@@ -428,7 +428,7 @@ services:
     ezpublish_rest.output.value_object_visitor.Exception.InvalidArgumentException:
         class: "%ezpublish_rest.output.value_object_visitor.Exception.InvalidArgumentException.class%"
         tags:
-            - { name: ezpublish_rest.output.value_object_visitor, type: \eZ\Publish\API\Repository\Exceptions\InvalidArgumentException }
+            - { name: ezpublish_rest.output.value_object_visitor, type: \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException }
 
     ezpublish_rest.input.dispatcher:
         class: "%ezpublish_rest.input.dispatcher.class%"
