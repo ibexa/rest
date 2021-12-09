@@ -6,9 +6,9 @@
  */
 namespace Ibexa\Rest\Input;
 
+use Ibexa\Contracts\Core\Repository\Values;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
-use Ibexa\Contracts\Core\Repository\Values;
 use RuntimeException;
 
 /**
