@@ -14,7 +14,7 @@ use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
-use Ibexa\Core\Repository\Values\Content as ApiValues;
+use Ibexa\Contracts\Core\Repository\Values\Content as ApiValues;
 use Ibexa\Rest\Server\Values\RestContent as RestContentValue;
 
 /**

@@ -8,7 +8,7 @@ namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
-use Ibexa\Core\Repository\Values;
+use Ibexa\Contracts\Core\Repository\Values;
 
 /**
  * Parser for LogicalOr Criterion.
