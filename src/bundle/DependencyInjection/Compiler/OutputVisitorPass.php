@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Compiler pass for the ezpublish_rest.output.visitor tag.
+ * Compiler pass for the ibexa.rest.output.visitor tag.
  *
  * Maps an output visitor (json, xml...) to an accept-header
  *
@@ -20,6 +20,8 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class OutputVisitorPass implements CompilerPassInterface
 {
+    public const OUTPUT_VISITOR_SERVICE_TAG = 'ibexa.rest.output.visitor';
+
     public function process(ContainerBuilder $container)
     {
         if (!$container->hasDefinition('ezpublish_rest.output.visitor.dispatcher')) {
@@ -30,12 +32,18 @@ class OutputVisitorPass implements CompilerPassInterface
 
         $visitors = [];
 
-        foreach ($container->findTaggedServiceIds('ezpublish_rest.output.visitor') as $id => $attributes) {
+        $taggedServiceIds = $container->findTaggedServiceIds(self::OUTPUT_VISITOR_SERVICE_TAG);
+        foreach ($taggedServiceIds as $id => $attributes) {
             foreach ($attributes as $attribute) {
-                $priority = isset($attribute['priority']) ? $attribute['priority'] : 0;
+                $priority = $attribute['priority'] ?? 0;
 
                 if (!isset($attribute['regexps'])) {
-                    throw new \LogicException('The ezpublish_rest.output.visitor service tag needs a "regexps" attribute to identify the Accept header.');
+                    throw new \LogicException(
+                        sprintf(
+                            'The "%s" service tag needs a "regexps" attribute to identify the Accept header.',
+                            self::OUTPUT_VISITOR_SERVICE_TAG
+                        )
+                    );
                 }
 
                 if (is_array($attribute['regexps'])) {

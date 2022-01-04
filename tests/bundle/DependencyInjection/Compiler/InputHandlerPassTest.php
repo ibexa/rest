@@ -17,7 +17,7 @@ class InputHandlerPassTest extends TestCase
     public function testProcess()
     {
         $visitorDefinition = new Definition();
-        $visitorDefinition->addTag('ezpublish_rest.input.handler', ['format' => 'test']);
+        $visitorDefinition->addTag('ibexa.rest.input.handler', ['format' => 'test']);
 
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->addDefinitions(

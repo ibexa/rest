@@ -17,7 +17,10 @@ class InputParserPassTest extends TestCase
     public function testProcess()
     {
         $visitorDefinition = new Definition();
-        $visitorDefinition->addTag('ezpublish_rest.input.parser', ['mediaType' => 'application/vnd.ez.api.UnitTest']);
+        $visitorDefinition->addTag(
+            'ibexa.rest.input.parser',
+            ['mediaType' => 'application/vnd.ez.api.UnitTest']
+        );
 
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->addDefinitions(

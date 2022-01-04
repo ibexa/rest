@@ -379,7 +379,7 @@ services:
     ### OUTPUT
 
     # Main REST output dispatcher
-    # Gets a <requestMatch> => output.visitor mapping with the ezpublish_rest.output.visitor tag.
+    # Gets a <requestMatch> => output.visitor mapping with the ibexa.rest.output.visitor tag.
     ezpublish_rest.output.visitor.dispatcher:
         class: "%ezpublish_rest.output.visitor.dispatcher.class%"
 
@@ -390,7 +390,7 @@ services:
             - "@ezpublish_rest.output.generator.json"
             - "@ezpublish_rest.output.value_object_visitor.dispatcher"
         tags:
-            - { name: ezpublish_rest.output.visitor, regexps: ezpublish_rest.output.visitor.json.regexps }
+            - { name: ibexa.rest.output.visitor, regexps: ezpublish_rest.output.visitor.json.regexps }
 
     ezpublish_rest.output.visitor.xml:
         class: "%ezpublish_rest.output.visitor.class%"
@@ -398,7 +398,7 @@ services:
             - "@ezpublish_rest.output.generator.xml"
             - "@ezpublish_rest.output.value_object_visitor.dispatcher"
         tags:
-            - { name: ezpublish_rest.output.visitor, regexps: ezpublish_rest.output.visitor.xml.regexps }
+            - { name: ibexa.rest.output.visitor, regexps: ezpublish_rest.output.visitor.xml.regexps }
 
     # format output generators
     ezpublish_rest.output.generator.xml:
@@ -428,7 +428,7 @@ services:
     ezpublish_rest.output.value_object_visitor.Exception.InvalidArgumentException:
         class: "%ezpublish_rest.output.value_object_visitor.Exception.InvalidArgumentException.class%"
         tags:
-            - { name: ezpublish_rest.output.value_object_visitor, type: \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException }
+            - { name: ibexa.rest.output.value_object.visitor, type: \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException }
 
     ezpublish_rest.input.dispatcher:
         class: "%ezpublish_rest.input.dispatcher.class%"
@@ -442,12 +442,12 @@ services:
     ezpublish_rest.input.handler.json:
         class: "%ezpublish_rest.input.handler.json.class%"
         tags:
-            - { name: ezpublish_rest.input.handler, format: json }
+            - { name: ibexa.rest.input.handler, format: json }
 
     ezpublish_rest.input.handler.xml:
         class: "%ezpublish_rest.input.handler.xml.class%"
         tags:
-            - { name: ezpublish_rest.input.handler, format: xml }
+            - { name: ibexa.rest.input.handler, format: xml }
 
     ezpublish_rest.templated_router:
         class: Ibexa\Bundle\Core\Routing\DefaultRouter
