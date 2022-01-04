@@ -43,7 +43,6 @@ class FieldTypeProcessorPassTest extends TestCase
     public function dataProviderForProcess(): iterable
     {
         yield ['ibexa.rest.field_type.processor'];
-        yield ['ezpublish_rest.field_type_processor'];
     }
 }
 
