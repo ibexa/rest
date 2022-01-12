@@ -6,8 +6,8 @@
  */
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\ContentService;
+use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as LocationValue;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
@@ -163,7 +163,8 @@ class Location extends ValueObjectVisitor
             $mainLocation = null;
         }
 
-        $visitor->visitValueObject(new RestContentValue(
+        $visitor->visitValueObject(
+            new RestContentValue(
                 $contentInfo,
                 $mainLocation,
                 $content,
