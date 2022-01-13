@@ -33,34 +33,36 @@ class OutputVisitorPass implements CompilerPassInterface
         $visitors = [];
 
         $taggedServiceIds = $container->findTaggedServiceIds(self::OUTPUT_VISITOR_SERVICE_TAG);
-        foreach ($taggedServiceIds as $id => $attributes) {
+        foreach ($taggedServiceIds as $serviceId => $attributes) {
             foreach ($attributes as $attribute) {
                 $priority = $attribute['priority'] ?? 0;
-
-                if (!isset($attribute['regexps'])) {
+                $regexps = $attribute['regexps'];
+                if (is_string($regexps)) {
+                    try {
+                        $regexps = $container->getParameter($regexps);
+                    } catch (InvalidArgumentException $e) {
+                        throw new \LogicException(
+                            sprintf(
+                                'Service "%s" tagged with "%s" service tag "regexps" attribute can be a string matching a container parameter name. Could not find parameter "%s".',
+                                $serviceId,
+                                self::OUTPUT_VISITOR_SERVICE_TAG,
+                                $regexps
+                            )
+                        );
+                    }
+                } elseif (!is_array($regexps)) {
                     throw new \LogicException(
                         sprintf(
-                            'The "%s" service tag needs a "regexps" attribute to identify the Accept header.',
+                            'Service "%s" tagged with "%s" service tag needs a "regexps" attribute to identify the Accept header, either as an array or a string.',
+                            $serviceId,
                             self::OUTPUT_VISITOR_SERVICE_TAG
                         )
                     );
                 }
 
-                if (is_array($attribute['regexps'])) {
-                    $regexps = $attribute['regexps'];
-                } elseif (is_string($attribute['regexps'])) {
-                    try {
-                        $regexps = $container->getParameter($attribute['regexps']);
-                    } catch (InvalidArgumentException $e) {
-                        throw new \LogicException("The regexps attribute of the ezpublish_rest.output.visitor service tag can be a string matching a container parameter name. Could not find parameter {$attribute['regexps']}.");
-                    }
-                } else {
-                    throw new \LogicException('The ezpublish_rest.output.visitor service tag needs a "regexps" attribute, either as an array or a string. Invalid value.');
-                }
-
                 $visitors[$priority][] = [
                     'regexps' => $regexps,
-                    'reference' => new Reference($id),
+                    'reference' => new Reference($serviceId),
                 ];
             }
         }
