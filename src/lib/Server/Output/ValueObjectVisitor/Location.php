@@ -1,29 +1,29 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
-use eZ\Publish\API\Repository\Exceptions\UnauthorizedException;
-use eZ\Publish\API\Repository\LocationService;
-use eZ\Publish\API\Repository\ContentService;
-use EzSystems\EzPlatformRest\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Output\Generator;
-use EzSystems\EzPlatformRest\Output\Visitor;
-use EzSystems\EzPlatformRest\Server\Values\RestContent as RestContentValue;
-use eZ\Publish\API\Repository\Values\Content\Location as LocationValue;
+use Ibexa\Contracts\Core\Repository\ContentService;
+use Ibexa\Contracts\Core\Repository\LocationService;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location as LocationValue;
+use Ibexa\Contracts\Rest\Output\Generator;
+use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
+use Ibexa\Contracts\Rest\Output\Visitor;
+use Ibexa\Core\Base\Exceptions\UnauthorizedException;
+use Ibexa\Rest\Server\Values\RestContent as RestContentValue;
 
 /**
  * Location value object visitor.
  */
 class Location extends ValueObjectVisitor
 {
-    /** @var \eZ\Publish\API\Repository\LocationService */
+    /** @var \Ibexa\Contracts\Core\Repository\LocationService */
     private $locationService;
 
-    /** @var \eZ\Publish\API\Repository\ContentService */
+    /** @var \Ibexa\Contracts\Core\Repository\ContentService */
     private $contentService;
 
     public function __construct(LocationService $locationService, ContentService $contentService)
@@ -35,9 +35,9 @@ class Location extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \EzSystems\EzPlatformRest\Output\Visitor $visitor
-     * @param \EzSystems\EzPlatformRest\Output\Generator $generator
-     * @param \eZ\Publish\API\Repository\Values\Content\Location $location
+     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
+     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Location $location
      */
     public function visit(Visitor $visitor, Generator $generator, $location)
     {
@@ -163,7 +163,8 @@ class Location extends ValueObjectVisitor
             $mainLocation = null;
         }
 
-        $visitor->visitValueObject(new RestContentValue(
+        $visitor->visitValueObject(
+            new RestContentValue(
                 $contentInfo,
                 $mainLocation,
                 $content,
@@ -175,3 +176,5 @@ class Location extends ValueObjectVisitor
         $generator->endObjectElement('ContentInfo');
     }
 }
+
+class_alias(Location::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Location');
