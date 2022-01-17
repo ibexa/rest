@@ -6,7 +6,6 @@
  */
 namespace Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 
-use Ibexa\Core\Base\Container\Compiler\TaggedServiceIdsIterator\BackwardCompatibleIterator;
 use LogicException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -15,7 +14,6 @@ use Symfony\Component\DependencyInjection\Reference;
 class FieldTypeProcessorPass implements CompilerPassInterface
 {
     private const FIELD_TYPE_PROCESSOR_SERVICE_TAG = 'ibexa.rest.field_type.processor';
-    private const DEPRECATED_FIELD_TYPE_PROCESSOR_SERVICE_TAG = 'ezpublish_rest.field_type_processor';
 
     public function process(ContainerBuilder $container)
     {
@@ -25,21 +23,17 @@ class FieldTypeProcessorPass implements CompilerPassInterface
 
         $definition = $container->getDefinition('ezpublish_rest.field_type_processor_registry');
 
-        $iterator = new BackwardCompatibleIterator(
-            $container,
-            self::FIELD_TYPE_PROCESSOR_SERVICE_TAG,
-            self::DEPRECATED_FIELD_TYPE_PROCESSOR_SERVICE_TAG
+        $taggedServiceIds = $container->findTaggedServiceIds(
+            self::FIELD_TYPE_PROCESSOR_SERVICE_TAG
         );
-
-        foreach ($iterator as $serviceId => $attributes) {
+        foreach ($taggedServiceIds as $serviceId => $attributes) {
             foreach ($attributes as $attribute) {
                 if (!isset($attribute['alias'])) {
                     throw new LogicException(
                         sprintf(
-                            'Service "%s" tagged with "%s" or "%s" needs an "alias" attribute to identify the Field Type',
+                            'Service "%s" tagged with "%s" needs an "alias" attribute to identify the Field Type',
                             $serviceId,
-                            self::FIELD_TYPE_PROCESSOR_SERVICE_TAG,
-                            self::DEPRECATED_FIELD_TYPE_PROCESSOR_SERVICE_TAG
+                            self::FIELD_TYPE_PROCESSOR_SERVICE_TAG
                         )
                     );
                 }

@@ -14,12 +14,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class OutputVisitorPassTest extends AbstractCompilerPassTestCase
 {
-    /**
-     * Register the compiler pass under test, just like you would do inside a bundle's load()
-     * method:.
-     *
-     *   $container->addCompilerPass(new MyCompilerPass());
-     */
     protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new OutputVisitorPass());
@@ -29,13 +23,16 @@ class OutputVisitorPassTest extends AbstractCompilerPassTestCase
     {
         $stringRegexp = '(^.*/.*$)';
         $stringDefinition = new Definition();
-        $stringDefinition->addTag('ezpublish_rest.output.visitor', ['regexps' => 'ezpublish_rest.output.visitor.test.regexps']);
+        $stringDefinition->addTag(
+            'ibexa.rest.output.visitor',
+            ['regexps' => 'ezpublish_rest.output.visitor.test.regexps']
+        );
         $this->setParameter('ezpublish_rest.output.visitor.test.regexps', [$stringRegexp]);
         $this->setDefinition('ezpublish_rest.output.visitor.test_string', $stringDefinition);
 
         $arrayRegexp = '(^application/json$)';
         $arrayDefinition = new Definition();
-        $arrayDefinition->addTag('ezpublish_rest.output.visitor', ['regexps' => [$arrayRegexp]]);
+        $arrayDefinition->addTag('ibexa.rest.output.visitor', ['regexps' => [$arrayRegexp]]);
         $this->setDefinition('ezpublish_rest.output.visitor.test_array', $arrayDefinition);
 
         $this->setDefinition('ezpublish_rest.output.visitor.dispatcher', new Definition());
@@ -89,7 +86,7 @@ class OutputVisitorPassTest extends AbstractCompilerPassTestCase
 
         foreach ($definitions as $name => $data) {
             $definition = new Definition();
-            $definition->addTag('ezpublish_rest.output.visitor', $data);
+            $definition->addTag('ibexa.rest.output.visitor', $data);
             $this->setDefinition('ezpublish_rest.output.visitor.test_' . $name, $definition);
         }
 

@@ -17,7 +17,7 @@ class ValueObjectVisitorPassTest extends TestCase
     public function testProcess()
     {
         $visitorDefinition = new Definition();
-        $visitorDefinition->addTag('ezpublish_rest.output.value_object_visitor', ['type' => 'test']);
+        $visitorDefinition->addTag('ibexa.rest.output.value_object.visitor', ['type' => 'test']);
 
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->addDefinitions(
