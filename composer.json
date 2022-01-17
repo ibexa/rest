@@ -56,6 +56,11 @@
         "symfony/http-client": "^5.3",
         "symfony/browser-kit": "^5.3"
     },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
+    },
     "scripts": {
         "fix-cs": "php-cs-fixer fix --config=.php-cs-fixer.php -v --show-progress=dots",
         "check-cs": "@fix-cs --dry-run",
