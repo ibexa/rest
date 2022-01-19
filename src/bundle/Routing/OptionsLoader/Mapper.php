@@ -24,7 +24,7 @@ class Mapper
         $optionsRoute->setMethods(['OPTIONS']);
         $optionsRoute->setDefault(
             '_controller',
-            'ezpublish_rest.controller.options:getRouteOptions'
+            'Ibexa\Rest\Server\Controller\Options:getRouteOptions'
         );
 
         $optionsRoute->setDefault(

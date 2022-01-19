@@ -76,7 +76,7 @@ class MapperTest extends TestCase
         );
 
         self::assertEquals(
-            'ezpublish_rest.controller.options:getRouteOptions',
+            'Ibexa\Rest\Server\Controller\Options:getRouteOptions',
             $optionsRoute->getDefault('_controller')
         );
     }
