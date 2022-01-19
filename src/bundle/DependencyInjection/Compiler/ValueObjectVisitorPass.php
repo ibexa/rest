@@ -20,11 +20,11 @@ class ValueObjectVisitorPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('ezpublish_rest.output.value_object_visitor.dispatcher')) {
+        if (!$container->hasDefinition(\Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher::class)) {
             return;
         }
 
-        $definition = $container->getDefinition('ezpublish_rest.output.value_object_visitor.dispatcher');
+        $definition = $container->getDefinition(\Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher::class);
 
         $taggedServiceIds = $container->findTaggedServiceIds(
             self::OUTPUT_VALUE_OBJECT_VISITOR_SERVICE_TAG

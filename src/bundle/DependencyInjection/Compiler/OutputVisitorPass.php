@@ -24,11 +24,11 @@ class OutputVisitorPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('ezpublish_rest.output.visitor.dispatcher')) {
+        if (!$container->hasDefinition(\Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher::class)) {
             return;
         }
 
-        $definition = $container->getDefinition('ezpublish_rest.output.visitor.dispatcher');
+        $definition = $container->getDefinition(\Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher::class);
 
         $visitors = [];
 

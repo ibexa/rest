@@ -34,14 +34,14 @@ class RestSessionBasedFactory extends FormLoginFactory
         /* @var \Symfony\Component\DependencyInjection\ContainerBuilder $container */
         $listenerId .= '.' . $id;
         $container->setDefinition($listenerId, $listener);
-        $container->setAlias('ezpublish_rest.session_authenticator', $listenerId);
+        $container->setAlias('ibexa.rest.session_authenticator', $listenerId);
 
         if ($container->hasDefinition('security.logout_listener.' . $id)) {
             // Copying logout handlers to REST session authenticator, to allow proper logout using it.
             $logoutListenerDef = $container->getDefinition('security.logout_listener.' . $id);
             $logoutListenerDef->addMethodCall(
                 'addHandler',
-                [new Reference('ezpublish_rest.security.authentication.logout_handler')]
+                [new Reference(\Ibexa\Rest\Server\Security\RestLogoutHandler::class)]
             );
 
             foreach ($logoutListenerDef->getMethodCalls() as $callArray) {
@@ -58,7 +58,7 @@ class RestSessionBasedFactory extends FormLoginFactory
 
     protected function getListenerId(): string
     {
-        return 'ezpublish_rest.security.authentication.listener.session';
+        return 'ibexa.rest.security.authentication.listener.session';
     }
 
     public function getPosition(): string

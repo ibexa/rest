@@ -22,7 +22,7 @@ class ValueObjectVisitorPassTest extends TestCase
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->addDefinitions(
             [
-                'ezpublish_rest.output.value_object_visitor.dispatcher' => new Definition(),
+                \Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher::class => new Definition(),
                 'ezpublish_rest.output.value_object_visitor.test' => $visitorDefinition,
             ]
         );
@@ -31,7 +31,7 @@ class ValueObjectVisitorPassTest extends TestCase
         $compilerPass->process($containerBuilder);
 
         $dispatcherMethodCalls = $containerBuilder
-            ->getDefinition('ezpublish_rest.output.value_object_visitor.dispatcher')
+            ->getDefinition(\Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher::class)
             ->getMethodCalls();
         self::assertTrue(isset($dispatcherMethodCalls[0][0]), 'Failed asserting that dispatcher has a method call');
         self::assertEquals('addVisitor', $dispatcherMethodCalls[0][0], "Failed asserting that called method is 'addVisitor'");

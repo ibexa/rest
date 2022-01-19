@@ -22,11 +22,11 @@ class InputHandlerPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('ezpublish_rest.input.dispatcher')) {
+        if (!$container->hasDefinition(\Ibexa\Rest\Input\Dispatcher::class)) {
             return;
         }
 
-        $definition = $container->getDefinition('ezpublish_rest.input.dispatcher');
+        $definition = $container->getDefinition(\Ibexa\Rest\Input\Dispatcher::class);
 
         $taggedServiceIds = $container->findTaggedServiceIds(self::INPUT_HANDLER_SERVICE_TAG);
         foreach ($taggedServiceIds as $id => $attributes) {

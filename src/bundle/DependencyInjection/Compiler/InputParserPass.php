@@ -22,11 +22,11 @@ class InputParserPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('ezpublish_rest.input.parsing_dispatcher')) {
+        if (!$container->hasDefinition(\Ibexa\Contracts\Rest\Input\ParsingDispatcher::class)) {
             return;
         }
 
-        $definition = $container->getDefinition('ezpublish_rest.input.parsing_dispatcher');
+        $definition = $container->getDefinition(\Ibexa\Contracts\Rest\Input\ParsingDispatcher::class);
 
         $taggedServiceIds = $container->findTaggedServiceIds(self::INPUT_PARSER_SERVICE_TAG);
         foreach ($taggedServiceIds as $id => $attributes) {

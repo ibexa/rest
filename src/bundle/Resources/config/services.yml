@@ -72,212 +72,212 @@ parameters:
     ezpublish_rest.input.handler.xml.class: Ibexa\Rest\Input\Handler\Xml
 
 services:
-    ezpublish_rest.routing.options_loader:
+    Ibexa\Bundle\Rest\Routing\OptionsLoader:
         class: "%ezpublish_rest.routing.options_loader.class%"
         arguments:
-            - "@ezpublish_rest.routing.options_loader.route_collection_mapper"
-            - "@ezpublish_rest.templated_router"
+            - '@Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper'
+            - '@Ibexa\Bundle\Core\Routing\DefaultRouter'
         tags:
             - { name: routing.loader }
 
-    ezpublish_rest.routing.options_loader.route_collection_mapper:
+    Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper:
         class: "%ezpublish_rest.routing.options_loader.route_collection_mapper.class%"
         arguments:
-            - "@ezpublish_rest.routing.options_loader.mapper"
+            - '@Ibexa\Bundle\Rest\Routing\OptionsLoader\Mapper'
 
-    ezpublish_rest.routing.options_loader.mapper:
+    Ibexa\Bundle\Rest\Routing\OptionsLoader\Mapper:
         class: "%ezpublish_rest.routing.options_loader.mapper.class%"
 
-    ezpublish_rest.cors_option_provider:
+    Ibexa\Bundle\Rest\CorsOptions\RestProvider:
         class: "%ezpublish_rest.cors_options_provider.class%"
         arguments: ["@router.default"]
         tags:
             - { name: nelmio_cors.options_provider }
 
-    ezpublish_rest.field_type_serializer:
+    Ibexa\Rest\Output\FieldTypeSerializer:
         class: "%ezpublish_rest.field_type_serializer.class%"
         arguments:
-            - "@ezpublish.api.service.field_type"
-            - "@ezpublish_rest.field_type_processor_registry"
+            - '@ibexa.api.service.field_type'
+            - '@Ibexa\Rest\FieldTypeProcessorRegistry'
 
-    ezpublish_rest.request_parser:
+    Ibexa\Bundle\Rest\RequestParser\Router:
         class: "%ezpublish_rest.request_parser.class%"
         arguments:
             - "@router"
 
-    ezpublish_rest.parser_tools:
+    Ibexa\Rest\Input\ParserTools:
         class: "%ezpublish_rest.parser_tools.class%"
 
-    ezpublish_rest.field_type_parser:
+    Ibexa\Rest\Input\FieldTypeParser:
         class: "%ezpublish_rest.field_type_parser.class%"
         arguments:
-            - "@ezpublish.api.service.content"
-            - "@ezpublish.api.service.content_type"
-            - "@ezpublish.api.service.field_type"
-            - "@ezpublish_rest.field_type_processor_registry"
+            - '@ibexa.api.service.content'
+            - '@ibexa.api.service.content_type'
+            - '@ibexa.api.service.field_type'
+            - '@Ibexa\Rest\FieldTypeProcessorRegistry'
 
-    ezpublish_rest.factory:
+    Ibexa\Bundle\Rest\ApiLoader\Factory:
         class: "%ezpublish_rest.factory.class%"
-        arguments: ["@ezpublish.config.resolver", "@ezpublish.api.repository"]
+        arguments: ['@ibexa.config.resolver', '@ibexa.api.repository']
         calls:
             - [setRequestStack, ["@request_stack"]]
 
-    ezpublish_rest.root_resource_builder:
+    Ibexa\Rest\Server\Service\ExpressionRouterRootResourceBuilder:
          class: "%ezpublish_rest.root_resource_builder.class%"
-         arguments: ["@router", "@ezpublish_rest.templated_router", "@ezpublish.config.resolver"]
+         arguments: ["@router", '@Ibexa\Bundle\Core\Routing\DefaultRouter', '@ibexa.config.resolver']
 
-    ezpublish_rest.controller.base:
+    Ibexa\Rest\Server\Controller:
         class: "%ezpublish_rest.controller.base.class%"
         calls:
             - [ setContainer, ["@service_container"] ]
-            - [ setInputDispatcher, ["@ezpublish_rest.input.dispatcher"] ]
+            - [ setInputDispatcher, ['@Ibexa\Rest\Input\Dispatcher'] ]
             - [ setRouter, ["@router"] ]
-            - [ setRequestParser, ["@ezpublish_rest.request_parser"] ]
-            - [ setRepository, ["@ezpublish.api.repository"] ]
+            - [ setRequestParser, ['@Ibexa\Bundle\Rest\RequestParser\Router'] ]
+            - [ setRepository, ['@ibexa.api.repository'] ]
 
-    ezpublish_rest.controller.root:
+    Ibexa\Rest\Server\Controller\Root:
         class: "%ezpublish_rest.controller.root.class%"
-        parent: ezpublish_rest.controller.base
-        arguments: ["@ezpublish_rest.root_resource_builder"]
+        parent: Ibexa\Rest\Server\Controller
+        arguments: ['@Ibexa\Rest\Server\Service\ExpressionRouterRootResourceBuilder']
         tags: [controller.service_arguments]
 
-    ezpublish_rest.controller.section:
+    Ibexa\Rest\Server\Controller\Section:
         class: "%ezpublish_rest.controller.section.class%"
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         arguments:
-            - "@ezpublish.api.service.section"
+            - '@ibexa.api.service.section'
         tags: [controller.service_arguments]
 
-    ezpublish_rest.controller.binary_content:
+    alias for "Ibexa\Bundle\Connector\Dam\Controller\AssetVariationController":
         class: "%ezpublish_rest.controller.binary_content.class%"
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         arguments:
-            - "@ezpublish.fieldType.ezimage.variation_service"
-            - '@ezpublish.config.resolver'
+            - '@ibexa.field_type.ezimage.variation_service'
+            - '@ibexa.config.resolver'
         tags: [controller.service_arguments]
 
-    ezpublish_rest.controller.content:
+    Ibexa\Rest\Server\Controller\Content:
         class: "%ezpublish_rest.controller.content.class%"
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         tags: [controller.service_arguments]
 
-    ezpublish_rest.controller.content_type:
+    Ibexa\Rest\Server\Controller\ContentType:
         class: "%ezpublish_rest.controller.content_type.class%"
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         arguments:
-            - "@ezpublish.api.service.content_type"
+            - '@ibexa.api.service.content_type'
         tags: [controller.service_arguments]
 
-    ezpublish_rest.controller.role:
+    Ibexa\Rest\Server\Controller\Role:
         class: "%ezpublish_rest.controller.role.class%"
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         arguments:
-            - "@ezpublish.api.service.role"
-            - "@ezpublish.api.service.user"
-            - "@ezpublish.api.service.location"
+            - '@ibexa.api.service.role'
+            - '@ibexa.api.service.user'
+            - '@ibexa.api.service.location'
         tags: [controller.service_arguments]
 
-    ezpublish_rest.controller.location:
+    Ibexa\Rest\Server\Controller\Location:
         class: "%ezpublish_rest.controller.location.class%"
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         arguments:
-            - "@ezpublish.api.service.location"
-            - "@ezpublish.api.service.content"
-            - "@ezpublish.api.service.trash"
-            - "@ezpublish.api.service.url_alias"
+            - '@ibexa.api.service.location'
+            - '@ibexa.api.service.content'
+            - '@ibexa.api.service.trash'
+            - '@ibexa.api.service.url_alias'
         tags: [controller.service_arguments]
 
-    ezpublish_rest.controller.object_state:
+    Ibexa\Rest\Server\Controller\ObjectState:
         class: "%ezpublish_rest.controller.object_state.class%"
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         arguments:
-            - "@ezpublish.api.service.object_state"
-            - "@ezpublish.api.service.content"
+            - '@ibexa.api.service.object_state'
+            - '@ibexa.api.service.content'
         tags: [controller.service_arguments]
 
-    ezpublish_rest.controller.trash:
+    Ibexa\Rest\Server\Controller\Trash:
         class: "%ezpublish_rest.controller.trash.class%"
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         arguments:
-            - "@ezpublish.api.service.trash"
-            - "@ezpublish.api.service.location"
+            - '@ibexa.api.service.trash'
+            - '@ibexa.api.service.location'
         tags: [controller.service_arguments]
 
-    ezpublish_rest.controller.user:
+    Ibexa\Rest\Server\Controller\User:
         class: "%ezpublish_rest.controller.user.class%"
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         arguments:
-            - "@ezpublish.api.service.user"
-            - "@ezpublish.api.service.role"
-            - "@ezpublish.api.service.content"
-            - "@ezpublish.api.service.content_type"
-            - "@ezpublish.api.service.location"
-            - "@ezpublish.api.service.section"
-            - "@ezpublish.api.repository"
+            - '@ibexa.api.service.user'
+            - '@ibexa.api.service.role'
+            - '@ibexa.api.service.content'
+            - '@ibexa.api.service.content_type'
+            - '@ibexa.api.service.location'
+            - '@ibexa.api.service.section'
+            - '@ibexa.api.repository'
             - '@Ibexa\Contracts\Core\Repository\PermissionResolver'
         tags: [controller.service_arguments]
 
-    ezpublish_rest.controller.url_wildcard:
+    Ibexa\Rest\Server\Controller\URLWildcard:
         class: "%ezpublish_rest.controller.url_wildcard.class%"
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         arguments:
-            - "@ezpublish.api.service.url_wildcard"
+            - '@ibexa.api.service.url_wildcard'
         tags: [controller.service_arguments]
 
-    ezpublish_rest.controller.url_alias:
+    Ibexa\Rest\Server\Controller\URLAlias:
         class: "%ezpublish_rest.controller.url_alias.class%"
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         arguments:
-            - "@ezpublish.api.service.url_alias"
-            - "@ezpublish.api.service.location"
+            - '@ibexa.api.service.url_alias'
+            - '@ibexa.api.service.location'
         tags: [controller.service_arguments]
 
-    ezpublish_rest.controller.views:
+    Ibexa\Rest\Server\Controller\Views:
         class: "%ezpublish_rest.controller.views.class%"
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         arguments:
-            - "@ezpublish.api.service.search"
+            - '@ibexa.api.service.search'
         tags: [controller.service_arguments]
 
-    ezpublish_rest.controller.session:
+    Ibexa\Rest\Server\Controller\SessionController:
         class: Ibexa\Rest\Server\Controller\SessionController
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         arguments:
             - "%ezpublish_rest.csrf_token_intention%"
             - '@Ibexa\Contracts\Core\Repository\PermissionResolver'
-            - '@ezpublish.api.service.user'
+            - '@ibexa.api.service.user'
             - "@?ezpublish_rest.session_authenticator"
             - "@?ezpublish_rest.security.csrf.token_manager"
         tags: [controller.service_arguments]
 
-    ezpublish_rest.controller.bookmark:
+    Ibexa\Rest\Server\Controller\Bookmark:
         class: Ibexa\Rest\Server\Controller\Bookmark
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         arguments:
-            - '@ezpublish.api.service.bookmark'
-            - '@ezpublish.api.service.location'
+            - '@ibexa.api.service.bookmark'
+            - '@ibexa.api.service.location'
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\JWT:
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         arguments:
             - '@Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface'
-            - '@?ezpublish_rest.session_authenticator'
+            - '@?ibexa.rest.session_authenticator'
         tags: [controller.service_arguments]
 
-    ezpublish_rest.request_listener:
+    Ibexa\Bundle\Rest\EventListener\RequestListener:
         class: "%ezpublish_rest.request_listener.class%"
         tags:
             - { name: kernel.event_subscriber }
 
-    ezpublish_rest.response_listener:
+    Ibexa\Bundle\Rest\EventListener\ResponseListener:
         class: "%ezpublish_rest.response_listener.class%"
         arguments:
-            - "@ezpublish_rest.output.visitor.dispatcher"
+            - '@Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher'
         tags:
             - { name: kernel.event_subscriber }
 
-    ezpublish_rest.csrf_listener:
+    Ibexa\Bundle\Rest\EventListener\CsrfListener:
         class: "%ezpublish_rest.csrf_listener.class%"
         arguments:
             - "@event_dispatcher"
@@ -287,91 +287,91 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
-    ezpublish_rest.controller.options:
+    Ibexa\Rest\Server\Controller\Options:
         class: "%ezpublish_rest.controller.options.class%"
-        parent: ezpublish_rest.controller.base
+        parent: Ibexa\Rest\Server\Controller
         tags: [controller.service_arguments]
 
-    ezpublish_rest.controller.services:
+    Ibexa\Rest\Server\Controller\Services:
         class: "%ezpublish_rest.controller.services.class%"
         arguments: ["%ezpublish.fieldType.ezcountry.data%"]
         tags: [controller.service_arguments]
 
-    ezpublish_rest.field_type_processor_registry:
+    Ibexa\Rest\FieldTypeProcessorRegistry:
         class: "%ezpublish_rest.field_type_processor_registry.class%"
         lazy: true
 
-    ezpublish_rest.field_type_processor.ezimage:
+    Ibexa\Rest\FieldTypeProcessor\ImageProcessor:
         class: "%ezpublish_rest.field_type_processor.ezimage.class%"
-        factory: ["@ezpublish_rest.factory", getImageFieldTypeProcessor]
+        factory: ['@Ibexa\Bundle\Rest\ApiLoader\Factory', getImageFieldTypeProcessor]
         arguments:
             - "@router"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezimage }
 
     Ibexa\Rest\FieldTypeProcessor\ImageAssetFieldTypeProcessor:
-        factory: ["@ezpublish_rest.factory", getImageAssetFieldTypeProcessor]
+        factory: ['@Ibexa\Bundle\Rest\ApiLoader\Factory', getImageAssetFieldTypeProcessor]
         arguments:
             - "@router"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezimageasset }
 
-    ezpublish_rest.field_type_processor.ezdatetime:
+    Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor:
         class: "%ezpublish_rest.field_type_processor.ezdatetime.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezdatetime }
 
-    ezpublish_rest.field_type_processor.ezdate:
+    Ibexa\Rest\FieldTypeProcessor\DateProcessor:
         class: "%ezpublish_rest.field_type_processor.ezdate.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezdate }
 
-    ezpublish_rest.field_type_processor.ezmedia:
+    Ibexa\Rest\FieldTypeProcessor\MediaProcessor:
         class: "%ezpublish_rest.field_type_processor.ezmedia.class%"
-        factory: ["@ezpublish_rest.factory", getMediaFieldTypeProcessor]
+        factory: ['@Ibexa\Bundle\Rest\ApiLoader\Factory', getMediaFieldTypeProcessor]
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezmedia }
 
-    ezpublish_rest.field_type_processor.ezobjectrelationlist:
+    Ibexa\Rest\FieldTypeProcessor\RelationListProcessor:
         class: "%ezpublish_rest.field_type_processor.ezobjectrelationlist.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezobjectrelationlist }
         calls:
             - [setRouter, ["@router"]]
-            - [setLocationService, ["@ezpublish.api.service.location"]]
+            - [setLocationService, ['@ibexa.api.service.location']]
 
-    ezpublish_rest.field_type_processor.ezobjectrelation:
+    Ibexa\Rest\FieldTypeProcessor\RelationProcessor:
         class: "%ezpublish_rest.field_type_processor.ezobjectrelation.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezobjectrelation }
         calls:
             - [setRouter, ["@router"]]
-            - [setLocationService, ["@ezpublish.api.service.location"]]
+            - [setLocationService, ['@ibexa.api.service.location']]
 
-    ezpublish_rest.field_type_processor.eztime:
+    Ibexa\Rest\FieldTypeProcessor\TimeProcessor:
         class: "%ezpublish_rest.field_type_processor.eztime.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: eztime }
 
-    ezpublish_rest.field_type_processor.ezbinaryfile:
+    Ibexa\Rest\FieldTypeProcessor\BinaryProcessor:
         class: "%ezpublish_rest.field_type_processor.ezbinaryfile.class%"
-        factory: ["@ezpublish_rest.factory", getBinaryFileFieldTypeProcessor]
+        factory: ['@Ibexa\Bundle\Rest\ApiLoader\Factory', getBinaryFileFieldTypeProcessor]
         arguments:
-            - "@ezpublish.core.io.default_url_decorator"
+            - '@ibexa.core.io.default_url_decorator'
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezbinaryfile }
 
-    ezpublish_rest.field_type_processor.ezfloat:
+    Ibexa\Rest\FieldTypeProcessor\FloatProcessor:
         class: "%ezpublish_rest.field_type_processor.ezfloat.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezfloat }
 
-    ezpublish_rest.field_type_processor.ezstring:
+    Ibexa\Rest\FieldTypeProcessor\StringProcessor:
         class: "%ezpublish_rest.field_type_processor.ezstring.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezstring }
 
-    ezpublish_rest.field_type_processor.ezuser:
+    Ibexa\Rest\FieldTypeProcessor\UserProcessor:
         class: "%ezpublish_rest.field_type_processor.ezuser.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezuser }
@@ -380,76 +380,76 @@ services:
 
     # Main REST output dispatcher
     # Gets a <requestMatch> => output.visitor mapping with the ibexa.rest.output.visitor tag.
-    ezpublish_rest.output.visitor.dispatcher:
+    Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher:
         class: "%ezpublish_rest.output.visitor.dispatcher.class%"
 
     # format output visitors
-    ezpublish_rest.output.visitor.json:
+    ibexa.rest.output.visitor.json:
         class: "%ezpublish_rest.output.visitor.class%"
         arguments:
-            - "@ezpublish_rest.output.generator.json"
-            - "@ezpublish_rest.output.value_object_visitor.dispatcher"
+            - '@Ibexa\Rest\Output\Generator\Json'
+            - '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher'
         tags:
             - { name: ibexa.rest.output.visitor, regexps: ezpublish_rest.output.visitor.json.regexps }
 
-    ezpublish_rest.output.visitor.xml:
+    ibexa.rest.output.visitor.xml:
         class: "%ezpublish_rest.output.visitor.class%"
         arguments:
-            - "@ezpublish_rest.output.generator.xml"
-            - "@ezpublish_rest.output.value_object_visitor.dispatcher"
+            - '@Ibexa\Rest\Output\Generator\Xml'
+            - '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher'
         tags:
             - { name: ibexa.rest.output.visitor, regexps: ezpublish_rest.output.visitor.xml.regexps }
 
     # format output generators
-    ezpublish_rest.output.generator.xml:
+    Ibexa\Rest\Output\Generator\Xml:
         class: "%ezpublish_rest.output.generator.xml.class%"
         arguments:
-            - "@ezpublish_rest.output.generator.xml.field_type_hash_generator"
+            - '@Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator'
         calls:
             - [ setFormatOutput, [ "%kernel.debug%" ] ]
 
-    ezpublish_rest.output.generator.xml.field_type_hash_generator:
+    Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator:
         class: "%ezpublish_rest.output.generator.xml.field_type_hash_generator.class%"
 
-    ezpublish_rest.output.generator.json:
+    Ibexa\Rest\Output\Generator\Json:
         class: "%ezpublish_rest.output.generator.json.class%"
         arguments:
-            - "@ezpublish_rest.output.generator.json.field_type_hash_generator"
+            - '@Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator'
         calls:
             - [ setFormatOutput, [ "%kernel.debug%" ] ]
 
-    ezpublish_rest.output.generator.json.field_type_hash_generator:
+    Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator:
         class: "%ezpublish_rest.output.generator.json.field_type_hash_generator.class%"
 
     # value objects visitors
-    ezpublish_rest.output.value_object_visitor.dispatcher:
+    Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher:
         class: "%ezpublish_rest.output.value_object_visitor.dispatcher.class%"
 
-    ezpublish_rest.output.value_object_visitor.Exception.InvalidArgumentException:
+    ibexa.rest.output.value_object_visitor.Exception.InvalidArgumentException:
         class: "%ezpublish_rest.output.value_object_visitor.Exception.InvalidArgumentException.class%"
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException }
 
-    ezpublish_rest.input.dispatcher:
+    Ibexa\Rest\Input\Dispatcher:
         class: "%ezpublish_rest.input.dispatcher.class%"
         arguments:
-            - "@ezpublish_rest.input.parsing_dispatcher"
+            - '@Ibexa\Contracts\Rest\Input\ParsingDispatcher'
             - []
 
-    ezpublish_rest.input.parsing_dispatcher:
+    Ibexa\Contracts\Rest\Input\ParsingDispatcher:
         class: "%ezpublish_rest.input.parsing_dispatcher.class%"
 
-    ezpublish_rest.input.handler.json:
+    Ibexa\Rest\Input\Handler\Json:
         class: "%ezpublish_rest.input.handler.json.class%"
         tags:
             - { name: ibexa.rest.input.handler, format: json }
 
-    ezpublish_rest.input.handler.xml:
+    Ibexa\Rest\Input\Handler\Xml:
         class: "%ezpublish_rest.input.handler.xml.class%"
         tags:
             - { name: ibexa.rest.input.handler, format: xml }
 
-    ezpublish_rest.templated_router:
+    Ibexa\Bundle\Core\Routing\DefaultRouter:
         class: Ibexa\Bundle\Core\Routing\DefaultRouter
         parent: hautelook.router.template
         calls:

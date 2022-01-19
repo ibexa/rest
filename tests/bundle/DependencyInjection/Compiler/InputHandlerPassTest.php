@@ -22,7 +22,7 @@ class InputHandlerPassTest extends TestCase
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->addDefinitions(
             [
-                'ezpublish_rest.input.dispatcher' => new Definition(),
+                \Ibexa\Rest\Input\Dispatcher::class => new Definition(),
                 'ezpublish_rest.input.handler.test' => $visitorDefinition,
             ]
         );
@@ -31,7 +31,7 @@ class InputHandlerPassTest extends TestCase
         $compilerPass->process($containerBuilder);
 
         $dispatcherMethodCalls = $containerBuilder
-            ->getDefinition('ezpublish_rest.input.dispatcher')
+            ->getDefinition(\Ibexa\Rest\Input\Dispatcher::class)
             ->getMethodCalls();
         self::assertTrue(isset($dispatcherMethodCalls[0][0]), 'Failed asserting that dispatcher has a method call');
         self::assertEquals('addHandler', $dispatcherMethodCalls[0][0], "Failed asserting that called method is 'addParser'");

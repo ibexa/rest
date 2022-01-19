@@ -17,11 +17,11 @@ class FieldTypeProcessorPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('ezpublish_rest.field_type_processor_registry')) {
+        if (!$container->hasDefinition(\Ibexa\Rest\FieldTypeProcessorRegistry::class)) {
             return;
         }
 
-        $definition = $container->getDefinition('ezpublish_rest.field_type_processor_registry');
+        $definition = $container->getDefinition(\Ibexa\Rest\FieldTypeProcessorRegistry::class);
 
         $taggedServiceIds = $container->findTaggedServiceIds(
             self::FIELD_TYPE_PROCESSOR_SERVICE_TAG
