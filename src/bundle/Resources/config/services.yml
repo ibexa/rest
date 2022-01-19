@@ -246,8 +246,8 @@ services:
             - "%ezpublish_rest.csrf_token_intention%"
             - '@Ibexa\Contracts\Core\Repository\PermissionResolver'
             - '@ibexa.api.service.user'
-            - "@?ezpublish_rest.session_authenticator"
-            - "@?ezpublish_rest.security.csrf.token_manager"
+            - '@?ibexa.rest.session_authenticator'
+            - '@?Ibexa\Rest\Server\Security\CsrfTokenManager'
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\Bookmark:
@@ -283,7 +283,7 @@ services:
             - "@event_dispatcher"
             - "%form.type_extension.csrf.enabled%"
             - "%ezpublish_rest.csrf_token_intention%"
-            - "@?ezpublish_rest.security.csrf.token_manager"
+            - '@?Ibexa\Rest\Server\Security\CsrfTokenManager'
         tags:
             - { name: kernel.event_subscriber }
 
