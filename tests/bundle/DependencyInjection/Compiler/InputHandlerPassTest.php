@@ -7,6 +7,7 @@
 namespace Ibexa\Tests\Bundle\Rest\DependencyInjection\Compiler;
 
 use Ibexa\Bundle\Rest\DependencyInjection\Compiler\InputHandlerPass;
+use Ibexa\Rest\Input\Dispatcher;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -22,7 +23,7 @@ class InputHandlerPassTest extends TestCase
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->addDefinitions(
             [
-                'ezpublish_rest.input.dispatcher' => new Definition(),
+                Dispatcher::class => new Definition(),
                 'ezpublish_rest.input.handler.test' => $visitorDefinition,
             ]
         );
@@ -31,7 +32,7 @@ class InputHandlerPassTest extends TestCase
         $compilerPass->process($containerBuilder);
 
         $dispatcherMethodCalls = $containerBuilder
-            ->getDefinition('ezpublish_rest.input.dispatcher')
+            ->getDefinition(Dispatcher::class)
             ->getMethodCalls();
         self::assertTrue(isset($dispatcherMethodCalls[0][0]), 'Failed asserting that dispatcher has a method call');
         self::assertEquals('addHandler', $dispatcherMethodCalls[0][0], "Failed asserting that called method is 'addParser'");

@@ -6,6 +6,7 @@
  */
 namespace Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 
+use Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -20,11 +21,11 @@ class ValueObjectVisitorPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('ezpublish_rest.output.value_object_visitor.dispatcher')) {
+        if (!$container->hasDefinition(ValueObjectVisitorDispatcher::class)) {
             return;
         }
 
-        $definition = $container->getDefinition('ezpublish_rest.output.value_object_visitor.dispatcher');
+        $definition = $container->getDefinition(ValueObjectVisitorDispatcher::class);
 
         $taggedServiceIds = $container->findTaggedServiceIds(
             self::OUTPUT_VALUE_OBJECT_VISITOR_SERVICE_TAG

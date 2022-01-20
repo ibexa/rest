@@ -6,6 +6,7 @@
  */
 namespace Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 
+use Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
@@ -24,11 +25,11 @@ class OutputVisitorPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('ezpublish_rest.output.visitor.dispatcher')) {
+        if (!$container->hasDefinition(AcceptHeaderVisitorDispatcher::class)) {
             return;
         }
 
-        $definition = $container->getDefinition('ezpublish_rest.output.visitor.dispatcher');
+        $definition = $container->getDefinition(AcceptHeaderVisitorDispatcher::class);
 
         $visitors = [];
 
