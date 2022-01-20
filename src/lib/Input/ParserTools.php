@@ -7,8 +7,22 @@
 namespace Ibexa\Rest\Input;
 
 use Ibexa\Contracts\Core\Repository\Values;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\ContentTypeLimitation;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\LanguageLimitation;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\LocationLimitation;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\ObjectStateLimitation;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\OwnerLimitation;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\ParentContentTypeLimitation;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\ParentDepthLimitation;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\ParentOwnerLimitation;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\ParentUserGroupLimitation;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SectionLimitation;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SiteaccessLimitation;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SubtreeLimitation;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\UserGroupLimitation;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
 use RuntimeException;
 
 /**
@@ -226,46 +240,46 @@ class ParserTools
     {
         switch ($identifier) {
             case Values\User\Limitation::CONTENTTYPE:
-                return new \Ibexa\Contracts\Core\Repository\Values\User\Limitation\ContentTypeLimitation();
+                return new ContentTypeLimitation();
 
             case Values\User\Limitation::LANGUAGE:
-                return new \Ibexa\Contracts\Core\Repository\Values\User\Limitation\LanguageLimitation();
+                return new LanguageLimitation();
 
             case Values\User\Limitation::LOCATION:
-                return new \Ibexa\Contracts\Core\Repository\Values\User\Limitation\LocationLimitation();
+                return new LocationLimitation();
 
             case Values\User\Limitation::OWNER:
-                return new \Ibexa\Contracts\Core\Repository\Values\User\Limitation\OwnerLimitation();
+                return new OwnerLimitation();
 
             case Values\User\Limitation::PARENTOWNER:
-                return new \Ibexa\Contracts\Core\Repository\Values\User\Limitation\ParentOwnerLimitation();
+                return new ParentOwnerLimitation();
 
             case Values\User\Limitation::PARENTCONTENTTYPE:
-                return new \Ibexa\Contracts\Core\Repository\Values\User\Limitation\ParentContentTypeLimitation();
+                return new ParentContentTypeLimitation();
 
             case Values\User\Limitation::PARENTDEPTH:
-                return new \Ibexa\Contracts\Core\Repository\Values\User\Limitation\ParentDepthLimitation();
+                return new ParentDepthLimitation();
 
             case Values\User\Limitation::SECTION:
-                return new \Ibexa\Contracts\Core\Repository\Values\User\Limitation\SectionLimitation();
+                return new SectionLimitation();
 
             case Values\User\Limitation::SITEACCESS:
-                return new \Ibexa\Contracts\Core\Repository\Values\User\Limitation\SiteaccessLimitation();
+                return new SiteaccessLimitation();
 
             case Values\User\Limitation::STATE:
-                return new \Ibexa\Contracts\Core\Repository\Values\User\Limitation\ObjectStateLimitation();
+                return new ObjectStateLimitation();
 
             case Values\User\Limitation::SUBTREE:
-                return new \Ibexa\Contracts\Core\Repository\Values\User\Limitation\SubtreeLimitation();
+                return new SubtreeLimitation();
 
             case Values\User\Limitation::USERGROUP:
-                return new \Ibexa\Contracts\Core\Repository\Values\User\Limitation\UserGroupLimitation();
+                return new UserGroupLimitation();
 
             case Values\User\Limitation::PARENTUSERGROUP:
-                return new \Ibexa\Contracts\Core\Repository\Values\User\Limitation\ParentUserGroupLimitation();
+                return new ParentUserGroupLimitation();
 
             default:
-                throw new \Ibexa\Core\Base\Exceptions\NotFoundException('Limitation', $identifier);
+                throw new NotFoundException('Limitation', $identifier);
         }
     }
 }

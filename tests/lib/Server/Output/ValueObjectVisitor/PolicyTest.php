@@ -6,6 +6,7 @@
  */
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\ContentTypeLimitation;
 use Ibexa\Core\Repository\Values\User;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
@@ -24,7 +25,7 @@ class PolicyTest extends ValueObjectVisitorBaseTest
 
         $generator->startDocument(null);
 
-        $contentTypeLimitation = new \Ibexa\Contracts\Core\Repository\Values\User\Limitation\ContentTypeLimitation();
+        $contentTypeLimitation = new ContentTypeLimitation();
         $contentTypeLimitation->limitationValues = [1, 2, 3];
 
         $policy = new User\Policy(

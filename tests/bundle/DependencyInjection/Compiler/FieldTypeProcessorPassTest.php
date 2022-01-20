@@ -7,6 +7,7 @@
 namespace Ibexa\Tests\Bundle\Rest\DependencyInjection\Compiler;
 
 use Ibexa\Bundle\Rest\DependencyInjection\Compiler\FieldTypeProcessorPass;
+use Ibexa\Rest\FieldTypeProcessorRegistry;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -25,7 +26,7 @@ class FieldTypeProcessorPassTest extends TestCase
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->addDefinitions(
             [
-                \Ibexa\Rest\FieldTypeProcessorRegistry::class => new Definition(),
+                FieldTypeProcessorRegistry::class => new Definition(),
                 'ezpublish_rest.field_type_processor.test' => $processorDefinition,
             ]
         );
@@ -33,7 +34,7 @@ class FieldTypeProcessorPassTest extends TestCase
         $compilerPass = new FieldTypeProcessorPass();
         $compilerPass->process($containerBuilder);
 
-        $dispatcherMethodCalls = $containerBuilder->getDefinition(\Ibexa\Rest\FieldTypeProcessorRegistry::class)->getMethodCalls();
+        $dispatcherMethodCalls = $containerBuilder->getDefinition(FieldTypeProcessorRegistry::class)->getMethodCalls();
         self::assertTrue(isset($dispatcherMethodCalls[0][0]), 'Failed asserting that dispatcher has a method call');
         self::assertEquals('registerProcessor', $dispatcherMethodCalls[0][0], "Failed asserting that called method is 'addVisitor'");
         self::assertInstanceOf(Reference::class, $dispatcherMethodCalls[0][1][1], 'Failed asserting that method call is to a Reference object');

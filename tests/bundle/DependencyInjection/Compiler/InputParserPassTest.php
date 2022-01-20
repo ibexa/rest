@@ -7,6 +7,7 @@
 namespace Ibexa\Tests\Bundle\Rest\DependencyInjection\Compiler;
 
 use Ibexa\Bundle\Rest\DependencyInjection\Compiler\InputParserPass;
+use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -25,7 +26,7 @@ class InputParserPassTest extends TestCase
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->addDefinitions(
             [
-                \Ibexa\Contracts\Rest\Input\ParsingDispatcher::class => new Definition(),
+                ParsingDispatcher::class => new Definition(),
                 'ezpublish_rest.input.parser.unit_test' => $visitorDefinition,
             ]
         );
@@ -34,7 +35,7 @@ class InputParserPassTest extends TestCase
         $compilerPass->process($containerBuilder);
 
         $dispatcherMethodCalls = $containerBuilder
-            ->getDefinition(\Ibexa\Contracts\Rest\Input\ParsingDispatcher::class)
+            ->getDefinition(ParsingDispatcher::class)
             ->getMethodCalls();
         self::assertTrue(isset($dispatcherMethodCalls[0][0]), 'Failed asserting that dispatcher has a method call');
         self::assertEquals('addParser', $dispatcherMethodCalls[0][0], "Failed asserting that called method is 'addParser'");

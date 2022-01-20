@@ -6,6 +6,7 @@
  */
 namespace Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 
+use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -22,11 +23,11 @@ class InputParserPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition(\Ibexa\Contracts\Rest\Input\ParsingDispatcher::class)) {
+        if (!$container->hasDefinition(ParsingDispatcher::class)) {
             return;
         }
 
-        $definition = $container->getDefinition(\Ibexa\Contracts\Rest\Input\ParsingDispatcher::class);
+        $definition = $container->getDefinition(ParsingDispatcher::class);
 
         $taggedServiceIds = $container->findTaggedServiceIds(self::INPUT_PARSER_SERVICE_TAG);
         foreach ($taggedServiceIds as $id => $attributes) {

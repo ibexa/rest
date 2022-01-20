@@ -6,6 +6,7 @@
  */
 namespace Ibexa\Bundle\Rest\DependencyInjection\Security;
 
+use Ibexa\Rest\Server\Security\RestLogoutHandler;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\FormLoginFactory;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -41,7 +42,7 @@ class RestSessionBasedFactory extends FormLoginFactory
             $logoutListenerDef = $container->getDefinition('security.logout_listener.' . $id);
             $logoutListenerDef->addMethodCall(
                 'addHandler',
-                [new Reference(\Ibexa\Rest\Server\Security\RestLogoutHandler::class)]
+                [new Reference(RestLogoutHandler::class)]
             );
 
             foreach ($logoutListenerDef->getMethodCalls() as $callArray) {

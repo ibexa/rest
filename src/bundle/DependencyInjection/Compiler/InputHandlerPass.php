@@ -6,6 +6,7 @@
  */
 namespace Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 
+use Ibexa\Rest\Input\Dispatcher;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -22,11 +23,11 @@ class InputHandlerPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition(\Ibexa\Rest\Input\Dispatcher::class)) {
+        if (!$container->hasDefinition(Dispatcher::class)) {
             return;
         }
 
-        $definition = $container->getDefinition(\Ibexa\Rest\Input\Dispatcher::class);
+        $definition = $container->getDefinition(Dispatcher::class);
 
         $taggedServiceIds = $container->findTaggedServiceIds(self::INPUT_HANDLER_SERVICE_TAG);
         foreach ($taggedServiceIds as $id => $attributes) {
