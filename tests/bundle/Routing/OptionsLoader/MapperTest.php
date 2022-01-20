@@ -25,7 +25,7 @@ class MapperTest extends TestCase
         $route = new Route('/route/{id}');
 
         self::assertEquals(
-            'ezpublish_rest_options_route_{id}',
+            'ibexa.rest.options.route_{id}',
             $this->mapper->getOptionsRouteName($route)
         );
     }
