@@ -53,7 +53,7 @@ class Location extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadLocation',
+                'ibexa.rest.load_location',
                 ['locationPath' => trim($location->pathString, '/')]
             )
         );
@@ -82,7 +82,7 @@ class Location extends ValueObjectVisitor
             $generator->startAttribute(
                 'href',
                 $this->router->generate(
-                    'ezpublish_rest_loadLocation',
+                    'ibexa.rest.load_location',
                     [
                         'locationPath' => implode('/', array_slice($location->path, 0, count($location->path) - 1)),
                     ]
@@ -108,7 +108,7 @@ class Location extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadLocationChildren',
+                'ibexa.rest.load_location_children',
                 [
                     'locationPath' => trim($location->pathString, '/'),
                 ]
@@ -120,7 +120,7 @@ class Location extends ValueObjectVisitor
         $generator->startObjectElement('Content');
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadContent', ['contentId' => $location->contentId])
+            $this->router->generate('ibexa.rest.load_content', ['contentId' => $location->contentId])
         );
         $generator->endAttribute('href');
         $generator->endObjectElement('Content');
@@ -135,7 +135,7 @@ class Location extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_listLocationURLAliases',
+                'ibexa.rest.list_location_url_aliases',
                 ['locationPath' => trim($location->pathString, '/')]
             )
         );
@@ -146,7 +146,7 @@ class Location extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadContent',
+                'ibexa.rest.load_content',
                 ['contentId' => $location->contentId]
             )
         );

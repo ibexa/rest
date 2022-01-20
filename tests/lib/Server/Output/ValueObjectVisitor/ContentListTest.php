@@ -29,7 +29,7 @@ class ContentListTest extends ValueObjectVisitorBaseTest
         $contentList = new ContentList([], 0);
 
         $this->addRouteExpectation(
-            'ezpublish_rest_redirectContent',
+            'ibexa.rest.redirect_content',
             [],
             '/content/objects'
         );

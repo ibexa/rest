@@ -47,7 +47,7 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $UserRefList->users[0]->contentInfo->id],
             "/user/users/{$UserRefList->users[0]->contentInfo->id}"
         );

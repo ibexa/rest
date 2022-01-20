@@ -35,7 +35,7 @@ class VersionListTest extends ValueObjectVisitorBaseTest
         $versionList = new VersionList([$versionInfo], '/some/path');
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentInVersion',
+            'ibexa.rest.load_content_in_version',
             [
                 'contentId' => $versionInfo->contentInfo->id,
                 'versionNumber' => $versionInfo->versionNo,

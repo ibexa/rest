@@ -29,7 +29,7 @@ class CreatedRelation extends RestRelation
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                'ezpublish_rest_loadVersionRelation',
+                'ibexa.rest.load_version_relation',
                 [
                     'contentId' => $data->relation->contentId,
                     'versionNumber' => $data->relation->versionNo,

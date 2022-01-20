@@ -67,7 +67,7 @@ class ImageProcessor extends BinaryInputProcessor
         foreach ($this->variations as $variationIdentifier) {
             $outgoingValueHash['variations'][$variationIdentifier] = [
                 'href' => $this->router->generate(
-                    'ezpublish_rest_binaryContent_getImageVariation',
+                    'ibexa.rest.binary_content.get_image_variation',
                     [
                         'imageId' => $outgoingValueHash['imageId'],
                         'variationIdentifier' => $variationIdentifier,

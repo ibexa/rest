@@ -29,7 +29,7 @@ class CreatedURLAlias extends URLAlias
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                'ezpublish_rest_loadURLAlias',
+                'ibexa.rest.load_url_alias',
                 ['urlAliasId' => $data->urlAlias->id]
             )
         );

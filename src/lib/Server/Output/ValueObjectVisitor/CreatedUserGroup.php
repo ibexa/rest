@@ -29,7 +29,7 @@ class CreatedUserGroup extends RestUserGroup
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                'ezpublish_rest_loadUserGroup',
+                'ibexa.rest.load_user_group',
                 ['groupPath' => trim($data->userGroup->mainLocation->pathString, '/')]
             )
         );

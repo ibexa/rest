@@ -31,7 +31,7 @@ class RestObjectState extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadObjectState',
+                'ibexa.rest.load_object_state',
                 ['objectStateGroupId' => $data->groupId, 'objectStateId' => $data->objectState->id]
             )
         );
@@ -50,7 +50,7 @@ class RestObjectState extends ValueObjectVisitor
 
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadObjectStateGroup', ['objectStateGroupId' => $data->groupId])
+            $this->router->generate('ibexa.rest.load_object_state_group', ['objectStateGroupId' => $data->groupId])
         );
         $generator->endAttribute('href');
 

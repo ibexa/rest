@@ -28,7 +28,7 @@ class ImageVariation extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_binaryContent_getImageVariation',
+                'ibexa.rest.binary_content.get_image_variation',
                 [
                     'imageId' => $data->imageId,
                     'variationIdentifier' => $data->name,

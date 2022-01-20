@@ -39,7 +39,7 @@ class UserSessionCreatedTest extends UserSessionTest
             ->with($this->equalTo('Content-Type'), $this->equalTo('application/vnd.ez.api.Session+xml'));
 
         $this->addRouteExpectation(
-            'ezpublish_rest_deleteSession',
+            'ibexa.rest.delete_session',
             [
                 'sessionId' => $session->sessionId,
             ],
@@ -47,7 +47,7 @@ class UserSessionCreatedTest extends UserSessionTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $session->user->id],
             "/user/users/{$session->user->id}"
         );

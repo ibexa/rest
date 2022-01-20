@@ -138,7 +138,7 @@ class CsrfListener implements EventSubscriberInterface
      */
     protected function isLoginRequest($route)
     {
-        return $route === 'ezpublish_rest_createSession';
+        return $route === 'ibexa.rest.create_session';
     }
 
     /**
@@ -154,7 +154,7 @@ class CsrfListener implements EventSubscriberInterface
     {
         return in_array(
             $route,
-            ['ezpublish_rest_createSession', 'ezpublish_rest_refreshSession', 'ezpublish_rest_deleteSession']
+            ['ibexa.rest.create_session', 'ibexa.rest.refresh_session', 'ibexa.rest.delete_session']
         );
     }
 

@@ -34,10 +34,10 @@ class RootTest extends ValueObjectVisitorBaseTest
             ],
         ];
 
-        $this->addRouteExpectation('ezpublish_rest_createContent', [], '/content/objects');
-        $this->addTemplatedRouteExpectation('ezpublish_rest_redirectContent', ['remoteId' => '{remoteId}'], '/content/objects');
-        $this->addRouteExpectation('ezpublish_rest_loadUsers', [], '/user/users');
-        $this->addTemplatedRouteExpectation('ezpublish_rest_loadUsers', ['roleId' => '{roleId}'], '/user/users{?roleId}');
+        $this->addRouteExpectation('ibexa.rest.create_content', [], '/content/objects');
+        $this->addTemplatedRouteExpectation('ibexa.rest.redirect_content', ['remoteId' => '{remoteId}'], '/content/objects');
+        $this->addRouteExpectation('ibexa.rest.load_users', [], '/user/users');
+        $this->addTemplatedRouteExpectation('ibexa.rest.load_users', ['roleId' => '{roleId}'], '/user/users{?roleId}');
 
         $configResolver = $this->createMock(ConfigResolverInterface::class);
         $configResolver

@@ -54,7 +54,7 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
      */
     public function mapToContentHref($contentId)
     {
-        return $this->router->generate('ezpublish_rest_loadContent', ['contentId' => $contentId]);
+        return $this->router->generate('ibexa.rest.load_content', ['contentId' => $contentId]);
     }
 
     /**
@@ -64,7 +64,7 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
      */
     public function mapToLocationHref($locationId)
     {
-        return $this->router->generate('ezpublish_rest_loadLocation', [
+        return $this->router->generate('ibexa.rest.load_location', [
             'locationPath' => implode('/', $this->locationService->loadLocation($locationId)->path),
         ]);
     }

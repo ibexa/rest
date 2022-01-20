@@ -35,27 +35,27 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
             ->with($this->isInstanceOf(FieldDefinitionList::class));
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentType',
+            'ibexa.rest.load_content_type',
             ['contentTypeId' => $restContentType->contentType->id],
             "/content/types/{$restContentType->contentType->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $restContentType->contentType->creatorId],
             "/user/users/{$restContentType->contentType->creatorId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $restContentType->contentType->modifierId],
             "/user/users/{$restContentType->contentType->modifierId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadGroupsOfContentType',
+            'ibexa.rest.load_groups_of_content_type',
             ['contentTypeId' => $restContentType->contentType->id],
             "/content/types/{$restContentType->contentType->id}/groups"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentTypeDraft',
+            'ibexa.rest.load_content_type_draft',
             ['contentTypeId' => $restContentType->contentType->id],
             "/content/types/{$restContentType->contentType->id}/draft"
         );

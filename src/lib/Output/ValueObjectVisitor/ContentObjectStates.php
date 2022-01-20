@@ -35,7 +35,7 @@ class ContentObjectStates extends ValueObjectVisitor
             $generator->startAttribute(
                 'href',
                 $this->router->generate(
-                    'ezpublish_rest_loadObjectState',
+                    'ibexa.rest.load_object_state',
                     [
                         'objectStateGroupId' => $state->groupId,
                         'objectStateId' => $state->objectState->id,

@@ -42,13 +42,13 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadObjectStateGroup',
+            'ibexa.rest.load_object_state_group',
             ['objectStateGroupId' => $objectStateGroup->id],
             "/content/objectstategroups/$objectStateGroup->id"
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadObjectStates',
+            'ibexa.rest.load_object_states',
             ['objectStateGroupId' => $objectStateGroup->id],
             "/content/objectstategroups/$objectStateGroup->id/objectstates"
         );

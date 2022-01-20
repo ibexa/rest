@@ -31,7 +31,7 @@ class ContentList extends ValueObjectVisitor
 
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_redirectContent')
+            $this->router->generate('ibexa.rest.redirect_content')
         );
         $generator->endAttribute('href');
 

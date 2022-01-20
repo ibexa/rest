@@ -31,7 +31,7 @@ class ContentTypeGroupList extends ValueObjectVisitor
 
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadContentTypeGroupList')
+            $this->router->generate('ibexa.rest.load_content_type_group_list')
         );
         $generator->endAttribute('href');
 

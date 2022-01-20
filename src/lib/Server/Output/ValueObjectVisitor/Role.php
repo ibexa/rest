@@ -36,7 +36,7 @@ class Role extends ValueObjectVisitor
     {
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadRole', ['roleId' => $data->id])
+            $this->router->generate('ibexa.rest.load_role', ['roleId' => $data->id])
         );
         $generator->endAttribute('href');
 
@@ -46,7 +46,7 @@ class Role extends ValueObjectVisitor
         $generator->startObjectElement('Policies', 'PolicyList');
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadPolicies', ['roleId' => $data->id])
+            $this->router->generate('ibexa.rest.load_policies', ['roleId' => $data->id])
         );
         $generator->endAttribute('href');
         $generator->endObjectElement('Policies');

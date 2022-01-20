@@ -29,7 +29,7 @@ class CreatedContentTypeGroup extends ContentTypeGroup
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                'ezpublish_rest_loadContentTypeGroup',
+                'ibexa.rest.load_content_type_group',
                 ['contentTypeGroupId' => $data->contentTypeGroup->id]
             )
         );

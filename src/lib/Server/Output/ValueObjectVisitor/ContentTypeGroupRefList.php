@@ -30,7 +30,7 @@ class ContentTypeGroupRefList extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_listContentTypesForGroup',
+                'ibexa.rest.list_content_types_for_group',
                 [
                     'contentTypeGroupId' => $data->contentType->id,
                 ]
@@ -47,7 +47,7 @@ class ContentTypeGroupRefList extends ValueObjectVisitor
             $generator->startAttribute(
                 'href',
                 $this->router->generate(
-                    'ezpublish_rest_loadContentTypeGroup',
+                    'ibexa.rest.load_content_type_group',
                     [
                         'contentTypeGroupId' => $contentTypeGroup->id,
                     ]
@@ -62,7 +62,7 @@ class ContentTypeGroupRefList extends ValueObjectVisitor
                 $generator->startAttribute(
                     'href',
                     $this->router->generate(
-                        'ezpublish_rest_unlinkContentTypeFromGroup',
+                        'ibexa.rest.unlink_content_type_from_group',
                         [
                             'contentTypeId' => $data->contentType->id,
                             'contentTypeGroupId' => $contentTypeGroup->id,

@@ -60,13 +60,13 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $versionInfo->creatorId],
             "/user/users/{$versionInfo->creatorId}"
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $versionInfo->contentInfo->id],
             "/content/objects/{$versionInfo->contentInfo->id}"
         );

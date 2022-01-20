@@ -59,7 +59,7 @@ class URLAlias extends ValueObjectVisitor
     {
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadURLAlias', ['urlAliasId' => $data->id])
+            $this->router->generate('ibexa.rest.load_url_alias', ['urlAliasId' => $data->id])
         );
         $generator->endAttribute('href');
 
@@ -73,7 +73,7 @@ class URLAlias extends ValueObjectVisitor
             $generator->startObjectElement('location', 'Location');
             $generator->startAttribute(
                 'href',
-                $this->router->generate('ezpublish_rest_loadLocation', ['locationPath' => $data->destination])
+                $this->router->generate('ibexa.rest.load_location', ['locationPath' => $data->destination])
             );
             $generator->endAttribute('href');
             $generator->endObjectElement('location');

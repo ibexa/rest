@@ -29,7 +29,7 @@ class CreatedSection extends Section
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                'ezpublish_rest_loadSection',
+                'ibexa.rest.load_section',
                 ['sectionId' => $data->section->id]
             )
         );

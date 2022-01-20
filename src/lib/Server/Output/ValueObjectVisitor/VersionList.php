@@ -40,7 +40,7 @@ class VersionList extends ValueObjectVisitor
             $generator->startAttribute(
                 'href',
                 $this->router->generate(
-                    'ezpublish_rest_loadContentInVersion',
+                    'ibexa.rest.load_content_in_version',
                     [
                         'contentId' => $version->getContentInfo()->id,
                         'versionNumber' => $version->versionNo,

@@ -29,7 +29,7 @@ class CreatedVersion extends Version
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                'ezpublish_rest_loadContentInVersion',
+                'ibexa.rest.load_content_in_version',
                 [
                     'contentId' => $data->version->content->id,
                     'versionNumber' => $data->version->content->getVersionInfo()->versionNo,

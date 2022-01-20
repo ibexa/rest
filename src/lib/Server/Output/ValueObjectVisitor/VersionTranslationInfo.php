@@ -53,7 +53,7 @@ class VersionTranslationInfo extends ValueObjectVisitor
             if ($canDelete && $languageCode !== $versionInfo->contentInfo->mainLanguageCode) {
                 $generator->startHashElement('DeleteTranslation');
                 $path = $this->router->generate(
-                    'ezpublish_rest_deleteTranslationFromDraft',
+                    'ibexa.rest.delete_translation_from_draft',
                     [
                         'contentId' => $versionInfo->contentInfo->id,
                         'versionNumber' => $versionInfo->versionNo,

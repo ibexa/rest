@@ -160,7 +160,7 @@ class ContentType extends RestController
 
             return new Values\TemporaryRedirect(
                 $this->router->generate(
-                    'ezpublish_rest_loadContentTypeGroup',
+                    'ibexa.rest.load_content_type_group',
                     [
                         'contentTypeGroupId' => $contentTypeGroup->id,
                     ]
@@ -354,7 +354,7 @@ class ContentType extends RestController
 
         return new Values\ResourceCreated(
             $this->router->generate(
-                'ezpublish_rest_loadContentType',
+                'ibexa.rest.load_content_type',
                 ['contentTypeId' => $copiedContentType->id]
             )
         );

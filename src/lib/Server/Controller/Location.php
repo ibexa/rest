@@ -94,7 +94,7 @@ class Location extends RestController
 
         return new Values\TemporaryRedirect(
             $this->router->generate(
-                'ezpublish_rest_loadLocation',
+                'ibexa.rest.load_location',
                 [
                     'locationPath' => trim($location->pathString, '/'),
                 ]
@@ -202,7 +202,7 @@ class Location extends RestController
 
         return new Values\ResourceCreated(
             $this->router->generate(
-                'ezpublish_rest_loadLocation',
+                'ibexa.rest.load_location',
                 [
                     'locationPath' => trim($newLocation->pathString, '/'),
                 ]
@@ -242,7 +242,7 @@ class Location extends RestController
 
             return new Values\ResourceCreated(
                 $this->router->generate(
-                    'ezpublish_rest_loadLocation',
+                    'ibexa.rest.load_location',
                     [
                         'locationPath' => trim($locationToMove->pathString, '/'),
                     ]
@@ -252,7 +252,7 @@ class Location extends RestController
             // If parsing of destination fails, let's try to see if destination is trash
             try {
                 $route = $this->requestParser->parse($destinationHref);
-                if (!isset($route['_route']) || $route['_route'] !== 'ezpublish_rest_loadTrashItems') {
+                if (!isset($route['_route']) || $route['_route'] !== 'ibexa.rest.load_trash_items') {
                     throw new Exceptions\InvalidArgumentException('');
                 }
                 // Trash the subtree
@@ -261,7 +261,7 @@ class Location extends RestController
                 if (isset($trashItem)) {
                     return new Values\ResourceCreated(
                         $this->router->generate(
-                            'ezpublish_rest_loadTrashItem',
+                            'ibexa.rest.load_trash_item',
                             ['trashItemId' => $trashItem->id]
                         )
                     );

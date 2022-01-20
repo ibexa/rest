@@ -62,24 +62,24 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
 
         $groupPath = trim($UserGroupRefList->userGroups[0]->mainLocation->pathString, '/');
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUserGroup',
+            'ibexa.rest.load_user_group',
             ['groupPath' => $groupPath],
             "/user/groups/{$groupPath}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_unassignUserFromUserGroup',
+            'ibexa.rest.unassign_user_from_user_group',
             ['userId' => $UserGroupRefList->userId, 'groupPath' => 14],
             '/user/users/14/groups/14'
         );
 
         $groupPath = trim($UserGroupRefList->userGroups[1]->mainLocation->pathString, '/');
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUserGroup',
+            'ibexa.rest.load_user_group',
             ['groupPath' => '1/5/13'],
             "/user/groups/{$groupPath}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_unassignUserFromUserGroup',
+            'ibexa.rest.unassign_user_from_user_group',
             ['userId' => $UserGroupRefList->userId, 'groupPath' => 13],
             '/user/users/14/groups/13'
         );

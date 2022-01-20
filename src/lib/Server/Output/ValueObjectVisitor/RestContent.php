@@ -53,7 +53,7 @@ class RestContent extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $data->path === null ?
-                $this->router->generate('ezpublish_rest_loadContent', ['contentId' => $contentInfo->id]) :
+                $this->router->generate('ibexa.rest.load_content', ['contentId' => $contentInfo->id]) :
                 $data->path
         );
         $generator->endAttribute('href');
@@ -67,7 +67,7 @@ class RestContent extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadContentType',
+                'ibexa.rest.load_content_type',
                 ['contentTypeId' => $contentInfo->contentTypeId]
             )
         );
@@ -83,7 +83,7 @@ class RestContent extends ValueObjectVisitor
         $generator->startObjectElement('Versions', 'VersionList');
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadContentVersions', ['contentId' => $contentInfo->id])
+            $this->router->generate('ibexa.rest.load_content_versions', ['contentId' => $contentInfo->id])
         );
         $generator->endAttribute('href');
         $generator->endObjectElement('Versions');
@@ -92,7 +92,7 @@ class RestContent extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_redirectCurrentVersion',
+                'ibexa.rest.redirect_current_version',
                 ['contentId' => $contentInfo->id]
             )
         );
@@ -114,7 +114,7 @@ class RestContent extends ValueObjectVisitor
         $generator->startObjectElement('Section');
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadSection', ['sectionId' => $contentInfo->sectionId])
+            $this->router->generate('ibexa.rest.load_section', ['sectionId' => $contentInfo->sectionId])
         );
         $generator->endAttribute('href');
         $generator->endObjectElement('Section');
@@ -125,7 +125,7 @@ class RestContent extends ValueObjectVisitor
             $generator->startAttribute(
                 'href',
                 $this->router->generate(
-                    'ezpublish_rest_loadLocation',
+                    'ibexa.rest.load_location',
                     ['locationPath' => trim($mainLocation->pathString, '/')]
                 )
             );
@@ -137,7 +137,7 @@ class RestContent extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadLocationsForContent',
+                'ibexa.rest.load_locations_for_content',
                 ['contentId' => $contentInfo->id]
             )
         );
@@ -147,7 +147,7 @@ class RestContent extends ValueObjectVisitor
         $generator->startObjectElement('Owner', 'User');
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadUser', ['userId' => $contentInfo->ownerId])
+            $this->router->generate('ibexa.rest.load_user', ['userId' => $contentInfo->ownerId])
         );
         $generator->endAttribute('href');
         $generator->endObjectElement('Owner');
@@ -206,7 +206,7 @@ class RestContent extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_getObjectStatesForContent',
+                'ibexa.rest.get_object_states_for_content',
                 ['contentId' => $contentInfo->id]
             )
         );

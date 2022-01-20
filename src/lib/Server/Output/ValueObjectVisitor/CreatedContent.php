@@ -27,7 +27,7 @@ class CreatedContent extends RestContent
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                'ezpublish_rest_loadContent',
+                'ibexa.rest.load_content',
                 ['contentId' => $data->content->contentInfo->id]
             )
         );

@@ -44,7 +44,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
             );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentTypeFieldDefinition',
+            'ibexa.rest.load_content_type_field_definition',
             [
                 'contentTypeId' => $restFieldDefinition->contentType->id,
                 'fieldDefinitionId' => $restFieldDefinition->fieldDefinition->id,

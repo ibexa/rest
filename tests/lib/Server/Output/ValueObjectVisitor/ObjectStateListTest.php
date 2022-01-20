@@ -30,7 +30,7 @@ class ObjectStateListTest extends ValueObjectVisitorBaseTest
         $stateList = new ObjectStateList([], 42);
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadObjectStates',
+            'ibexa.rest.load_object_states',
             ['objectStateGroupId' => $stateList->groupId],
             "/content/objectstategroups/{$stateList->groupId}/objectstates"
         );

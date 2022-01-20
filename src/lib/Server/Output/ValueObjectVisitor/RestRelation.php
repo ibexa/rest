@@ -31,7 +31,7 @@ class RestRelation extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadVersionRelation',
+                'ibexa.rest.load_version_relation',
                 [
                     'contentId' => $data->contentId,
                     'versionNumber' => $data->versionNo,
@@ -45,7 +45,7 @@ class RestRelation extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadContent',
+                'ibexa.rest.load_content',
                 [
                     'contentId' => $data->contentId,
                 ]
@@ -58,7 +58,7 @@ class RestRelation extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadContent',
+                'ibexa.rest.load_content',
                 [
                     'contentId' => $data->relation->getDestinationContentInfo()->id,
                 ]

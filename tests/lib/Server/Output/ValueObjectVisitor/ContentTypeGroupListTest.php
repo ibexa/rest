@@ -28,7 +28,7 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
 
         $contentTypeGroupList = new ContentTypeGroupList([]);
 
-        $this->addRouteExpectation('ezpublish_rest_loadContentTypeGroupList', [], '/content/typegroups');
+        $this->addRouteExpectation('ibexa.rest.load_content_type_group_list', [], '/content/typegroups');
 
         $visitor->visit(
             $this->getVisitorMock(),

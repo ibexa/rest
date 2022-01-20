@@ -33,7 +33,7 @@ class RestTrashItem extends ValueObjectVisitor
 
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadTrashItem', ['trashItemId' => $trashItem->id])
+            $this->router->generate('ibexa.rest.load_trash_item', ['trashItemId' => $trashItem->id])
         );
         $generator->endAttribute('href');
 
@@ -62,7 +62,7 @@ class RestTrashItem extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadLocation',
+                'ibexa.rest.load_location',
                 [
                     'locationPath' => implode('/', $pathStringParts),
                 ]
@@ -86,7 +86,7 @@ class RestTrashItem extends ValueObjectVisitor
         $generator->startObjectElement('Content');
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadContent', ['contentId' => $contentInfo->id])
+            $this->router->generate('ibexa.rest.load_content', ['contentId' => $contentInfo->id])
         );
         $generator->endAttribute('href');
         $generator->endObjectElement('Content');
@@ -101,7 +101,7 @@ class RestTrashItem extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadContent',
+                'ibexa.rest.load_content',
                 ['contentId' => $contentInfo->id]
             )
         );

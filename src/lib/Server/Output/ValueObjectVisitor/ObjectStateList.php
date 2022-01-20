@@ -32,7 +32,7 @@ class ObjectStateList extends ValueObjectVisitor
 
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadObjectStates', ['objectStateGroupId' => $data->groupId])
+            $this->router->generate('ibexa.rest.load_object_states', ['objectStateGroupId' => $data->groupId])
         );
 
         $generator->endAttribute('href');
