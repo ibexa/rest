@@ -148,7 +148,7 @@ services:
             - '@ibexa.api.service.section'
         tags: [controller.service_arguments]
 
-    alias for "Ibexa\Bundle\Connector\Dam\Controller\AssetVariationController":
+    Ibexa\Rest\Server\Controller\BinaryContent:
         class: "%ezpublish_rest.controller.binary_content.class%"
         parent: Ibexa\Rest\Server\Controller
         arguments:

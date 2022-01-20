@@ -246,7 +246,7 @@ ezpublish_rest_revealContent:
 ezpublish_rest_binaryContent_getImageVariation:
     path: /content/binary/images/{imageId}/variations/{variationIdentifier}
     defaults:
-        _controller: alias for "Ibexa\Bundle\Connector\Dam\Controller\AssetVariationController":getImageVariation
+        _controller: Ibexa\Rest\Server\Controller\BinaryContent:getImageVariation
     methods: [GET]
     requirements:
         imageId: \d+-\d+(-\d+)?
