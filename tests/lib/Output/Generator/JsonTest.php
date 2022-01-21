@@ -42,7 +42,7 @@ class JsonTest extends GeneratorTest
         $generator->endObjectElement('element');
 
         $this->assertSame(
-            '{"element":{"_media-type":"application\/vnd.ez.api.element+json"}}',
+            '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json"}}',
             $generator->endDocument('test')
         );
     }
@@ -57,7 +57,7 @@ class JsonTest extends GeneratorTest
         $generator->endObjectElement('element');
 
         $this->assertSame(
-            '{"element":{"_media-type":"application\/vnd.ez.api.User+json"}}',
+            '{"element":{"_media-type":"application\/vnd.ibexa.api.User+json"}}',
             $generator->endDocument('test')
         );
     }
@@ -76,7 +76,7 @@ class JsonTest extends GeneratorTest
         $generator->endObjectElement('element');
 
         $this->assertSame(
-            '{"element":{"_media-type":"application\/vnd.ez.api.element+json","stacked":{"_media-type":"application\/vnd.ez.api.stacked+json"}}}',
+            '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json","stacked":{"_media-type":"application\/vnd.ibexa.api.stacked+json"}}}',
             $generator->endDocument('test')
         );
     }
@@ -94,7 +94,7 @@ class JsonTest extends GeneratorTest
         $generator->endObjectElement('element');
 
         $this->assertSame(
-            '{"element":{"_media-type":"application\/vnd.ez.api.element+json","_attribute":"value"}}',
+            '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json","_attribute":"value"}}',
             $generator->endDocument('test')
         );
     }
@@ -113,7 +113,7 @@ class JsonTest extends GeneratorTest
         $generator->endObjectElement('element');
 
         $this->assertSame(
-            '{"element":{"_media-type":"application\/vnd.ez.api.element+json","_attribute":"value"}}',
+            '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json","_attribute":"value"}}',
             $generator->endDocument('test')
         );
     }
@@ -132,7 +132,7 @@ class JsonTest extends GeneratorTest
         $generator->endObjectElement('element');
 
         $this->assertSame(
-            '{"element":{"_media-type":"application\/vnd.ez.api.element+json","_attribute1":"value","_attribute2":"value"}}',
+            '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json","_attribute1":"value","_attribute2":"value"}}',
             $generator->endDocument('test')
         );
     }
@@ -150,7 +150,7 @@ class JsonTest extends GeneratorTest
         $generator->endObjectElement('element');
 
         $this->assertSame(
-            '{"element":{"_media-type":"application\/vnd.ez.api.element+json","value":"42"}}',
+            '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json","value":"42"}}',
             $generator->endDocument('test')
         );
     }
@@ -169,7 +169,7 @@ class JsonTest extends GeneratorTest
         $generator->endObjectElement('element');
 
         $this->assertSame(
-            '{"element":{"_media-type":"application\/vnd.ez.api.element+json","value":"42"}}',
+            '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json","value":"42"}}',
             $generator->endDocument('test')
         );
     }
@@ -195,7 +195,7 @@ class JsonTest extends GeneratorTest
         $generator->endObjectElement('elementList');
 
         $this->assertSame(
-            '{"elementList":{"_media-type":"application\/vnd.ez.api.elementList+json","elements":[{"_media-type":"application\/vnd.ez.api.element+json"},{"_media-type":"application\/vnd.ez.api.element+json"}]}}',
+            '{"elementList":{"_media-type":"application\/vnd.ibexa.api.elementList+json","elements":[{"_media-type":"application\/vnd.ibexa.api.element+json"},{"_media-type":"application\/vnd.ibexa.api.element+json"}]}}',
             $generator->endDocument('test')
         );
     }
@@ -236,7 +236,7 @@ class JsonTest extends GeneratorTest
         $generator->endObjectElement('element');
 
         $this->assertSame(
-            '{"element":{"_media-type":"application\/vnd.ez.api.element+json","simpleValue":["value1","value2"]}}',
+            '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json","simpleValue":["value1","value2"]}}',
             $generator->endDocument('test')
         );
     }
@@ -246,7 +246,7 @@ class JsonTest extends GeneratorTest
         $generator = $this->getGenerator();
 
         $this->assertEquals(
-            'application/vnd.ez.api.Section+json',
+            'application/vnd.ibexa.api.Section+json',
             $generator->getMediaType('Section')
         );
     }

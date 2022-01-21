@@ -67,7 +67,7 @@ class JWTTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'JWT',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.JWT+xml',
+                    'media-type' => 'application/vnd.ibexa.api.JWT+xml',
                 ],
             ],
             $result,

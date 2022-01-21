@@ -95,7 +95,7 @@ class PolicyTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Policy',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Policy+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Policy+xml',
                     'href' => '/user/roles/84/policies/42',
                 ],
             ],

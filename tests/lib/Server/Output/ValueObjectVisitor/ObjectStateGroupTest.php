@@ -101,7 +101,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ObjectStateGroup',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ObjectStateGroup+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ObjectStateGroup+xml',
                     'href' => '/content/objectstategroups/42',
                 ],
             ],

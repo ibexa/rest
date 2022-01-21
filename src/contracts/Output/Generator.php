@@ -333,7 +333,7 @@ abstract class Generator
      */
     protected function generateMediaType($name, $type)
     {
-        return "application/vnd.ez.api.{$name}+{$type}";
+        return "application/vnd.ibexa.api.{$name}+{$type}";
     }
 
     /**
@@ -345,7 +345,7 @@ abstract class Generator
      *
      * @return string
      */
-    protected function generateMediaTypeWithVendor($name, $type, $vendor = 'vnd.ez.api')
+    protected function generateMediaTypeWithVendor($name, $type, $vendor = 'vnd.ibexa.api')
     {
         return "application/{$vendor}.{$name}+{$type}";
     }

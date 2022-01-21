@@ -494,7 +494,7 @@ class User extends RestController
             throw new NotFoundException('Could not find Users with the given filter');
         }
 
-        if ($this->getMediaType($request) === 'application/vnd.ez.api.userlist') {
+        if ($this->getMediaType($request) === 'application/vnd.ibexa.api.userlist') {
             return new Values\UserList($restUsers, $request->getPathInfo());
         }
 
@@ -577,7 +577,7 @@ class User extends RestController
             ];
         }
 
-        if ($this->getMediaType($request) === 'application/vnd.ez.api.usergrouplist') {
+        if ($this->getMediaType($request) === 'application/vnd.ibexa.api.usergrouplist') {
             return new Values\UserGroupList($restUserGroups, $request->getPathInfo());
         }
 
@@ -747,7 +747,7 @@ class User extends RestController
             );
         }
 
-        if ($this->getMediaType($request) === 'application/vnd.ez.api.usergrouplist') {
+        if ($this->getMediaType($request) === 'application/vnd.ibexa.api.usergrouplist') {
             return new Values\CachedValue(
                 new Values\UserGroupList($restUserGroups, $request->getPathInfo()),
                 ['locationId' => $userGroupLocation->id]
@@ -845,7 +845,7 @@ class User extends RestController
             );
         }
 
-        if ($this->getMediaType($request) === 'application/vnd.ez.api.userlist') {
+        if ($this->getMediaType($request) === 'application/vnd.ibexa.api.userlist') {
             return new Values\CachedValue(
                 new Values\UserList($restUsers, $request->getPathInfo()),
                 ['locationId' => $userGroupLocation->id]

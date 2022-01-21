@@ -105,7 +105,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ObjectState',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ObjectState+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ObjectState+xml',
                     'href' => '/content/objectstategroups/21/objectstates/42',
                 ],
             ],
@@ -147,7 +147,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ObjectStateGroup',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ObjectStateGroup+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ObjectStateGroup+xml',
                     'href' => '/content/objectstategroups/21',
                 ],
             ],

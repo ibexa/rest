@@ -205,10 +205,10 @@ class TestCase extends BaseTestCase
                 ? $response->getHeader('Content-Type')[0]
                 : '';
 
-            if (strpos($contentTypeHeader, 'application/vnd.ez.api.ErrorMessage+xml') !== false) {
+            if (strpos($contentTypeHeader, 'application/vnd.ibexa.api.ErrorMessage+xml') !== false) {
                 $body = \simplexml_load_string($response->getBody());
                 $errorMessageString = $this->getHttpResponseCodeErrorMessage($body);
-            } elseif (strpos($contentTypeHeader, 'application/vnd.ez.api.ErrorMessage+json') !== false) {
+            } elseif (strpos($contentTypeHeader, 'application/vnd.ibexa.api.ErrorMessage+json') !== false) {
                 $body = json_decode($response->getBody());
                 $errorMessageString = $this->getHttpResponseCodeErrorMessage($body->ErrorMessage);
             }
@@ -247,12 +247,12 @@ EOF;
 
     protected function generateMediaTypeString($typeString)
     {
-        return "application/vnd.ez.api.$typeString";
+        return "application/vnd.ibexa.api.$typeString";
     }
 
     protected function getMediaFromTypeString($typeString)
     {
-        $prefix = 'application/vnd.ez.api.';
+        $prefix = 'application/vnd.ibexa.api.';
         self::assertStringStartsWith(
             $prefix,
             $typeString,

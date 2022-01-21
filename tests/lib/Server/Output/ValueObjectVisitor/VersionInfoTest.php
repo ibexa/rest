@@ -263,7 +263,7 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Content',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentInfo+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentInfo+xml',
                     'href' => '/content/objects/42',
                 ],
             ],

@@ -136,7 +136,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Location',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Location+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Location+xml',
                     'href' => '/content/locations/1/2/21/42',
                 ],
             ],
@@ -178,7 +178,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ContentInfo',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentInfo+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentInfo+xml',
                     'href' => '/content/objects/42',
                 ],
             ],
@@ -339,7 +339,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Children',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.LocationList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.LocationList+xml',
                     'href' => '/content/locations/1/2/21/42/children',
                 ],
             ],
@@ -381,7 +381,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ParentLocation',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Location+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Location+xml',
                     'href' => '/content/locations/1/2/21',
                 ],
             ],
@@ -423,7 +423,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Content',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Content+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Content+xml',
                     'href' => '/content/objects/42',
                 ],
             ],
@@ -565,7 +565,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'UrlAliases',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UrlAliasRefList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.UrlAliasRefList+xml',
                     'href' => '/content/objects/1/2/21/42/urlaliases',
                 ],
             ],

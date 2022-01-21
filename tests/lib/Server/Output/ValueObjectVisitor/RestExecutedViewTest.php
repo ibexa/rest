@@ -78,14 +78,14 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     {
         return [
             ['/View'],
-            ['/View[@media-type="application/vnd.ez.api.View+xml"]'],
+            ['/View[@media-type="application/vnd.ibexa.api.View+xml"]'],
             ['/View[@href="/content/views/test_view"]'],
             ['/View/identifier'],
             ['/View/identifier[text()="test_view"]'],
             ['/View/Query'],
-            ['/View/Query[@media-type="application/vnd.ez.api.Query+xml"]'],
+            ['/View/Query[@media-type="application/vnd.ibexa.api.Query+xml"]'],
             ['/View/Result'],
-            ['/View/Result[@media-type="application/vnd.ez.api.ViewResult+xml"]'],
+            ['/View/Result[@media-type="application/vnd.ibexa.api.ViewResult+xml"]'],
             ['/View/Result[@href="/content/views/test_view/results"]'],
             ['/View/Result/searchHits/searchHit[@score="0.123" and @index="alexandria"]'],
             ['/View/Result/searchHits/searchHit[@score="0.234" and @index="waze"]'],

@@ -79,7 +79,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'RoleAssignmentList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.RoleAssignmentList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.RoleAssignmentList+xml',
                     'href' => '/user/users/42/roles',
                 ],
             ],
@@ -166,7 +166,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'RoleAssignmentList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.RoleAssignmentList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.RoleAssignmentList+xml',
                     'href' => '/user/groups/1/5/777/roles',
                 ],
             ],

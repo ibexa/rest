@@ -72,7 +72,7 @@ class LocationListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'LocationList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.LocationList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.LocationList+xml',
                     'href' => '/content/objects/42/locations',
                 ],
             ],

@@ -80,7 +80,7 @@ class ObjectStateListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ObjectStateList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ObjectStateList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ObjectStateList+xml',
                     'href' => '/content/objectstategroups/42/objectstates',
                 ],
             ],

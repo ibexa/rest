@@ -101,7 +101,7 @@ class RestUserGroupRoleAssignmentTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'RoleAssignment',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.RoleAssignment+xml',
+                    'media-type' => 'application/vnd.ibexa.api.RoleAssignment+xml',
                     'href' => '/user/groups/1/5/14/roles/42',
                 ],
             ],
@@ -143,7 +143,7 @@ class RestUserGroupRoleAssignmentTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Role',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Role+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Role+xml',
                     'href' => '/user/roles/42',
                 ],
             ],

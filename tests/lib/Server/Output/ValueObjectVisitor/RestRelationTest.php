@@ -117,7 +117,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Relation',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Relation+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Relation+xml',
                     'href' => '/content/objects/1/versions/1/relations/42',
                 ],
             ],
@@ -138,7 +138,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'SourceContent',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentInfo+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentInfo+xml',
                     'href' => '/content/objects/1',
                 ],
             ],
@@ -159,7 +159,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'DestinationContent',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentInfo+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentInfo+xml',
                     'href' => '/content/objects/2',
                 ],
             ],

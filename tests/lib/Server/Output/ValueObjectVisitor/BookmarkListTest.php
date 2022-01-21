@@ -61,7 +61,7 @@ class BookmarkListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'BookmarkList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.BookmarkList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.BookmarkList+xml',
                 ],
             ],
             $result,
@@ -88,7 +88,7 @@ class BookmarkListTest extends ValueObjectVisitorBaseTest
      */
     public function testResultContainsBookmarkElement(string $result): void
     {
-        $query = "//BookmarkList/Bookmark[@media-type='application/vnd.ez.api.Bookmark+xml']";
+        $query = "//BookmarkList/Bookmark[@media-type='application/vnd.ibexa.api.Bookmark+xml']";
 
         $document = new DOMDocument();
         $document->loadXML($result);

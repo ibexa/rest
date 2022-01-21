@@ -73,7 +73,7 @@ class TrashTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Trash',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Trash+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Trash+xml',
                     'href' => '/content/trash',
                 ],
             ],

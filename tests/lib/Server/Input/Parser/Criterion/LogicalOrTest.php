@@ -11,6 +11,7 @@ use Ibexa\Contracts\Rest\Exceptions\Parser as ParserException;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Server\Input\Parser;
 use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class LogicalOrTest extends BaseTest
 {
@@ -69,10 +70,13 @@ class LogicalOrTest extends BaseTest
         $parserMock = $this->createMock(\Ibexa\Contracts\Rest\Input\Parser::class);
         $parserMock->method('parse')->willReturn($criterionMock);
 
-        $result = $this->internalGetParser()->parse($logicalOrParsedFromXml, new ParsingDispatcher([
-            'application/vnd.ez.api.internal.criterion.ContentTypeIdentifier' => $parserMock,
-            'application/vnd.ez.api.internal.criterion.Field' => $parserMock,
-        ]));
+        $result = $this->internalGetParser()->parse($logicalOrParsedFromXml, new ParsingDispatcher(
+            $this->createMock(EventDispatcherInterface::class),
+            [
+                'application/vnd.ibexa.api.internal.criterion.ContentTypeIdentifier' => $parserMock,
+                'application/vnd.ibexa.api.internal.criterion.Field' => $parserMock,
+            ]
+        ));
 
         self::assertInstanceOf(Content\Query\Criterion\LogicalOr::class, $result);
         self::assertCount(4, (array)$result->criteria);
@@ -81,7 +85,9 @@ class LogicalOrTest extends BaseTest
     public function testThrowsExceptionOnInvalidAndStatement()
     {
         $this->expectException(ParserException::class);
-        $this->internalGetParser()->parse(['OR' => 'Wrong type'], new ParsingDispatcher());
+        $this->internalGetParser()->parse(['OR' => 'Wrong type'], new ParsingDispatcher(
+            $this->createMock(EventDispatcherInterface::class)
+        ));
     }
 
     /**

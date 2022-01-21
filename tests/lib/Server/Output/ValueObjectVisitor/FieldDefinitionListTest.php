@@ -82,7 +82,7 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
                 '/FieldDefinitions[@href="/content/types/contentTypeId/fieldDefinitions"]',
             ],
             [
-                '/FieldDefinitions[@media-type="application/vnd.ez.api.FieldDefinitionList+xml"]',
+                '/FieldDefinitions[@media-type="application/vnd.ibexa.api.FieldDefinitionList+xml"]',
             ],
         ];
     }

@@ -11,6 +11,7 @@ use Ibexa\Contracts\Rest\Exceptions\Parser as ParserException;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Server\Input\Parser;
 use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class LogicalAndTest extends BaseTest
 {
@@ -57,10 +58,13 @@ class LogicalAndTest extends BaseTest
         $parserMock = $this->createMock(\Ibexa\Contracts\Rest\Input\Parser::class);
         $parserMock->method('parse')->willReturn($criterionMock);
 
-        $result = $this->internalGetParser()->parse($logicalAndParsedFromXml, new ParsingDispatcher([
-            'application/vnd.ez.api.internal.criterion.ContentTypeIdentifier' => $parserMock,
-            'application/vnd.ez.api.internal.criterion.Field' => $parserMock,
-        ]));
+        $result = $this->internalGetParser()->parse($logicalAndParsedFromXml, new ParsingDispatcher(
+            $this->createMock(EventDispatcherInterface::class),
+            [
+                'application/vnd.ibexa.api.internal.criterion.ContentTypeIdentifier' => $parserMock,
+                'application/vnd.ibexa.api.internal.criterion.Field' => $parserMock,
+            ]
+        ));
 
         self::assertInstanceOf(Content\Query\Criterion\LogicalAnd::class, $result);
         self::assertCount(3, (array)$result->criteria);
@@ -69,7 +73,9 @@ class LogicalAndTest extends BaseTest
     public function testThrowsExceptionOnInvalidAndStatement()
     {
         $this->expectException(ParserException::class);
-        $this->internalGetParser()->parse(['AND' => 'Should be an array'], new ParsingDispatcher());
+        $this->internalGetParser()->parse(['AND' => 'Should be an array'], new ParsingDispatcher(
+            $this->createMock(EventDispatcherInterface::class)
+        ));
     }
 
     /**

@@ -6,7 +6,9 @@
  */
 namespace Ibexa\Contracts\Rest\Input;
 
+use Ibexa\Contracts\Rest\Event\DispatchParsingData;
 use Ibexa\Contracts\Rest\Exceptions;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Parsing dispatcher.
@@ -31,13 +33,17 @@ class ParsingDispatcher
      */
     protected $parsers = [];
 
+    protected EventDispatcherInterface $eventDispatcher;
+
     /**
      * Construct from optional parsers array.
      *
      * @param array $parsers
      */
-    public function __construct(array $parsers = [])
+    public function __construct(EventDispatcherInterface $eventDispatcher, array $parsers = [])
     {
+        $this->eventDispatcher = $eventDispatcher;
+
         foreach ($parsers as $mediaType => $parser) {
             $this->addParser($mediaType, $parser);
         }
@@ -65,6 +71,12 @@ class ParsingDispatcher
      */
     public function parse(array $data, $mediaType)
     {
+        $dispatchParsingEvent = new DispatchParsingData($data, $mediaType);
+        $this->eventDispatcher->dispatch($dispatchParsingEvent);
+
+        $mediaType = $dispatchParsingEvent->getMediaType();
+        $data = $dispatchParsingEvent->getData();
+
         list($mediaType, $version) = $this->parseMediaTypeVersion($mediaType);
 
         // Remove encoding type

@@ -246,7 +246,7 @@ class XmlTest extends GeneratorTest
         $generator = $this->getGenerator();
 
         $this->assertEquals(
-            'application/vnd.ez.api.Section+xml',
+            'application/vnd.ibexa.api.Section+xml',
             $generator->getMediaType('Section')
         );
     }

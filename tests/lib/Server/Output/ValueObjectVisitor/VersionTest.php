@@ -140,7 +140,7 @@ class VersionTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Version',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Version+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Version+xml',
                     'href' => '/content/objects/23/versions/5',
                 ],
             ],

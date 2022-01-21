@@ -93,7 +93,7 @@ class RoleTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Role',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Role+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Role+xml',
                     'href' => '/user/roles/42',
                 ],
             ],
@@ -222,7 +222,7 @@ class RoleTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Policies',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.PolicyList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.PolicyList+xml',
                     'href' => '/user/roles/42/policies',
                 ],
             ],

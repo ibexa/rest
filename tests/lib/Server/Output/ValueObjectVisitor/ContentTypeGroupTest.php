@@ -120,7 +120,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ContentTypeGroup',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentTypeGroup+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentTypeGroup+xml',
                     'href' => '/content/typegroups/42',
                 ],
             ],
@@ -243,7 +243,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
                 'tag' => 'Creator',
                 'attributes' => [
                     'href' => '/user/users/14',
-                    'media-type' => 'application/vnd.ez.api.User+xml',
+                    'media-type' => 'application/vnd.ibexa.api.User+xml',
                 ],
             ],
             $result,
@@ -285,7 +285,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
                 'tag' => 'Modifier',
                 'attributes' => [
                     'href' => '/user/users/13',
-                    'media-type' => 'application/vnd.ez.api.User+xml',
+                    'media-type' => 'application/vnd.ibexa.api.User+xml',
                 ],
             ],
             $result,
@@ -327,7 +327,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
                 'tag' => 'ContentTypes',
                 'attributes' => [
                     'href' => '/content/typegroups/42/types',
-                    'media-type' => 'application/vnd.ez.api.ContentTypeInfoList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentTypeInfoList+xml',
                 ],
             ],
             $result,

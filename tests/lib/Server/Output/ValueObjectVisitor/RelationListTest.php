@@ -82,7 +82,7 @@ class RelationListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Relations',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.RelationList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.RelationList+xml',
                     'href' => '/content/objects/42/versions/21/relations',
                 ],
             ],

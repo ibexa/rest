@@ -409,7 +409,7 @@ XML;
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <RoleAssignInput>
-  <Role href="{$roleHref}" media-type="application/vnd.ez.api.RoleAssignInput+xml"/>
+  <Role href="{$roleHref}" media-type="application/vnd.ibexa.api.RoleAssignInput+xml"/>
 </RoleAssignInput>
 XML;
 
@@ -445,10 +445,10 @@ XML;
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <RoleAssignInput>
-  <Role href="{$roleHref}" media-type="application/vnd.ez.api.RoleAssignInput+xml"/>
+  <Role href="{$roleHref}" media-type="application/vnd.ibexa.api.RoleAssignInput+xml"/>
   <limitation identifier="{$limitation['identifier']}">
       <values>
-          <ref href="{$limitation['href']}" media-type="application/vnd.ez.api.{$limitation['identifier']}+xml" />
+          <ref href="{$limitation['href']}" media-type="application/vnd.ibexa.api.{$limitation['identifier']}+xml" />
       </values>
   </limitation>
 </RoleAssignInput>
@@ -517,10 +517,10 @@ XML;
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <RoleAssignInput>
-  <Role href="{$roleHref}" media-type="application/vnd.ez.api.RoleAssignInput+xml"/>
+  <Role href="{$roleHref}" media-type="application/vnd.ibexa.api.RoleAssignInput+xml"/>
   <limitation identifier="Section">
       <values>
-          <ref href="/api/ezp/v2/content/sections/1" media-type="application/vnd.ez.api.Section+xml" />
+          <ref href="/api/ezp/v2/content/sections/1" media-type="application/vnd.ibexa.api.Section+xml" />
       </values>
   </limitation>
 </RoleAssignInput>

@@ -6,13 +6,13 @@
  */
 return [
   'elementList' => [
-    '_media-type' => 'application/vnd.ez.api.elementList+xml',
+    '_media-type' => 'application/vnd.ibexa.api.elementList+xml',
     'element' => [
       0 => [
-        '_media-type' => 'application/vnd.ez.api.element+xml',
+        '_media-type' => 'application/vnd.ibexa.api.element+xml',
       ],
       1 => [
-        '_media-type' => 'application/vnd.ez.api.element+xml',
+        '_media-type' => 'application/vnd.ibexa.api.element+xml',
       ],
     ],
   ],
