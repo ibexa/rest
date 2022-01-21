@@ -33,7 +33,7 @@ class CreatedFieldDefinition extends RestFieldDefinition
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                "ezpublish_rest_loadContentType{$draftUriPart}FieldDefinition",
+                "ibexa.rest.load_content_type_{$draftUriPart}field_definition",
                 [
                     'contentTypeId' => $restFieldDefinition->contentType->id,
                     'fieldDefinitionId' => $restFieldDefinition->fieldDefinition->id,

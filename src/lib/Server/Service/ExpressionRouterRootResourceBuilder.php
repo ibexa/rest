@@ -25,11 +25,11 @@ use Symfony\Component\Routing\RouterInterface;
  * array(
  *      'content' => array(
  *          'mediaType' => '',
- *          'href' => 'router.generate("ezpublish_rest_listContentTypes")',
+ *          'href' => 'router.generate("ibexa.rest.list_content_types")',
  *      ),
  *      'usersByRoleId' => array(
  *          'mediaType' => 'UserRefList',
- *          'href' => 'templateRouter.generate("ezpublish_rest_loadUsers", {roleId: "{roleId}"})',
+ *          'href' => 'templateRouter.generate("ibexa.rest.load_users", {roleId: "{roleId}"})',
  *      ),
  * )
  */

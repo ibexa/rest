@@ -30,9 +30,9 @@ class RouteCollectionMapperTest extends TestCase
     public function testAddRestRoutesCollection()
     {
         $restRoutesCollection = new RouteCollection();
-        $restRoutesCollection->add('ezpublish_rest_route_one_get', $this->createRoute('/route/one', ['GET']));
-        $restRoutesCollection->add('ezpublish_rest_route_one_post', $this->createRoute('/route/one', ['POST']));
-        $restRoutesCollection->add('ezpublish_rest_route_two_delete', $this->createRoute('/route/two', ['DELETE']));
+        $restRoutesCollection->add('ibexa.rest.route_one_get', $this->createRoute('/route/one', ['GET']));
+        $restRoutesCollection->add('ibexa.rest.route_one_post', $this->createRoute('/route/one', ['POST']));
+        $restRoutesCollection->add('ibexa.rest.route_two_delete', $this->createRoute('/route/two', ['DELETE']));
 
         $optionsRouteCollection = $this->collectionMapper->mapCollection($restRoutesCollection);
 

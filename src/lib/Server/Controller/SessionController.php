@@ -228,7 +228,7 @@ class SessionController extends Controller
         if (null === $this->authenticator) {
             throw new \RuntimeException(
                 sprintf(
-                    "No %s instance injected. Ensure 'ezpublish_rest_session' is configured under your firewall",
+                    "No %s instance injected. Ensure 'ibexa.rest.session' is configured under your firewall",
                     AuthenticatorInterface::class
                 )
             );

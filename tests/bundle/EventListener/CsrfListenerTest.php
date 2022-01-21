@@ -42,7 +42,7 @@ class CsrfListenerTest extends EventListenerTest
      *
      * @var string
      */
-    protected $route = 'ezpublish_rest_something';
+    protected $route = 'ibexa.rest.something';
 
     /**
      * If set to false, Request::getRequestMethod() is expected not to be called.

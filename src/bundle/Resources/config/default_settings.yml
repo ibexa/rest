@@ -8,85 +8,85 @@ parameters:
     ezsettings.default.rest_root_resources:
         content:
             mediaType: ''
-            href: 'router.generate("ezpublish_rest_createContent")'
+            href: 'router.generate("ibexa.rest.create_content")'
         contentByRemoteId:
             mediaType: ''
-            href: 'templateRouter.generate("ezpublish_rest_redirectContent", {remoteId: "{remoteId}"})'
+            href: 'templateRouter.generate("ibexa.rest.redirect_content", {remoteId: "{remoteId}"})'
         contentTypes:
             mediaType: 'ContentTypeInfoList'
-            href: 'router.generate("ezpublish_rest_listContentTypes")'
+            href: 'router.generate("ibexa.rest.list_content_types")'
         contentTypeByIdentifier:
             mediaType: ''
-            href: 'templateRouter.generate("ezpublish_rest_listContentTypes", {identifier: "{identifier}"})'
+            href: 'templateRouter.generate("ibexa.rest.list_content_types", {identifier: "{identifier}"})'
         contentTypeGroups:
             mediaType: 'ContentTypeGroupList'
-            href: 'router.generate("ezpublish_rest_createContentTypeGroup")'
+            href: 'router.generate("ibexa.rest.create_content_type_group")'
         contentTypeGroupByIdentifier:
             mediaType: ''
-            href: 'templateRouter.generate("ezpublish_rest_loadContentTypeGroupList", {identifier: "{identifier}"})'
+            href: 'templateRouter.generate("ibexa.rest.load_content_type_group_list", {identifier: "{identifier}"})'
         users:
             mediaType: 'UserRefList'
-            href: 'router.generate("ezpublish_rest_loadUsers")'
+            href: 'router.generate("ibexa.rest.load_users")'
         usersByRoleId:
             mediaType: 'UserRefList'
-            href: 'templateRouter.generate("ezpublish_rest_loadUsers", {roleId: "{roleId}"})'
+            href: 'templateRouter.generate("ibexa.rest.load_users", {roleId: "{roleId}"})'
         usersByRemoteId:
             mediaType: 'UserRefList'
-            href: 'templateRouter.generate("ezpublish_rest_loadUsers", {remoteId: "{remoteId}"})'
+            href: 'templateRouter.generate("ibexa.rest.load_users", {remoteId: "{remoteId}"})'
         usersByEmail:
             mediaType: 'UserRefList'
-            href: 'templateRouter.generate("ezpublish_rest_loadUsers", {email: "{email}"})'
+            href: 'templateRouter.generate("ibexa.rest.load_users", {email: "{email}"})'
         usersByLogin:
             mediaType: 'UserRefList'
-            href: 'templateRouter.generate("ezpublish_rest_loadUsers", {login: "{login}"})'
+            href: 'templateRouter.generate("ibexa.rest.load_users", {login: "{login}"})'
         roles:
             mediaType: 'RoleList'
-            href: 'router.generate("ezpublish_rest_listRoles")'
+            href: 'router.generate("ibexa.rest.list_roles")'
         rootLocation:
             mediaType: 'Location'
-            href: 'router.generate("ezpublish_rest_loadLocation", {locationPath: "1/2"})'
+            href: 'router.generate("ibexa.rest.load_location", {locationPath: "1/2"})'
         rootUserGroup:
             mediaType: 'UserGroup'
-            href: 'router.generate("ezpublish_rest_loadUserGroup", {groupPath: "1/5"})'
+            href: 'router.generate("ibexa.rest.load_user_group", {groupPath: "1/5"})'
         rootMediaFolder:
             mediaType: 'Location'
-            href: 'router.generate("ezpublish_rest_loadLocation", {locationPath: "1/43"})'
+            href: 'router.generate("ibexa.rest.load_location", {locationPath: "1/43"})'
         locationByRemoteId:
             mediaType: ''
-            href: 'templateRouter.generate("ezpublish_rest_redirectLocation", {remoteId: "{remoteId}"})'
+            href: 'templateRouter.generate("ibexa.rest.redirect_location", {remoteId: "{remoteId}"})'
         locationByPath:
             mediaType: ''
-            href: 'templateRouter.generate("ezpublish_rest_redirectLocation", {locationPath: "{locationPath}"})'
+            href: 'templateRouter.generate("ibexa.rest.redirect_location", {locationPath: "{locationPath}"})'
         trash:
             mediaType: 'Trash'
-            href: 'router.generate("ezpublish_rest_loadTrashItems")'
+            href: 'router.generate("ibexa.rest.load_trash_items")'
         sections:
             mediaType: 'SectionList'
-            href: 'router.generate("ezpublish_rest_listSections")'
+            href: 'router.generate("ibexa.rest.list_sections")'
         views:
             mediaType: 'RefList'
-            href: 'router.generate("ezpublish_rest_views_create")'
+            href: 'router.generate("ibexa.rest.views.create")'
         objectStateGroups:
             mediaType: 'ObjectStateGroupList'
-            href: 'router.generate("ezpublish_rest_loadObjectStateGroups")'
+            href: 'router.generate("ibexa.rest.load_object_state_groups")'
         objectStates:
             mediaType: 'ObjectStateList'
-            href: 'templateRouter.generate("ezpublish_rest_loadObjectStates", {objectStateGroupId: "{objectStateGroupId}"})'
+            href: 'templateRouter.generate("ibexa.rest.load_object_states", {objectStateGroupId: "{objectStateGroupId}"})'
         globalUrlAliases:
             mediaType: 'UrlAliasRefList'
-            href: 'router.generate("ezpublish_rest_listGlobalURLAliases")'
+            href: 'router.generate("ibexa.rest.list_global_url_aliases")'
         urlWildcards:
             mediaType: 'UrlWildcardList'
-            href: 'router.generate("ezpublish_rest_listURLWildcards")'
+            href: 'router.generate("ibexa.rest.list_url_wildcards")'
         createSession:
             mediaType: 'UserSession'
-            href: 'router.generate("ezpublish_rest_createSession")'
+            href: 'router.generate("ibexa.rest.create_session")'
         refreshSession:
             mediaType: 'UserSession'
-            href: 'templateRouter.generate("ezpublish_rest_refreshSession", {sessionId: "{sessionId}"})'
+            href: 'templateRouter.generate("ibexa.rest.refresh_session", {sessionId: "{sessionId}"})'
         createToken:
             mediaType: 'JWT'
-            href: 'router.generate("ibexa.platform.rest.create_token")'
+            href: 'router.generate("ibexa.rest.create_token")'
 
     # Boundary times in microseconds which the authentication check will be delayed by.
     ibexa.rest.authentication_min_delay_time: 30000
