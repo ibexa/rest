@@ -69,7 +69,7 @@ class RestSessionBasedFactory extends FormLoginFactory
 
     public function getKey(): string
     {
-        return 'ibexa.rest.session';
+        return 'ibexa_rest_session';
     }
 
     protected function createEntryPoint($container, $id, $config, $defaultEntryPoint): ?string
