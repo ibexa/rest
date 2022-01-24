@@ -61,7 +61,7 @@ class ImageAssetFieldTypeProcessor extends FieldTypeProcessor
         foreach ($this->variations as $variationIdentifier) {
             $outgoingValueHash['variations'][$variationIdentifier] = [
                 'href' => $this->router->generate(
-                    'ezpublish_rest_binaryContent_getImageVariation',
+                    'ibexa.rest.binary_content.get_image_variation',
                     [
                         'imageId' => $imageId,
                         'variationIdentifier' => $variationIdentifier,

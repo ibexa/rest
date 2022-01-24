@@ -61,7 +61,7 @@ class Bookmark extends RestController
 
             return new Values\ResourceCreated(
                 $this->router->generate(
-                    'ezpublish_rest_isBookmarked',
+                    'ibexa.rest.is_bookmarked',
                     [
                         'locationId' => $locationId,
                     ]

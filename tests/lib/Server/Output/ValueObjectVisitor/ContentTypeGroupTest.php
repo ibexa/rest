@@ -49,25 +49,25 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         $routerMock = $this->getRouterMock();
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentTypeGroup',
+            'ibexa.rest.load_content_type_group',
             ['contentTypeGroupId' => $contentTypeGroup->id],
             "/content/typegroups/{$contentTypeGroup->id}"
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $contentTypeGroup->creatorId],
             "/user/users/{$contentTypeGroup->creatorId}"
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $contentTypeGroup->modifierId],
             "/user/users/{$contentTypeGroup->modifierId}"
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_listContentTypesForGroup',
+            'ibexa.rest.list_content_types_for_group',
             ['contentTypeGroupId' => $contentTypeGroup->id],
             "/content/typegroups/{$contentTypeGroup->id}/types"
         );

@@ -80,7 +80,7 @@ class VersionInfo extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadUser',
+                'ibexa.rest.load_user',
                 ['userId' => $versionInfo->creatorId]
             )
         );
@@ -112,7 +112,7 @@ class VersionInfo extends ValueObjectVisitor
         $generator->startObjectElement('Content', 'ContentInfo');
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadContent', ['contentId' => $versionInfo->getContentInfo()->id])
+            $this->router->generate('ibexa.rest.load_content', ['contentId' => $versionInfo->getContentInfo()->id])
         );
         $generator->endAttribute('href');
         $generator->endObjectElement('Content');

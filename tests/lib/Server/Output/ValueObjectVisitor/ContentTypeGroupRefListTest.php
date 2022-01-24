@@ -50,19 +50,19 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_listContentTypesForGroup',
+            'ibexa.rest.list_content_types_for_group',
             ['contentTypeGroupId' => $contentTypeGroupRefList->contentType->id],
             "/content/types/{$contentTypeGroupRefList->contentType->id}/groups"
         );
 
         // first iteration
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentTypeGroup',
+            'ibexa.rest.load_content_type_group',
             ['contentTypeGroupId' => $contentTypeGroupRefList->contentTypeGroups[0]->id],
             "/content/typegroups/{$contentTypeGroupRefList->contentTypeGroups[0]->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_unlinkContentTypeFromGroup',
+            'ibexa.rest.unlink_content_type_from_group',
             [
                 'contentTypeId' => $contentTypeGroupRefList->contentType->id,
                 'contentTypeGroupId' => $contentTypeGroupRefList->contentTypeGroups[0]->id,
@@ -72,12 +72,12 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
 
         // second iteration
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentTypeGroup',
+            'ibexa.rest.load_content_type_group',
             ['contentTypeGroupId' => $contentTypeGroupRefList->contentTypeGroups[1]->id],
             "/content/typegroups/{$contentTypeGroupRefList->contentTypeGroups[1]->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_unlinkContentTypeFromGroup',
+            'ibexa.rest.unlink_content_type_from_group',
             [
                 'contentTypeId' => $contentTypeGroupRefList->contentType->id,
                 'contentTypeGroupId' => $contentTypeGroupRefList->contentTypeGroups[1]->id,

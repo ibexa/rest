@@ -29,7 +29,7 @@ class CreatedLocation extends RestLocation
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                'ezpublish_rest_loadLocation',
+                'ibexa.rest.load_location',
                 ['locationPath' => trim($data->restLocation->location->pathString, '/')]
             )
         );

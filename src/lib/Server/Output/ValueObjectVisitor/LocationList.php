@@ -37,7 +37,7 @@ class LocationList extends ValueObjectVisitor
             $generator->startAttribute(
                 'href',
                 $this->router->generate(
-                    'ezpublish_rest_loadLocation',
+                    'ibexa.rest.load_location',
                     ['locationPath' => trim($restLocation->location->pathString, '/')]
                 )
             );

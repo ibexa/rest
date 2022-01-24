@@ -167,7 +167,7 @@ class Trash extends RestController
 
         return new Values\ResourceCreated(
             $this->router->generate(
-                'ezpublish_rest_loadLocation',
+                'ibexa.rest.load_location',
                 [
                     'locationPath' => trim($location->pathString, '/'),
                 ]

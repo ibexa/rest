@@ -46,47 +46,47 @@ class RestContentTest extends ValueObjectVisitorBaseTest
             ->method('visitValueObject');
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentType',
+            'ibexa.rest.load_content_type',
             ['contentTypeId' => $restContent->contentInfo->contentTypeId],
             "/content/types/{$restContent->contentInfo->contentTypeId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentVersions',
+            'ibexa.rest.load_content_versions',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}/versions"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_redirectCurrentVersion',
+            'ibexa.rest.redirect_current_version',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}/currentversion"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadSection',
+            'ibexa.rest.load_section',
             ['sectionId' => $restContent->contentInfo->sectionId],
             "/content/sections/{$restContent->contentInfo->sectionId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocation',
+            'ibexa.rest.load_location',
             ['locationPath' => $locationPath = trim($restContent->mainLocation->pathString, '/')],
             "/content/locations/{$locationPath}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocationsForContent',
+            'ibexa.rest.load_locations_for_content',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}/locations"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $restContent->contentInfo->ownerId],
             "/user/users/{$restContent->contentInfo->ownerId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_getObjectStatesForContent',
+            'ibexa.rest.get_object_states_for_content',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}/objectstates"
         );
@@ -425,43 +425,43 @@ class RestContentTest extends ValueObjectVisitorBaseTest
             ->with($this->isInstanceOf(Version::class));
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentType',
+            'ibexa.rest.load_content_type',
             ['contentTypeId' => $restContent->contentInfo->contentTypeId],
             "/content/types/{$restContent->contentInfo->contentTypeId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentVersions',
+            'ibexa.rest.load_content_versions',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}/versions"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_redirectCurrentVersion',
+            'ibexa.rest.redirect_current_version',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}/currentversion"
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadSection',
+            'ibexa.rest.load_section',
             ['sectionId' => $restContent->contentInfo->sectionId],
             "/content/sections/{$restContent->contentInfo->sectionId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocation',
+            'ibexa.rest.load_location',
             ['locationPath' => $locationPath = trim($restContent->mainLocation->pathString, '/')],
             "/content/locations/{$locationPath}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocationsForContent',
+            'ibexa.rest.load_locations_for_content',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}/locations"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $restContent->contentInfo->ownerId],
             "/user/users/{$restContent->contentInfo->ownerId}"
         );

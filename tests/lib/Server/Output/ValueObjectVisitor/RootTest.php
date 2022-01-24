@@ -18,26 +18,26 @@ class RootTest extends ValueObjectVisitorBaseTest
         $resourceConfig = [
             'Router' => [
                 'mediaType' => '',
-                'href' => 'router.generate("ezpublish_rest_createContent")',
+                'href' => 'router.generate("ibexa.rest.create_content")',
             ],
             'RouterWithAttributes' => [
                 'mediaType' => 'UserRefList',
-                'href' => 'router.generate("ezpublish_rest_loadUsers")',
+                'href' => 'router.generate("ibexa.rest.load_users")',
             ],
             'TemplateRouter' => [
                 'mediaType' => '',
-                'href' => 'templateRouter.generate("ezpublish_rest_redirectContent", {remoteId: "{remoteId}"})',
+                'href' => 'templateRouter.generate("ibexa.rest.redirect_content", {remoteId: "{remoteId}"})',
             ],
             'TemplateRouterWithAttributes' => [
                 'mediaType' => 'UserRefList',
-                'href' => 'templateRouter.generate("ezpublish_rest_loadUsers", {roleId: "{roleId}"})',
+                'href' => 'templateRouter.generate("ibexa.rest.load_users", {roleId: "{roleId}"})',
             ],
         ];
 
-        $this->addRouteExpectation('ezpublish_rest_createContent', [], '/content/objects');
-        $this->addTemplatedRouteExpectation('ezpublish_rest_redirectContent', ['remoteId' => '{remoteId}'], '/content/objects');
-        $this->addRouteExpectation('ezpublish_rest_loadUsers', [], '/user/users');
-        $this->addTemplatedRouteExpectation('ezpublish_rest_loadUsers', ['roleId' => '{roleId}'], '/user/users{?roleId}');
+        $this->addRouteExpectation('ibexa.rest.create_content', [], '/content/objects');
+        $this->addTemplatedRouteExpectation('ibexa.rest.redirect_content', ['remoteId' => '{remoteId}'], '/content/objects');
+        $this->addRouteExpectation('ibexa.rest.load_users', [], '/user/users');
+        $this->addTemplatedRouteExpectation('ibexa.rest.load_users', ['roleId' => '{roleId}'], '/user/users{?roleId}');
 
         $configResolver = $this->createMock(ConfigResolverInterface::class);
         $configResolver

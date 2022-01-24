@@ -41,7 +41,7 @@ class PolicyTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadPolicy',
+            'ibexa.rest.load_policy',
             ['roleId' => $policy->roleId, 'policyId' => $policy->id],
             "/user/roles/{$policy->roleId}/policies/{$policy->id}"
         );

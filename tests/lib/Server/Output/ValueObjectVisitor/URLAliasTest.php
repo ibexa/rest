@@ -39,7 +39,7 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadURLAlias',
+            'ibexa.rest.load_url_alias',
             ['urlAliasId' => $urlAlias->id],
             "/content/urlaliases/{$urlAlias->id}"
         );

@@ -29,7 +29,7 @@ class ObjectStateGroupList extends ValueObjectVisitor
         //@todo Needs refactoring, disabling certain headers should not be done this way
         $visitor->setHeader('Accept-Patch', false);
 
-        $generator->startAttribute('href', $this->router->generate('ezpublish_rest_loadObjectStateGroups'));
+        $generator->startAttribute('href', $this->router->generate('ibexa.rest.load_object_state_groups'));
         $generator->endAttribute('href');
 
         $generator->startList('ObjectStateGroup');

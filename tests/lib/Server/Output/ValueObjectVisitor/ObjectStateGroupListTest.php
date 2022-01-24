@@ -27,7 +27,7 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
 
         $groupList = new ObjectStateGroupList([]);
 
-        $this->addRouteExpectation('ezpublish_rest_loadObjectStateGroups', [], '/content/objectstategroups');
+        $this->addRouteExpectation('ibexa.rest.load_object_state_groups', [], '/content/objectstategroups');
 
         $visitor->visit(
             $this->getVisitorMock(),

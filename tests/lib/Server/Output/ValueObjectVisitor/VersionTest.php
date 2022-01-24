@@ -87,7 +87,7 @@ class VersionTest extends ValueObjectVisitorBaseTest
             ->method('visitValueObject');
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentInVersion',
+            'ibexa.rest.load_content_in_version',
             [
                 'contentId' => $version->content->id,
                 'versionNumber' => $version->content->versionInfo->versionNo,

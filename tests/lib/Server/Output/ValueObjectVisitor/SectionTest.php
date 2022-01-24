@@ -33,7 +33,7 @@ class SectionTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadSection',
+            'ibexa.rest.load_section',
             ['sectionId' => $section->id],
             "/content/sections/{$section->id}"
         );

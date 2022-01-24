@@ -62,7 +62,7 @@ class IbexaRestExtension extends Extension implements PrependExtensionInterface
 
     private function prependRouterConfiguration(ContainerBuilder $container)
     {
-        $config = ['router' => ['default_router' => ['non_siteaccess_aware_routes' => ['ezpublish_rest_']]]];
+        $config = ['router' => ['default_router' => ['non_siteaccess_aware_routes' => ['ibexa.rest.']]]];
         $container->prependExtensionConfig('ibexa', $config);
     }
 }

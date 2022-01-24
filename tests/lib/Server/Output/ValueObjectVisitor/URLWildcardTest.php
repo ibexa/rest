@@ -34,7 +34,7 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadURLWildcard',
+            'ibexa.rest.load_url_wildcard',
             ['urlWildcardId' => $urlWildcard->id],
             "/content/urlwildcards/{$urlWildcard->id}"
         );

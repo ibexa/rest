@@ -41,7 +41,7 @@ class UserGroupRefList extends ValueObjectVisitor
             $generator->startAttribute(
                 'href',
                 $this->router->generate(
-                    'ezpublish_rest_loadUserGroup',
+                    'ibexa.rest.load_user_group',
                     [
                         'groupPath' => trim($userGroup->mainLocation->pathString, '/'),
                     ]
@@ -55,7 +55,7 @@ class UserGroupRefList extends ValueObjectVisitor
                 $generator->startAttribute(
                     'href',
                     $this->router->generate(
-                        'ezpublish_rest_unassignUserFromUserGroup',
+                        'ibexa.rest.unassign_user_from_user_group',
                         [
                             'userId' => $data->userId,
                             'groupPath' => $userGroup->mainLocation->path[count($userGroup->mainLocation->path) - 1],

@@ -33,7 +33,7 @@ class ImageProcessorTest extends BinaryInputProcessorTest
                 ->expects($this->at($iteration))
                 ->method('generate')
                 ->with(
-                    'ezpublish_rest_binaryContent_getImageVariation',
+                    'ibexa.rest.binary_content.get_image_variation',
                     ['imageId' => $inputHash['imageId'], 'variationIdentifier' => $variationIdentifier]
                 )
                 ->willReturn(

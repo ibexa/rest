@@ -29,7 +29,7 @@ class URLWildcardList extends ValueObjectVisitor
 
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_listURLWildcards')
+            $this->router->generate('ibexa.rest.list_url_wildcards')
         );
         $generator->endAttribute('href');
 

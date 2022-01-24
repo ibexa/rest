@@ -55,34 +55,34 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocation',
+            'ibexa.rest.load_location',
             ['locationPath' => '1/2/21/42'],
             '/content/locations/1/2/21/42'
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocation',
+            'ibexa.rest.load_location',
             ['locationPath' => '1/2/21'],
             '/content/locations/1/2/21'
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocationChildren',
+            'ibexa.rest.load_location_children',
             ['locationPath' => '1/2/21/42'],
             '/content/locations/1/2/21/42/children'
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $location->location->contentId],
             "/content/objects/{$location->location->contentId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_listLocationURLAliases',
+            'ibexa.rest.list_location_url_aliases',
             ['locationPath' => '1/2/21/42'],
             '/content/objects/1/2/21/42/urlaliases'
         );
 
         // Expected twice, second one here for ContentInfo
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $location->location->contentId],
             "/content/objects/{$location->location->contentId}"
         );

@@ -31,8 +31,8 @@ class RoleAssignmentList extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $data->isGroupAssignment ?
-                $this->router->generate('ezpublish_rest_loadRoleAssignmentsForUserGroup', ['groupPath' => $data->id]) :
-                $this->router->generate('ezpublish_rest_loadRoleAssignmentsForUser', ['userId' => $data->id])
+                $this->router->generate('ibexa.rest.load_role_assignments_for_user_group', ['groupPath' => $data->id]) :
+                $this->router->generate('ibexa.rest.load_role_assignments_for_user', ['userId' => $data->id])
         );
         $generator->endAttribute('href');
 

@@ -29,7 +29,7 @@ class CreatedURLWildcard extends URLWildcard
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                'ezpublish_rest_loadURLWildcard',
+                'ibexa.rest.load_url_wildcard',
                 ['urlWildcardId' => $data->urlWildcard->id]
             )
         );

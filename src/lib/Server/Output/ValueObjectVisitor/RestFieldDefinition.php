@@ -56,7 +56,7 @@ class RestFieldDefinition extends RestContentTypeBase
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                "ezpublish_rest_loadContentType{$urlTypeSuffix}FieldDefinition",
+                "ibexa.rest.load_content_type_{$urlTypeSuffix}field_definition",
                 [
                     'contentTypeId' => $contentType->id,
                     'fieldDefinitionId' => $fieldDefinition->id,

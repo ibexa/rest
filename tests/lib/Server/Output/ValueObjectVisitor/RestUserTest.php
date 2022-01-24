@@ -32,52 +32,52 @@ class RestUserTest extends ValueObjectVisitorBaseTest
 
         $locationPath = implode('/', $restUser->mainLocation->path);
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $restUser->contentInfo->id],
             "/user/users/{$restUser->contentInfo->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentType',
+            'ibexa.rest.load_content_type',
             ['contentTypeId' => $restUser->contentInfo->contentTypeId],
             "/content/types/{$restUser->contentInfo->contentTypeId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentVersions',
+            'ibexa.rest.load_content_versions',
             ['contentId' => $restUser->contentInfo->id],
             "/content/objects/{$restUser->contentInfo->id}/versions"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadSection',
+            'ibexa.rest.load_section',
             ['sectionId' => $restUser->contentInfo->sectionId],
             "/content/sections/{$restUser->contentInfo->sectionId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocation',
+            'ibexa.rest.load_location',
             ['locationPath' => $locationPath],
             "/content/locations/{$locationPath}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocationsForContent',
+            'ibexa.rest.load_locations_for_content',
             ['contentId' => $restUser->contentInfo->id],
             "/content/objects/{$restUser->contentInfo->id}/locations"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUserGroupsOfUser',
+            'ibexa.rest.load_user_groups_of_user',
             ['userId' => $restUser->contentInfo->id],
             "/user/users/{$restUser->contentInfo->id}/groups"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $restUser->contentInfo->ownerId],
             "/user/users/{$restUser->contentInfo->ownerId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUserGroupsOfUser',
+            'ibexa.rest.load_user_groups_of_user',
             ['userId' => $restUser->contentInfo->id],
             "/user/users/{$restUser->contentInfo->id}/groups"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadRoleAssignmentsForUser',
+            'ibexa.rest.load_role_assignments_for_user',
             ['userId' => $restUser->contentInfo->id],
             "/user/users/{$restUser->contentInfo->id}/roles"
         );

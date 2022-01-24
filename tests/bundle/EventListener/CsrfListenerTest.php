@@ -42,7 +42,7 @@ class CsrfListenerTest extends EventListenerTest
      *
      * @var string
      */
-    protected $route = 'ezpublish_rest_something';
+    protected $route = 'ibexa.rest.something';
 
     /**
      * If set to false, Request::getRequestMethod() is expected not to be called.
@@ -128,9 +128,9 @@ class CsrfListenerTest extends EventListenerTest
     public static function provideSessionRoutes()
     {
         return [
-            ['ezpublish_rest_createSession'],
-            ['ezpublish_rest_refreshSession'],
-            ['ezpublish_rest_deleteSession'],
+            ['ibexa.rest.create_session'],
+            ['ibexa.rest.refresh_session'],
+            ['ibexa.rest.delete_session'],
         ];
     }
 

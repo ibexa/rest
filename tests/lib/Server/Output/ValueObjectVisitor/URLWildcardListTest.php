@@ -28,7 +28,7 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTest
         $urlWildcardList = new URLWildcardList([]);
 
         $this->addRouteExpectation(
-            'ezpublish_rest_listURLWildcards',
+            'ibexa.rest.list_url_wildcards',
             [],
             '/content/urlwildcards'
         );

@@ -31,7 +31,7 @@ class RelationList extends ValueObjectVisitor
         $path = $data->path;
         if ($path === null) {
             $path = $this->router->generate(
-                'ezpublish_rest_loadVersionRelations',
+                'ibexa.rest.load_version_relations',
                 [
                     'contentId' => $data->contentId,
                     'versionNumber' => $data->versionNo,

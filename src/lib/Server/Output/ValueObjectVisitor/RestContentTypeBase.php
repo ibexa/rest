@@ -25,17 +25,14 @@ abstract class RestContentTypeBase extends ValueObjectVisitor
     protected function getUrlTypeSuffix($contentTypeStatus)
     {
         switch ($contentTypeStatus) {
-            case Values\ContentType\ContentType::STATUS_DEFINED:
-                return '';
-
             case Values\ContentType\ContentType::STATUS_DRAFT:
-                return 'Draft';
-
+                return 'draft_';
             case Values\ContentType\ContentType::STATUS_MODIFIED:
-                return 'Modified';
+                return 'modified_';
+            case Values\ContentType\ContentType::STATUS_DEFINED:
+            default:
+                return '';
         }
-
-        return '';
     }
 
     /**

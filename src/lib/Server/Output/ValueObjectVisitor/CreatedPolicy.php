@@ -29,7 +29,7 @@ class CreatedPolicy extends Policy
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                'ezpublish_rest_loadPolicy',
+                'ibexa.rest.load_policy',
                 [
                     'roleId' => $data->policy->roleId,
                     'policyId' => $data->policy->id,

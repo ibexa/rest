@@ -29,7 +29,7 @@ class CreatedRole extends Role
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                'ezpublish_rest_loadRole',
+                'ibexa.rest.load_role',
                 ['roleId' => $data->role->id]
             )
         );

@@ -30,9 +30,9 @@ class RouteCollectionMapperTest extends TestCase
     public function testAddRestRoutesCollection()
     {
         $restRoutesCollection = new RouteCollection();
-        $restRoutesCollection->add('ezpublish_rest_route_one_get', $this->createRoute('/route/one', ['GET']));
-        $restRoutesCollection->add('ezpublish_rest_route_one_post', $this->createRoute('/route/one', ['POST']));
-        $restRoutesCollection->add('ezpublish_rest_route_two_delete', $this->createRoute('/route/two', ['DELETE']));
+        $restRoutesCollection->add('ibexa.rest.route_one_get', $this->createRoute('/route/one', ['GET']));
+        $restRoutesCollection->add('ibexa.rest.route_one_post', $this->createRoute('/route/one', ['POST']));
+        $restRoutesCollection->add('ibexa.rest.route_two_delete', $this->createRoute('/route/two', ['DELETE']));
 
         $optionsRouteCollection = $this->collectionMapper->mapCollection($restRoutesCollection);
 
@@ -43,22 +43,22 @@ class RouteCollectionMapperTest extends TestCase
 
         self::assertInstanceOf(
             Route::class,
-            $optionsRouteCollection->get('ezpublish_rest_options_route_one')
+            $optionsRouteCollection->get('ibexa.rest.options.route_one')
         );
 
         self::assertInstanceOf(
             Route::class,
-            $optionsRouteCollection->get('ezpublish_rest_options_route_two')
+            $optionsRouteCollection->get('ibexa.rest.options.route_two')
         );
 
         self::assertEquals(
             'GET,POST',
-            $optionsRouteCollection->get('ezpublish_rest_options_route_one')->getDefault('allowedMethods')
+            $optionsRouteCollection->get('ibexa.rest.options.route_one')->getDefault('allowedMethods')
         );
 
         self::assertEquals(
             'DELETE',
-            $optionsRouteCollection->get('ezpublish_rest_options_route_two')->getDefault('allowedMethods')
+            $optionsRouteCollection->get('ibexa.rest.options.route_two')->getDefault('allowedMethods')
         );
     }
 

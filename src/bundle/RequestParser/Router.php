@@ -91,7 +91,7 @@ class Router implements RequestParser
             throw new InvalidArgumentException('Invalid $match parameter, no _route key');
         }
 
-        return strpos($match['_route'], 'ezpublish_rest_') === 0;
+        return strpos($match['_route'], 'ibexa.rest.') === 0;
     }
 }
 

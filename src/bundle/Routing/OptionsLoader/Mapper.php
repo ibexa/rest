@@ -73,7 +73,7 @@ class Mapper
     {
         $name = str_replace('/', '_', $route->getPath());
 
-        return 'ezpublish_rest_options_' . trim($name, '_');
+        return 'ibexa.rest.options.' . trim($name, '_');
     }
 }
 

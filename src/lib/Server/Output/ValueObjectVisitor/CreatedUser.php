@@ -29,7 +29,7 @@ class CreatedUser extends RestUser
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                'ezpublish_rest_loadUser',
+                'ibexa.rest.load_user',
                 ['userId' => $data->user->contentInfo->id]
             )
         );

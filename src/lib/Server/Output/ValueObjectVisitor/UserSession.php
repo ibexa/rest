@@ -39,7 +39,7 @@ class UserSession extends ValueObjectVisitor
 
     protected function visitUserSessionAttributes(Visitor $visitor, Generator $generator, UserSessionValue $data)
     {
-        $sessionHref = $this->router->generate('ezpublish_rest_deleteSession', ['sessionId' => $data->sessionId]);
+        $sessionHref = $this->router->generate('ibexa.rest.delete_session', ['sessionId' => $data->sessionId]);
 
         $generator->startAttribute('href', $sessionHref);
         $generator->endAttribute('href');
@@ -56,7 +56,7 @@ class UserSession extends ValueObjectVisitor
         $generator->startObjectElement('User', 'User');
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadUser', ['userId' => $data->user->id])
+            $this->router->generate('ibexa.rest.load_user', ['userId' => $data->user->id])
         );
         $generator->endAttribute('href');
         $generator->endObjectElement('User');

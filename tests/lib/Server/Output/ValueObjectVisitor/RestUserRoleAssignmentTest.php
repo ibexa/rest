@@ -40,7 +40,7 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadRoleAssignmentForUser',
+            'ibexa.rest.load_role_assignment_for_user',
             [
                 'userId' => $userRoleAssignment->id,
                 'roleId' => $userRoleAssignment->roleAssignment->role->id,
@@ -49,7 +49,7 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadRole',
+            'ibexa.rest.load_role',
             ['roleId' => $userRoleAssignment->roleAssignment->role->id],
             "/user/roles/{$userRoleAssignment->roleAssignment->role->id}"
         );

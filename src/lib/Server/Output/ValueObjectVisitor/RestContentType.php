@@ -41,7 +41,7 @@ class RestContentType extends RestContentTypeBase
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadContentType' . $urlTypeSuffix,
+                'ibexa.rest.load_content_type' . $urlTypeSuffix,
                 [
                     'contentTypeId' => $contentType->id,
                 ]
@@ -75,7 +75,7 @@ class RestContentType extends RestContentTypeBase
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadUser',
+                'ibexa.rest.load_user',
                 ['userId' => $contentType->creatorId]
             )
         );
@@ -86,7 +86,7 @@ class RestContentType extends RestContentTypeBase
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadUser',
+                'ibexa.rest.load_user',
                 ['userId' => $contentType->modifierId]
             )
         );
@@ -97,7 +97,7 @@ class RestContentType extends RestContentTypeBase
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadGroupsOfContentType',
+                'ibexa.rest.load_groups_of_content_type',
                 ['contentTypeId' => $contentType->id]
             )
         );
@@ -108,7 +108,7 @@ class RestContentType extends RestContentTypeBase
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadContentTypeDraft',
+                'ibexa.rest.load_content_type_draft',
                 ['contentTypeId' => $contentType->id]
             )
         );

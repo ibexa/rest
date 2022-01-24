@@ -33,7 +33,7 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
             ->with($this->isInstanceOf(Server\Values\RestFieldDefinition::class));
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentTypeFieldDefinitionList',
+            'ibexa.rest.load_content_type_field_definition_list',
             ['contentTypeId' => $fieldDefinitionList->contentType->id],
             "/content/types/{$fieldDefinitionList->contentType->id}/fieldDefinitions"
         );

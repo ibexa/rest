@@ -29,7 +29,7 @@ class CreatedObjectState extends RestObjectState
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                'ezpublish_rest_loadObjectState',
+                'ibexa.rest.load_object_state',
                 [
                     'objectStateGroupId' => $data->objectState->groupId,
                     'objectStateId' => $data->objectState->objectState->id,

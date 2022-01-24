@@ -49,7 +49,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadVersionRelation',
+            'ibexa.rest.load_version_relation',
             [
                 'contentId' => $relation->contentId,
                 'versionNumber' => $relation->versionNo,
@@ -58,12 +58,12 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
             "/content/objects/{$relation->contentId}/versions/{$relation->versionNo}/relations/{$relation->relation->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $relation->contentId],
             "/content/objects/{$relation->contentId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $relation->relation->getDestinationContentInfo()->id],
             "/content/objects/{$relation->relation->getDestinationContentInfo()->id}"
         );

@@ -99,7 +99,7 @@ class Version extends ValueObjectVisitor
         $path = $data->path;
         if ($path == null) {
             $path = $this->router->generate(
-                'ezpublish_rest_loadContentInVersion',
+                'ibexa.rest.load_content_in_version',
                 [
                     'contentId' => $content->id,
                     'versionNumber' => $versionInfo->versionNo,

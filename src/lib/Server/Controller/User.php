@@ -129,7 +129,7 @@ class User extends RestController
     {
         //@todo Replace hardcoded value with one loaded from settings
         return new Values\PermanentRedirect(
-            $this->router->generate('ezpublish_rest_loadUserGroup', ['groupPath' => '/1/5'])
+            $this->router->generate('ibexa.rest.load_user_group', ['groupPath' => '/1/5'])
         );
     }
 
@@ -697,7 +697,7 @@ class User extends RestController
 
         return new Values\ResourceCreated(
             $this->router->generate(
-                'ezpublish_rest_loadUserGroup',
+                'ibexa.rest.load_user_group',
                 [
                     'groupPath' => trim($destinationGroupLocation->pathString, '/') . '/' . $userGroupLocation->id,
                 ]
@@ -903,7 +903,7 @@ class User extends RestController
         return new Values\UserGroupRefList(
             $restUserGroups,
             $this->router->generate(
-                'ezpublish_rest_loadUserGroupsOfUser',
+                'ibexa.rest.load_user_groups_of_user',
                 ['userId' => $userId]
             ),
             $userId
@@ -964,7 +964,7 @@ class User extends RestController
         return new Values\UserGroupRefList(
             $restUserGroups,
             $this->router->generate(
-                'ezpublish_rest_loadUserGroupsOfUser',
+                'ibexa.rest.load_user_groups_of_user',
                 ['userId' => $userId]
             ),
             $userId

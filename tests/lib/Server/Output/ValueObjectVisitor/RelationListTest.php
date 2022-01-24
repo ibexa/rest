@@ -29,7 +29,7 @@ class RelationListTest extends ValueObjectVisitorBaseTest
         $relationList = new RelationList([], 42, 21);
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadVersionRelations',
+            'ibexa.rest.load_version_relations',
             [
                 'contentId' => $relationList->contentId,
                 'versionNumber' => $relationList->versionNo,

@@ -48,12 +48,12 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_views_load',
+            'ibexa.rest.views.load',
             ['viewId' => $view->identifier],
             "/content/views/{$view->identifier}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_views_load_results',
+            'ibexa.rest.views.load.results',
             ['viewId' => $view->identifier],
             "/content/views/{$view->identifier}/results"
         );

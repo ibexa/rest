@@ -54,28 +54,28 @@ class RestLocationRootNodeTest extends RestLocationTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocation',
+            'ibexa.rest.load_location',
             ['locationPath' => '1'],
             '/content/locations/1'
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocationChildren',
+            'ibexa.rest.load_location_children',
             ['locationPath' => '1'],
             '/content/locations/1/children'
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $location->location->contentId],
             "/content/objects/{$location->location->contentId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_listLocationURLAliases',
+            'ibexa.rest.list_location_url_aliases',
             ['locationPath' => '1'],
             '/content/objects/1/urlaliases'
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $location->location->contentId],
             "/content/objects/{$location->location->contentId}"
         );

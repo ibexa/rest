@@ -47,7 +47,7 @@ class Content extends RestController
 
         return new Values\TemporaryRedirect(
             $this->router->generate(
-                'ezpublish_rest_loadContent',
+                'ibexa.rest.load_content',
                 [
                     'contentId' => $contentInfo->id,
                 ]
@@ -168,7 +168,7 @@ class Content extends RestController
 
         return new Values\TemporaryRedirect(
             $this->router->generate(
-                'ezpublish_rest_loadContentInVersion',
+                'ibexa.rest.load_content_in_version',
                 [
                     'contentId' => $contentId,
                     'versionNumber' => $contentInfo->currentVersionNo,
@@ -274,7 +274,7 @@ class Content extends RestController
 
         return new Values\ResourceCreated(
             $this->router->generate(
-                'ezpublish_rest_loadContent',
+                'ibexa.rest.load_content',
                 ['contentId' => $copiedContent->id]
             )
         );
@@ -464,7 +464,7 @@ class Content extends RestController
                 [
                     'Content-Type' => $request->headers->get('Content-Type'),
                     'Url' => $this->router->generate(
-                        'ezpublish_rest_updateVersion',
+                        'ibexa.rest.update_version',
                         [
                             'contentId' => $contentId,
                             'versionNumber' => $versionNumber,
@@ -556,7 +556,7 @@ class Content extends RestController
 
         return new Values\TemporaryRedirect(
             $this->router->generate(
-                'ezpublish_rest_redirectCurrentVersionRelations',
+                'ibexa.rest.redirect_current_version_relations',
                 [
                     'contentId' => $contentId,
                     'versionNumber' => $contentInfo->currentVersionNo,
@@ -768,7 +768,7 @@ class Content extends RestController
 
         // Add 301 status code and location href
         $response->setStatusCode(301);
-        $response->headers->set('Location', $this->router->generate('ezpublish_rest_views_create'));
+        $response->headers->set('Location', $this->router->generate('ibexa.rest.views.create'));
 
         return $response;
     }

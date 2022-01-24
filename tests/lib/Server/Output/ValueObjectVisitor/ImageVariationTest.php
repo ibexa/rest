@@ -38,7 +38,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_binaryContent_getImageVariation',
+            'ibexa.rest.binary_content.get_image_variation',
             [
                 'imageId' => '123-456789',
                 'variationIdentifier' => 'test',

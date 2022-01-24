@@ -54,25 +54,25 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadTrashItem',
+            'ibexa.rest.load_trash_item',
             ['trashItemId' => $trashItem->trashItem->id],
             "/content/trash/{$trashItem->trashItem->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocation',
+            'ibexa.rest.load_location',
             ['locationPath' => '1/2/21'],
             '/content/locations/1/2/21'
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $trashItem->trashItem->contentInfo->id],
             "/content/objects/{$trashItem->trashItem->contentInfo->id}"
         );
 
         // Expected twice, second one here for ContentInfo
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $trashItem->trashItem->contentInfo->id],
             "/content/objects/{$trashItem->trashItem->contentInfo->id}"
         );

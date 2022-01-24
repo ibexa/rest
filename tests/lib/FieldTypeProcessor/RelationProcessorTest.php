@@ -77,7 +77,7 @@ class RelationProcessorTest extends TestCase
 
         $routerMock
             ->method('generate')
-            ->with('ezpublish_rest_loadLocation', ['locationPath' => '1/25/42'])
+            ->with('ibexa.rest.load_location', ['locationPath' => '1/25/42'])
             ->willReturn('/api/ezp/v2/content/locations/1/25/42');
 
         $hash = $processor->postProcessFieldSettingsHash(['selectionRoot' => 42]);
@@ -104,7 +104,7 @@ class RelationProcessorTest extends TestCase
         $routerMock
             ->expects($this->once())
             ->method('generate')
-            ->with('ezpublish_rest_loadContent', ['contentId' => 42])
+            ->with('ibexa.rest.load_content', ['contentId' => 42])
             ->willReturn('/api/ezp/v2/content/objects/42');
 
         $hash = $processor->postProcessValueHash(['destinationContentId' => 42]);

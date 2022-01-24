@@ -33,7 +33,7 @@ class RestUserGroup extends ValueObjectVisitor
 
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadUserGroup', ['groupPath' => $mainLocationPath])
+            $this->router->generate('ibexa.rest.load_user_group', ['groupPath' => $mainLocationPath])
         );
         $generator->endAttribute('href');
 
@@ -51,7 +51,7 @@ class RestUserGroup extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadContentType',
+                'ibexa.rest.load_content_type',
                 ['contentTypeId' => $contentInfo->contentTypeId]
             )
         );
@@ -65,7 +65,7 @@ class RestUserGroup extends ValueObjectVisitor
         $generator->startObjectElement('Versions', 'VersionList');
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadContentVersions', ['contentId' => $contentInfo->id])
+            $this->router->generate('ibexa.rest.load_content_versions', ['contentId' => $contentInfo->id])
         );
         $generator->endAttribute('href');
         $generator->endObjectElement('Versions');
@@ -73,7 +73,7 @@ class RestUserGroup extends ValueObjectVisitor
         $generator->startObjectElement('Section');
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadSection', ['sectionId' => $contentInfo->sectionId])
+            $this->router->generate('ibexa.rest.load_section', ['sectionId' => $contentInfo->sectionId])
         );
         $generator->endAttribute('href');
         $generator->endObjectElement('Section');
@@ -82,7 +82,7 @@ class RestUserGroup extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadLocation',
+                'ibexa.rest.load_location',
                 ['locationPath' => $mainLocationPath]
             )
         );
@@ -92,7 +92,7 @@ class RestUserGroup extends ValueObjectVisitor
         $generator->startObjectElement('Locations', 'LocationList');
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadLocationsForContent', ['contentId' => $contentInfo->id])
+            $this->router->generate('ibexa.rest.load_locations_for_content', ['contentId' => $contentInfo->id])
         );
         $generator->endAttribute('href');
         $generator->endObjectElement('Locations');
@@ -100,7 +100,7 @@ class RestUserGroup extends ValueObjectVisitor
         $generator->startObjectElement('Owner', 'User');
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadUser', ['userId' => $contentInfo->ownerId])
+            $this->router->generate('ibexa.rest.load_user', ['userId' => $contentInfo->ownerId])
         );
         $generator->endAttribute('href');
         $generator->endObjectElement('Owner');
@@ -132,7 +132,7 @@ class RestUserGroup extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadUserGroup',
+                'ibexa.rest.load_user_group',
                 [
                     'groupPath' => implode('/', array_slice($mainLocation->path, 0, count($mainLocation->path) - 1)),
                 ]
@@ -145,7 +145,7 @@ class RestUserGroup extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadSubUserGroups',
+                'ibexa.rest.load_sub_user_groups',
                 [
                     'groupPath' => $mainLocationPath,
                 ]
@@ -158,7 +158,7 @@ class RestUserGroup extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadUsersFromGroup',
+                'ibexa.rest.load_users_from_group',
                 [
                     'groupPath' => $mainLocationPath,
                 ]
@@ -171,7 +171,7 @@ class RestUserGroup extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadRoleAssignmentsForUserGroup',
+                'ibexa.rest.load_role_assignments_for_user_group',
                 [
                     'groupPath' => $mainLocationPath,
                 ]
