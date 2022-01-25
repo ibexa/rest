@@ -18,7 +18,7 @@ final class BeforeParseEvent extends BeforeEvent
 
     private string $mediaType;
 
-    private ?ValueObject $valueObject;
+    private ?ValueObject $valueObject = null;
 
     public function __construct(
         array $data,
