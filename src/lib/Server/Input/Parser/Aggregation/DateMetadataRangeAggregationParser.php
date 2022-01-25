@@ -34,7 +34,7 @@ final class DateMetadataRangeAggregationParser extends AbstractRangeAggregationP
             $this->dispatchRanges(
                 $parsingDispatcher,
                 $data['ranges'],
-                'application/vnd.ez.api.internal.aggregation.range.DateTimeRange'
+                'application/vnd.ibexa.api.internal.aggregation.range.DateTimeRange'
             )
         );
     }

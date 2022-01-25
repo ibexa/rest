@@ -117,7 +117,7 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testUserGroupRefListMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroupRefList[@media-type="application/vnd.ez.api.UserGroupRefList+xml"]');
+        $this->assertXPath($dom, '/UserGroupRefList[@media-type="application/vnd.ibexa.api.UserGroupRefList+xml"]');
     }
 
     /**
@@ -137,7 +137,7 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testFirstUserGroupMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroupRefList/UserGroup[1][@media-type="application/vnd.ez.api.UserGroup+xml"]');
+        $this->assertXPath($dom, '/UserGroupRefList/UserGroup[1][@media-type="application/vnd.ibexa.api.UserGroup+xml"]');
     }
 
     /**
@@ -177,7 +177,7 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testSecondUserGroupMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroupRefList/UserGroup[2][@media-type="application/vnd.ez.api.UserGroup+xml"]');
+        $this->assertXPath($dom, '/UserGroupRefList/UserGroup[2][@media-type="application/vnd.ibexa.api.UserGroup+xml"]');
     }
 
     /**

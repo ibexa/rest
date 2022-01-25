@@ -45,7 +45,7 @@ class Xml extends Generator
      * @param \Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator $hashGenerator
      * @param string $vendor
      */
-    public function __construct(Xml\FieldTypeHashGenerator $hashGenerator, $vendor = 'vnd.ez.api')
+    public function __construct(Xml\FieldTypeHashGenerator $hashGenerator, $vendor = 'vnd.ibexa.api')
     {
         $this->hashGenerator = $hashGenerator;
         $this->vendor = $vendor;

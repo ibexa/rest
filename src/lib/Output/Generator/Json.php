@@ -45,7 +45,7 @@ class Json extends Generator
      * @param \Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator $fieldTypeHashGenerator
      * @param string $vendor
      */
-    public function __construct(Json\FieldTypeHashGenerator $fieldTypeHashGenerator, $vendor = 'vnd.ez.api')
+    public function __construct(Json\FieldTypeHashGenerator $fieldTypeHashGenerator, $vendor = 'vnd.ibexa.api')
     {
         $this->fieldTypeHashGenerator = $fieldTypeHashGenerator;
         $this->vendor = $vendor;

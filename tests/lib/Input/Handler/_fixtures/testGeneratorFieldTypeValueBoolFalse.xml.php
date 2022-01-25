@@ -6,7 +6,7 @@
  */
 return [
   'Version' => [
-    '_media-type' => 'application/vnd.ez.api.Version+xml',
+    '_media-type' => 'application/vnd.ibexa.api.Version+xml',
     'Field' => [
       'fieldValue' => false,
     ],

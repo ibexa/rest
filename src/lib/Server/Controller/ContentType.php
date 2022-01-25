@@ -116,7 +116,7 @@ class ContentType extends RestController
             Language::ALL
         );
 
-        if ($this->getMediaType($request) === 'application/vnd.ez.api.contenttypelist') {
+        if ($this->getMediaType($request) === 'application/vnd.ibexa.api.contenttypelist') {
             return new Values\ContentTypeList($contentTypes, $request->getPathInfo());
         }
 
@@ -209,7 +209,7 @@ class ContentType extends RestController
      */
     public function listContentTypes(Request $request)
     {
-        if ($this->getMediaType($request) === 'application/vnd.ez.api.contenttypelist') {
+        if ($this->getMediaType($request) === 'application/vnd.ibexa.api.contenttypelist') {
             $return = new Values\ContentTypeList([], $request->getPathInfo());
         } else {
             $return = new Values\ContentTypeInfoList([], $request->getPathInfo());

@@ -129,7 +129,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'TrashItem',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.TrashItem+xml',
+                    'media-type' => 'application/vnd.ibexa.api.TrashItem+xml',
                     'href' => '/content/trash/42',
                 ],
             ],
@@ -171,7 +171,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ContentInfo',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentInfo+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentInfo+xml',
                     'href' => '/content/objects/84',
                 ],
             ],
@@ -313,7 +313,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ParentLocation',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Location+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Location+xml',
                     'href' => '/content/locations/1/2/21',
                 ],
             ],
@@ -415,7 +415,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Content',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Content+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Content+xml',
                     'href' => '/content/objects/84',
                 ],
             ],

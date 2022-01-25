@@ -39,7 +39,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
 
         $this->getVisitorMock()->expects($this->at(1))
             ->method('setHeader')
-            ->with($this->equalTo('Content-Type'), $this->equalTo('application/vnd.ez.api.Session+xml'));
+            ->with($this->equalTo('Content-Type'), $this->equalTo('application/vnd.ibexa.api.Session+xml'));
 
         $this->addRouteExpectation(
             'ibexa.rest.delete_session',
@@ -103,7 +103,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Session',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Session+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Session+xml',
                     'href' => '/user/sessions/sessionId',
                 ],
             ],
@@ -217,7 +217,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
                 'tag' => 'User',
                 'attributes' => [
                     'href' => '/user/users/user123',
-                    'media-type' => 'application/vnd.ez.api.User+xml',
+                    'media-type' => 'application/vnd.ibexa.api.User+xml',
                 ],
             ],
             $result,

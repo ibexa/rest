@@ -9,6 +9,7 @@ namespace Ibexa\Tests\Rest\Input;
 use Ibexa\Contracts\Rest\Input\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use PHPUnit\Framework\TestCase;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * ParsingDispatcher test class.
@@ -19,7 +20,7 @@ class ParsingDispatcherTest extends TestCase
     {
         $this->expectException(\Ibexa\Contracts\Rest\Exceptions\Parser::class);
 
-        $dispatcher = new ParsingDispatcher();
+        $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class));
 
         $dispatcher->parse([], 'text/unknown');
     }
@@ -27,7 +28,7 @@ class ParsingDispatcherTest extends TestCase
     public function testParse()
     {
         $parser = $this->createParserMock();
-        $dispatcher = new ParsingDispatcher(['text/html' => $parser]);
+        $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
             ->expects($this->at(0))
@@ -47,7 +48,7 @@ class ParsingDispatcherTest extends TestCase
     public function testParseCharset()
     {
         $parser = $this->createParserMock();
-        $dispatcher = new ParsingDispatcher(['text/html' => $parser]);
+        $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
             ->expects($this->at(0))
@@ -66,6 +67,7 @@ class ParsingDispatcherTest extends TestCase
         $parserVersionOne = $this->createParserMock();
         $parserVersionTwo = $this->createParserMock();
         $dispatcher = new ParsingDispatcher(
+            $this->createMock(EventDispatcherInterface::class),
             [
                 'text/html' => $parserVersionOne,
                 'text/html; version=2' => $parserVersionTwo,
@@ -81,7 +83,7 @@ class ParsingDispatcherTest extends TestCase
     public function testParseStripFormat()
     {
         $parser = $this->createParserMock();
-        $dispatcher = new ParsingDispatcher(['text/html' => $parser]);
+        $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
             ->expects($this->at(0))

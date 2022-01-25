@@ -6,7 +6,7 @@
  */
 return [
   'element' => [
-    '_media-type' => 'application/vnd.ez.api.element+xml',
+    '_media-type' => 'application/vnd.ibexa.api.element+xml',
     '_attribute' => 'value',
   ],
 ];

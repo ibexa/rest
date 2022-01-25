@@ -118,7 +118,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testContentTypeGroupRefListMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentTypeGroupRefList[@media-type="application/vnd.ez.api.ContentTypeGroupRefList+xml"]');
+        $this->assertXPath($dom, '/ContentTypeGroupRefList[@media-type="application/vnd.ibexa.api.ContentTypeGroupRefList+xml"]');
     }
 
     /**
@@ -138,7 +138,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testFirstContentTypeGroupRefMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[1][@media-type="application/vnd.ez.api.ContentTypeGroup+xml"]');
+        $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[1][@media-type="application/vnd.ibexa.api.ContentTypeGroup+xml"]');
     }
 
     /**
@@ -178,7 +178,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testSecondContentTypeGroupRefMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[2][@media-type="application/vnd.ez.api.ContentTypeGroup+xml"]');
+        $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[2][@media-type="application/vnd.ibexa.api.ContentTypeGroup+xml"]');
     }
 
     /**

@@ -73,7 +73,7 @@ class ContentTypeListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ContentTypeList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentTypeList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentTypeList+xml',
                     'href' => '/content/typegroups/2/types',
                 ],
             ],

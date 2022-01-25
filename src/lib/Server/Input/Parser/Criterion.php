@@ -111,22 +111,22 @@ abstract class Criterion extends BaseParser
             $criterionName = self::$criterionIdMap[$criterionName];
         }
 
-        return 'application/vnd.ez.api.internal.criterion.' . $criterionName;
+        return 'application/vnd.ibexa.api.internal.criterion.' . $criterionName;
     }
 
     protected function getSortClauseMediaType($sortClauseName)
     {
-        return 'application/vnd.ez.api.internal.sortclause.' . $sortClauseName;
+        return 'application/vnd.ibexa.api.internal.sortclause.' . $sortClauseName;
     }
 
     protected function getFacetBuilderMediaType($facetBuilderName)
     {
-        return 'application/vnd.ez.api.internal.facetbuilder.' . $facetBuilderName;
+        return 'application/vnd.ibexa.api.internal.facetbuilder.' . $facetBuilderName;
     }
 
     protected function getAggregationMediaType(string $aggregationName): string
     {
-        return 'application/vnd.ez.api.internal.aggregation.' . $aggregationName;
+        return 'application/vnd.ibexa.api.internal.aggregation.' . $aggregationName;
     }
 }
 

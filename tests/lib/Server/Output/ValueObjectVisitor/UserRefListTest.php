@@ -85,7 +85,7 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testUserRefListMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserRefList[@media-type="application/vnd.ez.api.UserRefList+xml"]');
+        $this->assertXPath($dom, '/UserRefList[@media-type="application/vnd.ibexa.api.UserRefList+xml"]');
     }
 
     /**
@@ -105,7 +105,7 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testUserMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserRefList/User[@media-type="application/vnd.ez.api.User+xml"]');
+        $this->assertXPath($dom, '/UserRefList/User[@media-type="application/vnd.ibexa.api.User+xml"]');
     }
 
     /**

@@ -43,12 +43,12 @@ class ViewInputOneDotOne extends CriterionParser
         // query
         if (array_key_exists('ContentQuery', $data) && is_array($data['ContentQuery'])) {
             $queryData = $data['ContentQuery'];
-            $queryMediaType = 'application/vnd.ez.api.internal.ContentQuery';
+            $queryMediaType = 'application/vnd.ibexa.api.internal.ContentQuery';
         }
 
         if (array_key_exists('LocationQuery', $data) && is_array($data['LocationQuery'])) {
             $queryData = $data['LocationQuery'];
-            $queryMediaType = 'application/vnd.ez.api.internal.LocationQuery';
+            $queryMediaType = 'application/vnd.ibexa.api.internal.LocationQuery';
         }
 
         if (!isset($queryMediaType) || !isset($queryData)) {

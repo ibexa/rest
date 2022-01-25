@@ -20,7 +20,7 @@ class InputParserPassTest extends TestCase
         $visitorDefinition = new Definition();
         $visitorDefinition->addTag(
             'ibexa.rest.input.parser',
-            ['mediaType' => 'application/vnd.ez.api.UnitTest']
+            ['mediaType' => 'application/vnd.ibexa.api.UnitTest']
         );
 
         $containerBuilder = new ContainerBuilder();

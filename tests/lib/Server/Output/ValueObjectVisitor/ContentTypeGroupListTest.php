@@ -75,7 +75,7 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ContentTypeGroupList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentTypeGroupList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentTypeGroupList+xml',
                     'href' => '/content/typegroups',
                 ],
             ],

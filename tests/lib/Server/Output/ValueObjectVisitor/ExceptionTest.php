@@ -151,7 +151,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ErrorMessage',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ErrorMessage+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ErrorMessage+xml',
                 ],
             ],
             $result,
@@ -171,7 +171,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
 
         $this->assertXPath(
             $dom,
-            '/ErrorMessage/Previous[@media-type="application/vnd.ez.api.ErrorMessage+xml"]'
+            '/ErrorMessage/Previous[@media-type="application/vnd.ibexa.api.ErrorMessage+xml"]'
         );
     }
 

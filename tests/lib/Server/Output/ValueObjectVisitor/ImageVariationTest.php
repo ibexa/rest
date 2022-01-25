@@ -86,7 +86,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
      */
     public function testContentImageVariationTagMediaTypeAttribute(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentImageVariation[@media-type="application/vnd.ez.api.ContentImageVariation+xml"]');
+        $this->assertXPath($dom, '/ContentImageVariation[@media-type="application/vnd.ibexa.api.ContentImageVariation+xml"]');
     }
 
     /**

@@ -18,6 +18,7 @@ use Ibexa\Rest\Server\Input\Parser\FacetBuilder\SectionParser;
 use Ibexa\Rest\Server\Input\Parser\FacetBuilder\TermParser;
 use Ibexa\Rest\Server\Input\Parser\FacetBuilder\UserParser;
 use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 abstract class FacetBuilderBaseTest extends BaseTest
 {
@@ -26,50 +27,52 @@ abstract class FacetBuilderBaseTest extends BaseTest
      */
     protected function getParsingDispatcher()
     {
-        $parsingDispatcher = new ParsingDispatcher();
+        $parsingDispatcher = new ParsingDispatcher(
+            $this->createMock(EventDispatcherInterface::class)
+        );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.ContentType',
+            'application/vnd.ibexa.api.internal.facetbuilder.ContentType',
             new ContentTypeParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.Criterion',
+            'application/vnd.ibexa.api.internal.facetbuilder.Criterion',
             new CriterionParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.DateRange',
+            'application/vnd.ibexa.api.internal.facetbuilder.DateRange',
             new DateRangeParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.Field',
+            'application/vnd.ibexa.api.internal.facetbuilder.Field',
             new FieldParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.FieldRange',
+            'application/vnd.ibexa.api.internal.facetbuilder.FieldRange',
             new FieldRangeParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.Location',
+            'application/vnd.ibexa.api.internal.facetbuilder.Location',
             new LocationParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.Section',
+            'application/vnd.ibexa.api.internal.facetbuilder.Section',
             new SectionParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.Term',
+            'application/vnd.ibexa.api.internal.facetbuilder.Term',
             new TermParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.User',
+            'application/vnd.ibexa.api.internal.facetbuilder.User',
             new UserParser()
         );
 

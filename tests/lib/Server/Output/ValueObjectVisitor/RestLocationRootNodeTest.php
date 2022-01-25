@@ -169,7 +169,7 @@ class RestLocationRootNodeTest extends RestLocationTest
             [
                 'tag' => 'Location',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Location+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Location+xml',
                     'href' => '/content/locations/1',
                 ],
             ],
@@ -192,7 +192,7 @@ class RestLocationRootNodeTest extends RestLocationTest
             [
                 'tag' => 'Children',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.LocationList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.LocationList+xml',
                     'href' => '/content/locations/1/children',
                 ],
             ],
@@ -235,7 +235,7 @@ class RestLocationRootNodeTest extends RestLocationTest
             [
                 'tag' => 'UrlAliases',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UrlAliasRefList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.UrlAliasRefList+xml',
                     'href' => '/content/objects/1/urlaliases',
                 ],
             ],

@@ -87,7 +87,7 @@ class SectionTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Section',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Section+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Section+xml',
                     'href' => '/content/sections/23',
                 ],
             ],

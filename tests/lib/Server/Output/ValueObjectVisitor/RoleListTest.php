@@ -73,7 +73,7 @@ class RoleListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'RoleList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.RoleList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.RoleList+xml',
                     'href' => '/user/roles',
                 ],
             ],

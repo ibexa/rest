@@ -103,7 +103,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
     {
         $xpathAssertions = [
             '/FieldDefinition[@href="/content/types/contentTypeId/fieldDefinitions/fieldDefinitionId_23"]',
-            '/FieldDefinition[@media-type="application/vnd.ez.api.FieldDefinition+xml"]',
+            '/FieldDefinition[@media-type="application/vnd.ibexa.api.FieldDefinition+xml"]',
             '/FieldDefinition/id[text()="fieldDefinitionId_23"]',
             '/FieldDefinition/identifier[text()="title"]',
             '/FieldDefinition/fieldType[text()="my-field-type"]',

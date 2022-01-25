@@ -72,7 +72,7 @@ class ContentObjectStatesTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ContentObjectStates',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentObjectStates+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentObjectStates+xml',
                 ],
             ],
             $result,

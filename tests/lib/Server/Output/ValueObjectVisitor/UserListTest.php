@@ -76,7 +76,7 @@ class UserListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'UserList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UserList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.UserList+xml',
                     'href' => '/some/path',
                 ],
             ],

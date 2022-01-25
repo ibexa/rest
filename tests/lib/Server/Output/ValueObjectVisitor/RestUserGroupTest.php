@@ -162,7 +162,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testUserGroupMediaTypeWithoutVersionCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup[@media-type="application/vnd.ez.api.UserGroup+xml"]');
+        $this->assertXPath($dom, '/UserGroup[@media-type="application/vnd.ibexa.api.UserGroup+xml"]');
     }
 
     /**
@@ -192,7 +192,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testUserGroupTypeMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup/ContentType[@media-type="application/vnd.ez.api.ContentType+xml"]');
+        $this->assertXPath($dom, '/UserGroup/ContentType[@media-type="application/vnd.ibexa.api.ContentType+xml"]');
     }
 
     /**
@@ -222,7 +222,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testVersionsMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup/Versions[@media-type="application/vnd.ez.api.VersionList+xml"]');
+        $this->assertXPath($dom, '/UserGroup/Versions[@media-type="application/vnd.ibexa.api.VersionList+xml"]');
     }
 
     /**
@@ -242,7 +242,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testSectionMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup/Section[@media-type="application/vnd.ez.api.Section+xml"]');
+        $this->assertXPath($dom, '/UserGroup/Section[@media-type="application/vnd.ibexa.api.Section+xml"]');
     }
 
     /**
@@ -262,7 +262,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testMainLocationMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup/MainLocation[@media-type="application/vnd.ez.api.Location+xml"]');
+        $this->assertXPath($dom, '/UserGroup/MainLocation[@media-type="application/vnd.ibexa.api.Location+xml"]');
     }
 
     /**
@@ -282,7 +282,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testLocationsMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup/Locations[@media-type="application/vnd.ez.api.LocationList+xml"]');
+        $this->assertXPath($dom, '/UserGroup/Locations[@media-type="application/vnd.ibexa.api.LocationList+xml"]');
     }
 
     /**
@@ -302,7 +302,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testOwnerMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup/Owner[@media-type="application/vnd.ez.api.User+xml"]');
+        $this->assertXPath($dom, '/UserGroup/Owner[@media-type="application/vnd.ibexa.api.User+xml"]');
     }
 
     /**
@@ -382,7 +382,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testParentUserGroupMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup/ParentUserGroup[@media-type="application/vnd.ez.api.UserGroup+xml"]');
+        $this->assertXPath($dom, '/UserGroup/ParentUserGroup[@media-type="application/vnd.ibexa.api.UserGroup+xml"]');
     }
 
     /**
@@ -392,7 +392,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testSubgroupsMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup/Subgroups[@media-type="application/vnd.ez.api.UserGroupList+xml"]');
+        $this->assertXPath($dom, '/UserGroup/Subgroups[@media-type="application/vnd.ibexa.api.UserGroupList+xml"]');
     }
 
     /**
@@ -402,7 +402,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testUsersMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup/Users[@media-type="application/vnd.ez.api.UserList+xml"]');
+        $this->assertXPath($dom, '/UserGroup/Users[@media-type="application/vnd.ibexa.api.UserList+xml"]');
     }
 
     /**
@@ -412,7 +412,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testRolesMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup/Roles[@media-type="application/vnd.ez.api.RoleAssignmentList+xml"]');
+        $this->assertXPath($dom, '/UserGroup/Roles[@media-type="application/vnd.ibexa.api.RoleAssignmentList+xml"]');
     }
 
     /**

@@ -65,8 +65,8 @@ class CountryListTest extends ValueObjectVisitorBaseTest
      */
     public function testCountryListMediaType(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/CountryList/Country[1][@media-type="application/vnd.ez.api.Country+xml"]');
-        $this->assertXPath($dom, '/CountryList/Country[2][@media-type="application/vnd.ez.api.Country+xml"]');
+        $this->assertXPath($dom, '/CountryList/Country[1][@media-type="application/vnd.ibexa.api.Country+xml"]');
+        $this->assertXPath($dom, '/CountryList/Country[2][@media-type="application/vnd.ibexa.api.Country+xml"]');
     }
 
     /**

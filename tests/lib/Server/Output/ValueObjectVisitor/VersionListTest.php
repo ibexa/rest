@@ -88,7 +88,7 @@ class VersionListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'VersionList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.VersionList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.VersionList+xml',
                     'href' => '/some/path',
                 ],
             ],

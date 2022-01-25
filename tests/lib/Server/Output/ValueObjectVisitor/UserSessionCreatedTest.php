@@ -36,7 +36,7 @@ class UserSessionCreatedTest extends UserSessionTest
 
         $this->getVisitorMock()->expects($this->at(1))
             ->method('setHeader')
-            ->with($this->equalTo('Content-Type'), $this->equalTo('application/vnd.ez.api.Session+xml'));
+            ->with($this->equalTo('Content-Type'), $this->equalTo('application/vnd.ibexa.api.Session+xml'));
 
         $this->addRouteExpectation(
             'ibexa.rest.delete_session',

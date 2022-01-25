@@ -125,7 +125,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testContentTypeMediaType(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentType[@media-type="application/vnd.ez.api.ContentType+xml"]');
+        $this->assertXPath($dom, '/ContentType[@media-type="application/vnd.ibexa.api.ContentType+xml"]');
     }
 
     /**
@@ -235,7 +235,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testCreatorMediaType(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentType/Creator[@media-type="application/vnd.ez.api.User+xml"]');
+        $this->assertXPath($dom, '/ContentType/Creator[@media-type="application/vnd.ibexa.api.User+xml"]');
     }
 
     /**
@@ -255,7 +255,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testModifierMediaType(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentType/Modifier[@media-type="application/vnd.ez.api.User+xml"]');
+        $this->assertXPath($dom, '/ContentType/Modifier[@media-type="application/vnd.ibexa.api.User+xml"]');
     }
 
     /**
@@ -275,7 +275,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testDraftType(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentType/Draft[@media-type="application/vnd.ez.api.ContentType+xml"]');
+        $this->assertXPath($dom, '/ContentType/Draft[@media-type="application/vnd.ibexa.api.ContentType+xml"]');
     }
 
     /**
@@ -295,7 +295,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testGroupsType(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentType/Groups[@media-type="application/vnd.ez.api.ContentTypeGroupRefList+xml"]');
+        $this->assertXPath($dom, '/ContentType/Groups[@media-type="application/vnd.ibexa.api.ContentTypeGroupRefList+xml"]');
     }
 
     /**

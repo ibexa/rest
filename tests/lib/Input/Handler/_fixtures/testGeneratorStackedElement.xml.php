@@ -6,9 +6,9 @@
  */
 return [
   'element' => [
-    '_media-type' => 'application/vnd.ez.api.element+xml',
+    '_media-type' => 'application/vnd.ibexa.api.element+xml',
     'stacked' => [
-      '_media-type' => 'application/vnd.ez.api.stacked+xml',
+      '_media-type' => 'application/vnd.ibexa.api.stacked+xml',
     ],
   ],
 ];

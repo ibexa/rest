@@ -104,7 +104,7 @@ class RootTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Root',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Root+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Root+xml',
                 ],
             ],
             $result,
@@ -137,7 +137,7 @@ class RootTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'RouterWithAttributes',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UserRefList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.UserRefList+xml',
                 ],
             ],
             $result,
@@ -170,7 +170,7 @@ class RootTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'TemplateRouterWithAttributes',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UserRefList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.UserRefList+xml',
                 ],
             ],
             $result,

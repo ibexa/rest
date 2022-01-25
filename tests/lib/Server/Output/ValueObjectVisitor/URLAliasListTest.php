@@ -72,7 +72,7 @@ class URLAliasListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'UrlAliasList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UrlAliasList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.UrlAliasList+xml',
                     'href' => '/content/urlaliases',
                 ],
             ],

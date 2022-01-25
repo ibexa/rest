@@ -75,7 +75,7 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testUrlAliasRefListMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UrlAliasRefList[@media-type="application/vnd.ez.api.UrlAliasRefList+xml"]');
+        $this->assertXPath($dom, '/UrlAliasRefList[@media-type="application/vnd.ibexa.api.UrlAliasRefList+xml"]');
     }
 
     /**
@@ -95,7 +95,7 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testUrlAliasMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UrlAliasRefList/UrlAlias[@media-type="application/vnd.ez.api.UrlAlias+xml"]');
+        $this->assertXPath($dom, '/UrlAliasRefList/UrlAlias[@media-type="application/vnd.ibexa.api.UrlAlias+xml"]');
     }
 
     /**

@@ -88,7 +88,7 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'UrlWildcard',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UrlWildcard+xml',
+                    'media-type' => 'application/vnd.ibexa.api.UrlWildcard+xml',
                     'href' => '/content/urlwildcards/42',
                     'id' => '42',
                 ],

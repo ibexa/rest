@@ -45,7 +45,7 @@ class ViewInput extends BaseParser
             throw new Exceptions\Parser('Missing <Query> attribute for <ViewInput>.');
         }
 
-        $restViewInput->query = $parsingDispatcher->parse($data['Query'], 'application/vnd.ez.api.internal.ContentQuery');
+        $restViewInput->query = $parsingDispatcher->parse($data['Query'], 'application/vnd.ibexa.api.internal.ContentQuery');
 
         return $restViewInput;
     }

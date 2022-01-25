@@ -38,7 +38,7 @@ final class FloatRangeAggregationParser extends AbstractRangeAggregationParser
             $this->dispatchRanges(
                 $parsingDispatcher,
                 $data['ranges'],
-                'application/vnd.ez.api.internal.aggregation.range.FloatRange'
+                'application/vnd.ibexa.api.internal.aggregation.range.FloatRange'
             )
         );
     }

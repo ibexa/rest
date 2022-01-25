@@ -76,7 +76,7 @@ class Content extends RestController
 
         $contentVersion = null;
         $relations = null;
-        if ($this->getMediaType($request) === 'application/vnd.ez.api.content') {
+        if ($this->getMediaType($request) === 'application/vnd.ibexa.api.content') {
             $languages = Language::ALL;
             if ($request->query->has('languages')) {
                 $languages = explode(',', $request->query->get('languages'));
@@ -831,7 +831,7 @@ class Content extends RestController
         $contentValue = null;
         $contentType = null;
         $relations = null;
-        if ($this->getMediaType($request) === 'application/vnd.ez.api.content') {
+        if ($this->getMediaType($request) === 'application/vnd.ibexa.api.content') {
             $contentValue = $content;
             $contentType = $this->repository->getContentTypeService()->loadContentType(
                 $content->getVersionInfo()->getContentInfo()->contentTypeId

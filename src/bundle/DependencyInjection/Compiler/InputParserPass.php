@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\Reference;
  * Container compiler processor for the ibexa.rest.input.parser service tag.
  * Maps input parsers to media types.
  *
- * Tag attributes: mediaType. Ex: application/vnd.ez.api.Content
+ * Tag attributes: mediaType. Ex: application/vnd.ibexa.api.Content
  */
 class InputParserPass implements CompilerPassInterface
 {
