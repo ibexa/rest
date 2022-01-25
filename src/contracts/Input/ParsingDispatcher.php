@@ -6,7 +6,9 @@
  */
 namespace Ibexa\Contracts\Rest\Input;
 
-use Ibexa\Contracts\Rest\Event\DispatchParsingData;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
+use Ibexa\Contracts\Rest\Event\BeforeParseEvent;
+use Ibexa\Contracts\Rest\Event\ParseEvent;
 use Ibexa\Contracts\Rest\Exceptions;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -31,14 +33,12 @@ class ParsingDispatcher
      *
      * @var \Ibexa\Contracts\Rest\Input\Parser[]
      */
-    protected $parsers = [];
+    protected array $parsers = [];
 
     protected EventDispatcherInterface $eventDispatcher;
 
     /**
      * Construct from optional parsers array.
-     *
-     * @param array $parsers
      */
     public function __construct(EventDispatcherInterface $eventDispatcher, array $parsers = [])
     {
@@ -55,28 +55,49 @@ class ParsingDispatcher
      * @param string $mediaType
      * @param \Ibexa\Contracts\Rest\Input\Parser $parser
      */
-    public function addParser($mediaType, Parser $parser)
+    public function addParser(string $mediaType, Parser $parser): void
     {
         list($mediaType, $version) = $this->parseMediaTypeVersion($mediaType);
+
         $this->parsers[$mediaType][$version] = $parser;
     }
 
     /**
-     * Parses the given $data according to $mediaType.
-     *
-     * @param array $data
-     * @param string $mediaType
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject
+     * Dispatches parsing the given $data according to $mediaType.
      */
-    public function parse(array $data, $mediaType)
+    public function parse(array $data, string $mediaType): ValueObject
     {
-        $dispatchParsingEvent = new DispatchParsingData($data, $mediaType);
-        $this->eventDispatcher->dispatch($dispatchParsingEvent);
+        $eventData = [
+            $data,
+            $mediaType,
+        ];
 
-        $mediaType = $dispatchParsingEvent->getMediaType();
-        $data = $dispatchParsingEvent->getData();
+        $beforeEvent = new BeforeParseEvent(...$eventData);
 
+        $this->eventDispatcher->dispatch($beforeEvent);
+        if ($beforeEvent->isPropagationStopped()) {
+            return $beforeEvent->getValueObject();
+        }
+
+        $data = $beforeEvent->getData();
+        $mediaType = $beforeEvent->getMediaType();
+
+        $valueObject = $beforeEvent->hasValueObject()
+            ? $beforeEvent->getValueObject()
+            : $this->internalParse($data, $mediaType);
+
+        $this->eventDispatcher->dispatch(
+            new ParseEvent($valueObject, ...$eventData)
+        );
+
+        return $valueObject;
+    }
+
+    /**
+     * Parses the given $data according to $mediaType.
+     */
+    protected function internalParse(array $data, string $mediaType): ValueObject
+    {
         list($mediaType, $version) = $this->parseMediaTypeVersion($mediaType);
 
         // Remove encoding type
@@ -85,7 +106,7 @@ class ParsingDispatcher
         }
 
         if (!isset($this->parsers[$mediaType][$version])) {
-            throw new Exceptions\Parser("Unknown Content Type specification: '{$mediaType} (version: $version)'.");
+            throw new Exceptions\Parser("Unknown Content Type specification: '$mediaType (version: $version)'.");
         }
 
         return $this->parsers[$mediaType][$version]->parse($data, $this);
@@ -96,9 +117,9 @@ class ParsingDispatcher
      *
      * @param string $mediaType Ex: text/html; version=1.1
      *
-     * @return array An array with the mediatype string, stripped from the version, and the version (1.0 by default)
+     * @return array An array with the media-type string, stripped from the version, and the version (1.0 by default)
      */
-    protected function parseMediaTypeVersion($mediaType)
+    protected function parseMediaTypeVersion(string $mediaType): array
     {
         $version = '1.0';
         $contentType = explode('; ', $mediaType);
@@ -106,7 +127,7 @@ class ParsingDispatcher
             $mediaType = $contentType[0];
             foreach (array_slice($contentType, 1) as $parameterString) {
                 if (strpos($contentType[1], '=') === false) {
-                    throw new Exceptions\Parser("Unknown parameter format: '{$parameterString}'");
+                    throw new Exceptions\Parser("Unknown parameter format: '$parameterString'");
                 }
                 list($parameterName, $parameterValue) = explode('=', $parameterString);
                 if (trim($parameterName) === 'version') {

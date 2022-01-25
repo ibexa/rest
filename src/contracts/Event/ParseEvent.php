@@ -8,16 +8,23 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\Rest\Event;
 
-final class DispatchParsingData
+use Ibexa\Contracts\Core\Repository\Event\AfterEvent;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
+
+final class ParseEvent extends AfterEvent
 {
+    private ValueObject $valueObject;
+
     private array $data;
 
     private string $mediaType;
 
     public function __construct(
+        ValueObject $valueObject,
         array $data,
         string $mediaType
     ) {
+        $this->valueObject = $valueObject;
         $this->data = $data;
         $this->mediaType = $mediaType;
     }
@@ -27,18 +34,13 @@ final class DispatchParsingData
         return $this->data;
     }
 
-    public function setData(array $data): void
-    {
-        $this->data = $data;
-    }
-
     public function getMediaType(): string
     {
         return $this->mediaType;
     }
 
-    public function setMediaType(string $mediaType): void
+    public function getValueObject(): ValueObject
     {
-        $this->mediaType = $mediaType;
+        return $this->valueObject;
     }
 }
