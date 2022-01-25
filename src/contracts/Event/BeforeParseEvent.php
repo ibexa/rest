@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Ibexa\Contracts\Rest\Event;
 
 use Ibexa\Contracts\Core\Repository\Event\BeforeEvent;
-use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 use UnexpectedValueException;
 
 final class BeforeParseEvent extends BeforeEvent
@@ -18,7 +17,8 @@ final class BeforeParseEvent extends BeforeEvent
 
     private string $mediaType;
 
-    private ?ValueObject $valueObject = null;
+    /** @var mixed|null */
+    private $valueObject = null;
 
     public function __construct(
         array $data,
@@ -48,22 +48,22 @@ final class BeforeParseEvent extends BeforeEvent
         $this->mediaType = $mediaType;
     }
 
-    public function getValueObject(): ValueObject
+    public function getValueObject()
     {
         if (!$this->hasValueObject()) {
-            throw new UnexpectedValueException(sprintf('Return value is not set or not of type %s. Check hasValueObject() or set it using setValueObject() before you call the getter.', ValueObject::class));
+            throw new UnexpectedValueException('Return value is not set. Check hasValueObject() or set it using setValueObject() before you call the getter.');
         }
 
         return $this->valueObject;
     }
 
-    public function setValueObject(?ValueObject $valueObject): void
+    public function setValueObject($valueObject): void
     {
         $this->valueObject = $valueObject;
     }
 
     public function hasValueObject(): bool
     {
-        return $this->valueObject instanceof ValueObject;
+        return $this->valueObject !== null;
     }
 }

@@ -65,7 +65,7 @@ class ParsingDispatcher
     /**
      * Dispatches parsing the given $data according to $mediaType.
      */
-    public function parse(array $data, string $mediaType): ValueObject
+    public function parse(array $data, string $mediaType)
     {
         $eventData = [
             $data,
@@ -96,7 +96,7 @@ class ParsingDispatcher
     /**
      * Parses the given $data according to $mediaType.
      */
-    protected function internalParse(array $data, string $mediaType): ValueObject
+    protected function internalParse(array $data, string $mediaType)
     {
         list($mediaType, $version) = $this->parseMediaTypeVersion($mediaType);
 

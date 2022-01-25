@@ -9,18 +9,18 @@ declare(strict_types=1);
 namespace Ibexa\Contracts\Rest\Event;
 
 use Ibexa\Contracts\Core\Repository\Event\AfterEvent;
-use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 final class ParseEvent extends AfterEvent
 {
-    private ValueObject $valueObject;
+    /** @var mixed */
+    private $valueObject;
 
     private array $data;
 
     private string $mediaType;
 
     public function __construct(
-        ValueObject $valueObject,
+        $valueObject,
         array $data,
         string $mediaType
     ) {
@@ -39,7 +39,7 @@ final class ParseEvent extends AfterEvent
         return $this->mediaType;
     }
 
-    public function getValueObject(): ValueObject
+    public function getValueObject()
     {
         return $this->valueObject;
     }
