@@ -6,7 +6,6 @@
  */
 namespace Ibexa\Contracts\Rest\Input;
 
-use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 use Ibexa\Contracts\Rest\Event\BeforeParseEvent;
 use Ibexa\Contracts\Rest\Event\ParseEvent;
 use Ibexa\Contracts\Rest\Exceptions;
