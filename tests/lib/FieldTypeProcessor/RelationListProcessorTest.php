@@ -78,13 +78,13 @@ class RelationListProcessorTest extends TestCase
         $routerMock
             ->method('generate')
             ->with('ibexa.rest.load_location', ['locationPath' => '1/25/42'])
-            ->willReturn('/api/ezp/v2/content/locations/1/25/42');
+            ->willReturn('/api/ibexa/v2/content/locations/1/25/42');
 
         $hash = $processor->postProcessFieldSettingsHash(['selectionDefaultLocation' => 42]);
 
         $this->assertEquals([
             'selectionDefaultLocation' => 42,
-            'selectionDefaultLocationHref' => '/api/ezp/v2/content/locations/1/25/42',
+            'selectionDefaultLocationHref' => '/api/ibexa/v2/content/locations/1/25/42',
         ], $hash);
 
         //empty cases
@@ -108,14 +108,14 @@ class RelationListProcessorTest extends TestCase
                 ['ibexa.rest.load_content', ['contentId' => 42]],
                 ['ibexa.rest.load_content', ['contentId' => 300]]
             )->willReturnOnConsecutiveCalls(
-                '/api/ezp/v2/content/objects/42',
-                '/api/ezp/v2/content/objects/300'
+                '/api/ibexa/v2/content/objects/42',
+                '/api/ibexa/v2/content/objects/300'
             );
 
         $hash = $processor->postProcessValueHash(['destinationContentIds' => [42, 300]]);
         $this->assertArrayHasKey('destinationContentHrefs', $hash);
-        $this->assertEquals('/api/ezp/v2/content/objects/42', $hash['destinationContentHrefs'][0]);
-        $this->assertEquals('/api/ezp/v2/content/objects/300', $hash['destinationContentHrefs'][1]);
+        $this->assertEquals('/api/ibexa/v2/content/objects/42', $hash['destinationContentHrefs'][0]);
+        $this->assertEquals('/api/ibexa/v2/content/objects/300', $hash['destinationContentHrefs'][1]);
     }
 
     /**

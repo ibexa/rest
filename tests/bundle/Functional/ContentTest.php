@@ -22,19 +22,19 @@ class ContentTest extends RESTFunctionalTestCase
         $body = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentCreate>
-  <ContentType href="/api/ezp/v2/content/types/1" />
+  <ContentType href="/api/ibexa/v2/content/types/1" />
   <mainLanguageCode>eng-GB</mainLanguageCode>
   <LocationCreate>
-    <ParentLocation href="/api/ezp/v2/content/locations/1/2" />
+    <ParentLocation href="/api/ibexa/v2/content/locations/1/2" />
     <priority>0</priority>
     <hidden>false</hidden>
     <sortField>PATH</sortField>
     <sortOrder>ASC</sortOrder>
   </LocationCreate>
-  <Section href="/api/ezp/v2/content/sections/1" />
+  <Section href="/api/ibexa/v2/content/sections/1" />
   <alwaysAvailable>true</alwaysAvailable>
   <remoteId>{$string}</remoteId>
-  <User href="/api/ezp/v2/user/users/14" />
+  <User href="/api/ibexa/v2/user/users/14" />
   <modificationDate>2012-09-30T12:30:00</modificationDate>
   <fields>
     <field>
@@ -47,7 +47,7 @@ class ContentTest extends RESTFunctionalTestCase
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/objects',
+            '/api/ibexa/v2/content/objects',
             'ContentCreate+xml',
             'ContentInfo+json',
             $body
@@ -87,7 +87,7 @@ XML;
     public function testRedirectContent($restContentHref)
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/objects?remoteId=' . $this->addTestSuffix('testCreateContent'))
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/objects?remoteId=' . $this->addTestSuffix('testCreateContent'))
         );
 
         self::assertHttpResponseCodeEquals($response, 307);
@@ -116,7 +116,7 @@ XML;
         $content = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentUpdate>
-  <Owner href="/api/ezp/v2/user/users/10"/>
+  <Owner href="/api/ibexa/v2/user/users/10"/>
   <remoteId>{$string}</remoteId>
 </ContentUpdate>
 XML;
@@ -212,7 +212,7 @@ XML;
 
         self::assertHttpResponseCodeEquals($response, 201);
         self::assertStringStartsWith(
-            '/api/ezp/v2/content/objects/',
+            '/api/ibexa/v2/content/objects/',
             $response->getHeader('Location')[0]
         );
 
@@ -272,8 +272,8 @@ XML;
     /**
      * @depends testCreateDraftFromCurrentVersion
      *
-     * @param string $restContentVersionHref /api/ezp/v2/content/objects/<contentId>/versions>/<versionNumber>
-     * Covers DELETE /api/ezp/v2/content/objects/<contentId>/versions>/<versionNumber>
+     * @param string $restContentVersionHref /api/ibexa/v2/content/objects/<contentId>/versions>/<versionNumber>
+     * Covers DELETE /api/ibexa/v2/content/objects/<contentId>/versions>/<versionNumber>
      */
     public function testDeleteContentVersion($restContentVersionHref)
     {
@@ -358,7 +358,7 @@ XML;
         $content = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <RelationCreate>
-  <Destination href="/api/ezp/v2/content/objects/10"/>
+  <Destination href="/api/ibexa/v2/content/objects/10"/>
 </RelationCreate>
 XML;
 
@@ -399,7 +399,7 @@ XML;
      *
      * @throws \InvalidArgumentException
      *
-     * @param string $restContentHref /api/ezp/v2/content/objects/<contentId>
+     * @param string $restContentHref /api/ibexa/v2/content/objects/<contentId>
      *
      * @return array
      */
@@ -551,10 +551,10 @@ XML;
     {
         // create independent Content
         $content = $this->createContentDraft(
-            '/api/ezp/v2/content/types/1',
-            '/api/ezp/v2/content/locations/1/2',
-            '/api/ezp/v2/content/sections/1',
-            '/api/ezp/v2/user/users/14',
+            '/api/ibexa/v2/content/types/1',
+            '/api/ibexa/v2/content/locations/1/2',
+            '/api/ibexa/v2/content/sections/1',
+            '/api/ibexa/v2/user/users/14',
             [
                 'name' => [
                     'eng-GB' => $this->addTestSuffix(__FUNCTION__),
@@ -763,7 +763,7 @@ XML;
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/objects',
+            '/api/ibexa/v2/content/objects',
             'ContentCreate+xml',
             'ContentInfo+json',
             $body

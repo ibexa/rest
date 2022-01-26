@@ -174,7 +174,7 @@ class TestCase extends BaseTestCase
         array $extraHeaders = []
     ): RequestInterface {
         $headers = array_merge(
-            $method === 'POST' && $uri === '/api/ezp/v2/user/sessions' ? [] : $this->headers,
+            $method === 'POST' && $uri === '/api/ibexa/v2/user/sessions' ? [] : $this->headers,
             [
                 'Content-Type' => $this->generateMediaTypeString($contentType),
                 'Accept' => $this->generateMediaTypeString($acceptType),
@@ -301,7 +301,7 @@ EOF;
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentCreate>
-  <ContentType href="/api/ezp/v2/content/types/1" />
+  <ContentType href="/api/ibexa/v2/content/types/1" />
   <mainLanguageCode>eng-GB</mainLanguageCode>
   <LocationCreate>
     <ParentLocation href="{$parentLocationId}" />
@@ -310,10 +310,10 @@ EOF;
     <sortField>PATH</sortField>
     <sortOrder>ASC</sortOrder>
   </LocationCreate>
-  <Section href="/api/ezp/v2/content/sections/1" />
+  <Section href="/api/ibexa/v2/content/sections/1" />
   <alwaysAvailable>true</alwaysAvailable>
   <remoteId>{$remoteId}</remoteId>
-  <User href="/api/ezp/v2/user/users/14" />
+  <User href="/api/ibexa/v2/user/users/14" />
   <modificationDate>2012-09-30T12:30:00</modificationDate>
   <fields>
     <field>
@@ -337,7 +337,7 @@ XML;
     {
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/objects',
+            '/api/ibexa/v2/content/objects',
             'ContentCreate+xml',
             'Content+json',
             $xml
@@ -414,7 +414,7 @@ XML;
     {
         return $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/user/sessions',
+            '/api/ibexa/v2/user/sessions',
             'SessionInput+json',
             'Session+json',
             sprintf('{"SessionInput": {"login": "%s", "password": "%s"}}', $login, $password),

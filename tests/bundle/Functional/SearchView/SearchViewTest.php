@@ -48,7 +48,7 @@ class SearchViewTest extends SearchViewTestCase
     }
 
     /**
-     * Covers POST with ContentQuery Logic on /api/ezp/v2/views using payload in the XML format.
+     * Covers POST with ContentQuery Logic on /api/ibexa/v2/views using payload in the XML format.
      *
      * @dataProvider xmlProvider
      *
@@ -94,7 +94,7 @@ XML;
 
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/views',
+            '/api/ibexa/v2/views',
             'ViewInput+json; version=1.1',
             'View+json',
             $body
@@ -109,7 +109,7 @@ XML;
     }
 
     /**
-     * Covers POST with LocationQuery Logic on /api/ezp/v2/views using payload in the JSON format.
+     * Covers POST with LocationQuery Logic on /api/ibexa/v2/views using payload in the JSON format.
      *
      * @dataProvider jsonProvider
      *
@@ -196,7 +196,7 @@ XML;
 
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/typegroups/1/types?publish=true',
+            '/api/ibexa/v2/content/typegroups/1/types?publish=true',
             'ContentTypeCreate+xml',
             'ContentType+json',
             $body
@@ -222,16 +222,16 @@ XML;
   <ContentType href="$this->contentTypeHref" />
   <mainLanguageCode>eng-GB</mainLanguageCode>
   <LocationCreate>
-    <ParentLocation href="/api/ezp/v2/content/locations/1" />
+    <ParentLocation href="/api/ibexa/v2/content/locations/1" />
     <priority>0</priority>
     <hidden>false</hidden>
     <sortField>PATH</sortField>
     <sortOrder>ASC</sortOrder>
   </LocationCreate>
-  <Section href="/api/ezp/v2/content/sections/1" />
+  <Section href="/api/ibexa/v2/content/sections/1" />
   <alwaysAvailable>true</alwaysAvailable>
   <remoteId>$name</remoteId>
-  <User href="/api/ezp/v2/user/users/14" />
+  <User href="/api/ibexa/v2/user/users/14" />
   <modificationDate>2018-01-30T18:30:00</modificationDate>
   <fields>
     <field>
@@ -249,7 +249,7 @@ XML;
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/objects',
+            '/api/ibexa/v2/content/objects',
             'ContentCreate+xml',
             'ContentInfo+json',
             $body
@@ -453,7 +453,7 @@ XML;
 
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/typegroups/1/types?publish=true',
+            '/api/ibexa/v2/content/typegroups/1/types?publish=true',
             'ContentTypeCreate+xml',
             'ContentType+json',
             $body

@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class RequestListenerTest extends EventListenerTest
 {
-    public const REST_ROUTE = '/api/ezp/v2/rest-route';
+    public const REST_ROUTE = '/api/ibexa/v2/rest-route';
     public const NON_REST_ROUTE = '/non-rest-route';
 
     public function provideExpectedSubscribedEventTypes()
@@ -30,7 +30,7 @@ class RequestListenerTest extends EventListenerTest
     public static function restRequestUrisProvider()
     {
         return [
-            ['/api/ezp/v2/true'],
+            ['/api/ibexa/v2/true'],
             ['/api/bundle-name/v2/true'],
             ['/api/MyBundle12/v2/true'],
             ['/api/ThisIs_Bundle123/v2/true'],

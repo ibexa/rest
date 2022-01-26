@@ -16,7 +16,7 @@ class UserTest extends RESTFunctionalTestCase
     public function loadRootUserGroup()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/user/groups/root')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/user/groups/root')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -51,7 +51,7 @@ class UserTest extends RESTFunctionalTestCase
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/user/groups/1/5/subgroups',
+            '/api/ibexa/v2/user/groups/1/5/subgroups',
             'UserGroupCreate+xml',
             'UserGroup+json',
             $xml
@@ -211,7 +211,7 @@ XML;
     public function testLoadUsers()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/user/users')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/user/users')
         );
 
         self::assertHttpResponseCodeEquals($response, 404);
@@ -225,7 +225,7 @@ XML;
     {
         $remoteId = $this->addTestSuffix('testCreateUser');
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', "/api/ezp/v2/user/users?remoteId=$remoteId")
+            $this->createHttpRequest('GET', "/api/ibexa/v2/user/users?remoteId=$remoteId")
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -237,7 +237,7 @@ XML;
     public function testLoadUserGroups()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/user/groups')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/user/groups')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -251,7 +251,7 @@ XML;
     {
         $remoteId = $this->addTestSuffix('testCreateUserGroup');
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', "/api/ezp/v2/user/groups?remoteId=$remoteId")
+            $this->createHttpRequest('GET', "/api/ibexa/v2/user/groups?remoteId=$remoteId")
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -359,7 +359,7 @@ XML;
             '',
             '',
             '',
-            ['Destination' => '/api/ezp/v2/user/groups/1/5/12']
+            ['Destination' => '/api/ibexa/v2/user/groups/1/5/12']
         );
         $response = $this->sendHttpRequest($request);
 
@@ -386,7 +386,7 @@ XML;
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/user/sessions',
+            '/api/ibexa/v2/user/sessions',
             'SessionInput+xml',
             'Session+json',
             $xml
@@ -445,13 +445,13 @@ XML;
     public function testFilterUsersByLoginQueryParameter()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/user/users?login=admin')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/user/users?login=admin')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
 
         $response404 = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/user/users?login=foo')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/user/users?login=foo')
         );
 
         self::assertHttpResponseCodeEquals($response404, 404);
@@ -460,13 +460,13 @@ XML;
     public function testIfLoginIsUsedByAnotherUser()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('HEAD', '/api/ezp/v2/user/users?login=admin')
+            $this->createHttpRequest('HEAD', '/api/ibexa/v2/user/users?login=admin')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
 
         $response404 = $this->sendHttpRequest(
-            $this->createHttpRequest('HEAD', '/api/ezp/v2/user/users?login=foo')
+            $this->createHttpRequest('HEAD', '/api/ibexa/v2/user/users?login=foo')
         );
 
         self::assertHttpResponseCodeEquals($response404, 404);
@@ -475,13 +475,13 @@ XML;
     public function testFilterUsersByEmailQueryParameter()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/user/users?email=admin@link.invalid')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/user/users?email=admin@link.invalid')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
 
         $response404 = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/user/users?email=foo@bar.com')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/user/users?email=foo@bar.com')
         );
 
         self::assertHttpResponseCodeEquals($response404, 404);
@@ -490,13 +490,13 @@ XML;
     public function testIfEmailIsUsedByAnotherUser()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('HEAD', '/api/ezp/v2/user/users?email=admin@link.invalid')
+            $this->createHttpRequest('HEAD', '/api/ibexa/v2/user/users?email=admin@link.invalid')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
 
         $response404 = $this->sendHttpRequest(
-            $this->createHttpRequest('HEAD', '/api/ezp/v2/user/users?email=foo@bar.com')
+            $this->createHttpRequest('HEAD', '/api/ibexa/v2/user/users?email=foo@bar.com')
         );
 
         self::assertHttpResponseCodeEquals($response404, 404);

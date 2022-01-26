@@ -23,7 +23,7 @@ class ContentTypeTest extends RESTFunctionalTestCase
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/typegroups',
+            '/api/ibexa/v2/content/typegroups',
             'ContentTypeGroupInput+xml',
             'ContentTypeGroup+json',
             $body
@@ -152,7 +152,7 @@ XML;
     public function testLoadContentTypeGroupList()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/typegroups')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/typegroups')
         );
         self::assertHttpResponseCodeEquals($response, 200);
 
@@ -166,7 +166,7 @@ XML;
     public function testLoadContentTypeGroupListWithIdentifier()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/typegroups?identifier=testUpdateContentTypeGroup')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/typegroups?identifier=testUpdateContentTypeGroup')
         );
         // @todo Check if list filtered by identifier is supposed to send a 307
         self::assertHttpResponseCodeEquals($response, 307);
@@ -235,7 +235,7 @@ XML;
     public function testListContentTypes()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/types')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/types')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -248,7 +248,7 @@ XML;
     public function testListContentTypesByIdentifier()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/types?identifier=tCreate')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/types?identifier=tCreate')
         );
 
         // @todo This isn't consistent with the behaviour of /content/typegroups?identifier=
@@ -262,7 +262,7 @@ XML;
     public function testListContentTypesByRemoteId()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/types?remoteId=testCreateContentType')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/types?remoteId=testCreateContentType')
         );
 
         // @todo This isn't consistent with the behaviour of /content/typegroups?identifier=
@@ -545,7 +545,7 @@ XML;
     public function testLinkContentTypeToGroup($contentTypeHref)
     {
         // @todo Spec example is invalid, missing parameter name
-        $request = $this->createHttpRequest('POST', "$contentTypeHref/groups?group=/api/ezp/v2/content/typegroups/1");
+        $request = $this->createHttpRequest('POST', "$contentTypeHref/groups?group=/api/ibexa/v2/content/typegroups/1");
         $response = $this->sendHttpRequest($request);
         self::assertHttpResponseCodeEquals($response, 200);
 
