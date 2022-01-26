@@ -1,5 +1,5 @@
 paths:
-    '^/api/ezp/v2/':
+    '^/api/ibexa/v2/':
         max_age: 60
         allow_credentials: true
         allow_origin: []

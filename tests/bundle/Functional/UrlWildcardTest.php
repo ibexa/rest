@@ -16,7 +16,7 @@ class UrlWildcardTest extends RESTFunctionalTestCase
     public function testListURLWildcards()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/urlwildcards')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/urlwildcards')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -40,7 +40,7 @@ XML;
 
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/urlwildcards',
+            '/api/ibexa/v2/content/urlwildcards',
             'UrlWildcardCreate+xml',
             'UrlWildcard+json',
             $xml

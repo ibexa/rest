@@ -23,7 +23,7 @@ class HttpOptionsTest extends TestCase
      */
     public function testHttpOptions(string $route, array $expectedMethods): void
     {
-        $restAPIPrefix = '/api/ezp/v2';
+        $restAPIPrefix = '/api/ibexa/v2';
 
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('OPTIONS', "{$restAPIPrefix}{$route}")

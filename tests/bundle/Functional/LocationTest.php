@@ -17,7 +17,7 @@ class LocationTest extends RESTFunctionalTestCase
      */
     public function testCreateLocation()
     {
-        $content = $this->createFolder('testCreateLocation', '/api/ezp/v2/content/locations/1/2');
+        $content = $this->createFolder('testCreateLocation', '/api/ibexa/v2/content/locations/1/2');
         $contentHref = $content['_href'];
 
         $remoteId = $this->addTestSuffix('testCreatelocation');
@@ -25,7 +25,7 @@ class LocationTest extends RESTFunctionalTestCase
         $body = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <LocationCreate>
-  <ParentLocation href="/api/ezp/v2/content/locations/1/43" />
+  <ParentLocation href="/api/ibexa/v2/content/locations/1/43" />
   <remoteId>{$remoteId}</remoteId>
   <priority>0</priority>
   <hidden>false</hidden>
@@ -55,7 +55,7 @@ XML;
     public function testRedirectLocationByRemoteId($locationHref)
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/locations?remoteId=' . $this->addTestSuffix('testCreateLocation'))
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/locations?remoteId=' . $this->addTestSuffix('testCreateLocation'))
         );
 
         self::assertHttpResponseCodeEquals($response, 307);
@@ -71,7 +71,7 @@ XML;
         $hrefParts = explode('/', $locationHref);
         $id = array_pop($hrefParts);
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', "/api/ezp/v2/content/locations?id=$id")
+            $this->createHttpRequest('GET', "/api/ibexa/v2/content/locations?id=$id")
         );
 
         self::assertHttpResponseCodeEquals($response, 307);
@@ -88,7 +88,7 @@ XML;
         $this->createUrlAlias($locationHref, $testUrlAlias);
 
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', "/api/ezp/v2/content/locations?urlAlias={$testUrlAlias}")
+            $this->createHttpRequest('GET', "/api/ibexa/v2/content/locations?urlAlias={$testUrlAlias}")
         );
 
         self::assertHttpResponseCodeEquals($response, 307);
@@ -122,7 +122,7 @@ XML;
             '',
             '',
             '',
-            ['Destination' => '/api/ezp/v2/content/locations/1/43']
+            ['Destination' => '/api/ibexa/v2/content/locations/1/43']
         );
         $response = $this->sendHttpRequest($request);
         $this->addCreatedElement($response->getHeaderLine('Location'));
@@ -146,7 +146,7 @@ XML;
             '',
             '',
             '',
-            ['Destination' => '/api/ezp/v2/content/locations/1/5']
+            ['Destination' => '/api/ibexa/v2/content/locations/1/5']
         );
         $response = $this->sendHttpRequest($request);
 
@@ -170,7 +170,7 @@ XML;
     {
         self::markTestSkipped('@todo Implement');
 
-        /*$content = $this->createFolder( __FUNCTION__, "/api/ezp/v2/content/locations/1/2" );
+        /*$content = $this->createFolder( __FUNCTION__, "/api/ibexa/v2/content/locations/1/2" );
 
         $request = $this->createHttpRequest( 'SWAP', $locationHref );
         $request->addHeader( "Destination: $newFolderHref" );
@@ -248,7 +248,7 @@ XML;
 
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/urlaliases',
+            '/api/ibexa/v2/content/urlaliases',
             'UrlAliasCreate+xml',
             'UrlAlias+json',
             $xml

@@ -154,7 +154,7 @@ class SessionTest extends TestCase
     {
         $request = $this->createHttpRequest(
             'POST',
-            sprintf('/api/ezp/v2/user/sessions/%s/refresh', $session->identifier),
+            sprintf('/api/ibexa/v2/user/sessions/%s/refresh', $session->identifier),
             '',
             'Session+json',
             '',

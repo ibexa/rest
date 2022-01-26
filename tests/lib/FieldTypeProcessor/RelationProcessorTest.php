@@ -78,13 +78,13 @@ class RelationProcessorTest extends TestCase
         $routerMock
             ->method('generate')
             ->with('ibexa.rest.load_location', ['locationPath' => '1/25/42'])
-            ->willReturn('/api/ezp/v2/content/locations/1/25/42');
+            ->willReturn('/api/ibexa/v2/content/locations/1/25/42');
 
         $hash = $processor->postProcessFieldSettingsHash(['selectionRoot' => 42]);
 
         $this->assertEquals([
             'selectionRoot' => 42,
-            'selectionRootHref' => '/api/ezp/v2/content/locations/1/25/42',
+            'selectionRootHref' => '/api/ibexa/v2/content/locations/1/25/42',
         ], $hash);
 
         //empty cases
@@ -105,11 +105,11 @@ class RelationProcessorTest extends TestCase
             ->expects($this->once())
             ->method('generate')
             ->with('ibexa.rest.load_content', ['contentId' => 42])
-            ->willReturn('/api/ezp/v2/content/objects/42');
+            ->willReturn('/api/ibexa/v2/content/objects/42');
 
         $hash = $processor->postProcessValueHash(['destinationContentId' => 42]);
         $this->assertArrayHasKey('destinationContentHref', $hash);
-        $this->assertEquals('/api/ezp/v2/content/objects/42', $hash['destinationContentHref']);
+        $this->assertEquals('/api/ibexa/v2/content/objects/42', $hash['destinationContentHref']);
     }
 
     public function testPostProcessFieldValueHashNullValue()

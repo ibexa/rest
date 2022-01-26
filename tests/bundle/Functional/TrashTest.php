@@ -24,7 +24,7 @@ class TrashTest extends RESTFunctionalTestCase
     public function testLoadTrashItems()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/trash')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/trash')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -90,7 +90,7 @@ class TrashTest extends RESTFunctionalTestCase
             '',
             '',
             '',
-            ['Destination' => '/api/ezp/v2/content/locations/1/2']
+            ['Destination' => '/api/ibexa/v2/content/locations/1/2']
         );
         $response = $this->sendHttpRequest($request);
 
@@ -104,7 +104,7 @@ class TrashTest extends RESTFunctionalTestCase
     public function testEmptyTrash()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('DELETE', '/api/ezp/v2/content/trash')
+            $this->createHttpRequest('DELETE', '/api/ibexa/v2/content/trash')
         );
 
         self::assertHttpResponseCodeEquals($response, 204);
@@ -118,7 +118,7 @@ class TrashTest extends RESTFunctionalTestCase
         self::markTestSkipped('Makes the DB inconsistent');
 
         // create a folder
-        $folderArray = $this->createFolder('testDeleteTrashedItemFailsWith404', '/api/ezp/v2/content/locations/1/2');
+        $folderArray = $this->createFolder('testDeleteTrashedItemFailsWith404', '/api/ibexa/v2/content/locations/1/2');
 
         // send its main location to trash
         $folderLocations = $this->getContentLocations($folderArray['_href']);
@@ -139,7 +139,7 @@ class TrashTest extends RESTFunctionalTestCase
      */
     private function createTrashItem($id)
     {
-        $folder = $this->createFolder($id, '/api/ezp/v2/content/locations/1/2');
+        $folder = $this->createFolder($id, '/api/ibexa/v2/content/locations/1/2');
         $folderLocations = $this->getContentLocations($folder['_href']);
 
         return $this->sendLocationToTrash($folderLocations['LocationList']['Location'][0]['_href']);
@@ -158,7 +158,7 @@ class TrashTest extends RESTFunctionalTestCase
             '',
             '',
             '',
-            ['Destination' => '/api/ezp/v2/content/trash']
+            ['Destination' => '/api/ibexa/v2/content/trash']
         );
         $response = $this->sendHttpRequest($trashRequest);
 

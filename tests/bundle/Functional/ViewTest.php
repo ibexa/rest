@@ -15,8 +15,8 @@ class ViewTest extends TestCase
     {
         $fooRemoteId = md5('View test content foo');
         $barRemoteId = md5('View test content bar');
-        $this->createFolder('View test content foo', '/api/ezp/v2/content/locations/1/2', $fooRemoteId);
-        $this->createFolder('View test content bar', '/api/ezp/v2/content/locations/1/2', $barRemoteId);
+        $this->createFolder('View test content foo', '/api/ibexa/v2/content/locations/1/2', $fooRemoteId);
+        $this->createFolder('View test content bar', '/api/ibexa/v2/content/locations/1/2', $barRemoteId);
 
         $body = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -36,7 +36,7 @@ class ViewTest extends TestCase
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/views',
+            '/api/ibexa/v2/views',
             'ViewInput+xml',
             'View+json',
             $body
@@ -78,7 +78,7 @@ XML;
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/views',
+            '/api/ibexa/v2/views',
             'ViewInput+xml',
             'View+json',
             $body

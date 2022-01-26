@@ -15,7 +15,7 @@ class BookmarkTest extends RESTFunctionalTestCase
 {
     public function testCreateBookmark(): int
     {
-        $content = $this->createFolder(__FUNCTION__, '/api/ezp/v2/content/locations/1/2');
+        $content = $this->createFolder(__FUNCTION__, '/api/ibexa/v2/content/locations/1/2');
         $contentLocations = $this->getContentLocations($content['_href']);
 
         $locationPathParts = explode('/', $contentLocations['LocationList']['Location'][0]['_href']);
@@ -23,7 +23,7 @@ class BookmarkTest extends RESTFunctionalTestCase
 
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/bookmark/' . $locationId
+            '/api/ibexa/v2/bookmark/' . $locationId
         );
 
         $response = $this->sendHttpRequest($request);
@@ -40,7 +40,7 @@ class BookmarkTest extends RESTFunctionalTestCase
     {
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/bookmark/' . $locationId
+            '/api/ibexa/v2/bookmark/' . $locationId
         );
 
         $response = $this->sendHttpRequest($request);
@@ -55,7 +55,7 @@ class BookmarkTest extends RESTFunctionalTestCase
     {
         $request = $this->createHttpRequest(
             'HEAD',
-            '/api/ezp/v2/bookmark/' . $locationId
+            '/api/ibexa/v2/bookmark/' . $locationId
         );
 
         $response = $this->sendHttpRequest($request);
@@ -69,7 +69,7 @@ class BookmarkTest extends RESTFunctionalTestCase
 
         $request = $this->createHttpRequest(
             'HEAD',
-            '/api/ezp/v2/bookmark/' . $locationId
+            '/api/ibexa/v2/bookmark/' . $locationId
         );
 
         $response = $this->sendHttpRequest($request);
@@ -84,7 +84,7 @@ class BookmarkTest extends RESTFunctionalTestCase
     {
         $request = $this->createHttpRequest(
             'DELETE',
-            '/api/ezp/v2/bookmark/' . $locationId
+            '/api/ibexa/v2/bookmark/' . $locationId
         );
 
         $response = $this->sendHttpRequest($request);
@@ -96,7 +96,7 @@ class BookmarkTest extends RESTFunctionalTestCase
     {
         $request = $this->createHttpRequest(
             'GET',
-            '/api/ezp/v2/bookmark?offset=1&limit=100',
+            '/api/ibexa/v2/bookmark?offset=1&limit=100',
             'BookmarkList+xml',
             'BookmarkList+xml'
         );
@@ -112,7 +112,7 @@ class BookmarkTest extends RESTFunctionalTestCase
 
         $request = $this->createHttpRequest(
             'DELETE',
-            '/api/ezp/v2/bookmark/' . $locationId
+            '/api/ibexa/v2/bookmark/' . $locationId
         );
 
         $response = $this->sendHttpRequest($request);

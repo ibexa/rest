@@ -24,7 +24,7 @@ abstract class SearchViewTestCase extends RESTFunctionalTestCase
     {
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/views',
+            '/api/ibexa/v2/views',
             "ViewInput+{$format}; version=1.1",
             'View+json',
             $body

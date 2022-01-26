@@ -17,7 +17,7 @@ class UrlAliasTest extends RESTFunctionalTestCase
      */
     public function testCreateFolder()
     {
-        $folderArray = $this->createFolder('UrlAliasTest_testCreateFolder', '/api/ezp/v2/content/locations/1/2');
+        $folderArray = $this->createFolder('UrlAliasTest_testCreateFolder', '/api/ibexa/v2/content/locations/1/2');
         $folderLocations = $this->getContentLocations($folderArray['_href']);
 
         return $folderLocations['LocationList']['Location'][0]['_href'];
@@ -29,7 +29,7 @@ class UrlAliasTest extends RESTFunctionalTestCase
     public function testListGlobalURLAliases()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/urlaliases')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/urlaliases')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -56,7 +56,7 @@ XML;
 
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/urlaliases',
+            '/api/ibexa/v2/content/urlaliases',
             'UrlAliasCreate+xml',
             'UrlAlias+json',
             $xml
@@ -94,7 +94,7 @@ XML;
 
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/urlaliases',
+            '/api/ibexa/v2/content/urlaliases',
             'UrlAliasCreate+xml',
             'UrlAlias+json',
             $xml

@@ -16,7 +16,7 @@ class SectionTest extends RESTFunctionalTestCase
     public function testListSections()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/sections')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/sections')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -37,7 +37,7 @@ class SectionTest extends RESTFunctionalTestCase
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/sections',
+            '/api/ibexa/v2/content/sections',
             'SectionInput+xml',
             'Section+json',
             $xml
@@ -99,7 +99,7 @@ XML;
     public function testLoadSectionByIdentifier($sectionHref)
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/sections?identifier=testUpdateSection')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/sections?identifier=testUpdateSection')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
