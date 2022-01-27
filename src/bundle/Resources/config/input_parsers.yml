@@ -1,93 +1,16 @@
 parameters:
-    ezpublish_rest.input.parser.class: Ibexa\Rest\Server\Common\Parser
-    ezpublish_rest.input.parser.ContentObjectStates.class: Ibexa\Rest\Input\Parser\ContentObjectStates
 
     # REST server
-    ezpublish_rest.input.parser.ContentCreate.class: Ibexa\Rest\Server\Input\Parser\ContentCreate
-    ezpublish_rest.input.parser.ContentUpdate.class: Ibexa\Rest\Server\Input\Parser\ContentUpdate
-    ezpublish_rest.input.parser.ContentTypeGroupInput.class: Ibexa\Rest\Server\Input\Parser\ContentTypeGroupInput
-    ezpublish_rest.input.parser.ContentTypeCreate.class: Ibexa\Rest\Server\Input\Parser\ContentTypeCreate
-    ezpublish_rest.input.parser.ContentTypeUpdate.class: Ibexa\Rest\Server\Input\Parser\ContentTypeUpdate
-    ezpublish_rest.input.parser.FieldDefinitionCreate.class: Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate
-    ezpublish_rest.input.parser.FieldDefinitionUpdate.class: Ibexa\Rest\Server\Input\Parser\FieldDefinitionUpdate
-    ezpublish_rest.input.parser.LocationCreate.class: Ibexa\Rest\Server\Input\Parser\LocationCreate
-    ezpublish_rest.input.parser.LocationUpdate.class: Ibexa\Rest\Server\Input\Parser\LocationUpdate
-    ezpublish_rest.input.parser.ObjectStateCreate.class: Ibexa\Rest\Server\Input\Parser\ObjectStateCreate
-    ezpublish_rest.input.parser.ObjectStateGroupCreate.class: Ibexa\Rest\Server\Input\Parser\ObjectStateGroupCreate
-    ezpublish_rest.input.parser.ObjectStateGroupUpdate.class: Ibexa\Rest\Server\Input\Parser\ObjectStateGroupUpdate
-    ezpublish_rest.input.parser.ObjectStateUpdate.class: Ibexa\Rest\Server\Input\Parser\ObjectStateUpdate
-    ezpublish_rest.input.parser.PolicyCreate.class: Ibexa\Rest\Server\Input\Parser\PolicyCreate
-    ezpublish_rest.input.parser.PolicyUpdate.class: Ibexa\Rest\Server\Input\Parser\PolicyUpdate
-    ezpublish_rest.input.parser.RelationCreate.class: Ibexa\Rest\Server\Input\Parser\RelationCreate
-    ezpublish_rest.input.parser.RoleAssignInput.class: Ibexa\Rest\Server\Input\Parser\RoleAssignInput
-    ezpublish_rest.input.parser.RoleInput.class: Ibexa\Rest\Server\Input\Parser\RoleInput
-    ezpublish_rest.input.parser.SectionInput.class: Ibexa\Rest\Server\Input\Parser\SectionInput
-    ezpublish_rest.input.parser.UserGroupUpdate.class: Ibexa\Rest\Server\Input\Parser\UserGroupUpdate
-    ezpublish_rest.input.parser.UserUpdate.class: Ibexa\Rest\Server\Input\Parser\UserUpdate
-    ezpublish_rest.input.parser.UrlWildcardCreate.class: Ibexa\Rest\Server\Input\Parser\URLWildcardCreate
-    ezpublish_rest.input.parser.URLAliasCreate.class: Ibexa\Rest\Server\Input\Parser\URLAliasCreate
-    ezpublish_rest.input.parser.UserCreate.class: Ibexa\Rest\Server\Input\Parser\UserCreate
-    ezpublish_rest.input.parser.UserGroupCreate.class: Ibexa\Rest\Server\Input\Parser\UserGroupCreate
-    ezpublish_rest.input.parser.SessionInput.class: Ibexa\Rest\Server\Input\Parser\SessionInput
-    ezpublish_rest.input.parser.VersionUpdate.class: Ibexa\Rest\Server\Input\Parser\VersionUpdate
-    ezpublish_rest.input.parser.ViewInput.class: Ibexa\Rest\Server\Input\Parser\ViewInput
-    ezpublish_rest.input.parser.ViewInputOneDotOne.class: Ibexa\Rest\Server\Input\Parser\ViewInputOneDotOne
-
-    ezpublish_rest.input.parser.internal.ContentQuery.class: Ibexa\Rest\Server\Input\Parser\ContentQuery
-    ezpublish_rest.input.parser.internal.LocationQuery.class: Ibexa\Rest\Server\Input\Parser\LocationQuery
-    ezpublish_rest.input.parser.internal.criterion.Ancestor.class: Ibexa\Rest\Server\Input\Parser\Criterion\Ancestor
-    ezpublish_rest.input.parser.internal.criterion.ContentId.class: Ibexa\Rest\Server\Input\Parser\Criterion\ContentId
-    ezpublish_rest.input.parser.internal.criterion.ContentRemoteId.class: Ibexa\Rest\Server\Input\Parser\Criterion\ContentRemoteId
-    ezpublish_rest.input.parser.internal.criterion.ContentTypeGroupId.class: Ibexa\Rest\Server\Input\Parser\Criterion\ContentTypeGroupId
-    ezpublish_rest.input.parser.internal.criterion.ContentTypeId.class: Ibexa\Rest\Server\Input\Parser\Criterion\ContentTypeId
-    ezpublish_rest.input.parser.internal.criterion.ContentTypeIdentifier.class: Ibexa\Rest\Server\Input\Parser\Criterion\ContentTypeIdentifier
-    ezpublish_rest.input.parser.internal.criterion.DateMetadata.class: Ibexa\Rest\Server\Input\Parser\Criterion\DateMetadata
-    ezpublish_rest.input.parser.internal.criterion.Field.class: Ibexa\Rest\Server\Input\Parser\Criterion\Field
-    ezpublish_rest.input.parser.internal.criterion.FullText.class: Ibexa\Rest\Server\Input\Parser\Criterion\FullText
-    ezpublish_rest.input.parser.internal.criterion.LanguageCode.class: Ibexa\Rest\Server\Input\Parser\Criterion\LanguageCode
-    ezpublish_rest.input.parser.internal.criterion.LocationId.class: Ibexa\Rest\Server\Input\Parser\Criterion\LocationId
-    ezpublish_rest.input.parser.internal.criterion.LocationRemoteId.class: Ibexa\Rest\Server\Input\Parser\Criterion\LocationRemoteId
-    ezpublish_rest.input.parser.internal.criterion.LogicalAnd.class: Ibexa\Rest\Server\Input\Parser\Criterion\LogicalAnd
-    ezpublish_rest.input.parser.internal.criterion.LogicalNot.class: Ibexa\Rest\Server\Input\Parser\Criterion\LogicalNot
-    ezpublish_rest.input.parser.internal.criterion.LogicalOperator.class: Ibexa\Rest\Server\Input\Parser\Criterion\LogicalOperator
-    ezpublish_rest.input.parser.internal.criterion.LogicalOr.class: Ibexa\Rest\Server\Input\Parser\Criterion\LogicalOr
-    ezpublish_rest.input.parser.internal.criterion.MoreLikeThis.class: Ibexa\Rest\Server\Input\Parser\Criterion\MoreLikeThis
-    ezpublish_rest.input.parser.internal.criterion.ObjectStateId.class: Ibexa\Rest\Server\Input\Parser\Criterion\ObjectStateId
-    ezpublish_rest.input.parser.internal.criterion.Operator.class: Ibexa\Rest\Server\Input\Parser\Criterion\Operator
-    ezpublish_rest.input.parser.internal.criterion.ParentLocationId.class: Ibexa\Rest\Server\Input\Parser\Criterion\ParentLocationId
-    ezpublish_rest.input.parser.internal.criterion.ParentLocationRemoteId.class: Ibexa\Rest\Server\Input\Parser\Criterion\ParentLocationRemoteId
-    ezpublish_rest.input.parser.internal.criterion.SectionIdentifier.class: Ibexa\Rest\Server\Input\Parser\Criterion\SectionIdentifier
-    ezpublish_rest.input.parser.internal.criterion.SectionId.class: Ibexa\Rest\Server\Input\Parser\Criterion\SectionId
-    ezpublish_rest.input.parser.internal.criterion.Subtree.class: Ibexa\Rest\Server\Input\Parser\Criterion\Subtree
-    ezpublish_rest.input.parser.internal.criterion.UserMetadata.class: Ibexa\Rest\Server\Input\Parser\Criterion\UserMetadata
-    ezpublish_rest.input.parser.internal.criterion.Visibility.class: Ibexa\Rest\Server\Input\Parser\Criterion\Visibility
-
-    ezpublish_rest.input.parser.internal.sortclause.data_key_value_object.class: Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
-    ezpublish_rest.input.parser.internal.sortclause.field.class: Ibexa\Rest\Server\Input\Parser\SortClause\Field
-
-    ezpublish_rest.input.parser.internal.facetbuilder.content_type.class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\ContentTypeParser
-    ezpublish_rest.input.parser.internal.facetbuilder.criterion.class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\CriterionParser
-    ezpublish_rest.input.parser.internal.facetbuilder.date_range.class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\DateRangeParser
-    ezpublish_rest.input.parser.internal.facetbuilder.field.class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\FieldParser
-    ezpublish_rest.input.parser.internal.facetbuilder.field_range.class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\FieldRangeParser
-    ezpublish_rest.input.parser.internal.facetbuilder.location.class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\LocationParser
-    ezpublish_rest.input.parser.internal.facetbuilder.section.class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\SectionParser
-    ezpublish_rest.input.parser.internal.facetbuilder.term.class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\TermParser
-    ezpublish_rest.input.parser.internal.facetbuilder.user.class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\UserParser
-
-    ezpublish_rest.input.parser.internal.route_based_limitation.class: Ibexa\Rest\Server\Input\Parser\Limitation\RouteBasedLimitationParser
-    ezpublish_rest.input.parser.internal.path_string_route_based_limitation.class: Ibexa\Rest\Server\Input\Parser\Limitation\PathStringRouteBasedLimitationParser
 
 services:
     Ibexa\Rest\Server\Common\Parser:
-        class: "%ezpublish_rest.input.parser.class%"
         abstract: true
         calls:
             - [ setRequestParser, [ '@Ibexa\Bundle\Rest\RequestParser\Router' ] ]
 
     Ibexa\Rest\Input\Parser\ContentObjectStates:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.ContentObjectStates.class%"
+        class: Ibexa\Rest\Input\Parser\ContentObjectStates
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.ContentObjectStates }
 
@@ -95,7 +18,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\ContentCreate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.ContentCreate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\ContentCreate
         arguments:
             - '@ibexa.api.service.content'
             - '@ibexa.api.service.content_type'
@@ -107,13 +30,13 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\ContentUpdate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.ContentUpdate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\ContentUpdate
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.ContentUpdate }
 
     Ibexa\Rest\Server\Input\Parser\ContentTypeCreate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.ContentTypeCreate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\ContentTypeCreate
         arguments:
             - '@ibexa.api.service.content_type'
             - '@Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate'
@@ -123,7 +46,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\ContentTypeGroupInput:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.ContentTypeGroupInput.class%"
+        class: Ibexa\Rest\Server\Input\Parser\ContentTypeGroupInput
         arguments:
             - '@ibexa.api.service.content_type'
             - '@Ibexa\Rest\Input\ParserTools'
@@ -132,7 +55,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\ContentTypeUpdate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.ContentTypeUpdate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\ContentTypeUpdate
         arguments:
             - '@ibexa.api.service.content_type'
             - '@Ibexa\Rest\Input\ParserTools'
@@ -141,7 +64,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.FieldDefinitionCreate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate
         arguments:
             - '@ibexa.api.service.content_type'
             - '@Ibexa\Rest\Input\FieldTypeParser'
@@ -151,7 +74,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\FieldDefinitionUpdate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.FieldDefinitionUpdate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\FieldDefinitionUpdate
         arguments:
             - '@ibexa.api.service.content_type'
             - '@Ibexa\Rest\Input\FieldTypeParser'
@@ -166,7 +89,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\LocationCreate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.LocationCreate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\LocationCreate
         arguments:
             - '@ibexa.api.service.location'
             - '@Ibexa\Rest\Input\ParserTools'
@@ -175,7 +98,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\LocationUpdate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.LocationUpdate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\LocationUpdate
         arguments:
             - '@ibexa.api.service.location'
             - '@Ibexa\Rest\Input\ParserTools'
@@ -184,7 +107,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\ObjectStateGroupCreate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.ObjectStateGroupCreate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\ObjectStateGroupCreate
         arguments:
             - '@ibexa.api.service.object_state'
             - '@Ibexa\Rest\Input\ParserTools'
@@ -193,7 +116,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\ObjectStateGroupUpdate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.ObjectStateGroupUpdate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\ObjectStateGroupUpdate
         arguments:
             - '@ibexa.api.service.object_state'
             - '@Ibexa\Rest\Input\ParserTools'
@@ -202,7 +125,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\ObjectStateCreate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.ObjectStateCreate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\ObjectStateCreate
         arguments:
             - '@ibexa.api.service.object_state'
             - '@Ibexa\Rest\Input\ParserTools'
@@ -211,7 +134,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\ObjectStateUpdate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.ObjectStateUpdate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\ObjectStateUpdate
         arguments:
             - '@ibexa.api.service.object_state'
             - '@Ibexa\Rest\Input\ParserTools'
@@ -220,7 +143,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\PolicyCreate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.PolicyCreate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\PolicyCreate
         arguments:
             - '@ibexa.api.service.role'
             - '@Ibexa\Rest\Input\ParserTools'
@@ -229,7 +152,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\PolicyUpdate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.PolicyUpdate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\PolicyUpdate
         arguments:
             - '@ibexa.api.service.role'
             - '@Ibexa\Rest\Input\ParserTools'
@@ -238,13 +161,13 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\RelationCreate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.RelationCreate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\RelationCreate
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.RelationCreate }
 
     Ibexa\Rest\Server\Input\Parser\RoleAssignInput:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.RoleAssignInput.class%"
+        class: Ibexa\Rest\Server\Input\Parser\RoleAssignInput
         arguments:
             - '@Ibexa\Rest\Input\ParserTools'
         tags:
@@ -252,7 +175,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\RoleInput:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.RoleInput.class%"
+        class: Ibexa\Rest\Server\Input\Parser\RoleInput
         arguments:
             - '@ibexa.api.service.role'
             - '@Ibexa\Rest\Input\ParserTools'
@@ -261,7 +184,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\SectionInput:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.SectionInput.class%"
+        class: Ibexa\Rest\Server\Input\Parser\SectionInput
         arguments:
             - '@ibexa.api.service.section'
         tags:
@@ -269,7 +192,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\SessionInput:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.SessionInput.class%"
+        class: Ibexa\Rest\Server\Input\Parser\SessionInput
         arguments:
             - '@Ibexa\Rest\Input\ParserTools'
         tags:
@@ -277,7 +200,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\UserGroupUpdate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.UserGroupUpdate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\UserGroupUpdate
         arguments:
             - '@ibexa.api.service.user'
             - '@ibexa.api.service.content'
@@ -288,7 +211,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\URLAliasCreate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.URLAliasCreate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\URLAliasCreate
         arguments:
             - '@Ibexa\Rest\Input\ParserTools'
         tags:
@@ -296,7 +219,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\URLWildcardCreate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.UrlWildcardCreate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\URLWildcardCreate
         arguments:
             - '@Ibexa\Rest\Input\ParserTools'
         tags:
@@ -304,7 +227,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\UserCreate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.UserCreate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\UserCreate
         arguments:
             - '@ibexa.api.service.user'
             - '@ibexa.api.service.content_type'
@@ -315,7 +238,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\UserGroupCreate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.UserGroupCreate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\UserGroupCreate
         arguments:
             - '@ibexa.api.service.user'
             - '@ibexa.api.service.content_type'
@@ -325,7 +248,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\UserUpdate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.UserUpdate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\UserUpdate
         arguments:
             - '@ibexa.api.service.user'
             - '@ibexa.api.service.content'
@@ -336,19 +259,19 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\ViewInput:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.ViewInput.class%"
+        class: Ibexa\Rest\Server\Input\Parser\ViewInput
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.ViewInput }
 
     Ibexa\Rest\Server\Input\Parser\ViewInputOneDotOne:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.ViewInputOneDotOne.class%"
+        class: Ibexa\Rest\Server\Input\Parser\ViewInputOneDotOne
         tags:
             - { name: ibexa.rest.input.parser, mediaType: "application/vnd.ibexa.api.ViewInput; version=1.1" }
 
     Ibexa\Rest\Server\Input\Parser\VersionUpdate:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.VersionUpdate.class%"
+        class: Ibexa\Rest\Server\Input\Parser\VersionUpdate
         arguments:
             - '@ibexa.api.service.content'
             - '@Ibexa\Rest\Input\FieldTypeParser'
@@ -358,49 +281,49 @@ services:
     # internal Media-Types
     Ibexa\Rest\Server\Input\Parser\ContentQuery:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.ContentQuery.class%"
+        class: Ibexa\Rest\Server\Input\Parser\ContentQuery
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.ContentQuery }
 
     Ibexa\Rest\Server\Input\Parser\LocationQuery:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.LocationQuery.class%"
+        class: Ibexa\Rest\Server\Input\Parser\LocationQuery
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.LocationQuery }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\Ancestor:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.Ancestor.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\Ancestor
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.Ancestor }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\ContentId:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.ContentId.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\ContentId
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.ContentId }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\ContentRemoteId:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.ContentRemoteId.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\ContentRemoteId
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.ContentRemoteId }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\ContentTypeGroupId:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.ContentTypeGroupId.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\ContentTypeGroupId
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.ContentTypeGroupId }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\ContentTypeId:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.ContentTypeId.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\ContentTypeId
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.ContentTypeId }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\ContentTypeIdentifier:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.ContentTypeIdentifier.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\ContentTypeIdentifier
         arguments:
             - '@ibexa.api.service.content_type'
         tags:
@@ -408,85 +331,85 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\Criterion\DateMetadata:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.DateMetadata.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\DateMetadata
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.DateMetadata }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\Field:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.Field.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\Field
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.Field }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\FullText:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.FullText.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\FullText
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.FullText }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\LanguageCode:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.LanguageCode.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\LanguageCode
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.LanguageCode }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\LocationId:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.LocationId.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\LocationId
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.LocationId }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\LocationRemoteId:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.LocationRemoteId.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\LocationRemoteId
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.LocationRemoteId }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\LogicalAnd:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.LogicalAnd.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\LogicalAnd
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.LogicalAnd }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\LogicalNot:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.LogicalNot.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\LogicalNot
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.LogicalNot }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\LogicalOperator:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.LogicalOperator.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\LogicalOperator
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.LogicalOperator }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\LogicalOr:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.LogicalOr.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\LogicalOr
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.LogicalOr }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\MoreLikeThis:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.MoreLikeThis.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\MoreLikeThis
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.MoreLikeThis }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\Operator:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.Operator.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\Operator
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.Operator }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\ParentLocationId:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.ParentLocationId.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\ParentLocationId
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.ParentLocationId }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\ParentLocationRemoteId:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.ParentLocationRemoteId.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\ParentLocationRemoteId
         arguments:
             - '@ibexa.api.service.location'
         tags:
@@ -494,7 +417,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\Criterion\SectionIdentifier:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.SectionIdentifier.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\SectionIdentifier
         arguments:
             - '@ibexa.api.service.section'
         tags:
@@ -502,19 +425,19 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\Criterion\SectionId:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.SectionId.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\SectionId
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.SectionId }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\Subtree:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.Subtree.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\Subtree
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.Subtree }
 
     Ibexa\Rest\Server\Input\Parser\Criterion\UserMetadata:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.UserMetadata.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\UserMetadata
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.UserMetadata }
 
@@ -549,7 +472,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\Criterion\ObjectStateId:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.ObjectStateId.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\ObjectStateId
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.ObjectStateId }
 
@@ -560,7 +483,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\Criterion\Visibility:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.criterion.Visibility.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Criterion\Visibility
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.Visibility }
 
@@ -573,7 +496,7 @@ services:
 
     ibexa.rest.input.parser.internal.sortclause.content_id:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.sortclause.data_key_value_object.class%'
+        class: Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
         arguments:
             - 'ContentId'
             - 'Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentId'
@@ -582,7 +505,7 @@ services:
 
     ibexa.rest.input.parser.internal.sortclause.content_name:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.sortclause.data_key_value_object.class%'
+        class: Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
         arguments:
             - 'ContentName'
             - 'Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\ContentName'
@@ -591,7 +514,7 @@ services:
 
     ibexa.rest.input.parser.internal.sortclause.date_modified:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.sortclause.data_key_value_object.class%'
+        class: Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
         arguments:
             - 'DateModified'
             - 'Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DateModified'
@@ -600,7 +523,7 @@ services:
 
     ibexa.rest.input.parser.internal.sortclause.date_published:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.sortclause.data_key_value_object.class%'
+        class: Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
         arguments:
             - 'DatePublished'
             - 'Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished'
@@ -609,7 +532,7 @@ services:
 
     ibexa.rest.input.parser.internal.sortclause.location_depth:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.sortclause.data_key_value_object.class%'
+        class: Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
         arguments:
             - 'LocationDepth'
             - 'Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Depth'
@@ -618,7 +541,7 @@ services:
 
     ibexa.rest.input.parser.internal.sortclause.location_path:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.sortclause.data_key_value_object.class%'
+        class: Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
         arguments:
             - 'LocationPath'
             - 'Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Path'
@@ -627,7 +550,7 @@ services:
 
     ibexa.rest.input.parser.internal.sortclause.location_priority:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.sortclause.data_key_value_object.class%'
+        class: Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
         arguments:
             - 'LocationPriority'
             - 'Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Priority'
@@ -636,7 +559,7 @@ services:
 
     ibexa.rest.input.parser.internal.sortclause.location_id:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.sortclause.data_key_value_object.class%'
+        class: Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
         arguments:
             - 'LocationId'
             - 'Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Location\Id'
@@ -645,7 +568,7 @@ services:
 
     ibexa.rest.input.parser.internal.sortclause.section_identifier:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.sortclause.data_key_value_object.class%'
+        class: Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
         arguments:
             - 'SectionIdentifier'
             - 'Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\SectionIdentifier'
@@ -654,7 +577,7 @@ services:
 
     ibexa.rest.input.parser.internal.sortclause.SectionName:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.sortclause.data_key_value_object.class%'
+        class: Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
         arguments:
             - 'SectionName'
             - 'Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\SectionName'
@@ -672,61 +595,61 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\SortClause\Field:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.sortclause.field.class%'
+        class: Ibexa\Rest\Server\Input\Parser\SortClause\Field
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.sortclause.Field }
 
     Ibexa\Rest\Server\Input\Parser\FacetBuilder\ContentTypeParser:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.facetbuilder.content_type.class%'
+        class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\ContentTypeParser
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.facetbuilder.ContentType }
 
     Ibexa\Rest\Server\Input\Parser\FacetBuilder\CriterionParser:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.facetbuilder.criterion.class%'
+        class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\CriterionParser
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.facetbuilder.Criterion }
 
     Ibexa\Rest\Server\Input\Parser\FacetBuilder\DateRangeParser:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.facetbuilder.date_range.class%'
+        class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\DateRangeParser
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.facetbuilder.DateRange }
 
     Ibexa\Rest\Server\Input\Parser\FacetBuilder\FieldParser:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.facetbuilder.field.class%'
+        class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\FieldParser
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.facetbuilder.Field }
 
     Ibexa\Rest\Server\Input\Parser\FacetBuilder\FieldRangeParser:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.facetbuilder.field_range.class%'
+        class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\FieldRangeParser
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.facetbuilder.FieldRange }
 
     Ibexa\Rest\Server\Input\Parser\FacetBuilder\LocationParser:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.facetbuilder.location.class%'
+        class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\LocationParser
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.facetbuilder.Location }
 
     Ibexa\Rest\Server\Input\Parser\FacetBuilder\SectionParser:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.facetbuilder.section.class%'
+        class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\SectionParser
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.facetbuilder.Section }
 
     Ibexa\Rest\Server\Input\Parser\FacetBuilder\TermParser:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.facetbuilder.term.class%'
+        class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\TermParser
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.facetbuilder.Term }
 
     Ibexa\Rest\Server\Input\Parser\FacetBuilder\UserParser:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: '%ezpublish_rest.input.parser.internal.facetbuilder.user.class%'
+        class: Ibexa\Rest\Server\Input\Parser\FacetBuilder\UserParser
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.facetbuilder.User }
 
@@ -876,7 +799,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\Limitation\PathStringRouteBasedLimitationParser:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.path_string_route_based_limitation.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Limitation\PathStringRouteBasedLimitationParser
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.limitation.Subtree }
         arguments:
@@ -885,7 +808,7 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\Limitation\RouteBasedLimitationParser:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: "%ezpublish_rest.input.parser.internal.route_based_limitation.class%"
+        class: Ibexa\Rest\Server\Input\Parser\Limitation\RouteBasedLimitationParser
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.limitation.Section }
         arguments:
