@@ -1,59 +1,4 @@
 parameters:
-    ezpublish_rest.routing.options_loader.class: Ibexa\Bundle\Rest\Routing\OptionsLoader
-    ezpublish_rest.routing.options_loader.route_collection_mapper.class: Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper
-    ezpublish_rest.routing.options_loader.mapper.class: Ibexa\Bundle\Rest\Routing\OptionsLoader\Mapper
-
-    ezpublish_rest.cors_options_provider.class: Ibexa\Bundle\Rest\CorsOptions\RestProvider
-
-    ezpublish_rest.root_resource_builder.class: Ibexa\Rest\Server\Service\ExpressionRouterRootResourceBuilder
-
-    ezpublish_rest.controller.base.class: Ibexa\Rest\Server\Controller
-    ezpublish_rest.controller.binary_content.class: Ibexa\Rest\Server\Controller\BinaryContent
-    ezpublish_rest.controller.content.class: Ibexa\Rest\Server\Controller\Content
-    ezpublish_rest.controller.content_type.class: Ibexa\Rest\Server\Controller\ContentType
-    ezpublish_rest.controller.location.class: Ibexa\Rest\Server\Controller\Location
-    ezpublish_rest.controller.object_state.class: Ibexa\Rest\Server\Controller\ObjectState
-    ezpublish_rest.controller.role.class: Ibexa\Rest\Server\Controller\Role
-    ezpublish_rest.controller.root.class: Ibexa\Rest\Server\Controller\Root
-    ezpublish_rest.controller.section.class: Ibexa\Rest\Server\Controller\Section
-    ezpublish_rest.controller.trash.class: Ibexa\Rest\Server\Controller\Trash
-    ezpublish_rest.controller.user.class: Ibexa\Rest\Server\Controller\User
-    ezpublish_rest.controller.url_wildcard.class: Ibexa\Rest\Server\Controller\URLWildcard
-    ezpublish_rest.controller.url_alias.class: Ibexa\Rest\Server\Controller\URLAlias
-    ezpublish_rest.controller.options.class: Ibexa\Rest\Server\Controller\Options
-    ezpublish_rest.controller.services.class: Ibexa\Rest\Server\Controller\Services
-    ezpublish_rest.controller.views.class: Ibexa\Rest\Server\Controller\Views
-
-    ezpublish_rest.factory.class: Ibexa\Bundle\Rest\ApiLoader\Factory
-    ezpublish_rest.request_parser.class: Ibexa\Bundle\Rest\RequestParser\Router
-    ezpublish_rest.parser_tools.class: Ibexa\Rest\Input\ParserTools
-    ezpublish_rest.field_type_parser.class: Ibexa\Rest\Input\FieldTypeParser
-    ezpublish_rest.field_type_serializer.class: Ibexa\Rest\Output\FieldTypeSerializer
-
-    ezpublish_rest.request_listener.class: Ibexa\Bundle\Rest\EventListener\RequestListener
-    ezpublish_rest.csrf_listener.class: Ibexa\Bundle\Rest\EventListener\CsrfListener
-    ezpublish_rest.response_listener.class: Ibexa\Bundle\Rest\EventListener\ResponseListener
-
-    ezpublish_rest.field_type_processor.ezauthor.class: Ibexa\Rest\FieldTypeProcessor\AuthorProcessor
-    ezpublish_rest.field_type_processor_registry.class: Ibexa\Rest\FieldTypeProcessorRegistry
-    ezpublish_rest.field_type_processor.ezimage.class: Ibexa\Rest\FieldTypeProcessor\ImageProcessor
-    ezpublish_rest.field_type_processor.ezdatetime.class: Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor
-    ezpublish_rest.field_type_processor.ezdate.class: Ibexa\Rest\FieldTypeProcessor\DateProcessor
-    ezpublish_rest.field_type_processor.ezmedia.class: Ibexa\Rest\FieldTypeProcessor\MediaProcessor
-    ezpublish_rest.field_type_processor.ezobjectrelationlist.class: Ibexa\Rest\FieldTypeProcessor\RelationListProcessor
-    ezpublish_rest.field_type_processor.ezobjectrelation.class: Ibexa\Rest\FieldTypeProcessor\RelationProcessor
-    ezpublish_rest.field_type_processor.eztime.class: Ibexa\Rest\FieldTypeProcessor\TimeProcessor
-    ezpublish_rest.field_type_processor.ezbinaryfile.class: Ibexa\Rest\FieldTypeProcessor\BinaryProcessor
-    ezpublish_rest.field_type_processor.ezfloat.class: Ibexa\Rest\FieldTypeProcessor\FloatProcessor
-    ezpublish_rest.field_type_processor.ezstring.class: Ibexa\Rest\FieldTypeProcessor\StringProcessor
-    ezpublish_rest.field_type_processor.ezuser.class: Ibexa\Rest\FieldTypeProcessor\UserProcessor
-
-    ezpublish_rest.output.visitor.dispatcher.class: Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher
-    ezpublish_rest.output.visitor.class: Ibexa\Contracts\Rest\Output\Visitor
-    ezpublish_rest.output.generator.json.class: Ibexa\Rest\Output\Generator\Json
-    ezpublish_rest.output.generator.json.field_type_hash_generator.class: Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator
-    ezpublish_rest.output.generator.xml.class: Ibexa\Rest\Output\Generator\Xml
-    ezpublish_rest.output.generator.xml.field_type_hash_generator.class: Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator
     ezpublish_rest.output.visitor.json.regexps:
         - '(^application/vnd\.ibexa\.api\.[A-Za-z]+\+json$)'
         - '(^application/json$)'
@@ -62,18 +7,8 @@ parameters:
         - '(^application/xml$)'
         - '(^.*/.*$)'
 
-    ezpublish_rest.output.value_object_visitor.dispatcher.class: Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher
-    ezpublish_rest.output.value_object_visitor.Exception.InvalidArgumentException.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\InvalidArgumentException
-
-    ezpublish_rest.input.dispatcher.class: Ibexa\Rest\Input\Dispatcher
-    ezpublish_rest.input.parsing_dispatcher.class: Ibexa\Contracts\Rest\Input\ParsingDispatcher
-
-    ezpublish_rest.input.handler.json.class: Ibexa\Rest\Input\Handler\Json
-    ezpublish_rest.input.handler.xml.class: Ibexa\Rest\Input\Handler\Xml
-
 services:
     Ibexa\Bundle\Rest\Routing\OptionsLoader:
-        class: "%ezpublish_rest.routing.options_loader.class%"
         arguments:
             - '@Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper'
             - '@Ibexa\Bundle\Core\Routing\DefaultRouter'
@@ -81,35 +16,28 @@ services:
             - { name: routing.loader }
 
     Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper:
-        class: "%ezpublish_rest.routing.options_loader.route_collection_mapper.class%"
         arguments:
             - '@Ibexa\Bundle\Rest\Routing\OptionsLoader\Mapper'
 
-    Ibexa\Bundle\Rest\Routing\OptionsLoader\Mapper:
-        class: "%ezpublish_rest.routing.options_loader.mapper.class%"
+    Ibexa\Bundle\Rest\Routing\OptionsLoader\Mapper: ~
 
     Ibexa\Bundle\Rest\CorsOptions\RestProvider:
-        class: "%ezpublish_rest.cors_options_provider.class%"
         arguments: ["@router.default"]
         tags:
             - { name: nelmio_cors.options_provider }
 
     Ibexa\Rest\Output\FieldTypeSerializer:
-        class: "%ezpublish_rest.field_type_serializer.class%"
         arguments:
             - '@ibexa.api.service.field_type'
             - '@Ibexa\Rest\FieldTypeProcessorRegistry'
 
     Ibexa\Bundle\Rest\RequestParser\Router:
-        class: "%ezpublish_rest.request_parser.class%"
         arguments:
             - "@router"
 
-    Ibexa\Rest\Input\ParserTools:
-        class: "%ezpublish_rest.parser_tools.class%"
+    Ibexa\Rest\Input\ParserTools: ~
 
     Ibexa\Rest\Input\FieldTypeParser:
-        class: "%ezpublish_rest.field_type_parser.class%"
         arguments:
             - '@ibexa.api.service.content'
             - '@ibexa.api.service.content_type'
@@ -117,17 +45,14 @@ services:
             - '@Ibexa\Rest\FieldTypeProcessorRegistry'
 
     Ibexa\Bundle\Rest\ApiLoader\Factory:
-        class: "%ezpublish_rest.factory.class%"
         arguments: ['@ibexa.config.resolver', '@ibexa.api.repository']
         calls:
             - [setRequestStack, ["@request_stack"]]
 
     Ibexa\Rest\Server\Service\ExpressionRouterRootResourceBuilder:
-         class: "%ezpublish_rest.root_resource_builder.class%"
          arguments: ["@router", '@Ibexa\Bundle\Core\Routing\DefaultRouter', '@ibexa.config.resolver']
 
     Ibexa\Rest\Server\Controller:
-        class: "%ezpublish_rest.controller.base.class%"
         calls:
             - [ setContainer, ["@service_container"] ]
             - [ setInputDispatcher, ['@Ibexa\Rest\Input\Dispatcher'] ]
@@ -136,20 +61,17 @@ services:
             - [ setRepository, ['@ibexa.api.repository'] ]
 
     Ibexa\Rest\Server\Controller\Root:
-        class: "%ezpublish_rest.controller.root.class%"
         parent: Ibexa\Rest\Server\Controller
         arguments: ['@Ibexa\Rest\Server\Service\ExpressionRouterRootResourceBuilder']
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\Section:
-        class: "%ezpublish_rest.controller.section.class%"
         parent: Ibexa\Rest\Server\Controller
         arguments:
             - '@ibexa.api.service.section'
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\BinaryContent:
-        class: "%ezpublish_rest.controller.binary_content.class%"
         parent: Ibexa\Rest\Server\Controller
         arguments:
             - '@ibexa.field_type.ezimage.variation_service'
@@ -157,19 +79,16 @@ services:
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\Content:
-        class: "%ezpublish_rest.controller.content.class%"
         parent: Ibexa\Rest\Server\Controller
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\ContentType:
-        class: "%ezpublish_rest.controller.content_type.class%"
         parent: Ibexa\Rest\Server\Controller
         arguments:
             - '@ibexa.api.service.content_type'
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\Role:
-        class: "%ezpublish_rest.controller.role.class%"
         parent: Ibexa\Rest\Server\Controller
         arguments:
             - '@ibexa.api.service.role'
@@ -178,7 +97,6 @@ services:
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\Location:
-        class: "%ezpublish_rest.controller.location.class%"
         parent: Ibexa\Rest\Server\Controller
         arguments:
             - '@ibexa.api.service.location'
@@ -188,7 +106,6 @@ services:
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\ObjectState:
-        class: "%ezpublish_rest.controller.object_state.class%"
         parent: Ibexa\Rest\Server\Controller
         arguments:
             - '@ibexa.api.service.object_state'
@@ -196,7 +113,6 @@ services:
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\Trash:
-        class: "%ezpublish_rest.controller.trash.class%"
         parent: Ibexa\Rest\Server\Controller
         arguments:
             - '@ibexa.api.service.trash'
@@ -204,7 +120,6 @@ services:
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\User:
-        class: "%ezpublish_rest.controller.user.class%"
         parent: Ibexa\Rest\Server\Controller
         arguments:
             - '@ibexa.api.service.user'
@@ -218,14 +133,12 @@ services:
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\URLWildcard:
-        class: "%ezpublish_rest.controller.url_wildcard.class%"
         parent: Ibexa\Rest\Server\Controller
         arguments:
             - '@ibexa.api.service.url_wildcard'
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\URLAlias:
-        class: "%ezpublish_rest.controller.url_alias.class%"
         parent: Ibexa\Rest\Server\Controller
         arguments:
             - '@ibexa.api.service.url_alias'
@@ -233,7 +146,6 @@ services:
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\Views:
-        class: "%ezpublish_rest.controller.views.class%"
         parent: Ibexa\Rest\Server\Controller
         arguments:
             - '@ibexa.api.service.search'
@@ -266,19 +178,16 @@ services:
         tags: [controller.service_arguments]
 
     Ibexa\Bundle\Rest\EventListener\RequestListener:
-        class: "%ezpublish_rest.request_listener.class%"
         tags:
             - { name: kernel.event_subscriber }
 
     Ibexa\Bundle\Rest\EventListener\ResponseListener:
-        class: "%ezpublish_rest.response_listener.class%"
         arguments:
             - '@Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher'
         tags:
             - { name: kernel.event_subscriber }
 
     Ibexa\Bundle\Rest\EventListener\CsrfListener:
-        class: "%ezpublish_rest.csrf_listener.class%"
         arguments:
             - "@event_dispatcher"
             - "%form.type_extension.csrf.enabled%"
@@ -288,21 +197,17 @@ services:
             - { name: kernel.event_subscriber }
 
     Ibexa\Rest\Server\Controller\Options:
-        class: "%ezpublish_rest.controller.options.class%"
         parent: Ibexa\Rest\Server\Controller
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\Services:
-        class: "%ezpublish_rest.controller.services.class%"
         arguments: ["%ezpublish.fieldType.ezcountry.data%"]
         tags: [controller.service_arguments]
 
     Ibexa\Rest\FieldTypeProcessorRegistry:
-        class: "%ezpublish_rest.field_type_processor_registry.class%"
         lazy: true
 
     Ibexa\Rest\FieldTypeProcessor\ImageProcessor:
-        class: "%ezpublish_rest.field_type_processor.ezimage.class%"
         factory: ['@Ibexa\Bundle\Rest\ApiLoader\Factory', getImageFieldTypeProcessor]
         arguments:
             - "@router"
@@ -317,23 +222,19 @@ services:
             - { name: ibexa.rest.field_type.processor, alias: ezimageasset }
 
     Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor:
-        class: "%ezpublish_rest.field_type_processor.ezdatetime.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezdatetime }
 
     Ibexa\Rest\FieldTypeProcessor\DateProcessor:
-        class: "%ezpublish_rest.field_type_processor.ezdate.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezdate }
 
     Ibexa\Rest\FieldTypeProcessor\MediaProcessor:
-        class: "%ezpublish_rest.field_type_processor.ezmedia.class%"
         factory: ['@Ibexa\Bundle\Rest\ApiLoader\Factory', getMediaFieldTypeProcessor]
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezmedia }
 
     Ibexa\Rest\FieldTypeProcessor\RelationListProcessor:
-        class: "%ezpublish_rest.field_type_processor.ezobjectrelationlist.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezobjectrelationlist }
         calls:
@@ -341,7 +242,6 @@ services:
             - [setLocationService, ['@ibexa.api.service.location']]
 
     Ibexa\Rest\FieldTypeProcessor\RelationProcessor:
-        class: "%ezpublish_rest.field_type_processor.ezobjectrelation.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezobjectrelation }
         calls:
@@ -349,12 +249,10 @@ services:
             - [setLocationService, ['@ibexa.api.service.location']]
 
     Ibexa\Rest\FieldTypeProcessor\TimeProcessor:
-        class: "%ezpublish_rest.field_type_processor.eztime.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: eztime }
 
     Ibexa\Rest\FieldTypeProcessor\BinaryProcessor:
-        class: "%ezpublish_rest.field_type_processor.ezbinaryfile.class%"
         factory: ['@Ibexa\Bundle\Rest\ApiLoader\Factory', getBinaryFileFieldTypeProcessor]
         arguments:
             - '@ibexa.core.io.default_url_decorator'
@@ -362,17 +260,14 @@ services:
             - { name: ibexa.rest.field_type.processor, alias: ezbinaryfile }
 
     Ibexa\Rest\FieldTypeProcessor\FloatProcessor:
-        class: "%ezpublish_rest.field_type_processor.ezfloat.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezfloat }
 
     Ibexa\Rest\FieldTypeProcessor\StringProcessor:
-        class: "%ezpublish_rest.field_type_processor.ezstring.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezstring }
 
     Ibexa\Rest\FieldTypeProcessor\UserProcessor:
-        class: "%ezpublish_rest.field_type_processor.ezuser.class%"
         tags:
             - { name: ibexa.rest.field_type.processor, alias: ezuser }
 
@@ -380,12 +275,11 @@ services:
 
     # Main REST output dispatcher
     # Gets a <requestMatch> => output.visitor mapping with the ibexa.rest.output.visitor tag.
-    Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher:
-        class: "%ezpublish_rest.output.visitor.dispatcher.class%"
+    Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher: ~
 
     # format output visitors
     ibexa.rest.output.visitor.json:
-        class: "%ezpublish_rest.output.visitor.class%"
+        class: Ibexa\Contracts\Rest\Output\Visitor
         arguments:
             - '@Ibexa\Rest\Output\Generator\Json'
             - '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher'
@@ -393,7 +287,7 @@ services:
             - { name: ibexa.rest.output.visitor, regexps: ezpublish_rest.output.visitor.json.regexps }
 
     ibexa.rest.output.visitor.xml:
-        class: "%ezpublish_rest.output.visitor.class%"
+        class: Ibexa\Contracts\Rest\Output\Visitor
         arguments:
             - '@Ibexa\Rest\Output\Generator\Xml'
             - '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher'
@@ -402,52 +296,43 @@ services:
 
     # format output generators
     Ibexa\Rest\Output\Generator\Xml:
-        class: "%ezpublish_rest.output.generator.xml.class%"
         arguments:
             - '@Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator'
         calls:
             - [ setFormatOutput, [ "%kernel.debug%" ] ]
 
-    Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator:
-        class: "%ezpublish_rest.output.generator.xml.field_type_hash_generator.class%"
+    Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator: ~
 
     Ibexa\Rest\Output\Generator\Json:
-        class: "%ezpublish_rest.output.generator.json.class%"
         arguments:
             - '@Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator'
         calls:
             - [ setFormatOutput, [ "%kernel.debug%" ] ]
 
-    Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator:
-        class: "%ezpublish_rest.output.generator.json.field_type_hash_generator.class%"
+    Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator: ~
 
     # value objects visitors
-    Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher:
-        class: "%ezpublish_rest.output.value_object_visitor.dispatcher.class%"
+    Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher: ~
 
     ibexa.rest.output.value_object_visitor.Exception.InvalidArgumentException:
-        class: "%ezpublish_rest.output.value_object_visitor.Exception.InvalidArgumentException.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\InvalidArgumentException
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException }
 
     Ibexa\Rest\Input\Dispatcher:
-        class: "%ezpublish_rest.input.dispatcher.class%"
         arguments:
             - '@Ibexa\Contracts\Rest\Input\ParsingDispatcher'
             - []
 
     Ibexa\Contracts\Rest\Input\ParsingDispatcher:
-        class: "%ezpublish_rest.input.parsing_dispatcher.class%"
         arguments:
             - '@event_dispatcher'
 
     Ibexa\Rest\Input\Handler\Json:
-        class: "%ezpublish_rest.input.handler.json.class%"
         tags:
             - { name: ibexa.rest.input.handler, format: json }
 
     Ibexa\Rest\Input\Handler\Xml:
-        class: "%ezpublish_rest.input.handler.xml.class%"
         tags:
             - { name: ibexa.rest.input.handler, format: xml }
 

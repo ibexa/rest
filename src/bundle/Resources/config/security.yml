@@ -1,12 +1,8 @@
 parameters:
-    ezpublish_rest.security.authentication.listener.session.class: Ibexa\Rest\Server\Security\RestAuthenticator
-    ezpublish_rest.security.authentication.logout_handler.class: Ibexa\Rest\Server\Security\RestLogoutHandler
-
-    ezpublish_rest.security.csrf.token_manager.class: Ibexa\Rest\Server\Security\CsrfTokenManager
 services:
     # Following service will be aliased at compile time to "ezpublish_rest.session_authenticator" by the Security factory.
     ibexa.rest.security.authentication.listener.session:
-        class: "%ezpublish_rest.security.authentication.listener.session.class%"
+        class: Ibexa\Rest\Server\Security\RestAuthenticator
         arguments:
             - "@security.token_storage"
             - "@security.authentication.manager"
@@ -19,12 +15,10 @@ services:
         abstract: true
 
     Ibexa\Rest\Server\Security\RestLogoutHandler:
-        class: "%ezpublish_rest.security.authentication.logout_handler.class%"
         arguments:
             - '@ibexa.config.resolver'
 
     Ibexa\Rest\Server\Security\CsrfTokenManager:
-        class: '%ezpublish_rest.security.csrf.token_manager.class%'
         arguments:
             - '@?security.csrf.token_generator'
             - '@?security.csrf.token_storage'

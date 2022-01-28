@@ -1,134 +1,45 @@
 parameters:
-    ezpublish_rest.output.value_object_visitor.base.class: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-    ezpublish_rest.output.value_object_visitor.ContentObjectStates.class: Ibexa\Rest\Output\ValueObjectVisitor\ContentObjectStates
 
     # Errors
-    ezpublish_rest.output.value_object_visitor.InvalidArgumentException.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\InvalidArgumentException
-    ezpublish_rest.output.value_object_visitor.NotFoundException.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\NotFoundException
-    ezpublish_rest.output.value_object_visitor.UnauthorizedException.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\UnauthorizedException
-    ezpublish_rest.output.value_object_visitor.BadStateException.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\BadStateException
-    ezpublish_rest.output.value_object_visitor.BadRequestException.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\BadRequestException
-    ezpublish_rest.output.value_object_visitor.ContentFieldValidationException.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentFieldValidationException
-    ezpublish_rest.output.value_object_visitor.ForbiddenException.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ForbiddenException
-    ezpublish_rest.output.value_object_visitor.Exception.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Exception
-    ezpublish_rest.output.value_object_visitor.NotImplementedException.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\NotImplementedException
 
     # Section
-    ezpublish_rest.output.value_object_visitor.SectionList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\SectionList
-    ezpublish_rest.output.value_object_visitor.CreatedSection.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedSection
-    ezpublish_rest.output.value_object_visitor.Section.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Section
 
     # URLWildcard
-    ezpublish_rest.output.value_object_visitor.URLWildcardList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcardList
-    ezpublish_rest.output.value_object_visitor.URLWildcard.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcard
-    ezpublish_rest.output.value_object_visitor.CreatedURLWildcard.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedURLWildcard
 
     # URLAlias
-    ezpublish_rest.output.value_object_visitor.URLAliasList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAliasList
-    ezpublish_rest.output.value_object_visitor.URLAliasRefList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAliasRefList
-    ezpublish_rest.output.value_object_visitor.URLAlias.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAlias
-    ezpublish_rest.output.value_object_visitor.CreatedURLAlias.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedURLAlias
 
     # Content
-    ezpublish_rest.output.value_object_visitor.ContentList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentList
-    ezpublish_rest.output.value_object_visitor.RestContent.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestContent
-    ezpublish_rest.output.value_object_visitor.CreatedContent.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedContent
-    ezpublish_rest.output.value_object_visitor.VersionList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionList
-    ezpublish_rest.output.value_object_visitor.CreatedVersion.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedVersion
-    ezpublish_rest.output.value_object_visitor.VersionInfo.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionInfo
-    ezpublish_rest.output.value_object_visitor.ImageVariation.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ImageVariation
-    ezpublish_rest.output.value_object_visitor.Version.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Version
-    ezpublish_rest.output.value_object_visitor.VersionTranslationInfo.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionTranslationInfo
 
     # User group
-    ezpublish_rest.output.value_object_visitor.RestUserGroup.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserGroup
-    ezpublish_rest.output.value_object_visitor.CreatedUserGroup.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedUserGroup
-    ezpublish_rest.output.value_object_visitor.UserGroupList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\UserGroupList
-    ezpublish_rest.output.value_object_visitor.UserGroupRefList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\UserGroupRefList
 
     # User
-    ezpublish_rest.output.value_object_visitor.UserList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\UserList
-    ezpublish_rest.output.value_object_visitor.UserRefList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\UserRefList
-    ezpublish_rest.output.value_object_visitor.CreatedUser.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedUser
-    ezpublish_rest.output.value_object_visitor.RestUser.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUser
-    ezpublish_rest.output.value_object_visitor.UserSession.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\UserSession
-    ezpublish_rest.output.value_object_visitor.UserSessionDeleted.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\DeletedUserSession
 
     # ContentType
-    ezpublish_rest.output.value_object_visitor.RestContentType.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestContentType
-    ezpublish_rest.output.value_object_visitor.CreatedContentType.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedContentType
 
     # Object state
-    ezpublish_rest.output.value_object_visitor.ObjectStateList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateList
-    ezpublish_rest.output.value_object_visitor.CreatedObjectState.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedObjectState
-    ezpublish_rest.output.value_object_visitor.RestObjectState.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestObjectState
-    ezpublish_rest.output.value_object_visitor.ObjectStateGroupList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateGroupList
-    ezpublish_rest.output.value_object_visitor.CreatedObjectStateGroup.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedObjectStateGroup
-    ezpublish_rest.output.value_object_visitor.ObjectStateGroup.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateGroup
 
     # View
-    ezpublish_rest.output.value_object_visitor.RestExecutedView.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestExecutedView
 
     # Trash
-    ezpublish_rest.output.value_object_visitor.RestTrashItem.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestTrashItem
-    ezpublish_rest.output.value_object_visitor.Trash.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Trash
 
     # Location
-    ezpublish_rest.output.value_object_visitor.LocationList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\LocationList
-    ezpublish_rest.output.value_object_visitor.RestLocation.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestLocation
-    ezpublish_rest.output.value_object_visitor.Location.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Location
-    ezpublish_rest.output.value_object_visitor.CreatedLocation.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedLocation
 
     # Roles
-    ezpublish_rest.output.value_object_visitor.RestUserGroupRoleAssignment.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserGroupRoleAssignment
-    ezpublish_rest.output.value_object_visitor.RestUserRoleAssignment.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserRoleAssignment
-    ezpublish_rest.output.value_object_visitor.RoleAssignmentList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RoleAssignmentList
-    ezpublish_rest.output.value_object_visitor.PolicyList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\PolicyList
-    ezpublish_rest.output.value_object_visitor.CreatedPolicy.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedPolicy
-    ezpublish_rest.output.value_object_visitor.Policy.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Policy
-    ezpublish_rest.output.value_object_visitor.Role.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Role
-    ezpublish_rest.output.value_object_visitor.CreatedRole.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedRole
-    ezpublish_rest.output.value_object_visitor.PublishedRole.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\PublishedRole
-    ezpublish_rest.output.value_object_visitor.RoleList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RoleList
 
     # Relation
-    ezpublish_rest.output.value_object_visitor.CreatedRelation.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedRelation
-    ezpublish_rest.output.value_object_visitor.RestRelation.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestRelation
-    ezpublish_rest.output.value_object_visitor.RelationList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RelationList
 
     # Field Definition
-    ezpublish_rest.output.value_object_visitor.RestFieldDefinition.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestFieldDefinition
-    ezpublish_rest.output.value_object_visitor.CreatedFieldDefinition.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedFieldDefinition
-    ezpublish_rest.output.value_object_visitor.FieldDefinitionList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\FieldDefinitionList
 
     # Content Type Group
-    ezpublish_rest.output.value_object_visitor.ContentTypeGroupList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroupList
-    ezpublish_rest.output.value_object_visitor.CreatedContentTypeGroup.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedContentTypeGroup
-    ezpublish_rest.output.value_object_visitor.ContentTypeGroup.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroup
-    ezpublish_rest.output.value_object_visitor.ContentTypeInfoList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeInfoList
-    ezpublish_rest.output.value_object_visitor.ContentTypeList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeList
-    ezpublish_rest.output.value_object_visitor.ContentTypeGroupRefList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroupRefList
 
     # HTTP
-    ezpublish_rest.output.value_object_visitor.Conflict.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Conflict
-    ezpublish_rest.output.value_object_visitor.SeeOther.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\SeeOther
-    ezpublish_rest.output.value_object_visitor.Root.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Root
-    ezpublish_rest.output.value_object_visitor.NoContent.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\NoContent
-    ezpublish_rest.output.value_object_visitor.ResourceCreated.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ResourceCreated
-    ezpublish_rest.output.value_object_visitor.PermanentRedirect.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\PermanentRedirect
-    ezpublish_rest.output.value_object_visitor.TemporaryRedirect.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\TemporaryRedirect
-    ezpublish_rest.output.value_object_visitor.Options.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Options
-    ezpublish_rest.output.value_object_visitor.OK.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\OK
 
     # Cache
-    ezpublish_rest.output.value_object_visitor.cached_value.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CachedValue
 
     # Services
-    ezpublish_rest.output.value_object_visitor.CountryList.class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CountryList
 
 services:
     Ibexa\Contracts\Rest\Output\ValueObjectVisitor:
-        class: "%ezpublish_rest.output.value_object_visitor.base.class%"
         calls:
             - [ setRequestParser, [ '@Ibexa\Bundle\Rest\RequestParser\Router' ] ]
             - [ setRouter, [ "@router" ] ]
@@ -137,35 +48,35 @@ services:
     # Errors
     ibexa.rest.output.value_object_visitor.InvalidArgumentException:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.InvalidArgumentException.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\InvalidArgumentException
         arguments: [ "%kernel.debug%", "@translator" ]
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\NotFoundException:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.NotFoundException.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\NotFoundException
         arguments: [ "%kernel.debug%", "@translator" ]
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\UnauthorizedException:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.UnauthorizedException.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\UnauthorizedException
         arguments: [ "%kernel.debug%", "@translator" ]
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\BadStateException:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.BadStateException.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\BadStateException
         arguments: [ "%kernel.debug%", "@translator" ]
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Exceptions\BadStateException }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\BadRequestException:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.BadRequestException.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\BadRequestException
         arguments: [ "%kernel.debug%", "@translator" ]
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Exceptions\BadRequestException }
@@ -173,28 +84,28 @@ services:
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentFieldValidationException:
         parent: Ibexa\Rest\Server\Output\ValueObjectVisitor\BadRequestException
-        class: "%ezpublish_rest.output.value_object_visitor.ContentFieldValidationException.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentFieldValidationException
         arguments: [ "%kernel.debug%", "@translator" ]
         tags:
             - {  name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Exceptions\ContentFieldValidationException }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\ForbiddenException:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.ForbiddenException.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ForbiddenException
         arguments: [ "%kernel.debug%", "@translator" ]
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Exceptions\ForbiddenException }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\NotImplementedException:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.NotImplementedException.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\NotImplementedException
         arguments: [ "%kernel.debug%", "@translator" ]
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\Exception:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.Exception.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Exception
         arguments: [ "%kernel.debug%", "@translator" ]
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Exception }
@@ -215,63 +126,63 @@ services:
     # Section
     Ibexa\Rest\Server\Output\ValueObjectVisitor\SectionList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.SectionList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\SectionList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\SectionList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedSection:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedSection.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedSection
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedSection }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\Section:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.Section.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Section
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Values\Content\Section }
 
     # URLWildcard
     Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcardList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.URLWildcardList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcardList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\URLWildcardList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcard:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.URLWildcard.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcard
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedURLWildcard:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedURLWildcard.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedURLWildcard
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedURLWildcard }
 
     # URLAlias
     Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAliasList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.URLAliasList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAliasList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\URLAliasList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAliasRefList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.URLAliasRefList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAliasRefList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\URLAliasRefList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAlias:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.URLAlias.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAlias
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Values\Content\URLAlias }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedURLAlias:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedURLAlias.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedURLAlias
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedURLAlias }
 
@@ -284,59 +195,59 @@ services:
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.ContentList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\ContentList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RestContent:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.RestContent.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestContent
         arguments: ['@Ibexa\Core\Helper\TranslationHelper']
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\RestContent }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedContent:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedContent.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedContent
         arguments: ['@Ibexa\Core\Helper\TranslationHelper']
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedContent }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.VersionList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\VersionList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedVersion:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedVersion.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedVersion
         arguments: [ '@Ibexa\Rest\Output\FieldTypeSerializer' ]
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedVersion }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionInfo:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.VersionInfo.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionInfo
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\ImageVariation:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.ImageVariation.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ImageVariation
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Variation\Values\ImageVariation }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\Version:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.Version.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Version
         arguments: [ '@Ibexa\Rest\Output\FieldTypeSerializer'  ]
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\Version }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionTranslationInfo:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.VersionTranslationInfo.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionTranslationInfo
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\VersionTranslationInfo }
 
@@ -351,44 +262,44 @@ services:
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserGroup:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.RestUserGroup.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserGroup
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\RestUserGroup }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedUserGroup:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedUserGroup.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedUserGroup
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedUserGroup }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\UserGroupList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.UserGroupList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\UserGroupList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\UserGroupList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\UserGroupRefList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.UserGroupRefList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\UserGroupRefList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\UserGroupRefList }
 
     # User
     Ibexa\Rest\Server\Output\ValueObjectVisitor\UserList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.UserList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\UserList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\UserList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\UserRefList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.UserRefList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\UserRefList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\UserRefList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedUser:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedUser.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedUser
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedUser }
 
@@ -402,19 +313,19 @@ services:
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUser:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.RestUser.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUser
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\RestUser }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\UserSession:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.UserSession.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\UserSession
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\UserSession }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\DeletedUserSession:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.UserSessionDeleted.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\DeletedUserSession
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\DeletedUserSession }
 
@@ -432,68 +343,68 @@ services:
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RestContentType:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.RestContentType.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestContentType
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\RestContentType }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedContentType:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedContentType.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedContentType
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedContentType }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.ContentTypeList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\ContentTypeList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeInfoList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.ContentTypeInfoList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeInfoList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\ContentTypeInfoList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroup:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.ContentTypeGroup.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroup
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedContentTypeGroup:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedContentTypeGroup.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedContentTypeGroup
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedContentTypeGroup }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroupList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.ContentTypeGroupList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroupList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\ContentTypeGroupList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroupRefList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.ContentTypeGroupRefList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroupRefList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\ContentTypeGroupRefList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\FieldDefinitionList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.FieldDefinitionList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\FieldDefinitionList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\FieldDefinitionList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedFieldDefinition:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedFieldDefinition.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedFieldDefinition
         arguments: [ '@Ibexa\Rest\Output\FieldTypeSerializer'  ]
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedFieldDefinition }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RestFieldDefinition:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.RestFieldDefinition.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestFieldDefinition
         arguments: [ '@Ibexa\Rest\Output\FieldTypeSerializer'  ]
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\RestFieldDefinition }
@@ -501,101 +412,101 @@ services:
     # Relation
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RelationList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.RelationList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RelationList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\RelationList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RestRelation:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.RestRelation.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestRelation
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\RestRelation }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedRelation:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedRelation.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedRelation
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedRelation }
 
     # Role
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RoleList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.RoleList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RoleList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\RoleList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedRole:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedRole.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedRole
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedRole }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\PublishedRole:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.PublishedRole.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\PublishedRole
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\PublishedRole }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\Role:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.Role.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Role
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Values\User\Role }
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Values\User\RoleDraft }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\Policy:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.Policy.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Policy
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Values\User\Policy }
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Values\User\PolicyDraft }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedPolicy:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedPolicy.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedPolicy
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedPolicy }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\PolicyList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.PolicyList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\PolicyList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\PolicyList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RoleAssignmentList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.RoleAssignmentList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RoleAssignmentList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\RoleAssignmentList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserRoleAssignment:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.RestUserRoleAssignment.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserRoleAssignment
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\RestUserRoleAssignment }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserGroupRoleAssignment:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.RestUserGroupRoleAssignment.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserGroupRoleAssignment
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\RestUserGroupRoleAssignment }
 
     # Location
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedLocation:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedLocation.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedLocation
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedLocation }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RestLocation:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.RestLocation.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestLocation
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\RestLocation }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\Location:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.Location.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Location
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Values\Content\Location }
         arguments:
@@ -604,27 +515,27 @@ services:
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\LocationList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.LocationList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\LocationList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\LocationList }
 
     # Trash
     Ibexa\Rest\Server\Output\ValueObjectVisitor\Trash:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.Trash.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Trash
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\Trash }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RestTrashItem:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.RestTrashItem.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestTrashItem
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\RestTrashItem }
 
     # Views
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RestExecutedView:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.RestExecutedView.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestExecutedView
         arguments: [ '@ibexa.api.service.location', '@ibexa.api.service.content' ]
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\RestExecutedView }
@@ -664,112 +575,111 @@ services:
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateGroup:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.ObjectStateGroup.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateGroup
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedObjectStateGroup:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedObjectStateGroup.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedObjectStateGroup
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedObjectStateGroup }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateGroupList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.ObjectStateGroupList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateGroupList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\ObjectStateGroupList }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RestObjectState:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.RestObjectState.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestObjectState
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Values\RestObjectState }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedObjectState:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CreatedObjectState.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CreatedObjectState
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedObjectState }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.ObjectStateList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\ObjectStateList }
 
     Ibexa\Rest\Output\ValueObjectVisitor\ContentObjectStates:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.ContentObjectStates.class%"
+        class: Ibexa\Rest\Output\ValueObjectVisitor\ContentObjectStates
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Values\ContentObjectStates }
 
     # Services
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CountryList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.CountryList.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\CountryList
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CountryList}
 
     # REST specific
     Ibexa\Rest\Server\Output\ValueObjectVisitor\TemporaryRedirect:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.TemporaryRedirect.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\TemporaryRedirect
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\TemporaryRedirect }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\PermanentRedirect:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.PermanentRedirect.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\PermanentRedirect
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\PermanentRedirect }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\ResourceCreated:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.ResourceCreated.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\ResourceCreated
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\ResourceCreated }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\NoContent:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.NoContent.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\NoContent
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\NoContent }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\Root:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.Root.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Root
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Values\Root }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\SeeOther:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.SeeOther.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\SeeOther
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\SeeOther }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\Conflict:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.Conflict.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Conflict
         arguments: [ true  ]
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\Conflict }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\Options:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.Options.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\Options
         arguments: [ true  ]
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\Options }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\OK:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        class: "%ezpublish_rest.output.value_object_visitor.OK.class%"
+        class: Ibexa\Rest\Server\Output\ValueObjectVisitor\OK
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\OK }
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\CachedValue:
-        class: "%ezpublish_rest.output.value_object_visitor.cached_value.class%"
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
         arguments:
             - '@ibexa.config.resolver'
