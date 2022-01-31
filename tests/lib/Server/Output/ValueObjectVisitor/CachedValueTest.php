@@ -6,7 +6,7 @@
  */
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Core\MVC\ConfigResolverInterface;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\CachedValue;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
@@ -155,7 +155,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @return \Ibexa\Core\MVC\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function getConfigProviderMock()
     {

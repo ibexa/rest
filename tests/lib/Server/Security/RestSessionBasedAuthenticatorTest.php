@@ -7,7 +7,7 @@
 namespace Ibexa\Tests\Rest\Server\Security;
 
 use Ibexa\Contracts\Core\Repository\Values\User\User;
-use Ibexa\Core\MVC\ConfigResolverInterface;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\Security\User as EzUser;
 use Ibexa\Rest\Server\Exceptions\InvalidUserTypeException;
 use Ibexa\Rest\Server\Exceptions\UserConflictException;

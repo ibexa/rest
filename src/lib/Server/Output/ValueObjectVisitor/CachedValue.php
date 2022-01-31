@@ -6,10 +6,10 @@
  */
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
-use Ibexa\Core\MVC\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\RequestStackAware;
 
 /**
@@ -19,7 +19,7 @@ class CachedValue extends ValueObjectVisitor
 {
     use RequestStackAware;
 
-    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
     protected $configResolver;
 
     public function __construct(ConfigResolverInterface $configResolver)

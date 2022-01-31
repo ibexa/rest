@@ -6,7 +6,7 @@
  */
 namespace Ibexa\Rest\Server\Security;
 
-use Ibexa\Core\MVC\ConfigResolverInterface;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\Security\Authentication\AuthenticatorInterface;
 use Ibexa\Core\MVC\Symfony\Security\UserInterface as EzUser;
 use Ibexa\Rest\Server\Exceptions\InvalidUserTypeException;
@@ -64,7 +64,7 @@ class RestAuthenticator implements AuthenticatorInterface
     private $dispatcher;
 
     /**
-     * @var \Ibexa\Core\MVC\ConfigResolverInterface
+     * @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface
      */
     private $configResolver;
 
