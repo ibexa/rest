@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Service;
 
-use Ibexa\Core\MVC\ConfigResolverInterface;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Rest\Values;
 use Ibexa\Rest\Values\Root;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
@@ -41,7 +41,7 @@ class ExpressionRouterRootResourceBuilder implements RootResourceBuilderInterfac
     /** @var \Symfony\Component\Routing\RouterInterface */
     protected $templateRouter;
 
-    /** @var \Ibexa\Core\MVC\ConfigResolverInterface */
+    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
     protected $configResolver;
 
     public function __construct(RouterInterface $router, RouterInterface $templateRouter, ConfigResolverInterface $configResolver)

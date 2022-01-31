@@ -7,7 +7,7 @@
 namespace Ibexa\Bundle\Rest\ApiLoader;
 
 use Ibexa\Contracts\Core\Repository\Repository;
-use Ibexa\Core\MVC\ConfigResolverInterface;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\RequestStackAware;
 use Ibexa\Rest\FieldTypeProcessor\BinaryProcessor;
 use Ibexa\Rest\FieldTypeProcessor\ImageAssetFieldTypeProcessor;
@@ -20,7 +20,7 @@ class Factory
     use RequestStackAware;
 
     /**
-     * @var \Ibexa\Core\MVC\ConfigResolverInterface
+     * @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface
      */
     protected $configResolver;
 
@@ -30,7 +30,7 @@ class Factory
     protected $repository;
 
     /**
-     * @param \Ibexa\Core\MVC\ConfigResolverInterface $configResolver
+     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
      * @param \Ibexa\Contracts\Core\Repository\Repository $repository
      */
     public function __construct(ConfigResolverInterface $configResolver, Repository $repository)
