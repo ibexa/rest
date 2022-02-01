@@ -1,8 +1,8 @@
 parameters:
-    ezpublish_rest.output.visitor.json.regexps:
+    ibexa.rest.output.visitor.json.regexps:
         - '(^application/vnd\.ibexa\.api\.[A-Za-z]+\+json$)'
         - '(^application/json$)'
-    ezpublish_rest.output.visitor.xml.regexps:
+    ibexa.rest.output.visitor.xml.regexps:
         - '(^application/vnd\.ibexa\.api\.[A-Za-z]+\+xml$)'
         - '(^application/xml$)'
         - '(^.*/.*$)'
@@ -155,7 +155,7 @@ services:
         class: Ibexa\Rest\Server\Controller\SessionController
         parent: Ibexa\Rest\Server\Controller
         arguments:
-            - "%ezpublish_rest.csrf_token_intention%"
+            - '%ibexa.rest.csrf_token_intention%'
             - '@Ibexa\Contracts\Core\Repository\PermissionResolver'
             - '@ibexa.api.service.user'
             - '@?ibexa.rest.session_authenticator'
@@ -191,7 +191,7 @@ services:
         arguments:
             - "@event_dispatcher"
             - "%form.type_extension.csrf.enabled%"
-            - "%ezpublish_rest.csrf_token_intention%"
+            - '%ibexa.rest.csrf_token_intention%'
             - '@?Ibexa\Rest\Server\Security\CsrfTokenManager'
         tags:
             - { name: kernel.event_subscriber }
@@ -201,7 +201,7 @@ services:
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\Services:
-        arguments: ["%ezpublish.fieldType.ezcountry.data%"]
+        arguments: ['%ibexa.field_type.country.data%']
         tags: [controller.service_arguments]
 
     Ibexa\Rest\FieldTypeProcessorRegistry:
@@ -284,7 +284,7 @@ services:
             - '@Ibexa\Rest\Output\Generator\Json'
             - '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher'
         tags:
-            - { name: ibexa.rest.output.visitor, regexps: ezpublish_rest.output.visitor.json.regexps }
+            - { name: ibexa.rest.output.visitor, regexps: ibexa.rest.output.visitor.json.regexps }
 
     ibexa.rest.output.visitor.xml:
         class: Ibexa\Contracts\Rest\Output\Visitor
@@ -292,7 +292,7 @@ services:
             - '@Ibexa\Rest\Output\Generator\Xml'
             - '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher'
         tags:
-            - { name: ibexa.rest.output.visitor, regexps: ezpublish_rest.output.visitor.xml.regexps }
+            - { name: ibexa.rest.output.visitor, regexps: ibexa.rest.output.visitor.xml.regexps }
 
     # format output generators
     Ibexa\Rest\Output\Generator\Xml:
