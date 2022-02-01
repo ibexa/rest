@@ -44,7 +44,7 @@ class IbexaRestExtension extends Extension implements PrependExtensionInterface
         $loader->load('security.yml');
         $loader->load('default_settings.yml');
 
-        $processor = new ConfigurationProcessor($container, 'ezsettings');
+        $processor = new ConfigurationProcessor($container, 'ibexa.site_access.config');
         $processor->mapConfigArray('rest_root_resources', $config);
     }
 

@@ -1,11 +1,11 @@
 parameters:
     # Intention string used by the CSRF protection in REST context.
-    ezpublish_rest.csrf_token_intention: rest
+    ibexa.rest.csrf_token_intention: rest
 
     # URI part that all REST routes begin with. By this a REST request is recognized.
-    ezpublish_rest.path_prefix: /api/ibexa/v2
+    ibexa.rest.path_prefix: /api/ibexa/v2
 
-    ezsettings.default.rest_root_resources:
+    ibexa.site_access.config.default.rest_root_resources:
         content:
             mediaType: ''
             href: 'router.generate("ibexa.rest.create_content")'
