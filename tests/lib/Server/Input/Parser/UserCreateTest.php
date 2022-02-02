@@ -265,7 +265,7 @@ class UserCreateTest extends BaseTest
      */
     public function testParseExceptionOnInvalidSection()
     {
-        $this->expectException('EzSystems\EzPlatformRest\Exceptions\Parser');
+        $this->expectException('Ibexa\\Contracts\\Rest\\Exceptions\\Parser');
         $this->expectExceptionMessage('Missing \'_href\' attribute for the Section element in UserCreate.');
         $inputArray = [
             'ContentType' => [

@@ -34,13 +34,13 @@ class ContentObjectStatesTest extends BaseTest
         );
 
         $this->assertInstanceOf(
-            '\\EzSystems\\EzPlatformRest\\Values\\RestObjectState',
+            '\\Ibexa\\Rest\\Values\\RestObjectState',
             $result[0],
             'ObjectState not created correctly.'
         );
 
         $this->assertInstanceOf(
-            '\\eZ\\Publish\\API\\Repository\\Values\\ObjectState\\ObjectState',
+            '\\Ibexa\\Contracts\\Core\\Repository\\Values\\ObjectState\\ObjectState',
             $result[0]->objectState,
             'Inner ObjectState not created correctly.'
         );
@@ -63,7 +63,7 @@ class ContentObjectStatesTest extends BaseTest
      */
     public function testParseExceptionOnMissingHref()
     {
-        $this->expectException('EzSystems\EzPlatformRest\Exceptions\Parser');
+        $this->expectException('Ibexa\\Contracts\\Rest\\Exceptions\\Parser');
         $this->expectExceptionMessage('Missing \'_href\' attribute for ObjectState.');
         $inputArray = [
             'ObjectState' => [

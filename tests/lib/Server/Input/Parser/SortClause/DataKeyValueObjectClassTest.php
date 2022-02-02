@@ -90,7 +90,7 @@ class DataKeyValueObjectClassTest extends BaseTest
     {
         return new DataKeyValueObjectClass(
             'DatePublished',
-            'eZ\Publish\API\Repository\Values\Content\Query\SortClause\DatePublished'
+            'Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Query\\SortClause\\DatePublished'
         );
     }
 }

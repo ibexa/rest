@@ -77,7 +77,7 @@ class ContentUpdateTest extends BaseTest
         }
 
         if (!isset($exceptionThrown)) {
-            self::fail('Failed asserting that exception of type "\\eZ\\Publish\\Core\\REST\\Common\\Exceptions\\Parser" is thrown.');
+            self::fail('Failed asserting that exception of type "\\Ibexa\\Core\\REST\\Common\\Exceptions\\Parser" is thrown.');
         }
     }
 
@@ -115,7 +115,7 @@ class ContentUpdateTest extends BaseTest
         }
 
         if (!isset($exceptionThrown)) {
-            self::fail('Failed asserting that exception of type "\\eZ\\Publish\\Core\\REST\\Common\\Exceptions\\Parser" is thrown.');
+            self::fail('Failed asserting that exception of type "\\Ibexa\\Core\\REST\\Common\\Exceptions\\Parser" is thrown.');
         }
     }
 

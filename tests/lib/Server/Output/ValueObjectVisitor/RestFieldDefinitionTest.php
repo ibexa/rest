@@ -36,7 +36,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
         $this->fieldTypeSerializerMock->expects($this->once())
             ->method('serializeFieldDefaultValue')
             ->with(
-                $this->isInstanceOf('\\EzSystems\\EzPlatformRest\\Output\\Generator'),
+                $this->isInstanceOf('\\Ibexa\\Contracts\\Rest\\Output\\Generator'),
                 $this->equalTo('my-field-type'),
                 $this->equalTo(
                     'my default value text'
