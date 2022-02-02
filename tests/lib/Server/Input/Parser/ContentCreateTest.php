@@ -58,19 +58,19 @@ class ContentCreateTest extends BaseTest
         $result = $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
 
         $this->assertInstanceOf(
-            '\\EzSystems\\EzPlatformRest\\Server\\Values\\RestContentCreateStruct',
+            '\\Ibexa\\Rest\\Server\\Values\\RestContentCreateStruct',
             $result,
             'ContentCreate not created correctly.'
         );
 
         $this->assertInstanceOf(
-            '\\eZ\\Publish\\API\\Repository\\Values\\Content\\ContentCreateStruct',
+            '\\Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\ContentCreateStruct',
             $result->contentCreateStruct,
             'contentCreateStruct not created correctly.'
         );
 
         $this->assertInstanceOf(
-            '\\eZ\\Publish\\API\\Repository\\Values\\ContentType\\ContentType',
+            '\\Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType',
             $result->contentCreateStruct->contentType,
             'contentType not created correctly.'
         );
@@ -88,7 +88,7 @@ class ContentCreateTest extends BaseTest
         );
 
         $this->assertInstanceOf(
-            '\\eZ\\Publish\\API\\Repository\\Values\\Content\\LocationCreateStruct',
+            '\\Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\LocationCreateStruct',
             $result->locationCreateStruct,
             'locationCreateStruct not created correctly.'
         );

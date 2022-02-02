@@ -41,14 +41,14 @@ class ViewInputTest extends BaseTest
 
     public function testThrowsExceptionOnMissingIdentifier()
     {
-        $this->expectException('EzSystems\EzPlatformRest\Exceptions\Parser');
+        $this->expectException('Ibexa\\Contracts\\Rest\\Exceptions\\Parser');
         $inputArray = ['Query' => []];
         $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
     public function testThrowsExceptionOnMissingQuery()
     {
-        $this->expectException('EzSystems\EzPlatformRest\Exceptions\Parser');
+        $this->expectException('Ibexa\\Contracts\\Rest\\Exceptions\\Parser');
         $inputArray = ['identifier' => 'foo'];
         $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
     }
