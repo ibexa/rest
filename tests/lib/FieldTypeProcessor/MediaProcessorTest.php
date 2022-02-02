@@ -34,7 +34,7 @@ class MediaProcessorTest extends BinaryInputProcessorTest
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\MediaProcessor::preProcessFieldSettingsHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\MediaProcessor::preProcessFieldSettingsHash
      * @dataProvider fieldSettingsHashes
      */
     public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
@@ -48,7 +48,7 @@ class MediaProcessorTest extends BinaryInputProcessorTest
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\MediaProcessor::postProcessFieldSettingsHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\MediaProcessor::postProcessFieldSettingsHash
      * @dataProvider fieldSettingsHashes
      */
     public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)

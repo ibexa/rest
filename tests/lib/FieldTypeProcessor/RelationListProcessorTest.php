@@ -33,7 +33,7 @@ class RelationListProcessorTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\RelationListProcessor::preProcessFieldSettingsHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::preProcessFieldSettingsHash
      * @dataProvider fieldSettingsHashes
      */
     public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
@@ -47,7 +47,7 @@ class RelationListProcessorTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\RelationListProcessor::postProcessFieldSettingsHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::postProcessFieldSettingsHash
      * @dataProvider fieldSettingsHashes
      */
     public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)

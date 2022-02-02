@@ -30,7 +30,7 @@ class AuthorProcessorTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\AuthorProcessor::preProcessFieldSettingsHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\AuthorProcessor::preProcessFieldSettingsHash
      * @dataProvider fieldSettingsHashes
      */
     public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
@@ -44,7 +44,7 @@ class AuthorProcessorTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\AuthorProcessor::postProcessFieldSettingsHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\AuthorProcessor::postProcessFieldSettingsHash
      * @dataProvider fieldSettingsHashes
      */
     public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)

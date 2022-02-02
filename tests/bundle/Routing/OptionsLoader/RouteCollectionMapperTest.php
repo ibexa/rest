@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
 /**
- * @covers \EzSystems\EzPlatformRestBundle\Routing\OptionsLoader\RouteCollectionMapper
+ * @covers \Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper
  */
 class RouteCollectionMapperTest extends TestCase
 {

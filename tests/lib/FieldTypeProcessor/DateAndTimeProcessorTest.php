@@ -31,7 +31,7 @@ class DateAndTimeProcessorTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\DateAndTimeProcessor::preProcessFieldSettingsHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor::preProcessFieldSettingsHash
      * @dataProvider fieldSettingsHashes
      */
     public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
@@ -45,7 +45,7 @@ class DateAndTimeProcessorTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\DateAndTimeProcessor::postProcessFieldSettingsHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor::postProcessFieldSettingsHash
      * @dataProvider fieldSettingsHashes
      */
     public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)

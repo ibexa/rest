@@ -54,7 +54,7 @@ class BinaryContent extends RestController
         $content = $this->repository->getContentService()->loadContent($contentId, null, $versionNumber);
 
         $fieldFound = false;
-        /** @var $field \eZ\Publish\API\Repository\Values\Content\Field */
+        /** @var $field \Ibexa\Contracts\Core\Repository\Values\Content\Field */
         foreach ($content->getFields() as $field) {
             if ($field->id === $fieldId) {
                 $fieldFound = true;

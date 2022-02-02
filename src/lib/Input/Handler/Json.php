@@ -17,7 +17,7 @@ class Json extends Handler
     /**
      * Converts the given string to an array structure.
      *
-     * @throw EzSystems\EzPlatformRest\Exceptions\Parser
+     * @throw Ibexa\Contracts\Rest\Exceptions\Parser
      *
      * @param string $string
      *

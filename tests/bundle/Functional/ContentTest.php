@@ -155,7 +155,7 @@ XML;
     /**
      * @depends testPublishContent
      * Covers GET /content/objects/<contentId>/currentversion
-     * @covers \EzSystems\EzPlatformRest\Server\Controller\Content::redirectCurrentVersion
+     * @covers \Ibexa\Rest\Server\Controller\Content::redirectCurrentVersion
      *
      * @param string $restContentHref
      *

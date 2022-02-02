@@ -49,7 +49,7 @@ abstract class BinaryInputProcessorTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\BinaryInputProcessor::preProcessValueHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\BinaryInputProcessor::preProcessValueHash
      */
     public function testPreProcessValueHashMissingKey()
     {
@@ -63,7 +63,7 @@ abstract class BinaryInputProcessorTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\BinaryInputProcessor::preProcessValueHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\BinaryInputProcessor::preProcessValueHash
      */
     public function testPreProcessValueHash()
     {

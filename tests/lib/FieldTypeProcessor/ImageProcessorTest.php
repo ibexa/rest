@@ -15,7 +15,7 @@ class ImageProcessorTest extends BinaryInputProcessorTest
     protected $requestParser;
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\ImageProcessor::postProcessValueHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\ImageProcessor::postProcessValueHash
      */
     public function testPostProcessValueHash()
     {
