@@ -26,7 +26,7 @@ class MediaProcessorTest extends BinaryInputProcessorTest
             static function ($constantName) {
                 return [
                     ['mediaType' => $constantName],
-                    ['mediaType' => constant("eZ\\Publish\\Core\\FieldType\\Media\\Type::{$constantName}")],
+                    ['mediaType' => constant("Ibexa\\Core\\FieldType\\Media\\Type::{$constantName}")],
                 ];
             },
             $this->constants

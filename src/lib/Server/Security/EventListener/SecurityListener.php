@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Server\Security\EventListener;
 
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
-use Ibexa\Core\MVC\Symfony\Security\UserInterface as EzPlatformUser;
+use Ibexa\Core\MVC\Symfony\Security\UserInterface as IbexaUser;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent as BaseInteractiveLoginEvent;
@@ -17,7 +17,7 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 /**
  * This security listener listens to security.interactive_login event to:
- *  - Set current user reference if user is an instance of an eZ user.
+ *  - Set current user reference if user is an instance of an Ibexa user.
  */
 final class SecurityListener implements EventSubscriberInterface
 {
@@ -48,7 +48,7 @@ final class SecurityListener implements EventSubscriberInterface
         }
 
         $user = $event->getAuthenticationToken()->getUser();
-        if ($user instanceof EzPlatformUser) {
+        if ($user instanceof IbexaUser) {
             $this->permissionResolver->setCurrentUserReference($user->getAPIUser());
         }
     }

@@ -8,7 +8,7 @@ namespace Ibexa\Tests\Rest\Server\Security;
 
 use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
-use Ibexa\Core\MVC\Symfony\Security\User as EzUser;
+use Ibexa\Core\MVC\Symfony\Security\User as IbexaUser;
 use Ibexa\Rest\Server\Exceptions\InvalidUserTypeException;
 use Ibexa\Rest\Server\Exceptions\UserConflictException;
 use Ibexa\Rest\Server\Security\RestAuthenticator;
@@ -191,7 +191,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
         $authenticatedToken
             ->expects($this->once())
             ->method('getUser')
-            ->willReturn('not_an_ez_user');
+            ->willReturn('not_an_ibexa_user');
 
         $this->logger
             ->expects($this->once())
@@ -213,7 +213,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
             ->method('getUserId')
             ->willReturn($userId);
 
-        return new EzUser($apiUser);
+        return new IbexaUser($apiUser);
     }
 
     public function testAuthenticateUserConflict()
