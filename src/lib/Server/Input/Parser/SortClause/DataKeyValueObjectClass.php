@@ -23,7 +23,7 @@ class DataKeyValueObjectClass extends BaseParser
 
     /**
      * Value object class, corresponding to the $dataKey.
-     * Example: 'eZ\Publish\API\Repository\Values\Content\Query\SortClause\DatePublished'.
+     * Example: 'Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished'.
      *
      * @var string
      */

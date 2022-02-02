@@ -31,7 +31,7 @@ class RouteBasedLimitationParser extends BaseParser
 
     /**
      * Value object class built by the Parser.
-     * Example: "eZ\Publish\API\Repository\Values\User\Limitation\SectionLimitation".
+     * Example: "Ibexa\Contracts\Core\Repository\Values\User\Limitation\SectionLimitation".
      *
      * @var string
      */

@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\RouteCollection;
 
 /**
- * @covers \EzSystems\EzPlatformRestBundle\Routing\OptionsLoader
+ * @covers \Ibexa\Bundle\Rest\Routing\OptionsLoader
  */
 class OptionsLoaderTest extends TestCase
 {

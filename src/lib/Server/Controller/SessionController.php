@@ -66,7 +66,7 @@ class SessionController extends Controller
      */
     public function createSessionAction(Request $request)
     {
-        /** @var $sessionInput \EzSystems\EzPlatformRest\Server\Values\SessionInput */
+        /** @var $sessionInput \Ibexa\Rest\Server\Values\SessionInput */
         $sessionInput = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

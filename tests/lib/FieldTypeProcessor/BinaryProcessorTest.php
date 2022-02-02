@@ -13,7 +13,7 @@ class BinaryProcessorTest extends BinaryInputProcessorTest
     public const TEMPLATE_URL = 'http://ez.no/subdir/var/rest_test/storage/original/{path}';
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\BinaryProcessor::postProcessValueHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\BinaryProcessor::postProcessValueHash
      */
     public function testPostProcessValueHash()
     {

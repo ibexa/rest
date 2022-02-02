@@ -432,7 +432,7 @@ class Role extends RestController
      * This is needed because the RoleService addPolicy() and addPolicyByRoleDraft() methods return the role,
      * not the policy.
      *
-     * @param $role \eZ\Publish\API\Repository\Values\User\Role
+     * @param $role \Ibexa\Contracts\Core\Repository\Values\User\Role
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\User\Policy
      */
