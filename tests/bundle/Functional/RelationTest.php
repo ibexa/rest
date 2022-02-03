@@ -39,7 +39,7 @@ class RelationTest extends RESTFunctionalTestCase
       <languageCode>eng-GB</languageCode>
       <fieldValue>
         <value key="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/ezpublish/docbook/xhtml" xmlns:ezcustom="http://ibexa.co/xmlns/ezpublish/docbook/custom" version="5.0-variant ezpublish-1.0"&gt;
+&lt;section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml" xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom" version="5.0-variant ezpublish-1.0"&gt;
 &lt;title ezxhtml:level="2"&gt;This is a title.&lt;/title&gt;
 &lt;para&gt;&lt;link xlink:href="ezcontent://1" xml:id="id1" xlink:title="Content title" ezxhtml:class="linkClass5"&gt;Content name&lt;/link&gt;&lt;/para&gt;
 &lt;ezembed xlink:href="ezcontent://1" view="line" xml:id="embed-id-2" ezxhtml:class="embedClass2" ezxhtml:align="right"/&gt;
