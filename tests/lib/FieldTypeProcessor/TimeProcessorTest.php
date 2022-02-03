@@ -22,7 +22,7 @@ class TimeProcessorTest extends TestCase
             static function ($constantName) {
                 return [
                     ['defaultType' => $constantName],
-                    ['defaultType' => constant("eZ\\Publish\\Core\\FieldType\\Time\\Type::{$constantName}")],
+                    ['defaultType' => constant("Ibexa\\Core\\FieldType\\Time\\Type::{$constantName}")],
                 ];
             },
             $this->constants

@@ -25,7 +25,7 @@ class Root extends RestController
     }
 
     /**
-     * List the root resources of the eZ Publish installation.
+     * List the root resources of the Ibexa installation.
      *
      * @return \Ibexa\Rest\Values\Root
      */

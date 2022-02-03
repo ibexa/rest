@@ -8,7 +8,7 @@ namespace Ibexa\Rest\Server\Security;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\Security\Authentication\AuthenticatorInterface;
-use Ibexa\Core\MVC\Symfony\Security\UserInterface as EzUser;
+use Ibexa\Core\MVC\Symfony\Security\UserInterface as IbexaUser;
 use Ibexa\Rest\Server\Exceptions\InvalidUserTypeException;
 use Ibexa\Rest\Server\Exceptions\UserConflictException;
 use Psr\Log\LoggerInterface;
@@ -143,15 +143,15 @@ class RestAuthenticator implements AuthenticatorInterface
 
         // Re-fetch token from SecurityContext since an INTERACTIVE_LOGIN listener might have changed it
         // i.e. when using multiple user providers.
-        // @see \eZ\Publish\Core\MVC\Symfony\Security\EventListener\SecurityListener::onInteractiveLogin()
+        // @see \Ibexa\Core\MVC\Symfony\Security\EventListener\SecurityListener::onInteractiveLogin()
         $token = $this->tokenStorage->getToken();
         $user = $token->getUser();
-        if (!$user instanceof EzUser) {
+        if (!$user instanceof IbexaUser) {
             if ($this->logger) {
                 $this->logger->error('REST: Authenticated user must be Ibexa\\Core\\MVC\\Symfony\\Security\\User, got ' . is_string($user) ? $user : get_class($user));
             }
 
-            $e = new InvalidUserTypeException('Authenticated user is not an eZ User.');
+            $e = new InvalidUserTypeException('Authenticated user is not an Ibexa User.');
             $e->setToken($token);
             throw $e;
         }
@@ -189,14 +189,14 @@ class RestAuthenticator implements AuthenticatorInterface
      *
      * @return bool
      */
-    private function isUserConflict(EzUser $user, TokenInterface $previousToken = null)
+    private function isUserConflict(IbexaUser $user, TokenInterface $previousToken = null)
     {
         if ($previousToken === null || !$previousToken instanceof UsernamePasswordToken) {
             return false;
         }
 
         $previousUser = $previousToken->getUser();
-        if (!$previousUser instanceof EzUser) {
+        if (!$previousUser instanceof IbexaUser) {
             return false;
         }
 
@@ -218,7 +218,7 @@ class RestAuthenticator implements AuthenticatorInterface
         // Session::invalidate() is not called on purpose, to avoid unwanted session migration that would imply
         // generation of a new session id.
         // REST logout must indeed clear the session cookie.
-        // See \EzSystems\EzPlatformRest\Server\Security\RestLogoutHandler
+        // See \Ibexa\Rest\Server\Security\RestLogoutHandler
         $request->getSession()->clear();
 
         $token = $this->tokenStorage->getToken();

@@ -25,7 +25,7 @@ class RelationProcessorTest extends TestCase
             static function ($constantName) {
                 return [
                     ['selectionMethod' => $constantName],
-                    ['selectionMethod' => constant("eZ\\Publish\\Core\\FieldType\\Relation\\Type::{$constantName}")],
+                    ['selectionMethod' => constant("Ibexa\\Core\\FieldType\\Relation\\Type::{$constantName}")],
                 ];
             },
             $this->constants

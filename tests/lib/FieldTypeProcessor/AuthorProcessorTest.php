@@ -22,7 +22,7 @@ class AuthorProcessorTest extends TestCase
             static function ($constantName) {
                 return [
                     ['defaultAuthor' => $constantName],
-                    ['defaultAuthor' => constant("eZ\\Publish\\Core\\FieldType\\Author\\Type::{$constantName}")],
+                    ['defaultAuthor' => constant("Ibexa\\Core\\FieldType\\Author\\Type::{$constantName}")],
                 ];
             },
             $this->constants

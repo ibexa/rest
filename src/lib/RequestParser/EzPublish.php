@@ -7,7 +7,7 @@
 namespace Ibexa\Rest\RequestParser;
 
 /**
- * Pattern based Request parser pre-configured for eZ Publish.
+ * Pattern based Request parser pre-configured for Ibexa.
  */
 class EzPublish extends Pattern
 {

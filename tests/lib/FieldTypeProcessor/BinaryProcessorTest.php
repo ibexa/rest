@@ -10,18 +10,18 @@ use Ibexa\Rest\FieldTypeProcessor\BinaryProcessor;
 
 class BinaryProcessorTest extends BinaryInputProcessorTest
 {
-    public const TEMPLATE_URL = 'http://ez.no/subdir/var/rest_test/storage/original/{path}';
+    public const TEMPLATE_URL = 'http://ibexa.co/subdir/var/rest_test/storage/original/{path}';
 
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\BinaryProcessor::postProcessValueHash
      */
     public function testPostProcessValueHash()
     {
-        $uri = '/var/ezdemo_site/storage/original/application/815b3aa9.pdf';
+        $uri = '/var/ibexa_demo_site/storage/original/application/815b3aa9.pdf';
         $processor = $this->getProcessor();
 
         $inputHash = [
-            'uri' => '/var/ezdemo_site/storage/original/application/815b3aa9.pdf',
+            'uri' => '/var/ibexa_demo_site/storage/original/application/815b3aa9.pdf',
         ];
 
         $outputHash = $processor->postProcessValueHash($inputHash);

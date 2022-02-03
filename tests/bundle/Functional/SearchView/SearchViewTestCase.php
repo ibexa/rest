@@ -11,7 +11,7 @@ namespace Ibexa\Tests\Bundle\Rest\Functional\SearchView;
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 
 /**
- * @internal for internal use by eZ Platform REST test framework
+ * @internal for internal use by Ibexa REST test framework
  */
 abstract class SearchViewTestCase extends RESTFunctionalTestCase
 {

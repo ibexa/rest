@@ -22,7 +22,7 @@ class DateProcessorTest extends TestCase
             static function ($constantName) {
                 return [
                     ['defaultType' => $constantName],
-                    ['defaultType' => constant("eZ\\Publish\\Core\\FieldType\\Date\\Type::{$constantName}")],
+                    ['defaultType' => constant("Ibexa\\Core\\FieldType\\Date\\Type::{$constantName}")],
                 ];
             },
             $this->constants

@@ -75,7 +75,7 @@ class RestLogoutHandlerTest extends TestCase
         $request->attributes->set('is_rest_request', true);
         $sessionSettings = [
             'cookie_path' => '/',
-            'cookie_domain' => 'ez.no',
+            'cookie_domain' => 'ibexa.co',
         ];
         $this->configResolver
             ->expects($this->once())
