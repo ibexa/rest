@@ -1,6 +1,6 @@
 | Question           | Answer
 | ------------------ | ------------------
-| **JIRA issue**     | [EZP-XXXXX](https://issues.ibexa.co/browse/EZP-XXXXX)
+| **JIRA issue**     | [IBX-XXXXX](https://issues.ibexa.co/browse/IBX-XXXXX)
 | **Type**| bug/feature/improvement
 | **Target version** | e.g.: eZ Platform `v3.0.0`
 | **BC breaks**      | yes/no
