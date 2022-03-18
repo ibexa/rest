@@ -15,6 +15,7 @@ env:
     PROJECT_VERSION: ^3.3.x-dev
     PROJECT_EDITION: oss
     SETUP: "doc/docker/base-dev.yml:doc/docker/selenium.yml"
+    WEB_HOST: web
 
 jobs:
     integration-tests-rest:
