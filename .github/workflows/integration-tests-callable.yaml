@@ -45,4 +45,4 @@ jobs:
             - name: Run tests
               run: |
                 cd "$HOME/build/project"
-                docker-compose --env-file=.env exec -T --user www-data app sh -c "cd ibexa/rest && composer update && composer integration"
+                docker-compose --env-file=.env exec -T --user www-data app sh -c "cd vendor/ibexa/rest && composer update && composer integration"
