@@ -31,7 +31,7 @@ class CreatedContentType extends RestContentType
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                'ibexa.rest.load_content_type' . $this->getUrlTypeSuffix($restContentType->contentType->status),
+                'ibexa.rest.load_content_type_' . $this->getUrlTypeSuffix($restContentType->contentType->status),
                 [
                     'contentTypeId' => $restContentType->contentType->id,
                 ]
