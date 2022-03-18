@@ -41,7 +41,7 @@ class RestContentType extends RestContentTypeBase
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ibexa.rest.load_content_type_' . $urlTypeSuffix,
+                'ibexa.rest.load_content_type' . $urlTypeSuffix,
                 [
                     'contentTypeId' => $contentType->id,
                 ]
