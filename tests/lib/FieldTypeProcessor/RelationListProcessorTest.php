@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\FieldTypeProcessor;
+namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
-use eZ\Publish\API\Repository\LocationService;
-use eZ\Publish\Core\Repository\Values\Content\Location;
-use EzSystems\EzPlatformRest\FieldTypeProcessor\RelationListProcessor;
+use Ibexa\Contracts\Core\Repository\LocationService;
+use Ibexa\Core\Repository\Values\Content\Location;
+use Ibexa\Rest\FieldTypeProcessor\RelationListProcessor;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -22,10 +22,10 @@ class RelationListProcessorTest extends TestCase
     public function fieldSettingsHashes()
     {
         return array_map(
-            function ($constantName) {
+            static function ($constantName) {
                 return [
                     ['selectionMethod' => $constantName],
-                    ['selectionMethod' => constant("eZ\\Publish\\Core\\FieldType\\RelationList\\Type::{$constantName}")],
+                    ['selectionMethod' => constant("Ibexa\\Core\\FieldType\\RelationList\\Type::{$constantName}")],
                 ];
             },
             $this->constants
@@ -33,7 +33,7 @@ class RelationListProcessorTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\RelationListProcessor::preProcessFieldSettingsHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::preProcessFieldSettingsHash
      * @dataProvider fieldSettingsHashes
      */
     public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
@@ -47,7 +47,7 @@ class RelationListProcessorTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\RelationListProcessor::postProcessFieldSettingsHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::postProcessFieldSettingsHash
      * @dataProvider fieldSettingsHashes
      */
     public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)
@@ -77,14 +77,14 @@ class RelationListProcessorTest extends TestCase
 
         $routerMock
             ->method('generate')
-            ->with('ezpublish_rest_loadLocation', ['locationPath' => '1/25/42'])
-            ->willReturn('/api/ezp/v2/content/locations/1/25/42');
+            ->with('ibexa.rest.load_location', ['locationPath' => '1/25/42'])
+            ->willReturn('/api/ibexa/v2/content/locations/1/25/42');
 
         $hash = $processor->postProcessFieldSettingsHash(['selectionDefaultLocation' => 42]);
 
         $this->assertEquals([
             'selectionDefaultLocation' => 42,
-            'selectionDefaultLocationHref' => '/api/ezp/v2/content/locations/1/25/42',
+            'selectionDefaultLocationHref' => '/api/ibexa/v2/content/locations/1/25/42',
         ], $hash);
 
         //empty cases
@@ -105,24 +105,26 @@ class RelationListProcessorTest extends TestCase
             ->expects($this->exactly(2))
             ->method('generate')
             ->withConsecutive(
-                ['ezpublish_rest_loadContent', ['contentId' => 42]],
-                ['ezpublish_rest_loadContent', ['contentId' => 300]]
+                ['ibexa.rest.load_content', ['contentId' => 42]],
+                ['ibexa.rest.load_content', ['contentId' => 300]]
             )->willReturnOnConsecutiveCalls(
-                '/api/ezp/v2/content/objects/42',
-                '/api/ezp/v2/content/objects/300'
+                '/api/ibexa/v2/content/objects/42',
+                '/api/ibexa/v2/content/objects/300'
             );
 
         $hash = $processor->postProcessValueHash(['destinationContentIds' => [42, 300]]);
         $this->assertArrayHasKey('destinationContentHrefs', $hash);
-        $this->assertEquals('/api/ezp/v2/content/objects/42', $hash['destinationContentHrefs'][0]);
-        $this->assertEquals('/api/ezp/v2/content/objects/300', $hash['destinationContentHrefs'][1]);
+        $this->assertEquals('/api/ibexa/v2/content/objects/42', $hash['destinationContentHrefs'][0]);
+        $this->assertEquals('/api/ibexa/v2/content/objects/300', $hash['destinationContentHrefs'][1]);
     }
 
     /**
-     * @return \EzSystems\EzPlatformRest\FieldTypeProcessor\RelationListProcessor
+     * @return \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor
      */
     protected function getProcessor()
     {
         return new RelationListProcessor();
     }
 }
+
+class_alias(RelationListProcessorTest::class, 'EzSystems\EzPlatformRest\Tests\FieldTypeProcessor\RelationListProcessorTest');

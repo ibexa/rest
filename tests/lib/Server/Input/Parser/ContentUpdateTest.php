@@ -1,23 +1,23 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Input\Parser;
+namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
-use EzSystems\EzPlatformRest\Exceptions\InvalidArgumentException;
-use EzSystems\EzPlatformRest\Server\Input\Parser\ContentUpdate as ContentUpdateParser;
-use EzSystems\EzPlatformRest\Values\RestContentMetadataUpdateStruct;
-use EzSystems\EzPlatformRest\Exceptions\Parser;
 use DateTime;
+use Ibexa\Contracts\Rest\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
+use Ibexa\Rest\Server\Input\Parser\ContentUpdate as ContentUpdateParser;
+use Ibexa\Rest\Values\RestContentMetadataUpdateStruct;
 
 class ContentUpdateTest extends BaseTest
 {
     /**
      * Tests the ContentUpdate parser.
      *
-     * @return \EzSystems\EzPlatformRest\Values\RestContentMetadataUpdateStruct
+     * @return \Ibexa\Rest\Values\RestContentMetadataUpdateStruct
      */
     public function testParseValid()
     {
@@ -40,7 +40,7 @@ class ContentUpdateTest extends BaseTest
     /**
      * Test for valid owner ID value in result.
      *
-     * @param \EzSystems\EzPlatformRest\Values\RestContentMetadataUpdateStruct $result
+     * @param \Ibexa\Rest\Values\RestContentMetadataUpdateStruct $result
      *
      * @depends testParseValid
      */
@@ -77,7 +77,7 @@ class ContentUpdateTest extends BaseTest
         }
 
         if (!isset($exceptionThrown)) {
-            self::fail('Failed asserting that exception of type "\\eZ\\Publish\\Core\\REST\\Common\\Exceptions\\Parser" is thrown.');
+            self::fail('Failed asserting that exception of type "\\Ibexa\\Core\\REST\\Common\\Exceptions\\Parser" is thrown.');
         }
     }
 
@@ -115,7 +115,7 @@ class ContentUpdateTest extends BaseTest
         }
 
         if (!isset($exceptionThrown)) {
-            self::fail('Failed asserting that exception of type "\\eZ\\Publish\\Core\\REST\\Common\\Exceptions\\Parser" is thrown.');
+            self::fail('Failed asserting that exception of type "\\Ibexa\\Core\\REST\\Common\\Exceptions\\Parser" is thrown.');
         }
     }
 
@@ -130,7 +130,7 @@ class ContentUpdateTest extends BaseTest
     /**
      * Returns the ContentUpdate parser.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Input\Parser\ContentUpdate
+     * @return \Ibexa\Rest\Server\Input\Parser\ContentUpdate
      */
     protected function internalGetParser()
     {
@@ -140,7 +140,7 @@ class ContentUpdateTest extends BaseTest
     /**
      * Returns a valid RestContentMetadataUpdateStruct that matches the structure from getValidInputData().
      *
-     * @return \EzSystems\EzPlatformRest\Values\RestContentMetadataUpdateStruct
+     * @return \Ibexa\Rest\Values\RestContentMetadataUpdateStruct
      */
     protected function getContentUpdateStruct()
     {
@@ -190,3 +190,5 @@ class ContentUpdateTest extends BaseTest
         ];
     }
 }
+
+class_alias(ContentUpdateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\ContentUpdateTest');

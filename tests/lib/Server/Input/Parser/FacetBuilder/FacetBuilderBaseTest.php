@@ -1,75 +1,78 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Input\Parser\FacetBuilder;
+namespace Ibexa\Tests\Rest\Server\Input\Parser\FacetBuilder;
 
-use EzSystems\EzPlatformRest\Input\ParsingDispatcher;
-use EzSystems\EzPlatformRest\Server\Input\Parser\ContentQuery as QueryParser;
-use EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\ContentTypeParser;
-use EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\CriterionParser;
-use EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\DateRangeParser;
-use EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\FieldParser;
-use EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\FieldRangeParser;
-use EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\LocationParser;
-use EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\SectionParser;
-use EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\TermParser;
-use EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\UserParser;
-use EzSystems\EzPlatformRest\Tests\Server\Input\Parser\BaseTest;
+use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
+use Ibexa\Rest\Server\Input\Parser\ContentQuery as QueryParser;
+use Ibexa\Rest\Server\Input\Parser\FacetBuilder\ContentTypeParser;
+use Ibexa\Rest\Server\Input\Parser\FacetBuilder\CriterionParser;
+use Ibexa\Rest\Server\Input\Parser\FacetBuilder\DateRangeParser;
+use Ibexa\Rest\Server\Input\Parser\FacetBuilder\FieldParser;
+use Ibexa\Rest\Server\Input\Parser\FacetBuilder\FieldRangeParser;
+use Ibexa\Rest\Server\Input\Parser\FacetBuilder\LocationParser;
+use Ibexa\Rest\Server\Input\Parser\FacetBuilder\SectionParser;
+use Ibexa\Rest\Server\Input\Parser\FacetBuilder\TermParser;
+use Ibexa\Rest\Server\Input\Parser\FacetBuilder\UserParser;
+use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 abstract class FacetBuilderBaseTest extends BaseTest
 {
     /**
-     * @return \EzSystems\EzPlatformRest\Input\ParsingDispatcher
+     * @return \Ibexa\Contracts\Rest\Input\ParsingDispatcher
      */
     protected function getParsingDispatcher()
     {
-        $parsingDispatcher = new ParsingDispatcher();
+        $parsingDispatcher = new ParsingDispatcher(
+            $this->createMock(EventDispatcherInterface::class)
+        );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.ContentType',
+            'application/vnd.ibexa.api.internal.facetbuilder.ContentType',
             new ContentTypeParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.Criterion',
+            'application/vnd.ibexa.api.internal.facetbuilder.Criterion',
             new CriterionParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.DateRange',
+            'application/vnd.ibexa.api.internal.facetbuilder.DateRange',
             new DateRangeParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.Field',
+            'application/vnd.ibexa.api.internal.facetbuilder.Field',
             new FieldParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.FieldRange',
+            'application/vnd.ibexa.api.internal.facetbuilder.FieldRange',
             new FieldRangeParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.Location',
+            'application/vnd.ibexa.api.internal.facetbuilder.Location',
             new LocationParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.Section',
+            'application/vnd.ibexa.api.internal.facetbuilder.Section',
             new SectionParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.Term',
+            'application/vnd.ibexa.api.internal.facetbuilder.Term',
             new TermParser()
         );
 
         $parsingDispatcher->addParser(
-            'application/vnd.ez.api.internal.facetbuilder.User',
+            'application/vnd.ibexa.api.internal.facetbuilder.User',
             new UserParser()
         );
 
@@ -79,10 +82,12 @@ abstract class FacetBuilderBaseTest extends BaseTest
     /**
      * Returns the query parser.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Input\Parser\ContentQuery
+     * @return \Ibexa\Rest\Server\Input\Parser\ContentQuery
      */
     protected function internalGetParser()
     {
         return new QueryParser();
     }
 }
+
+class_alias(FacetBuilderBaseTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\FacetBuilder\FacetBuilderBaseTest');

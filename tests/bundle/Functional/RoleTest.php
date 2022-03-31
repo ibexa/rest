@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRestBundle\Tests\Functional;
+namespace Ibexa\Tests\Bundle\Rest\Functional;
 
-use EzSystems\EzPlatformRestBundle\Tests\Functional\TestCase as RESTFunctionalTestCase;
+use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 
 class RoleTest extends RESTFunctionalTestCase
 {
@@ -34,7 +34,7 @@ class RoleTest extends RESTFunctionalTestCase
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/user/roles',
+            '/api/ibexa/v2/user/roles',
             'RoleInput+xml',
             'Role+json',
             $xml
@@ -74,7 +74,7 @@ XML;
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/user/roles?publish=false',
+            '/api/ibexa/v2/user/roles?publish=false',
             'RoleInput+xml',
             'RoleDraft+json',
             $xml
@@ -96,7 +96,7 @@ XML;
     public function testListRoles()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/user/roles')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/user/roles')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -409,13 +409,13 @@ XML;
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <RoleAssignInput>
-  <Role href="{$roleHref}" media-type="application/vnd.ez.api.RoleAssignInput+xml"/>
+  <Role href="{$roleHref}" media-type="application/vnd.ibexa.api.RoleAssignInput+xml"/>
 </RoleAssignInput>
 XML;
 
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/user/users/10/roles',
+            '/api/ibexa/v2/user/users/10/roles',
             'RoleAssignInput+xml',
             'RoleAssignmentList+json',
             $xml
@@ -445,10 +445,10 @@ XML;
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <RoleAssignInput>
-  <Role href="{$roleHref}" media-type="application/vnd.ez.api.RoleAssignInput+xml"/>
+  <Role href="{$roleHref}" media-type="application/vnd.ibexa.api.RoleAssignInput+xml"/>
   <limitation identifier="{$limitation['identifier']}">
       <values>
-          <ref href="{$limitation['href']}" media-type="application/vnd.ez.api.{$limitation['identifier']}+xml" />
+          <ref href="{$limitation['href']}" media-type="application/vnd.ibexa.api.{$limitation['identifier']}+xml" />
       </values>
   </limitation>
 </RoleAssignInput>
@@ -456,7 +456,7 @@ XML;
 
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/user/users/10/roles',
+            '/api/ibexa/v2/user/users/10/roles',
             'RoleAssignInput+xml',
             'RoleAssignmentList+json',
             $xml
@@ -473,8 +473,8 @@ XML;
     public function provideLimitations()
     {
         return [
-            [['identifier' => 'Section', 'href' => '/api/ezp/v2/content/sections/1']],
-            [['identifier' => 'Subtree', 'href' => '/api/ezp/v2/content/locations/1/2/']],
+            [['identifier' => 'Section', 'href' => '/api/ibexa/v2/content/sections/1']],
+            [['identifier' => 'Subtree', 'href' => '/api/ibexa/v2/content/locations/1/2/']],
         ];
     }
 
@@ -517,10 +517,10 @@ XML;
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <RoleAssignInput>
-  <Role href="{$roleHref}" media-type="application/vnd.ez.api.RoleAssignInput+xml"/>
+  <Role href="{$roleHref}" media-type="application/vnd.ibexa.api.RoleAssignInput+xml"/>
   <limitation identifier="Section">
       <values>
-          <ref href="/api/ezp/v2/content/sections/1" media-type="application/vnd.ez.api.Section+xml" />
+          <ref href="/api/ibexa/v2/content/sections/1" media-type="application/vnd.ibexa.api.Section+xml" />
       </values>
   </limitation>
 </RoleAssignInput>
@@ -528,7 +528,7 @@ XML;
         // Assign to "Guest users" group to avoid affecting other tests
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/user/groups/1/5/12/roles',
+            '/api/ibexa/v2/user/groups/1/5/12/roles',
             'RoleAssignInput+xml',
             'RoleAssignmentList+json',
             $xml
@@ -578,7 +578,7 @@ XML;
     public function testLoadRoleAssignmentsForUser()
     {
         $response = $this->sendHttpRequest(
-            $request = $this->createHttpRequest('GET', '/api/ezp/v2/user/users/10/roles')
+            $request = $this->createHttpRequest('GET', '/api/ibexa/v2/user/users/10/roles')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -590,7 +590,7 @@ XML;
     public function testLoadRoleAssignmentsForUserGroup()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/user/groups/1/5/44/roles')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/user/groups/1/5/44/roles')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -602,7 +602,7 @@ XML;
     public function testListPoliciesForUser()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/user/policies?userId=10')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/user/policies?userId=10')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -679,7 +679,7 @@ XML;
         self::assertHttpResponseHasHeader(
             $response,
             'Location',
-            '/api/ezp/v2/user/roles/' . preg_replace('/.*roles\/(\d+).*/', '$1', $roleDraftHref)
+            '/api/ibexa/v2/user/roles/' . preg_replace('/.*roles\/(\d+).*/', '$1', $roleDraftHref)
         );
     }
 
@@ -736,7 +736,7 @@ XML;
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/user/roles',
+            '/api/ibexa/v2/user/roles',
             'RoleInput+xml',
             'RoleDraft+json',
             $xml
@@ -752,3 +752,5 @@ XML;
         return $href;
     }
 }
+
+class_alias(RoleTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\RoleTest');

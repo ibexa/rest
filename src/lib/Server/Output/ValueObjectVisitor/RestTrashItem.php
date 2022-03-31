@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Output\Generator;
-use EzSystems\EzPlatformRest\Output\Visitor;
-use EzSystems\EzPlatformRest\Server\Values\RestContent as RestContentValue;
+use Ibexa\Contracts\Rest\Output\Generator;
+use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
+use Ibexa\Contracts\Rest\Output\Visitor;
+use Ibexa\Rest\Server\Values\RestContent as RestContentValue;
 
 /**
  * RestTrashItem value object visitor.
@@ -19,9 +19,9 @@ class RestTrashItem extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \EzSystems\EzPlatformRest\Output\Visitor $visitor
-     * @param \EzSystems\EzPlatformRest\Output\Generator $generator
-     * @param \EzSystems\EzPlatformRest\Server\Values\RestTrashItem $data
+     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
+     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param \Ibexa\Rest\Server\Values\RestTrashItem $data
      */
     public function visit(Visitor $visitor, Generator $generator, $data)
     {
@@ -33,7 +33,7 @@ class RestTrashItem extends ValueObjectVisitor
 
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadTrashItem', ['trashItemId' => $trashItem->id])
+            $this->router->generate('ibexa.rest.load_trash_item', ['trashItemId' => $trashItem->id])
         );
         $generator->endAttribute('href');
 
@@ -62,7 +62,7 @@ class RestTrashItem extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadLocation',
+                'ibexa.rest.load_location',
                 [
                     'locationPath' => implode('/', $pathStringParts),
                 ]
@@ -86,7 +86,7 @@ class RestTrashItem extends ValueObjectVisitor
         $generator->startObjectElement('Content');
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadContent', ['contentId' => $contentInfo->id])
+            $this->router->generate('ibexa.rest.load_content', ['contentId' => $contentInfo->id])
         );
         $generator->endAttribute('href');
         $generator->endObjectElement('Content');
@@ -101,7 +101,7 @@ class RestTrashItem extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadContent',
+                'ibexa.rest.load_content',
                 ['contentId' => $contentInfo->id]
             )
         );
@@ -112,3 +112,5 @@ class RestTrashItem extends ValueObjectVisitor
         $generator->endObjectElement('TrashItem');
     }
 }
+
+class_alias(RestTrashItem::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestTrashItem');

@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Server\Values\ContentList;
-use EzSystems\EzPlatformRest\Server\Values\RestContent;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\ContentList;
+use Ibexa\Rest\Server\Values\RestContent;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ContentListTest extends ValueObjectVisitorBaseTest
 {
@@ -29,7 +29,7 @@ class ContentListTest extends ValueObjectVisitorBaseTest
         $contentList = new ContentList([], 0);
 
         $this->addRouteExpectation(
-            'ezpublish_rest_redirectContent',
+            'ibexa.rest.redirect_content',
             [],
             '/content/objects'
         );
@@ -79,7 +79,7 @@ class ContentListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ContentList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentList+xml',
                     'href' => '/content/objects',
                 ],
             ],
@@ -145,10 +145,12 @@ class ContentListTest extends ValueObjectVisitorBaseTest
     /**
      * Get the ContentList visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ContentList
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentList
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\ContentList();
     }
 }
+
+class_alias(ContentListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ContentListTest');

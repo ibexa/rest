@@ -1,23 +1,23 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Values\RestContent;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use eZ\Publish\Core\Repository\Values;
-use eZ\Publish\Core\Helper\TranslationHelper;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use EzSystems\EzPlatformRest\Server\Values\Version;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Helper\TranslationHelper;
+use Ibexa\Core\Repository\Values;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\RestContent;
+use Ibexa\Rest\Server\Values\Version;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RestContentTest extends ValueObjectVisitorBaseTest
 {
-    /** @var \eZ\Publish\Core\Helper\TranslationHelper|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Ibexa\Core\Helper\TranslationHelper|\PHPUnit\Framework\MockObject\MockObject */
     private $translationHelper;
 
     protected function setUp(): void
@@ -25,7 +25,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
         $this->translationHelper = $this->createMock(TranslationHelper::class);
         $this->translationHelper
             ->method('getTranslatedContentNameByContentInfo')
-            ->willReturnCallback(function (ContentInfo $content) {
+            ->willReturnCallback(static function (ContentInfo $content) {
                 return $content->name . ' (Translated)';
             });
     }
@@ -46,47 +46,47 @@ class RestContentTest extends ValueObjectVisitorBaseTest
             ->method('visitValueObject');
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentType',
+            'ibexa.rest.load_content_type',
             ['contentTypeId' => $restContent->contentInfo->contentTypeId],
             "/content/types/{$restContent->contentInfo->contentTypeId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentVersions',
+            'ibexa.rest.load_content_versions',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}/versions"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_redirectCurrentVersion',
+            'ibexa.rest.redirect_current_version',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}/currentversion"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadSection',
+            'ibexa.rest.load_section',
             ['sectionId' => $restContent->contentInfo->sectionId],
             "/content/sections/{$restContent->contentInfo->sectionId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocation',
+            'ibexa.rest.load_location',
             ['locationPath' => $locationPath = trim($restContent->mainLocation->pathString, '/')],
             "/content/locations/{$locationPath}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocationsForContent',
+            'ibexa.rest.load_locations_for_content',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}/locations"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $restContent->contentInfo->ownerId],
             "/user/users/{$restContent->contentInfo->ownerId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_getObjectStatesForContent',
+            'ibexa.rest.get_object_states_for_content',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}/objectstates"
         );
@@ -165,7 +165,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testContentMediaTypeWithoutVersionCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content[@media-type="application/vnd.ez.api.ContentInfo+xml"]');
+        $this->assertXPath($dom, '/Content[@media-type="application/vnd.ibexa.api.ContentInfo+xml"]');
     }
 
     /**
@@ -195,7 +195,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testContentTypeMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content/ContentType[@media-type="application/vnd.ez.api.ContentType+xml"]');
+        $this->assertXPath($dom, '/Content/ContentType[@media-type="application/vnd.ibexa.api.ContentType+xml"]');
     }
 
     /**
@@ -235,7 +235,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testVersionsMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content/Versions[@media-type="application/vnd.ez.api.VersionList+xml"]');
+        $this->assertXPath($dom, '/Content/Versions[@media-type="application/vnd.ibexa.api.VersionList+xml"]');
     }
 
     /**
@@ -255,7 +255,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testCurrentVersionMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content/CurrentVersion[@media-type="application/vnd.ez.api.Version+xml"]');
+        $this->assertXPath($dom, '/Content/CurrentVersion[@media-type="application/vnd.ibexa.api.Version+xml"]');
     }
 
     /**
@@ -275,7 +275,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testSectionMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content/Section[@media-type="application/vnd.ez.api.Section+xml"]');
+        $this->assertXPath($dom, '/Content/Section[@media-type="application/vnd.ibexa.api.Section+xml"]');
     }
 
     /**
@@ -295,7 +295,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testMainLocationMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content/MainLocation[@media-type="application/vnd.ez.api.Location+xml"]');
+        $this->assertXPath($dom, '/Content/MainLocation[@media-type="application/vnd.ibexa.api.Location+xml"]');
     }
 
     /**
@@ -315,7 +315,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testLocationsMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content/Locations[@media-type="application/vnd.ez.api.LocationList+xml"]');
+        $this->assertXPath($dom, '/Content/Locations[@media-type="application/vnd.ibexa.api.LocationList+xml"]');
     }
 
     /**
@@ -335,7 +335,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testOwnerMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content/Owner[@media-type="application/vnd.ez.api.User+xml"]');
+        $this->assertXPath($dom, '/Content/Owner[@media-type="application/vnd.ibexa.api.User+xml"]');
     }
 
     /**
@@ -425,43 +425,43 @@ class RestContentTest extends ValueObjectVisitorBaseTest
             ->with($this->isInstanceOf(Version::class));
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentType',
+            'ibexa.rest.load_content_type',
             ['contentTypeId' => $restContent->contentInfo->contentTypeId],
             "/content/types/{$restContent->contentInfo->contentTypeId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentVersions',
+            'ibexa.rest.load_content_versions',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}/versions"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_redirectCurrentVersion',
+            'ibexa.rest.redirect_current_version',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}/currentversion"
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadSection',
+            'ibexa.rest.load_section',
             ['sectionId' => $restContent->contentInfo->sectionId],
             "/content/sections/{$restContent->contentInfo->sectionId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocation',
+            'ibexa.rest.load_location',
             ['locationPath' => $locationPath = trim($restContent->mainLocation->pathString, '/')],
             "/content/locations/{$locationPath}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocationsForContent',
+            'ibexa.rest.load_locations_for_content',
             ['contentId' => $restContent->contentInfo->id],
             "/content/objects/{$restContent->contentInfo->id}/locations"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $restContent->contentInfo->ownerId],
             "/user/users/{$restContent->contentInfo->ownerId}"
         );
@@ -489,7 +489,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testContentMediaTypeWithVersionCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content[@media-type="application/vnd.ez.api.Content+xml"]');
+        $this->assertXPath($dom, '/Content[@media-type="application/vnd.ibexa.api.Content+xml"]');
     }
 
     /**
@@ -509,13 +509,13 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testEmbeddedCurrentVersionMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content/CurrentVersion[@media-type="application/vnd.ez.api.Version+xml"]');
+        $this->assertXPath($dom, '/Content/CurrentVersion[@media-type="application/vnd.ibexa.api.Version+xml"]');
     }
 
     /**
      * Get the Content visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestContent
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestContent
      */
     protected function internalGetVisitor()
     {
@@ -524,3 +524,5 @@ class RestContentTest extends ValueObjectVisitorBaseTest
         );
     }
 }
+
+class_alias(RestContentTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestContentTest');

@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRest\Server\Security\EventListener;
+namespace Ibexa\Rest\Server\Security\EventListener;
 
-use eZ\Publish\API\Repository\PermissionResolver;
-use eZ\Publish\Core\MVC\Symfony\Security\UserInterface as EzPlatformUser;
+use Ibexa\Contracts\Core\Repository\PermissionResolver;
+use Ibexa\Core\MVC\Symfony\Security\UserInterface as IbexaUser;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent as BaseInteractiveLoginEvent;
@@ -17,11 +17,11 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 /**
  * This security listener listens to security.interactive_login event to:
- *  - Set current user reference if user is an instance of an eZ user.
+ *  - Set current user reference if user is an instance of an Ibexa user.
  */
 final class SecurityListener implements EventSubscriberInterface
 {
-    /** @var \eZ\Publish\API\Repository\PermissionResolver */
+    /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
     private $permissionResolver;
 
     public function __construct(
@@ -48,8 +48,10 @@ final class SecurityListener implements EventSubscriberInterface
         }
 
         $user = $event->getAuthenticationToken()->getUser();
-        if ($user instanceof EzPlatformUser) {
+        if ($user instanceof IbexaUser) {
             $this->permissionResolver->setCurrentUserReference($user->getAPIUser());
         }
     }
 }
+
+class_alias(SecurityListener::class, 'EzSystems\EzPlatformRest\Server\Security\EventListener\SecurityListener');

@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use eZ\Publish\API\Repository\Values\Content;
+use Ibexa\Contracts\Core\Repository\Values\Content;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class URLWildcardTest extends ValueObjectVisitorBaseTest
 {
@@ -34,7 +34,7 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadURLWildcard',
+            'ibexa.rest.load_url_wildcard',
             ['urlWildcardId' => $urlWildcard->id],
             "/content/urlwildcards/{$urlWildcard->id}"
         );
@@ -88,7 +88,7 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'UrlWildcard',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UrlWildcard+xml',
+                    'media-type' => 'application/vnd.ibexa.api.UrlWildcard+xml',
                     'href' => '/content/urlwildcards/42',
                     'id' => '42',
                 ],
@@ -162,10 +162,12 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
     /**
      * Get the URLWildcard visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\URLWildcard
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcard
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\URLWildcard();
     }
 }
+
+class_alias(URLWildcardTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\URLWildcardTest');

@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Server\Values\ObjectStateGroupList;
-use eZ\Publish\Core\Repository\Values\ObjectState\ObjectStateGroup;
+use Ibexa\Core\Repository\Values\ObjectState\ObjectStateGroup;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\ObjectStateGroupList;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
 {
@@ -27,7 +27,7 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
 
         $groupList = new ObjectStateGroupList([]);
 
-        $this->addRouteExpectation('ezpublish_rest_loadObjectStateGroups', [], '/content/objectstategroups');
+        $this->addRouteExpectation('ibexa.rest.load_object_state_groups', [], '/content/objectstategroups');
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -74,7 +74,7 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ObjectStateGroupList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ObjectStateGroupList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ObjectStateGroupList+xml',
                     'href' => '/content/objectstategroups',
                 ],
             ],
@@ -103,7 +103,7 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
 
         $this->getVisitorMock()->expects($this->exactly(2))
             ->method('visitValueObject')
-            ->with($this->isInstanceOf(\eZ\Publish\API\Repository\Values\ObjectState\ObjectStateGroup::class));
+            ->with($this->isInstanceOf(\Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup::class));
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -115,10 +115,12 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
     /**
      * Get the ObjectStateGroupList visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ObjectStateGroupList
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateGroupList
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\ObjectStateGroupList();
     }
 }
+
+class_alias(ObjectStateGroupListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ObjectStateGroupListTest');

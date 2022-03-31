@@ -1,14 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use eZ\Publish\Core\Repository\Values\User;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\ContentTypeLimitation;
+use Ibexa\Core\Repository\Values\User;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class PolicyTest extends ValueObjectVisitorBaseTest
 {
@@ -24,7 +25,7 @@ class PolicyTest extends ValueObjectVisitorBaseTest
 
         $generator->startDocument(null);
 
-        $contentTypeLimitation = new \eZ\Publish\API\Repository\Values\User\Limitation\ContentTypeLimitation();
+        $contentTypeLimitation = new ContentTypeLimitation();
         $contentTypeLimitation->limitationValues = [1, 2, 3];
 
         $policy = new User\Policy(
@@ -40,7 +41,7 @@ class PolicyTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadPolicy',
+            'ibexa.rest.load_policy',
             ['roleId' => $policy->roleId, 'policyId' => $policy->id],
             "/user/roles/{$policy->roleId}/policies/{$policy->id}"
         );
@@ -94,7 +95,7 @@ class PolicyTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Policy',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Policy+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Policy+xml',
                     'href' => '/user/roles/84/policies/42',
                 ],
             ],
@@ -205,10 +206,12 @@ class PolicyTest extends ValueObjectVisitorBaseTest
     /**
      * Get the Policy visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Policy
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Policy
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\Policy();
     }
 }
+
+class_alias(PolicyTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\PolicyTest');

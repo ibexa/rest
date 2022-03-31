@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use eZ\Publish\API\Repository\Values\User\User;
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Server\Values;
+use Ibexa\Contracts\Core\Repository\Values\User\User;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class UserSessionTest extends ValueObjectVisitorBaseTest
 {
@@ -39,10 +39,10 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
 
         $this->getVisitorMock()->expects($this->at(1))
             ->method('setHeader')
-            ->with($this->equalTo('Content-Type'), $this->equalTo('application/vnd.ez.api.Session+xml'));
+            ->with($this->equalTo('Content-Type'), $this->equalTo('application/vnd.ibexa.api.Session+xml'));
 
         $this->addRouteExpectation(
-            'ezpublish_rest_deleteSession',
+            'ibexa.rest.delete_session',
             [
                 'sessionId' => $session->sessionId,
             ],
@@ -50,7 +50,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $session->user->id],
             "/user/users/{$session->user->id}"
         );
@@ -103,7 +103,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Session',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Session+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Session+xml',
                     'href' => '/user/sessions/sessionId',
                 ],
             ],
@@ -217,7 +217,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
                 'tag' => 'User',
                 'attributes' => [
                     'href' => '/user/users/user123',
-                    'media-type' => 'application/vnd.ez.api.User+xml',
+                    'media-type' => 'application/vnd.ibexa.api.User+xml',
                 ],
             ],
             $result,
@@ -229,10 +229,12 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
     /**
      * Get the Session visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\UserSession
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UserSession
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\UserSession();
     }
 }
+
+class_alias(UserSessionTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\UserSessionTest');

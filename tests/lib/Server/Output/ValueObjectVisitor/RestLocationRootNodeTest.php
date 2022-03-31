@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Server\Values\RestContent;
-use EzSystems\EzPlatformRest\Server\Values\RestLocation;
-use eZ\Publish\Core\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Core\Repository\Values\Content\Location;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\RestContent;
+use Ibexa\Rest\Server\Values\RestLocation;
 
 class RestLocationRootNodeTest extends RestLocationTest
 {
@@ -54,28 +54,28 @@ class RestLocationRootNodeTest extends RestLocationTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocation',
+            'ibexa.rest.load_location',
             ['locationPath' => '1'],
             '/content/locations/1'
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocationChildren',
+            'ibexa.rest.load_location_children',
             ['locationPath' => '1'],
             '/content/locations/1/children'
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $location->location->contentId],
             "/content/objects/{$location->location->contentId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_listLocationURLAliases',
+            'ibexa.rest.list_location_url_aliases',
             ['locationPath' => '1'],
             '/content/objects/1/urlaliases'
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $location->location->contentId],
             "/content/objects/{$location->location->contentId}"
         );
@@ -169,7 +169,7 @@ class RestLocationRootNodeTest extends RestLocationTest
             [
                 'tag' => 'Location',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Location+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Location+xml',
                     'href' => '/content/locations/1',
                 ],
             ],
@@ -192,7 +192,7 @@ class RestLocationRootNodeTest extends RestLocationTest
             [
                 'tag' => 'Children',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.LocationList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.LocationList+xml',
                     'href' => '/content/locations/1/children',
                 ],
             ],
@@ -235,7 +235,7 @@ class RestLocationRootNodeTest extends RestLocationTest
             [
                 'tag' => 'UrlAliases',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UrlAliasRefList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.UrlAliasRefList+xml',
                     'href' => '/content/objects/1/urlaliases',
                 ],
             ],
@@ -248,10 +248,12 @@ class RestLocationRootNodeTest extends RestLocationTest
     /**
      * Get the Location visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestLocation
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestLocation
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\RestLocation();
     }
 }
+
+class_alias(RestLocationRootNodeTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestLocationRootNodeTest');

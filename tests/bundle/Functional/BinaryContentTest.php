@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRestBundle\Tests\Functional;
+namespace Ibexa\Tests\Bundle\Rest\Functional;
 
-use EzSystems\EzPlatformRestBundle\Tests\Functional\TestCase as RESTFunctionalTestCase;
+use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 class BinaryContentTest extends RESTFunctionalTestCase
@@ -22,19 +22,19 @@ class BinaryContentTest extends RESTFunctionalTestCase
         $body = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentCreate>
-  <ContentType href="/api/ezp/v2/content/types/5" />
+  <ContentType href="/api/ibexa/v2/content/types/5" />
   <mainLanguageCode>eng-GB</mainLanguageCode>
   <LocationCreate>
-    <ParentLocation href="/api/ezp/v2/content/locations/1/2" />
+    <ParentLocation href="/api/ibexa/v2/content/locations/1/2" />
     <priority>0</priority>
     <hidden>false</hidden>
     <sortField>PATH</sortField>
     <sortOrder>ASC</sortOrder>
   </LocationCreate>
-  <Section href="/api/ezp/v2/content/sections/3" />
+  <Section href="/api/ibexa/v2/content/sections/3" />
   <alwaysAvailable>true</alwaysAvailable>
   <remoteId>{$string}</remoteId>
-  <User href="/api/ezp/v2/user/users/14" />
+  <User href="/api/ibexa/v2/user/users/14" />
   <modificationDate>2012-09-30T12:30:00</modificationDate>
   <fields>
     <field>
@@ -56,7 +56,7 @@ class BinaryContentTest extends RESTFunctionalTestCase
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/objects',
+            '/api/ibexa/v2/content/objects',
             'ContentCreate+xml',
             'ContentInfo+json',
             $body
@@ -117,15 +117,15 @@ XML;
   <ContentType href="{$contentTypeHref}" />
   <mainLanguageCode>eng-GB</mainLanguageCode>
   <LocationCreate>
-    <ParentLocation href="/api/ezp/v2/content/locations/1/2" />
+    <ParentLocation href="/api/ibexa/v2/content/locations/1/2" />
     <priority>0</priority>
     <hidden>false</hidden>
     <sortField>PATH</sortField>
     <sortOrder>ASC</sortOrder>
   </LocationCreate>
-  <Section href="/api/ezp/v2/content/sections/1" />
+  <Section href="/api/ibexa/v2/content/sections/1" />
   <alwaysAvailable>true</alwaysAvailable>
-  <User href="/api/ezp/v2/user/users/14" />
+  <User href="/api/ibexa/v2/user/users/14" />
   <modificationDate>2012-09-30T12:30:00</modificationDate>
   <fields>
     <field>
@@ -212,7 +212,7 @@ XML;
 
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/typegroups/3/types?publish=true',
+            '/api/ibexa/v2/content/typegroups/3/types?publish=true',
             'ContentTypeCreate+xml',
             'ContentType+json',
             $body
@@ -227,3 +227,5 @@ XML;
         return $response->getHeader('Location')[0];
     }
 }
+
+class_alias(BinaryContentTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\BinaryContentTest');

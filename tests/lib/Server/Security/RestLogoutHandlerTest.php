@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Security;
+namespace Ibexa\Tests\Rest\Server\Security;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformRest\Server\Security\RestLogoutHandler;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Rest\Server\Security\RestLogoutHandler;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,7 +75,7 @@ class RestLogoutHandlerTest extends TestCase
         $request->attributes->set('is_rest_request', true);
         $sessionSettings = [
             'cookie_path' => '/',
-            'cookie_domain' => 'ez.no',
+            'cookie_domain' => 'ibexa.co',
         ];
         $this->configResolver
             ->expects($this->once())
@@ -120,3 +120,5 @@ class RestLogoutHandlerTest extends TestCase
         );
     }
 }
+
+class_alias(RestLogoutHandlerTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Security\RestLogoutHandlerTest');

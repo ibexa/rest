@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use eZ\Publish\SPI\Variation\Values\ImageVariation;
+use Ibexa\Contracts\Core\Variation\Values\ImageVariation;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ImageVariationTest extends ValueObjectVisitorBaseTest
 {
@@ -38,7 +38,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_binaryContent_getImageVariation',
+            'ibexa.rest.binary_content.get_image_variation',
             [
                 'imageId' => '123-456789',
                 'variationIdentifier' => 'test',
@@ -86,7 +86,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
      */
     public function testContentImageVariationTagMediaTypeAttribute(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentImageVariation[@media-type="application/vnd.ez.api.ContentImageVariation+xml"]');
+        $this->assertXPath($dom, '/ContentImageVariation[@media-type="application/vnd.ibexa.api.ContentImageVariation+xml"]');
     }
 
     /**
@@ -180,10 +180,12 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ImageVariation
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ImageVariation
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\ImageVariation();
     }
 }
+
+class_alias(ImageVariationTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ImageVariationTest');

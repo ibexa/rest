@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use eZ\Publish\Core\Repository\Values;
-use EzSystems\EzPlatformRest\Server\Values\FieldDefinitionList;
-use EzSystems\EzPlatformRest\Server\Values\RestContentType;
+use Ibexa\Core\Repository\Values;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\FieldDefinitionList;
+use Ibexa\Rest\Server\Values\RestContentType;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 /**
  * @todo coverage add unit test for testVisitDraftType
@@ -35,27 +35,27 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
             ->with($this->isInstanceOf(FieldDefinitionList::class));
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentType',
+            'ibexa.rest.load_content_type',
             ['contentTypeId' => $restContentType->contentType->id],
             "/content/types/{$restContentType->contentType->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $restContentType->contentType->creatorId],
             "/user/users/{$restContentType->contentType->creatorId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $restContentType->contentType->modifierId],
             "/user/users/{$restContentType->contentType->modifierId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadGroupsOfContentType',
+            'ibexa.rest.load_groups_of_content_type',
             ['contentTypeId' => $restContentType->contentType->id],
             "/content/types/{$restContentType->contentType->id}/groups"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentTypeDraft',
+            'ibexa.rest.load_content_type_draft',
             ['contentTypeId' => $restContentType->contentType->id],
             "/content/types/{$restContentType->contentType->id}/draft"
         );
@@ -125,7 +125,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testContentTypeMediaType(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentType[@media-type="application/vnd.ez.api.ContentType+xml"]');
+        $this->assertXPath($dom, '/ContentType[@media-type="application/vnd.ibexa.api.ContentType+xml"]');
     }
 
     /**
@@ -235,7 +235,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testCreatorMediaType(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentType/Creator[@media-type="application/vnd.ez.api.User+xml"]');
+        $this->assertXPath($dom, '/ContentType/Creator[@media-type="application/vnd.ibexa.api.User+xml"]');
     }
 
     /**
@@ -255,7 +255,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testModifierMediaType(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentType/Modifier[@media-type="application/vnd.ez.api.User+xml"]');
+        $this->assertXPath($dom, '/ContentType/Modifier[@media-type="application/vnd.ibexa.api.User+xml"]');
     }
 
     /**
@@ -275,7 +275,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testDraftType(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentType/Draft[@media-type="application/vnd.ez.api.ContentType+xml"]');
+        $this->assertXPath($dom, '/ContentType/Draft[@media-type="application/vnd.ibexa.api.ContentType+xml"]');
     }
 
     /**
@@ -295,7 +295,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testGroupsType(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentType/Groups[@media-type="application/vnd.ez.api.ContentTypeGroupRefList+xml"]');
+        $this->assertXPath($dom, '/ContentType/Groups[@media-type="application/vnd.ibexa.api.ContentTypeGroupRefList+xml"]');
     }
 
     /**
@@ -381,10 +381,12 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     /**
      * Get the RestContentType visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestContentType
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestContentType
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\RestContentType();
     }
 }
+
+class_alias(RestContentTypeTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestContentTypeTest');

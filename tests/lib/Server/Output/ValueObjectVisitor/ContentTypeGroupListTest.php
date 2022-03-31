@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Server\Values\ContentTypeGroupList;
-use eZ\Publish\Core\Repository\Values\ContentType;
-use eZ\Publish\API\Repository\Values\ContentType\ContentTypeGroup;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup;
+use Ibexa\Core\Repository\Values\ContentType;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\ContentTypeGroupList;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
 {
@@ -28,7 +28,7 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
 
         $contentTypeGroupList = new ContentTypeGroupList([]);
 
-        $this->addRouteExpectation('ezpublish_rest_loadContentTypeGroupList', [], '/content/typegroups');
+        $this->addRouteExpectation('ibexa.rest.load_content_type_group_list', [], '/content/typegroups');
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -75,7 +75,7 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ContentTypeGroupList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentTypeGroupList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentTypeGroupList+xml',
                     'href' => '/content/typegroups',
                 ],
             ],
@@ -116,10 +116,12 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
     /**
      * Get the ContentTypeGroupList visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ContentTypeGroupList
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroupList
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\ContentTypeGroupList();
     }
 }
+
+class_alias(ContentTypeGroupListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ContentTypeGroupListTest');

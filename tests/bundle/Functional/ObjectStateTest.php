@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRestBundle\Tests\Functional;
+namespace Ibexa\Tests\Bundle\Rest\Functional;
 
-use EzSystems\EzPlatformRestBundle\Tests\Functional\TestCase as RESTFunctionalTestCase;
+use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 
 class ObjectStateTest extends RESTFunctionalTestCase
 {
@@ -33,7 +33,7 @@ XML;
 
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/objectstategroups',
+            '/api/ibexa/v2/content/objectstategroups',
             'ObjectStateGroupCreate+xml',
             'ObjectStateGroup+json',
             $body
@@ -126,7 +126,7 @@ XML;
     public function testLoadObjectStateGroups()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/objectstategroups')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/objectstategroups')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -155,7 +155,7 @@ XML;
      */
     public function testSetObjectStatesForContent($objectStateHref)
     {
-        $folder = $this->createFolder(__FUNCTION__, '/api/ezp/v2/content/locations/1/2');
+        $folder = $this->createFolder(__FUNCTION__, '/api/ibexa/v2/content/locations/1/2');
 
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -285,3 +285,5 @@ XML;
         self::assertHttpResponseCodeEquals($response, 204);
     }
 }
+
+class_alias(ObjectStateTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\ObjectStateTest');

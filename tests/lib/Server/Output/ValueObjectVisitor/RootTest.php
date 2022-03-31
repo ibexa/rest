@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Server\Service\ExpressionRouterRootResourceBuilder;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Service\ExpressionRouterRootResourceBuilder;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RootTest extends ValueObjectVisitorBaseTest
 {
@@ -18,26 +18,26 @@ class RootTest extends ValueObjectVisitorBaseTest
         $resourceConfig = [
             'Router' => [
                 'mediaType' => '',
-                'href' => 'router.generate("ezpublish_rest_createContent")',
+                'href' => 'router.generate("ibexa.rest.create_content")',
             ],
             'RouterWithAttributes' => [
                 'mediaType' => 'UserRefList',
-                'href' => 'router.generate("ezpublish_rest_loadUsers")',
+                'href' => 'router.generate("ibexa.rest.load_users")',
             ],
             'TemplateRouter' => [
                 'mediaType' => '',
-                'href' => 'templateRouter.generate("ezpublish_rest_redirectContent", {remoteId: "{remoteId}"})',
+                'href' => 'templateRouter.generate("ibexa.rest.redirect_content", {remoteId: "{remoteId}"})',
             ],
             'TemplateRouterWithAttributes' => [
                 'mediaType' => 'UserRefList',
-                'href' => 'templateRouter.generate("ezpublish_rest_loadUsers", {roleId: "{roleId}"})',
+                'href' => 'templateRouter.generate("ibexa.rest.load_users", {roleId: "{roleId}"})',
             ],
         ];
 
-        $this->addRouteExpectation('ezpublish_rest_createContent', [], '/content/objects');
-        $this->addTemplatedRouteExpectation('ezpublish_rest_redirectContent', ['remoteId' => '{remoteId}'], '/content/objects');
-        $this->addRouteExpectation('ezpublish_rest_loadUsers', [], '/user/users');
-        $this->addTemplatedRouteExpectation('ezpublish_rest_loadUsers', ['roleId' => '{roleId}'], '/user/users{?roleId}');
+        $this->addRouteExpectation('ibexa.rest.create_content', [], '/content/objects');
+        $this->addTemplatedRouteExpectation('ibexa.rest.redirect_content', ['remoteId' => '{remoteId}'], '/content/objects');
+        $this->addRouteExpectation('ibexa.rest.load_users', [], '/user/users');
+        $this->addTemplatedRouteExpectation('ibexa.rest.load_users', ['roleId' => '{roleId}'], '/user/users{?roleId}');
 
         $configResolver = $this->createMock(ConfigResolverInterface::class);
         $configResolver
@@ -104,7 +104,7 @@ class RootTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Root',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Root+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Root+xml',
                 ],
             ],
             $result,
@@ -137,7 +137,7 @@ class RootTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'RouterWithAttributes',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UserRefList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.UserRefList+xml',
                 ],
             ],
             $result,
@@ -170,7 +170,7 @@ class RootTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'TemplateRouterWithAttributes',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UserRefList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.UserRefList+xml',
                 ],
             ],
             $result,
@@ -182,10 +182,12 @@ class RootTest extends ValueObjectVisitorBaseTest
     /**
      * Get the Role visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Root
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Root
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\Root();
     }
 }
+
+class_alias(RootTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RootTest');

@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\FieldTypeProcessor;
+namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
-use EzSystems\EzPlatformRest\FieldTypeProcessor\TimeProcessor;
+use Ibexa\Rest\FieldTypeProcessor\TimeProcessor;
 use PHPUnit\Framework\TestCase;
 
 class TimeProcessorTest extends TestCase
@@ -19,10 +19,10 @@ class TimeProcessorTest extends TestCase
     public function fieldSettingsHashes()
     {
         return array_map(
-            function ($constantName) {
+            static function ($constantName) {
                 return [
                     ['defaultType' => $constantName],
-                    ['defaultType' => constant("eZ\\Publish\\Core\\FieldType\\Time\\Type::{$constantName}")],
+                    ['defaultType' => constant("Ibexa\\Core\\FieldType\\Time\\Type::{$constantName}")],
                 ];
             },
             $this->constants
@@ -30,7 +30,7 @@ class TimeProcessorTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\TimeProcessor::preProcessFieldSettingsHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\TimeProcessor::preProcessFieldSettingsHash
      * @dataProvider fieldSettingsHashes
      */
     public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
@@ -44,7 +44,7 @@ class TimeProcessorTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\TimeProcessor::postProcessFieldSettingsHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\TimeProcessor::postProcessFieldSettingsHash
      * @dataProvider fieldSettingsHashes
      */
     public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)
@@ -58,10 +58,12 @@ class TimeProcessorTest extends TestCase
     }
 
     /**
-     * @return \EzSystems\EzPlatformRest\FieldTypeProcessor\TimeProcessor
+     * @return \Ibexa\Rest\FieldTypeProcessor\TimeProcessor
      */
     protected function getProcessor()
     {
         return new TimeProcessor();
     }
 }
+
+class_alias(TimeProcessorTest::class, 'EzSystems\EzPlatformRest\Tests\FieldTypeProcessor\TimeProcessorTest');

@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Output\Generator;
-use EzSystems\EzPlatformRest\Output\Visitor;
+use Ibexa\Contracts\Rest\Output\Generator;
+use Ibexa\Contracts\Rest\Output\Visitor;
 
 /**
  * CreatedURLAlias value object visitor.
@@ -19,9 +19,9 @@ class CreatedURLAlias extends URLAlias
     /**
      * Visit struct returned by controllers.
      *
-     * @param \EzSystems\EzPlatformRest\Output\Visitor $visitor
-     * @param \EzSystems\EzPlatformRest\Output\Generator $generator
-     * @param \EzSystems\EzPlatformRest\Server\Values\CreatedURLAlias $data
+     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
+     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param \Ibexa\Rest\Server\Values\CreatedURLAlias $data
      */
     public function visit(Visitor $visitor, Generator $generator, $data)
     {
@@ -29,10 +29,12 @@ class CreatedURLAlias extends URLAlias
         $visitor->setHeader(
             'Location',
             $this->router->generate(
-                'ezpublish_rest_loadURLAlias',
+                'ibexa.rest.load_url_alias',
                 ['urlAliasId' => $data->urlAlias->id]
             )
         );
         $visitor->setStatus(201);
     }
 }
+
+class_alias(CreatedURLAlias::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedURLAlias');

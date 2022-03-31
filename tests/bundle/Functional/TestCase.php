@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRestBundle\Tests\Functional;
+namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Nyholm\Psr7\Request as HttpRequest;
-use PHPUnit\Framework\TestCase as BaseTestCase;
 use PHPUnit\Framework\ExpectationFailedException;
+use PHPUnit\Framework\TestCase as BaseTestCase;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
@@ -18,7 +18,7 @@ use Symfony\Component\HttpClient\Psr18Client;
 
 class TestCase extends BaseTestCase
 {
-    const X_HTTP_METHOD_OVERRIDE_MAP = [
+    public const X_HTTP_METHOD_OVERRIDE_MAP = [
         'PUBLISH' => 'POST',
         'MOVE' => 'POST',
         'PATCH' => 'PATCH',
@@ -174,7 +174,7 @@ class TestCase extends BaseTestCase
         array $extraHeaders = []
     ): RequestInterface {
         $headers = array_merge(
-            $method === 'POST' && $uri === '/api/ezp/v2/user/sessions' ? [] : $this->headers,
+            $method === 'POST' && $uri === '/api/ibexa/v2/user/sessions' ? [] : $this->headers,
             [
                 'Content-Type' => $this->generateMediaTypeString($contentType),
                 'Accept' => $this->generateMediaTypeString($acceptType),
@@ -205,10 +205,10 @@ class TestCase extends BaseTestCase
                 ? $response->getHeader('Content-Type')[0]
                 : '';
 
-            if (strpos($contentTypeHeader, 'application/vnd.ez.api.ErrorMessage+xml') !== false) {
+            if (strpos($contentTypeHeader, 'application/vnd.ibexa.api.ErrorMessage+xml') !== false) {
                 $body = \simplexml_load_string($response->getBody());
                 $errorMessageString = $this->getHttpResponseCodeErrorMessage($body);
-            } elseif (strpos($contentTypeHeader, 'application/vnd.ez.api.ErrorMessage+json') !== false) {
+            } elseif (strpos($contentTypeHeader, 'application/vnd.ibexa.api.ErrorMessage+json') !== false) {
                 $body = json_decode($response->getBody());
                 $errorMessageString = $this->getHttpResponseCodeErrorMessage($body->ErrorMessage);
             }
@@ -247,12 +247,12 @@ EOF;
 
     protected function generateMediaTypeString($typeString)
     {
-        return "application/vnd.ez.api.$typeString";
+        return "application/vnd.ibexa.api.$typeString";
     }
 
     protected function getMediaFromTypeString($typeString)
     {
-        $prefix = 'application/vnd.ez.api.';
+        $prefix = 'application/vnd.ibexa.api.';
         self::assertStringStartsWith(
             $prefix,
             $typeString,
@@ -265,7 +265,7 @@ EOF;
     protected function addCreatedElement($href)
     {
         $testCase = $this;
-        self::$createdContent[$href] = function () use ($href, $testCase) {
+        self::$createdContent[$href] = static function () use ($href, $testCase) {
             $testCase->sendHttpRequest(
                 $testCase->createHttpRequest('DELETE', $href)
             );
@@ -301,7 +301,7 @@ EOF;
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentCreate>
-  <ContentType href="/api/ezp/v2/content/types/1" />
+  <ContentType href="/api/ibexa/v2/content/types/1" />
   <mainLanguageCode>eng-GB</mainLanguageCode>
   <LocationCreate>
     <ParentLocation href="{$parentLocationId}" />
@@ -310,10 +310,10 @@ EOF;
     <sortField>PATH</sortField>
     <sortOrder>ASC</sortOrder>
   </LocationCreate>
-  <Section href="/api/ezp/v2/content/sections/1" />
+  <Section href="/api/ibexa/v2/content/sections/1" />
   <alwaysAvailable>true</alwaysAvailable>
   <remoteId>{$remoteId}</remoteId>
-  <User href="/api/ezp/v2/user/users/14" />
+  <User href="/api/ibexa/v2/user/users/14" />
   <modificationDate>2012-09-30T12:30:00</modificationDate>
   <fields>
     <field>
@@ -337,7 +337,7 @@ XML;
     {
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/objects',
+            '/api/ibexa/v2/content/objects',
             'ContentCreate+xml',
             'Content+json',
             $xml
@@ -414,7 +414,7 @@ XML;
     {
         return $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/user/sessions',
+            '/api/ibexa/v2/user/sessions',
             'SessionInput+json',
             'Session+json',
             sprintf('{"SessionInput": {"login": "%s", "password": "%s"}}', $login, $password),
@@ -422,3 +422,5 @@ XML;
         );
     }
 }
+
+class_alias(TestCase::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\TestCase');

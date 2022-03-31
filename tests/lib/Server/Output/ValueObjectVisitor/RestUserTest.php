@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Values\RestUser;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use eZ\Publish\Core\Repository\Values;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Repository\Values;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\RestUser;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RestUserTest extends ValueObjectVisitorBaseTest
 {
@@ -32,52 +32,52 @@ class RestUserTest extends ValueObjectVisitorBaseTest
 
         $locationPath = implode('/', $restUser->mainLocation->path);
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $restUser->contentInfo->id],
             "/user/users/{$restUser->contentInfo->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentType',
+            'ibexa.rest.load_content_type',
             ['contentTypeId' => $restUser->contentInfo->contentTypeId],
             "/content/types/{$restUser->contentInfo->contentTypeId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentVersions',
+            'ibexa.rest.load_content_versions',
             ['contentId' => $restUser->contentInfo->id],
             "/content/objects/{$restUser->contentInfo->id}/versions"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadSection',
+            'ibexa.rest.load_section',
             ['sectionId' => $restUser->contentInfo->sectionId],
             "/content/sections/{$restUser->contentInfo->sectionId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocation',
+            'ibexa.rest.load_location',
             ['locationPath' => $locationPath],
             "/content/locations/{$locationPath}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocationsForContent',
+            'ibexa.rest.load_locations_for_content',
             ['contentId' => $restUser->contentInfo->id],
             "/content/objects/{$restUser->contentInfo->id}/locations"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUserGroupsOfUser',
+            'ibexa.rest.load_user_groups_of_user',
             ['userId' => $restUser->contentInfo->id],
             "/user/users/{$restUser->contentInfo->id}/groups"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $restUser->contentInfo->ownerId],
             "/user/users/{$restUser->contentInfo->ownerId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUserGroupsOfUser',
+            'ibexa.rest.load_user_groups_of_user',
             ['userId' => $restUser->contentInfo->id],
             "/user/users/{$restUser->contentInfo->id}/groups"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadRoleAssignmentsForUser',
+            'ibexa.rest.load_role_assignments_for_user',
             ['userId' => $restUser->contentInfo->id],
             "/user/users/{$restUser->contentInfo->id}/roles"
         );
@@ -157,7 +157,7 @@ class RestUserTest extends ValueObjectVisitorBaseTest
      */
     public function testUserMediaTypeWithoutVersionCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/User[@media-type="application/vnd.ez.api.User+xml"]');
+        $this->assertXPath($dom, '/User[@media-type="application/vnd.ibexa.api.User+xml"]');
     }
 
     /**
@@ -187,7 +187,7 @@ class RestUserTest extends ValueObjectVisitorBaseTest
      */
     public function testUserTypeMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/User/ContentType[@media-type="application/vnd.ez.api.ContentType+xml"]');
+        $this->assertXPath($dom, '/User/ContentType[@media-type="application/vnd.ibexa.api.ContentType+xml"]');
     }
 
     /**
@@ -217,7 +217,7 @@ class RestUserTest extends ValueObjectVisitorBaseTest
      */
     public function testVersionsMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/User/Versions[@media-type="application/vnd.ez.api.VersionList+xml"]');
+        $this->assertXPath($dom, '/User/Versions[@media-type="application/vnd.ibexa.api.VersionList+xml"]');
     }
 
     /**
@@ -237,7 +237,7 @@ class RestUserTest extends ValueObjectVisitorBaseTest
      */
     public function testSectionMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/User/Section[@media-type="application/vnd.ez.api.Section+xml"]');
+        $this->assertXPath($dom, '/User/Section[@media-type="application/vnd.ibexa.api.Section+xml"]');
     }
 
     /**
@@ -257,7 +257,7 @@ class RestUserTest extends ValueObjectVisitorBaseTest
      */
     public function testMainLocationMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/User/MainLocation[@media-type="application/vnd.ez.api.Location+xml"]');
+        $this->assertXPath($dom, '/User/MainLocation[@media-type="application/vnd.ibexa.api.Location+xml"]');
     }
 
     /**
@@ -277,7 +277,7 @@ class RestUserTest extends ValueObjectVisitorBaseTest
      */
     public function testLocationsMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/User/Locations[@media-type="application/vnd.ez.api.LocationList+xml"]');
+        $this->assertXPath($dom, '/User/Locations[@media-type="application/vnd.ibexa.api.LocationList+xml"]');
     }
 
     /**
@@ -297,7 +297,7 @@ class RestUserTest extends ValueObjectVisitorBaseTest
      */
     public function testOwnerMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/User/Owner[@media-type="application/vnd.ez.api.User+xml"]');
+        $this->assertXPath($dom, '/User/Owner[@media-type="application/vnd.ibexa.api.User+xml"]');
     }
 
     /**
@@ -347,7 +347,7 @@ class RestUserTest extends ValueObjectVisitorBaseTest
      */
     public function testUserGroupsMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/User/UserGroups[@media-type="application/vnd.ez.api.UserGroupList+xml"]');
+        $this->assertXPath($dom, '/User/UserGroups[@media-type="application/vnd.ibexa.api.UserGroupList+xml"]');
     }
 
     /**
@@ -367,16 +367,18 @@ class RestUserTest extends ValueObjectVisitorBaseTest
      */
     public function testRolesMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/User/Roles[@media-type="application/vnd.ez.api.RoleAssignmentList+xml"]');
+        $this->assertXPath($dom, '/User/Roles[@media-type="application/vnd.ibexa.api.RoleAssignmentList+xml"]');
     }
 
     /**
      * Get the User visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestUser
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUser
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\RestUser();
     }
 }
+
+class_alias(RestUserTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestUserTest');

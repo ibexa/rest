@@ -1,18 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRestBundle\DependencyInjection\Compiler;
+namespace Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 
+use Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Compiler pass for the ezpublish_rest.output.visitor tag.
+ * Compiler pass for the ibexa.rest.output.visitor tag.
  *
  * Maps an output visitor (json, xml...) to an accept-header
  *
@@ -20,39 +21,49 @@ use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
  */
 class OutputVisitorPass implements CompilerPassInterface
 {
+    public const OUTPUT_VISITOR_SERVICE_TAG = 'ibexa.rest.output.visitor';
+
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('ezpublish_rest.output.visitor.dispatcher')) {
+        if (!$container->hasDefinition(AcceptHeaderVisitorDispatcher::class)) {
             return;
         }
 
-        $definition = $container->getDefinition('ezpublish_rest.output.visitor.dispatcher');
+        $definition = $container->getDefinition(AcceptHeaderVisitorDispatcher::class);
 
         $visitors = [];
 
-        foreach ($container->findTaggedServiceIds('ezpublish_rest.output.visitor') as $id => $attributes) {
+        $taggedServiceIds = $container->findTaggedServiceIds(self::OUTPUT_VISITOR_SERVICE_TAG);
+        foreach ($taggedServiceIds as $serviceId => $attributes) {
             foreach ($attributes as $attribute) {
-                $priority = isset($attribute['priority']) ? $attribute['priority'] : 0;
-
-                if (!isset($attribute['regexps'])) {
-                    throw new \LogicException('The ezpublish_rest.output.visitor service tag needs a "regexps" attribute to identify the Accept header.');
-                }
-
-                if (is_array($attribute['regexps'])) {
-                    $regexps = $attribute['regexps'];
-                } elseif (is_string($attribute['regexps'])) {
+                $priority = $attribute['priority'] ?? 0;
+                $regexps = $attribute['regexps'];
+                if (is_string($regexps)) {
                     try {
-                        $regexps = $container->getParameter($attribute['regexps']);
+                        $regexps = $container->getParameter($regexps);
                     } catch (InvalidArgumentException $e) {
-                        throw new \LogicException("The regexps attribute of the ezpublish_rest.output.visitor service tag can be a string matching a container parameter name. Could not find parameter {$attribute['regexps']}.");
+                        throw new \LogicException(
+                            sprintf(
+                                'Service "%s" tagged with "%s" service tag "regexps" attribute can be a string matching a container parameter name. Could not find parameter "%s".',
+                                $serviceId,
+                                self::OUTPUT_VISITOR_SERVICE_TAG,
+                                $regexps
+                            )
+                        );
                     }
-                } else {
-                    throw new \LogicException('The ezpublish_rest.output.visitor service tag needs a "regexps" attribute, either as an array or a string. Invalid value.');
+                } elseif (!is_array($regexps)) {
+                    throw new \LogicException(
+                        sprintf(
+                            'Service "%s" tagged with "%s" service tag needs a "regexps" attribute to identify the Accept header, either as an array or a string.',
+                            $serviceId,
+                            self::OUTPUT_VISITOR_SERVICE_TAG
+                        )
+                    );
                 }
 
                 $visitors[$priority][] = [
                     'regexps' => $regexps,
-                    'reference' => new Reference($id),
+                    'reference' => new Reference($serviceId),
                 ];
             }
         }
@@ -64,7 +75,8 @@ class OutputVisitorPass implements CompilerPassInterface
         foreach ($visitors as $visitor) {
             foreach ($visitor['regexps'] as $regexp) {
                 $definition->addMethodCall(
-                    'addVisitor', [
+                    'addVisitor',
+                    [
                         $regexp,
                         $visitor['reference'],
                     ]
@@ -73,3 +85,5 @@ class OutputVisitorPass implements CompilerPassInterface
         }
     }
 }
+
+class_alias(OutputVisitorPass::class, 'EzSystems\EzPlatformRestBundle\DependencyInjection\Compiler\OutputVisitorPass');

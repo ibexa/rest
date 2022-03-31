@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use eZ\Publish\Core\Repository\Values\Content;
-use EzSystems\EzPlatformRest\Server\Values\RestRelation;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Core\Repository\Values\Content;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\RestRelation;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RestRelationTest extends ValueObjectVisitorBaseTest
 {
@@ -49,7 +49,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadVersionRelation',
+            'ibexa.rest.load_version_relation',
             [
                 'contentId' => $relation->contentId,
                 'versionNumber' => $relation->versionNo,
@@ -58,12 +58,12 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
             "/content/objects/{$relation->contentId}/versions/{$relation->versionNo}/relations/{$relation->relation->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $relation->contentId],
             "/content/objects/{$relation->contentId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $relation->relation->getDestinationContentInfo()->id],
             "/content/objects/{$relation->relation->getDestinationContentInfo()->id}"
         );
@@ -117,7 +117,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Relation',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Relation+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Relation+xml',
                     'href' => '/content/objects/1/versions/1/relations/42',
                 ],
             ],
@@ -138,7 +138,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'SourceContent',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentInfo+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentInfo+xml',
                     'href' => '/content/objects/1',
                 ],
             ],
@@ -159,7 +159,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'DestinationContent',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentInfo+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentInfo+xml',
                     'href' => '/content/objects/2',
                 ],
             ],
@@ -208,10 +208,12 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
     /**
      * Get the Relation visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestRelation
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestRelation
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\RestRelation();
     }
 }
+
+class_alias(RestRelationTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestRelationTest');

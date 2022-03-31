@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use eZ\Publish\Core\Repository\Values\User\User;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Server\Values\UserRefList;
-use EzSystems\EzPlatformRest\Server\Values\RestUser;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\Core\Repository\Values\Content\Location;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Repository\Values\Content\Location;
+use Ibexa\Core\Repository\Values\User\User;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\RestUser;
+use Ibexa\Rest\Server\Values\UserRefList;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class UserRefListTest extends ValueObjectVisitorBaseTest
 {
@@ -47,7 +47,7 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $UserRefList->users[0]->contentInfo->id],
             "/user/users/{$UserRefList->users[0]->contentInfo->id}"
         );
@@ -85,7 +85,7 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testUserRefListMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserRefList[@media-type="application/vnd.ez.api.UserRefList+xml"]');
+        $this->assertXPath($dom, '/UserRefList[@media-type="application/vnd.ibexa.api.UserRefList+xml"]');
     }
 
     /**
@@ -105,16 +105,18 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testUserMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserRefList/User[@media-type="application/vnd.ez.api.User+xml"]');
+        $this->assertXPath($dom, '/UserRefList/User[@media-type="application/vnd.ibexa.api.User+xml"]');
     }
 
     /**
      * Get the UserRefList visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\UserRefList
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UserRefList
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\UserRefList();
     }
 }
+
+class_alias(UserRefListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\UserRefListTest');

@@ -13,7 +13,7 @@
     <env name="EZP_TEST_REST_AUTH" value="admin:publish"/>
   </php>
   <testsuites>
-    <testsuite name="eZ Publish REST Functional Tests">
+    <testsuite name="Ibexa REST Functional Tests">
       <directory>tests/bundle/Functional</directory>
     </testsuite>
   </testsuites>

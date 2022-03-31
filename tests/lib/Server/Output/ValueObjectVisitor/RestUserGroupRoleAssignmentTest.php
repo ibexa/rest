@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use eZ\Publish\Core\Repository\Values\User;
-use EzSystems\EzPlatformRest\Server\Values;
+use Ibexa\Core\Repository\Values\User;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RestUserGroupRoleAssignmentTest extends ValueObjectVisitorBaseTest
 {
@@ -40,7 +40,7 @@ class RestUserGroupRoleAssignmentTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadRoleAssignmentForUserGroup',
+            'ibexa.rest.load_role_assignment_for_user_group',
             [
                 'groupPath' => '1/5/14',
                 'roleId' => $userGroupRoleAssignment->roleAssignment->role->id,
@@ -48,7 +48,7 @@ class RestUserGroupRoleAssignmentTest extends ValueObjectVisitorBaseTest
             "/user/groups/1/5/14/roles/{$userGroupRoleAssignment->roleAssignment->role->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadRole',
+            'ibexa.rest.load_role',
             ['roleId' => $userGroupRoleAssignment->roleAssignment->role->id],
             "/user/roles/{$userGroupRoleAssignment->roleAssignment->role->id}"
         );
@@ -101,7 +101,7 @@ class RestUserGroupRoleAssignmentTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'RoleAssignment',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.RoleAssignment+xml',
+                    'media-type' => 'application/vnd.ibexa.api.RoleAssignment+xml',
                     'href' => '/user/groups/1/5/14/roles/42',
                 ],
             ],
@@ -143,7 +143,7 @@ class RestUserGroupRoleAssignmentTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Role',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Role+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Role+xml',
                     'href' => '/user/roles/42',
                 ],
             ],
@@ -156,10 +156,12 @@ class RestUserGroupRoleAssignmentTest extends ValueObjectVisitorBaseTest
     /**
      * Get the RestUserGroupRoleAssignment visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestUserGroupRoleAssignment
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserGroupRoleAssignment
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\RestUserGroupRoleAssignment();
     }
 }
+
+class_alias(RestUserGroupRoleAssignmentTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestUserGroupRoleAssignmentTest');

@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Output;
+namespace Ibexa\Contracts\Rest\Output;
 
 /**
  * Output generator.
@@ -333,7 +333,7 @@ abstract class Generator
      */
     protected function generateMediaType($name, $type)
     {
-        return "application/vnd.ez.api.{$name}+{$type}";
+        return "application/vnd.ibexa.api.{$name}+{$type}";
     }
 
     /**
@@ -345,7 +345,7 @@ abstract class Generator
      *
      * @return string
      */
-    protected function generateMediaTypeWithVendor($name, $type, $vendor = 'vnd.ez.api')
+    protected function generateMediaTypeWithVendor($name, $type, $vendor = 'vnd.ibexa.api')
     {
         return "application/{$vendor}.{$name}+{$type}";
     }
@@ -433,3 +433,5 @@ abstract class Generator
      */
     abstract public function serializeBool($boolValue);
 }
+
+class_alias(Generator::class, 'EzSystems\EzPlatformRest\Output\Generator');

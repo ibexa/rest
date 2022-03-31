@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRestBundle\Tests\Functional\SearchView;
+namespace Ibexa\Tests\Bundle\Rest\Functional\SearchView;
 
-use EzSystems\EzPlatformRestBundle\Tests\Functional\TestCase as RESTFunctionalTestCase;
+use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 
 /**
- * @internal for internal use by eZ Platform REST test framework
+ * @internal for internal use by Ibexa REST test framework
  */
 abstract class SearchViewTestCase extends RESTFunctionalTestCase
 {
@@ -24,7 +24,7 @@ abstract class SearchViewTestCase extends RESTFunctionalTestCase
     {
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/views',
+            '/api/ibexa/v2/views',
             "ViewInput+{$format}; version=1.1",
             'View+json',
             $body
@@ -41,3 +41,5 @@ abstract class SearchViewTestCase extends RESTFunctionalTestCase
         return $jsonResponse->View->Result->count;
     }
 }
+
+class_alias(SearchViewTestCase::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SearchView\SearchViewTestCase');

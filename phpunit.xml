@@ -9,15 +9,15 @@
   colors="true"
   >
   <testsuites>
-    <testsuite name="eZ Publish REST Bundle">
+    <testsuite name="Ibexa REST Bundle">
       <directory>tests/bundle/</directory>
       <exclude>tests/bundle/Functional</exclude>
     </testsuite>
-    <testsuite name="eZ Publish REST">
+    <testsuite name="Ibexa REST">
       <directory>tests/lib/</directory>
       <exclude>tests/lib/Server</exclude>
     </testsuite>
-    <testsuite name="eZ Publish REST Server Tests">
+    <testsuite name="Ibexa REST Server Tests">
       <directory>tests/lib/Server</directory>
     </testsuite>
   </testsuites>

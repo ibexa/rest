@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Server\Values\RestContent;
-use EzSystems\EzPlatformRest\Server\Values\RestLocation;
-use eZ\Publish\Core\Repository\Values\Content\Location;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Core\Repository\Values\Content\Location;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\RestContent;
+use Ibexa\Rest\Server\Values\RestLocation;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RestLocationTest extends ValueObjectVisitorBaseTest
 {
@@ -55,34 +55,34 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocation',
+            'ibexa.rest.load_location',
             ['locationPath' => '1/2/21/42'],
             '/content/locations/1/2/21/42'
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocation',
+            'ibexa.rest.load_location',
             ['locationPath' => '1/2/21'],
             '/content/locations/1/2/21'
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocationChildren',
+            'ibexa.rest.load_location_children',
             ['locationPath' => '1/2/21/42'],
             '/content/locations/1/2/21/42/children'
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $location->location->contentId],
             "/content/objects/{$location->location->contentId}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_listLocationURLAliases',
+            'ibexa.rest.list_location_url_aliases',
             ['locationPath' => '1/2/21/42'],
             '/content/objects/1/2/21/42/urlaliases'
         );
 
         // Expected twice, second one here for ContentInfo
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $location->location->contentId],
             "/content/objects/{$location->location->contentId}"
         );
@@ -136,7 +136,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Location',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Location+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Location+xml',
                     'href' => '/content/locations/1/2/21/42',
                 ],
             ],
@@ -178,7 +178,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ContentInfo',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentInfo+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentInfo+xml',
                     'href' => '/content/objects/42',
                 ],
             ],
@@ -339,7 +339,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Children',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.LocationList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.LocationList+xml',
                     'href' => '/content/locations/1/2/21/42/children',
                 ],
             ],
@@ -381,7 +381,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ParentLocation',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Location+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Location+xml',
                     'href' => '/content/locations/1/2/21',
                 ],
             ],
@@ -423,7 +423,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Content',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Content+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Content+xml',
                     'href' => '/content/objects/42',
                 ],
             ],
@@ -565,7 +565,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'UrlAliases',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UrlAliasRefList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.UrlAliasRefList+xml',
                     'href' => '/content/objects/1/2/21/42/urlaliases',
                 ],
             ],
@@ -578,10 +578,12 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     /**
      * Get the Location visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestLocation
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestLocation
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\RestLocation();
     }
 }
+
+class_alias(RestLocationTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestLocationTest');

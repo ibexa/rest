@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Server\Values\URLAliasRefList;
-use eZ\Publish\API\Repository\Values\Content\URLAlias;
+use Ibexa\Contracts\Core\Repository\Values\Content\URLAlias;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\URLAliasRefList;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class URLAliasRefListTest extends ValueObjectVisitorBaseTest
 {
@@ -37,7 +37,7 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadURLAlias',
+            'ibexa.rest.load_url_alias',
             ['urlAliasId' => $urlAliasRefList->urlAliases[0]->id],
             "/content/urlaliases/{$urlAliasRefList->urlAliases[0]->id}"
         );
@@ -75,7 +75,7 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testUrlAliasRefListMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UrlAliasRefList[@media-type="application/vnd.ez.api.UrlAliasRefList+xml"]');
+        $this->assertXPath($dom, '/UrlAliasRefList[@media-type="application/vnd.ibexa.api.UrlAliasRefList+xml"]');
     }
 
     /**
@@ -95,16 +95,18 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testUrlAliasMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UrlAliasRefList/UrlAlias[@media-type="application/vnd.ez.api.UrlAlias+xml"]');
+        $this->assertXPath($dom, '/UrlAliasRefList/UrlAlias[@media-type="application/vnd.ibexa.api.UrlAlias+xml"]');
     }
 
     /**
      * Get the URLAliasRefList visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\URLAliasRefList
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAliasRefList
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\URLAliasRefList();
     }
 }
+
+class_alias(URLAliasRefListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\URLAliasRefListTest');

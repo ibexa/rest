@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Input\Parser;
+namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
-use eZ\Publish\API\Repository\Values\Content\Query;
-use EzSystems\EzPlatformRest\Server\Input\Parser\ViewInput;
-use EzSystems\EzPlatformRest\Server\Values\RestViewInput;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Rest\Server\Input\Parser\ViewInput;
+use Ibexa\Rest\Server\Values\RestViewInput;
 
 class ViewInputTest extends BaseTest
 {
@@ -27,7 +27,7 @@ class ViewInputTest extends BaseTest
         $parsingDispatcher
             ->expects($this->once())
             ->method('parse')
-            ->with($inputArray['Query'], 'application/vnd.ez.api.internal.ContentQuery')
+            ->with($inputArray['Query'], 'application/vnd.ibexa.api.internal.ContentQuery')
             ->willReturn(new Query());
 
         $result = $parser->parse($inputArray, $parsingDispatcher);
@@ -41,14 +41,14 @@ class ViewInputTest extends BaseTest
 
     public function testThrowsExceptionOnMissingIdentifier()
     {
-        $this->expectException('EzSystems\EzPlatformRest\Exceptions\Parser');
+        $this->expectException('Ibexa\\Contracts\\Rest\\Exceptions\\Parser');
         $inputArray = ['Query' => []];
         $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
     public function testThrowsExceptionOnMissingQuery()
     {
-        $this->expectException('EzSystems\EzPlatformRest\Exceptions\Parser');
+        $this->expectException('Ibexa\\Contracts\\Rest\\Exceptions\\Parser');
         $inputArray = ['identifier' => 'foo'];
         $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
     }
@@ -56,10 +56,12 @@ class ViewInputTest extends BaseTest
     /**
      * Returns the session input parser.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Input\Parser\ViewInput
+     * @return \Ibexa\Rest\Server\Input\Parser\ViewInput
      */
     protected function internalGetParser()
     {
         return new ViewInput();
     }
 }
+
+class_alias(ViewInputTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\ViewInputTest');

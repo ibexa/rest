@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\FieldTypeProcessor;
+namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
-use EzSystems\EzPlatformRest\FieldTypeProcessor\DateAndTimeProcessor;
+use Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor;
 use PHPUnit\Framework\TestCase;
 
 class DateAndTimeProcessorTest extends TestCase
@@ -20,10 +20,10 @@ class DateAndTimeProcessorTest extends TestCase
     public function fieldSettingsHashes()
     {
         return array_map(
-            function ($constantName) {
+            static function ($constantName) {
                 return [
                     ['defaultType' => $constantName],
-                    ['defaultType' => constant("eZ\\Publish\\Core\\FieldType\\DateAndTime\\Type::{$constantName}")],
+                    ['defaultType' => constant("Ibexa\\Core\\FieldType\\DateAndTime\\Type::{$constantName}")],
                 ];
             },
             $this->constants
@@ -31,7 +31,7 @@ class DateAndTimeProcessorTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\DateAndTimeProcessor::preProcessFieldSettingsHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor::preProcessFieldSettingsHash
      * @dataProvider fieldSettingsHashes
      */
     public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
@@ -45,7 +45,7 @@ class DateAndTimeProcessorTest extends TestCase
     }
 
     /**
-     * @covers \EzSystems\EzPlatformRest\FieldTypeProcessor\DateAndTimeProcessor::postProcessFieldSettingsHash
+     * @covers \Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor::postProcessFieldSettingsHash
      * @dataProvider fieldSettingsHashes
      */
     public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)
@@ -59,10 +59,12 @@ class DateAndTimeProcessorTest extends TestCase
     }
 
     /**
-     * @return \EzSystems\EzPlatformRest\FieldTypeProcessor\DateAndTimeProcessor
+     * @return \Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor
      */
     protected function getProcessor()
     {
         return new DateAndTimeProcessor();
     }
 }
+
+class_alias(DateAndTimeProcessorTest::class, 'EzSystems\EzPlatformRest\Tests\FieldTypeProcessor\DateAndTimeProcessorTest');

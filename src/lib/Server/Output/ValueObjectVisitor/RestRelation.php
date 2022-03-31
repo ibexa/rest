@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Output\Generator;
-use EzSystems\EzPlatformRest\Output\Visitor;
-use eZ\Publish\API\Repository\Values\Content\Relation as RelationValue;
+use Ibexa\Contracts\Core\Repository\Values\Content\Relation as RelationValue;
+use Ibexa\Contracts\Rest\Output\Generator;
+use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
+use Ibexa\Contracts\Rest\Output\Visitor;
 
 /**
  * RestRelation value object visitor.
@@ -19,9 +19,9 @@ class RestRelation extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \EzSystems\EzPlatformRest\Output\Visitor $visitor
-     * @param \EzSystems\EzPlatformRest\Output\Generator $generator
-     * @param \EzSystems\EzPlatformRest\Server\Values\RestRelation $data
+     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
+     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param \Ibexa\Rest\Server\Values\RestRelation $data
      */
     public function visit(Visitor $visitor, Generator $generator, $data)
     {
@@ -31,7 +31,7 @@ class RestRelation extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadVersionRelation',
+                'ibexa.rest.load_version_relation',
                 [
                     'contentId' => $data->contentId,
                     'versionNumber' => $data->versionNo,
@@ -45,7 +45,7 @@ class RestRelation extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadContent',
+                'ibexa.rest.load_content',
                 [
                     'contentId' => $data->contentId,
                 ]
@@ -58,7 +58,7 @@ class RestRelation extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadContent',
+                'ibexa.rest.load_content',
                 [
                     'contentId' => $data->relation->getDestinationContentInfo()->id,
                 ]
@@ -114,3 +114,5 @@ class RestRelation extends ValueObjectVisitor
         return implode(',', $relationTypeList);
     }
 }
+
+class_alias(RestRelation::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestRelation');

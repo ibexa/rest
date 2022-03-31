@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRestBundle\Tests\Functional;
+namespace Ibexa\Tests\Bundle\Rest\Functional;
 
-use EzSystems\EzPlatformRestBundle\Tests\Functional\TestCase as RESTFunctionalTestCase;
+use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 use SimpleXMLElement;
 
 class SortClauseTest extends RESTFunctionalTestCase
@@ -23,7 +23,7 @@ class SortClauseTest extends RESTFunctionalTestCase
     public function testFieldSortClause(array $foldersNameToCreate, string $sortClauseXML, array $foldersInExpectedOrder)
     {
         $string = $this->addTestSuffix(__FUNCTION__);
-        $mainTestFolderContent = $this->createFolder($string, '/api/ezp/v2/content/locations/1/2');
+        $mainTestFolderContent = $this->createFolder($string, '/api/ibexa/v2/content/locations/1/2');
 
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $mainTestFolderContent['_href'], '', 'Content+json')
@@ -71,7 +71,7 @@ class SortClauseTest extends RESTFunctionalTestCase
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/views',
+            '/api/ibexa/v2/views',
             'ViewInput+xml; version=1.1',
             'View+xml',
             $body
@@ -129,3 +129,5 @@ XML;
         ];
     }
 }
+
+class_alias(SortClauseTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SortClauseTest');

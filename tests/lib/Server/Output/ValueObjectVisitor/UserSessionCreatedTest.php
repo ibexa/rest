@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Server\Values;
+use Ibexa\Rest\Server\Values;
 
 class UserSessionCreatedTest extends UserSessionTest
 {
@@ -36,10 +36,10 @@ class UserSessionCreatedTest extends UserSessionTest
 
         $this->getVisitorMock()->expects($this->at(1))
             ->method('setHeader')
-            ->with($this->equalTo('Content-Type'), $this->equalTo('application/vnd.ez.api.Session+xml'));
+            ->with($this->equalTo('Content-Type'), $this->equalTo('application/vnd.ibexa.api.Session+xml'));
 
         $this->addRouteExpectation(
-            'ezpublish_rest_deleteSession',
+            'ibexa.rest.delete_session',
             [
                 'sessionId' => $session->sessionId,
             ],
@@ -47,7 +47,7 @@ class UserSessionCreatedTest extends UserSessionTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $session->user->id],
             "/user/users/{$session->user->id}"
         );
@@ -65,3 +65,5 @@ class UserSessionCreatedTest extends UserSessionTest
         return $result;
     }
 }
+
+class_alias(UserSessionCreatedTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\UserSessionCreatedTest');
