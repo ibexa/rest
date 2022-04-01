@@ -26,9 +26,9 @@ abstract class RestContentTypeBase extends ValueObjectVisitor
     {
         switch ($contentTypeStatus) {
             case Values\ContentType\ContentType::STATUS_DRAFT:
-                return 'draft_';
+                return '_draft';
             case Values\ContentType\ContentType::STATUS_MODIFIED:
-                return 'modified_';
+                return '_modified';
             case Values\ContentType\ContentType::STATUS_DEFINED:
             default:
                 return '';
