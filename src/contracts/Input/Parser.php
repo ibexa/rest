@@ -17,7 +17,7 @@ abstract class Parser
      * @param array $data
      * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject
+     * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject|object
      */
     abstract public function parse(array $data, ParsingDispatcher $parsingDispatcher);
 }
