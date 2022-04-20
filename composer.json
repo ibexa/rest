@@ -30,7 +30,7 @@
         "ext-libxml": "*",
         "ext-simplexml": "*",
         "ext-xmlwriter": "*",
-        "ibexa/core": "~4.1.0@dev",
+        "ibexa/core": "~4.2.0@dev",
         "symfony/http-kernel": "^5.3",
         "symfony/dependency-injection": "^5.3",
         "symfony/routing": "^5.3",
@@ -47,7 +47,7 @@
     },
     "require-dev": {
         "ibexa/ci-scripts": "^0.2@dev",
-        "ibexa/doctrine-schema": "~4.1.0@dev",
+        "ibexa/doctrine-schema": "~4.2.0@dev",
         "ibexa/code-style": "^1.0",
         "friendsofphp/php-cs-fixer": "^3.0",
         "phpunit/phpunit": "^8.5",
@@ -69,7 +69,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "4.1.x-dev"
+            "dev-main": "4.2.x-dev"
         }
     }
 }
