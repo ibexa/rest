@@ -68,4 +68,4 @@ jobs:
               run: composer test
     integration-tests:
         name: "REST integration tests"
-        uses: ./.github/workflows/integration-tests-callable.yaml@main
+        uses: ./.github/workflows/integration-tests-callable.yaml

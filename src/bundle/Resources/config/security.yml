@@ -10,8 +10,6 @@ services:
             - "@event_dispatcher"
             - '@ibexa.config.resolver'
             - "@?logger"
-            - "%ibexa.rest.authentication_min_delay_time%"
-            - "%ibexa.rest.authentication_max_delay_time%"
         abstract: true
 
     Ibexa\Rest\Server\Security\RestLogoutHandler:
