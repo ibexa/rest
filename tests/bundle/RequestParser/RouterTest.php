@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRestBundle\Tests\RequestParser;
+namespace Ibexa\Tests\Bundle\Rest\RequestParser;
 
-use EzSystems\EzPlatformRest\Exceptions\InvalidArgumentException;
+use Ibexa\Bundle\Rest\RequestParser\Router as RouterRequestParser;
+use Ibexa\Contracts\Rest\Exceptions\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use EzSystems\EzPlatformRestBundle\RequestParser\Router as RouterRequestParser;
 use Symfony\Cmf\Component\Routing\ChainRouter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
@@ -29,7 +29,7 @@ class RouterTest extends TestCase
         $request = Request::create($uri, 'GET');
 
         $expectedMatchResult = [
-            '_route' => 'ezpublish_rest_testRoute',
+            '_route' => 'ibexa.rest.test_route',
             '_controller' => '',
         ];
 
@@ -79,7 +79,7 @@ class RouterTest extends TestCase
         $href = '/api/test/v1/content/objects/1';
 
         $expectedMatchResult = [
-            '_route' => 'ezpublish_rest_testParseHref',
+            '_route' => 'ibexa.rest.test_parse_href',
             'contentId' => 1,
         ];
 
@@ -99,7 +99,7 @@ class RouterTest extends TestCase
         $href = '/api/test/v1/content/no-attribute';
 
         $matchResult = [
-            '_route' => 'ezpublish_rest_testParseHrefAttributeNotFound',
+            '_route' => 'ibexa.rest.test_parse_href_attribute_not_found',
         ];
 
         $this->getRouterMock()
@@ -112,7 +112,7 @@ class RouterTest extends TestCase
 
     public function testGenerate()
     {
-        $routeName = 'ezpublish_rest_testGenerate';
+        $routeName = 'ibexa.rest.test_generate';
         $arguments = ['arg1' => 1];
 
         $expectedResult = self::$routePrefix . '/generate/' . $arguments['arg1'];
@@ -129,7 +129,7 @@ class RouterTest extends TestCase
     }
 
     /**
-     * @return \EzSystems\EzPlatformRestBundle\RequestParser\Router
+     * @return \Ibexa\Bundle\Rest\RequestParser\Router
      */
     private function getRequestParser()
     {
@@ -155,3 +155,5 @@ class RouterTest extends TestCase
         return $this->router;
     }
 }
+
+class_alias(RouterTest::class, 'EzSystems\EzPlatformRestBundle\Tests\RequestParser\RouterTest');

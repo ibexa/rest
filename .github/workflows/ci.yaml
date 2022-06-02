@@ -42,7 +42,6 @@ jobs:
             fail-fast: false
             matrix:
                 php:
-                    - '7.3'
                     - '7.4'
                     - '8.0'
                     - '8.1'
@@ -69,4 +68,4 @@ jobs:
               run: composer test
     integration-tests:
         name: "REST integration tests"
-        uses: ./.github/workflows/integration-tests-callable.yaml
+        uses: ./.github/workflows/integration-tests-callable.yaml@4.1

@@ -1,23 +1,23 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use eZ\Publish\API\Repository\ContentService;
-use eZ\Publish\API\Repository\ContentTypeService;
-use eZ\Publish\API\Repository\LocationService;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\API\Repository\Values\Content\Search\SearchHit;
-use eZ\Publish\API\Repository\Values\Content\Search\SearchResult;
-use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use eZ\Publish\Core\Repository\Values\Content;
-use EzSystems\EzPlatformRest\Server\Values\RestExecutedView;
-use eZ\Publish\Core\Repository\Values\Content as ApiValues;
+use Ibexa\Contracts\Core\Repository\ContentService;
+use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\LocationService;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit;
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
+use Ibexa\Core\Repository\Values\Content;
+use Ibexa\Core\Repository\Values\Content as ApiValues;
+use Ibexa\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\RestExecutedView;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RestExecutedViewTest extends ValueObjectVisitorBaseTest
 {
@@ -48,12 +48,12 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_views_load',
+            'ibexa.rest.views.load',
             ['viewId' => $view->identifier],
             "/content/views/{$view->identifier}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_views_load_results',
+            'ibexa.rest.views.load.results',
             ['viewId' => $view->identifier],
             "/content/views/{$view->identifier}/results"
         );
@@ -78,14 +78,14 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     {
         return [
             ['/View'],
-            ['/View[@media-type="application/vnd.ez.api.View+xml"]'],
+            ['/View[@media-type="application/vnd.ibexa.api.View+xml"]'],
             ['/View[@href="/content/views/test_view"]'],
             ['/View/identifier'],
             ['/View/identifier[text()="test_view"]'],
             ['/View/Query'],
-            ['/View/Query[@media-type="application/vnd.ez.api.Query+xml"]'],
+            ['/View/Query[@media-type="application/vnd.ibexa.api.Query+xml"]'],
             ['/View/Result'],
-            ['/View/Result[@media-type="application/vnd.ez.api.ViewResult+xml"]'],
+            ['/View/Result[@media-type="application/vnd.ibexa.api.ViewResult+xml"]'],
             ['/View/Result[@href="/content/views/test_view/results"]'],
             ['/View/Result/searchHits/searchHit[@score="0.123" and @index="alexandria"]'],
             ['/View/Result/searchHits/searchHit[@score="0.234" and @index="waze"]'],
@@ -107,7 +107,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     /**
      * Get the Relation visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestExecutedView
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestExecutedView
      */
     protected function internalGetVisitor()
     {
@@ -118,7 +118,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\LocationService|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\Repository\LocationService|\PHPUnit\Framework\MockObject\MockObject
      */
     public function getLocationServiceMock()
     {
@@ -126,7 +126,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\ContentService|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\Repository\ContentService|\PHPUnit\Framework\MockObject\MockObject
      */
     public function getContentServiceMock()
     {
@@ -137,7 +137,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
      */
     public function getContentTypeServiceMock()
     {
@@ -145,7 +145,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\Content\Search\SearchHit
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit
      */
     protected function buildContentSearchHit()
     {
@@ -164,7 +164,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @return \eZ\Publish\API\Repository\Values\Content\Search\SearchHit
+     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit
      */
     protected function buildLocationSearchHit()
     {
@@ -175,3 +175,5 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         ]);
     }
 }
+
+class_alias(RestExecutedViewTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestExecutedViewTest');

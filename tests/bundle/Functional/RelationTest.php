@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRestBundle\Tests\Functional;
+namespace Ibexa\Tests\Bundle\Rest\Functional;
 
-use EzSystems\EzPlatformRestBundle\Tests\Functional\TestCase as RESTFunctionalTestCase;
+use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 
 class RelationTest extends RESTFunctionalTestCase
 {
@@ -15,18 +15,18 @@ class RelationTest extends RESTFunctionalTestCase
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentCreate>
-  <ContentType href="/api/ezp/v2/content/types/2" />
+  <ContentType href="/api/ibexa/v2/content/types/2" />
   <mainLanguageCode>eng-GB</mainLanguageCode>
   <LocationCreate>
-    <ParentLocation href="/api/ezp/v2/content/locations/1/2" />
+    <ParentLocation href="/api/ibexa/v2/content/locations/1/2" />
     <priority>0</priority>
     <hidden>false</hidden>
     <sortField>PATH</sortField>
     <sortOrder>ASC</sortOrder>
   </LocationCreate>
-  <Section href="/api/ezp/v2/content/sections/1" />
+  <Section href="/api/ibexa/v2/content/sections/1" />
   <alwaysAvailable>true</alwaysAvailable>
-  <User href="/api/ezp/v2/user/users/14" />
+  <User href="/api/ibexa/v2/user/users/14" />
   <modificationDate>2012-09-30T12:30:00</modificationDate>
   <fields>
     <field>
@@ -39,7 +39,7 @@ class RelationTest extends RESTFunctionalTestCase
       <languageCode>eng-GB</languageCode>
       <fieldValue>
         <value key="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ez.no/xmlns/ezpublish/docbook/xhtml" xmlns:ezcustom="http://ez.no/xmlns/ezpublish/docbook/custom" version="5.0-variant ezpublish-1.0"&gt;
+&lt;section xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ezxhtml="http://ibexa.co/xmlns/dxp/docbook/xhtml" xmlns:ezcustom="http://ibexa.co/xmlns/dxp/docbook/custom" version="5.0-variant ezpublish-1.0"&gt;
 &lt;title ezxhtml:level="2"&gt;This is a title.&lt;/title&gt;
 &lt;para&gt;&lt;link xlink:href="ezcontent://1" xml:id="id1" xlink:title="Content title" ezxhtml:class="linkClass5"&gt;Content name&lt;/link&gt;&lt;/para&gt;
 &lt;ezembed xlink:href="ezcontent://1" view="line" xml:id="embed-id-2" ezxhtml:class="embedClass2" ezxhtml:align="right"/&gt;
@@ -64,3 +64,5 @@ XML;
         self::assertEquals('ATTRIBUTE', $relations[2]['RelationType']);
     }
 }
+
+class_alias(RelationTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\RelationTest');

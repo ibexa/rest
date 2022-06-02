@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Input\Parser;
+namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
-use eZ\Publish\API\Repository\Values\Content\LocationQuery;
-use eZ\Publish\API\Repository\Values\Content\Query;
-use EzSystems\EzPlatformRest\Server\Input\Parser\ViewInputOneDotOne;
-use EzSystems\EzPlatformRest\Server\Values\RestViewInput;
-use EzSystems\EzPlatformRest\Exceptions\Parser;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
+use Ibexa\Rest\Server\Input\Parser\ViewInputOneDotOne;
+use Ibexa\Rest\Server\Values\RestViewInput;
 
 class ViewInputOneDotOneTest extends BaseTest
 {
@@ -29,7 +29,7 @@ class ViewInputOneDotOneTest extends BaseTest
         $parsingDispatcher
             ->expects($this->once())
             ->method('parse')
-            ->with($inputArray['ContentQuery'], 'application/vnd.ez.api.internal.ContentQuery')
+            ->with($inputArray['ContentQuery'], 'application/vnd.ibexa.api.internal.ContentQuery')
             ->willReturn(new Query());
 
         $result = $parser->parse($inputArray, $parsingDispatcher);
@@ -56,7 +56,7 @@ class ViewInputOneDotOneTest extends BaseTest
         $parsingDispatcher
             ->expects($this->once())
             ->method('parse')
-            ->with($inputArray['LocationQuery'], 'application/vnd.ez.api.internal.LocationQuery')
+            ->with($inputArray['LocationQuery'], 'application/vnd.ibexa.api.internal.LocationQuery')
             ->willReturn(new LocationQuery());
 
         $result = $parser->parse($inputArray, $parsingDispatcher);
@@ -85,10 +85,12 @@ class ViewInputOneDotOneTest extends BaseTest
     /**
      * Returns the session input parser.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Input\Parser\ViewInput
+     * @return \Ibexa\Rest\Server\Input\Parser\ViewInput
      */
     protected function internalGetParser()
     {
         return new ViewInputOneDotOne();
     }
 }
+
+class_alias(ViewInputOneDotOneTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\ViewInputOneDotOneTest');

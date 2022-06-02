@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Server\Values\RestContent;
-use EzSystems\EzPlatformRest\Server\Values\RestTrashItem;
-use eZ\Publish\Core\Repository\Values\Content\TrashItem;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Core\Repository\Values\Content\TrashItem;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\RestContent;
+use Ibexa\Rest\Server\Values\RestTrashItem;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RestTrashItemTest extends ValueObjectVisitorBaseTest
 {
@@ -54,25 +54,25 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadTrashItem',
+            'ibexa.rest.load_trash_item',
             ['trashItemId' => $trashItem->trashItem->id],
             "/content/trash/{$trashItem->trashItem->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadLocation',
+            'ibexa.rest.load_location',
             ['locationPath' => '1/2/21'],
             '/content/locations/1/2/21'
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $trashItem->trashItem->contentInfo->id],
             "/content/objects/{$trashItem->trashItem->contentInfo->id}"
         );
 
         // Expected twice, second one here for ContentInfo
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContent',
+            'ibexa.rest.load_content',
             ['contentId' => $trashItem->trashItem->contentInfo->id],
             "/content/objects/{$trashItem->trashItem->contentInfo->id}"
         );
@@ -129,7 +129,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'TrashItem',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.TrashItem+xml',
+                    'media-type' => 'application/vnd.ibexa.api.TrashItem+xml',
                     'href' => '/content/trash/42',
                 ],
             ],
@@ -171,7 +171,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ContentInfo',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentInfo+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentInfo+xml',
                     'href' => '/content/objects/84',
                 ],
             ],
@@ -313,7 +313,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ParentLocation',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Location+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Location+xml',
                     'href' => '/content/locations/1/2/21',
                 ],
             ],
@@ -415,7 +415,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'Content',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Content+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Content+xml',
                     'href' => '/content/objects/84',
                 ],
             ],
@@ -468,10 +468,12 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
     /**
      * Get the TrashItem visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestTrashItem
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestTrashItem
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\RestTrashItem();
     }
 }
+
+class_alias(RestTrashItemTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestTrashItemTest');

@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use eZ\Publish\Core\Repository\Values\ContentType\ContentTypeGroup;
-use eZ\Publish\Core\Repository\Values\ContentType\ContentType;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Server\Values\ContentTypeGroupRefList;
+use Ibexa\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Repository\Values\ContentType\ContentTypeGroup;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\ContentTypeGroupRefList;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
 {
@@ -50,19 +50,19 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_listContentTypesForGroup',
+            'ibexa.rest.list_content_types_for_group',
             ['contentTypeGroupId' => $contentTypeGroupRefList->contentType->id],
             "/content/types/{$contentTypeGroupRefList->contentType->id}/groups"
         );
 
         // first iteration
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentTypeGroup',
+            'ibexa.rest.load_content_type_group',
             ['contentTypeGroupId' => $contentTypeGroupRefList->contentTypeGroups[0]->id],
             "/content/typegroups/{$contentTypeGroupRefList->contentTypeGroups[0]->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_unlinkContentTypeFromGroup',
+            'ibexa.rest.unlink_content_type_from_group',
             [
                 'contentTypeId' => $contentTypeGroupRefList->contentType->id,
                 'contentTypeGroupId' => $contentTypeGroupRefList->contentTypeGroups[0]->id,
@@ -72,12 +72,12 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
 
         // second iteration
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentTypeGroup',
+            'ibexa.rest.load_content_type_group',
             ['contentTypeGroupId' => $contentTypeGroupRefList->contentTypeGroups[1]->id],
             "/content/typegroups/{$contentTypeGroupRefList->contentTypeGroups[1]->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_unlinkContentTypeFromGroup',
+            'ibexa.rest.unlink_content_type_from_group',
             [
                 'contentTypeId' => $contentTypeGroupRefList->contentType->id,
                 'contentTypeGroupId' => $contentTypeGroupRefList->contentTypeGroups[1]->id,
@@ -118,7 +118,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testContentTypeGroupRefListMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentTypeGroupRefList[@media-type="application/vnd.ez.api.ContentTypeGroupRefList+xml"]');
+        $this->assertXPath($dom, '/ContentTypeGroupRefList[@media-type="application/vnd.ibexa.api.ContentTypeGroupRefList+xml"]');
     }
 
     /**
@@ -138,7 +138,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testFirstContentTypeGroupRefMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[1][@media-type="application/vnd.ez.api.ContentTypeGroup+xml"]');
+        $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[1][@media-type="application/vnd.ibexa.api.ContentTypeGroup+xml"]');
     }
 
     /**
@@ -178,7 +178,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testSecondContentTypeGroupRefMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[2][@media-type="application/vnd.ez.api.ContentTypeGroup+xml"]');
+        $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[2][@media-type="application/vnd.ibexa.api.ContentTypeGroup+xml"]');
     }
 
     /**
@@ -204,10 +204,12 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
     /**
      * Get the ContentTypeGroupRefList visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ContentTypeGroupRefList
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroupRefList
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\ContentTypeGroupRefList();
     }
 }
+
+class_alias(ContentTypeGroupRefListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ContentTypeGroupRefListTest');

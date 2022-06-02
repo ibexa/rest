@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest;
+namespace Ibexa\Contracts\Rest;
 
 /**
  * FieldTypeProcessor.
@@ -16,12 +16,12 @@ abstract class FieldTypeProcessor
      *
      * This method is called by the REST input parsers to allow a field
      * type to pre process the given $incomingValueHash before it is handled by
-     * {@link eZ\Publish\SPI\FieldType\FieldType::fromHash()}. The
+     * {@link Ibexa\Contracts\Core\FieldType\FieldType::fromHash()}. The
      * $incomingValueHash can be expected to conform to the rules that need to
      * apply to hashes accepted by fromHash(). The return value of this method
      * replaces the $incomingValueHash.
      *
-     * @see \EzSystems\EzPlatformRest\Input\FieldTypeParser
+     * @see \Ibexa\Rest\Input\FieldTypeParser
      *
      * @param mixed $incomingValueHash
      *
@@ -37,12 +37,12 @@ abstract class FieldTypeProcessor
      *
      * This method is called by the REST output visitors to allow a field type to
      * post process the given $outgoingValueHash, which was previously generated
-     * using {@link eZ\Publish\SPI\FieldType\FieldType::toHash()}, before it is
+     * using {@link Ibexa\Contracts\Core\FieldType\FieldType::toHash()}, before it is
      * sent to the client. The return value of this method replaces
      * $outgoingValueHash and must obey to the same rules as the original
      * $outgoingValueHash.
      *
-     * @see \EzSystems\EzPlatformRest\Output\FieldTypeSerializer
+     * @see \Ibexa\Rest\Output\FieldTypeSerializer
      *
      * @param mixed $outgoingValueHash
      *
@@ -58,12 +58,12 @@ abstract class FieldTypeProcessor
      *
      * This method is called by the REST input parsers to allow a field type to
      * pre process the given $incomingSettingsHash before it is handled by
-     * {@link eZ\Publish\SPI\FieldType\FieldType::fieldSettingsFromHash()}. The
+     * {@link Ibexa\Contracts\Core\FieldType\FieldType::fieldSettingsFromHash()}. The
      * $incomingSettingsHash can be expected to conform to the rules that
      * need to apply to hashes accepted by fieldSettingsFromHash(). The return
      * value of this method replaces the $incomingSettingsHash.
      *
-     * @see \EzSystems\EzPlatformRest\Input\FieldTypeParser
+     * @see \Ibexa\Rest\Input\FieldTypeParser
      *
      * @param mixed $incomingSettingsHash
      *
@@ -79,12 +79,12 @@ abstract class FieldTypeProcessor
      *
      * This method is called by the REST output visitors to allow a field type to post
      * process the given $outgoingSettingsHash, which was previously generated
-     * using {@link eZ\Publish\SPI\FieldType\FieldType::fieldSettingsToHash()},
+     * using {@link Ibexa\Contracts\Core\FieldType\FieldType::fieldSettingsToHash()},
      * before it is sent to the client. The return value of this method replaces
      * $outgoingSettingsHash and must obey to the same rules as the original
      * $outgoingSettingsHash.
      *
-     * @see \EzSystems\EzPlatformRest\Output\FieldTypeSerializer
+     * @see \Ibexa\Rest\Output\FieldTypeSerializer
      *
      * @param mixed $outgoingSettingsHash
      *
@@ -100,12 +100,12 @@ abstract class FieldTypeProcessor
      *
      * This method is called by the REST input parsers to allow a field type to pre
      * process the given $incomingValidatorConfigurationHash before it is handled
-     * by {@link eZ\Publish\SPI\FieldType\FieldType::validatorConfigurationFromHash()}.
+     * by {@link Ibexa\Contracts\Core\FieldType\FieldType::validatorConfigurationFromHash()}.
      * The $incomingValidatorConfigurationHash can be expected to conform to the
      * rules that need to apply to hashes accepted by validatorConfigurationFromHash().
      * The return value of this method replaces the $incomingValidatorConfigurationHash.
      *
-     * @see \EzSystems\EzPlatformRest\Input\FieldTypeParser
+     * @see \Ibexa\Rest\Input\FieldTypeParser
      *
      * @param mixed $incomingValidatorConfigurationHash
      *
@@ -121,12 +121,12 @@ abstract class FieldTypeProcessor
      *
      * This method is called by the REST output visitors to allow a field type to post
      * process the given $outgoingValidatorConfigurationHash, which was previously generated
-     * using {@link eZ\Publish\SPI\FieldType\FieldType::validatorConfigurationToHash()},
+     * using {@link Ibexa\Contracts\Core\FieldType\FieldType::validatorConfigurationToHash()},
      * before it is sent to the client. The return value of this method replaces
      * $outgoingValidatorConfigurationHash and must obey to the same rules as the original
      * $outgoingValidatorConfigurationHash.
      *
-     * @see \EzSystems\EzPlatformRest\Output\FieldTypeSerializer
+     * @see \Ibexa\Rest\Output\FieldTypeSerializer
      *
      * @param mixed $outgoingValidatorConfigurationHash
      *
@@ -137,3 +137,5 @@ abstract class FieldTypeProcessor
         return $outgoingValidatorConfigurationHash;
     }
 }
+
+class_alias(FieldTypeProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor');

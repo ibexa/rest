@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRestBundle\Tests\Functional;
+namespace Ibexa\Tests\Bundle\Rest\Functional;
 
-use EzSystems\EzPlatformRestBundle\Tests\Functional\TestCase as RESTFunctionalTestCase;
+use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 
 class UrlWildcardTest extends RESTFunctionalTestCase
 {
@@ -16,7 +16,7 @@ class UrlWildcardTest extends RESTFunctionalTestCase
     public function testListURLWildcards()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/urlwildcards')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/urlwildcards')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -40,7 +40,7 @@ XML;
 
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/urlwildcards',
+            '/api/ibexa/v2/content/urlwildcards',
             'UrlWildcardCreate+xml',
             'UrlWildcard+json',
             $xml
@@ -82,3 +82,5 @@ XML;
         self::assertHttpResponseCodeEquals($response, 204);
     }
 }
+
+class_alias(UrlWildcardTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\UrlWildcardTest');

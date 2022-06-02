@@ -1,25 +1,20 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRestBundle\Tests\DependencyInjection\Compiler;
+namespace Ibexa\Tests\Bundle\Rest\DependencyInjection\Compiler;
 
-use EzSystems\EzPlatformRestBundle\DependencyInjection\Compiler\OutputVisitorPass;
+use Ibexa\Bundle\Rest\DependencyInjection\Compiler\OutputVisitorPass;
+use Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher;
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Symfony\Component\DependencyInjection\Reference;
 
 class OutputVisitorPassTest extends AbstractCompilerPassTestCase
 {
-    /**
-     * Register the compiler pass under test, just like you would do inside a bundle's load()
-     * method:.
-     *
-     *   $container->addCompilerPass(new MyCompilerPass());
-     */
     protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new OutputVisitorPass());
@@ -29,16 +24,19 @@ class OutputVisitorPassTest extends AbstractCompilerPassTestCase
     {
         $stringRegexp = '(^.*/.*$)';
         $stringDefinition = new Definition();
-        $stringDefinition->addTag('ezpublish_rest.output.visitor', ['regexps' => 'ezpublish_rest.output.visitor.test.regexps']);
+        $stringDefinition->addTag(
+            'ibexa.rest.output.visitor',
+            ['regexps' => 'ezpublish_rest.output.visitor.test.regexps']
+        );
         $this->setParameter('ezpublish_rest.output.visitor.test.regexps', [$stringRegexp]);
         $this->setDefinition('ezpublish_rest.output.visitor.test_string', $stringDefinition);
 
         $arrayRegexp = '(^application/json$)';
         $arrayDefinition = new Definition();
-        $arrayDefinition->addTag('ezpublish_rest.output.visitor', ['regexps' => [$arrayRegexp]]);
+        $arrayDefinition->addTag('ibexa.rest.output.visitor', ['regexps' => [$arrayRegexp]]);
         $this->setDefinition('ezpublish_rest.output.visitor.test_array', $arrayDefinition);
 
-        $this->setDefinition('ezpublish_rest.output.visitor.dispatcher', new Definition());
+        $this->setDefinition(AcceptHeaderVisitorDispatcher::class, new Definition());
 
         $this->compile();
 
@@ -48,11 +46,11 @@ class OutputVisitorPassTest extends AbstractCompilerPassTestCase
         self::assertEquals('ezpublish_rest.output.visitor.test_array', $visitorsInOrder[1]);
         $this->assertContainerBuilderHasService('ezpublish_rest.output.visitor.test_string');
         $this->assertContainerBuilderHasService('ezpublish_rest.output.visitor.test_array');
-        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall('ezpublish_rest.output.visitor.dispatcher', 'addVisitor', [
+        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(AcceptHeaderVisitorDispatcher::class, 'addVisitor', [
             $stringRegexp,
             new Reference('ezpublish_rest.output.visitor.test_string'),
         ]);
-        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall('ezpublish_rest.output.visitor.dispatcher', 'addVisitor', [
+        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(AcceptHeaderVisitorDispatcher::class, 'addVisitor', [
             $arrayRegexp,
             new Reference('ezpublish_rest.output.visitor.test_array'),
         ]);
@@ -85,11 +83,11 @@ class OutputVisitorPassTest extends AbstractCompilerPassTestCase
             'low',
         ];
 
-        $this->setDefinition('ezpublish_rest.output.visitor.dispatcher', new Definition());
+        $this->setDefinition(AcceptHeaderVisitorDispatcher::class, new Definition());
 
         foreach ($definitions as $name => $data) {
             $definition = new Definition();
-            $definition->addTag('ezpublish_rest.output.visitor', $data);
+            $definition->addTag('ibexa.rest.output.visitor', $data);
             $this->setDefinition('ezpublish_rest.output.visitor.test_' . $name, $definition);
         }
 
@@ -104,10 +102,12 @@ class OutputVisitorPassTest extends AbstractCompilerPassTestCase
 
     protected function getVisitorsInRegistrationOrder()
     {
-        $calls = $this->container->getDefinition('ezpublish_rest.output.visitor.dispatcher')->getMethodCalls();
+        $calls = $this->container->getDefinition(AcceptHeaderVisitorDispatcher::class)->getMethodCalls();
 
-        return array_map(function ($call) {
+        return array_map(static function ($call) {
             return (string) $call[1][1];
         }, $calls);
     }
 }
+
+class_alias(OutputVisitorPassTest::class, 'EzSystems\EzPlatformRestBundle\Tests\DependencyInjection\Compiler\OutputVisitorPassTest');

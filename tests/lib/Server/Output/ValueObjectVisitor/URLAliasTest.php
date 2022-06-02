@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use eZ\Publish\API\Repository\Values\Content;
+use Ibexa\Contracts\Core\Repository\Values\Content;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class URLAliasTest extends ValueObjectVisitorBaseTest
 {
@@ -39,7 +39,7 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadURLAlias',
+            'ibexa.rest.load_url_alias',
             ['urlAliasId' => $urlAlias->id],
             "/content/urlaliases/{$urlAlias->id}"
         );
@@ -93,7 +93,7 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'UrlAlias',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UrlAlias+xml',
+                    'media-type' => 'application/vnd.ibexa.api.UrlAlias+xml',
                     'href' => '/content/urlaliases/some-id',
                     'id' => 'some-id',
                     'type' => 'RESOURCE',
@@ -248,10 +248,12 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
     /**
      * Get the URLAlias visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\URLAlias
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAlias
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\URLAlias();
     }
 }
+
+class_alias(URLAliasTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\URLAliasTest');

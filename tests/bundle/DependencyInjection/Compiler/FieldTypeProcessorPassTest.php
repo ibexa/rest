@@ -1,15 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRestBundle\Tests\DependencyInjection\Compiler;
+namespace Ibexa\Tests\Bundle\Rest\DependencyInjection\Compiler;
 
-use EzSystems\EzPlatformRestBundle\DependencyInjection\Compiler\FieldTypeProcessorPass;
+use Ibexa\Bundle\Rest\DependencyInjection\Compiler\FieldTypeProcessorPass;
+use Ibexa\Rest\FieldTypeProcessorRegistry;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\Reference;
 
 class FieldTypeProcessorPassTest extends TestCase
@@ -25,7 +26,7 @@ class FieldTypeProcessorPassTest extends TestCase
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->addDefinitions(
             [
-                'ezpublish_rest.field_type_processor_registry' => new Definition(),
+                FieldTypeProcessorRegistry::class => new Definition(),
                 'ezpublish_rest.field_type_processor.test' => $processorDefinition,
             ]
         );
@@ -33,7 +34,7 @@ class FieldTypeProcessorPassTest extends TestCase
         $compilerPass = new FieldTypeProcessorPass();
         $compilerPass->process($containerBuilder);
 
-        $dispatcherMethodCalls = $containerBuilder->getDefinition('ezpublish_rest.field_type_processor_registry')->getMethodCalls();
+        $dispatcherMethodCalls = $containerBuilder->getDefinition(FieldTypeProcessorRegistry::class)->getMethodCalls();
         self::assertTrue(isset($dispatcherMethodCalls[0][0]), 'Failed asserting that dispatcher has a method call');
         self::assertEquals('registerProcessor', $dispatcherMethodCalls[0][0], "Failed asserting that called method is 'addVisitor'");
         self::assertInstanceOf(Reference::class, $dispatcherMethodCalls[0][1][1], 'Failed asserting that method call is to a Reference object');
@@ -43,6 +44,7 @@ class FieldTypeProcessorPassTest extends TestCase
     public function dataProviderForProcess(): iterable
     {
         yield ['ibexa.rest.field_type.processor'];
-        yield ['ezpublish_rest.field_type_processor'];
     }
 }
+
+class_alias(FieldTypeProcessorPassTest::class, 'EzSystems\EzPlatformRestBundle\Tests\DependencyInjection\Compiler\FieldTypeProcessorPassTest');

@@ -6,7 +6,7 @@ env:
     APP_DEBUG: 1
     PHP_INI_ENV_memory_limit: 512M
     COMPOSER_CACHE_DIR: ~/.composer/cache
-    PROJECT_VERSION: ^3.3.x-dev
+    PROJECT_VERSION: 4.1.x-dev
     PROJECT_EDITION: oss
     SETUP: "doc/docker/base-dev.yml:doc/docker/selenium.yml"
     WEB_HOST: web
@@ -47,4 +47,4 @@ jobs:
             - name: Run tests
               run: |
                 cd "$HOME/build/project"
-                docker-compose --env-file=.env exec -T --user www-data app sh -c "cd vendor/ezsystems/ezplatform-rest && composer update && composer integration"
+                docker-compose --env-file=.env exec -T --user www-data app sh -c "cd vendor/ibexa/rest && composer update && composer integration"

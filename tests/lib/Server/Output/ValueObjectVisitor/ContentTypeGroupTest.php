@@ -1,14 +1,14 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use eZ\Publish\Core\Repository\Values\ContentType;
+use Ibexa\Core\Repository\Values\ContentType;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
 {
@@ -49,25 +49,25 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         $routerMock = $this->getRouterMock();
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadContentTypeGroup',
+            'ibexa.rest.load_content_type_group',
             ['contentTypeGroupId' => $contentTypeGroup->id],
             "/content/typegroups/{$contentTypeGroup->id}"
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $contentTypeGroup->creatorId],
             "/user/users/{$contentTypeGroup->creatorId}"
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUser',
+            'ibexa.rest.load_user',
             ['userId' => $contentTypeGroup->modifierId],
             "/user/users/{$contentTypeGroup->modifierId}"
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_listContentTypesForGroup',
+            'ibexa.rest.list_content_types_for_group',
             ['contentTypeGroupId' => $contentTypeGroup->id],
             "/content/typegroups/{$contentTypeGroup->id}/types"
         );
@@ -120,7 +120,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ContentTypeGroup',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentTypeGroup+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentTypeGroup+xml',
                     'href' => '/content/typegroups/42',
                 ],
             ],
@@ -243,7 +243,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
                 'tag' => 'Creator',
                 'attributes' => [
                     'href' => '/user/users/14',
-                    'media-type' => 'application/vnd.ez.api.User+xml',
+                    'media-type' => 'application/vnd.ibexa.api.User+xml',
                 ],
             ],
             $result,
@@ -285,7 +285,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
                 'tag' => 'Modifier',
                 'attributes' => [
                     'href' => '/user/users/13',
-                    'media-type' => 'application/vnd.ez.api.User+xml',
+                    'media-type' => 'application/vnd.ibexa.api.User+xml',
                 ],
             ],
             $result,
@@ -327,7 +327,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
                 'tag' => 'ContentTypes',
                 'attributes' => [
                     'href' => '/content/typegroups/42/types',
-                    'media-type' => 'application/vnd.ez.api.ContentTypeInfoList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ContentTypeInfoList+xml',
                 ],
             ],
             $result,
@@ -339,10 +339,12 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
     /**
      * Get the ContentTypeGroup visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ContentTypeGroup
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroup
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\ContentTypeGroup();
     }
 }
+
+class_alias(ContentTypeGroupTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ContentTypeGroupTest');

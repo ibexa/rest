@@ -1,21 +1,21 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 return [
   'elementList' => [
-    '_media-type' => 'application/vnd.ez.api.elementList+xml',
+    '_media-type' => 'application/vnd.ibexa.api.elementList+xml',
     'element' => [
       0 => [
-        '_media-type' => 'application/vnd.ez.api.element+xml',
+        '_media-type' => 'application/vnd.ibexa.api.element+xml',
       ],
       1 => [
-        '_media-type' => 'application/vnd.ez.api.element+xml',
+        '_media-type' => 'application/vnd.ibexa.api.element+xml',
       ],
       2 => [
-        '_media-type' => 'application/vnd.ez.api.element+xml',
+        '_media-type' => 'application/vnd.ibexa.api.element+xml',
       ],
     ],
   ],

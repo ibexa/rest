@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Output\Generator;
-use EzSystems\EzPlatformRest\Output\Visitor;
-use EzSystems\EzPlatformRest\Server\Values\RestContent as RestContentValue;
+use Ibexa\Contracts\Rest\Output\Generator;
+use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
+use Ibexa\Contracts\Rest\Output\Visitor;
+use Ibexa\Rest\Server\Values\RestContent as RestContentValue;
 
 /**
  * RestLocation value object visitor.
@@ -19,9 +19,9 @@ class RestLocation extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \EzSystems\EzPlatformRest\Output\Visitor $visitor
-     * @param \EzSystems\EzPlatformRest\Output\Generator $generator
-     * @param \EzSystems\EzPlatformRest\Server\Values\RestLocation $data
+     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
+     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param \Ibexa\Rest\Server\Values\RestLocation $data
      */
     public function visit(Visitor $visitor, Generator $generator, $data)
     {
@@ -35,7 +35,7 @@ class RestLocation extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadLocation',
+                'ibexa.rest.load_location',
                 ['locationPath' => trim($location->pathString, '/')]
             )
         );
@@ -70,7 +70,7 @@ class RestLocation extends ValueObjectVisitor
             $generator->startAttribute(
                 'href',
                 $this->router->generate(
-                    'ezpublish_rest_loadLocation',
+                    'ibexa.rest.load_location',
                     [
                         'locationPath' => implode('/', array_slice($location->path, 0, count($location->path) - 1)),
                     ]
@@ -96,7 +96,7 @@ class RestLocation extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadLocationChildren',
+                'ibexa.rest.load_location_children',
                 [
                     'locationPath' => trim($location->pathString, '/'),
                 ]
@@ -108,7 +108,7 @@ class RestLocation extends ValueObjectVisitor
         $generator->startObjectElement('Content');
         $generator->startAttribute(
             'href',
-            $this->router->generate('ezpublish_rest_loadContent', ['contentId' => $contentInfo->id])
+            $this->router->generate('ibexa.rest.load_content', ['contentId' => $contentInfo->id])
         );
         $generator->endAttribute('href');
         $generator->endObjectElement('Content');
@@ -123,7 +123,7 @@ class RestLocation extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_listLocationURLAliases',
+                'ibexa.rest.list_location_url_aliases',
                 ['locationPath' => trim($location->pathString, '/')]
             )
         );
@@ -134,7 +134,7 @@ class RestLocation extends ValueObjectVisitor
         $generator->startAttribute(
             'href',
             $this->router->generate(
-                'ezpublish_rest_loadContent',
+                'ibexa.rest.load_content',
                 ['contentId' => $contentInfo->id]
             )
         );
@@ -145,3 +145,5 @@ class RestLocation extends ValueObjectVisitor
         $generator->endObjectElement('Location');
     }
 }
+
+class_alias(RestLocation::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestLocation');

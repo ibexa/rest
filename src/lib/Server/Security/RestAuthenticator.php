@@ -1,26 +1,26 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Server\Security;
+namespace Ibexa\Rest\Server\Security;
 
-use eZ\Publish\Core\MVC\ConfigResolverInterface;
-use eZ\Publish\Core\MVC\Symfony\Security\Authentication\AuthenticatorInterface;
-use eZ\Publish\Core\MVC\Symfony\Security\UserInterface as EzUser;
-use EzSystems\EzPlatformRest\Server\Exceptions\InvalidUserTypeException;
-use EzSystems\EzPlatformRest\Server\Exceptions\UserConflictException;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Core\MVC\Symfony\Security\Authentication\AuthenticatorInterface;
+use Ibexa\Core\MVC\Symfony\Security\UserInterface as IbexaUser;
+use Ibexa\Rest\Server\Exceptions\InvalidUserTypeException;
+use Ibexa\Rest\Server\Exceptions\UserConflictException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
 use Symfony\Component\Security\Http\Logout\SessionLogoutHandler;
@@ -43,6 +43,7 @@ class RestAuthenticator implements AuthenticatorInterface
      * @var \Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface
      */
     private $authenticationManager;
+
     /**
      * @var string
      */
@@ -59,7 +60,7 @@ class RestAuthenticator implements AuthenticatorInterface
     private $dispatcher;
 
     /**
-     * @var \eZ\Publish\Core\MVC\ConfigResolverInterface
+     * @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface
      */
     private $configResolver;
 
@@ -122,15 +123,15 @@ class RestAuthenticator implements AuthenticatorInterface
 
         // Re-fetch token from SecurityContext since an INTERACTIVE_LOGIN listener might have changed it
         // i.e. when using multiple user providers.
-        // @see \eZ\Publish\Core\MVC\Symfony\Security\EventListener\SecurityListener::onInteractiveLogin()
+        // @see \Ibexa\Core\MVC\Symfony\Security\EventListener\SecurityListener::onInteractiveLogin()
         $token = $this->tokenStorage->getToken();
         $user = $token->getUser();
-        if (!$user instanceof EzUser) {
+        if (!$user instanceof IbexaUser) {
             if ($this->logger) {
-                $this->logger->error('REST: Authenticated user must be eZ\Publish\Core\MVC\Symfony\Security\User, got ' . is_string($user) ? $user : get_class($user));
+                $this->logger->error('REST: Authenticated user must be Ibexa\\Core\\MVC\\Symfony\\Security\\User, got ' . is_string($user) ? $user : get_class($user));
             }
 
-            $e = new InvalidUserTypeException('Authenticated user is not an eZ User.');
+            $e = new InvalidUserTypeException('Authenticated user is not an Ibexa User.');
             $e->setToken($token);
             throw $e;
         }
@@ -163,19 +164,19 @@ class RestAuthenticator implements AuthenticatorInterface
     /**
      * Checks if newly matched user is conflicting with previously non-anonymous logged in user, if any.
      *
-     * @param EzUser $user
-     * @param TokenInterface $previousToken
+     * @param \Ibexa\Core\MVC\Symfony\Security\UserInterface $user
+     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $previousToken
      *
      * @return bool
      */
-    private function isUserConflict(EzUser $user, TokenInterface $previousToken = null)
+    private function isUserConflict(IbexaUser $user, TokenInterface $previousToken = null)
     {
         if ($previousToken === null || !$previousToken instanceof UsernamePasswordToken) {
             return false;
         }
 
         $previousUser = $previousToken->getUser();
-        if (!$previousUser instanceof EzUser) {
+        if (!$previousUser instanceof IbexaUser) {
             return false;
         }
 
@@ -197,7 +198,7 @@ class RestAuthenticator implements AuthenticatorInterface
         // Session::invalidate() is not called on purpose, to avoid unwanted session migration that would imply
         // generation of a new session id.
         // REST logout must indeed clear the session cookie.
-        // See \EzSystems\EzPlatformRest\Server\Security\RestLogoutHandler
+        // See \Ibexa\Rest\Server\Security\RestLogoutHandler
         $request->getSession()->clear();
 
         $token = $this->tokenStorage->getToken();
@@ -214,3 +215,5 @@ class RestAuthenticator implements AuthenticatorInterface
         return $response;
     }
 }
+
+class_alias(RestAuthenticator::class, 'EzSystems\EzPlatformRest\Server\Security\RestAuthenticator');

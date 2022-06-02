@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use eZ\Publish\Core\Repository\Values\ObjectState\ObjectState;
-use EzSystems\EzPlatformRest\Values;
+use Ibexa\Core\Repository\Values\ObjectState\ObjectState;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Values;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RestObjectStateTest extends ValueObjectVisitorBaseTest
 {
@@ -47,12 +47,12 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
         );
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadObjectState',
+            'ibexa.rest.load_object_state',
             ['objectStateGroupId' => $objectState->groupId, 'objectStateId' => $objectState->objectState->id],
             "/content/objectstategroups/{$objectState->groupId}/objectstates/{$objectState->objectState->id}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_loadObjectStateGroup',
+            'ibexa.rest.load_object_state_group',
             ['objectStateGroupId' => $objectState->groupId],
             "/content/objectstategroups/{$objectState->groupId}"
         );
@@ -105,7 +105,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ObjectState',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ObjectState+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ObjectState+xml',
                     'href' => '/content/objectstategroups/21/objectstates/42',
                 ],
             ],
@@ -147,7 +147,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'ObjectStateGroup',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ObjectStateGroup+xml',
+                    'media-type' => 'application/vnd.ibexa.api.ObjectStateGroup+xml',
                     'href' => '/content/objectstategroups/21',
                 ],
             ],
@@ -304,10 +304,12 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
     /**
      * Get the ObjectState visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestObjectState
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestObjectState
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\RestObjectState();
     }
 }
+
+class_alias(RestObjectStateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestObjectStateTest');

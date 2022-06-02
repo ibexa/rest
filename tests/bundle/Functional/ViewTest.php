@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRestBundle\Tests\Functional;
+namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 class ViewTest extends TestCase
 {
@@ -15,8 +15,8 @@ class ViewTest extends TestCase
     {
         $fooRemoteId = md5('View test content foo');
         $barRemoteId = md5('View test content bar');
-        $this->createFolder('View test content foo', '/api/ezp/v2/content/locations/1/2', $fooRemoteId);
-        $this->createFolder('View test content bar', '/api/ezp/v2/content/locations/1/2', $barRemoteId);
+        $this->createFolder('View test content foo', '/api/ibexa/v2/content/locations/1/2', $fooRemoteId);
+        $this->createFolder('View test content bar', '/api/ibexa/v2/content/locations/1/2', $barRemoteId);
 
         $body = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -36,7 +36,7 @@ class ViewTest extends TestCase
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/views',
+            '/api/ibexa/v2/views',
             'ViewInput+xml',
             'View+json',
             $body
@@ -78,7 +78,7 @@ XML;
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/views',
+            '/api/ibexa/v2/views',
             'ViewInput+xml',
             'View+json',
             $body
@@ -89,3 +89,5 @@ XML;
         self::assertEquals(1, $responseData['View']['Result']['count']);
     }
 }
+
+class_alias(ViewTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\ViewTest');

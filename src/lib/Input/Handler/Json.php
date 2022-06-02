@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Input\Handler;
+namespace Ibexa\Rest\Input\Handler;
 
-use EzSystems\EzPlatformRest\Input\Handler;
-use EzSystems\EzPlatformRest\Exceptions\Parser as ParserException;
+use Ibexa\Contracts\Rest\Exceptions\Parser as ParserException;
+use Ibexa\Contracts\Rest\Input\Handler;
 
 /**
  * Input format handler base class.
@@ -17,7 +17,7 @@ class Json extends Handler
     /**
      * Converts the given string to an array structure.
      *
-     * @throw EzSystems\EzPlatformRest\Exceptions\Parser
+     * @throw Ibexa\Contracts\Rest\Exceptions\Parser
      *
      * @param string $string
      *
@@ -64,3 +64,5 @@ class Json extends Handler
         return 'Unknown JSON decode error';
     }
 }
+
+class_alias(Json::class, 'EzSystems\EzPlatformRest\Input\Handler\Json');

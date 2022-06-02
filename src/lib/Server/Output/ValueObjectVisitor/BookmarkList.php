@@ -1,17 +1,17 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 declare(strict_types=1);
 
-namespace EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Output\Generator;
-use EzSystems\EzPlatformRest\Output\Visitor;
-use EzSystems\EzPlatformRest\Server\Values\BookmarkList as BookmarkListValue;
+use Ibexa\Contracts\Rest\Output\Generator;
+use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
+use Ibexa\Contracts\Rest\Output\Visitor;
+use Ibexa\Rest\Server\Values\BookmarkList as BookmarkListValue;
 
 class BookmarkList extends ValueObjectVisitor
 {
@@ -36,7 +36,7 @@ class BookmarkList extends ValueObjectVisitor
         foreach ($data->items as $restLocation) {
             $generator->startObjectElement('Bookmark');
 
-            $generator->startAttribute('_href', $this->router->generate('ezpublish_rest_isBookmarked', [
+            $generator->startAttribute('_href', $this->router->generate('ibexa.rest.is_bookmarked', [
                 'locationId' => $restLocation->location->id,
             ]));
             $generator->endAttribute('_href');
@@ -48,3 +48,5 @@ class BookmarkList extends ValueObjectVisitor
         $generator->endList('items');
     }
 }
+
+class_alias(BookmarkList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\BookmarkList');

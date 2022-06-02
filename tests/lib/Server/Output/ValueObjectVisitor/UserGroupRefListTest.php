@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use eZ\Publish\API\Repository\Values\ContentType\ContentType;
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use eZ\Publish\Core\Repository\Values\User\UserGroup;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Server\Values\UserGroupRefList;
-use EzSystems\EzPlatformRest\Server\Values\RestUserGroup;
-use eZ\Publish\API\Repository\Values\Content\ContentInfo;
-use eZ\Publish\Core\Repository\Values\Content\Location;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Core\Repository\Values\Content\Location;
+use Ibexa\Core\Repository\Values\User\UserGroup;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\RestUserGroup;
+use Ibexa\Rest\Server\Values\UserGroupRefList;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class UserGroupRefListTest extends ValueObjectVisitorBaseTest
 {
@@ -62,24 +62,24 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
 
         $groupPath = trim($UserGroupRefList->userGroups[0]->mainLocation->pathString, '/');
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUserGroup',
+            'ibexa.rest.load_user_group',
             ['groupPath' => $groupPath],
             "/user/groups/{$groupPath}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_unassignUserFromUserGroup',
+            'ibexa.rest.unassign_user_from_user_group',
             ['userId' => $UserGroupRefList->userId, 'groupPath' => 14],
             '/user/users/14/groups/14'
         );
 
         $groupPath = trim($UserGroupRefList->userGroups[1]->mainLocation->pathString, '/');
         $this->addRouteExpectation(
-            'ezpublish_rest_loadUserGroup',
+            'ibexa.rest.load_user_group',
             ['groupPath' => '1/5/13'],
             "/user/groups/{$groupPath}"
         );
         $this->addRouteExpectation(
-            'ezpublish_rest_unassignUserFromUserGroup',
+            'ibexa.rest.unassign_user_from_user_group',
             ['userId' => $UserGroupRefList->userId, 'groupPath' => 13],
             '/user/users/14/groups/13'
         );
@@ -117,7 +117,7 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testUserGroupRefListMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroupRefList[@media-type="application/vnd.ez.api.UserGroupRefList+xml"]');
+        $this->assertXPath($dom, '/UserGroupRefList[@media-type="application/vnd.ibexa.api.UserGroupRefList+xml"]');
     }
 
     /**
@@ -137,7 +137,7 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testFirstUserGroupMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroupRefList/UserGroup[1][@media-type="application/vnd.ez.api.UserGroup+xml"]');
+        $this->assertXPath($dom, '/UserGroupRefList/UserGroup[1][@media-type="application/vnd.ibexa.api.UserGroup+xml"]');
     }
 
     /**
@@ -177,7 +177,7 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
      */
     public function testSecondUserGroupMediaTypeCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroupRefList/UserGroup[2][@media-type="application/vnd.ez.api.UserGroup+xml"]');
+        $this->assertXPath($dom, '/UserGroupRefList/UserGroup[2][@media-type="application/vnd.ibexa.api.UserGroup+xml"]');
     }
 
     /**
@@ -203,10 +203,12 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
     /**
      * Get the UserGroupRefList visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\UserGroupRefList
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UserGroupRefList
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\UserGroupRefList();
     }
 }
+
+class_alias(UserGroupRefListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\UserGroupRefListTest');

@@ -1,48 +1,48 @@
 # Root resource
 
 
-ezpublish_rest_loadRootResource:
+ibexa.rest.load_root_resource:
     path: /
     defaults:
-        _controller: ezpublish_rest.controller.root:loadRootResource
+        _controller: Ibexa\Rest\Server\Controller\Root:loadRootResource
     methods: [GET]
 
 
 # Sections
 
 
-ezpublish_rest_listSections:
+ibexa.rest.list_sections:
     path: /content/sections
     defaults:
-        _controller: ezpublish_rest.controller.section:listSections
+        _controller: Ibexa\Rest\Server\Controller\Section:listSections
     methods: [GET]
 
-ezpublish_rest_createSection:
+ibexa.rest.create_section:
     path: /content/sections
     defaults:
-        _controller: ezpublish_rest.controller.section:createSection
+        _controller: Ibexa\Rest\Server\Controller\Section:createSection
     methods: [POST]
 
-ezpublish_rest_loadSection:
+ibexa.rest.load_section:
     path: /content/sections/{sectionId}
     defaults:
-        _controller: ezpublish_rest.controller.section:loadSection
+        _controller: Ibexa\Rest\Server\Controller\Section:loadSection
     methods: [GET]
     requirements:
         sectionId: \d+
 
-ezpublish_rest_updateSection:
+ibexa.rest.update_section:
     path: /content/sections/{sectionId}
     defaults:
-        _controller: ezpublish_rest.controller.section:updateSection
+        _controller: Ibexa\Rest\Server\Controller\Section:updateSection
     methods: [PATCH]
     requirements:
         sectionId: \d+
 
-ezpublish_rest_deleteSection:
+ibexa.rest.delete_section:
     path: /content/sections/{sectionId}
     defaults:
-        _controller: ezpublish_rest.controller.section:deleteSection
+        _controller: Ibexa\Rest\Server\Controller\Section:deleteSection
     methods: [DELETE]
     requirements:
         sectionId: \d+
@@ -51,202 +51,202 @@ ezpublish_rest_deleteSection:
 # Content
 
 
-ezpublish_rest_redirectContent:
+ibexa.rest.redirect_content:
     path: /content/objects
     defaults:
-        _controller: ezpublish_rest.controller.content:redirectContent
+        _controller: Ibexa\Rest\Server\Controller\Content:redirectContent
     methods: [GET]
 
-ezpublish_rest_createContent:
+ibexa.rest.create_content:
     path: /content/objects
     defaults:
-        _controller: ezpublish_rest.controller.content:createContent
+        _controller: Ibexa\Rest\Server\Controller\Content:createContent
     methods: [POST]
 
-ezpublish_rest_updateContentMetadata:
+ibexa.rest.update_content_metadata:
     path: /content/objects/{contentId}
     defaults:
-        _controller: ezpublish_rest.controller.content:updateContentMetadata
+        _controller: Ibexa\Rest\Server\Controller\Content:updateContentMetadata
     methods: [PATCH]
     requirements:
         contentId: \d+
 
-ezpublish_rest_loadContent:
+ibexa.rest.load_content:
     path: /content/objects/{contentId}
     defaults:
-        _controller: ezpublish_rest.controller.content:loadContent
+        _controller: Ibexa\Rest\Server\Controller\Content:loadContent
     methods: [GET]
     requirements:
         contentId: \d+
 
-ezpublish_rest_deleteContent:
+ibexa.rest.delete_content:
     path: /content/objects/{contentId}
     defaults:
-        _controller: ezpublish_rest.controller.content:deleteContent
+        _controller: Ibexa\Rest\Server\Controller\Content:deleteContent
     methods: [DELETE]
     requirements:
         contentId: \d+
 
-ezpublish_rest_copyContent:
+ibexa.rest.copy_content:
     path: /content/objects/{contentId}
     defaults:
-        _controller: ezpublish_rest.controller.content:copyContent
+        _controller: Ibexa\Rest\Server\Controller\Content:copyContent
     methods: [COPY]
     requirements:
         contentId: \d+
 
-ezpublish_rest_deleteContentTranslation:
+ibexa.rest.delete_content_translation:
     path: /content/objects/{contentId}/translations/{languageCode}
     defaults:
-        _controller: ezpublish_rest.controller.content:deleteContentTranslation
+        _controller: Ibexa\Rest\Server\Controller\Content:deleteContentTranslation
     methods: [DELETE]
 
-ezpublish_rest_redirectCurrentVersionRelations:
+ibexa.rest.redirect_current_version_relations:
     path: /content/objects/{contentId}/relations
     defaults:
-        _controller: ezpublish_rest.controller.content:redirectCurrentVersionRelations
+        _controller: Ibexa\Rest\Server\Controller\Content:redirectCurrentVersionRelations
     methods: [GET]
     requirements:
         contentId: \d+
 
-ezpublish_rest_loadContentVersions:
+ibexa.rest.load_content_versions:
     path: /content/objects/{contentId}/versions
     defaults:
-        _controller: ezpublish_rest.controller.content:loadContentVersions
+        _controller: Ibexa\Rest\Server\Controller\Content:loadContentVersions
     methods: [GET]
     requirements:
         contentId: \d+
 
-ezpublish_rest_loadVersionRelations:
+ibexa.rest.load_version_relations:
     path: /content/objects/{contentId}/versions/{versionNumber}/relations
     defaults:
-        _controller: ezpublish_rest.controller.content:loadVersionRelations
+        _controller: Ibexa\Rest\Server\Controller\Content:loadVersionRelations
     methods: [GET]
     requirements:
         contentId: \d+
         versionNumber: \d+
 
-ezpublish_rest_createRelation:
+ibexa.rest.create_relation:
     path: /content/objects/{contentId}/versions/{versionNumber}/relations
     defaults:
-        _controller: ezpublish_rest.controller.content:createRelation
+        _controller: Ibexa\Rest\Server\Controller\Content:createRelation
     methods: [POST]
     requirements:
         contentId: \d+
         versionNumber: \d+
 
-ezpublish_rest_loadVersionRelation:
+ibexa.rest.load_version_relation:
     path: /content/objects/{contentId}/versions/{versionNumber}/relations/{relationId}
     defaults:
-        _controller: ezpublish_rest.controller.content:loadVersionRelation
+        _controller: Ibexa\Rest\Server\Controller\Content:loadVersionRelation
     methods: [GET]
     requirements:
         contentId: \d+
         versionNumber: \d+
         relationId: \d+
 
-ezpublish_rest_removeRelation:
+ibexa.rest.remove_relation:
     path: /content/objects/{contentId}/versions/{versionNumber}/relations/{relationId}
     defaults:
-        _controller: ezpublish_rest.controller.content:removeRelation
+        _controller: Ibexa\Rest\Server\Controller\Content:removeRelation
     methods: [DELETE]
     requirements:
         contentId: \d+
         versionNumber: \d+
         relationId: \d+
 
-ezpublish_rest_loadContentInVersion:
+ibexa.rest.load_content_in_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
     defaults:
-        _controller: ezpublish_rest.controller.content:loadContentInVersion
+        _controller: Ibexa\Rest\Server\Controller\Content:loadContentInVersion
     methods: [GET]
     requirements:
         contentId: \d+
         versionNumber: \d+
 
-ezpublish_rest_updateVersion:
+ibexa.rest.update_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
     defaults:
-        _controller: ezpublish_rest.controller.content:updateVersion
+        _controller: Ibexa\Rest\Server\Controller\Content:updateVersion
     methods: [PATCH]
     requirements:
         contentId: \d+
         versionNumber: \d+
 
-ezpublish_rest_deleteContentVersion:
+ibexa.rest.delete_content_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
     defaults:
-        _controller: ezpublish_rest.controller.content:deleteContentVersion
+        _controller: Ibexa\Rest\Server\Controller\Content:deleteContentVersion
     methods: [DELETE]
     requirements:
         contentId: \d+
         versionNumber: \d+
 
-ezpublish_rest_deleteTranslationFromDraft:
+ibexa.rest.delete_translation_from_draft:
     path: /content/objects/{contentId}/versions/{versionNumber}/translations/{languageCode}
     defaults:
-        _controller: ezpublish_rest.controller.content:deleteTranslationFromDraft
+        _controller: Ibexa\Rest\Server\Controller\Content:deleteTranslationFromDraft
     methods: [DELETE]
     requirements:
         contentId: \d+
         versionNumber: \d+
 
-ezpublish_rest_createDraftFromVersion:
+ibexa.rest.create_draft_from_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
     defaults:
-        _controller: ezpublish_rest.controller.content:createDraftFromVersion
+        _controller: Ibexa\Rest\Server\Controller\Content:createDraftFromVersion
     methods: [COPY]
     requirements:
         contentId: \d+
         versionNumber: \d+
 
-ezpublish_rest_publishVersion:
+ibexa.rest.publish_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
     defaults:
-        _controller: ezpublish_rest.controller.content:publishVersion
+        _controller: Ibexa\Rest\Server\Controller\Content:publishVersion
     methods: [PUBLISH]
     requirements:
         contentId: \d+
         versionNumber: \d+
 
-ezpublish_rest_redirectCurrentVersion:
+ibexa.rest.redirect_current_version:
     path: /content/objects/{contentId}/currentversion
     defaults:
-        _controller: ezpublish_rest.controller.content:redirectCurrentVersion
+        _controller: Ibexa\Rest\Server\Controller\Content:redirectCurrentVersion
     methods: [GET]
     requirements:
         contentId: \d+
 
-ezpublish_rest_createDraftFromCurrentVersion:
+ibexa.rest.create_draft_from_current_version:
     path: /content/objects/{contentId}/currentversion
     defaults:
-        _controller: ezpublish_rest.controller.content:createDraftFromCurrentVersion
+        _controller: Ibexa\Rest\Server\Controller\Content:createDraftFromCurrentVersion
     methods: [COPY]
     requirements:
         contentId: \d+
 
-ezpublish_rest_hideContent:
+ibexa.rest.hide_content:
     path: /content/objects/{contentId}/hide
     defaults:
-        _controller: ezpublish_rest.controller.content:hideContent
+        _controller: Ibexa\Rest\Server\Controller\Content:hideContent
     methods: [POST]
     requirements:
         contentId: \d+
 
-ezpublish_rest_revealContent:
+ibexa.rest.reveal_content:
     path: /content/objects/{contentId}/reveal
     defaults:
-        _controller: ezpublish_rest.controller.content:revealContent
+        _controller: Ibexa\Rest\Server\Controller\Content:revealContent
     methods: [POST]
     requirements:
         contentId: \d+
 
 # Binary content
 
-ezpublish_rest_binaryContent_getImageVariation:
+ibexa.rest.binary_content.get_image_variation:
     path: /content/binary/images/{imageId}/variations/{variationIdentifier}
     defaults:
-        _controller: ezpublish_rest.controller.binary_content:getImageVariation
+        _controller: Ibexa\Rest\Server\Controller\BinaryContent:getImageVariation
     methods: [GET]
     requirements:
         imageId: \d+-\d+(-\d+)?
@@ -254,130 +254,130 @@ ezpublish_rest_binaryContent_getImageVariation:
 # Views
 
 # Deprecated in favour of /views from Platform 1.0
-ezpublish_rest_createContentView:
+ibexa.rest.create_content_view:
     path: /content/views
     defaults:
-        _controller: ezpublish_rest.controller.content:createView
+        _controller: Ibexa\Rest\Server\Controller\Content:createView
     methods: [POST]
 
 # Views, Platform 1.0
-ezpublish_rest_views_create:
+ibexa.rest.views.create:
     path: /views
     defaults:
-        _controller: ezpublish_rest.controller.views:createView
+        _controller: Ibexa\Rest\Server\Controller\Views:createView
     methods: [POST]
 
-ezpublish_rest_views_list:
+ibexa.rest.views.list:
     path: /views
     defaults:
-        _controller: ezpublish_rest.controller.views:listView
+        _controller: Ibexa\Rest\Server\Controller\Views:listView
     methods: [GET]
 
-ezpublish_rest_views_load:
+ibexa.rest.views.load:
     path : /views/{viewId}
     defaults:
-        _controller: ezpublish_rest.controller.views:getView
+        _controller: Ibexa\Rest\Server\Controller\Views:getView
     methods: [GET]
 
-ezpublish_rest_views_load_results:
+ibexa.rest.views.load.results:
     path: /views/{viewId}/results
     defaults:
-        _controller: ezpublish_rest.controller.views:loadViewResults
+        _controller: Ibexa\Rest\Server\Controller\Views:loadViewResults
     methods: [GET]
 # Object states
 
 
-ezpublish_rest_loadObjectStateGroups:
+ibexa.rest.load_object_state_groups:
     path: /content/objectstategroups
     defaults:
-        _controller: ezpublish_rest.controller.object_state:loadObjectStateGroups
+        _controller: Ibexa\Rest\Server\Controller\ObjectState:loadObjectStateGroups
     methods: [GET]
 
-ezpublish_rest_createObjectStateGroup:
+ibexa.rest.create_object_state_group:
     path: /content/objectstategroups
     defaults:
-        _controller: ezpublish_rest.controller.object_state:createObjectStateGroup
+        _controller: Ibexa\Rest\Server\Controller\ObjectState:createObjectStateGroup
     methods: [POST]
 
-ezpublish_rest_loadObjectStateGroup:
+ibexa.rest.load_object_state_group:
     path: /content/objectstategroups/{objectStateGroupId}
     defaults:
-        _controller: ezpublish_rest.controller.object_state:loadObjectStateGroup
+        _controller: Ibexa\Rest\Server\Controller\ObjectState:loadObjectStateGroup
     methods: [GET]
     requirements:
         objectStateGroupId: \d+
 
-ezpublish_rest_updateObjectStateGroup:
+ibexa.rest.update_object_state_group:
     path: /content/objectstategroups/{objectStateGroupId}
     defaults:
-        _controller: ezpublish_rest.controller.object_state:updateObjectStateGroup
+        _controller: Ibexa\Rest\Server\Controller\ObjectState:updateObjectStateGroup
     methods: [PATCH]
     requirements:
         objectStateGroupId: \d+
 
-ezpublish_rest_deleteObjectStateGroup:
+ibexa.rest.delete_object_state_group:
     path: /content/objectstategroups/{objectStateGroupId}
     defaults:
-        _controller: ezpublish_rest.controller.object_state:deleteObjectStateGroup
+        _controller: Ibexa\Rest\Server\Controller\ObjectState:deleteObjectStateGroup
     methods: [DELETE]
     requirements:
         objectStateGroupId: \d+
 
-ezpublish_rest_loadObjectStates:
+ibexa.rest.load_object_states:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates
     defaults:
-        _controller: ezpublish_rest.controller.object_state:loadObjectStates
+        _controller: Ibexa\Rest\Server\Controller\ObjectState:loadObjectStates
     methods: [GET]
     requirements:
         objectStateGroupId: \d+
 
-ezpublish_rest_createObjectState:
+ibexa.rest.create_object_state:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates
     defaults:
-        _controller: ezpublish_rest.controller.object_state:createObjectState
+        _controller: Ibexa\Rest\Server\Controller\ObjectState:createObjectState
     methods: [POST]
     requirements:
         objectStateGroupId: \d+
 
-ezpublish_rest_loadObjectState:
+ibexa.rest.load_object_state:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates/{objectStateId}
     defaults:
-        _controller: ezpublish_rest.controller.object_state:loadObjectState
+        _controller: Ibexa\Rest\Server\Controller\ObjectState:loadObjectState
     methods: [GET]
     requirements:
         objectStateGroupId: \d+
         objectStateId: \d+
 
-ezpublish_rest_updateObjectState:
+ibexa.rest.update_object_state:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates/{objectStateId}
     defaults:
-        _controller: ezpublish_rest.controller.object_state:updateObjectState
+        _controller: Ibexa\Rest\Server\Controller\ObjectState:updateObjectState
     methods: [PATCH]
     requirements:
         objectStateGroupId: \d+
         objectStateId: \d+
 
-ezpublish_rest_deleteObjectState:
+ibexa.rest.delete_object_state:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates/{objectStateId}
     defaults:
-        _controller: ezpublish_rest.controller.object_state:deleteObjectState
+        _controller: Ibexa\Rest\Server\Controller\ObjectState:deleteObjectState
     methods: [DELETE]
     requirements:
         objectStateGroupId: \d+
         objectStateId: \d+
 
-ezpublish_rest_getObjectStatesForContent:
+ibexa.rest.get_object_states_for_content:
     path: /content/objects/{contentId}/objectstates
     defaults:
-        _controller: ezpublish_rest.controller.object_state:getObjectStatesForContent
+        _controller: Ibexa\Rest\Server\Controller\ObjectState:getObjectStatesForContent
     methods: [GET]
     requirements:
         contentId: \d+
 
-ezpublish_rest_setObjectStatesForContent:
+ibexa.rest.set_object_states_for_content:
     path: /content/objects/{contentId}/objectstates
     defaults:
-        _controller: ezpublish_rest.controller.object_state:setObjectStatesForContent
+        _controller: Ibexa\Rest\Server\Controller\ObjectState:setObjectStatesForContent
     methods: [PATCH]
     requirements:
         contentId: \d+
@@ -386,80 +386,80 @@ ezpublish_rest_setObjectStatesForContent:
 # Locations
 
 
-ezpublish_rest_redirectLocation:
+ibexa.rest.redirect_location:
     path: /content/locations
     defaults:
-        _controller: ezpublish_rest.controller.location:redirectLocation
+        _controller: Ibexa\Rest\Server\Controller\Location:redirectLocation
     methods: [GET]
 
-ezpublish_rest_loadLocation:
+ibexa.rest.load_location:
     path: /content/locations/{locationPath}
     defaults:
-        _controller: ezpublish_rest.controller.location:loadLocation
+        _controller: Ibexa\Rest\Server\Controller\Location:loadLocation
     methods: [GET]
     requirements:
         locationPath: "[0-9/]+"
 
-ezpublish_rest_updateLocation:
+ibexa.rest.update_location:
     path: /content/locations/{locationPath}
     defaults:
-        _controller: ezpublish_rest.controller.location:updateLocation
+        _controller: Ibexa\Rest\Server\Controller\Location:updateLocation
     methods: [PATCH]
     requirements:
         locationPath: "[0-9/]+"
 
-ezpublish_rest_deleteSubtree:
+ibexa.rest.delete_subtree:
     path: /content/locations/{locationPath}
     defaults:
-        _controller: ezpublish_rest.controller.location:deleteSubtree
+        _controller: Ibexa\Rest\Server\Controller\Location:deleteSubtree
     methods: [DELETE]
     requirements:
         locationPath: "[0-9/]+"
 
-ezpublish_rest_copySubtree:
+ibexa.rest.copy_subtree:
     path: /content/locations/{locationPath}
     defaults:
-        _controller: ezpublish_rest.controller.location:copySubtree
+        _controller: Ibexa\Rest\Server\Controller\Location:copySubtree
     methods: [COPY]
     requirements:
         locationPath: "[0-9/]+"
 
-ezpublish_rest_moveSubtree:
+ibexa.rest.move_subtree:
     path: /content/locations/{locationPath}
     defaults:
-        _controller: ezpublish_rest.controller.location:moveSubtree
+        _controller: Ibexa\Rest\Server\Controller\Location:moveSubtree
     methods: [MOVE]
     requirements:
         locationPath: "[0-9/]+"
 
-ezpublish_rest_swapLocation:
+ibexa.rest.swap_location:
     path: /content/locations/{locationPath}
     defaults:
-        _controller: ezpublish_rest.controller.location:swapLocation
+        _controller: Ibexa\Rest\Server\Controller\Location:swapLocation
     methods: [SWAP]
     requirements:
         locationPath: "[0-9/]+"
 
-ezpublish_rest_loadLocationChildren:
+ibexa.rest.load_location_children:
     path: /content/locations/{locationPath}/children
     defaults:
-        _controller: ezpublish_rest.controller.location:loadLocationChildren
+        _controller: Ibexa\Rest\Server\Controller\Location:loadLocationChildren
     methods: [GET]
     requirements:
         locationPath: "[0-9/]+"
 
-ezpublish_rest_loadLocationsForContent:
+ibexa.rest.load_locations_for_content:
     path: /content/objects/{contentId}/locations
     defaults:
-        _controller: ezpublish_rest.controller.location:loadLocationsForContent
+        _controller: Ibexa\Rest\Server\Controller\Location:loadLocationsForContent
     methods: [GET]
     requirements:
         contentId: \d+
 
-ezpublish_rest_createLocation:
+ibexa.rest.create_location:
     path: /content/objects/{contentId}/locations
     defaults:
-        _controller: ezpublish_rest.controller.location:createLocation
+        _controller: Ibexa\Rest\Server\Controller\Location:createLocation
     methods: [POST]
     requirements:
         contentId: \d+
@@ -468,210 +468,210 @@ ezpublish_rest_createLocation:
 # Content types
 
 
-ezpublish_rest_loadContentTypeGroupList:
+ibexa.rest.load_content_type_group_list:
     path: /content/typegroups
     defaults:
-        _controller: ezpublish_rest.controller.content_type:loadContentTypeGroupList
+        _controller: Ibexa\Rest\Server\Controller\ContentType:loadContentTypeGroupList
     methods: [GET]
 
-ezpublish_rest_createContentTypeGroup:
+ibexa.rest.create_content_type_group:
     path: /content/typegroups
     defaults:
-        _controller: ezpublish_rest.controller.content_type:createContentTypeGroup
+        _controller: Ibexa\Rest\Server\Controller\ContentType:createContentTypeGroup
     methods: [POST]
 
-ezpublish_rest_loadContentTypeGroup:
+ibexa.rest.load_content_type_group:
     path: /content/typegroups/{contentTypeGroupId}
     defaults:
-        _controller: ezpublish_rest.controller.content_type:loadContentTypeGroup
+        _controller: Ibexa\Rest\Server\Controller\ContentType:loadContentTypeGroup
     methods: [GET]
     requirements:
         contentTypeGroupId: \d+
 
-ezpublish_rest_updateContentTypeGroup:
+ibexa.rest.update_content_type_group:
     path: /content/typegroups/{contentTypeGroupId}
     defaults:
-        _controller: ezpublish_rest.controller.content_type:updateContentTypeGroup
+        _controller: Ibexa\Rest\Server\Controller\ContentType:updateContentTypeGroup
     methods: [PATCH]
     requirements:
         contentTypeGroupId: \d+
 
-ezpublish_rest_deleteContentTypeGroup:
+ibexa.rest.delete_content_type_group:
     path: /content/typegroups/{contentTypeGroupId}
     defaults:
-        _controller: ezpublish_rest.controller.content_type:deleteContentTypeGroup
+        _controller: Ibexa\Rest\Server\Controller\ContentType:deleteContentTypeGroup
     methods: [DELETE]
     requirements:
         contentTypeGroupId: \d+
 
-ezpublish_rest_listContentTypesForGroup:
+ibexa.rest.list_content_types_for_group:
     path: /content/typegroups/{contentTypeGroupId}/types
     defaults:
-        _controller: ezpublish_rest.controller.content_type:listContentTypesForGroup
+        _controller: Ibexa\Rest\Server\Controller\ContentType:listContentTypesForGroup
     methods: [GET]
     requirements:
         contentTypeGroupId: \d+
 
-ezpublish_rest_createContentType:
+ibexa.rest.create_content_type:
     path: /content/typegroups/{contentTypeGroupId}/types
     defaults:
-        _controller: ezpublish_rest.controller.content_type:createContentType
+        _controller: Ibexa\Rest\Server\Controller\ContentType:createContentType
     methods: [POST]
     requirements:
         contentTypeGroupId: \d+
 
-ezpublish_rest_listContentTypes:
+ibexa.rest.list_content_types:
     # @todo: Handle all GET parameters
     path: /content/types
     defaults:
-        _controller: ezpublish_rest.controller.content_type:listContentTypes
+        _controller: Ibexa\Rest\Server\Controller\ContentType:listContentTypes
     methods: [GET]
 
-ezpublish_rest_copyContentType:
+ibexa.rest.copy_content_type:
     path: /content/types/{contentTypeId}
     defaults:
-        _controller: ezpublish_rest.controller.content_type:copyContentType
+        _controller: Ibexa\Rest\Server\Controller\ContentType:copyContentType
     methods: [COPY]
     requirements:
         contentTypeId: \d+
 
-ezpublish_rest_loadContentType:
+ibexa.rest.load_content_type:
     path: /content/types/{contentTypeId}
     defaults:
-        _controller: ezpublish_rest.controller.content_type:loadContentType
+        _controller: Ibexa\Rest\Server\Controller\ContentType:loadContentType
     methods: [GET]
     requirements:
         contentTypeId: \d+
 
-ezpublish_rest_createContentTypeDraft:
+ibexa.rest.create_content_type_draft:
     path: /content/types/{contentTypeId}
     defaults:
-        _controller: ezpublish_rest.controller.content_type:createContentTypeDraft
+        _controller: Ibexa\Rest\Server\Controller\ContentType:createContentTypeDraft
     methods: [POST]
     requirements:
         contentTypeId: \d+
 
-ezpublish_rest_deleteContentType:
+ibexa.rest.delete_content_type:
     path: /content/types/{contentTypeId}
     defaults:
-        _controller: ezpublish_rest.controller.content_type:deleteContentType
+        _controller: Ibexa\Rest\Server\Controller\ContentType:deleteContentType
     methods: [DELETE]
     requirements:
         contentTypeId: \d+
 
-ezpublish_rest_deleteContentTypeDraft:
+ibexa.rest.delete_content_type_draft:
     path: /content/types/{contentTypeId}/draft
     defaults:
-        _controller: ezpublish_rest.controller.content_type:deleteContentTypeDraft
+        _controller: Ibexa\Rest\Server\Controller\ContentType:deleteContentTypeDraft
     methods: [DELETE]
     requirements:
         contentTypeId: \d+
 
-ezpublish_rest_loadContentTypeFieldDefinitionList:
+ibexa.rest.load_content_type_field_definition_list:
     path: /content/types/{contentTypeId}/fieldDefinitions
     defaults:
-        _controller: ezpublish_rest.controller.content_type:loadContentTypeFieldDefinitionList
+        _controller: Ibexa\Rest\Server\Controller\ContentType:loadContentTypeFieldDefinitionList
     methods: [GET]
     requirements:
         contentTypeId: \d+
 
-ezpublish_rest_loadContentTypeFieldDefinition:
+ibexa.rest.load_content_type_field_definition:
     path: /content/types/{contentTypeId}/fieldDefinitions/{fieldDefinitionId}
     defaults:
-        _controller: ezpublish_rest.controller.content_type:loadContentTypeFieldDefinition
+        _controller: Ibexa\Rest\Server\Controller\ContentType:loadContentTypeFieldDefinition
     methods: [GET]
     requirements:
         contentTypeId: \d+
         fieldDefinitionId: \d+
 
-ezpublish_rest_loadContentTypeDraft:
+ibexa.rest.load_content_type_draft:
     path: /content/types/{contentTypeId}/draft
     defaults:
-        _controller: ezpublish_rest.controller.content_type:loadContentTypeDraft
+        _controller: Ibexa\Rest\Server\Controller\ContentType:loadContentTypeDraft
     methods: [GET]
     requirements:
         contentTypeId: \d+
 
-ezpublish_rest_updateContentTypeDraft:
+ibexa.rest.update_content_type_draft:
     path: /content/types/{contentTypeId}/draft
     defaults:
-        _controller: ezpublish_rest.controller.content_type:updateContentTypeDraft
+        _controller: Ibexa\Rest\Server\Controller\ContentType:updateContentTypeDraft
     methods: [PATCH]
     requirements:
         contentTypeId: \d+
 
-ezpublish_rest_publishContentTypeDraft:
+ibexa.rest.publish_content_type_draft:
     path: /content/types/{contentTypeId}/draft
     defaults:
-        _controller: ezpublish_rest.controller.content_type:publishContentTypeDraft
+        _controller: Ibexa\Rest\Server\Controller\ContentType:publishContentTypeDraft
     methods: [PUBLISH]
     requirements:
         contentTypeId: \d+
 
-ezpublish_rest_loadContentTypeDraftFieldDefinitionList:
+ibexa.rest.load_content_type_draft_field_definition_list:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions
     defaults:
-        _controller: ezpublish_rest.controller.content_type:loadContentTypeDraftFieldDefinitionList
+        _controller: Ibexa\Rest\Server\Controller\ContentType:loadContentTypeDraftFieldDefinitionList
     methods: [GET]
     requirements:
         contentTypeId: \d+
 
-ezpublish_rest_addContentTypeDraftFieldDefinition:
+ibexa.rest.add_content_type_draft_field_definition:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions
     defaults:
-        _controller: ezpublish_rest.controller.content_type:addContentTypeDraftFieldDefinition
+        _controller: Ibexa\Rest\Server\Controller\ContentType:addContentTypeDraftFieldDefinition
     methods: [POST]
     requirements:
         contentTypeId: \d+
 
-ezpublish_rest_loadContentTypeDraftFieldDefinition:
+ibexa.rest.load_content_type_draft_field_definition:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}
     defaults:
-        _controller: ezpublish_rest.controller.content_type:loadContentTypeDraftFieldDefinition
+        _controller: Ibexa\Rest\Server\Controller\ContentType:loadContentTypeDraftFieldDefinition
     methods: [GET]
     requirements:
         contentTypeId: \d+
         fieldDefinitionId: \d+
 
-ezpublish_rest_updateContentTypeDraftFieldDefinition:
+ibexa.rest.update_content_type_draft_field_definition:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}
     defaults:
-        _controller: ezpublish_rest.controller.content_type:updateContentTypeDraftFieldDefinition
+        _controller: Ibexa\Rest\Server\Controller\ContentType:updateContentTypeDraftFieldDefinition
     methods: [PATCH]
     requirements:
         contentTypeId: \d+
         fieldDefinitionId: \d+
 
-ezpublish_rest_removeContentTypeDraftFieldDefinition:
+ibexa.rest.remove_content_type_draft_field_definition:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}
     defaults:
-        _controller: ezpublish_rest.controller.content_type:removeContentTypeDraftFieldDefinition
+        _controller: Ibexa\Rest\Server\Controller\ContentType:removeContentTypeDraftFieldDefinition
     methods: [DELETE]
     requirements:
         contentTypeId: \d+
         fieldDefinitionId: \d+
 
-ezpublish_rest_loadGroupsOfContentType:
+ibexa.rest.load_groups_of_content_type:
     path: /content/types/{contentTypeId}/groups
     defaults:
-        _controller: ezpublish_rest.controller.content_type:loadGroupsOfContentType
+        _controller: Ibexa\Rest\Server\Controller\ContentType:loadGroupsOfContentType
     methods: [GET]
     requirements:
         contentTypeId: \d+
 
-ezpublish_rest_linkContentTypeToGroup:
+ibexa.rest.link_content_type_to_group:
     # Handle GET parameter group in controller. Most likely already done
     path: /content/types/{contentTypeId}/groups
     defaults:
-        _controller: ezpublish_rest.controller.content_type:linkContentTypeToGroup
+        _controller: Ibexa\Rest\Server\Controller\ContentType:linkContentTypeToGroup
     methods: [POST]
     requirements:
         contentTypeId: \d+
 
-ezpublish_rest_unlinkContentTypeFromGroup:
+ibexa.rest.unlink_content_type_from_group:
     path: /content/types/{contentTypeId}/groups/{contentTypeGroupId}
     defaults:
-        _controller: ezpublish_rest.controller.content_type:unlinkContentTypeFromGroup
+        _controller: Ibexa\Rest\Server\Controller\ContentType:unlinkContentTypeFromGroup
     methods: [DELETE]
     requirements:
         contentTypeId: \d+
@@ -681,38 +681,38 @@ ezpublish_rest_unlinkContentTypeFromGroup:
 # Trash
 
 
-ezpublish_rest_loadTrashItems:
+ibexa.rest.load_trash_items:
     path: /content/trash
     defaults:
-        _controller: ezpublish_rest.controller.trash:loadTrashItems
+        _controller: Ibexa\Rest\Server\Controller\Trash:loadTrashItems
     methods: [GET]
 
-ezpublish_rest_emptyTrash:
+ibexa.rest.empty_trash:
     path: /content/trash
     defaults:
-        _controller: ezpublish_rest.controller.trash:emptyTrash
+        _controller: Ibexa\Rest\Server\Controller\Trash:emptyTrash
     methods: [DELETE]
 
-ezpublish_rest_loadTrashItem:
+ibexa.rest.load_trash_item:
     path: /content/trash/{trashItemId}
     defaults:
-        _controller: ezpublish_rest.controller.trash:loadTrashItem
+        _controller: Ibexa\Rest\Server\Controller\Trash:loadTrashItem
     methods: [GET]
     requirements:
         trashItemId: \d+
 
-ezpublish_rest_deleteTrashItem:
+ibexa.rest.delete_trash_item:
     path: /content/trash/{trashItemId}
     defaults:
-        _controller: ezpublish_rest.controller.trash:deleteTrashItem
+        _controller: Ibexa\Rest\Server\Controller\Trash:deleteTrashItem
     methods: [DELETE]
     requirements:
         trashItemId: \d+
 
-ezpublish_rest_restoreTrashItem:
+ibexa.rest.restore_trash_item:
     path: /content/trash/{trashItemId}
     defaults:
-        _controller: ezpublish_rest.controller.trash:restoreTrashItem
+        _controller: Ibexa\Rest\Server\Controller\Trash:restoreTrashItem
     methods: [MOVE]
     requirements:
         trashItemId: \d+
@@ -721,30 +721,30 @@ ezpublish_rest_restoreTrashItem:
 # URL wildcards
 
 
-ezpublish_rest_listURLWildcards:
+ibexa.rest.list_url_wildcards:
     path: /content/urlwildcards
     defaults:
-        _controller: ezpublish_rest.controller.url_wildcard:listURLWildcards
+        _controller: Ibexa\Rest\Server\Controller\URLWildcard:listURLWildcards
     methods: [GET]
 
-ezpublish_rest_createURLWildcard:
+ibexa.rest.create_url_wildcard:
     path: /content/urlwildcards
     defaults:
-        _controller: ezpublish_rest.controller.url_wildcard:createURLWildcard
+        _controller: Ibexa\Rest\Server\Controller\URLWildcard:createURLWildcard
     methods: [POST]
 
-ezpublish_rest_loadURLWildcard:
+ibexa.rest.load_url_wildcard:
     path: /content/urlwildcards/{urlWildcardId}
     defaults:
-        _controller: ezpublish_rest.controller.url_wildcard:loadURLWildcard
+        _controller: Ibexa\Rest\Server\Controller\URLWildcard:loadURLWildcard
     methods: [GET]
     requirements:
         urlWildcardId: \d+
 
-ezpublish_rest_deleteURLWildcard:
+ibexa.rest.delete_url_wildcard:
     path: /content/urlwildcards/{urlWildcardId}
     defaults:
-        _controller: ezpublish_rest.controller.url_wildcard:deleteURLWildcard
+        _controller: Ibexa\Rest\Server\Controller\URLWildcard:deleteURLWildcard
     methods: [DELETE]
     requirements:
         urlWildcardId: \d+
@@ -753,139 +753,139 @@ ezpublish_rest_deleteURLWildcard:
 # User policies
 
 
-ezpublish_rest_listPoliciesForUser:
+ibexa.rest.list_policies_for_user:
     path: /user/policies
     defaults:
-        _controller: ezpublish_rest.controller.role:listPoliciesForUser
+        _controller: Ibexa\Rest\Server\Controller\Role:listPoliciesForUser
     methods: [GET]
 
 
 # Roles
 
 
-ezpublish_rest_listRoles:
+ibexa.rest.list_roles:
     path: /user/roles
     defaults:
-        _controller: ezpublish_rest.controller.role:listRoles
+        _controller: Ibexa\Rest\Server\Controller\Role:listRoles
     methods: [GET]
 
-ezpublish_rest_createRole:
+ibexa.rest.create_role:
     path: /user/roles
     defaults:
-        _controller: ezpublish_rest.controller.role:createRole
+        _controller: Ibexa\Rest\Server\Controller\Role:createRole
     methods: [POST]
     requirements:
 
-ezpublish_rest_createRoleDraft:
+ibexa.rest.create_role_draft:
     path: /user/roles/{roleId}
     defaults:
-        _controller: ezpublish_rest.controller.role:createRoleDraft
+        _controller: Ibexa\Rest\Server\Controller\Role:createRoleDraft
     methods: [POST]
     requirements:
         roleId: \d+
 
-ezpublish_rest_loadRole:
+ibexa.rest.load_role:
     path: /user/roles/{roleId}
     defaults:
-        _controller: ezpublish_rest.controller.role:loadRole
+        _controller: Ibexa\Rest\Server\Controller\Role:loadRole
     methods: [GET]
     requirements:
         roleId: \d+
 
-ezpublish_rest_loadRoleDraft:
+ibexa.rest.load_role_draft:
     path: /user/roles/{roleId}/draft
     defaults:
-        _controller: ezpublish_rest.controller.role:loadRoleDraft
+        _controller: Ibexa\Rest\Server\Controller\Role:loadRoleDraft
     methods: [GET]
     requirements:
         roleId: \d+
 
-ezpublish_rest_updateRole:
+ibexa.rest.update_role:
     path: /user/roles/{roleId}
     defaults:
-        _controller: ezpublish_rest.controller.role:updateRole
+        _controller: Ibexa\Rest\Server\Controller\Role:updateRole
     methods: [PATCH]
     requirements:
         roleId: \d+
 
-ezpublish_rest_updateRoleDraft:
+ibexa.rest.update_role_draft:
     path: /user/roles/{roleId}/draft
     defaults:
-        _controller: ezpublish_rest.controller.role:updateRoleDraft
+        _controller: Ibexa\Rest\Server\Controller\Role:updateRoleDraft
     methods: [PATCH]
     requirements:
         roleId: \d+
 
-ezpublish_rest_publishRoleDraft:
+ibexa.rest.publish_role_draft:
     path: /user/roles/{roleId}/draft
     defaults:
-        _controller: ezpublish_rest.controller.role:publishRoleDraft
+        _controller: Ibexa\Rest\Server\Controller\Role:publishRoleDraft
     methods: [PUBLISH]
     requirements:
         roleId: \d+
 
-ezpublish_rest_deleteRole:
+ibexa.rest.delete_role:
     path: /user/roles/{roleId}
     defaults:
-        _controller: ezpublish_rest.controller.role:deleteRole
+        _controller: Ibexa\Rest\Server\Controller\Role:deleteRole
     methods: [DELETE]
     requirements:
         roleId: \d+
 
-ezpublish_rest_deleteRoleDraft:
+ibexa.rest.delete_role_draft:
     path: /user/roles/{roleId}/draft
     defaults:
-        _controller: ezpublish_rest.controller.role:deleteRoleDraft
+        _controller: Ibexa\Rest\Server\Controller\Role:deleteRoleDraft
     methods: [DELETE]
     requirements:
         roleId: \d+
 
-ezpublish_rest_loadPolicies:
+ibexa.rest.load_policies:
     path: /user/roles/{roleId}/policies
     defaults:
-        _controller: ezpublish_rest.controller.role:loadPolicies
+        _controller: Ibexa\Rest\Server\Controller\Role:loadPolicies
     methods: [GET]
     requirements:
         roleId: \d+
 
-ezpublish_rest_addPolicy:
+ibexa.rest.add_policy:
     path: /user/roles/{roleId}/policies
     defaults:
-        _controller: ezpublish_rest.controller.role:addPolicy
+        _controller: Ibexa\Rest\Server\Controller\Role:addPolicy
     methods: [POST]
     requirements:
         roleId: \d+
 
-ezpublish_rest_deletePolicies:
+ibexa.rest.delete_policies:
     path: /user/roles/{roleId}/policies
     defaults:
-        _controller: ezpublish_rest.controller.role:deletePolicies
+        _controller: Ibexa\Rest\Server\Controller\Role:deletePolicies
     methods: [DELETE]
     requirements:
         roleId: \d+
 
-ezpublish_rest_loadPolicy:
+ibexa.rest.load_policy:
     path: /user/roles/{roleId}/policies/{policyId}
     defaults:
-        _controller: ezpublish_rest.controller.role:loadPolicy
+        _controller: Ibexa\Rest\Server\Controller\Role:loadPolicy
     methods: [GET]
     requirements:
         roleId: \d+
         policyId: \d+
 
-ezpublish_rest_updatePolicy:
+ibexa.rest.update_policy:
     path: /user/roles/{roleId}/policies/{policyId}
     defaults:
-        _controller: ezpublish_rest.controller.role:updatePolicy
+        _controller: Ibexa\Rest\Server\Controller\Role:updatePolicy
     methods: [PATCH]
     requirements:
         roleId: \d+
         policyId: \d+
 
-ezpublish_rest_deletePolicy:
+ibexa.rest.delete_policy:
     path: /user/roles/{roleId}/policies/{policyId}
     defaults:
-        _controller: ezpublish_rest.controller.role:deletePolicy
+        _controller: Ibexa\Rest\Server\Controller\Role:deletePolicy
     methods: [DELETE]
     requirements:
         roleId: \d+
@@ -895,243 +895,243 @@ ezpublish_rest_deletePolicy:
 # Users
 
 
-ezpublish_rest_verifyUsers:
+ibexa.rest.verify_users:
     path: /user/users
     defaults:
-        _controller: ezpublish_rest.controller.user:verifyUsers
+        _controller: Ibexa\Rest\Server\Controller\User:verifyUsers
     methods: [HEAD]
 
-ezpublish_rest_loadUsers:
+ibexa.rest.load_users:
     path: /user/users
     defaults:
-        _controller: ezpublish_rest.controller.user:loadUsers
+        _controller: Ibexa\Rest\Server\Controller\User:loadUsers
     methods: [GET]
 
-ezpublish_rest_loadUser:
+ibexa.rest.load_user:
     path: /user/users/{userId}
     defaults:
-        _controller: ezpublish_rest.controller.user:loadUser
+        _controller: Ibexa\Rest\Server\Controller\User:loadUser
     methods: [GET]
     requirements:
         userId: \d+
 
-ezpublish_rest_updateUser:
+ibexa.rest.update_user:
     path: /user/users/{userId}
     defaults:
-        _controller: ezpublish_rest.controller.user:updateUser
+        _controller: Ibexa\Rest\Server\Controller\User:updateUser
     methods: [PATCH]
     requirements:
         userId: \d+
 
-ezpublish_rest_deleteUser:
+ibexa.rest.delete_user:
     path: /user/users/{userId}
     defaults:
-        _controller: ezpublish_rest.controller.user:deleteUser
+        _controller: Ibexa\Rest\Server\Controller\User:deleteUser
     methods: [DELETE]
     requirements:
         userId: \d+
 
-ezpublish_rest_loadUserGroupsOfUser:
+ibexa.rest.load_user_groups_of_user:
     path: /user/users/{userId}/groups
     defaults:
-        _controller: ezpublish_rest.controller.user:loadUserGroupsOfUser
+        _controller: Ibexa\Rest\Server\Controller\User:loadUserGroupsOfUser
     methods: [GET]
     requirements:
         userId: \d+
 
-ezpublish_rest_assignUserToUserGroup:
+ibexa.rest.assign_user_to_user_group:
     path: /user/users/{userId}/groups
     defaults:
-        _controller: ezpublish_rest.controller.user:assignUserToUserGroup
+        _controller: Ibexa\Rest\Server\Controller\User:assignUserToUserGroup
     methods: [POST]
     requirements:
         userId: \d+
 
-ezpublish_rest_unassignUserFromUserGroup:
+ibexa.rest.unassign_user_from_user_group:
     path: /user/users/{userId}/groups/{groupPath}
     defaults:
-        _controller: ezpublish_rest.controller.user:unassignUserFromUserGroup
+        _controller: Ibexa\Rest\Server\Controller\User:unassignUserFromUserGroup
     methods: [DELETE]
     requirements:
         userId: \d+
         groupPath: \d+
 
-ezpublish_rest_loadUserDrafts:
+ibexa.rest.load_user_drafts:
     path: /user/users/{userId}/drafts
     defaults:
-        _controller: ezpublish_rest.controller.user:loadUserDrafts
+        _controller: Ibexa\Rest\Server\Controller\User:loadUserDrafts
     methods: [GET]
     requirements:
         userId: \d+
 
-ezpublish_rest_loadRoleAssignmentsForUser:
+ibexa.rest.load_role_assignments_for_user:
     path: /user/users/{userId}/roles
     defaults:
-        _controller: ezpublish_rest.controller.role:loadRoleAssignmentsForUser
+        _controller: Ibexa\Rest\Server\Controller\Role:loadRoleAssignmentsForUser
     methods: [GET]
     requirements:
         userId: \d+
 
-ezpublish_rest_assignRoleToUser:
+ibexa.rest.assign_role_to_user:
     path: /user/users/{userId}/roles
     defaults:
-        _controller: ezpublish_rest.controller.role:assignRoleToUser
+        _controller: Ibexa\Rest\Server\Controller\Role:assignRoleToUser
     methods: [POST]
     requirements:
         userId: \d+
 
-ezpublish_rest_loadRoleAssignmentForUser:
+ibexa.rest.load_role_assignment_for_user:
     path: /user/users/{userId}/roles/{roleId}
     defaults:
-        _controller: ezpublish_rest.controller.role:loadRoleAssignmentForUser
+        _controller: Ibexa\Rest\Server\Controller\Role:loadRoleAssignmentForUser
     methods: [GET]
     requirements:
         userId: \d+
         roleId: \d+
 
-ezpublish_rest_unassignRoleFromUser:
+ibexa.rest.unassign_role_from_user:
     path: /user/users/{userId}/roles/{roleId}
     defaults:
-        _controller: ezpublish_rest.controller.role:unassignRoleFromUser
+        _controller: Ibexa\Rest\Server\Controller\Role:unassignRoleFromUser
     methods: [DELETE]
     requirements:
         userId: \d+
         roleId: \d+
 
-ezpublish_rest_loadUserGroups:
+ibexa.rest.load_user_groups:
     path: /user/groups
     defaults:
-        _controller: ezpublish_rest.controller.user:loadUserGroups
+        _controller: Ibexa\Rest\Server\Controller\User:loadUserGroups
     methods: [GET]
 
-ezpublish_rest_loadRootUserGroup:
+ibexa.rest.load_root_user_group:
     path: /user/groups/root
     defaults:
-        _controller: ezpublish_rest.controller.user:loadRootUserGroup
+        _controller: Ibexa\Rest\Server\Controller\User:loadRootUserGroup
     methods: [GET]
 
-ezpublish_rest_createRootUserGroup:
+ibexa.rest.create_root_user_group:
     path: /user/groups/subgroups
     defaults:
-        _controller: ezpublish_rest.controller.user:createUserGroup
+        _controller: Ibexa\Rest\Server\Controller\User:createUserGroup
     methods: [POST]
 
-ezpublish_rest_loadUserGroup:
+ibexa.rest.load_user_group:
     path: /user/groups/{groupPath}
     defaults:
-        _controller: ezpublish_rest.controller.user:loadUserGroup
+        _controller: Ibexa\Rest\Server\Controller\User:loadUserGroup
     methods: [GET]
     requirements:
         groupPath: "[0-9/]+"
 
-ezpublish_rest_updateUserGroup:
+ibexa.rest.update_user_group:
     path: /user/groups/{groupPath}
     defaults:
-        _controller: ezpublish_rest.controller.user:updateUserGroup
+        _controller: Ibexa\Rest\Server\Controller\User:updateUserGroup
     methods: [PATCH]
     requirements:
         groupPath: "[0-9/]+"
 
-ezpublish_rest_deleteUserGroup:
+ibexa.rest.delete_user_group:
     path: /user/groups/{groupPath}
     defaults:
-        _controller: ezpublish_rest.controller.user:deleteUserGroup
+        _controller: Ibexa\Rest\Server\Controller\User:deleteUserGroup
     methods: [DELETE]
     requirements:
         groupPath: "[0-9/]+"
 
-ezpublish_rest_moveUserGroup:
+ibexa.rest.move_user_group:
     path: /user/groups/{groupPath}
     defaults:
-        _controller: ezpublish_rest.controller.user:moveUserGroup
+        _controller: Ibexa\Rest\Server\Controller\User:moveUserGroup
     methods: [MOVE]
     requirements:
         groupPath: "[0-9/]+"
 
-ezpublish_rest_loadSubUserGroups:
+ibexa.rest.load_sub_user_groups:
     path: /user/groups/{groupPath}/subgroups
     defaults:
-        _controller: ezpublish_rest.controller.user:loadSubUserGroups
+        _controller: Ibexa\Rest\Server\Controller\User:loadSubUserGroups
     methods: [GET]
     requirements:
         groupPath: "[0-9/]+"
 
-ezpublish_rest_createUserGroup:
+ibexa.rest.create_user_group:
     path: /user/groups/{groupPath}/subgroups
     defaults:
-        _controller: ezpublish_rest.controller.user:createUserGroup
+        _controller: Ibexa\Rest\Server\Controller\User:createUserGroup
     methods: [POST]
     requirements:
         groupPath: "[0-9/]+"
 
-ezpublish_rest_loadUsersFromGroup:
+ibexa.rest.load_users_from_group:
     path: /user/groups/{groupPath}/users
     defaults:
-        _controller: ezpublish_rest.controller.user:loadUsersFromGroup
+        _controller: Ibexa\Rest\Server\Controller\User:loadUsersFromGroup
     methods: [GET]
     requirements:
         groupPath: "[0-9/]+"
 
-ezpublish_rest_createUser:
+ibexa.rest.create_user:
     path: /user/groups/{groupPath}/users
     defaults:
-        _controller: ezpublish_rest.controller.user:createUser
+        _controller: Ibexa\Rest\Server\Controller\User:createUser
     methods: [POST]
     requirements:
         groupPath: "[0-9/]+"
 
-ezpublish_rest_loadRoleAssignmentsForUserGroup:
+ibexa.rest.load_role_assignments_for_user_group:
     path: /user/groups/{groupPath}/roles
     defaults:
-        _controller: ezpublish_rest.controller.role:loadRoleAssignmentsForUserGroup
+        _controller: Ibexa\Rest\Server\Controller\Role:loadRoleAssignmentsForUserGroup
     methods: [GET]
     requirements:
         groupPath: "[0-9/]+"
 
-ezpublish_rest_assignRoleToUserGroup:
+ibexa.rest.assign_role_to_user_group:
     path: /user/groups/{groupPath}/roles
     defaults:
-        _controller: ezpublish_rest.controller.role:assignRoleToUserGroup
+        _controller: Ibexa\Rest\Server\Controller\Role:assignRoleToUserGroup
     methods: [POST]
     requirements:
         groupPath: "[0-9/]+"
 
-ezpublish_rest_loadRoleAssignmentForUserGroup:
+ibexa.rest.load_role_assignment_for_user_group:
     path: /user/groups/{groupPath}/roles/{roleId}
     defaults:
-        _controller: ezpublish_rest.controller.role:loadRoleAssignmentForUserGroup
+        _controller: Ibexa\Rest\Server\Controller\Role:loadRoleAssignmentForUserGroup
     methods: [GET]
     requirements:
         groupPath: "[0-9/]+"
         roleId: \d+
 
-ezpublish_rest_unassignRoleFromUserGroup:
+ibexa.rest.unassign_role_from_user_group:
     path: /user/groups/{groupPath}/roles/{roleId}
     defaults:
-        _controller: ezpublish_rest.controller.role:unassignRoleFromUserGroup
+        _controller: Ibexa\Rest\Server\Controller\Role:unassignRoleFromUserGroup
     methods: [DELETE]
     requirements:
         groupPath: "[0-9/]+"
         roleId: \d+
 
-ezpublish_rest_createSession:
+ibexa.rest.create_session:
     path: /user/sessions
     defaults:
-        _controller: ezpublish_rest.controller.session:createSessionAction
+        _controller: Ibexa\Rest\Server\Controller\SessionController:createSessionAction
         csrf_protection: false
     methods: [POST]
 
-ezpublish_rest_deleteSession:
+ibexa.rest.delete_session:
     path: /user/sessions/{sessionId}
     defaults:
-        _controller: ezpublish_rest.controller.session:deleteSessionAction
+        _controller: Ibexa\Rest\Server\Controller\SessionController:deleteSessionAction
         csrf_protection: false
     methods: [DELETE]
 
-ezpublish_rest_refreshSession:
+ibexa.rest.refresh_session:
     path: /user/sessions/{sessionId}/refresh
     defaults:
-        _controller: ezpublish_rest.controller.session:refreshSessionAction
+        _controller: Ibexa\Rest\Server\Controller\SessionController:refreshSessionAction
         csrf_protection: false
     methods: [POST]
 
@@ -1139,83 +1139,83 @@ ezpublish_rest_refreshSession:
 # URL aliases
 
 
-ezpublish_rest_listGlobalURLAliases:
+ibexa.rest.list_global_url_aliases:
     path: /content/urlaliases
     defaults:
-        _controller: ezpublish_rest.controller.url_alias:listGlobalURLAliases
+        _controller: Ibexa\Rest\Server\Controller\URLAlias:listGlobalURLAliases
     methods: [GET]
 
-ezpublish_rest_listLocationURLAliases:
+ibexa.rest.list_location_url_aliases:
     path: /content/locations/{locationPath}/urlaliases
     defaults:
-        _controller: ezpublish_rest.controller.url_alias:listLocationURLAliases
+        _controller: Ibexa\Rest\Server\Controller\URLAlias:listLocationURLAliases
     methods: [GET]
     requirements:
         locationPath: "[0-9/]+"
 
-ezpublish_rest_createURLAlias:
+ibexa.rest.create_url_alias:
     path: /content/urlaliases
     defaults:
-        _controller: ezpublish_rest.controller.url_alias:createURLAlias
+        _controller: Ibexa\Rest\Server\Controller\URLAlias:createURLAlias
     methods: [POST]
 
-ezpublish_rest_loadURLAlias:
+ibexa.rest.load_url_alias:
     path: /content/urlaliases/{urlAliasId}
     defaults:
-        _controller: ezpublish_rest.controller.url_alias:loadURLAlias
+        _controller: Ibexa\Rest\Server\Controller\URLAlias:loadURLAlias
     methods: [GET]
 
-ezpublish_rest_deleteURLAlias:
+ibexa.rest.delete_url_alias:
     path: /content/urlaliases/{urlAliasId}
     defaults:
-        _controller: ezpublish_rest.controller.url_alias:deleteURLAlias
+        _controller: Ibexa\Rest\Server\Controller\URLAlias:deleteURLAlias
     methods: [DELETE]
 
 
 # Services
 
 
-ezpublish_rest_loadCountryList:
+ibexa.rest.load_country_list:
     path: /services/countries
     defaults:
-        _controller: ezpublish_rest.controller.services:loadCountryList
+        _controller: Ibexa\Rest\Server\Controller\Services:loadCountryList
     methods: [GET]
 
 # Bookmark
 
-ezpublish_rest_createBookmark:
+ibexa.rest.create_bookmark:
     path: /bookmark/{locationId}
     defaults:
-        _controller: ezpublish_rest.controller.bookmark:createBookmark
+        _controller: Ibexa\Rest\Server\Controller\Bookmark:createBookmark
     methods: [POST]
     requirements:
         locationId: "[0-9]+"
 
-ezpublish_rest_deleteBookmark:
+ibexa.rest.delete_bookmark:
     path: /bookmark/{locationId}
     defaults:
-        _controller: ezpublish_rest.controller.bookmark:deleteBookmark
+        _controller: Ibexa\Rest\Server\Controller\Bookmark:deleteBookmark
     methods: [DELETE]
     requirements:
         locationId: "[0-9]+"
 
-ezpublish_rest_isBookmarked:
+ibexa.rest.is_bookmarked:
     path: /bookmark/{locationId}
     defaults:
-        _controller: ezpublish_rest.controller.bookmark:isBookmarked
+        _controller: Ibexa\Rest\Server\Controller\Bookmark:isBookmarked
     methods: [GET, HEAD]
     requirements:
         locationId: "[0-9]+"
 
-ezpublish_rest_loadBookmarks:
+ibexa.rest.load_bookmarks:
     path: /bookmark
     defaults:
-        _controller: ezpublish_rest.controller.bookmark:loadBookmarks
+        _controller: Ibexa\Rest\Server\Controller\Bookmark:loadBookmarks
     methods: [GET]
 
 # JWT
 
-ibexa.platform.rest.create_token:
+ibexa.rest.create_token:
     path: /user/token/jwt
-    controller: EzSystems\EzPlatformRest\Server\Controller\JWT::createToken
+    controller: Ibexa\Rest\Server\Controller\JWT::createToken
     methods: [POST]

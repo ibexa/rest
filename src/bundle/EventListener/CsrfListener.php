@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRestBundle\EventListener;
+namespace Ibexa\Bundle\Rest\EventListener;
 
+use Ibexa\Bundle\Rest\RestEvents;
+use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use eZ\Publish\Core\Base\Exceptions\UnauthorizedException;
-use EzSystems\EzPlatformRestBundle\RestEvents;
+use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
@@ -21,10 +21,10 @@ class CsrfListener implements EventSubscriberInterface
     /**
      * Name of the HTTP header containing CSRF token.
      */
-    const CSRF_TOKEN_HEADER = 'X-CSRF-Token';
+    public const CSRF_TOKEN_HEADER = 'X-CSRF-Token';
 
     /**
-     * @var CsrfTokenManagerInterface|null
+     * @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface|null
      */
     private $csrfTokenManager;
 
@@ -50,7 +50,7 @@ class CsrfListener implements EventSubscriberInterface
      * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
      * @param bool $csrfEnabled
      * @param string $csrfTokenIntention
-     * @param CsrfTokenManagerInterface|null $csrfTokenManager
+     * @param \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface|null $csrfTokenManager
      */
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
@@ -79,7 +79,7 @@ class CsrfListener implements EventSubscriberInterface
      *
      * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
      *
-     * @throws \eZ\Publish\Core\Base\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
      */
     public function onKernelRequest(RequestEvent $event)
     {
@@ -138,7 +138,7 @@ class CsrfListener implements EventSubscriberInterface
      */
     protected function isLoginRequest($route)
     {
-        return $route === 'ezpublish_rest_createSession';
+        return $route === 'ibexa.rest.create_session';
     }
 
     /**
@@ -154,14 +154,14 @@ class CsrfListener implements EventSubscriberInterface
     {
         return in_array(
             $route,
-            ['ezpublish_rest_createSession', 'ezpublish_rest_refreshSession', 'ezpublish_rest_deleteSession']
+            ['ibexa.rest.create_session', 'ibexa.rest.refresh_session', 'ibexa.rest.delete_session']
         );
     }
 
     /**
      * Checks the validity of the request's csrf token header.
      *
-     * @param Request $request
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return bool true/false if the token is valid/invalid, false if none was found in the request's headers
      */
@@ -179,3 +179,5 @@ class CsrfListener implements EventSubscriberInterface
         );
     }
 }
+
+class_alias(CsrfListener::class, 'EzSystems\EzPlatformRestBundle\EventListener\CsrfListener');

@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Server\Values\RestUserRoleAssignment;
-use EzSystems\EzPlatformRest\Server\Values\RoleAssignmentList;
-use eZ\Publish\Core\Repository\Values\User;
+use Ibexa\Core\Repository\Values\User;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\RestUserRoleAssignment;
+use Ibexa\Rest\Server\Values\RoleAssignmentList;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
 {
@@ -29,7 +29,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
         $roleAssignmentList = new RoleAssignmentList([], '42');
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadRoleAssignmentsForUser',
+            'ibexa.rest.load_role_assignments_for_user',
             ['userId' => 42],
             '/user/users/42/roles'
         );
@@ -79,7 +79,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'RoleAssignmentList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.RoleAssignmentList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.RoleAssignmentList+xml',
                     'href' => '/user/users/42/roles',
                 ],
             ],
@@ -135,7 +135,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
         $roleAssignmentList = new RoleAssignmentList([], '/1/5/777', true);
 
         $this->addRouteExpectation(
-            'ezpublish_rest_loadRoleAssignmentsForUserGroup',
+            'ibexa.rest.load_role_assignments_for_user_group',
             ['groupPath' => '/1/5/777'],
             '/user/groups/1/5/777/roles'
         );
@@ -166,7 +166,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'RoleAssignmentList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.RoleAssignmentList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.RoleAssignmentList+xml',
                     'href' => '/user/groups/1/5/777/roles',
                 ],
             ],
@@ -179,10 +179,12 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
     /**
      * Get the RoleAssignmentList visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RoleAssignmentList
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RoleAssignmentList
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\RoleAssignmentList();
     }
 }
+
+class_alias(RoleAssignmentListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RoleAssignmentListTest');

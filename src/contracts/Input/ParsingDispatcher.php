@@ -1,12 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Input;
+namespace Ibexa\Contracts\Rest\Input;
 
-use EzSystems\EzPlatformRest\Exceptions;
+use Ibexa\Contracts\Rest\Event\BeforeParseEvent;
+use Ibexa\Contracts\Rest\Event\ParseEvent;
+use Ibexa\Contracts\Rest\Exceptions;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Parsing dispatcher.
@@ -27,17 +30,19 @@ class ParsingDispatcher
      *  )
      * </code>
      *
-     * @var \EzSystems\EzPlatformRest\Input\Parser[]
+     * @var \Ibexa\Contracts\Rest\Input\Parser[]
      */
-    protected $parsers = [];
+    protected array $parsers = [];
+
+    protected EventDispatcherInterface $eventDispatcher;
 
     /**
      * Construct from optional parsers array.
-     *
-     * @param array $parsers
      */
-    public function __construct(array $parsers = [])
+    public function __construct(EventDispatcherInterface $eventDispatcher, array $parsers = [])
     {
+        $this->eventDispatcher = $eventDispatcher;
+
         foreach ($parsers as $mediaType => $parser) {
             $this->addParser($mediaType, $parser);
         }
@@ -47,23 +52,50 @@ class ParsingDispatcher
      * Adds another parser for the given Content Type.
      *
      * @param string $mediaType
-     * @param \EzSystems\EzPlatformRest\Input\Parser $parser
+     * @param \Ibexa\Contracts\Rest\Input\Parser $parser
      */
-    public function addParser($mediaType, Parser $parser)
+    public function addParser(string $mediaType, Parser $parser): void
     {
         list($mediaType, $version) = $this->parseMediaTypeVersion($mediaType);
+
         $this->parsers[$mediaType][$version] = $parser;
     }
 
     /**
-     * Parses the given $data according to $mediaType.
-     *
-     * @param array $data
-     * @param string $mediaType
-     *
-     * @return \eZ\Publish\API\Repository\Values\ValueObject
+     * Dispatches parsing the given $data according to $mediaType.
      */
-    public function parse(array $data, $mediaType)
+    public function parse(array $data, string $mediaType)
+    {
+        $eventData = [
+            $data,
+            $mediaType,
+        ];
+
+        $beforeEvent = new BeforeParseEvent(...$eventData);
+
+        $this->eventDispatcher->dispatch($beforeEvent);
+        if ($beforeEvent->isPropagationStopped()) {
+            return $beforeEvent->getValueObject();
+        }
+
+        $data = $beforeEvent->getData();
+        $mediaType = $beforeEvent->getMediaType();
+
+        $valueObject = $beforeEvent->hasValueObject()
+            ? $beforeEvent->getValueObject()
+            : $this->internalParse($data, $mediaType);
+
+        $this->eventDispatcher->dispatch(
+            new ParseEvent($valueObject, ...$eventData)
+        );
+
+        return $valueObject;
+    }
+
+    /**
+     * Parses the given $data according to $mediaType.
+     */
+    protected function internalParse(array $data, string $mediaType)
     {
         list($mediaType, $version) = $this->parseMediaTypeVersion($mediaType);
 
@@ -73,7 +105,7 @@ class ParsingDispatcher
         }
 
         if (!isset($this->parsers[$mediaType][$version])) {
-            throw new Exceptions\Parser("Unknown Content Type specification: '{$mediaType} (version: $version)'.");
+            throw new Exceptions\Parser("Unknown Content Type specification: '$mediaType (version: $version)'.");
         }
 
         return $this->parsers[$mediaType][$version]->parse($data, $this);
@@ -84,9 +116,9 @@ class ParsingDispatcher
      *
      * @param string $mediaType Ex: text/html; version=1.1
      *
-     * @return array An array with the mediatype string, stripped from the version, and the version (1.0 by default)
+     * @return array An array with the media-type string, stripped from the version, and the version (1.0 by default)
      */
-    protected function parseMediaTypeVersion($mediaType)
+    protected function parseMediaTypeVersion(string $mediaType): array
     {
         $version = '1.0';
         $contentType = explode('; ', $mediaType);
@@ -94,7 +126,7 @@ class ParsingDispatcher
             $mediaType = $contentType[0];
             foreach (array_slice($contentType, 1) as $parameterString) {
                 if (strpos($contentType[1], '=') === false) {
-                    throw new Exceptions\Parser("Unknown parameter format: '{$parameterString}'");
+                    throw new Exceptions\Parser("Unknown parameter format: '$parameterString'");
                 }
                 list($parameterName, $parameterValue) = explode('=', $parameterString);
                 if (trim($parameterName) === 'version') {
@@ -107,3 +139,5 @@ class ParsingDispatcher
         return [$mediaType, $version];
     }
 }
+
+class_alias(ParsingDispatcher::class, 'EzSystems\EzPlatformRest\Input\ParsingDispatcher');

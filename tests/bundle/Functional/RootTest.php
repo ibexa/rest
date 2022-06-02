@@ -1,13 +1,13 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRestBundle\Tests\Functional;
+namespace Ibexa\Tests\Bundle\Rest\Functional;
 
-use EzSystems\EzPlatformRestBundle\Tests\Functional\TestCase as RESTFunctionalTestCase;
-use EzSystems\EzPlatformRest\Tests\AssertXmlTagTrait;
+use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use Ibexa\Tests\Rest\AssertXmlTagTrait;
 
 class RootTest extends RESTFunctionalTestCase
 {
@@ -19,7 +19,7 @@ class RootTest extends RESTFunctionalTestCase
     public function testLoadRootResource()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/')
         );
         self::assertHttpResponseCodeEquals($response, 200);
 
@@ -34,7 +34,7 @@ class RootTest extends RESTFunctionalTestCase
     {
         self::markTestSkipped('@todo fixme');
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/' . uniqid('rest', true), '', 'Stuff+json')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/' . uniqid('rest', true), '', 'Stuff+json')
         );
         self::assertHttpResponseCodeEquals($response, 404);
         $responseArray = json_decode($response->getBody(), true);
@@ -68,7 +68,7 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'Root',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Root+xml',
+                    'media-type' => 'application/vnd.ibexa.api.Root+xml',
                 ],
             ],
             $result,
@@ -102,7 +102,7 @@ class RootTest extends RESTFunctionalTestCase
                 'tag' => 'content',
                 'attributes' => [
                     'media-type' => '',
-                    'href' => '/api/ezp/v2/content/objects',
+                    'href' => '/api/ibexa/v2/content/objects',
                 ],
             ],
             $result,
@@ -136,7 +136,7 @@ class RootTest extends RESTFunctionalTestCase
                 'tag' => 'contentByRemoteId',
                 'attributes' => [
                     'media-type' => '',
-                    'href' => '/api/ezp/v2/content/objects{?remoteId}',
+                    'href' => '/api/ibexa/v2/content/objects{?remoteId}',
                 ],
             ],
             $result,
@@ -169,8 +169,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'contentTypes',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentTypeInfoList+xml',
-                    'href' => '/api/ezp/v2/content/types',
+                    'media-type' => 'application/vnd.ibexa.api.ContentTypeInfoList+xml',
+                    'href' => '/api/ibexa/v2/content/types',
                 ],
             ],
             $result,
@@ -204,7 +204,7 @@ class RootTest extends RESTFunctionalTestCase
                 'tag' => 'contentTypeByIdentifier',
                 'attributes' => [
                     'media-type' => '',
-                    'href' => '/api/ezp/v2/content/types{?identifier}',
+                    'href' => '/api/ibexa/v2/content/types{?identifier}',
                 ],
             ],
             $result,
@@ -237,8 +237,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'contentTypeGroups',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ContentTypeGroupList+xml',
-                    'href' => '/api/ezp/v2/content/typegroups',
+                    'media-type' => 'application/vnd.ibexa.api.ContentTypeGroupList+xml',
+                    'href' => '/api/ibexa/v2/content/typegroups',
                 ],
             ],
             $result,
@@ -272,7 +272,7 @@ class RootTest extends RESTFunctionalTestCase
                 'tag' => 'contentTypeGroupByIdentifier',
                 'attributes' => [
                     'media-type' => '',
-                    'href' => '/api/ezp/v2/content/typegroups{?identifier}',
+                    'href' => '/api/ibexa/v2/content/typegroups{?identifier}',
                 ],
             ],
             $result,
@@ -305,8 +305,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'users',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UserRefList+xml',
-                    'href' => '/api/ezp/v2/user/users',
+                    'media-type' => 'application/vnd.ibexa.api.UserRefList+xml',
+                    'href' => '/api/ibexa/v2/user/users',
                 ],
             ],
             $result,
@@ -339,8 +339,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'usersByRoleId',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UserRefList+xml',
-                    'href' => '/api/ezp/v2/user/users{?roleId}',
+                    'media-type' => 'application/vnd.ibexa.api.UserRefList+xml',
+                    'href' => '/api/ibexa/v2/user/users{?roleId}',
                 ],
             ],
             $result,
@@ -373,8 +373,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'usersByRemoteId',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UserRefList+xml',
-                    'href' => '/api/ezp/v2/user/users{?remoteId}',
+                    'media-type' => 'application/vnd.ibexa.api.UserRefList+xml',
+                    'href' => '/api/ibexa/v2/user/users{?remoteId}',
                 ],
             ],
             $result,
@@ -407,8 +407,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'usersByEmail',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UserRefList+xml',
-                    'href' => '/api/ezp/v2/user/users{?email}',
+                    'media-type' => 'application/vnd.ibexa.api.UserRefList+xml',
+                    'href' => '/api/ibexa/v2/user/users{?email}',
                 ],
             ],
             $result,
@@ -441,8 +441,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'usersByLogin',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UserRefList+xml',
-                    'href' => '/api/ezp/v2/user/users{?login}',
+                    'media-type' => 'application/vnd.ibexa.api.UserRefList+xml',
+                    'href' => '/api/ibexa/v2/user/users{?login}',
                 ],
             ],
             $result,
@@ -475,8 +475,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'roles',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.RoleList+xml',
-                    'href' => '/api/ezp/v2/user/roles',
+                    'media-type' => 'application/vnd.ibexa.api.RoleList+xml',
+                    'href' => '/api/ibexa/v2/user/roles',
                 ],
             ],
             $result,
@@ -509,8 +509,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'rootLocation',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Location+xml',
-                    'href' => '/api/ezp/v2/content/locations/1/2',
+                    'media-type' => 'application/vnd.ibexa.api.Location+xml',
+                    'href' => '/api/ibexa/v2/content/locations/1/2',
                 ],
             ],
             $result,
@@ -543,8 +543,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'rootUserGroup',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UserGroup+xml',
-                    'href' => '/api/ezp/v2/user/groups/1/5',
+                    'media-type' => 'application/vnd.ibexa.api.UserGroup+xml',
+                    'href' => '/api/ibexa/v2/user/groups/1/5',
                 ],
             ],
             $result,
@@ -577,8 +577,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'rootMediaFolder',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Location+xml',
-                    'href' => '/api/ezp/v2/content/locations/1/43',
+                    'media-type' => 'application/vnd.ibexa.api.Location+xml',
+                    'href' => '/api/ibexa/v2/content/locations/1/43',
                 ],
             ],
             $result,
@@ -612,7 +612,7 @@ class RootTest extends RESTFunctionalTestCase
                 'tag' => 'locationByRemoteId',
                 'attributes' => [
                     'media-type' => '',
-                    'href' => '/api/ezp/v2/content/locations{?remoteId}',
+                    'href' => '/api/ibexa/v2/content/locations{?remoteId}',
                 ],
             ],
             $result,
@@ -646,7 +646,7 @@ class RootTest extends RESTFunctionalTestCase
                 'tag' => 'locationByPath',
                 'attributes' => [
                     'media-type' => '',
-                    'href' => '/api/ezp/v2/content/locations{?locationPath}',
+                    'href' => '/api/ibexa/v2/content/locations{?locationPath}',
                 ],
             ],
             $result,
@@ -679,8 +679,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'trash',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.Trash+xml',
-                    'href' => '/api/ezp/v2/content/trash',
+                    'media-type' => 'application/vnd.ibexa.api.Trash+xml',
+                    'href' => '/api/ibexa/v2/content/trash',
                 ],
             ],
             $result,
@@ -713,8 +713,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'sections',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.SectionList+xml',
-                    'href' => '/api/ezp/v2/content/sections',
+                    'media-type' => 'application/vnd.ibexa.api.SectionList+xml',
+                    'href' => '/api/ibexa/v2/content/sections',
                 ],
             ],
             $result,
@@ -747,8 +747,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'views',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.RefList+xml',
-                    'href' => '/api/ezp/v2/views',
+                    'media-type' => 'application/vnd.ibexa.api.RefList+xml',
+                    'href' => '/api/ibexa/v2/views',
                 ],
             ],
             $result,
@@ -781,8 +781,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'objectStateGroups',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ObjectStateGroupList+xml',
-                    'href' => '/api/ezp/v2/content/objectstategroups',
+                    'media-type' => 'application/vnd.ibexa.api.ObjectStateGroupList+xml',
+                    'href' => '/api/ibexa/v2/content/objectstategroups',
                 ],
             ],
             $result,
@@ -815,8 +815,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'objectStates',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.ObjectStateList+xml',
-                    'href' => '/api/ezp/v2/content/objectstategroups/{objectStateGroupId}/objectstates',
+                    'media-type' => 'application/vnd.ibexa.api.ObjectStateList+xml',
+                    'href' => '/api/ibexa/v2/content/objectstategroups/{objectStateGroupId}/objectstates',
                 ],
             ],
             $result,
@@ -849,8 +849,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'globalUrlAliases',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UrlAliasRefList+xml',
-                    'href' => '/api/ezp/v2/content/urlaliases',
+                    'media-type' => 'application/vnd.ibexa.api.UrlAliasRefList+xml',
+                    'href' => '/api/ibexa/v2/content/urlaliases',
                 ],
             ],
             $result,
@@ -883,8 +883,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'urlWildcards',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UrlWildcardList+xml',
-                    'href' => '/api/ezp/v2/content/urlwildcards',
+                    'media-type' => 'application/vnd.ibexa.api.UrlWildcardList+xml',
+                    'href' => '/api/ibexa/v2/content/urlwildcards',
                 ],
             ],
             $result,
@@ -917,8 +917,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'createSession',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UserSession+xml',
-                    'href' => '/api/ezp/v2/user/sessions',
+                    'media-type' => 'application/vnd.ibexa.api.UserSession+xml',
+                    'href' => '/api/ibexa/v2/user/sessions',
                 ],
             ],
             $result,
@@ -951,8 +951,8 @@ class RootTest extends RESTFunctionalTestCase
             [
                 'tag' => 'refreshSession',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UserSession+xml',
-                    'href' => '/api/ezp/v2/user/sessions/{sessionId}/refresh',
+                    'media-type' => 'application/vnd.ibexa.api.UserSession+xml',
+                    'href' => '/api/ibexa/v2/user/sessions/{sessionId}/refresh',
                 ],
             ],
             $result,
@@ -964,9 +964,11 @@ class RootTest extends RESTFunctionalTestCase
     public function getRandomUriSet()
     {
         return [
-            ['/api/ezp/v2/randomUri'],
-            ['/api/ezp/v2/randomUri/level/two'],
-            ['/api/ezp/v2/randomUri/with/arguments?arg=argh'],
+            ['/api/ibexa/v2/randomUri'],
+            ['/api/ibexa/v2/randomUri/level/two'],
+            ['/api/ibexa/v2/randomUri/with/arguments?arg=argh'],
         ];
     }
 }
+
+class_alias(RootTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\RootTest');

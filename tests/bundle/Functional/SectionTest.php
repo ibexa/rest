@@ -1,12 +1,12 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRestBundle\Tests\Functional;
+namespace Ibexa\Tests\Bundle\Rest\Functional;
 
-use EzSystems\EzPlatformRestBundle\Tests\Functional\TestCase as RESTFunctionalTestCase;
+use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 
 class SectionTest extends RESTFunctionalTestCase
 {
@@ -16,7 +16,7 @@ class SectionTest extends RESTFunctionalTestCase
     public function testListSections()
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/sections')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/sections')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -37,7 +37,7 @@ class SectionTest extends RESTFunctionalTestCase
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ezp/v2/content/sections',
+            '/api/ibexa/v2/content/sections',
             'SectionInput+xml',
             'Section+json',
             $xml
@@ -99,7 +99,7 @@ XML;
     public function testLoadSectionByIdentifier($sectionHref)
     {
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('GET', '/api/ezp/v2/content/sections?identifier=testUpdateSection')
+            $this->createHttpRequest('GET', '/api/ibexa/v2/content/sections?identifier=testUpdateSection')
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
@@ -118,3 +118,5 @@ XML;
         self::assertHttpResponseCodeEquals($response, 204);
     }
 }
+
+class_alias(SectionTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SectionTest');

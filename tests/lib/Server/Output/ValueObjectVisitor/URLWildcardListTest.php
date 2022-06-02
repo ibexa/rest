@@ -1,15 +1,15 @@
 <?php
 
 /**
- * @copyright Copyright (C) eZ Systems AS. All rights reserved.
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-namespace EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor;
+namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest;
-use EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor;
-use EzSystems\EzPlatformRest\Server\Values\URLWildcardList;
-use eZ\Publish\API\Repository\Values\Content;
+use Ibexa\Contracts\Core\Repository\Values\Content;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\URLWildcardList;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class URLWildcardListTest extends ValueObjectVisitorBaseTest
 {
@@ -28,7 +28,7 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTest
         $urlWildcardList = new URLWildcardList([]);
 
         $this->addRouteExpectation(
-            'ezpublish_rest_listURLWildcards',
+            'ibexa.rest.list_url_wildcards',
             [],
             '/content/urlwildcards'
         );
@@ -78,7 +78,7 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTest
             [
                 'tag' => 'UrlWildcardList',
                 'attributes' => [
-                    'media-type' => 'application/vnd.ez.api.UrlWildcardList+xml',
+                    'media-type' => 'application/vnd.ibexa.api.UrlWildcardList+xml',
                     'href' => '/content/urlwildcards',
                 ],
             ],
@@ -119,10 +119,12 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTest
     /**
      * Get the URLWildcardList visitor.
      *
-     * @return \EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\URLWildcardList
+     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcardList
      */
     protected function internalGetVisitor()
     {
         return new ValueObjectVisitor\URLWildcardList();
     }
 }
+
+class_alias(URLWildcardListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\URLWildcardListTest');
