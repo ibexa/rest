@@ -42,7 +42,7 @@ class HttpOptionsTest extends TestCase
      *
      * @see testHttpOptions
      *
-     * @return array Data Provider sets
+     * @return array<array{non-empty-string, array<non-empty-string>}> Data Provider sets
      */
     public function providerForTestHttpOptions(): array
     {
@@ -96,6 +96,7 @@ class HttpOptionsTest extends TestCase
             ['/user/roles/1/draft', ['GET', 'PATCH', 'PUBLISH', 'DELETE']],
             ['/user/roles/1/policies', ['GET', 'POST', 'DELETE']],
             ['/user/roles/1/policies/328', ['GET', 'PATCH', 'DELETE']],
+            ['/user/current', ['GET']],
             ['/user/users', ['HEAD', 'GET']],
             ['/user/users/10', ['GET', 'PATCH', 'DELETE']],
             ['/user/users/10/groups', ['GET', 'POST']],
@@ -111,7 +112,7 @@ class HttpOptionsTest extends TestCase
             ['/user/groups/4/users', ['GET', 'POST']],
             ['/user/groups/4/roles', ['GET', 'POST']],
             ['/user/groups/13/roles/1', ['GET', 'DELETE']],
-            ['/user/sessions', ['POST']],
+            ['/user/sessions', ['GET', 'POST']],
             ['/user/sessions/sess_123', ['DELETE']],
             ['/user/sessions/sess_123/refresh', ['POST']],
             ['/content/urlaliases', ['GET', 'POST']],
