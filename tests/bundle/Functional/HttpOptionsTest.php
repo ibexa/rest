@@ -34,7 +34,7 @@ class HttpOptionsTest extends TestCase
 
         self::assertHttpResponseHasHeader($response, 'Allow');
         $actualMethods = explode(',', $response->getHeader('Allow')[0]);
-        self::assertEquals($expectedMethods, $actualMethods);
+        self::assertEqualsCanonicalizing($expectedMethods, $actualMethods);
     }
 
     /**
