@@ -146,6 +146,47 @@ class SessionTest extends TestCase
     }
 
     /**
+     * @depends testCreateSession
+     */
+    public function testCheckSession(): void
+    {
+        $session = $this->login();
+        $request = $this->createHttpRequest(
+            'GET',
+            '/api/ibexa/v2/user/sessions',
+            '',
+            'Session+json',
+            '',
+            [
+                'Cookie' => sprintf('%s=%s', $session->name, $session->identifier),
+                'X-CSRF-Token' => $session->csrfToken,
+            ]
+        );
+        $response = $this->sendHttpRequest($request);
+        self::assertHttpResponseCodeEquals($response, 200);
+        $contents = $response->getBody()->getContents();
+        $data = json_decode($contents, true, JSON_THROW_ON_ERROR);
+        self::assertArrayHasKey('Session', $data);
+    }
+
+    /**
+     * @depends testCreateSession
+     */
+    public function testCheckSessionWithoutOne(): void
+    {
+        $request = $this->createHttpRequest(
+            'GET',
+            '/api/ibexa/v2/user/sessions',
+            '',
+            'Session+json'
+        );
+        $response = $this->sendHttpRequest($request);
+        self::assertHttpResponseCodeEquals($response, 404);
+        $contents = $response->getBody()->getContents();
+        self::assertEmpty($contents);
+    }
+
+    /**
      * @param \stdClass $session
      *
      * @return \Psr\Http\Message\RequestInterface

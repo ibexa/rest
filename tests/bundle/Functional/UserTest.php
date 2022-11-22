@@ -174,6 +174,30 @@ XML;
         self::assertHttpResponseCodeEquals($response, 200);
     }
 
+    public function testRedirectToCurrentUser(): void
+    {
+        $request = $this->createHttpRequest('GET', '/api/ibexa/v2/user/current');
+
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 307);
+        self::assertTrue($response->hasHeader('Location'));
+        [ $location ] = $response->getHeader('Location');
+        self::assertSame('/api/ibexa/v2/user/users/14', $location);
+    }
+
+    public function testRedirectToCurrentUserWhenNotLoggedIn(): void
+    {
+        $request = $this
+            ->createHttpRequest('GET', '/api/ibexa/v2/user/current')
+            ->withoutHeader('Cookie');
+
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 401);
+        self::assertFalse($response->hasHeader('Location'));
+    }
+
     /**
      * @depends testCreateUser
      * Covers PATCH /user/users/{userId}
