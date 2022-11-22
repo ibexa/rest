@@ -10,6 +10,8 @@ use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 
 class UserTest extends RESTFunctionalTestCase
 {
+    private const HEADER_LOCATION = 'Location';
+
     /**
      * Covers GET /user/groups/root.
      */
@@ -59,9 +61,9 @@ XML;
         $response = $this->sendHttpRequest($request);
 
         self::assertHttpResponseCodeEquals($response, 201);
-        self::assertHttpResponseHasHeader($response, 'Location');
+        self::assertHttpResponseHasHeader($response, self::HEADER_LOCATION);
 
-        $href = $response->getHeader('Location')[0];
+        $href = $response->getHeader(self::HEADER_LOCATION)[0];
         $this->addCreatedElement($href);
 
         return $href;
@@ -153,9 +155,9 @@ XML;
         $response = $this->sendHttpRequest($request);
 
         self::assertHttpResponseCodeEquals($response, 201);
-        self::assertHttpResponseHasHeader($response, 'Location');
+        self::assertHttpResponseHasHeader($response, self::HEADER_LOCATION);
 
-        $href = $response->getHeader('Location')[0];
+        $href = $response->getHeader(self::HEADER_LOCATION)[0];
         $this->addCreatedElement($href);
 
         return $href;
@@ -181,9 +183,7 @@ XML;
         $response = $this->sendHttpRequest($request);
 
         self::assertHttpResponseCodeEquals($response, 307);
-        self::assertTrue($response->hasHeader('Location'));
-        [ $location ] = $response->getHeader('Location');
-        self::assertSame('/api/ibexa/v2/user/users/14', $location);
+        self::assertHttpResponseHasHeader($response, self::HEADER_LOCATION, '/api/ibexa/v2/user/users/14');
     }
 
     public function testRedirectToCurrentUserWhenNotLoggedIn(): void
@@ -195,7 +195,7 @@ XML;
         $response = $this->sendHttpRequest($request);
 
         self::assertHttpResponseCodeEquals($response, 401);
-        self::assertFalse($response->hasHeader('Location'));
+        self::assertFalse($response->hasHeader(self::HEADER_LOCATION));
     }
 
     /**
@@ -418,9 +418,9 @@ XML;
         $response = $this->sendHttpRequest($request);
 
         self::assertHttpResponseCodeEquals($response, 201);
-        self::assertHttpResponseHasHeader($response, 'Location');
+        self::assertHttpResponseHasHeader($response, self::HEADER_LOCATION);
 
-        $href = $response->getHeader('Location')[0];
+        $href = $response->getHeader(self::HEADER_LOCATION)[0];
         $this->addCreatedElement($href);
 
         return $href;
