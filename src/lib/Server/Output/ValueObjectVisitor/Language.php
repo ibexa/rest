@@ -28,10 +28,13 @@ final class Language extends ValueObjectVisitor
 
     private function visitLanguageAttributes(Visitor $visitor, Generator $generator, LanguageValue $language): void
     {
-        $generator->attribute('href', $this->router->generate(
-            'ibexa.rest.languages.view',
-            ['languageCode' => $language->getLanguageCode()],
-        ));
+        $generator->attribute(
+            'href',
+            $this->router->generate(
+                'ibexa.rest.languages.view',
+                ['languageCode' => $language->getLanguageCode()],
+            ),
+        );
         $generator->valueElement('languageId', $language->getId());
         $generator->valueElement('languageCode', $language->getLanguageCode());
         $generator->valueElement('name', $language->getName());
