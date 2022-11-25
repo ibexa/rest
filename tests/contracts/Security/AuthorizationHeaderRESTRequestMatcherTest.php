@@ -44,4 +44,16 @@ final class AuthorizationHeaderRESTRequestMatcherTest extends TestCase
 
         self::assertTrue($matcher->matches($request));
     }
+
+    public function testMatchesRestJwtCreationEndpoint(): void
+    {
+        $matcher = new AuthorizationHeaderRESTRequestMatcher();
+
+        $request = new Request([], [], [
+            'is_rest_request' => true,
+            '_route' => 'ibexa.rest.create_token',
+        ]);
+
+        self::assertTrue($matcher->matches($request));
+    }
 }
