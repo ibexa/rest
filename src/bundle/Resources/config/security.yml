@@ -1,5 +1,22 @@
 parameters:
 services:
+    ibexa.rest.security.expression_language:
+        class: Symfony\Component\ExpressionLanguage\ExpressionLanguage
+        arguments:
+            $cache: '@cache.system'
+
+    ibexa.rest.security.request_matcher.bearer_authentication:
+        class: Symfony\Component\HttpFoundation\ExpressionRequestMatcher
+        calls:
+            - [
+                setExpression,
+                [
+                    '@ibexa.rest.security.expression_language',
+                    'attributes["is_rest_request"] === true 
+                        && (attributes["_route"] === "ibexa.rest.create_token" or request.headers.has("Authorization"))'
+                ]
+            ]
+
     # Following service will be aliased at compile time to "ezpublish_rest.session_authenticator" by the Security factory.
     ibexa.rest.security.authentication.listener.session:
         class: Ibexa\Rest\Server\Security\RestAuthenticator
