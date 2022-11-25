@@ -393,7 +393,7 @@ ibexa.rest.languages.list:
 ibexa.rest.languages.view:
     path: /languages/{languageCode}
     methods: [GET]
-    controller: Ibexa\Rest\Server\Controller\Language::viewLanguage
+    controller: Ibexa\Rest\Server\Controller\Language::loadLanguage
 
 # Locations
 

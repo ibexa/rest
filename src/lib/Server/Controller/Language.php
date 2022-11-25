@@ -9,8 +9,10 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\LanguageService;
+use Ibexa\Contracts\Core\Repository\Values\Content\Language as ApiLanguage;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values\LanguageList;
+use Traversable;
 
 final class Language extends RestController
 {
@@ -25,14 +27,14 @@ final class Language extends RestController
     {
         $languages = $this->languageService->loadLanguages();
 
-        if ($languages instanceof \Traversable) {
+        if ($languages instanceof Traversable) {
             $languages = iterator_to_array($languages);
         }
 
         return new LanguageList($languages);
     }
 
-    public function viewLanguage(string $languageCode): \Ibexa\Contracts\Core\Repository\Values\Content\Language
+    public function loadLanguage(string $languageCode): ApiLanguage
     {
         return $this->languageService->loadLanguage($languageCode);
     }
