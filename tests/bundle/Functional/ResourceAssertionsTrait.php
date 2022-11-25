@@ -12,7 +12,6 @@ use JsonSchema\Validator;
 
 trait ResourceAssertionsTrait
 {
-
     final protected static function assertResponseMatchesXmlSnapshot(string $content, ?string $file = null): void
     {
         self::assertStringMatchesSnapshot($content, 'xml', $file);
