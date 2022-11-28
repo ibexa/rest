@@ -1126,6 +1126,13 @@ ibexa.rest.create_session:
         csrf_protection: false
     methods: [POST]
 
+ibexa.rest.check_session:
+    path: /user/sessions/current
+    controller: Ibexa\Rest\Server\Controller\SessionController::checkSessionAction
+    methods: [GET]
+    defaults:
+        csrf_protection: false
+
 ibexa.rest.delete_session:
     path: /user/sessions/{sessionId}
     defaults:
@@ -1140,12 +1147,6 @@ ibexa.rest.refresh_session:
         csrf_protection: false
     methods: [POST]
 
-ibexa.rest.check_session:
-    path: /user/sessions
-    controller: Ibexa\Rest\Server\Controller\SessionController::checkSessionAction
-    methods: [GET]
-    defaults:
-        csrf_protection: false
 
 # URL aliases
 

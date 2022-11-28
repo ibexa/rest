@@ -153,7 +153,7 @@ class SessionTest extends TestCase
         $session = $this->login();
         $request = $this->createHttpRequest(
             'GET',
-            '/api/ibexa/v2/user/sessions',
+            '/api/ibexa/v2/user/sessions/current',
             '',
             'Session+json',
             '',
@@ -176,7 +176,7 @@ class SessionTest extends TestCase
     {
         $request = $this->createHttpRequest(
             'GET',
-            '/api/ibexa/v2/user/sessions',
+            '/api/ibexa/v2/user/sessions/current',
             '',
             'Session+json'
         );
