@@ -27,6 +27,8 @@ use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 /**
@@ -212,6 +214,22 @@ class User extends RestController
                 $relations
             ),
             ['locationId' => $userContentInfo->mainLocationId]
+        );
+    }
+
+    /**
+     * @see \Symfony\Component\Security\Http\Controller\UserValueResolver
+     */
+    public function redirectToCurrentUser(?UserInterface $user): Values\TemporaryRedirect
+    {
+        if ($user === null) {
+            throw new UnauthorizedHttpException('', 'Not logged in.');
+        }
+
+        $userReference = $this->permissionResolver->getCurrentUserReference();
+
+        return new Values\TemporaryRedirect(
+            $this->router->generate('ibexa.rest.load_user', ['userId' => $userReference->getUserId()])
         );
     }
 

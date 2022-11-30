@@ -139,6 +139,33 @@ class SessionController extends Controller
     }
 
     /**
+     * @return \Ibexa\Rest\Server\Values\UserSession|\Symfony\Component\HttpFoundation\Response
+     */
+    public function checkSessionAction(Request $request)
+    {
+        $session = $request->getSession();
+
+        if ($session === null || !$session->isStarted()) {
+            $response = $this->getAuthenticator()->logout($request);
+            $response->setStatusCode(404);
+
+            return $response;
+        }
+
+        $currentUser = $this->userService->loadUser(
+            $this->permissionResolver->getCurrentUserReference()->getUserId()
+        );
+
+        return new Values\UserSession(
+            $currentUser,
+            $session->getName(),
+            $session->getId(),
+            $request->headers->get('X-CSRF-Token'),
+            false
+        );
+    }
+
+    /**
      * Deletes given session.
      *
      * @param string $sessionId

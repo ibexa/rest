@@ -394,13 +394,13 @@ XML;
      *
      * @return \stdClass an object with the name, identifier, csrftoken properties
      */
-    protected function login()
+    protected function login(): \stdClass
     {
         $request = $this->createAuthenticationHttpRequest($this->getLoginUsername(), $this->getLoginPassword());
         $response = $this->sendHttpRequest($request);
         self::assertHttpResponseCodeEquals($response, 201);
 
-        return json_decode($response->getBody())->Session;
+        return json_decode($response->getBody()->getContents(), false, JSON_THROW_ON_ERROR)->Session;
     }
 
     /**

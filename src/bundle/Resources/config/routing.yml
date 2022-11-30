@@ -915,6 +915,11 @@ ibexa.rest.load_user:
     requirements:
         userId: \d+
 
+ibexa.rest.current_user:
+    path: /user/current
+    controller: Ibexa\Rest\Server\Controller\User::redirectToCurrentUser
+    methods: [GET]
+
 ibexa.rest.update_user:
     path: /user/users/{userId}
     defaults:
@@ -1120,6 +1125,13 @@ ibexa.rest.create_session:
         _controller: Ibexa\Rest\Server\Controller\SessionController:createSessionAction
         csrf_protection: false
     methods: [POST]
+
+ibexa.rest.check_session:
+    path: /user/sessions/current
+    controller: Ibexa\Rest\Server\Controller\SessionController::checkSessionAction
+    methods: [GET]
+    defaults:
+        csrf_protection: false
 
 ibexa.rest.delete_session:
     path: /user/sessions/{sessionId}
