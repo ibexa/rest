@@ -14,6 +14,8 @@ final class LanguageTest extends RESTFunctionalTestCase
 {
     use ResourceAssertionsTrait;
 
+    private const SNAPSHOT_DIR = __DIR__ . '/_snapshot';
+
     public function testLanguageListJson(): void
     {
         $request = $this->createHttpRequest('GET', '/api/ibexa/v2/languages', '', 'LanguageList+json');
@@ -24,7 +26,7 @@ final class LanguageTest extends RESTFunctionalTestCase
         self::assertJson($content);
 
         self::assertJsonResponseIsValid($content, 'LanguageList');
-        self::assertResponseMatchesJsonSnapshot($content, __DIR__ . '/LanguageList.json');
+        self::assertResponseMatchesJsonSnapshot($content, self::SNAPSHOT_DIR . '/LanguageList.json');
     }
 
     public function testLanguageListXml(): void
@@ -34,7 +36,7 @@ final class LanguageTest extends RESTFunctionalTestCase
 
         self::assertHttpResponseCodeEquals($response, 200);
         $content = $response->getBody()->getContents();
-        self::assertResponseMatchesXmlSnapshot($content, __DIR__ . '/LanguageList.xml');
+        self::assertResponseMatchesXmlSnapshot($content, self::SNAPSHOT_DIR . '/LanguageList.xml');
     }
 
     public function testLanguageViewJson(): void
@@ -47,7 +49,7 @@ final class LanguageTest extends RESTFunctionalTestCase
         self::assertJson($content);
 
         self::assertJsonResponseIsValid($content, 'Language');
-        self::assertResponseMatchesJsonSnapshot($content, __DIR__ . '/Language.json');
+        self::assertResponseMatchesJsonSnapshot($content, self::SNAPSHOT_DIR . '/Language.json');
     }
 
     public function testLanguageViewXml(): void
@@ -57,6 +59,6 @@ final class LanguageTest extends RESTFunctionalTestCase
 
         self::assertHttpResponseCodeEquals($response, 200);
         $content = $response->getBody()->getContents();
-        self::assertResponseMatchesXmlSnapshot($content, __DIR__ . '/Language.xml');
+        self::assertResponseMatchesXmlSnapshot($content, self::SNAPSHOT_DIR . '/Language.xml');
     }
 }

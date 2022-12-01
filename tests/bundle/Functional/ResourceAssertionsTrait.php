@@ -30,16 +30,9 @@ trait ResourceAssertionsTrait
         ?string $type = null,
         ?string $file = null
     ): void {
-        if ($file === null) {
-            $classInfo = new \ReflectionClass(static::class);
-            $class = substr(static::class, strrpos(static::class, '\\') + 1);
-            $classFilename = $classInfo->getFileName();
-            self::assertNotFalse($classFilename);
-            $file = dirname($classFilename) . '/' . $class . '.' . ($type ?? 'log');
-        }
-        if (!file_exists($file)) {
-            file_put_contents($file, rtrim($content, "\n") . "\n");
-        }
+        $file ??= self::getDefaultSnapshotFileLocation($type);
+
+        self::checkSnapshotFileExistence($file, $content);
 
         if ($type === 'xml') {
             self::assertXmlStringEqualsXmlFile($file, $content);
@@ -96,5 +89,35 @@ trait ResourceAssertionsTrait
     private static function getSchemaFileLocation(string $resource): string
     {
         return __DIR__ . '/JsonSchema/' . $resource . '.json';
+    }
+
+    private static function checkSnapshotFileExistence(string $file, string $content): void
+    {
+        if (file_exists($file)) {
+            return;
+        }
+
+        if ($_ENV['IBEXA_REST_GENERATE_SNAPSHOTS'] ?? false) {
+            file_put_contents($file, rtrim($content, "\n") . "\n");
+
+            return;
+        }
+
+        self::fail(sprintf(
+            'File %s does not exist. If it\'s a new REST route, add environment variable "%s" to phpunit.xml '
+            . '(or environment) set to truthy value to enable snapshot generation.',
+            $file,
+            'IBEXA_REST_GENERATE_SNAPSHOTS',
+        ));
+    }
+
+    private static function getDefaultSnapshotFileLocation(?string $type): string
+    {
+        $classInfo = new \ReflectionClass(static::class);
+        $class = substr(static::class, strrpos(static::class, '\\') + 1);
+        $classFilename = $classInfo->getFileName();
+        self::assertNotFalse($classFilename);
+
+        return dirname($classFilename) . '/_snapshot/' . $class . '.' . ($type ?? 'log');
     }
 }
