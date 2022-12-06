@@ -49,6 +49,8 @@ class UserSession extends RestValue
      */
     public $exists;
 
+    public bool $created;
+
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\User\User $user
      * @param string $sessionName

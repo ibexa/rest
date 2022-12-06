@@ -96,6 +96,10 @@ services:
             - '@ibexa.api.service.location'
         tags: [controller.service_arguments]
 
+    Ibexa\Rest\Server\Controller\Language:
+        autowire: true
+        tags: [controller.service_arguments]
+
     Ibexa\Rest\Server\Controller\Location:
         parent: Ibexa\Rest\Server\Controller
         arguments:

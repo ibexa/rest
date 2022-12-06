@@ -383,6 +383,18 @@ ibexa.rest.set_object_states_for_content:
         contentId: \d+
 
 
+# Languages
+
+ibexa.rest.languages.list:
+    path: /languages
+    methods: [GET]
+    controller: Ibexa\Rest\Server\Controller\Language::listLanguages
+
+ibexa.rest.languages.view:
+    path: /languages/{languageCode}
+    methods: [GET]
+    controller: Ibexa\Rest\Server\Controller\Language::loadLanguage
+
 # Locations
 
 
@@ -915,6 +927,11 @@ ibexa.rest.load_user:
     requirements:
         userId: \d+
 
+ibexa.rest.current_user:
+    path: /user/current
+    controller: Ibexa\Rest\Server\Controller\User::redirectToCurrentUser
+    methods: [GET]
+
 ibexa.rest.update_user:
     path: /user/users/{userId}
     defaults:
@@ -1120,6 +1137,13 @@ ibexa.rest.create_session:
         _controller: Ibexa\Rest\Server\Controller\SessionController:createSessionAction
         csrf_protection: false
     methods: [POST]
+
+ibexa.rest.check_session:
+    path: /user/sessions/current
+    controller: Ibexa\Rest\Server\Controller\SessionController::checkSessionAction
+    methods: [GET]
+    defaults:
+        csrf_protection: false
 
 ibexa.rest.delete_session:
     path: /user/sessions/{sessionId}
