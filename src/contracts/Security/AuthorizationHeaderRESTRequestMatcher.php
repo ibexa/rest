@@ -21,7 +21,7 @@ final class AuthorizationHeaderRESTRequestMatcher extends RequestMatcher
 
         if (
             $request->attributes->get('_route') === 'ibexa.rest.create_token'
-            || empty($request->headers->get('Authorization'))
+            || !empty($request->headers->get('Authorization'))
         ) {
             return parent::matches($request);
         }
