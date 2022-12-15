@@ -561,6 +561,38 @@ class ContentType extends RestController
     }
 
     /**
+     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     */
+    public function loadContentTypeFieldDefinitionByIdentifier(
+        int $contentTypeId,
+        string $fieldDefinitionIdentifier,
+        Request $request
+    ): Values\RestFieldDefinition {
+        $contentType = $this->contentTypeService->loadContentType($contentTypeId);
+        $fieldDefinition = $contentType->getFieldDefinition($fieldDefinitionIdentifier);
+        $path = $this->router->generate(
+            'ibexa.rest.load_content_type_field_definition_by_identifier',
+            [
+                'contentTypeId' => $contentType->id,
+                'fieldDefinitionIdentifier' => $fieldDefinitionIdentifier,
+            ]
+        );
+
+        if ($fieldDefinition === null) {
+            throw new Exceptions\NotFoundException(
+                sprintf("Field definition not found: '%s'.", $request->getPathInfo())
+            );
+        }
+
+        return new Values\RestFieldDefinition(
+            $contentType,
+            $fieldDefinition,
+            $path
+        );
+    }
+
+    /**
      * Loads field definitions for a given content type draft.
      *
      * @param $contentTypeId
