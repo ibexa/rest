@@ -15,6 +15,7 @@
     </testsuite>
     <testsuite name="Ibexa REST">
       <directory>tests/lib/</directory>
+      <directory>tests/contracts/</directory>
       <exclude>tests/lib/Server</exclude>
     </testsuite>
     <testsuite name="Ibexa REST Server Tests">

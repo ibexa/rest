@@ -17,10 +17,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "EzSystems\\EzPlatformRestBundle\\Tests\\": "tests/bundle/",
-            "EzSystems\\EzPlatformRest\\Tests\\": "tests/lib/",
             "Ibexa\\Tests\\Rest\\": "tests/lib/",
-            "Ibexa\\Tests\\Bundle\\Rest\\": "tests/bundle/"
+            "Ibexa\\Tests\\Bundle\\Rest\\": "tests/bundle/",
+            "Ibexa\\Tests\\Contracts\\Rest\\": "tests/contracts/",
+            "Ibexa\\Tests\\Integration\\Rest\\": "tests/integration/"
         }
     },
     "require": {
