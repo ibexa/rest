@@ -12,6 +12,8 @@ services:
             - "@?logger"
         abstract: true
 
+    Ibexa\Contracts\Rest\Security\AuthorizationHeaderRESTRequestMatcher: ~
+
     Ibexa\Rest\Server\Security\RestLogoutHandler:
         arguments:
             - '@ibexa.config.resolver'
