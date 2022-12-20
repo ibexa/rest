@@ -53,17 +53,19 @@ class RestFieldDefinition extends RestContentTypeBase
             $visitor->setHeader('Accept-Patch', $generator->getMediaType('FieldDefinitionUpdate'));
         }
 
-        $generator->startAttribute(
-            'href',
-            $this->router->generate(
+        if ($data->path === null) {
+            $href = $this->router->generate(
                 "ibexa.rest.load_content_type{$urlTypeSuffix}_field_definition",
                 [
                     'contentTypeId' => $contentType->id,
                     'fieldDefinitionId' => $fieldDefinition->id,
                 ]
-            )
-        );
-        $generator->endAttribute('href');
+            );
+        } else {
+            $href = $data->path;
+        }
+
+        $generator->attribute('href', $href);
 
         $generator->startValueElement('id', $fieldDefinition->id);
         $generator->endValueElement('id');

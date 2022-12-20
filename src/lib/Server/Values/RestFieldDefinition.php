@@ -30,15 +30,15 @@ class RestFieldDefinition extends RestValue
     public $fieldDefinition;
 
     /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition $fieldDefinition
+     * Path which is used to fetch the list of field definitions.
      */
-    public function __construct(ContentType $contentType, FieldDefinition $fieldDefinition)
+    public ?string $path;
+
+    public function __construct(ContentType $contentType, FieldDefinition $fieldDefinition, ?string $path = null)
     {
         $this->contentType = $contentType;
         $this->fieldDefinition = $fieldDefinition;
+        $this->path = $path;
     }
 }
 
