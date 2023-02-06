@@ -15,6 +15,7 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Throwable;
 
 /**
  * REST Response Listener.
@@ -90,7 +91,7 @@ class ResponseListener implements EventSubscriberInterface, LoggerAwareInterface
         );
     }
 
-    private function logException(\Throwable $exception): void
+    private function logException(Throwable $exception): void
     {
         if (!isset($this->logger)) {
             return;
