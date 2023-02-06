@@ -20,8 +20,8 @@ final class JWT extends ValueObjectVisitor
         $visitor->setHeader('Content-Type', $generator->getMediaType('JWT'));
 
         $generator->startObjectElement('JWT');
-        $generator->startAttribute('token', $data->token);
-        $generator->endAttribute('token');
+        $generator->attribute('token', $data->token);
+        $generator->valueElement('token', $data->token);
         $generator->endObjectElement('JWT');
     }
 }
