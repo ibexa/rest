@@ -188,8 +188,11 @@ services:
     Ibexa\Bundle\Rest\EventListener\ResponseListener:
         arguments:
             - '@Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher'
+        calls:
+            - ['setLogger', ['@?logger']]
         tags:
             - { name: kernel.event_subscriber }
+            - { name: monolog.logger, channel: request }
 
     Ibexa\Bundle\Rest\EventListener\CsrfListener:
         arguments:
