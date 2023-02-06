@@ -160,7 +160,7 @@ class SessionController extends Controller
             $currentUser,
             $session->getName(),
             $session->getId(),
-            $request->headers->get('X-CSRF-Token'),
+            $this->getCsrfToken(),
             false
         );
     }
