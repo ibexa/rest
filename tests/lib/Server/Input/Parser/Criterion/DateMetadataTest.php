@@ -34,6 +34,10 @@ final class DateMetadataTest extends BaseTest
                 new DateMetadataCriterion('created', Operator::EQ, 14),
             ],
             [
+                ['DateMetadataCriterion' => ['Target' => 'created', 'Value' => '14', 'Operator' => 'EQ']],
+                new DateMetadataCriterion('created', Operator::EQ, 14),
+            ],
+            [
                 ['DateMetadataCriterion' => ['Target' => 'created', 'Value' => 1620739489, 'Operator' => 'LT']],
                 new DateMetadataCriterion('created', Operator::LT, 1620739489),
             ],
