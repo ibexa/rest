@@ -68,7 +68,7 @@ final class DateMetadataTest extends BaseTest
 
     public function testParseExceptionOnInvalidCriterionFormat(): void
     {
-        $this->expectExceptionMessage('Invalid <DateMetaDataCriterion> format');
+        $this->expectExceptionMessage('Invalid <DateMetadataCriterion> format');
         $this->expectException(Exceptions\Parser::class);
         $inputArray = [
             'foo' => 'Michael learns to mock',
