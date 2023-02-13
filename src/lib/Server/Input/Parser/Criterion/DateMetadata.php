@@ -37,7 +37,7 @@ class DateMetadata extends BaseParser
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): DateMetadataCriterion
     {
         if (!isset($data['DateMetadataCriterion'])) {
-            throw new Exceptions\Parser('Invalid <DateMetaDataCriterion> format');
+            throw new Exceptions\Parser('Invalid <DateMetadataCriterion> format');
         }
 
         $dateMetadata = $data['DateMetadataCriterion'];
@@ -54,6 +54,14 @@ class DateMetadata extends BaseParser
 
         if (!isset($dateMetadata['Value'])) {
             throw new Exceptions\Parser('Invalid <Value> format');
+        }
+
+        if (
+            is_string($dateMetadata['Value'])
+            && is_numeric($dateMetadata['Value'])
+            && ((int)$dateMetadata['Value'] == $dateMetadata['Value'])
+        ) {
+            $dateMetadata['Value'] = (int)$dateMetadata['Value'];
         }
 
         if (!in_array(gettype($dateMetadata['Value']), ['integer', 'array'], true)) {
