@@ -75,7 +75,7 @@ XML;
      */
     public function provideForViewTest(): iterable
     {
-        $template = static fn(string $criterion, string $operator, string $format): string => sprintf(
+        $template = static fn (string $criterion, string $operator, string $format): string => sprintf(
             'Criterion: %s / Operator: %s / Format: %s',
             $criterion,
             strtoupper($operator),
