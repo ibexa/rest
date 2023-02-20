@@ -291,6 +291,11 @@ services:
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.LocationQuery }
 
+    Ibexa\Rest\Server\Input\Parser\Criterion\Location\Depth:
+        parent: Ibexa\Rest\Server\Common\Parser
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.LocationDepth }
+
     Ibexa\Rest\Server\Input\Parser\Criterion\Ancestor:
         parent: Ibexa\Rest\Server\Common\Parser
         class: Ibexa\Rest\Server\Input\Parser\Criterion\Ancestor

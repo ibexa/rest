@@ -8,10 +8,12 @@ namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 class ViewTest extends TestCase
 {
+    use ResourceAssertionsTrait;
+
     /**
      * Covers POST /views.
      */
-    public function testViewRequestWithOrStatement()
+    public function testViewRequestWithOrStatement(): void
     {
         $fooRemoteId = md5('View test content foo');
         $barRemoteId = md5('View test content bar');
@@ -42,9 +44,63 @@ XML;
             $body
         );
         $response = $this->sendHttpRequest($request);
+        self::assertHttpResponseCodeEquals($response, 200);
+        self::assertJsonResponseIsValid($response->getBody()->getContents(), 'View');
         $responseData = json_decode($response->getBody(), true);
 
         self::assertEquals(2, $responseData['View']['Result']['count']);
+    }
+
+    /**
+     * @dataProvider provideForViewTest
+     */
+    public function testCriterions(string $body, string $type): void
+    {
+        $request = $this->createHttpRequest(
+            'POST',
+            '/api/ibexa/v2/views',
+            "ViewInput+$type",
+            'View+json',
+            $body
+        );
+        $response = $this->sendHttpRequest($request);
+        self::assertHttpResponseCodeEquals($response, 200);
+        self::assertJsonResponseIsValid($response->getBody()->getContents(), 'View');
+        $responseData = json_decode($response->getBody(), true);
+        self::assertGreaterThan(0, $responseData['View']['Result']['count']);
+    }
+
+    /**
+     * @return iterable<string, array{string, string}>
+     */
+    public function provideForViewTest(): iterable
+    {
+        $template = static fn(string $criterion, string $operator, string $format): string => sprintf(
+            'Criterion: %s / Operator: %s / Format: %s',
+            $criterion,
+            strtoupper($operator),
+            strtoupper($format),
+        );
+
+        yield $template('LocationDepth', 'eq', 'xml') => [
+            file_get_contents(__DIR__ . '/_input/search/LocationDepth.eq.xml'),
+            'xml',
+        ];
+
+        yield $template('LocationDepth', 'eq', 'json') => [
+            file_get_contents(__DIR__ . '/_input/search/LocationDepth.eq.json'),
+            'json',
+        ];
+
+        yield $template('LocationDepth', 'in', 'xml') => [
+            file_get_contents(__DIR__ . '/_input/search/LocationDepth.in.xml'),
+            'xml',
+        ];
+
+        yield $template('LocationDepth', 'in', 'json') => [
+            file_get_contents(__DIR__ . '/_input/search/LocationDepth.in.json'),
+            'json',
+        ];
     }
 
     /**
@@ -52,7 +108,7 @@ XML;
      *
      * @depends testViewRequestWithOrStatement
      */
-    public function testViewRequestWithAndStatement()
+    public function testViewRequestWithAndStatement(): void
     {
         $fooRemoteId = md5('View test content foo');
         $barRemoteId = md5('View test content bar');
@@ -84,10 +140,10 @@ XML;
             $body
         );
         $response = $this->sendHttpRequest($request);
+        self::assertHttpResponseCodeEquals($response, 200);
+        self::assertJsonResponseIsValid($response->getBody()->getContents(), 'View');
         $responseData = json_decode($response->getBody(), true);
 
         self::assertEquals(1, $responseData['View']['Result']['count']);
     }
 }
-
-class_alias(ViewTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\ViewTest');
