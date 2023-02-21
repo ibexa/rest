@@ -10,6 +10,18 @@ class ViewTest extends TestCase
 {
     use ResourceAssertionsTrait;
 
+    private const VIEW_ENDPOINT_ACCEPT_TYPE = 'View+json';
+    private const VIEW_ENDPOINT_URL = '/api/ibexa/v2/views';
+
+    private const FORMAT_XML = 'xml';
+    private const FORMAT_JSON = 'json';
+
+    private const OPERATOR_EQUALITY = 'eq';
+    private const OPERATOR_IN = 'in';
+
+    private const CRITERION_LOCATION_DEPTH = 'LocationDepth';
+    private const CRITERION_IS_MAIN_LOCATION = 'IsMainLocation';
+
     /**
      * Covers POST /views.
      */
@@ -38,9 +50,9 @@ class ViewTest extends TestCase
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ibexa/v2/views',
+            self::VIEW_ENDPOINT_URL,
             'ViewInput+xml',
-            'View+json',
+            self::VIEW_ENDPOINT_ACCEPT_TYPE,
             $body
         );
         $response = $this->sendHttpRequest($request);
@@ -58,9 +70,9 @@ XML;
     {
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ibexa/v2/views',
+            self::VIEW_ENDPOINT_URL,
             "ViewInput+$type",
-            'View+json',
+            self::VIEW_ENDPOINT_ACCEPT_TYPE,
             $body
         );
         $response = $this->sendHttpRequest($request);
@@ -82,34 +94,34 @@ XML;
             strtoupper($format),
         );
 
-        yield $template('LocationDepth', 'eq', 'xml') => [
+        yield $template(self::CRITERION_LOCATION_DEPTH, self::OPERATOR_EQUALITY, self::FORMAT_XML) => [
             file_get_contents(__DIR__ . '/_input/search/LocationDepth.eq.xml'),
-            'xml',
+            self::FORMAT_XML,
         ];
 
-        yield $template('LocationDepth', 'eq', 'json') => [
+        yield $template(self::CRITERION_LOCATION_DEPTH, self::OPERATOR_EQUALITY, self::FORMAT_JSON) => [
             file_get_contents(__DIR__ . '/_input/search/LocationDepth.eq.json'),
-            'json',
+            self::FORMAT_JSON,
         ];
 
-        yield $template('LocationDepth', 'in', 'xml') => [
+        yield $template(self::CRITERION_LOCATION_DEPTH, self::OPERATOR_IN, self::FORMAT_XML) => [
             file_get_contents(__DIR__ . '/_input/search/LocationDepth.in.xml'),
-            'xml',
+            self::FORMAT_XML,
         ];
 
-        yield $template('LocationDepth', 'in', 'json') => [
+        yield $template(self::CRITERION_LOCATION_DEPTH, self::OPERATOR_IN, self::FORMAT_JSON) => [
             file_get_contents(__DIR__ . '/_input/search/LocationDepth.in.json'),
-            'json',
+            self::FORMAT_JSON,
         ];
 
-        yield $template('IsMainLocation', 'eq', 'xml') => [
+        yield $template(self::CRITERION_IS_MAIN_LOCATION, self::OPERATOR_EQUALITY, self::FORMAT_XML) => [
             file_get_contents(__DIR__ . '/_input/search/IsMainLocation.xml'),
-            'xml',
+            self::FORMAT_XML,
         ];
 
-        yield $template('IsMainLocation', 'eq', 'json') => [
+        yield $template(self::CRITERION_IS_MAIN_LOCATION, self::OPERATOR_EQUALITY, self::FORMAT_JSON) => [
             file_get_contents(__DIR__ . '/_input/search/IsMainLocation.json'),
-            'json',
+            self::FORMAT_JSON,
         ];
     }
 
@@ -144,9 +156,9 @@ XML;
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ibexa/v2/views',
+            self::VIEW_ENDPOINT_URL,
             'ViewInput+xml',
-            'View+json',
+            self::VIEW_ENDPOINT_ACCEPT_TYPE,
             $body
         );
         $response = $this->sendHttpRequest($request);
