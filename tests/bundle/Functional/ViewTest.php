@@ -101,6 +101,16 @@ XML;
             file_get_contents(__DIR__ . '/_input/search/LocationDepth.in.json'),
             'json',
         ];
+
+        yield $template('IsMainLocation', 'eq', 'xml') => [
+            file_get_contents(__DIR__ . '/_input/search/IsMainLocation.xml'),
+            'xml',
+        ];
+
+        yield $template('IsMainLocation', 'eq', 'json') => [
+            file_get_contents(__DIR__ . '/_input/search/IsMainLocation.json'),
+            'json',
+        ];
     }
 
     /**
