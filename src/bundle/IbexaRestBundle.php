@@ -25,6 +25,10 @@ class IbexaRestBundle extends Bundle
         /** @var \Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension $securityExtension */
         $securityExtension = $container->getExtension('security');
         $securityExtension->addSecurityListenerFactory(new RestSessionBasedFactory());
+
+        if ($container->hasExtension('lexik_jwt_authentication')) {
+            $container->addCompilerPass(new Compiler\LexikAuthorizationHeaderBridgePass());
+        }
     }
 }
 

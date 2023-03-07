@@ -13,6 +13,22 @@ use Symfony\Component\HttpFoundation\RequestMatcher;
 
 final class AuthorizationHeaderRESTRequestMatcher extends RequestMatcher
 {
+    private ?string $headerName;
+
+    public function __construct(
+        string $path = null,
+        string $host = null,
+        $methods = null,
+        $ips = null,
+        array $attributes = [],
+        $schemes = null,
+        int $port = null,
+        string $headerName = null
+    ) {
+        parent::__construct($path, $host, $methods, $ips, $attributes, $schemes, $port);
+        $this->headerName = $headerName;
+    }
+
     public function matches(Request $request): bool
     {
         if ($request->attributes->get('is_rest_request', false) !== true) {
@@ -21,7 +37,7 @@ final class AuthorizationHeaderRESTRequestMatcher extends RequestMatcher
 
         if (
             $request->attributes->get('_route') === 'ibexa.rest.create_token'
-            || !empty($request->headers->get('Authorization'))
+            || !empty($request->headers->get($this->headerName ?? 'Authorization'))
         ) {
             return parent::matches($request);
         }
