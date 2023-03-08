@@ -27,7 +27,6 @@ final class LexikAuthorizationHeaderBridgePass implements CompilerPassInterface
         $definition = $container->getDefinition('lexik_jwt_authentication.extractor.authorization_header_extractor');
         $headerName = $definition->getArgument(1);
 
-        $matcher = $container->getDefinition(AuthorizationHeaderRESTRequestMatcher::class);
-        $matcher->setArgument('$headerName', $headerName);
+        $container->setParameter('ibexa.rest.authorization_header_name', $headerName);
     }
 }
