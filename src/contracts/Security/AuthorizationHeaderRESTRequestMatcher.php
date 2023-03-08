@@ -16,14 +16,14 @@ final class AuthorizationHeaderRESTRequestMatcher extends RequestMatcher
     private ?string $headerName;
 
     public function __construct(
+        string $headerName = null,
         string $path = null,
         string $host = null,
         $methods = null,
         $ips = null,
         array $attributes = [],
         $schemes = null,
-        int $port = null,
-        string $headerName = null
+        int $port = null
     ) {
         parent::__construct($path, $host, $methods, $ips, $attributes, $schemes, $port);
         $this->headerName = $headerName;
