@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 
-use Ibexa\Contracts\Rest\Security\AuthorizationHeaderRESTRequestMatcher;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
