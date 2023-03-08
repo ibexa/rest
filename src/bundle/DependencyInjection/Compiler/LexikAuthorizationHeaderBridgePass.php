@@ -16,10 +16,6 @@ final class LexikAuthorizationHeaderBridgePass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->hasDefinition(AuthorizationHeaderRESTRequestMatcher::class)) {
-            return;
-        }
-
         if (!$container->hasDefinition('lexik_jwt_authentication.extractor.authorization_header_extractor')) {
             return;
         }
