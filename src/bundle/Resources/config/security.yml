@@ -1,4 +1,6 @@
 parameters:
+    ibexa.rest.authorization_header_name: ~
+
 services:
     # Following service will be aliased at compile time to "ezpublish_rest.session_authenticator" by the Security factory.
     ibexa.rest.security.authentication.listener.session:
@@ -12,7 +14,9 @@ services:
             - "@?logger"
         abstract: true
 
-    Ibexa\Contracts\Rest\Security\AuthorizationHeaderRESTRequestMatcher: ~
+    Ibexa\Contracts\Rest\Security\AuthorizationHeaderRESTRequestMatcher:
+        arguments:
+            $headerName: '%ibexa.rest.authorization_header_name%'
 
     Ibexa\Rest\Server\Security\RestLogoutHandler:
         arguments:

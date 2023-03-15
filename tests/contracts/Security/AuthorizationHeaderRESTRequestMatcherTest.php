@@ -25,7 +25,7 @@ final class AuthorizationHeaderRESTRequestMatcherTest extends TestCase
     {
         $matcher = new AuthorizationHeaderRESTRequestMatcher();
 
-        $request = new Request([], [], [
+        $request = $this->createRequest([
             'is_rest_request' => true,
         ]);
 
@@ -36,10 +36,23 @@ final class AuthorizationHeaderRESTRequestMatcherTest extends TestCase
     {
         $matcher = new AuthorizationHeaderRESTRequestMatcher();
 
-        $request = new Request([], [], [
+        $request = $this->createRequest([
             'is_rest_request' => true,
-        ], [], [], [
+        ], [
             'HTTP_AUTHORIZATION' => 'Bearer foo',
+        ]);
+
+        self::assertTrue($matcher->matches($request));
+    }
+
+    public function testMatchesRestRequestsWithCustomHeader(): void
+    {
+        $matcher = new AuthorizationHeaderRESTRequestMatcher('X-Foo');
+
+        $request = $this->createRequest([
+            'is_rest_request' => true,
+        ], [
+            'HTTP_X-FOO' => 'Bearer foo',
         ]);
 
         self::assertTrue($matcher->matches($request));
@@ -49,11 +62,20 @@ final class AuthorizationHeaderRESTRequestMatcherTest extends TestCase
     {
         $matcher = new AuthorizationHeaderRESTRequestMatcher();
 
-        $request = new Request([], [], [
+        $request = $this->createRequest([
             'is_rest_request' => true,
             '_route' => 'ibexa.rest.create_token',
         ]);
 
         self::assertTrue($matcher->matches($request));
+    }
+
+    /**
+     * @param array<string, mixed> $attributes
+     * @param array<string, array<string>|string> $server
+     */
+    private function createRequest(array $attributes = [], array $server = []): Request
+    {
+        return new Request([], [], $attributes, [], [], $server);
     }
 }
