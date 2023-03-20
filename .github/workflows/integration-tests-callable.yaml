@@ -6,7 +6,6 @@ env:
     APP_DEBUG: 1
     PHP_INI_ENV_memory_limit: 512M
     COMPOSER_CACHE_DIR: ~/.composer/cache
-    PROJECT_VERSION: 4.4.x-dev
     PROJECT_EDITION: oss
     SETUP: "doc/docker/base-dev.yml:doc/docker/selenium.yml"
     WEB_HOST: web
@@ -19,6 +18,11 @@ jobs:
         steps:
             - uses: actions/checkout@v2
 
+            - name: Set project version
+              run: |
+                version=$(jq -r '.extra | ."branch-alias" | ."dev-main"' < composer.json)
+                echo "version=$version" >> $GITHUB_ENV
+
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
               with:
@@ -29,15 +33,15 @@ jobs:
               uses: actions/cache@v2
               with:
                   path: ${{ env.COMPOSER_CACHE_DIR }}
-                  key: ${{ env.PROJECT_EDITION }}-${{ env.PROJECT_VERSION }}-${{ github.sha }}
+                  key: ${{ env.PROJECT_EDITION }}-${{ env.version }}-${{ github.sha }}
                   restore-keys: |
-                    ${{ env.PROJECT_EDITION }}-${{ env.PROJECT_VERSION }}
+                    ${{ env.PROJECT_EDITION }}-${{ env.version }}
 
             - name: Set up whole project using the tested dependency
               run: |
-                curl -L "https://raw.githubusercontent.com/ibexa/ci-scripts/main/bin/${{ env.PROJECT_VERSION }}/prepare_project_edition.sh" > prepare_project_edition.sh
+                curl -L "https://raw.githubusercontent.com/ibexa/ci-scripts/main/bin/${{ env.version }}/prepare_project_edition.sh" > prepare_project_edition.sh
                 chmod +x prepare_project_edition.sh
-                ./prepare_project_edition.sh ${{ env.PROJECT_EDITION }} ${{ env.PROJECT_VERSION }} ${{ env.SETUP }}
+                ./prepare_project_edition.sh ${{ env.PROJECT_EDITION }} ${{ env.version }} ${{ env.SETUP }}
 
             - name: Run setup command
               run: |
