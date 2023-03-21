@@ -6,8 +6,26 @@
  */
 namespace Ibexa\Rest\Output\Generator\Json;
 
-class FieldTypeHashGenerator
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+
+class FieldTypeHashGenerator implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
+    private NormalizerInterface $normalizer;
+
+    public function __construct(
+        NormalizerInterface $normalizer,
+        ?LoggerInterface $logger = null
+    ) {
+        $this->normalizer = $normalizer;
+        $this->logger = $logger ?? new NullLogger();
+    }
+
     /**
      * Generates the field type value $hashValue as a child of the given Object
      * using $hashElementName as the property name.
@@ -32,24 +50,27 @@ class FieldTypeHashGenerator
      */
     protected function generateValue($parent, $value)
     {
-        switch (($hashValueType = gettype($value))) {
-            case 'NULL':
-            case 'boolean':
-            case 'integer':
-            case 'double':
-            case 'string':
-
-                // Will be handled accordingly on serialization
-                return $value;
-                break;
-
-            case 'array':
-                return $this->generateArrayValue($parent, $value);
-                break;
-
-            default:
-                throw new \Exception('Invalid type in Field value hash: ' . $hashValueType);
+        if (is_array($value)) {
+            return $this->generateArrayValue($parent, $value);
         }
+
+        if (is_object($value)) {
+            if ($this->normalizer->supportsNormalization($value, 'json', ['parent' => $parent])) {
+                return $this->normalizer->normalize($value, 'json', ['parent' => $parent]);
+            }
+
+            $this->logger->error(sprintf(
+                'Unable to normalize value for type "%s". '
+                . 'Ensure that a normalizer is registered with tag: "%s".',
+                get_debug_type($value),
+                'ibexa.rest.serializer.normalizer',
+            ));
+
+            return null;
+        }
+
+        // Will be handled accordingly on serialization
+        return $value;
     }
 
     /**

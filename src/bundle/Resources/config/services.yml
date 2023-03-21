@@ -325,7 +325,12 @@ services:
         calls:
             - [ setFormatOutput, [ "%kernel.debug%" ] ]
 
-    Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator: ~
+    Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator:
+        arguments:
+            $normalizer: '@ibexa.rest.serializer'
+            $logger: '@logger'
+        tags:
+            - { name: monolog.logger, channel: ibexa.rest }
 
     # value objects visitors
     Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher: ~
