@@ -8,6 +8,15 @@ parameters:
         - '(^.*/.*$)'
 
 services:
+    Ibexa\Bundle\Rest\Serializer\SerializerFactory:
+        arguments:
+            - !tagged_iterator 'ibexa.rest.serializer.normalizer'
+            - !tagged_iterator 'ibexa.rest.serializer.encoder'
+
+    ibexa.rest.serializer:
+        class: Symfony\Component\Serializer\Serializer
+        factory: [ '@Ibexa\Bundle\Rest\Serializer\SerializerFactory', 'create' ]
+
     Ibexa\Bundle\Rest\Routing\OptionsLoader:
         arguments:
             - '@Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper'
