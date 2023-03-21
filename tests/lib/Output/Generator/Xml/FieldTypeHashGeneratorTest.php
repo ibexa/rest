@@ -9,6 +9,7 @@ namespace Ibexa\Tests\Rest\Output\Generator\Xml;
 use Ibexa\Rest\Output\Generator\Xml;
 use Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator;
 use Ibexa\Tests\Rest\Output\Generator\FieldTypeHashGeneratorBaseTest;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class FieldTypeHashGeneratorTest extends FieldTypeHashGeneratorBaseTest
 {
@@ -17,9 +18,9 @@ class FieldTypeHashGeneratorTest extends FieldTypeHashGeneratorBaseTest
      *
      * @return \Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator
      */
-    protected function initializeFieldTypeHashGenerator()
+    protected function initializeFieldTypeHashGenerator(): FieldTypeHashGenerator
     {
-        return new FieldTypeHashGenerator();
+        return new FieldTypeHashGenerator($this->createMock(NormalizerInterface::class));
     }
 
     /**
