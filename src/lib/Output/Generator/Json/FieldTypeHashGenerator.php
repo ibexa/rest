@@ -51,6 +51,11 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      */
     protected function generateValue($parent, $value)
     {
+        if (is_scalar($value)) {
+            // Will be handled accordingly on serialization
+            return $value;
+        }
+
         if (is_array($value)) {
             return $this->generateArrayValue($parent, $value);
         }
@@ -73,8 +78,7 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
             }
         }
 
-        // Will be handled accordingly on serialization
-        return $value;
+        throw new \Exception('Invalid type in Field value hash: ' . get_debug_type($value));
     }
 
     /**
