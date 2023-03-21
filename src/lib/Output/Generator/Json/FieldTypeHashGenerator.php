@@ -10,7 +10,7 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class FieldTypeHashGenerator implements LoggerAwareInterface
@@ -58,7 +58,7 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
         if (is_object($value)) {
             try {
                 return $this->normalizer->normalize($value, 'json', ['parent' => $parent]);
-            } catch (NotNormalizableValueException $e) {
+            } catch (ExceptionInterface $e) {
                 $message = sprintf(
                     'Unable to normalize value for type "%s". '
                     . 'Ensure that a normalizer is registered with tag: "%s".',
