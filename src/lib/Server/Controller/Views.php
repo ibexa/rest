@@ -37,6 +37,7 @@ class Views extends Controller
      */
     public function createView(Request $request)
     {
+        /** @var \Ibexa\Rest\Server\Values\RestViewInput $viewInput */
         $viewInput = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -45,9 +46,9 @@ class Views extends Controller
         );
 
         if ($viewInput->query instanceof LocationQuery) {
-            $method = 'findLocations';
+            $method = [$this->searchService, 'findLocations'];
         } else {
-            $method = 'findContent';
+            $method = [$this->searchService, 'findContent'];
         }
 
         $languageFilter = [
@@ -62,7 +63,7 @@ class Views extends Controller
         return new Values\RestExecutedView(
             [
                 'identifier' => $viewInput->identifier,
-                'searchResults' => $this->searchService->$method(
+                'searchResults' => $method(
                     $viewInput->query,
                     $languageFilter
                 ),
