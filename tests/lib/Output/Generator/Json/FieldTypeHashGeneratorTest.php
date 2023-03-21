@@ -9,30 +9,25 @@ namespace Ibexa\Tests\Rest\Output\Generator\Json;
 use Ibexa\Rest\Output\Generator\Json;
 use Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator;
 use Ibexa\Tests\Rest\Output\Generator\FieldTypeHashGeneratorBaseTest;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class FieldTypeHashGeneratorTest extends FieldTypeHashGeneratorBaseTest
 {
     /**
      * Initializes the field type hash generator.
-     *
-     * @return \Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator
      */
-    protected function initializeFieldTypeHashGenerator()
+    protected function initializeFieldTypeHashGenerator(): FieldTypeHashGenerator
     {
-        return new FieldTypeHashGenerator();
+        return new FieldTypeHashGenerator($this->createMock(NormalizerInterface::class));
     }
 
     /**
      * Initializes the generator.
-     *
-     * @return \Ibexa\Contracts\Rest\Output\Generator
      */
-    protected function initializeGenerator()
+    protected function initializeGenerator(): Json
     {
         return new Json(
             $this->getFieldTypeHashGenerator()
         );
     }
 }
-
-class_alias(FieldTypeHashGeneratorTest::class, 'EzSystems\EzPlatformRest\Tests\Output\Generator\Json\FieldTypeHashGeneratorTest');
