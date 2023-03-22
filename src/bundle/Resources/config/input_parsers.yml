@@ -663,7 +663,7 @@ services:
     Ibexa\Rest\Server\Input\Parser\Aggregation\Range\FloatRangeParser:
         parent: Ibexa\Rest\Server\Common\Parser
         tags:
-            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.aggregation..range.FloatRange }
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.aggregation.range.FloatRange }
 
     Ibexa\Rest\Server\Input\Parser\Aggregation\Range\IntRangeParser:
         parent: Ibexa\Rest\Server\Common\Parser
