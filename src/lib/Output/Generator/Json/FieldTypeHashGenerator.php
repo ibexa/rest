@@ -65,9 +65,10 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
                 $value = $this->normalizer->normalize($value, 'json', ['parent' => $parent]);
             } catch (ExceptionInterface $e) {
                 $message = sprintf(
-                    'Unable to normalize value for type "%s". '
+                    'Unable to normalize value for type "%s". %s. '
                     . 'Ensure that a normalizer is registered with tag: "%s".',
-                    get_debug_type($value),
+                    get_class($value),
+                    $e->getMessage(),
                     'ibexa.rest.serializer.normalizer',
                 );
                 $this->logger->error($message, [
