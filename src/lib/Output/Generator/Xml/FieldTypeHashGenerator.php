@@ -75,7 +75,7 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
                 $this->logger->error($message, [
                     'exception' => $e,
                 ]);
-                $value = [];
+                $value = null;
             }
             $this->generateValue($writer, $value, $key, $elementName);
         } else {

@@ -51,11 +51,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
      */
     final protected function getNormalizer(): NormalizerInterface
     {
-        if (!isset($this->normalizer)) {
-            $this->normalizer = $this->createMock(NormalizerInterface::class);
-        }
-
-        return $this->normalizer;
+        return $this->normalizer ??= $this->createMock(NormalizerInterface::class);
     }
 
     public function testGenerateNull()
