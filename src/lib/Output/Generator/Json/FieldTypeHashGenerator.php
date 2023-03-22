@@ -62,7 +62,7 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
 
         if (is_object($value)) {
             try {
-                return $this->normalizer->normalize($value, 'json', ['parent' => $parent]);
+                $value = $this->normalizer->normalize($value, 'json', ['parent' => $parent]);
             } catch (ExceptionInterface $e) {
                 $message = sprintf(
                     'Unable to normalize value for type "%s". '
@@ -74,8 +74,10 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
                     'exception' => $e,
                 ]);
 
-                return null;
+                $value = null;
             }
+
+            return $this->generateValue($parent, $value);
         }
 
         throw new \Exception('Invalid type in Field value hash: ' . get_debug_type($value));
