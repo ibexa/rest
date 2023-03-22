@@ -51,7 +51,7 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      */
     protected function generateValue($parent, $value)
     {
-        if (is_scalar($value)) {
+        if ($value === null || is_scalar($value)) {
             // Will be handled accordingly on serialization
             return $value;
         }
