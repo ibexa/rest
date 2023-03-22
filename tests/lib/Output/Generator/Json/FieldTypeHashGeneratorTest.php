@@ -9,7 +9,6 @@ namespace Ibexa\Tests\Rest\Output\Generator\Json;
 use Ibexa\Rest\Output\Generator\Json;
 use Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator;
 use Ibexa\Tests\Rest\Output\Generator\FieldTypeHashGeneratorBaseTest;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class FieldTypeHashGeneratorTest extends FieldTypeHashGeneratorBaseTest
 {

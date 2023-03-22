@@ -242,7 +242,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         $fixtureFile = $this->getFixtureFile($functionName);
         $actualResult = $this->getGeneratorOutput();
 
-        file_put_contents( $fixtureFile, $actualResult );
+        // file_put_contents( $fixtureFile, $actualResult );
         // $this->markTestIncomplete( "Wrote fixture to '{$fixtureFile}'." );
 
         $this->assertSame(
