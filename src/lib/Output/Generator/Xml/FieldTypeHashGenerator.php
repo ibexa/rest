@@ -63,22 +63,7 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
         } elseif (is_array($value)) {
             $this->generateArrayValue($writer, $value, $key, $elementName);
         } elseif (is_object($value)) {
-            try {
-                $value = $this->normalizer->normalize($value, 'xml');
-            } catch (ExceptionInterface $e) {
-                $message = sprintf(
-                    'Unable to normalize value for type "%s". %s. '
-                    . 'Ensure that a normalizer is registered with tag: "%s".',
-                    get_class($value),
-                    $e->getMessage(),
-                    'ibexa.rest.serializer.normalizer',
-                );
-                $this->logger->error($message, [
-                    'exception' => $e,
-                ]);
-                $value = null;
-            }
-            $this->generateValue($writer, $value, $key, $elementName);
+            $this->generateObjectValue($value, $writer, $key, $elementName);
         } else {
             throw new \Exception('Invalid type in Field value hash: ' . get_debug_type($value));
         }
@@ -251,6 +236,26 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
             $writer->text($key);
             $writer->endAttribute();
         }
+    }
+
+    private function generateObjectValue(object $value, \XmlWriter $writer, ?string $key, string $elementName): void
+    {
+        try {
+            $value = $this->normalizer->normalize($value, 'xml');
+        } catch (ExceptionInterface $e) {
+            $message = sprintf(
+                'Unable to normalize value for type "%s". %s. '
+                . 'Ensure that a normalizer is registered with tag: "%s".',
+                get_class($value),
+                $e->getMessage(),
+                'ibexa.rest.serializer.normalizer',
+            );
+            $this->logger->error($message, [
+                'exception' => $e,
+            ]);
+            $value = null;
+        }
+        $this->generateValue($writer, $value, $key, $elementName);
     }
 }
 
