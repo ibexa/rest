@@ -78,10 +78,6 @@ class SessionController extends Controller
 
         try {
             $session = $request->getSession();
-            if ($session->isStarted() && $this->hasStoredCsrfToken()) {
-                $this->checkCsrfToken($request);
-            }
-
             $token = $this->getAuthenticator()->authenticate($request);
             $csrfToken = $this->getCsrfToken();
 
