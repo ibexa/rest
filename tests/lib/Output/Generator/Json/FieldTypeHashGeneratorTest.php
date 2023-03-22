@@ -18,7 +18,7 @@ class FieldTypeHashGeneratorTest extends FieldTypeHashGeneratorBaseTest
      */
     protected function initializeFieldTypeHashGenerator(): FieldTypeHashGenerator
     {
-        return new FieldTypeHashGenerator($this->createMock(NormalizerInterface::class));
+        return new FieldTypeHashGenerator($this->getNormalizer());
     }
 
     /**

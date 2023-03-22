@@ -7,12 +7,16 @@
 namespace Ibexa\Tests\Rest\Output\Generator;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 abstract class FieldTypeHashGeneratorBaseTest extends TestCase
 {
     private $generator;
 
     private $fieldTypeHashGenerator;
+
+    /** @var \Symfony\Component\Serializer\Normalizer\NormalizerInterface&\PHPUnit\Framework\MockObject\MockObject */
+    private NormalizerInterface $normalizer;
 
     private $iniPrecisions;
 
@@ -41,6 +45,18 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
      * @return \Ibexa\Contracts\Rest\Output\Generator
      */
     abstract protected function initializeGenerator();
+
+    /**
+     * @return \Symfony\Component\Serializer\Normalizer\NormalizerInterface&\PHPUnit\Framework\MockObject\MockObject
+     */
+    final protected function getNormalizer(): NormalizerInterface
+    {
+        if (!isset($this->normalizer)) {
+            $this->normalizer = $this->createMock(NormalizerInterface::class);
+        }
+
+        return $this->normalizer;
+    }
 
     public function testGenerateNull()
     {
@@ -170,6 +186,30 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         $this->assertSerializationSame(__FUNCTION__);
     }
 
+    public function testGenerateUsingNormalizer(): void
+    {
+        $object = (object)[];
+        $this->getNormalizer()
+            ->expects(self::once())
+            ->method('normalize')
+            ->with(self::identicalTo($object))
+            ->willReturn([
+                'id' => 1,
+                'type' => 'foo',
+                'internal_hash' => [
+                    'foo' => 'bar',
+                ],
+                'internal_list' => [
+                    42,
+                    56,
+                ],
+            ]);
+
+        $this->getGenerator()->generateFieldTypeHash('fieldValue', $object);
+
+        $this->assertSerializationSame(__FUNCTION__);
+    }
+
     protected function getFieldTypeHashGenerator()
     {
         if (!isset($this->fieldTypeHashGenerator)) {
@@ -202,7 +242,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         $fixtureFile = $this->getFixtureFile($functionName);
         $actualResult = $this->getGeneratorOutput();
 
-        // file_put_contents( $fixtureFile, $actualResult );
+        file_put_contents( $fixtureFile, $actualResult );
         // $this->markTestIncomplete( "Wrote fixture to '{$fixtureFile}'." );
 
         $this->assertSame(

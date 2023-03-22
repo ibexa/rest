@@ -78,11 +78,10 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
                 $value = [];
             }
             $this->generateArrayValue($writer, $value, $key, $elementName);
-
-            return;
+        } else {
+            throw new \Exception('Invalid type in Field value hash: ' . get_debug_type($value));
         }
 
-        throw new \Exception('Invalid type in Field value hash: ' . get_debug_type($value));
     }
 
     /**
