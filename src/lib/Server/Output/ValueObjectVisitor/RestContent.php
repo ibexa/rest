@@ -150,12 +150,7 @@ class RestContent extends ValueObjectVisitor
 
         // Published date will not exist if we're visiting the content draft
         if ($contentInfo->publishedDate !== null) {
-            $generator->valueElement(
-                'publishedDate',
-                ($contentInfo->publishedDate !== null
-                    ? $contentInfo->publishedDate->format('c')
-                    : null)
-            );
+            $generator->valueElement('publishedDate', $contentInfo->publishedDate->format('c'));
         }
 
         $generator->valueElement(
