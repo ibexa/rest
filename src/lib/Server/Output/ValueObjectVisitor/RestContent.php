@@ -52,9 +52,10 @@ class RestContent extends ValueObjectVisitor
 
         $generator->attribute(
             'href',
-            $data->path === null ?
-                $this->router->generate('ibexa.rest.load_content', ['contentId' => $contentInfo->id]) :
-                $data->path
+            $data->path ?? $this->router->generate(
+                'ibexa.rest.load_content',
+                ['contentId' => $contentInfo->id]
+            )
         );
 
         $generator->attribute('remoteId', $contentInfo->remoteId);
