@@ -78,10 +78,6 @@ class SessionController extends Controller
 
         try {
             $session = $request->getSession();
-            if ($session->isStarted() && $this->hasStoredCsrfToken()) {
-                $this->checkCsrfToken($request);
-            }
-
             $token = $this->getAuthenticator()->authenticate($request);
             $csrfToken = $this->getCsrfToken();
 
@@ -217,13 +213,8 @@ class SessionController extends Controller
             return;
         }
 
-        $exception = new UnauthorizedException(
-            'Missing or invalid CSRF token',
-            $request->getMethod() . ' ' . $request->getPathInfo()
-        );
-
         if (!$request->headers->has('X-CSRF-Token')) {
-            throw $exception;
+            throw $this->createInvalidCsrfTokenException($request);
         }
 
         $csrfToken = new CsrfToken(
@@ -232,7 +223,7 @@ class SessionController extends Controller
         );
 
         if (!$this->csrfTokenManager->isTokenValid($csrfToken)) {
-            throw $exception;
+            throw $this->createInvalidCsrfTokenException($request);
         }
     }
 
@@ -262,6 +253,14 @@ class SessionController extends Controller
         }
 
         return $this->authenticator;
+    }
+
+    private function createInvalidCsrfTokenException(Request $request): UnauthorizedException
+    {
+        return new UnauthorizedException(
+            'Missing or invalid CSRF token',
+            $request->getMethod() . ' ' . $request->getPathInfo()
+        );
     }
 }
 
