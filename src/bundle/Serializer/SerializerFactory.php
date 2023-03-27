@@ -16,12 +16,12 @@ final class SerializerFactory
     /**
      * @var iterable<\Symfony\Component\Serializer\Normalizer\NormalizerInterface|\Symfony\Component\Serializer\Normalizer\DenormalizerInterface>
      */
-    private $normalizers;
+    private iterable $normalizers;
 
     /**
      * @var iterable<\Symfony\Component\Serializer\Encoder\EncoderInterface|\Symfony\Component\Serializer\Encoder\DecoderInterface>
      */
-    private $encoders;
+    private iterable $encoders;
 
     /**
      * @param iterable<\Symfony\Component\Serializer\Normalizer\NormalizerInterface|\Symfony\Component\Serializer\Normalizer\DenormalizerInterface> $normalizers
