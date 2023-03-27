@@ -44,8 +44,6 @@ class Visitor
      *
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher $valueObjectVisitorDispatcher
-     *
-     * {@internal param array $visitors}
      */
     public function __construct(Generator $generator, ValueObjectVisitorDispatcher $valueObjectVisitorDispatcher)
     {
