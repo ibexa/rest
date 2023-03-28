@@ -15,6 +15,7 @@ services:
 
     ibexa.rest.serializer:
         class: Symfony\Component\Serializer\Serializer
+        autoconfigure: false
         factory: [ '@Ibexa\Bundle\Rest\Serializer\SerializerFactory', 'create' ]
 
     Ibexa\Bundle\Rest\Routing\OptionsLoader:
