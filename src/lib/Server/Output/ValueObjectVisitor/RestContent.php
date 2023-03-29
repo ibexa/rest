@@ -50,53 +50,46 @@ class RestContent extends ValueObjectVisitor
         $visitor->setHeader('Content-Type', $generator->getMediaType($mediaType));
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('ContentUpdate'));
 
-        $generator->startAttribute(
+        $generator->attribute(
             'href',
-            $data->path === null ?
-                $this->router->generate('ibexa.rest.load_content', ['contentId' => $contentInfo->id]) :
-                $data->path
+            $data->path ?? $this->router->generate(
+                'ibexa.rest.load_content',
+                ['contentId' => $contentInfo->id]
+            )
         );
-        $generator->endAttribute('href');
 
-        $generator->startAttribute('remoteId', $contentInfo->remoteId);
-        $generator->endAttribute('remoteId');
-        $generator->startAttribute('id', $contentInfo->id);
-        $generator->endAttribute('id');
+        $generator->attribute('remoteId', $contentInfo->remoteId);
+        $generator->attribute('id', $contentInfo->id);
 
         $generator->startObjectElement('ContentType');
-        $generator->startAttribute(
+        $generator->attribute(
             'href',
             $this->router->generate(
                 'ibexa.rest.load_content_type',
                 ['contentTypeId' => $contentInfo->contentTypeId]
             )
         );
-        $generator->endAttribute('href');
         $generator->endObjectElement('ContentType');
 
-        $generator->startValueElement('Name', $contentInfo->name);
-        $generator->endValueElement('Name');
+        $generator->valueElement('Name', $contentInfo->name);
 
-        $generator->startValueElement('TranslatedName', $translatedContentName);
-        $generator->endValueElement('TranslatedName');
+        $generator->valueElement('TranslatedName', $translatedContentName);
 
         $generator->startObjectElement('Versions', 'VersionList');
-        $generator->startAttribute(
+        $generator->attribute(
             'href',
             $this->router->generate('ibexa.rest.load_content_versions', ['contentId' => $contentInfo->id])
         );
-        $generator->endAttribute('href');
         $generator->endObjectElement('Versions');
 
         $generator->startObjectElement('CurrentVersion', 'Version');
-        $generator->startAttribute(
+        $generator->attribute(
             'href',
             $this->router->generate(
                 'ibexa.rest.redirect_current_version',
                 ['contentId' => $contentInfo->id]
             )
         );
-        $generator->endAttribute('href');
 
         // Embed current version, if available
         if ($currentVersion !== null) {
@@ -112,105 +105,88 @@ class RestContent extends ValueObjectVisitor
         $generator->endObjectElement('CurrentVersion');
 
         $generator->startObjectElement('Section');
-        $generator->startAttribute(
+        $generator->attribute(
             'href',
             $this->router->generate('ibexa.rest.load_section', ['sectionId' => $contentInfo->sectionId])
         );
-        $generator->endAttribute('href');
         $generator->endObjectElement('Section');
 
         // Main location will not exist if we're visiting the content draft
         if ($data->mainLocation !== null) {
             $generator->startObjectElement('MainLocation', 'Location');
-            $generator->startAttribute(
+            $generator->attribute(
                 'href',
                 $this->router->generate(
                     'ibexa.rest.load_location',
                     ['locationPath' => trim($mainLocation->pathString, '/')]
                 )
             );
-            $generator->endAttribute('href');
             $generator->endObjectElement('MainLocation');
         }
 
         $generator->startObjectElement('Locations', 'LocationList');
-        $generator->startAttribute(
+        $generator->attribute(
             'href',
             $this->router->generate(
                 'ibexa.rest.load_locations_for_content',
                 ['contentId' => $contentInfo->id]
             )
         );
-        $generator->endAttribute('href');
         $generator->endObjectElement('Locations');
 
         $generator->startObjectElement('Owner', 'User');
-        $generator->startAttribute(
+        $generator->attribute(
             'href',
             $this->router->generate('ibexa.rest.load_user', ['userId' => $contentInfo->ownerId])
         );
-        $generator->endAttribute('href');
         $generator->endObjectElement('Owner');
 
         // Modification date will not exist if we're visiting the content draft
         if ($contentInfo->modificationDate !== null) {
-            $generator->startValueElement(
+            $generator->valueElement(
                 'lastModificationDate',
                 $contentInfo->modificationDate->format('c')
             );
-            $generator->endValueElement('lastModificationDate');
         }
 
         // Published date will not exist if we're visiting the content draft
         if ($contentInfo->publishedDate !== null) {
-            $generator->startValueElement(
-                'publishedDate',
-                ($contentInfo->publishedDate !== null
-                    ? $contentInfo->publishedDate->format('c')
-                    : null)
-            );
-            $generator->endValueElement('publishedDate');
+            $generator->valueElement('publishedDate', $contentInfo->publishedDate->format('c'));
         }
 
-        $generator->startValueElement(
+        $generator->valueElement(
             'mainLanguageCode',
             $contentInfo->mainLanguageCode
         );
-        $generator->endValueElement('mainLanguageCode');
 
-        $generator->startValueElement(
+        $generator->valueElement(
             'currentVersionNo',
             $contentInfo->currentVersionNo
         );
-        $generator->endValueElement('currentVersionNo');
 
-        $generator->startValueElement(
+        $generator->valueElement(
             'alwaysAvailable',
             $this->serializeBool($generator, $contentInfo->alwaysAvailable)
         );
-        $generator->endValueElement('alwaysAvailable');
 
-        $generator->startValueElement(
+        $generator->valueElement(
             'isHidden',
             $this->serializeBool($generator, $contentInfo->isHidden)
         );
-        $generator->endValueElement('isHidden');
 
-        $generator->startValueElement(
+        $generator->valueElement(
             'status',
             $this->getStatusString($contentInfo->status)
         );
-        $generator->endValueElement('status');
 
         $generator->startObjectElement('ObjectStates', 'ContentObjectStates');
-        $generator->startAttribute(
+        $generator->attribute(
             'href',
             $this->router->generate(
                 'ibexa.rest.get_object_states_for_content',
                 ['contentId' => $contentInfo->id]
             )
         );
-        $generator->endAttribute('href');
         $generator->endObjectElement('ObjectStates');
 
         $generator->endObjectElement('Content');
