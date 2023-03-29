@@ -7,12 +7,12 @@
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
-use Ibexa\Contracts\Core\Repository\Values\Content\Location as LocationValue;
+use Ibexa\Contracts\Core\Repository\Values\Content;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
-use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Server\Values\RestContent as RestContentValue;
 
 /**
@@ -26,8 +26,10 @@ class Location extends ValueObjectVisitor
     /** @var \Ibexa\Contracts\Core\Repository\ContentService */
     private $contentService;
 
-    public function __construct(LocationService $locationService, ContentService $contentService)
-    {
+    public function __construct(
+        LocationService $locationService,
+        ContentService $contentService
+    ) {
         $this->locationService = $locationService;
         $this->contentService = $contentService;
     }
@@ -48,8 +50,15 @@ class Location extends ValueObjectVisitor
         $generator->endObjectElement('Location');
     }
 
-    protected function visitLocationAttributes(Visitor $visitor, Generator $generator, LocationValue $location)
-    {
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
+    protected function visitLocationAttributes(
+        Visitor $visitor,
+        Generator $generator,
+        Content\Location $location
+    ) {
         $generator->startAttribute(
             'href',
             $this->router->generate(
@@ -153,15 +162,8 @@ class Location extends ValueObjectVisitor
         $generator->endAttribute('href');
 
         $content = $location->getContent();
-        $contentInfo = $location->contentInfo;
-
-        try {
-            $mainLocation = $contentInfo->mainLocationId === $location->id
-                ? $location
-                : $this->locationService->loadLocation($contentInfo->mainLocationId);
-        } catch (UnauthorizedException $e) {
-            $mainLocation = null;
-        }
+        $contentInfo = $location->getContentInfo();
+        $mainLocation = $this->resolveMainLocation($contentInfo, $location);
 
         $visitor->visitValueObject(
             new RestContentValue(
@@ -174,6 +176,29 @@ class Location extends ValueObjectVisitor
         );
 
         $generator->endObjectElement('ContentInfo');
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     */
+    private function resolveMainLocation(
+        Content\ContentInfo $contentInfo,
+        Content\Location $location
+    ): ?Content\Location {
+        $mainLocationId = $contentInfo->getMainLocationId();
+        if ($mainLocationId === null) {
+            return null;
+        }
+
+        if ($mainLocationId === $location->id) {
+            return $location;
+        }
+
+        try {
+            return $this->locationService->loadLocation($mainLocationId);
+        } catch (UnauthorizedException $e) {
+            return null;
+        }
     }
 }
 
