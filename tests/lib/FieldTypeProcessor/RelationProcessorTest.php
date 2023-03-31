@@ -149,7 +149,7 @@ class RelationProcessorTest extends TestCase
 
         $hash = $processor->postProcessFieldSettingsHash(['selectionRoot' => -1]);
 
-        self::assertEquals([
+        self::assertSame([
             'selectionRoot' => -1,
             'selectionRootHref' => '',
         ], $hash);
