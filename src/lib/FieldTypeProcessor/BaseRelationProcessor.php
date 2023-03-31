@@ -6,6 +6,8 @@
  */
 namespace Ibexa\Rest\FieldTypeProcessor;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Rest\FieldTypeProcessor;
 use Ibexa\Core\FieldType\Relation\Type;
@@ -57,15 +59,16 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
         return $this->router->generate('ibexa.rest.load_content', ['contentId' => $contentId]);
     }
 
-    /**
-     * @param  int $locationId
-     *
-     * @return string
-     */
-    public function mapToLocationHref($locationId)
+    public function mapToLocationHref(int $locationId): ?string
     {
+        try {
+            $location = $this->locationService->loadLocation($locationId);
+        } catch (UnauthorizedException | NotFoundException $e) {
+            return null;
+        }
+
         return $this->router->generate('ibexa.rest.load_location', [
-            'locationPath' => implode('/', $this->locationService->loadLocation($locationId)->path),
+            'locationPath' => implode('/', $location->path),
         ]);
     }
 

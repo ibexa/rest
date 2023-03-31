@@ -7,6 +7,7 @@
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Contracts\Core\Repository\LocationService;
+use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\FieldTypeProcessor\RelationProcessor;
 use PHPUnit\Framework\TestCase;
@@ -125,6 +126,33 @@ class RelationProcessorTest extends TestCase
 
         $hash = $processor->postProcessValueHash(['destinationContentId' => null]);
         $this->assertArrayNotHasKey('destinationContentHref', $hash);
+    }
+
+    public function testPostProcessFieldValueHashNotAccessibleLocation(): void
+    {
+        $processor = $this->getProcessor();
+
+        $serviceLocationMock = $this->createMock(LocationService::class);
+        $processor->setLocationService($serviceLocationMock);
+
+        $serviceLocationMock
+            ->method('loadLocation')
+            ->with('-1')
+            ->willThrowException(new NotFoundException('', ''));
+
+        $routerMock = $this->createMock(RouterInterface::class);
+        $processor->setRouter($routerMock);
+
+        $routerMock
+            ->expects(self::never())
+            ->method('generate');
+
+        $hash = $processor->postProcessFieldSettingsHash(['selectionRoot' => -1]);
+
+        self::assertEquals([
+            'selectionRoot' => -1,
+            'selectionRootHref' => null,
+        ], $hash);
     }
 
     /**
