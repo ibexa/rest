@@ -151,7 +151,7 @@ class RelationProcessorTest extends TestCase
 
         self::assertEquals([
             'selectionRoot' => -1,
-            'selectionRootHref' => null,
+            'selectionRootHref' => '',
         ], $hash);
     }
 
