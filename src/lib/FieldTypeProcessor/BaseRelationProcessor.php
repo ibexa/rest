@@ -59,12 +59,17 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
         return $this->router->generate('ibexa.rest.load_content', ['contentId' => $contentId]);
     }
 
-    public function mapToLocationHref(int $locationId): ?string
+    /**
+     * @param  int $locationId
+     *
+     * @return string
+     */
+    public function mapToLocationHref($locationId)
     {
         try {
             $location = $this->locationService->loadLocation($locationId);
         } catch (UnauthorizedException | NotFoundException $e) {
-            return null;
+            return '';
         }
 
         return $this->router->generate('ibexa.rest.load_location', [
