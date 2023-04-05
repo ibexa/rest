@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    _instanceof:
+        Ibexa\Rest\Exception\Converter\RepositoryExceptionConverterInterface:
+            tags: [ ibexa.rest.repository_exception.converter ]
+
+    Ibexa\Rest\Exception\Converter\ContentFieldValidationExceptionConverter: ~

@@ -1,3 +1,6 @@
+imports:
+    - { resource: exception/converters.yaml }
+
 parameters:
     ibexa.rest.output.visitor.json.regexps:
         - '(^application/vnd\.ibexa\.api\.[A-Za-z]+\+json$)'
@@ -199,6 +202,7 @@ services:
     Ibexa\Bundle\Rest\EventListener\ResponseListener:
         arguments:
             - '@Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher'
+            - '@Ibexa\Rest\Exception\Converter\RepositoryExceptionConverterInterface'
         calls:
             - ['setLogger', ['@?logger']]
         tags:
@@ -369,3 +373,10 @@ services:
         parent: hautelook.router.template
         calls:
             - [ setOption, [ strict_requirements, ~ ] ]
+
+    Ibexa\Rest\Exception\Converter\AggregateRepositoryExceptionConverter:
+        arguments:
+            $converters: !tagged_iterator ibexa.rest.repository_exception.converter
+
+    Ibexa\Rest\Exception\Converter\RepositoryExceptionConverterInterface:
+        alias: Ibexa\Rest\Exception\Converter\AggregateRepositoryExceptionConverter
