@@ -63,6 +63,7 @@ services:
          arguments: ["@router", '@Ibexa\Bundle\Core\Routing\DefaultRouter', '@ibexa.config.resolver']
 
     Ibexa\Rest\Server\Controller:
+        autowire: true
         calls:
             - [ setContainer, ["@service_container"] ]
             - [ setInputDispatcher, ['@Ibexa\Rest\Input\Dispatcher'] ]
