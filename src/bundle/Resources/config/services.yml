@@ -8,6 +8,16 @@ parameters:
         - '(^.*/.*$)'
 
 services:
+    Ibexa\Bundle\Rest\Serializer\SerializerFactory:
+        arguments:
+            - !tagged_iterator 'ibexa.rest.serializer.normalizer'
+            - !tagged_iterator 'ibexa.rest.serializer.encoder'
+
+    ibexa.rest.serializer:
+        class: Symfony\Component\Serializer\Serializer
+        autoconfigure: false
+        factory: [ '@Ibexa\Bundle\Rest\Serializer\SerializerFactory', 'create' ]
+
     Ibexa\Bundle\Rest\Routing\OptionsLoader:
         arguments:
             - '@Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper'
@@ -308,7 +318,12 @@ services:
         calls:
             - [ setFormatOutput, [ "%kernel.debug%" ] ]
 
-    Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator: ~
+    Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator:
+        arguments:
+            $normalizer: '@ibexa.rest.serializer'
+            $logger: '@logger'
+        tags:
+            - { name: monolog.logger, channel: ibexa.rest }
 
     Ibexa\Rest\Output\Generator\Json:
         arguments:
@@ -316,7 +331,12 @@ services:
         calls:
             - [ setFormatOutput, [ "%kernel.debug%" ] ]
 
-    Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator: ~
+    Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator:
+        arguments:
+            $normalizer: '@ibexa.rest.serializer'
+            $logger: '@logger'
+        tags:
+            - { name: monolog.logger, channel: ibexa.rest }
 
     # value objects visitors
     Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher: ~

@@ -7,12 +7,21 @@
 namespace Ibexa\Tests\Rest\Output\Generator;
 
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 abstract class FieldTypeHashGeneratorBaseTest extends TestCase
 {
     private $generator;
 
     private $fieldTypeHashGenerator;
+
+    /** @var \Symfony\Component\Serializer\Normalizer\NormalizerInterface&\PHPUnit\Framework\MockObject\MockObject */
+    private NormalizerInterface $normalizer;
+
+    /** @var \Psr\Log\LoggerInterface&\PHPUnit\Framework\MockObject\MockObject */
+    private LoggerInterface $logger;
 
     private $iniPrecisions;
 
@@ -41,6 +50,22 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
      * @return \Ibexa\Contracts\Rest\Output\Generator
      */
     abstract protected function initializeGenerator();
+
+    /**
+     * @return \Symfony\Component\Serializer\Normalizer\NormalizerInterface&\PHPUnit\Framework\MockObject\MockObject
+     */
+    final protected function getNormalizer(): NormalizerInterface
+    {
+        return $this->normalizer ??= $this->createMock(NormalizerInterface::class);
+    }
+
+    /**
+     * @return \Psr\Log\LoggerInterface&\PHPUnit\Framework\MockObject\MockObject
+     */
+    final protected function getLogger(): LoggerInterface
+    {
+        return $this->logger ??= $this->createMock(LoggerInterface::class);
+    }
 
     public function testGenerateNull()
     {
@@ -166,6 +191,52 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
                 ['id' => 2, 'name' => 'Joe Bielefeld', 'email' => 'bielefeld@example.com'],
             ]
         );
+
+        $this->assertSerializationSame(__FUNCTION__);
+    }
+
+    public function testGenerateUsingNormalizer(): void
+    {
+        $object = (object)[];
+        $this->getNormalizer()
+            ->expects(self::once())
+            ->method('normalize')
+            ->with(self::identicalTo($object))
+            ->willReturn([
+                'id' => 1,
+                'type' => 'foo',
+                'internal_hash' => [
+                    'foo' => 'bar',
+                ],
+                'internal_list' => [
+                    42,
+                    56,
+                ],
+            ]);
+
+        $this->getGenerator()->generateFieldTypeHash('fieldValue', $object);
+
+        $this->assertSerializationSame(__FUNCTION__);
+    }
+
+    public function testGenerateWithMissingNormalizer(): void
+    {
+        $object = (object)[];
+        $this->getNormalizer()
+            ->expects(self::once())
+            ->method('normalize')
+            ->with(self::identicalTo($object))
+            ->willThrowException(new NotNormalizableValueException('foo'));
+
+        $this->getLogger()
+            ->expects(self::once())
+            ->method('error')
+            ->with(self::identicalTo(
+                'Unable to normalize value for type "stdClass". foo. Ensure that a normalizer is registered '
+                . 'with tag: "ibexa.rest.serializer.normalizer".'
+            ));
+
+        $this->getGenerator()->generateFieldTypeHash('fieldValue', $object);
 
         $this->assertSerializationSame(__FUNCTION__);
     }
