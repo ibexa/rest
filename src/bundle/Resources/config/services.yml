@@ -70,7 +70,6 @@ services:
             - [ setRouter, ["@router"] ]
             - [ setRequestParser, ['@Ibexa\Bundle\Rest\RequestParser\Router'] ]
             - [ setRepository, ['@ibexa.api.repository'] ]
-        tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\Root:
         parent: Ibexa\Rest\Server\Controller
