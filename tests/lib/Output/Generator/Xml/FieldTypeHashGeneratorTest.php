@@ -10,24 +10,20 @@ use Ibexa\Rest\Output\Generator\Xml;
 use Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator;
 use Ibexa\Tests\Rest\Output\Generator\FieldTypeHashGeneratorBaseTest;
 
-class FieldTypeHashGeneratorTest extends FieldTypeHashGeneratorBaseTest
+final class FieldTypeHashGeneratorTest extends FieldTypeHashGeneratorBaseTest
 {
     /**
      * Initializes the field type hash generator.
-     *
-     * @return \Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator
      */
-    protected function initializeFieldTypeHashGenerator()
+    protected function initializeFieldTypeHashGenerator(): FieldTypeHashGenerator
     {
-        return new FieldTypeHashGenerator();
+        return new FieldTypeHashGenerator($this->getNormalizer(), $this->getLogger());
     }
 
     /**
      * Initializes the generator.
-     *
-     * @return \Ibexa\Contracts\Rest\Output\Generator
      */
-    protected function initializeGenerator()
+    protected function initializeGenerator(): Xml
     {
         $generator = new Xml(
             $this->getFieldTypeHashGenerator()
@@ -37,5 +33,3 @@ class FieldTypeHashGeneratorTest extends FieldTypeHashGeneratorBaseTest
         return $generator;
     }
 }
-
-class_alias(FieldTypeHashGeneratorTest::class, 'EzSystems\EzPlatformRest\Tests\Output\Generator\Xml\FieldTypeHashGeneratorTest');

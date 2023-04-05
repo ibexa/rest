@@ -13,6 +13,7 @@ use Ibexa\Tests\Rest\AssertXmlTagTrait;
 use Ibexa\Tests\Rest\Server;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
 {
@@ -94,7 +95,9 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     {
         if (!isset($this->generator)) {
             $this->generator = new Generator\Xml(
-                new Generator\Xml\FieldTypeHashGenerator()
+                new Generator\Xml\FieldTypeHashGenerator(
+                    $this->createMock(NormalizerInterface::class)
+                )
             );
         }
 
