@@ -22,6 +22,7 @@ use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Values;
+use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -95,9 +96,9 @@ class Role extends RestController
                 )
             );
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         } catch (UnauthorizedException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         } catch (LimitationValidationException $e) {
             throw new BadRequestException($e->getMessage());
         } catch (Exceptions\Parser $e) {
@@ -139,9 +140,9 @@ class Role extends RestController
                 $this->roleService->loadRole($roleId)
             );
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         } catch (UnauthorizedException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         } catch (LimitationValidationException $e) {
             throw new BadRequestException($e->getMessage());
         } catch (Exceptions\Parser $e) {

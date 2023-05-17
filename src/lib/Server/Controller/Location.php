@@ -17,6 +17,7 @@ use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
+use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -125,7 +126,7 @@ class Location extends RestController
         try {
             $createdLocation = $this->locationService->createLocation($contentInfo, $locationCreateStruct);
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
         return new Values\CreatedLocation(['restLocation' => new Values\RestLocation($createdLocation, 0)]);

@@ -20,6 +20,7 @@ use Ibexa\Rest\Server\Exceptions\ContentFieldValidationException as RESTContentF
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Rest\Server\Values\RestContentCreateStruct;
+use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
@@ -710,7 +711,7 @@ class Content extends RestController
         try {
             $destinationContentInfo = $this->repository->getContentService()->loadContentInfo($destinationContentId);
         } catch (NotFoundException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
         $existingRelations = $this->repository->getContentService()->loadRelations($versionInfo);

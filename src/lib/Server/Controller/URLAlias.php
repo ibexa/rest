@@ -13,6 +13,7 @@ use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
+use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -132,7 +133,7 @@ class URLAlias extends RestController
                     $urlAliasCreate['alwaysAvailable']
                 );
             } catch (InvalidArgumentException $e) {
-                throw new ForbiddenException($e->getMessage());
+                throw new ForbiddenException(/** @Ignore */ $e->getMessage());
             }
         } else {
             try {
@@ -144,7 +145,7 @@ class URLAlias extends RestController
                     $urlAliasCreate['alwaysAvailable']
                 );
             } catch (InvalidArgumentException $e) {
-                throw new ForbiddenException($e->getMessage());
+                throw new ForbiddenException(/** @Ignore */ $e->getMessage());
             }
         }
 
