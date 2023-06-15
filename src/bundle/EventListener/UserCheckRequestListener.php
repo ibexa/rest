@@ -13,6 +13,7 @@ use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Security;
@@ -61,13 +62,7 @@ final class UserCheckRequestListener implements EventSubscriberInterface, Logger
             throw new UnexpectedUserException('Expectation failed. User changed.', 401);
         }
 
-        if (method_exists($user, 'getUserIdentifier')) {
-            $identifier = $user->getUserIdentifier();
-        } else {
-            $identifier = $user->getUsername();
-        }
-
-        if ($expectedUserIdentifier !== $identifier) {
+        if ($expectedUserIdentifier !== $user->getUsername()) {
             throw new UnexpectedUserException('Expectation failed. User changed.', Response::HTTP_UNAUTHORIZED);
         }
     }
