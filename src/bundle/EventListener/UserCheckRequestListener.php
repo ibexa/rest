@@ -59,7 +59,7 @@ final class UserCheckRequestListener implements EventSubscriberInterface, Logger
 
         $user = $this->security->getUser();
         if ($user === null || $expectedUserIdentifier !== $user->getUsername()) {
-            throw new UnexpectedUserException('Expectation failed. User changed.', 401);
+            throw new UnexpectedUserException('Expectation failed. User changed.', Response::HTTP_UNAUTHORIZED);
         }
     }
 }
