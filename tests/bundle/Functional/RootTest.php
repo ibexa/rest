@@ -26,6 +26,29 @@ class RootTest extends RESTFunctionalTestCase
         return $response->getBody();
     }
 
+    public function testExpectedUser(): void
+    {
+        $request = $this->createHttpRequest('GET', '/api/ibexa/v2/');
+        $request = $request->withHeader('Accept', 'application/json');
+        $request = $request->withHeader('X-Expected-User', '');
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 200);
+
+        $request = $request->withHeader('X-Expected-User', 'admin');
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 200);
+
+        $request = $request->withHeader('X-Expected-User', 'foo');
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 401);
+        $responseArray = json_decode($response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+        self::assertArrayHasKey('ErrorMessage', $responseArray);
+        self::assertSame('Expectation failed. User changed.', $responseArray['ErrorMessage']['errorDescription']);
+    }
+
     /**
      * @dataProvider getRandomUriSet
      * Covers GET /<wrongUri>
