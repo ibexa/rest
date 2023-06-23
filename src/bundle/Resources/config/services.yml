@@ -214,6 +214,16 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    Ibexa\Bundle\Rest\EventListener\UserCheckRequestListener:
+        arguments:
+            $permissionResolver: '@Ibexa\Contracts\Core\Repository\PermissionResolver'
+            $security: '@security.helper'
+        calls:
+            - [setLogger, ['@logger']]
+        tags:
+            - { name: kernel.event_subscriber }
+            - { name: monolog.logger, channel: request }
+
     Ibexa\Rest\Server\Controller\Options:
         parent: Ibexa\Rest\Server\Controller
         tags: [controller.service_arguments]
