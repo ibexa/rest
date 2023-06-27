@@ -197,12 +197,10 @@ abstract class Generator
     }
 
     /**
-     * Start value element.
-     *
-     * @param string $name
-     * @param string $value
+     * @phpstan-param scalar $value
+     * @phpstan-param array<string, scalar> $attributes
      */
-    abstract public function startValueElement($name, $value);
+    abstract public function startValueElement(string $name, $value, array $attributes = []): void;
 
     /**
      * Check start value element.

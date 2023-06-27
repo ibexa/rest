@@ -154,14 +154,7 @@ class Xml extends Generator
         $this->xmlWriter->endElement();
     }
 
-    /**
-     * Start value element.
-     *
-     * @param string $name
-     * @param string $value
-     * @param array $attributes
-     */
-    public function startValueElement($name, $value, $attributes = [])
+    public function startValueElement(string $name, $value, array $attributes = []): void
     {
         $this->checkStartValueElement($name);
 
