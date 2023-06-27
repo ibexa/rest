@@ -188,23 +188,75 @@ abstract class GeneratorTest extends TestCase
 
     abstract protected function assertSnapshot(string $snapshotName, string $generatedContent): void;
 
-    public function testStartValueElementWithAttributes(): void
+    /**
+     * @dataProvider getDataForTestStartValueElementWithAttributes
+     *
+     * @phpstan-param scalar|null $elementValue
+     * @phpstan-param array<string, scalar|null> $attributes
+     */
+    public function testStartValueElementWithAttributes($elementValue, array $attributes): void
     {
         $generator = $this->getGenerator();
         $generator->startDocument('test');
         $generator->startObjectElement('Element');
         $generator->startValueElement(
             'element',
-            'value',
-            [
-                'attribute1' => 'attribute_value1',
-                'attribute2' => 'attribute_value2',
-            ]
+            $elementValue,
+            $attributes
         );
         $generator->endValueElement('element');
         $generator->endObjectElement('Element');
 
-        static::assertSnapshot(__FUNCTION__, $generator->endDocument('test'));
+        static::assertSnapshot(__FUNCTION__ . '/' . $this->dataName(), $generator->endDocument('test'));
+    }
+
+    /**
+     * @return iterable<string, array{scalar|null, array<string, scalar|null>}>
+     */
+    public function getDataForTestStartValueElementWithAttributes(): iterable
+    {
+        // data set name corresponds to the file names located in
+        // ./tests/lib/Output/Generator/_fixtures/testStartValueElementWithAttributes
+
+        yield 'strings' => [
+            'value',
+            [
+                'attribute1' => 'attribute_value1',
+                'attribute2' => 'attribute_value2',
+            ],
+        ];
+
+        yield 'booleans' => [
+            false,
+            [
+                'attribute1' => true,
+                'attribute2' => false,
+            ],
+        ];
+
+        yield 'integers' => [
+            1,
+            [
+                'attribute1' => 2,
+                'attribute2' => 3,
+            ],
+        ];
+
+        yield 'floats' => [
+            1.2,
+            [
+                'attribute1' => 2.3,
+                'attribute2' => 3.2,
+            ],
+        ];
+
+        yield 'null' => [
+            null,
+            [
+                'attribute1' => null,
+                'attribute2' => 'foo', // let's see if 1st null affects rendering
+            ],
+        ];
     }
 }
 
