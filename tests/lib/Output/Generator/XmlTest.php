@@ -241,6 +241,14 @@ class XmlTest extends GeneratorTest
         );
     }
 
+    public function assertSnapshot(string $snapshotName, string $generatedContent): void
+    {
+        self::assertXmlStringEqualsXmlFile(
+            sprintf('%s/_fixtures/%s.xml', __DIR__, $snapshotName),
+            $generatedContent
+        );
+    }
+
     public function testGetMediaType()
     {
         $generator = $this->getGenerator();

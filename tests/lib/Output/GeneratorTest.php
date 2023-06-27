@@ -185,6 +185,27 @@ abstract class GeneratorTest extends TestCase
 
         $this->assertFalse($generator->isEmpty());
     }
+
+    abstract protected function assertSnapshot(string $snapshotName, string $generatedContent): void;
+
+    public function testStartValueElementWithAttributes(): void
+    {
+        $generator = $this->getGenerator();
+        $generator->startDocument('test');
+        $generator->startObjectElement('Element');
+        $generator->startValueElement(
+            'element',
+            'value',
+            [
+                'attribute1' => 'attribute_value1',
+                'attribute2' => 'attribute_value2',
+            ]
+        );
+        $generator->endValueElement('element');
+        $generator->endObjectElement('Element');
+
+        static::assertSnapshot(__FUNCTION__, $generator->endDocument('test'));
+    }
 }
 
 class_alias(GeneratorTest::class, 'EzSystems\EzPlatformRest\Tests\Output\GeneratorTest');
