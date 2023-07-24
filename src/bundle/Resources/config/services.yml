@@ -6,6 +6,7 @@ parameters:
         - '(^application/vnd\.ibexa\.api\.[A-Za-z]+\+xml$)'
         - '(^application/xml$)'
         - '(^.*/.*$)'
+    ibexa.rest.path_prefix.pattern: !php/const \Ibexa\Bundle\Rest\UriParser\UriParser::DEFAULT_REST_PREFIX_PATTERN
 
 services:
     Ibexa\Bundle\Rest\Serializer\SerializerFactory:
@@ -44,6 +45,13 @@ services:
     Ibexa\Bundle\Rest\RequestParser\Router:
         arguments:
             - "@router"
+
+    Ibexa\Contracts\Rest\UriParser\UriParserInterface: '@Ibexa\Bundle\Rest\UriParser\UriParser'
+
+    Ibexa\Bundle\Rest\UriParser\UriParser:
+        arguments:
+            $urlMatcher: '@Symfony\Component\Routing\Matcher\UrlMatcherInterface'
+            $restPrefixPattern: '%ibexa.rest.path_prefix.pattern%'
 
     Ibexa\Rest\Input\ParserTools: ~
 
