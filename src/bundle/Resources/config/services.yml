@@ -202,6 +202,8 @@ services:
         tags: [controller.service_arguments]
 
     Ibexa\Bundle\Rest\EventListener\RequestListener:
+        arguments:
+            $uriParser: '@Ibexa\Contracts\Rest\UriParser\UriParserInterface'
         tags:
             - { name: kernel.event_subscriber }
 
