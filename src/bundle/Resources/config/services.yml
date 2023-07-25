@@ -44,7 +44,8 @@ services:
 
     Ibexa\Bundle\Rest\RequestParser\Router:
         arguments:
-            - "@router"
+            $router: '@router'
+            $uriParser: '@Ibexa\Contracts\Rest\UriParser\UriParserInterface'
 
     Ibexa\Contracts\Rest\UriParser\UriParserInterface: '@Ibexa\Bundle\Rest\UriParser\UriParser'
 
