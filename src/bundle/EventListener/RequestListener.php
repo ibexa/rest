@@ -6,24 +6,39 @@
  */
 namespace Ibexa\Bundle\Rest\EventListener;
 
+use Ibexa\Bundle\Rest\UriParser\UriParser;
+use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
+ * @internal
+ *
  * REST request listener.
  *
  * Flags a REST request as such using the is_rest_request attribute.
  */
 class RequestListener implements EventSubscriberInterface
 {
-    public const REST_PREFIX_PATTERN = '/^\/api\/[a-zA-Z0-9-_]+\/v\d+(\.\d+)?\//';
+    /**
+     * @deprecated rely on \Ibexa\Contracts\Rest\UriParser\UriParserInterface::isRestRequest instead.
+     * @see \Ibexa\Contracts\Rest\UriParser\UriParserInterface::isRestRequest()
+     */
+    public const REST_PREFIX_PATTERN = UriParser::DEFAULT_REST_PREFIX_PATTERN;
+
+    private UriParserInterface $uriParser;
+
+    public function __construct(UriParserInterface $uriParser)
+    {
+        $this->uriParser = $uriParser;
+    }
 
     /**
      * @return array
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             // 10001 is to ensure that REST requests are tagged before CorsListener is called
@@ -33,24 +48,22 @@ class RequestListener implements EventSubscriberInterface
 
     /**
      * If the request is a REST one, sets the is_rest_request request attribute.
-     *
-     * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
      */
-    public function onKernelRequest(RequestEvent $event)
+    public function onKernelRequest(RequestEvent $event): void
     {
-        $isRestRequest = true;
-
-        if (!$this->hasRestPrefix($event->getRequest())) {
-            $isRestRequest = false;
-        }
-
-        $event->getRequest()->attributes->set('is_rest_request', $isRestRequest);
+        $event->getRequest()->attributes->set(
+            'is_rest_request',
+            $this->uriParser->isRestRequest($event->getRequest())
+        );
     }
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return bool
+     *
+     * @deprecated use \Ibexa\Contracts\Rest\UriParser\UriParserInterface::isRestRequest instead
+     * @see \Ibexa\Contracts\Rest\UriParser\UriParserInterface::isRestRequest()
      */
     protected function hasRestPrefix(Request $request)
     {
