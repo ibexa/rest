@@ -34,7 +34,7 @@ jobs:
               run: composer run-script check-cs -- --format=checkstyle | cs2pr
 
     tests:
-        name: Unit tests
+        name: Unit & integration tests
         runs-on: "ubuntu-20.04"
         timeout-minutes: 15
 
@@ -66,6 +66,8 @@ jobs:
 
             - name: Run unit test suite
               run: composer test
+            - name: Run integration test suite
+              run: composer test-integration
     functional-tests:
         name: "REST functional tests"
         uses: ./.github/workflows/integration-tests-callable.yaml
