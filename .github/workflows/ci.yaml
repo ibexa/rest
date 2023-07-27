@@ -66,6 +66,6 @@ jobs:
 
             - name: Run unit test suite
               run: composer test
-    integration-tests:
-        name: "REST integration tests"
+    functional-tests:
+        name: "REST functional tests"
         uses: ./.github/workflows/integration-tests-callable.yaml

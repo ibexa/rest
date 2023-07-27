@@ -11,7 +11,7 @@ env:
     WEB_HOST: web
 
 jobs:
-    integration-tests-rest:
+    functional-tests-rest:
         runs-on: ubuntu-latest
         timeout-minutes: 15
 
@@ -51,4 +51,4 @@ jobs:
             - name: Run tests
               run: |
                 cd "$HOME/build/project"
-                docker-compose --env-file=.env exec -T --user www-data app sh -c "cd vendor/ibexa/rest && composer update && composer integration"
+                docker-compose --env-file=.env exec -T --user www-data app sh -c "cd vendor/ibexa/rest && composer update && composer test-functional"
