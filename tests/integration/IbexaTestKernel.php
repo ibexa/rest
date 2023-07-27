@@ -10,6 +10,7 @@ namespace Ibexa\Tests\Integration\Rest;
 
 use Hautelook\TemplatedUriBundle\HautelookTemplatedUriBundle;
 use Ibexa\Bundle\Rest\IbexaRestBundle;
+use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Ibexa\Contracts\Test\Core\IbexaTestKernel as CoreIbexaTestKernel;
 use Ibexa\Rest\Server\Controller\Root as RestRootController;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -41,6 +42,7 @@ final class IbexaTestKernel extends CoreIbexaTestKernel
     {
         yield from parent::getExposedServicesByClass();
         yield RestRootController::class;
+        yield UriParserInterface::class;
     }
 
     private static function loadRouting(ContainerBuilder $container): void
