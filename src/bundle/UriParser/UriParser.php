@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\Rest\UriParser;
 
-use Ibexa\Bundle\Rest\EventListener\RequestListener;
 use Ibexa\Contracts\Rest\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -91,7 +90,6 @@ final class UriParser implements UriParserInterface
 
     public function hasRestPrefix(string $uri): bool
     {
-        // this entire parser needs to be moved to ibexa/rest and RequestListener should use it instead
         return (bool)preg_match($this->restPrefixPattern, $uri);
     }
 }
