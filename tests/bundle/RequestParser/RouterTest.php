@@ -4,39 +4,39 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace Ibexa\Tests\Bundle\Rest\RequestParser;
 
 use Ibexa\Bundle\Rest\RequestParser\Router as RouterRequestParser;
+use Ibexa\Bundle\Rest\UriParser\UriParser;
 use Ibexa\Contracts\Rest\Exceptions\InvalidArgumentException;
+use Ibexa\Rest\RequestParser;
+use PHPUnit\Framework\MockObject\Builder\InvocationMocker;
+use PHPUnit\Framework\MockObject\Rule\InvokedCount as InvokedCountMatcher;
 use PHPUnit\Framework\TestCase;
-use Symfony\Cmf\Component\Routing\ChainRouter;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\RouterInterface;
 
-class RouterTest extends TestCase
+final class RouterTest extends TestCase
 {
-    /**
-     * @var \Symfony\Cmf\Component\Routing\ChainRouter
-     */
-    private $router;
+    private RouterInterface $router;
 
-    protected static $routePrefix = '/api/test/v1';
+    private static $routePrefix = '/api/test/v1';
 
-    public function testParse()
+    public function testParse(): void
     {
         $uri = self::$routePrefix . '/';
-        $request = Request::create($uri, 'GET');
 
         $expectedMatchResult = [
             '_route' => 'ibexa.rest.test_route',
             '_controller' => '',
         ];
 
-        $this->getRouterMock()
-            ->expects($this->once())
-            ->method('matchRequest')
-            ->willReturn($expectedMatchResult);
+        $this->getRouterInvocationMockerForMatchingUri($uri)
+             ->willReturn($expectedMatchResult)
+        ;
 
         self::assertEquals(
             $expectedMatchResult,
@@ -44,37 +44,36 @@ class RouterTest extends TestCase
         );
     }
 
-    public function testParseNoMatch()
+    public function testParseNoMatch(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('No route matched \'/api/test/v1/nomatch\'');
+        $exceptionMessage = 'No route matched \'/api/test/v1/nomatch\'';
+        $this->expectExceptionMessage($exceptionMessage);
 
         $uri = self::$routePrefix . '/nomatch';
 
-        $this->getRouterMock()
-            ->expects($this->once())
-            ->method('matchRequest')
-            ->will($this->throwException(new ResourceNotFoundException()));
+        $this->getRouterInvocationMockerForMatchingUri($uri)
+             ->willThrowException(new ResourceNotFoundException($exceptionMessage))
+        ;
 
         $this->getRequestParser()->parse($uri);
     }
 
-    public function testParseNoPrefix()
+    public function testParseNoPrefix(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('No route matched \'/no/prefix\'');
+        $exceptionMessage = 'No route matched \'/no/prefix\'';
+        $this->expectExceptionMessage($exceptionMessage);
 
         $uri = '/no/prefix';
 
-        $this->getRouterMock()
-            ->expects($this->once())
-            ->method('matchRequest')
-            ->will($this->throwException(new ResourceNotFoundException()));
+        // invalid prefix should cause internal url matcher not to be called
+        $this->getRouterInvocationMockerForMatchingUri($uri, self::never());
 
         $this->getRequestParser()->parse($uri);
     }
 
-    public function testParseHref()
+    public function testParseHref(): void
     {
         $href = '/api/test/v1/content/objects/1';
 
@@ -83,18 +82,19 @@ class RouterTest extends TestCase
             'contentId' => 1,
         ];
 
-        $this->getRouterMock()
-            ->expects($this->once())
-            ->method('matchRequest')
-            ->willReturn($expectedMatchResult);
+        $this->getRouterInvocationMockerForMatchingUri($href)
+             ->willReturn($expectedMatchResult)
+        ;
 
         self::assertEquals(1, $this->getRequestParser()->parseHref($href, 'contentId'));
     }
 
-    public function testParseHrefAttributeNotFound()
+    public function testParseHrefAttributeNotFound(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('No attribute \'badAttribute\' in route matched from /api/test/v1/content/no-attribute');
+        $this->expectExceptionMessage(
+            'No attribute \'badAttribute\' in route matched from /api/test/v1/content/no-attribute'
+        );
 
         $href = '/api/test/v1/content/no-attribute';
 
@@ -102,25 +102,25 @@ class RouterTest extends TestCase
             '_route' => 'ibexa.rest.test_parse_href_attribute_not_found',
         ];
 
-        $this->getRouterMock()
-            ->expects($this->once())
-            ->method('matchRequest')
-            ->willReturn($matchResult);
+        $this->getRouterInvocationMockerForMatchingUri($href)
+             ->willReturn($matchResult)
+        ;
 
         self::assertEquals(1, $this->getRequestParser()->parseHref($href, 'badAttribute'));
     }
 
-    public function testGenerate()
+    public function testGenerate(): void
     {
         $routeName = 'ibexa.rest.test_generate';
         $arguments = ['arg1' => 1];
 
         $expectedResult = self::$routePrefix . '/generate/' . $arguments['arg1'];
         $this->getRouterMock()
-            ->expects($this->once())
-            ->method('generate')
-            ->with($routeName, $arguments)
-            ->willReturn($expectedResult);
+             ->expects($this->once())
+             ->method('generate')
+             ->with($routeName, $arguments)
+             ->willReturn($expectedResult)
+        ;
 
         self::assertEquals(
             $expectedResult,
@@ -128,31 +128,42 @@ class RouterTest extends TestCase
         );
     }
 
-    /**
-     * @return \Ibexa\Bundle\Rest\RequestParser\Router
-     */
-    private function getRequestParser()
+    private function getRequestParser(): RequestParser
     {
+        $routerMock = $this->getRouterMock();
+
         return new RouterRequestParser(
-            $this->getRouterMock()
+            $routerMock,
+            new UriParser($routerMock)
         );
     }
 
     /**
-     * @return \Symfony\Cmf\Component\Routing\ChainRouter|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Symfony\Component\Routing\RouterInterface&\PHPUnit\Framework\MockObject\MockObject
      */
-    private function getRouterMock()
+    private function getRouterMock(): RouterInterface
     {
         if (!isset($this->router)) {
-            $this->router = $this->createMock(ChainRouter::class);
+            $this->router = $this->createMock(RouterInterface::class);
 
             $this->router
-                ->expects($this->any())
                 ->method('getContext')
-                ->willReturn(new RequestContext());
+                ->willReturn(new RequestContext())
+            ;
         }
 
         return $this->router;
+    }
+
+    private function getRouterInvocationMockerForMatchingUri(
+        string $uri,
+        ?InvokedCountMatcher $invokedCount = null
+    ): InvocationMocker {
+        return $this->getRouterMock()
+                    ->expects($invokedCount ?? self::once())
+                    ->method('match')
+                    ->with($uri)
+        ;
     }
 }
 
