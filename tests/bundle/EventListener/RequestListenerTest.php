@@ -61,7 +61,7 @@ final class RequestListenerTest extends EventListenerTest
     }
 
     /**
-     * @retirm array<array{string}>
+     * @return array<array{string}>
      */
     public static function nonRestRequestsUrisProvider(): array
     {
