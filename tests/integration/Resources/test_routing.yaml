@@ -1,0 +1,3 @@
+test.ibexa.rest:
+    resource: '@IbexaRestBundle/Resources/config/routing.yml'
+    prefix: '%ibexa.rest.path_prefix%'
