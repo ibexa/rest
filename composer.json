@@ -49,6 +49,7 @@
         "ibexa/ci-scripts": "^0.2@dev",
         "ibexa/doctrine-schema": "~4.5.0@dev",
         "ibexa/code-style": "^1.0",
+        "ibexa/test-core": "^0.1.x-dev",
         "friendsofphp/php-cs-fixer": "^3.0",
         "phpunit/phpunit": "^8.5",
         "matthiasnoback/symfony-dependency-injection-test": "^4.1",
@@ -68,7 +69,8 @@
         "fix-cs": "php-cs-fixer fix --config=.php-cs-fixer.php -v --show-progress=dots",
         "check-cs": "@fix-cs --dry-run",
         "test": "phpunit -c phpunit.xml",
-        "integration": "phpunit -c phpunit-integration-rest.xml"
+        "test-integration": "phpunit -c phpunit.integration.xml",
+        "test-functional": "phpunit -c phpunit.functional.xml"
     },
     "extra": {
         "branch-alias": {
