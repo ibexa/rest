@@ -16,7 +16,7 @@ use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class IbexaTestKernel extends CoreIbexaTestKernel
+final class IbexaTestKernel extends CoreIbexaTestKernel
 {
     public function registerBundles(): iterable
     {
