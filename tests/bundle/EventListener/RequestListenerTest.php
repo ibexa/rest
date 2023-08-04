@@ -7,18 +7,22 @@
 namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
 use Ibexa\Bundle\Rest\EventListener\RequestListener;
-use Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher;
+use Ibexa\Bundle\Rest\UriParser\UriParser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 
-class RequestListenerTest extends EventListenerTest
+final class RequestListenerTest extends EventListenerTest
 {
     public const REST_ROUTE = '/api/ibexa/v2/rest-route';
     public const NON_REST_ROUTE = '/non-rest-route';
 
-    public function provideExpectedSubscribedEventTypes()
+    /**
+     * @return array<array{array{string}}>
+     */
+    public function provideExpectedSubscribedEventTypes(): array
     {
         return [
             [
@@ -27,97 +31,69 @@ class RequestListenerTest extends EventListenerTest
         ];
     }
 
-    public static function restRequestUrisProvider()
+    /**
+     * @retirm array<array{string, bool}>
+     */
+    public static function getDataForTestOnKernelRequest(): array
     {
         return [
-            ['/api/ibexa/v2/true'],
-            ['/api/bundle-name/v2/true'],
-            ['/api/MyBundle12/v2/true'],
-            ['/api/ThisIs_Bundle123/v2/true'],
-            ['/api/my-bundle/v1/true'],
-            ['/api/my-bundle/v2/true'],
-            ['/api/my-bundle/v2.7/true'],
-            ['/api/my-bundle/v122.73/true'],
+            // REST requests
+            [self::REST_ROUTE, true],
+            ['/api/ibexa/v2/true', true],
+            ['/api/bundle-name/v2/true', true],
+            ['/api/MyBundle12/v2/true', true],
+            ['/api/ThisIs_Bundle123/v2/true', true],
+            ['/api/my-bundle/v1/true', true],
+            ['/api/my-bundle/v2/true', true],
+            ['/api/my-bundle/v2.7/true', true],
+            ['/api/my-bundle/v122.73/true', true],
+            // non-REST requests
+            [self::NON_REST_ROUTE, false],
+            ['/ap/ezp/v2/false', false],
+            ['/api/bundle name/v2/false', false],
+            ['/api/My/Bundle/v2/false', false],
+            ['/api//v2/false', false],
+            ['/api/my-bundle/v/false', false],
+            ['/api/my-bundle/v2-2/false', false],
+            ['/api/my-bundle/v2 7/false', false],
+            ['/api/my-bundle/v/7/false', false],
         ];
     }
 
-    public static function nonRestRequestsUrisProvider()
+    /**
+     * @return array<array{string}>
+     */
+    public static function nonRestRequestsUrisProvider(): array
     {
         return [
-            ['/ap/ezp/v2/false'],
-            ['/api/bundle name/v2/false'],
-            ['/api/My/Bundle/v2/false'],
-            ['/api//v2/false'],
-            ['/api/my-bundle/v/false'],
-            ['/api/my-bundle/v2-2/false'],
-            ['/api/my-bundle/v2 7/false'],
-            ['/api/my-bundle/v/7/false'],
         ];
     }
 
-    public function testOnKernelRequestNotMasterRequest()
+    public function testOnKernelRequestNotMasterRequest(): void
     {
         $request = $this->performFakeRequest(self::REST_ROUTE, HttpKernelInterface::SUB_REQUEST);
 
         self::assertTrue($request->attributes->get('is_rest_request'));
     }
 
-    public function testOnKernelRequestNotRestRequest()
-    {
-        $request = $this->performFakeRequest(self::NON_REST_ROUTE);
-
-        self::assertFalse($request->attributes->get('is_rest_request'));
-    }
-
-    public function testOnKernelRequestRestRequest()
-    {
-        $request = $this->performFakeRequest(self::REST_ROUTE);
-
-        self::assertTrue($request->attributes->get('is_rest_request'));
-    }
-
     /**
-     * @dataProvider restRequestUrisProvider
+     * @dataProvider getDataForTestOnKernelRequest
      */
-    public function testRestRequestVariations($uri)
+    public function testOnKernelRequest(string $uri, bool $isExpectedRestRequest): void
     {
         $request = $this->performFakeRequest($uri);
 
-        self::assertTrue($request->attributes->get('is_rest_request'));
+        self::assertSame($isExpectedRestRequest, $request->attributes->get('is_rest_request'));
     }
 
-    /**
-     * @dataProvider nonRestRequestsUrisProvider
-     */
-    public function testNonRestRequestVariations($uri)
-    {
-        $request = $this->performFakeRequest($uri);
-
-        self::assertFalse($request->attributes->get('is_rest_request'));
-    }
-
-    /**
-     * @return \Ibexa\Bundle\Rest\EventListener\RequestListener
-     */
-    protected function getEventListener()
+    protected function getEventListener(): RequestListener
     {
         return new RequestListener(
-            $this->getVisitorDispatcherMock()
+            new UriParser($this->createMock(UrlMatcherInterface::class))
         );
     }
 
-    /**
-     * @return \Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher|\PHPUnit\Framework\MockObject\MockObject
-     */
-    public function getVisitorDispatcherMock()
-    {
-        return $this->createMock(AcceptHeaderVisitorDispatcher::class);
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
-    protected function performFakeRequest($uri, $type = HttpKernelInterface::MASTER_REQUEST)
+    protected function performFakeRequest(string $uri, int $type = HttpKernelInterface::MAIN_REQUEST): Request
     {
         $event = new RequestEvent(
             $this->createMock(HttpKernelInterface::class),
