@@ -95,35 +95,50 @@ XML;
         );
 
         yield $template(self::CRITERION_LOCATION_DEPTH, self::OPERATOR_EQUALITY, self::FORMAT_XML) => [
-            file_get_contents(__DIR__ . '/_input/search/LocationDepth.eq.xml'),
+            $this->loadFile(__DIR__ . '/_input/search/LocationDepth.eq.xml'),
             self::FORMAT_XML,
         ];
 
         yield $template(self::CRITERION_LOCATION_DEPTH, self::OPERATOR_EQUALITY, self::FORMAT_JSON) => [
-            file_get_contents(__DIR__ . '/_input/search/LocationDepth.eq.json'),
+            $this->loadFile(__DIR__ . '/_input/search/LocationDepth.eq.json'),
             self::FORMAT_JSON,
         ];
 
         yield $template(self::CRITERION_LOCATION_DEPTH, self::OPERATOR_IN, self::FORMAT_XML) => [
-            file_get_contents(__DIR__ . '/_input/search/LocationDepth.in.xml'),
+            $this->loadFile(__DIR__ . '/_input/search/LocationDepth.in.xml'),
             self::FORMAT_XML,
         ];
 
         yield $template(self::CRITERION_LOCATION_DEPTH, self::OPERATOR_IN, self::FORMAT_JSON) => [
-            file_get_contents(__DIR__ . '/_input/search/LocationDepth.in.json'),
+            $this->loadFile(__DIR__ . '/_input/search/LocationDepth.in.json'),
             self::FORMAT_JSON,
         ];
 
         yield $template(self::CRITERION_IS_MAIN_LOCATION, self::OPERATOR_EQUALITY, self::FORMAT_XML) => [
-            file_get_contents(__DIR__ . '/_input/search/IsMainLocation.xml'),
+            $this->loadFile(__DIR__ . '/_input/search/IsMainLocation.xml'),
             self::FORMAT_XML,
         ];
 
         yield $template(self::CRITERION_IS_MAIN_LOCATION, self::OPERATOR_EQUALITY, self::FORMAT_JSON) => [
-            file_get_contents(__DIR__ . '/_input/search/IsMainLocation.json'),
+            $this->loadFile(__DIR__ . '/_input/search/IsMainLocation.json'),
             self::FORMAT_JSON,
         ];
     }
+
+    private function loadFile(string $filepath): string
+    {
+        $data = file_get_contents($filepath);
+
+        if ($data === false) {
+            throw new \RuntimeException(sprintf(
+                'Unable to get contents for file: "%s". Ensure it exists and is readable.',
+                $filepath,
+            ));
+        }
+
+        return $data;
+    }
+
 
     /**
      * Covers POST /views.

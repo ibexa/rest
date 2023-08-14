@@ -286,11 +286,6 @@ parameters:
 			path: src/contracts/Input/Handler.php
 
 		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Input\\\\Parser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/contracts/Input/Parser.php
-
-		-
 			message: "#^Cannot access offset mixed on Ibexa\\\\Contracts\\\\Rest\\\\Input\\\\Parser\\.$#"
 			count: 2
 			path: src/contracts/Input/ParsingDispatcher.php
@@ -2166,29 +2161,14 @@ parameters:
 			path: src/lib/Server/Input/Parser/Aggregation/AbstractRangeAggregationParser.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\AbstractRangeAggregationParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Aggregation/AbstractRangeAggregationParser.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\AbstractRangeAggregationParser\\:\\:parseAggregation\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Aggregation/AbstractRangeAggregationParser.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\AbstractStatsAggregationParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Aggregation/AbstractStatsAggregationParser.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\AbstractStatsAggregationParser\\:\\:parseAggregation\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Aggregation/AbstractStatsAggregationParser.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\AbstractTermAggregationParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Aggregation/AbstractTermAggregationParser.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\AbstractTermAggregationParser\\:\\:parseAggregation\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
@@ -2289,11 +2269,6 @@ parameters:
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\ObjectStateTermAggregationParser\\:\\:parseAggregation\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Aggregation/ObjectStateTermAggregationParser.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\Range\\\\AbstractRangeParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Aggregation/Range/AbstractRangeParser.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\Range\\\\AbstractRangeParser\\:\\:visitRangeValue\\(\\) has no return type specified\\.$#"
@@ -2466,16 +2441,6 @@ parameters:
 			path: src/lib/Server/Input/Parser/Criterion/FullText.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\IsUserBased\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/IsUserBased.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\IsUserEnabled\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/IsUserEnabled.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\LanguageCode\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion/LanguageCode.php
@@ -2546,11 +2511,6 @@ parameters:
 			path: src/lib/Server/Input/Parser/Criterion/ObjectStateId.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\ObjectStateIdentifier\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/ObjectStateIdentifier.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\Operator\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion/Operator.php
@@ -2576,39 +2536,14 @@ parameters:
 			path: src/lib/Server/Input/Parser/Criterion/SectionId.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\SectionIdentifier\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/SectionIdentifier.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\Sibling\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/Sibling.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\Subtree\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion/Subtree.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\UserEmail\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/UserEmail.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\UserId\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/UserId.php
-
-		-
 			message: "#^Parameter \\#1 \\$value of class Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\Criterion\\\\UserId constructor expects array\\<int\\>\\|int, array\\<int, string\\> given\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion/UserId.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\UserLogin\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/UserLogin.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\UserMetadata\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
@@ -2679,11 +2614,6 @@ parameters:
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FieldDefinitionUpdate\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/FieldDefinitionUpdate.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\JWTInput\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/JWTInput.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Limitation\\\\PathStringRouteBasedLimitationParser\\:\\:parseIdFromHref\\(\\) has parameter \\$limitationValue with no type specified\\.$#"
@@ -6674,16 +6604,6 @@ parameters:
 			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 2
 			path: tests/bundle/Functional/UserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\ViewTest\\:\\:testViewRequestWithAndStatement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/bundle/Functional/ViewTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\ViewTest\\:\\:testViewRequestWithOrStatement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/bundle/Functional/ViewTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\RequestParser\\\\RouterTest\\:\\:getRouterMock\\(\\) should return PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\Routing\\\\RouterInterface but returns Symfony\\\\Component\\\\Routing\\\\RouterInterface\\.$#"
