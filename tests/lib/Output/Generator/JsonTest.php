@@ -208,7 +208,6 @@ class JsonTest extends GeneratorTest
 
         $generator->startHashElement('elements');
 
-        \Phpstan\dumpType($generator);
         $generator->startValueElement('element', 'element value 1', ['attribute' => 'attribute value 1']);
         $generator->endValueElement('element');
 
