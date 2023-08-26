@@ -89,7 +89,7 @@ class Section extends RestController
                 )
             );
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
         return new Values\CreatedSection(
@@ -135,7 +135,7 @@ class Section extends RestController
                 $this->mapToUpdateStruct($createStruct)
             );
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
     }
 

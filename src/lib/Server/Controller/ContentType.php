@@ -21,6 +21,7 @@ use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
+use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -68,7 +69,7 @@ class ContentType extends RestController
                 ]
             );
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
     }
 
@@ -98,7 +99,7 @@ class ContentType extends RestController
 
             return $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId, Language::ALL);
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
     }
 
@@ -304,7 +305,7 @@ class ContentType extends RestController
                 [$contentTypeGroup]
             );
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         } catch (ContentTypeValidationException $e) {
             throw new BadRequestException($e->getMessage());
         } catch (ContentTypeFieldDefinitionValidationException $e) {
@@ -378,7 +379,7 @@ class ContentType extends RestController
                 $contentType
             );
         } catch (BadStateException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
         $contentTypeUpdateStruct = $this->inputDispatcher->parse(
@@ -396,7 +397,7 @@ class ContentType extends RestController
                 $contentTypeUpdateStruct
             );
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
         return new Values\CreatedContentType(
@@ -455,7 +456,7 @@ class ContentType extends RestController
                 $contentTypeUpdateStruct
             );
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
         return new Values\RestContentType(
@@ -494,11 +495,11 @@ class ContentType extends RestController
                 $fieldDefinitionCreate
             );
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         } catch (ContentTypeFieldDefinitionValidationException $e) {
             throw new BadRequestException($e->getMessage());
         } catch (BadStateException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
         $updatedDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
@@ -678,7 +679,7 @@ class ContentType extends RestController
                 $fieldDefinitionUpdate
             );
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
         $updatedDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
@@ -768,7 +769,7 @@ class ContentType extends RestController
         try {
             $this->contentTypeService->deleteContentType($contentType);
         } catch (BadStateException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
         return new Values\NoContent();

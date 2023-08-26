@@ -26,6 +26,7 @@ use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
+use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -304,7 +305,7 @@ class User extends RestController
         try {
             $createdUser = $this->userService->createUser($userCreateStruct, [$userGroup]);
         } catch (ApiExceptions\InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
         $createdContentInfo = $createdUser->getVersionInfo()->getContentInfo();

@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Core\Repository\Values\Translation;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\Visitor;
+use JMS\TranslationBundle\Annotation\Ignore;
 
 /**
  * ContentFieldValidationException value object visitor.
@@ -60,6 +61,7 @@ class ContentFieldValidationException extends BadRequestException
                     $generator->valueElement(
                         'message',
                         $this->translator->trans(
+                            /** @Ignore */
                             $this->translationToString($translation),
                             $translation->values,
                             'repository_exceptions'
