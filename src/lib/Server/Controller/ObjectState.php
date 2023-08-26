@@ -17,6 +17,7 @@ use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Rest\Values\ContentObjectStates;
 use Ibexa\Rest\Values\RestObjectState;
+use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -69,7 +70,7 @@ class ObjectState extends RestController
                 )
             );
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */$e->getMessage());
         }
 
         return new Values\CreatedObjectStateGroup(
@@ -103,7 +104,7 @@ class ObjectState extends RestController
                 )
             );
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
         return new Values\CreatedObjectState(
@@ -230,7 +231,7 @@ class ObjectState extends RestController
 
             return $updatedStateGroup;
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
     }
 
@@ -260,7 +261,7 @@ class ObjectState extends RestController
 
             return new RestObjectState($updatedObjectState, $objectStateGroupId);
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException($e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
     }
 
@@ -321,7 +322,10 @@ class ObjectState extends RestController
 
         foreach ($countByGroups as $groupId => $count) {
             if ($count > 1) {
-                throw new ForbiddenException("Multiple Object states provided for group with ID $groupId");
+                throw new ForbiddenException(
+                    /** @Ignore */
+                    "Multiple Object states provided for group with ID $groupId"
+                );
             }
         }
 

@@ -58,12 +58,29 @@ class IbexaRestExtension extends Extension implements PrependExtensionInterface
         }
 
         $this->prependRouterConfiguration($container);
+        $this->prependJMSTranslation($container);
     }
 
     private function prependRouterConfiguration(ContainerBuilder $container)
     {
         $config = ['router' => ['default_router' => ['non_siteaccess_aware_routes' => ['ibexa.rest.']]]];
         $container->prependExtensionConfig('ibexa', $config);
+    }
+
+    private function prependJMSTranslation(ContainerBuilder $container): void
+    {
+        $container->prependExtensionConfig('jms_translation', [
+            'configs' => [
+                'ibexa_rest' => [
+                    'dirs' => [
+                        __DIR__ . '/../../',
+                    ],
+                    'excluded_dirs' => ['Behat', 'Tests', 'node_modules', 'Features'],
+                    'output_dir' => __DIR__ . '/../Resources/translations/',
+                    'output_format' => 'xliff',
+                ],
+            ],
+        ]);
     }
 }
 

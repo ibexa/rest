@@ -14,6 +14,7 @@ use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
 use InvalidArgumentException;
+use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -147,7 +148,7 @@ class Trash extends RestController
             try {
                 $parentLocation = $this->locationService->loadLocation(array_pop($locationPathParts));
             } catch (NotFoundException $e) {
-                throw new ForbiddenException($e->getMessage());
+                throw new ForbiddenException(/** @Ignore */ $e->getMessage());
             }
         }
 
@@ -159,7 +160,7 @@ class Trash extends RestController
             try {
                 $this->locationService->loadLocation($trashItem->parentLocationId);
             } catch (NotFoundException $e) {
-                throw new ForbiddenException($e->getMessage());
+                throw new ForbiddenException(/** @Ignore */ $e->getMessage());
             }
         }
 
