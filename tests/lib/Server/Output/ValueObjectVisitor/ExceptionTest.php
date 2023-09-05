@@ -41,7 +41,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
     public function testVisitNonVerbose(): string
     {
         $this->getTranslatorMock()->method('trans')
-             ->with('non_verbose_error', [], 'repository_exceptions')
+             ->with('non_verbose_error', [], 'ibexa_repository_exceptions')
              ->willReturn(self::NON_VERBOSE_ERROR_DESCRIPTION);
 
         $visitor = $this->internalGetNonDebugVisitor();
