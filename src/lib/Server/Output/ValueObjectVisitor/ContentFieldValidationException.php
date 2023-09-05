@@ -64,7 +64,7 @@ class ContentFieldValidationException extends BadRequestException
                             /** @Ignore */
                             $this->translationToString($translation),
                             $translation->values,
-                            'repository_exceptions'
+                            'ibexa_repository_exceptions'
                         )
                     );
 

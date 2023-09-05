@@ -10,6 +10,8 @@ use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
 use Ibexa\Core\Base\Translatable;
+use JMS\TranslationBundle\Annotation\Desc;
+use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -114,12 +116,12 @@ class Exception extends ValueObjectVisitor
 
         if ($this->debug || $statusCode < 500) {
             $errorDescription = $data instanceof Translatable && $this->translator
-                ? /** @Ignore */ $this->translator->trans($data->getMessageTemplate(), $data->getParameters(), 'repository_exceptions')
+                ? /** @Ignore */ $this->translator->trans($data->getMessageTemplate(), $data->getParameters(), 'ibexa_repository_exceptions')
                 : $data->getMessage();
         } else {
             // Do not leak any file paths and sensitive data on production environments
             $errorDescription = $this->translator
-                ? /** @Desc("An error has occurred. Please try again later or contact your Administrator.") */ $this->translator->trans('non_verbose_error', [], 'repository_exceptions')
+                ? /** @Desc("An error has occurred. Please try again later or contact your Administrator.") */ $this->translator->trans('non_verbose_error', [], 'ibexa_repository_exceptions')
                 : 'An error has occurred. Please try again later or contact your Administrator.';
         }
 
