@@ -127,7 +127,7 @@ XML;
         self::assertHttpResponseHasHeader(
             $variationResponse,
             'content-type',
-            'application/vnd.ez.api.ContentImageVariation+json'
+            'application/vnd.ibexa.api.ContentImageVariation+json'
         );
     }
 }
