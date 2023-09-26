@@ -255,6 +255,11 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
             ]);
             $value = null;
         }
+
+        if (is_object($value)) {
+            return;
+        }
+
         $this->generateValue($writer, $value, $key, $elementName);
     }
 }
