@@ -219,6 +219,20 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         $this->assertSerializationSame(__FUNCTION__);
     }
 
+    public function testGenerateObjectUsingNormalizer(): void
+    {
+        $object = (object)[];
+        $this->getNormalizer()
+            ->expects(self::once())
+            ->method('normalize')
+            ->with(self::identicalTo($object))
+            ->willReturnArgument(0);
+
+        $this->getGenerator()->generateFieldTypeHash('fieldValue', $object);
+
+        $this->assertSerializationSame(__FUNCTION__);
+    }
+
     public function testGenerateWithMissingNormalizer(): void
     {
         $object = (object)[];
