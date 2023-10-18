@@ -814,3 +814,38 @@ services:
         arguments:
             - 'sectionId'
             - 'Ibexa\Contracts\Core\Repository\Values\User\Limitation\SectionLimitation'
+
+    Ibexa\Rest\Server\Input\Parser\Criterion\ImageMimeType:
+        parent: Ibexa\Rest\Server\Common\Parser
+        arguments:
+            $validator: '@validator'
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.ImageMimeType }
+
+    Ibexa\Rest\Server\Input\Parser\Criterion\ImageFileSize:
+        parent: Ibexa\Rest\Server\Common\Parser
+        arguments:
+            $validator: '@validator'
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.ImageFileSize }
+
+    Ibexa\Rest\Server\Input\Parser\Criterion\ImageOrientation:
+        parent: Ibexa\Rest\Server\Common\Parser
+        arguments:
+            $validator: '@validator'
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.ImageOrientation }
+
+    Ibexa\Rest\Server\Input\Parser\Criterion\ImageDimensions:
+        parent: Ibexa\Rest\Server\Common\Parser
+        arguments:
+            $validator: '@validator'
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.ImageDimensions }
+
+    Ibexa\Rest\Server\Input\Parser\Criterion\Image:
+        parent: Ibexa\Rest\Server\Common\Parser
+        arguments:
+            $validator: '@validator'
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.Image }
