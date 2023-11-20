@@ -17,7 +17,7 @@ use Ibexa\Contracts\Core\Repository\Values\User\Limitation\ParentDepthLimitation
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\ParentOwnerLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\ParentUserGroupLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SectionLimitation;
-use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SiteaccessLimitation;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SiteAccessLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\SubtreeLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\UserGroupLimitation;
 use Ibexa\Contracts\Rest\Exceptions;
