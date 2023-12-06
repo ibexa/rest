@@ -776,22 +776,12 @@ parameters:
 			path: src/lib/Message.php
 
 		-
-			message: "#^Cannot access property \\$fieldTypeIdentifier on Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\ContentType\\\\FieldDefinition\\|null\\.$#"
-			count: 1
-			path: src/lib/Output/FieldTypeSerializer.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\FieldTypeSerializer\\:\\:serializeFieldDefaultValue\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Output/FieldTypeSerializer.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\FieldTypeSerializer\\:\\:serializeFieldSettings\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/FieldTypeSerializer.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\FieldTypeSerializer\\:\\:serializeFieldValue\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Output/FieldTypeSerializer.php
 
@@ -3717,11 +3707,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\Version\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Version.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\Version\\:\\:visitField\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/Version.php
 
@@ -7332,11 +7317,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\FieldTypeSerializerTest\\:\\:testSerializeFieldSettingsWithPostProcessing\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/FieldTypeSerializerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\FieldTypeSerializerTest\\:\\:testSerializeFieldValue\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/Output/FieldTypeSerializerTest.php
 
