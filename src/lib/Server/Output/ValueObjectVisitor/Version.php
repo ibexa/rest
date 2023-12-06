@@ -6,9 +6,7 @@
  */
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 use Ibexa\Contracts\Core\Repository\Values\Content\Thumbnail;
-use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
@@ -57,44 +55,11 @@ class Version extends ValueObjectVisitor
         $generator->endObjectElement('Version');
     }
 
-    /**
-     * Visits a single content field and generates its content.
-     *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Field $field
-     */
-    public function visitField(Generator $generator, ContentType $contentType, Field $field)
-    {
-        $generator->startHashElement('field');
-
-        $generator->startValueElement('id', $field->id);
-        $generator->endValueElement('id');
-
-        $generator->startValueElement('fieldDefinitionIdentifier', $field->fieldDefIdentifier);
-        $generator->endValueElement('fieldDefinitionIdentifier');
-
-        $generator->startValueElement('languageCode', $field->languageCode);
-        $generator->endValueElement('languageCode');
-
-        $generator->startValueElement('fieldTypeIdentifier', $field->fieldTypeIdentifier);
-        $generator->endValueElement('fieldTypeIdentifier');
-
-        $this->fieldTypeSerializer->serializeFieldValue(
-            $generator,
-            $contentType,
-            $field
-        );
-
-        $generator->endHashElement('field');
-    }
-
     protected function visitVersionAttributes(Visitor $visitor, Generator $generator, VersionValue $data)
     {
         $content = $data->content;
 
         $versionInfo = $content->getVersionInfo();
-        $contentType = $data->contentType;
 
         $path = $data->path;
         if ($path == null) {
@@ -115,7 +80,7 @@ class Version extends ValueObjectVisitor
         $generator->startHashElement('Fields');
         $generator->startList('field');
         foreach ($content->getFields() as $field) {
-            $this->visitField($generator, $contentType, $field);
+            $visitor->visitValueObject($field);
         }
         $generator->endList('field');
         $generator->endHashElement('Fields');

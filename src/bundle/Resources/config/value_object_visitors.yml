@@ -407,6 +407,12 @@ services:
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\CreatedFieldDefinition }
 
+    Ibexa\Rest\Server\Output\ValueObjectVisitor\Field:
+        parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
+        arguments: [ '@Ibexa\Rest\Output\FieldTypeSerializer' ]
+        tags:
+            - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Values\Content\Field }
+
     Ibexa\Rest\Server\Output\ValueObjectVisitor\RestFieldDefinition:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
         class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestFieldDefinition
