@@ -41,21 +41,28 @@ class FieldTypeSerializer
     }
 
     /**
-     * Serializes the field value of $field through $generator.
+     * @deprecated 4.6.0 The "FieldTypeSerializer::serializeFieldValue()" method is deprecated, will be removed in 5.0.
+     * Use "FieldTypeSerializer::serializeContentFieldValue()" instead.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Field $field
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
-    public function serializeFieldValue(Generator $generator, ContentType $contentType, Field $field)
+    public function serializeFieldValue(Generator $generator, ContentType $contentType, Field $field): void
+    {
+        $this->serializeContentFieldValue($generator, $field);
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     */
+    public function serializeContentFieldValue(Generator $generator, Field $field): void
     {
         $this->serializeValue(
             'fieldValue',
             $generator,
             $this->fieldTypeService->getFieldType(
-                $contentType->getFieldDefinition($field->fieldDefIdentifier)->fieldTypeIdentifier
+                $field->getFieldTypeIdentifier()
             ),
-            $field->value
+            $field->getValue()
         );
     }
 
