@@ -7291,47 +7291,7 @@ parameters:
 			path: tests/lib/Output/FieldTypeSerializerTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\FieldTypeSerializerTest\\:\\:getFieldTypeSerializer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/FieldTypeSerializerTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\FieldTypeSerializerTest\\:\\:getFieldTypeServiceMock\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/FieldTypeSerializerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\FieldTypeSerializerTest\\:\\:getGeneratorMock\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/FieldTypeSerializerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\FieldTypeSerializerTest\\:\\:testSerializeFieldDefaultValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/FieldTypeSerializerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\FieldTypeSerializerTest\\:\\:testSerializeFieldSettings\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/FieldTypeSerializerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\FieldTypeSerializerTest\\:\\:testSerializeFieldSettingsWithPostProcessing\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/FieldTypeSerializerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\FieldTypeSerializerTest\\:\\:testSerializeFieldValueWithProcessor\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/FieldTypeSerializerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\FieldTypeSerializerTest\\:\\:testSerializeValidatorConfiguration\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/FieldTypeSerializerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\FieldTypeSerializerTest\\:\\:testSerializeValidatorConfigurationWithPostProcessing\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/Output/FieldTypeSerializerTest.php
 

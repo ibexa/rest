@@ -46,10 +46,10 @@ class FieldTypeSerializerTest extends TestCase
     ): void {
         $serializer = $this->getFieldTypeSerializer();
 
-        $this->getFieldTypeServiceMock()
-            ->method('getFieldType')
-            ->with($this->equalTo('myFancyFieldType'))
-            ->willReturn($fieldType);
+        $this->mockFieldTypeServiceGetFieldType(
+            'myFancyFieldType',
+            $fieldType
+        );
 
         $serializer->serializeFieldValue(
             $this->mockGeneratorGenerateFieldTypeHash(
@@ -74,10 +74,10 @@ class FieldTypeSerializerTest extends TestCase
     ): void {
         $serializer = $this->getFieldTypeSerializer();
 
-        $this->getFieldTypeServiceMock()
-            ->method('getFieldType')
-            ->with($this->equalTo('myFancyFieldType'))
-            ->willReturn($fieldType);
+        $this->mockFieldTypeServiceGetFieldType(
+            'myFancyFieldType',
+            $fieldType
+        );
 
         $serializer->serializeContentFieldValue(
             $this->mockGeneratorGenerateFieldTypeHash(
@@ -106,7 +106,7 @@ class FieldTypeSerializerTest extends TestCase
         ];
     }
 
-    public function testSerializeFieldValueWithProcessor()
+    public function testSerializeFieldValueWithProcessor(): void
     {
         $serializer = $this->getFieldTypeSerializer();
 
@@ -127,14 +127,11 @@ class FieldTypeSerializerTest extends TestCase
             ->willReturn(['post-processed']);
 
         $fieldTypeMock = $this->getFieldTypeMock();
-        $this->getFieldTypeServiceMock()->expects($this->once())
-            ->method('getFieldType')
-            ->with($this->equalTo('myFancyFieldType'))
-            ->willReturnCallback(
-                static function () use ($fieldTypeMock) {
-                    return $fieldTypeMock;
-                }
-            );
+
+        $this->mockFieldTypeServiceGetFieldType(
+            'myFancyFieldType',
+            $fieldTypeMock
+        );
 
         $fieldTypeMock->expects($this->once())
             ->method('getFieldTypeIdentifier')
@@ -154,19 +151,15 @@ class FieldTypeSerializerTest extends TestCase
         );
     }
 
-    public function testSerializeFieldDefaultValue()
+    public function testSerializeFieldDefaultValue(): void
     {
         $serializer = $this->getFieldTypeSerializer();
 
         $fieldTypeMock = $this->getFieldTypeMock();
-        $this->getFieldTypeServiceMock()->expects($this->once())
-            ->method('getFieldType')
-            ->with($this->equalTo('myFancyFieldType'))
-            ->willReturnCallback(
-                static function () use ($fieldTypeMock) {
-                    return $fieldTypeMock;
-                }
-            );
+        $this->mockFieldTypeServiceGetFieldType(
+            'myFancyFieldType',
+            $fieldTypeMock
+        );
 
         $fieldTypeMock->expects($this->once())
             ->method('toHash')
@@ -183,19 +176,15 @@ class FieldTypeSerializerTest extends TestCase
         );
     }
 
-    public function testSerializeFieldSettings()
+    public function testSerializeFieldSettings(): void
     {
         $serializer = $this->getFieldTypeSerializer();
 
         $fieldTypeMock = $this->getFieldTypeMock();
-        $this->getFieldTypeServiceMock()->expects($this->once())
-            ->method('getFieldType')
-            ->with($this->equalTo('myFancyFieldType'))
-            ->willReturnCallback(
-                static function () use ($fieldTypeMock) {
-                    return $fieldTypeMock;
-                }
-            );
+        $this->mockFieldTypeServiceGetFieldType(
+            'myFancyFieldType',
+            $fieldTypeMock
+        );
 
         $fieldTypeMock->expects($this->once())
             ->method('fieldSettingsToHash')
@@ -212,7 +201,7 @@ class FieldTypeSerializerTest extends TestCase
         );
     }
 
-    public function testSerializeFieldSettingsWithPostProcessing()
+    public function testSerializeFieldSettingsWithPostProcessing(): void
     {
         $serializer = $this->getFieldTypeSerializer();
         $fieldTypeMock = $this->getFieldTypeMock();
@@ -237,14 +226,10 @@ class FieldTypeSerializerTest extends TestCase
             ->with($this->equalTo(['foo' => 'bar']))
             ->willReturn(['post-processed']);
 
-        $this->getFieldTypeServiceMock()->expects($this->once())
-            ->method('getFieldType')
-            ->with($this->equalTo('myFancyFieldType'))
-            ->willReturnCallback(
-                static function () use ($fieldTypeMock) {
-                    return $fieldTypeMock;
-                }
-            );
+        $this->mockFieldTypeServiceGetFieldType(
+            'myFancyFieldType',
+            $fieldTypeMock
+        );
 
         $fieldTypeMock->expects($this->once())
             ->method('fieldSettingsToHash')
@@ -261,19 +246,15 @@ class FieldTypeSerializerTest extends TestCase
         );
     }
 
-    public function testSerializeValidatorConfiguration()
+    public function testSerializeValidatorConfiguration(): void
     {
         $serializer = $this->getFieldTypeSerializer();
 
         $fieldTypeMock = $this->getFieldTypeMock();
-        $this->getFieldTypeServiceMock()->expects($this->once())
-            ->method('getFieldType')
-            ->with($this->equalTo('myFancyFieldType'))
-            ->willReturnCallback(
-                static function () use ($fieldTypeMock) {
-                    return $fieldTypeMock;
-                }
-            );
+        $this->mockFieldTypeServiceGetFieldType(
+            'myFancyFieldType',
+            $fieldTypeMock
+        );
 
         $fieldTypeMock->expects($this->once())
             ->method('validatorConfigurationToHash')
@@ -290,7 +271,7 @@ class FieldTypeSerializerTest extends TestCase
         );
     }
 
-    public function testSerializeValidatorConfigurationWithPostProcessing()
+    public function testSerializeValidatorConfigurationWithPostProcessing(): void
     {
         $serializer = $this->getFieldTypeSerializer();
         $fieldTypeMock = $this->getFieldTypeMock();
@@ -316,23 +297,10 @@ class FieldTypeSerializerTest extends TestCase
             ->willReturn(['post-processed']);
 
         $fieldTypeMock = $this->getFieldTypeMock();
-        $this->getFieldTypeServiceMock()->expects($this->once())
-            ->method('getFieldType')
-            ->with($this->equalTo('myFancyFieldType'))
-            ->willReturnCallback(
-                static function () use ($fieldTypeMock) {
-                    return $fieldTypeMock;
-                }
-            );
-
-        $this->getFieldTypeServiceMock()->expects($this->once())
-            ->method('getFieldType')
-            ->with($this->equalTo('myFancyFieldType'))
-            ->willReturnCallback(
-                static function () use ($fieldTypeMock) {
-                    return $fieldTypeMock;
-                }
-            );
+        $this->mockFieldTypeServiceGetFieldType(
+            'myFancyFieldType',
+            $fieldTypeMock
+        );
 
         $fieldTypeMock->expects($this->once())
             ->method('validatorConfigurationToHash')
@@ -349,7 +317,7 @@ class FieldTypeSerializerTest extends TestCase
         );
     }
 
-    protected function getFieldTypeSerializer()
+    protected function getFieldTypeSerializer(): FieldTypeSerializer
     {
         return new FieldTypeSerializer(
             $this->getFieldTypeServiceMock(),
@@ -400,15 +368,6 @@ class FieldTypeSerializerTest extends TestCase
         }
 
         return $this->fieldTypeMock;
-    }
-
-    protected function getGeneratorMock()
-    {
-        if (!isset($this->generatorMock)) {
-            $this->generatorMock = $this->createMock(Generator::class);
-        }
-
-        return $this->generatorMock;
     }
 
     /**
@@ -464,6 +423,16 @@ class FieldTypeSerializerTest extends TestCase
             ->willReturn($hashValue);
 
         return $fieldTypeMock;
+    }
+
+    private function mockFieldTypeServiceGetFieldType(
+        string $identifier,
+        APIFieldType $fieldType
+    ): void {
+        $this->getFieldTypeServiceMock()
+            ->method('getFieldType')
+            ->with($identifier)
+            ->willReturn($fieldType);
     }
 }
 
