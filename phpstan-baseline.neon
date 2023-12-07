@@ -4071,6 +4071,11 @@ parameters:
 			path: tests/bundle/DependencyInjection/Compiler/ValueObjectVisitorPassTest.php
 
 		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:expects\\(\\)\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
 			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:getCsrfProviderMock\\(\\) has invalid return type Symfony\\\\Component\\\\Form\\\\Extension\\\\Csrf\\\\CsrfProvider\\\\CsrfProviderInterface\\.$#"
 			count: 1
 			path: tests/bundle/EventListener/CsrfListenerTest.php
