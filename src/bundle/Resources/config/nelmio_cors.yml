@@ -5,4 +5,4 @@ paths:
         allow_origin: []
         allow_headers: [ "authorization", "accept", "content-type", "X-CSRF-Token", "destination", "x-siteaccess" ]
         expose_headers: true
-
+        allow_methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'DELETE']
