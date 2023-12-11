@@ -9,7 +9,6 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
-use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Core\Repository\Values;
 use Ibexa\Rest\Output\FieldTypeSerializer;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
@@ -74,17 +73,6 @@ class VersionTest extends ValueObjectVisitorBaseTest
             $this->getMockForAbstractClass(ContentType::class),
             []
         );
-
-        $this->fieldTypeSerializerMock->expects($this->exactly(2))
-            ->method('serializeFieldValue')
-            ->with(
-                $this->isInstanceOf(Generator::class),
-                $this->isInstanceOf(ContentType::class),
-                $this->isInstanceOf(Field::class)
-            );
-
-        $this->getVisitorMock()->expects($this->exactly(2))
-            ->method('visitValueObject');
 
         $this->addRouteExpectation(
             'ibexa.rest.load_content_in_version',
