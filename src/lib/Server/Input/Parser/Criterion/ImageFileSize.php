@@ -38,13 +38,8 @@ final class ImageFileSize extends BaseParser
         $this->validateInputArray($data);
 
         $sizeData = $data[self::IMAGE_FILE_SIZE_CRITERION][self::SIZE_KEY];
-        $minFileSize = isset($sizeData['min'])
-            ? (int) $sizeData['min']
-            : 0;
-
-        $maxFileSize = isset($sizeData['max'])
-            ? (int) $sizeData['max']
-            : null;
+        $minFileSize = $sizeData['min'] ?? 0;
+        $maxFileSize = $sizeData['max'] ?? null;
 
         return new ImageFileSizeCriterion(
             $data[self::IMAGE_FILE_SIZE_CRITERION][self::FIELD_DEF_IDENTIFIER_KEY],
