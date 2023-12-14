@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "View"
+  ],
+  "properties": {
+    "View": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "_media-type",
+        "_href",
+        "identifier",
+        "Query",
+        "Result"
+      ],
+      "properties": {
+        "_media-type": {
+          "type": "string"
+        },
+        "_href": {
+          "type": "string"
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "Query": {
+          "type": "object",
+          "properties": {
+            "_media-type": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "_media-type"
+          ]
+        },
+        "Result": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "_media-type",
+            "_href",
+            "count",
+            "time",
+            "timedOut",
+            "maxScore",
+            "searchHits",
+            "aggregations"
+          ],
+          "properties": {
+            "_media-type": {
+              "type": "string"
+            },
+            "_href": {
+              "type": "string"
+            },
+            "count": {
+              "type": "number"
+            },
+            "time": {
+              "type": "number"
+            },
+            "timedOut": {
+              "type": "boolean"
+            },
+            "maxScore": {
+              "oneOf": [
+                {
+                  "type": "number"
+                }, {
+                  "type": "null"
+                }
+              ]
+            },
+            "searchHits": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "searchHit"
+              ],
+              "properties": {
+                "searchHit": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "_media-type",
+                      "_score",
+                      "_index",
+                      "value"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "_media-type": {
+                        "type": "string"
+                      },
+                      "_score": {
+                        "type": "number"
+                      },
+                      "_index": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "object",
+                        "required": [
+                          "_media-type",
+                          "Content"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "_media-type": {
+                            "type": "string"
+                          },
+                          "Content": {
+                            "type": "object"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "aggregations": {
+              "type": "array"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "ViewInput": {
+    "identifier": "TitleView",
+    "Query": {
+      "LocationFilter": {
+        "LocationDepth": {
+          "Value": [1],
+          "Operator": "eq"
+        }
+      },
+      "limit": 10,
+      "offset": 0
+    }
+  }
+}
