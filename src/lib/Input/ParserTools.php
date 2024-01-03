@@ -131,7 +131,7 @@ class ParserTools
                 return Values\ContentType\ContentType::STATUS_MODIFIED;
         }
 
-        throw new \RuntimeException("Unknown Content Type status '{$contentTypeStatus}.'");
+        throw new \RuntimeException("Unknown Content type status '{$contentTypeStatus}.'");
     }
 
     /**

@@ -52,7 +52,7 @@ class Dispatcher
     }
 
     /**
-     * Adds another handler for the given Content Type.
+     * Adds another handler for the given Content type.
      *
      * @param string $type
      * @param \Ibexa\Contracts\Rest\Input\Handler $handler
