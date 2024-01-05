@@ -70,7 +70,7 @@ final class Image extends BaseParser
      *
      * @return array{
      *      mimeTypes?: string|array<string>,
-     *      size?: array{min?: int|null, max?: int|null},
+     *      size?: array{min?: numeric|null, max?: numeric|null},
      *      width?: array{min?: int|null, max?: int|null},
      *      height?: array{min?: int|null, max?: int|null},
      *      orientation?: string|array<string>,
