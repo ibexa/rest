@@ -238,7 +238,7 @@ class UserGroupCreateTest extends BaseTest
     public function testParseExceptionOnInvalidFieldDefinitionIdentifier()
     {
         $this->expectException(Parser::class);
-        $this->expectExceptionMessage('\'unknown\' is an invalid Field definition identifier for the \'some_class\' Content type in UserGroupCreate.');
+        $this->expectExceptionMessage('\'unknown\' is an invalid Field definition identifier for the \'some_class\' content type in UserGroupCreate.');
         $inputArray = [
             'ContentType' => [
                 '_href' => '/content/types/3',

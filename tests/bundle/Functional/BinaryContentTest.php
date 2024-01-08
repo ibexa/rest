@@ -165,7 +165,7 @@ XML;
 <ContentTypeCreate>
   <identifier>image_asset_ct</identifier>
   <names>
-    <value languageCode="eng-GB">Image Asset Content type</value>
+    <value languageCode="eng-GB">Image Asset content type</value>
   </names>
   <remoteId>image_asset_ct</remoteId>
   <urlAliasSchema>&lt;title&gt;</urlAliasSchema>

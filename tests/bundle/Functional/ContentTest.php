@@ -713,7 +713,7 @@ XML;
     /**
      * Create new Content Draft.
      *
-     * @param string $restContentTypeHref Content type REST resource link
+     * @param string $restContentTypeHref content type REST resource link
      * @param string $restParentLocationHref Parent Location REST resource link
      * @param string $restSectionHref Section REST resource link
      * @param string $restUserHref User REST resource link

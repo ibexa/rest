@@ -136,7 +136,7 @@ class UserCreate extends BaseParser
             $fieldDefinition = $userCreateStruct->contentType->getFieldDefinition($fieldData['fieldDefinitionIdentifier']);
             if (!$fieldDefinition) {
                 throw new Exceptions\Parser(
-                    "'{$fieldData['fieldDefinitionIdentifier']}' is an invalid Field definition identifier for the '{$userCreateStruct->contentType->identifier}' Content type in UserCreate."
+                    "'{$fieldData['fieldDefinitionIdentifier']}' is an invalid Field definition identifier for the '{$userCreateStruct->contentType->identifier}' content type in UserCreate."
                 );
             }
 

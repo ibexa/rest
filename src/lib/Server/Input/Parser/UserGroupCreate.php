@@ -104,7 +104,7 @@ class UserGroupCreate extends BaseParser
             $fieldDefinition = $userGroupCreateStruct->contentType->getFieldDefinition($fieldData['fieldDefinitionIdentifier']);
             if (!$fieldDefinition) {
                 throw new Exceptions\Parser(
-                    "'{$fieldData['fieldDefinitionIdentifier']}' is an invalid Field definition identifier for the '{$userGroupCreateStruct->contentType->identifier}' Content type in UserGroupCreate."
+                    "'{$fieldData['fieldDefinitionIdentifier']}' is an invalid Field definition identifier for the '{$userGroupCreateStruct->contentType->identifier}' content type in UserGroupCreate."
                 );
             }
 

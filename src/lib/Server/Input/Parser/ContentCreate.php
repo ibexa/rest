@@ -153,7 +153,7 @@ class ContentCreate extends BaseParser
             $fieldDefinition = $contentType->getFieldDefinition($fieldData['fieldDefinitionIdentifier']);
             if (!$fieldDefinition) {
                 throw new Exceptions\Parser(
-                    "'{$fieldData['fieldDefinitionIdentifier']}' is an invalid Field definition identifier for the '{$contentType->identifier}' Content type in ContentCreate."
+                    "'{$fieldData['fieldDefinitionIdentifier']}' is an invalid Field definition identifier for the '{$contentType->identifier}' content type in ContentCreate."
                 );
             }
 
