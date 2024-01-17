@@ -494,6 +494,13 @@ services:
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.Sibling }
 
+    Ibexa\Rest\Server\Input\Parser\Criterion\ContentName:
+        parent: Ibexa\Rest\Server\Common\Parser
+        arguments:
+            $validator: '@validator'
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.ContentName }
+
     ibexa.rest.input.parser.internal.sortclause.content_id:
         parent: Ibexa\Rest\Server\Common\Parser
         class: Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
