@@ -10,7 +10,7 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Value as RestValue;
 
 /**
- * REST Content type, as received by /content/types/<ID>.
+ * REST content type, as received by /content/types/<ID>.
  *
  * Might have a "FieldDefinitionList" embedded
  */

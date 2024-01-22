@@ -6,25 +6,25 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="6b5380565700746eb00dfa6b096b5db86d590589" resname="Cannot publish an empty Content Type draft">
-        <source>Cannot publish an empty Content Type draft</source>
-        <target state="new">Cannot publish an empty Content Type draft</target>
-        <note>key: Cannot publish an empty Content Type draft</note>
+      <trans-unit id="18a38f6c46cc84d27fa3d24cbd09aee62125be8d" resname="Cannot publish an empty content type draft">
+        <source>Cannot publish an empty content type draft</source>
+        <target state="new">Cannot publish an empty content type draft</target>
+        <note>key: Cannot publish an empty content type draft</note>
       </trans-unit>
-      <trans-unit id="05517432cfd855bfa4417139564c188c02654b4c" resname="Cannot unlink the Content Type from its only remaining group">
-        <source>Cannot unlink the Content Type from its only remaining group</source>
-        <target state="new">Cannot unlink the Content Type from its only remaining group</target>
-        <note>key: Cannot unlink the Content Type from its only remaining group</note>
+      <trans-unit id="8bfebd32a3304d378cf1219c4b25b1044d9dde34" resname="Cannot unlink the content type from its only remaining group">
+        <source>Cannot unlink the content type from its only remaining group</source>
+        <target state="new">Cannot unlink the content type from its only remaining group</target>
+        <note>key: Cannot unlink the content type from its only remaining group</note>
       </trans-unit>
       <trans-unit id="0b525944af0bdcb0dd04bcaa4a027212bffc9738" resname="Current version already has DRAFT status">
         <source>Current version already has DRAFT status</source>
         <target state="new">Current version already has DRAFT status</target>
         <note>key: Current version already has DRAFT status</note>
       </trans-unit>
-      <trans-unit id="3488686cd9f81f72d18993fefc0d4de7d17bc52b" resname="Only empty Content Type groups can be deleted">
-        <source>Only empty Content Type groups can be deleted</source>
-        <target state="new">Only empty Content Type groups can be deleted</target>
-        <note>key: Only empty Content Type groups can be deleted</note>
+      <trans-unit id="f915c78ee350c1b4fb3d3adac7584a12fcc0cfdf" resname="Only empty content type groups can be deleted">
+        <source>Only empty content type groups can be deleted</source>
+        <target state="new">Only empty content type groups can be deleted</target>
+        <note>key: Only empty content type groups can be deleted</note>
       </trans-unit>
       <trans-unit id="309f294f925bf5343de6ca4507a303bbc762090f" resname="Only versions with DRAFT status can be published">
         <source>Only versions with DRAFT status can be published</source>
@@ -56,10 +56,10 @@
         <target state="new">Relation of type COMMON to the selected destination content ID already exists</target>
         <note>key: Relation of type COMMON to the selected destination content ID already exists</note>
       </trans-unit>
-      <trans-unit id="fd9dfe52da409af010a267fa2ad0a70d077b73c4" resname="The Content Type is already linked to the provided group">
-        <source>The Content Type is already linked to the provided group</source>
-        <target state="new">The Content Type is already linked to the provided group</target>
-        <note>key: The Content Type is already linked to the provided group</note>
+      <trans-unit id="7d98c91ecfe4814f6268eb889de59ada9eec6a1d" resname="The content type is already linked to the provided group">
+        <source>The content type is already linked to the provided group</source>
+        <target state="new">The content type is already linked to the provided group</target>
+        <note>key: The content type is already linked to the provided group</note>
       </trans-unit>
       <trans-unit id="d71c63955373cbd73161528026feb878e5e042b8" resname="Translation can be deleted from a DRAFT version only">
         <source>Translation can be deleted from a DRAFT version only</source>

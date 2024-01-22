@@ -55,7 +55,7 @@ abstract class RestContentTypeBase extends ValueObjectVisitor
                 return 'MODIFIED';
         }
 
-        throw new \RuntimeException("Unknown Content Type status: '{$contentTypeStatus}'.");
+        throw new \RuntimeException("Unknown content type status: '{$contentTypeStatus}'.");
     }
 }
 
