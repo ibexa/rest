@@ -12,6 +12,16 @@ use Ibexa\Tests\Bundle\Rest\Functional\SearchView\SearchCriterionTestCase;
 
 final class IsContainerTest extends SearchCriterionTestCase
 {
+    /**
+     * @phpstan-return iterable<
+     *     string,
+     *     array{
+     *         string,
+     *         string,
+     *         int,
+     *     },
+     * >
+     */
     public function getCriteriaPayloads(): iterable
     {
         return [
