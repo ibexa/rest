@@ -20,7 +20,7 @@ final class FilterParser extends BaseParser
     /**
      * Parses input structure to a Query.
      *
-     * @param array $data
+     * @param array<mixed> $data
      * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
@@ -48,7 +48,7 @@ final class FilterParser extends BaseParser
     }
 
     /**
-     * @param array $criteriaArray
+     * @param array<string, array<mixed>> $criteriaArray
      * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion|null A criterion, or a LogicalAnd with a set of Criterion, or null if an empty array was given
@@ -91,7 +91,7 @@ final class FilterParser extends BaseParser
         }
     }
 
-    protected function getCriterionMediaType($criterionName)
+    protected function getCriterionMediaType(string $criterionName): string
     {
         return 'application/vnd.ibexa.api.internal.criterion.' . $criterionName;
     }
