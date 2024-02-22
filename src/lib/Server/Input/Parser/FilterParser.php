@@ -8,6 +8,7 @@ namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion as CriterionValue;
 use Ibexa\Contracts\Core\Repository\Values\Filter\Filter;
+use Ibexa\Contracts\Core\Repository\Values\Filter\FilteringCriterion;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -31,7 +32,11 @@ final class FilterParser extends BaseParser
     {
         $filter = new Filter();
         if (array_key_exists('criteria', $data) && is_array($data['criteria'])) {
-            $filter->andWithCriterion($this->processCriteriaArray($data['criteria'], $parsingDispatcher));
+            $criteria = $this->processCriteriaArray($data['criteria'], $parsingDispatcher);
+
+            if ($criteria instanceof FilteringCriterion) {
+                $filter->andWithCriterion($criteria);
+            }
         }
 
         // limit
