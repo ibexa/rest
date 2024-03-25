@@ -285,11 +285,6 @@ services:
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.ContentQuery }
 
-    Ibexa\Rest\Server\Input\Parser\FilterParser:
-        parent: Ibexa\Rest\Server\Common\Parser
-        tags:
-            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.Filter }
-
     Ibexa\Rest\Server\Input\Parser\LocationQuery:
         parent: Ibexa\Rest\Server\Common\Parser
         class: Ibexa\Rest\Server\Input\Parser\LocationQuery
