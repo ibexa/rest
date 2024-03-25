@@ -26,10 +26,10 @@ class IsContainer extends BaseParser
 
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): IsContainerCriterion
     {
-        if (!array_key_exists('IsContainer', $data)) {
+        if (!array_key_exists('IsContainerCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <IsContainer> format');
         }
 
-        return new IsContainerCriterion($this->parserTools->parseBooleanValue($data['IsContainer']));
+        return new IsContainerCriterion($this->parserTools->parseBooleanValue($data['IsContainerCriterion']));
     }
 }
