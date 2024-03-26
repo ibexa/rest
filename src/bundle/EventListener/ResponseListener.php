@@ -6,6 +6,8 @@
  */
 namespace Ibexa\Bundle\Rest\EventListener;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\Exception as RepositoryException;
+use Ibexa\Rest\Exception\Converter\RepositoryExceptionConverterInterface;
 use Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -31,12 +33,17 @@ class ResponseListener implements EventSubscriberInterface, LoggerAwareInterface
      */
     private $viewDispatcher;
 
+    private RepositoryExceptionConverterInterface $repositoryExceptionConverter;
+
     /**
      * @param $viewDispatcher AcceptHeaderVisitorDispatcher
      */
-    public function __construct(AcceptHeaderVisitorDispatcher $viewDispatcher)
-    {
+    public function __construct(
+        AcceptHeaderVisitorDispatcher $viewDispatcher,
+        RepositoryExceptionConverterInterface $repositoryExceptionConverter
+    ) {
         $this->viewDispatcher = $viewDispatcher;
+        $this->repositoryExceptionConverter = $repositoryExceptionConverter;
     }
 
     /**
@@ -74,7 +81,7 @@ class ResponseListener implements EventSubscriberInterface, LoggerAwareInterface
      *
      * @throws \Exception
      */
-    public function onKernelExceptionView(ExceptionEvent $event)
+    public function onKernelExceptionView(ExceptionEvent $event): void
     {
         if (!$event->getRequest()->attributes->get('is_rest_request')) {
             return;
@@ -86,7 +93,9 @@ class ResponseListener implements EventSubscriberInterface, LoggerAwareInterface
         $event->setResponse(
             $this->viewDispatcher->dispatch(
                 $event->getRequest(),
-                $exception
+                $exception instanceof RepositoryException
+                    ? $this->repositoryExceptionConverter->convert($exception)
+                    : $exception
             )
         );
     }
