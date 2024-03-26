@@ -24,6 +24,9 @@ class IsContainer extends BaseParser
         $this->parserTools = $parserTools;
     }
 
+    /**
+     * @param array<mixed> $data
+     */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): IsContainerCriterion
     {
         if (!array_key_exists('IsContainerCriterion', $data)) {
