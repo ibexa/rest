@@ -81,11 +81,6 @@ parameters:
 			path: src/bundle/DependencyInjection/IbexaRestExtension.php
 
 		-
-			message: "#^Parameter \\#1 \\$configuration of method Symfony\\\\Component\\\\DependencyInjection\\\\Extension\\\\Extension\\:\\:processConfiguration\\(\\) expects Symfony\\\\Component\\\\Config\\\\Definition\\\\ConfigurationInterface, Symfony\\\\Component\\\\Config\\\\Definition\\\\ConfigurationInterface\\|null given\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/IbexaRestExtension.php
-
-		-
 			message: "#^Parameter \\#1 \\$input of static method Symfony\\\\Component\\\\Yaml\\\\Yaml\\:\\:parse\\(\\) expects string, string\\|false given\\.$#"
 			count: 1
 			path: src/bundle/DependencyInjection/IbexaRestExtension.php
@@ -701,7 +696,7 @@ parameters:
 			path: src/lib/Input/Handler/Xml.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Input\\\\Handler\\\\Xml\\:\\:convertDom\\(\\) should return array but returns array\\<int\\|string, mixed\\>\\|string\\.$#"
+			message: "#^Method Ibexa\\\\Rest\\\\Input\\\\Handler\\\\Xml\\:\\:convertDom\\(\\) should return array but returns array\\|string\\.$#"
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
 
