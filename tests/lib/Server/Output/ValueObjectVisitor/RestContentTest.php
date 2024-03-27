@@ -114,7 +114,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
                 [
                     'id' => 'content23',
                     'name' => 'Sindelfingen',
-                    'sectionId' => 'section23',
+                    'sectionId' => 23,
                     'currentVersionNo' => 5,
                     'published' => true,
                     'ownerId' => 'user23',
@@ -265,7 +265,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testSectionHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content/Section[@href="/content/sections/section23"]');
+        $this->assertXPath($dom, '/Content/Section[@href="/content/sections/23"]');
     }
 
     /**
