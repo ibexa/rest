@@ -125,7 +125,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
                     'remoteId' => 'abc123',
                     'mainLanguageCode' => 'eng-US',
                     'mainLocationId' => 25,
-                    'contentTypeId' => 'contentType23',
+                    'contentTypeId' => 26,
                     'isHidden' => true,
                 ]
             ),
@@ -185,7 +185,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testContentTypeHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content/ContentType[@href="/content/types/contentType23"]');
+        $this->assertXPath($dom, '/Content/ContentType[@href="/content/types/26"]');
     }
 
     /**

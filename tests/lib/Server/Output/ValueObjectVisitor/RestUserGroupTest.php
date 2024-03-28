@@ -122,7 +122,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
                     'remoteId' => 'abc123',
                     'mainLanguageCode' => 'eng-US',
                     'mainLocationId' => 25,
-                    'contentTypeId' => 'contentType23',
+                    'contentTypeId' => 26,
                 ]
             ),
             new Values\Content\Location(
@@ -182,7 +182,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testUserGroupTypeHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup/ContentType[@href="/content/types/contentType23"]');
+        $this->assertXPath($dom, '/UserGroup/ContentType[@href="/content/types/26"]');
     }
 
     /**
