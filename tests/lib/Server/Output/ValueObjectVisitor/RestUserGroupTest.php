@@ -115,7 +115,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
                     'sectionId' => 23,
                     'currentVersionNo' => 5,
                     'published' => true,
-                    'ownerId' => 'user23',
+                    'ownerId' => 24,
                     'modificationDate' => new \DateTime('2012-09-05 15:27 Europe/Berlin'),
                     'publishedDate' => new \DateTime('2012-09-05 15:27 Europe/Berlin'),
                     'alwaysAvailable' => true,
@@ -292,7 +292,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testOwnerHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup/Owner[@href="/user/users/user23"]');
+        $this->assertXPath($dom, '/UserGroup/Owner[@href="/user/users/24"]');
     }
 
     /**
