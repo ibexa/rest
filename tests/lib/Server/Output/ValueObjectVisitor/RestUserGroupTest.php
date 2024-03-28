@@ -121,7 +121,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
                     'alwaysAvailable' => true,
                     'remoteId' => 'abc123',
                     'mainLanguageCode' => 'eng-US',
-                    'mainLocationId' => 'location23',
+                    'mainLocationId' => 25,
                     'contentTypeId' => 'contentType23',
                 ]
             ),

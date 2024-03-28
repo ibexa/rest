@@ -124,7 +124,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
                     'status' => ContentInfo::STATUS_PUBLISHED,
                     'remoteId' => 'abc123',
                     'mainLanguageCode' => 'eng-US',
-                    'mainLocationId' => 'location23',
+                    'mainLocationId' => 25,
                     'contentTypeId' => 'contentType23',
                     'isHidden' => true,
                 ]
