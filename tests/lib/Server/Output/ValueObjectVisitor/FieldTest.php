@@ -8,8 +8,10 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
+use Ibexa\Contracts\Core\Repository\FieldType;
+use Ibexa\Contracts\Core\Repository\FieldTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field as ApiField;
-use Ibexa\Contracts\Rest\Output\Generator;
+use Ibexa\Rest\FieldTypeProcessorRegistry;
 use Ibexa\Rest\Output\FieldTypeSerializer;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\Field;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
@@ -19,14 +21,18 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
  */
 final class FieldTest extends ValueObjectVisitorBaseTest
 {
-    /** @var \Ibexa\Rest\Output\FieldTypeSerializer&\PHPUnit\Framework\MockObject\MockObject */
-    private FieldTypeSerializer $fieldTypeSerializer;
+    /** @var \Ibexa\Contracts\Core\Repository\FieldTypeService&\PHPUnit\Framework\MockObject\MockObject */
+    private FieldTypeService $fieldTypeService;
+
+    /** @var \Ibexa\Rest\FieldTypeProcessorRegistry&\PHPUnit\Framework\MockObject\MockObject */
+    private FieldTypeProcessorRegistry $fieldTypeProcessorRegistry;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->fieldTypeSerializer = $this->createMock(FieldTypeSerializer::class);
+        $this->fieldTypeService = $this->createMock(FieldTypeService::class);
+        $this->fieldTypeProcessorRegistry = $this->createMock(FieldTypeProcessorRegistry::class);
     }
 
     public function testVisit(): void
@@ -41,15 +47,11 @@ final class FieldTest extends ValueObjectVisitorBaseTest
                 'fieldDefIdentifier' => 'foo',
                 'value' => 'foo',
                 'languageCode' => 'eng-GB',
-                'fieldTypeIdentifier' => 'ezfoo',
+                'fieldTypeIdentifier' => 'foo_field_type',
             ]
         );
 
-        $this->mockFieldTypeSerializerSerializeContentFieldValue(
-            $generator,
-            $field,
-            '<value>foo</value>'
-        );
+        $this->mockSerializingFieldValue($field);
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -67,25 +69,24 @@ final class FieldTest extends ValueObjectVisitorBaseTest
         $this->assertContainsTag('fieldTypeIdentifier', $result);
     }
 
-    private function mockFieldTypeSerializerSerializeContentFieldValue(
-        Generator $generator,
-        ApiField $field,
-        string $value
-    ): void {
-        $this->fieldTypeSerializer
-            ->method('serializeContentFieldValue')
-            ->with(
-                $generator,
-                $field
-            )
-            ->willReturn($value);
+    private function mockSerializingFieldValue(ApiField $field): void
+    {
+        $fieldTypeMock = $this->createMock(FieldType::class);
+        $fieldTypeIdentifier = $field->getFieldTypeIdentifier();
+
+        $fieldTypeMock->method('getFieldTypeIdentifier')->willReturn($fieldTypeIdentifier);
+        $fieldTypeMock->method('toHash')->with('foo')->willReturn(['value' => 'foo']);
+
+        $this->fieldTypeProcessorRegistry->method('hasProcessor')->with($fieldTypeIdentifier)->willReturn(false);
+
+        $this->fieldTypeService->method('getFieldType')->with($fieldTypeIdentifier)->willReturn($fieldTypeMock);
     }
 
     private function assertContainsTag(
         string $tag,
         string $result
     ): void {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => $tag,
             ],
@@ -96,6 +97,11 @@ final class FieldTest extends ValueObjectVisitorBaseTest
 
     protected function internalGetVisitor(): Field
     {
-        return new Field($this->fieldTypeSerializer);
+        return new Field(
+            new FieldTypeSerializer(
+                $this->fieldTypeService,
+                $this->fieldTypeProcessorRegistry
+            )
+        );
     }
 }
