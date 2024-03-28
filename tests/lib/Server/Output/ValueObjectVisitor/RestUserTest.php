@@ -105,7 +105,7 @@ class RestUserTest extends ValueObjectVisitorBaseTest
             $this->getMockForAbstractClass(ContentType::class),
             new ContentInfo(
                 [
-                    'id' => 'content23',
+                    'id' => 22,
                     'name' => 'Sindelfingen',
                     'sectionId' => 23,
                     'currentVersionNo' => 5,
@@ -137,7 +137,7 @@ class RestUserTest extends ValueObjectVisitorBaseTest
      */
     public function testUserHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/User[@href="/user/users/content23"]');
+        $this->assertXPath($dom, '/User[@href="/user/users/22"]');
     }
 
     /**
@@ -147,7 +147,7 @@ class RestUserTest extends ValueObjectVisitorBaseTest
      */
     public function testUserIdCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/User[@id="content23"]');
+        $this->assertXPath($dom, '/User[@id="22"]');
     }
 
     /**
@@ -207,7 +207,7 @@ class RestUserTest extends ValueObjectVisitorBaseTest
      */
     public function testVersionsHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/User/Versions[@href="/content/objects/content23/versions"]');
+        $this->assertXPath($dom, '/User/Versions[@href="/content/objects/22/versions"]');
     }
 
     /**
@@ -267,7 +267,7 @@ class RestUserTest extends ValueObjectVisitorBaseTest
      */
     public function testLocationsHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/User/Locations[@href="/content/objects/content23/locations"]');
+        $this->assertXPath($dom, '/User/Locations[@href="/content/objects/22/locations"]');
     }
 
     /**
@@ -337,7 +337,7 @@ class RestUserTest extends ValueObjectVisitorBaseTest
      */
     public function testUserGroupsHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/User/UserGroups[@href="/user/users/content23/groups"]');
+        $this->assertXPath($dom, '/User/UserGroups[@href="/user/users/22/groups"]');
     }
 
     /**
@@ -357,7 +357,7 @@ class RestUserTest extends ValueObjectVisitorBaseTest
      */
     public function testRolesHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/User/Roles[@href="/user/users/content23/roles"]');
+        $this->assertXPath($dom, '/User/Roles[@href="/user/users/22/roles"]');
     }
 
     /**

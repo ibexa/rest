@@ -112,7 +112,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
         return new RestContent(
             new ContentInfo(
                 [
-                    'id' => 'content23',
+                    'id' => 22,
                     'name' => 'Sindelfingen',
                     'sectionId' => 23,
                     'currentVersionNo' => 5,
@@ -145,7 +145,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testContentHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content[@href="/content/objects/content23"]');
+        $this->assertXPath($dom, '/Content[@href="/content/objects/22"]');
     }
 
     /**
@@ -155,7 +155,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testContentIdCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content[@id="content23"]');
+        $this->assertXPath($dom, '/Content[@id="22"]');
     }
 
     /**
@@ -225,7 +225,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testVersionsHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content/Versions[@href="/content/objects/content23/versions"]');
+        $this->assertXPath($dom, '/Content/Versions[@href="/content/objects/22/versions"]');
     }
 
     /**
@@ -245,7 +245,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testCurrentVersionHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content/CurrentVersion[@href="/content/objects/content23/currentversion"]');
+        $this->assertXPath($dom, '/Content/CurrentVersion[@href="/content/objects/22/currentversion"]');
     }
 
     /**
@@ -305,7 +305,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testLocationsHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content/Locations[@href="/content/objects/content23/locations"]');
+        $this->assertXPath($dom, '/Content/Locations[@href="/content/objects/22/locations"]');
     }
 
     /**
@@ -499,7 +499,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      */
     public function testEmbeddedCurrentVersionHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/Content/CurrentVersion[@href="/content/objects/content23/currentversion"]');
+        $this->assertXPath($dom, '/Content/CurrentVersion[@href="/content/objects/22/currentversion"]');
     }
 
     /**

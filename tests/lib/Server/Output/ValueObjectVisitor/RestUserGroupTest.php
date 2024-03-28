@@ -110,7 +110,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
             $this->getMockForAbstractClass(ContentType::class),
             new ContentInfo(
                 [
-                    'id' => 'content23',
+                    'id' => 22,
                     'name' => 'Sindelfingen',
                     'sectionId' => 23,
                     'currentVersionNo' => 5,
@@ -152,7 +152,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testUserGroupIdCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup[@id="content23"]');
+        $this->assertXPath($dom, '/UserGroup[@id="22"]');
     }
 
     /**
@@ -212,7 +212,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testVersionsHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup/Versions[@href="/content/objects/content23/versions"]');
+        $this->assertXPath($dom, '/UserGroup/Versions[@href="/content/objects/22/versions"]');
     }
 
     /**
@@ -272,7 +272,7 @@ class RestUserGroupTest extends ValueObjectVisitorBaseTest
      */
     public function testLocationsHrefCorrect(\DOMDocument $dom)
     {
-        $this->assertXPath($dom, '/UserGroup/Locations[@href="/content/objects/content23/locations"]');
+        $this->assertXPath($dom, '/UserGroup/Locations[@href="/content/objects/22/locations"]');
     }
 
     /**
