@@ -4,6 +4,7 @@
   bootstrap="vendor/autoload.php"
   beStrictAboutTestsThatDoNotTestAnything="false"
   colors="true"
+  failOnWarning="true"
   >
   <php>
     <env name="EZP_TEST_REST_HOST" value="localhost"/>

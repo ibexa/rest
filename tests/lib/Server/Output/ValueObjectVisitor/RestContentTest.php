@@ -6,6 +6,7 @@
  */
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
+use DOMDocument;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Core\Helper\TranslationHelper;
@@ -13,9 +14,8 @@ use Ibexa\Core\Repository\Values;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestContent;
 use Ibexa\Rest\Server\Values\Version;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
-class RestContentTest extends ValueObjectVisitorBaseTest
+class RestContentTest extends BaseContentValueObjectVisitorTestCase
 {
     /** @var \Ibexa\Core\Helper\TranslationHelper|\PHPUnit\Framework\MockObject\MockObject */
     private $translationHelper;
@@ -30,10 +30,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
             });
     }
 
-    /**
-     * @return \DOMDocument
-     */
-    public function testVisitWithoutEmbeddedVersion()
+    public function testVisitWithoutEmbeddedVersion(): DOMDocument
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -101,34 +98,16 @@ class RestContentTest extends ValueObjectVisitorBaseTest
 
         $this->assertNotNull($result);
 
-        $dom = new \DOMDocument();
+        $dom = new DOMDocument();
         $dom->loadXml($result);
 
         return $dom;
     }
 
-    protected function getBasicRestContent()
+    protected function getBasicRestContent(): RestContent
     {
         return new RestContent(
-            new ContentInfo(
-                [
-                    'id' => 'content23',
-                    'name' => 'Sindelfingen',
-                    'sectionId' => 'section23',
-                    'currentVersionNo' => 5,
-                    'published' => true,
-                    'ownerId' => 'user23',
-                    'modificationDate' => new \DateTime('2012-09-05 15:27 Europe/Berlin'),
-                    'publishedDate' => null,
-                    'alwaysAvailable' => true,
-                    'status' => ContentInfo::STATUS_PUBLISHED,
-                    'remoteId' => 'abc123',
-                    'mainLanguageCode' => 'eng-US',
-                    'mainLocationId' => 'location23',
-                    'contentTypeId' => 'contentType23',
-                    'isHidden' => true,
-                ]
-            ),
+            $this->getContentInfoStub(),
             new Values\Content\Location(
                 [
                     'pathString' => '/1/2/23',
@@ -139,269 +118,110 @@ class RestContentTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithoutEmbeddedVersion
      */
-    public function testContentHrefCorrect(\DOMDocument $dom)
+    public function testContentHrefCorrect(DOMDocument $dom): void
     {
-        $this->assertXPath($dom, '/Content[@href="/content/objects/content23"]');
+        $this->assertXPath($dom, '/Content[@href="/content/objects/22"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithoutEmbeddedVersion
      */
-    public function testContentIdCorrect(\DOMDocument $dom)
+    public function testContentIdCorrect(DOMDocument $dom): void
     {
-        $this->assertXPath($dom, '/Content[@id="content23"]');
+        $this->assertXPath($dom, '/Content[@id="22"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithoutEmbeddedVersion
      */
-    public function testContentMediaTypeWithoutVersionCorrect(\DOMDocument $dom)
+    public function testContentMediaTypeWithoutVersionCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content[@media-type="application/vnd.ibexa.api.ContentInfo+xml"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithoutEmbeddedVersion
      */
-    public function testContentRemoteIdCorrect(\DOMDocument $dom)
+    public function testContentRemoteIdCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content[@remoteId="abc123"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithoutEmbeddedVersion
      */
-    public function testContentTypeHrefCorrect(\DOMDocument $dom)
+    public function testContentTypeHrefCorrect(DOMDocument $dom): void
     {
-        $this->assertXPath($dom, '/Content/ContentType[@href="/content/types/contentType23"]');
+        $this->assertXPath($dom, '/Content/ContentType[@href="/content/types/26"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithoutEmbeddedVersion
      */
-    public function testContentTypeMediaTypeCorrect(\DOMDocument $dom)
+    public function testContentTypeMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/ContentType[@media-type="application/vnd.ibexa.api.ContentType+xml"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithoutEmbeddedVersion
      */
-    public function testNameCorrect(\DOMDocument $dom)
+    public function testNameCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/Name[text()="Sindelfingen"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithoutEmbeddedVersion
      */
-    public function testTranslatedNameCorrect(\DOMDocument $dom)
+    public function testTranslatedNameCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/TranslatedName[text()="Sindelfingen (Translated)"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithoutEmbeddedVersion
      */
-    public function testVersionsHrefCorrect(\DOMDocument $dom)
+    public function testCurrentVersionHrefCorrect(DOMDocument $dom): void
     {
-        $this->assertXPath($dom, '/Content/Versions[@href="/content/objects/content23/versions"]');
+        $this->assertXPath($dom, '/Content/CurrentVersion[@href="/content/objects/22/currentversion"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithoutEmbeddedVersion
      */
-    public function testVersionsMediaTypeCorrect(\DOMDocument $dom)
-    {
-        $this->assertXPath($dom, '/Content/Versions[@media-type="application/vnd.ibexa.api.VersionList+xml"]');
-    }
-
-    /**
-     * @param \DOMDocument $dom
-     *
-     * @depends testVisitWithoutEmbeddedVersion
-     */
-    public function testCurrentVersionHrefCorrect(\DOMDocument $dom)
-    {
-        $this->assertXPath($dom, '/Content/CurrentVersion[@href="/content/objects/content23/currentversion"]');
-    }
-
-    /**
-     * @param \DOMDocument $dom
-     *
-     * @depends testVisitWithoutEmbeddedVersion
-     */
-    public function testCurrentVersionMediaTypeCorrect(\DOMDocument $dom)
+    public function testCurrentVersionMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/CurrentVersion[@media-type="application/vnd.ibexa.api.Version+xml"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithoutEmbeddedVersion
      */
-    public function testSectionHrefCorrect(\DOMDocument $dom)
-    {
-        $this->assertXPath($dom, '/Content/Section[@href="/content/sections/section23"]');
-    }
-
-    /**
-     * @param \DOMDocument $dom
-     *
-     * @depends testVisitWithoutEmbeddedVersion
-     */
-    public function testSectionMediaTypeCorrect(\DOMDocument $dom)
-    {
-        $this->assertXPath($dom, '/Content/Section[@media-type="application/vnd.ibexa.api.Section+xml"]');
-    }
-
-    /**
-     * @param \DOMDocument $dom
-     *
-     * @depends testVisitWithoutEmbeddedVersion
-     */
-    public function testMainLocationHrefCorrect(\DOMDocument $dom)
-    {
-        $this->assertXPath($dom, '/Content/MainLocation[@href="/content/locations/1/2/23"]');
-    }
-
-    /**
-     * @param \DOMDocument $dom
-     *
-     * @depends testVisitWithoutEmbeddedVersion
-     */
-    public function testMainLocationMediaTypeCorrect(\DOMDocument $dom)
-    {
-        $this->assertXPath($dom, '/Content/MainLocation[@media-type="application/vnd.ibexa.api.Location+xml"]');
-    }
-
-    /**
-     * @param \DOMDocument $dom
-     *
-     * @depends testVisitWithoutEmbeddedVersion
-     */
-    public function testLocationsHrefCorrect(\DOMDocument $dom)
-    {
-        $this->assertXPath($dom, '/Content/Locations[@href="/content/objects/content23/locations"]');
-    }
-
-    /**
-     * @param \DOMDocument $dom
-     *
-     * @depends testVisitWithoutEmbeddedVersion
-     */
-    public function testLocationsMediaTypeCorrect(\DOMDocument $dom)
-    {
-        $this->assertXPath($dom, '/Content/Locations[@media-type="application/vnd.ibexa.api.LocationList+xml"]');
-    }
-
-    /**
-     * @param \DOMDocument $dom
-     *
-     * @depends testVisitWithoutEmbeddedVersion
-     */
-    public function testOwnerHrefCorrect(\DOMDocument $dom)
-    {
-        $this->assertXPath($dom, '/Content/Owner[@href="/user/users/user23"]');
-    }
-
-    /**
-     * @param \DOMDocument $dom
-     *
-     * @depends testVisitWithoutEmbeddedVersion
-     */
-    public function testOwnerMediaTypeCorrect(\DOMDocument $dom)
-    {
-        $this->assertXPath($dom, '/Content/Owner[@media-type="application/vnd.ibexa.api.User+xml"]');
-    }
-
-    /**
-     * @param \DOMDocument $dom
-     *
-     * @depends testVisitWithoutEmbeddedVersion
-     */
-    public function testLastModificationDateCorrect(\DOMDocument $dom)
-    {
-        $this->assertXPath($dom, '/Content/lastModificationDate[text()="2012-09-05T15:27:00+02:00"]');
-    }
-
-    /**
-     * @param \DOMDocument $dom
-     *
-     * @depends testVisitWithoutEmbeddedVersion
-     */
-    public function testMainLanguageCodeCorrect(\DOMDocument $dom)
-    {
-        $this->assertXPath($dom, '/Content/mainLanguageCode[text()="eng-US"]');
-    }
-
-    /**
-     * @param \DOMDocument $dom
-     *
-     * @depends testVisitWithoutEmbeddedVersion
-     */
-    public function testCurrentVersionNoCorrect(\DOMDocument $dom)
+    public function testCurrentVersionNoCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/currentVersionNo[text()="5"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithoutEmbeddedVersion
      */
-    public function testAlwaysAvailableCorrect(\DOMDocument $dom)
-    {
-        $this->assertXPath($dom, '/Content/alwaysAvailable[text()="true"]');
-    }
-
-    /**
-     * @param \DOMDocument $dom
-     *
-     * @depends testVisitWithoutEmbeddedVersion
-     */
-    public function testIsHiddenCorrect(\DOMDocument $dom)
+    public function testIsHiddenCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/isHidden[text()="true"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithoutEmbeddedVersion
      */
-    public function testStatusCorrect(\DOMDocument $dom)
+    public function testStatusCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/status[text()="PUBLISHED"]');
     }
 
-    /**
-     * @return \DOMDocument
-     */
-    public function testVisitWithEmbeddedVersion()
+    public function testVisitWithEmbeddedVersion(): DOMDocument
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -445,27 +265,6 @@ class RestContentTest extends ValueObjectVisitorBaseTest
             "/content/objects/{$restContent->contentInfo->id}/currentversion"
         );
 
-        $this->addRouteExpectation(
-            'ibexa.rest.load_section',
-            ['sectionId' => $restContent->contentInfo->sectionId],
-            "/content/sections/{$restContent->contentInfo->sectionId}"
-        );
-        $this->addRouteExpectation(
-            'ibexa.rest.load_location',
-            ['locationPath' => $locationPath = trim($restContent->mainLocation->pathString, '/')],
-            "/content/locations/{$locationPath}"
-        );
-        $this->addRouteExpectation(
-            'ibexa.rest.load_locations_for_content',
-            ['contentId' => $restContent->contentInfo->id],
-            "/content/objects/{$restContent->contentInfo->id}/locations"
-        );
-        $this->addRouteExpectation(
-            'ibexa.rest.load_user',
-            ['userId' => $restContent->contentInfo->ownerId],
-            "/user/users/{$restContent->contentInfo->ownerId}"
-        );
-
         $visitor->visit(
             $this->getVisitorMock(),
             $generator,
@@ -476,7 +275,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
 
         $this->assertNotNull($result);
 
-        $dom = new \DOMDocument();
+        $dom = new DOMDocument();
         $dom->loadXml($result);
 
         return $dom;
@@ -487,7 +286,7 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisitWithEmbeddedVersion
      */
-    public function testContentMediaTypeWithVersionCorrect(\DOMDocument $dom)
+    public function testContentMediaTypeWithVersionCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content[@media-type="application/vnd.ibexa.api.Content+xml"]');
     }
@@ -497,9 +296,9 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisitWithEmbeddedVersion
      */
-    public function testEmbeddedCurrentVersionHrefCorrect(\DOMDocument $dom)
+    public function testEmbeddedCurrentVersionHrefCorrect(DOMDocument $dom): void
     {
-        $this->assertXPath($dom, '/Content/CurrentVersion[@href="/content/objects/content23/currentversion"]');
+        $this->assertXPath($dom, '/Content/CurrentVersion[@href="/content/objects/22/currentversion"]');
     }
 
     /**
@@ -507,21 +306,24 @@ class RestContentTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisitWithEmbeddedVersion
      */
-    public function testEmbeddedCurrentVersionMediaTypeCorrect(\DOMDocument $dom)
+    public function testEmbeddedCurrentVersionMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/CurrentVersion[@media-type="application/vnd.ibexa.api.Version+xml"]');
     }
 
     /**
      * Get the Content visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestContent
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\RestContent
     {
         return new ValueObjectVisitor\RestContent(
             $this->translationHelper
         );
+    }
+
+    protected function getXPathFirstElementName(): string
+    {
+        return 'Content';
     }
 }
 
