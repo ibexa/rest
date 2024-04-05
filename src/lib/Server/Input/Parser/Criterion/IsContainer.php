@@ -14,10 +14,9 @@ use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 use Ibexa\Rest\Input\ParserTools;
 
-class IsContainer extends BaseParser
+final class IsContainer extends BaseParser
 {
-    /** @var \Ibexa\Rest\Input\ParserTools */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     public function __construct(ParserTools $parserTools)
     {
