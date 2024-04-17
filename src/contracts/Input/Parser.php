@@ -14,8 +14,7 @@ abstract class Parser
     /**
      * Parse input structure.
      *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param array<mixed> $data
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject|object
      */

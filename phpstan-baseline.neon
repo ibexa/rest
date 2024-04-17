@@ -281,11 +281,6 @@ parameters:
 			path: src/contracts/Input/Handler.php
 
 		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Input\\\\Parser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/contracts/Input/Parser.php
-
-		-
 			message: "#^Cannot access offset mixed on Ibexa\\\\Contracts\\\\Rest\\\\Input\\\\Parser\\.$#"
 			count: 1
 			path: src/contracts/Input/ParsingDispatcher.php
@@ -2116,29 +2111,14 @@ parameters:
 			path: src/lib/Server/Input/Parser/Aggregation/AbstractRangeAggregationParser.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\AbstractRangeAggregationParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Aggregation/AbstractRangeAggregationParser.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\AbstractRangeAggregationParser\\:\\:parseAggregation\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Aggregation/AbstractRangeAggregationParser.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\AbstractStatsAggregationParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Aggregation/AbstractStatsAggregationParser.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\AbstractStatsAggregationParser\\:\\:parseAggregation\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Aggregation/AbstractStatsAggregationParser.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\AbstractTermAggregationParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Aggregation/AbstractTermAggregationParser.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\AbstractTermAggregationParser\\:\\:parseAggregation\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
@@ -2239,11 +2219,6 @@ parameters:
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\ObjectStateTermAggregationParser\\:\\:parseAggregation\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Aggregation/ObjectStateTermAggregationParser.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\Range\\\\AbstractRangeParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Aggregation/Range/AbstractRangeParser.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Aggregation\\\\Range\\\\AbstractRangeParser\\:\\:visitRangeValue\\(\\) has no return type specified\\.$#"
@@ -2416,16 +2391,6 @@ parameters:
 			path: src/lib/Server/Input/Parser/Criterion/FullText.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\IsUserBased\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/IsUserBased.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\IsUserEnabled\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/IsUserEnabled.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\LanguageCode\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion/LanguageCode.php
@@ -2496,11 +2461,6 @@ parameters:
 			path: src/lib/Server/Input/Parser/Criterion/ObjectStateId.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\ObjectStateIdentifier\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/ObjectStateIdentifier.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\Operator\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion/Operator.php
@@ -2526,39 +2486,14 @@ parameters:
 			path: src/lib/Server/Input/Parser/Criterion/SectionId.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\SectionIdentifier\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/SectionIdentifier.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\Sibling\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/Sibling.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\Subtree\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion/Subtree.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\UserEmail\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/UserEmail.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\UserId\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/UserId.php
-
-		-
 			message: "#^Parameter \\#1 \\$value of class Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\Criterion\\\\UserId constructor expects array\\<int\\>\\|int, array\\<int, string\\> given\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion/UserId.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\UserLogin\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/UserLogin.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\UserMetadata\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
@@ -2629,11 +2564,6 @@ parameters:
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FieldDefinitionUpdate\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/FieldDefinitionUpdate.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\JWTInput\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/JWTInput.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Limitation\\\\PathStringRouteBasedLimitationParser\\:\\:parseIdFromHref\\(\\) has parameter \\$limitationValue with no type specified\\.$#"
@@ -3584,11 +3514,6 @@ parameters:
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\Trash\\:\\:visit\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/Trash.php
-
-		-
-			message: "#^Access to protected property Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\URLAlias\\:\\:\\$languageCodes\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/URLAlias.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\URLAlias\\:\\:visit\\(\\) has no return type specified\\.$#"
@@ -9621,156 +9546,6 @@ parameters:
 			path: tests/lib/Server/Output/ValueObjectVisitor/ResourceCreatedTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:getBasicRestContent\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testAlwaysAvailableCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testContentHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testContentIdCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testContentMediaTypeWithVersionCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testContentMediaTypeWithoutVersionCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testContentRemoteIdCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testContentTypeHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testContentTypeMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testCurrentVersionHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testCurrentVersionMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testCurrentVersionNoCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testEmbeddedCurrentVersionHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testEmbeddedCurrentVersionMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testIsHiddenCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testLastModificationDateCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testLocationsHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testLocationsMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testMainLanguageCodeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testMainLocationHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testMainLocationMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testNameCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testOwnerHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testOwnerMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testSectionHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testSectionMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testStatusCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testTranslatedNameCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testVersionsHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTest\\:\\:testVersionsMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestContentTypeTest\\:\\:getBasicContentType\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/Server/Output/ValueObjectVisitor/RestContentTypeTest.php
@@ -10326,151 +10101,6 @@ parameters:
 			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupRoleAssignmentTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:getBasicRestUserGroup\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testAlwaysAvailableCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testLastModificationDateCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testLocationsHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testLocationsMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testMainLanguageCodeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testMainLocationHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testMainLocationMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testNameCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testOwnerHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testOwnerMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testParentUserGroupHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testParentUserGroupMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testRolesHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testRolesMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testSectionHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testSectionMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testSubgroupsHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testSubgroupsMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testUserGroupHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testUserGroupIdCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testUserGroupMediaTypeWithoutVersionCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testUserGroupRemoteIdCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testUserGroupTypeHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testUserGroupTypeMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testUsersHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testUsersMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testVersionsHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroupTest\\:\\:testVersionsMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserGroupTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorBaseTest\\:\\:assertXMLTag\\(\\) invoked with 4 parameters, 2\\-3 required\\.$#"
 			count: 4
 			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserRoleAssignmentTest.php
@@ -10496,127 +10126,7 @@ parameters:
 			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserRoleAssignmentTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:getBasicRestUser\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testAlwaysAvailableCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testLastModificationDateCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testLocationsHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testLocationsMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testMainLanguageCodeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testMainLocationHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testMainLocationMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testNameCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testOwnerHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testOwnerMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testRolesHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testRolesMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testSectionHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testSectionMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testUserGroupsHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testUserGroupsMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testUserHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testUserIdCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testUserMediaTypeWithoutVersionCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testUserRemoteIdCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testUserTypeHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testUserTypeMediaTypeCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testVersionsHrefCorrect\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserTest\\:\\:testVersionsMediaTypeCorrect\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/Server/Output/ValueObjectVisitor/RestUserTest.php
 
