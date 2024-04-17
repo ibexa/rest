@@ -443,7 +443,6 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\Criterion\IsContainer:
         parent: Ibexa\Rest\Server\Common\Parser
-        class: Ibexa\Rest\Server\Input\Parser\Criterion\IsContainer
         arguments:
             $parserTools: '@Ibexa\Rest\Input\ParserTools'
         tags:

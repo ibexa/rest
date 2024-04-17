@@ -16,7 +16,7 @@ use Ibexa\Rest\Input\ParserTools;
 
 final class IsContainer extends BaseParser
 {
-    protected ParserTools $parserTools;
+    private ParserTools $parserTools;
 
     public function __construct(ParserTools $parserTools)
     {
