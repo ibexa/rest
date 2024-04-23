@@ -16,7 +16,7 @@ jobs:
         timeout-minutes: 15
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v4
 
             - name: Set project version
               run: |
@@ -33,7 +33,7 @@ jobs:
               uses: actions/cache@v2
               with:
                   path: ${{ env.COMPOSER_CACHE_DIR }}
-                  key: ${{ env.PROJECT_EDITION }}-${{ env.version }}-${{ github.sha }}
+                  key: "${{ env.PROJECT_EDITION }}-${{ env.version }}-${{ github.sha }}"
                   restore-keys: |
                     ${{ env.PROJECT_EDITION }}-${{ env.version }}
 
