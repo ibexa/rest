@@ -12,17 +12,17 @@ jobs:
         name: Run code style check
         runs-on: "ubuntu-22.04"
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
               with:
-                  php-version: '8.1'
+                  php-version: '8.3'
                   coverage: none
                   extensions: 'pdo_sqlite, gd'
                   tools: cs2pr
 
-            - uses: ramsey/composer-install@v2
+            - uses: ramsey/composer-install@v3
               with:
                   dependency-versions: highest
 
@@ -38,12 +38,10 @@ jobs:
             fail-fast: false
             matrix:
                 php:
-                    - '7.4'
-                    - '8.0'
-                    - '8.2'
+                    - '8.3'
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
@@ -53,7 +51,7 @@ jobs:
                   extensions: pdo_sqlite, gd
                   tools: cs2pr
 
-            - uses: ramsey/composer-install@v2
+            - uses: ramsey/composer-install@v3
               with:
                   dependency-versions: highest
 
