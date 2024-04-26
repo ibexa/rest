@@ -38,12 +38,10 @@ jobs:
                     ${{ env.PROJECT_EDITION }}-${{ env.version }}
 
             - name: Set up whole project using the tested dependency
-              env:
-                  SETUP: ghcr.io/ibexa/docker/php:8.3-node18
               run: |
                 curl -L "https://raw.githubusercontent.com/ibexa/ci-scripts/main/bin/${{ env.version }}/prepare_project_edition.sh" > prepare_project_edition.sh
                 chmod +x prepare_project_edition.sh
-                ./prepare_project_edition.sh ${{ env.PROJECT_EDITION }} ${{ env.version }} ${{ env.SETUP }}
+                ./prepare_project_edition.sh ${{ env.PROJECT_EDITION }} ${{ env.version }} ${{ env.SETUP }} ghcr.io/ibexa/docker/php:8.3-node18
 
             - name: Run setup command
               run: |
