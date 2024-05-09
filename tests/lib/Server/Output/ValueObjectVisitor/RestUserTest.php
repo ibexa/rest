@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use DOMDocument;
@@ -23,7 +24,7 @@ class RestUserTest extends BaseContentValueObjectVisitorTestCase
 
         $restUser = $this->getBasicRestUser();
 
-        $this->getVisitorMock()->expects($this->once())
+        $this->getVisitorMock()->expects(self::once())
             ->method('visitValueObject');
 
         $this->addRouteExpectation(
@@ -61,7 +62,7 @@ class RestUserTest extends BaseContentValueObjectVisitorTestCase
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         $dom = new DOMDocument();
         $dom->loadXml($result);

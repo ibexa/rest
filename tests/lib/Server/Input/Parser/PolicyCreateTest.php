@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation;
@@ -47,19 +48,19 @@ class PolicyCreateTest extends BaseTest
         $policyCreate = $this->getParser();
         $result = $policyCreate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             PolicyCreateStruct::class,
             $result,
             'PolicyCreateStruct not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'content',
             $result->module,
             'PolicyCreateStruct module property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'delete',
             $result->function,
             'PolicyCreateStruct function property not created correctly.'
@@ -67,27 +68,27 @@ class PolicyCreateTest extends BaseTest
 
         $parsedLimitations = $result->getLimitations();
 
-        $this->assertIsArray($parsedLimitations, 'PolicyCreateStruct limitations not created correctly');
+        self::assertIsArray($parsedLimitations, 'PolicyCreateStruct limitations not created correctly');
 
-        $this->assertCount(
+        self::assertCount(
             1,
             $parsedLimitations,
             'PolicyCreateStruct limitations not created correctly'
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             Limitation::class,
             $parsedLimitations['Class'],
             'Limitation not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'Class',
             $parsedLimitations['Class']->getIdentifier(),
             'Limitation identifier not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             [1, 2, 3],
             $parsedLimitations['Class']->limitationValues,
             'Limitation values not created correctly.'
@@ -244,11 +245,11 @@ class PolicyCreateTest extends BaseTest
     {
         $roleServiceMock = $this->createMock(RoleService::class);
 
-        $roleServiceMock->expects($this->any())
+        $roleServiceMock->expects(self::any())
             ->method('newPolicyCreateStruct')
             ->with(
-                $this->equalTo('content'),
-                $this->equalTo('delete')
+                self::equalTo('content'),
+                self::equalTo('delete')
             )
             ->willReturn(
                 new PolicyCreateStruct(

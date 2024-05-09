@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Rest\FieldTypeProcessor\ImageProcessor;
@@ -30,7 +31,7 @@ class ImageProcessorTest extends BinaryInputProcessorTest
         foreach ($this->getVariations() as $iteration => $variationIdentifier) {
             $expectedVariations[$variationIdentifier]['href'] = "/content/binary/images/{$inputHash['imageId']}/variations/{$variationIdentifier}";
             $routerMock
-                ->expects($this->at($iteration))
+                ->expects(self::at($iteration))
                 ->method('generate')
                 ->with(
                     'ibexa.rest.binary_content.get_image_variation',
@@ -43,7 +44,7 @@ class ImageProcessorTest extends BinaryInputProcessorTest
 
         $outputHash = $processor->postProcessValueHash($inputHash);
 
-        $this->assertEquals(
+        self::assertEquals(
             [
                 'path' => '/var/some_site/223-1-eng-US/Cool-File.jpg',
                 'imageId' => '223-12345',

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\SectionCreateStruct;
@@ -26,7 +27,7 @@ class SectionInputTest extends BaseTest
         $sectionInput = $this->getParser();
         $result = $sectionInput->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertEquals(
+        self::assertEquals(
             new SectionCreateStruct($inputArray),
             $result,
             'SectionCreateStruct not created correctly.'
@@ -84,7 +85,7 @@ class SectionInputTest extends BaseTest
     {
         $sectionServiceMock = $this->createMock(SectionService::class);
 
-        $sectionServiceMock->expects($this->any())
+        $sectionServiceMock->expects(self::any())
             ->method('newSectionCreateStruct')
             ->willReturn(
                 new SectionCreateStruct()

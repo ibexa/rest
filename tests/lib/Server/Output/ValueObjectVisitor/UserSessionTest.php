@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\User\User;
@@ -33,13 +34,13 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
             false
         );
 
-        $this->getVisitorMock()->expects($this->at(0))
+        $this->getVisitorMock()->expects(self::at(0))
             ->method('setStatus')
-            ->with($this->equalTo(200));
+            ->with(self::equalTo(200));
 
-        $this->getVisitorMock()->expects($this->at(1))
+        $this->getVisitorMock()->expects(self::at(1))
             ->method('setHeader')
-            ->with($this->equalTo('Content-Type'), $this->equalTo('application/vnd.ibexa.api.Session+xml'));
+            ->with(self::equalTo('Content-Type'), self::equalTo('application/vnd.ibexa.api.Session+xml'));
 
         $this->addRouteExpectation(
             'ibexa.rest.delete_session',
@@ -63,7 +64,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         return $result;
     }
@@ -176,9 +177,9 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
     protected function getUserMock()
     {
         $user = $this->createMock(User::class);
-        $user->expects($this->any())
+        $user->expects(self::any())
             ->method('__get')
-            ->with($this->equalTo('id'))
+            ->with(self::equalTo('id'))
             ->willReturn('user123');
 
         return $user;

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Security;
 
 use Ibexa\Contracts\Core\Repository\Values\User\User;
@@ -89,16 +90,16 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
         $existingToken = $this->getTokenInterfaceMock();
         $this->tokenStorage
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getToken')
             ->willReturn($existingToken);
 
         $existingToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUsername')
             ->willReturn($username);
         $existingToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('setAttribute')
             ->with('isFromSession', true);
 
@@ -106,7 +107,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
         $request->attributes->set('username', $username);
         $request->attributes->set('password', $password);
 
-        $this->assertSame($existingToken, $this->authenticator->authenticate($request));
+        self::assertSame($existingToken, $this->authenticator->authenticate($request));
     }
 
     public function testAuthenticateNoTokenFound()
@@ -117,12 +118,12 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
         $existingToken = $this->getTokenInterfaceMock();
         $this->tokenStorage
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getToken')
             ->willReturn($existingToken);
 
         $existingToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUsername')
             ->willReturn(__METHOD__);
 
@@ -132,13 +133,13 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
         $usernamePasswordToken = new UsernamePasswordToken($username, $password, self::PROVIDER_KEY);
         $this->authenticationManager
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('authenticate')
-            ->with($this->equalTo($usernamePasswordToken))
+            ->with(self::equalTo($usernamePasswordToken))
             ->willReturn(null);
 
         $this->logger
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('error');
 
         $this->authenticator->authenticate($request);
@@ -152,7 +153,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
         $existingToken = $this->getTokenInterfaceMock();
         $existingToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUsername')
             ->willReturn(__METHOD__);
 
@@ -163,38 +164,38 @@ class RestSessionBasedAuthenticatorTest extends TestCase
         $usernamePasswordToken = new UsernamePasswordToken($username, $password, self::PROVIDER_KEY);
         $authenticatedToken = $this->getUsernamePasswordTokenMock();
         $this->authenticationManager
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('authenticate')
-            ->with($this->equalTo($usernamePasswordToken))
+            ->with(self::equalTo($usernamePasswordToken))
             ->willReturn($authenticatedToken);
 
         $this->tokenStorage
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('setToken')
             ->with($authenticatedToken);
 
         $this->eventDispatcher
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch')
             ->with(
-                $this->equalTo(new InteractiveLoginEvent($request, $authenticatedToken)),
+                self::equalTo(new InteractiveLoginEvent($request, $authenticatedToken)),
                 SecurityEvents::INTERACTIVE_LOGIN
             );
 
         $this->tokenStorage
-            ->expects($this->exactly(2))
+            ->expects(self::exactly(2))
             ->method('getToken')
             ->will(
-                $this->onConsecutiveCalls($existingToken, $authenticatedToken)
+                self::onConsecutiveCalls($existingToken, $authenticatedToken)
             );
 
         $authenticatedToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn('not_an_ibexa_user');
 
         $this->logger
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('error');
 
         $this->authenticator->authenticate($request);
@@ -209,7 +210,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
     {
         $apiUser = $this->createMock(User::class);
         $apiUser
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('getUserId')
             ->willReturn($userId);
 
@@ -225,11 +226,11 @@ class RestSessionBasedAuthenticatorTest extends TestCase
         $existingUser = $this->createUser(123);
         $existingToken = $this->getUsernamePasswordTokenMock();
         $existingToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUsername')
             ->willReturn(__METHOD__);
         $existingToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn($existingUser);
 
@@ -240,44 +241,44 @@ class RestSessionBasedAuthenticatorTest extends TestCase
         $usernamePasswordToken = new UsernamePasswordToken($username, $password, self::PROVIDER_KEY);
         $authenticatedToken = $this->getUsernamePasswordTokenMock();
         $this->authenticationManager
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('authenticate')
-            ->with($this->equalTo($usernamePasswordToken))
+            ->with(self::equalTo($usernamePasswordToken))
             ->willReturn($authenticatedToken);
 
         $this->eventDispatcher
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch')
             ->with(
-                $this->equalTo(new InteractiveLoginEvent($request, $authenticatedToken)),
+                self::equalTo(new InteractiveLoginEvent($request, $authenticatedToken)),
                 SecurityEvents::INTERACTIVE_LOGIN
             );
 
         $this->tokenStorage
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('getToken')
             ->willReturn($existingToken);
         $this->tokenStorage
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('setToken')
             ->with($authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(2))
+            ->expects(self::at(2))
             ->method('getToken')
             ->willReturn($authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(3))
+            ->expects(self::at(3))
             ->method('setToken')
             ->with($existingToken);
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn($authenticatedUser);
 
         $this->configResolver
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getParameter')
             ->with('anonymous_user_id')
             ->willReturn(10);
@@ -294,11 +295,11 @@ class RestSessionBasedAuthenticatorTest extends TestCase
         $existingUser = $this->createUser($anonymousUserId);
         $existingToken = $this->getUsernamePasswordTokenMock();
         $existingToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUsername')
             ->willReturn(__METHOD__);
         $existingToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn($existingUser);
 
@@ -309,45 +310,45 @@ class RestSessionBasedAuthenticatorTest extends TestCase
         $usernamePasswordToken = new UsernamePasswordToken($username, $password, self::PROVIDER_KEY);
         $authenticatedToken = $this->getUsernamePasswordTokenMock();
         $this->authenticationManager
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('authenticate')
-            ->with($this->equalTo($usernamePasswordToken))
+            ->with(self::equalTo($usernamePasswordToken))
             ->willReturn($authenticatedToken);
 
         $this->eventDispatcher
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch')
             ->with(
-                $this->equalTo(new InteractiveLoginEvent($request, $authenticatedToken)),
+                self::equalTo(new InteractiveLoginEvent($request, $authenticatedToken)),
                 SecurityEvents::INTERACTIVE_LOGIN
             );
 
         $this->tokenStorage
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('getToken')
             ->willReturn($existingToken);
         $this->tokenStorage
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('setToken')
             ->with($authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(2))
+            ->expects(self::at(2))
             ->method('getToken')
             ->willReturn($authenticatedToken);
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn($authenticatedUser);
 
         $this->configResolver
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getParameter')
             ->with('anonymous_user_id')
             ->willReturn($anonymousUserId);
 
-        $this->assertSame($authenticatedToken, $this->authenticator->authenticate($request));
+        self::assertSame($authenticatedToken, $this->authenticator->authenticate($request));
     }
 
     public function testAuthenticate()
@@ -357,7 +358,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
         $existingToken = $this->getTokenInterfaceMock();
         $existingToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUsername')
             ->willReturn(__METHOD__);
 
@@ -368,39 +369,39 @@ class RestSessionBasedAuthenticatorTest extends TestCase
         $usernamePasswordToken = new UsernamePasswordToken($username, $password, self::PROVIDER_KEY);
         $authenticatedToken = $this->getUsernamePasswordTokenMock();
         $this->authenticationManager
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('authenticate')
-            ->with($this->equalTo($usernamePasswordToken))
+            ->with(self::equalTo($usernamePasswordToken))
             ->willReturn($authenticatedToken);
 
         $this->eventDispatcher
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch')
             ->with(
-                $this->equalTo(new InteractiveLoginEvent($request, $authenticatedToken)),
+                self::equalTo(new InteractiveLoginEvent($request, $authenticatedToken)),
                 SecurityEvents::INTERACTIVE_LOGIN
             );
 
         $this->tokenStorage
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('getToken')
             ->willReturn($existingToken);
         $this->tokenStorage
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('setToken')
             ->with($authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(2))
+            ->expects(self::at(2))
             ->method('getToken')
             ->willReturn($authenticatedToken);
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn($authenticatedUser);
 
-        $this->assertSame($authenticatedToken, $this->authenticator->authenticate($request));
+        self::assertSame($authenticatedToken, $this->authenticator->authenticate($request));
     }
 
     public function testAuthenticatePreviousUserNonEz()
@@ -411,11 +412,11 @@ class RestSessionBasedAuthenticatorTest extends TestCase
         $existingUser = $this->createMock(UserInterface::class);
         $existingToken = $this->getUsernamePasswordTokenMock();
         $existingToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUsername')
             ->willReturn(__METHOD__);
         $existingToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn($existingUser);
 
@@ -426,39 +427,39 @@ class RestSessionBasedAuthenticatorTest extends TestCase
         $usernamePasswordToken = new UsernamePasswordToken($username, $password, self::PROVIDER_KEY);
         $authenticatedToken = $this->getUsernamePasswordTokenMock();
         $this->authenticationManager
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('authenticate')
-            ->with($this->equalTo($usernamePasswordToken))
+            ->with(self::equalTo($usernamePasswordToken))
             ->willReturn($authenticatedToken);
 
         $this->eventDispatcher
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch')
             ->with(
-                $this->equalTo(new InteractiveLoginEvent($request, $authenticatedToken)),
+                self::equalTo(new InteractiveLoginEvent($request, $authenticatedToken)),
                 SecurityEvents::INTERACTIVE_LOGIN
             );
 
         $this->tokenStorage
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('getToken')
             ->willReturn($existingToken);
         $this->tokenStorage
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('setToken')
             ->with($authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(2))
+            ->expects(self::at(2))
             ->method('getToken')
             ->willReturn($authenticatedToken);
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn($authenticatedUser);
 
-        $this->assertSame($authenticatedToken, $this->authenticator->authenticate($request));
+        self::assertSame($authenticatedToken, $this->authenticator->authenticate($request));
     }
 
     public function testAuthenticatePreviousTokenNotUsernamePassword()
@@ -468,7 +469,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
         $existingToken = $this->getTokenInterfaceMock();
         $existingToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUsername')
             ->willReturn(__METHOD__);
 
@@ -479,51 +480,51 @@ class RestSessionBasedAuthenticatorTest extends TestCase
         $usernamePasswordToken = new UsernamePasswordToken($username, $password, self::PROVIDER_KEY);
         $authenticatedToken = $this->getUsernamePasswordTokenMock();
         $this->authenticationManager
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('authenticate')
-            ->with($this->equalTo($usernamePasswordToken))
+            ->with(self::equalTo($usernamePasswordToken))
             ->willReturn($authenticatedToken);
 
         $this->eventDispatcher
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch')
             ->with(
-                $this->equalTo(new InteractiveLoginEvent($request, $authenticatedToken)),
+                self::equalTo(new InteractiveLoginEvent($request, $authenticatedToken)),
                 SecurityEvents::INTERACTIVE_LOGIN
             );
 
         $this->tokenStorage
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('getToken')
             ->willReturn($existingToken);
         $this->tokenStorage
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('setToken')
             ->with($authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(2))
+            ->expects(self::at(2))
             ->method('getToken')
             ->willReturn($authenticatedToken);
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getUser')
             ->willReturn($authenticatedUser);
 
-        $this->assertSame($authenticatedToken, $this->authenticator->authenticate($request));
+        self::assertSame($authenticatedToken, $this->authenticator->authenticate($request));
     }
 
     public function testLogout()
     {
         $sessionLogoutHandler = $this->createMock(SessionLogoutHandler::class);
         $sessionLogoutHandler
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('logout');
 
         $token = $this->getTokenInterfaceMock();
         $this->tokenStorage
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getToken')
             ->willReturn($token);
 
@@ -532,20 +533,20 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
         $logoutHandler1 = $this->createMock(LogoutHandlerInterface::class);
         $logoutHandler1
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('logout')
             ->with(
                 $request,
-                $this->isInstanceOf(Response::class),
+                self::isInstanceOf(Response::class),
                 $token
             );
         $logoutHandler2 = $this->createMock(LogoutHandlerInterface::class);
         $logoutHandler2
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('logout')
             ->with(
                 $request,
-                $this->isInstanceOf(Response::class),
+                self::isInstanceOf(Response::class),
                 $token
             );
 
@@ -553,7 +554,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
         $this->authenticator->addLogoutHandler($logoutHandler1);
         $this->authenticator->addLogoutHandler($logoutHandler2);
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             Response::class,
             $this->authenticator->logout($request)
         );

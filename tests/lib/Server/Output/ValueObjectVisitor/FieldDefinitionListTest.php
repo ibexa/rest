@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values;
@@ -28,9 +29,9 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
 
         $fieldDefinitionList = $this->getBasicFieldDefinitionList();
 
-        $this->getVisitorMock()->expects($this->exactly(2))
+        $this->getVisitorMock()->expects(self::exactly(2))
             ->method('visitValueObject')
-            ->with($this->isInstanceOf(Server\Values\RestFieldDefinition::class));
+            ->with(self::isInstanceOf(Server\Values\RestFieldDefinition::class));
 
         $this->addRouteExpectation(
             'ibexa.rest.load_content_type_field_definition_list',
@@ -46,7 +47,7 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -92,6 +93,7 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
      * @param \DOMDocument $dom
      *
      * @depends testVisitFieldDefinitionList
+     *
      * @dataProvider provideXpathAssertions
      */
     public function testGeneratedXml($xpath, \DOMDocument $dom)

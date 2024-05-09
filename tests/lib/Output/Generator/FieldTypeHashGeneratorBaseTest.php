@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output\Generator;
 
 use PHPUnit\Framework\TestCase;
@@ -290,7 +291,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         // file_put_contents( $fixtureFile, $actualResult );
         // $this->markTestIncomplete( "Wrote fixture to '{$fixtureFile}'." );
 
-        $this->assertSame(
+        self::assertSame(
             file_get_contents($this->getFixtureFile($functionName)),
             $actualResult
         );

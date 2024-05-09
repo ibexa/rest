@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
@@ -77,9 +78,9 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
             "/content/objects/{$trashItem->trashItem->contentInfo->id}"
         );
 
-        $this->getVisitorMock()->expects($this->once())
+        $this->getVisitorMock()->expects(self::once())
             ->method('visitValueObject')
-            ->with($this->isInstanceOf(RestContent::class));
+            ->with(self::isInstanceOf(RestContent::class));
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -89,7 +90,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         return $result;
     }

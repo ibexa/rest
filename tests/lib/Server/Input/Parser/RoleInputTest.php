@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Core\Repository\RoleService;
@@ -43,13 +44,13 @@ class RoleInputTest extends BaseTest
         $roleInput = $this->getParser();
         $result = $roleInput->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             RoleCreateStruct::class,
             $result,
             'RoleCreateStruct not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'Identifier Bar',
             $result->identifier,
             'RoleCreateStruct identifier property not created correctly.'
@@ -92,9 +93,9 @@ class RoleInputTest extends BaseTest
     {
         $roleServiceMock = $this->createMock(RoleService::class);
 
-        $roleServiceMock->expects($this->any())
+        $roleServiceMock->expects(self::any())
             ->method('newRoleCreateStruct')
-            ->with($this->equalTo('Identifier Bar'))
+            ->with(self::equalTo('Identifier Bar'))
             ->willReturn(
                 new RoleCreateStruct(['identifier' => 'Identifier Bar'])
             );

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionUpdateStruct;
@@ -31,75 +32,75 @@ class FieldDefinitionUpdateTest extends BaseTest
         $fieldDefinitionUpdate = $this->getParser();
         $result = $fieldDefinitionUpdate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             FieldDefinitionUpdateStruct::class,
             $result,
             'FieldDefinitionUpdateStruct not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'title',
             $result->identifier,
             'identifier not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'content',
             $result->fieldGroup,
             'fieldGroup not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             1,
             $result->position,
             'position not created correctly'
         );
 
-        $this->assertTrue(
+        self::assertTrue(
             $result->isTranslatable,
             'isTranslatable not created correctly'
         );
 
-        $this->assertTrue(
+        self::assertTrue(
             $result->isRequired,
             'isRequired not created correctly'
         );
 
-        $this->assertTrue(
+        self::assertTrue(
             $result->isInfoCollector,
             'isInfoCollector not created correctly'
         );
 
-        $this->assertTrue(
+        self::assertTrue(
             $result->isSearchable,
             'isSearchable not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'New title',
             $result->defaultValue,
             'defaultValue not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             ['eng-US' => 'Title'],
             $result->names,
             'names not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             ['eng-US' => 'This is the title'],
             $result->descriptions,
             'descriptions not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             ['textRows' => 24],
             $result->fieldSettings,
             'fieldSettings not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             [
                 'StringLengthValidator' => [
                     'minStringLength' => 12,
@@ -162,15 +163,15 @@ class FieldDefinitionUpdateTest extends BaseTest
     {
         $fieldTypeParserMock = $this->createMock(FieldTypeParser::class);
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock->expects(self::any())
             ->method('parseValue')
             ->willReturn('New title');
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock->expects(self::any())
             ->method('parseFieldSettings')
             ->willReturn(['textRows' => 24]);
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock->expects(self::any())
             ->method('parseValidatorConfiguration')
             ->willReturn(
                 [
@@ -193,15 +194,15 @@ class FieldDefinitionUpdateTest extends BaseTest
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects($this->any())
+        $contentTypeServiceMock->expects(self::any())
             ->method('newFieldDefinitionUpdateStruct')
             ->willReturn(
                 new FieldDefinitionUpdateStruct()
             );
 
-        $contentTypeServiceMock->expects($this->any())
+        $contentTypeServiceMock->expects(self::any())
             ->method('loadContentTypeDraft')
-            ->with($this->equalTo(42))
+            ->with(self::equalTo(42))
             ->willReturn(
                 new ContentTypeDraft(
                     [

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
@@ -26,90 +27,90 @@ class ContentTypeCreateTest extends BaseTest
         $contentTypeCreate = $this->getParser();
         $result = $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ContentTypeCreateStruct::class,
             $result,
             'ContentTypeCreateStruct not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'new_content_type',
             $result->identifier,
             'identifier not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'eng-US',
             $result->mainLanguageCode,
             'mainLanguageCode not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'remote123456',
             $result->remoteId,
             'remoteId not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             '<title>',
             $result->urlAliasSchema,
             'urlAliasSchema not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             '<title>',
             $result->nameSchema,
             'nameSchema not created correctly'
         );
 
-        $this->assertTrue(
+        self::assertTrue(
             $result->isContainer,
             'isContainer not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             Location::SORT_FIELD_PATH,
             $result->defaultSortField,
             'defaultSortField not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             Location::SORT_ORDER_ASC,
             $result->defaultSortOrder,
             'defaultSortOrder not created correctly'
         );
 
-        $this->assertTrue(
+        self::assertTrue(
             $result->defaultAlwaysAvailable,
             'defaultAlwaysAvailable not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             ['eng-US' => 'New content type'],
             $result->names,
             'names not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             ['eng-US' => 'New content type description'],
             $result->descriptions,
             'descriptions not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             new \DateTime('2012-12-31T12:30:00'),
             $result->creationDate,
             'creationDate not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             14,
             $result->creatorId,
             'creatorId not created correctly'
         );
 
         foreach ($result->fieldDefinitions as $fieldDefinition) {
-            $this->assertInstanceOf(
+            self::assertInstanceOf(
                 FieldDefinitionCreateStruct::class,
                 $fieldDefinition,
                 'ContentTypeCreateStruct field definition not created correctly.'
@@ -254,7 +255,7 @@ class ContentTypeCreateTest extends BaseTest
     {
         $fieldDefinitionCreateParserMock = $this->createMock(FieldDefinitionCreate::class);
 
-        $fieldDefinitionCreateParserMock->expects($this->any())
+        $fieldDefinitionCreateParserMock->expects(self::any())
             ->method('parse')
             ->with([], $this->getParsingDispatcherMock())
             ->willReturn(new FieldDefinitionCreateStruct());
@@ -271,9 +272,9 @@ class ContentTypeCreateTest extends BaseTest
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects($this->any())
+        $contentTypeServiceMock->expects(self::any())
             ->method('newContentTypeCreateStruct')
-            ->with($this->equalTo('new_content_type'))
+            ->with(self::equalTo('new_content_type'))
             ->willReturn(
                 new ContentTypeCreateStruct(
                     [

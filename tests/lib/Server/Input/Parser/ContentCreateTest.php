@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\FieldTypeService;
@@ -57,67 +58,67 @@ class ContentCreateTest extends BaseTest
         $contentCreate = $this->getParser();
         $result = $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             '\\Ibexa\\Rest\\Server\\Values\\RestContentCreateStruct',
             $result,
             'ContentCreate not created correctly.'
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             '\\Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\ContentCreateStruct',
             $result->contentCreateStruct,
             'contentCreateStruct not created correctly.'
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             '\\Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType',
             $result->contentCreateStruct->contentType,
             'contentType not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             13,
             $result->contentCreateStruct->contentType->id,
             'contentType not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'eng-US',
             $result->contentCreateStruct->mainLanguageCode,
             'mainLanguageCode not created correctly'
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             '\\Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\LocationCreateStruct',
             $result->locationCreateStruct,
             'locationCreateStruct not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             4,
             $result->contentCreateStruct->sectionId,
             'sectionId not created correctly'
         );
 
-        $this->assertTrue(
+        self::assertTrue(
             $result->contentCreateStruct->alwaysAvailable,
             'alwaysAvailable not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'remoteId12345678',
             $result->contentCreateStruct->remoteId,
             'remoteId not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             14,
             $result->contentCreateStruct->ownerId,
             'ownerId not created correctly'
         );
 
         foreach ($result->contentCreateStruct->fields as $field) {
-            $this->assertEquals(
+            self::assertEquals(
                 'foo',
                 $field->value,
                 'field value not created correctly'
@@ -525,7 +526,7 @@ class ContentCreateTest extends BaseTest
             )
             ->getMock();
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock->expects(self::any())
             ->method('parseValue')
             ->with('ezstring', [])
             ->willReturn('foo');
@@ -542,7 +543,7 @@ class ContentCreateTest extends BaseTest
     {
         $locationCreateParserMock = $this->createMock(LocationCreate::class);
 
-        $locationCreateParserMock->expects($this->any())
+        $locationCreateParserMock->expects(self::any())
             ->method('parse')
             ->with([], $this->getParsingDispatcherMock())
             ->willReturn(new LocationCreateStruct());
@@ -560,11 +561,11 @@ class ContentCreateTest extends BaseTest
         $contentServiceMock = $this->createMock(ContentService::class);
 
         $contentType = $this->getContentType();
-        $contentServiceMock->expects($this->any())
+        $contentServiceMock->expects(self::any())
             ->method('newContentCreateStruct')
             ->with(
-                $this->equalTo($contentType),
-                $this->equalTo('eng-US')
+                self::equalTo($contentType),
+                self::equalTo('eng-US')
             )
             ->willReturn(
                 new ContentCreateStruct(
@@ -587,9 +588,9 @@ class ContentCreateTest extends BaseTest
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects($this->any())
+        $contentTypeServiceMock->expects(self::any())
             ->method('loadContentType')
-            ->with($this->equalTo(13))
+            ->with(self::equalTo(13))
             ->willReturn($this->getContentType());
 
         return $contentTypeServiceMock;

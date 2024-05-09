@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Security;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
@@ -181,6 +182,7 @@ class RestAuthenticator implements AuthenticatorInterface
         }
 
         $wasAnonymous = $previousUser->getAPIUser()->getUserId() == $this->configResolver->getParameter('anonymous_user_id');
+
         // TODO: isEqualTo is not on the interface
         return !$wasAnonymous && !$user->isEqualTo($previousUser);
     }

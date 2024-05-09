@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
@@ -25,7 +26,7 @@ class QueryParserTest extends BaseTest
 
         $expectedQuery = new Query();
 
-        $this->assertEquals($expectedQuery, $result);
+        self::assertEquals($expectedQuery, $result);
     }
 
     public function testDispatchOneFilter()
@@ -37,7 +38,7 @@ class QueryParserTest extends BaseTest
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('parse')
             ->with(['ContentTypeIdentifierCriterion' => 'article'])
             ->willReturn(new Query\Criterion\ContentTypeIdentifier('article'));
@@ -49,7 +50,7 @@ class QueryParserTest extends BaseTest
         $expectedQuery = new Query();
         $expectedQuery->filter = new Query\Criterion\ContentTypeIdentifier('article');
 
-        $this->assertEquals($expectedQuery, $result);
+        self::assertEquals($expectedQuery, $result);
     }
 
     public function testDispatchMoreThanOneFilter()
@@ -61,12 +62,12 @@ class QueryParserTest extends BaseTest
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('parse')
             ->with(['ContentTypeIdentifierCriterion' => 'article'])
             ->willReturn(new Query\Criterion\ContentTypeIdentifier('article'));
         $parsingDispatcher
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('parse')
             ->with(['ParentLocationIdCriterion' => 762])
             ->willReturn(new Query\Criterion\ParentLocationId(762));
@@ -81,7 +82,7 @@ class QueryParserTest extends BaseTest
             new Query\Criterion\ParentLocationId(762),
         ]);
 
-        $this->assertEquals($expectedQuery, $result);
+        self::assertEquals($expectedQuery, $result);
     }
 
     public function testDispatchOneQueryItem()
@@ -93,7 +94,7 @@ class QueryParserTest extends BaseTest
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('parse')
             ->with(['ContentTypeIdentifierCriterion' => 'article'])
             ->willReturn(new Query\Criterion\ContentTypeIdentifier('article'));
@@ -105,7 +106,7 @@ class QueryParserTest extends BaseTest
         $expectedQuery = new Query();
         $expectedQuery->query = new Query\Criterion\ContentTypeIdentifier('article');
 
-        $this->assertEquals($expectedQuery, $result);
+        self::assertEquals($expectedQuery, $result);
     }
 
     public function testDispatchMoreThanOneQueryItem()
@@ -117,12 +118,12 @@ class QueryParserTest extends BaseTest
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('parse')
             ->with(['ContentTypeIdentifierCriterion' => 'article'])
             ->willReturn(new Query\Criterion\ContentTypeIdentifier('article'));
         $parsingDispatcher
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('parse')
             ->with(['ParentLocationIdCriterion' => 762])
             ->willReturn(new Query\Criterion\ParentLocationId(762));
@@ -137,7 +138,7 @@ class QueryParserTest extends BaseTest
             new Query\Criterion\ParentLocationId(762),
         ]);
 
-        $this->assertEquals($expectedQuery, $result);
+        self::assertEquals($expectedQuery, $result);
     }
 
     /**

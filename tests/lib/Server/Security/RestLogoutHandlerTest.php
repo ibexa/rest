@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Security;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
@@ -38,21 +39,21 @@ class RestLogoutHandlerTest extends TestCase
     {
         $sessionId = 'eZSESSID';
         $this->session
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getName')
             ->willReturn($sessionId);
         $request = new Request();
         $request->setSession($this->session);
         $request->attributes->set('is_rest_request', true);
         $this->configResolver
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getParameter')
             ->with('session')
             ->willReturn([]);
         $response = new Response();
         $response->headers = $this->createMock(ResponseHeaderBag::class);
         $response->headers
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('clearCookie')
             ->with($sessionId);
         $logoutHandler = new RestLogoutHandler($this->configResolver);
@@ -67,7 +68,7 @@ class RestLogoutHandlerTest extends TestCase
     {
         $sessionId = 'eZSESSID';
         $this->session
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getName')
             ->willReturn($sessionId);
         $request = new Request();
@@ -78,14 +79,14 @@ class RestLogoutHandlerTest extends TestCase
             'cookie_domain' => 'ibexa.co',
         ];
         $this->configResolver
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getParameter')
             ->with('session')
             ->willReturn($sessionSettings);
         $response = new Response();
         $response->headers = $this->createMock(ResponseHeaderBag::class);
         $response->headers
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('clearCookie')
             ->with($sessionId, $sessionSettings['cookie_path'], $sessionSettings['cookie_domain']);
         $logoutHandler = new RestLogoutHandler($this->configResolver);
@@ -100,7 +101,7 @@ class RestLogoutHandlerTest extends TestCase
     {
         $session = $this->createMock(SessionInterface::class);
         $session
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('getName');
 
         $request = new Request();
@@ -109,7 +110,7 @@ class RestLogoutHandlerTest extends TestCase
         $response = new Response();
         $response->headers = $this->createMock(ResponseHeaderBag::class);
         $response->headers
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('clearCookie');
 
         $logoutHandler = new RestLogoutHandler($this->configResolver);

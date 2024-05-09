@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output;
 
 use Ibexa\Contracts\Rest\Output\Exceptions\OutputGeneratorException;
@@ -42,7 +43,7 @@ abstract class GeneratorTest extends TestCase
         $generator->reset();
         $generator->startDocument('test');
 
-        $this->assertNotNull($generator->endDocument('test'));
+        self::assertNotNull($generator->endDocument('test'));
     }
 
     public function testInvalidDocumentNameEnd()
@@ -173,7 +174,7 @@ abstract class GeneratorTest extends TestCase
 
         $generator->startDocument('test');
 
-        $this->assertTrue($generator->isEmpty());
+        self::assertTrue($generator->isEmpty());
     }
 
     public function testNonEmptyDocument()
@@ -183,7 +184,7 @@ abstract class GeneratorTest extends TestCase
         $generator->startDocument('test');
         $generator->startObjectElement('element');
 
-        $this->assertFalse($generator->isEmpty());
+        self::assertFalse($generator->isEmpty());
     }
 
     abstract protected function assertSnapshot(string $snapshotName, string $generatedContent): void;

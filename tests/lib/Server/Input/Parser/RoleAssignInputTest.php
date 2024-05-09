@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
@@ -32,7 +33,7 @@ class RoleAssignInputTest extends BaseTest
         ];
 
         $this->getParsingDispatcherMock()
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('parse')
             ->with($limitation, 'application/vnd.ibexa.api.internal.limitation.Section')
             ->willReturn(new SectionLimitation());
@@ -40,19 +41,19 @@ class RoleAssignInputTest extends BaseTest
         $roleAssignInput = $this->getParser();
         $result = $roleAssignInput->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             RoleAssignment::class,
             $result,
             'RoleAssignment not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             '42',
             $result->roleId,
             'RoleAssignment roleId property not created correctly.'
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             RoleLimitation::class,
             $result->limitation,
             'Limitation not created correctly.'

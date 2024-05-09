@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Contracts\Core\Repository\LocationService;
@@ -35,13 +36,14 @@ class RelationProcessorTest extends TestCase
 
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\RelationProcessor::preProcessFieldSettingsHash
+     *
      * @dataProvider fieldSettingsHashes
      */
     public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
     {
         $processor = $this->getProcessor();
 
-        $this->assertEquals(
+        self::assertEquals(
             $outputSettings,
             $processor->preProcessFieldSettingsHash($inputSettings)
         );
@@ -49,13 +51,14 @@ class RelationProcessorTest extends TestCase
 
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\RelationProcessor::postProcessFieldSettingsHash
+     *
      * @dataProvider fieldSettingsHashes
      */
     public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)
     {
         $processor = $this->getProcessor();
 
-        $this->assertEquals(
+        self::assertEquals(
             $outputSettings,
             $processor->postProcessFieldSettingsHash($inputSettings)
         );
@@ -83,16 +86,16 @@ class RelationProcessorTest extends TestCase
 
         $hash = $processor->postProcessFieldSettingsHash(['selectionRoot' => 42]);
 
-        $this->assertEquals([
+        self::assertEquals([
             'selectionRoot' => 42,
             'selectionRootHref' => '/api/ibexa/v2/content/locations/1/25/42',
         ], $hash);
 
         //empty cases
         $hash = $processor->postProcessFieldSettingsHash(['selectionRoot' => '']);
-        $this->assertEquals(['selectionRoot' => ''], $hash);
+        self::assertEquals(['selectionRoot' => ''], $hash);
         $hash = $processor->postProcessFieldSettingsHash(['selectionRoot' => null]);
-        $this->assertEquals(['selectionRoot' => null], $hash);
+        self::assertEquals(['selectionRoot' => null], $hash);
     }
 
     public function testPostProcessFieldValueHash()
@@ -103,14 +106,14 @@ class RelationProcessorTest extends TestCase
         $processor->setRouter($routerMock);
 
         $routerMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('generate')
             ->with('ibexa.rest.load_content', ['contentId' => 42])
             ->willReturn('/api/ibexa/v2/content/objects/42');
 
         $hash = $processor->postProcessValueHash(['destinationContentId' => 42]);
-        $this->assertArrayHasKey('destinationContentHref', $hash);
-        $this->assertEquals('/api/ibexa/v2/content/objects/42', $hash['destinationContentHref']);
+        self::assertArrayHasKey('destinationContentHref', $hash);
+        self::assertEquals('/api/ibexa/v2/content/objects/42', $hash['destinationContentHref']);
     }
 
     public function testPostProcessFieldValueHashNullValue()
@@ -121,11 +124,11 @@ class RelationProcessorTest extends TestCase
         $processor->setRouter($routerMock);
 
         $routerMock
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('generate');
 
         $hash = $processor->postProcessValueHash(['destinationContentId' => null]);
-        $this->assertArrayNotHasKey('destinationContentHref', $hash);
+        self::assertArrayNotHasKey('destinationContentHref', $hash);
     }
 
     public function testPostProcessFieldValueHashNotAccessibleLocation(): void

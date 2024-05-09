@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\Content;
@@ -45,7 +46,7 @@ class RelationListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         return $result;
     }
@@ -111,9 +112,9 @@ class RelationListTest extends ValueObjectVisitorBaseTest
             1
         );
 
-        $this->getVisitorMock()->expects($this->exactly(2))
+        $this->getVisitorMock()->expects(self::exactly(2))
             ->method('visitValueObject')
-            ->with($this->isInstanceOf(RestRelation::class));
+            ->with(self::isInstanceOf(RestRelation::class));
 
         $visitor->visit(
             $this->getVisitorMock(),

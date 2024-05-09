@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\Routing;
 
 use Ibexa\Bundle\Rest\Routing\OptionsLoader;
@@ -18,6 +19,7 @@ class OptionsLoaderTest extends TestCase
     /**
      * @param string $type
      * @param bool $expected
+     *
      * @dataProvider getResourceType
      */
     public function testSupportsResourceType($type, $expected)
@@ -40,7 +42,7 @@ class OptionsLoaderTest extends TestCase
     {
         $optionsRouteCollection = new RouteCollection();
 
-        $this->getRouteCollectionMapperMock()->expects($this->once())
+        $this->getRouteCollectionMapperMock()->expects(self::once())
             ->method('mapCollection')
             ->with(new RouteCollection())
             ->willReturn($optionsRouteCollection);
@@ -63,9 +65,9 @@ class OptionsLoaderTest extends TestCase
             ->setMethods(['import'])
             ->getMock();
 
-        $mock->expects($this->any())
+        $mock->expects(self::any())
             ->method('import')
-            ->with($this->anything(), $this->anything())
+            ->with(self::anything(), self::anything())
             ->willReturn(new RouteCollection());
 
         return $mock;

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
@@ -28,12 +29,12 @@ class ResourceCreatedTest extends ValueObjectVisitorBaseTest
             '/some/redirect/uri'
         );
 
-        $this->getVisitorMock()->expects($this->once())
+        $this->getVisitorMock()->expects(self::once())
             ->method('setStatus')
-            ->with($this->equalTo(201));
-        $this->getVisitorMock()->expects($this->once())
+            ->with(self::equalTo(201));
+        $this->getVisitorMock()->expects(self::once())
             ->method('setHeader')
-            ->with($this->equalTo('Location'), $this->equalTo('/some/redirect/uri'));
+            ->with(self::equalTo('Location'), self::equalTo('/some/redirect/uri'));
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -41,7 +42,7 @@ class ResourceCreatedTest extends ValueObjectVisitorBaseTest
             $resourceCreated
         );
 
-        $this->assertTrue($generator->isEmpty());
+        self::assertTrue($generator->isEmpty());
     }
 
     /**

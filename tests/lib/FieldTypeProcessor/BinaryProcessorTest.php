@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Rest\FieldTypeProcessor\BinaryProcessor;
@@ -27,7 +28,7 @@ class BinaryProcessorTest extends BinaryInputProcessorTest
         $outputHash = $processor->postProcessValueHash($inputHash);
 
         $expectedUri = 'http://static.example.com' . $uri;
-        $this->assertEquals(
+        self::assertEquals(
             [
                 'url' => $expectedUri,
                 'uri' => $expectedUri,

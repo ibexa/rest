@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use DOMDocument;
@@ -33,7 +34,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
 
         $result = $this->generateDocument($generator, $visitor);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         return $result;
     }
@@ -53,7 +54,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
 
         $result = $this->generateDocument($generator, $visitor);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         return $result;
     }
@@ -135,7 +136,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
         $nodeList = $xpath->query('//ErrorMessage/errorDescription');
         $errorDescriptionNode = $nodeList->item(0);
 
-        $this->assertEquals(self::NON_VERBOSE_ERROR_DESCRIPTION, $errorDescriptionNode->textContent);
+        self::assertEquals(self::NON_VERBOSE_ERROR_DESCRIPTION, $errorDescriptionNode->textContent);
     }
 
     /**
@@ -247,7 +248,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
 
         $this
             ->getVisitorMock()
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('visitValueObject')
             ->with($previousException);
 

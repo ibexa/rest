@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output;
 
 use Ibexa\Contracts\Rest\Output\Generator;
@@ -24,17 +25,17 @@ class VisitorTest extends TestCase
 
         $generator = $this->getGeneratorMock();
         $generator
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('startDocument')
             ->with($data);
 
         $generator
-            ->expects($this->at(2))
+            ->expects(self::at(2))
             ->method('isEmpty')
             ->willReturn(false);
 
         $generator
-            ->expects($this->at(3))
+            ->expects(self::at(3))
             ->method('endDocument')
             ->with($data)
             ->willReturn('Hello world!');
@@ -44,7 +45,7 @@ class VisitorTest extends TestCase
             ->setConstructorArgs([$generator, $this->getValueObjectDispatcherMock()])
             ->getMock();
 
-        $this->assertEquals(
+        self::assertEquals(
             new Response('Hello world!', 200, []),
             $visitor->visit($data)
         );
@@ -56,17 +57,17 @@ class VisitorTest extends TestCase
 
         $generator = $this->getGeneratorMock();
         $generator
-            ->expects($this->at(1))
+            ->expects(self::at(1))
             ->method('startDocument')
             ->with($data);
 
         $generator
-            ->expects($this->at(2))
+            ->expects(self::at(2))
             ->method('isEmpty')
             ->willReturn(true);
 
         $generator
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('endDocument');
 
         $visitor = $this->getMockBuilder(Visitor::class)
@@ -74,7 +75,7 @@ class VisitorTest extends TestCase
             ->setConstructorArgs([$generator, $this->getValueObjectDispatcherMock()])
             ->getMock();
 
-        $this->assertEquals(
+        self::assertEquals(
             new Response(null, 200, []),
             $visitor->visit($data)
         );
@@ -89,7 +90,7 @@ class VisitorTest extends TestCase
 
         $valueObjectDispatcherMock = $this->getValueObjectDispatcherMock();
         $valueObjectDispatcherMock
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('visit')
             ->with($data);
 
@@ -104,7 +105,7 @@ class VisitorTest extends TestCase
         $visitor = $this->getVisitorMock();
 
         $visitor->setHeader('Content-Type', 'text/xml');
-        $this->assertEquals(
+        self::assertEquals(
             new Response(
                 null,
                 200,
@@ -129,7 +130,7 @@ class VisitorTest extends TestCase
 
         $visitor->setHeader('Content-Type', 'text/xml');
         $visitor->setHeader('Accept-Patch', false);
-        $this->assertEquals(
+        self::assertEquals(
             new Response(
                 null,
                 200,
@@ -149,7 +150,7 @@ class VisitorTest extends TestCase
 
         $visitor->setHeader('Content-Type', 'text/xml');
         $visitor->setHeader('Content-Type', 'text/html');
-        $this->assertEquals(
+        self::assertEquals(
             new Response(
                 null,
                 200,
@@ -172,7 +173,7 @@ class VisitorTest extends TestCase
         $visitor->visit($data);
         $result = $visitor->visit($data);
 
-        $this->assertEquals(
+        self::assertEquals(
             new Response(
                 null,
                 200,
@@ -189,7 +190,7 @@ class VisitorTest extends TestCase
         $visitor = $this->getVisitorMock();
 
         $visitor->setStatus(201);
-        $this->assertEquals(
+        self::assertEquals(
             new Response(
                 null,
                 201
@@ -207,7 +208,7 @@ class VisitorTest extends TestCase
         $visitor->setStatus(201);
         $visitor->setStatus(404);
 
-        $this->assertEquals(
+        self::assertEquals(
             new Response(
                 null,
                 201

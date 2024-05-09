@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateUpdateStruct;
@@ -42,31 +43,31 @@ class ObjectStateUpdateTest extends BaseTest
         $objectStateUpdate = $this->getParser();
         $result = $objectStateUpdate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ObjectStateUpdateStruct::class,
             $result,
             'ObjectStateUpdateStruct not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'test-state',
             $result->identifier,
             'ObjectStateUpdateStruct identifier property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'eng-GB',
             $result->defaultLanguageCode,
             'ObjectStateUpdateStruct defaultLanguageCode property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             ['eng-GB' => 'Test state'],
             $result->names,
             'ObjectStateUpdateStruct names property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             ['eng-GB' => 'Test description'],
             $result->descriptions,
             'ObjectStateUpdateStruct descriptions property not created correctly.'
@@ -120,7 +121,7 @@ class ObjectStateUpdateTest extends BaseTest
     {
         $objectStateServiceMock = $this->createMock(ObjectStateService::class);
 
-        $objectStateServiceMock->expects($this->any())
+        $objectStateServiceMock->expects(self::any())
             ->method('newObjectStateUpdateStruct')
             ->willReturn(
                 new ObjectStateUpdateStruct()

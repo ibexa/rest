@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser\FacetBuilder;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
@@ -50,7 +51,7 @@ class FacetBuilderParserTest extends FacetBuilderBaseTest
             ],
         ]);
 
-        $this->assertEquals($expectedQuery, $result);
+        self::assertEquals($expectedQuery, $result);
     }
 
     public function testQueryContentTypeFacetBuilder(): void
@@ -72,7 +73,7 @@ class FacetBuilderParserTest extends FacetBuilderBaseTest
             ],
         ]);
 
-        $this->assertEquals($expectedQuery, $result);
+        self::assertEquals($expectedQuery, $result);
     }
 
     public function testQueryCriterionFacetBuilder(): void
@@ -98,7 +99,7 @@ class FacetBuilderParserTest extends FacetBuilderBaseTest
             ],
         ]);
 
-        $this->assertEquals($expectedQuery, $result);
+        self::assertEquals($expectedQuery, $result);
     }
 
     public function testQueryFieldFacetBuilder(): void
@@ -132,7 +133,7 @@ class FacetBuilderParserTest extends FacetBuilderBaseTest
             ],
         ]);
 
-        $this->assertEquals($expectedQuery, $result);
+        self::assertEquals($expectedQuery, $result);
     }
 
     public function testQueryLocationFacetBuilder(): void
@@ -158,7 +159,7 @@ class FacetBuilderParserTest extends FacetBuilderBaseTest
             ],
         ]);
 
-        $this->assertEquals($expectedQuery, $result);
+        self::assertEquals($expectedQuery, $result);
     }
 
     public function testQuerySectionFacetBuilder(): void
@@ -180,7 +181,7 @@ class FacetBuilderParserTest extends FacetBuilderBaseTest
             ],
         ]);
 
-        $this->assertEquals($expectedQuery, $result);
+        self::assertEquals($expectedQuery, $result);
     }
 
     public function testQueryTermFacetBuilder(): void
@@ -202,7 +203,7 @@ class FacetBuilderParserTest extends FacetBuilderBaseTest
             ],
         ]);
 
-        $this->assertEquals($expectedQuery, $result);
+        self::assertEquals($expectedQuery, $result);
     }
 
     public function testQueryUserFacetBuilder(): void
@@ -228,7 +229,7 @@ class FacetBuilderParserTest extends FacetBuilderBaseTest
             ],
         ]);
 
-        $this->assertEquals($expectedQuery, $result);
+        self::assertEquals($expectedQuery, $result);
     }
 
     public function testQueryNoFacetBuilders(): void
@@ -246,7 +247,7 @@ class FacetBuilderParserTest extends FacetBuilderBaseTest
             'facetBuilders' => [],
         ]);
 
-        $this->assertEquals($expectedQuery, $result);
+        self::assertEquals($expectedQuery, $result);
     }
 
     public function testQueryMultipleFacetBuilders(): void
@@ -274,7 +275,7 @@ class FacetBuilderParserTest extends FacetBuilderBaseTest
             ],
         ]);
 
-        $this->assertEquals($expectedQuery, $result);
+        self::assertEquals($expectedQuery, $result);
     }
 }
 

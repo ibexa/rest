@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser\SortClause;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
@@ -26,7 +27,7 @@ class DataKeyValueObjectClassTest extends BaseTest
         $dataKeyValueObjectClass = $this->getParser();
         $result = $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertEquals(
+        self::assertEquals(
             new DatePublished(Query::SORT_ASC),
             $result,
             'DataKeyValueObjectClass parser not created correctly.'

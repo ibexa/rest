@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output\Generator;
 
 use Ibexa\Rest\Output\Generator\Xml;
@@ -23,7 +24,7 @@ class XmlTest extends GeneratorTest
 
         $generator->startDocument('test');
 
-        $this->assertSame(
+        self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
             $generator->endDocument('test')
         );
@@ -38,7 +39,7 @@ class XmlTest extends GeneratorTest
         $generator->startObjectElement('element');
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
             $generator->endDocument('test')
         );
@@ -53,7 +54,7 @@ class XmlTest extends GeneratorTest
         $generator->startObjectElement('element', 'User');
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
             $generator->endDocument('test')
         );
@@ -72,7 +73,7 @@ class XmlTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
             $generator->endDocument('test')
         );
@@ -90,7 +91,7 @@ class XmlTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
             $generator->endDocument('test')
         );
@@ -109,7 +110,7 @@ class XmlTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
             $generator->endDocument('test')
         );
@@ -128,7 +129,7 @@ class XmlTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
             $generator->endDocument('test')
         );
@@ -146,7 +147,7 @@ class XmlTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
             $generator->endDocument('test')
         );
@@ -165,7 +166,7 @@ class XmlTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
             $generator->endDocument('test')
         );
@@ -191,7 +192,7 @@ class XmlTest extends GeneratorTest
 
         $generator->endObjectElement('elementList');
 
-        $this->assertSame(
+        self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
             $generator->endDocument('test')
         );
@@ -213,7 +214,7 @@ class XmlTest extends GeneratorTest
 
         $generator->endHashElement('elements');
 
-        $this->assertSame(
+        self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
             $generator->endDocument('test')
         );
@@ -235,7 +236,7 @@ class XmlTest extends GeneratorTest
         $generator->endList('simpleValue');
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
             $generator->endDocument('test')
         );
@@ -253,7 +254,7 @@ class XmlTest extends GeneratorTest
     {
         $generator = $this->getGenerator();
 
-        $this->assertEquals(
+        self::assertEquals(
             'application/vnd.ibexa.api.Section+xml',
             $generator->getMediaType('Section')
         );
@@ -263,9 +264,9 @@ class XmlTest extends GeneratorTest
     {
         $generator = $this->getGenerator();
 
-        $this->assertTrue($generator->serializeBool(true) === 'true');
-        $this->assertTrue($generator->serializeBool(false) === 'false');
-        $this->assertTrue($generator->serializeBool('notbooleanbuttrue') === 'true');
+        self::assertTrue($generator->serializeBool(true) === 'true');
+        self::assertTrue($generator->serializeBool(false) === 'false');
+        self::assertTrue($generator->serializeBool('notbooleanbuttrue') === 'true');
     }
 
     protected function getGenerator()

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
@@ -51,44 +52,44 @@ class UserCreateTest extends BaseTest
         $userCreate = $this->getParser();
         $result = $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             UserCreateStruct::class,
             $result,
             'UserCreateStruct not created correctly.'
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ContentType::class,
             $result->contentType,
             'contentType not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             4,
             $result->contentType->id,
             'contentType not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'eng-US',
             $result->mainLanguageCode,
             'mainLanguageCode not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             4,
             $result->sectionId,
             'sectionId not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'remoteId12345678',
             $result->remoteId,
             'remoteId not created correctly'
         );
 
         foreach ($result->fields as $field) {
-            $this->assertEquals(
+            self::assertEquals(
                 'foo',
                 $field->value,
                 'field value not created correctly'
@@ -456,7 +457,7 @@ class UserCreateTest extends BaseTest
             )
             ->getMock();
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock->expects(self::any())
             ->method('parseValue')
             ->with('ezstring', [])
             ->willReturn('foo');
@@ -474,14 +475,14 @@ class UserCreateTest extends BaseTest
         $userServiceMock = $this->createMock(UserService::class);
 
         $contentType = $this->getContentType();
-        $userServiceMock->expects($this->any())
+        $userServiceMock->expects(self::any())
             ->method('newUserCreateStruct')
             ->with(
-                $this->equalTo('login'),
-                $this->equalTo('admin@link.invalid'),
-                $this->equalTo('password'),
-                $this->equalTo('eng-US'),
-                $this->equalTo($contentType)
+                self::equalTo('login'),
+                self::equalTo('admin@link.invalid'),
+                self::equalTo('password'),
+                self::equalTo('eng-US'),
+                self::equalTo($contentType)
             )
             ->willReturn(
                 new UserCreateStruct(
@@ -504,9 +505,9 @@ class UserCreateTest extends BaseTest
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects($this->any())
+        $contentTypeServiceMock->expects(self::any())
             ->method('loadContentType')
-            ->with($this->equalTo(4))
+            ->with(self::equalTo(4))
             ->willReturn($this->getContentType());
 
         return $contentTypeServiceMock;

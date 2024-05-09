@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Input\Handler;
 
 use Ibexa\Contracts\Rest\Exceptions\Parser;
@@ -30,7 +31,7 @@ class JsonTest extends TestCase
     {
         $handler = $this->getHandler();
 
-        $this->assertSame(
+        self::assertSame(
             [
                 'text' => 'Hello world!',
             ],
@@ -42,7 +43,7 @@ class JsonTest extends TestCase
     {
         $handler = $this->getHandler();
 
-        $this->assertSame(
+        self::assertSame(
             [
                 'Field' => [
                     'fieldValue' => [

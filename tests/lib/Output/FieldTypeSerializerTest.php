@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output;
 
 use Ibexa\Contracts\Core\Repository\FieldType as APIFieldType;
@@ -112,18 +113,18 @@ class FieldTypeSerializerTest extends TestCase
 
         $processorMock = $this->getFieldTypeProcessorMock();
         $this->getFieldTypeProcessorRegistryMock()
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('hasProcessor')
             ->with('myFancyFieldType')
             ->willReturn(true);
         $this->getFieldTypeProcessorRegistryMock()
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getProcessor')
             ->with('myFancyFieldType')
             ->willReturn($processorMock);
-        $processorMock->expects($this->once())
+        $processorMock->expects(self::once())
             ->method('postProcessValueHash')
-            ->with($this->equalTo([23, 42]))
+            ->with(self::equalTo([23, 42]))
             ->willReturn(['post-processed']);
 
         $fieldTypeMock = $this->getFieldTypeMock();
@@ -133,12 +134,12 @@ class FieldTypeSerializerTest extends TestCase
             $fieldTypeMock
         );
 
-        $fieldTypeMock->expects($this->once())
+        $fieldTypeMock->expects(self::once())
             ->method('getFieldTypeIdentifier')
             ->willReturn('myFancyFieldType');
-        $fieldTypeMock->expects($this->once())
+        $fieldTypeMock->expects(self::once())
             ->method('toHash')
-            ->with($this->equalTo('my-field-value'))
+            ->with(self::equalTo('my-field-value'))
             ->willReturn([23, 42]);
 
         $serializer->serializeFieldValue(
@@ -161,9 +162,9 @@ class FieldTypeSerializerTest extends TestCase
             $fieldTypeMock
         );
 
-        $fieldTypeMock->expects($this->once())
+        $fieldTypeMock->expects(self::once())
             ->method('toHash')
-            ->with($this->equalTo('my-field-value'))
+            ->with(self::equalTo('my-field-value'))
             ->willReturn([23, 42]);
 
         $serializer->serializeFieldDefaultValue(
@@ -186,9 +187,9 @@ class FieldTypeSerializerTest extends TestCase
             $fieldTypeMock
         );
 
-        $fieldTypeMock->expects($this->once())
+        $fieldTypeMock->expects(self::once())
             ->method('fieldSettingsToHash')
-            ->with($this->equalTo('my-field-settings'))
+            ->with(self::equalTo('my-field-settings'))
             ->willReturn(['foo' => 'bar']);
 
         $serializer->serializeFieldSettings(
@@ -208,12 +209,12 @@ class FieldTypeSerializerTest extends TestCase
 
         $processorMock = $this->getFieldTypeProcessorMock();
         $this->getFieldTypeProcessorRegistryMock()
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('hasProcessor')
             ->with('myFancyFieldType')
             ->willReturn(true);
         $this->getFieldTypeProcessorRegistryMock()
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getProcessor')
             ->with('myFancyFieldType')
             ->willReturnCallback(
@@ -221,9 +222,9 @@ class FieldTypeSerializerTest extends TestCase
                     return $processorMock;
                 }
             );
-        $processorMock->expects($this->once())
+        $processorMock->expects(self::once())
             ->method('postProcessFieldSettingsHash')
-            ->with($this->equalTo(['foo' => 'bar']))
+            ->with(self::equalTo(['foo' => 'bar']))
             ->willReturn(['post-processed']);
 
         $this->mockFieldTypeServiceGetFieldType(
@@ -231,9 +232,9 @@ class FieldTypeSerializerTest extends TestCase
             $fieldTypeMock
         );
 
-        $fieldTypeMock->expects($this->once())
+        $fieldTypeMock->expects(self::once())
             ->method('fieldSettingsToHash')
-            ->with($this->equalTo('my-field-settings'))
+            ->with(self::equalTo('my-field-settings'))
             ->willReturn(['foo' => 'bar']);
 
         $serializer->serializeFieldSettings(
@@ -256,9 +257,9 @@ class FieldTypeSerializerTest extends TestCase
             $fieldTypeMock
         );
 
-        $fieldTypeMock->expects($this->once())
+        $fieldTypeMock->expects(self::once())
             ->method('validatorConfigurationToHash')
-            ->with($this->equalTo('validator-config'))
+            ->with(self::equalTo('validator-config'))
             ->willReturn(['bar' => 'foo']);
 
         $serializer->serializeValidatorConfiguration(
@@ -278,12 +279,12 @@ class FieldTypeSerializerTest extends TestCase
 
         $processorMock = $this->getFieldTypeProcessorMock();
         $this->getFieldTypeProcessorRegistryMock()
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('hasProcessor')
             ->with('myFancyFieldType')
             ->willReturn(true);
         $this->getFieldTypeProcessorRegistryMock()
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getProcessor')
             ->with('myFancyFieldType')
             ->willReturnCallback(
@@ -291,9 +292,9 @@ class FieldTypeSerializerTest extends TestCase
                     return $processorMock;
                 }
             );
-        $processorMock->expects($this->once())
+        $processorMock->expects(self::once())
             ->method('postProcessValidatorConfigurationHash')
-            ->with($this->equalTo(['bar' => 'foo']))
+            ->with(self::equalTo(['bar' => 'foo']))
             ->willReturn(['post-processed']);
 
         $fieldTypeMock = $this->getFieldTypeMock();
@@ -302,9 +303,9 @@ class FieldTypeSerializerTest extends TestCase
             $fieldTypeMock
         );
 
-        $fieldTypeMock->expects($this->once())
+        $fieldTypeMock->expects(self::once())
             ->method('validatorConfigurationToHash')
-            ->with($this->equalTo('validator-config'))
+            ->with(self::equalTo('validator-config'))
             ->willReturn(['bar' => 'foo']);
 
         $serializer->serializeValidatorConfiguration(

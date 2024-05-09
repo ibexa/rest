@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
@@ -29,6 +30,7 @@ class CachedValue extends RestValue
     /**
      * @param mixed $value The value that gets cached
      * @param array $cacheTags Tags to add to the cache (supported: locationId)
+     *
      * @throw InvalidArgumentException If invalid cache tags are provided
      */
     public function __construct($value, array $cacheTags = [])

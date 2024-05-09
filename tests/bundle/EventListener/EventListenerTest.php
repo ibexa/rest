@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
 use PHPUnit\Framework\TestCase;
@@ -66,7 +67,7 @@ abstract class EventListenerTest extends TestCase
                                 ->getMock();
 
             $this->event
-                ->expects($this->any())
+                ->expects(self::any())
                 ->method('getRequest')
                 ->willReturn($this->getRequestMock());
         }
@@ -82,7 +83,7 @@ abstract class EventListenerTest extends TestCase
         if (!isset($this->requestAttributesMock)) {
             $this->requestAttributesMock = $this->createMock(ParameterBag::class);
             $this->requestAttributesMock
-                ->expects($this->once())
+                ->expects(self::once())
                 ->method('get')
                 ->with('is_rest_request')
                 ->willReturn($this->isRestRequest);
@@ -108,11 +109,11 @@ abstract class EventListenerTest extends TestCase
 
             if ($this->requestMethod === false) {
                 $this->requestMock
-                    ->expects($this->never())
+                    ->expects(self::never())
                     ->method('getMethod');
             } else {
                 $this->requestMock
-                    ->expects($this->atLeastOnce())
+                    ->expects(self::atLeastOnce())
                     ->method('getMethod')
                     ->willReturn($this->requestMethod);
             }
