@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Bundle\Rest;
 
@@ -12,11 +13,12 @@ use Ibexa\Bundle\Rest\DependencyInjection\Security\RestSessionBasedFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class IbexaRestBundle extends Bundle
+final class IbexaRestBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
+
         $container->addCompilerPass(new Compiler\FieldTypeProcessorPass());
         $container->addCompilerPass(new Compiler\InputHandlerPass());
         $container->addCompilerPass(new Compiler\InputParserPass());
@@ -25,12 +27,10 @@ class IbexaRestBundle extends Bundle
 
         /** @var \Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension $securityExtension */
         $securityExtension = $container->getExtension('security');
-        $securityExtension->addSecurityListenerFactory(new RestSessionBasedFactory());
+        $securityExtension->addAuthenticatorFactory(new RestSessionBasedFactory());
 
         if ($container->hasExtension('lexik_jwt_authentication')) {
             $container->addCompilerPass(new Compiler\LexikAuthorizationHeaderBridgePass());
         }
     }
 }
-
-class_alias(IbexaRestBundle::class, 'EzSystems\EzPlatformRestBundle\EzPlatformRestBundle');

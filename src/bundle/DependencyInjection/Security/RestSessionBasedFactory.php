@@ -4,31 +4,44 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Bundle\Rest\DependencyInjection\Security;
 
 use Ibexa\Rest\Server\Security\RestLogoutHandler;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\FormLoginFactory;
 use Symfony\Component\DependencyInjection\ChildDefinition;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class RestSessionBasedFactory extends FormLoginFactory
+final class RestSessionBasedFactory extends FormLoginFactory
 {
     public function __construct()
     {
         parent::__construct();
         unset($this->options['check_path']);
+
         $this->defaultSuccessHandlerOptions = [];
         $this->defaultFailureHandlerOptions = [];
     }
 
-    protected function isRememberMeAware($config)
+    /**
+     * @param array<mixed> $config
+     */
+    protected function isRememberMeAware(array $config): bool
     {
         return false;
     }
 
-    protected function createListener($container, $id, $config, $userProvider)
-    {
+    /**
+     * @param array<mixed> $config
+     */
+    protected function createListener(
+        ContainerBuilder $container,
+        string $id,
+        array $config,
+        ?string $userProvider
+    ): string {
         $listenerId = $this->getListenerId();
         $listener = new ChildDefinition($listenerId);
         $listener->replaceArgument(2, $id);
@@ -73,10 +86,24 @@ class RestSessionBasedFactory extends FormLoginFactory
         return 'ibexa_rest_session';
     }
 
-    protected function createEntryPoint($container, $id, $config, $defaultEntryPoint): ?string
-    {
-        return $defaultEntryPoint;
+    /**
+     * @param array<mixed> $config
+     */
+    protected function createEntryPoint(
+        ContainerBuilder $container,
+        string $id,
+        array $config,
+        ?string $defaultEntryPointId
+    ): ?string {
+        return $defaultEntryPointId;
+    }
+
+    public function createAuthenticator(
+        ContainerBuilder $container,
+        string $firewallName,
+        array $config,
+        string $userProviderId
+    ): string {
+        return parent::createAuthenticator($container, $firewallName . '__rest', $config, $userProviderId);
     }
 }
-
-class_alias(RestSessionBasedFactory::class, 'EzSystems\EzPlatformRestBundle\DependencyInjection\Security\RestSessionBasedFactory');

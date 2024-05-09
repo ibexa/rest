@@ -86,56 +86,6 @@ parameters:
 			path: src/bundle/DependencyInjection/IbexaRestExtension.php
 
 		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Security\\\\RestSessionBasedFactory\\:\\:createEntryPoint\\(\\) has parameter \\$config with no type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Security/RestSessionBasedFactory.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Security\\\\RestSessionBasedFactory\\:\\:createEntryPoint\\(\\) has parameter \\$container with no type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Security/RestSessionBasedFactory.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Security\\\\RestSessionBasedFactory\\:\\:createEntryPoint\\(\\) has parameter \\$defaultEntryPoint with no type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Security/RestSessionBasedFactory.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Security\\\\RestSessionBasedFactory\\:\\:createEntryPoint\\(\\) has parameter \\$id with no type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Security/RestSessionBasedFactory.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Security\\\\RestSessionBasedFactory\\:\\:createListener\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Security/RestSessionBasedFactory.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Security\\\\RestSessionBasedFactory\\:\\:createListener\\(\\) has parameter \\$config with no type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Security/RestSessionBasedFactory.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Security\\\\RestSessionBasedFactory\\:\\:createListener\\(\\) has parameter \\$container with no type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Security/RestSessionBasedFactory.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Security\\\\RestSessionBasedFactory\\:\\:createListener\\(\\) has parameter \\$id with no type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Security/RestSessionBasedFactory.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Security\\\\RestSessionBasedFactory\\:\\:createListener\\(\\) has parameter \\$userProvider with no type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Security/RestSessionBasedFactory.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Security\\\\RestSessionBasedFactory\\:\\:isRememberMeAware\\(\\) has parameter \\$config with no type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Security/RestSessionBasedFactory.php
-
-		-
 			message: "#^Cannot call method isTokenValid\\(\\) on Symfony\\\\Component\\\\Security\\\\Csrf\\\\CsrfTokenManagerInterface\\|null\\.$#"
 			count: 1
 			path: src/bundle/EventListener/CsrfListener.php
@@ -189,11 +139,6 @@ parameters:
 			message: "#^Property Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\UserCheckRequestListener\\:\\:\\$permissionResolver is never read, only written\\.$#"
 			count: 1
 			path: src/bundle/EventListener/UserCheckRequestListener.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\IbexaRestBundle\\:\\:build\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/IbexaRestBundle.php
 
 		-
 			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\RequestParser\\\\Router\\:\\:generate\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
