@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
 use Exception;
@@ -78,7 +79,7 @@ class ResponseListenerTest extends EventListenerTest
     protected function onKernelViewIsNotRestRequest($method, RequestEvent $event)
     {
         $this->getVisitorDispatcherMock()
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('dispatch');
 
         $this->getEventListener()->$method($event);
@@ -97,7 +98,7 @@ class ResponseListenerTest extends EventListenerTest
     protected function onKernelView($method, $event, $value)
     {
         $this->getVisitorDispatcherMock()
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch')
             ->with(
                 $this->getRequestMock(),
@@ -108,7 +109,7 @@ class ResponseListenerTest extends EventListenerTest
 
         $this->getEventListener()->$method($event);
 
-        $this->assertEquals($this->response, $event->getResponse());
+        self::assertEquals($this->response, $event->getResponse());
     }
 
     /**

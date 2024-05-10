@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
@@ -66,7 +67,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -97,6 +98,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
      * @param \DOMDocument $dom
      *
      * @depends testVisit
+     *
      * @dataProvider provideXpathAssertions
      */
     public function testGeneratedXml($xpath, \DOMDocument $dom)

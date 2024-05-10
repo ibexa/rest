@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
@@ -26,11 +27,11 @@ class OptionsTest extends ValueObjectVisitorBaseTest
 
         $noContent = new Values\Options(['GET', 'POST']);
 
-        $this->getVisitorMock()->expects($this->once())
+        $this->getVisitorMock()->expects(self::once())
             ->method('setStatus')
-            ->with($this->equalTo(200));
+            ->with(self::equalTo(200));
 
-        $this->getVisitorMock()->expects($this->exactly(2))
+        $this->getVisitorMock()->expects(self::exactly(2))
             ->method('setHeader')
             ->willReturnMap(
                 ['Allow', 'GET,POST'],

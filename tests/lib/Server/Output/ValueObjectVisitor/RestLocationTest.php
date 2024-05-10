@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
@@ -87,9 +88,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
             "/content/objects/{$location->location->contentId}"
         );
 
-        $this->getVisitorMock()->expects($this->once())
+        $this->getVisitorMock()->expects(self::once())
             ->method('visitValueObject')
-            ->with($this->isInstanceOf(RestContent::class));
+            ->with(self::isInstanceOf(RestContent::class));
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -99,7 +100,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         return $result;
     }

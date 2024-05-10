@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroupCreateStruct;
@@ -42,31 +43,31 @@ class ObjectStateGroupCreateTest extends BaseTest
         $objectStateGroupCreate = $this->getParser();
         $result = $objectStateGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ObjectStateGroupCreateStruct::class,
             $result,
             'ObjectStateGroupCreateStruct not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'test-group',
             $result->identifier,
             'ObjectStateGroupCreateStruct identifier property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'eng-GB',
             $result->defaultLanguageCode,
             'ObjectStateGroupCreateStruct defaultLanguageCode property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             ['eng-GB' => 'Test group'],
             $result->names,
             'ObjectStateGroupCreateStruct names property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             ['eng-GB' => 'Test group description'],
             $result->descriptions,
             'ObjectStateGroupCreateStruct descriptions property not created correctly.'
@@ -206,9 +207,9 @@ class ObjectStateGroupCreateTest extends BaseTest
     {
         $objectStateServiceMock = $this->createMock(ObjectStateService::class);
 
-        $objectStateServiceMock->expects($this->any())
+        $objectStateServiceMock->expects(self::any())
             ->method('newObjectStateGroupCreateStruct')
-            ->with($this->equalTo('test-group'))
+            ->with(self::equalTo('test-group'))
             ->willReturn(
                 new ObjectStateGroupCreateStruct(['identifier' => 'test-group'])
             );

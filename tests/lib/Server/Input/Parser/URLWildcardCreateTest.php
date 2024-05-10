@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Rest\Exceptions\Parser;
@@ -25,7 +26,7 @@ class URLWildcardCreateTest extends BaseTest
         $urlWildcardCreate = $this->getParser();
         $result = $urlWildcardCreate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertEquals(
+        self::assertEquals(
             [
                 'sourceUrl' => '/source/url',
                 'destinationUrl' => '/destination/url',

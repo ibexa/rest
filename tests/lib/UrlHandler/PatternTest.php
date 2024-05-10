@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\UrlHandler;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
@@ -124,7 +125,7 @@ class PatternTest extends TestCase
     {
         $urlHandler = $this->getWorkingUrlHandler();
 
-        $this->assertSame(
+        self::assertSame(
             $values,
             $urlHandler->parse($url)
         );
@@ -189,7 +190,7 @@ class PatternTest extends TestCase
     {
         $urlHandler = $this->getWorkingUrlHandler();
 
-        $this->assertSame(
+        self::assertSame(
             $url,
             $urlHandler->generate($type, $values)
         );

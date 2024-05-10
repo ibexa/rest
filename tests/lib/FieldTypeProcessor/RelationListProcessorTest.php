@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Contracts\Core\Repository\LocationService;
@@ -34,13 +35,14 @@ class RelationListProcessorTest extends TestCase
 
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::preProcessFieldSettingsHash
+     *
      * @dataProvider fieldSettingsHashes
      */
     public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
     {
         $processor = $this->getProcessor();
 
-        $this->assertEquals(
+        self::assertEquals(
             $outputSettings,
             $processor->preProcessFieldSettingsHash($inputSettings)
         );
@@ -48,13 +50,14 @@ class RelationListProcessorTest extends TestCase
 
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::postProcessFieldSettingsHash
+     *
      * @dataProvider fieldSettingsHashes
      */
     public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)
     {
         $processor = $this->getProcessor();
 
-        $this->assertEquals(
+        self::assertEquals(
             $outputSettings,
             $processor->postProcessFieldSettingsHash($inputSettings)
         );
@@ -82,16 +85,16 @@ class RelationListProcessorTest extends TestCase
 
         $hash = $processor->postProcessFieldSettingsHash(['selectionDefaultLocation' => 42]);
 
-        $this->assertEquals([
+        self::assertEquals([
             'selectionDefaultLocation' => 42,
             'selectionDefaultLocationHref' => '/api/ibexa/v2/content/locations/1/25/42',
         ], $hash);
 
         //empty cases
         $hash = $processor->postProcessFieldSettingsHash(['selectionDefaultLocation' => '']);
-        $this->assertEquals(['selectionDefaultLocation' => ''], $hash);
+        self::assertEquals(['selectionDefaultLocation' => ''], $hash);
         $hash = $processor->postProcessFieldSettingsHash(['selectionDefaultLocation' => null]);
-        $this->assertEquals(['selectionDefaultLocation' => null], $hash);
+        self::assertEquals(['selectionDefaultLocation' => null], $hash);
     }
 
     public function testPostProcessValueHash()
@@ -102,7 +105,7 @@ class RelationListProcessorTest extends TestCase
         $processor->setRouter($routerMock);
 
         $routerMock
-            ->expects($this->exactly(2))
+            ->expects(self::exactly(2))
             ->method('generate')
             ->withConsecutive(
                 ['ibexa.rest.load_content', ['contentId' => 42]],
@@ -113,9 +116,9 @@ class RelationListProcessorTest extends TestCase
             );
 
         $hash = $processor->postProcessValueHash(['destinationContentIds' => [42, 300]]);
-        $this->assertArrayHasKey('destinationContentHrefs', $hash);
-        $this->assertEquals('/api/ibexa/v2/content/objects/42', $hash['destinationContentHrefs'][0]);
-        $this->assertEquals('/api/ibexa/v2/content/objects/300', $hash['destinationContentHrefs'][1]);
+        self::assertArrayHasKey('destinationContentHrefs', $hash);
+        self::assertEquals('/api/ibexa/v2/content/objects/42', $hash['destinationContentHrefs'][0]);
+        self::assertEquals('/api/ibexa/v2/content/objects/300', $hash['destinationContentHrefs'][1]);
     }
 
     /**

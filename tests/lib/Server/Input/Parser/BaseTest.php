@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
@@ -85,7 +86,7 @@ abstract class BaseTest extends ParentBaseTest
             $this->requestParserMock = $this->createMock(RequestParser::class);
 
             $this->requestParserMock
-                ->expects($this->any())
+                ->expects(self::any())
                 ->method('parseHref')
                 ->willReturnCallback($callback);
         }

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
@@ -31,42 +32,42 @@ class LocationUpdateTest extends BaseTest
         $locationUpdate = $this->getParser();
         $result = $locationUpdate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             RestLocationUpdateStruct::class,
             $result,
             'LocationUpdateStruct not created correctly.'
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             LocationUpdateStruct::class,
             $result->locationUpdateStruct,
             'LocationUpdateStruct not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             0,
             $result->locationUpdateStruct->priority,
             'LocationUpdateStruct priority property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'remote-id',
             $result->locationUpdateStruct->remoteId,
             'LocationUpdateStruct remoteId property not created correctly.'
         );
 
-        $this->assertTrue(
+        self::assertTrue(
             $result->hidden,
             'hidden property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             Location::SORT_FIELD_PATH,
             $result->locationUpdateStruct->sortField,
             'LocationUpdateStruct sortField property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             Location::SORT_ORDER_ASC,
             $result->locationUpdateStruct->sortOrder,
             'LocationUpdateStruct sortOrder property not created correctly.'
@@ -87,17 +88,17 @@ class LocationUpdateTest extends BaseTest
         $locationUpdate = $this->getParser();
         $result = $locationUpdate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             RestLocationUpdateStruct::class,
             $result
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             LocationUpdateStruct::class,
             $result->locationUpdateStruct
         );
 
-        $this->assertNull(
+        self::assertNull(
             $result->locationUpdateStruct->sortField
         );
     }
@@ -116,17 +117,17 @@ class LocationUpdateTest extends BaseTest
         $locationUpdate = $this->getParser();
         $result = $locationUpdate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             RestLocationUpdateStruct::class,
             $result
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             LocationUpdateStruct::class,
             $result->locationUpdateStruct
         );
 
-        $this->assertNull(
+        self::assertNull(
             $result->locationUpdateStruct->sortOrder
         );
     }
@@ -153,7 +154,7 @@ class LocationUpdateTest extends BaseTest
     {
         $locationServiceMock = $this->createMock(LocationService::class);
 
-        $locationServiceMock->expects($this->any())
+        $locationServiceMock->expects(self::any())
             ->method('newLocationUpdateStruct')
             ->willReturn(
                 new LocationUpdateStruct()

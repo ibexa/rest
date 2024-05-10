@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
 use Ibexa\Bundle\Rest\EventListener\CsrfListener;
@@ -94,6 +95,7 @@ class CsrfListenerTest extends EventListenerTest
      * Tests that method CSRF check don't apply to are indeed ignored.
      *
      * @param string $ignoredMethod
+     *
      * @dataProvider getIgnoredRequestMethods
      */
     public function testIgnoredRequestMethods($ignoredMethod)
@@ -164,7 +166,7 @@ class CsrfListenerTest extends EventListenerTest
     public function testValidToken()
     {
         $this->getEventDispatcherMock()
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('dispatch');
 
         $this->getEventListener()->onKernelRequest($this->getEvent());
@@ -176,7 +178,7 @@ class CsrfListenerTest extends EventListenerTest
     protected function getCsrfProviderMock()
     {
         $provider = $this->createMock(CsrfTokenManagerInterface::class);
-        $provider->expects($this->any())
+        $provider->expects(self::any())
             ->method('isTokenValid')
             ->willReturnCallback(
                 static function (CsrfToken $token) {
@@ -200,7 +202,7 @@ class CsrfListenerTest extends EventListenerTest
             parent::getEvent(RequestEvent::class);
 
             $this->event
-                ->expects($this->any())
+                ->expects(self::any())
                 ->method('getRequestType')
                 ->willReturn($this->requestType);
         }
@@ -216,7 +218,7 @@ class CsrfListenerTest extends EventListenerTest
         if (!isset($this->sessionMock)) {
             $this->sessionMock = $this->createMock(SessionInterface::class);
             $this->sessionMock
-                ->expects($this->atLeastOnce())
+                ->expects(self::atLeastOnce())
                 ->method('isStarted')
                 ->willReturn($this->sessionIsStarted);
         }
@@ -234,21 +236,21 @@ class CsrfListenerTest extends EventListenerTest
 
             if ($this->csrfTokenHeaderValue === null) {
                 $this->requestHeadersMock
-                    ->expects($this->never())
+                    ->expects(self::never())
                     ->method('has');
 
                 $this->requestHeadersMock
-                    ->expects($this->never())
+                    ->expects(self::never())
                     ->method('get');
             } else {
                 $this->requestHeadersMock
-                    ->expects($this->atLeastOnce())
+                    ->expects(self::atLeastOnce())
                     ->method('has')
                     ->with(CsrfListener::CSRF_TOKEN_HEADER)
                     ->willReturn(true);
 
                 $this->requestHeadersMock
-                    ->expects($this->atLeastOnce())
+                    ->expects(self::atLeastOnce())
                     ->method('get')
                     ->with(CsrfListener::CSRF_TOKEN_HEADER)
                     ->willReturn($this->csrfTokenHeaderValue);
@@ -268,22 +270,22 @@ class CsrfListenerTest extends EventListenerTest
 
             if ($this->sessionMock === false) {
                 $this->requestMock
-                    ->expects($this->never())
+                    ->expects(self::never())
                     ->method('getSession');
             } else {
                 $this->requestMock
-                    ->expects($this->atLeastOnce())
+                    ->expects(self::atLeastOnce())
                     ->method('getSession')
                     ->willReturn($this->getSessionMock());
             }
 
             if ($this->route === false) {
                 $this->requestMock
-                    ->expects($this->never())
+                    ->expects(self::never())
                     ->method('get');
             } else {
                 $this->requestMock
-                    ->expects($this->atLeastOnce())
+                    ->expects(self::atLeastOnce())
                     ->method('get')
                     ->with('_route')
                     ->willReturn($this->route);

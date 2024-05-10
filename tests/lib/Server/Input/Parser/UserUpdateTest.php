@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
@@ -48,61 +49,61 @@ class UserUpdateTest extends BaseTest
         $userUpdate = $this->getParser();
         $result = $userUpdate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             RestUserUpdateStruct::class,
             $result,
             'UserUpdate not created correctly.'
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ContentUpdateStruct::class,
             $result->userUpdateStruct->contentUpdateStruct,
             'UserUpdate not created correctly.'
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ContentMetadataUpdateStruct::class,
             $result->userUpdateStruct->contentMetadataUpdateStruct,
             'UserUpdate not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             1,
             $result->sectionId,
             'sectionId not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'eng-US',
             $result->userUpdateStruct->contentMetadataUpdateStruct->mainLanguageCode,
             'mainLanguageCode not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'remoteId123456',
             $result->userUpdateStruct->contentMetadataUpdateStruct->remoteId,
             'remoteId not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'admin@link.invalid',
             $result->userUpdateStruct->email,
             'email not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'somePassword',
             $result->userUpdateStruct->password,
             'password not created correctly'
         );
 
-        $this->assertTrue(
+        self::assertTrue(
             $result->userUpdateStruct->enabled,
             'enabled not created correctly'
         );
 
         foreach ($result->userUpdateStruct->contentUpdateStruct->fields as $field) {
-            $this->assertEquals(
+            self::assertEquals(
                 'foo',
                 $field->value,
                 'field value not created correctly'
@@ -257,7 +258,7 @@ class UserUpdateTest extends BaseTest
             )
             ->getMock();
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock->expects(self::any())
             ->method('parseFieldValue')
             ->with(14, 'first_name', [])
             ->willReturn('foo');
@@ -274,7 +275,7 @@ class UserUpdateTest extends BaseTest
     {
         $userServiceMock = $this->createMock(UserService::class);
 
-        $userServiceMock->expects($this->any())
+        $userServiceMock->expects(self::any())
             ->method('newUserUpdateStruct')
             ->willReturn(
                 new UserUpdateStruct()
@@ -292,13 +293,13 @@ class UserUpdateTest extends BaseTest
     {
         $contentServiceMock = $this->createMock(ContentService::class);
 
-        $contentServiceMock->expects($this->any())
+        $contentServiceMock->expects(self::any())
             ->method('newContentUpdateStruct')
             ->willReturn(
                 new ContentUpdateStruct()
             );
 
-        $contentServiceMock->expects($this->any())
+        $contentServiceMock->expects(self::any())
             ->method('newContentMetadataUpdateStruct')
             ->willReturn(
                 new ContentMetadataUpdateStruct()

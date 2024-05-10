@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\User;
@@ -53,7 +54,7 @@ class RoleTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         return $result;
     }
@@ -132,7 +133,7 @@ class RoleTest extends ValueObjectVisitorBaseTest
      */
     public function testResultContainsMainLanguageCodeValueElement($result)
     {
-        $this->markTestSkipped('@todo uncomment when support for multilingual names and descriptions is added EZP-24776');
+        self::markTestSkipped('@todo uncomment when support for multilingual names and descriptions is added EZP-24776');
         $this->assertXMLTag(
             [
                 'tag' => 'mainLanguageCode',
@@ -153,7 +154,7 @@ class RoleTest extends ValueObjectVisitorBaseTest
      */
     public function testResultContainsNamesElement($result)
     {
-        $this->markTestSkipped('@todo uncomment when support for multilingual names and descriptions is added EZP-24776');
+        self::markTestSkipped('@todo uncomment when support for multilingual names and descriptions is added EZP-24776');
         $this->assertXMLTag(
             [
                 'tag' => 'names',
@@ -176,7 +177,7 @@ class RoleTest extends ValueObjectVisitorBaseTest
      */
     public function testResultContainsDescriptionsElement($result)
     {
-        $this->markTestSkipped('@todo uncomment when support for multilingual names and descriptions is added EZP-24776');
+        self::markTestSkipped('@todo uncomment when support for multilingual names and descriptions is added EZP-24776');
         $this->assertXMLTag(
             [
                 'tag' => 'descriptions',

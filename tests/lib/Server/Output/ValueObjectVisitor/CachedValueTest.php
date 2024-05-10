@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
@@ -38,10 +39,10 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
     public function testVisit()
     {
         $responseMock = $this->getResponseMock();
-        $responseMock->expects($this->once())->method('setPublic');
-        $responseMock->expects($this->at(1))->method('setVary')->with('Accept');
-        $responseMock->expects($this->once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
-        $responseMock->expects($this->at(3))->method('setVary')->with('X-User-Hash', false);
+        $responseMock->expects(self::once())->method('setPublic');
+        $responseMock->expects(self::at(1))->method('setVary')->with('Accept');
+        $responseMock->expects(self::once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
+        $responseMock->expects(self::at(3))->method('setVary')->with('X-User-Hash', false);
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
@@ -51,10 +52,10 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
     public function testVisitLocationCache()
     {
         $responseMock = $this->getResponseMock();
-        $responseMock->expects($this->once())->method('setPublic');
-        $responseMock->expects($this->at(1))->method('setVary')->with('Accept');
-        $responseMock->expects($this->once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
-        $responseMock->expects($this->at(3))->method('setVary')->with('X-User-Hash', false);
+        $responseMock->expects(self::once())->method('setPublic');
+        $responseMock->expects(self::at(1))->method('setVary')->with('Accept');
+        $responseMock->expects(self::once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
+        $responseMock->expects(self::at(3))->method('setVary')->with('X-User-Hash', false);
 
         $result = $this->visit(new CachedValue(new stdClass(), ['locationId' => 'testLocationId']));
 
@@ -66,10 +67,10 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
         $this->request->headers->remove('X-User-Hash');
 
         $responseMock = $this->getResponseMock();
-        $responseMock->expects($this->once())->method('setPublic');
+        $responseMock->expects(self::once())->method('setPublic');
         // no Vary header on X-User-Hash
-        $responseMock->expects($this->once())->method('setVary')->with('Accept');
-        $responseMock->expects($this->once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
+        $responseMock->expects(self::once())->method('setVary')->with('Accept');
+        $responseMock->expects(self::once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
@@ -81,9 +82,9 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
         $this->request = null;
 
         $responseMock = $this->getResponseMock();
-        $responseMock->expects($this->once())->method('setPublic');
-        $responseMock->expects($this->once())->method('setVary')->with('Accept');
-        $responseMock->expects($this->once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
+        $responseMock->expects(self::once())->method('setPublic');
+        $responseMock->expects(self::once())->method('setVary')->with('Accept');
+        $responseMock->expects(self::once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
@@ -95,7 +96,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
         // disable caching globally
         $this->options = array_merge($this->defaultOptions, ['content.view_cache' => false]);
 
-        $this->getResponseMock()->expects($this->never())->method('setPublic');
+        $this->getResponseMock()->expects(self::never())->method('setPublic');
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
@@ -108,9 +109,9 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
         $this->options = array_merge($this->defaultOptions, ['content.ttl_cache' => false]);
 
         $responseMock = $this->getResponseMock();
-        $responseMock->expects($this->once())->method('setPublic');
-        $responseMock->expects($this->once())->method('setVary')->with('Accept');
-        $responseMock->expects($this->never())->method('setSharedMaxAge');
+        $responseMock->expects(self::once())->method('setPublic');
+        $responseMock->expects(self::once())->method('setVary')->with('Accept');
+        $responseMock->expects(self::never())->method('setSharedMaxAge');
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
@@ -119,7 +120,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
     protected function visit($value)
     {
-        $this->getVisitorMock()->expects($this->once())->method('visitValueObject')->with($value->value);
+        $this->getVisitorMock()->expects(self::once())->method('visitValueObject')->with($value->value);
 
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -163,7 +164,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
         $mock = $this->createMock(ConfigResolverInterface::class);
         $mock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('hasParameter')
             ->willReturnCallback(
                 static function ($parameterName) use ($options) {
@@ -171,7 +172,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
                 }
             );
         $mock
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('getParameter')
             ->willReturnCallback(
                 static function ($parameterName, $defaultValue) use ($options) {

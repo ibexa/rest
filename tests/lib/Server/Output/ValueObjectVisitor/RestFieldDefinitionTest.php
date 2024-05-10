@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values;
@@ -40,12 +41,12 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
 
         $restFieldDefinition = $this->getBasicRestFieldDefinition($path);
 
-        $this->fieldTypeSerializerMock->expects($this->once())
+        $this->fieldTypeSerializerMock->expects(self::once())
             ->method('serializeFieldDefaultValue')
             ->with(
-                $this->isInstanceOf('\\Ibexa\\Contracts\\Rest\\Output\\Generator'),
-                $this->equalTo('my-field-type'),
-                $this->equalTo(
+                self::isInstanceOf('\\Ibexa\\Contracts\\Rest\\Output\\Generator'),
+                self::equalTo('my-field-type'),
+                self::equalTo(
                     'my default value text'
                 )
             );
@@ -69,7 +70,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -156,6 +157,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
 
     /**
      * @depends testVisitRestFieldDefinition
+     *
      * @dataProvider provideXpathAssertions
      */
     public function testGeneratedXml(string $xpath, \DOMDocument $dom): void
@@ -165,6 +167,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
 
     /**
      * @depends testVisitRestFieldDefinitionWithPath
+     *
      * @dataProvider provideXpathAssertionsPath
      */
     public function testGeneratedXmlPath(string $xpath, \DOMDocument $dom): void

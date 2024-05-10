@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Variation\Values\ImageVariation;
@@ -54,7 +55,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -64,6 +65,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
     /**
      * @param \DOMDocument $dom
+     *
      * @depends testVisit
      */
     public function testContentImageVariationContentTagExists(\DOMDocument $dom)
@@ -73,6 +75,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
     /**
      * @param \DOMDocument $dom
+     *
      * @depends testVisit
      */
     public function testContentImageVariationTagHrefAttribute(\DOMDocument $dom)
@@ -82,6 +85,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
     /**
      * @param \DOMDocument $dom
+     *
      * @depends testVisit
      */
     public function testContentImageVariationTagMediaTypeAttribute(\DOMDocument $dom)
@@ -91,6 +95,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
     /**
      * @param \DOMDocument $dom
+     *
      * @depends testVisit
      */
     public function testUriTagExists(\DOMDocument $dom)
@@ -100,6 +105,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
     /**
      * @param \DOMDocument $dom
+     *
      * @depends testVisit
      */
     public function testUriTagValue(\DOMDocument $dom)
@@ -109,6 +115,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
     /**
      * @param \DOMDocument $dom
+     *
      * @depends testVisit
      */
     public function testContentTypeTagExists(\DOMDocument $dom)
@@ -118,6 +125,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
     /**
      * @param \DOMDocument $dom
+     *
      * @depends testVisit
      */
     public function testContentTypeTagValue(\DOMDocument $dom)
@@ -127,6 +135,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
     /**
      * @param \DOMDocument $dom
+     *
      * @depends testVisit
      */
     public function testWidthTagExists(\DOMDocument $dom)
@@ -136,6 +145,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
     /**
      * @param \DOMDocument $dom
+     *
      * @depends testVisit
      */
     public function testWidthTagValue(\DOMDocument $dom)
@@ -145,6 +155,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
     /**
      * @param \DOMDocument $dom
+     *
      * @depends testVisit
      */
     public function testHeightTagExists(\DOMDocument $dom)
@@ -154,6 +165,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
     /**
      * @param \DOMDocument $dom
+     *
      * @depends testVisit
      */
     public function testHeightTagValue(\DOMDocument $dom)
@@ -163,6 +175,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
     /**
      * @param \DOMDocument $dom
+     *
      * @depends testVisit
      */
     public function testFileSizeTagExists(\DOMDocument $dom)
@@ -172,6 +185,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
     /**
      * @param \DOMDocument $dom
+     *
      * @depends testVisit
      */
     public function testFileSizeTagValue(\DOMDocument $dom)

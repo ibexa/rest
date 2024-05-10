@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
@@ -33,42 +34,42 @@ class LocationCreateTest extends BaseTest
         $locationCreate = $this->getParser();
         $result = $locationCreate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             LocationCreateStruct::class,
             $result,
             'LocationCreateStruct not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             42,
             $result->parentLocationId,
             'LocationCreateStruct parentLocationId property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             2,
             $result->priority,
             'LocationCreateStruct priority property not created correctly.'
         );
 
-        $this->assertTrue(
+        self::assertTrue(
             $result->hidden,
             'LocationCreateStruct hidden property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'remoteId12345678',
             $result->remoteId,
             'LocationCreateStruct remoteId property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             Location::SORT_FIELD_PATH,
             $result->sortField,
             'LocationCreateStruct sortField property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             Location::SORT_ORDER_ASC,
             $result->sortOrder,
             'LocationCreateStruct sortOrder property not created correctly.'
@@ -178,9 +179,9 @@ class LocationCreateTest extends BaseTest
     {
         $locationServiceMock = $this->createMock(LocationService::class);
 
-        $locationServiceMock->expects($this->any())
+        $locationServiceMock->expects(self::any())
             ->method('newLocationCreateStruct')
-            ->with($this->equalTo(42))
+            ->with(self::equalTo(42))
             ->willReturn(
                 new LocationCreateStruct(['parentLocationId' => 42])
             );

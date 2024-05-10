@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output;
 
 use Ibexa\Contracts\Rest\Output\Visitor;
@@ -65,7 +66,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
             $this->visitorMock = $this->createMock(Visitor::class);
 
             $this->visitorMock
-                ->expects($this->any())
+                ->expects(self::any())
                 ->method('getResponse')
                 ->willReturn($this->getResponseMock());
         }
@@ -123,7 +124,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
 
         $xpath = new \DOMXPath($ownerDocument);
 
-        $this->assertTrue(
+        self::assertTrue(
             $xpath->evaluate("boolean({$xpathExpression})", $domNode),
             "XPath expression '{$xpathExpression}' resulted in an empty node set."
         );
@@ -182,11 +183,11 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     protected function addRouteExpectation($routeName, $arguments, $returnValue)
     {
         $this->getRouterMock()
-            ->expects($this->at($this->routerCallIndex++))
+            ->expects(self::at($this->routerCallIndex++))
             ->method('generate')
             ->with(
-                $this->equalTo($routeName),
-                $this->equalTo($arguments)
+                self::equalTo($routeName),
+                self::equalTo($arguments)
             )
             ->willReturn($returnValue);
     }
@@ -213,11 +214,11 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     protected function addTemplatedRouteExpectation($routeName, $arguments, $returnValue)
     {
         $this->getTemplatedRouterMock()
-            ->expects($this->at($this->templatedRouterCallIndex++))
+            ->expects(self::at($this->templatedRouterCallIndex++))
             ->method('generate')
             ->with(
-                $this->equalTo($routeName),
-                $this->equalTo($arguments)
+                self::equalTo($routeName),
+                self::equalTo($arguments)
             )
             ->willReturn($returnValue);
     }

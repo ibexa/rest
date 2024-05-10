@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Input;
 
 use Ibexa\Contracts\Rest\Exceptions\Parser;
@@ -78,21 +79,21 @@ class DispatcherTest extends TestCase
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('parse')
             ->with([42], 'text/html')
             ->willReturn(23);
 
         $handler = $this->createMock(Handler::class);
         $handler
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('convert')
             ->with('Hello world!')
             ->willReturn([[42]]);
 
         $dispatcher = new Dispatcher($parsingDispatcher, ['format' => $handler]);
 
-        $this->assertSame(
+        self::assertSame(
             23,
             $dispatcher->parse($message)
         );
@@ -114,14 +115,14 @@ class DispatcherTest extends TestCase
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('parse')
             ->with(['someKey' => 'someValue', '__url' => '/foo/bar'], 'text/html')
             ->willReturn(23);
 
         $handler = $this->createMock(Handler::class);
         $handler
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('convert')
             ->with('Hello world!')
             ->willReturn(
@@ -134,7 +135,7 @@ class DispatcherTest extends TestCase
 
         $dispatcher = new Dispatcher($parsingDispatcher, ['format' => $handler]);
 
-        $this->assertSame(
+        self::assertSame(
             23,
             $dispatcher->parse($message)
         );
@@ -152,13 +153,13 @@ class DispatcherTest extends TestCase
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('parse')
-            ->with($this->anything(), 'text/html; version=1.1');
+            ->with(self::anything(), 'text/html; version=1.1');
 
         $handler = $this->createMock(Handler::class);
         $handler
-            ->expects($this->any())
+            ->expects(self::any())
             ->method('convert')
             ->willReturn([]);
 

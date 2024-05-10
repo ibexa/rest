@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
@@ -26,9 +27,9 @@ class ConflictTest extends ValueObjectVisitorBaseTest
 
         $noContent = new Values\Conflict();
 
-        $this->getVisitorMock()->expects($this->once())
+        $this->getVisitorMock()->expects(self::once())
             ->method('setStatus')
-            ->with($this->equalTo(409));
+            ->with(self::equalTo(409));
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -36,7 +37,7 @@ class ConflictTest extends ValueObjectVisitorBaseTest
             $noContent
         );
 
-        $this->assertTrue($generator->isEmpty());
+        self::assertTrue($generator->isEmpty());
     }
 
     /**

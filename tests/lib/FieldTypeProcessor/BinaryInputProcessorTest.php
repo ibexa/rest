@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use PHPUnit\Framework\TestCase;
@@ -59,7 +60,7 @@ abstract class BinaryInputProcessorTest extends TestCase
 
         $outputHash = $processor->preProcessValueHash($inputHash);
 
-        $this->assertEquals($inputHash, $outputHash);
+        self::assertEquals($inputHash, $outputHash);
     }
 
     /**
@@ -75,12 +76,12 @@ abstract class BinaryInputProcessorTest extends TestCase
 
         $outputHash = $processor->preProcessValueHash($inputHash);
 
-        $this->assertFalse(isset($outputHash['data']), 'Data found in input hash');
-        $this->assertTrue(isset($outputHash['inputUri']), 'No path found in output hash');
+        self::assertFalse(isset($outputHash['data']), 'Data found in input hash');
+        self::assertTrue(isset($outputHash['inputUri']), 'No path found in output hash');
 
-        $this->assertFileExists($outputHash['inputUri'], "The output path {$outputHash['inputUri']} does not exist");
+        self::assertFileExists($outputHash['inputUri'], "The output path {$outputHash['inputUri']} does not exist");
 
-        $this->assertEquals($fileContent, file_get_contents($outputHash['inputUri']));
+        self::assertEquals($fileContent, file_get_contents($outputHash['inputUri']));
     }
 
     /**

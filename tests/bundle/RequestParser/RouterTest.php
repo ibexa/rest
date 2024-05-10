@@ -116,7 +116,7 @@ final class RouterTest extends TestCase
 
         $expectedResult = self::$routePrefix . '/generate/' . $arguments['arg1'];
         $this->getRouterMock()
-             ->expects($this->once())
+             ->expects(self::once())
              ->method('generate')
              ->with($routeName, $arguments)
              ->willReturn($expectedResult)

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
@@ -70,6 +71,7 @@ XML;
 
     /**
      * @depends testCreateContentTypeGroup
+     *
      * @returns string The created content type href
      * Covers POST /content/typegroups/<contentTypeGroupId>/types?publish=true
      *

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateCreateStruct;
@@ -43,37 +44,37 @@ class ObjectStateCreateTest extends BaseTest
         $objectStateCreate = $this->getParser();
         $result = $objectStateCreate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ObjectStateCreateStruct::class,
             $result,
             'ObjectStateCreateStruct not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'test-state',
             $result->identifier,
             'ObjectStateCreateStruct identifier property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             0,
             $result->priority,
             'ObjectStateCreateStruct priority property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'eng-GB',
             $result->defaultLanguageCode,
             'ObjectStateCreateStruct defaultLanguageCode property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             ['eng-GB' => 'Test state'],
             $result->names,
             'ObjectStateCreateStruct names property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             ['eng-GB' => 'Test description'],
             $result->descriptions,
             'ObjectStateCreateStruct descriptions property not created correctly.'
@@ -249,9 +250,9 @@ class ObjectStateCreateTest extends BaseTest
     {
         $objectStateServiceMock = $this->createMock(ObjectStateService::class);
 
-        $objectStateServiceMock->expects($this->any())
+        $objectStateServiceMock->expects(self::any())
             ->method('newObjectStateCreateStruct')
-            ->with($this->equalTo('test-state'))
+            ->with(self::equalTo('test-state'))
             ->willReturn(
                 new ObjectStateCreateStruct(['identifier' => 'test-state'])
             );

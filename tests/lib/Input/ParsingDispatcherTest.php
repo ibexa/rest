@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Input;
 
 use Ibexa\Contracts\Rest\Input\Parser;
@@ -31,12 +32,12 @@ class ParsingDispatcherTest extends TestCase
         $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('parse')
             ->with([42], $dispatcher)
             ->willReturn(23);
 
-        $this->assertSame(
+        self::assertSame(
             23,
             $dispatcher->parse([42], 'text/html')
         );
@@ -51,12 +52,12 @@ class ParsingDispatcherTest extends TestCase
         $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('parse')
             ->with([42], $dispatcher)
             ->willReturn(23);
 
-        $this->assertSame(
+        self::assertSame(
             23,
             $dispatcher->parse([42], 'text/html; charset=UTF-8; version=1.0')
         );
@@ -74,8 +75,8 @@ class ParsingDispatcherTest extends TestCase
             ]
         );
 
-        $parserVersionOne->expects($this->never())->method('parse');
-        $parserVersionTwo->expects($this->once())->method('parse');
+        $parserVersionOne->expects(self::never())->method('parse');
+        $parserVersionTwo->expects(self::once())->method('parse');
 
         $dispatcher->parse([42], 'text/html; version=2');
     }
@@ -86,12 +87,12 @@ class ParsingDispatcherTest extends TestCase
         $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('parse')
             ->with([42], $dispatcher)
             ->willReturn(23);
 
-        $this->assertSame(
+        self::assertSame(
             23,
             $dispatcher->parse([42], 'text/html+json')
         );

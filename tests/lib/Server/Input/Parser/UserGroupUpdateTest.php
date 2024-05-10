@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
@@ -48,44 +49,44 @@ class UserGroupUpdateTest extends BaseTest
         $userGroupUpdate = $this->getParser();
         $result = $userGroupUpdate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             RestUserGroupUpdateStruct::class,
             $result,
             'UserGroupUpdate not created correctly.'
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ContentUpdateStruct::class,
             $result->userGroupUpdateStruct->contentUpdateStruct,
             'UserGroupUpdate not created correctly.'
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ContentMetadataUpdateStruct::class,
             $result->userGroupUpdateStruct->contentMetadataUpdateStruct,
             'UserGroupUpdate not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             1,
             $result->sectionId,
             'sectionId not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'eng-US',
             $result->userGroupUpdateStruct->contentMetadataUpdateStruct->mainLanguageCode,
             'mainLanguageCode not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'remoteId123456',
             $result->userGroupUpdateStruct->contentMetadataUpdateStruct->remoteId,
             'remoteId not created correctly'
         );
 
         foreach ($result->userGroupUpdateStruct->contentUpdateStruct->fields as $field) {
-            $this->assertEquals(
+            self::assertEquals(
                 'foo',
                 $field->value,
                 'field value not created correctly'
@@ -228,7 +229,7 @@ class UserGroupUpdateTest extends BaseTest
             )
             ->getMock();
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock->expects(self::any())
             ->method('parseFieldValue')
             ->with(4, 'name', [])
             ->willReturn('foo');
@@ -245,7 +246,7 @@ class UserGroupUpdateTest extends BaseTest
     {
         $userServiceMock = $this->createMock(UserService::class);
 
-        $userServiceMock->expects($this->any())
+        $userServiceMock->expects(self::any())
             ->method('newUserGroupUpdateStruct')
             ->willReturn(
                 new UserGroupUpdateStruct()
@@ -263,9 +264,9 @@ class UserGroupUpdateTest extends BaseTest
     {
         $userServiceMock = $this->createMock(LocationService::class);
 
-        $userServiceMock->expects($this->any())
+        $userServiceMock->expects(self::any())
             ->method('loadLocation')
-            ->with($this->equalTo(5))
+            ->with(self::equalTo(5))
             ->willReturn(
                 new Location(
                     [
@@ -290,13 +291,13 @@ class UserGroupUpdateTest extends BaseTest
     {
         $contentServiceMock = $this->createMock(ContentService::class);
 
-        $contentServiceMock->expects($this->any())
+        $contentServiceMock->expects(self::any())
             ->method('newContentUpdateStruct')
             ->willReturn(
                 new ContentUpdateStruct()
             );
 
-        $contentServiceMock->expects($this->any())
+        $contentServiceMock->expects(self::any())
             ->method('newContentMetadataUpdateStruct')
             ->willReturn(
                 new ContentMetadataUpdateStruct()

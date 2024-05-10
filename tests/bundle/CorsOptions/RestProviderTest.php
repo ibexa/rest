@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\CorsOptions;
 
 use Exception;
@@ -114,14 +115,14 @@ class RestProviderTest extends TestCase
         $mock = $this->createMock(RequestMatcherInterface::class);
 
         if ($this->matchRequestResult instanceof Exception) {
-            $mock->expects($this->any())
+            $mock->expects(self::any())
                 ->method('matchRequest')
-                ->will($this->throwException($this->matchRequestResult));
+                ->will(self::throwException($this->matchRequestResult));
         } elseif ($this->matchRequestResult === false) {
-            $mock->expects($this->never())
+            $mock->expects(self::never())
                 ->method('matchRequest');
         } else {
-            $mock->expects($this->any())
+            $mock->expects(self::any())
                 ->method('matchRequest')
                 ->willReturn($this->matchRequestResult);
         }
