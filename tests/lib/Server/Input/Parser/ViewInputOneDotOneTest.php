@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
@@ -27,7 +28,7 @@ class ViewInputOneDotOneTest extends BaseTest
         $parser = $this->getParser();
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('parse')
             ->with($inputArray['ContentQuery'], 'application/vnd.ibexa.api.internal.ContentQuery')
             ->willReturn(new Query());
@@ -38,7 +39,7 @@ class ViewInputOneDotOneTest extends BaseTest
         $expectedViewInput->identifier = 'Query identifier';
         $expectedViewInput->query = new Query();
 
-        $this->assertEquals($expectedViewInput, $result, 'RestViewInput not created correctly.');
+        self::assertEquals($expectedViewInput, $result, 'RestViewInput not created correctly.');
     }
 
     /**
@@ -54,7 +55,7 @@ class ViewInputOneDotOneTest extends BaseTest
         $parser = $this->getParser();
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('parse')
             ->with($inputArray['LocationQuery'], 'application/vnd.ibexa.api.internal.LocationQuery')
             ->willReturn(new LocationQuery());
@@ -65,7 +66,7 @@ class ViewInputOneDotOneTest extends BaseTest
         $expectedViewInput->identifier = 'Query identifier';
         $expectedViewInput->query = new LocationQuery();
 
-        $this->assertEquals($expectedViewInput, $result, 'RestViewInput not created correctly.');
+        self::assertEquals($expectedViewInput, $result, 'RestViewInput not created correctly.');
     }
 
     public function testThrowsExceptionOnMissingIdentifier()

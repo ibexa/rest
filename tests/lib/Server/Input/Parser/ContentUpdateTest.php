@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use DateTime;
@@ -46,7 +47,7 @@ class ContentUpdateTest extends BaseTest
      */
     public function testParserResultOwner(RestContentMetadataUpdateStruct $result)
     {
-        $this->assertEquals(
+        self::assertEquals(
             '42',
             $result->ownerId
         );

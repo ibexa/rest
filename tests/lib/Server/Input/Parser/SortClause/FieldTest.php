@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser\SortClause;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
@@ -29,7 +30,7 @@ class FieldTest extends BaseTest
         $fieldParser = $this->getParser();
         $result = $fieldParser->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertEquals(
+        self::assertEquals(
             new Field('content', 'field', Query::SORT_ASC),
             $result,
             'Field parser not created correctly.'

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Security;
 
 use Ibexa\Rest\Server\Security\CsrfTokenManager;
@@ -36,7 +37,7 @@ class CsrfTokenManagerTest extends TestCase
         $csrfTokenManager = $this->createCsrfTokenManager(false);
 
         $this->tokenStorage
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('hasToken')
             ->with(self::CSRF_TOKEN_INTENTION);
 
@@ -48,7 +49,7 @@ class CsrfTokenManagerTest extends TestCase
         $csrfTokenManager = $this->createCsrfTokenManager(true);
 
         $this->tokenStorage
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('hasToken')
             ->with('https-' . self::CSRF_TOKEN_INTENTION);
 
@@ -63,7 +64,7 @@ class CsrfTokenManagerTest extends TestCase
         }
 
         $this->requestStack
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('getMainRequest')
             ->willReturn($request);
 

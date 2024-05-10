@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation;
@@ -45,7 +46,7 @@ class PolicyUpdateTest extends BaseTest
         $policyUpdate = $this->getParser();
         $result = $policyUpdate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             PolicyUpdateStruct::class,
             $result,
             'PolicyUpdateStruct not created correctly.'
@@ -53,27 +54,27 @@ class PolicyUpdateTest extends BaseTest
 
         $parsedLimitations = $result->getLimitations();
 
-        $this->assertIsArray($parsedLimitations, 'PolicyUpdateStruct limitations not created correctly');
+        self::assertIsArray($parsedLimitations, 'PolicyUpdateStruct limitations not created correctly');
 
-        $this->assertCount(
+        self::assertCount(
             1,
             $parsedLimitations,
             'PolicyUpdateStruct limitations not created correctly'
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             Limitation::class,
             $parsedLimitations['Class'],
             'Limitation not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'Class',
             $parsedLimitations['Class']->getIdentifier(),
             'Limitation identifier not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             [1, 2, 3],
             $parsedLimitations['Class']->limitationValues,
             'Limitation values not created correctly.'
@@ -156,7 +157,7 @@ class PolicyUpdateTest extends BaseTest
     {
         $roleServiceMock = $this->createMock(RoleService::class);
 
-        $roleServiceMock->expects($this->any())
+        $roleServiceMock->expects(self::any())
             ->method('newPolicyUpdateStruct')
             ->willReturn(
                 new PolicyUpdateStruct()

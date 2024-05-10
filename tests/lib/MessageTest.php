@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest;
 
 use Ibexa\Rest\Message;
@@ -21,7 +22,7 @@ class MessageTest extends TestCase
     {
         $message = new Message();
 
-        $this->assertSame([], $message->headers);
+        self::assertSame([], $message->headers);
     }
 
     /**
@@ -31,7 +32,7 @@ class MessageTest extends TestCase
     {
         $message = new Message();
 
-        $this->assertSame('', $message->body);
+        self::assertSame('', $message->body);
     }
 
     /**
@@ -45,7 +46,7 @@ class MessageTest extends TestCase
             ]
         );
 
-        $this->assertSame($headers, $message->headers);
+        self::assertSame($headers, $message->headers);
     }
 
     /**
@@ -58,7 +59,7 @@ class MessageTest extends TestCase
             'Hello world!'
         );
 
-        $this->assertSame('Hello world!', $message->body);
+        self::assertSame('Hello world!', $message->body);
     }
 }
 

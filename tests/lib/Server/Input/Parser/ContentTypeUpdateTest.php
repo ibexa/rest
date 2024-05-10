@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
@@ -24,83 +25,83 @@ class ContentTypeUpdateTest extends BaseTest
         $contentTypeUpdate = $this->getParser();
         $result = $contentTypeUpdate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ContentTypeUpdateStruct::class,
             $result,
             'ContentTypeUpdateStruct not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'updated_content_type',
             $result->identifier,
             'identifier not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'eng-US',
             $result->mainLanguageCode,
             'mainLanguageCode not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'remote123456',
             $result->remoteId,
             'remoteId not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             '<title>',
             $result->urlAliasSchema,
             'urlAliasSchema not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             '<title>',
             $result->nameSchema,
             'nameSchema not created correctly'
         );
 
-        $this->assertTrue(
+        self::assertTrue(
             $result->isContainer,
             'isContainer not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             Location::SORT_FIELD_PATH,
             $result->defaultSortField,
             'defaultSortField not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             Location::SORT_ORDER_ASC,
             $result->defaultSortOrder,
             'defaultSortOrder not created correctly'
         );
 
-        $this->assertTrue(
+        self::assertTrue(
             $result->defaultAlwaysAvailable,
             'defaultAlwaysAvailable not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             ['eng-US' => 'Updated content type'],
             $result->names,
             'names not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             ['eng-US' => 'Updated content type description'],
             $result->descriptions,
             'descriptions not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             new \DateTime('2012-12-31T12:30:00'),
             $result->modificationDate,
             'creationDate not created correctly'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             14,
             $result->modifierId,
             'creatorId not created correctly'
@@ -171,7 +172,7 @@ class ContentTypeUpdateTest extends BaseTest
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects($this->any())
+        $contentTypeServiceMock->expects(self::any())
             ->method('newContentTypeUpdateStruct')
             ->willReturn(new ContentTypeUpdateStruct());
 

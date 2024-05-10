@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Input\Handler;
 
 use Ibexa\Contracts\Rest\Exceptions\Parser;
@@ -21,7 +22,7 @@ class XmlTest extends TestCase
 
         $handler = new Xml();
 
-        $this->assertSame(
+        self::assertSame(
             [
                 'text' => 'Hello world!',
             ],
@@ -49,7 +50,7 @@ class XmlTest extends TestCase
     {
         $handler = new Xml();
 
-        $this->assertSame(
+        self::assertSame(
             $expectation,
             $handler->convert($xml)
         );

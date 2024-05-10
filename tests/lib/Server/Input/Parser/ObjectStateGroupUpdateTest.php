@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroupUpdateStruct;
@@ -42,31 +43,31 @@ class ObjectStateGroupUpdateTest extends BaseTest
         $objectStateGroupUpdate = $this->getParser();
         $result = $objectStateGroupUpdate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ObjectStateGroupUpdateStruct::class,
             $result,
             'ObjectStateGroupUpdateStruct not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'test-group',
             $result->identifier,
             'ObjectStateGroupUpdateStruct identifier property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'eng-GB',
             $result->defaultLanguageCode,
             'ObjectStateGroupUpdateStruct defaultLanguageCode property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             ['eng-GB' => 'Test group'],
             $result->names,
             'ObjectStateGroupUpdateStruct names property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             ['eng-GB' => 'Test group description'],
             $result->descriptions,
             'ObjectStateGroupUpdateStruct descriptions property not created correctly.'
@@ -120,7 +121,7 @@ class ObjectStateGroupUpdateTest extends BaseTest
     {
         $objectStateServiceMock = $this->createMock(ObjectStateService::class);
 
-        $objectStateServiceMock->expects($this->any())
+        $objectStateServiceMock->expects(self::any())
             ->method('newObjectStateGroupUpdateStruct')
             ->willReturn(
                 new ObjectStateGroupUpdateStruct()

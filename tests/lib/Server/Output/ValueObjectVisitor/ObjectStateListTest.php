@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\ObjectState\ObjectState;
@@ -43,7 +44,7 @@ class ObjectStateListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         return $result;
     }
@@ -108,9 +109,9 @@ class ObjectStateListTest extends ValueObjectVisitorBaseTest
             42
         );
 
-        $this->getVisitorMock()->expects($this->exactly(2))
+        $this->getVisitorMock()->expects(self::exactly(2))
             ->method('visitValueObject')
-            ->with($this->isInstanceOf(RestObjectState::class));
+            ->with(self::isInstanceOf(RestObjectState::class));
 
         $visitor->visit(
             $this->getVisitorMock(),

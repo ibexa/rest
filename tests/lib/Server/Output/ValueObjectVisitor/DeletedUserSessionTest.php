@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
@@ -32,9 +33,9 @@ class DeletedUserSessionTest extends ValueObjectVisitorBaseTest
         $deletedSessionValue = new Values\DeletedUserSession($generatedResponse);
 
         $outputVisitor = $this->getVisitorMock();
-        $outputVisitor->expects($this->once())
+        $outputVisitor->expects(self::once())
             ->method('setStatus')
-            ->with($this->equalTo(204));
+            ->with(self::equalTo(204));
 
         $visitor->visit(
             $outputVisitor,
@@ -42,10 +43,10 @@ class DeletedUserSessionTest extends ValueObjectVisitorBaseTest
             $deletedSessionValue
         );
 
-        $this->assertTrue($generator->isEmpty());
-        $this->assertSame('bar', $this->getResponseMock()->headers->get('foo'));
-        $this->assertSame('thing', $this->getResponseMock()->headers->get('some'));
-        $this->assertSame([$cookie], $this->getResponseMock()->headers->getCookies());
+        self::assertTrue($generator->isEmpty());
+        self::assertSame('bar', $this->getResponseMock()->headers->get('foo'));
+        self::assertSame('thing', $this->getResponseMock()->headers->get('some'));
+        self::assertSame([$cookie], $this->getResponseMock()->headers->getCookies());
     }
 
     protected function internalGetVisitor()

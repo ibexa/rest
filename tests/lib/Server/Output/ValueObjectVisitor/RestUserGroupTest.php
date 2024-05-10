@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use DOMDocument;
@@ -23,7 +24,7 @@ class RestUserGroupTest extends BaseContentValueObjectVisitorTestCase
 
         $restUserGroup = $this->getBasicRestUserGroup();
 
-        $this->getVisitorMock()->expects($this->once())
+        $this->getVisitorMock()->expects(self::once())
             ->method('visitValueObject');
 
         $userGroupPath = trim($restUserGroup->mainLocation->getPathString(), '/');
@@ -67,7 +68,7 @@ class RestUserGroupTest extends BaseContentValueObjectVisitorTestCase
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         $dom = new DOMDocument();
         $dom->loadXml($result);

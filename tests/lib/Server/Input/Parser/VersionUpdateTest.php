@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
@@ -37,20 +38,20 @@ class VersionUpdateTest extends BaseTest
         $VersionUpdate = $this->getParser();
         $result = $VersionUpdate->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ContentUpdateStruct::class,
             $result,
             'VersionUpdate not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'eng-US',
             $result->initialLanguageCode,
             'initialLanguageCode not created correctly'
         );
 
         foreach ($result->fields as $field) {
-            $this->assertEquals(
+            self::assertEquals(
                 'foo',
                 $field->value,
                 'field value not created correctly'
@@ -153,7 +154,7 @@ class VersionUpdateTest extends BaseTest
             )
             ->getMock();
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock->expects(self::any())
             ->method('parseFieldValue')
             ->with(42, 'subject', [])
             ->willReturn('foo');
@@ -170,7 +171,7 @@ class VersionUpdateTest extends BaseTest
     {
         $contentServiceMock = $this->createMock(ContentService::class);
 
-        $contentServiceMock->expects($this->any())
+        $contentServiceMock->expects(self::any())
             ->method('newContentUpdateStruct')
             ->willReturn(
                 new ContentUpdateStruct()

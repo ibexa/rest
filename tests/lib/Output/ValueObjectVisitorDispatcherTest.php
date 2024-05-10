@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output;
 
 use Error;
@@ -37,7 +38,7 @@ class ValueObjectVisitorDispatcherTest extends TestCase
 
         $visitor = $this->getValueObjectVisitorMock();
         $visitor
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('visit')
             ->with($this->getOutputVisitorMock(), $this->getOutputGeneratorMock(), $data);
 
@@ -69,7 +70,7 @@ class ValueObjectVisitorDispatcherTest extends TestCase
 
         $valueObjectVisitor = $this->getValueObjectVisitorMock();
         $valueObjectVisitor
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('visit')
             ->with($this->getOutputVisitorMock(), $this->getOutputGeneratorMock(), $data);
 
@@ -91,11 +92,11 @@ class ValueObjectVisitorDispatcherTest extends TestCase
         $dispatcher->addVisitor('stdClass', $valueObjectVisitor2);
 
         $valueObjectVisitor1
-            ->expects($this->never())
+            ->expects(self::never())
             ->method('visit');
 
         $valueObjectVisitor2
-            ->expects($this->at(0))
+            ->expects(self::at(0))
             ->method('visit')
             ->with($this->getOutputVisitorMock(), $this->getOutputGeneratorMock(), $data);
 

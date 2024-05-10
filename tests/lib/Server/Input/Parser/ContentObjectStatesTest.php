@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Rest\Input\Parser;
@@ -26,32 +27,32 @@ class ContentObjectStatesTest extends BaseTest
         $objectState = $this->getParser();
         $result = $objectState->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertIsArray($result, 'ContentObjectStates not parsed correctly');
+        self::assertIsArray($result, 'ContentObjectStates not parsed correctly');
 
-        $this->assertNotEmpty(
+        self::assertNotEmpty(
             $result,
             'ContentObjectStates has no ObjectState elements'
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             '\\Ibexa\\Rest\\Values\\RestObjectState',
             $result[0],
             'ObjectState not created correctly.'
         );
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             '\\Ibexa\\Contracts\\Core\\Repository\\Values\\ObjectState\\ObjectState',
             $result[0]->objectState,
             'Inner ObjectState not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             21,
             $result[0]->objectState->id,
             'Inner ObjectState id property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             42,
             $result[0]->groupId,
             'groupId property not created correctly.'

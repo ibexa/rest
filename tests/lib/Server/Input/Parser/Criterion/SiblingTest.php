@@ -49,7 +49,7 @@ final class SiblingTest extends BaseTest
             self::EXAMPLE_PARENT_LOCATION_ID
         );
 
-        $this->assertEquals($exepected, $actual);
+        self::assertEquals($exepected, $actual);
     }
 
     public function testParseThrowsParserException(): void

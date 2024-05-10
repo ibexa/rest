@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\User\Policy;
@@ -36,7 +37,7 @@ class PolicyListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         return $result;
     }
@@ -101,9 +102,9 @@ class PolicyListTest extends ValueObjectVisitorBaseTest
             42
         );
 
-        $this->getVisitorMock()->expects($this->exactly(2))
+        $this->getVisitorMock()->expects(self::exactly(2))
             ->method('visitValueObject')
-            ->with($this->isInstanceOf(Policy::class));
+            ->with(self::isInstanceOf(Policy::class));
 
         $visitor->visit(
             $this->getVisitorMock(),

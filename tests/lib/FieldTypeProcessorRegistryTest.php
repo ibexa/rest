@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest;
 
 use Ibexa\Contracts\Rest\FieldTypeProcessor;
@@ -21,7 +22,7 @@ class FieldTypeProcessorRegistryTest extends BaseTest
 
         $registry->registerProcessor('my-type', $processor);
 
-        $this->assertTrue($registry->hasProcessor('my-type'));
+        self::assertTrue($registry->hasProcessor('my-type'));
     }
 
     public function testRegisterMultipleProcessors()
@@ -34,15 +35,15 @@ class FieldTypeProcessorRegistryTest extends BaseTest
         $registry->registerProcessor('my-type', $processorA);
         $registry->registerProcessor('your-type', $processorB);
 
-        $this->assertTrue($registry->hasProcessor('my-type'));
-        $this->assertTrue($registry->hasProcessor('your-type'));
+        self::assertTrue($registry->hasProcessor('my-type'));
+        self::assertTrue($registry->hasProcessor('your-type'));
     }
 
     public function testHasProcessorFailure()
     {
         $registry = new FieldTypeProcessorRegistry();
 
-        $this->assertFalse($registry->hasProcessor('my-type'));
+        self::assertFalse($registry->hasProcessor('my-type'));
     }
 
     public function testGetProcessor()
@@ -53,7 +54,7 @@ class FieldTypeProcessorRegistryTest extends BaseTest
 
         $registry->registerProcessor('my-type', $processor);
 
-        $this->assertSame(
+        self::assertSame(
             $processor,
             $registry->getProcessor('my-type')
         );
@@ -78,7 +79,7 @@ class FieldTypeProcessorRegistryTest extends BaseTest
         $registry->registerProcessor('my-type', $processorA);
         $registry->registerProcessor('my-type', $processorB);
 
-        $this->assertSame(
+        self::assertSame(
             $processorB,
             $registry->getProcessor('my-type')
         );

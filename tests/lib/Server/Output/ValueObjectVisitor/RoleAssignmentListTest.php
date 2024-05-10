@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\User;
@@ -42,7 +43,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         return $result;
     }
@@ -107,9 +108,9 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
             42
         );
 
-        $this->getVisitorMock()->expects($this->exactly(2))
+        $this->getVisitorMock()->expects(self::exactly(2))
              ->method('visitValueObject')
-             ->with($this->isInstanceOf(RestUserRoleAssignment::class));
+             ->with(self::isInstanceOf(RestUserRoleAssignment::class));
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -148,7 +149,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         return $result;
     }

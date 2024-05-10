@@ -47,7 +47,7 @@ class BookmarkListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         return $result;
     }
@@ -94,7 +94,7 @@ class BookmarkListTest extends ValueObjectVisitorBaseTest
         $document->loadXML($result);
         $xpath = new DOMXPath($document);
 
-        $this->assertEquals(count($this->data->items), $xpath->query($query)->length);
+        self::assertEquals(count($this->data->items), $xpath->query($query)->length);
     }
 
     /**

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroupCreateStruct;
@@ -29,25 +30,25 @@ class ContentTypeGroupInputTest extends BaseTest
         $contentTypeGroupInput = $this->getParser();
         $result = $contentTypeGroupInput->parse($inputArray, $this->getParsingDispatcherMock());
 
-        $this->assertInstanceOf(
+        self::assertInstanceOf(
             ContentTypeGroupCreateStruct::class,
             $result,
             'ContentTypeGroupCreateStruct not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             'Identifier Bar',
             $result->identifier,
             'ContentTypeGroupCreateStruct identifier property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             14,
             $result->creatorId,
             'ContentTypeGroupCreateStruct creatorId property not created correctly.'
         );
 
-        $this->assertEquals(
+        self::assertEquals(
             new \DateTime('2012-12-31T12:00:00'),
             $result->creationDate,
             'ContentTypeGroupCreateStruct creationDate property not created correctly.'
@@ -93,9 +94,9 @@ class ContentTypeGroupInputTest extends BaseTest
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects($this->any())
+        $contentTypeServiceMock->expects(self::any())
             ->method('newContentTypeGroupCreateStruct')
-            ->with($this->equalTo('Identifier Bar'))
+            ->with(self::equalTo('Identifier Bar'))
             ->willReturn(
                 new ContentTypeGroupCreateStruct(['identifier' => 'Identifier Bar'])
             );

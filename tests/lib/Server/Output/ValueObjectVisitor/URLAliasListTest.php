@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content;
@@ -35,7 +36,7 @@ class URLAliasListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        $this->assertNotNull($result);
+        self::assertNotNull($result);
 
         return $result;
     }
@@ -100,9 +101,9 @@ class URLAliasListTest extends ValueObjectVisitorBaseTest
             '/content/urlaliases'
         );
 
-        $this->getVisitorMock()->expects($this->exactly(2))
+        $this->getVisitorMock()->expects(self::exactly(2))
             ->method('visitValueObject')
-            ->with($this->isInstanceOf(Content\URLAlias::class));
+            ->with(self::isInstanceOf(Content\URLAlias::class));
 
         $visitor->visit(
             $this->getVisitorMock(),

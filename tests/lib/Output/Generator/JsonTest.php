@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output\Generator;
 
 use Ibexa\Contracts\Rest\Output\Exceptions\OutputGeneratorException;
@@ -26,7 +27,7 @@ class JsonTest extends GeneratorTest
 
         $generator->startDocument('test');
 
-        $this->assertSame(
+        self::assertSame(
             '{}',
             $generator->endDocument('test')
         );
@@ -41,7 +42,7 @@ class JsonTest extends GeneratorTest
         $generator->startObjectElement('element');
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json"}}',
             $generator->endDocument('test')
         );
@@ -56,7 +57,7 @@ class JsonTest extends GeneratorTest
         $generator->startObjectElement('element', 'User');
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             '{"element":{"_media-type":"application\/vnd.ibexa.api.User+json"}}',
             $generator->endDocument('test')
         );
@@ -75,7 +76,7 @@ class JsonTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json","stacked":{"_media-type":"application\/vnd.ibexa.api.stacked+json"}}}',
             $generator->endDocument('test')
         );
@@ -93,7 +94,7 @@ class JsonTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json","_attribute":"value"}}',
             $generator->endDocument('test')
         );
@@ -112,7 +113,7 @@ class JsonTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json","_attribute":"value"}}',
             $generator->endDocument('test')
         );
@@ -131,7 +132,7 @@ class JsonTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json","_attribute1":"value","_attribute2":"value"}}',
             $generator->endDocument('test')
         );
@@ -149,7 +150,7 @@ class JsonTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json","value":"42"}}',
             $generator->endDocument('test')
         );
@@ -168,7 +169,7 @@ class JsonTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json","value":"42"}}',
             $generator->endDocument('test')
         );
@@ -194,7 +195,7 @@ class JsonTest extends GeneratorTest
 
         $generator->endObjectElement('elementList');
 
-        $this->assertSame(
+        self::assertSame(
             '{"elementList":{"_media-type":"application\/vnd.ibexa.api.elementList+json","elements":[{"_media-type":"application\/vnd.ibexa.api.element+json"},{"_media-type":"application\/vnd.ibexa.api.element+json"}]}}',
             $generator->endDocument('test')
         );
@@ -213,7 +214,7 @@ class JsonTest extends GeneratorTest
 
         $generator->endHashElement('elements');
 
-        $this->assertSame(
+        self::assertSame(
             '{"elements":{"element":{"_attribute":"attribute value 1","#text":"element value 1"}}}',
             $generator->endDocument('test')
         );
@@ -235,7 +236,7 @@ class JsonTest extends GeneratorTest
         $generator->endList('simpleValue');
         $generator->endObjectElement('element');
 
-        $this->assertSame(
+        self::assertSame(
             '{"element":{"_media-type":"application\/vnd.ibexa.api.element+json","simpleValue":["value1","value2"]}}',
             $generator->endDocument('test')
         );
@@ -253,7 +254,7 @@ class JsonTest extends GeneratorTest
     {
         $generator = $this->getGenerator();
 
-        $this->assertEquals(
+        self::assertEquals(
             'application/vnd.ibexa.api.Section+json',
             $generator->getMediaType('Section')
         );
@@ -293,9 +294,9 @@ class JsonTest extends GeneratorTest
     {
         $generator = $this->getGenerator();
 
-        $this->assertTrue($generator->serializeBool(true) === true);
-        $this->assertTrue($generator->serializeBool(false) === false);
-        $this->assertTrue($generator->serializeBool('notbooleanbuttrue') === true);
+        self::assertTrue($generator->serializeBool(true) === true);
+        self::assertTrue($generator->serializeBool(false) === false);
+        self::assertTrue($generator->serializeBool('notbooleanbuttrue') === true);
     }
 
     protected function getGenerator()

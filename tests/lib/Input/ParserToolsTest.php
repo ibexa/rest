@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Input;
 
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
@@ -17,7 +18,7 @@ class ParserToolsTest extends TestCase
     {
         $parserTools = $this->getParserTools();
 
-        $this->assertTrue(
+        self::assertTrue(
             $parserTools->isEmbeddedObject(
                 [
                     '_href' => '/foo/bar',
@@ -32,7 +33,7 @@ class ParserToolsTest extends TestCase
     {
         $parserTools = $this->getParserTools();
 
-        $this->assertFalse(
+        self::assertFalse(
             $parserTools->isEmbeddedObject(
                 [
                     '_href' => '/foo/bar',
@@ -47,11 +48,11 @@ class ParserToolsTest extends TestCase
         $parserTools = $this->getParserTools();
 
         $dispatcherMock = $this->createMock(ParsingDispatcher::class);
-        $dispatcherMock->expects($this->once())
+        $dispatcherMock->expects(self::once())
             ->method('parse')
             ->with(
-                $this->isType('array'),
-                $this->equalTo('application/my-type')
+                self::isType('array'),
+                self::equalTo('application/my-type')
             );
 
         $parsingInput = [
@@ -60,7 +61,7 @@ class ParserToolsTest extends TestCase
             'someContent' => [],
         ];
 
-        $this->assertEquals(
+        self::assertEquals(
             '/foo/bar',
             $parserTools->parseObjectElement($parsingInput, $dispatcherMock)
         );
@@ -71,7 +72,7 @@ class ParserToolsTest extends TestCase
         $parserTools = $this->getParserTools();
 
         $dispatcherMock = $this->createMock(ParsingDispatcher::class);
-        $dispatcherMock->expects($this->never())
+        $dispatcherMock->expects(self::never())
             ->method('parse');
 
         $parsingInput = [
@@ -80,7 +81,7 @@ class ParserToolsTest extends TestCase
             '#someTextContent' => 'foo',
         ];
 
-        $this->assertEquals(
+        self::assertEquals(
             '/foo/bar',
             $parserTools->parseObjectElement($parsingInput, $dispatcherMock)
         );
@@ -90,10 +91,10 @@ class ParserToolsTest extends TestCase
     {
         $tools = $this->getParserTools();
 
-        $this->assertTrue($tools->parseBooleanValue('true'));
-        $this->assertTrue($tools->parseBooleanValue(true));
-        $this->assertFalse($tools->parseBooleanValue('false'));
-        $this->assertFalse($tools->parseBooleanValue(false));
+        self::assertTrue($tools->parseBooleanValue('true'));
+        self::assertTrue($tools->parseBooleanValue(true));
+        self::assertFalse($tools->parseBooleanValue('false'));
+        self::assertFalse($tools->parseBooleanValue(false));
     }
 
     public function testUnexpectedValueParseBooleanValue()
