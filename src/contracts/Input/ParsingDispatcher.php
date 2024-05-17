@@ -30,7 +30,7 @@ class ParsingDispatcher
      *  )
      * </code>
      *
-     * @var \Ibexa\Contracts\Rest\Input\Parser[]
+     * @var array<string, array<string, \Ibexa\Contracts\Rest\Input\Parser>>
      */
     protected array $parsers = [];
 
@@ -56,7 +56,7 @@ class ParsingDispatcher
      */
     public function addParser(string $mediaType, Parser $parser): void
     {
-        list($mediaType, $version) = $this->parseMediaTypeVersion($mediaType);
+        [$mediaType, $version] = $this->parseMediaTypeVersion($mediaType);
 
         $this->parsers[$mediaType][$version] = $parser;
     }
@@ -116,7 +116,7 @@ class ParsingDispatcher
      *
      * @param string $mediaType Ex: text/html; version=1.1
      *
-     * @return array An array with the media-type string, stripped from the version, and the version (1.0 by default)
+     * @return array{string, string} An array with the media-type string, stripped from the version, and the version (1.0 by default)
      */
     protected function parseMediaTypeVersion(string $mediaType): array
     {
