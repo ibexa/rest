@@ -10,5 +10,7 @@ parameters:
     paths:
         - src
         - tests
-    checkGenericClassInNonGenericObjectType: false
     treatPhpDocTypesAsCertain: false
+    ignoreErrors:
+        -
+            identifier: missingType.generics
