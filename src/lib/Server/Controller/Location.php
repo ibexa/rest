@@ -18,6 +18,7 @@ use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Value;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -223,6 +224,16 @@ class Location extends RestController
      */
     public function moveSubtree($locationPath, Request $request)
     {
+        trigger_deprecation(
+            'ibexa/rest',
+            '5.0',
+            sprintf(
+                '"%s" route is deprecated and will be removed in 6.0. Use "%s" route instead.',
+                'ibexa.rest.move_subtree',
+                'ibexa.rest.move_location',
+            ),
+        );
+
         $locationToMove = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($locationPath)
         );
@@ -277,6 +288,39 @@ class Location extends RestController
                 throw new BadRequestException("{$destinationHref} is not an acceptable destination");
             }
         }
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
+    public function moveLocation(Request $request, string $locationPath): Value
+    {
+        $destinationLocation = $this->inputDispatcher->parse(
+            new Message(
+                ['Content-Type' => $request->headers->get('Content-Type')],
+                $request->getContent(),
+            ),
+        );
+
+        $locationToMove = $this->locationService->loadLocation(
+            $this->extractLocationIdFromPath($locationPath),
+        );
+
+        $this->locationService->moveSubtree($locationToMove, $destinationLocation);
+
+        // Reload the location to get a new subtree position
+        $locationToMove = $this->locationService->loadLocation($locationToMove->id);
+
+        return new Values\ResourceCreated(
+            $this->router->generate(
+                'ibexa.rest.load_location',
+                [
+                    'locationPath' => trim($locationToMove->getPathString(), '/'),
+                ],
+            ),
+        );
     }
 
     /**
