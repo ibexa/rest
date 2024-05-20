@@ -262,4 +262,25 @@ XML;
 
         return $href;
     }
+
+    /**
+     * @covers \Ibexa\Rest\Server\Controller\Location::moveLocation
+     *
+     * @depends testCopySubtree
+     */
+    public function testMoveLocation(): void
+    {
+        $request = $this->createHttpRequest(
+            'POST',
+            '/api/ibexa/v2/content/locations/1/43',
+            'MoveLocationInput+json',
+            '',
+            json_encode(['MoveLocationInput' => ['destination' => '/1/2']]) ?: '',
+        );
+
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 201);
+        self::assertHttpResponseHasHeader($response, 'Location');
+    }
 }
