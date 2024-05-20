@@ -7,14 +7,13 @@
 
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use eZ\Publish\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\LocationService;
-use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as ApiLocation;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Core\Repository\Values\Content\Content;
+use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
@@ -36,7 +35,6 @@ final class LocationTest extends ValueObjectVisitorBaseTest
 
     protected function setUp(): void
     {
-        $this->permissionResolverMock = $this->createMock(PermissionResolver::class);
         $this->locationServiceMock = $this->createMock(LocationService::class);
         $this->contentServiceMock = $this->createMock(ContentService::class);
 
