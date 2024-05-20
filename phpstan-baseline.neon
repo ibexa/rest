@@ -9301,32 +9301,7 @@ parameters:
 			path: tests/lib/Server/Output/ValueObjectVisitor/LocationListTest.php
 
 		-
-			message: "#^Access to an undefined property Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\LocationTest\\:\\:\\$permissionResolverMock\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/LocationTest.php
-
-		-
-			message: "#^Access to property \\$id on an unknown class eZ\\\\Publish\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Location\\.$#"
-			count: 2
-			path: tests/lib/Server/Output/ValueObjectVisitor/LocationTest.php
-
-		-
-			message: "#^Call to method getContentInfo\\(\\) on an unknown class eZ\\\\Publish\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Location\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/LocationTest.php
-
-		-
-			message: "#^Instantiated class eZ\\\\Publish\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Location not found\\.$#"
-			count: 2
-			path: tests/lib/Server/Output/ValueObjectVisitor/LocationTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\LocationTest\\:\\:getDataForTestVisitLocationAttributesResolvesMainLocation\\(\\) return type has no value type specified in iterable type iterable\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/LocationTest.php
-
-		-
-			message: "#^Parameter \\$location of method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\LocationTest\\:\\:mockLoadLocation\\(\\) has invalid type eZ\\\\Publish\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Location\\.$#"
 			count: 1
 			path: tests/lib/Server/Output/ValueObjectVisitor/LocationTest.php
 
