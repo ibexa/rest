@@ -21,5 +21,3 @@ class CreatedRole extends ValueObject
      */
     public $role;
 }
-
-class_alias(CreatedRole::class, 'EzSystems\EzPlatformRest\Server\Values\CreatedRole');

@@ -36,5 +36,3 @@ class LocationRemoteId extends BaseParser
         return new LocationRemoteIdCriterion(explode(',', $data['LocationRemoteIdCriterion']));
     }
 }
-
-class_alias(LocationRemoteId::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\LocationRemoteId');

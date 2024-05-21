@@ -43,5 +43,3 @@ final class IntegerRangeAggregationParser extends AbstractRangeAggregationParser
         );
     }
 }
-
-class_alias(IntegerRangeAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Field\IntegerRangeAggregationParser');

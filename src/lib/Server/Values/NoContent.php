@@ -12,5 +12,3 @@ use Ibexa\Rest\Value as RestValue;
 class NoContent extends RestValue
 {
 }
-
-class_alias(NoContent::class, 'EzSystems\EzPlatformRest\Server\Values\NoContent');

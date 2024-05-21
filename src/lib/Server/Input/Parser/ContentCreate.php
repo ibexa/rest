@@ -178,5 +178,3 @@ class ContentCreate extends BaseParser
         return new RestContentCreateStruct($contentCreateStruct, $locationCreateStruct);
     }
 }
-
-class_alias(ContentCreate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\ContentCreate');

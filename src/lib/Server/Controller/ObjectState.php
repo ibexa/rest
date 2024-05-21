@@ -342,5 +342,3 @@ class ObjectState extends RestController
         return new ContentObjectStates($contentObjectStates);
     }
 }
-
-class_alias(ObjectState::class, 'EzSystems\EzPlatformRest\Server\Controller\ObjectState');

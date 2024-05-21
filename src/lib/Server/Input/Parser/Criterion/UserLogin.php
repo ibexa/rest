@@ -36,5 +36,3 @@ class UserLogin extends BaseParser
         return new UserLoginCriterion($value, $operator);
     }
 }
-
-class_alias(UserLogin::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\UserLogin');

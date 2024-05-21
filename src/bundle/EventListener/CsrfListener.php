@@ -180,5 +180,3 @@ class CsrfListener implements EventSubscriberInterface
         );
     }
 }
-
-class_alias(CsrfListener::class, 'EzSystems\EzPlatformRestBundle\EventListener\CsrfListener');

@@ -61,5 +61,3 @@ class ViewInputOneDotOne extends CriterionParser
         return $restViewInput;
     }
 }
-
-class_alias(ViewInputOneDotOne::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\ViewInputOneDotOne');

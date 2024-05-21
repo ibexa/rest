@@ -73,5 +73,3 @@ class ImageAssetFieldTypeProcessor extends FieldTypeProcessor
         return $outgoingValueHash;
     }
 }
-
-class_alias(ImageAssetFieldTypeProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor\ImageAssetFieldTypeProcessor');

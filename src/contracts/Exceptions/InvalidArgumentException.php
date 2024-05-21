@@ -15,5 +15,3 @@ use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException as APIIn
 class InvalidArgumentException extends APIInvalidArgumentException
 {
 }
-
-class_alias(InvalidArgumentException::class, 'EzSystems\EzPlatformRest\Exceptions\InvalidArgumentException');

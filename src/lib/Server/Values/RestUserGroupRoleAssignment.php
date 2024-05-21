@@ -41,5 +41,3 @@ class RestUserGroupRoleAssignment extends RestValue
         $this->id = $id;
     }
 }
-
-class_alias(RestUserGroupRoleAssignment::class, 'EzSystems\EzPlatformRest\Server\Values\RestUserGroupRoleAssignment');

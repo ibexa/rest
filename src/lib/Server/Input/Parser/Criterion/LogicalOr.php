@@ -51,5 +51,3 @@ class LogicalOr extends LogicalOperator
         return new Values\Content\Query\Criterion\LogicalOr($criteria);
     }
 }
-
-class_alias(LogicalOr::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\LogicalOr');

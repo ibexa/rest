@@ -35,5 +35,3 @@ class Configuration extends SiteAccessConfiguration
             ->end();
     }
 }
-
-class_alias(Configuration::class, 'EzSystems\EzPlatformRestBundle\DependencyInjection\Configuration');

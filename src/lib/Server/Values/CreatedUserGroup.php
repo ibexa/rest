@@ -21,5 +21,3 @@ class CreatedUserGroup extends ValueObject
      */
     public $userGroup;
 }
-
-class_alias(CreatedUserGroup::class, 'EzSystems\EzPlatformRest\Server\Values\CreatedUserGroup');

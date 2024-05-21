@@ -67,5 +67,3 @@ class CachedValue extends ValueObjectVisitor
         return $defaultValue;
     }
 }
-
-class_alias(CachedValue::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CachedValue');

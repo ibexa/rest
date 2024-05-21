@@ -35,5 +35,3 @@ class ObjectStateIdentifier extends BaseParser
         );
     }
 }
-
-class_alias(ObjectStateIdentifier::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\ObjectStateIdentifier');

@@ -42,5 +42,3 @@ class RestFieldDefinition extends RestValue
         $this->path = $path;
     }
 }
-
-class_alias(RestFieldDefinition::class, 'EzSystems\EzPlatformRest\Server\Values\RestFieldDefinition');

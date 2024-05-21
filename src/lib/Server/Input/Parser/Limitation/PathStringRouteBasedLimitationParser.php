@@ -38,5 +38,3 @@ class PathStringRouteBasedLimitationParser extends RouteBasedLimitationParser
         return '/' . ltrim(parent::parseIdFromHref($limitationValue), '/');
     }
 }
-
-class_alias(PathStringRouteBasedLimitationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Limitation\PathStringRouteBasedLimitationParser');

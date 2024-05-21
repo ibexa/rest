@@ -162,5 +162,3 @@ class RestExecutedView extends ValueObjectVisitor
         $generator->endObjectElement('View');
     }
 }
-
-class_alias(RestExecutedView::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestExecutedView');

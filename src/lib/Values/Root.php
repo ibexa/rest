@@ -32,5 +32,3 @@ class Root extends RestValue
         return $this->resources;
     }
 }
-
-class_alias(Root::class, 'EzSystems\EzPlatformRest\Values\Root');

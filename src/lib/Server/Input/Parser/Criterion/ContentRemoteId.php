@@ -36,5 +36,3 @@ class ContentRemoteId extends BaseParser
         return new ContentRemoteIdCriterion(explode(',', $data['ContentRemoteIdCriterion']));
     }
 }
-
-class_alias(ContentRemoteId::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\ContentRemoteId');

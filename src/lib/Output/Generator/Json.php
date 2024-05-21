@@ -325,5 +325,3 @@ class Json extends Generator
         return (bool)$boolValue;
     }
 }
-
-class_alias(Json::class, 'EzSystems\EzPlatformRest\Output\Generator\Json');

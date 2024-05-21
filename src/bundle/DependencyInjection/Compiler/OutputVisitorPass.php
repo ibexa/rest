@@ -86,5 +86,3 @@ class OutputVisitorPass implements CompilerPassInterface
         }
     }
 }
-
-class_alias(OutputVisitorPass::class, 'EzSystems\EzPlatformRestBundle\DependencyInjection\Compiler\OutputVisitorPass');

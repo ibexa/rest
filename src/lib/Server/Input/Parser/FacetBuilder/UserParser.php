@@ -54,5 +54,3 @@ class UserParser extends BaseParser
         return new UserFacetBuilder($data['User']);
     }
 }
-
-class_alias(UserParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\UserParser');

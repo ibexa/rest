@@ -84,5 +84,3 @@ class IbexaRestExtension extends Extension implements PrependExtensionInterface
         ]);
     }
 }
-
-class_alias(IbexaRestExtension::class, 'EzSystems\EzPlatformRestBundle\DependencyInjection\EzPlatformRestExtension');

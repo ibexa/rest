@@ -36,5 +36,3 @@ class FullText extends BaseParser
         return new FullTextCriterion($data['FullTextCriterion']);
     }
 }
-
-class_alias(FullText::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\FullText');

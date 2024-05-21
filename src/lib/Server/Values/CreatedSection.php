@@ -21,5 +21,3 @@ class CreatedSection extends ValueObject
      */
     public $section;
 }
-
-class_alias(CreatedSection::class, 'EzSystems\EzPlatformRest\Server\Values\CreatedSection');

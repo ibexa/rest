@@ -27,5 +27,3 @@ final class RawRangeAggregationParser extends AbstractRangeAggregationParser
         );
     }
 }
-
-class_alias(RawRangeAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\RawRangeAggregationParser');

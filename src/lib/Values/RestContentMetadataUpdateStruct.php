@@ -23,5 +23,3 @@ class RestContentMetadataUpdateStruct extends ContentMetadataUpdateStruct
      */
     public $sectionId;
 }
-
-class_alias(RestContentMetadataUpdateStruct::class, 'EzSystems\EzPlatformRest\Values\RestContentMetadataUpdateStruct');

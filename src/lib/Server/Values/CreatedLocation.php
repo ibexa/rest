@@ -21,5 +21,3 @@ class CreatedLocation extends ValueObject
      */
     public $restLocation;
 }
-
-class_alias(CreatedLocation::class, 'EzSystems\EzPlatformRest\Server\Values\CreatedLocation');

@@ -24,5 +24,3 @@ class SessionInput extends ValueObject
      */
     public $password;
 }
-
-class_alias(SessionInput::class, 'EzSystems\EzPlatformRest\Server\Values\SessionInput');

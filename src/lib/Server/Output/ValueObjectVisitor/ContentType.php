@@ -29,5 +29,3 @@ final class ContentType extends ValueObjectVisitor implements DelegateValueObjec
         );
     }
 }
-
-class_alias(ContentType::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ContentType');

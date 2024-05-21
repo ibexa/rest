@@ -59,5 +59,3 @@ class AcceptHeaderVisitorDispatcher
         throw new RuntimeException('No view mapping found.');
     }
 }
-
-class_alias(AcceptHeaderVisitorDispatcher::class, 'EzSystems\EzPlatformRest\Server\View\AcceptHeaderVisitorDispatcher');

@@ -22,5 +22,3 @@ class NotImplementedException extends Exception
         return 501;
     }
 }
-
-class_alias(NotImplementedException::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\NotImplementedException');

@@ -45,5 +45,3 @@ class Root extends RestController
         throw new NotFoundException('No such route');
     }
 }
-
-class_alias(Root::class, 'EzSystems\EzPlatformRest\Server\Controller\Root');

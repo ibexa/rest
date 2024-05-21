@@ -43,5 +43,3 @@ final class DateRangeAggregationParser extends AbstractRangeAggregationParser
         );
     }
 }
-
-class_alias(DateRangeAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Field\DateRangeAggregationParser');

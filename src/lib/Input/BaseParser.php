@@ -24,5 +24,3 @@ abstract class BaseParser extends Parser
         $this->requestParser = $requestParser;
     }
 }
-
-class_alias(BaseParser::class, 'EzSystems\EzPlatformRest\Input\BaseParser');

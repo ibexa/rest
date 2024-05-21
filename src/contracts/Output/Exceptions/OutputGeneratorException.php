@@ -26,5 +26,3 @@ class OutputGeneratorException extends RuntimeException
         );
     }
 }
-
-class_alias(OutputGeneratorException::class, 'EzSystems\EzPlatformRest\Output\Exceptions\OutputGeneratorException');

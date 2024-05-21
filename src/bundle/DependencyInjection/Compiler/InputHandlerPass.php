@@ -50,5 +50,3 @@ class InputHandlerPass implements CompilerPassInterface
         }
     }
 }
-
-class_alias(InputHandlerPass::class, 'EzSystems\EzPlatformRestBundle\DependencyInjection\Compiler\InputHandlerPass');

@@ -135,5 +135,3 @@ class FieldTypeParser
         return $fieldType->validatorConfigurationFromHash($configurationHash);
     }
 }
-
-class_alias(FieldTypeParser::class, 'EzSystems\EzPlatformRest\Input\FieldTypeParser');

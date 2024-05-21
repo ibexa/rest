@@ -180,5 +180,3 @@ class ContentTypeCreate extends BaseParser
         return $contentTypeCreateStruct;
     }
 }
-
-class_alias(ContentTypeCreate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\ContentTypeCreate');

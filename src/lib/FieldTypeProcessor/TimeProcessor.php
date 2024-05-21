@@ -48,5 +48,3 @@ class TimeProcessor extends FieldTypeProcessor
         return $outgoingSettingsHash;
     }
 }
-
-class_alias(TimeProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor\TimeProcessor');

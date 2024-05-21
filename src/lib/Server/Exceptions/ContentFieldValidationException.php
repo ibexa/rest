@@ -40,5 +40,3 @@ class ContentFieldValidationException extends BadRequestException
         return $this->errors;
     }
 }
-
-class_alias(ContentFieldValidationException::class, 'EzSystems\EzPlatformRest\Server\Exceptions\ContentFieldValidationException');

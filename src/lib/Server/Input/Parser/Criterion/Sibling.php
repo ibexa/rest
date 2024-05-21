@@ -37,5 +37,3 @@ class Sibling extends BaseParser
         return SiblingCriterion::fromLocation($location);
     }
 }
-
-class_alias(Sibling::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\Sibling');

@@ -1082,5 +1082,3 @@ class User extends RestController
         $this->sessionController = $sessionController;
     }
 }
-
-class_alias(User::class, 'EzSystems\EzPlatformRest\Server\Controller\User');

@@ -37,5 +37,3 @@ class CreatedUser extends RestUser
         $visitor->setStatus(201);
     }
 }
-
-class_alias(CreatedUser::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedUser');

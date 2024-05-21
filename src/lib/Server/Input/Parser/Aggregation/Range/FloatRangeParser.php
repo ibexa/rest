@@ -21,5 +21,3 @@ final class FloatRangeParser extends AbstractRangeParser
         return (float)$value;
     }
 }
-
-class_alias(FloatRangeParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Range\FloatRangeParser');

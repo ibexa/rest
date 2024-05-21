@@ -33,5 +33,3 @@ class Services extends RestController
         return new Values\CountryList($this->countriesInfo);
     }
 }
-
-class_alias(Services::class, 'EzSystems\EzPlatformRest\Server\Controller\Services');

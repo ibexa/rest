@@ -202,5 +202,3 @@ class Location extends ValueObjectVisitor
         }
     }
 }
-
-class_alias(Location::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Location');

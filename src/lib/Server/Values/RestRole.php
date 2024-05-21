@@ -67,5 +67,3 @@ class RestRole extends RestValue
         return $this->innerRole->__isset($property);
     }
 }
-
-class_alias(RestRole::class, 'EzSystems\EzPlatformRest\Server\Values\RestRole');

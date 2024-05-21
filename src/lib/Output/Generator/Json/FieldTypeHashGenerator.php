@@ -174,5 +174,3 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
         return $value;
     }
 }
-
-class_alias(FieldTypeHashGenerator::class, 'EzSystems\EzPlatformRest\Output\Generator\Json\FieldTypeHashGenerator');

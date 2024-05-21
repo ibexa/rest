@@ -44,5 +44,3 @@ class CreatedFieldDefinition extends RestFieldDefinition
         $visitor->setStatus(201);
     }
 }
-
-class_alias(CreatedFieldDefinition::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedFieldDefinition');

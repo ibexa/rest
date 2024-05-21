@@ -66,5 +66,3 @@ class RoleInput extends BaseParser
         return $roleCreateStruct;
     }
 }
-
-class_alias(RoleInput::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\RoleInput');

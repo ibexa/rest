@@ -36,5 +36,3 @@ class CriterionParser extends BaseParser
         return new CriterionFacetBuilder($data['Criterion']);
     }
 }
-
-class_alias(CriterionParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\CriterionParser');

@@ -21,5 +21,3 @@ class Conflict extends ValueObjectVisitor
         $visitor->setStatus(409);
     }
 }
-
-class_alias(Conflict::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Conflict');

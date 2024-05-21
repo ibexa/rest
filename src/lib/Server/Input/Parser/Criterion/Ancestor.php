@@ -36,5 +36,3 @@ class Ancestor extends BaseParser
         return new AncestorCriterion(explode(',', $data['AncestorCriterion']));
     }
 }
-
-class_alias(Ancestor::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\Ancestor');

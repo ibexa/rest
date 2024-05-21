@@ -36,5 +36,3 @@ class LanguageCode extends BaseParser
         return new LanguageCodeCriterion(explode(',', $data['LanguageCodeCriterion']));
     }
 }
-
-class_alias(LanguageCode::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\LanguageCode');

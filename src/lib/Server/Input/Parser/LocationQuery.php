@@ -20,5 +20,3 @@ class LocationQuery extends QueryParser
         return new LocationQueryValueObject();
     }
 }
-
-class_alias(LocationQuery::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\LocationQuery');

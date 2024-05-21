@@ -34,5 +34,3 @@ class BookmarkList extends RestValue
         $this->items = $items;
     }
 }
-
-class_alias(BookmarkList::class, 'EzSystems\EzPlatformRest\Server\Values\BookmarkList');

@@ -79,5 +79,3 @@ abstract class Controller implements ContainerAwareInterface
         return 'unknown/unknown';
     }
 }
-
-class_alias(Controller::class, 'EzSystems\EzPlatformRest\Server\Controller');

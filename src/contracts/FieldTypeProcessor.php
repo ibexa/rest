@@ -138,5 +138,3 @@ abstract class FieldTypeProcessor
         return $outgoingValidatorConfigurationHash;
     }
 }
-
-class_alias(FieldTypeProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor');

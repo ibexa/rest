@@ -15,5 +15,3 @@ namespace Ibexa\Rest\Output;
 interface DelegateValueObjectVisitor
 {
 }
-
-class_alias(DelegateValueObjectVisitor::class, 'EzSystems\EzPlatformRest\Output\DelegateValueObjectVisitor');

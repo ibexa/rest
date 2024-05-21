@@ -12,5 +12,3 @@ use Ibexa\Rest\Value as RestValue;
 class Conflict extends RestValue
 {
 }
-
-class_alias(Conflict::class, 'EzSystems\EzPlatformRest\Server\Values\Conflict');

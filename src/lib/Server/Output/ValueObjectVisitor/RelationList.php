@@ -52,5 +52,3 @@ class RelationList extends ValueObjectVisitor
         $generator->endObjectElement('Relations');
     }
 }
-
-class_alias(RelationList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RelationList');

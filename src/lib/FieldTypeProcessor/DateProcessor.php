@@ -48,5 +48,3 @@ class DateProcessor extends FieldTypeProcessor
         return $outgoingSettingsHash;
     }
 }
-
-class_alias(DateProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor\DateProcessor');

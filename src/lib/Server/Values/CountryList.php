@@ -27,5 +27,3 @@ class CountryList extends RestValue
         $this->countries = $countries;
     }
 }
-
-class_alias(CountryList::class, 'EzSystems\EzPlatformRest\Server\Values\CountryList');

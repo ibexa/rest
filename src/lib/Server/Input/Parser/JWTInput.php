@@ -28,5 +28,3 @@ final class JWTInput extends BaseParser
         return new JWTInputValue($data['username'], $data['password']);
     }
 }
-
-class_alias(JWTInput::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\JWTInput');

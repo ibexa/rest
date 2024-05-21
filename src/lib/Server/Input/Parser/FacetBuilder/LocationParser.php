@@ -36,5 +36,3 @@ class LocationParser extends BaseParser
         return new LocationFacetBuilder($data['Location']);
     }
 }
-
-class_alias(LocationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\LocationParser');

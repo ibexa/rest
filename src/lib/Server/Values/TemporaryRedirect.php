@@ -28,5 +28,3 @@ class TemporaryRedirect extends RestValue
         $this->redirectUri = $redirectUri;
     }
 }
-
-class_alias(TemporaryRedirect::class, 'EzSystems\EzPlatformRest\Server\Values\TemporaryRedirect');

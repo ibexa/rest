@@ -23,5 +23,3 @@ final class DateTimeRangeParser extends AbstractRangeParser
         return new DateTimeImmutable($value);
     }
 }
-
-class_alias(DateTimeRangeParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Range\DateTimeRangeParser');

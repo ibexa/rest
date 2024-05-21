@@ -27,5 +27,3 @@ class Options extends RestController
         return new Values\Options(explode(',', $allowedMethods));
     }
 }
-
-class_alias(Options::class, 'EzSystems\EzPlatformRest\Server\Controller\Options');

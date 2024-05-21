@@ -68,5 +68,3 @@ class LogicalOperator extends Criterion
         return empty($value) || key($value) === 0;
     }
 }
-
-class_alias(LogicalOperator::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\LogicalOperator');

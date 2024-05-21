@@ -24,5 +24,3 @@ final class ContentTypeGroupTermAggregationParser extends AbstractTermAggregatio
         return new ContentTypeGroupTermAggregation($data['name']);
     }
 }
-
-class_alias(ContentTypeGroupTermAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\ContentTypeGroupTermAggregationParser');

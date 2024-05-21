@@ -41,5 +41,3 @@ class RestObjectState extends RestValue
         $this->groupId = $groupId;
     }
 }
-
-class_alias(RestObjectState::class, 'EzSystems\EzPlatformRest\Values\RestObjectState');

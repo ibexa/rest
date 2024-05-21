@@ -21,5 +21,3 @@ class CreatedRelation extends ValueObject
      */
     public $relation;
 }
-
-class_alias(CreatedRelation::class, 'EzSystems\EzPlatformRest\Server\Values\CreatedRelation');

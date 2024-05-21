@@ -52,5 +52,3 @@ class ContentObjectStates extends ValueObjectVisitor
         $generator->endObjectElement('ContentObjectStates');
     }
 }
-
-class_alias(ContentObjectStates::class, 'EzSystems\EzPlatformRest\Output\ValueObjectVisitor\ContentObjectStates');

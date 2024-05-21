@@ -130,5 +130,3 @@ abstract class Criterion extends BaseParser
         return 'application/vnd.ibexa.api.internal.aggregation.' . $aggregationName;
     }
 }
-
-class_alias(Criterion::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion');

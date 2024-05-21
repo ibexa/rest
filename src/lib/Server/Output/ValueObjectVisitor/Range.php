@@ -25,5 +25,3 @@ final class Range extends ValueObjectVisitor
         $generator->endObjectElement('Range');
     }
 }
-
-class_alias(Range::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Range');

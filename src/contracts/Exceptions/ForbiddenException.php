@@ -15,5 +15,3 @@ use InvalidArgumentException;
 class ForbiddenException extends InvalidArgumentException
 {
 }
-
-class_alias(ForbiddenException::class, 'EzSystems\EzPlatformRest\Exceptions\ForbiddenException');

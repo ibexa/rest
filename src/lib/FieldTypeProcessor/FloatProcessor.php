@@ -23,5 +23,3 @@ class FloatProcessor extends FieldTypeProcessor
         return $incomingValueHash;
     }
 }
-
-class_alias(FloatProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor\FloatProcessor');

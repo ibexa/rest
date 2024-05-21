@@ -40,5 +40,3 @@ class Visibility extends BaseParser
         return new VisibilityCriterion((int)$data['VisibilityCriterion']);
     }
 }
-
-class_alias(Visibility::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\Visibility');

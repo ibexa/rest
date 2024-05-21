@@ -54,5 +54,3 @@ class Version extends RestValue
         $this->path = $path;
     }
 }
-
-class_alias(Version::class, 'EzSystems\EzPlatformRest\Server\Values\Version');

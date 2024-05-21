@@ -113,5 +113,3 @@ class RestTrashItem extends ValueObjectVisitor
         $generator->endObjectElement('TrashItem');
     }
 }
-
-class_alias(RestTrashItem::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestTrashItem');

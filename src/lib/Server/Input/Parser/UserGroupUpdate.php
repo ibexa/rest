@@ -160,5 +160,3 @@ class UserGroupUpdate extends BaseParser
         );
     }
 }
-
-class_alias(UserGroupUpdate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\UserGroupUpdate');

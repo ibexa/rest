@@ -21,5 +21,3 @@ class CreatedFieldDefinition extends ValueObject
      */
     public $fieldDefinition;
 }
-
-class_alias(CreatedFieldDefinition::class, 'EzSystems\EzPlatformRest\Server\Values\CreatedFieldDefinition');

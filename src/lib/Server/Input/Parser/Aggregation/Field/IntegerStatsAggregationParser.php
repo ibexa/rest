@@ -38,5 +38,3 @@ final class IntegerStatsAggregationParser extends AbstractStatsAggregationParser
         );
     }
 }
-
-class_alias(IntegerStatsAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Field\IntegerStatsAggregationParser');

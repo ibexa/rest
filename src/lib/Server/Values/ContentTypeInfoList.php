@@ -40,5 +40,3 @@ class ContentTypeInfoList extends RestValue
         $this->path = $path;
     }
 }
-
-class_alias(ContentTypeInfoList::class, 'EzSystems\EzPlatformRest\Server\Values\ContentTypeInfoList');

@@ -38,5 +38,3 @@ final class FloatStatsAggregationParser extends AbstractStatsAggregationParser
         );
     }
 }
-
-class_alias(FloatStatsAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Field\FloatStatsAggregationParser');

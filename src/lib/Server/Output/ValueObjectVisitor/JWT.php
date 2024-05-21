@@ -25,5 +25,3 @@ final class JWT extends ValueObjectVisitor
         $generator->endObjectElement('JWT');
     }
 }
-
-class_alias(JWT::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\JWT');

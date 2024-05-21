@@ -37,5 +37,3 @@ class CreatedObjectStateGroup extends ObjectStateGroup
         $visitor->setStatus(201);
     }
 }
-
-class_alias(CreatedObjectStateGroup::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedObjectStateGroup');

@@ -20,5 +20,3 @@ class ContentQuery extends QueryParser
         return new Query();
     }
 }
-
-class_alias(ContentQuery::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\ContentQuery');

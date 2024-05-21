@@ -63,5 +63,3 @@ class UserSession extends ValueObjectVisitor
         $generator->endObjectElement('User');
     }
 }
-
-class_alias(UserSession::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\UserSession');

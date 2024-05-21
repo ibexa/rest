@@ -39,5 +39,3 @@ class RestLocation extends RestValue
         $this->childCount = $childCount;
     }
 }
-
-class_alias(RestLocation::class, 'EzSystems\EzPlatformRest\Server\Values\RestLocation');

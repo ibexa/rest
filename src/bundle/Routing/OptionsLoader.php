@@ -40,5 +40,3 @@ class OptionsLoader extends Loader
         return $type === 'rest_options';
     }
 }
-
-class_alias(OptionsLoader::class, 'EzSystems\EzPlatformRestBundle\Routing\OptionsLoader');

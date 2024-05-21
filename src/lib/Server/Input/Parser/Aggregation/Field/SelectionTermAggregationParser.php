@@ -38,5 +38,3 @@ final class SelectionTermAggregationParser extends AbstractTermAggregationParser
         );
     }
 }
-
-class_alias(SelectionTermAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Field\SelectionTermAggregationParser');

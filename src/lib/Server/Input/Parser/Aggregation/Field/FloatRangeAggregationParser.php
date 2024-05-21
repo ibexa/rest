@@ -43,5 +43,3 @@ final class FloatRangeAggregationParser extends AbstractRangeAggregationParser
         );
     }
 }
-
-class_alias(FloatRangeAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Field\FloatRangeAggregationParser');

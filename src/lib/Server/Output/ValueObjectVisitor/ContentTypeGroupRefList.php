@@ -85,5 +85,3 @@ class ContentTypeGroupRefList extends ValueObjectVisitor
         $generator->endObjectElement('ContentTypeGroupRefList');
     }
 }
-
-class_alias(ContentTypeGroupRefList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ContentTypeGroupRefList');

@@ -126,5 +126,3 @@ class UserGroupCreate extends BaseParser
         return $userGroupCreateStruct;
     }
 }
-
-class_alias(UserGroupCreate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\UserGroupCreate');

@@ -38,5 +38,3 @@ final class CheckboxTermAggregationParser extends AbstractTermAggregationParser
         );
     }
 }
-
-class_alias(CheckboxTermAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Field\CheckboxTermAggregationParser');

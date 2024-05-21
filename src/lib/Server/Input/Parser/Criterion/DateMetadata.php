@@ -102,5 +102,3 @@ class DateMetadata extends BaseParser
         return self::OPERATORS[$operatorName];
     }
 }
-
-class_alias(DateMetadata::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\DateMetadata');

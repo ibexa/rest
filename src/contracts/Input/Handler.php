@@ -21,5 +21,3 @@ abstract class Handler
      */
     abstract public function convert($string);
 }
-
-class_alias(Handler::class, 'EzSystems\EzPlatformRest\Input\Handler');

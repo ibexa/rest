@@ -77,5 +77,3 @@ class MediaProcessor extends BinaryInputProcessor
         return $outgoingSettingsHash;
     }
 }
-
-class_alias(MediaProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor\MediaProcessor');

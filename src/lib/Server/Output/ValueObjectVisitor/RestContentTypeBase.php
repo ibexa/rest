@@ -59,5 +59,3 @@ abstract class RestContentTypeBase extends ValueObjectVisitor
         throw new \RuntimeException("Unknown content type status: '{$contentTypeStatus}'.");
     }
 }
-
-class_alias(RestContentTypeBase::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestContentTypeBase');

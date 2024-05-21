@@ -42,5 +42,3 @@ class RoleList extends ValueObjectVisitor
         $generator->endObjectElement('RoleList');
     }
 }
-
-class_alias(RoleList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RoleList');

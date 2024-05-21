@@ -75,5 +75,3 @@ class RoleAssignInput extends BaseParser
         return new RoleAssignment($roleId, $limitation);
     }
 }
-
-class_alias(RoleAssignInput::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\RoleAssignInput');

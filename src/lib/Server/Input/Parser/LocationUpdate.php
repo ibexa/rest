@@ -80,5 +80,3 @@ class LocationUpdate extends BaseParser
         return new RestLocationUpdateStruct($locationUpdateStruct, $hidden);
     }
 }
-
-class_alias(LocationUpdate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\LocationUpdate');

@@ -432,5 +432,3 @@ class Location extends RestController
         );
     }
 }
-
-class_alias(Location::class, 'EzSystems\EzPlatformRest\Server\Controller\Location');

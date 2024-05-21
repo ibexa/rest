@@ -51,5 +51,3 @@ class ViewInput extends BaseParser
         return $restViewInput;
     }
 }
-
-class_alias(ViewInput::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\ViewInput');

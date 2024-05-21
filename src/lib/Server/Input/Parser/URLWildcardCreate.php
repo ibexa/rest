@@ -61,5 +61,3 @@ class URLWildcardCreate extends BaseParser
         return $data;
     }
 }
-
-class_alias(URLWildcardCreate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\URLWildcardCreate');

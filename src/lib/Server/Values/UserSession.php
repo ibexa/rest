@@ -67,5 +67,3 @@ class UserSession extends RestValue
         $this->created = $created;
     }
 }
-
-class_alias(UserSession::class, 'EzSystems\EzPlatformRest\Server\Values\UserSession');

@@ -36,5 +36,3 @@ class ParentLocationId extends BaseParser
         return new ParentLocationIdCriterion(explode(',', $data['ParentLocationIdCriterion']));
     }
 }
-
-class_alias(ParentLocationId::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\ParentLocationId');

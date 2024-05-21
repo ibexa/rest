@@ -39,5 +39,3 @@ class RestContentType extends RestValue
         $this->fieldDefinitions = $fieldDefinitions;
     }
 }
-
-class_alias(RestContentType::class, 'EzSystems\EzPlatformRest\Server\Values\RestContentType');

@@ -40,5 +40,3 @@ class ContentList extends RestValue
         $this->totalCount = $totalCount;
     }
 }
-
-class_alias(ContentList::class, 'EzSystems\EzPlatformRest\Server\Values\ContentList');

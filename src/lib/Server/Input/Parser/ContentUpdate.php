@@ -100,5 +100,3 @@ class ContentUpdate extends BaseParser
         return new RestContentMetadataUpdateStruct($parsedData);
     }
 }
-
-class_alias(ContentUpdate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\ContentUpdate');

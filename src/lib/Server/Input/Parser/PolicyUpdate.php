@@ -77,5 +77,3 @@ class PolicyUpdate extends BaseParser
         return $policyUpdate;
     }
 }
-
-class_alias(PolicyUpdate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\PolicyUpdate');

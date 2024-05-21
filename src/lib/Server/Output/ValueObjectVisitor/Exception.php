@@ -153,5 +153,3 @@ class Exception extends ValueObjectVisitor
         return $statusCode;
     }
 }
-
-class_alias(Exception::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Exception');

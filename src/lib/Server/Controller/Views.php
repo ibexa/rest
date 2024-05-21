@@ -102,5 +102,3 @@ class Views extends Controller
         return new NotImplementedException('ezpublish_rest.controller.content:loadViewResults');
     }
 }
-
-class_alias(Views::class, 'EzSystems\EzPlatformRest\Server\Controller\Views');

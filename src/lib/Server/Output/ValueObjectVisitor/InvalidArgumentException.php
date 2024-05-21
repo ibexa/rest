@@ -22,5 +22,3 @@ class InvalidArgumentException extends Exception
         return 406;
     }
 }
-
-class_alias(InvalidArgumentException::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\InvalidArgumentException');

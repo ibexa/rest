@@ -21,5 +21,3 @@ class CreatedContentTypeGroup extends ValueObject
      */
     public $contentTypeGroup;
 }
-
-class_alias(CreatedContentTypeGroup::class, 'EzSystems\EzPlatformRest\Server\Values\CreatedContentTypeGroup');

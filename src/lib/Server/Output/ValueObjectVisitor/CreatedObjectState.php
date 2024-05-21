@@ -40,5 +40,3 @@ class CreatedObjectState extends RestObjectState
         $visitor->setStatus(201);
     }
 }
-
-class_alias(CreatedObjectState::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedObjectState');

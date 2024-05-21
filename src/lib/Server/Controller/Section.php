@@ -175,5 +175,3 @@ class Section extends RestController
         );
     }
 }
-
-class_alias(Section::class, 'EzSystems\EzPlatformRest\Server\Controller\Section');

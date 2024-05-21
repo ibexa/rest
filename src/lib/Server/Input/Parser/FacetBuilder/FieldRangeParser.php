@@ -31,5 +31,3 @@ class FieldRangeParser extends BaseParser
         throw new Exceptions\Parser('<FieldRange> is not supported yet');
     }
 }
-
-class_alias(FieldRangeParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\FieldRangeParser');

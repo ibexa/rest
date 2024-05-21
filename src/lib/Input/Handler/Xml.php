@@ -281,5 +281,3 @@ class Xml extends Handler
         return $stringValue;
     }
 }
-
-class_alias(Xml::class, 'EzSystems\EzPlatformRest\Input\Handler\Xml');

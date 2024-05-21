@@ -65,5 +65,3 @@ class ObjectStateGroup extends ValueObjectVisitor
         $this->visitDescriptionsList($generator, $data->getDescriptions());
     }
 }
-
-class_alias(ObjectStateGroup::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ObjectStateGroup');

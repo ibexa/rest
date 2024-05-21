@@ -66,5 +66,3 @@ class RestProvider implements ProviderInterface
         return [];
     }
 }
-
-class_alias(RestProvider::class, 'EzSystems\EzPlatformRestBundle\CorsOptions\RestProvider');

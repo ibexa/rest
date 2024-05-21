@@ -27,5 +27,3 @@ final class RawStatsAggregationParser extends AbstractStatsAggregationParser
         );
     }
 }
-
-class_alias(RawStatsAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\RawStatsAggregationParser');

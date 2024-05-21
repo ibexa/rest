@@ -146,5 +146,3 @@ class RestLocation extends ValueObjectVisitor
         $generator->endObjectElement('Location');
     }
 }
-
-class_alias(RestLocation::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestLocation');

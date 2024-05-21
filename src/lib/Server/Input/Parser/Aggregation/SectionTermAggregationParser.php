@@ -24,5 +24,3 @@ final class SectionTermAggregationParser extends AbstractTermAggregationParser
         return new SectionTermAggregation($data['name']);
     }
 }
-
-class_alias(SectionTermAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\SectionTermAggregationParser');

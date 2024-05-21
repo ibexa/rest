@@ -51,5 +51,3 @@ class LogicalAnd extends LogicalOperator
         return new Values\Content\Query\Criterion\LogicalAnd($criteria);
     }
 }
-
-class_alias(LogicalAnd::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\LogicalAnd');

@@ -16,5 +16,3 @@ class SeeOther extends RestValue
         $this->redirectUri = $redirectUri;
     }
 }
-
-class_alias(SeeOther::class, 'EzSystems\EzPlatformRest\Server\Values\SeeOther');

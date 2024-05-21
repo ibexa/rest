@@ -33,5 +33,3 @@ class IsUserEnabled extends BaseParser
         return new IsUserEnabledCriterion($this->parserTools->parseBooleanValue($data['IsUserEnabledCriterion']));
     }
 }
-
-class_alias(IsUserEnabled::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\IsUserEnabled');

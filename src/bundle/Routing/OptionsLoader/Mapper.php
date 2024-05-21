@@ -77,5 +77,3 @@ class Mapper
         return 'ibexa.rest.options.' . trim($name, '_');
     }
 }
-
-class_alias(Mapper::class, 'EzSystems\EzPlatformRestBundle\Routing\OptionsLoader\Mapper');

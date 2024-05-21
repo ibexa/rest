@@ -32,5 +32,3 @@ final class ObjectStateTermAggregationParser extends AbstractTermAggregationPars
         );
     }
 }
-
-class_alias(ObjectStateTermAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\ObjectStateTermAggregationParser');

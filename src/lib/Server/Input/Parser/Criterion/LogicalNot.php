@@ -43,5 +43,3 @@ class LogicalNot extends CriterionParser
         return new LogicalNotCriterion($criteria);
     }
 }
-
-class_alias(LogicalNot::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\LogicalNot');

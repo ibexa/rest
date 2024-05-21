@@ -71,5 +71,3 @@ class VersionTranslationInfo extends ValueObjectVisitor
         $generator->endList('Language');
     }
 }
-
-class_alias(VersionTranslationInfo::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\VersionTranslationInfo');

@@ -284,5 +284,3 @@ class ParserTools
         }
     }
 }
-
-class_alias(ParserTools::class, 'EzSystems\EzPlatformRest\Input\ParserTools');

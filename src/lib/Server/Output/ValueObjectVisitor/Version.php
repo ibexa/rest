@@ -119,5 +119,3 @@ class Version extends ValueObjectVisitor
         $generator->endObjectElement('Thumbnail');
     }
 }
-
-class_alias(Version::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Version');

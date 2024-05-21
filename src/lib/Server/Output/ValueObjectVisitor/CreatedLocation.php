@@ -37,5 +37,3 @@ class CreatedLocation extends RestLocation
         $visitor->setStatus(201);
     }
 }
-
-class_alias(CreatedLocation::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedLocation');

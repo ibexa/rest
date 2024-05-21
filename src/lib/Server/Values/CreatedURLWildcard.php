@@ -21,5 +21,3 @@ class CreatedURLWildcard extends ValueObject
      */
     public $urlWildcard;
 }
-
-class_alias(CreatedURLWildcard::class, 'EzSystems\EzPlatformRest\Server\Values\CreatedURLWildcard');

@@ -78,5 +78,3 @@ class RestContent extends RestValue
         $this->path = $path;
     }
 }
-
-class_alias(RestContent::class, 'EzSystems\EzPlatformRest\Server\Values\RestContent');

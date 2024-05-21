@@ -38,5 +38,3 @@ class RestContentCreateStruct extends ValueObject
         $this->locationCreateStruct = $locationCreateStruct;
     }
 }
-
-class_alias(RestContentCreateStruct::class, 'EzSystems\EzPlatformRest\Server\Values\RestContentCreateStruct');

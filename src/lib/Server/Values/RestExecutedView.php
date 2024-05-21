@@ -28,5 +28,3 @@ class RestExecutedView extends ValueObject
      */
     public $identifier;
 }
-
-class_alias(RestExecutedView::class, 'EzSystems\EzPlatformRest\Server\Values\RestExecutedView');

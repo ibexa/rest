@@ -98,5 +98,3 @@ class EzPublish extends Pattern
         'userSession' => '/user/sessions/{sessionId}',
     ];
 }
-
-class_alias(EzPublish::class, 'EzSystems\EzPlatformRest\RequestParser\EzPublish');

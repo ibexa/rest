@@ -49,5 +49,3 @@ class RoleAssignmentList extends RestValue
         $this->isGroupAssignment = $isGroupAssignment;
     }
 }
-
-class_alias(RoleAssignmentList::class, 'EzSystems\EzPlatformRest\Server\Values\RoleAssignmentList');

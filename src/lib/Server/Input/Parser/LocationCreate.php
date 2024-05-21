@@ -95,5 +95,3 @@ class LocationCreate extends BaseParser
         return $locationCreateStruct;
     }
 }
-
-class_alias(LocationCreate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\LocationCreate');

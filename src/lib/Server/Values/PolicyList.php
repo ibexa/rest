@@ -40,5 +40,3 @@ class PolicyList extends RestValue
         $this->path = $path;
     }
 }
-
-class_alias(PolicyList::class, 'EzSystems\EzPlatformRest\Server\Values\PolicyList');

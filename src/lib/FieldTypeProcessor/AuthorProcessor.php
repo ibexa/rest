@@ -48,5 +48,3 @@ class AuthorProcessor extends FieldTypeProcessor
         return $outgoingSettingsHash;
     }
 }
-
-class_alias(AuthorProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor\AuthorProcessor');

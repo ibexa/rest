@@ -41,5 +41,3 @@ class RestLocationUpdateStruct extends RestValue
         $this->hidden = $hidden;
     }
 }
-
-class_alias(RestLocationUpdateStruct::class, 'EzSystems\EzPlatformRest\Server\Values\RestLocationUpdateStruct');

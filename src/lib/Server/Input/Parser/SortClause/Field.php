@@ -85,5 +85,3 @@ class Field extends BaseParser
         return $normalizedData;
     }
 }
-
-class_alias(Field::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\SortClause\Field');

@@ -29,5 +29,3 @@ class UserProcessor extends FieldTypeProcessor
         return $outgoingValueHash;
     }
 }
-
-class_alias(UserProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor\UserProcessor');

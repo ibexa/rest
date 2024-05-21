@@ -91,5 +91,3 @@ class Factory
         );
     }
 }
-
-class_alias(Factory::class, 'EzSystems\EzPlatformRestBundle\ApiLoader\Factory');

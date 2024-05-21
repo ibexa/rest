@@ -31,5 +31,3 @@ class URLWildcardList extends RestValue
         $this->urlWildcards = $urlWildcards;
     }
 }
-
-class_alias(URLWildcardList::class, 'EzSystems\EzPlatformRest\Server\Values\URLWildcardList');

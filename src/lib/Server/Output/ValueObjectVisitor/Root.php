@@ -50,5 +50,3 @@ class Root extends ValueObjectVisitor
         $generator->endObjectElement('Root');
     }
 }
-
-class_alias(Root::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Root');

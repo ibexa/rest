@@ -217,5 +217,3 @@ class RestAuthenticator implements AuthenticatorInterface
         return $response;
     }
 }
-
-class_alias(RestAuthenticator::class, 'EzSystems\EzPlatformRest\Server\Security\RestAuthenticator');

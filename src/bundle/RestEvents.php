@@ -14,5 +14,3 @@ final class RestEvents
      */
     public const REST_CSRF_TOKEN_VALIDATED = 'ezpublish.rest.csrf_token_validated';
 }
-
-class_alias(RestEvents::class, 'EzSystems\EzPlatformRestBundle\RestEvents');

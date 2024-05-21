@@ -75,5 +75,3 @@ final class JWT extends RestController
         return $this->authenticator;
     }
 }
-
-class_alias(JWT::class, 'EzSystems\EzPlatformRest\Server\Controller\JWT');

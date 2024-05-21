@@ -37,5 +37,3 @@ class CreatedRole extends Role
         $visitor->setStatus(201);
     }
 }
-
-class_alias(CreatedRole::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedRole');

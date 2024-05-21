@@ -41,5 +41,3 @@ final class UserGroup extends ValueObjectVisitor implements DelegateValueObjectV
         );
     }
 }
-
-class_alias(UserGroup::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\UserGroup');

@@ -41,5 +41,3 @@ class FieldDefinitionList extends RestValue
         $this->fieldDefinitions = $fieldDefinitions;
     }
 }
-
-class_alias(FieldDefinitionList::class, 'EzSystems\EzPlatformRest\Server\Values\FieldDefinitionList');

@@ -25,5 +25,3 @@ final class Author extends ValueObjectVisitor
         $generator->endObjectElement('Author');
     }
 }
-
-class_alias(Author::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Author');

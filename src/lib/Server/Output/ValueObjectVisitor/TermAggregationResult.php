@@ -62,5 +62,3 @@ final class TermAggregationResult extends ValueObjectVisitor
         $generator->valueElement('count', $count);
     }
 }
-
-class_alias(TermAggregationResult::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\TermAggregationResult');

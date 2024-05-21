@@ -21,5 +21,3 @@ class CreatedVersion extends ValueObject
      */
     public $version;
 }
-
-class_alias(CreatedVersion::class, 'EzSystems\EzPlatformRest\Server\Values\CreatedVersion');

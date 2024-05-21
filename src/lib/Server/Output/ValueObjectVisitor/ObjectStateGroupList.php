@@ -42,5 +42,3 @@ class ObjectStateGroupList extends ValueObjectVisitor
         $generator->endObjectElement('ObjectStateGroupList');
     }
 }
-
-class_alias(ObjectStateGroupList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ObjectStateGroupList');

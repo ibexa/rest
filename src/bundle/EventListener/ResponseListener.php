@@ -108,5 +108,3 @@ class ResponseListener implements EventSubscriberInterface, LoggerAwareInterface
         ]);
     }
 }
-
-class_alias(ResponseListener::class, 'EzSystems\EzPlatformRestBundle\EventListener\ResponseListener');

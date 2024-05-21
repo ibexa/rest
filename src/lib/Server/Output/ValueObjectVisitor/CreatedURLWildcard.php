@@ -37,5 +37,3 @@ class CreatedURLWildcard extends URLWildcard
         $visitor->setStatus(201);
     }
 }
-
-class_alias(CreatedURLWildcard::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedURLWildcard');

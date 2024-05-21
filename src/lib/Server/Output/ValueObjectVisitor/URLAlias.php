@@ -114,5 +114,3 @@ class URLAlias extends ValueObjectVisitor
         $generator->endValueElement('custom');
     }
 }
-
-class_alias(URLAlias::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\URLAlias');

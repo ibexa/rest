@@ -36,5 +36,3 @@ class ContentTypeParser extends BaseParser
         return new ContentTypeFacetBuilder($data['ContentType']);
     }
 }
-
-class_alias(ContentTypeParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\ContentTypeParser');

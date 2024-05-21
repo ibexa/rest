@@ -47,5 +47,3 @@ abstract class AbstractTermAggregationParser extends BaseParser
         ParsingDispatcher $parsingDispatcher
     ): AbstractTermAggregation;
 }
-
-class_alias(AbstractTermAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\AbstractTermAggregationParser');

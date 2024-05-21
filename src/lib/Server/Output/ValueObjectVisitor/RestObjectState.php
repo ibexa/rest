@@ -69,5 +69,3 @@ class RestObjectState extends ValueObjectVisitor
         $generator->endObjectElement('ObjectState');
     }
 }
-
-class_alias(RestObjectState::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestObjectState');

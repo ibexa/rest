@@ -121,5 +121,3 @@ class BinaryContent extends RestController
         throw new Exceptions\NotFoundException("Invalid image ID {$imageId}");
     }
 }
-
-class_alias(BinaryContent::class, 'EzSystems\EzPlatformRest\Server\Controller\BinaryContent');

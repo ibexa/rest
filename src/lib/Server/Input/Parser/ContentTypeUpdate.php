@@ -124,5 +124,3 @@ class ContentTypeUpdate extends BaseParser
         return $contentTypeUpdateStruct;
     }
 }
-
-class_alias(ContentTypeUpdate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\ContentTypeUpdate');

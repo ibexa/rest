@@ -65,5 +65,3 @@ class Json extends Handler
         return 'Unknown JSON decode error';
     }
 }
-
-class_alias(Json::class, 'EzSystems\EzPlatformRest\Input\Handler\Json');

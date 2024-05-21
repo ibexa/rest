@@ -158,5 +158,3 @@ class RestContentType extends RestContentTypeBase
         $generator->endObjectElement($mediaType);
     }
 }
-
-class_alias(RestContentType::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestContentType');

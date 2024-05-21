@@ -60,5 +60,3 @@ class VersionList extends ValueObjectVisitor
         $generator->endObjectElement('VersionList');
     }
 }
-
-class_alias(VersionList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\VersionList');

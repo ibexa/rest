@@ -55,5 +55,3 @@ class CountryList extends ValueObjectVisitor
         $generator->endObjectElement('CountryList');
     }
 }
-
-class_alias(CountryList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CountryList');

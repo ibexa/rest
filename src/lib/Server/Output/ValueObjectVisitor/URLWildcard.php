@@ -56,5 +56,3 @@ class URLWildcard extends ValueObjectVisitor
         $generator->endValueElement('forward');
     }
 }
-
-class_alias(URLWildcard::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\URLWildcard');

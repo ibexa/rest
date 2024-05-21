@@ -54,5 +54,3 @@ class ParentLocationRemoteId extends BaseParser
         return new ParentLocationIdCriterion($contentIdArray);
     }
 }
-
-class_alias(ParentLocationRemoteId::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\ParentLocationRemoteId');

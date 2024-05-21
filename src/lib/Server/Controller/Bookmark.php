@@ -158,5 +158,3 @@ class Bookmark extends RestController
         return array_pop($pathParts);
     }
 }
-
-class_alias(Bookmark::class, 'EzSystems\EzPlatformRest\Server\Controller\Bookmark');

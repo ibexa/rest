@@ -13,5 +13,3 @@ namespace Ibexa\Rest\Server\Values;
 class OK
 {
 }
-
-class_alias(OK::class, 'EzSystems\EzPlatformRest\Server\Values\OK');

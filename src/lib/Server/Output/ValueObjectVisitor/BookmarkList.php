@@ -48,5 +48,3 @@ class BookmarkList extends ValueObjectVisitor
         $generator->endList('items');
     }
 }
-
-class_alias(BookmarkList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\BookmarkList');

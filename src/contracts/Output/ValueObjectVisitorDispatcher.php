@@ -79,5 +79,3 @@ class ValueObjectVisitorDispatcher
         throw new Exceptions\NoVisitorFoundException($checkedClassNames);
     }
 }
-
-class_alias(ValueObjectVisitorDispatcher::class, 'EzSystems\EzPlatformRest\Output\ValueObjectVisitorDispatcher');
