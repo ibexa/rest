@@ -123,5 +123,3 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\ObjectStateGroupList();
     }
 }
-
-class_alias(ObjectStateGroupListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ObjectStateGroupListTest');

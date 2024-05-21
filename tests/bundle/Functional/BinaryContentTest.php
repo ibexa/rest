@@ -228,5 +228,3 @@ XML;
         return $response->getHeader('Location')[0];
     }
 }
-
-class_alias(BinaryContentTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\BinaryContentTest');

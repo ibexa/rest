@@ -157,5 +157,3 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\ContentFieldValidationException(false, new Translator('eng-GB'));
     }
 }
-
-class_alias(ContentFieldValidationExceptionTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ContentFieldValidationExceptionTest');

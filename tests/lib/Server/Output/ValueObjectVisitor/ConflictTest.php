@@ -50,5 +50,3 @@ class ConflictTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\Conflict();
     }
 }
-
-class_alias(ConflictTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ConflictTest');

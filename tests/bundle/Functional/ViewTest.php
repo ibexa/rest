@@ -90,5 +90,3 @@ XML;
         self::assertEquals(1, $responseData['View']['Result']['count']);
     }
 }
-
-class_alias(ViewTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\ViewTest');

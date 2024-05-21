@@ -68,5 +68,3 @@ class TimeProcessorTest extends TestCase
         return new TimeProcessor();
     }
 }
-
-class_alias(TimeProcessorTest::class, 'EzSystems\EzPlatformRest\Tests\FieldTypeProcessor\TimeProcessorTest');

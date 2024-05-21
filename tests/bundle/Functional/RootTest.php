@@ -994,5 +994,3 @@ class RootTest extends RESTFunctionalTestCase
         ];
     }
 }
-
-class_alias(RootTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\RootTest');

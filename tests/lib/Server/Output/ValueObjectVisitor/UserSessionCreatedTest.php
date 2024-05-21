@@ -66,5 +66,3 @@ class UserSessionCreatedTest extends UserSessionTest
         return $result;
     }
 }
-
-class_alias(UserSessionCreatedTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\UserSessionCreatedTest');

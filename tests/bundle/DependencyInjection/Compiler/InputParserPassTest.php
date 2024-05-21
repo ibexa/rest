@@ -45,5 +45,3 @@ class InputParserPassTest extends TestCase
         self::assertEquals('ezpublish_rest.input.parser.unit_test', $dispatcherMethodCalls[0][1][1]->__toString(), "Failed asserting that Referenced service is 'ezpublish_rest.input.parser.unit_test'");
     }
 }
-
-class_alias(InputParserPassTest::class, 'EzSystems\EzPlatformRestBundle\Tests\DependencyInjection\Compiler\InputParserPassTest');

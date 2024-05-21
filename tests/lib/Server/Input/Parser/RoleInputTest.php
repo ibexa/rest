@@ -103,5 +103,3 @@ class RoleInputTest extends BaseTest
         return $roleServiceMock;
     }
 }
-
-class_alias(RoleInputTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\RoleInputTest');

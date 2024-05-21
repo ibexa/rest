@@ -54,5 +54,3 @@ class DeletedUserSessionTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\DeletedUserSession();
     }
 }
-
-class_alias(DeletedUserSessionTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\DeletedUserSessionTest');

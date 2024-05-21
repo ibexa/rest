@@ -81,5 +81,3 @@ class RelationCreateTest extends BaseTest
         ];
     }
 }
-
-class_alias(RelationCreateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\RelationCreateTest');

@@ -130,5 +130,3 @@ class RestProviderTest extends TestCase
         return $mock;
     }
 }
-
-class_alias(RestProviderTest::class, 'EzSystems\EzPlatformRestBundle\Tests\CorsOptions\RestProviderTest');

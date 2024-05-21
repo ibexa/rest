@@ -230,5 +230,3 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
      */
     abstract protected function internalGetVisitor();
 }
-
-class_alias(ValueObjectVisitorBaseTest::class, 'EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorBaseTest');

@@ -72,5 +72,3 @@ class MediaProcessorTest extends BinaryInputProcessorTest
         return new MediaProcessor($this->getTempDir());
     }
 }
-
-class_alias(MediaProcessorTest::class, 'EzSystems\EzPlatformRest\Tests\FieldTypeProcessor\MediaProcessorTest');

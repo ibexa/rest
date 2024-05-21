@@ -129,5 +129,3 @@ class RelationListProcessorTest extends TestCase
         return new RelationListProcessor();
     }
 }
-
-class_alias(RelationListProcessorTest::class, 'EzSystems\EzPlatformRest\Tests\FieldTypeProcessor\RelationListProcessorTest');

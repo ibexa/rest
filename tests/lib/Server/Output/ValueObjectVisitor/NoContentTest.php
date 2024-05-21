@@ -50,5 +50,3 @@ class NoContentTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\NoContent();
     }
 }
-
-class_alias(NoContentTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\NoContentTest');

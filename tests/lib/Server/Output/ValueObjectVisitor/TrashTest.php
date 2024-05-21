@@ -131,5 +131,3 @@ class TrashTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\Trash();
     }
 }
-
-class_alias(TrashTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\TrashTest');

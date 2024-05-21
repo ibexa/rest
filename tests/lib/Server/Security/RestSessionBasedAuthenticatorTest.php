@@ -570,5 +570,3 @@ class RestSessionBasedAuthenticatorTest extends TestCase
         return $this->createMock(UsernamePasswordToken::class);
     }
 }
-
-class_alias(RestSessionBasedAuthenticatorTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Security\RestSessionBasedAuthenticatorTest');

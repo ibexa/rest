@@ -314,5 +314,3 @@ class UserGroupUpdateTest extends BaseTest
         ];
     }
 }
-
-class_alias(UserGroupUpdateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\UserGroupUpdateTest');

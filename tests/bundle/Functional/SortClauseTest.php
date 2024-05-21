@@ -130,5 +130,3 @@ XML;
         ];
     }
 }
-
-class_alias(SortClauseTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SortClauseTest');

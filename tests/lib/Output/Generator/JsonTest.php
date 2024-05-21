@@ -310,5 +310,3 @@ class JsonTest extends GeneratorTest
         return $this->generator;
     }
 }
-
-class_alias(JsonTest::class, 'EzSystems\EzPlatformRest\Tests\Output\Generator\JsonTest');

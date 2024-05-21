@@ -130,5 +130,3 @@ class ObjectStateGroupUpdateTest extends BaseTest
         return $objectStateServiceMock;
     }
 }
-
-class_alias(ObjectStateGroupUpdateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\ObjectStateGroupUpdateTest');

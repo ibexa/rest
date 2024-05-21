@@ -106,5 +106,3 @@ class ParsingDispatcherTest extends TestCase
         return $this->createMock(Parser::class);
     }
 }
-
-class_alias(ParsingDispatcherTest::class, 'EzSystems\EzPlatformRest\Tests\Input\ParsingDispatcherTest');

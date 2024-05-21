@@ -107,5 +107,3 @@ final class RequestListenerTest extends EventListenerTest
         return $event->getRequest();
     }
 }
-
-class_alias(RequestListenerTest::class, 'EzSystems\EzPlatformRestBundle\Tests\EventListener\RequestListenerTest');

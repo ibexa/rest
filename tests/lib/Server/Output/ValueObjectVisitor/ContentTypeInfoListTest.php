@@ -131,5 +131,3 @@ class ContentTypeInfoListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\ContentTypeInfoList();
     }
 }
-
-class_alias(ContentTypeInfoListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ContentTypeInfoListTest');

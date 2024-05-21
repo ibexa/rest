@@ -111,5 +111,3 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\FieldDefinitionList();
     }
 }
-
-class_alias(FieldDefinitionListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\FieldDefinitionListTest');

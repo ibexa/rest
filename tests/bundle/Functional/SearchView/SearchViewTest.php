@@ -465,5 +465,3 @@ XML;
         return $response->getHeader('Location')[0];
     }
 }
-
-class_alias(SearchViewTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SearchView\SearchViewTest');

@@ -260,5 +260,3 @@ abstract class GeneratorTest extends TestCase
         ];
     }
 }
-
-class_alias(GeneratorTest::class, 'EzSystems\EzPlatformRest\Tests\Output\GeneratorTest');

@@ -362,5 +362,3 @@ class FieldTypeParserTest extends TestCase
         );
     }
 }
-
-class_alias(FieldTypeParserTest::class, 'EzSystems\EzPlatformRest\Tests\Input\FieldTypeParserTest');

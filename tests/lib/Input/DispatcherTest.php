@@ -168,5 +168,3 @@ class DispatcherTest extends TestCase
         $dispatcher->parse($message);
     }
 }
-
-class_alias(DispatcherTest::class, 'EzSystems\EzPlatformRest\Tests\Input\DispatcherTest');

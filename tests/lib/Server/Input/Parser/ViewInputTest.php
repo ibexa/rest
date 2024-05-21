@@ -64,5 +64,3 @@ class ViewInputTest extends BaseTest
         return new ViewInput();
     }
 }
-
-class_alias(ViewInputTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\ViewInputTest');

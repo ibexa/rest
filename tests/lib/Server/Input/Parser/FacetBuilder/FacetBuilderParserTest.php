@@ -278,5 +278,3 @@ class FacetBuilderParserTest extends FacetBuilderBaseTest
         self::assertEquals($expectedQuery, $result);
     }
 }
-
-class_alias(FacetBuilderParserTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\FacetBuilder\FacetBuilderParserTest');

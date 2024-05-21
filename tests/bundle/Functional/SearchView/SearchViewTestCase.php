@@ -41,5 +41,3 @@ abstract class SearchViewTestCase extends RESTFunctionalTestCase
         return $jsonResponse->View->Result->count;
     }
 }
-
-class_alias(SearchViewTestCase::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SearchView\SearchViewTestCase');

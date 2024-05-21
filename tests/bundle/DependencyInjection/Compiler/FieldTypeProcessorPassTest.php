@@ -47,5 +47,3 @@ class FieldTypeProcessorPassTest extends TestCase
         yield ['ibexa.rest.field_type.processor'];
     }
 }
-
-class_alias(FieldTypeProcessorPassTest::class, 'EzSystems\EzPlatformRestBundle\Tests\DependencyInjection\Compiler\FieldTypeProcessorPassTest');

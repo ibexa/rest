@@ -281,5 +281,3 @@ class XmlTest extends GeneratorTest
         return $this->generator;
     }
 }
-
-class_alias(XmlTest::class, 'EzSystems\EzPlatformRest\Tests\Output\Generator\XmlTest');

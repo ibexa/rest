@@ -75,5 +75,3 @@ class CsrfTokenManagerTest extends TestCase
         );
     }
 }
-
-class_alias(CsrfTokenManagerTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Security\CsrfTokenManagerTest');

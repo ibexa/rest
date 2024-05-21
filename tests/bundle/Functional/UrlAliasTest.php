@@ -163,5 +163,3 @@ XML;
         self::assertHttpResponseCodeEquals($response, 200);
     }
 }
-
-class_alias(UrlAliasTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\UrlAliasTest');

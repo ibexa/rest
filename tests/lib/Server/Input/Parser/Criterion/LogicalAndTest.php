@@ -87,5 +87,3 @@ class LogicalAndTest extends BaseTest
         return new Parser\Criterion\LogicalAnd();
     }
 }
-
-class_alias(LogicalAndTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\Criterion\LogicalAndTest');

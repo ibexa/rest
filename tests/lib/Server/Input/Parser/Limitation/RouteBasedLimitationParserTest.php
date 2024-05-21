@@ -48,5 +48,3 @@ class RouteBasedLimitationParserTest extends BaseTest
         ];
     }
 }
-
-class_alias(RouteBasedLimitationParserTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\Limitation\RouteBasedLimitationParserTest');

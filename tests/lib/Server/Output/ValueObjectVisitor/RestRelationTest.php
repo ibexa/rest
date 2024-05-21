@@ -216,5 +216,3 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\RestRelation();
     }
 }
-
-class_alias(RestRelationTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestRelationTest');

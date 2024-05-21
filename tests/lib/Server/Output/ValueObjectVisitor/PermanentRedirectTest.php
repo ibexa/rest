@@ -53,5 +53,3 @@ class PermanentRedirectTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\PermanentRedirect();
     }
 }
-
-class_alias(PermanentRedirectTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\PermanentRedirectTest');

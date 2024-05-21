@@ -91,5 +91,3 @@ abstract class BinaryInputProcessorTest extends TestCase
      */
     abstract protected function getProcessor();
 }
-
-class_alias(BinaryInputProcessorTest::class, 'EzSystems\EzPlatformRest\Tests\FieldTypeProcessor\BinaryInputProcessorTest');

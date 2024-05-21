@@ -287,5 +287,3 @@ XML;
         self::assertHttpResponseCodeEquals($response, 204);
     }
 }
-
-class_alias(ObjectStateTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\ObjectStateTest');

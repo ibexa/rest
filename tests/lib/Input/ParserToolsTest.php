@@ -109,5 +109,3 @@ class ParserToolsTest extends TestCase
         return new ParserTools();
     }
 }
-
-class_alias(ParserToolsTest::class, 'EzSystems\EzPlatformRest\Tests\Input\ParserToolsTest');

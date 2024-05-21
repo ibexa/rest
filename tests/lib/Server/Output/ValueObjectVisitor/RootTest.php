@@ -190,5 +190,3 @@ class RootTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\Root();
     }
 }
-
-class_alias(RootTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RootTest');

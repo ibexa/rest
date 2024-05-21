@@ -261,5 +261,3 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
         return $generator->endDocument(null);
     }
 }
-
-class_alias(ExceptionTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ExceptionTest');

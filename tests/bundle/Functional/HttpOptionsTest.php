@@ -122,5 +122,3 @@ class HttpOptionsTest extends TestCase
         ];
     }
 }
-
-class_alias(HttpOptionsTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\HttpOptionsTest');

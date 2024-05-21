@@ -43,5 +43,3 @@ abstract class SearchCriterionTestCase extends SearchViewTestCase
             JSON;
     }
 }
-
-class_alias(SearchCriterionTestCase::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SearchView\SearchCriterionTestCase');

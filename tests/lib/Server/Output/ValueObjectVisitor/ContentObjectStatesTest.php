@@ -92,5 +92,3 @@ class ContentObjectStatesTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\ContentObjectStates();
     }
 }
-
-class_alias(ContentObjectStatesTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ContentObjectStatesTest');

@@ -85,5 +85,3 @@ class ImageProcessorTest extends BinaryInputProcessorTest
         return ['small', 'medium', 'large'];
     }
 }
-
-class_alias(ImageProcessorTest::class, 'EzSystems\EzPlatformRest\Tests\FieldTypeProcessor\ImageProcessorTest');

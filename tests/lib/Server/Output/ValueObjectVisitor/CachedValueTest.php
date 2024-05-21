@@ -183,5 +183,3 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
         return $mock;
     }
 }
-
-class_alias(CachedValueTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\CachedValueTest');

@@ -320,5 +320,3 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         );
     }
 }
-
-class_alias(FieldTypeHashGeneratorBaseTest::class, 'EzSystems\EzPlatformRest\Tests\Output\Generator\FieldTypeHashGeneratorBaseTest');

@@ -15,5 +15,3 @@ use stdClass;
 class ValueObject extends stdClass
 {
 }
-
-class_alias(ValueObject::class, 'EzSystems\EzPlatformRest\Tests\Output\ValueObject');

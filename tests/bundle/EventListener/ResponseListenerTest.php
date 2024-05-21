@@ -180,5 +180,3 @@ class ResponseListenerTest extends EventListenerTest
         return $this->event;
     }
 }
-
-class_alias(ResponseListenerTest::class, 'EzSystems\EzPlatformRestBundle\Tests\EventListener\ResponseListenerTest');

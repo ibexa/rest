@@ -127,5 +127,3 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\URLWildcardList();
     }
 }
-
-class_alias(URLWildcardListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\URLWildcardListTest');

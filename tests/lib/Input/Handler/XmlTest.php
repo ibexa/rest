@@ -56,5 +56,3 @@ class XmlTest extends TestCase
         );
     }
 }
-
-class_alias(XmlTest::class, 'EzSystems\EzPlatformRest\Tests\Input\Handler\XmlTest');

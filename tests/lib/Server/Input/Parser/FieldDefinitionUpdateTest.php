@@ -276,5 +276,3 @@ class FieldDefinitionUpdateTest extends BaseTest
         ];
     }
 }
-
-class_alias(FieldDefinitionUpdateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\FieldDefinitionUpdateTest');

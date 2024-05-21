@@ -110,5 +110,3 @@ class OutputVisitorPassTest extends AbstractCompilerPassTestCase
         }, $calls);
     }
 }
-
-class_alias(OutputVisitorPassTest::class, 'EzSystems\EzPlatformRestBundle\Tests\DependencyInjection\Compiler\OutputVisitorPassTest');

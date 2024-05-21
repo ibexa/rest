@@ -28,5 +28,3 @@ final class UserEmailTest extends SearchCriterionTestCase
         ];
     }
 }
-
-class_alias(UserEmailTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SearchView\Criterion\UserEmailTest');

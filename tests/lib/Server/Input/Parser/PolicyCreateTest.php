@@ -263,5 +263,3 @@ class PolicyCreateTest extends BaseTest
         return $roleServiceMock;
     }
 }
-
-class_alias(PolicyCreateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\PolicyCreateTest');

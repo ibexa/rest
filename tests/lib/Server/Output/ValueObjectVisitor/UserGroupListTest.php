@@ -146,5 +146,3 @@ class UserGroupListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\UserGroupList();
     }
 }
-
-class_alias(UserGroupListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\UserGroupListTest');

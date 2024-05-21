@@ -55,5 +55,3 @@ class OptionsTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\Options();
     }
 }
-
-class_alias(OptionsTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\OptionsTest');

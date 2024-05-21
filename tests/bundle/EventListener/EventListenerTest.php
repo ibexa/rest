@@ -146,5 +146,3 @@ abstract class EventListenerTest extends TestCase
      */
     abstract public function provideExpectedSubscribedEventTypes();
 }
-
-class_alias(EventListenerTest::class, 'EzSystems\EzPlatformRestBundle\Tests\EventListener\EventListenerTest');

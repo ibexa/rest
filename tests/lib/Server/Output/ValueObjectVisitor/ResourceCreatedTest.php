@@ -55,5 +55,3 @@ class ResourceCreatedTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\ResourceCreated();
     }
 }
-
-class_alias(ResourceCreatedTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ResourceCreatedTest');

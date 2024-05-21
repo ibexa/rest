@@ -15,5 +15,3 @@ use PHPUnit\Framework\TestCase;
 abstract class BaseTest extends TestCase
 {
 }
-
-class_alias(BaseTest::class, 'EzSystems\EzPlatformRest\Tests\Server\BaseTest');

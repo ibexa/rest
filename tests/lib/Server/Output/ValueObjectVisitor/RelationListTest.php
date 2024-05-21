@@ -133,5 +133,3 @@ class RelationListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\RelationList();
     }
 }
-
-class_alias(RelationListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RelationListTest');

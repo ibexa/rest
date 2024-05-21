@@ -172,5 +172,3 @@ class RoleAssignInputTest extends BaseTest
         ];
     }
 }
-
-class_alias(RoleAssignInputTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\RoleAssignInputTest');

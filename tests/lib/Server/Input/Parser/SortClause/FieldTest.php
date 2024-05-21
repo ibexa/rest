@@ -80,5 +80,3 @@ class FieldTest extends BaseTest
         return new FieldParser();
     }
 }
-
-class_alias(FieldTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\SortClause\FieldTest');

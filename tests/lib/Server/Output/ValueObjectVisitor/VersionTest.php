@@ -170,5 +170,3 @@ class VersionTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\Version($this->fieldTypeSerializerMock);
     }
 }
-
-class_alias(VersionTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\VersionTest');

@@ -213,5 +213,3 @@ class PatternTest extends TestCase
         );
     }
 }
-
-class_alias(PatternTest::class, 'EzSystems\EzPlatformRest\Tests\UrlHandler\PatternTest');

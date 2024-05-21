@@ -122,5 +122,3 @@ class SectionListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\SectionList();
     }
 }
-
-class_alias(SectionListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\SectionListTest');

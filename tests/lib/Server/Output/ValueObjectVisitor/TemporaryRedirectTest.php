@@ -53,5 +53,3 @@ class TemporaryRedirectTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\TemporaryRedirect();
     }
 }
-
-class_alias(TemporaryRedirectTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\TemporaryRedirectTest');

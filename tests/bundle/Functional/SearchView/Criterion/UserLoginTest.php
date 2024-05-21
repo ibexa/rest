@@ -33,5 +33,3 @@ final class UserLoginTest extends SearchCriterionTestCase
         ];
     }
 }
-
-class_alias(UserLoginTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SearchView\Criterion\UserLoginTest');

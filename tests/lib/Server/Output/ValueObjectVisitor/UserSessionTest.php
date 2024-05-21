@@ -237,5 +237,3 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\UserSession();
     }
 }
-
-class_alias(UserSessionTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\UserSessionTest');

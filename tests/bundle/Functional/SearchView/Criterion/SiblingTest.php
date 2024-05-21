@@ -21,5 +21,3 @@ final class SiblingTest extends SearchCriterionTestCase
         ];
     }
 }
-
-class_alias(SiblingTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SearchView\Criterion\SiblingTest');

@@ -123,5 +123,3 @@ abstract class BaseTest extends ParentBaseTest
      */
     abstract protected function internalGetParser();
 }
-
-class_alias(BaseTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\BaseTest');

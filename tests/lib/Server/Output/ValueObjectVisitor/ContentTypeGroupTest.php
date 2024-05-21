@@ -347,5 +347,3 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\ContentTypeGroup();
     }
 }
-
-class_alias(ContentTypeGroupTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ContentTypeGroupTest');

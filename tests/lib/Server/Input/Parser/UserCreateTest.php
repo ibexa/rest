@@ -545,5 +545,3 @@ class UserCreateTest extends BaseTest
         ];
     }
 }
-
-class_alias(UserCreateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\UserCreateTest');

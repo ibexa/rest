@@ -217,5 +217,3 @@ class RestUserGroupTest extends BaseContentValueObjectVisitorTestCase
         return 'UserGroup';
     }
 }
-
-class_alias(RestUserGroupTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestUserGroupTest');

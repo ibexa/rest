@@ -54,5 +54,3 @@ trait AssertXmlTagTrait
         self::assertGreaterThanOrEqual(1, $xpath->query($query)->length, $message);
     }
 }
-
-class_alias(AssertXmlTagTrait::class, 'EzSystems\EzPlatformRest\Tests\AssertXmlTagTrait');

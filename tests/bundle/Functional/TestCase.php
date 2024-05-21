@@ -423,5 +423,3 @@ XML;
         );
     }
 }
-
-class_alias(TestCase::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\TestCase');

@@ -28,5 +28,3 @@ final class ObjectStateIdentifierTest extends SearchCriterionTestCase
         ];
     }
 }
-
-class_alias(ObjectStateIdentifierTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SearchView\Criterion\ObjectStateIdentifierTest');

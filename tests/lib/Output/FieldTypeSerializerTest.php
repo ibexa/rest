@@ -436,5 +436,3 @@ class FieldTypeSerializerTest extends TestCase
             ->willReturn($fieldType);
     }
 }
-
-class_alias(FieldTypeSerializerTest::class, 'EzSystems\EzPlatformRest\Tests\Output\FieldTypeSerializerTest');

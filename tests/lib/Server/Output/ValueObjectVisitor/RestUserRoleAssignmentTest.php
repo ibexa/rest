@@ -165,5 +165,3 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\RestUserRoleAssignment();
     }
 }
-
-class_alias(RestUserRoleAssignmentTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestUserRoleAssignmentTest');
