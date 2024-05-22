@@ -139,7 +139,7 @@ XML;
      *
      * @depends testCopySubtree
      */
-    public function testMoveSubtree($locationHref)
+    public function testMoveSubtree($locationHref): string
     {
         $request = $this->createHttpRequest(
             'MOVE',
@@ -153,6 +153,8 @@ XML;
 
         self::assertHttpResponseCodeEquals($response, 201);
         self::assertHttpResponseHasHeader($response, 'Location');
+
+        return $locationHref;
     }
 
     /**
@@ -266,13 +268,13 @@ XML;
     /**
      * @covers \Ibexa\Rest\Server\Controller\Location::moveLocation
      *
-     * @depends testCopySubtree
+     * @depends testMoveSubtree
      */
-    public function testMoveLocation(): void
+    public function testMoveLocation(string $locationHref): void
     {
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ibexa/v2/content/locations/1/43',
+            $locationHref,
             'MoveLocationInput+json',
             '',
             json_encode(['MoveLocationInput' => ['destination' => '/1/2']]) ?: '',
