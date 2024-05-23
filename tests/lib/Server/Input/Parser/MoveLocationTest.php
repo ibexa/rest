@@ -17,8 +17,7 @@ final class MoveLocationTest extends BaseTest
 {
     private const int TESTED_LOCATION_ID = 22;
 
-    /** @var \PHPUnit\Framework\MockObject\MockObject&\Ibexa\Contracts\Core\Repository\LocationService */
-    private MockObject $locationService;
+    private MockObject&LocationService $locationService;
 
     public function testParse(): void
     {
@@ -79,7 +78,6 @@ final class MoveLocationTest extends BaseTest
 
     protected function internalGetParser(): MoveLocation
     {
-        /** @var \Ibexa\Contracts\Core\Repository\LocationService&\PHPUnit\Framework\MockObject\MockObject $locationService */
         $locationService = $this->createMock(LocationService::class);
         $this->locationService = $locationService;
 
