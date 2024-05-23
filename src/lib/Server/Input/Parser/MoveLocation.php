@@ -58,7 +58,7 @@ final class MoveLocation extends BaseParser
 
         $locationId = (int)array_pop($pathParts);
 
-        if ($locationId === 0) {
+        if ($locationId <= 0) {
             throw new Exceptions\Parser("The 'destination' element for MoveLocationInput is invalid.");
         }
 
