@@ -266,8 +266,6 @@ XML;
     }
 
     /**
-     * @covers \Ibexa\Rest\Server\Controller\Location::moveLocation
-     *
      * @depends testMoveSubtree
      */
     public function testMoveLocation(string $locationHref): void
