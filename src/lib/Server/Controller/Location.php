@@ -224,16 +224,6 @@ class Location extends RestController
      */
     public function moveSubtree($locationPath, Request $request)
     {
-        trigger_deprecation(
-            'ibexa/rest',
-            '5.0',
-            sprintf(
-                '"%s" route is deprecated and will be removed in 6.0. Use "%s" route instead.',
-                'ibexa.rest.move_subtree',
-                'ibexa.rest.move_location',
-            ),
-        );
-
         $locationToMove = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($locationPath)
         );
