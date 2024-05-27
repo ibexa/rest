@@ -501,13 +501,6 @@ ibexa.rest.copy_subtree:
         locationPath: "[0-9/]+"
 
 ibexa.rest.move_subtree:
-    alias: ibexa.rest.move_subtree.original
-    deprecated:
-        package: 'ibexa/rest'
-        version: '5.0'
-        message: '"%alias_id%" route is deprecated and will be removed in 6.0. Use "ibexa.rest.move_location" route instead.'
-
-ibexa.rest.move_subtree.original:
     path: /content/locations/{locationPath}
     defaults:
         _controller: Ibexa\Rest\Server\Controller\Location:moveSubtree
