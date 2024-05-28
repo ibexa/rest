@@ -180,10 +180,11 @@ services:
         parent: Ibexa\Rest\Server\Controller
         arguments:
             $permissionResolver: '@Ibexa\Contracts\Core\Repository\PermissionResolver'
-            $userService: '@ibexa.api.service.user'
+            $userService: '@Ibexa\Contracts\Core\Repository\UserService'
             $csrfTokenManager: '@Ibexa\Rest\Server\Security\CsrfTokenManager'
             $securityTokenStorage: '@Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface'
             $csrfTokenIntention: '%ibexa.rest.csrf_token_intention%'
+            $configResolver: '@Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface'
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\Bookmark:

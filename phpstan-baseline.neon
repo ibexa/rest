@@ -86,6 +86,46 @@ parameters:
 			path: src/bundle/DependencyInjection/IbexaRestExtension.php
 
 		-
+			message: "#^Cannot call method isTokenValid\\(\\) on Symfony\\\\Component\\\\Security\\\\Csrf\\\\CsrfTokenManagerInterface\\|null\\.$#"
+			count: 1
+			path: src/bundle/EventListener/CsrfListener.php
+
+		-
+			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListener\\:\\:getSubscribedEvents\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/bundle/EventListener/CsrfListener.php
+
+		-
+			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListener\\:\\:onKernelRequest\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/bundle/EventListener/CsrfListener.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of class Symfony\\\\Component\\\\Security\\\\Csrf\\\\CsrfToken constructor expects string, bool given\\.$#"
+			count: 1
+			path: src/bundle/EventListener/CsrfListener.php
+
+		-
+			message: "#^Property Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListener\\:\\:\\$csrfTokenIntention \\(bool\\) does not accept string\\.$#"
+			count: 1
+			path: src/bundle/EventListener/CsrfListener.php
+
+		-
+			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListener\\:\\:getSubscribedEvents\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/bundle/EventListener/ResponseListener.php
+
+		-
+			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListener\\:\\:onKernelExceptionView\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/bundle/EventListener/ResponseListener.php
+
+		-
+			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListener\\:\\:onKernelResultView\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/bundle/EventListener/ResponseListener.php
+
+		-
 			message: "#^Property Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\UserCheckRequestListener\\:\\:\\$permissionResolver is never read, only written\\.$#"
 			count: 1
 			path: src/bundle/EventListener/UserCheckRequestListener.php
@@ -1731,17 +1771,122 @@ parameters:
 			path: src/lib/Server/Controller/URLWildcard.php
 
 		-
-			message: "#^Access to an undefined property Ibexa\\\\Rest\\\\Value\\:\\:\\$users\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
 			message: "#^Dead catch \\- Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Exceptions\\\\NotFoundException is never thrown in the try block\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/User.php
 
 		-
 			message: "#^Expression \"\\$this\\-\\>loadUsers\\(\\$request\\)\\-\\>users\" on a separate line does not do anything\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:assignUserToUserGroup\\(\\) has parameter \\$userId with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:createUser\\(\\) has parameter \\$groupPath with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:createUserGroup\\(\\) has parameter \\$groupPath with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:deleteUser\\(\\) has parameter \\$userId with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:deleteUserGroup\\(\\) has parameter \\$groupPath with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadSubUserGroups\\(\\) has parameter \\$groupPath with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadSubUserGroups\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\UserGroupList\\|Ibexa\\\\Rest\\\\Server\\\\Values\\\\UserGroupRefList but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"
+			count: 2
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUser\\(\\) has parameter \\$userId with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUser\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUser but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUserDrafts\\(\\) has parameter \\$userId with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUserGroup\\(\\) has parameter \\$groupPath with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUserGroup\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUserGroup but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUserGroupsOfUser\\(\\) has parameter \\$userId with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUserGroupsOfUser\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\UserGroupRefList but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUsersFromGroup\\(\\) has parameter \\$groupPath with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUsersFromGroup\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\UserList\\|Ibexa\\\\Rest\\\\Server\\\\Values\\\\UserRefList but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"
+			count: 2
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:moveUserGroup\\(\\) has parameter \\$groupPath with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:unassignUserFromUserGroup\\(\\) has parameter \\$groupPath with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:unassignUserFromUserGroup\\(\\) has parameter \\$userId with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:updateUser\\(\\) has parameter \\$userId with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:updateUserGroup\\(\\) has parameter \\$groupPath with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:verifyUsers\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/User.php
 
@@ -1758,6 +1903,11 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, int\\|null given\\.$#"
 			count: 14
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string given\\.$#"
+			count: 1
 			path: src/lib/Server/Controller/User.php
 
 		-
@@ -3586,9 +3736,369 @@ parameters:
 			path: tests/bundle/DependencyInjection/Compiler/ValueObjectVisitorPassTest.php
 
 		-
-			message: "#^Parameter \\#2 \\$method of function method_exists expects string, array\\<int\\|string, int\\|string\\>\\|int\\|string given\\.$#"
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\:\\:expects\\(\\)\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:getCsrfProviderMock\\(\\) has invalid return type Symfony\\\\Component\\\\Form\\\\Extension\\\\Csrf\\\\CsrfProvider\\\\CsrfProviderInterface\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:getCsrfProviderMock\\(\\) should return PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\Form\\\\Extension\\\\Csrf\\\\CsrfProvider\\\\CsrfProviderInterface but returns PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\Security\\\\Csrf\\\\CsrfTokenManagerInterface\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:getEvent\\(\\) has parameter \\$class with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:getEvent\\(\\) should return PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\RequestEvent but returns Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:getEventDispatcherMock\\(\\) should return PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface but returns Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:getIgnoredRequestMethods\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:getSessionMock\\(\\) should return PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionInterface but returns Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionInterface\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:provideExpectedSubscribedEventTypes\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:provideSessionRoutes\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:testCsrfDisabled\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:testIgnoredRequestMethods\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:testInvalidToken\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:testIsNotRestRequest\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:testNoHeader\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:testNoSessionStarted\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:testSessionRequests\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:testSessionRequests\\(\\) has parameter \\$route with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:testValidToken\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Parameter \\#4 \\$csrfTokenManager of class Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListener constructor expects Symfony\\\\Component\\\\Security\\\\Csrf\\\\CsrfTokenManagerInterface\\|null, PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\Form\\\\Extension\\\\Csrf\\\\CsrfProvider\\\\CsrfProviderInterface given\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:\\$csrfTokenHeaderValue has no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:\\$eventDispatcherMock \\(Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:\\$requestMethod has no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:\\$route \\(string\\) does not accept false\\.$#"
+			count: 4
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:\\$sessionIsStarted has no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:\\$sessionMock \\(Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionInterface\\) does not accept false\\.$#"
+			count: 2
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:\\$sessionMock \\(Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionInterface\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:\\$event \\(Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:\\$requestHeadersMock \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\HttpFoundation\\\\ParameterBag\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:\\$requestMock \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\HttpFoundation\\\\Request\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/CsrfListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:getEvent\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:getEvent\\(\\) has parameter \\$class with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:provideExpectedSubscribedEventTypes\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:testGetSubscribedEvents\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:testGetSubscribedEvents\\(\\) has parameter \\$expectedEventTypes with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^PHPDoc tag @param references unknown parameter\\: \\$csrfEnabled$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^PHPDoc tag @return has invalid value \\(\\\\PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\|\\$class\\)\\: Unexpected token \"\\$class\", expected type at offset 60$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:\\$enableCsrfProtection has no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:\\$event \\(Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:\\$event \\(Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:\\$isRestRequest has no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:\\$requestAttributesMock \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\HttpFoundation\\\\ParameterBag\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:\\$requestHeadersMock \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\HttpFoundation\\\\ParameterBag\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:\\$requestMethod has no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:\\$requestMock \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\HttpFoundation\\\\Request\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:\\$requestType has no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Property Symfony\\\\Component\\\\HttpFoundation\\\\Request\\:\\:\\$headers \\(Symfony\\\\Component\\\\HttpFoundation\\\\HeaderBag\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\HttpFoundation\\\\ParameterBag\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Unable to resolve the template type T in call to method PHPUnit\\\\Framework\\\\TestCase\\:\\:getMockBuilder\\(\\)$#"
+			count: 1
+			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\RequestListenerTest\\:\\:getDataForTestOnKernelRequest\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/RequestListenerTest.php
+
+		-
+			message: "#^Return type \\(Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\RequestListener\\) of method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\RequestListenerTest\\:\\:getEventListener\\(\\) should be compatible with return type \\(Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListener\\) of method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:getEventListener\\(\\)$#"
+			count: 1
+			path: tests/bundle/EventListener/RequestListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:getControllerResultEvent\\(\\) should return Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\ViewEvent but returns Symfony\\\\Contracts\\\\EventDispatcher\\\\Event\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:getExceptionEvent\\(\\) should return Symfony\\\\Component\\\\HttpKernel\\\\Event\\\\ExceptionEvent but returns Symfony\\\\Contracts\\\\EventDispatcher\\\\Event\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:onKernelView\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:onKernelView\\(\\) has parameter \\$event with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:onKernelView\\(\\) has parameter \\$method with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:onKernelView\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:onKernelViewIsNotRestRequest\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:onKernelViewIsNotRestRequest\\(\\) has parameter \\$method with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:provideExpectedSubscribedEventTypes\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:testOnControllerResultView\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:testOnKernelExceptionView\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:testOnKernelExceptionViewIsNotRestRequest\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:testOnKernelResultViewIsNotRestRequest\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^PHPDoc type Symfony\\\\Contracts\\\\EventDispatcher\\\\Event of property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:\\$event is not covariant with PHPDoc type Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface of overridden property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:\\$event\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:\\$controllerResult has no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:\\$dispatcherMessage has no type specified\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:\\$event \\(Symfony\\\\Contracts\\\\EventDispatcher\\\\Event\\) in isset\\(\\) is not nullable\\.$#"
+			count: 2
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:\\$kernelMock \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\HttpKernel\\\\KernelInterface\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:\\$visitorDispatcherMock \\(Ibexa\\\\Rest\\\\Server\\\\View\\\\AcceptHeaderVisitorDispatcher&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Return type \\(Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListener\\) of method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:getEventListener\\(\\) should be compatible with return type \\(Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListener\\) of method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:getEventListener\\(\\)$#"
+			count: 1
+			path: tests/bundle/EventListener/ResponseListenerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\BinaryContentTest\\:\\:createContentTypeWithImageAsset\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/BinaryContentTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\BinaryContentTest\\:\\:testGetImageAssetVariations\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/BinaryContentTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\BinaryContentTest\\:\\:testGetImageVariation\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/BinaryContentTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\ContentTest\\:\\:assertTranslationDoesNotExist\\(\\) has parameter \\$versionItem with no value type specified in iterable type array\\.$#"
@@ -5161,6 +5671,61 @@ parameters:
 			path: tests/bundle/Functional/SessionTest.php
 
 		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\SessionTest\\:\\:assertHttpResponseDeletesSessionCookie\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/SessionTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\SessionTest\\:\\:assertHttpResponseDeletesSessionCookie\\(\\) has parameter \\$session with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/SessionTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\SessionTest\\:\\:testCreateSessionBadCredentials\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/SessionTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\SessionTest\\:\\:testDeleteSession\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/SessionTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\SessionTest\\:\\:testDeleteSessionExpired\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/SessionTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\SessionTest\\:\\:testDeleteSessionExpired\\(\\) has parameter \\$session with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/SessionTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\SessionTest\\:\\:testDeleteSessionMissingCsrfToken\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/SessionTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\SessionTest\\:\\:testLoginWithExistingFrontendSession\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/SessionTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\SessionTest\\:\\:testRefreshSession\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/SessionTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\SessionTest\\:\\:testRefreshSessionExpired\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/SessionTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\SessionTest\\:\\:testRefreshSessionMissingCsrfToken\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/SessionTest.php
+
+		-
 			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\SortClauseTest\\:\\:sortingClauseDataProvider\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/bundle/Functional/SortClauseTest.php
@@ -5486,6 +6051,196 @@ parameters:
 			path: tests/bundle/Functional/UrlWildcardTest.php
 
 		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:loadRootUserGroup\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testAssignUserToUserGroup\\(\\) has parameter \\$userHref with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testCreateUser\\(\\) has parameter \\$userGroupHref with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testDeleteSession\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testDeleteSession\\(\\) has parameter \\$sessionHref with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testDeleteUser\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testDeleteUser\\(\\) has parameter \\$userHref with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testDeleteUserGroup\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testDeleteUserGroup\\(\\) has parameter \\$groupHref with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testFilterUsersByEmailQueryParameter\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testFilterUsersByLoginQueryParameter\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testIfEmailIsUsedByAnotherUser\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testIfLoginIsUsedByAnotherUser\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadSubUserGroups\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadSubUserGroups\\(\\) has parameter \\$groupHref with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadUser\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadUser\\(\\) has parameter \\$userHref with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadUserByRemoteId\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadUserDrafts\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadUserDrafts\\(\\) has parameter \\$userHref with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadUserGroup\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadUserGroup\\(\\) has parameter \\$groupId with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadUserGroupByRemoteId\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadUserGroupByRemoteId\\(\\) has parameter \\$groupHref with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadUserGroups\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadUserGroupsOfUser\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadUserGroupsOfUser\\(\\) has parameter \\$userHref with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadUsers\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadUsersFromGroup\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testLoadUsersFromGroup\\(\\) has parameter \\$groupHref with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testMoveUserGroup\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testMoveUserGroup\\(\\) has parameter \\$groupHref with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testUnassignUserFromUserGroup\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testUnassignUserFromUserGroup\\(\\) has parameter \\$userHref with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testUpdateUser\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testUpdateUser\\(\\) has parameter \\$userHref with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testUpdateUserGroup\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\UserTest\\:\\:testUpdateUserGroup\\(\\) has parameter \\$groupHref with no type specified\\.$#"
+			count: 1
+			path: tests/bundle/Functional/UserTest.php
+
+		-
 			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 2
 			path: tests/bundle/Functional/UserTest.php
@@ -5559,6 +6314,11 @@ parameters:
 			message: "#^Cannot call method match\\(\\) on object\\|null\\.$#"
 			count: 1
 			path: tests/integration/BasicKernelTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Integration\\\\Rest\\\\UriParser\\\\UriParserTest\\:\\:getDataForTestIsRestRequest\\(\\) return type has no value type specified in iterable type iterable\\.$#"
+			count: 1
+			path: tests/integration/UriParser/UriParserTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\AuthorProcessorTest\\:\\:fieldSettingsHashes\\(\\) has no return type specified\\.$#"
@@ -9734,6 +10494,26 @@ parameters:
 			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\VersionTest\\:\\:\\$fieldTypeSerializerMock has no type specified\\.$#"
 			count: 1
 			path: tests/lib/Server/Output/ValueObjectVisitor/VersionTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Security\\\\CsrfTokenManagerTest\\:\\:createCsrfTokenManager\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/lib/Server/Security/CsrfTokenManagerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Security\\\\CsrfTokenManagerTest\\:\\:createCsrfTokenManager\\(\\) has parameter \\$https with no type specified\\.$#"
+			count: 1
+			path: tests/lib/Server/Security/CsrfTokenManagerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Security\\\\CsrfTokenManagerTest\\:\\:testHasTokenForHttp\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/lib/Server/Security/CsrfTokenManagerTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Security\\\\CsrfTokenManagerTest\\:\\:testHasTokenForHttps\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/lib/Server/Security/CsrfTokenManagerTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:getParseValues\\(\\) return type has no value type specified in iterable type array\\.$#"

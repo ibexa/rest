@@ -17,14 +17,14 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
-use Symfony\Component\Security\Http\Authenticator\InteractiveAuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 
-final class RestAuthenticator extends AbstractAuthenticator implements InteractiveAuthenticatorInterface
+final class RestAuthenticator extends AbstractAuthenticator
 {
-    private const string LOGIN_ROUTE = 'ibexa.rest.create_session';
+    private const string ACCEPT_HEADER = 'Accept';
+    private const string SESSION_HEADER_VALUE = 'application/vnd.ibexa.api.Session';
 
     public function __construct(
         private readonly Dispatcher $inputDispatcher,
@@ -34,7 +34,12 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
 
     public function supports(Request $request): ?bool
     {
-        return $request->attributes->get('_route') === self::LOGIN_ROUTE;
+        return
+            $request->headers->has(self::ACCEPT_HEADER) &&
+            str_contains(
+                $request->headers->get(self::ACCEPT_HEADER) ?? '',
+                self::SESSION_HEADER_VALUE
+            );
     }
 
     public function authenticate(Request $request): Passport
@@ -83,11 +88,6 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
         throw new UnauthorizedException($exception->getMessage());
-    }
-
-    public function isInteractive(): bool
-    {
-        return true;
     }
 
     private function fetchExistingToken(Request $request): ?TokenInterface
