@@ -23,27 +23,18 @@ use Throwable;
  *
  * Converts responses from REST controllers to REST Responses, depending on the Accept-Header value.
  */
-class ResponseListener implements EventSubscriberInterface, LoggerAwareInterface
+final class ResponseListener implements EventSubscriberInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
-    /**
-     * @var \Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher
-     */
-    private $viewDispatcher;
+    private AcceptHeaderVisitorDispatcher $viewDispatcher;
 
-    /**
-     * @param $viewDispatcher AcceptHeaderVisitorDispatcher
-     */
     public function __construct(AcceptHeaderVisitorDispatcher $viewDispatcher)
     {
         $this->viewDispatcher = $viewDispatcher;
     }
 
-    /**
-     * @return array
-     */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::VIEW => 'onKernelResultView',
@@ -52,10 +43,7 @@ class ResponseListener implements EventSubscriberInterface, LoggerAwareInterface
         ];
     }
 
-    /**
-     * @param \Symfony\Component\HttpKernel\Event\ViewEvent $event
-     */
-    public function onKernelResultView(ViewEvent $event)
+    public function onKernelResultView(ViewEvent $event): void
     {
         if (!$event->getRequest()->attributes->get('is_rest_request')) {
             return;
@@ -71,11 +59,9 @@ class ResponseListener implements EventSubscriberInterface, LoggerAwareInterface
     }
 
     /**
-     * @param \Symfony\Component\HttpKernel\Event\ExceptionEvent $event
-     *
      * @throws \Exception
      */
-    public function onKernelExceptionView(ExceptionEvent $event)
+    public function onKernelExceptionView(ExceptionEvent $event): void
     {
         if (!$event->getRequest()->attributes->get('is_rest_request')) {
             return;

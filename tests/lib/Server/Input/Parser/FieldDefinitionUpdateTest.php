@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
@@ -20,12 +21,9 @@ use Ibexa\Rest\Server\Input\Parser\FieldDefinitionUpdate;
 /**
  * @todo Test with fieldSettings and validatorConfiguration when specified
  */
-class FieldDefinitionUpdateTest extends BaseTest
+final class FieldDefinitionUpdateTest extends BaseTest
 {
-    /**
-     * Tests the FieldDefinitionUpdate parser.
-     */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = $this->getInputArray();
 
@@ -112,10 +110,7 @@ class FieldDefinitionUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Test FieldDefinitionUpdate parser throwing exception on invalid names.
-     */
-    public function testParseExceptionOnInvalidNames()
+    public function testParseExceptionOnInvalidNames(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid \'names\' element for FieldDefinitionUpdate.');
@@ -126,10 +121,7 @@ class FieldDefinitionUpdateTest extends BaseTest
         $fieldDefinitionUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test FieldDefinitionUpdate parser throwing exception on invalid descriptions.
-     */
-    public function testParseExceptionOnInvalidDescriptions()
+    public function testParseExceptionOnInvalidDescriptions(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid \'descriptions\' element for FieldDefinitionUpdate.');
@@ -140,12 +132,7 @@ class FieldDefinitionUpdateTest extends BaseTest
         $fieldDefinitionUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the FieldDefinitionUpdate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\FieldDefinitionUpdate
-     */
-    protected function internalGetParser()
+    protected function internalGetParser(): FieldDefinitionUpdate
     {
         return new FieldDefinitionUpdate(
             $this->getContentTypeServiceMock(),
@@ -154,12 +141,7 @@ class FieldDefinitionUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the FieldTypeParser mock object.
-     *
-     * @return \Ibexa\Rest\Input\FieldTypeParser
-     */
-    protected function getFieldTypeParserMock()
+    protected function getFieldTypeParserMock(): FieldTypeParser
     {
         $fieldTypeParserMock = $this->createMock(FieldTypeParser::class);
 
@@ -185,12 +167,7 @@ class FieldDefinitionUpdateTest extends BaseTest
         return $fieldTypeParserMock;
     }
 
-    /**
-     * Get the content type service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService
-     */
-    protected function getContentTypeServiceMock()
+    protected function getContentTypeServiceMock(): ContentTypeService
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
@@ -212,6 +189,7 @@ class FieldDefinitionUpdateTest extends BaseTest
                                         [
                                             'id' => 24,
                                             'fieldTypeIdentifier' => 'ezstring',
+                                            'identifier' => 'title',
                                         ]
                                     ),
                                 ]),
@@ -224,11 +202,9 @@ class FieldDefinitionUpdateTest extends BaseTest
     }
 
     /**
-     * Returns the array under test.
-     *
-     * @return array
+     * @return array<string, mixed>
      */
-    protected function getInputArray()
+    protected function getInputArray(): array
     {
         return [
             '__url' => '/content/types/42/draft/fieldDefinitions/24',
@@ -268,7 +244,10 @@ class FieldDefinitionUpdateTest extends BaseTest
         ];
     }
 
-    public function getParseHrefExpectationsMap()
+    /**
+     * @return array{array{string, string, int}}
+     */
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/content/types/42/draft/fieldDefinitions/24', 'contentTypeId', 42],

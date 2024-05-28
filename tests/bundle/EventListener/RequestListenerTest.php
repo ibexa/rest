@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
@@ -17,8 +18,8 @@ use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 
 final class RequestListenerTest extends EventListenerTest
 {
-    public const REST_ROUTE = '/api/ibexa/v2/rest-route';
-    public const NON_REST_ROUTE = '/non-rest-route';
+    public const string REST_ROUTE = '/api/ibexa/v2/rest-route';
+    public const string NON_REST_ROUTE = '/non-rest-route';
 
     /**
      * @return array<array{array{string}}>
@@ -33,7 +34,7 @@ final class RequestListenerTest extends EventListenerTest
     }
 
     /**
-     * @retirm array<array{string, bool}>
+     * @return array<array{string, bool}>
      */
     public static function getDataForTestOnKernelRequest(): array
     {
@@ -87,7 +88,7 @@ final class RequestListenerTest extends EventListenerTest
         self::assertSame($isExpectedRestRequest, $request->attributes->get('is_rest_request'));
     }
 
-    protected function getEventListener(): RequestListener
+    protected function getEventListener(?bool $csrfEnabled = null): RequestListener
     {
         return new RequestListener(
             new UriParser($this->createMock(UrlMatcherInterface::class))

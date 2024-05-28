@@ -4,13 +4,14 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
-class BinaryContentTest extends RESTFunctionalTestCase
+final class BinaryContentTest extends RESTFunctionalTestCase
 {
     public function testCreateContentWithImageData(): string
     {
@@ -77,7 +78,7 @@ XML;
     /**
      * @depends testCreateContentWithImageData
      */
-    public function testGetImageVariation(string $hrefToImage)
+    public function testGetImageVariation(string $hrefToImage): void
     {
         $imageResponse = $this->sendHttpRequest(
             $this->createHttpRequest(
@@ -88,10 +89,10 @@ XML;
             )
         );
 
-        $jsonResponse = json_decode($imageResponse->getBody());
+        $jsonResponse = json_decode($imageResponse->getBody()->getContents());
         $imageField = $jsonResponse->Version->Fields->field[2];
 
-        self::assertObjectHasAttribute('variations', $imageField->fieldValue);
+        self::assertObjectHasProperty('variations', $imageField->fieldValue);
 
         $variationResponse = $this->sendHttpRequest(
             $this->createHttpRequest(
@@ -99,13 +100,14 @@ XML;
                 $imageField->fieldValue->variations->medium->href,
             )
         );
+
         self::assertHttpResponseCodeEquals($variationResponse, Response::HTTP_OK);
     }
 
     /**
      * @depends testCreateContentWithImageData
      */
-    public function testGetImageAssetVariations(string $hrefToImage)
+    public function testGetImageAssetVariations(string $hrefToImage): void
     {
         $parsedHref = explode('/', $hrefToImage);
         $destinationContentId = end($parsedHref);
@@ -159,7 +161,7 @@ XML;
         self::assertHttpResponseCodeEquals($variationResponse, Response::HTTP_OK);
     }
 
-    private function createContentTypeWithImageAsset()
+    private function createContentTypeWithImageAsset(): string
     {
         $body = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>

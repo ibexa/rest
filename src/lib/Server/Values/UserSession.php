@@ -4,62 +4,34 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Rest\Value as RestValue;
 
-/**
- * User list view model.
- */
-class UserSession extends RestValue
+final class UserSession extends RestValue
 {
-    /**
-     * User.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\User\User
-     */
-    public $user;
+    public User $user;
 
-    /**
-     * Session name.
-     *
-     * @var string
-     */
-    public $sessionName;
+    public string $sessionName;
 
-    /**
-     * Session ID.
-     *
-     * @var string
-     */
-    public $sessionId;
+    public string $sessionId;
 
-    /**
-     * CSRF token value.
-     *
-     * @var string
-     */
-    public $csrfToken;
+    public string $csrfToken;
 
-    /**
-     * True if session exists.
-     *
-     * @var bool
-     */
-    public $exists;
+    public bool $exists;
 
     public bool $created;
 
-    /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\User $user
-     * @param string $sessionName
-     * @param string $sessionId
-     * @param string $csrfToken
-     */
-    public function __construct(User $user, $sessionName, $sessionId, $csrfToken, $created)
-    {
+    public function __construct(
+        User $user,
+        string $sessionName,
+        string $sessionId,
+        string $csrfToken,
+        bool $created
+    ) {
         $this->user = $user;
         $this->sessionName = $sessionName;
         $this->sessionId = $sessionId;

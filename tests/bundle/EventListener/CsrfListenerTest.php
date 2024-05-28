@@ -4,12 +4,15 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
 use Ibexa\Bundle\Rest\EventListener\CsrfListener;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\HeaderBag;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -17,97 +20,87 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-class CsrfListenerTest extends EventListenerTest
+final class CsrfListenerTest extends EventListenerTest
 {
-    public const VALID_TOKEN = 'valid';
-    public const INVALID_TOKEN = 'invalid';
-    public const INTENTION = 'rest';
+    public const string VALID_TOKEN = 'valid';
+    public const string INVALID_TOKEN = 'invalid';
+    public const string INTENTION = 'rest';
 
-    /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface */
-    protected $eventDispatcherMock;
-
-    /**
-     * If set to null before initializing mocks, Request::getSession() is expected not to be called.
-     *
-     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
-     */
-    protected $sessionMock;
-
-    protected $sessionIsStarted = true;
-
-    protected $csrfTokenHeaderValue = self::VALID_TOKEN;
-
-    /**
-     * Route returned by Request::get( '_route' )
-     * If set to false, get( '_route' ) is expected not to be called.
-     *
-     * @var string
-     */
-    protected $route = 'ibexa.rest.something';
-
-    /**
-     * If set to false, Request::getRequestMethod() is expected not to be called.
-     */
-    protected $requestMethod = 'POST';
-
-    public function provideExpectedSubscribedEventTypes()
+    public function provideExpectedSubscribedEventTypes(): array
     {
         return [
             [[KernelEvents::REQUEST]],
         ];
     }
 
-    public function testIsNotRestRequest()
+    public function testIsNotRestRequest(): void
     {
-        $this->isRestRequest = false;
-
-        $this->requestMethod = false;
-        $this->sessionMock = false;
-        $this->route = false;
-        $this->csrfTokenHeaderValue = null;
-
         $listener = $this->getEventListener();
-        $listener->onKernelRequest($this->getEvent());
+        $request = $this->createMock(Request::class);
+        $request->attributes = new ParameterBag();
+
+        $listener->onKernelRequest(
+            $this->getEvent($request)
+        );
     }
 
-    public function testCsrfDisabled()
+    public function testCsrfDisabled(): void
     {
-        $this->requestMethod = false;
-        $this->sessionMock = false;
-        $this->route = false;
-        $this->csrfTokenHeaderValue = null;
+        $request = $this->createMock(Request::class);
+        $request->attributes = new ParameterBag([
+            'is_rest_request' => true,
+        ]);
 
-        $this->getEventListener(false)->onKernelRequest($this->getEvent());
+        $this
+            ->getEventListener(false)
+            ->onKernelRequest($this->getEvent($request));
     }
 
-    public function testNoSessionStarted()
+    public function testNoSessionStarted(): void
     {
-        $this->sessionIsStarted = false;
+        $request = $this->createMock(Request::class);
+        $request->attributes = new ParameterBag([
+            'is_rest_request' => true,
+        ]);
 
-        $this->requestMethod = false;
-        $this->route = false;
-        $this->csrfTokenHeaderValue = null;
+        $request
+            ->method('getSession')
+            ->willReturn($this->getSessionMock(false));
 
-        $this->getEventListener()->onKernelRequest($this->getEvent());
+        $this
+            ->getEventListener()
+            ->onKernelRequest($this->getEvent($request));
     }
 
     /**
      * Tests that method CSRF check don't apply to are indeed ignored.
      *
-     * @param string $ignoredMethod
-     *
      * @dataProvider getIgnoredRequestMethods
      */
-    public function testIgnoredRequestMethods($ignoredMethod)
+    public function testIgnoredRequestMethods(string $ignoredMethod): void
     {
-        $this->requestMethod = $ignoredMethod;
-        $this->route = false;
-        $this->csrfTokenHeaderValue = null;
+        $request = $this->createMock(Request::class);
+        $request->attributes = new ParameterBag([
+            'is_rest_request' => true,
+        ]);
 
-        $this->getEventListener()->onKernelRequest($this->getEvent());
+        $request
+            ->method('getSession')
+            ->willReturn($this->getSessionMock());
+
+        $request
+            ->method('getMethod')
+            ->willReturn($ignoredMethod);
+
+        $this
+            ->getEventListener()
+            ->onKernelRequest($this->getEvent($request));
     }
 
-    public function getIgnoredRequestMethods()
+    /**
+     * @return array<array<string>>
+     */
+    public function getIgnoredRequestMethods(): array
     {
         return [
             ['GET'],
@@ -116,77 +109,148 @@ class CsrfListenerTest extends EventListenerTest
         ];
     }
 
-    /**
-     * @dataProvider provideSessionRoutes
-     */
-    public function testSessionRequests($route)
+    public function testSessionRequests(): void
     {
-        $this->route = $route;
-        $this->csrfTokenHeaderValue = null;
+        $request = $this->createMock(Request::class);
+        $request->attributes = $this->getRequestAttributesMock();
+        $request->headers = $this->getRequestHeadersMock();
 
-        $this->getEventListener()->onKernelRequest($this->getEvent());
-    }
+        $request
+            ->method('getSession')
+            ->willReturn($this->getSessionMock());
 
-    public static function provideSessionRoutes()
-    {
-        return [
-            ['ibexa.rest.create_session'],
-            ['ibexa.rest.refresh_session'],
-            ['ibexa.rest.delete_session'],
-        ];
+        $request
+            ->method('getMethod')
+            ->willReturn('GET');
+
+        $this
+            ->getEventListener()
+            ->onKernelRequest($this->getEvent($request));
     }
 
     public function testSkipCsrfProtection(): void
     {
-        $this->enableCsrfProtection = false;
-        $this->csrfTokenHeaderValue = null;
+        $request = $this->createMock(Request::class);
+        $request->attributes = $this->getRequestAttributesMock();
+        $request->headers = $this->getRequestHeadersMock();
 
-        $listener = $this->getEventListener();
-        $listener->onKernelRequest($this->getEvent());
+        $this
+            ->getEventListener(false)
+            ->onKernelRequest($this->getEvent($request));
     }
 
-    public function testNoHeader()
+    public function testNoHeader(): void
     {
+        $request = $this->createMock(Request::class);
+        $request->attributes = $this->getRequestAttributesMock();
+        $request->headers = $this->getRequestHeadersMock();
+
+        $request
+            ->method('getMethod')
+            ->willReturn('POST');
+
+        $request
+            ->method('getSession')
+            ->willReturn($this->getSessionMock());
+
         $this->expectException(UnauthorizedException::class);
 
-        $this->csrfTokenHeaderValue = false;
-
-        $this->getEventListener()->onKernelRequest($this->getEvent());
+        $this
+            ->getEventListener()
+            ->onKernelRequest($this->getEvent($request));
     }
 
-    public function testInvalidToken()
+    public function testInvalidToken(): void
     {
+        $request = $this->createMock(Request::class);
+        $request->attributes = $this->getRequestAttributesMock();
+        $request->headers = $this->getRequestHeadersMock(self::INVALID_TOKEN);
+
+        $request
+            ->method('getMethod')
+            ->willReturn('POST');
+
+        $request
+            ->method('getSession')
+            ->willReturn($this->getSessionMock());
+
         $this->expectException(UnauthorizedException::class);
 
-        $this->csrfTokenHeaderValue = self::INVALID_TOKEN;
-
-        $this->getEventListener()->onKernelRequest($this->getEvent());
+        $this
+            ->getEventListener()
+            ->onKernelRequest($this->getEvent($request));
     }
 
-    public function testValidToken()
+    public function testValidToken(): void
     {
-        $this->getEventDispatcherMock()
+        $request = $this->createMock(Request::class);
+        $request->attributes = $this->getRequestAttributesMock();
+        $request->headers = $this->getRequestHeadersMock(self::VALID_TOKEN);
+
+        $request
+            ->method('getMethod')
+            ->willReturn('POST');
+
+        $request
+            ->method('getSession')
+            ->willReturn($this->getSessionMock());
+
+        $this
+            ->getEventListener(true, $this->getEventDispatcherMock())
+            ->onKernelRequest($this->getEvent($request));
+    }
+
+    protected function getEventListener(
+        ?bool $csrfEnabled = true,
+        ?EventDispatcherInterface $eventDispatcher = null
+    ): CsrfListener {
+        return new CsrfListener(
+            $eventDispatcher ?? $this->getEventDispatcherMock(),
+            $csrfEnabled ?? true,
+            self::INTENTION,
+            $csrfEnabled === true ? $this->getCsrfProviderMock() : null
+        );
+    }
+
+    private function getEvent(Request $request): RequestEvent
+    {
+        $event = $this->createMock(RequestEvent::class);
+        $event
             ->expects(self::once())
-            ->method('dispatch');
+            ->method('getRequest')
+            ->willReturn($request);
 
-        $this->getEventListener()->onKernelRequest($this->getEvent());
+        return $event;
     }
 
     /**
-     * @return \Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Symfony\Component\HttpFoundation\Session\SessionInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getCsrfProviderMock()
+    private function getSessionMock(bool $isSessionStarted = true): SessionInterface
+    {
+        $sessionMock = $this->createMock(SessionInterface::class);
+
+        $sessionMock
+            ->expects(self::atLeastOnce())
+            ->method('isStarted')
+            ->willReturn($isSessionStarted);
+
+        return $sessionMock;
+    }
+
+    /**
+     * @return \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+     */
+    private function getCsrfProviderMock(): CsrfTokenManagerInterface
     {
         $provider = $this->createMock(CsrfTokenManagerInterface::class);
         $provider->expects(self::any())
             ->method('isTokenValid')
             ->willReturnCallback(
-                static function (CsrfToken $token) {
-                    if ($token == new CsrfToken(self::INTENTION, self::VALID_TOKEN)) {
-                        return true;
-                    }
-
-                    return false;
+                static function (CsrfToken $token): bool {
+                    return
+                        $token->getId() === self::INTENTION &&
+                        $token->getValue() === self::VALID_TOKEN;
                 }
             );
 
@@ -194,139 +258,38 @@ class CsrfListenerTest extends EventListenerTest
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpKernel\Event\RequestEvent
+     * @return \Symfony\Component\HttpFoundation\HeaderBag&\PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getEvent($class = null)
+    private function getRequestHeadersMock(?string $csrfTokenHeaderValue = null): HeaderBag
     {
-        if (!isset($this->event)) {
-            parent::getEvent(RequestEvent::class);
+        $headerBag = $this->createMock(HeaderBag::class);
 
-            $this->event
-                ->expects(self::any())
-                ->method('getRequestType')
-                ->willReturn($this->requestType);
+        if ($csrfTokenHeaderValue === null) {
+            $headerBag
+                ->expects(self::never())
+                ->method('get');
+        } else {
+            $headerBag
+                ->expects(self::once())
+                ->method('has')
+                ->with(CsrfListener::CSRF_TOKEN_HEADER)
+                ->willReturn($csrfTokenHeaderValue !== null);
+
+            $headerBag
+                ->expects(self::once())
+                ->method('get')
+                ->with(CsrfListener::CSRF_TOKEN_HEADER)
+                ->willReturn($csrfTokenHeaderValue);
         }
 
-        return $this->event;
+        return $headerBag;
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\Session\SessionInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Symfony\Component\EventDispatcher\EventDispatcherInterface&\PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getSessionMock()
+    private function getEventDispatcherMock(): EventDispatcherInterface
     {
-        if (!isset($this->sessionMock)) {
-            $this->sessionMock = $this->createMock(SessionInterface::class);
-            $this->sessionMock
-                ->expects(self::atLeastOnce())
-                ->method('isStarted')
-                ->willReturn($this->sessionIsStarted);
-        }
-
-        return $this->sessionMock;
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\ParameterBag|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getRequestHeadersMock()
-    {
-        if (!isset($this->requestHeadersMock)) {
-            $this->requestHeadersMock = parent::getRequestHeadersMock();
-
-            if ($this->csrfTokenHeaderValue === null) {
-                $this->requestHeadersMock
-                    ->expects(self::never())
-                    ->method('has');
-
-                $this->requestHeadersMock
-                    ->expects(self::never())
-                    ->method('get');
-            } else {
-                $this->requestHeadersMock
-                    ->expects(self::atLeastOnce())
-                    ->method('has')
-                    ->with(CsrfListener::CSRF_TOKEN_HEADER)
-                    ->willReturn(true);
-
-                $this->requestHeadersMock
-                    ->expects(self::atLeastOnce())
-                    ->method('get')
-                    ->with(CsrfListener::CSRF_TOKEN_HEADER)
-                    ->willReturn($this->csrfTokenHeaderValue);
-            }
-        }
-
-        return $this->requestHeadersMock;
-    }
-
-    /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\Request
-     */
-    protected function getRequestMock()
-    {
-        if (!isset($this->requestMock)) {
-            $this->requestMock = parent::getRequestMock();
-
-            if ($this->sessionMock === false) {
-                $this->requestMock
-                    ->expects(self::never())
-                    ->method('getSession');
-            } else {
-                $this->requestMock
-                    ->expects(self::atLeastOnce())
-                    ->method('getSession')
-                    ->willReturn($this->getSessionMock());
-            }
-
-            if ($this->route === false) {
-                $this->requestMock
-                    ->expects(self::never())
-                    ->method('get');
-            } else {
-                $this->requestMock
-                    ->expects(self::atLeastOnce())
-                    ->method('get')
-                    ->with('_route')
-                    ->willReturn($this->route);
-            }
-        }
-
-        return $this->requestMock;
-    }
-
-    /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\EventDispatcher\EventDispatcherInterface
-     */
-    protected function getEventDispatcherMock()
-    {
-        if (!isset($this->eventDispatcherMock)) {
-            $this->eventDispatcherMock = $this->createMock(EventDispatcherInterface::class);
-        }
-
-        return $this->eventDispatcherMock;
-    }
-
-    /**
-     * @param bool $csrfEnabled
-     *
-     * @return \Ibexa\Bundle\Rest\EventListener\CsrfListener
-     */
-    protected function getEventListener($csrfEnabled = true)
-    {
-        if ($csrfEnabled) {
-            return new CsrfListener(
-                $this->getEventDispatcherMock(),
-                $csrfEnabled,
-                self::INTENTION,
-                $this->getCsrfProviderMock()
-            );
-        }
-
-        return new CsrfListener(
-            $this->getEventDispatcherMock(),
-            $csrfEnabled,
-            self::INTENTION
-        );
+        return $this->createMock(EventDispatcherInterface::class);
     }
 }

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Security;
 
@@ -13,17 +14,11 @@ use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Csrf\TokenStorage\NativeSessionTokenStorage;
 use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
-class CsrfTokenManager extends BaseCsrfTokenManager
+final class CsrfTokenManager extends BaseCsrfTokenManager
 {
-    /**
-     * @var \Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface
-     */
-    private $storage;
+    private TokenStorageInterface $storage;
 
-    /**
-     * @var string
-     */
-    private $namespace;
+    private string $namespace;
 
     public function __construct(
         TokenGeneratorInterface $generator = null,
@@ -36,26 +31,12 @@ class CsrfTokenManager extends BaseCsrfTokenManager
         parent::__construct($generator, $this->storage, $this->namespace);
     }
 
-    /**
-     * Tests if a CSRF token is stored.
-     *
-     * @param string $tokenId
-     *
-     * @return bool
-     */
-    public function hasToken($tokenId)
+    public function hasToken(string $tokenId): bool
     {
         return $this->storage->hasToken($this->namespace . $tokenId);
     }
 
-    /**
-     * Resolves token namespace.
-     *
-     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
-     *
-     * @return string
-     */
-    private function resolveNamespace(RequestStack $requestStack = null)
+    private function resolveNamespace(RequestStack $requestStack = null): string
     {
         if ($requestStack !== null && ($request = $requestStack->getMainRequest())) {
             return $request->isSecure() ? 'https-' : '';

@@ -2,25 +2,14 @@ parameters:
     ibexa.rest.authorization_header_name: ~
 
 services:
-    # Following service will be aliased at compile time to "ezpublish_rest.session_authenticator" by the Security factory.
-    ibexa.rest.security.authentication.listener.session:
-        class: Ibexa\Rest\Server\Security\RestAuthenticator
-        arguments:
-            - "@security.token_storage"
-            - "@security.authentication.manager"
-            - ~ # Will be replaced at compile time by security provider key
-            - "@event_dispatcher"
-            - '@ibexa.config.resolver'
-            - "@?logger"
-        abstract: true
+    _defaults:
+        autowire: true
+        autoconfigure: false
+        public: false
 
     Ibexa\Contracts\Rest\Security\AuthorizationHeaderRESTRequestMatcher:
         arguments:
             $headerName: '%ibexa.rest.authorization_header_name%'
-
-    Ibexa\Rest\Server\Security\RestLogoutHandler:
-        arguments:
-            - '@ibexa.config.resolver'
 
     Ibexa\Rest\Server\Security\CsrfTokenManager:
         arguments:
@@ -29,7 +18,7 @@ services:
             - '@?request_stack'
 
     Ibexa\Rest\Server\Security\EventListener\SecurityListener:
-        arguments:
-            - '@Ibexa\Contracts\Core\Repository\PermissionResolver'
         tags:
             - { name: kernel.event_subscriber }
+
+    Ibexa\Rest\Security\Authenticator\RestAuthenticator: ~
