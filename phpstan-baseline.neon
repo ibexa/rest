@@ -6316,11 +6316,6 @@ parameters:
 			path: tests/integration/BasicKernelTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Integration\\\\Rest\\\\UriParser\\\\UriParserTest\\:\\:getDataForTestIsRestRequest\\(\\) return type has no value type specified in iterable type iterable\\.$#"
-			count: 1
-			path: tests/integration/UriParser/UriParserTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\AuthorProcessorTest\\:\\:fieldSettingsHashes\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/FieldTypeProcessor/AuthorProcessorTest.php
@@ -10494,26 +10489,6 @@ parameters:
 			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\VersionTest\\:\\:\\$fieldTypeSerializerMock has no type specified\\.$#"
 			count: 1
 			path: tests/lib/Server/Output/ValueObjectVisitor/VersionTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Security\\\\CsrfTokenManagerTest\\:\\:createCsrfTokenManager\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Security/CsrfTokenManagerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Security\\\\CsrfTokenManagerTest\\:\\:createCsrfTokenManager\\(\\) has parameter \\$https with no type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Security/CsrfTokenManagerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Security\\\\CsrfTokenManagerTest\\:\\:testHasTokenForHttp\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Security/CsrfTokenManagerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Security\\\\CsrfTokenManagerTest\\:\\:testHasTokenForHttps\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Security/CsrfTokenManagerTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:getParseValues\\(\\) return type has no value type specified in iterable type array\\.$#"
