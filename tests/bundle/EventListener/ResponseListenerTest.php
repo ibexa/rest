@@ -36,7 +36,7 @@ final class ResponseListenerTest extends EventListenerTest
 
     protected EventDispatcherInterface $event;
 
-    /** @var \Symfony\Component\HttpKernel\KernelInterface&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Symfony\Component\HttpKernel\KernelInterface|\PHPUnit\Framework\MockObject\MockObject */
     protected KernelInterface $kernelMock;
 
     public function setUp(): void

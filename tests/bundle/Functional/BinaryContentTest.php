@@ -66,7 +66,7 @@ XML;
 
         $response = $this->sendHttpRequest($request);
 
-        $this->assertHttpResponseCodeEquals($response, Response::HTTP_CREATED);
+        self::assertHttpResponseCodeEquals($response, Response::HTTP_CREATED);
         self::assertHttpResponseHasHeader($response, 'Location');
 
         $href = $response->getHeader('Location')[0];
@@ -89,13 +89,7 @@ XML;
             )
         );
 
-        $jsonResponse = json_decode(
-            $imageResponse->getBody()->getContents(),
-            false,
-            512,
-            JSON_THROW_ON_ERROR
-        );
-
+        $jsonResponse = json_decode($imageResponse->getBody()->getContents());
         $imageField = $jsonResponse->Version->Fields->field[2];
 
         self::assertObjectHasProperty('variations', $imageField->fieldValue);
@@ -107,7 +101,7 @@ XML;
             )
         );
 
-        $this->assertHttpResponseCodeEquals($variationResponse, Response::HTTP_OK);
+        self::assertHttpResponseCodeEquals($variationResponse, Response::HTTP_OK);
     }
 
     /**
@@ -164,7 +158,7 @@ XML;
                 $imageField['fieldValue']['variations']['medium']['href'],
             )
         );
-        $this->assertHttpResponseCodeEquals($variationResponse, Response::HTTP_OK);
+        self::assertHttpResponseCodeEquals($variationResponse, Response::HTTP_OK);
     }
 
     private function createContentTypeWithImageAsset(): string
@@ -228,8 +222,8 @@ XML;
         );
         $response = $this->sendHttpRequest($request);
 
-        $this->assertHttpResponseCodeEquals($response, 201);
-        $this->assertHttpResponseHasHeader($response, 'Location');
+        self::assertHttpResponseCodeEquals($response, 201);
+        self::assertHttpResponseHasHeader($response, 'Location');
 
         $this->addCreatedElement($response->getHeader('Location')[0]);
 
