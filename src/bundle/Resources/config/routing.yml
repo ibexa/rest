@@ -595,7 +595,7 @@ ibexa.rest.load_content_type_field_definition:
     requirements:
         contentTypeId: \d+
         fieldDefinitionId: \d+
-        
+
 ibexa.rest.load_content_type_field_definition_by_identifier:
     path: /content/types/{contentTypeId}/fieldDefinition/{fieldDefinitionIdentifier}
     controller: Ibexa\Rest\Server\Controller\ContentType::loadContentTypeFieldDefinitionByIdentifier
