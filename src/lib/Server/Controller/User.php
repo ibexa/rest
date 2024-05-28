@@ -28,7 +28,6 @@ use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
-use Ibexa\Rest\Value as RestValue;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
@@ -82,8 +81,10 @@ final class User extends RestController
 
     /**
      * Redirects to the root user group.
+     *
+     * @return \Ibexa\Rest\Server\Values\PermanentRedirect
      */
-    public function loadRootUserGroup(): Values\PermanentRedirect
+    public function loadRootUserGroup()
     {
         //@todo Replace hardcoded value with one loaded from settings
         return new Values\PermanentRedirect(
@@ -93,14 +94,18 @@ final class User extends RestController
 
     /**
      * Loads a user group for the given path.
+     *
+     * @param $groupPath
+     *
+     * @return \Ibexa\Rest\Server\Values\RestUserGroup
      */
-    public function loadUserGroup(string $groupPath): RestValue
+    public function loadUserGroup($groupPath)
     {
         $userGroupLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($groupPath)
         );
 
-        if (trim($userGroupLocation->pathString, '/') !== $groupPath) {
+        if (trim($userGroupLocation->pathString, '/') != $groupPath) {
             throw new NotFoundException(
                 "Could not find a Location with path string $groupPath"
             );
@@ -125,7 +130,14 @@ final class User extends RestController
         );
     }
 
-    public function loadUser(int $userId): RestValue
+    /**
+     * Loads a user for the given ID.
+     *
+     * @param $userId
+     *
+     * @return \Ibexa\Rest\Server\Values\RestUser
+     */
+    public function loadUser($userId)
     {
         $user = $this->userService->loadUser($userId, Language::ALL);
 
@@ -182,13 +194,13 @@ final class User extends RestController
      * Create a new user group under the given parent
      * To create a top level group use /user/groups/1/5/subgroups.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @param $groupPath
+     *
+     * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
+     *
+     * @return \Ibexa\Rest\Server\Values\CreatedUserGroup
      */
-    public function createUserGroup(string $groupPath, Request $request): Values\CreatedUserGroup
+    public function createUserGroup($groupPath, Request $request)
     {
         $userGroupLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($groupPath)
@@ -226,12 +238,13 @@ final class User extends RestController
     /**
      * Create a new user group in the given group.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @param $groupPath
+     *
+     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     *
+     * @return \Ibexa\Rest\Server\Values\CreatedUser
      */
-    public function createUser(string $groupPath, Request $request): Values\CreatedUser
+    public function createUser($groupPath, Request $request)
     {
         $userGroupLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($groupPath)
@@ -268,7 +281,14 @@ final class User extends RestController
         );
     }
 
-    public function updateUserGroup(string $groupPath, Request $request): Values\RestUserGroup
+    /**
+     * Updates a user group.
+     *
+     * @param $groupPath
+     *
+     * @return \Ibexa\Rest\Server\Values\RestUserGroup
+     */
+    public function updateUserGroup($groupPath, Request $request)
     {
         $userGroupLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($groupPath)
@@ -311,7 +331,14 @@ final class User extends RestController
         );
     }
 
-    public function updateUser(int $userId, Request $request): Values\RestUser
+    /**
+     * Updates a user.
+     *
+     * @param $userId
+     *
+     * @return \Ibexa\Rest\Server\Values\RestUser
+     */
+    public function updateUser($userId, Request $request)
     {
         $user = $this->userService->loadUser($userId);
 
@@ -351,10 +378,13 @@ final class User extends RestController
     /**
      * Given user group is deleted.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @param $groupPath
+     *
+     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     *
+     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteUserGroup(string $groupPath): Values\NoContent
+    public function deleteUserGroup($groupPath)
     {
         $userGroupLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($groupPath)
@@ -378,10 +408,13 @@ final class User extends RestController
     /**
      * Given user is deleted.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @param $userId
+     *
+     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     *
+     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteUser(int $userId): Values\NoContent
+    public function deleteUser($userId)
     {
         $user = $this->userService->loadUser($userId);
 
@@ -396,8 +429,10 @@ final class User extends RestController
 
     /**
      * Loads users.
+     *
+     * @return \Ibexa\Rest\Server\Values\UserList|\Ibexa\Rest\Server\Values\UserRefList
      */
-    public function loadUsers(Request $request): RestValue
+    public function loadUsers(Request $request)
     {
         $restUsers = [];
 
@@ -441,7 +476,7 @@ final class User extends RestController
         return new Values\UserRefList($restUsers, $request->getPathInfo());
     }
 
-    public function verifyUsers(Request $request): Values\OK
+    public function verifyUsers(Request $request)
     {
         // We let the NotFoundException loadUsers throws if there are no results pass.
         $this->loadUsers($request)->users;
@@ -456,7 +491,7 @@ final class User extends RestController
      *
      * @return \Ibexa\Rest\Server\Values\RestUser[]
      */
-    public function loadUsersAssignedToRole($roleId): array
+    public function loadUsersAssignedToRole($roleId)
     {
         $role = $this->roleService->loadRole($roleId);
         $roleAssignments = $this->roleService->getRoleAssignments($role);
@@ -472,7 +507,10 @@ final class User extends RestController
         return $restUsers;
     }
 
-    private function buildRestUserObject(RepositoryUser $user): Values\RestUser
+    /**
+     * @return Values\RestUser
+     */
+    private function buildRestUserObject(RepositoryUser $user)
     {
         return new Values\RestUser(
             $user,
@@ -485,8 +523,10 @@ final class User extends RestController
 
     /**
      * Loads user groups.
+     *
+     * @return \Ibexa\Rest\Server\Values\UserGroupList|\Ibexa\Rest\Server\Values\UserGroupRefList
      */
-    public function loadUserGroups(Request $request): RestValue
+    public function loadUserGroups(Request $request)
     {
         $restUserGroups = [];
         if ($request->query->has('id')) {
@@ -521,8 +561,10 @@ final class User extends RestController
 
     /**
      * Loads a user group by its remote ID.
+     *
+     * @return \Ibexa\Rest\Server\Values\RestUserGroup
      */
-    public function loadUserGroupByRemoteId(Request $request): Values\RestUserGroup
+    public function loadUserGroupByRemoteId(Request $request)
     {
         $contentInfo = $this->contentService->loadContentInfoByRemoteId($request->query->get('remoteId'));
         $userGroup = $this->userService->loadUserGroup($contentInfo->id, Language::ALL);
@@ -545,7 +587,7 @@ final class User extends RestController
      *
      * @return \Ibexa\Rest\Server\Values\RestUserGroup[]
      */
-    public function loadUserGroupsAssignedToRole($roleId): array
+    public function loadUserGroupsAssignedToRole($roleId)
     {
         $role = $this->roleService->loadRole($roleId);
         $roleAssignments = $this->roleService->getRoleAssignments($role);
@@ -574,8 +616,12 @@ final class User extends RestController
 
     /**
      * Loads drafts assigned to user.
+     *
+     * @param $userId
+     *
+     * @return \Ibexa\Rest\Server\Values\VersionList
      */
-    public function loadUserDrafts(int $userId, Request $request): Values\VersionList
+    public function loadUserDrafts($userId, Request $request)
     {
         $contentDrafts = $this->contentService->loadContentDrafts(
             $this->userService->loadUser($userId)
@@ -587,10 +633,13 @@ final class User extends RestController
     /**
      * Moves the user group to another parent.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @param $groupPath
+     *
+     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     *
+     * @return \Ibexa\Rest\Server\Values\ResourceCreated
      */
-    public function moveUserGroup(string $groupPath, Request $request): Values\ResourceCreated
+    public function moveUserGroup($groupPath, Request $request)
     {
         $userGroupLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($groupPath)
@@ -633,8 +682,12 @@ final class User extends RestController
 
     /**
      * Returns a list of the sub groups.
+     *
+     * @param $groupPath
+     *
+     * @return \Ibexa\Rest\Server\Values\UserGroupList|\Ibexa\Rest\Server\Values\UserGroupRefList
      */
-    public function loadSubUserGroups(string $groupPath, Request $request): RestValue
+    public function loadSubUserGroups($groupPath, Request $request)
     {
         $offset = $request->query->has('offset') ? (int)$request->query->get('offset') : 0;
         $limit = $request->query->has('limit') ? (int)$request->query->get('limit') : 25;
@@ -686,8 +739,12 @@ final class User extends RestController
      * Returns a list of user groups the user belongs to.
      * The returned list includes the resources for unassigning
      * a user group if the user is in multiple groups.
+     *
+     * @param $userId
+     *
+     * @return \Ibexa\Rest\Server\Values\UserGroupRefList
      */
-    public function loadUserGroupsOfUser(int $userId, Request $request): RestValue
+    public function loadUserGroupsOfUser($userId, Request $request)
     {
         $offset = $request->query->has('offset') ? (int)$request->query->get('offset') : 0;
         $limit = $request->query->has('limit') ? (int)$request->query->get('limit') : 25;
@@ -723,8 +780,12 @@ final class User extends RestController
 
     /**
      * Loads the users of the group with the given path.
+     *
+     * @param $groupPath
+     *
+     * @return \Ibexa\Rest\Server\Values\UserList|\Ibexa\Rest\Server\Values\UserRefList
      */
-    public function loadUsersFromGroup(string $groupPath, Request $request): RestValue
+    public function loadUsersFromGroup($groupPath, Request $request)
     {
         $userGroupLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($groupPath)
@@ -775,14 +836,17 @@ final class User extends RestController
     /**
      * Unassigns the user from a user group.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @param $userId
+     * @param $groupPath
+     *
+     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     *
+     * @return \Ibexa\Rest\Server\Values\UserGroupRefList
      */
-    public function unassignUserFromUserGroup(int $userId, string $groupPath): Values\UserGroupRefList
+    public function unassignUserFromUserGroup($userId, $groupPath)
     {
         $user = $this->userService->loadUser($userId);
-        $userGroupLocation = $this->locationService->loadLocation((int)trim($groupPath, '/'));
+        $userGroupLocation = $this->locationService->loadLocation(trim($groupPath, '/'));
 
         $userGroup = $this->userService->loadUserGroup(
             $userGroupLocation->contentId
@@ -824,10 +888,13 @@ final class User extends RestController
     /**
      * Assigns the user to a user group.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @param $userId
+     *
+     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     *
+     * @return \Ibexa\Rest\Server\Values\UserGroupRefList
      */
-    public function assignUserToUserGroup(int $userId, Request $request): Values\UserGroupRefList
+    public function assignUserToUserGroup($userId, Request $request)
     {
         $user = $this->userService->loadUser($userId);
 
@@ -881,11 +948,13 @@ final class User extends RestController
 
     /**
      * Extracts and returns an item id from a path, e.g. /1/2/58 => 58.
+     *
+     * @return mixed
      */
-    private function extractLocationIdFromPath(string $path): int
+    private function extractLocationIdFromPath(string $path)
     {
         $pathParts = explode('/', $path);
 
-        return (int)array_pop($pathParts);
+        return array_pop($pathParts);
     }
 }
