@@ -86,31 +86,6 @@ parameters:
 			path: src/bundle/DependencyInjection/IbexaRestExtension.php
 
 		-
-			message: "#^Cannot call method isTokenValid\\(\\) on Symfony\\\\Component\\\\Security\\\\Csrf\\\\CsrfTokenManagerInterface\\|null\\.$#"
-			count: 1
-			path: src/bundle/EventListener/CsrfListener.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListener\\:\\:getSubscribedEvents\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/bundle/EventListener/CsrfListener.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListener\\:\\:onKernelRequest\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/EventListener/CsrfListener.php
-
-		-
-			message: "#^Parameter \\#1 \\$id of class Symfony\\\\Component\\\\Security\\\\Csrf\\\\CsrfToken constructor expects string, bool given\\.$#"
-			count: 1
-			path: src/bundle/EventListener/CsrfListener.php
-
-		-
-			message: "#^Property Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListener\\:\\:\\$csrfTokenIntention \\(bool\\) does not accept string\\.$#"
-			count: 1
-			path: src/bundle/EventListener/CsrfListener.php
-
-		-
 			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListener\\:\\:getSubscribedEvents\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/bundle/EventListener/ResponseListener.php
