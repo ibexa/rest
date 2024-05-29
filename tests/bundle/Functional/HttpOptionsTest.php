@@ -114,7 +114,6 @@ class HttpOptionsTest extends TestCase
             ['/user/groups/13/roles/1', ['GET', 'DELETE']],
             ['/user/sessions', ['POST']],
             ['/user/sessions/sess_123', ['DELETE']],
-            ['/user/sessions/sess_123/refresh', ['POST']],
             ['/content/urlaliases', ['GET', 'POST']],
             ['/content/locations/1/2/urlaliases', ['GET']],
             ['/content/urlaliases/12', ['GET', 'DELETE']],
