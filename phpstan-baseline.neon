@@ -3711,69 +3711,14 @@ parameters:
 			path: tests/bundle/DependencyInjection/Compiler/ValueObjectVisitorPassTest.php
 
 		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\EventDispatcher\\\\EventSubscriberInterface\\:\\:onKernelRequest\\(\\)\\.$#"
-			count: 9
-			path: tests/bundle/EventListener/CsrfListenerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:getEventDispatcherMock\\(\\) should return PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface but returns Symfony\\\\Component\\\\EventDispatcher\\\\EventDispatcherInterface\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/CsrfListenerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:testCsrfDisabled\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/CsrfListenerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:testNoSessionStarted\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/CsrfListenerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:testSessionRequests\\(\\) has parameter \\$route with no type specified\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/CsrfListenerTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$csrfEnabled of class Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListener constructor expects bool, false\\|null given\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/CsrfListenerTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:\\$csrfTokenHeaderValue has no type specified\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/CsrfListenerTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:\\$requestMethod has no type specified\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/CsrfListenerTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:\\$route \\(string\\) does not accept false\\.$#"
-			count: 4
-			path: tests/bundle/EventListener/CsrfListenerTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\CsrfListenerTest\\:\\:\\$sessionMock has no type specified\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/CsrfListenerTest.php
-
-		-
 			message: "#^Parameter \\#2 \\$method of function method_exists expects string, array\\<int\\|string, int\\|string\\>\\|int\\|string given\\.$#"
 			count: 1
 			path: tests/bundle/EventListener/EventListenerTest.php
 
 		-
-			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\EventListenerTest\\:\\:\\$requestMethod has no type specified\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/EventListenerTest.php
-
-		-
-			message: "#^Property Symfony\\\\Component\\\\HttpFoundation\\\\Request\\:\\:\\$headers \\(Symfony\\\\Component\\\\HttpFoundation\\\\HeaderBag\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\HttpFoundation\\\\ParameterBag\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/EventListenerTest.php
+			message: "#^Call to an undefined method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:getRequestMock\\(\\)\\.$#"
+			count: 3
+			path: tests/bundle/EventListener/ResponseListenerTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:onKernelView\\(\\) has parameter \\$event with no type specified\\.$#"
