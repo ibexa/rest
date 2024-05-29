@@ -104,6 +104,8 @@ class SessionController extends Controller
     /**
      * Refresh given session.
      *
+     * @deprecated 4.6.7 The "SessionController::refreshSessionAction()" method is deprecated, will be removed in 5.0. Use SessionController::checkSessionAction() instead.
+     *
      * @param string $sessionId
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
@@ -112,6 +114,12 @@ class SessionController extends Controller
      */
     public function refreshSessionAction($sessionId, Request $request)
     {
+        trigger_deprecation(
+            'ibexa/rest',
+            '4.6.7',
+            sprintf('The %s() method is deprecated, will be removed in 5.0.', __METHOD__)
+        );
+
         $session = $request->getSession();
 
         if ($session === null || !$session->isStarted() || $session->getId() != $sessionId || !$this->hasStoredCsrfToken()) {
