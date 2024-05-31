@@ -21,6 +21,7 @@ use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
+use Ibexa\Rest\Server\Strategy\ContentTypePostOperationFactory;
 use Ibexa\Rest\Server\Values;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,14 +38,14 @@ class ContentType extends RestController
      */
     protected $contentTypeService;
 
-    /**
-     * Construct controller.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\ContentTypeService $contentTypeService
-     */
-    public function __construct(ContentTypeService $contentTypeService)
-    {
+    protected ContentTypePostOperationFactory $contentTypePostOperationFactory;
+
+    public function __construct(
+        ContentTypeService $contentTypeService,
+        ContentTypePostOperationFactory $contentTypePostOperationFactory,
+    ) {
         $this->contentTypeService = $contentTypeService;
+        $this->contentTypePostOperationFactory = $contentTypePostOperationFactory;
     }
 
     /**
@@ -805,6 +806,34 @@ class ContentType extends RestController
         return new Values\ContentTypeGroupRefList(
             $contentType,
             $contentType->getContentTypeGroups()
+        );
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     */
+    public function postOperation(Request $request, int $contentTypeId): Values\ResourceCreated
+    {
+        /** @var \Ibexa\Rest\Server\Values\ContentTypePostOperationValue $operationValue */
+        $operationValue = $this->inputDispatcher->parse(
+            new Message(
+                [
+                    'Content-Type' => $request->headers->get('Content-Type'),
+                ],
+                $request->getContent(),
+            )
+        );
+
+        $contentType = $this->contentTypeService->loadContentType($contentTypeId);
+
+        $operationStrategy = $this->contentTypePostOperationFactory->getOperationStrategy($operationValue);
+        $newContentTypeResource = $operationStrategy->execute($contentType);
+
+        return new Values\ResourceCreated(
+            $this->router->generate(
+                'ibexa.rest.load_content_type',
+                ['contentTypeId' => $newContentTypeResource->id],
+            )
         );
     }
 

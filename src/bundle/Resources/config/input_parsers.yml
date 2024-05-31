@@ -863,3 +863,8 @@ services:
             $validator: '@validator'
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.Image }
+
+    Ibexa\Rest\Server\Input\Parser\CopyContentType:
+        parent: Ibexa\Rest\Server\Common\Parser
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.CopyContentTypeInput }

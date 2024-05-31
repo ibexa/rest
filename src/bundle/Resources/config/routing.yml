@@ -697,6 +697,13 @@ ibexa.rest.unlink_content_type_from_group:
         contentTypeId: \d+
         contentTypeGroupId: \d+
 
+ibexa.rest.content_type_operation:
+    path: /content/types/{contentTypeId}
+    defaults:
+        _controller: Ibexa\Rest\Server\Controller\ContentType:postOperation
+    methods: [POST]
+    requirements:
+        contentTypeId: \d+
 
 # Trash
 

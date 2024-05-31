@@ -390,3 +390,12 @@ services:
         parent: hautelook.router.template
         calls:
             - [ setOption, [ strict_requirements, ~ ] ]
+
+    Ibexa\Rest\Server\Strategy\ContentTypePostOperationFactory:
+        arguments:
+            $operationStrategies: !tagged_iterator ibexa.rest.server.content_type.post.strategy
+
+    Ibexa\Rest\Server\Strategy\ContentTypePostCopyOperation:
+        arguments:
+            $contentTypeService: '@ibexa.api.service.content_type'
+        tags: [ ibexa.rest.server.content_type.post.strategy ]
