@@ -1731,122 +1731,17 @@ parameters:
 			path: src/lib/Server/Controller/URLWildcard.php
 
 		-
+			message: "#^Access to an undefined property Ibexa\\\\Rest\\\\Value\\:\\:\\$users\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
 			message: "#^Dead catch \\- Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Exceptions\\\\NotFoundException is never thrown in the try block\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/User.php
 
 		-
 			message: "#^Expression \"\\$this\\-\\>loadUsers\\(\\$request\\)\\-\\>users\" on a separate line does not do anything\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:assignUserToUserGroup\\(\\) has parameter \\$userId with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:createUser\\(\\) has parameter \\$groupPath with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:createUserGroup\\(\\) has parameter \\$groupPath with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:deleteUser\\(\\) has parameter \\$userId with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:deleteUserGroup\\(\\) has parameter \\$groupPath with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadSubUserGroups\\(\\) has parameter \\$groupPath with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadSubUserGroups\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\UserGroupList\\|Ibexa\\\\Rest\\\\Server\\\\Values\\\\UserGroupRefList but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"
-			count: 2
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUser\\(\\) has parameter \\$userId with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUser\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUser but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUserDrafts\\(\\) has parameter \\$userId with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUserGroup\\(\\) has parameter \\$groupPath with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUserGroup\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUserGroup but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUserGroupsOfUser\\(\\) has parameter \\$userId with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUserGroupsOfUser\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\UserGroupRefList but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUsersFromGroup\\(\\) has parameter \\$groupPath with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:loadUsersFromGroup\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\UserList\\|Ibexa\\\\Rest\\\\Server\\\\Values\\\\UserRefList but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"
-			count: 2
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:moveUserGroup\\(\\) has parameter \\$groupPath with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:unassignUserFromUserGroup\\(\\) has parameter \\$groupPath with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:unassignUserFromUserGroup\\(\\) has parameter \\$userId with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:updateUser\\(\\) has parameter \\$userId with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:updateUserGroup\\(\\) has parameter \\$groupPath with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:verifyUsers\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/User.php
 
@@ -1863,11 +1758,6 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, int\\|null given\\.$#"
 			count: 14
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string given\\.$#"
-			count: 1
 			path: src/lib/Server/Controller/User.php
 
 		-
