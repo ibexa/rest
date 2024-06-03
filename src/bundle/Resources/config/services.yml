@@ -391,11 +391,11 @@ services:
         calls:
             - [ setOption, [ strict_requirements, ~ ] ]
 
-    Ibexa\Rest\Server\Strategy\ContentTypePostOperationFactory:
+    Ibexa\Rest\Server\Input\Parser\Strategy\ContentTypePostOperationFactory:
         arguments:
             $operationStrategies: !tagged_iterator ibexa.rest.server.content_type.post.strategy
 
-    Ibexa\Rest\Server\Strategy\ContentTypePostCopyOperation:
+    Ibexa\Rest\Server\Input\Parser\Strategy\ContentTypePostCopyOperation:
         arguments:
             $contentTypeService: '@ibexa.api.service.content_type'
         tags: [ ibexa.rest.server.content_type.post.strategy ]

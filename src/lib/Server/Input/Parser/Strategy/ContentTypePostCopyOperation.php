@@ -5,7 +5,7 @@
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 
-namespace Ibexa\Rest\Server\Strategy;
+namespace Ibexa\Rest\Server\Input\Parser\Strategy;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;

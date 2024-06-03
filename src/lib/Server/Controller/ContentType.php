@@ -21,7 +21,7 @@ use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Strategy\ContentTypePostOperationFactory;
+use Ibexa\Rest\Server\Input\Parser\Strategy\ContentTypePostOperationFactory;
 use Ibexa\Rest\Server\Values;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
