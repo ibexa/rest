@@ -11,7 +11,7 @@ use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Server\Values\ContentTypePostOperationValue;
 
-final readonly class ContentTypePostCopyOperationStrategy implements ContentTypePostOperationStrategyInterface
+final readonly class ContentTypePostCopyOperation implements ContentTypePostOperationStrategyInterface
 {
     public function __construct(
         private ContentTypeService $contentTypeService

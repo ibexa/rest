@@ -11,7 +11,7 @@ use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 use Ibexa\Rest\Server\Values\ContentTypePostOperationValue;
 
-final class CopyContentType extends BaseParser
+final class CopyContentTypeInput extends BaseParser
 {
     /**
      * @phpstan-param array{} $data

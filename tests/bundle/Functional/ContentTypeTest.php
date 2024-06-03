@@ -614,6 +614,25 @@ XML;
 
         self::assertHttpResponseCodeEquals($response, 403);
     }
+
+    /**
+     * @depends testCreateContentType
+     */
+    public function testCopyContentTypePostOperation(string $contentTypeHref): void
+    {
+        $request = $this->createHttpRequest(
+            'POST',
+            $contentTypeHref,
+            'CopyContentTypeInput+json',
+            '',
+            json_encode(['CopyContentTypeInput' => []]) ?: '',
+        );
+
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 201);
+        self::assertHttpResponseHasHeader($response, 'Location');
+    }
 }
 
 class_alias(ContentTypeTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\ContentTypeTest');

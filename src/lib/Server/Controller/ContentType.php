@@ -814,19 +814,19 @@ class ContentType extends RestController
      */
     public function postOperation(Request $request, int $contentTypeId): Values\ResourceCreated
     {
-        /** @var \Ibexa\Rest\Server\Values\ContentTypePostOperationValue $operationValue */
-        $operationValue = $this->inputDispatcher->parse(
+        /** @var \Ibexa\Rest\Server\Values\ContentTypePostOperationValue $postOperationValue */
+        $postOperationValue = $this->inputDispatcher->parse(
             new Message(
                 [
                     'Content-Type' => $request->headers->get('Content-Type'),
                 ],
                 $request->getContent(),
-            )
+            ),
         );
 
         $contentType = $this->contentTypeService->loadContentType($contentTypeId);
 
-        $operationStrategy = $this->contentTypePostOperationFactory->getOperationStrategy($operationValue);
+        $operationStrategy = $this->contentTypePostOperationFactory->getOperationStrategy($postOperationValue);
         $newContentTypeResource = $operationStrategy->execute($contentType);
 
         return new Values\ResourceCreated(

@@ -62,6 +62,11 @@ services:
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.ContentTypeUpdate }
 
+    Ibexa\Rest\Server\Input\Parser\CopyContentTypeInput:
+        parent: Ibexa\Rest\Server\Common\Parser
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.CopyContentTypeInput }
+
     Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate:
         parent: Ibexa\Rest\Server\Common\Parser
         class: Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate
@@ -863,8 +868,3 @@ services:
             $validator: '@validator'
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.Image }
-
-    Ibexa\Rest\Server\Input\Parser\CopyContentType:
-        parent: Ibexa\Rest\Server\Common\Parser
-        tags:
-            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.CopyContentTypeInput }
