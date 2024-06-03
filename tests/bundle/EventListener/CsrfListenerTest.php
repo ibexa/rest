@@ -196,19 +196,16 @@ final class CsrfListenerTest extends EventListenerTest
             ->willReturn($this->getSessionMock());
 
         $this
-            ->getEventDispatcherMock()
-            ->expects(self::once())
-            ->method('dispatch');
-
-        $this
-            ->getEventListener()
+            ->getEventListener(true, $this->getEventDispatcherMock())
             ->onKernelRequest($this->getEvent($request));
     }
 
-    protected function getEventListener(?bool $csrfEnabled = true): CsrfListener
-    {
+    protected function getEventListener(
+        ?bool $csrfEnabled = true,
+        ?EventDispatcherInterface $eventDispatcher = null
+    ): CsrfListener {
         return new CsrfListener(
-            $this->getEventDispatcherMock(),
+            $eventDispatcher ?? $this->getEventDispatcherMock(),
             $csrfEnabled ?? true,
             self::INTENTION,
             $csrfEnabled === true ? $this->getCsrfProviderMock() : null

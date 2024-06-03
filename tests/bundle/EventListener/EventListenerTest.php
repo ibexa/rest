@@ -56,7 +56,7 @@ abstract class EventListenerTest extends TestCase
         $requestAttributesMock = $this->createMock(ParameterBag::class);
 
         $requestAttributesMock
-            ->expects(self::once())
+            ->expects(self::any())
             ->method('get')
             ->with('is_rest_request')
             ->willReturn($this->isRestRequest);

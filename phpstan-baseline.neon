@@ -86,21 +86,6 @@ parameters:
 			path: src/bundle/DependencyInjection/IbexaRestExtension.php
 
 		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListener\\:\\:getSubscribedEvents\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/bundle/EventListener/ResponseListener.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListener\\:\\:onKernelExceptionView\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/EventListener/ResponseListener.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListener\\:\\:onKernelResultView\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/EventListener/ResponseListener.php
-
-		-
 			message: "#^Property Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\UserCheckRequestListener\\:\\:\\$permissionResolver is never read, only written\\.$#"
 			count: 1
 			path: src/bundle/EventListener/UserCheckRequestListener.php
@@ -3714,51 +3699,6 @@ parameters:
 			message: "#^Parameter \\#2 \\$method of function method_exists expects string, array\\<int\\|string, int\\|string\\>\\|int\\|string given\\.$#"
 			count: 1
 			path: tests/bundle/EventListener/EventListenerTest.php
-
-		-
-			message: "#^Call to an undefined method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:getRequestMock\\(\\)\\.$#"
-			count: 3
-			path: tests/bundle/EventListener/ResponseListenerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:onKernelView\\(\\) has parameter \\$event with no type specified\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/ResponseListenerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:onKernelView\\(\\) has parameter \\$method with no type specified\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/ResponseListenerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:onKernelView\\(\\) has parameter \\$value with no type specified\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/ResponseListenerTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:onKernelViewIsNotRestRequest\\(\\) has parameter \\$method with no type specified\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/ResponseListenerTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:\\$controllerResult has no type specified\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/ResponseListenerTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:\\$dispatcherMessage has no type specified\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/ResponseListenerTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:\\$kernelMock \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\HttpKernel\\\\KernelInterface\\) in isset\\(\\) is not nullable\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/ResponseListenerTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\EventListener\\\\ResponseListenerTest\\:\\:\\$visitorDispatcherMock \\(Ibexa\\\\Rest\\\\Server\\\\View\\\\AcceptHeaderVisitorDispatcher&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\) in isset\\(\\) is not nullable\\.$#"
-			count: 1
-			path: tests/bundle/EventListener/ResponseListenerTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\BinaryContentTest\\:\\:createContentTypeWithImageAsset\\(\\) has no return type specified\\.$#"
