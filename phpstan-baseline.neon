@@ -3701,21 +3701,6 @@ parameters:
 			path: tests/bundle/EventListener/EventListenerTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\BinaryContentTest\\:\\:createContentTypeWithImageAsset\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/bundle/Functional/BinaryContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\BinaryContentTest\\:\\:testGetImageAssetVariations\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/bundle/Functional/BinaryContentTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\BinaryContentTest\\:\\:testGetImageVariation\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/bundle/Functional/BinaryContentTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\ContentTest\\:\\:assertTranslationDoesNotExist\\(\\) has parameter \\$versionItem with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/bundle/Functional/ContentTest.php
@@ -5282,21 +5267,6 @@ parameters:
 
 		-
 			message: "#^Cannot call method item\\(\\) on DOMNodeList\\<DOMNode\\>\\|false\\.$#"
-			count: 1
-			path: tests/bundle/Functional/SessionTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\SessionTest\\:\\:assertHttpResponseDeletesSessionCookie\\(\\) has parameter \\$session with no type specified\\.$#"
-			count: 1
-			path: tests/bundle/Functional/SessionTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\SessionTest\\:\\:testDeleteSession\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/bundle/Functional/SessionTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\SessionTest\\:\\:testDeleteSessionExpired\\(\\) has parameter \\$session with no type specified\\.$#"
 			count: 1
 			path: tests/bundle/Functional/SessionTest.php
 
