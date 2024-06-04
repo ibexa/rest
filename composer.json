@@ -24,6 +24,8 @@
         }
     },
     "require": {
+        "api-platform/metadata": "3.2.x-dev",
+        "api-platform/openapi": "3.2.x-dev",
         "php": " >=8.3",
         "ext-dom": "*",
         "ext-json": "*",
@@ -81,5 +83,36 @@
         "branch-alias": {
             "dev-main": "5.0.x-dev"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "~/Sites/openapi-forks/json-schema"
+        },
+        {
+            "type": "path",
+            "url": "~/Sites/openapi-forks/jsonld"
+        },
+        {
+            "type": "path",
+            "url": "~/Sites/openapi-forks/metadata"
+        },
+        {
+            "type": "path",
+            "url": "~/Sites/openapi-forks/openapi"
+        },
+        {
+            "type": "path",
+            "url": "~/Sites/openapi-forks/serializer"
+        },
+        {
+            "type": "path",
+            "url": "~/Sites/openapi-forks/state"
+        },
+        {
+            "type": "path",
+            "url": "~/Sites/openapi-forks/validator"
+        }
+    ],
+    "minimum-stability": "dev"
 }
