@@ -21,7 +21,7 @@ final readonly class ContentTypeHeaderMatcherFactory
 
     public function __invoke(): Closure
     {
-        return function (Request $request, ?string $contentTypeHeaderToMatch): bool {
+        return function (Request $request, string $contentTypeHeaderToMatch): bool {
             $contentTypeHeaderValue = $request->headers->get('Content-Type');
 
             if ($contentTypeHeaderValue === null) {
