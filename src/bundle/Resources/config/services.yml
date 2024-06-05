@@ -396,7 +396,7 @@ services:
         arguments:
             $parsingDispatcher: '@Ibexa\Contracts\Rest\Input\ParsingDispatcher'
 
-    ibexa.routing.expression_language.is_compatible_content_type:
+    ibexa.routing.expression_language.is_content_type_compatible:
         class: Closure
         factory: '@Ibexa\Bundle\Rest\Routing\ExpressionLanguage\ContentTypeHeaderMatcherFactory'
         tags:
