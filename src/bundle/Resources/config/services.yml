@@ -390,3 +390,13 @@ services:
         parent: hautelook.router.template
         calls:
             - [ setOption, [ strict_requirements, ~ ] ]
+
+    Ibexa\Bundle\Rest\Routing\ExpressionLanguage\ContentTypeHeaderMatcherExpressionFunction:
+        arguments:
+            $mediaTypeParser: '@Ibexa\Contracts\Rest\Input\MediaTypeParserInterface'
+        tags:
+            - { name: routing.expression_language_function, function: 'ibexa_get_media_type' }
+
+    Ibexa\Contracts\Rest\Input\MediaTypeParser: ~
+
+    Ibexa\Contracts\Rest\Input\MediaTypeParserInterface: '@Ibexa\Contracts\Rest\Input\MediaTypeParser'

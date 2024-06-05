@@ -18,15 +18,21 @@ class HttpOptionsTest extends TestCase
      *
      * @dataProvider providerForTestHttpOptions
      *
-     * @param string $route
-     * @param string[] $expectedMethods
+     * @param array<string> $expectedMethods
      */
-    public function testHttpOptions(string $route, array $expectedMethods): void
-    {
+    public function testHttpOptions(
+        string $route,
+        array $expectedMethods,
+        ?string $contentType = null
+    ): void {
         $restAPIPrefix = '/api/ibexa/v2';
 
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('OPTIONS', "{$restAPIPrefix}{$route}")
+            $this->createHttpRequest(
+                'OPTIONS',
+                "{$restAPIPrefix}{$route}",
+                $contentType ?? '',
+            )
         );
 
         self::assertHttpResponseCodeEquals($response, 200);

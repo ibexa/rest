@@ -63,14 +63,40 @@ class RouteCollectionMapperTest extends TestCase
         );
     }
 
-    /**
-     * @param string $path
-     * @param array $methods
-     *
-     * @return \Symfony\Component\Routing\Route
-     */
-    private function createRoute($path, array $methods)
+    public function testAddRestRoutesCollectionWithConditionAndSuffix(): void
     {
-        return new Route($path, [], [], [], '', [], $methods);
+        $restRoutesCollection = new RouteCollection();
+        $restRoutesCollection->add(
+            'ibexa.rest.route_three_post',
+            $this->createRoute(
+                '/route/three',
+                ['POST'],
+                'ibexa_get_media_type(request) === "RouteThreeInput"',
+                ['options_route_suffix' => 'RouteThreeInput'],
+            ),
+        );
+
+        $optionsRouteCollection = $this->collectionMapper->mapCollection($restRoutesCollection);
+
+        self::assertCount(1, $optionsRouteCollection);
+
+        $optionsRoute = $optionsRouteCollection->get('ibexa.rest.options.route_three.RouteThreeInput');
+
+        self::assertInstanceOf(Route::class, $optionsRoute);
+
+        self::assertEquals('POST', $optionsRoute->getDefault('allowedMethods'));
+    }
+
+    /**
+     * @param array<string> $methods
+     * @param array<string> $options
+     */
+    private function createRoute(
+        string $path,
+        array $methods,
+        ?string $condition = null,
+        array $options = [],
+    ): Route {
+        return new Route($path, [], [], $options, '', [], $methods, $condition);
     }
 }
