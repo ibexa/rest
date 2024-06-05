@@ -24,10 +24,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 
 final class RestAuthenticator extends AbstractAuthenticator implements InteractiveAuthenticatorInterface
 {
-    private const string ACCEPT_HEADER = 'Accept';
-    private const string CONTENT_TYPE_HEADER = 'Content-Type';
-    private const string SESSION_HEADER_VALUE = 'application/vnd.ibexa.api.Session';
-    private const string SESSION_INPUT_HEADER_VALUE = 'application/vnd.ibexa.api.SessionInput';
+    private const string LOGIN_ROUTE = 'ibexa.rest.create_session';
 
     public function __construct(
         private readonly Dispatcher $inputDispatcher,
@@ -37,17 +34,7 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
 
     public function supports(Request $request): ?bool
     {
-        return
-            $request->headers->has(self::ACCEPT_HEADER) &&
-            $request->headers->has(self::CONTENT_TYPE_HEADER) &&
-            str_contains(
-                $request->headers->get(self::ACCEPT_HEADER) ?? '',
-                self::SESSION_HEADER_VALUE
-            ) &&
-            str_contains(
-                $request->headers->get(self::CONTENT_TYPE_HEADER) ?? '',
-                self::SESSION_INPUT_HEADER_VALUE
-            );
+        return $request->attributes->get('_route') === self::LOGIN_ROUTE;
     }
 
     public function authenticate(Request $request): Passport
