@@ -10,13 +10,9 @@ namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Rest\Value as RestValue;
 
-class JWT extends RestValue
+final class JWT extends RestValue
 {
-    /** @var string */
-    public $token;
-
-    public function __construct(string $token)
+    public function __construct(public string $token)
     {
-        $this->token = $token;
     }
 }

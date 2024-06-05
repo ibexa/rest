@@ -461,11 +461,6 @@ parameters:
 			path: src/contracts/Output/Visitor.php
 
 		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Security\\\\AuthorizationHeaderRESTRequestMatcher\\:\\:__construct\\(\\) has parameter \\$attributes with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/contracts/Security/AuthorizationHeaderRESTRequestMatcher.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\FieldTypeProcessor\\\\BaseRelationProcessor\\:\\:setLocationService\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/FieldTypeProcessor/BaseRelationProcessor.php
@@ -1324,11 +1319,6 @@ parameters:
 			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/ContentType.php
-
-		-
-			message: "#^Parameter \\#1 \\$wrappedUser of class Ibexa\\\\Rest\\\\Server\\\\Security\\\\JWTUser constructor expects Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface, Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null given\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/JWT.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\Location\\:\\:loadLocation\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestLocation but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"

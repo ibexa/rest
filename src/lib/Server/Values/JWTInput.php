@@ -10,17 +10,11 @@ namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Rest\Value as RestValue;
 
-class JWTInput extends RestValue
+final class JWTInput extends RestValue
 {
-    /** @var string */
-    public $username;
-
-    /** @var string */
-    public $password;
-
-    public function __construct(string $username, string $password)
-    {
-        $this->username = $username;
-        $this->password = $password;
+    public function __construct(
+        public string $username,
+        public string $password,
+    ) {
     }
 }

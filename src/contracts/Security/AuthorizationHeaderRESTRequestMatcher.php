@@ -15,6 +15,9 @@ final class AuthorizationHeaderRESTRequestMatcher extends RequestMatcher
 {
     private ?string $headerName;
 
+    /**
+     * @param array<string, mixed> $attributes
+     */
     public function __construct(
         ?string $headerName = null,
         string $path = null,

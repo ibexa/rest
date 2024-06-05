@@ -17,7 +17,7 @@ services:
             - '@?security.csrf.token_storage'
             - '@?request_stack'
 
-    Ibexa\Rest\Server\Security\EventListener\SecurityListener:
+    Ibexa\Rest\Server\Security\EventListener\JWTAuthenticationSuccessSubscriber:
         tags:
             - { name: kernel.event_subscriber }
 
