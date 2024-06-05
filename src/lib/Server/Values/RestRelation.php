@@ -48,5 +48,3 @@ class RestRelation extends RestValue
         $this->versionNo = $versionNo;
     }
 }
-
-class_alias(RestRelation::class, 'EzSystems\EzPlatformRest\Server\Values\RestRelation');

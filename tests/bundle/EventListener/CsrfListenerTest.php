@@ -330,5 +330,3 @@ class CsrfListenerTest extends EventListenerTest
         );
     }
 }
-
-class_alias(CsrfListenerTest::class, 'EzSystems\EzPlatformRestBundle\Tests\EventListener\CsrfListenerTest');

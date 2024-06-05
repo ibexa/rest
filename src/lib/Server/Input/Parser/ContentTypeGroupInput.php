@@ -82,5 +82,3 @@ class ContentTypeGroupInput extends BaseParser
         return $contentTypeGroupCreateStruct;
     }
 }
-
-class_alias(ContentTypeGroupInput::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\ContentTypeGroupInput');

@@ -48,5 +48,3 @@ class FieldTypeProcessorPass implements CompilerPassInterface
         }
     }
 }
-
-class_alias(FieldTypeProcessorPass::class, 'EzSystems\EzPlatformRestBundle\DependencyInjection\Compiler\FieldTypeProcessorPass');

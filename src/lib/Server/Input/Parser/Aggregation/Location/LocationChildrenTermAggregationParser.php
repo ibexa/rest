@@ -25,5 +25,3 @@ final class LocationChildrenTermAggregationParser extends AbstractTermAggregatio
         return new LocationChildrenTermAggregation($data['name']);
     }
 }
-
-class_alias(LocationChildrenTermAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Location\LocationChildrenTermAggregationParser');

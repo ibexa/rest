@@ -74,5 +74,3 @@ class RouteCollectionMapperTest extends TestCase
         return new Route($path, [], [], [], '', [], $methods);
     }
 }
-
-class_alias(RouteCollectionMapperTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Routing\OptionsLoader\RouteCollectionMapperTest');

@@ -93,5 +93,3 @@ class LocationListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\LocationList();
     }
 }
-
-class_alias(LocationListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\LocationListTest');

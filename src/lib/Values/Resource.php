@@ -49,5 +49,3 @@ class Resource extends RestValue
         $this->href = $href;
     }
 }
-
-class_alias(Resource::class, 'EzSystems\EzPlatformRest\Values\Resource');

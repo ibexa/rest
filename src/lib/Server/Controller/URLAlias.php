@@ -175,5 +175,3 @@ class URLAlias extends RestController
         return new Values\NoContent();
     }
 }
-
-class_alias(URLAlias::class, 'EzSystems\EzPlatformRest\Server\Controller\URLAlias');

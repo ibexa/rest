@@ -173,5 +173,3 @@ class FieldTypeSerializer
         $generator->generateFieldTypeHash($elementName, $hash);
     }
 }
-
-class_alias(FieldTypeSerializer::class, 'EzSystems\EzPlatformRest\Output\FieldTypeSerializer');

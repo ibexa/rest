@@ -16,5 +16,3 @@ interface RootResourceBuilderInterface
      */
     public function buildRootResource();
 }
-
-class_alias(RootResourceBuilderInterface::class, 'EzSystems\EzPlatformRest\Server\Service\RootResourceBuilderInterface');

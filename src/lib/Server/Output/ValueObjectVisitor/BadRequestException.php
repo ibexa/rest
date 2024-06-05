@@ -22,5 +22,3 @@ class BadRequestException extends Exception
         return 400;
     }
 }
-
-class_alias(BadRequestException::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\BadRequestException');

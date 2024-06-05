@@ -79,5 +79,3 @@ class JWTInputTest extends BaseTest
         return new JWTInput();
     }
 }
-
-class_alias(JWTInputTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\JWTInputTest');

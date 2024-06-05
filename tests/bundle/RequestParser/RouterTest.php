@@ -166,5 +166,3 @@ final class RouterTest extends TestCase
         ;
     }
 }
-
-class_alias(RouterTest::class, 'EzSystems\EzPlatformRestBundle\Tests\RequestParser\RouterTest');

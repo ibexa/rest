@@ -37,5 +37,3 @@ class RelationCreate extends BaseParser
         return $this->requestParser->parseHref($data['Destination']['_href'], 'contentId');
     }
 }
-
-class_alias(RelationCreate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\RelationCreate');

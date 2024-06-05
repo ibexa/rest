@@ -21,5 +21,3 @@ class CreatedObjectState extends ValueObject
      */
     public $objectState;
 }
-
-class_alias(CreatedObjectState::class, 'EzSystems\EzPlatformRest\Server\Values\CreatedObjectState');

@@ -31,5 +31,3 @@ class ContentObjectStates extends RestValue
         $this->states = $states;
     }
 }
-
-class_alias(ContentObjectStates::class, 'EzSystems\EzPlatformRest\Values\ContentObjectStates');

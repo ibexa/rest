@@ -170,5 +170,3 @@ class TrashTest extends RESTFunctionalTestCase
         return $trashHref;
     }
 }
-
-class_alias(TrashTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\TrashTest');

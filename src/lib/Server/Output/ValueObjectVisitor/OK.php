@@ -18,5 +18,3 @@ class OK extends ValueObjectVisitor
         $visitor->setStatus(200);
     }
 }
-
-class_alias(OK::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\OK');

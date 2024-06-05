@@ -184,5 +184,3 @@ class RestUserGroup extends ValueObjectVisitor
         $generator->endObjectElement('UserGroup');
     }
 }
-
-class_alias(RestUserGroup::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestUserGroup');

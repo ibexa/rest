@@ -40,5 +40,3 @@ class CreatedVersion extends Version
         $visitor->setStatus(201);
     }
 }
-
-class_alias(CreatedVersion::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedVersion');

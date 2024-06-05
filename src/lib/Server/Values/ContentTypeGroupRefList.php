@@ -41,5 +41,3 @@ class ContentTypeGroupRefList extends RestValue
         $this->contentTypeGroups = $contentTypeGroups;
     }
 }
-
-class_alias(ContentTypeGroupRefList::class, 'EzSystems\EzPlatformRest\Server\Values\ContentTypeGroupRefList');

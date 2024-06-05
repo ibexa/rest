@@ -135,5 +135,3 @@ class CountryListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\CountryList();
     }
 }
-
-class_alias(CountryListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\CountryListTest');

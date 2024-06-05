@@ -37,5 +37,3 @@ class CreatedUserGroup extends RestUserGroup
         $visitor->setStatus(201);
     }
 }
-
-class_alias(CreatedUserGroup::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedUserGroup');

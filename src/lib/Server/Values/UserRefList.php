@@ -40,5 +40,3 @@ class UserRefList extends RestValue
         $this->path = $path;
     }
 }
-
-class_alias(UserRefList::class, 'EzSystems\EzPlatformRest\Server\Values\UserRefList');

@@ -59,5 +59,3 @@ class ContentTypeIdentifier extends BaseParser
         );
     }
 }
-
-class_alias(ContentTypeIdentifier::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\ContentTypeIdentifier');

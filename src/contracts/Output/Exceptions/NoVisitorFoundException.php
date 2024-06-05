@@ -29,5 +29,3 @@ class NoVisitorFoundException extends RuntimeException
         );
     }
 }
-
-class_alias(NoVisitorFoundException::class, 'EzSystems\EzPlatformRest\Output\Exceptions\NoVisitorFoundException');

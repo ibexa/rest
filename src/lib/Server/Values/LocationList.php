@@ -40,5 +40,3 @@ class LocationList extends RestValue
         $this->path = $path;
     }
 }
-
-class_alias(LocationList::class, 'EzSystems\EzPlatformRest\Server\Values\LocationList');

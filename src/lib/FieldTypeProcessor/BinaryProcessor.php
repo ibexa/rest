@@ -63,5 +63,3 @@ class BinaryProcessor extends BinaryInputProcessor
         return $url;
     }
 }
-
-class_alias(BinaryProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor\BinaryProcessor');

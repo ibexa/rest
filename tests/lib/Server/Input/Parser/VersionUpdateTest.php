@@ -187,5 +187,3 @@ class VersionUpdateTest extends BaseTest
         ];
     }
 }
-
-class_alias(VersionUpdateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\VersionUpdateTest');

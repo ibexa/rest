@@ -26,5 +26,3 @@ class DeletedUserSession extends RestValue
         $this->response = $response;
     }
 }
-
-class_alias(DeletedUserSession::class, 'EzSystems\EzPlatformRest\Server\Values\DeletedUserSession');

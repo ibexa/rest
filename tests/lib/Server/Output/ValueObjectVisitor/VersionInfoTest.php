@@ -284,5 +284,3 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\VersionInfo();
     }
 }
-
-class_alias(VersionInfoTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\VersionInfoTest');

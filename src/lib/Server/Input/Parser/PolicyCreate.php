@@ -85,5 +85,3 @@ class PolicyCreate extends BaseParser
         return $policyCreate;
     }
 }
-
-class_alias(PolicyCreate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\PolicyCreate');

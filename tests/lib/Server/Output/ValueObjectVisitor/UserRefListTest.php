@@ -119,5 +119,3 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\UserRefList();
     }
 }
-
-class_alias(UserRefListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\UserRefListTest');

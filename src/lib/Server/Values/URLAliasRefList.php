@@ -40,5 +40,3 @@ class URLAliasRefList extends RestValue
         $this->path = $path;
     }
 }
-
-class_alias(URLAliasRefList::class, 'EzSystems\EzPlatformRest\Server\Values\URLAliasRefList');

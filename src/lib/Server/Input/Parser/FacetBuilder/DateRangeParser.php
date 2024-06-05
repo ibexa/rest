@@ -58,5 +58,3 @@ class DateRangeParser extends BaseParser
         */
     }
 }
-
-class_alias(DateRangeParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\DateRangeParser');

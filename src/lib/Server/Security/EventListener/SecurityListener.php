@@ -53,5 +53,3 @@ final class SecurityListener implements EventSubscriberInterface
         }
     }
 }
-
-class_alias(SecurityListener::class, 'EzSystems\EzPlatformRest\Server\Security\EventListener\SecurityListener');

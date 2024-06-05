@@ -36,5 +36,3 @@ class VersionTranslationInfo extends RestValue
         return $this->versionInfo;
     }
 }
-
-class_alias(VersionTranslationInfo::class, 'EzSystems\EzPlatformRest\Server\Values\VersionTranslationInfo');

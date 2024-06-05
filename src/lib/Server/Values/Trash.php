@@ -40,5 +40,3 @@ class Trash extends RestValue
         $this->path = $path;
     }
 }
-
-class_alias(Trash::class, 'EzSystems\EzPlatformRest\Server\Values\Trash');

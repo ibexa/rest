@@ -21,5 +21,3 @@ class CreatedURLAlias extends ValueObject
      */
     public $urlAlias;
 }
-
-class_alias(CreatedURLAlias::class, 'EzSystems\EzPlatformRest\Server\Values\CreatedURLAlias');

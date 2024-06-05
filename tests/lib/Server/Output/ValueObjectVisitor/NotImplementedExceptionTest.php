@@ -52,5 +52,3 @@ class NotImplementedExceptionTest extends ExceptionTest
         return new ValueObjectVisitor\NotImplementedException();
     }
 }
-
-class_alias(NotImplementedExceptionTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\NotImplementedExceptionTest');

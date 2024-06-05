@@ -37,5 +37,3 @@ class CreatedURLAlias extends URLAlias
         $visitor->setStatus(201);
     }
 }
-
-class_alias(CreatedURLAlias::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedURLAlias');

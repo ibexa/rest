@@ -10,9 +10,7 @@
         "psr-4": {
             "Ibexa\\Bundle\\Rest\\": "src/bundle/",
             "Ibexa\\Rest\\": "src/lib/",
-            "Ibexa\\Contracts\\Rest\\": "src/contracts/",
-            "EzSystems\\EzPlatformRestBundle\\": "src/bundle/",
-            "EzSystems\\EzPlatformRest\\": "src/lib/"
+            "Ibexa\\Contracts\\Rest\\": "src/contracts/"
         }
     },
     "autoload-dev": {

@@ -49,5 +49,3 @@ class UserGroupRefList extends RestValue
         $this->userId = $userId;
     }
 }
-
-class_alias(UserGroupRefList::class, 'EzSystems\EzPlatformRest\Server\Values\UserGroupRefList');

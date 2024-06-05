@@ -53,5 +53,3 @@ class Role extends ValueObjectVisitor
         $generator->endObjectElement('Policies');
     }
 }
-
-class_alias(Role::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Role');

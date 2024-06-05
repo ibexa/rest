@@ -71,5 +71,3 @@ class JsonTest extends TestCase
         return new Json();
     }
 }
-
-class_alias(JsonTest::class, 'EzSystems\EzPlatformRest\Tests\Input\Handler\JsonTest');

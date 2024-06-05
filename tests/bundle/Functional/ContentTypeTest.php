@@ -615,5 +615,3 @@ XML;
         self::assertHttpResponseCodeEquals($response, 403);
     }
 }
-
-class_alias(ContentTypeTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\ContentTypeTest');

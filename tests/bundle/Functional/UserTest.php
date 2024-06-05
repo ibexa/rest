@@ -529,5 +529,3 @@ XML;
         self::assertHttpResponseCodeEquals($response404, 404);
     }
 }
-
-class_alias(UserTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\UserTest');

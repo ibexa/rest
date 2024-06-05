@@ -42,5 +42,3 @@ class SectionList extends ValueObjectVisitor
         $generator->endObjectElement('SectionList');
     }
 }
-
-class_alias(SectionList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\SectionList');

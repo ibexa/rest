@@ -37,5 +37,3 @@ class CreatedContentTypeGroup extends ContentTypeGroup
         $visitor->setStatus(201);
     }
 }
-
-class_alias(CreatedContentTypeGroup::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedContentTypeGroup');

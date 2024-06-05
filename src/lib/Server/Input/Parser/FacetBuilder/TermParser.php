@@ -36,5 +36,3 @@ class TermParser extends BaseParser
         return new TermFacetBuilder($data['Term']);
     }
 }
-
-class_alias(TermParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\TermParser');

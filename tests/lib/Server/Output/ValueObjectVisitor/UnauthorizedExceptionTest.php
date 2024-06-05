@@ -52,5 +52,3 @@ class UnauthorizedExceptionTest extends ExceptionTest
         return new ValueObjectVisitor\UnauthorizedException();
     }
 }
-
-class_alias(UnauthorizedExceptionTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\UnauthorizedExceptionTest');

@@ -28,5 +28,3 @@ final class IsUserBasedTest extends SearchCriterionTestCase
         ];
     }
 }
-
-class_alias(IsUserBasedTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SearchView\Criterion\IsUserBasedTest');

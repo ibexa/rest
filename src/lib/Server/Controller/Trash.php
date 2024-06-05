@@ -177,5 +177,3 @@ class Trash extends RestController
         );
     }
 }
-
-class_alias(Trash::class, 'EzSystems\EzPlatformRest\Server\Controller\Trash');

@@ -94,5 +94,3 @@ class SectionInputTest extends BaseTest
         return $sectionServiceMock;
     }
 }
-
-class_alias(SectionInputTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\SectionInputTest');

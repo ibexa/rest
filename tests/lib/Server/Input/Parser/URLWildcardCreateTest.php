@@ -98,5 +98,3 @@ class URLWildcardCreateTest extends BaseTest
         return $parser;
     }
 }
-
-class_alias(URLWildcardCreateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\URLWildcardCreateTest');

@@ -48,5 +48,3 @@ class URLAliasRefList extends ValueObjectVisitor
         $generator->endObjectElement('UrlAliasRefList');
     }
 }
-
-class_alias(URLAliasRefList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\URLAliasRefList');

@@ -30,5 +30,3 @@ final class SectionIdentifierTest extends SearchCriterionTestCase
         ];
     }
 }
-
-class_alias(SectionIdentifierTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SearchView\Criterion\SectionIdentifierTest');

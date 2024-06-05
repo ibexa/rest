@@ -42,5 +42,3 @@ class InputHandlerPassTest extends TestCase
         self::assertEquals('ezpublish_rest.input.handler.test', $dispatcherMethodCalls[0][1][1]->__toString(), "Failed asserting that Referenced service is 'ezpublish_rest.input.handler.test'");
     }
 }
-
-class_alias(InputHandlerPassTest::class, 'EzSystems\EzPlatformRestBundle\Tests\DependencyInjection\Compiler\InputHandlerPassTest');

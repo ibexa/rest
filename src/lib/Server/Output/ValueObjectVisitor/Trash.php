@@ -40,5 +40,3 @@ class Trash extends ValueObjectVisitor
         $generator->endObjectElement('Trash');
     }
 }
-
-class_alias(Trash::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Trash');

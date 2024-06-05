@@ -68,5 +68,3 @@ class AuthorProcessorTest extends TestCase
         return new AuthorProcessor();
     }
 }
-
-class_alias(AuthorProcessorTest::class, 'EzSystems\EzPlatformRest\Tests\FieldTypeProcessor\AuthorProcessorTest');

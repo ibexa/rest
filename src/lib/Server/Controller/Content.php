@@ -854,5 +854,3 @@ class Content extends RestController
         );
     }
 }
-
-class_alias(Content::class, 'EzSystems\EzPlatformRest\Server\Controller\Content');

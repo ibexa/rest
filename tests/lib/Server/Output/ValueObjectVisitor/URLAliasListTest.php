@@ -122,5 +122,3 @@ class URLAliasListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\URLAliasList();
     }
 }
-
-class_alias(URLAliasListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\URLAliasListTest');

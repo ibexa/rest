@@ -74,5 +74,3 @@ class DataKeyValueObjectClass extends BaseParser
         return $this->dataKey;
     }
 }
-
-class_alias(DataKeyValueObjectClass::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\SortClause\DataKeyValueObjectClass');

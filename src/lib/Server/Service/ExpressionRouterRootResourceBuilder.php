@@ -75,5 +75,3 @@ class ExpressionRouterRootResourceBuilder implements RootResourceBuilderInterfac
         return new Root($resources);
     }
 }
-
-class_alias(ExpressionRouterRootResourceBuilder::class, 'EzSystems\EzPlatformRest\Server\Service\ExpressionRouterRootResourceBuilder');

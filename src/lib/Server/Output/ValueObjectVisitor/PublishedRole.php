@@ -37,5 +37,3 @@ class PublishedRole extends Role
         $visitor->setStatus(204);
     }
 }
-
-class_alias(PublishedRole::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\PublishedRole');

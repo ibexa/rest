@@ -135,5 +135,3 @@ class RestFieldDefinition extends RestContentTypeBase
         $generator->endObjectElement('FieldDefinition');
     }
 }
-
-class_alias(RestFieldDefinition::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestFieldDefinition');

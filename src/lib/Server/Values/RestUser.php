@@ -60,5 +60,3 @@ class RestUser extends RestValue
         $this->relations = $relations;
     }
 }
-
-class_alias(RestUser::class, 'EzSystems\EzPlatformRest\Server\Values\RestUser');

@@ -202,5 +202,3 @@ abstract class ValueObjectVisitor
         throw new \RuntimeException("Unknown default sort order: '{$sortOrder}'.");
     }
 }
-
-class_alias(ValueObjectVisitor::class, 'EzSystems\EzPlatformRest\Output\ValueObjectVisitor');

@@ -243,5 +243,3 @@ class VisitorTest extends TestCase
             ->getMock();
     }
 }
-
-class_alias(VisitorTest::class, 'EzSystems\EzPlatformRest\Tests\Output\VisitorTest');

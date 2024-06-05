@@ -49,5 +49,3 @@ class ObjectStateList extends ValueObjectVisitor
         $generator->endObjectElement('ObjectStateList');
     }
 }
-
-class_alias(ObjectStateList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ObjectStateList');

@@ -163,5 +163,3 @@ class LocationUpdateTest extends BaseTest
         return $locationServiceMock;
     }
 }
-
-class_alias(LocationUpdateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\LocationUpdateTest');

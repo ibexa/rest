@@ -27,5 +27,3 @@ final class RawTermAggregationParser extends AbstractTermAggregationParser
         );
     }
 }
-
-class_alias(RawTermAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\RawTermAggregationParser');

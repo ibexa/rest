@@ -26,5 +26,3 @@ class InvalidTypeException extends RuntimeException
         );
     }
 }
-
-class_alias(InvalidTypeException::class, 'EzSystems\EzPlatformRest\Output\Exceptions\InvalidTypeException');

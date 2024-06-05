@@ -24,5 +24,3 @@ class SectionIdentifier extends BaseParser
         return new SectionIdentifierCriterion(explode(',', $data['SectionIdentifierCriterion']));
     }
 }
-
-class_alias(SectionIdentifier::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\SectionIdentifier');

@@ -62,5 +62,3 @@ class MessageTest extends TestCase
         self::assertSame('Hello world!', $message->body);
     }
 }
-
-class_alias(MessageTest::class, 'EzSystems\EzPlatformRest\Tests\MessageTest');

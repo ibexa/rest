@@ -201,5 +201,3 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\ImageVariation();
     }
 }
-
-class_alias(ImageVariationTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ImageVariationTest');

@@ -73,5 +73,3 @@ class SessionInputTest extends BaseTest
         return new SessionInput();
     }
 }
-
-class_alias(SessionInputTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\SessionInputTest');

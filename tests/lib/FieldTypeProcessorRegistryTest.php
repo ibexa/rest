@@ -95,5 +95,3 @@ class FieldTypeProcessorRegistryTest extends BaseTest
         return $this->createMock(FieldTypeProcessor::class);
     }
 }
-
-class_alias(FieldTypeProcessorRegistryTest::class, 'EzSystems\EzPlatformRest\Tests\FieldTypeProcessorRegistryTest');

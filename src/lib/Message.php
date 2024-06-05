@@ -47,5 +47,3 @@ class Message
         $this->statusCode = $statusCode;
     }
 }
-
-class_alias(Message::class, 'EzSystems\EzPlatformRest\Message');

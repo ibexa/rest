@@ -43,5 +43,3 @@ class URLWildcardList extends ValueObjectVisitor
         $generator->endObjectElement('UrlWildcardList');
     }
 }
-
-class_alias(URLWildcardList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\URLWildcardList');

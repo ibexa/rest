@@ -40,5 +40,3 @@ class SectionList extends RestValue
         $this->path = $path;
     }
 }
-
-class_alias(SectionList::class, 'EzSystems\EzPlatformRest\Server\Values\SectionList');

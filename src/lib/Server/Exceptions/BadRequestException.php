@@ -15,5 +15,3 @@ use InvalidArgumentException;
 class BadRequestException extends InvalidArgumentException
 {
 }
-
-class_alias(BadRequestException::class, 'EzSystems\EzPlatformRest\Server\Exceptions\BadRequestException');

@@ -266,5 +266,3 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
         $this->generateValue($writer, $value, $key, $elementName);
     }
 }
-
-class_alias(FieldTypeHashGenerator::class, 'EzSystems\EzPlatformRest\Output\Generator\Xml\FieldTypeHashGenerator');

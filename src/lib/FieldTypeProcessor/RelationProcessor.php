@@ -42,5 +42,3 @@ class RelationProcessor extends BaseRelationProcessor
         return $outgoingSettingsHash;
     }
 }
-
-class_alias(RelationProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor\RelationProcessor');

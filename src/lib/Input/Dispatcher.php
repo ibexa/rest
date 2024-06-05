@@ -127,5 +127,3 @@ class Dispatcher
         return $parameters;
     }
 }
-
-class_alias(Dispatcher::class, 'EzSystems\EzPlatformRest\Input\Dispatcher');

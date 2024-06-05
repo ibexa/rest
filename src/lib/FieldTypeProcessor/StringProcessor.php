@@ -19,5 +19,3 @@ class StringProcessor extends FieldTypeProcessor
         return (string) $incomingValueHash;
     }
 }
-
-class_alias(StringProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor\StringProcessor');

@@ -40,5 +40,3 @@ class RoleList extends RestValue
         $this->path = $path;
     }
 }
-
-class_alias(RoleList::class, 'EzSystems\EzPlatformRest\Server\Values\RoleList');

@@ -70,5 +70,3 @@ class Policy extends ValueObjectVisitor
         }
     }
 }
-
-class_alias(Policy::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Policy');

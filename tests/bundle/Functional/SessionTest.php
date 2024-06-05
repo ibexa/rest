@@ -237,5 +237,3 @@ class SessionTest extends TestCase
         self::assertStringStartsWith("{$session->name}=deleted;", $response->getHeader('set-cookie')[0]);
     }
 }
-
-class_alias(SessionTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SessionTest');

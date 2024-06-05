@@ -40,5 +40,3 @@ final class Language extends ValueObjectVisitor
         $generator->valueElement('name', $language->getName());
     }
 }
-
-class_alias(Language::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Language');

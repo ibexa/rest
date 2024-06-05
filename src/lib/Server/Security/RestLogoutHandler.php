@@ -57,5 +57,3 @@ class RestLogoutHandler implements LogoutHandlerInterface
         $response->headers->clearCookie($request->getSession()->getName(), $path, $domain);
     }
 }
-
-class_alias(RestLogoutHandler::class, 'EzSystems\EzPlatformRest\Server\Security\RestLogoutHandler');

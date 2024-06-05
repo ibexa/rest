@@ -63,5 +63,3 @@ class ImageVariation extends ValueObjectVisitor
         }
     }
 }
-
-class_alias(ImageVariation::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ImageVariation');

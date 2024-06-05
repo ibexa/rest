@@ -173,5 +173,3 @@ class FieldDefinitionUpdate extends BaseParser
         throw new Exceptions\NotFoundException("Field definition not found: '{$data['__url']}'.");
     }
 }
-
-class_alias(FieldDefinitionUpdate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\FieldDefinitionUpdate');

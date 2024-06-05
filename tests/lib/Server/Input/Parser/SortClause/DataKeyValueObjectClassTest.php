@@ -95,5 +95,3 @@ class DataKeyValueObjectClassTest extends BaseTest
         );
     }
 }
-
-class_alias(DataKeyValueObjectClassTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\SortClause\DataKeyValueObjectClassTest');

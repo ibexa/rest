@@ -184,5 +184,3 @@ class UserUpdate extends BaseParser
         );
     }
 }
-
-class_alias(UserUpdate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\UserUpdate');

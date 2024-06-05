@@ -316,5 +316,3 @@ class UserUpdateTest extends BaseTest
         ];
     }
 }
-
-class_alias(UserUpdateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\UserUpdateTest');

@@ -21,5 +21,3 @@ class PublishedRole extends ValueObject
      */
     public $role;
 }
-
-class_alias(PublishedRole::class, 'EzSystems\EzPlatformRest\Server\Values\PublishedRole');

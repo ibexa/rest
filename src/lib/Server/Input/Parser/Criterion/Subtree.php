@@ -36,5 +36,3 @@ class Subtree extends BaseParser
         return new SubtreeCriterion(explode(',', $data['SubtreeCriterion']));
     }
 }
-
-class_alias(Subtree::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\Subtree');

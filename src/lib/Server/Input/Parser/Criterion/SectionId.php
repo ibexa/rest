@@ -36,5 +36,3 @@ class SectionId extends BaseParser
         return new SectionIdCriterion($data['SectionIdCriterion']);
     }
 }
-
-class_alias(SectionId::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\SectionId');

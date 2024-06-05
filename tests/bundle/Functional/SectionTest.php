@@ -120,5 +120,3 @@ XML;
         self::assertHttpResponseCodeEquals($response, 204);
     }
 }
-
-class_alias(SectionTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SectionTest');

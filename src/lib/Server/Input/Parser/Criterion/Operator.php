@@ -30,5 +30,3 @@ class Operator extends BaseParser
         throw new \Exception('@todo implement');
     }
 }
-
-class_alias(Operator::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\Operator');

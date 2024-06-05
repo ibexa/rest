@@ -169,5 +169,3 @@ final class DateMetadataTest extends BaseTest
         return new DateMetadata();
     }
 }
-
-class_alias(DateMetadataTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\Criterion\DateMetadataTest');

@@ -263,5 +263,3 @@ XML;
         return $href;
     }
 }
-
-class_alias(LocationTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\LocationTest');

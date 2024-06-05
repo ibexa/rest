@@ -38,5 +38,3 @@ final class KeywordTermAggregationParser extends AbstractTermAggregationParser
         );
     }
 }
-
-class_alias(KeywordTermAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Field\KeywordTermAggregationParser');

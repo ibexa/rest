@@ -158,5 +158,3 @@ class UserCreate extends BaseParser
         return $userCreateStruct;
     }
 }
-
-class_alias(UserCreate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\UserCreate');

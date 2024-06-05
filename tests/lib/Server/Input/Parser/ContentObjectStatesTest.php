@@ -97,5 +97,3 @@ class ContentObjectStatesTest extends BaseTest
         return new Parser\ContentObjectStates();
     }
 }
-
-class_alias(ContentObjectStatesTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\ContentObjectStatesTest');

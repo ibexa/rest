@@ -22,5 +22,3 @@ class ForbiddenException extends Exception
         return 403;
     }
 }
-
-class_alias(ForbiddenException::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ForbiddenException');

@@ -41,5 +41,3 @@ interface RequestParser
      */
     public function parseHref($href, $attribute);
 }
-
-class_alias(RequestParser::class, 'EzSystems\EzPlatformRest\RequestParser');

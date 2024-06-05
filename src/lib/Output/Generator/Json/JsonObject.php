@@ -42,5 +42,3 @@ class JsonObject
         return $this->_ref_parent;
     }
 }
-
-class_alias(JsonObject::class, 'EzSystems\EzPlatformRest\Output\Generator\Json\JsonObject');

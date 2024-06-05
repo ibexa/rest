@@ -63,5 +63,3 @@ class SectionInput extends BaseParser
         return $sectionCreate;
     }
 }
-
-class_alias(SectionInput::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\SectionInput');

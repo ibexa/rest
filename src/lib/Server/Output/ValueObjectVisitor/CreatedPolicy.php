@@ -40,5 +40,3 @@ class CreatedPolicy extends Policy
         $visitor->setStatus(201);
     }
 }
-
-class_alias(CreatedPolicy::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedPolicy');

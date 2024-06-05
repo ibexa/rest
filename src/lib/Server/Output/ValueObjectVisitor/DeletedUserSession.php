@@ -30,5 +30,3 @@ class DeletedUserSession extends NoContent
         }
     }
 }
-
-class_alias(DeletedUserSession::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\DeletedUserSession');

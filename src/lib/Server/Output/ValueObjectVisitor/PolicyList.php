@@ -42,5 +42,3 @@ class PolicyList extends ValueObjectVisitor
         $generator->endObjectElement('PolicyList');
     }
 }
-
-class_alias(PolicyList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\PolicyList');

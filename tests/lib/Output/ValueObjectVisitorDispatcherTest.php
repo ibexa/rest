@@ -155,5 +155,3 @@ class ValueObjectVisitorDispatcherTest extends TestCase
         return $this->outputGeneratorMock;
     }
 }
-
-class_alias(ValueObjectVisitorDispatcherTest::class, 'EzSystems\EzPlatformRest\Tests\Output\ValueObjectVisitorDispatcherTest');

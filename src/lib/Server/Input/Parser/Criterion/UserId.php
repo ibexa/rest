@@ -24,5 +24,3 @@ class UserId extends BaseParser
         return new UserIdCriterion(explode(',', $data['UserIdCriterion']));
     }
 }
-
-class_alias(UserId::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\UserId');

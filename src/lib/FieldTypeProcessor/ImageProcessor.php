@@ -114,5 +114,3 @@ class ImageProcessor extends BinaryInputProcessor
         );
     }
 }
-
-class_alias(ImageProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor\ImageProcessor');

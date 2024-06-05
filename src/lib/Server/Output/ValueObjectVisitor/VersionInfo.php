@@ -119,5 +119,3 @@ class VersionInfo extends ValueObjectVisitor
         $generator->endObjectElement('Content');
     }
 }
-
-class_alias(VersionInfo::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\VersionInfo');

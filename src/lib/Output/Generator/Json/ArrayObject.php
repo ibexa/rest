@@ -44,5 +44,3 @@ class ArrayObject extends NativeArrayObject
         return $this->_ref_parent;
     }
 }
-
-class_alias(ArrayObject::class, 'EzSystems\EzPlatformRest\Output\Generator\Json\ArrayObject');

@@ -102,5 +102,3 @@ class RouteBasedLimitationParser extends BaseParser
         );
     }
 }
-
-class_alias(RouteBasedLimitationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Limitation\RouteBasedLimitationParser');

@@ -65,5 +65,3 @@ XML;
         self::assertEquals('ATTRIBUTE', $relations[2]['RelationType']);
     }
 }
-
-class_alias(RelationTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\RelationTest');

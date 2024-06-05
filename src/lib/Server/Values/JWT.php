@@ -20,5 +20,3 @@ class JWT extends RestValue
         $this->token = $token;
     }
 }
-
-class_alias(JWT::class, 'EzSystems\EzPlatformRest\Server\Values\JWT');

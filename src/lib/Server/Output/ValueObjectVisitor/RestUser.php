@@ -171,5 +171,3 @@ class RestUser extends ValueObjectVisitor
         $generator->endObjectElement('User');
     }
 }
-
-class_alias(RestUser::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestUser');

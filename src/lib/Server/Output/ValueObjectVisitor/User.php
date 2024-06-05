@@ -43,5 +43,3 @@ final class User extends ValueObjectVisitor implements DelegateValueObjectVisito
         );
     }
 }
-
-class_alias(User::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\User');

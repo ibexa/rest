@@ -21,5 +21,3 @@ class CreatedObjectStateGroup extends ValueObject
      */
     public $objectStateGroup;
 }
-
-class_alias(CreatedObjectStateGroup::class, 'EzSystems\EzPlatformRest\Server\Values\CreatedObjectStateGroup');

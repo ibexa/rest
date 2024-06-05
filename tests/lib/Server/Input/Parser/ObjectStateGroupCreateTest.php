@@ -217,5 +217,3 @@ class ObjectStateGroupCreateTest extends BaseTest
         return $objectStateServiceMock;
     }
 }
-
-class_alias(ObjectStateGroupCreateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\ObjectStateGroupCreateTest');

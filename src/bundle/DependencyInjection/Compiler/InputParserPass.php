@@ -50,5 +50,3 @@ class InputParserPass implements CompilerPassInterface
         }
     }
 }
-
-class_alias(InputParserPass::class, 'EzSystems\EzPlatformRestBundle\DependencyInjection\Compiler\InputParserPass');

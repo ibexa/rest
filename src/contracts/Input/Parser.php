@@ -21,5 +21,3 @@ abstract class Parser
      */
     abstract public function parse(array $data, ParsingDispatcher $parsingDispatcher);
 }
-
-class_alias(Parser::class, 'EzSystems\EzPlatformRest\Input\Parser');

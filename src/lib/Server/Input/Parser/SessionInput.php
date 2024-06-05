@@ -44,5 +44,3 @@ class SessionInput extends BaseParser
         return $sessionInput;
     }
 }
-
-class_alias(SessionInput::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\SessionInput');

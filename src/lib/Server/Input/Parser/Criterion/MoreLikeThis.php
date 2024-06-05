@@ -30,5 +30,3 @@ class MoreLikeThis extends BaseParser
         throw new \Exception('@todo implement');
     }
 }
-
-class_alias(MoreLikeThis::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\MoreLikeThis');

@@ -166,5 +166,3 @@ class PolicyUpdateTest extends BaseTest
         return $roleServiceMock;
     }
 }
-
-class_alias(PolicyUpdateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\PolicyUpdateTest');

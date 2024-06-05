@@ -25,5 +25,3 @@ class Options extends ValueObjectVisitor
         $visitor->setStatus(200);
     }
 }
-
-class_alias(Options::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Options');

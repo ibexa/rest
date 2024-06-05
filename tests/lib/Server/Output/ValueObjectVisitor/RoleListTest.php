@@ -123,5 +123,3 @@ class RoleListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\RoleList();
     }
 }
-
-class_alias(RoleListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RoleListTest');

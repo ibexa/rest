@@ -60,5 +60,3 @@ class RestUserGroupRoleAssignment extends ValueObjectVisitor
         $generator->endObjectElement('RoleAssignment');
     }
 }
-
-class_alias(RestUserGroupRoleAssignment::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestUserGroupRoleAssignment');

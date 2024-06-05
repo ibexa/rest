@@ -55,5 +55,3 @@ abstract class AbstractRangeAggregationParser extends BaseParser
         return $ranges;
     }
 }
-
-class_alias(AbstractRangeAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\AbstractRangeAggregationParser');

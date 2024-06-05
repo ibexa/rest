@@ -53,5 +53,3 @@ class Router implements RequestParser
         return $this->uriParser->getAttributeFromUri($href, $attribute);
     }
 }
-
-class_alias(Router::class, 'EzSystems\EzPlatformRestBundle\RequestParser\Router');

@@ -29,5 +29,3 @@ class TemporaryRedirect extends ValueObjectVisitor
         $visitor->setHeader('Location', $data->redirectUri);
     }
 }
-
-class_alias(TemporaryRedirect::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\TemporaryRedirect');

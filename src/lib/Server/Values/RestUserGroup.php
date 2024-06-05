@@ -66,5 +66,3 @@ class RestUserGroup extends RestValue
         $this->relations = $relations;
     }
 }
-
-class_alias(RestUserGroup::class, 'EzSystems\EzPlatformRest\Server\Values\RestUserGroup');

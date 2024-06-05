@@ -53,5 +53,3 @@ class RouteCollectionMapper
         return $optionsRouteCollection;
     }
 }
-
-class_alias(RouteCollectionMapper::class, 'EzSystems\EzPlatformRestBundle\Routing\OptionsLoader\RouteCollectionMapper');

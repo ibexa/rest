@@ -36,5 +36,3 @@ class ObjectStateId extends BaseParser
         return new ObjectStateIdCriterion(explode(',', $data['ObjectStateIdCriterion']));
     }
 }
-
-class_alias(ObjectStateId::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\ObjectStateId');

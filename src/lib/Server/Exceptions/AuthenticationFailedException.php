@@ -16,5 +16,3 @@ use InvalidArgumentException;
 class AuthenticationFailedException extends InvalidArgumentException
 {
 }
-
-class_alias(AuthenticationFailedException::class, 'EzSystems\EzPlatformRest\Server\Exceptions\AuthenticationFailedException');

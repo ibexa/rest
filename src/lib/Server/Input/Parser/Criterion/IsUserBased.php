@@ -33,5 +33,3 @@ class IsUserBased extends BaseParser
         return new IsUserBasedCriterion($this->parserTools->parseBooleanValue($data['IsUserBasedCriterion']));
     }
 }
-
-class_alias(IsUserBased::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\IsUserBased');

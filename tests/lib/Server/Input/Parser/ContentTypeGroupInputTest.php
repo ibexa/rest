@@ -111,5 +111,3 @@ class ContentTypeGroupInputTest extends BaseTest
         ];
     }
 }
-
-class_alias(ContentTypeGroupInputTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\ContentTypeGroupInputTest');

@@ -86,5 +86,3 @@ class Field extends BaseParser
         return self::OPERATORS[$operatorName];
     }
 }
-
-class_alias(Field::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\Field');

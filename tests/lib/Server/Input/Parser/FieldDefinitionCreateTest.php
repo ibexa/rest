@@ -285,5 +285,3 @@ class FieldDefinitionCreateTest extends BaseTest
         ];
     }
 }
-
-class_alias(FieldDefinitionCreateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\FieldDefinitionCreateTest');

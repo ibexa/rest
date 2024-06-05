@@ -52,5 +52,3 @@ class NotFoundExceptionTest extends ExceptionTest
         return new ValueObjectVisitor\NotFoundException();
     }
 }
-
-class_alias(NotFoundExceptionTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\NotFoundExceptionTest');

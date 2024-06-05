@@ -800,5 +800,3 @@ class Role extends RestController
         );
     }
 }
-
-class_alias(Role::class, 'EzSystems\EzPlatformRest\Server\Controller\Role');

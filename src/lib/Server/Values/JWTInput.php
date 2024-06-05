@@ -24,5 +24,3 @@ class JWTInput extends RestValue
         $this->password = $password;
     }
 }
-
-class_alias(JWTInput::class, 'EzSystems\EzPlatformRest\Server\Values\JWTInput');

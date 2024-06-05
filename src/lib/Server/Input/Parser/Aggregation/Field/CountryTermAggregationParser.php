@@ -63,5 +63,3 @@ final class CountryTermAggregationParser extends AbstractTermAggregationParser
         }
     }
 }
-
-class_alias(CountryTermAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Field\CountryTermAggregationParser');

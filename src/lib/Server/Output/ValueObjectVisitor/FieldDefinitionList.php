@@ -57,5 +57,3 @@ class FieldDefinitionList extends RestContentTypeBase
         $generator->endObjectElement('FieldDefinitions');
     }
 }
-
-class_alias(FieldDefinitionList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\FieldDefinitionList');

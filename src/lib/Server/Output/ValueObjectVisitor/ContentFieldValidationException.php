@@ -108,5 +108,3 @@ class ContentFieldValidationException extends BadRequestException
         }
     }
 }
-
-class_alias(ContentFieldValidationException::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ContentFieldValidationException');

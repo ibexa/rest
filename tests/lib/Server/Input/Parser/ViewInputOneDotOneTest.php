@@ -93,5 +93,3 @@ class ViewInputOneDotOneTest extends BaseTest
         return new ViewInputOneDotOne();
     }
 }
-
-class_alias(ViewInputOneDotOneTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\ViewInputOneDotOneTest');

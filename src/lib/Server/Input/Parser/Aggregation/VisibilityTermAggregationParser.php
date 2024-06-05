@@ -24,5 +24,3 @@ final class VisibilityTermAggregationParser extends AbstractTermAggregationParse
         return new VisibilityTermAggregation($data['name']);
     }
 }
-
-class_alias(VisibilityTermAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\VisibilityTermAggregationParser');

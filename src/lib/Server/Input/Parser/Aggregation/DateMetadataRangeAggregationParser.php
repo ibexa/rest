@@ -58,5 +58,3 @@ final class DateMetadataRangeAggregationParser extends AbstractRangeAggregationP
         }
     }
 }
-
-class_alias(DateMetadataRangeAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\DateMetadataRangeAggregationParser');

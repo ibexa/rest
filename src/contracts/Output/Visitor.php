@@ -159,5 +159,3 @@ class Visitor
         return $this->response;
     }
 }
-
-class_alias(Visitor::class, 'EzSystems\EzPlatformRest\Output\Visitor');

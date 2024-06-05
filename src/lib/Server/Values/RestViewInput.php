@@ -38,5 +38,3 @@ class RestViewInput extends RestValue
      */
     public $useAlwaysAvailable;
 }
-
-class_alias(RestViewInput::class, 'EzSystems\EzPlatformRest\Server\Values\RestViewInput');

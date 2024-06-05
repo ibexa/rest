@@ -586,5 +586,3 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\RestLocation();
     }
 }
-
-class_alias(RestLocationTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestLocationTest');

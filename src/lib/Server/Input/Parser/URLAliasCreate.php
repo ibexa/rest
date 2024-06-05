@@ -85,5 +85,3 @@ class URLAliasCreate extends BaseParser
         return $data;
     }
 }
-
-class_alias(URLAliasCreate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\URLAliasCreate');

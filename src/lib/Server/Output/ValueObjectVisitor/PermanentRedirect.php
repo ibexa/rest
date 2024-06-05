@@ -29,5 +29,3 @@ class PermanentRedirect extends ValueObjectVisitor
         $visitor->setHeader('Location', $data->redirectUri);
     }
 }
-
-class_alias(PermanentRedirect::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\PermanentRedirect');

@@ -130,5 +130,3 @@ class ObjectStateListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\ObjectStateList();
     }
 }
-
-class_alias(ObjectStateListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ObjectStateListTest');

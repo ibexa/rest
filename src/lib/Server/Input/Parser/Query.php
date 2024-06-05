@@ -131,5 +131,3 @@ abstract class Query extends CriterionParser
         return $sortClauses;
     }
 }
-
-class_alias(Query::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Query');

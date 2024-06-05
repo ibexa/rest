@@ -48,5 +48,3 @@ class PathStringRouteBasedLimitationParserTest extends BaseTest
         ];
     }
 }
-
-class_alias(PathStringRouteBasedLimitationParserTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\Limitation\PathStringRouteBasedLimitationParserTest');

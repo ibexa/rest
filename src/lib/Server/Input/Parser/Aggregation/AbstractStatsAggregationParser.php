@@ -34,5 +34,3 @@ abstract class AbstractStatsAggregationParser extends BaseParser
         ParsingDispatcher $parsingDispatcher
     ): AbstractStatsAggregation;
 }
-
-class_alias(AbstractStatsAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\AbstractStatsAggregationParser');

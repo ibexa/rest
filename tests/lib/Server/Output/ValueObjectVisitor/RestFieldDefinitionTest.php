@@ -183,5 +183,3 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\RestFieldDefinition($this->fieldTypeSerializerMock);
     }
 }
-
-class_alias(RestFieldDefinitionTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestFieldDefinitionTest');

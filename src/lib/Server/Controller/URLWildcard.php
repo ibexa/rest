@@ -111,5 +111,3 @@ class URLWildcard extends RestController
         return new Values\NoContent();
     }
 }
-
-class_alias(URLWildcard::class, 'EzSystems\EzPlatformRest\Server\Controller\URLWildcard');

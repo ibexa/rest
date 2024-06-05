@@ -432,5 +432,3 @@ abstract class Generator
      */
     abstract public function serializeBool($boolValue);
 }
-
-class_alias(Generator::class, 'EzSystems\EzPlatformRest\Output\Generator');

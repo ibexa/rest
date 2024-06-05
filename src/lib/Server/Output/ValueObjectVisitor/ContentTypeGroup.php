@@ -85,5 +85,3 @@ class ContentTypeGroup extends ValueObjectVisitor
         $generator->endObjectElement('ContentTypes');
     }
 }
-
-class_alias(ContentTypeGroup::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ContentTypeGroup');

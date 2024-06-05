@@ -39,5 +39,3 @@ class RestTrashItem extends RestValue
         $this->childCount = $childCount;
     }
 }
-
-class_alias(RestTrashItem::class, 'EzSystems\EzPlatformRest\Server\Values\RestTrashItem');

@@ -81,5 +81,3 @@ class ObjectStateUpdate extends BaseParser
         return $objectStateUpdateStruct;
     }
 }
-
-class_alias(ObjectStateUpdate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\ObjectStateUpdate');

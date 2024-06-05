@@ -21,5 +21,3 @@ class CreatedPolicy extends ValueObject
      */
     public $policy;
 }
-
-class_alias(CreatedPolicy::class, 'EzSystems\EzPlatformRest\Server\Values\CreatedPolicy');

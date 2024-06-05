@@ -43,5 +43,3 @@ final class TimeRangeAggregationParser extends AbstractRangeAggregationParser
         );
     }
 }
-
-class_alias(TimeRangeAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Field\TimeRangeAggregationParser');

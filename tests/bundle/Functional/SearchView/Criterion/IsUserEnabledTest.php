@@ -28,5 +28,3 @@ final class IsUserEnabledTest extends SearchCriterionTestCase
         ];
     }
 }
-
-class_alias(IsUserEnabledTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SearchView\Criterion\IsUserEnabledTest');

@@ -41,5 +41,3 @@ class RoleAssignment extends RestValue
         $this->limitation = $limitation;
     }
 }
-
-class_alias(RoleAssignment::class, 'EzSystems\EzPlatformRest\Server\Values\RoleAssignment');

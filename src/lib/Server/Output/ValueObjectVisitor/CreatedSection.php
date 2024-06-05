@@ -37,5 +37,3 @@ class CreatedSection extends Section
         $visitor->setStatus(201);
     }
 }
-
-class_alias(CreatedSection::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedSection');

@@ -69,5 +69,3 @@ class DateAndTimeProcessorTest extends TestCase
         return new DateAndTimeProcessor();
     }
 }
-
-class_alias(DateAndTimeProcessorTest::class, 'EzSystems\EzPlatformRest\Tests\FieldTypeProcessor\DateAndTimeProcessorTest');

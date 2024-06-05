@@ -54,5 +54,3 @@ class DateAndTimeProcessor extends FieldTypeProcessor
         return $outgoingSettingsHash;
     }
 }
-
-class_alias(DateAndTimeProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor\DateAndTimeProcessor');

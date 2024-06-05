@@ -22,5 +22,3 @@ class NotFoundException extends Exception
         return 404;
     }
 }
-
-class_alias(NotFoundException::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\NotFoundException');

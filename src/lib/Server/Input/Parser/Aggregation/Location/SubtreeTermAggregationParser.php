@@ -33,5 +33,3 @@ final class SubtreeTermAggregationParser extends AbstractTermAggregationParser
         );
     }
 }
-
-class_alias(SubtreeTermAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Location\SubtreeTermAggregationParser');

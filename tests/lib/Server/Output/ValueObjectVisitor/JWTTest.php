@@ -81,5 +81,3 @@ class JWTTest extends ValueObjectVisitorBaseTest
         return new JWT();
     }
 }
-
-class_alias(JWTTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\JWTTest');

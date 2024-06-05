@@ -64,5 +64,3 @@ class CsrfTokenManager extends BaseCsrfTokenManager
         return !empty($_SERVER['HTTPS']) && 'off' !== strtolower($_SERVER['HTTPS']) ? 'https-' : '';
     }
 }
-
-class_alias(CsrfTokenManager::class, 'EzSystems\EzPlatformRest\Server\Security\CsrfTokenManager');

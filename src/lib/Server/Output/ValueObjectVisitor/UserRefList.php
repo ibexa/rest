@@ -47,5 +47,3 @@ class UserRefList extends ValueObjectVisitor
         $generator->endObjectElement('UserRefList');
     }
 }
-
-class_alias(UserRefList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\UserRefList');

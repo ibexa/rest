@@ -67,5 +67,3 @@ final class SiblingTest extends BaseTest
         return new SiblingParser($this->locationService);
     }
 }
-
-class_alias(SiblingTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\Criterion\SiblingTest');

@@ -12,5 +12,3 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 class UserConflictException extends AuthenticationException
 {
 }
-
-class_alias(UserConflictException::class, 'EzSystems\EzPlatformRest\Server\Exceptions\UserConflictException');

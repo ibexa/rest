@@ -21,5 +21,3 @@ class CreatedContent extends ValueObject
      */
     public $content;
 }
-
-class_alias(CreatedContent::class, 'EzSystems\EzPlatformRest\Server\Values\CreatedContent');

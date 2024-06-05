@@ -52,5 +52,3 @@ class BadRequestExceptionTest extends ExceptionTest
         return new ValueObjectVisitor\BadRequestException();
     }
 }
-
-class_alias(BadRequestExceptionTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\BadRequestExceptionTest');

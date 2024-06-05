@@ -85,5 +85,3 @@ XML;
         self::assertHttpResponseCodeEquals($response, 204);
     }
 }
-
-class_alias(UrlWildcardTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\UrlWildcardTest');

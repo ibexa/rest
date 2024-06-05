@@ -42,5 +42,3 @@ class UserList extends ValueObjectVisitor
         $generator->endObjectElement('UserList');
     }
 }
-
-class_alias(UserList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\UserList');

@@ -68,5 +68,3 @@ class DateProcessorTest extends TestCase
         return new DateProcessor();
     }
 }
-
-class_alias(DateProcessorTest::class, 'EzSystems\EzPlatformRest\Tests\FieldTypeProcessor\DateProcessorTest');

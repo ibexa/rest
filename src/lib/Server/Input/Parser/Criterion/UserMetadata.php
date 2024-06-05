@@ -54,5 +54,3 @@ class UserMetadata extends BaseParser
         return new UserMetadataCriterion($target, null, $value);
     }
 }
-
-class_alias(UserMetadata::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\UserMetadata');

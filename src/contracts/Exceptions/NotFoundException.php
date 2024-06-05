@@ -18,5 +18,3 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException as APINotFoundE
 class NotFoundException extends APINotFoundException
 {
 }
-
-class_alias(NotFoundException::class, 'EzSystems\EzPlatformRest\Exceptions\NotFoundException');

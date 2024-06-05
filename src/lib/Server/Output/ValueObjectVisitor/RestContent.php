@@ -218,5 +218,3 @@ class RestContent extends ValueObjectVisitor
         throw new CoreBadStateException('status', $status);
     }
 }
-
-class_alias(RestContent::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestContent');

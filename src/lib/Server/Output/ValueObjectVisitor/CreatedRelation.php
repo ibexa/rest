@@ -41,5 +41,3 @@ class CreatedRelation extends RestRelation
         $visitor->setStatus(201);
     }
 }
-
-class_alias(CreatedRelation::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedRelation');

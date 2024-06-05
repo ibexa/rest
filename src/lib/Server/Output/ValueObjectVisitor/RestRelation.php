@@ -115,5 +115,3 @@ class RestRelation extends ValueObjectVisitor
         return implode(',', $relationTypeList);
     }
 }
-
-class_alias(RestRelation::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RestRelation');

@@ -29,5 +29,3 @@ final class ObjectState extends ValueObjectVisitor implements DelegateValueObjec
         );
     }
 }
-
-class_alias(ObjectState::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ObjectState');

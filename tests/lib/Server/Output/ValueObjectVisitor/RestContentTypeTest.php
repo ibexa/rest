@@ -389,5 +389,3 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\RestContentType();
     }
 }
-
-class_alias(RestContentTypeTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestContentTypeTest');

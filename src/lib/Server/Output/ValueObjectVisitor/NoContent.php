@@ -28,5 +28,3 @@ class NoContent extends ValueObjectVisitor
         $visitor->setStatus(204);
     }
 }
-
-class_alias(NoContent::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\NoContent');

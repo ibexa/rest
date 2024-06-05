@@ -41,5 +41,3 @@ class CreatedContentType extends RestContentType
         $visitor->setStatus(201);
     }
 }
-
-class_alias(CreatedContentType::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\CreatedContentType');

@@ -120,5 +120,3 @@ class BookmarkTest extends RESTFunctionalTestCase
         self::assertHttpResponseCodeEquals($response, Response::HTTP_NOT_FOUND);
     }
 }
-
-class_alias(BookmarkTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\BookmarkTest');

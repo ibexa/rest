@@ -341,5 +341,3 @@ class ContentTypeCreateTest extends BaseTest
         ];
     }
 }
-
-class_alias(ContentTypeCreateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\ContentTypeCreateTest');

@@ -28,5 +28,3 @@ final class UserIdTest extends SearchCriterionTestCase
         ];
     }
 }
-
-class_alias(UserIdTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\SearchView\Criterion\UserIdTest');

@@ -53,5 +53,3 @@ final class UserMetadataTermAggregationParser extends AbstractTermAggregationPar
         }
     }
 }
-
-class_alias(UserMetadataTermAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\UserMetadataTermAggregationParser');

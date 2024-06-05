@@ -74,5 +74,3 @@ class FieldTypeProcessorRegistry
         return $this->processors[$fieldTypeIdentifier];
     }
 }
-
-class_alias(FieldTypeProcessorRegistry::class, 'EzSystems\EzPlatformRest\FieldTypeProcessorRegistry');

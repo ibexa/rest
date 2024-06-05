@@ -62,5 +62,3 @@ final class RangeAggregationResult extends ValueObjectVisitor
         $generator->valueElement('count', $count);
     }
 }
-
-class_alias(RangeAggregationResult::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RangeAggregationResult');

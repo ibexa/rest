@@ -149,5 +149,3 @@ class QueryParserTest extends BaseTest
         return new QueryParser();
     }
 }
-
-class_alias(QueryParserTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\QueryParserTest');

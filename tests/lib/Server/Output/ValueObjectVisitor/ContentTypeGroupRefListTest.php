@@ -212,5 +212,3 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\ContentTypeGroupRefList();
     }
 }
-
-class_alias(ContentTypeGroupRefListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ContentTypeGroupRefListTest');

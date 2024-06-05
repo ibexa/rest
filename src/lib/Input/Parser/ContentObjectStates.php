@@ -53,5 +53,3 @@ class ContentObjectStates extends BaseParser
         return $states;
     }
 }
-
-class_alias(ContentObjectStates::class, 'EzSystems\EzPlatformRest\Input\Parser\ContentObjectStates');

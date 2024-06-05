@@ -88,5 +88,3 @@ class ObjectStateCreate extends BaseParser
         return $objectStateCreateStruct;
     }
 }
-
-class_alias(ObjectStateCreate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\ObjectStateCreate');

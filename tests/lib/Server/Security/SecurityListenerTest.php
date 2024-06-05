@@ -73,5 +73,3 @@ class SecurityListenerTest extends TestCase
         $securityListener->onInteractiveLogin($interactiveLoginEvent);
     }
 }
-
-class_alias(SecurityListenerTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Security\SecurityListenerTest');

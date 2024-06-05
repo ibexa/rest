@@ -50,5 +50,3 @@ class BinaryProcessorTest extends BinaryInputProcessorTest
         );
     }
 }
-
-class_alias(BinaryProcessorTest::class, 'EzSystems\EzPlatformRest\Tests\FieldTypeProcessor\BinaryProcessorTest');

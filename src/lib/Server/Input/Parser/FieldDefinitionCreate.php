@@ -157,5 +157,3 @@ class FieldDefinitionCreate extends BaseParser
         return $fieldDefinitionCreate;
     }
 }
-
-class_alias(FieldDefinitionCreate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\FieldDefinitionCreate');

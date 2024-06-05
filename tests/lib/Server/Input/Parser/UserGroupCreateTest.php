@@ -410,5 +410,3 @@ class UserGroupCreateTest extends BaseTest
         ];
     }
 }
-
-class_alias(UserGroupCreateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\UserGroupCreateTest');

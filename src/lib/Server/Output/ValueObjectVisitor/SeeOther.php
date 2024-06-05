@@ -22,5 +22,3 @@ class SeeOther extends ValueObjectVisitor
         $visitor->setHeader('Location', $data->redirectUri);
     }
 }
-
-class_alias(SeeOther::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\SeeOther');

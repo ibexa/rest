@@ -33,5 +33,3 @@ final class StatsAggregationResult extends ValueObjectVisitor
         $generator->endObjectElement('StatsAggregationResult');
     }
 }
-
-class_alias(StatsAggregationResult::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\StatsAggregationResult');

@@ -140,5 +140,3 @@ class ParsingDispatcher
         return [$mediaType, $version];
     }
 }
-
-class_alias(ParsingDispatcher::class, 'EzSystems\EzPlatformRest\Input\ParsingDispatcher');

@@ -24,5 +24,3 @@ final class LanguageTermAggregationParser extends AbstractTermAggregationParser
         return new LanguageTermAggregation($data['name']);
     }
 }
-
-class_alias(LanguageTermAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\LanguageTermAggregationParser');

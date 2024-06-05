@@ -55,5 +55,3 @@ class FieldParser extends BaseParser
         return new FieldFacetBuilder($data['Field']);
     }
 }
-
-class_alias(FieldParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\FieldParser');

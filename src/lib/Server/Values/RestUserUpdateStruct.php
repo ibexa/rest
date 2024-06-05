@@ -41,5 +41,3 @@ class RestUserUpdateStruct extends RestValue
         $this->sectionId = $sectionId;
     }
 }
-
-class_alias(RestUserUpdateStruct::class, 'EzSystems\EzPlatformRest\Server\Values\RestUserUpdateStruct');

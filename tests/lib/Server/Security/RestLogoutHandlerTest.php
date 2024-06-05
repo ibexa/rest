@@ -121,5 +121,3 @@ class RestLogoutHandlerTest extends TestCase
         );
     }
 }
-
-class_alias(RestLogoutHandlerTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Security\RestLogoutHandlerTest');

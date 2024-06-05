@@ -85,5 +85,3 @@ class OptionsLoaderTest extends TestCase
         return $this->routeCollectionMapperMock;
     }
 }
-
-class_alias(OptionsLoaderTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Routing\OptionsLoaderTest');

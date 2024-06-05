@@ -105,5 +105,3 @@ class BookmarkListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\BookmarkList();
     }
 }
-
-class_alias(BookmarkListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\BookmarkListTest');

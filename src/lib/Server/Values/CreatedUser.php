@@ -21,5 +21,3 @@ class CreatedUser extends ValueObject
      */
     public $user;
 }
-
-class_alias(CreatedUser::class, 'EzSystems\EzPlatformRest\Server\Values\CreatedUser');

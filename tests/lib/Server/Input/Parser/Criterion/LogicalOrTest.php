@@ -99,5 +99,3 @@ class LogicalOrTest extends BaseTest
         return new Parser\Criterion\LogicalOr();
     }
 }
-
-class_alias(LogicalOrTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\Criterion\LogicalOrTest');

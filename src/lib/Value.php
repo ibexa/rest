@@ -10,5 +10,3 @@ namespace Ibexa\Rest;
 abstract class Value
 {
 }
-
-class_alias(Value::class, 'EzSystems\EzPlatformRest\Value');

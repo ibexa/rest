@@ -196,5 +196,3 @@ class LocationCreateTest extends BaseTest
         ];
     }
 }
-
-class_alias(LocationCreateTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\LocationCreateTest');

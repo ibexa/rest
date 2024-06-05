@@ -46,5 +46,3 @@ abstract class BinaryInputProcessor extends FieldTypeProcessor
         return $incomingValueHash;
     }
 }
-
-class_alias(BinaryInputProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor\BinaryInputProcessor');

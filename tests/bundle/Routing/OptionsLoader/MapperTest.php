@@ -82,5 +82,3 @@ class MapperTest extends TestCase
         );
     }
 }
-
-class_alias(MapperTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Routing\OptionsLoader\MapperTest');

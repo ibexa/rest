@@ -38,5 +38,3 @@ final class AuthorTermAggregationParser extends AbstractTermAggregationParser
         );
     }
 }
-
-class_alias(AuthorTermAggregationParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Field\AuthorTermAggregationParser');

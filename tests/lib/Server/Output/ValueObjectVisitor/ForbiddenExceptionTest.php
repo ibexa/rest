@@ -52,5 +52,3 @@ class ForbiddenExceptionTest extends ExceptionTest
         return new ValueObjectVisitor\ForbiddenException();
     }
 }
-
-class_alias(ForbiddenExceptionTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\ForbiddenExceptionTest');

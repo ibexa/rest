@@ -123,5 +123,3 @@ class PolicyListTest extends ValueObjectVisitorBaseTest
         return new ValueObjectVisitor\PolicyList();
     }
 }
-
-class_alias(PolicyListTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\PolicyListTest');

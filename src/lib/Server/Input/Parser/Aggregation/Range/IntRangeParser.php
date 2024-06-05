@@ -21,5 +21,3 @@ final class IntRangeParser extends AbstractRangeParser
         return (int)$value;
     }
 }
-
-class_alias(IntRangeParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Range\IntRangeParser');

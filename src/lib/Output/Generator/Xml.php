@@ -265,5 +265,3 @@ class Xml extends Generator
         return $boolValue ? 'true' : 'false';
     }
 }
-
-class_alias(Xml::class, 'EzSystems\EzPlatformRest\Output\Generator\Xml');

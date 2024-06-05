@@ -190,5 +190,3 @@ class Pattern implements RequestParser
         return $parsingResult[$attribute];
     }
 }
-
-class_alias(Pattern::class, 'EzSystems\EzPlatformRest\RequestParser\Pattern');

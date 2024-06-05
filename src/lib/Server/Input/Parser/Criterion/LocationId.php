@@ -36,5 +36,3 @@ class LocationId extends BaseParser
         return new LocationIdCriterion(explode(',', $data['LocationIdCriterion']));
     }
 }
-
-class_alias(LocationId::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\LocationId');

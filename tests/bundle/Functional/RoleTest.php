@@ -754,5 +754,3 @@ XML;
         return $href;
     }
 }
-
-class_alias(RoleTest::class, 'EzSystems\EzPlatformRestBundle\Tests\Functional\RoleTest');

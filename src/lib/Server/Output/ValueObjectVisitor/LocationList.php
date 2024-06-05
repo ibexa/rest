@@ -51,5 +51,3 @@ class LocationList extends ValueObjectVisitor
         $generator->endObjectElement('LocationList');
     }
 }
-
-class_alias(LocationList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\LocationList');

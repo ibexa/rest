@@ -22,5 +22,3 @@ class UnauthorizedException extends Exception
         return 401;
     }
 }
-
-class_alias(UnauthorizedException::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\UnauthorizedException');

@@ -26,5 +26,3 @@ class Options extends ValueObject
         $this->allowedMethods = $allowedMethods;
     }
 }
-
-class_alias(Options::class, 'EzSystems\EzPlatformRest\Server\Values\Options');

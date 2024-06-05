@@ -22,5 +22,3 @@ class BadStateException extends Exception
         return 409;
     }
 }
-
-class_alias(BadStateException::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\BadStateException');

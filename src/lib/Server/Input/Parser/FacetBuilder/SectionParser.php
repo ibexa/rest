@@ -36,5 +36,3 @@ class SectionParser extends BaseParser
         return new SectionFacetBuilder($data['Section']);
     }
 }
-
-class_alias(SectionParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\FacetBuilder\SectionParser');

@@ -36,5 +36,3 @@ class UserEmail extends BaseParser
         return new UserEmailCriterion($value, $operator);
     }
 }
-
-class_alias(UserEmail::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\UserEmail');

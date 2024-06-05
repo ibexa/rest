@@ -29,5 +29,3 @@ class ResourceCreated extends ValueObjectVisitor
         $visitor->setHeader('Location', $data->redirectUri);
     }
 }
-
-class_alias(ResourceCreated::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ResourceCreated');

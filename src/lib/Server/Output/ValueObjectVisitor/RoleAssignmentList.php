@@ -50,5 +50,3 @@ class RoleAssignmentList extends ValueObjectVisitor
         $generator->endObjectElement('RoleAssignmentList');
     }
 }
-
-class_alias(RoleAssignmentList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\RoleAssignmentList');

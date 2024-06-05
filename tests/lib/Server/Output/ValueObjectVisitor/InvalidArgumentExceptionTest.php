@@ -52,5 +52,3 @@ class InvalidArgumentExceptionTest extends ExceptionTest
         return new ValueObjectVisitor\InvalidArgumentException();
     }
 }
-
-class_alias(InvalidArgumentExceptionTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\InvalidArgumentExceptionTest');

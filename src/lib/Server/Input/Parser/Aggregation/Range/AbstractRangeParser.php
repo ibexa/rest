@@ -33,5 +33,3 @@ abstract class AbstractRangeParser extends BaseParser
 
     abstract protected function visitRangeValue(ParsingDispatcher $parsingDispatcher, $value);
 }
-
-class_alias(AbstractRangeParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Range\AbstractRangeParser');

@@ -90,5 +90,3 @@ abstract class FacetBuilderBaseTest extends BaseTest
         return new QueryParser();
     }
 }
-
-class_alias(FacetBuilderBaseTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\FacetBuilder\FacetBuilderBaseTest');

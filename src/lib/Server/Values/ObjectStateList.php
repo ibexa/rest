@@ -40,5 +40,3 @@ class ObjectStateList extends RestValue
         $this->groupId = $groupId;
     }
 }
-
-class_alias(ObjectStateList::class, 'EzSystems\EzPlatformRest\Server\Values\ObjectStateList');

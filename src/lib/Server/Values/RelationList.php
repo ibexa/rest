@@ -58,5 +58,3 @@ class RelationList extends RestValue
         $this->path = $path;
     }
 }
-
-class_alias(RelationList::class, 'EzSystems\EzPlatformRest\Server\Values\RelationList');

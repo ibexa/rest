@@ -129,5 +129,3 @@ class UserMetadataTest extends BaseTest
         return new UserMetadata();
     }
 }
-
-class_alias(UserMetadataTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Input\Parser\Criterion\UserMetadataTest');

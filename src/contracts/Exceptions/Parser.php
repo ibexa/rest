@@ -15,5 +15,3 @@ use InvalidArgumentException as PHPInvalidArgumentException;
 class Parser extends PHPInvalidArgumentException
 {
 }
-
-class_alias(Parser::class, 'EzSystems\EzPlatformRest\Exceptions\Parser');

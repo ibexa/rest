@@ -1001,5 +1001,3 @@ class ContentType extends RestController
         return $contentTypes;
     }
 }
-
-class_alias(ContentType::class, 'EzSystems\EzPlatformRest\Server\Controller\ContentType');

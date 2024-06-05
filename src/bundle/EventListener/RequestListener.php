@@ -71,5 +71,3 @@ class RequestListener implements EventSubscriberInterface
         return preg_match(self::REST_PREFIX_PATTERN, $request->getPathInfo());
     }
 }
-
-class_alias(RequestListener::class, 'EzSystems\EzPlatformRestBundle\EventListener\RequestListener');

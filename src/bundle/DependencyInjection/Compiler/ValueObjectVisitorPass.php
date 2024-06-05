@@ -50,5 +50,3 @@ class ValueObjectVisitorPass implements CompilerPassInterface
         }
     }
 }
-
-class_alias(ValueObjectVisitorPass::class, 'EzSystems\EzPlatformRestBundle\DependencyInjection\Compiler\ValueObjectVisitorPass');

@@ -40,5 +40,3 @@ class UserGroupList extends RestValue
         $this->path = $path;
     }
 }
-
-class_alias(UserGroupList::class, 'EzSystems\EzPlatformRest\Server\Values\UserGroupList');

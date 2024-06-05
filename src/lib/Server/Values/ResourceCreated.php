@@ -16,5 +16,3 @@ class ResourceCreated extends RestValue
         $this->redirectUri = $redirectUri;
     }
 }
-
-class_alias(ResourceCreated::class, 'EzSystems\EzPlatformRest\Server\Values\ResourceCreated');

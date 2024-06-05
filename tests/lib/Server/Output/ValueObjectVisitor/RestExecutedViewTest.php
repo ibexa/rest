@@ -177,5 +177,3 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         ]);
     }
 }
-
-class_alias(RestExecutedViewTest::class, 'EzSystems\EzPlatformRest\Tests\Server\Output\ValueObjectVisitor\RestExecutedViewTest');

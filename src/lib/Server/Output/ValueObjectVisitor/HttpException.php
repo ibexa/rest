@@ -22,5 +22,3 @@ class HttpException extends Exception
         return $statusCode;
     }
 }
-
-class_alias(HttpException::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\HttpException');

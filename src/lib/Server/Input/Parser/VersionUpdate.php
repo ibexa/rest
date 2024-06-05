@@ -99,5 +99,3 @@ class VersionUpdate extends BaseParser
         return $contentUpdateStruct;
     }
 }
-
-class_alias(VersionUpdate::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\VersionUpdate');

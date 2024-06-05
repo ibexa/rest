@@ -28,5 +28,3 @@ class PermanentRedirect extends RestValue
         $this->redirectUri = $redirectUri;
     }
 }
-
-class_alias(PermanentRedirect::class, 'EzSystems\EzPlatformRest\Server\Values\PermanentRedirect');

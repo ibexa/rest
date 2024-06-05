@@ -51,5 +51,3 @@ class Section extends ValueObjectVisitor
         $generator->endValueElement('name');
     }
 }
-
-class_alias(Section::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\Section');

@@ -36,5 +36,3 @@ class ContentTypeId extends BaseParser
         return new ContentTypeIdCriterion($data['ContentTypeIdCriterion']);
     }
 }
-
-class_alias(ContentTypeId::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Criterion\ContentTypeId');

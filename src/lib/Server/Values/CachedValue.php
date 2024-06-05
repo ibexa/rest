@@ -52,5 +52,3 @@ class CachedValue extends RestValue
         return $tags;
     }
 }
-
-class_alias(CachedValue::class, 'EzSystems\EzPlatformRest\Server\Values\CachedValue');

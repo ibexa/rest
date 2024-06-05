@@ -108,5 +108,3 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
         return $outgoingSettingsHash;
     }
 }
-
-class_alias(BaseRelationProcessor::class, 'EzSystems\EzPlatformRest\FieldTypeProcessor\BaseRelationProcessor');

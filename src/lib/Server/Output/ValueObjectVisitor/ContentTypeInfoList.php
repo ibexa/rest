@@ -45,5 +45,3 @@ class ContentTypeInfoList extends ValueObjectVisitor
         $generator->endObjectElement('ContentTypeInfoList');
     }
 }
-
-class_alias(ContentTypeInfoList::class, 'EzSystems\EzPlatformRest\Server\Output\ValueObjectVisitor\ContentTypeInfoList');

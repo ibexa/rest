@@ -272,5 +272,3 @@ class SessionController extends Controller
         );
     }
 }
-
-class_alias(SessionController::class, 'EzSystems\EzPlatformRest\Server\Controller\SessionController');
