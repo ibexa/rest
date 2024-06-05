@@ -38,11 +38,7 @@ final class ContentTypeHeaderMatcherFactoryTest extends TestCase
         ]);
 
         $closure = $this->contentTypeHeaderMatcher;
-
-        $this->parsingDispatcher
-            ->expects(self::once())
-            ->method('fetchMediaTypeWithoutVersion')
-            ->willReturn('application/vnd.ibexa.api.CopyContentTypeInput');
+        $this->mockParsingDispatcher('application/vnd.ibexa.api.CopyContentTypeInput');
 
         self::assertTrue($closure($request, 'application/vnd.ibexa.api.CopyContentTypeInput'));
     }
@@ -55,12 +51,16 @@ final class ContentTypeHeaderMatcherFactoryTest extends TestCase
         ]);
 
         $closure = $this->contentTypeHeaderMatcher;
+        $this->mockParsingDispatcher('application/vnd.ibexa.api.CreateContentTypeInput');
 
+        self::assertFalse($closure($request, 'application/vnd.ibexa.api.CopyContentTypeInput'));
+    }
+
+    private function mockParsingDispatcher(string $returnedMediaType): void
+    {
         $this->parsingDispatcher
             ->expects(self::once())
             ->method('fetchMediaTypeWithoutVersion')
-            ->willReturn('application/vnd.ibexa.api.CreateContentTypeInput');
-
-        self::assertFalse($closure($request, 'application/vnd.ibexa.api.CopyContentTypeInput'));
+            ->willReturn($returnedMediaType);
     }
 }
