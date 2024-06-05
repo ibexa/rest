@@ -400,4 +400,4 @@ services:
         class: Closure
         factory: '@Ibexa\Bundle\Rest\Routing\ExpressionLanguage\ContentTypeHeaderMatcherFactory'
         tags:
-            - { name: routing.expression_language_function, function: 'is_compatible_content_type' }
+            - { name: routing.expression_language_function, function: 'is_content_type_compatible' }
