@@ -391,3 +391,13 @@ services:
         parent: hautelook.router.template
         calls:
             - [ setOption, [ strict_requirements, ~ ] ]
+
+    Ibexa\Bundle\Rest\Routing\ExpressionLanguage\ContentTypeHeaderMatcherFactory:
+        arguments:
+            $parsingDispatcher: '@Ibexa\Contracts\Rest\Input\ParsingDispatcher'
+
+    ibexa.routing.expression_language.content_type_matcher:
+        class: Closure
+        factory: '@Ibexa\Bundle\Rest\Routing\ExpressionLanguage\ContentTypeHeaderMatcherFactory'
+        tags:
+            - { name: routing.expression_language_function, function: 'compatible_content_type' }
