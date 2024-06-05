@@ -533,6 +533,14 @@ ibexa.rest.create_location:
 
 # Content types
 
+ibexa.rest.content_type.copy:
+    path: /content/types/{contentTypeId}
+    defaults:
+        _controller: Ibexa\Rest\Server\Controller\ContentType:copyContentType
+    condition: 'compatible_content_type(request, "application/vnd.ibexa.api.CopyContentTypeInput")'
+    methods: [POST]
+    requirements:
+        contentTypeId: \d+
 
 ibexa.rest.content_type.publish_draft:
     path: /content/types/{contentTypeId}/draft
@@ -770,7 +778,6 @@ ibexa.rest.unlink_content_type_from_group:
     requirements:
         contentTypeId: \d+
         contentTypeGroupId: \d+
-
 
 # Trash
 
