@@ -557,7 +557,7 @@ ibexa.rest.content_type.copy:
     path: /content/types/{contentTypeId}
     defaults:
         _controller: Ibexa\Rest\Server\Controller\ContentType:copyContentType
-    condition: 'is_compatible_content_type(request, "application/vnd.ibexa.api.CopyContentTypeInput")'
+    condition: 'is_content_type_compatible(request, "application/vnd.ibexa.api.CopyContentTypeInput")'
     methods: [POST]
     requirements:
         contentTypeId: \d+
