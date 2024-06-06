@@ -57,6 +57,16 @@ ibexa.rest.refresh_session:
 # Content
 
 
+ibexa.rest.content.publish_version:
+    path: /content/objects/{contentId}/versions/{versionNumber}
+    defaults:
+        _controller: Ibexa\Rest\Server\Controller\Content:publishVersion
+    condition: 'is_content_type_compatible(request, "application/vnd.ibexa.api.PublishContentVersionInput")'
+    methods: [POST]
+    requirements:
+        contentId: \d+
+        versionNumber: \d+
+
 ibexa.rest.redirect_content:
     path: /content/objects
     defaults:
