@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace Ibexa\Rest\Server\Security\EventListener;
+namespace Ibexa\Rest\Server\Security\EventListener\JWT;
 
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Core\MVC\Symfony\Security\UserInterface as IbexaUser;
@@ -14,7 +14,7 @@ use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-final readonly class JWTAuthenticationSuccessSubscriber implements EventSubscriberInterface
+final readonly class AuthenticationSuccessSubscriber implements EventSubscriberInterface
 {
     public function __construct(private PermissionResolver $permissionResolver)
     {

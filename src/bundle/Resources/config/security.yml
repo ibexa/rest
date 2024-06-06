@@ -17,7 +17,11 @@ services:
             - '@?security.csrf.token_storage'
             - '@?request_stack'
 
-    Ibexa\Rest\Server\Security\EventListener\JWTAuthenticationSuccessSubscriber:
+    Ibexa\Rest\Server\Security\EventListener\JWT\AuthenticationSuccessSubscriber:
+        tags:
+            - { name: kernel.event_subscriber }
+
+    Ibexa\Rest\Server\Security\EventListener\JWT\JsonLoginHeaderReplacingSubscriber:
         tags:
             - { name: kernel.event_subscriber }
 

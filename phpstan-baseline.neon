@@ -541,7 +541,7 @@ parameters:
 			path: src/lib/Input/Dispatcher.php
 
 		-
-			message: "#^Cannot access property \\$fieldTypeIdentifier on Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\ContentType\\\\FieldDefinition\\|null\\.$#"
+			message: "#^Cannot call method getFieldTypeIdentifier\\(\\) on Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\ContentType\\\\FieldDefinition\\|null\\.$#"
 			count: 1
 			path: src/lib/Input/FieldTypeParser.php
 
@@ -5601,11 +5601,6 @@ parameters:
 			path: tests/lib/FieldTypeProcessor/BinaryInputProcessorTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$filename of function unlink expects string, string\\|false given\\.$#"
-			count: 1
-			path: tests/lib/FieldTypeProcessor/BinaryInputProcessorTest.php
-
-		-
 			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\BinaryInputProcessorTest\\:\\:\\$tempDir has no type specified\\.$#"
 			count: 1
 			path: tests/lib/FieldTypeProcessor/BinaryInputProcessorTest.php
@@ -7186,31 +7181,6 @@ parameters:
 			path: tests/lib/Server/Input/Parser/FieldDefinitionCreateTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FieldDefinitionUpdateTest\\:\\:getInputArray\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/lib/Server/Input/Parser/FieldDefinitionUpdateTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FieldDefinitionUpdateTest\\:\\:getParseHrefExpectationsMap\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/lib/Server/Input/Parser/FieldDefinitionUpdateTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FieldDefinitionUpdateTest\\:\\:testParse\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Input/Parser/FieldDefinitionUpdateTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FieldDefinitionUpdateTest\\:\\:testParseExceptionOnInvalidDescriptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Input/Parser/FieldDefinitionUpdateTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FieldDefinitionUpdateTest\\:\\:testParseExceptionOnInvalidNames\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Input/Parser/FieldDefinitionUpdateTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Limitation\\\\PathStringRouteBasedLimitationParserTest\\:\\:getParseHrefExpectationsMap\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/lib/Server/Input/Parser/Limitation/PathStringRouteBasedLimitationParserTest.php
@@ -8279,26 +8249,6 @@ parameters:
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\ImageVariationTest\\:\\:testWidthTagValue\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/Server/Output/ValueObjectVisitor/ImageVariationTest.php
-
-		-
-			message: "#^Instantiated class Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\JWT not found\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/JWTTest.php
-
-		-
-			message: "#^Instantiated class Ibexa\\\\Rest\\\\Server\\\\Values\\\\JWT not found\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/JWTTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\JWTTest\\:\\:internalGetVisitor\\(\\) has invalid return type Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\JWT\\.$#"
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/JWTTest.php
-
-		-
-			message: "#^Static method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorBaseTest\\:\\:assertXMLTag\\(\\) invoked with 4 parameters, 2\\-3 required\\.$#"
-			count: 2
-			path: tests/lib/Server/Output/ValueObjectVisitor/JWTTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorBaseTest\\:\\:assertXMLTag\\(\\) invoked with 4 parameters, 2\\-3 required\\.$#"

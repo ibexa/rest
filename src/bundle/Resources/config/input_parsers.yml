@@ -82,11 +82,6 @@ services:
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.FieldDefinitionUpdate }
 
-    Ibexa\Rest\Server\Input\Parser\JWTInput:
-        parent: Ibexa\Rest\Server\Common\Parser
-        tags:
-            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.JWTInput }
-
     Ibexa\Rest\Server\Input\Parser\LocationCreate:
         parent: Ibexa\Rest\Server\Common\Parser
         class: Ibexa\Rest\Server\Input\Parser\LocationCreate
