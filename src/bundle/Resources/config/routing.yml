@@ -808,6 +808,15 @@ ibexa.rest.list_policies_for_user:
 # Roles
 
 
+ibexa.rest.role.publish:
+    path: /user/roles/{roleId}/draft
+    defaults:
+        _controller: Ibexa\Rest\Server\Controller\Role:publishRoleDraft
+    condition: 'is_content_type_compatible(request, "application/vnd.ibexa.api.PublishRoleInput")'
+    methods: [POST]
+    requirements:
+        roleId: \d+
+
 ibexa.rest.list_roles:
     path: /user/roles
     defaults:
