@@ -57,6 +57,15 @@ ibexa.rest.refresh_session:
 # Content
 
 
+ibexa.rest.content.create_draft_from_current_version:
+    path: /content/objects/{contentId}/currentversion
+    defaults:
+        _controller: Ibexa\Rest\Server\Controller\Content:createDraftFromCurrentVersion
+    condition: 'is_content_type_compatible(request, "application/vnd.ibexa.api.CreateDraftFromCurrentVersionInput")'
+    methods: [POST]
+    requirements:
+        contentId: \d+
+
 ibexa.rest.redirect_content:
     path: /content/objects
     defaults:
