@@ -495,6 +495,15 @@ ibexa.rest.content_type.copy:
     requirements:
         contentTypeId: \d+
 
+ibexa.rest.content_type.publish:
+    path: /content/types/{contentTypeId}/draft
+    defaults:
+        _controller: Ibexa\Rest\Server\Controller\ContentType:publishContentTypeDraft
+    condition: 'is_content_type_compatible(request, "application/vnd.ibexa.api.PublishContentTypeInput")'
+    methods: [POST]
+    requirements:
+        contentTypeId: \d+
+
 ibexa.rest.load_content_type_group_list:
     path: /content/typegroups
     defaults:
