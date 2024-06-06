@@ -334,11 +334,6 @@ services:
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\DeletedUserSession }
 
-    Ibexa\Rest\Server\Output\ValueObjectVisitor\JWT:
-        parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-        tags:
-            - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\JWT }
-
     # ContentType
     Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentType:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
