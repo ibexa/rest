@@ -12,12 +12,16 @@ use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\Server\Input\Parser\MoveLocation;
 use PHPUnit\Framework\MockObject\MockObject;
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class MoveLocationTest extends BaseTest
 {
     private const int TESTED_LOCATION_ID = 22;
 
     private MockObject&LocationService $locationService;
+
+    private ValidatorInterface $validator;
 
     public function testParse(): void
     {
@@ -51,7 +55,7 @@ final class MoveLocationTest extends BaseTest
     public function testParseExceptionOnMissingDestinationElement(): void
     {
         $this->expectException(Parser::class);
-        $this->expectExceptionMessage("Missing 'destination' element for MoveLocationInput.");
+        $this->expectExceptionMessage("The 'destination' element for MoveLocationInput is malformed or missing.");
 
         $inputArray = [
             'new_destination' => '/1/2/3',
@@ -71,7 +75,7 @@ final class MoveLocationTest extends BaseTest
         $sessionInput = $this->getParser();
 
         $this->expectException(Parser::class);
-        $this->expectExceptionMessage("The 'destination' element for MoveLocationInput is invalid.");
+        $this->expectExceptionMessage("The 'destination' element for MoveLocationInput is malformed or missing.");
 
         $sessionInput->parse($inputArray, $this->getParsingDispatcherMock());
     }
@@ -80,9 +84,11 @@ final class MoveLocationTest extends BaseTest
     {
         $locationService = $this->createMock(LocationService::class);
         $this->locationService = $locationService;
+        $this->validator = Validation::createValidator();
 
         return new MoveLocation(
             $this->locationService,
+            $this->validator,
         );
     }
 

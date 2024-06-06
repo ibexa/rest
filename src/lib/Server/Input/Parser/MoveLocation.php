@@ -12,11 +12,16 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
+use Ibexa\Rest\Server\Validation\Builder\Input\Parser\MoveLocationInputValidatorBuilder;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class MoveLocation extends BaseParser
 {
+    public const string DESTINATION_KEY = 'destination';
+
     public function __construct(
-        private readonly LocationService $locationService
+        private readonly LocationService $locationService,
+        private readonly ValidatorInterface $validator,
     ) {
     }
 
@@ -31,11 +36,9 @@ final class MoveLocation extends BaseParser
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): Location
     {
-        if (!array_key_exists('destination', $data)) {
-            throw new Exceptions\Parser("Missing 'destination' element for MoveLocationInput.");
-        }
+        $this->validateInputData($data);
 
-        return $this->getLocationByPath($data['destination']);
+        return $this->getLocationByPath($data[self::DESTINATION_KEY]);
     }
 
     /**
@@ -49,19 +52,25 @@ final class MoveLocation extends BaseParser
         );
     }
 
-    /**
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
-     */
     private function extractLocationIdFromPath(string $path): int
     {
         $pathParts = explode('/', $path);
 
-        $locationId = (int)array_pop($pathParts);
+        return (int)array_pop($pathParts);
+    }
 
-        if ($locationId <= 0) {
-            throw new Exceptions\Parser("The 'destination' element for MoveLocationInput is invalid.");
+    /**
+     * @param array<mixed> $data
+     *
+     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     */
+    private function validateInputData(array $data): void
+    {
+        $builder = new MoveLocationInputValidatorBuilder($this->validator);
+        $builder->validateInputArray($data);
+        $errors = $builder->build()->getViolations();
+        if ($errors->count() > 0) {
+            throw new Exceptions\Parser("The 'destination' element for MoveLocationInput is malformed or missing.");
         }
-
-        return $locationId;
     }
 }
