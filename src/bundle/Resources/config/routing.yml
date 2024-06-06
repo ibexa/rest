@@ -404,6 +404,15 @@ ibexa.rest.languages.view:
 # Locations
 
 
+ibexa.rest.move_location:
+    path: /content/locations/{locationPath}
+    defaults:
+        _controller: Ibexa\Rest\Server\Controller\Location:moveLocation
+    condition: 'is_content_type_compatible(request, "application/vnd.ibexa.api.MoveLocationInput")'
+    methods: [POST]
+    requirements:
+        locationPath: "[0-9/]+"
+
 ibexa.rest.redirect_location:
     path: /content/locations
     defaults:
@@ -447,14 +456,6 @@ ibexa.rest.move_subtree:
     defaults:
         _controller: Ibexa\Rest\Server\Controller\Location:moveSubtree
     methods: [MOVE]
-    requirements:
-        locationPath: "[0-9/]+"
-
-ibexa.rest.move_location:
-    path: /content/locations/{locationPath}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location:moveLocation
-    methods: [POST]
     requirements:
         locationPath: "[0-9/]+"
 
