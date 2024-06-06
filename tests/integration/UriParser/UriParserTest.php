@@ -70,8 +70,8 @@ final class UriParserTest extends IbexaKernelTestCase
         yield 'Invalid attribute' => [
             'GET',
             $uri,
-            'sectionId',
-            "No attribute 'sectionId' in route matched from $uri",
+            'session',
+            "No attribute 'session' in route matched from $uri",
         ];
 
         yield 'Invalid method' => [
