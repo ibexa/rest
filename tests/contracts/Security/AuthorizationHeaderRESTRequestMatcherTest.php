@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Contracts\Rest\Security;
 
-use Ibexa\Contracts\Rest\Security\AuthorizationHeaderRESTRequestMatcher;
+use Ibexa\Rest\Security\AuthorizationHeaderRESTRequestMatcher;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 

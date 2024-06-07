@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace Ibexa\Rest\Server\Security\EventListener\JWT;
+namespace Ibexa\Rest\Security\EventListener\JWT;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -16,6 +16,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
  * JWT authentication since Symfony 5.4 relies on `json_login` hence `application/json` header is required.
  * Therefore, there has to be a way to replace prior `application/vnd.ibexa.api.JWTInput+json` header whenever JWT authentication
  * is triggered.
+ *
+ * @TODO: Drop on releasing the new REST API version.
  */
 final readonly class JsonLoginHeaderReplacingSubscriber implements EventSubscriberInterface
 {
