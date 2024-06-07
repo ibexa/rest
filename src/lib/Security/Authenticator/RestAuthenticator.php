@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Security\Authenticator;
 
+use Ibexa\Contracts\Rest\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Input\Dispatcher;
 use Ibexa\Rest\Message;
 use Symfony\Component\HttpFoundation\Request;
@@ -76,9 +77,12 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
         return null;
     }
 
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        throw $exception;
+        throw new UnauthorizedException($exception->getMessage());
     }
 
     public function isInteractive(): bool
