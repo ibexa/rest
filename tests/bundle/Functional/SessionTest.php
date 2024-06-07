@@ -28,7 +28,7 @@ final class SessionTest extends TestCase
         $request = $this->createAuthenticationHttpRequest('admin', 'bad_password');
         $response = $this->sendHttpRequest($request);
 
-        self::assertHttpResponseCodeEquals($response, 500);
+        self::assertHttpResponseCodeEquals($response, 401);
     }
 
     /**

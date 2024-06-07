@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\Rest\EventListener;
 
 use Ibexa\Bundle\Rest\RestEvents;
-use Ibexa\Core\Base\Exceptions\UnauthorizedException;
+use Ibexa\Contracts\Rest\Exceptions\UnauthorizedException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,7 +59,7 @@ final class CsrfListener implements EventSubscriberInterface
     /**
      * This method validates CSRF token if CSRF protection is enabled.
      *
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function onKernelRequest(RequestEvent $event): void
     {
@@ -86,10 +86,7 @@ final class CsrfListener implements EventSubscriberInterface
         }
 
         if (!$this->checkCsrfToken($request)) {
-            throw new UnauthorizedException(
-                'Missing or invalid CSRF token',
-                $request->getMethod() . ' ' . $request->getPathInfo()
-            );
+            throw new UnauthorizedException('Missing or invalid CSRF token');
         }
 
         // Dispatching event so that CSRF token intention can be injected into Legacy Stack

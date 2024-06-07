@@ -11,7 +11,7 @@ namespace Ibexa\Rest\Server\Controller;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
-use Ibexa\Core\Base\Exceptions\UnauthorizedException;
+use Ibexa\Contracts\Rest\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Server\Controller;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Security\CsrfTokenManager;
@@ -47,7 +47,7 @@ final class SessionController extends Controller
             $token = $this->securityTokenStorage->getToken();
 
             if ($token === null) {
-                throw new UnauthorizedException('authorization', 'The current user is not authenticated.');
+                throw new UnauthorizedException('The current user is not authenticated.');
             }
 
             /** @var \Ibexa\Core\MVC\Symfony\Security\User $user */
@@ -64,9 +64,9 @@ final class SessionController extends Controller
             // Already logged in with another user, this will be converted to HTTP status 409
             return new Values\Conflict();
         } catch (AuthenticationException $e) {
-            throw new UnauthorizedException('Invalid login or password', $request->getPathInfo());
+            throw new UnauthorizedException('Invalid login or password');
         } catch (AccessDeniedException $e) {
-            throw new UnauthorizedException($e->getMessage(), $request->getPathInfo());
+            throw new UnauthorizedException($e->getMessage());
         }
     }
 
@@ -159,7 +159,7 @@ final class SessionController extends Controller
     /**
      * Checks the presence / validity of the CSRF token.
      *
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException if the token is missing or invalid
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException if the token is missing or invalid
      */
     private function checkCsrfToken(Request $request): void
     {
@@ -184,10 +184,7 @@ final class SessionController extends Controller
 
     private function createInvalidCsrfTokenException(Request $request): UnauthorizedException
     {
-        return new UnauthorizedException(
-            'Missing or invalid CSRF token',
-            $request->getMethod() . ' ' . $request->getPathInfo()
-        );
+        return new UnauthorizedException('Missing or invalid CSRF token');
     }
 
     private function logout(Request $request): Response
