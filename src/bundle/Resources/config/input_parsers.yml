@@ -866,3 +866,11 @@ services:
             $validator: '@validator'
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.MoveLocationInput }
+
+    Ibexa\Rest\Server\Input\Parser\SwapLocationInput:
+        parent: Ibexa\Rest\Server\Common\Parser
+        arguments:
+            $locationService: '@ibexa.api.service.location'
+            $validator: '@validator'
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.SwapLocationInput }

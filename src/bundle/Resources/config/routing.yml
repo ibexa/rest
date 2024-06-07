@@ -432,6 +432,14 @@ ibexa.rest.languages.view:
 
 # Locations
 
+ibexa.rest.location.swap:
+    path: /content/locations/{locationPath}
+    defaults:
+        _controller: Ibexa\Rest\Server\Controller\Location:swap
+    condition: 'is_content_type_compatible(request, "application/vnd.ibexa.api.SwapLocationInput")'
+    methods: [POST]
+    requirements:
+        locationPath: "[0-9/]+"
 
 ibexa.rest.move_location:
     path: /content/locations/{locationPath}

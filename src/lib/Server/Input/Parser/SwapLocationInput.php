@@ -9,12 +9,12 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Rest\Server\Validation\Builder\Input\Parser\BaseInputParserValidatorBuilder;
-use Ibexa\Rest\Server\Validation\Builder\Input\Parser\MoveLocationInputValidatorBuilder;
+use Ibexa\Rest\Server\Validation\Builder\Input\Parser\SwapLocationInputValidatorBuilder;
 
-final class MoveLocation extends AbstractDestinationLocationParser
+final class SwapLocationInput extends AbstractDestinationLocationParser
 {
     protected function getValidatorBuilder(): BaseInputParserValidatorBuilder
     {
-        return new MoveLocationInputValidatorBuilder($this->validator);
+        return new SwapLocationInputValidatorBuilder($this->validator);
     }
 }
