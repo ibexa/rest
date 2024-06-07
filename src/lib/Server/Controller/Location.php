@@ -339,6 +339,27 @@ class Location extends RestController
     }
 
     /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
+    public function swap(Request $request, string $locationPath): Values\NoContent
+    {
+        $locationId = $this->extractLocationIdFromPath($locationPath);
+        $location = $this->locationService->loadLocation($locationId);
+
+        $destinationLocation = $this->inputDispatcher->parse(
+            new Message(
+                ['Content-Type' => $request->headers->get('Content-Type')],
+                $request->getContent(),
+            ),
+        );
+
+        $this->locationService->swapLocation($location, $destinationLocation);
+
+        return new Values\NoContent();
+    }
+
+    /**
      * Loads a location by remote ID.
      *
      * @todo remove, or use in loadLocation with filter
