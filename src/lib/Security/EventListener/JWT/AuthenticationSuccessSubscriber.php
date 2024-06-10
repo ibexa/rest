@@ -23,9 +23,7 @@ final readonly class AuthenticationSuccessSubscriber implements EventSubscriberI
     public static function getSubscribedEvents(): array
     {
         return [
-            Events::AUTHENTICATION_SUCCESS => [
-                ['onAuthenticationSuccess', 10],
-            ],
+            Events::AUTHENTICATION_SUCCESS => ['onAuthenticationSuccess', 10],
         ];
     }
 
