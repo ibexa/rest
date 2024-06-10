@@ -19,6 +19,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Throwable;
 
 /**
+ * @internal
+ *
  * REST Response Listener.
  *
  * Converts responses from REST controllers to REST Responses, depending on the Accept-Header value.

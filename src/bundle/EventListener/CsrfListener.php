@@ -18,6 +18,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
+/**
+ * @internal
+ */
 final class CsrfListener implements EventSubscriberInterface
 {
     /**

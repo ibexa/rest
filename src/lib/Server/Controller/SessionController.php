@@ -24,6 +24,9 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 
+/**
+ * @internal
+ */
 final class SessionController extends Controller
 {
     public function __construct(
@@ -98,12 +101,10 @@ final class SessionController extends Controller
      *
      * @deprecated 4.6.7 The "SessionController::refreshSessionAction()" method is deprecated, will be removed in the next API version. Use SessionController::checkSessionAction() instead.
      *
-     * @return \Ibexa\Rest\Server\Values\UserSession|\Symfony\Component\HttpFoundation\Response
-     *
      * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
-    public function refreshSessionAction(string $sessionId, Request $request)
+    public function refreshSessionAction(string $sessionId, Request $request): Values\UserSession|Response
     {
         trigger_deprecation(
             'ibexa/rest',
@@ -132,11 +133,9 @@ final class SessionController extends Controller
     }
 
     /**
-     * @return \Ibexa\Rest\Server\Values\DeletedUserSession|\Symfony\Component\HttpFoundation\Response
-     *
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function deleteSessionAction(string $sessionId, Request $request)
+    public function deleteSessionAction(string $sessionId, Request $request): Values\DeletedUserSession|Response
     {
         /** @var \Symfony\Component\HttpFoundation\Session\Session $session */
         $session = $request->getSession();

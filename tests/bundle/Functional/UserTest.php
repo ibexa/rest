@@ -72,7 +72,7 @@ XML;
     }
 
     /**
-     * $groupId covers GET /user/groups/{groupId}.
+     * Covers GET /user/groups/{groupId}.
      *
      * @depends testCreateUserGroup
      */
