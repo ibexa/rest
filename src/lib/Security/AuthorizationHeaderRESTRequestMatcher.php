@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\RequestMatcher;
 
 /**
  * @internal
+ *
+ * This class is mandatory for JWT REST calls recognition. It's used within security.firewalls.ibexa_jwt_rest.request_matcher configuration key.
  */
 final class AuthorizationHeaderRESTRequestMatcher extends RequestMatcher
 {
