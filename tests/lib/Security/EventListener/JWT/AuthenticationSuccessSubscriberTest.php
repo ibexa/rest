@@ -12,6 +12,7 @@ use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Core\MVC\Symfony\Security\User;
 use Ibexa\Core\Repository\Values\User\User as ApiUser;
 use Ibexa\Rest\Security\EventListener\JWT\AuthenticationSuccessSubscriber;
+use Ibexa\Rest\Server\Exceptions\BadResponseException;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use PHPUnit\Framework\TestCase;
@@ -78,5 +79,26 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
             new InMemoryUser('foo', 'bar'),
             false,
         ];
+    }
+
+    public function testResponseIsMissingJwtToken(): void
+    {
+        $subscriber = new AuthenticationSuccessSubscriber(
+            $this->createMock(PermissionResolver::class)
+        );
+
+        $event = new AuthenticationSuccessEvent(
+            [
+                'some' => 'data',
+                'some_other' => 'data',
+                'but_no_token' => 'anywhere',
+            ],
+            new User($this->createMock(ApiUser::class)),
+            new Response()
+        );
+
+        $this->expectException(BadResponseException::class);
+
+        $subscriber->onAuthenticationSuccess($event);
     }
 }

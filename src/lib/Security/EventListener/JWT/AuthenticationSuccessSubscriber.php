@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Security\EventListener\JWT;
 
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Core\MVC\Symfony\Security\UserInterface as IbexaUser;
+use Ibexa\Rest\Server\Exceptions\BadResponseException;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -43,10 +44,17 @@ final readonly class AuthenticationSuccessSubscriber implements EventSubscriberI
      *
      * @deprecated: Drop on releasing the new REST API version.
      */
+    /**
+     * @throws \Ibexa\Rest\Server\Exceptions\BadResponseException
+     */
     private function normalizeResponseToRest(AuthenticationSuccessEvent $event): void
     {
-        $token = $event->getData()['token'];
+        $eventData = $event->getData();
+        if (!isset($eventData['token'])) {
+            throw new BadResponseException('JWT Token has not been generated.');
+        }
 
+        $token = $eventData['token'];
         $event->setData([
             'JWT' => [
                 '_media-type' => 'application/vnd.ibexa.api.JWT+json',
