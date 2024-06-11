@@ -11,6 +11,9 @@ namespace Ibexa\Rest\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestMatcher;
 
+/**
+ * @internal
+ */
 final class AuthorizationHeaderRESTRequestMatcher extends RequestMatcher
 {
     private ?string $headerName;

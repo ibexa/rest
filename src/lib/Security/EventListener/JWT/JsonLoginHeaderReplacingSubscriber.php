@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
  * Therefore, there has to be a way to replace prior `application/vnd.ibexa.api.JWTInput+json` header whenever JWT authentication
  * is triggered.
  *
- * @TODO: Drop on releasing the new REST API version.
+ * @deprecated: Drop on releasing the new REST API version.
  */
 final readonly class JsonLoginHeaderReplacingSubscriber implements EventSubscriberInterface
 {

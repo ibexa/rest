@@ -41,7 +41,7 @@ final readonly class AuthenticationSuccessSubscriber implements EventSubscriberI
      * This method provides BC compatibility for the JWT Token REST response
      * since the new Lexik/JWT json_login authenticator changes its form.
      *
-     * @TODO: Drop on releasing the new REST API version.
+     * @deprecated: Drop on releasing the new REST API version.
      */
     private function normalizeResponseToRest(AuthenticationSuccessEvent $event): void
     {
