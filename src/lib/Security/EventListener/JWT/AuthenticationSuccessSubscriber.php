@@ -14,11 +14,14 @@ use Ibexa\Rest\Server\Exceptions\BadResponseException;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 final readonly class AuthenticationSuccessSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private PermissionResolver $permissionResolver)
-    {
+    public function __construct(
+        private PermissionResolver $permissionResolver,
+        private RequestStack $requestStack,
+    ) {
     }
 
     public static function getSubscribedEvents(): array
@@ -30,6 +33,15 @@ final readonly class AuthenticationSuccessSubscriber implements EventSubscriberI
 
     public function onAuthenticationSuccess(AuthenticationSuccessEvent $event): void
     {
+        $request = $this->requestStack->getCurrentRequest();
+        if ($request === null) {
+            return;
+        }
+
+        if (!$request->attributes->get('is_rest_request')) {
+            return;
+        }
+
         $user = $event->getUser();
         if ($user instanceof IbexaUser) {
             $this->permissionResolver->setCurrentUserReference($user->getAPIUser());

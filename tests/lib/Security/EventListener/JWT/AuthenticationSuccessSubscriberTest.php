@@ -16,6 +16,8 @@ use Ibexa\Rest\Server\Exceptions\BadResponseException;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\InMemoryUser;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -25,7 +27,8 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
     public function testGetSubscribedEvents(): void
     {
         $subscriber = new AuthenticationSuccessSubscriber(
-            $this->createMock(PermissionResolver::class)
+            $this->createMock(PermissionResolver::class),
+            $this->getRequestStackMock()
         );
 
         self::assertEquals(
@@ -50,7 +53,11 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
 
         $event = new AuthenticationSuccessEvent(['token' => 'foo_token'], $user, new Response());
 
-        $subscriber = new AuthenticationSuccessSubscriber($permissionResolver);
+        $subscriber = new AuthenticationSuccessSubscriber(
+            $permissionResolver,
+            $this->getRequestStackMock()
+        );
+
         $subscriber->onAuthenticationSuccess($event);
 
         self::assertSame(
@@ -84,7 +91,8 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
     public function testResponseIsMissingJwtToken(): void
     {
         $subscriber = new AuthenticationSuccessSubscriber(
-            $this->createMock(PermissionResolver::class)
+            $this->createMock(PermissionResolver::class),
+            $this->getRequestStackMock()
         );
 
         $event = new AuthenticationSuccessEvent(
@@ -100,5 +108,49 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
         $this->expectException(BadResponseException::class);
 
         $subscriber->onAuthenticationSuccess($event);
+    }
+
+    public function testSkippingResponseNormalizingForNonRestRequest(): void
+    {
+        $subscriber = new AuthenticationSuccessSubscriber(
+            $this->createMock(PermissionResolver::class),
+            $this->getRequestStackMock(false)
+        );
+
+        $event = new AuthenticationSuccessEvent(
+            [
+                'token' => 'foo',
+            ],
+            new User($this->createMock(ApiUser::class)),
+            new Response()
+        );
+
+        $subscriber->onAuthenticationSuccess($event);
+
+        self::assertSame(
+            [
+                'token' => 'foo',
+            ],
+            $event->getData()
+        );
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RequestStack&\PHPUnit\Framework\MockObject\MockObject
+     */
+    private function getRequestStackMock(bool $isRestRequest = true): RequestStack
+    {
+        $request = new Request(
+            [],
+            [],
+            $isRestRequest === true ? ['is_rest_request' => true] : []
+        );
+
+        $requestStackMock = $this->createMock(RequestStack::class);
+        $requestStackMock
+            ->method('getCurrentRequest')
+            ->willReturn($request);
+
+        return $requestStackMock;
     }
 }
