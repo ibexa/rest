@@ -99,7 +99,7 @@ final class SessionController extends Controller
     /**
      * Refresh given session.
      *
-     * @deprecated 4.6.7 The "SessionController::refreshSessionAction()" method is deprecated, will be removed in the next API version. Use SessionController::checkSessionAction() instead.
+     * @deprecated 5.0.0 The "SessionController::refreshSessionAction()" method is deprecated, will be removed in the next API version. Use SessionController::checkSessionAction() instead.
      *
      * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException

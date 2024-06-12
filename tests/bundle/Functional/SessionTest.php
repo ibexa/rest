@@ -147,7 +147,7 @@ final class SessionTest extends TestCase
         $this->assertHttpResponseCodeEquals($response, 204);
         self::assertHttpResponseDeletesSessionCookie($session, $response);
 
-        //triggered again to make sure deleting already deleted session results in 404
+        // Triggered again to make sure deleting already deleted session results in 404
         $response = $this->sendHttpRequest($deleteSessionRequest);
 
         $this->assertHttpResponseCodeEquals($response, 404);
