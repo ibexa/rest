@@ -42,7 +42,7 @@ final readonly class AuthenticationSuccessSubscriber implements EventSubscriberI
      * This method provides BC compatibility for the JWT Token REST response
      * since the new Lexik/JWT json_login authenticator changes its form.
      *
-     * @deprecated: Drop on releasing the new REST API version.
+     * @deprecated 5.0.0. Will be removed in the next REST API version.
      */
     /**
      * @throws \Ibexa\Rest\Server\Exceptions\BadResponseException
