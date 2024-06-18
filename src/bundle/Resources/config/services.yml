@@ -394,10 +394,14 @@ services:
 
     Ibexa\Bundle\Rest\Routing\ExpressionLanguage\ContentTypeHeaderMatcherFactory:
         arguments:
-            $parsingDispatcher: '@Ibexa\Contracts\Rest\Input\ParsingDispatcher'
+            $mediaTypeParser: '@Ibexa\Contracts\Rest\Input\MediaTypeParserInterface'
 
-    ibexa.routing.expression_language.is_content_type_compatible:
+    ibexa.routing.expression_language.get_media_type:
         class: Closure
         factory: '@Ibexa\Bundle\Rest\Routing\ExpressionLanguage\ContentTypeHeaderMatcherFactory'
         tags:
-            - { name: routing.expression_language_function, function: 'is_content_type_compatible' }
+            - { name: routing.expression_language_function, function: 'ibexa_get_media_type' }
+
+    Ibexa\Contracts\Rest\Input\MediaTypeParser: ~
+
+    Ibexa\Contracts\Rest\Input\MediaTypeParserInterface: '@Ibexa\Contracts\Rest\Input\MediaTypeParser'
