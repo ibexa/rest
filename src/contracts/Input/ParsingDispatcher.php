@@ -100,23 +100,16 @@ class ParsingDispatcher
     {
         list($mediaType, $version) = $this->parseMediaTypeVersion($mediaType);
 
-        $mediaTypeWithoutVersion = $this->fetchMediaTypeWithoutVersion($mediaType);
-
-        if (!isset($this->parsers[$mediaTypeWithoutVersion][$version])) {
-            throw new Exceptions\Parser("Unknown content type specification: '$mediaTypeWithoutVersion (version: $version)'.");
-        }
-
-        return $this->parsers[$mediaTypeWithoutVersion][$version]->parse($data, $this);
-    }
-
-    public function fetchMediaTypeWithoutVersion(string $mediaType): string
-    {
         // Remove encoding type
         if (($plusPos = strrpos($mediaType, '+')) !== false) {
             $mediaType = substr($mediaType, 0, $plusPos);
         }
 
-        return $mediaType;
+        if (!isset($this->parsers[$mediaType][$version])) {
+            throw new Exceptions\Parser("Unknown content type specification: '$mediaType (version: $version)'.");
+        }
+
+        return $this->parsers[$mediaType][$version]->parse($data, $this);
     }
 
     /**
