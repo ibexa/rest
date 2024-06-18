@@ -9,28 +9,26 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\Rest\Routing\ExpressionLanguage;
 
 use Closure;
-use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
+use Ibexa\Contracts\Rest\Input\MediaTypeParserInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final readonly class ContentTypeHeaderMatcherFactory
 {
     public function __construct(
-        private ParsingDispatcher $parsingDispatcher
+        private MediaTypeParserInterface $mediaTypeParser
     ) {
     }
 
     public function __invoke(): Closure
     {
-        return function (Request $request, string $contentTypeHeaderToMatch): bool {
+        return function (Request $request): ?string {
             $contentTypeHeaderValue = $request->headers->get('Content-Type');
 
             if ($contentTypeHeaderValue === null) {
-                return false;
+                return null;
             }
 
-            $mediaType = $this->parsingDispatcher->fetchMediaTypeWithoutVersion($contentTypeHeaderValue);
-
-            return $contentTypeHeaderToMatch === $mediaType;
+            return $this->mediaTypeParser->parseContentTypeHeader($contentTypeHeaderValue);
         };
     }
 }
