@@ -32,5 +32,7 @@ final class IbexaRestBundle extends Bundle
         if ($container->hasExtension('lexik_jwt_authentication')) {
             $container->addCompilerPass(new Compiler\LexikAuthorizationHeaderBridgePass());
         }
+
+        $container->addCompilerPass(new Compiler\FilterPass());
     }
 }

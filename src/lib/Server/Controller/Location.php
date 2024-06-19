@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Controller;
 
+use ApiPlatform\Metadata\Post;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\LocationService;

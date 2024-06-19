@@ -7,6 +7,13 @@ ibexa.rest.load_root_resource:
         _controller: Ibexa\Rest\Server\Controller\Root:loadRootResource
     methods: [GET]
 
+ibexa.open_api_documentation:
+    path: /aaaaopenapi/doc
+    defaults:
+        _controller: Ibexa\Bundle\Rest\Controller\OpenApiController:serveDocumentationAction
+    methods: [GET]
+    options:
+        expose: true
 
 # Sections
 

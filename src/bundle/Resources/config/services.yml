@@ -390,3 +390,79 @@ services:
         parent: hautelook.router.template
         calls:
             - [ setOption, [ strict_requirements, ~ ] ]
+
+##    <!-- Cache -->
+#    api_platform.cache.metadata.resource:
+#        parent: cache.system
+#        public: false
+#        tags: ['cache.pool']
+#
+#
+##    <!-- Resource name collection -->
+#    api_platform.metadata.resource.name_collection_factory.cached:
+#        class: ApiPlatform\Metadata\Resource\Factory\CachedResourceNameCollectionFactory
+#        decorates: api_platform.metadata.resource.name_collection_factory
+#        decoration_priority: -10
+#        public: false
+#        arguments:
+#            - '@api_platform.cache.metadata.resource'
+#            - '@api_platform.metadata.resource.name_collection_factory.cached.inner'
+#
+##    <!-- XML is the default -->
+#    api_platform.metadata.resource.name_collection_factory:
+#        alias: api_platform.metadata.resource.name_collection_factory.xml
+#
+#    api_platform.metadata.resource.name_collection_factory.xml:
+#        class: ApiPlatform\Metadata\Resource\Factory\ExtractorResourceNameCollectionFactory
+#        public: false
+#        arguments:
+#            - '@api_platform.metadata.resource_extractor.xml'
+#
+#    ApiPlatform\Metadata\Resource\Factory\ResourceNameCollectionFactoryInterface:
+#        alias: 'api_platform.metadata.resource.name_collection_factory'
+#
+#    api_platform.metadata.resource.name_collection_factory.attributes:
+#        decorates: api_platform.metadata.resource.name_collection_factory
+#        class: ApiPlatform\Metadata\Resource\Factory\AttributesResourceNameCollectionFactory
+#        public: false
+#        arguments:
+#            - '%api_platform.resource_class_directories%'
+#            - '@api_platform.metadata.resource.name_collection_factory.attributes.inner'
+#
+#    api_platform.metadata.resource.name_collection_factory.class_name:
+#        decorates: api_platform.metadata.resource.name_collection_factory
+#        class: ApiPlatform\Metadata\Resource\Factory\ClassNameResourceNameCollectionFactory
+#        public: false
+#        arguments:
+#            - '%api_platform.class_name_resources%'
+#            - '@api_platform.metadata.resource.name_collection_factory.class_name.inner'
+
+
+#    <argument type="service" id="api_platform.metadata.resource.name_collection_factory" />
+#    <argument type="service" id="api_platform.state_provider.main" on-invalid="null" />
+#    <argument type="service" id="api_platform.state_processor.main" on-invalid="null" />
+#    <argument>%api_platform.docs_formats%</argument>
+
+#    private readonly ResourceNameCollectionFactoryInterface $resourceNameCollectionFactory,
+#    private readonly ProviderInterface $provider,
+#    private readonly ProcessorInterface $processor,
+
+    Ibexa\Bundle\Rest\Controller\OpenApiController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
+        autowire: true
+        arguments:
+            $configResolver: '@ibexa.config.resolver'
+            $resourceNameCollectionFactory: '@api_platform.metadata.resource.name_collection_factory'
+            $provider: '@api_platform.state_provider.main'
+            $processor: '@api_platform.state_processor.main'
+        tags:
+            - controller.service_arguments
+
+    Ibexa\Bundle\Rest\Controller\OpenApiTwoController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
+        autowire: true
+#        arguments:
+#            $configResolver: '@ibexa.config.resolver'
+        tags:
+            - controller.service_arguments
+
