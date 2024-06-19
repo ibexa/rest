@@ -8,18 +8,18 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\Routing\ExpressionLanguage;
 
-use Ibexa\Bundle\Rest\Routing\ExpressionLanguage\ContentTypeHeaderMatcherFactory;
+use Ibexa\Bundle\Rest\Routing\ExpressionLanguage\ContentTypeHeaderMatcherExpressionFunction;
 use Ibexa\Contracts\Rest\Input\MediaTypeParser;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
-final class ContentTypeHeaderMatcherFactoryTest extends TestCase
+final class ContentTypeHeaderMatcherExpressionFunctionTest extends TestCase
 {
-    private readonly ContentTypeHeaderMatcherFactory $contentTypeHeaderMatcher;
+    private readonly ContentTypeHeaderMatcherExpressionFunction $contentTypeHeaderMatcher;
 
     protected function setUp(): void
     {
-        $contentTypeHeaderMatcher = new ContentTypeHeaderMatcherFactory(
+        $contentTypeHeaderMatcher = new ContentTypeHeaderMatcherExpressionFunction(
             new MediaTypeParser(),
         );
         $this->contentTypeHeaderMatcher = $contentTypeHeaderMatcher;

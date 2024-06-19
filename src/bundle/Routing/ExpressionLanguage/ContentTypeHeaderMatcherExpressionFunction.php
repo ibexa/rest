@@ -11,7 +11,7 @@ namespace Ibexa\Bundle\Rest\Routing\ExpressionLanguage;
 use Ibexa\Contracts\Rest\Input\MediaTypeParserInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-final readonly class ContentTypeHeaderMatcherFactory
+final readonly class ContentTypeHeaderMatcherExpressionFunction
 {
     public function __construct(
         private MediaTypeParserInterface $mediaTypeParser
