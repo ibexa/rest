@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\Routing\ExpressionLanguage;
 
-use Closure;
 use Ibexa\Bundle\Rest\Routing\ExpressionLanguage\ContentTypeHeaderMatcherFactory;
 use Ibexa\Contracts\Rest\Input\MediaTypeParser;
 use PHPUnit\Framework\TestCase;
@@ -16,14 +15,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 final class ContentTypeHeaderMatcherFactoryTest extends TestCase
 {
-    private readonly Closure $contentTypeHeaderMatcher;
+    private readonly ContentTypeHeaderMatcherFactory $contentTypeHeaderMatcher;
 
     protected function setUp(): void
     {
-        $contentTypeHeaderMatcherFactory = new ContentTypeHeaderMatcherFactory(
+        $contentTypeHeaderMatcher = new ContentTypeHeaderMatcherFactory(
             new MediaTypeParser(),
         );
-        $this->contentTypeHeaderMatcher = $contentTypeHeaderMatcherFactory();
+        $this->contentTypeHeaderMatcher = $contentTypeHeaderMatcher;
     }
 
     public function testGetMediaType(): void
