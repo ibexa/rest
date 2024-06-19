@@ -455,6 +455,7 @@ services:
             $resourceNameCollectionFactory: '@api_platform.metadata.resource.name_collection_factory'
             $provider: '@api_platform.state_provider.main'
             $processor: '@api_platform.state_processor.main'
+            $openApiFactory: '@api_platform.openapi.factory'
         tags:
             - controller.service_arguments
 

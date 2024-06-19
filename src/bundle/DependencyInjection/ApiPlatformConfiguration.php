@@ -16,8 +16,8 @@ namespace Ibexa\Bundle\Rest\DependencyInjection;
 //use ApiPlatform\Doctrine\Common\Filter\OrderFilterInterface;
 //use ApiPlatform\Elasticsearch\Metadata\Document\DocumentMetadata;
 //use ApiPlatform\Elasticsearch\State\Options;
-//use ApiPlatform\Exception\FilterValidationException;
-//use ApiPlatform\Exception\InvalidArgumentException;
+use ApiPlatform\Exception\FilterValidationException;
+use ApiPlatform\Exception\InvalidArgumentException;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
@@ -508,8 +508,8 @@ final class ApiPlatformConfiguration implements ConfigurationInterface
             ->arrayNode('exception_to_status')
             ->defaultValue([
                 SerializerExceptionInterface::class => Response::HTTP_BAD_REQUEST,
-//                InvalidArgumentException::class => Response::HTTP_BAD_REQUEST,
-//                FilterValidationException::class => Response::HTTP_BAD_REQUEST,
+                InvalidArgumentException::class => Response::HTTP_BAD_REQUEST,
+                FilterValidationException::class => Response::HTTP_BAD_REQUEST,
                 OptimisticLockException::class => Response::HTTP_CONFLICT,
             ])
             ->info('The list of exceptions mapped to their HTTP status code.')

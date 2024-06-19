@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 
-//use ApiPlatform\Exception\RuntimeException;
+use ApiPlatform\Exception\RuntimeException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -30,6 +30,7 @@ final class FilterPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      *
+     * @throws RuntimeException
      */
     public function process(ContainerBuilder $container): void
     {

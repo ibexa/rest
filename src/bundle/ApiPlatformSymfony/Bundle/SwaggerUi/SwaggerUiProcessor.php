@@ -19,6 +19,7 @@ use ApiPlatform\OpenApi\OpenApi;
 use ApiPlatform\OpenApi\Options;
 use ApiPlatform\OpenApi\Serializer\NormalizeOperationNameTrait;
 use ApiPlatform\State\ProcessorInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -61,7 +62,7 @@ final class SwaggerUiProcessor implements ProcessorInterface
         ];
 
         $swaggerData = [
-            'url' => $this->urlGenerator->generate('api_doc', ['format' => 'json']),
+            'url' => '',//$this->urlGenerator->generate('api_doc', ['format' => 'json']),
             'spec' => $this->normalizer->normalize($openApi, 'json', []),
             'oauth' => [
                 'enabled' => $this->openApiOptions->getOAuthEnabled(),
@@ -90,7 +91,8 @@ final class SwaggerUiProcessor implements ProcessorInterface
             $status = $requestedOperation->getStatus() ?? $status;
         }
 
-        return new Response($this->twig->render('@ApiPlatform/SwaggerUi/index.html.twig', $swaggerContext + ['swagger_data' => $swaggerData]), $status);
+        return new JsonResponse($swaggerData);
+        return new Response($this->twig->render('@IbexaPersonalization/SwaggerUi/index.html.twig', $swaggerContext + ['swagger_data' => $swaggerData]), $status);
     }
 
     /**

@@ -3,6 +3,9 @@
 namespace Ibexa\Bundle\Rest\Controller;
 
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
+use ApiPlatform\OpenApi\OpenApi;
+use ApiPlatform\OpenApi\Serializer\ApiGatewayNormalizer;
 use ApiPlatform\OpenApi\Serializer\LegacyOpenApiNormalizer;
 use Ibexa\AdminUi\Form\DataMapper\SectionCreateMapper;
 use Ibexa\AdminUi\Form\DataMapper\SectionUpdateMapper;
@@ -20,6 +23,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Ibexa\Contracts\AdminUi\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 use ApiPlatform\Metadata\Resource\Factory\ResourceNameCollectionFactoryInterface;
@@ -41,10 +45,31 @@ class OpenApiController extends Controller
         private readonly ResourceNameCollectionFactoryInterface $resourceNameCollectionFactory,
         private readonly ProviderInterface $provider,
         private readonly ProcessorInterface $processor,
+        private readonly OpenApiFactoryInterface $openApiFactory,
     ) {
     }
 
     private static ResourceNameCollection $resourceNameCollection;
+
+    public function testDoc(Request $request)
+    {
+        $context['request'] = $request;
+        $operation = new Get(
+            outputFormats: $this->documentationFormats,
+            class: OpenApi::class,
+            normalizationContext: [
+                ApiGatewayNormalizer::API_GATEWAY => $context['api_gateway'] ?? null,
+                LegacyOpenApiNormalizer::SPEC_VERSION => $context['spec_version'] ?? null,
+            ],
+            read: true,
+            serialize: true,
+            provider: fn () => $this->openApiFactory->__invoke($context)
+        );
+
+            $operation = $operation->withProcessor('api_platform.swagger_ui.processor')->withWrite(true);
+
+        return $this->processor->process($this->provider->provide($operation, [], $context), $operation, [], $context);
+    }
 
     public function __invoke(Request $request)
     {
@@ -68,9 +93,10 @@ class OpenApiController extends Controller
     }
 
 
-    public function serveDocumentationAction(Request $request): JsonResponse
+    public function serveDocumentationAction(Request $request): Response
     {
-        return $this->__invoke($request);
+        return $this->testDoc($request);
+//        return $this->__invoke($request);
 //        return new JsonResponse([
 //            'status' => 'fdddiled',
 //        ]);

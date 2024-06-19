@@ -156,10 +156,10 @@ final class ApiPlatformExtension extends Extension implements PrependExtensionIn
 
         $this->registerCommonConfiguration($container, $config, $loader, $formats, $patchFormats, $errorFormats, $docsFormats, $jsonSchemaFormats);
         $this->registerMetadataConfiguration($container, $config, $loader);
-//        $this->registerOAuthConfiguration($container, $config);
-//        $this->registerOpenApiConfiguration($container, $config, $loader);
-//        $this->registerSwaggerConfiguration($container, $config, $loader);
-//        $this->registerJsonApiConfiguration($formats, $loader, $config);
+        $this->registerOAuthConfiguration($container, $config);
+        $this->registerOpenApiConfiguration($container, $config, $loader);
+        $this->registerSwaggerConfiguration($container, $config, $loader);
+        $this->registerJsonApiConfiguration($formats, $loader, $config);
 //        $this->registerJsonLdHydraConfiguration($container, $formats, $loader, $config);
 //        $this->registerJsonHalConfiguration($formats, $loader);
 //        $this->registerJsonProblemConfiguration($errorFormats, $loader);
@@ -449,77 +449,77 @@ final class ApiPlatformExtension extends Extension implements PrependExtensionIn
         return [$resources['xml'], $resources['yml']];
     }
 
-//    private function registerOAuthConfiguration(ContainerBuilder $container, array $config): void
-//    {
-//        if (!$config['oauth']) {
-//            return;
-//        }
-//
-//        $container->setParameter('api_platform.oauth.enabled', $this->isConfigEnabled($container, $config['oauth']));
-//        $container->setParameter('api_platform.oauth.clientId', $config['oauth']['clientId']);
-//        $container->setParameter('api_platform.oauth.clientSecret', $config['oauth']['clientSecret']);
-//        $container->setParameter('api_platform.oauth.type', $config['oauth']['type']);
-//        $container->setParameter('api_platform.oauth.flow', $config['oauth']['flow']);
-//        $container->setParameter('api_platform.oauth.tokenUrl', $config['oauth']['tokenUrl']);
-//        $container->setParameter('api_platform.oauth.authorizationUrl', $config['oauth']['authorizationUrl']);
-//        $container->setParameter('api_platform.oauth.refreshUrl', $config['oauth']['refreshUrl']);
-//        $container->setParameter('api_platform.oauth.scopes', $config['oauth']['scopes']);
-//        $container->setParameter('api_platform.oauth.pkce', $config['oauth']['pkce']);
-//
-//        if ($container->hasDefinition('api_platform.swagger_ui.action')) {
-//            $container->getDefinition('api_platform.swagger_ui.action')->setArgument(10, $config['oauth']['pkce']);
-//        }
-//    }
+    private function registerOAuthConfiguration(ContainerBuilder $container, array $config): void
+    {
+        if (!$config['oauth']) {
+            return;
+        }
+
+        $container->setParameter('api_platform.oauth.enabled', $this->isConfigEnabled($container, $config['oauth']));
+        $container->setParameter('api_platform.oauth.clientId', $config['oauth']['clientId']);
+        $container->setParameter('api_platform.oauth.clientSecret', $config['oauth']['clientSecret']);
+        $container->setParameter('api_platform.oauth.type', $config['oauth']['type']);
+        $container->setParameter('api_platform.oauth.flow', $config['oauth']['flow']);
+        $container->setParameter('api_platform.oauth.tokenUrl', $config['oauth']['tokenUrl']);
+        $container->setParameter('api_platform.oauth.authorizationUrl', $config['oauth']['authorizationUrl']);
+        $container->setParameter('api_platform.oauth.refreshUrl', $config['oauth']['refreshUrl']);
+        $container->setParameter('api_platform.oauth.scopes', $config['oauth']['scopes']);
+        $container->setParameter('api_platform.oauth.pkce', $config['oauth']['pkce']);
+
+        if ($container->hasDefinition('api_platform.swagger_ui.action')) {
+            $container->getDefinition('api_platform.swagger_ui.action')->setArgument(10, $config['oauth']['pkce']);
+        }
+    }
 
     /**
      * Registers the Swagger, ReDoc and Swagger UI configuration.
      */
-//    private function registerSwaggerConfiguration(ContainerBuilder $container, array $config, XmlFileLoader $loader): void
-//    {
-//        foreach (array_keys($config['swagger']['api_keys']) as $keyName) {
-//            if (!preg_match('/^[a-zA-Z0-9._-]+$/', $keyName)) {
-//                trigger_deprecation('api-platform/core', '3.1', sprintf('The swagger api_keys key "%s" is not valid with OpenAPI 3.1 it should match "^[a-zA-Z0-9._-]+$"', $keyName));
-//            }
-//        }
-//
-//        $container->setParameter('api_platform.swagger.versions', $config['swagger']['versions']);
-//
-//        if (!$config['enable_swagger'] && $config['enable_swagger_ui']) {
-//            throw new RuntimeException('You can not enable the Swagger UI without enabling Swagger, fix this by enabling swagger via the configuration "enable_swagger: true".');
-//        }
-//
-//        if (!$config['enable_swagger']) {
-//            return;
-//        }
-//
-//        $loader->load('openapi.xml');
-//        $loader->load('swagger_ui.xml');
-//
-//        $loader->load('legacy/swagger_ui.xml');
-//
-//        if (!$config['enable_swagger_ui'] && !$config['enable_re_doc']) {
-//            // Remove the listener but keep the controller to allow customizing the path of the UI
-//            $container->removeDefinition('api_platform.swagger.listener.ui');
-//        }
-//
-//        $container->setParameter('api_platform.enable_swagger_ui', $config['enable_swagger_ui']);
-//        $container->setParameter('api_platform.enable_re_doc', $config['enable_re_doc']);
-//        $container->setParameter('api_platform.swagger.api_keys', $config['swagger']['api_keys']);
-//        if ($config['openapi']['swagger_ui_extra_configuration'] && $config['swagger']['swagger_ui_extra_configuration']) {
-//            throw new RuntimeException('You can not set "swagger_ui_extra_configuration" twice - in "openapi" and "swagger" section.');
-//        }
-//        $container->setParameter('api_platform.swagger_ui.extra_configuration', $config['openapi']['swagger_ui_extra_configuration'] ?: $config['swagger']['swagger_ui_extra_configuration']);
-//    }
+    private function registerSwaggerConfiguration(ContainerBuilder $container, array $config, XmlFileLoader $loader): void
+    {
+        foreach (array_keys($config['swagger']['api_keys']) as $keyName) {
+            if (!preg_match('/^[a-zA-Z0-9._-]+$/', $keyName)) {
+                trigger_deprecation('api-platform/core', '3.1', sprintf('The swagger api_keys key "%s" is not valid with OpenAPI 3.1 it should match "^[a-zA-Z0-9._-]+$"', $keyName));
+            }
+        }
 
-//    private function registerJsonApiConfiguration(array $formats, XmlFileLoader $loader, array $config): void
-//    {
-//        if (!isset($formats['jsonapi'])) {
-//            return;
-//        }
-//
-//        $loader->load('jsonapi.xml');
+        $container->setParameter('api_platform.swagger.versions', $config['swagger']['versions']);
+
+        if (!$config['enable_swagger'] && $config['enable_swagger_ui']) {
+            throw new RuntimeException('You can not enable the Swagger UI without enabling Swagger, fix this by enabling swagger via the configuration "enable_swagger: true".');
+        }
+
+        if (!$config['enable_swagger']) {
+            return;
+        }
+
+        $loader->load('openapi.xml');
+        $loader->load('swagger_ui.xml');
+
+//        $loader->load('legacy/swagger_ui.xml');
+
+        if (!$config['enable_swagger_ui'] && !$config['enable_re_doc']) {
+            // Remove the listener but keep the controller to allow customizing the path of the UI
+            $container->removeDefinition('api_platform.swagger.listener.ui');
+        }
+
+        $container->setParameter('api_platform.enable_swagger_ui', $config['enable_swagger_ui']);
+        $container->setParameter('api_platform.enable_re_doc', $config['enable_re_doc']);
+        $container->setParameter('api_platform.swagger.api_keys', $config['swagger']['api_keys']);
+        if ($config['openapi']['swagger_ui_extra_configuration'] && $config['swagger']['swagger_ui_extra_configuration']) {
+            throw new RuntimeException('You can not set "swagger_ui_extra_configuration" twice - in "openapi" and "swagger" section.');
+        }
+        $container->setParameter('api_platform.swagger_ui.extra_configuration', $config['openapi']['swagger_ui_extra_configuration'] ?: $config['swagger']['swagger_ui_extra_configuration']);
+    }
+
+    private function registerJsonApiConfiguration(array $formats, XmlFileLoader $loader, array $config): void
+    {
+        if (!isset($formats['jsonapi'])) {
+            return;
+        }
+
+        $loader->load('jsonapi.xml');
 //        $loader->load('legacy/jsonapi.xml');
-//    }
+    }
 
 //    private function registerJsonLdHydraConfiguration(ContainerBuilder $container, array $formats, XmlFileLoader $loader, array $config): void
 //    {
@@ -877,17 +877,17 @@ final class ApiPlatformExtension extends Extension implements PrependExtensionIn
 //        }
 //    }
 
-//    private function registerOpenApiConfiguration(ContainerBuilder $container, array $config, XmlFileLoader $loader): void
-//    {
-//        $container->setParameter('api_platform.openapi.termsOfService', $config['openapi']['termsOfService']);
-//        $container->setParameter('api_platform.openapi.contact.name', $config['openapi']['contact']['name']);
-//        $container->setParameter('api_platform.openapi.contact.url', $config['openapi']['contact']['url']);
-//        $container->setParameter('api_platform.openapi.contact.email', $config['openapi']['contact']['email']);
-//        $container->setParameter('api_platform.openapi.license.name', $config['openapi']['license']['name']);
-//        $container->setParameter('api_platform.openapi.license.url', $config['openapi']['license']['url']);
-//
-//        $loader->load('json_schema.xml');
-//    }
+    private function registerOpenApiConfiguration(ContainerBuilder $container, array $config, XmlFileLoader $loader): void
+    {
+        $container->setParameter('api_platform.openapi.termsOfService', $config['openapi']['termsOfService']);
+        $container->setParameter('api_platform.openapi.contact.name', $config['openapi']['contact']['name']);
+        $container->setParameter('api_platform.openapi.contact.url', $config['openapi']['contact']['url']);
+        $container->setParameter('api_platform.openapi.contact.email', $config['openapi']['contact']['email']);
+        $container->setParameter('api_platform.openapi.license.name', $config['openapi']['license']['name']);
+        $container->setParameter('api_platform.openapi.license.url', $config['openapi']['license']['url']);
+
+        $loader->load('json_schema.xml');
+    }
 
 //    private function registerMakerConfiguration(ContainerBuilder $container, array $config, XmlFileLoader $loader): void
 //    {
