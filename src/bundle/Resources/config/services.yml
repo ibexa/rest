@@ -396,7 +396,7 @@ services:
         arguments:
             $mediaTypeParser: '@Ibexa\Contracts\Rest\Input\MediaTypeParserInterface'
 
-    ibexa.routing.expression_language.get_media_type:
+    ibexa.rest.expression_language.get_media_type:
         class: Closure
         factory: '@Ibexa\Bundle\Rest\Routing\ExpressionLanguage\ContentTypeHeaderMatcherFactory'
         tags:
