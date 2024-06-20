@@ -275,7 +275,7 @@ XML;
             $locationHref,
             'MoveLocationInput+json',
             '',
-            json_encode(['MoveLocationInput' => ['destination' => '/1/2']]) ?: '',
+            json_encode(['MoveLocationInput' => ['destination' => '/1/2']], JSON_THROW_ON_ERROR),
         );
 
         $response = $this->sendHttpRequest($request);

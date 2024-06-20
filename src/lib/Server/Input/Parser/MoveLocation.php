@@ -4,14 +4,15 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
-use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
+use Ibexa\Rest\Server\Exceptions\ValidationFailedException;
 use Ibexa\Rest\Server\Validation\Builder\Input\Parser\MoveLocationInputValidatorBuilder;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -60,17 +61,24 @@ final class MoveLocation extends BaseParser
     }
 
     /**
+     * @phpstan-assert array{
+     *      'destination': string,
+     *  } $data
+     *
      * @param array<mixed> $data
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws \Ibexa\Rest\Server\Exceptions\ValidationFailedException
      */
     private function validateInputData(array $data): void
     {
         $builder = new MoveLocationInputValidatorBuilder($this->validator);
         $builder->validateInputArray($data);
-        $errors = $builder->build()->getViolations();
-        if ($errors->count() > 0) {
-            throw new Exceptions\Parser("The 'destination' element for MoveLocationInput is malformed or missing.");
+        $violations = $builder->build()->getViolations();
+        if ($violations->count() > 0) {
+            throw new ValidationFailedException(
+                'MoveLocation',
+                $violations,
+            );
         }
     }
 }
