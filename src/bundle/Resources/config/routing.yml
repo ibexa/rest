@@ -59,9 +59,8 @@ ibexa.rest.refresh_session:
 
 ibexa.rest.content.create_draft_from_current_version:
     path: /content/objects/{contentId}/currentversion
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content:createDraftFromCurrentVersion
-    condition: 'is_content_type_compatible(request, "application/vnd.ibexa.api.CreateDraftFromCurrentVersionInput")'
+    controller: Ibexa\Rest\Server\Controller\Content:createDraftFromCurrentVersion
+    condition: 'ibexa_get_media_type(request) === "CreateDraftFromCurrentVersionInput"'
     methods: [POST]
     requirements:
         contentId: \d+
