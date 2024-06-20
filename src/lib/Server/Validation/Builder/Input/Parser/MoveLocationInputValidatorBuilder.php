@@ -12,7 +12,7 @@ use Ibexa\Rest\Server\Input\Parser\MoveLocation;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class MoveLocationInputValidatorBuilder extends BaseInputParserValidatorBuilder
+final class MoveLocationInputValidatorBuilder extends BaseInputParserValidatorBuilder
 {
     protected function buildConstraint(): Constraint
     {

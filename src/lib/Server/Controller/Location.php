@@ -18,7 +18,6 @@ use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
-use Ibexa\Rest\Value;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -285,7 +284,7 @@ class Location extends RestController
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function moveLocation(Request $request, string $locationPath): Value
+    public function moveLocation(Request $request, string $locationPath): Values\ResourceCreated
     {
         $destinationLocation = $this->inputDispatcher->parse(
             new Message(
