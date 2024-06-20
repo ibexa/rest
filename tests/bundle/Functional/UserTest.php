@@ -4,19 +4,20 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 
-class UserTest extends RESTFunctionalTestCase
+final class UserTest extends RESTFunctionalTestCase
 {
     private const HEADER_LOCATION = 'Location';
 
     /**
      * Covers GET /user/groups/root.
      */
-    public function loadRootUserGroup()
+    public function loadRootUserGroup(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/user/groups/root')
@@ -28,9 +29,9 @@ class UserTest extends RESTFunctionalTestCase
     /**
      * Covers POST /user/groups/{groupPath}/subgroups.
      *
-     * @return string the created user group href
+     * returns the created user group href
      */
-    public function testCreateUserGroup()
+    public function testCreateUserGroup(): string
     {
         $text = $this->addTestSuffix(__FUNCTION__);
         $xml = <<< XML
@@ -71,11 +72,11 @@ XML;
     }
 
     /**
-     * @param $userGroupId Covers GET /user/groups/{groupId}
+     * Covers GET /user/groups/{groupId}.
      *
      * @depends testCreateUserGroup
      */
-    public function testLoadUserGroup($groupId)
+    public function testLoadUserGroup(string $groupId): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $groupId)
@@ -89,7 +90,7 @@ XML;
      *
      * @depends testCreateUserGroup
      */
-    public function testUpdateUserGroup($groupHref)
+    public function testUpdateUserGroup(string $groupHref): void
     {
         $text = $this->addTestSuffix(__FUNCTION__);
         $xml = <<< XML
@@ -118,11 +119,12 @@ XML;
 
     /**
      * @depends testCreateUserGroup
+     *
      * Covers POST /user/groups/{groupPath}/users
      *
-     * @return string The created user  href
+     * returns created user href
      */
-    public function testCreateUser($userGroupHref)
+    public function testCreateUser(string $userGroupHref): string
     {
         $text = $this->addTestSuffix(__FUNCTION__);
         $xml = <<< XML
@@ -166,11 +168,9 @@ XML;
     }
 
     /**
-     * @param $userId Covers GET /user/users/{userId}
-     *
      * @depends testCreateUser
      */
-    public function testLoadUser($userHref)
+    public function testLoadUser(string $userHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $userHref)
@@ -203,11 +203,11 @@ XML;
 
     /**
      * @depends testCreateUser
+     *
      * Covers PATCH /user/users/{userId}
      */
-    public function testUpdateUser($userHref)
+    public function testUpdateUser(string $userHref): void
     {
-        $text = $this->addTestSuffix(__FUNCTION__);
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <UserUpdate>
@@ -235,7 +235,7 @@ XML;
     /**
      * Covers GET /user/users.
      */
-    public function testLoadUsers()
+    public function testLoadUsers(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/user/users')
@@ -246,9 +246,10 @@ XML;
 
     /**
      * @depends testCreateUser
+     *
      * Covers GET /user/users?remoteId={userRemoteId}
      */
-    public function testLoadUserByRemoteId()
+    public function testLoadUserByRemoteId(): void
     {
         $remoteId = $this->addTestSuffix('testCreateUser');
         $response = $this->sendHttpRequest(
@@ -261,7 +262,7 @@ XML;
     /**
      * Covers GET /user/groups.
      */
-    public function testLoadUserGroups()
+    public function testLoadUserGroups(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/user/groups')
@@ -272,9 +273,10 @@ XML;
 
     /**
      * @depends testCreateUserGroup
+     *
      * Covers GET /user/groups?remoteId={groupRemoteId}
      */
-    public function testLoadUserGroupByRemoteId($groupHref)
+    public function testLoadUserGroupByRemoteId(): void
     {
         $remoteId = $this->addTestSuffix('testCreateUserGroup');
         $response = $this->sendHttpRequest(
@@ -289,7 +291,7 @@ XML;
      *
      * @depends testCreateUser
      */
-    public function testLoadUserDrafts($userHref)
+    public function testLoadUserDrafts(string $userHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$userHref/drafts")
@@ -300,9 +302,10 @@ XML;
 
     /**
      * @depends testCreateUserGroup
+     *
      * Covers GET /user/groups/{groupPath}/subgroups
      */
-    public function testLoadSubUserGroups($groupHref)
+    public function testLoadSubUserGroups(string $groupHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$groupHref/subgroups")
@@ -316,7 +319,7 @@ XML;
      *
      * @depends testCreateUser
      */
-    public function testLoadUserGroupsOfUser($userHref)
+    public function testLoadUserGroupsOfUser(string $userHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$userHref/groups")
@@ -330,7 +333,7 @@ XML;
      *
      * @depends testCreateUserGroup
      */
-    public function testLoadUsersFromGroup($groupHref)
+    public function testLoadUsersFromGroup(string $groupHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$groupHref/users")
@@ -343,10 +346,8 @@ XML;
      * Covers POST /user/users/{userId}/groups.
      *
      * @depends testCreateUser
-     *
-     * @return string $userHref
      */
-    public function testAssignUserToUserGroup($userHref)
+    public function testAssignUserToUserGroup(string $userHref): string
     {
         // /1/5/12 is Members
         $response = $this->sendHttpRequest(
@@ -363,7 +364,7 @@ XML;
      *
      * @depends testAssignUserToUserGroup
      */
-    public function testUnassignUserFromUserGroup($userHref)
+    public function testUnassignUserFromUserGroup(string $userHref): void
     {
         // /1/5/12 is Members
         $response = $this->sendHttpRequest(
@@ -378,7 +379,7 @@ XML;
      *
      * @depends testCreateUserGroup
      */
-    public function testMoveUserGroup($groupHref)
+    public function testMoveUserGroup(string $groupHref): void
     {
         $request = $this->createHttpRequest(
             'MOVE',
@@ -395,11 +396,10 @@ XML;
 
     /**
      * @depends testCreateUser
-     * Covers POST /user/sessions
      *
-     * @return string The created session href
+     * Covers POST /user/sessions
      */
-    public function testCreateSession()
+    public function testCreateSession(): string
     {
         self::markTestSkipped('@todo fixme');
 
@@ -431,13 +431,15 @@ XML;
 
     /**
      * @depends testCreateSession
+     *
      * Covers DELETE /user/sessions/{sessionId}
      */
-    public function testDeleteSession($sessionHref)
+    public function testDeleteSession(string $sessionHref): void
     {
         self::markTestSkipped('@todo improve. The session can only be deleted if started !');
+
         $response = $this->sendHttpRequest(
-            $request = $this->createHttpRequest('DELETE', $sessionHref)
+            $this->createHttpRequest('DELETE', $sessionHref)
         );
 
         self::assertHttpResponseCodeEquals($response, 204);
@@ -445,9 +447,10 @@ XML;
 
     /**
      * @depends testCreateUser
+     *
      * Covers DELETE /user/users/{userId}
      */
-    public function testDeleteUser($userHref)
+    public function testDeleteUser(string $userHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $userHref)
@@ -458,9 +461,10 @@ XML;
 
     /**
      * @depends testCreateUserGroup
+     *
      * Covers DELETE /user/users/{userId}
      */
-    public function testDeleteUserGroup($groupHref)
+    public function testDeleteUserGroup(string $groupHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $groupHref)
@@ -469,7 +473,7 @@ XML;
         self::assertHttpResponseCodeEquals($response, 204);
     }
 
-    public function testFilterUsersByLoginQueryParameter()
+    public function testFilterUsersByLoginQueryParameter(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/user/users?login=admin')
@@ -484,7 +488,7 @@ XML;
         self::assertHttpResponseCodeEquals($response404, 404);
     }
 
-    public function testIfLoginIsUsedByAnotherUser()
+    public function testIfLoginIsUsedByAnotherUser(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('HEAD', '/api/ibexa/v2/user/users?login=admin')
@@ -499,7 +503,7 @@ XML;
         self::assertHttpResponseCodeEquals($response404, 404);
     }
 
-    public function testFilterUsersByEmailQueryParameter()
+    public function testFilterUsersByEmailQueryParameter(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/user/users?email=admin@link.invalid')
@@ -514,7 +518,7 @@ XML;
         self::assertHttpResponseCodeEquals($response404, 404);
     }
 
-    public function testIfEmailIsUsedByAnotherUser()
+    public function testIfEmailIsUsedByAnotherUser(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('HEAD', '/api/ibexa/v2/user/users?email=admin@link.invalid')

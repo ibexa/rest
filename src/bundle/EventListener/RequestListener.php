@@ -7,10 +7,8 @@
 
 namespace Ibexa\Bundle\Rest\EventListener;
 
-use Ibexa\Bundle\Rest\UriParser\UriParser;
 use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -21,14 +19,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
  *
  * Flags a REST request as such using the is_rest_request attribute.
  */
-class RequestListener implements EventSubscriberInterface
+final class RequestListener implements EventSubscriberInterface
 {
-    /**
-     * @deprecated rely on \Ibexa\Contracts\Rest\UriParser\UriParserInterface::isRestRequest instead.
-     * @see \Ibexa\Contracts\Rest\UriParser\UriParserInterface::isRestRequest()
-     */
-    public const REST_PREFIX_PATTERN = UriParser::DEFAULT_REST_PREFIX_PATTERN;
-
     private UriParserInterface $uriParser;
 
     public function __construct(UriParserInterface $uriParser)
@@ -36,9 +28,6 @@ class RequestListener implements EventSubscriberInterface
         $this->uriParser = $uriParser;
     }
 
-    /**
-     * @return array
-     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -56,18 +45,5 @@ class RequestListener implements EventSubscriberInterface
             'is_rest_request',
             $this->uriParser->isRestRequest($event->getRequest())
         );
-    }
-
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return bool
-     *
-     * @deprecated use \Ibexa\Contracts\Rest\UriParser\UriParserInterface::isRestRequest instead
-     * @see \Ibexa\Contracts\Rest\UriParser\UriParserInterface::isRestRequest()
-     */
-    protected function hasRestPrefix(Request $request)
-    {
-        return preg_match(self::REST_PREFIX_PATTERN, $request->getPathInfo());
     }
 }

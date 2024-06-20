@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Controller;
 
-use Ibexa\Core\Base\Exceptions\UnauthorizedException;
+use Ibexa\Contracts\Rest\Exceptions\UnauthorizedException;
 use Ibexa\Core\MVC\Symfony\Security\Authentication\AuthenticatorInterface;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -57,7 +57,7 @@ final class JWT extends RestController
             return new Values\JWT($jwtToken);
         } catch (AuthenticationException $e) {
             $this->getAuthenticator()->logout($request);
-            throw new UnauthorizedException('Invalid login or password', $request->getPathInfo());
+            throw new UnauthorizedException('Invalid login or password');
         }
     }
 

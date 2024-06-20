@@ -39,11 +39,11 @@ final class UriParserTest extends IbexaKernelTestCase
             '2',
         ];
 
-        yield 'Get sessionId attribute from ibexa.rest.refresh_session POST route' => [
+        yield 'Get userId attribute from ibexa.rest.assign_user_to_user_group POST route' => [
             'POST',
-            '/api/ibexa/v2/user/sessions/MySession/refresh',
-            'sessionId',
-            'MySession',
+            '/api/ibexa/v2/user/users/14/groups',
+            'userId',
+            '14',
         ];
     }
 
@@ -66,19 +66,19 @@ final class UriParserTest extends IbexaKernelTestCase
      */
     public static function getDataForTestGetAttributeFromUriThrowsException(): iterable
     {
-        $uri = '/api/ibexa/v2/user/sessions/MySession/refresh';
+        $uri = '/api/ibexa/v2/content/sections/1';
         yield 'Invalid attribute' => [
-            'POST',
+            'GET',
             $uri,
             'session',
             "No attribute 'session' in route matched from $uri",
         ];
 
         yield 'Invalid method' => [
-            'GET',
+            'POST',
             $uri,
-            'sessionId',
-            "Method 'GET' is not allowed for '$uri'. Allowed: [POST]",
+            'sectionId',
+            "Method 'POST' is not allowed for '$uri'. Allowed: [GET, PATCH, DELETE]",
         ];
 
         yield 'Invalid route' => [
@@ -113,6 +113,9 @@ final class UriParserTest extends IbexaKernelTestCase
         $this->uriParser->getAttributeFromUri($uri, $attributeName, $method);
     }
 
+    /**
+     * @return iterable<string, array{\Symfony\Component\HttpFoundation\Request, bool}>
+     */
     public static function getDataForTestIsRestRequest(): iterable
     {
         yield ($uri = '/api/ibexa/v2/foo') => [

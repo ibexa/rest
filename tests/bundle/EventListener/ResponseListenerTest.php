@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
@@ -11,36 +12,32 @@ use Exception;
 use Ibexa\Bundle\Rest\EventListener\ResponseListener;
 use Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher;
 use stdClass;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-class ResponseListenerTest extends EventListenerTest
+final class ResponseListenerTest extends EventListenerTest
 {
-    /** @var \Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher|\PHPUnit\Framework\MockObject\MockObject */
-    protected $visitorDispatcherMock;
+    /** @var \Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher&\PHPUnit\Framework\MockObject\MockObject */
+    protected AcceptHeaderVisitorDispatcher $visitorDispatcherMock;
 
-    /** @var \stdClass */
-    protected $eventValue;
+    protected stdClass $eventValue;
 
-    /** @var \Exception */
-    protected $exceptionEventValue;
+    protected Exception $exceptionEventValue;
 
-    protected $dispatcherMessage;
+    protected Response $response;
 
-    protected $controllerResult;
+    protected EventDispatcherInterface $event;
 
-    /** @var \Symfony\Component\HttpFoundation\Response */
-    protected $response;
-
-    /** @var \Symfony\Contracts\EventDispatcher\Event */
-    protected $event;
-
-    /** @var \Symfony\Component\HttpKernel\KernelInterface|\PHPUnit\Framework\MockObject\MockObject */
-    protected $kernelMock;
+    /** @var \Symfony\Component\HttpKernel\KernelInterface&\PHPUnit\Framework\MockObject\MockObject */
+    protected KernelInterface $kernelMock;
 
     public function setUp(): void
     {
@@ -49,24 +46,24 @@ class ResponseListenerTest extends EventListenerTest
         $this->response = new Response('BODY', 406, ['foo' => 'bar']);
     }
 
-    public function provideExpectedSubscribedEventTypes()
+    public function provideExpectedSubscribedEventTypes(): array
     {
         return [
             [[KernelEvents::VIEW, KernelEvents::EXCEPTION]],
         ];
     }
 
-    public function testOnKernelResultViewIsNotRestRequest()
+    public function testOnKernelResultViewIsNotRestRequest(): void
     {
         $this->isRestRequest = false;
 
         $this->onKernelViewIsNotRestRequest(
             'onKernelResultView',
-            $this->getControllerResultEvent()
+            $this->getViewEvent()
         );
     }
 
-    public function testOnKernelExceptionViewIsNotRestRequest()
+    public function testOnKernelExceptionViewIsNotRestRequest(): void
     {
         $this->isRestRequest = false;
 
@@ -76,7 +73,7 @@ class ResponseListenerTest extends EventListenerTest
         );
     }
 
-    protected function onKernelViewIsNotRestRequest($method, RequestEvent $event)
+    protected function onKernelViewIsNotRestRequest(string $method, RequestEvent $event): void
     {
         $this->getVisitorDispatcherMock()
             ->expects(self::never())
@@ -85,18 +82,32 @@ class ResponseListenerTest extends EventListenerTest
         $this->getEventListener()->$method($event);
     }
 
-    public function testOnKernelExceptionView()
+    public function testOnKernelExceptionView(): void
     {
-        $this->onKernelView('onKernelExceptionView', $this->getExceptionEvent(), $this->exceptionEventValue);
+        $this->onKernelView(
+            'onKernelExceptionView',
+            $this->getExceptionEvent(),
+            $this->exceptionEventValue
+        );
     }
 
-    public function testOnControllerResultView()
+    public function testOnControllerResultView(): void
     {
-        $this->onKernelView('onKernelResultView', $this->getControllerResultEvent(), $this->eventValue);
+        $this->onKernelView(
+            'onKernelResultView',
+            $this->getViewEvent(),
+            $this->eventValue
+        );
     }
 
-    protected function onKernelView($method, $event, $value)
-    {
+    /**
+     * @param mixed $value
+     */
+    protected function onKernelView(
+        string $method,
+        RequestEvent $event,
+        $value
+    ): void {
         $this->getVisitorDispatcherMock()
             ->expects(self::once())
             ->method('dispatch')
@@ -113,9 +124,9 @@ class ResponseListenerTest extends EventListenerTest
     }
 
     /**
-     * @return \Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher|\PHPUnit\Framework\MockObject\MockObject
+     * @return \Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher&\PHPUnit\Framework\MockObject\MockObject
      */
-    public function getVisitorDispatcherMock()
+    private function getVisitorDispatcherMock(): AcceptHeaderVisitorDispatcher
     {
         if (!isset($this->visitorDispatcherMock)) {
             $this->visitorDispatcherMock = $this->createMock(AcceptHeaderVisitorDispatcher::class);
@@ -124,59 +135,49 @@ class ResponseListenerTest extends EventListenerTest
         return $this->visitorDispatcherMock;
     }
 
-    /**
-     * @return \Ibexa\Bundle\Rest\EventListener\ResponseListener
-     */
-    protected function getEventListener()
+    protected function getEventListener(?bool $csrfEnabled = null): EventSubscriberInterface
     {
         return new ResponseListener(
             $this->getVisitorDispatcherMock()
         );
     }
 
-    /**
-     * @return \Symfony\Component\HttpKernel\Event\ViewEvent
-     */
-    protected function getControllerResultEvent(): ViewEvent
+    protected function getViewEvent(): ViewEvent
     {
-        if (!isset($this->event)) {
-            $this->event = new ViewEvent(
-                $this->getKernelMock(),
-                $this->getRequestMock(),
-                KernelInterface::MASTER_REQUEST,
-                $this->eventValue
-            );
-        }
-
-        return $this->event;
+        return new ViewEvent(
+            $this->getKernelMock(),
+            $this->getRequestMock(),
+            HttpKernelInterface::MAIN_REQUEST,
+            $this->eventValue
+        );
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpKernel\KernelInterface
+     * @return \PHPUnit\Framework\MockObject\MockObject&\Symfony\Component\HttpKernel\KernelInterface
      */
     protected function getKernelMock(): KernelInterface
     {
-        if (!isset($this->kernelMock)) {
-            $this->kernelMock = $this->createMock(KernelInterface::class);
-        }
+        return $this->createMock(KernelInterface::class);
+    }
 
-        return $this->kernelMock;
+    private function getExceptionEvent(): ExceptionEvent
+    {
+        return new ExceptionEvent(
+            $this->getKernelMock(),
+            $this->getRequestMock(),
+            HttpKernelInterface::MAIN_REQUEST,
+            $this->exceptionEventValue
+        );
     }
 
     /**
-     * @return \Symfony\Component\HttpKernel\Event\ExceptionEvent
+     * @return \Symfony\Component\HttpFoundation\Request&\PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getExceptionEvent(): ExceptionEvent
+    private function getRequestMock(): Request
     {
-        if (!isset($this->event)) {
-            $this->event = new ExceptionEvent(
-                $this->getKernelMock(),
-                $this->getRequestMock(),
-                KernelInterface::MASTER_REQUEST,
-                $this->exceptionEventValue
-            );
-        }
+        $request = $this->createMock(Request::class);
+        $request->attributes = $this->getRequestAttributesMock();
 
-        return $this->event;
+        return $request;
     }
 }

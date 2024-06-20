@@ -4,23 +4,15 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
-/**
- * SessionInput view model.
- */
-class SessionInput extends ValueObject
+final class SessionInput extends ValueObject
 {
-    /**
-     * @var string
-     */
-    public $login;
+    public string $login;
 
-    /**
-     * @var string
-     */
-    public $password;
+    public string $password;
 }

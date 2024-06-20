@@ -179,11 +179,12 @@ services:
         class: Ibexa\Rest\Server\Controller\SessionController
         parent: Ibexa\Rest\Server\Controller
         arguments:
-            - '%ibexa.rest.csrf_token_intention%'
-            - '@Ibexa\Contracts\Core\Repository\PermissionResolver'
-            - '@ibexa.api.service.user'
-            - '@?ibexa.rest.session_authenticator'
-            - '@?Ibexa\Rest\Server\Security\CsrfTokenManager'
+            $permissionResolver: '@Ibexa\Contracts\Core\Repository\PermissionResolver'
+            $userService: '@Ibexa\Contracts\Core\Repository\UserService'
+            $csrfTokenManager: '@Ibexa\Rest\Server\Security\CsrfTokenManager'
+            $securityTokenStorage: '@Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface'
+            $csrfTokenIntention: '%ibexa.rest.csrf_token_intention%'
+            $configResolver: '@Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface'
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\Bookmark:

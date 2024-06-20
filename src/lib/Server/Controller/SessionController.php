@@ -4,86 +4,60 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
-use Ibexa\Core\Base\Exceptions\UnauthorizedException;
-use Ibexa\Core\MVC\Symfony\Security\Authentication\AuthenticatorInterface;
-use Ibexa\Rest\Message;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Contracts\Rest\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Server\Controller;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Security\CsrfTokenManager;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Value as RestValue;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface as SecurityTokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Csrf\CsrfToken;
-use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
-class SessionController extends Controller
+/**
+ * @internal
+ */
+final class SessionController extends Controller
 {
-    /** @var \Ibexa\Core\MVC\Symfony\Security\Authentication\AuthenticatorInterface|null */
-    private $authenticator;
-
-    /** @var \Ibexa\Rest\Server\Security\CsrfTokenManager */
-    private $csrfTokenManager;
-
-    /** @var string */
-    private $csrfTokenIntention;
-
-    /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
-    private $permissionResolver;
-
-    /** @var \Ibexa\Contracts\Core\Repository\UserService */
-    private $userService;
-
-    /** @var \Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface */
-    private $csrfTokenStorage;
-
     public function __construct(
-        $tokenIntention,
-        PermissionResolver $permissionResolver,
-        UserService $userService,
-        ?AuthenticatorInterface $authenticator = null,
-        CsrfTokenManager $csrfTokenManager = null,
-        TokenStorageInterface $csrfTokenStorage = null
+        private readonly PermissionResolver $permissionResolver,
+        private readonly UserService $userService,
+        private readonly CsrfTokenManager $csrfTokenManager,
+        private readonly SecurityTokenStorageInterface $securityTokenStorage,
+        private readonly string $csrfTokenIntention,
+        private readonly ConfigResolverInterface $configResolver,
     ) {
-        $this->authenticator = $authenticator;
-        $this->csrfTokenIntention = $tokenIntention;
-        $this->csrfTokenManager = $csrfTokenManager;
-        $this->permissionResolver = $permissionResolver;
-        $this->userService = $userService;
-        $this->csrfTokenStorage = $csrfTokenStorage;
     }
 
     /**
-     * Creates a new session based on the credentials provided as POST parameters.
-     *
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException If the login or password are incorrect or invalid CSRF
-     *
-     * @return Values\UserSession|Values\Conflict
+     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
      */
-    public function createSessionAction(Request $request)
+    public function createSessionAction(Request $request): RestValue
     {
-        /** @var $sessionInput \Ibexa\Rest\Server\Values\SessionInput */
-        $sessionInput = $this->inputDispatcher->parse(
-            new Message(
-                ['Content-Type' => $request->headers->get('Content-Type')],
-                $request->getContent()
-            )
-        );
-        $request->attributes->set('username', $sessionInput->login);
-        $request->attributes->set('password', (string) $sessionInput->password);
-
         try {
             $session = $request->getSession();
-            $token = $this->getAuthenticator()->authenticate($request);
             $csrfToken = $this->getCsrfToken();
+            $token = $this->securityTokenStorage->getToken();
+
+            if ($token === null) {
+                throw new UnauthorizedException('The current user is not authenticated.');
+            }
+
+            /** @var \Ibexa\Core\MVC\Symfony\Security\User $user */
+            $user = $token->getUser();
 
             return new Values\UserSession(
-                $token->getUser()->getAPIUser(),
+                $user->getAPIUser(),
                 $session->getName(),
                 $session->getId(),
                 $csrfToken,
@@ -93,54 +67,10 @@ class SessionController extends Controller
             // Already logged in with another user, this will be converted to HTTP status 409
             return new Values\Conflict();
         } catch (AuthenticationException $e) {
-            $this->getAuthenticator()->logout($request);
-            throw new UnauthorizedException('Invalid login or password', $request->getPathInfo());
+            throw new UnauthorizedException('Invalid login or password');
         } catch (AccessDeniedException $e) {
-            $this->getAuthenticator()->logout($request);
-            throw new UnauthorizedException($e->getMessage(), $request->getPathInfo());
+            throw new UnauthorizedException($e->getMessage());
         }
-    }
-
-    /**
-     * Refresh given session.
-     *
-     * @deprecated 4.6.7 The "SessionController::refreshSessionAction()" method is deprecated, will be removed in 5.0. Use SessionController::checkSessionAction() instead.
-     *
-     * @param string $sessionId
-     *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Rest\Server\Values\UserSession
-     */
-    public function refreshSessionAction($sessionId, Request $request)
-    {
-        trigger_deprecation(
-            'ibexa/rest',
-            '4.6.7',
-            sprintf('The %s() method is deprecated, will be removed in 5.0.', __METHOD__)
-        );
-
-        $session = $request->getSession();
-
-        if ($session === null || !$session->isStarted() || $session->getId() != $sessionId || !$this->hasStoredCsrfToken()) {
-            $response = $this->getAuthenticator()->logout($request);
-            $response->setStatusCode(404);
-
-            return $response;
-        }
-
-        $this->checkCsrfToken($request);
-        $currentUser = $this->userService->loadUser(
-            $this->permissionResolver->getCurrentUserReference()->getUserId()
-        );
-
-        return new Values\UserSession(
-            $currentUser,
-            $session->getName(),
-            $session->getId(),
-            $request->headers->get('X-CSRF-Token'),
-            false
-        );
     }
 
     /**
@@ -149,12 +79,8 @@ class SessionController extends Controller
     public function checkSessionAction(Request $request)
     {
         $session = $request->getSession();
-
         if ($session === null || !$session->isStarted()) {
-            $response = $this->getAuthenticator()->logout($request);
-            $response->setStatusCode(404);
-
-            return $response;
+            return $this->logout($request);
         }
 
         $currentUser = $this->userService->loadUser(
@@ -171,57 +97,71 @@ class SessionController extends Controller
     }
 
     /**
-     * Deletes given session.
+     * Refresh given session.
      *
-     * @param string $sessionId
+     * @deprecated 5.0.0 The "SessionController::refreshSessionAction()" method is deprecated, will be removed in the next API version. Use SessionController::checkSessionAction() instead.
      *
-     * @return Values\DeletedUserSession
-     *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
-    public function deleteSessionAction($sessionId, Request $request)
+    public function refreshSessionAction(string $sessionId, Request $request): Values\UserSession|Response
     {
-        /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
-        $session = $request->getSession();
-        if (!$session->isStarted() || $session->getId() != $sessionId || !$this->hasStoredCsrfToken()) {
-            $response = $this->getAuthenticator()->logout($request);
-            $response->setStatusCode(404);
+        trigger_deprecation(
+            'ibexa/rest',
+            '4.6.7',
+            sprintf('The %s() method is deprecated, will be removed in the next API version.', __METHOD__)
+        );
 
-            return $response;
+        $session = $request->getSession();
+
+        if ($session === null || !$session->isStarted() || $session->getId() !== $sessionId || !$this->hasStoredCsrfToken()) {
+            return $this->logout($request);
+        }
+
+        $this->checkCsrfToken($request);
+        $currentUser = $this->userService->loadUser(
+            $this->permissionResolver->getCurrentUserReference()->getUserId()
+        );
+
+        return new Values\UserSession(
+            $currentUser,
+            $session->getName(),
+            $session->getId(),
+            $request->headers->get('X-CSRF-Token') ?? '',
+            false
+        );
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
+    public function deleteSessionAction(string $sessionId, Request $request): Values\DeletedUserSession|Response
+    {
+        /** @var \Symfony\Component\HttpFoundation\Session\Session $session */
+        $session = $request->getSession();
+        if (!$session->isStarted() || $session->getId() !== $sessionId || !$this->hasStoredCsrfToken()) {
+            return $this->logout($request);
         }
 
         $this->checkCsrfToken($request);
 
-        return new Values\DeletedUserSession($this->getAuthenticator()->logout($request));
+        return new Values\DeletedUserSession(
+            $this->logout($request)
+        );
     }
 
-    /**
-     * Tests if a CSRF token is stored.
-     *
-     * @return bool
-     */
-    private function hasStoredCsrfToken()
+    private function hasStoredCsrfToken(): bool
     {
-        if ($this->csrfTokenManager === null) {
-            return true;
-        }
-
         return $this->csrfTokenManager->hasToken($this->csrfTokenIntention);
     }
 
     /**
      * Checks the presence / validity of the CSRF token.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException if the token is missing or invalid
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException if the token is missing or invalid
      */
-    private function checkCsrfToken(Request $request)
+    private function checkCsrfToken(Request $request): void
     {
-        if ($this->csrfTokenManager === null) {
-            return;
-        }
-
         if (!$request->headers->has('X-CSRF-Token')) {
             throw $this->createInvalidCsrfTokenException($request);
         }
@@ -236,39 +176,42 @@ class SessionController extends Controller
         }
     }
 
-    /**
-     * Returns the csrf token for REST. The token is generated if it doesn't exist.
-     *
-     * @return string the csrf token, or an empty string if csrf check is disabled
-     */
-    private function getCsrfToken()
+    private function getCsrfToken(): string
     {
-        if ($this->csrfTokenManager === null) {
-            return '';
-        }
-
         return $this->csrfTokenManager->getToken($this->csrfTokenIntention)->getValue();
-    }
-
-    private function getAuthenticator(): ?AuthenticatorInterface
-    {
-        if (null === $this->authenticator) {
-            throw new \RuntimeException(
-                sprintf(
-                    "No %s instance injected. Ensure 'ibexa.rest.session' is configured under your firewall",
-                    AuthenticatorInterface::class
-                )
-            );
-        }
-
-        return $this->authenticator;
     }
 
     private function createInvalidCsrfTokenException(Request $request): UnauthorizedException
     {
-        return new UnauthorizedException(
-            'Missing or invalid CSRF token',
-            $request->getMethod() . ' ' . $request->getPathInfo()
+        return new UnauthorizedException('Missing or invalid CSRF token');
+    }
+
+    private function logout(Request $request): Response
+    {
+        $path = '/';
+        $domain = null;
+
+        $session = $this->configResolver->getParameter('session');
+        if (array_key_exists('cookie_domain', $session)) {
+            $domain = $session['cookie_domain'];
+        }
+
+        if (array_key_exists('cookie_path', $session)) {
+            $path = $session['cookie_path'];
+        }
+
+        $response = new Response();
+        $requestSession = $request->getSession();
+
+        $response->headers->clearCookie(
+            $requestSession->getName(),
+            $path,
+            $domain
         );
+
+        $response->setStatusCode(404);
+        $requestSession->clear();
+
+        return $response;
     }
 }

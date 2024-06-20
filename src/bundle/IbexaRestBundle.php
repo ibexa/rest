@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\Rest;
 
 use Ibexa\Bundle\Rest\DependencyInjection\Compiler;
-use Ibexa\Bundle\Rest\DependencyInjection\Security\RestSessionBasedFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -24,10 +23,6 @@ final class IbexaRestBundle extends Bundle
         $container->addCompilerPass(new Compiler\InputParserPass());
         $container->addCompilerPass(new Compiler\OutputVisitorPass());
         $container->addCompilerPass(new Compiler\ValueObjectVisitorPass());
-
-        /** @var \Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension $securityExtension */
-        $securityExtension = $container->getExtension('security');
-        $securityExtension->addAuthenticatorFactory(new RestSessionBasedFactory());
 
         if ($container->hasExtension('lexik_jwt_authentication')) {
             $container->addCompilerPass(new Compiler\LexikAuthorizationHeaderBridgePass());

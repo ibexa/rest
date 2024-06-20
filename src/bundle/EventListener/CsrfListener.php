@@ -4,11 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Bundle\Rest\EventListener;
 
 use Ibexa\Bundle\Rest\RestEvents;
-use Ibexa\Core\Base\Exceptions\UnauthorizedException;
+use Ibexa\Contracts\Rest\Exceptions\UnauthorizedException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,47 +18,33 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-class CsrfListener implements EventSubscriberInterface
+/**
+ * @internal
+ */
+final class CsrfListener implements EventSubscriberInterface
 {
     /**
      * Name of the HTTP header containing CSRF token.
      */
-    public const CSRF_TOKEN_HEADER = 'X-CSRF-Token';
+    public const string CSRF_TOKEN_HEADER = 'X-CSRF-Token';
 
-    /**
-     * @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface|null
-     */
-    private $csrfTokenManager;
+    private ?CsrfTokenManagerInterface $csrfTokenManager;
 
-    /**
-     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
-     */
-    private $eventDispatcher;
+    private EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * @var bool
-     */
-    private $csrfEnabled;
+    private bool $csrfEnabled;
 
-    /**
-     * @var bool
-     */
-    private $csrfTokenIntention;
+    private string $csrfTokenIntention;
 
     /**
      * Note that CSRF provider needs to be optional as it will not be available
      * when CSRF protection is disabled.
-     *
-     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
-     * @param bool $csrfEnabled
-     * @param string $csrfTokenIntention
-     * @param \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface|null $csrfTokenManager
      */
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
-        $csrfEnabled,
-        $csrfTokenIntention,
-        CsrfTokenManagerInterface $csrfTokenManager = null
+        bool $csrfEnabled,
+        string $csrfTokenIntention,
+        ?CsrfTokenManagerInterface $csrfTokenManager = null
     ) {
         $this->eventDispatcher = $eventDispatcher;
         $this->csrfEnabled = $csrfEnabled;
@@ -65,10 +52,7 @@ class CsrfListener implements EventSubscriberInterface
         $this->csrfTokenManager = $csrfTokenManager;
     }
 
-    /**
-     * @return array
-     */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             KernelEvents::REQUEST => 'onKernelRequest',
@@ -78,13 +62,12 @@ class CsrfListener implements EventSubscriberInterface
     /**
      * This method validates CSRF token if CSRF protection is enabled.
      *
-     * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
-     *
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function onKernelRequest(RequestEvent $event)
+    public function onKernelRequest(RequestEvent $event): void
     {
-        if (!$event->getRequest()->attributes->get('is_rest_request')) {
+        $request = $event->getRequest();
+        if (!$request->attributes->get('is_rest_request')) {
             return;
         }
 
@@ -93,82 +76,38 @@ class CsrfListener implements EventSubscriberInterface
         }
 
         // skip CSRF validation if no session is running
-        if (!$event->getRequest()->getSession()->isStarted()) {
+        if (!$request->getSession()->isStarted()) {
             return;
         }
 
-        if ($this->isMethodSafe($event->getRequest()->getMethod())) {
+        if ($this->isMethodSafe($request->getMethod())) {
             return;
         }
 
-        if ($this->isSessionRoute($event->getRequest()->get('_route'))) {
+        if (!$request->attributes->getBoolean('csrf_protection', true)) {
             return;
         }
 
-        if (!$event->getRequest()->attributes->getBoolean('csrf_protection', true)) {
-            return;
-        }
-
-        if (!$this->checkCsrfToken($event->getRequest())) {
-            throw new UnauthorizedException(
-                'Missing or invalid CSRF token',
-                $event->getRequest()->getMethod() . ' ' . $event->getRequest()->getPathInfo()
-            );
+        if (!$this->checkCsrfToken($request)) {
+            throw new UnauthorizedException('Missing or invalid CSRF token');
         }
 
         // Dispatching event so that CSRF token intention can be injected into Legacy Stack
         $this->eventDispatcher->dispatch($event, RestEvents::REST_CSRF_TOKEN_VALIDATED);
     }
 
-    /**
-     * @param string $method
-     *
-     * @return bool
-     */
-    protected function isMethodSafe($method)
+    private function isMethodSafe(string $method): bool
     {
         return in_array($method, ['GET', 'HEAD', 'OPTIONS']);
     }
 
-    /**
-     * @param string $route
-     *
-     * @return bool
-     *
-     * @deprecated Deprecated since 6.5. Use isSessionRoute() instead.
-     */
-    protected function isLoginRequest($route)
-    {
-        return $route === 'ibexa.rest.create_session';
-    }
-
-    /**
-     * Tests if a given $route is a session management one.
-     *
-     * @param string $route
-     *
-     * @return bool
-     *
-     * @deprecated since Ibexa DXP 3.3.7. Add csrf_protection: false attribute to route definition instead.
-     */
-    protected function isSessionRoute($route)
-    {
-        return in_array(
-            $route,
-            ['ibexa.rest.create_session', 'ibexa.rest.refresh_session', 'ibexa.rest.delete_session']
-        );
-    }
-
-    /**
-     * Checks the validity of the request's csrf token header.
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return bool true/false if the token is valid/invalid, false if none was found in the request's headers
-     */
-    protected function checkCsrfToken(Request $request)
+    private function checkCsrfToken(Request $request): bool
     {
         if (!$request->headers->has(self::CSRF_TOKEN_HEADER)) {
+            return false;
+        }
+
+        if ($this->csrfTokenManager === null) {
             return false;
         }
 
