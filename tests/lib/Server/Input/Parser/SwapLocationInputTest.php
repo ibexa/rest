@@ -14,6 +14,8 @@ use Symfony\Component\Validator\Validation;
 
 final class SwapLocationInputTest extends AbstractDestinationLocationInputTest
 {
+    private const string PARSER = 'SwapLocationInput';
+
     public function testParse(): void
     {
         $this->parse();
@@ -21,12 +23,12 @@ final class SwapLocationInputTest extends AbstractDestinationLocationInputTest
 
     public function testParseExceptionOnMissingDestinationElement(): void
     {
-        $this->parseExceptionOnMissingDestinationElement();
+        $this->parseExceptionOnMissingDestinationElement(self::PARSER);
     }
 
     public function testParseExceptionOnInvalidDestinationElement(): void
     {
-        $this->parseExceptionOnInvalidDestinationElement();
+        $this->parseExceptionOnInvalidDestinationElement(self::PARSER);
     }
 
     protected function internalGetParser(): SwapLocationInput

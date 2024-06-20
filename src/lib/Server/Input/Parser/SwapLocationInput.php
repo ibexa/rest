@@ -13,6 +13,8 @@ use Ibexa\Rest\Server\Validation\Builder\Input\Parser\SwapLocationInputValidator
 
 final class SwapLocationInput extends AbstractDestinationLocationParser
 {
+    protected const string PARSER = 'SwapLocationInput';
+
     protected function getValidatorBuilder(): BaseInputParserValidatorBuilder
     {
         return new SwapLocationInputValidatorBuilder($this->validator);

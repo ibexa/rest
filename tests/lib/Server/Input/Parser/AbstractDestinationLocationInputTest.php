@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\LocationService;
-use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\Values\Content\Location;
+use Ibexa\Rest\Server\Exceptions\ValidationFailedException;
 use Ibexa\Rest\Server\Input\Parser\AbstractDestinationLocationParser;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -52,10 +52,12 @@ abstract class AbstractDestinationLocationInputTest extends BaseTest
         );
     }
 
-    protected function parseExceptionOnMissingDestinationElement(): void
+    protected function parseExceptionOnMissingDestinationElement(string $parser): void
     {
-        $this->expectException(Parser::class);
-        $this->expectExceptionMessage("The 'destination' element is malformed or missing.");
+        $this->expectException(ValidationFailedException::class);
+        $this->expectExceptionMessage(
+            sprintf('Input data validation failed for %s', $parser),
+        );
 
         $inputArray = [
             'new_destination' => '/1/2/3',
@@ -66,7 +68,7 @@ abstract class AbstractDestinationLocationInputTest extends BaseTest
         $sessionInput->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    protected function parseExceptionOnInvalidDestinationElement(): void
+    protected function parseExceptionOnInvalidDestinationElement(string $parser): void
     {
         $inputArray = [
             'destination' => 'test_destination',
@@ -74,8 +76,10 @@ abstract class AbstractDestinationLocationInputTest extends BaseTest
 
         $sessionInput = $this->getParser();
 
-        $this->expectException(Parser::class);
-        $this->expectExceptionMessage("The 'destination' element is malformed or missing.");
+        $this->expectException(ValidationFailedException::class);
+        $this->expectExceptionMessage(
+            sprintf('Input data validation failed for %s', $parser),
+        );
 
         $sessionInput->parse($inputArray, $this->getParsingDispatcherMock());
     }

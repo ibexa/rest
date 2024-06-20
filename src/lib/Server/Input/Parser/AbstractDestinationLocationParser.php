@@ -9,14 +9,15 @@ namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
-use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
+use Ibexa\Rest\Server\Exceptions\ValidationFailedException;
 use Ibexa\Rest\Server\Validation\Builder\Input\Parser\BaseInputParserValidatorBuilder;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 abstract class AbstractDestinationLocationParser extends BaseParser
 {
+    protected const string PARSER = '';
     public const string DESTINATION_KEY = 'destination';
 
     public function __construct(
@@ -60,18 +61,23 @@ abstract class AbstractDestinationLocationParser extends BaseParser
     }
 
     /**
+     * @phpstan-assert array{
+     *      'destination': string,
+     *  } $data
+     *
      * @param array<mixed> $data
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws \Ibexa\Rest\Server\Exceptions\ValidationFailedException
      */
     private function validateInputData(array $data): void
     {
         $builder = $this->getValidatorBuilder();
         $builder->validateInputArray($data);
-        $errors = $builder->build()->getViolations();
-        if ($errors->count() > 0) {
-            throw new Exceptions\Parser(
-                "The 'destination' element is malformed or missing."
+        $violations = $builder->build()->getViolations();
+        if ($violations->count() > 0) {
+            throw new ValidationFailedException(
+                static::PARSER,
+                $violations,
             );
         }
     }
