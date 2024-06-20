@@ -86,7 +86,7 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        throw new UnauthorizedException($exception->getMessage());
+        throw new UnauthorizedException($exception->getMessageKey());
     }
 
     public function isInteractive(): bool
