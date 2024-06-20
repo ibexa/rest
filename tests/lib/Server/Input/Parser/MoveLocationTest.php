@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\LocationService;
-use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\Values\Content\Location;
+use Ibexa\Rest\Server\Exceptions\ValidationFailedException;
 use Ibexa\Rest\Server\Input\Parser\MoveLocation;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Validator\Validation;
@@ -55,8 +55,8 @@ final class MoveLocationTest extends BaseTest
 
     public function testParseExceptionOnMissingDestinationElement(): void
     {
-        $this->expectException(Parser::class);
-        $this->expectExceptionMessage("The 'destination' element for MoveLocationInput is malformed or missing.");
+        $this->expectException(ValidationFailedException::class);
+        $this->expectExceptionMessage('Input data validation failed for MoveLocation');
 
         $inputArray = [
             'new_destination' => '/1/2/3',
@@ -75,8 +75,8 @@ final class MoveLocationTest extends BaseTest
 
         $sessionInput = $this->getParser();
 
-        $this->expectException(Parser::class);
-        $this->expectExceptionMessage("The 'destination' element for MoveLocationInput is malformed or missing.");
+        $this->expectException(ValidationFailedException::class);
+        $this->expectExceptionMessage('Input data validation failed for MoveLocation');
 
         $sessionInput->parse($inputArray, $this->getParsingDispatcherMock());
     }
