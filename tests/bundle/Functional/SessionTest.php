@@ -28,7 +28,7 @@ final class SessionTest extends TestCase
         $request = $this->createAuthenticationHttpRequest('admin', 'bad_password');
         $response = $this->sendHttpRequest($request);
 
-        self::assertHttpResponseCodeEquals($response, 401);
+        $this->assertHttpResponseCodeEquals($response, 401);
     }
 
     /**
@@ -38,7 +38,7 @@ final class SessionTest extends TestCase
     {
         $response = $this->sendHttpRequest($this->createRefreshRequest($session));
 
-        self::assertHttpResponseCodeEquals($response, 200);
+        $this->assertHttpResponseCodeEquals($response, 200);
     }
 
     public function testRefreshSessionExpired(): void
@@ -46,10 +46,10 @@ final class SessionTest extends TestCase
         $session = $this->login();
 
         $response = $this->sendHttpRequest($this->createDeleteRequest($session));
-        self::assertHttpResponseCodeEquals($response, 204);
+        $this->assertHttpResponseCodeEquals($response, 204);
 
         $response = $this->sendHttpRequest($this->createRefreshRequest($session));
-        self::assertHttpResponseCodeEquals($response, 404);
+        $this->assertHttpResponseCodeEquals($response, 404);
 
         self::assertHttpResponseDeletesSessionCookie($session, $response);
     }
@@ -63,7 +63,7 @@ final class SessionTest extends TestCase
             ->withoutHeader('X-CSRF-Token');
         $response = $this->sendHttpRequest($refreshRequest);
 
-        self::assertHttpResponseCodeEquals($response, 401);
+        $this->assertHttpResponseCodeEquals($response, 401);
     }
 
     public function testCreateSession(): stdClass
@@ -76,7 +76,7 @@ final class SessionTest extends TestCase
         $session = $this->login();
         $response = $this->sendHttpRequest($this->createDeleteRequest($session));
 
-        self::assertHttpResponseCodeEquals($response, 204);
+        $this->assertHttpResponseCodeEquals($response, 204);
         self::assertHttpResponseDeletesSessionCookie($session, $response);
     }
 
@@ -91,7 +91,7 @@ final class SessionTest extends TestCase
             ->withoutHeader('X-CSRF-Token');
         $response = $this->sendHttpRequest($request);
 
-        self::assertHttpResponseCodeEquals($response, 401);
+        $this->assertHttpResponseCodeEquals($response, 401);
     }
 
     public function testLoginWithExistingFrontendSession(): void
@@ -134,7 +134,7 @@ final class SessionTest extends TestCase
         $response = $this->sendHttpRequest($request);
 
         // Session is recreated when using CSRF, expect 201 instead of 200
-        self::assertHttpResponseCodeEquals($response, 201);
+        $this->assertHttpResponseCodeEquals($response, 201);
     }
 
     public function testDeleteSessionExpired(): void
@@ -144,13 +144,13 @@ final class SessionTest extends TestCase
 
         $response = $this->sendHttpRequest($deleteSessionRequest);
 
-        self::assertHttpResponseCodeEquals($response, 204);
+        $this->assertHttpResponseCodeEquals($response, 204);
         self::assertHttpResponseDeletesSessionCookie($session, $response);
 
-        //triggered again to make sure deleting already deleted session results in 404
+        // Triggered again to make sure deleting already deleted session results in 404
         $response = $this->sendHttpRequest($deleteSessionRequest);
 
-        self::assertHttpResponseCodeEquals($response, 404);
+        $this->assertHttpResponseCodeEquals($response, 404);
     }
 
     protected function createRefreshRequest(stdClass $session): RequestInterface
@@ -187,7 +187,7 @@ final class SessionTest extends TestCase
         );
 
         $response = $this->sendHttpRequest($request);
-        self::assertHttpResponseCodeEquals($response, 200);
+        $this->assertHttpResponseCodeEquals($response, 200);
 
         $contents = $response->getBody()->getContents();
         $data = json_decode($contents, true, JSON_THROW_ON_ERROR);
@@ -207,7 +207,7 @@ final class SessionTest extends TestCase
         );
 
         $response = $this->sendHttpRequest($request);
-        self::assertHttpResponseCodeEquals($response, 404);
+        $this->assertHttpResponseCodeEquals($response, 404);
 
         $contents = $response->getBody()->getContents();
         self::assertEmpty($contents);

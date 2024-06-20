@@ -22,6 +22,11 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 
+/**
+ * @internal
+ *
+ * This is mandatory for proper REST API authentication, it's used within security.firewalls.ibexa_rest.custom_authenticators configuration key.
+ */
 final class RestAuthenticator extends AbstractAuthenticator implements InteractiveAuthenticatorInterface
 {
     private const string LOGIN_ROUTE = 'ibexa.rest.create_session';
@@ -41,7 +46,6 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
     {
         $existingUserToken = $this->fetchExistingToken($request);
         if ($this->canUserFromSessionBeAuthenticated($existingUserToken)) {
-            /** @phpstan-ignore-next-line */
             $existingUser = $existingUserToken->getUser();
 
             return $this->createAuthorizationPassport(
@@ -82,7 +86,7 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
     {
-        throw new UnauthorizedException($exception->getMessage());
+        throw new UnauthorizedException($exception->getMessageKey());
     }
 
     public function isInteractive(): bool
@@ -107,6 +111,9 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
         return $previousToken;
     }
 
+    /**
+     * @phpstan-assert-if-true !null $existingUserToken
+     */
     private function canUserFromSessionBeAuthenticated(?TokenInterface $existingUserToken): bool
     {
         if ($existingUserToken === null) {
@@ -114,11 +121,8 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
         }
 
         $user = $existingUserToken->getUser();
-        if ($user === null || $user->getPassword() === null) {
-            return false;
-        }
 
-        return true;
+        return !($user === null || $user->getPassword() === null);
     }
 
     private function createAuthorizationPassport(string $login, string $password): Passport
