@@ -810,9 +810,8 @@ ibexa.rest.list_policies_for_user:
 
 ibexa.rest.role.publish:
     path: /user/roles/{roleId}/draft
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role:publishRoleDraft
-    condition: 'is_content_type_compatible(request, "application/vnd.ibexa.api.PublishRoleInput")'
+    controller: Ibexa\Rest\Server\Controller\Role:publishRoleDraft
+    condition: 'ibexa_get_media_type(request) === "PublishRoleInput"'
     methods: [POST]
     requirements:
         roleId: \d+
