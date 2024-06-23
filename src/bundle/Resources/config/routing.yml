@@ -810,7 +810,7 @@ ibexa.rest.list_policies_for_user:
 
 ibexa.rest.role.publish:
     path: /user/roles/{roleId}/draft
-    controller: Ibexa\Rest\Server\Controller\Role:publishRoleDraft
+    controller: Ibexa\Rest\Server\Controller\Role::publishRoleDraft
     condition: 'ibexa_get_media_type(request) === "PublishRoleInput"'
     methods: [POST]
     requirements:
