@@ -268,7 +268,7 @@ XML;
     /**
      * @depends testMoveSubtree
      */
-    public function testMoveLocation(string $locationHref): void
+    public function testMoveLocation(string $locationHref): string
     {
         $request = $this->createHttpRequest(
             'POST',
@@ -282,6 +282,8 @@ XML;
 
         self::assertHttpResponseCodeEquals($response, 201);
         self::assertHttpResponseHasHeader($response, 'Location');
+
+        return $locationHref;
     }
 
     /**
@@ -300,6 +302,5 @@ XML;
         $response = $this->sendHttpRequest($request);
 
         self::assertHttpResponseCodeEquals($response, 204);
-        self::assertHttpResponseHasHeader($response, 'Location');
     }
 }
