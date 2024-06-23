@@ -775,6 +775,14 @@ ibexa.rest.unlink_content_type_from_group:
 # Trash
 
 
+ibexa.rest.trash.restore_trash_item:
+    path: /content/trash/{trashItemId}
+    controller: Ibexa\Rest\Server\Controller\Trash::restoreItem
+    condition: 'ibexa_get_media_type(request) === "RestoreTrashItemInput"'
+    methods: [POST]
+    requirements:
+        trashItemId: \d+
+
 ibexa.rest.load_trash_items:
     path: /content/trash
     defaults:
