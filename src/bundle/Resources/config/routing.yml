@@ -403,6 +403,14 @@ ibexa.rest.languages.view:
 
 # Locations
 
+ibexa.rest.location.copy:
+    path: /content/locations/{locationPath}
+    controller: Ibexa\Rest\Server\Controller\Location:copy
+    condition: 'ibexa_get_media_type(request) === "CopyLocationInput"'
+    methods: [POST]
+    requirements:
+        locationPath: "[0-9/]+"
+
 ibexa.rest.location.swap:
     path: /content/locations/{locationPath}
     controller: Ibexa\Rest\Server\Controller\Location::swap
