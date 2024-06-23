@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use Psr\Http\Message\ResponseInterface;
 
 final class UserTest extends RESTFunctionalTestCase
 {
@@ -379,7 +380,7 @@ XML;
      *
      * @depends testCreateUserGroup
      */
-    public function testMoveUserGroup(string $groupHref): void
+    public function testMoveUserGroup(string $groupHref): ResponseInterface
     {
         $request = $this->createHttpRequest(
             'MOVE',
@@ -392,6 +393,31 @@ XML;
         $response = $this->sendHttpRequest($request);
 
         self::assertHttpResponseCodeEquals($response, 201);
+
+        return $response;
+    }
+
+    /**
+     * @depends testMoveUserGroup
+     */
+    public function testMoveGroup(ResponseInterface $response): void
+    {
+        $userGroupHref = $response->getHeader('Location')[0];
+
+        $request = $this->createHttpRequest(
+            'POST',
+            $userGroupHref,
+            'MoveUserGroupInput+json',
+            '',
+            json_encode(
+                ['MoveUserGroupInput' => ['destination' => '/1/5']], JSON_THROW_ON_ERROR,
+            ),
+        );
+
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 201);
+        self::assertHttpResponseHasHeader($response, 'Location');
     }
 
     /**
