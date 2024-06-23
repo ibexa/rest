@@ -1027,6 +1027,13 @@ ibexa.rest.delete_policy:
 
 # Users
 
+ibexa.rest.user_group.move:
+    path: /user/groups/{groupPath}
+    controller: Ibexa\Rest\Server\Controller\User::moveGroup
+    condition: 'ibexa_get_media_type(request) === "MoveUserGroupInput"'
+    methods: [POST]
+    requirements:
+        groupPath: "[0-9/]+"
 
 ibexa.rest.verify_users:
     path: /user/users

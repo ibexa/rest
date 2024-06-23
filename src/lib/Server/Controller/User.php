@@ -632,6 +632,46 @@ final class User extends RestController
     }
 
     /**
+     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     */
+    public function moveGroup(string $groupPath, Request $request): Values\ResourceCreated
+    {
+        $userGroupLocation = $this->locationService->loadLocation(
+            $this->extractLocationIdFromPath($groupPath)
+        );
+
+        $userGroup = $this->userService->loadUserGroup(
+            $userGroupLocation->contentId,
+        );
+
+        /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $destinationLocation */
+        $destinationLocation = $this->inputDispatcher->parse(
+            new Message(
+                ['Content-Type' => $request->headers->get('Content-Type')],
+                $request->getContent(),
+            ),
+        );
+
+        $destinationGroup = $this->userService->loadUserGroup(
+            $destinationLocation->getContent()->getId(),
+        );
+
+        $this->userService->moveUserGroup($userGroup, $destinationGroup);
+
+        return new Values\ResourceCreated(
+            $this->router->generate(
+                'ibexa.rest.load_user_group',
+                [
+                    'groupPath' => trim($destinationLocation->pathString, '/')
+                        . '/'
+                        . $userGroupLocation->getId(),
+                ],
+            )
+        );
+    }
+
+    /**
      * Returns a list of the sub groups.
      */
     public function loadSubUserGroups(string $groupPath, Request $request): RestValue
