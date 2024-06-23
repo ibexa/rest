@@ -100,7 +100,7 @@ class HttpOptionsTest extends TestCase
             ['/user/policies', ['GET']],
             ['/user/roles', ['GET', 'POST']],
             ['/user/roles/1', ['POST', 'GET', 'PATCH', 'DELETE']],
-            ['/user/roles/1/draft', ['GET', 'PATCH', 'PUBLISH', 'DELETE']],
+            ['/user/roles/1/draft', ['GET', 'PATCH', 'PUBLISH', 'DELETE'], 'PublishRoleInput+json'],
             ['/user/roles/1/policies', ['GET', 'POST', 'DELETE']],
             ['/user/roles/1/policies/328', ['GET', 'PATCH', 'DELETE']],
             ['/user/current', ['GET']],
