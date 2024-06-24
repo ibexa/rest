@@ -434,7 +434,7 @@ ibexa.rest.languages.view:
 
 ibexa.rest.location.swap:
     path: /content/locations/{locationPath}
-    controller: Ibexa\Rest\Server\Controller\Location:swap
+    controller: Ibexa\Rest\Server\Controller\Location::swap
     condition: 'ibexa_get_media_type(request) === "SwapLocationInput"'
     methods: [POST]
     requirements:
