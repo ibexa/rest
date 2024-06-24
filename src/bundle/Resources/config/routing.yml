@@ -405,7 +405,7 @@ ibexa.rest.languages.view:
 
 ibexa.rest.location.copy:
     path: /content/locations/{locationPath}
-    controller: Ibexa\Rest\Server\Controller\Location:copy
+    controller: Ibexa\Rest\Server\Controller\Location::copy
     condition: 'ibexa_get_media_type(request) === "CopyLocationInput"'
     methods: [POST]
     requirements:
