@@ -410,7 +410,8 @@ XML;
             'MoveUserGroupInput+json',
             '',
             json_encode(
-                ['MoveUserGroupInput' => ['destination' => '/1/5']], JSON_THROW_ON_ERROR,
+                ['MoveUserGroupInput' => ['destination' => '/1/5']],
+                JSON_THROW_ON_ERROR,
             ),
         );
 
