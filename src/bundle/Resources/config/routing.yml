@@ -497,7 +497,7 @@ ibexa.rest.content_type.copy:
 
 ibexa.rest.content_type.publish:
     path: /content/types/{contentTypeId}/draft
-    controller: Ibexa\Rest\Server\Controller\ContentType:publishContentTypeDraft
+    controller: Ibexa\Rest\Server\Controller\ContentType::publishContentTypeDraft
     condition: 'ibexa_get_media_type(request) === "PublishContentTypeInput"'
     methods: [POST]
     requirements:
