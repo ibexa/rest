@@ -406,7 +406,7 @@ ibexa.rest.languages.view:
 
 ibexa.rest.move_location:
     path: /content/locations/{locationPath}
-    controller: Ibexa\Rest\Server\Controller\Location:moveLocation
+    controller: Ibexa\Rest\Server\Controller\Location::moveLocation
     condition: 'ibexa_get_media_type(request) === "MoveLocationInput"'
     methods: [POST]
     requirements:
