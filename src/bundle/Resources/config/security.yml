@@ -7,7 +7,7 @@ services:
         autoconfigure: false
         public: false
 
-    Ibexa\Contracts\Rest\Security\AuthorizationHeaderRESTRequestMatcher:
+    Ibexa\Rest\Security\AuthorizationHeaderRESTRequestMatcher:
         arguments:
             $headerName: '%ibexa.rest.authorization_header_name%'
 
@@ -17,7 +17,11 @@ services:
             - '@?security.csrf.token_storage'
             - '@?request_stack'
 
-    Ibexa\Rest\Server\Security\EventListener\SecurityListener:
+    Ibexa\Rest\Security\EventListener\JWT\AuthenticationSuccessSubscriber:
+        tags:
+            - { name: kernel.event_subscriber }
+
+    Ibexa\Rest\Security\EventListener\JWT\JsonLoginHeaderReplacingSubscriber:
         tags:
             - { name: kernel.event_subscriber }
 

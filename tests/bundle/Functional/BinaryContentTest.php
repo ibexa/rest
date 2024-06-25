@@ -67,7 +67,7 @@ XML;
         $response = $this->sendHttpRequest($request);
 
         $this->assertHttpResponseCodeEquals($response, Response::HTTP_CREATED);
-        self::assertHttpResponseHasHeader($response, 'Location');
+        $this->assertHttpResponseHasHeader($response, 'Location');
 
         $href = $response->getHeader('Location')[0];
         $this->addCreatedElement($href);

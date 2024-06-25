@@ -196,10 +196,9 @@ services:
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\JWT:
+        autowire: true
+        autoconfigure: true
         parent: Ibexa\Rest\Server\Controller
-        arguments:
-            - '@Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface'
-            - '@?ibexa.rest.session_authenticator'
         tags: [controller.service_arguments]
 
     Ibexa\Bundle\Rest\EventListener\RequestListener:
