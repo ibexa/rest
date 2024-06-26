@@ -79,7 +79,7 @@
     "extra": {
         "branch-alias": {
             "dev-main": "5.0.x-dev",
-            "dev-IBX-8335-api-platform": "5.0.x-dev"
+            "dev-IBX-8335-full-api-platform": "5.0.x-dev"
         }
     },
     "repositories": {
