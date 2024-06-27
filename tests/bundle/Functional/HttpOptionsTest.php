@@ -101,6 +101,7 @@ class HttpOptionsTest extends TestCase
             ['/content/types/1/groups/1', ['DELETE']],
             ['/content/trash', ['GET', 'DELETE']],
             ['/content/trash/1', ['GET', 'DELETE', 'MOVE']],
+            ['/content/trash/1', ['POST'], 'RestoreTrashItemInput+json'],
             ['/content/urlwildcards', ['GET', 'POST']],
             ['/content/urlwildcards/1', ['GET', 'DELETE']],
             ['/user/policies', ['GET']],

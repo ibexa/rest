@@ -780,6 +780,8 @@ ibexa.rest.trash.restore_trash_item:
     controller: Ibexa\Rest\Server\Controller\Trash::restoreItem
     condition: 'ibexa_get_media_type(request) === "RestoreTrashItemInput"'
     methods: [POST]
+    options:
+        options_route_suffix: '_RestoreTrashItemInput'
     requirements:
         trashItemId: \d+
 
