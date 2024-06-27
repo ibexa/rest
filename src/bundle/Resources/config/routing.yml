@@ -437,6 +437,8 @@ ibexa.rest.location.swap:
     controller: Ibexa\Rest\Server\Controller\Location::swap
     condition: 'ibexa_get_media_type(request) === "SwapLocationInput"'
     methods: [POST]
+    options:
+        options_route_suffix: '_SwapLocationInput'
     requirements:
         locationPath: "[0-9/]+"
 
