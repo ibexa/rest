@@ -18,8 +18,7 @@ class HttpOptionsTest extends TestCase
      *
      * @dataProvider providerForTestHttpOptions
      *
-     * @param string $route
-     * @param string[] $expectedMethods
+     * @param array<string> $expectedMethods
      */
     public function testHttpOptions(
         string $route,
@@ -85,7 +84,8 @@ class HttpOptionsTest extends TestCase
             ['/content/typegroups/1', ['GET', 'PATCH', 'DELETE']],
             ['/content/typegroups/1/types', ['GET', 'POST']],
             ['/content/types', ['GET']],
-            ['/content/types/1', ['COPY', 'GET', 'POST', 'DELETE'], 'CopyContentTypeInput+json'],
+            ['/content/types/1', ['POST'], 'CopyContentTypeInput+json'],
+            ['/content/types/1', ['COPY', 'GET', 'POST', 'DELETE']],
             ['/content/types/1/draft', ['DELETE', 'GET', 'PATCH', 'PUBLISH']],
             ['/content/types/1/fieldDefinitions', ['GET']],
             ['/content/types/1/fieldDefinitions/1', ['GET']],
