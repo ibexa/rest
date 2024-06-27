@@ -85,6 +85,7 @@ class HttpOptionsTest extends TestCase
             ['/content/typegroups/1/types', ['GET', 'POST']],
             ['/content/types', ['GET']],
             ['/content/types/1', ['POST'], 'CopyContentTypeInput+json'],
+            ['/content/types/1', ['POST'], 'PublishContentTypeInput+json'],
             ['/content/types/1', ['COPY', 'GET', 'POST', 'DELETE']],
             ['/content/types/1/draft', ['DELETE', 'GET', 'PATCH', 'PUBLISH']],
             ['/content/types/1/fieldDefinitions', ['GET']],
