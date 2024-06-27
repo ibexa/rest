@@ -500,6 +500,8 @@ ibexa.rest.content_type.publish:
     controller: Ibexa\Rest\Server\Controller\ContentType::publishContentTypeDraft
     condition: 'ibexa_get_media_type(request) === "PublishContentTypeInput"'
     methods: [POST]
+    options:
+        options_route_suffix: '_PublishContentTypeInput'
     requirements:
         contentTypeId: \d+
 
