@@ -63,6 +63,7 @@ class HttpOptionsTest extends TestCase
             ['/content/objects/1/versions', ['GET']],
             ['/content/objects/1/versions/1/relations', ['GET', 'POST']],
             ['/content/objects/1/versions/1/relations/1', ['GET', 'DELETE']],
+            ['/content/objects/1/versions/1', ['POST'], 'CreateDraftFromVersionInput+json'],
             ['/content/objects/1/versions/1', ['GET', 'PATCH', 'DELETE', 'COPY', 'PUBLISH']],
             ['/content/objects/1/versions/1/translations/eng-GB', ['DELETE']],
             ['/content/objects/1/currentversion', ['GET', 'COPY']],

@@ -62,6 +62,8 @@ ibexa.rest.content.create_draft_from_version:
     controller: Ibexa\Rest\Server\Controller\Content::createDraftFromVersion
     condition: 'ibexa_get_media_type(request) === "CreateDraftFromVersionInput"'
     methods: [POST]
+    options:
+        options_route_suffix: '_CreateDraftFromVersionInput'
     requirements:
         contentId: \d+
         versionNumber: \d+
