@@ -1032,6 +1032,8 @@ ibexa.rest.user_group.move:
     controller: Ibexa\Rest\Server\Controller\User::moveGroup
     condition: 'ibexa_get_media_type(request) === "MoveUserGroupInput"'
     methods: [POST]
+    options:
+        options_route_suffix: '_MoveUserGroupInput'
     requirements:
         groupPath: "[0-9/]+"
 
