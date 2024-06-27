@@ -490,6 +490,8 @@ ibexa.rest.content_type.copy:
     controller: Ibexa\Rest\Server\Controller\ContentType::copyContentType
     condition: 'ibexa_get_media_type(request) === "CopyContentTypeInput"'
     methods: [POST]
+    options:
+        options_route_suffix: '_CopyContentTypeInput'
     requirements:
         contentTypeId: \d+
 
