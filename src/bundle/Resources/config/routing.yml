@@ -467,6 +467,8 @@ ibexa.rest.move_location:
     controller: Ibexa\Rest\Server\Controller\Location::moveLocation
     condition: 'ibexa_get_media_type(request) === "MoveLocationInput"'
     methods: [POST]
+    options:
+        options_route_suffix: '_MoveLocationInput'
     requirements:
         locationPath: "[0-9/]+"
 
