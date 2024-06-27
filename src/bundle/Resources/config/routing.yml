@@ -813,6 +813,8 @@ ibexa.rest.role.publish:
     controller: Ibexa\Rest\Server\Controller\Role::publishRoleDraft
     condition: 'ibexa_get_media_type(request) === "PublishRoleInput"'
     methods: [POST]
+    options:
+        options_route_suffix: '_PublishRoleInput'
     requirements:
         roleId: \d+
 
