@@ -292,11 +292,41 @@ XML;
     public function testSwap(string $locationHref): void
     {
         $request = $this->createHttpRequest(
-            'POST',
+            'COPY',
             $locationHref,
+            '',
+            '',
+            '',
+            ['Destination' => '/api/ibexa/v2/content/locations/1/43']
+        );
+        $response = $this->sendHttpRequest($request);
+        $newCopiedLocation = $response->getHeader('Location')[0];
+
+        $request = $this->createHttpRequest(
+            'COPY',
+            $locationHref,
+            '',
+            '',
+            '',
+            ['Destination' => '/api/ibexa/v2/content/locations/1/43']
+        );
+        $response = $this->sendHttpRequest($request);
+        $secondCopiedLocation = $response->getHeader('Location')[0];
+
+        $request = $this->createHttpRequest(
+            'POST',
+            $newCopiedLocation,
             'SwapLocationInput+json',
             '',
-            json_encode(['SwapLocationInput' => ['destination' => '/1/5']]) ?: '',
+            json_encode([
+                'SwapLocationInput' => [
+                    'destination' => str_replace(
+                        '/api/ibexa/v2/content/locations',
+                        '',
+                        $secondCopiedLocation,
+                    ),
+                ],
+            ], JSON_THROW_ON_ERROR),
         );
 
         $response = $this->sendHttpRequest($request);
