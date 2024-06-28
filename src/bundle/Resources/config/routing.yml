@@ -478,7 +478,7 @@ ibexa.rest.move_location:
     condition: 'ibexa_get_media_type(request) === "MoveLocationInput"'
     methods: [POST]
     options:
-        options_route_suffix: '_MoveLocationInput'
+        options_route_suffix: 'MoveLocationInput'
     requirements:
         locationPath: "[0-9/]+"
 
