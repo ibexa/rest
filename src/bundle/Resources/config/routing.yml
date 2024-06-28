@@ -501,7 +501,7 @@ ibexa.rest.content_type.publish:
     condition: 'ibexa_get_media_type(request) === "PublishContentTypeInput"'
     methods: [POST]
     options:
-        options_route_suffix: '_PublishContentTypeInput'
+        options_route_suffix: 'PublishContentTypeInput'
     requirements:
         contentTypeId: \d+
 
