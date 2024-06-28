@@ -28,7 +28,7 @@ final class IsContainerTest extends SearchCriterionTestCase
             'is container' => [
                 'json',
                 $this->buildJsonCriterionQuery('"IsContainerCriterion": true'),
-                10,
+                12,
             ],
             'is not container' => [
                 'json',
