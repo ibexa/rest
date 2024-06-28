@@ -531,7 +531,7 @@ ibexa.rest.content_type.copy:
     condition: 'is_content_type_compatible(request, "application/vnd.ibexa.api.CopyContentTypeInput")'
     methods: [POST]
     options:
-        options_route_suffix: '_CopyContentTypeInput'
+        options_route_suffix: 'CopyContentTypeInput'
     requirements:
         contentTypeId: \d+
 
