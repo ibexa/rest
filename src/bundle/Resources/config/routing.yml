@@ -63,7 +63,7 @@ ibexa.rest.content.create_draft_from_version:
     condition: 'ibexa_get_media_type(request) === "CreateDraftFromVersionInput"'
     methods: [POST]
     options:
-        options_route_suffix: '_CreateDraftFromVersionInput'
+        options_route_suffix: 'CreateDraftFromVersionInput'
     requirements:
         contentId: \d+
         versionNumber: \d+
@@ -506,14 +506,6 @@ ibexa.rest.create_location:
 
 # Content types
 
-ibexa.rest.content_type.copy:
-    path: /content/types/{contentTypeId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType:copyContentType
-    condition: 'is_content_type_compatible(request, "application/vnd.ibexa.api.CopyContentTypeInput")'
-    methods: [POST]
-    requirements:
-        contentTypeId: \d+
 
 ibexa.rest.content_type.copy:
     path: /content/types/{contentTypeId}
