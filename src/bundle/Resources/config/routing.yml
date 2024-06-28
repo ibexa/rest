@@ -59,7 +59,7 @@ ibexa.rest.refresh_session:
 
 ibexa.rest.content.copy:
     path: /content/objects/{contentId}
-    controller: Ibexa\Rest\Server\Controller\Content::copyContent
+    controller: Ibexa\Rest\Server\Controller\Content::copy
     condition: 'ibexa_get_media_type(request) === "CopyContentInput"'
     methods: [POST]
     options:

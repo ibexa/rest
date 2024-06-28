@@ -293,17 +293,17 @@ class Content extends RestController
 
         $contentInfo = $contentService->loadContentInfo($contentId);
 
-        $destinationLocationPath = $this->inputDispatcher->parse(
+        /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $destinationLocation */
+        $destinationLocation = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
                 $request->getContent(),
             ),
         );
-        $destinationLocationParts = explode('/', $destinationLocationPath);
 
         $copiedContent = $contentService->copyContent(
             $contentInfo,
-            $locationService->newLocationCreateStruct((int)array_pop($destinationLocationParts)),
+            $locationService->newLocationCreateStruct($destinationLocation->getId()),
         );
 
         return new Values\ResourceCreated(
