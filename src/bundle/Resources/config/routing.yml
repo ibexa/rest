@@ -57,6 +57,16 @@ ibexa.rest.refresh_session:
 # Content
 
 
+ibexa.rest.content.copy:
+    path: /content/objects/{contentId}
+    controller: Ibexa\Rest\Server\Controller\Content::copyContent
+    condition: 'ibexa_get_media_type(request) === "CopyContentInput"'
+    methods: [POST]
+    options:
+        options_route_suffix: '_CopyContentInput'
+    requirements:
+        contentId: \d+
+
 ibexa.rest.redirect_content:
     path: /content/objects
     defaults:

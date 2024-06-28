@@ -57,6 +57,7 @@ class HttpOptionsTest extends TestCase
             ['/content/sections', ['GET', 'POST']],
             ['/content/sections/1', ['GET', 'PATCH', 'DELETE']],
             ['/content/objects', ['GET', 'POST']],
+            ['/content/objects/1', ['POST'], 'CopyContentInput+json'],
             ['/content/objects/1', ['PATCH', 'GET', 'DELETE', 'COPY']],
             ['/content/objects/1/translations/eng-GB', ['DELETE']],
             ['/content/objects/1/relations', ['GET']],
