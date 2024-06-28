@@ -63,7 +63,7 @@ ibexa.rest.content.publish_version:
     condition: 'ibexa_get_media_type(request) === "PublishContentVersionInput"'
     methods: [POST]
     options:
-        options_route_suffix: '_PublishContentVersionInput'
+        options_route_suffix: 'PublishContentVersionInput'
     requirements:
         contentId: \d+
         versionNumber: \d+
