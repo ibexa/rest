@@ -72,7 +72,7 @@ class Mapper
 
         $parts = [
             'ibexa.rest.options',
-            $name,
+            trim($name, '_'),
         ];
 
         // Routes that share path 1-to-1 can result in overwrite.

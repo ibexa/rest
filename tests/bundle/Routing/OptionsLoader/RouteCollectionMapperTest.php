@@ -63,7 +63,7 @@ class RouteCollectionMapperTest extends TestCase
         );
     }
 
-    public function testAddRestRoutesCollectionWithCondition(): void
+    public function testAddRestRoutesCollectionWithConditionAndSuffix(): void
     {
         $restRoutesCollection = new RouteCollection();
         $restRoutesCollection->add(
@@ -72,7 +72,7 @@ class RouteCollectionMapperTest extends TestCase
                 '/route/three',
                 ['POST'],
                 'ibexa_get_media_type(request) === "RouteThreeInput"',
-                ['options_route_suffix' => '_RouteThreeInput'],
+                ['options_route_suffix' => 'RouteThreeInput'],
             ),
         );
 
@@ -80,7 +80,7 @@ class RouteCollectionMapperTest extends TestCase
 
         self::assertCount(1, $optionsRouteCollection);
 
-        $optionsRoute = $optionsRouteCollection->get('ibexa.rest.options.route_three_RouteThreeInput');
+        $optionsRoute = $optionsRouteCollection->get('ibexa.rest.options.route_three.RouteThreeInput');
 
         self::assertInstanceOf(Route::class, $optionsRoute);
 
