@@ -409,7 +409,7 @@ ibexa.rest.location.copy:
     condition: 'ibexa_get_media_type(request) === "CopyLocationInput"'
     methods: [POST]
     options:
-        options_route_suffix: '_CopyLocationInput'
+        options_route_suffix: 'CopyLocationInput'
     requirements:
         locationPath: "[0-9/]+"
 
