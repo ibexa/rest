@@ -814,7 +814,7 @@ ibexa.rest.role.publish:
     condition: 'ibexa_get_media_type(request) === "PublishRoleInput"'
     methods: [POST]
     options:
-        options_route_suffix: '_PublishRoleInput'
+        options_route_suffix: 'PublishRoleInput'
     requirements:
         roleId: \d+
 
