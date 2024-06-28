@@ -63,7 +63,7 @@ ibexa.rest.content.create_draft_from_version:
     condition: 'ibexa_get_media_type(request) === "CreateDraftFromVersionInput"'
     methods: [POST]
     options:
-        options_route_suffix: '_CreateDraftFromVersionInput'
+        options_route_suffix: 'CreateDraftFromVersionInput'
     requirements:
         contentId: \d+
         versionNumber: \d+
