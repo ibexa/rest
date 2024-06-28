@@ -408,6 +408,8 @@ ibexa.rest.location.copy:
     controller: Ibexa\Rest\Server\Controller\Location::copy
     condition: 'ibexa_get_media_type(request) === "CopyLocationInput"'
     methods: [POST]
+    options:
+        options_route_suffix: '_CopyLocationInput'
     requirements:
         locationPath: "[0-9/]+"
 
