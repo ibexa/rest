@@ -70,8 +70,18 @@ class Mapper
     {
         $name = str_replace('/', '_', $route->getPath());
 
+        $parts = [
+            'ibexa.rest.options',
+            $name,
+        ];
+
         // Routes that share path 1-to-1 can result in overwrite.
         // Use "options_route_suffix" to ensure uniqueness.
-        return 'ibexa.rest.options.' . trim($name, '_') . $route->getOption('options_route_suffix');
+        $routeSuffix = $route->getOption('options_route_suffix');
+        if ($routeSuffix !== null) {
+            $parts[] = $routeSuffix;
+        }
+
+        return implode('.', $parts);
     }
 }
