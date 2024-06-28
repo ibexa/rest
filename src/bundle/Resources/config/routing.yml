@@ -1033,7 +1033,7 @@ ibexa.rest.user_group.move:
     condition: 'ibexa_get_media_type(request) === "MoveUserGroupInput"'
     methods: [POST]
     options:
-        options_route_suffix: '_MoveUserGroupInput'
+        options_route_suffix: 'MoveUserGroupInput'
     requirements:
         groupPath: "[0-9/]+"
 
