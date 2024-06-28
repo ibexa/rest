@@ -539,7 +539,7 @@ ibexa.rest.content_type.copy:
     condition: 'ibexa_get_media_type(request) === "CopyContentTypeInput"'
     methods: [POST]
     options:
-        options_route_suffix: '_CopyContentTypeInput'
+        options_route_suffix: 'CopyContentTypeInput'
     requirements:
         contentTypeId: \d+
 
