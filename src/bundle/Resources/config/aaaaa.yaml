@@ -1,0 +1,31 @@
+api_platform.action.entrypoint:
+    Service(api_platform.metadata.resource.name_collection_factory.cached): (ApiPlatform\Metadata\Resource\Factory\CachedResourceNameCollectionFactory)
+        Service(api_platform.cache.metadata.resource):
+        Service(api_platform.metadata.resource.name_collection_factory.yaml): (ApiPlatform\Metadata\Resource\Factory\ExtractorResourceNameCollectionFactory)
+            Service(api_platform.metadata.resource_extractor.yaml): (ApiPlatform\Metadata\Extractor\YamlResourceExtractor)
+                Array (0 element(s))
+                Service(service_container)
+            Service(api_platform.metadata.resource.name_collection_factory.class_name):
+
+    Service(api_platform.state_provider.documentation.content_negotiation): (ApiPlatform\State\Provider\ContentNegotiationProvider)
+        Service(api_platform.swagger_ui.documentation.provider): (ApiPlatform\Symfony\Bundle\SwaggerUi\SwaggerUiProvider)
+            Service(api_platform.swagger_ui.documentation.provider.inner):
+            Service(api_platform.openapi.factory):
+                Service(api_platform.metadata.resource.name_collection_factory.cached):
+                Service(api_platform.metadata.resource.metadata_collection_factory.cached):
+                Service(api_platform.metadata.property.name_collection_factory.cached):
+                Service(api_platform.metadata.property.metadata_factory.cached):
+                Service(api_platform.json_schema.backward_compatible_schema_factory):
+                Service(api_platform.json_schema.type_factory):
+                Service(api_platform.filter_locator):
+                %api_platform.formats%:
+                Service(api_platform.openapi.options):
+                Service(api_platform.pagination_options):
+                Service(api_platform.router):
+        Service(api_platform.negotiator):
+        %api_platform.formats%:
+        %api_platform.error_formats%:
+
+    Service(api_platform.state_processor.documentation.write):
+
+    %api_platform.docs_formats%:
