@@ -14,6 +14,16 @@ ibexa.api_platform.documentation:
         index: index
         _format: ~
 
+
+# OpenAPI documentation
+
+
+ibexa.api_platform.documentation:
+    path: /doc
+    controller: Ibexa\Bundle\Rest\Controller\ApiPlatformController::documentationAction
+
+
+
 # Sections
 
 ibexa.rest.list_sections:
