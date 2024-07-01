@@ -8,6 +8,8 @@
 namespace Ibexa\Bundle\Rest\DependencyInjection;
 
 use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\ConfigurationProcessor;
+use Ibexa\Bundle\Rest\DependencyInjection\Compiler\ClassNameResourceNamePass;
+use Ibexa\Rest\Server\Controller as RestController;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -35,6 +37,8 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
      */
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
+        $this->configureApiPlatformAutotagging($container);
+
         $container->setParameter('ibexa.rest.strict_mode', $mergedConfig['strict_mode']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
@@ -83,5 +87,11 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
                 ],
             ],
         ]);
+    }
+
+    private function configureApiPlatformAutotagging(ContainerBuilder $container): void
+    {
+        $container->registerForAutoconfiguration(RestController::class)
+            ->addTag(ClassNameResourceNamePass::API_PLATFORM_RESOURCE_SERVICE_TAG);
     }
 }
