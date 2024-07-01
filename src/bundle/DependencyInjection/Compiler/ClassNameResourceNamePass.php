@@ -7,36 +7,30 @@
 
 namespace Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 
+use Ibexa\Bundle\Rest\ApiPlatform\ClassNameResourceNameCollectionFactory;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 class ClassNameResourceNamePass implements CompilerPassInterface
 {
-    public const API_PLATFORM_CLASS_NAME_RESOURCE_SERVICE_TAG = 'ibexa.rest.api_platform.class_name_resource';
+    public const API_PLATFORM_RESOURCE_SERVICE_TAG = 'ibexa.api_platform.resource';
 
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('ibexa.api_platform.metadata.resource.name_collection_factory')) {
+        if (!$container->hasDefinition(ClassNameResourceNameCollectionFactory::class)) {
             return;
         }
 
-        $definition = $container->getDefinition('ibexa.api_platform.metadata.resource.name_collection_factory');
+        $definition = $container->getDefinition(ClassNameResourceNameCollectionFactory::class);
 
-        $definition->addMethodCall(
-            'addResources',
-            [[
-                'Ibexa\\Rest\\Server\\Controller\\Language',
-            ]]
-        );
-//        $taggedServiceIds = $container->findTaggedServiceIds(self::INPUT_HANDLER_SERVICE_TAG);
-//        foreach ($taggedServiceIds as $id => $attributes) {
-//            $definition->addMethodCall(
-//                'addResources',
-//                [[
-//                    'Ibexa\\Rest\\Server\\Controller\\Language',
-//                ]]
-//            );
-//        }
+        $taggedServiceIds = $container->findTaggedServiceIds(self::API_PLATFORM_RESOURCE_SERVICE_TAG);
+        foreach ($taggedServiceIds as $id => $attributes) {
+            $taggedServiceDefinition = $container->getDefinition($id);
+            $definition->addMethodCall(
+                'addResources',
+                [[ $taggedServiceDefinition->getClass() ]]
+            );
+        }
     }
 }

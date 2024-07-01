@@ -8,6 +8,16 @@ ibexa.rest.load_root_resource:
     methods: [GET]
 
 
+
+# OpenAPI documentation
+
+
+ibexa.api_platform.documentation:
+    path: /doc
+    controller: Ibexa\Bundle\Rest\Controller\ApiPlatformController::documentationAction
+
+
+
 # Sections
 
 
