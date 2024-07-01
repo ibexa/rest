@@ -8,18 +8,14 @@
 namespace Ibexa\Bundle\Rest\Controller;
 
 use ApiPlatform\Symfony\Action\EntrypointAction;
-use Ibexa\AdminUi\Form\Factory\FormFactory;
-use Ibexa\Contracts\AdminUi\Controller\Controller;
-use Ibexa\Contracts\Core\Repository\PermissionResolver;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ApiPlatformController extends Controller
+class ApiPlatformController extends AbstractController
 {
     public function __construct(
-        private EntrypointAction $entrypointAction,
+        private readonly EntrypointAction $entrypointAction,
     ) {
     }
 
