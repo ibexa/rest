@@ -16,35 +16,15 @@ use Symfony\Component\HttpFoundation\RequestMatcher;
  *
  * This class is mandatory for JWT REST calls recognition. It's used within security.firewalls.ibexa_jwt_rest.request_matcher configuration key.
  */
-final class AuthorizationHeaderRESTRequestMatcher extends RequestMatcher
+final class JWTTokenCreationRESTRequestMatcher extends RequestMatcher
 {
-    private ?string $headerName;
-
-    /**
-     * @param array<string, mixed> $attributes
-     */
-    public function __construct(
-        ?string $headerName = null,
-        string $path = null,
-        string $host = null,
-        $methods = null,
-        $ips = null,
-        array $attributes = [],
-        $schemes = null,
-        int $port = null
-    ) {
-        parent::__construct($path, $host, $methods, $ips, $attributes, $schemes, $port);
-
-        $this->headerName = $headerName;
-    }
-
     public function matches(Request $request): bool
     {
         if ($request->attributes->get('is_rest_request', false) !== true) {
             return false;
         }
 
-        if (!empty($request->headers->get($this->headerName ?? 'Authorization'))) {
+        if ($request->attributes->get('_route') === 'ibexa.rest.create_token') {
             return parent::matches($request);
         }
 
