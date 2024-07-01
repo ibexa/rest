@@ -1,0 +1,33 @@
+services:
+    Ibexa\Bundle\Rest\Controller\ApiPlatformController:
+        parent: Ibexa\Contracts\AdminUi\Controller\Controller
+        arguments:
+            $entrypointAction: '@ibexa.api_platform.action.entrypoint'
+
+    ibexa.api_platform.action.entrypoint:
+        parent: api_platform.action.entrypoint
+        arguments:
+            index_1: '@ibexa.api_platform.state_provider.documentation.content_negotiation'
+
+    ibexa.api_platform.state_provider.documentation.content_negotiation:
+        parent: api_platform.state_provider.documentation.content_negotiation
+        arguments:
+            index_0: '@ibexa.api_platform.swagger_ui.documentation.provider'
+
+    ibexa.api_platform.swagger_ui.documentation.provider:
+        parent: api_platform.swagger_ui.documentation.provider
+        arguments:
+            index_1: '@ibexa.api_platform.ibexa_openapi.factory'
+
+    ibexa.api_platform.ibexa_openapi.factory:
+        class: 'Ibexa\Bundle\Rest\ApiPlatform\OpenApiFactory'
+        decorates: ibexa.api_platform.openapi.factory
+        arguments: ['@.inner']
+
+    ibexa.api_platform.openapi.factory:
+        parent: api_platform.openapi.factory
+        arguments:
+            index_0: '@ibexa.api_platform.metadata.resource.name_collection_factory'
+
+    ibexa.api_platform.metadata.resource.name_collection_factory:
+        class: 'Ibexa\Bundle\Rest\ApiPlatform\ClassNameResourceNameCollectionFactory'

@@ -39,6 +39,7 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('api_platform.yml');
         $loader->load('value_object_visitors.yml');
         $loader->load('input_parsers.yml');
         $loader->load('security.yml');
