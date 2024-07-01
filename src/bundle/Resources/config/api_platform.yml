@@ -1,8 +1,9 @@
 services:
     Ibexa\Bundle\Rest\Controller\ApiPlatformController:
-        parent: Ibexa\Contracts\AdminUi\Controller\Controller
+        autowire: true
+        autoconfigure: true
         arguments:
-            $entrypointAction: '@ibexa.api_platform.action.entrypoint'
+            - '@ibexa.api_platform.action.entrypoint'
 
     ibexa.api_platform.action.entrypoint:
         parent: api_platform.action.entrypoint
@@ -27,7 +28,6 @@ services:
     ibexa.api_platform.openapi.factory:
         parent: api_platform.openapi.factory
         arguments:
-            index_0: '@ibexa.api_platform.metadata.resource.name_collection_factory'
+            index_0: '@Ibexa\Bundle\Rest\ApiPlatform\ClassNameResourceNameCollectionFactory'
 
-    ibexa.api_platform.metadata.resource.name_collection_factory:
-        class: 'Ibexa\Bundle\Rest\ApiPlatform\ClassNameResourceNameCollectionFactory'
+    Ibexa\Bundle\Rest\ApiPlatform\ClassNameResourceNameCollectionFactory: ~

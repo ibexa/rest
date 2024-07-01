@@ -38,7 +38,7 @@ final class OpenApiFactory implements OpenApiFactoryInterface
         $components = $openApi->getComponents();
         $components = $components->withSchemas($schemas);
 
-//        $openApi = $openApi->withComponents($components);
+        $openApi = $openApi->withComponents($components);
 
         return $openApi;
     }
