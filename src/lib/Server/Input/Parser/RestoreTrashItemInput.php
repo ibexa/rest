@@ -15,6 +15,7 @@ use Ibexa\Rest\Input\BaseParser;
 use Ibexa\Rest\Server\Exceptions\ValidationFailedException;
 use Ibexa\Rest\Server\Validation\Builder\Input\Parser\RestoreTrashItemInputValidatorBuilder;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Webmozart\Assert\Assert;
 
 final class RestoreTrashItemInput extends BaseParser
 {
@@ -59,7 +60,11 @@ final class RestoreTrashItemInput extends BaseParser
     {
         $pathParts = explode('/', $path);
 
-        return (int)array_pop($pathParts);
+        $lastPart = array_pop($pathParts);
+
+        Assert::integerish($lastPart);
+
+        return (int)$lastPart;
     }
 
     /**
