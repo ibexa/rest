@@ -1,4 +1,0 @@
-ibexa.api_platform.documentation:
-    path: /api_doc
-    defaults:
-        _controller: 'Ibexa\Bundle\Rest\Controller\ApiPlatformController::documentationAction'
