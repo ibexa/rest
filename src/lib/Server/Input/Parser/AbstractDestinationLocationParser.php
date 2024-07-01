@@ -14,6 +14,7 @@ use Ibexa\Rest\Input\BaseParser;
 use Ibexa\Rest\Server\Exceptions\ValidationFailedException;
 use Ibexa\Rest\Server\Validation\Builder\Input\Parser\BaseInputParserValidatorBuilder;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Webmozart\Assert\Assert;
 
 abstract class AbstractDestinationLocationParser extends BaseParser
 {
@@ -56,8 +57,11 @@ abstract class AbstractDestinationLocationParser extends BaseParser
     private function extractLocationIdFromPath(string $path): int
     {
         $pathParts = explode('/', $path);
+        $lastPart = array_pop($pathParts);
 
-        return (int)array_pop($pathParts);
+        Assert::integerish($lastPart);
+
+        return (int)$lastPart;
     }
 
     /**
