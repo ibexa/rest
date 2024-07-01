@@ -12,7 +12,7 @@ use Ibexa\Rest\Server\Input\Parser\MoveUserGroupInput;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class MoveUserGroupInputValidatorBuilder extends BaseInputParserValidatorBuilder
+final class MoveUserGroupInputValidatorBuilder extends BaseInputParserValidatorBuilder
 {
     protected function buildConstraint(): Constraint
     {
