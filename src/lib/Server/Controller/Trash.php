@@ -11,6 +11,7 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\TrashService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
@@ -173,6 +174,37 @@ class Trash extends RestController
                 [
                     'locationPath' => trim($location->pathString, '/'),
                 ]
+            )
+        );
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
+    public function restoreItem(int $trashItemId, Request $request): Values\ResourceCreated
+    {
+        $locationDestination = $this->inputDispatcher->parse(
+            new Message(
+                ['Content-Type' => $request->headers->get('Content-Type')],
+                $request->getContent(),
+            ),
+        );
+
+        $trashItem = $this->trashService->loadTrashItem($trashItemId);
+
+        if ($locationDestination === null) {
+            $locationDestination = $this->locationService->loadLocation($trashItem->parentLocationId);
+        }
+
+        $location = $this->trashService->recover($trashItem, $locationDestination);
+
+        return new Values\ResourceCreated(
+            $this->router->generate(
+                'ibexa.rest.load_location',
+                [
+                    'locationPath' => trim($location->getPathString(), '/'),
+                ],
             )
         );
     }
