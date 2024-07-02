@@ -114,7 +114,9 @@ final class FieldDefinitionUpdateTest extends BaseTest
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid \'names\' element for FieldDefinitionUpdate.');
+
         $inputArray = $this->getInputArray();
+
         unset($inputArray['names']['value']);
 
         $fieldDefinitionUpdate = $this->getParser();
@@ -126,6 +128,7 @@ final class FieldDefinitionUpdateTest extends BaseTest
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid \'descriptions\' element for FieldDefinitionUpdate.');
         $inputArray = $this->getInputArray();
+
         unset($inputArray['descriptions']['value']);
 
         $fieldDefinitionUpdate = $this->getParser();
@@ -189,7 +192,7 @@ final class FieldDefinitionUpdateTest extends BaseTest
                                         [
                                             'id' => 24,
                                             'fieldTypeIdentifier' => 'ezstring',
-                                            'identifier' => 'title',
+                                            'identifier' => 'foo',
                                         ]
                                     ),
                                 ]),
@@ -245,7 +248,9 @@ final class FieldDefinitionUpdateTest extends BaseTest
     }
 
     /**
-     * @return array{array{string, string, int}}
+     * @return array{
+     *   array{string, string, int}
+     * }
      */
     public function getParseHrefExpectationsMap(): array
     {
