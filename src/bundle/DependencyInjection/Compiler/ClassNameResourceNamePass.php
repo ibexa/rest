@@ -15,7 +15,7 @@ class ClassNameResourceNamePass implements CompilerPassInterface
 {
     public const API_PLATFORM_RESOURCE_SERVICE_TAG = 'ibexa.api_platform.resource';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition(ClassNameResourceNameCollectionFactory::class)) {
             return;
