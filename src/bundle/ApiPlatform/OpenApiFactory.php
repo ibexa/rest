@@ -21,17 +21,52 @@ final class OpenApiFactory implements OpenApiFactoryInterface
         $openApi = $this->decorated->__invoke($context);
 
         $schemas = new \ArrayObject();
-        $schemas['Language'] = [
+        $schemas['BaseObject'] = [
             'type' => 'object',
+            'required' => [ '_media-type', '_href' ],
             'properties' => [
-                'name' => [
+                '_media-type' => [
                     'type' => 'string',
-                    'example' => 'Polish',
                 ],
-                'code' => [
+                '_href' => [
                     'type' => 'string',
-                    'example' => 'Pl-pl',
                 ],
+            ],
+        ];
+        $schemas['Language'] = [
+            'allOf' => [
+                [
+                    '$ref' => '#/components/schemas/BaseObject'
+                ],
+                [
+                    'type' => 'object',
+                    'required' => [ 'id', 'languageCode', 'name', 'enabled' ],
+                    'properties' => [
+                        'id' => [
+                            'description' => 'The language ID (auto generated).',
+                            'type' => 'integer',
+                        ],
+                        'languageCode' => [
+                            'description' => 'The languageCode code.',
+                            'type' => 'string',
+                        ],
+                        'name' => [
+                            'description' => 'Human readable name of the language.',
+                            'type' => 'string',
+                        ],
+                        'enabled' => [
+                            'description' => 'Indicates if the language is enabled or not.',
+                            'type' => 'boolean'
+                        ],
+                    ],
+                ],
+            ],
+        ];
+        $schemas['LanguageList'] = [
+            'description' => ' List of languages.',
+            'type' => 'array',
+            'items' => [
+                '$ref' => '#/components/schemas/Language'
             ],
         ];
 
