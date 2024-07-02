@@ -9,7 +9,7 @@ ibexa.rest.load_root_resource:
 
 ibexa.api_platform.documentation:
     path: /doc
-    controller: Ibexa\Bundle\Rest\Controller\ApiPlatformController::documentationAction
+    controller: ibexa.api_platform.action.entrypoint
 
 # Sections
 
