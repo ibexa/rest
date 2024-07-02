@@ -23,7 +23,7 @@ final class IsUserBasedTest extends SearchCriterionTestCase
             'is not user based' => [
                 'json',
                 $this->buildJsonCriterionQuery('"IsUserBasedCriterion": false'),
-                12,
+                13,
             ],
         ];
     }
