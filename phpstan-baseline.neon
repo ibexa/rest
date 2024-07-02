@@ -6601,11 +6601,6 @@ parameters:
 			path: tests/lib/FieldTypeProcessor/BinaryInputProcessorTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$filename of function unlink expects string, string\\|false given\\.$#"
-			count: 1
-			path: tests/lib/FieldTypeProcessor/BinaryInputProcessorTest.php
-
-		-
 			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\BinaryInputProcessorTest\\:\\:\\$tempDir has no type specified\\.$#"
 			count: 1
 			path: tests/lib/FieldTypeProcessor/BinaryInputProcessorTest.php
@@ -8184,31 +8179,6 @@ parameters:
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FieldDefinitionCreateTest\\:\\:testParseExceptionOnMissingIdentifier\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/Server/Input/Parser/FieldDefinitionCreateTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FieldDefinitionUpdateTest\\:\\:getInputArray\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/lib/Server/Input/Parser/FieldDefinitionUpdateTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FieldDefinitionUpdateTest\\:\\:getParseHrefExpectationsMap\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/lib/Server/Input/Parser/FieldDefinitionUpdateTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FieldDefinitionUpdateTest\\:\\:testParse\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Input/Parser/FieldDefinitionUpdateTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FieldDefinitionUpdateTest\\:\\:testParseExceptionOnInvalidDescriptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Input/Parser/FieldDefinitionUpdateTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FieldDefinitionUpdateTest\\:\\:testParseExceptionOnInvalidNames\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Server/Input/Parser/FieldDefinitionUpdateTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Limitation\\\\PathStringRouteBasedLimitationParserTest\\:\\:getParseHrefExpectationsMap\\(\\) return type has no value type specified in iterable type array\\.$#"
