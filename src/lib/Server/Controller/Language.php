@@ -28,7 +28,7 @@ use Traversable;
                 'content' => [
                     'application/vnd.ibexa.api.LanguageList+xml' => [
                         'schema' => [
-                            '$ref' => "#/components/schemas/LanguageList",
+                            '$ref' => '#/components/schemas/LanguageList',
                         ],
                         'example' => <<<XML
                         <?xml version="1.0" encoding="UTF-8"?>
@@ -48,7 +48,7 @@ use Traversable;
                     ],
                     'application/vnd.ibexa.api.LanguageList+json' => [
                         'schema' => [
-                            '$ref' => "#/components/schemas/LanguageList",
+                            '$ref' => '#/components/schemas/LanguageList',
                         ],
                         'example' => [
                             'LanguageList' => [
@@ -92,7 +92,7 @@ use Traversable;
                 'content' => [
                     'application/vnd.ibexa.api.Language+xml' => [
                         'schema' => [
-                            '$ref' => "#/components/schemas/Language",
+                            '$ref' => '#/components/schemas/Language',
                         ],
                         'example' => <<<XML
                         <?xml version="1.0" encoding="UTF-8"?>
@@ -105,7 +105,7 @@ use Traversable;
                     ],
                     'application/vnd.ibexa.api.Language+json' => [
                         'schema' => [
-                            '$ref' => "#/components/schemas/Language",
+                            '$ref' => '#/components/schemas/Language',
                         ],
                         'example' => [
                             'Language' => [
@@ -114,7 +114,7 @@ use Traversable;
                                 'languageId' => '2',
                                 'languageCode' => 'eng-GB',
                                 'name' => 'English (United Kingdom)',
-                            ]
+                            ],
                         ],
                     ],
                 ],

@@ -4,7 +4,6 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-
 declare(strict_types=1);
 
 namespace Ibexa\Bundle\Rest\ApiPlatform;
@@ -14,7 +13,9 @@ use ApiPlatform\OpenApi\OpenApi;
 
 final class OpenApiFactory implements OpenApiFactoryInterface
 {
-    public function __construct(private readonly OpenApiFactoryInterface $decorated) { }
+    public function __construct(private readonly OpenApiFactoryInterface $decorated)
+    {
+    }
 
     public function __invoke(array $context = []): OpenApi
     {
@@ -23,7 +24,7 @@ final class OpenApiFactory implements OpenApiFactoryInterface
         $schemas = new \ArrayObject();
         $schemas['BaseObject'] = [
             'type' => 'object',
-            'required' => [ '_media-type', '_href' ],
+            'required' => ['_media-type', '_href'],
             'properties' => [
                 '_media-type' => [
                     'type' => 'string',
@@ -36,11 +37,11 @@ final class OpenApiFactory implements OpenApiFactoryInterface
         $schemas['Language'] = [
             'allOf' => [
                 [
-                    '$ref' => '#/components/schemas/BaseObject'
+                    '$ref' => '#/components/schemas/BaseObject',
                 ],
                 [
                     'type' => 'object',
-                    'required' => [ 'id', 'languageCode', 'name', 'enabled' ],
+                    'required' => ['id', 'languageCode', 'name', 'enabled'],
                     'properties' => [
                         'id' => [
                             'description' => 'The language ID (auto generated).',
@@ -56,7 +57,7 @@ final class OpenApiFactory implements OpenApiFactoryInterface
                         ],
                         'enabled' => [
                             'description' => 'Indicates if the language is enabled or not.',
-                            'type' => 'boolean'
+                            'type' => 'boolean',
                         ],
                     ],
                 ],
@@ -66,7 +67,7 @@ final class OpenApiFactory implements OpenApiFactoryInterface
             'description' => ' List of languages.',
             'type' => 'array',
             'items' => [
-                '$ref' => '#/components/schemas/Language'
+                '$ref' => '#/components/schemas/Language',
             ],
         ];
 
