@@ -17,10 +17,14 @@ final class OpenApiFactory implements OpenApiFactoryInterface
     {
     }
 
+    /**
+     * @param array<mixed> $context
+     */
     public function __invoke(array $context = []): OpenApi
     {
         $openApi = $this->decorated->__invoke($context);
 
+        /** @var \ArrayObject<string, mixed> $schemas */
         $schemas = new \ArrayObject();
         $schemas['BaseObject'] = [
             'type' => 'object',
