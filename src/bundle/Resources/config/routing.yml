@@ -20,7 +20,7 @@ ibexa.api_platform.documentation:
 
 ibexa.api_platform.documentation:
     path: /doc
-    controller: Ibexa\Bundle\Rest\Controller\ApiPlatformController::documentationAction
+    controller: ibexa.api_platform.action.entrypoint
 
 
 
