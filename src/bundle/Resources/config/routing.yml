@@ -553,6 +553,7 @@ ibexa.rest.create_location:
 
 # Content types
 
+
 ibexa.rest.content_type.copy:
     path: /content/types/{contentTypeId}
     controller: Ibexa\Rest\Server\Controller\ContentType::copyContentType
