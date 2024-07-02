@@ -8,22 +8,22 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Contracts\Rest\Security;
 
-use Ibexa\Rest\Security\AuthorizationHeaderRESTRequestMatcher;
+use Ibexa\Rest\Security\JWTTokenCreationRESTRequestMatcher;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
-final class AuthorizationHeaderRESTRequestMatcherTest extends TestCase
+final class JWTTokenCreationRESTRequestMatcherTest extends TestCase
 {
     public function testDoesNotMatchNonRestRequests(): void
     {
-        $matcher = new AuthorizationHeaderRESTRequestMatcher();
+        $matcher = new JWTTokenCreationRESTRequestMatcher();
 
         self::assertFalse($matcher->matches(new Request()));
     }
 
     public function testDoesNotMatchRestRequestsWithoutHeader(): void
     {
-        $matcher = new AuthorizationHeaderRESTRequestMatcher();
+        $matcher = new JWTTokenCreationRESTRequestMatcher();
 
         $request = $this->createRequest([
             'is_rest_request' => true,
@@ -32,27 +32,13 @@ final class AuthorizationHeaderRESTRequestMatcherTest extends TestCase
         self::assertFalse($matcher->matches($request));
     }
 
-    public function testMatchesRestRequestsWithHeader(): void
+    public function testMatchesRestJwtCreationEndpoint(): void
     {
-        $matcher = new AuthorizationHeaderRESTRequestMatcher();
+        $matcher = new JWTTokenCreationRESTRequestMatcher();
 
         $request = $this->createRequest([
             'is_rest_request' => true,
-        ], [
-            'HTTP_AUTHORIZATION' => 'Bearer foo',
-        ]);
-
-        self::assertTrue($matcher->matches($request));
-    }
-
-    public function testMatchesRestRequestsWithCustomHeader(): void
-    {
-        $matcher = new AuthorizationHeaderRESTRequestMatcher('X-Foo');
-
-        $request = $this->createRequest([
-            'is_rest_request' => true,
-        ], [
-            'HTTP_X-FOO' => 'Bearer foo',
+            '_route' => 'ibexa.rest.create_token',
         ]);
 
         self::assertTrue($matcher->matches($request));

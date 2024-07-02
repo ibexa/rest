@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Rest\Security\EventListener\JWT;
 
-use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Core\MVC\Symfony\Security\User;
 use Ibexa\Core\Repository\Values\User\User as ApiUser;
 use Ibexa\Rest\Security\EventListener\JWT\AuthenticationSuccessSubscriber;
@@ -27,7 +26,6 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
     public function testGetSubscribedEvents(): void
     {
         $subscriber = new AuthenticationSuccessSubscriber(
-            $this->createMock(PermissionResolver::class),
             $this->getRequestStackMock()
         );
 
@@ -46,15 +44,9 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
         UserInterface $user,
         bool $isPermissionResolverInvoked
     ): void {
-        $permissionResolver = $this->createMock(PermissionResolver::class);
-        $permissionResolver
-            ->expects($isPermissionResolverInvoked === true ? self::once() : self::never())
-            ->method('setCurrentUserReference');
-
         $event = new AuthenticationSuccessEvent(['token' => 'foo_token'], $user, new Response());
 
         $subscriber = new AuthenticationSuccessSubscriber(
-            $permissionResolver,
             $this->getRequestStackMock()
         );
 
@@ -91,7 +83,6 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
     public function testResponseIsMissingJwtToken(): void
     {
         $subscriber = new AuthenticationSuccessSubscriber(
-            $this->createMock(PermissionResolver::class),
             $this->getRequestStackMock()
         );
 
@@ -113,7 +104,6 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
     public function testSkippingResponseNormalizingForNonRestRequest(): void
     {
         $subscriber = new AuthenticationSuccessSubscriber(
-            $this->createMock(PermissionResolver::class),
             $this->getRequestStackMock(false)
         );
 

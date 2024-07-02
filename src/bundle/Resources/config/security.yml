@@ -11,6 +11,8 @@ services:
         arguments:
             $headerName: '%ibexa.rest.authorization_header_name%'
 
+    Ibexa\Rest\Security\JWTTokenCreationRESTRequestMatcher: ~
+
     Ibexa\Rest\Server\Security\CsrfTokenManager:
         arguments:
             - '@?security.csrf.token_generator'

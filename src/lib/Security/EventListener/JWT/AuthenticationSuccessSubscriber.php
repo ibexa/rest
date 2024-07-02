@@ -8,8 +8,6 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Security\EventListener\JWT;
 
-use Ibexa\Contracts\Core\Repository\PermissionResolver;
-use Ibexa\Core\MVC\Symfony\Security\UserInterface as IbexaUser;
 use Ibexa\Rest\Server\Exceptions\BadResponseException;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
@@ -19,7 +17,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 final readonly class AuthenticationSuccessSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private PermissionResolver $permissionResolver,
         private RequestStack $requestStack,
     ) {
     }
@@ -40,11 +37,6 @@ final readonly class AuthenticationSuccessSubscriber implements EventSubscriberI
 
         if (!$request->attributes->get('is_rest_request')) {
             return;
-        }
-
-        $user = $event->getUser();
-        if ($user instanceof IbexaUser) {
-            $this->permissionResolver->setCurrentUserReference($user->getAPIUser());
         }
 
         $this->normalizeResponseToRest($event);
