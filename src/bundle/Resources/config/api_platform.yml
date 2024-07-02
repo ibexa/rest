@@ -1,10 +1,4 @@
 services:
-    Ibexa\Bundle\Rest\Controller\ApiPlatformController:
-        autowire: true
-        autoconfigure: true
-        arguments:
-            - '@ibexa.api_platform.action.entrypoint'
-
     ibexa.api_platform.action.entrypoint:
         parent: api_platform.action.entrypoint
         arguments:
