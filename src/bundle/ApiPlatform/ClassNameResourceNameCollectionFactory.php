@@ -25,7 +25,6 @@ final class ClassNameResourceNameCollectionFactory implements ResourceNameCollec
     public function create(): ResourceNameCollection
     {
         return new ResourceNameCollection($this->resources);
-        // TODO: autotagging
     }
 
     /**
