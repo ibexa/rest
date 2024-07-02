@@ -10,7 +10,6 @@ namespace Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 use Ibexa\Bundle\Rest\ApiPlatform\ClassNameResourceNameCollectionFactory;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 
 class ClassNameResourceNamePass implements CompilerPassInterface
 {
@@ -29,7 +28,7 @@ class ClassNameResourceNamePass implements CompilerPassInterface
             $taggedServiceDefinition = $container->getDefinition($id);
             $definition->addMethodCall(
                 'addResources',
-                [[ $taggedServiceDefinition->getClass() ]]
+                [[$taggedServiceDefinition->getClass()]]
             );
         }
     }
