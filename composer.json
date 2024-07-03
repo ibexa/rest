@@ -28,7 +28,7 @@
         "ext-libxml": "*",
         "ext-simplexml": "*",
         "ext-xmlwriter": "*",
-        "api-platform/core": "3.3.x-dev",
+        "api-platform/core": "dev-downgraded-deps",
         "hautelook/templated-uri-bundle": "^3.4",
         "ibexa/core": "~5.0.x-dev",
         "ibexa/polyfill-php82": "^1.0",
@@ -86,8 +86,8 @@
     },
     "repositories": {
         "api-platform/core": {
-            "type": "path",
-            "url": "~/Sites/openapi-forks/core"
+            "type": "vcs",
+            "url": "https://github.com/tischsoic/core"
         }
     },
     "minimum-stability": "dev"
