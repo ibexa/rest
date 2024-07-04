@@ -19,8 +19,11 @@ ibexa.api_platform.documentation:
 
 
 ibexa.api_platform.documentation:
-    path: /doc
+    path: /doc/{index}.{_format}
     controller: ibexa.api_platform.action.entrypoint
+    defaults:
+        index: index
+        _format: ~
 
 
 
