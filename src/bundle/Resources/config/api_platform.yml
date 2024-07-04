@@ -2,6 +2,7 @@ services:
     ibexa.api_platform.action.entrypoint:
         parent: api_platform.action.entrypoint
         arguments:
+            index_0: '@Ibexa\Bundle\Rest\ApiPlatform\ClassNameResourceNameCollectionFactory'
             index_1: '@ibexa.api_platform.state_provider.documentation.content_negotiation'
 
     ibexa.api_platform.state_provider.documentation.content_negotiation:
