@@ -5516,11 +5516,6 @@ parameters:
 			path: tests/bundle/Routing/OptionsLoader/MapperTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Routing\\\\OptionsLoader\\\\RouteCollectionMapperTest\\:\\:createRoute\\(\\) has parameter \\$methods with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/bundle/Routing/OptionsLoader/RouteCollectionMapperTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Routing\\\\OptionsLoader\\\\RouteCollectionMapperTest\\:\\:testAddRestRoutesCollection\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/bundle/Routing/OptionsLoader/RouteCollectionMapperTest.php

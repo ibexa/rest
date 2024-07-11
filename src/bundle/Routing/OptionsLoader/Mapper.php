@@ -65,15 +65,23 @@ class Mapper
 
     /**
      * Returns the OPTIONS name of a REST route.
-     *
-     * @param $route Route
-     *
-     * @return string
      */
-    public function getOptionsRouteName(Route $route)
+    public function getOptionsRouteName(Route $route): string
     {
         $name = str_replace('/', '_', $route->getPath());
 
-        return 'ibexa.rest.options.' . trim($name, '_');
+        $parts = [
+            'ibexa.rest.options',
+            trim($name, '_'),
+        ];
+
+        // Routes that share path 1-to-1 can result in overwrite.
+        // Use "options_route_suffix" to ensure uniqueness.
+        $routeSuffix = $route->getOption('options_route_suffix');
+        if ($routeSuffix !== null) {
+            $parts[] = $routeSuffix;
+        }
+
+        return implode('.', $parts);
     }
 }
