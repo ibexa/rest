@@ -1275,7 +1275,6 @@ ibexa.rest.load_bookmarks:
     methods: [GET]
 
 # JWT
-
 ibexa.rest.create_token:
     path: /user/token/jwt
     controller: Ibexa\Rest\Server\Controller\JWT::createToken
