@@ -485,15 +485,6 @@ ibexa.rest.create_location:
 
 # Content types
 
-ibexa.rest.content_type.copy:
-    path: /content/types/{contentTypeId}
-    controller: Ibexa\Rest\Server\Controller\ContentType::copyContentType
-    condition: 'ibexa_get_media_type(request) === "CopyContentTypeInput"'
-    methods: [POST]
-    options:
-        options_route_suffix: 'CopyContentTypeInput'
-    requirements:
-        contentTypeId: \d+
 
 ibexa.rest.content_type.copy:
     path: /content/types/{contentTypeId}
