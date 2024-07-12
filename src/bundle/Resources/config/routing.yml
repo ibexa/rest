@@ -809,6 +809,16 @@ ibexa.rest.list_policies_for_user:
 # Roles
 
 
+ibexa.rest.role.publish:
+    path: /user/roles/{roleId}/draft
+    controller: Ibexa\Rest\Server\Controller\Role::publishRoleDraft
+    condition: 'ibexa_get_media_type(request) === "PublishRoleInput"'
+    methods: [POST]
+    options:
+        options_route_suffix: 'PublishRoleInput'
+    requirements:
+        roleId: \d+
+
 ibexa.rest.list_roles:
     path: /user/roles
     defaults:
