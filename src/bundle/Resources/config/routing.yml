@@ -57,6 +57,17 @@ ibexa.rest.refresh_session:
 # Content
 
 
+ibexa.rest.content.publish_version:
+    path: /content/objects/{contentId}/versions/{versionNumber}
+    controller: Ibexa\Rest\Server\Controller\Content::publishVersion
+    condition: 'ibexa_get_media_type(request) === "PublishContentVersionInput"'
+    methods: [POST]
+    options:
+        options_route_suffix: 'PublishContentVersionInput'
+    requirements:
+        contentId: \d+
+        versionNumber: \d+
+
 ibexa.rest.redirect_content:
     path: /content/objects
     defaults:
