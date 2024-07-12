@@ -4036,11 +4036,6 @@ parameters:
 			path: tests/bundle/Functional/LocationTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\LocationTest\\:\\:testMoveSubtree\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/bundle/Functional/LocationTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\LocationTest\\:\\:testMoveSubtree\\(\\) has parameter \\$locationHref with no type specified\\.$#"
 			count: 1
 			path: tests/bundle/Functional/LocationTest.php

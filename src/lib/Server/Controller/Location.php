@@ -280,6 +280,39 @@ class Location extends RestController
     }
 
     /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     */
+    public function moveLocation(Request $request, string $locationPath): Values\ResourceCreated
+    {
+        $destinationLocation = $this->inputDispatcher->parse(
+            new Message(
+                ['Content-Type' => $request->headers->get('Content-Type')],
+                $request->getContent(),
+            ),
+        );
+
+        $locationToMove = $this->locationService->loadLocation(
+            $this->extractLocationIdFromPath($locationPath),
+        );
+
+        $this->locationService->moveSubtree($locationToMove, $destinationLocation);
+
+        // Reload the location to get a new subtree position
+        $locationToMove = $this->locationService->loadLocation($locationToMove->id);
+
+        return new Values\ResourceCreated(
+            $this->router->generate(
+                'ibexa.rest.load_location',
+                [
+                    'locationPath' => trim($locationToMove->getPathString(), '/'),
+                ],
+            ),
+        );
+    }
+
+    /**
      * Swaps a location with another one.
      *
      * @param string $locationPath

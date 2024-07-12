@@ -139,7 +139,7 @@ XML;
      *
      * @depends testCopySubtree
      */
-    public function testMoveSubtree($locationHref)
+    public function testMoveSubtree($locationHref): string
     {
         $request = $this->createHttpRequest(
             'MOVE',
@@ -153,6 +153,8 @@ XML;
 
         self::assertHttpResponseCodeEquals($response, 201);
         self::assertHttpResponseHasHeader($response, 'Location');
+
+        return $locationHref;
     }
 
     /**
@@ -261,5 +263,24 @@ XML;
         $this->addCreatedElement($href);
 
         return $href;
+    }
+
+    /**
+     * @depends testMoveSubtree
+     */
+    public function testMoveLocation(string $locationHref): void
+    {
+        $request = $this->createHttpRequest(
+            'POST',
+            $locationHref,
+            'MoveLocationInput+json',
+            '',
+            json_encode(['MoveLocationInput' => ['destination' => '/1/2']], JSON_THROW_ON_ERROR),
+        );
+
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 201);
+        self::assertHttpResponseHasHeader($response, 'Location');
     }
 }
