@@ -65,6 +65,16 @@ ibexa.rest.content.create_draft_from_version:
     options:
         options_route_suffix: 'CreateDraftFromVersionInput'
 
+ibexa.rest.content.create_draft_from_current_version:
+    path: /content/objects/{contentId}/currentversion
+    controller: Ibexa\Rest\Server\Controller\Content::createDraftFromCurrentVersion
+    condition: 'ibexa_get_media_type(request) === "CreateDraftFromCurrentVersionInput"'
+    methods: [POST]
+    options:
+        options_route_suffix: 'CreateDraftFromCurrentVersionInput'
+    requirements:
+        contentId: \d+
+
 ibexa.rest.content.publish_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
     controller: Ibexa\Rest\Server\Controller\Content::publishVersion
