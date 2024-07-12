@@ -67,6 +67,17 @@ ibexa.rest.content.create_draft_from_current_version:
     requirements:
         contentId: \d+
 
+ibexa.rest.content.publish_version:
+    path: /content/objects/{contentId}/versions/{versionNumber}
+    controller: Ibexa\Rest\Server\Controller\Content::publishVersion
+    condition: 'ibexa_get_media_type(request) === "PublishContentVersionInput"'
+    methods: [POST]
+    options:
+        options_route_suffix: 'PublishContentVersionInput'
+    requirements:
+        contentId: \d+
+        versionNumber: \d+
+
 ibexa.rest.redirect_content:
     path: /content/objects
     defaults:
@@ -506,6 +517,16 @@ ibexa.rest.create_location:
 # Content types
 
 
+ibexa.rest.content_type.publish_draft:
+    path: /content/types/{contentTypeId}/draft
+    controller: Ibexa\Rest\Server\Controller\ContentType::publishContentTypeDraft
+    condition: 'ibexa_get_media_type(request) === "PublishContentTypeInput"'
+    methods: [POST]
+    options:
+        options_route_suffix: 'PublishContentTypeInput'
+    requirements:
+        contentTypeId: \d+
+
 ibexa.rest.content_type.copy:
     path: /content/types/{contentTypeId}
     controller: Ibexa\Rest\Server\Controller\ContentType::copyContentType
@@ -818,6 +839,16 @@ ibexa.rest.list_policies_for_user:
 
 # Roles
 
+
+ibexa.rest.role.publish:
+    path: /user/roles/{roleId}/draft
+    controller: Ibexa\Rest\Server\Controller\Role::publishRoleDraft
+    condition: 'ibexa_get_media_type(request) === "PublishRoleInput"'
+    methods: [POST]
+    options:
+        options_route_suffix: 'PublishRoleInput'
+    requirements:
+        roleId: \d+
 
 ibexa.rest.list_roles:
     path: /user/roles
