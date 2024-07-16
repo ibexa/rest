@@ -498,14 +498,6 @@ ibexa.rest.move_subtree:
     requirements:
         locationPath: "[0-9/]+"
 
-ibexa.rest.move_location:
-    path: /content/locations/{locationPath}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location:moveLocation
-    methods: [POST]
-    requirements:
-        locationPath: "[0-9/]+"
-
 ibexa.rest.swap_location:
     path: /content/locations/{locationPath}
     defaults:
