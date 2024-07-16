@@ -390,3 +390,8 @@ services:
         parent: hautelook.router.template
         calls:
             - [ setOption, [ strict_requirements, ~ ] ]
+
+    Ibexa\Contracts\Rest\Input\Parser\Query\Criterion\BaseCriterionProcessor:
+        abstract: true
+        arguments:
+            $parsingDispatcher: '@Ibexa\Contracts\Rest\Input\ParsingDispatcher'
