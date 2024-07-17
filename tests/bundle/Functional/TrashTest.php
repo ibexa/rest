@@ -169,4 +169,38 @@ class TrashTest extends RESTFunctionalTestCase
 
         return $trashHref;
     }
+
+    public function testRestoreItemWithDestination(): void
+    {
+        $trashItemHref = $this->createTrashItem('testItemToRestore');
+
+        $request = $this->createHttpRequest(
+            'POST',
+            $trashItemHref,
+            'RestoreTrashItemInput+json',
+            '',
+            json_encode(['RestoreTrashItemInput' => ['destination' => '/1/2']], JSON_THROW_ON_ERROR),
+        );
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 201);
+        self::assertHttpResponseHasHeader($response, 'Location');
+    }
+
+    public function testRestoreTrashItemWithoutDestination(): void
+    {
+        $trashItemHref = $this->createTrashItem('testItemToRestore');
+
+        $request = $this->createHttpRequest(
+            'POST',
+            $trashItemHref,
+            'RestoreTrashItemInput+json',
+            '',
+            json_encode(['RestoreTrashItemInput' => []], JSON_THROW_ON_ERROR),
+        );
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 201);
+        self::assertHttpResponseHasHeader($response, 'Location');
+    }
 }
