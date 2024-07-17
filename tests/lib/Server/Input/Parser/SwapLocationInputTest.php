@@ -9,12 +9,12 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\LocationService;
-use Ibexa\Rest\Server\Input\Parser\MoveLocation;
+use Ibexa\Rest\Server\Input\Parser\SwapLocationInput;
 use Symfony\Component\Validator\Validation;
 
-final class MoveLocationTest extends AbstractDestinationLocationInputTest
+final class SwapLocationInputTest extends AbstractDestinationLocationInputTest
 {
-    private const string PARSER = 'MoveLocation';
+    private const string PARSER = 'SwapLocationInput';
 
     public function testParse(): void
     {
@@ -31,13 +31,13 @@ final class MoveLocationTest extends AbstractDestinationLocationInputTest
         $this->parseExceptionOnInvalidDestinationElement(self::PARSER);
     }
 
-    protected function internalGetParser(): MoveLocation
+    protected function internalGetParser(): SwapLocationInput
     {
         $locationService = $this->createMock(LocationService::class);
         $this->locationService = $locationService;
         $this->validator = Validation::createValidator();
 
-        return new MoveLocation(
+        return new SwapLocationInput(
             $this->locationService,
             $this->validator,
         );
