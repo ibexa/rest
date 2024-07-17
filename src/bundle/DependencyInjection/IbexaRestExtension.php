@@ -9,6 +9,8 @@ namespace Ibexa\Bundle\Rest\DependencyInjection;
 
 use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\ConfigurationProcessor;
 use Ibexa\Bundle\Rest\DependencyInjection\Compiler\ClassNameResourceNamePass;
+use Ibexa\Bundle\Rest\DependencyInjection\Compiler\SchemaProviderPass;
+use Ibexa\Rest\ApiPlatform\SchemasProviderInterface;
 use Ibexa\Rest\Server\Controller as RestController;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Resource\FileResource;
@@ -93,5 +95,8 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
     {
         $container->registerForAutoconfiguration(RestController::class)
             ->addTag(ClassNameResourceNamePass::API_PLATFORM_RESOURCE_SERVICE_TAG);
+
+        $container->registerForAutoconfiguration(SchemasProviderInterface::class)
+            ->addTag(SchemaProviderPass::API_PLATFORM_SCHEMA_PROVIDER_SERVICE_TAG);
     }
 }

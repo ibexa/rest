@@ -18,7 +18,9 @@ services:
     ibexa.api_platform.ibexa_openapi.factory:
         class: 'Ibexa\Bundle\Rest\ApiPlatform\OpenApiFactory'
         decorates: ibexa.api_platform.openapi.factory
-        arguments: ['@.inner']
+        arguments:
+            - '@.inner'
+            - '@Ibexa\Bundle\Rest\ApiPlatform\SchemasCollectionFactory'
 
     ibexa.api_platform.openapi.factory:
         parent: api_platform.openapi.factory
@@ -26,3 +28,18 @@ services:
             index_0: '@Ibexa\Bundle\Rest\ApiPlatform\ClassNameResourceNameCollectionFactory'
 
     Ibexa\Bundle\Rest\ApiPlatform\ClassNameResourceNameCollectionFactory: ~
+
+
+    # Collecting schemas
+
+    Ibexa\Bundle\Rest\ApiPlatform\SchemasCollectionFactory: ~
+
+    ibexa.api_platform.schemas_provider.rest:
+        class: Ibexa\Rest\ApiPlatform\SchemasProvider
+        autowire: true
+        autoconfigure: true
+        arguments:
+            $files:
+                - '@@IbexaRestBundle/Resources/api_platform/base.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/language_schemas.yml'
+

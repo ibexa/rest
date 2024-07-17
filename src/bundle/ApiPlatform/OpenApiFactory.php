@@ -13,8 +13,10 @@ use ApiPlatform\OpenApi\OpenApi;
 
 final class OpenApiFactory implements OpenApiFactoryInterface
 {
-    public function __construct(private readonly OpenApiFactoryInterface $decorated)
-    {
+    public function __construct(
+        private readonly OpenApiFactoryInterface $decorated,
+        private readonly SchemasCollectionFactory $schemaCollectionFactory,
+    ) {
     }
 
     /**
@@ -24,59 +26,11 @@ final class OpenApiFactory implements OpenApiFactoryInterface
     {
         $openApi = $this->decorated->__invoke($context);
 
-        /** @var \ArrayObject<string, mixed> $schemas */
-        $schemas = new \ArrayObject();
-        $schemas['BaseObject'] = [
-            'type' => 'object',
-            'required' => ['_media-type', '_href'],
-            'properties' => [
-                '_media-type' => [
-                    'type' => 'string',
-                ],
-                '_href' => [
-                    'type' => 'string',
-                ],
-            ],
-        ];
-        $schemas['Language'] = [
-            'allOf' => [
-                [
-                    '$ref' => '#/components/schemas/BaseObject',
-                ],
-                [
-                    'type' => 'object',
-                    'required' => ['id', 'languageCode', 'name', 'enabled'],
-                    'properties' => [
-                        'id' => [
-                            'description' => 'The language ID (auto generated).',
-                            'type' => 'integer',
-                        ],
-                        'languageCode' => [
-                            'description' => 'The languageCode code.',
-                            'type' => 'string',
-                        ],
-                        'name' => [
-                            'description' => 'Human readable name of the language.',
-                            'type' => 'string',
-                        ],
-                        'enabled' => [
-                            'description' => 'Indicates if the language is enabled or not.',
-                            'type' => 'boolean',
-                        ],
-                    ],
-                ],
-            ],
-        ];
-        $schemas['LanguageList'] = [
-            'description' => ' List of languages.',
-            'type' => 'array',
-            'items' => [
-                '$ref' => '#/components/schemas/Language',
-            ],
-        ];
+        $schemasCollection = $this->schemaCollectionFactory->create();
+        $schemas = iterator_to_array($schemasCollection);
 
         $components = $openApi->getComponents();
-        $components = $components->withSchemas($schemas);
+        $components = $components->withSchemas(new \ArrayObject($schemas));
 
         $openApi = $openApi->withComponents($components);
 
