@@ -23,6 +23,7 @@ use Ibexa\Rest\Server\Values;
 use Ibexa\Rest\Server\Values\RestContentCreateStruct;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
@@ -801,7 +802,7 @@ class Content extends RestController
         $response = $this->forward('ezpublish_rest.controller.views:createView');
 
         // Add 301 status code and location href
-        $response->setStatusCode(301);
+        $response->setStatusCode(Response::HTTP_MOVED_PERMANENTLY);
         $response->headers->set('Location', $this->router->generate('ibexa.rest.views.create'));
 
         return $response;
