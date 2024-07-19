@@ -44,9 +44,9 @@ final class JWTUser implements UserInterface
         return $this->wrappedUser->getSalt();
     }
 
-    public function getUsername(): string
+    public function getUserIdentifier(): string
     {
-        return $this->userIdentifier ?? $this->wrappedUser->getUsername();
+        return $this->userIdentifier ?? $this->wrappedUser->getUserIdentifier();
     }
 
     public function getWrappedUser(): UserInterface
