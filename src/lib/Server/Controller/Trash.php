@@ -181,6 +181,7 @@ class Trash extends RestController
     /**
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
      */
     public function restoreItem(int $trashItemId, Request $request): Values\ResourceCreated
     {
