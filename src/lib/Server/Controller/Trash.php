@@ -127,9 +127,9 @@ class Trash extends RestController
      *
      * @param $trashItemId
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
      * @return \Ibexa\Rest\Server\Values\ResourceCreated
+     *
+     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      */
     public function restoreTrashItem($trashItemId, Request $request)
     {
@@ -194,7 +194,11 @@ class Trash extends RestController
         $trashItem = $this->trashService->loadTrashItem($trashItemId);
 
         if ($locationDestination === null) {
-            $locationDestination = $this->locationService->loadLocation($trashItem->parentLocationId);
+            try {
+                $locationDestination = $this->locationService->loadLocation($trashItem->parentLocationId);
+            } catch (NotFoundException $e) {
+                throw new ForbiddenException(/** @Ignore */ $e->getMessage());
+            }
         }
 
         $location = $this->trashService->recover($trashItem, $locationDestination);
