@@ -432,6 +432,16 @@ ibexa.rest.languages.view:
 
 # Locations
 
+ibexa.rest.trash_location:
+    path: /content/locations/{locationPath}
+    controller: Ibexa\Rest\Server\Controller\Trash::trashLocation
+    condition: 'ibexa_get_media_type(request) === "TrashLocationInput"'
+    methods: [POST]
+    options:
+        options_route_suffix: 'TrashLocationInput'
+    requirements:
+        locationPath: "[0-9/]+"
+
 ibexa.rest.location.swap:
     path: /content/locations/{locationPath}
     controller: Ibexa\Rest\Server\Controller\Location::swap
@@ -774,16 +784,6 @@ ibexa.rest.unlink_content_type_from_group:
 
 # Trash
 
-
-ibexa.rest.trash_location:
-    path: /content/locations/{locationPath}
-    controller: Ibexa\Rest\Server\Controller\Trash::trashLocation
-    condition: 'ibexa_get_media_type(request) === "TrashLocationInput"'
-    methods: [POST]
-    options:
-        options_route_suffix: 'TrashLocationInput'
-    requirements:
-        locationPath: "[0-9/]+"
 
 ibexa.rest.trash.restore_trash_item:
     path: /content/trash/{trashItemId}
