@@ -436,7 +436,7 @@ ibexa.rest.trash_location:
     path: /content/locations/{locationPath}
     controller: Ibexa\Rest\Server\Controller\Trash::trashLocation
     condition: 'ibexa_get_media_type(request) === "TrashLocationInput"'
-    methods: [POST]
+    methods: [POST, TRASH]
     options:
         options_route_suffix: 'TrashLocationInput'
     requirements:
