@@ -198,7 +198,7 @@ class Trash extends RestController
             try {
                 $locationDestination = $this->locationService->loadLocation($trashItem->parentLocationId);
             } catch (NotFoundException $e) {
-                throw new ForbiddenException(/** @Ignore */ $e->getMessage());
+                throw new ForbiddenException(/** @Ignore */ $e->getMessage(), 1, $e);
             }
         }
 
