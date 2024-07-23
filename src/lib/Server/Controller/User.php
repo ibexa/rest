@@ -632,7 +632,7 @@ final class User extends RestController
     }
 
     /**
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Rest\Exceptions\ForbiddenException
      * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
      */
     public function moveGroup(string $groupPath, Request $request): Values\ResourceCreated
@@ -645,13 +645,17 @@ final class User extends RestController
             $userGroupLocation->contentId,
         );
 
-        /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $destinationLocation */
-        $destinationLocation = $this->inputDispatcher->parse(
-            new Message(
-                ['Content-Type' => $request->headers->get('Content-Type')],
-                $request->getContent(),
-            ),
-        );
+        try {
+            /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $destinationLocation */
+            $destinationLocation = $this->inputDispatcher->parse(
+                new Message(
+                    ['Content-Type' => $request->headers->get('Content-Type')],
+                    $request->getContent(),
+                ),
+            );
+        } catch (ApiExceptions\NotFoundException $e) {
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage(), 1, $e);
+        }
 
         $destinationGroup = $this->userService->loadUserGroup(
             $destinationLocation->getContent()->getId(),

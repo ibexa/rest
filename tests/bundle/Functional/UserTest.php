@@ -400,7 +400,7 @@ XML;
     /**
      * @depends testMoveUserGroup
      */
-    public function testMoveGroup(ResponseInterface $response): void
+    public function testMoveGroup(ResponseInterface $response): ResponseInterface
     {
         $userGroupHref = $response->getHeader('Location')[0];
 
@@ -419,6 +419,31 @@ XML;
 
         self::assertHttpResponseCodeEquals($response, 201);
         self::assertHttpResponseHasHeader($response, 'Location');
+
+        return $response;
+    }
+
+    /**
+     * @depends testMoveGroup
+     */
+    public function testMoveGroupToMissingLocationThrowsForbiddenException(ResponseInterface $response): void
+    {
+        $userGroupHref = $response->getHeader('Location')[0];
+
+        $request = $this->createHttpRequest(
+            'POST',
+            $userGroupHref,
+            'MoveUserGroupInput+json',
+            '',
+            json_encode(
+                ['MoveUserGroupInput' => ['destination' => '/1/5/333999']],
+                JSON_THROW_ON_ERROR,
+            ),
+        );
+
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 403);
     }
 
     /**
