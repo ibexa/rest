@@ -235,4 +235,47 @@ class TrashTest extends RESTFunctionalTestCase
         self::assertHttpResponseCodeEquals($response, 201);
         self::assertHttpResponseHasHeader($response, 'Location');
     }
+
+    public function testRestoreTrashItemWithMissingOriginalLocationThrowsException(): void
+    {
+        $containerFolder = $this->createFolder('container', '/api/ibexa/v2/content/locations/1/2');
+        $containerFolderLocations = $this->getContentLocations($containerFolder['_href']);
+        $containerFolderLocationHref = $containerFolderLocations['LocationList']['Location'][0]['_href'];
+
+        $folder = $this->createFolder('toRemove', $containerFolderLocationHref);
+        $folderLocations = $this->getContentLocations($folder['_href']);
+
+        // Send folder to trash
+        $trashItemHref = $this->sendLocationToTrash($folderLocations['LocationList']['Location'][0]['_href']);
+
+        // Send container folder to trash
+        $this->sendLocationToTrash($containerFolderLocationHref);
+
+        $request = $this->createHttpRequest(
+            'POST',
+            $trashItemHref,
+            'RestoreTrashItemInput+json',
+            '',
+            json_encode(['RestoreTrashItemInput' => []], JSON_THROW_ON_ERROR),
+        );
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 403);
+    }
+
+    public function testRestoreTrashItemToMissingLocationThrowsForbiddenException(): void
+    {
+        $trashItemHref = $this->createTrashItem('testItemToRestore');
+
+        $request = $this->createHttpRequest(
+            'POST',
+            $trashItemHref,
+            'RestoreTrashItemInput+json',
+            '',
+            json_encode(['RestoreTrashItemInput' => ['destination' => '/1/22222']], JSON_THROW_ON_ERROR),
+        );
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 403);
+    }
 }
