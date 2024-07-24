@@ -230,4 +230,20 @@ class TrashTest extends RESTFunctionalTestCase
 
         self::assertHttpResponseCodeEquals($response, 403);
     }
+
+    public function testRestoreTrashItemToMissingLocationThrowsForbiddenException(): void
+    {
+        $trashItemHref = $this->createTrashItem('testItemToRestore');
+
+        $request = $this->createHttpRequest(
+            'POST',
+            $trashItemHref,
+            'RestoreTrashItemInput+json',
+            '',
+            json_encode(['RestoreTrashItemInput' => ['destination' => '/1/22222']], JSON_THROW_ON_ERROR),
+        );
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 403);
+    }
 }

@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Controller;
 
+use Ibexa\Contracts\Core\Repository\Exceptions as ApiExceptions;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\TrashService;
@@ -185,12 +186,17 @@ class Trash extends RestController
      */
     public function restoreItem(int $trashItemId, Request $request): Values\ResourceCreated
     {
-        $locationDestination = $this->inputDispatcher->parse(
-            new Message(
-                ['Content-Type' => $request->headers->get('Content-Type')],
-                $request->getContent(),
-            ),
-        );
+        try {
+            /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location|null $locationDestination */
+            $locationDestination = $this->inputDispatcher->parse(
+                new Message(
+                    ['Content-Type' => $request->headers->get('Content-Type')],
+                    $request->getContent(),
+                ),
+            );
+        } catch (ApiExceptions\NotFoundException $e) {
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage(), 1, $e);
+        }
 
         $trashItem = $this->trashService->loadTrashItem($trashItemId);
 
