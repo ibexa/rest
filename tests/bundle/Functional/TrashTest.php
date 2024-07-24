@@ -133,6 +133,38 @@ class TrashTest extends RESTFunctionalTestCase
         self::assertHttpResponseCodeEquals($response, 404);
     }
 
+    public function testTrashLocation(): void
+    {
+        $folder = $this->createFolder('folderToTrash', '/api/ibexa/v2/content/locations/1/2');
+
+        $folderLocations = $this->getContentLocations($folder['_href']);
+        $locationHref = $folderLocations['LocationList']['Location'][0]['_href'];
+
+        $request = $this->createHttpRequest(
+            'POST',
+            $locationHref,
+            'TrashLocationInput+json',
+        );
+
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 201);
+        self::assertHttpResponseHasHeader($response, 'Location');
+    }
+
+    public function testTrashLocationInvalidLocation(): void
+    {
+        $request = $this->createHttpRequest(
+            'POST',
+            '/api/ibexa/v2/content/locations/a/b/c',
+            'TrashLocationInput+json',
+        );
+
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 404);
+    }
+
     /**
      * Creates a folder, and sends it to trash.
      *

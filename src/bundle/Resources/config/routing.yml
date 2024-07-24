@@ -432,6 +432,16 @@ ibexa.rest.languages.view:
 
 # Locations
 
+ibexa.rest.trash_location:
+    path: /content/locations/{locationPath}
+    controller: Ibexa\Rest\Server\Controller\Trash::trashLocation
+    condition: 'ibexa_get_media_type(request) === "TrashLocationInput"'
+    methods: [POST, TRASH]
+    options:
+        options_route_suffix: 'TrashLocationInput'
+    requirements:
+        locationPath: "[0-9/]+"
+
 ibexa.rest.location.swap:
     path: /content/locations/{locationPath}
     controller: Ibexa\Rest\Server\Controller\Location::swap

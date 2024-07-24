@@ -15,9 +15,11 @@ use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Value as RestValue;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
+use Webmozart\Assert\Assert;
 
 /**
  * Trash controller.
@@ -48,6 +50,30 @@ class Trash extends RestController
     {
         $this->trashService = $trashService;
         $this->locationService = $locationService;
+    }
+
+    /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     */
+    public function trashLocation(string $locationPath): RestValue
+    {
+        $location = $this->locationService->loadLocation(
+            $this->extractLocationIdFromPath($locationPath),
+        );
+
+        $trashItem = $this->trashService->trash($location);
+
+        if ($trashItem === null) {
+            return new Values\NoContent();
+        }
+
+        return new Values\ResourceCreated(
+            $this->router->generate(
+                'ibexa.rest.load_trash_item',
+                ['trashItemId' => $trashItem->getId()],
+            ),
+        );
     }
 
     /**
@@ -207,5 +233,15 @@ class Trash extends RestController
                 ],
             )
         );
+    }
+
+    private function extractLocationIdFromPath(string $path): int
+    {
+        $pathParts = explode('/', $path);
+        $lastPart = array_pop($pathParts);
+
+        Assert::integerish($lastPart);
+
+        return (int)$lastPart;
     }
 }
