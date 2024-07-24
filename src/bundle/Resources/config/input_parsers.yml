@@ -882,3 +882,11 @@ services:
             $validator: '@validator'
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.RestoreTrashItemInput }
+
+    Ibexa\Rest\Server\Input\Parser\MoveUserGroupInput:
+        parent: Ibexa\Rest\Server\Common\Parser
+        arguments:
+            $locationService: '@ibexa.api.service.location'
+            $validator: '@validator'
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.MoveUserGroupInput }

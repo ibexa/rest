@@ -124,6 +124,7 @@ class HttpOptionsTest extends TestCase
             ['/user/groups/root', ['GET']],
             ['/user/groups/subgroups', ['POST']],
             ['/user/groups/4', ['GET', 'PATCH', 'DELETE', 'MOVE']],
+            ['/user/groups/4', ['POST'], 'MoveUserGroupInput+json'],
             ['/user/groups/4/subgroups', ['GET', 'POST']],
             ['/user/groups/4/users', ['GET', 'POST']],
             ['/user/groups/4/roles', ['GET', 'POST']],
