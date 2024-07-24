@@ -85,7 +85,6 @@ class HttpOptionsTest extends TestCase
             ['/content/locations/1/2', ['POST'], 'SwapLocationInput+json'],
             ['/content/locations/1/2', ['GET', 'PATCH', 'DELETE', 'COPY', 'MOVE', 'SWAP']],
             ['/content/locations/1/2', ['POST', 'TRASH'], 'TrashLocationInput+json'],
-            ['/content/locations/1/2', ['POST', 'TRASH'], 'CopyLocationInput+json'],
             ['/content/locations/1/2/children', ['GET']],
             ['/content/objects/1/locations', ['GET', 'POST']],
             ['/content/typegroups', ['GET', 'POST']],
