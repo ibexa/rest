@@ -337,19 +337,19 @@ XML;
     /**
      * @depends testMoveLocation
      */
-    public function testSwap(string $locationHref): void
+    public function testCopy(string $locationHref): void
     {
         $request = $this->createHttpRequest(
             'POST',
             $locationHref,
-            'SwapLocationInput+json',
+            'CopyLocationInput+json',
             '',
-            json_encode(['SwapLocationInput' => ['destination' => '/1/5']]) ?: '',
+            json_encode(['CopyLocationInput' => ['destination' => '/1/2']]) ?: '',
         );
 
         $response = $this->sendHttpRequest($request);
 
-        self::assertHttpResponseCodeEquals($response, 204);
+        self::assertHttpResponseCodeEquals($response, 201);
         self::assertHttpResponseHasHeader($response, 'Location');
     }
 }
