@@ -333,4 +333,23 @@ XML;
 
         self::assertHttpResponseCodeEquals($response, 204);
     }
+
+    /**
+     * @depends testMoveLocation
+     */
+    public function testCopy(string $locationHref): void
+    {
+        $request = $this->createHttpRequest(
+            'POST',
+            $locationHref,
+            'CopyLocationInput+json',
+            '',
+            json_encode(['CopyLocationInput' => ['destination' => '/1/2']]) ?: '',
+        );
+
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 201);
+        self::assertHttpResponseHasHeader($response, 'Location');
+    }
 }

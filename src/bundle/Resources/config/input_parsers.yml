@@ -890,3 +890,11 @@ services:
             $validator: '@validator'
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.MoveUserGroupInput }
+
+    Ibexa\Rest\Server\Input\Parser\CopyLocationInput:
+        parent: Ibexa\Rest\Server\Common\Parser
+        arguments:
+            $locationService: '@ibexa.api.service.location'
+            $validator: '@validator'
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.CopyLocationInput }

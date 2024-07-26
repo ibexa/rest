@@ -18,12 +18,12 @@ final class ObjectStateIdentifierTest extends SearchCriterionTestCase
             'identifier with target group' => [
                 'json',
                 $this->buildJsonCriterionQuery('"ObjectStateIdentifierCriterion": {"value": "not_locked", "target": "ez_lock"}'),
-                14,
+                15,
             ],
             'identifier without target group' => [
                 'json',
                 $this->buildJsonCriterionQuery('"ObjectStateIdentifierCriterion": {"value": "not_locked", "target": null}'),
-                14,
+                15,
             ],
         ];
     }
