@@ -57,6 +57,16 @@ ibexa.rest.refresh_session:
 # Content
 
 
+ibexa.rest.content.copy:
+    path: /content/objects/{contentId}
+    controller: Ibexa\Rest\Server\Controller\Content::copy
+    condition: 'ibexa_get_media_type(request) === "CopyContentInput"'
+    methods: [POST]
+    options:
+        options_route_suffix: 'CopyContentInput'
+    requirements:
+        contentId: \d+
+
 ibexa.rest.content.create_draft_from_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
     controller: Ibexa\Rest\Server\Controller\Content::createDraftFromVersion
@@ -472,16 +482,6 @@ ibexa.rest.location.move:
     requirements:
         locationPath: "[0-9/]+"
 
-ibexa.rest.move_location:
-    path: /content/locations/{locationPath}
-    controller: Ibexa\Rest\Server\Controller\Location::moveLocation
-    condition: 'ibexa_get_media_type(request) === "MoveLocationInput"'
-    methods: [POST]
-    options:
-        options_route_suffix: 'MoveLocationInput'
-    requirements:
-        locationPath: "[0-9/]+"
-
 ibexa.rest.redirect_location:
     path: /content/locations
     defaults:
@@ -563,16 +563,6 @@ ibexa.rest.create_location:
 
 # Content types
 
-
-ibexa.rest.content_type.copy:
-    path: /content/types/{contentTypeId}
-    controller: Ibexa\Rest\Server\Controller\ContentType::copyContentType
-    condition: 'ibexa_get_media_type(request) === "CopyContentTypeInput"'
-    methods: [POST]
-    options:
-        options_route_suffix: 'CopyContentTypeInput'
-    requirements:
-        contentTypeId: \d+
 
 ibexa.rest.content_type.publish_draft:
     path: /content/types/{contentTypeId}/draft

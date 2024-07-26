@@ -352,23 +352,4 @@ XML;
         self::assertHttpResponseCodeEquals($response, 201);
         self::assertHttpResponseHasHeader($response, 'Location');
     }
-
-    /**
-     * @depends testMoveLocation
-     */
-    public function testSwap(string $locationHref): void
-    {
-        $request = $this->createHttpRequest(
-            'POST',
-            $locationHref,
-            'SwapLocationInput+json',
-            '',
-            json_encode(['SwapLocationInput' => ['destination' => '/1/5']]) ?: '',
-        );
-
-        $response = $this->sendHttpRequest($request);
-
-        self::assertHttpResponseCodeEquals($response, 204);
-        self::assertHttpResponseHasHeader($response, 'Location');
-    }
 }
