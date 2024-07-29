@@ -283,6 +283,38 @@ class Content extends RestController
     }
 
     /**
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     */
+    public function copy(int $contentId, Request $request): Values\ResourceCreated
+    {
+        $contentService = $this->repository->getContentService();
+        $locationService = $this->repository->getLocationService();
+
+        $contentInfo = $contentService->loadContentInfo($contentId);
+
+        /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $destinationLocation */
+        $destinationLocation = $this->inputDispatcher->parse(
+            new Message(
+                ['Content-Type' => $request->headers->get('Content-Type')],
+                $request->getContent(),
+            ),
+        );
+
+        $copiedContent = $contentService->copyContent(
+            $contentInfo,
+            $locationService->newLocationCreateStruct($destinationLocation->getId()),
+        );
+
+        return new Values\ResourceCreated(
+            $this->router->generate(
+                'ibexa.rest.load_content',
+                ['contentId' => $copiedContent->id],
+            )
+        );
+    }
+
+    /**
      * Deletes a translation from all the Versions of the given Content Object.
      *
      * If any non-published Version contains only the Translation to be deleted, that entire Version will be deleted

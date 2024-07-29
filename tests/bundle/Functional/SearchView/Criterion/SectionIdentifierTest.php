@@ -24,8 +24,8 @@ final class SectionIdentifierTest extends SearchCriterionTestCase
             'multiple Sections' => [
                 'json',
                 $this->buildJsonCriterionQuery('"SectionIdentifierCriterion": "users,standard"'),
-                // 2 users + 6 groups + 1 Home Folder
-                9,
+                // 2 users + 7 groups + 1 Home Folder
+                10,
             ],
         ];
     }

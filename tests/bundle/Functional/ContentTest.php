@@ -224,6 +224,29 @@ XML;
     }
 
     /**
+     * Covers POST /content/objects/<contentId>.
+     *
+     * @depends testPublishContent
+     */
+    public function testCopy(string $restContentHref): void
+    {
+        $request = $this->createHttpRequest(
+            'POST',
+            $restContentHref,
+            'CopyContentInput+json',
+            '',
+            json_encode(['CopyContentInput' => ['destination' => '/1/2']], JSON_THROW_ON_ERROR),
+        );
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 201);
+        self::assertStringStartsWith(
+            '/api/ibexa/v2/content/objects/',
+            $response->getHeader('Location')[0],
+        );
+    }
+
+    /**
      * Covers DELETE /content/objects/<versionNumber>.
      *
      * @depends testCopyContent
