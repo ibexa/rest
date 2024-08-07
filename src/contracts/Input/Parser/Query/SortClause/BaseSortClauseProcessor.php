@@ -8,7 +8,6 @@ namespace Ibexa\Contracts\Rest\Input\Parser\Query\SortClause;
 
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
-use Traversable;
 
 /**
  * @template TSortClause
@@ -24,7 +23,7 @@ abstract class BaseSortClauseProcessor implements SortClauseProcessorInterface
         $this->parsingDispatcher = $parsingDispatcher;
     }
 
-    public function processSortClauses(array $sortClauseData): Traversable
+    public function processSortClauses(array $sortClauseData): iterable
     {
         if (empty($sortClauseData)) {
             yield from [];

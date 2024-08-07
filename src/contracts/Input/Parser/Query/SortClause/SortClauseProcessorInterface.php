@@ -6,8 +6,6 @@
  */
 namespace Ibexa\Contracts\Rest\Input\Parser\Query\SortClause;
 
-use Traversable;
-
 /**
  * @template TSortClause
  *
@@ -18,7 +16,7 @@ interface SortClauseProcessorInterface
     /**
      * @param array<string, string> $sortClauseData
      *
-     * @return \Traversable<TSortClause>
+     * @return iterable<TSortClause>
      */
-    public function processSortClauses(array $sortClauseData): Traversable;
+    public function processSortClauses(array $sortClauseData): iterable;
 }
