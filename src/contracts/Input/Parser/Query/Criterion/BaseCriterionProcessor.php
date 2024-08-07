@@ -8,7 +8,6 @@ namespace Ibexa\Contracts\Rest\Input\Parser\Query\Criterion;
 
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
-use Traversable;
 
 /**
  * @template TCriterion
@@ -31,7 +30,7 @@ abstract class BaseCriterionProcessor implements CriterionProcessorInterface
         $this->parsingDispatcher = $parsingDispatcher;
     }
 
-    public function processCriteria(array $criteriaData): Traversable
+    final public function processCriteria(array $criteriaData): iterable
     {
         if (empty($criteriaData)) {
             yield from [];

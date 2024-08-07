@@ -8,8 +8,6 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\Rest\Input\Parser\Query\Criterion;
 
-use Traversable;
-
 /**
  * @template TCriterion
  *
@@ -20,7 +18,7 @@ interface CriterionProcessorInterface
     /**
      * @param array<string, array<mixed>> $criteriaData
      *
-     * @return \Traversable<TCriterion>
+     * @return iterable<TCriterion>
      */
-    public function processCriteria(array $criteriaData): Traversable;
+    public function processCriteria(array $criteriaData): iterable;
 }
