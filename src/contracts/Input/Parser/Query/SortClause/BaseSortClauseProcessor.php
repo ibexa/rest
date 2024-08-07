@@ -23,7 +23,7 @@ abstract class BaseSortClauseProcessor implements SortClauseProcessorInterface
         $this->parsingDispatcher = $parsingDispatcher;
     }
 
-    public function processSortClauses(array $sortClauseData): iterable
+    final public function processSortClauses(array $sortClauseData): iterable
     {
         if (empty($sortClauseData)) {
             yield from [];
