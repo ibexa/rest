@@ -46,9 +46,9 @@ jobs:
             - name: Run setup command
               run: |
                 cd "$HOME/build/project"
-                docker-compose --env-file=.env exec -T --user www-data app sh -c "APP_ENV=behat php bin/console ibexa:behat:create-language 'pol-PL' 'Polish (polski)'"
+                docker compose --env-file=.env exec -T --user www-data app sh -c "APP_ENV=behat php bin/console ibexa:behat:create-language 'pol-PL' 'Polish (polski)'"
 
             - name: Run tests
               run: |
                 cd "$HOME/build/project"
-                docker-compose --env-file=.env exec -T --user www-data app sh -c "cd vendor/ibexa/rest && composer update && composer test-functional"
+                docker compose --env-file=.env exec -T --user www-data app sh -c "cd vendor/ibexa/rest && composer update && composer test-functional"
