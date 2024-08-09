@@ -28,6 +28,7 @@
         "ext-libxml": "*",
         "ext-simplexml": "*",
         "ext-xmlwriter": "*",
+        "api-platform/core": "dev-downgraded-deps",
         "hautelook/templated-uri-bundle": "^3.4",
         "ibexa/core": "~5.0.x-dev",
         "lexik/jwt-authentication-bundle": "^2.8",
@@ -78,7 +79,15 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-main": "5.0.x-dev"
+            "dev-main": "5.0.x-dev",
+            "dev-IBX-8335-full-api-platform": "5.0.x-dev"
         }
-    }
+    },
+    "repositories": {
+        "api-platform/core": {
+            "type": "vcs",
+            "url": "https://github.com/tischsoic/core"
+        }
+    },
+    "minimum-stability": "dev"
 }
