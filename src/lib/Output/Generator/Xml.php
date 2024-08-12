@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Output\Generator;
 
 use Ibexa\Contracts\Rest\Output\Generator;
+use Symfony\Component\Serializer\Encoder\EncoderInterface;
 
 /**
  * Xml generator.
@@ -42,13 +43,19 @@ class Xml extends Generator
      */
     protected $vendor;
 
+    protected EncoderInterface $encoder;
+
     /**
      * @param \Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator $hashGenerator
      * @param string $vendor
      */
-    public function __construct(Xml\FieldTypeHashGenerator $hashGenerator, $vendor = 'vnd.ibexa.api')
-    {
+    public function __construct(
+        Xml\FieldTypeHashGenerator $hashGenerator,
+        EncoderInterface $encoder,
+        $vendor = 'vnd.ibexa.api',
+    ) {
         $this->hashGenerator = $hashGenerator;
+        $this->encoder = $encoder;
         $this->vendor = $vendor;
     }
 
@@ -76,7 +83,7 @@ class Xml extends Generator
      */
     public function isEmpty()
     {
-        return $this->isEmpty;
+        return $this->normalizedData === [] && $this->isEmpty;
     }
 
     /**
