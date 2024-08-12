@@ -4,14 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
-declare(strict_types=1);
 
 namespace Ibexa\Contracts\Rest\Output;
 
-use Error;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Serializer\Encoder\EncoderInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * Visits a value object into an HTTP Response.
@@ -19,22 +15,41 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 class Visitor
 {
     /**
-     * HTTP Response Object.
+     * @var \Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher
      */
-    protected Response $response;
+    protected $valueObjectVisitorDispatcher = [];
+
+    /**
+     * Generator.
+     *
+     * @var \Ibexa\Contracts\Rest\Output\Generator
+     */
+    protected $generator;
+
+    /**
+     * HTTP Response Object.
+     *
+     * @var \Symfony\Component\HttpFoundation\Response
+     */
+    protected $response;
 
     /**
      * Used to ensure that the status code can't be overwritten.
+     *
+     * @var int
      */
-    private ?int $statusCode = null;
+    private $statusCode;
+
+    private NormalizerDispatcherInterface $normalizerDispatcher;
 
     public function __construct(
-        private readonly Generator $generator,
-        private readonly NormalizerInterface $normalizer,
-        private readonly EncoderInterface $encoder,
-        private readonly ValueObjectVisitorResolverInterface $valueObjectVisitorResolver,
-        private readonly string $format,
+        Generator $generator,
+        ValueObjectVisitorDispatcher $valueObjectVisitorDispatcher,
+        NormalizerDispatcherInterface $normalizerDispatcher,
     ) {
+        $this->generator = $generator;
+        $this->valueObjectVisitorDispatcher = $valueObjectVisitorDispatcher;
+        $this->normalizerDispatcher = $normalizerDispatcher;
         $this->response = new Response('', 200);
     }
 
@@ -43,8 +58,11 @@ class Visitor
      *
      * Does not allow overwriting of response headers. The first definition of
      * a header will be used.
+     *
+     * @param string $name
+     * @param string $value
      */
-    public function setHeader(string $name, mixed $value): void
+    public function setHeader($name, $value)
     {
         if (!$this->response->headers->has($name)) {
             $this->response->headers->set($name, $value);
@@ -68,16 +86,17 @@ class Visitor
 
     /**
      * Visit struct returned by controllers.
+     *
+     * @param mixed $data
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function visit(mixed $data): Response
+    public function visit($data)
     {
-        $normalizedData = $this->normalizer->normalize($data, $this->format, ['visitor' => $this]);
-        $encoderContext = [];
+        $this->generator->reset();
+        $this->generator->startDocument($data);
 
-        if (isset($normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT])) {
-            $encoderContext = $normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT];
-            unset($normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT]);
-        }
+        $this->visitValueObject($data);
 
         //@todo Needs refactoring!
         // A hackish solution to enable outer visitors to disable setting
@@ -92,9 +111,7 @@ class Visitor
 
         $response = clone $this->response;
 
-        $content = $this->encoder->encode($normalizedData, $this->format, $encoderContext);
-
-        $response->setContent($content);
+        $response->setContent($this->generator->isEmpty() ? null : $this->generator->endDocument($data));
 
         // reset the inner response
         $this->response = new Response(null, Response::HTTP_OK);
@@ -107,24 +124,17 @@ class Visitor
      * Visit struct returned by controllers.
      *
      * Can be called by sub-visitors to visit nested objects.
+     *
+     * @param object $data
+     *
+     * @return mixed
      */
-    public function visitValueObject(mixed $data): void
+    public function visitValueObject($data)
     {
-        if ($data instanceof Error) {
-            // Skip internal PHP errors serialization
-            throw $data;
-        }
+        $this->valueObjectVisitorDispatcher->setOutputGenerator($this->generator);
+        $this->valueObjectVisitorDispatcher->setOutputVisitor($this);
 
-        if (!is_object($data)) {
-            throw new Exceptions\InvalidTypeException($data);
-        }
-
-        $visitor = $this->valueObjectVisitorResolver->resolveValueObjectVisitor($data);
-        if (!$visitor instanceof ValueObjectVisitor) {
-            throw new Exceptions\NoVisitorFoundException([$data::class]);
-        }
-
-        $visitor->visit($this, $this->generator, $data);
+        return $this->valueObjectVisitorDispatcher->visit($data);
     }
 
     /**
@@ -133,19 +143,19 @@ class Visitor
      * @param string $type
      *
      * @see \Ibexa\Rest\Generator::getMediaType()
+     *
+     * @return string
      */
-    public function getMediaType(string $type): string
+    public function getMediaType($type)
     {
         return $this->generator->getMediaType($type);
     }
 
-    public function getResponse(): Response
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getResponse()
     {
         return $this->response;
-    }
-
-    public function getGenerator(): Generator
-    {
-        return $this->generator;
     }
 }
