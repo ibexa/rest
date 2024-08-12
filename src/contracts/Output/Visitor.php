@@ -40,17 +40,17 @@ class Visitor
      */
     private $statusCode;
 
-    /**
-     * Construct from Generator and an array of concrete view model visitors.
-     *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param \Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher $valueObjectVisitorDispatcher
-     */
-    public function __construct(Generator $generator, ValueObjectVisitorDispatcher $valueObjectVisitorDispatcher)
-    {
+    private NormalizerDispatcherInterface $normalizerDispatcher;
+
+    public function __construct(
+        Generator $generator,
+        ValueObjectVisitorDispatcher $valueObjectVisitorDispatcher,
+        NormalizerDispatcherInterface $normalizerDispatcher,
+    ) {
         $this->generator = $generator;
         $this->valueObjectVisitorDispatcher = $valueObjectVisitorDispatcher;
-        $this->response = new Response('', Response::HTTP_OK);
+        $this->normalizerDispatcher = $normalizerDispatcher;
+        $this->response = new Response('', 200);
     }
 
     /**

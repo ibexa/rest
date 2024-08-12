@@ -315,23 +315,26 @@ services:
     ibexa.rest.output.visitor.json:
         class: Ibexa\Contracts\Rest\Output\Visitor
         arguments:
-            - '@Ibexa\Rest\Output\Generator\Json'
-            - '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher'
+            $generator: '@Ibexa\Rest\Output\Generator\Json'
+            $valueObjectVisitorDispatcher: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher'
+            $normalizerDispatcher: '@Ibexa\Contracts\Rest\Output\NormalizerDispatcherInterface'
         tags:
             - { name: ibexa.rest.output.visitor, regexps: ibexa.rest.output.visitor.json.regexps }
 
     ibexa.rest.output.visitor.xml:
         class: Ibexa\Contracts\Rest\Output\Visitor
         arguments:
-            - '@Ibexa\Rest\Output\Generator\Xml'
-            - '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher'
+            $generator: '@Ibexa\Rest\Output\Generator\Xml'
+            $valueObjectVisitorDispatcher: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher'
+            $normalizerDispatcher: '@Ibexa\Contracts\Rest\Output\NormalizerDispatcherInterface'
         tags:
             - { name: ibexa.rest.output.visitor, regexps: ibexa.rest.output.visitor.xml.regexps }
 
     # format output generators
     Ibexa\Rest\Output\Generator\Xml:
         arguments:
-            - '@Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator'
+            $hashGenerator: '@Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator'
+            $encoder: '@ibexa.rest.serializer.encoder.xml'
         calls:
             - [ setFormatOutput, [ "%kernel.debug%" ] ]
 
@@ -345,7 +348,8 @@ services:
 
     Ibexa\Rest\Output\Generator\Json:
         arguments:
-            - '@Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator'
+            $fieldTypeHashGenerator: '@Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator'
+            $encoder: '@ibexa.rest.serializer.encoder.json'
         calls:
             - [ setFormatOutput, [ "%kernel.debug%" ] ]
 
@@ -397,6 +401,26 @@ services:
     Ibexa\Contracts\Rest\Input\MediaTypeParser: ~
 
     Ibexa\Contracts\Rest\Input\MediaTypeParserInterface: '@Ibexa\Contracts\Rest\Input\MediaTypeParser'
+
+    ibexa.rest.serializer.encoder.json:
+        class: Symfony\Component\Serializer\Encoder\JsonEncoder
+        tags:
+            - ibexa.rest.serializer.encoder
+
+    ibexa.rest.serializer.encoder.xml:
+        class: Symfony\Component\Serializer\Encoder\XmlEncoder
+        tags:
+            - ibexa.rest.serializer.encoder
+
+    Ibexa\Contracts\Rest\Output\NormalizerDispatcherInterface: '@Ibexa\Contracts\Rest\Output\NormalizerDispatcher'
+
+    Ibexa\Contracts\Rest\Output\NormalizerDispatcher:
+        arguments:
+            $normalizer: '@ibexa.rest.serializer'
+
+    Ibexa\Rest\Output\Normalizer\TestNormalizer:
+        tags:
+            - ibexa.rest.serializer.normalizer
 
     Ibexa\Contracts\Rest\Input\Parser\Query\Criterion\BaseCriterionProcessor:
         abstract: true

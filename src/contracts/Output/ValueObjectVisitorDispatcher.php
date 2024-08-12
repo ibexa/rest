@@ -8,6 +8,7 @@
 namespace Ibexa\Contracts\Rest\Output;
 
 use Error;
+use Ibexa\Rest\Output\Normalizer\TestData;
 
 /**
  * Dispatches value objects to a visitor depending on the class name.
@@ -29,6 +30,8 @@ class ValueObjectVisitorDispatcher
      */
     private $outputGenerator;
 
+    private NormalizerDispatcher $normalizerDispatcher;
+
     public function setOutputVisitor(Visitor $outputVisitor)
     {
         $this->outputVisitor = $outputVisitor;
@@ -37,6 +40,11 @@ class ValueObjectVisitorDispatcher
     public function setOutputGenerator(Generator $outputGenerator)
     {
         $this->outputGenerator = $outputGenerator;
+    }
+
+    public function setNormalizerDispatcher(NormalizerDispatcherInterface $normalizerDispatcher): void
+    {
+        $this->normalizerDispatcher = $normalizerDispatcher;
     }
 
     /**
@@ -58,6 +66,10 @@ class ValueObjectVisitorDispatcher
      */
     public function visit($data)
     {
+        //TODO
+        $data = new TestData();
+        $data->setName('77656677556655566');
+
         if ($data instanceof Error) {
             // Skip internal PHP errors serialization
             throw $data;
@@ -75,6 +87,10 @@ class ValueObjectVisitorDispatcher
                 return $this->visitors[$className]->visit($this->outputVisitor, $this->outputGenerator, $data);
             }
         } while ($className = get_parent_class($className));
+
+        if ($this->normalizerDispatcher->supportsNormalization($data)) {
+            return $this->normalizerDispatcher->visit($data, $this->outputGenerator);
+        }
 
         throw new Exceptions\NoVisitorFoundException($checkedClassNames);
     }
