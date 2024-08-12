@@ -29,6 +29,8 @@ abstract class Generator
      */
     protected $formatOutput = false;
 
+    protected array $normalizedData = [];
+
     public function setFormatOutput($formatOutput)
     {
         $this->formatOutput = (bool)$formatOutput;
@@ -406,6 +408,11 @@ abstract class Generator
                 )
             );
         }
+    }
+
+    public function setNormalizedData(array $data): void
+    {
+        $this->normalizedData = $data;
     }
 
     /**
