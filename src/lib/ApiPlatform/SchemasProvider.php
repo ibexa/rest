@@ -30,7 +30,9 @@ final class SchemasProvider implements SchemasProviderInterface
             $filePath = $this->kernel->locateResource($fileName);
             $schemas = Yaml::parseFile($filePath);
 
-            $allSchemas = array_merge($allSchemas, $schemas['schemas']);
+            if (isset($schemas['schemas'])) {
+                $allSchemas = array_merge($allSchemas, $schemas['schemas']);
+            }
         }
 
         return $allSchemas;
