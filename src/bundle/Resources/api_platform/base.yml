@@ -3,9 +3,12 @@ schemas:
         type: object
         required:
             - _media-type
-            - _href
         properties:
             _media-type:
+                xml:
+                    attribute: true
                 type: string
             _href:
+                xml:
+                    attribute: true
                 type: string
