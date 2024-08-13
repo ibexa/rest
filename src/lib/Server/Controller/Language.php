@@ -20,8 +20,26 @@ use Traversable;
 #[Get(
     uriTemplate: '/languages',
     openapi: new Model\Operation(
+        extensionProperties: [
+            'x-visib' => '555'
+        ],
         tags: [
             'Language attr on Controller',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                description: 'If set, the list is returned in XML or JSON format.',
+                required: true,
+                in: 'header',
+                schema: [
+                    'description' => 'If set, the list is returned in XML or JSON format.',
+                    'example' => 'application/vnd.ibexa.api.LanguageList+xml
+application/vnd.ibexa.api.LanguageList+json
+',
+                    'type' => 'string',
+                ],
+            ),
         ],
         responses: [
             Response::HTTP_OK => [
@@ -48,7 +66,7 @@ use Traversable;
                     ],
                     'application/vnd.ibexa.api.LanguageList+json' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/LanguageList',
+                            '$ref' => '#/components/schemas/LanguageListWrapper',
                         ],
                         'example' => [
                             'LanguageList' => [
@@ -87,6 +105,29 @@ use Traversable;
         tags: [
             'Language attr on Controller',
         ],
+        parameters: [
+            new Model\Parameter(
+                name: 'code',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Accept',
+                description: 'If set, the language is returned in XML or JSON format.',
+                required: true,
+                in: 'header',
+                schema: [
+                    'description' => 'If set, the language is returned in XML or JSON format.',
+                    'example' => 'application/vnd.ibexa.api.Language+xml
+application/vnd.ibexa.api.Language+json
+',
+                    'type' => 'string',
+                ],
+            ),
+        ],
         responses: [
             Response::HTTP_OK => [
                 'content' => [
@@ -95,17 +136,17 @@ use Traversable;
                             '$ref' => '#/components/schemas/Language',
                         ],
                         'example' => <<<XML
-                        <?xml version="1.0" encoding="UTF-8"?>
-                        <Language media-type="application/vnd.ibexa.api.Language+xml" href="/api/ibexa/v2/languages/eng-GB">
-                            <languageId>2</languageId>
-                            <languageCode>eng-GB</languageCode>
-                            <name>English (United Kingdom)</name>
-                        </Language>
+                          <?xml version="1.0" encoding="UTF-8"?>
+                          <Language media-type="application/vnd.ibexa.api.Language+xml" href="/api/ibexa/v2/languages/eng-GB">
+                           <languageId>2</languageId>
+                           <languageCode>eng-GB</languageCode>
+                           <name>English (United Kingdom)</name>
+                          </Language>
                         XML
                     ],
                     'application/vnd.ibexa.api.Language+json' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/Language',
+                            '$ref' => '#/components/schemas/LanguageWrapper',
                         ],
                         'example' => [
                             'Language' => [
@@ -121,16 +162,6 @@ use Traversable;
             ],
         ],
         summary: 'Get language',
-        parameters: [
-            new Model\Parameter(
-                name: 'code',
-                in: 'path',
-                required: true,
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
     ),
     name: 'languages_code',
 )]

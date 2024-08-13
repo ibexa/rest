@@ -2,15 +2,14 @@ schemas:
     Language:
         allOf:
             - ref: "#/components/schemas/BaseObject"
-            - type: object
-              description: This class represents a language in the Repository.
+            - description: This class represents a language in the Repository.
+              type: object
               required:
-                  - id
+                  - languageId
                   - languageCode
                   - name
-                  - enabled
               properties:
-                  id:
+                  languageId:
                       description: The language ID (auto generated).
                       type: integer
                   languageCode:
@@ -19,11 +18,29 @@ schemas:
                   name:
                       description: Human readable name of the language.
                       type: string
-                  enabled:
-                      description: Indicates if the language is enabled or not.
-                      type: boolean
+    LanguageWrapper:
+        type: object
+        required:
+            - Language
+        properties:
+            Language:
+                $ref: "#/components/schemas/Language"
     LanguageList:
-        description: List of languages.
-        type: array
-        items:
-            $ref: "#/components/schemas/Language"
+        allOf:
+            - ref: "#/components/schemas/BaseObject"
+            - description: List of languages.
+              type: object
+              required:
+                  - Language
+              properties:
+                  Language:
+                      type: array
+                      items:
+                          $ref: "#/components/schemas/Language"
+    LanguageListWrapper:
+        type: object
+        required:
+            - LanguageList
+        properties:
+            LanguageList:
+                $ref: "#/components/schemas/LanguageList"
