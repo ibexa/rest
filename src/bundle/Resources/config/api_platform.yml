@@ -42,4 +42,3 @@ services:
             $files:
                 - '@@IbexaRestBundle/Resources/api_platform/base.yml'
                 - '@@IbexaRestBundle/Resources/api_platform/language_schemas.yml'
-
