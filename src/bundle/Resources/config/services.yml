@@ -400,3 +400,8 @@ services:
     Ibexa\Contracts\Rest\Input\MediaTypeParser: ~
 
     Ibexa\Contracts\Rest\Input\MediaTypeParserInterface: '@Ibexa\Contracts\Rest\Input\MediaTypeParser'
+
+    Ibexa\Contracts\Rest\Input\Parser\Query\Criterion\BaseCriterionProcessor:
+        abstract: true
+        arguments:
+            $parsingDispatcher: '@Ibexa\Contracts\Rest\Input\ParsingDispatcher'
