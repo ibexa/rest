@@ -77,7 +77,7 @@ class Json extends Generator
      */
     public function isEmpty()
     {
-        return $this->normalizedData === [] && $this->isEmpty;
+        return $this->isEmpty;
     }
 
     /**
@@ -91,10 +91,6 @@ class Json extends Generator
      */
     public function endDocument($data)
     {
-        if ($this->normalizedData !== []) {
-            return $this->encoder->encode($this->normalizedData, 'json');
-        }
-
         $this->checkEndDocument($data);
 
         $jsonEncodeOptions = 0;
@@ -331,5 +327,10 @@ class Json extends Generator
     public function serializeBool($boolValue)
     {
         return (bool)$boolValue;
+    }
+
+    public function toArray(): array
+    {
+        return json_decode(json_encode($this->json), true);
     }
 }
