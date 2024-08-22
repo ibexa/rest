@@ -863,3 +863,11 @@ services:
             $validator: '@validator'
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.Image }
+
+
+    Ibexa\Rest\Server\Input\Parser\Criterion\IsBookmarked:
+        parent: Ibexa\Rest\Server\Common\Parser
+        arguments:
+            $parserTools: '@Ibexa\Rest\Input\ParserTools'
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.IsBookmarked }
