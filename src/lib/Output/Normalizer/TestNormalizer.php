@@ -1,12 +1,22 @@
 <?php
 
+/**
+ * @copyright Copyright (C) Ibexa AS. All rights reserved.
+ * @license For full copyright and license information view LICENSE file distributed with this source code.
+ */
+
 namespace Ibexa\Rest\Output\Normalizer;
 
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Webmozart\Assert\Assert;
 
-final class TestNormalizer implements NormalizerInterface
+//TODO for testing purposes, to remove
+final class TestNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
+    use NormalizerAwareTrait;
+
     public function normalize($object, string $format = null, array $context = []): array
     {
         $result = [];
@@ -15,6 +25,7 @@ final class TestNormalizer implements NormalizerInterface
 
         $result['TestData'] = [
             'name' => $object->getName(),
+            'Location' => $this->normalizer->normalize($object->getLocation())['Location'],
         ];
 
         return $result;

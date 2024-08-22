@@ -7,46 +7,51 @@
 
 namespace Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 
-use Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver;
+use Ibexa\Contracts\Rest\Output\AdapterNormalizer;
+use Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Compiler pass for the ibexa.rest.output.value_object.visitor tag.
- * Maps a fully qualified class to a value object visitor.
+ * Maps an fully qualified class to a value object visitor.
  */
-final readonly class ValueObjectVisitorResolverPass implements CompilerPassInterface
+class ValueObjectVisitorPass implements CompilerPassInterface
 {
-    public const string OUTPUT_VALUE_OBJECT_VISITOR_SERVICE_TAG = 'ibexa.rest.output.value_object.visitor';
+    public const OUTPUT_VALUE_OBJECT_VISITOR_SERVICE_TAG = 'ibexa.rest.output.value_object.visitor';
 
-    public function process(ContainerBuilder $container): void
+    public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition(ValueObjectVisitorResolver::class)) {
+        if (!$container->hasDefinition(ValueObjectVisitorDispatcher::class)) {
             return;
         }
 
-        $definition = $container->getDefinition(ValueObjectVisitorResolver::class);
+        $definitions = [
+            $container->getDefinition(ValueObjectVisitorDispatcher::class),
+            $container->getDefinition(AdapterNormalizer::class),
+        ];
 
         $taggedServiceIds = $container->findTaggedServiceIds(
             self::OUTPUT_VALUE_OBJECT_VISITOR_SERVICE_TAG
         );
+        foreach ($definitions as $definition) {
+            foreach ($taggedServiceIds as $id => $attributes) {
+                foreach ($attributes as $attribute) {
+                    if (!isset($attribute['type'])) {
+                        throw new \LogicException(
+                            sprintf(
+                                'The "%s" service tag needs a "type" attribute to identify the field type.',
+                                self::OUTPUT_VALUE_OBJECT_VISITOR_SERVICE_TAG
+                            )
+                        );
+                    }
 
-        foreach ($taggedServiceIds as $id => $attributes) {
-            foreach ($attributes as $attribute) {
-                if (!isset($attribute['type'])) {
-                    throw new \LogicException(
-                        sprintf(
-                            'The "%s" service tag needs a "type" attribute to identify the field type.',
-                            self::OUTPUT_VALUE_OBJECT_VISITOR_SERVICE_TAG
-                        )
+                    $definition->addMethodCall(
+                        'addVisitor',
+                        [$attribute['type'], new Reference($id)]
                     );
                 }
-
-                $definition->addMethodCall(
-                    'addVisitor',
-                    [$attribute['type'], new Reference($id)]
-                );
             }
         }
     }

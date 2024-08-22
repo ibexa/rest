@@ -18,7 +18,7 @@ class Json extends Generator
     /**
      * Data structure which is build during visiting;.
      *
-     * @var \Ibexa\Rest\Output\Generator\Json\JsonObject|\Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Data\ArrayList
+     * @var array
      */
     protected $json;
 
@@ -67,7 +67,7 @@ class Json extends Generator
 
         $this->isEmpty = true;
 
-        $this->json = new Json\JsonObject(null);
+        $this->json = new Json\JsonObject();
     }
 
     /**
@@ -77,7 +77,7 @@ class Json extends Generator
      */
     public function isEmpty()
     {
-        return $this->normalizedData === [] && $this->isEmpty;
+        return $this->isEmpty;
     }
 
     /**
@@ -91,20 +91,16 @@ class Json extends Generator
      */
     public function endDocument($data)
     {
-        if ($this->normalizedData !== []) {
-            return $this->encoder->encode($this->normalizedData, 'json');
-        }
-
         $this->checkEndDocument($data);
 
-        $jsonEncodeOptions = JSON_THROW_ON_ERROR;
+        $jsonEncodeOptions = 0;
         if ($this->formatOutput && defined('JSON_PRETTY_PRINT')) {
-            $jsonEncodeOptions |= JSON_PRETTY_PRINT;
+            $jsonEncodeOptions = JSON_PRETTY_PRINT;
         }
 
-        $data = $this->convertArrayObjects($this->json);
+        $this->json = $this->convertArrayObjects($this->json);
 
-        return json_encode($data, $jsonEncodeOptions);
+        return json_encode($this->json, $jsonEncodeOptions);
     }
 
     /**
@@ -147,22 +143,20 @@ class Json extends Generator
 
         $this->isEmpty = false;
 
-        $mediaTypeName ??= $name;
+        $mediaTypeName = $mediaTypeName ?: $name;
 
         $object = new Json\JsonObject($this->json);
 
-        if ($this->json instanceof Json\ArrayObject || $this->json instanceof Data\ArrayList) {
-            $this->json->append($object);
-            if ($this->json instanceof Data\ArrayList) {
-                $this->json->setName($name);
-            }
+        if ($this->json instanceof Json\ArrayObject) {
+            $this->json[] = $object;
             $this->json = $object;
         } else {
             $this->json->$name = $object;
             $this->json = $object;
         }
 
-        $this->attribute('media-type', $this->getMediaType($mediaTypeName));
+        $this->startAttribute('media-type', $this->getMediaType($mediaTypeName));
+        $this->endAttribute('media-type');
     }
 
     /**
@@ -191,7 +185,7 @@ class Json extends Generator
         $object = new Json\JsonObject($this->json);
 
         if ($this->json instanceof Json\ArrayObject) {
-            $this->json->append($object);
+            $this->json[] = $object;
             $this->json = $object;
         } else {
             $this->json->$name = $object;
@@ -228,7 +222,7 @@ class Json extends Generator
         }
 
         if ($this->json instanceof Json\ArrayObject) {
-            $this->json->append($jsonValue);
+            $this->json[] = $jsonValue;
         } else {
             $this->json->$name = $jsonValue;
         }
@@ -328,20 +322,15 @@ class Json extends Generator
      *
      * @param bool $boolValue
      *
-     * @return mixed
+     * @return bool
      */
     public function serializeBool($boolValue)
     {
         return (bool)$boolValue;
     }
 
-    public function getData(): object
+    public function toArray(): array
     {
-        return $this->json;
-    }
-
-    protected function getEncoderContext(array $data): array
-    {
-        return [];
+        return json_decode(json_encode($this->json), true);
     }
 }

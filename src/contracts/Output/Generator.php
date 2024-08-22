@@ -29,8 +29,6 @@ abstract class Generator
      */
     protected $formatOutput = false;
 
-    protected array $normalizedData = [];
-
     public function setFormatOutput($formatOutput)
     {
         $this->formatOutput = (bool)$formatOutput;
@@ -410,11 +408,6 @@ abstract class Generator
         }
     }
 
-    public function setNormalizedData(array $data): void
-    {
-        $this->normalizedData = $data;
-    }
-
     /**
      * Serializes a boolean value.
      *
@@ -424,18 +417,8 @@ abstract class Generator
      */
     abstract public function serializeBool($boolValue);
 
-    public function getData(): object
-    {
-        throw new \LogicException(sprintf(
-            '%s does not maintain state',
-            static::class,
-        ));
-    }
-
     /**
-     * @param array<mixed> $data
-     *
      * @return array<mixed>
      */
-    abstract protected function getEncoderContext(array $data): array;
+    abstract public function toArray(): array;
 }

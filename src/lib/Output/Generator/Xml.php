@@ -83,7 +83,7 @@ class Xml extends Generator
      */
     public function isEmpty()
     {
-        return $this->normalizedData === [] && $this->isEmpty;
+        return $this->isEmpty;
     }
 
     /**
@@ -275,15 +275,5 @@ class Xml extends Generator
     public function toArray(): array
     {
         return [];
-    }
-
-    public function getEncoderContext(array $data): array
-    {
-        return [];
-    }
-
-    public function transformData(array $normalizedData): array
-    {
-        return $normalizedData;
     }
 }
