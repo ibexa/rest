@@ -4,10 +4,15 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Contracts\Rest\Output;
 
+use Ibexa\Contracts\Core\Repository\LocationService;
+use Ibexa\Rest\Output\Normalizer\TestData;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Encoder\EncoderInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 /**
  * Visits a value object into an HTTP Response.
@@ -15,41 +20,22 @@ use Symfony\Component\HttpFoundation\Response;
 class Visitor
 {
     /**
-     * @var \Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher
-     */
-    protected $valueObjectVisitorDispatcher = [];
-
-    /**
-     * Generator.
-     *
-     * @var \Ibexa\Contracts\Rest\Output\Generator
-     */
-    protected $generator;
-
-    /**
      * HTTP Response Object.
-     *
-     * @var \Symfony\Component\HttpFoundation\Response
      */
-    protected $response;
+    protected Response $response;
 
     /**
      * Used to ensure that the status code can't be overwritten.
-     *
-     * @var int
      */
-    private $statusCode;
-
-    private NormalizerDispatcherInterface $normalizerDispatcher;
+    private ?int $statusCode = null;
 
     public function __construct(
-        Generator $generator,
-        ValueObjectVisitorDispatcher $valueObjectVisitorDispatcher,
-        NormalizerDispatcherInterface $normalizerDispatcher,
+        private readonly Generator $generator,
+        private readonly NormalizerInterface $normalizer,
+        private readonly EncoderInterface $encoder,
+        private readonly ValueObjectVisitorDispatcher $valueObjectVisitorDispatcher,
+        private readonly ?LocationService $locationService = null, //TODO to remove
     ) {
-        $this->generator = $generator;
-        $this->valueObjectVisitorDispatcher = $valueObjectVisitorDispatcher;
-        $this->normalizerDispatcher = $normalizerDispatcher;
         $this->response = new Response('', 200);
     }
 
@@ -87,16 +73,18 @@ class Visitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param mixed $data
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function visit($data)
+    public function visit(mixed $data)
     {
-        $this->generator->reset();
-        $this->generator->startDocument($data);
+        //TODO to remove
+        $data = new TestData();
+        $data->setName('test test');
+        $location = $this->locationService->loadLocation(2);
+        $location = new RestLocation($location, 2);
+        $data->setLocation($location);
 
-        $this->visitValueObject($data);
+        $normalizedData = $this->normalizer->normalize($data);
 
         //@todo Needs refactoring!
         // A hackish solution to enable outer visitors to disable setting
@@ -111,7 +99,7 @@ class Visitor
 
         $response = clone $this->response;
 
-        $response->setContent($this->generator->isEmpty() ? null : $this->generator->endDocument($data));
+        $response->setContent($this->encoder->encode($normalizedData, 'json'));
 
         // reset the inner response
         $this->response = new Response(null, Response::HTTP_OK);
@@ -143,19 +131,19 @@ class Visitor
      * @param string $type
      *
      * @see \Ibexa\Rest\Generator::getMediaType()
-     *
-     * @return string
      */
-    public function getMediaType($type)
+    public function getMediaType(string $type): string
     {
         return $this->generator->getMediaType($type);
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function getResponse()
+    public function getResponse(): Response
     {
         return $this->response;
+    }
+
+    public function getGenerator(): Generator
+    {
+        return $this->generator;
     }
 }

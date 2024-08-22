@@ -83,7 +83,7 @@ class Xml extends Generator
      */
     public function isEmpty()
     {
-        return $this->normalizedData === [] && $this->isEmpty;
+        return $this->isEmpty;
     }
 
     /**
@@ -270,5 +270,10 @@ class Xml extends Generator
     public function serializeBool($boolValue)
     {
         return $boolValue ? 'true' : 'false';
+    }
+
+    public function toArray(): array
+    {
+        return [];
     }
 }

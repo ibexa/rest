@@ -7,6 +7,7 @@
 
 namespace Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 
+use Ibexa\Contracts\Rest\Output\AdapterNormalizer;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -26,26 +27,31 @@ class ValueObjectVisitorPass implements CompilerPassInterface
             return;
         }
 
-        $definition = $container->getDefinition(ValueObjectVisitorDispatcher::class);
+        $definitions = [
+            $container->getDefinition(ValueObjectVisitorDispatcher::class),
+            $container->getDefinition(AdapterNormalizer::class),
+        ];
 
         $taggedServiceIds = $container->findTaggedServiceIds(
             self::OUTPUT_VALUE_OBJECT_VISITOR_SERVICE_TAG
         );
-        foreach ($taggedServiceIds as $id => $attributes) {
-            foreach ($attributes as $attribute) {
-                if (!isset($attribute['type'])) {
-                    throw new \LogicException(
-                        sprintf(
-                            'The "%s" service tag needs a "type" attribute to identify the field type.',
-                            self::OUTPUT_VALUE_OBJECT_VISITOR_SERVICE_TAG
-                        )
+        foreach ($definitions as $definition) {
+            foreach ($taggedServiceIds as $id => $attributes) {
+                foreach ($attributes as $attribute) {
+                    if (!isset($attribute['type'])) {
+                        throw new \LogicException(
+                            sprintf(
+                                'The "%s" service tag needs a "type" attribute to identify the field type.',
+                                self::OUTPUT_VALUE_OBJECT_VISITOR_SERVICE_TAG
+                            )
+                        );
+                    }
+
+                    $definition->addMethodCall(
+                        'addVisitor',
+                        [$attribute['type'], new Reference($id)]
                     );
                 }
-
-                $definition->addMethodCall(
-                    'addVisitor',
-                    [$attribute['type'], new Reference($id)]
-                );
             }
         }
     }
