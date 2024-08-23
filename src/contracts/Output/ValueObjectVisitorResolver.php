@@ -10,13 +10,15 @@ namespace Ibexa\Contracts\Rest\Output;
 
 final class ValueObjectVisitorResolver implements ValueObjectVisitorResolverInterface
 {
-    /** @var array<class-string, ValueObjectVisitor> */
+    /**
+     * @var array<class-string, ValueObjectVisitor>
+     */
     private array $visitors;
 
     /**
      * @param class-string $visitedClassName
      */
-    public function addVisitor(string $visitedClassName, ValueObjectVisitor $visitor): void
+    public function addVisitor(string $visitedClassName, $visitor): void
     {
         $this->visitors[$visitedClassName] = $visitor;
     }
