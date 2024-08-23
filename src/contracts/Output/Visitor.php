@@ -8,8 +8,10 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\Rest\Output;
 
+use Error;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Rest\Output\Normalizer\TestData;
+use Ibexa\Rest\Server\Values\RestLocation;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\EncoderInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -33,7 +35,7 @@ class Visitor
         private readonly Generator $generator,
         private readonly NormalizerInterface $normalizer,
         private readonly EncoderInterface $encoder,
-        private readonly ValueObjectVisitorDispatcher $valueObjectVisitorDispatcher,
+        private readonly ValueObjectVisitorResolverInterface $valueObjectVisitorResolver,
         private readonly ?LocationService $locationService = null, //TODO to remove
     ) {
         $this->response = new Response('', 200);
@@ -112,17 +114,24 @@ class Visitor
      * Visit struct returned by controllers.
      *
      * Can be called by sub-visitors to visit nested objects.
-     *
-     * @param object $data
-     *
-     * @return mixed
      */
-    public function visitValueObject($data)
+    public function visitValueObject(mixed $data): void
     {
-        $this->valueObjectVisitorDispatcher->setOutputGenerator($this->generator);
-        $this->valueObjectVisitorDispatcher->setOutputVisitor($this);
+        if ($data instanceof Error) {
+            // Skip internal PHP errors serialization
+            throw $data;
+        }
 
-        return $this->valueObjectVisitorDispatcher->visit($data);
+        if (!is_object($data)) {
+            throw new Exceptions\InvalidTypeException($data);
+        }
+
+        $visitor = $this->valueObjectVisitorResolver->resolveValueObjectVisitor($data);
+        if (!$visitor instanceof ValueObjectVisitor) {
+            throw new Exceptions\NoVisitorFoundException([$data::class]);
+        }
+
+        $visitor->visit($this, $this->generator, $data);
     }
 
     /**
