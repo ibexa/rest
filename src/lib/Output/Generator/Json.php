@@ -8,7 +8,6 @@
 namespace Ibexa\Rest\Output\Generator;
 
 use Ibexa\Contracts\Rest\Output\Generator;
-use Symfony\Component\Serializer\Encoder\EncoderInterface;
 
 /**
  * Json generator.
@@ -47,12 +46,9 @@ class Json extends Generator
      * @param \Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator $fieldTypeHashGenerator
      * @param string $vendor
      */
-    public function __construct(
-        Json\FieldTypeHashGenerator $fieldTypeHashGenerator,
-        protected EncoderInterface $encoder,
-        $vendor = 'vnd.ibexa.api',
-    ) {
-        $this->fieldTypeHashGenerator = $fieldTypeHashGenerator;
+    public function __construct(Json\FieldTypeHashGenerator $hashGenerator, $vendor = 'vnd.ibexa.api')
+    {
+        $this->fieldTypeHashGenerator = $hashGenerator;
         $this->vendor = $vendor;
     }
 
