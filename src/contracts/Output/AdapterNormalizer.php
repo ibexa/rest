@@ -89,10 +89,7 @@ final class AdapterNormalizer implements NormalizerInterface, NormalizerAwareInt
     {
         $fieldTypeHashGenerator = new Json\FieldTypeHashGenerator($this->normalizer);
 
-        $generator = new Json(
-            $fieldTypeHashGenerator,
-            $this->encoder,
-        );
+        $generator = new Json($fieldTypeHashGenerator);
 
         return new Visitor(
             $generator,
