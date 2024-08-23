@@ -21,22 +21,10 @@ final class AdapterNormalizer implements NormalizerInterface, NormalizerAwareInt
 
     private const string CALLED_CONTEXT = __CLASS__ . '_CALLED';
 
-    /**
-     * @var array<class-string, ValueObjectVisitor>
-     */
-    private array $visitors;
-
     public function __construct(
         private readonly EncoderInterface $encoder,
+        private readonly ValueObjectVisitorResolverInterface $valueObjectVisitorResolver,
     ) {
-    }
-
-    /**
-     * @param class-string $visitedClassName
-     */
-    public function addVisitor(string $visitedClassName, ValueObjectVisitor $visitor): void
-    {
-        $this->visitors[$visitedClassName] = $visitor;
     }
 
     /**
@@ -44,7 +32,10 @@ final class AdapterNormalizer implements NormalizerInterface, NormalizerAwareInt
      */
     public function normalize(mixed $object, ?string $format = null, array $context = []): mixed
     {
-        $eligibleVisitor = $this->getEligibleVisitor(is_object($object) ? $object::class : null);
+        $eligibleVisitor = is_object($object)
+            ? $this->valueObjectVisitorResolver->resolveValueObjectVisitor($object)
+            : null;
+
         if ($eligibleVisitor instanceof ValueObjectVisitor) {
             return $this->visitValueObject($object, $eligibleVisitor);
         }
@@ -61,8 +52,9 @@ final class AdapterNormalizer implements NormalizerInterface, NormalizerAwareInt
             return false;
         }
 
-        $className = is_object($data) ? $data::class : null;
-        $eligibleVisitor = $this->getEligibleVisitor($className);
+        $eligibleVisitor = is_object($data)
+            ? $this->valueObjectVisitorResolver->resolveValueObjectVisitor($data)
+            : null;
 
         if ($eligibleVisitor instanceof ValueObjectVisitor) {
             return true;
@@ -93,45 +85,20 @@ final class AdapterNormalizer implements NormalizerInterface, NormalizerAwareInt
         return $generator->toArray();
     }
 
-    /**
-     * @param class-string|null $className
-     */
-    private function getEligibleVisitor(?string $className): ?ValueObjectVisitor
-    {
-        if ($className === null) {
-            return null;
-        }
-
-        do {
-            if (isset($this->visitors[$className])) {
-                return $this->visitors[$className];
-            }
-        } while ($className = get_parent_class($className));
-
-        return null;
-    }
-
     private function createVisitor(): Visitor
     {
         $fieldTypeHashGenerator = new Json\FieldTypeHashGenerator($this->normalizer);
-        $valueObjectVisitorDispatcher = new ValueObjectVisitorDispatcher();
 
         $generator = new Json(
             $fieldTypeHashGenerator,
             $this->encoder,
         );
 
-        $visitor = new Visitor(
+        return new Visitor(
             $generator,
             $this->normalizer,
             $this->encoder,
-            $valueObjectVisitorDispatcher,
+            $this->valueObjectVisitorResolver,
         );
-
-        $valueObjectVisitorDispatcher->setVisitors($this->visitors);
-        $valueObjectVisitorDispatcher->setOutputVisitor($visitor);
-        $valueObjectVisitorDispatcher->setOutputGenerator($generator);
-
-        return $visitor;
     }
 }

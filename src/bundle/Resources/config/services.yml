@@ -323,7 +323,7 @@ services:
             $generator: '@Ibexa\Rest\Output\Generator\Json'
             $normalizer: '@ibexa.rest.serializer'
             $encoder: '@ibexa.rest.serializer.encoder.json'
-            $valueObjectVisitorDispatcher: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher'
+            $valueObjectVisitorResolver: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver'
             $locationService: '@ibexa.api.service.location'
         tags:
             - { name: ibexa.rest.output.visitor, regexps: ibexa.rest.output.visitor.json.regexps }
@@ -334,7 +334,7 @@ services:
             $generator: '@Ibexa\Rest\Output\Generator\Xml'
             $normalizer: '@ibexa.rest.serializer'
             $encoder: '@ibexa.rest.serializer.encoder.xml'
-            $valueObjectVisitorDispatcher: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher'
+            $valueObjectVisitorResolver: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver'
             $locationService: '@ibexa.api.service.location'
         tags:
             - { name: ibexa.rest.output.visitor, regexps: ibexa.rest.output.visitor.xml.regexps }
@@ -371,8 +371,6 @@ services:
             - { name: monolog.logger, channel: ibexa.rest }
 
     # value objects visitors
-    Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher: ~
-
     ibexa.rest.output.value_object_visitor.Exception.InvalidArgumentException:
         class: Ibexa\Rest\Server\Output\ValueObjectVisitor\InvalidArgumentException
         tags:
@@ -424,6 +422,7 @@ services:
     Ibexa\Contracts\Rest\Output\AdapterNormalizer:
         arguments:
             $encoder: '@ibexa.rest.serializer.encoder.json'
+            $valueObjectVisitorResolver: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver'
         tags:
             - { name: ibexa.rest.serializer.normalizer, priority: -1000 }
 
@@ -435,6 +434,10 @@ services:
         abstract: true
         arguments:
             $parsingDispatcher: '@Ibexa\Contracts\Rest\Input\ParsingDispatcher'
+
+    Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolverInterface: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitor'
+
+    Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver: ~
 
     Ibexa\Contracts\Rest\Input\Parser\Query\SortClause\BaseSortClauseProcessor:
         abstract: true
