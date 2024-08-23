@@ -10,6 +10,13 @@ use Ibexa\Tests\Bundle\Rest\Functional\SearchView\SearchCriterionTestCase;
 
 final class IsBookmarkedTest extends SearchCriterionTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->addMediaFolderToBookmarks();
+    }
+
     /**
      * @phpstan-return iterable<
      *     string,
@@ -25,13 +32,23 @@ final class IsBookmarkedTest extends SearchCriterionTestCase
         yield 'Bookmarked locations' => [
             'json',
             $this->buildJsonCriterionQuery('"IsBookmarkedCriterion": true'),
-            4,
+            1,
         ];
 
         yield 'Not bookmarked locations' => [
             'json',
             $this->buildJsonCriterionQuery('"IsBookmarkedCriterion": false'),
-            19,
+            11,
         ];
+    }
+
+    private function addMediaFolderToBookmarks(): void
+    {
+        $request = $this->createHttpRequest(
+            'POST',
+            '/api/ibexa/v2/bookmark/43'
+        );
+
+        $this->sendHttpRequest($request);
     }
 }
