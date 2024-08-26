@@ -11,16 +11,25 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 class Configuration extends SiteAccessConfiguration
 {
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder(IbexaRestExtension::EXTENSION_NAME);
 
-        $this->addRestRootResourcesSection($treeBuilder->getRootNode());
+        $rootNode = $treeBuilder->getRootNode();
+        $rootNode
+            ->children()
+                ->booleanNode('strict_mode')
+                    ->defaultValue('%kernel.debug%')
+                    ->info('Throw exceptions for missing normalizers.')
+                ->end()
+            ->end();
+
+        $this->addRestRootResourcesSection($rootNode);
 
         return $treeBuilder;
     }
 
-    public function addRestRootResourcesSection($rootNode)
+    private function addRestRootResourcesSection($rootNode): void
     {
         $systemNode = $this->generateScopeBaseNode($rootNode);
         $systemNode

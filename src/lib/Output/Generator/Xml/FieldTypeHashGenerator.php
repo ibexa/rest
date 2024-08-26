@@ -19,12 +19,16 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
 
     private NormalizerInterface $normalizer;
 
+    private bool $strictMode;
+
     public function __construct(
         NormalizerInterface $normalizer,
-        ?LoggerInterface $logger = null
+        ?LoggerInterface $logger = null,
+        bool $strictMode = false
     ) {
         $this->normalizer = $normalizer;
         $this->logger = $logger ?? new NullLogger();
+        $this->strictMode = $strictMode;
     }
 
     /**
@@ -243,6 +247,9 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
         try {
             $value = $this->normalizer->normalize($value, 'xml');
         } catch (ExceptionInterface $e) {
+            if ($this->strictMode) {
+                throw $e;
+            }
             $message = sprintf(
                 'Unable to normalize value for type "%s". %s. '
                 . 'Ensure that a normalizer is registered with tag: "%s".',

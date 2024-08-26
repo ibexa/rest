@@ -344,6 +344,7 @@ services:
         arguments:
             $normalizer: '@ibexa.rest.serializer'
             $logger: '@logger'
+            $strictMode: '%ibexa.rest.strict_mode%'
         tags:
             - { name: monolog.logger, channel: ibexa.rest }
 
@@ -357,6 +358,7 @@ services:
         arguments:
             $normalizer: '@ibexa.rest.serializer'
             $logger: '@logger'
+            $strictMode: '%ibexa.rest.strict_mode%'
         tags:
             - { name: monolog.logger, channel: ibexa.rest }
 
