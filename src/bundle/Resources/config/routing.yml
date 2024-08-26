@@ -47,15 +47,7 @@ ibexa.rest.delete_section:
     requirements:
         sectionId: \d+
 
-ibexa.rest.refresh_session:
-    path: /user/sessions/{sessionId}/refresh
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\SessionController:refreshSessionAction
-        csrf_protection: false
-    methods: [POST]
-
 # Content
-
 
 ibexa.rest.content.copy:
     path: /content/objects/{contentId}
