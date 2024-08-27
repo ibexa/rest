@@ -421,10 +421,6 @@ services:
         tags:
             - { name: ibexa.rest.serializer.normalizer, priority: -1000 }
 
-    Ibexa\Rest\Output\Normalizer\TestNormalizer:
-        tags:
-            - ibexa.rest.serializer.normalizer
-
     Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolverInterface: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitor'
 
     Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver: ~
