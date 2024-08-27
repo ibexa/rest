@@ -18,7 +18,7 @@ final class ValueObjectVisitorResolver implements ValueObjectVisitorResolverInte
     /**
      * @param class-string $visitedClassName
      */
-    public function addVisitor(string $visitedClassName, $visitor): void
+    public function addVisitor(string $visitedClassName, ValueObjectVisitor $visitor): void
     {
         $this->visitors[$visitedClassName] = $visitor;
     }

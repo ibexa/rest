@@ -9,13 +9,14 @@ declare(strict_types=1);
 namespace Ibexa\Contracts\Rest\Output;
 
 use Ibexa\Rest\Output\Generator\Json;
+use LogicException;
 use Symfony\Component\Serializer\Encoder\EncoderInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final class AdapterNormalizer implements NormalizerInterface, NormalizerAwareInterface, ContextAwareNormalizerInterface
+final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerAwareInterface, ContextAwareNormalizerInterface
 {
     use NormalizerAwareTrait;
 
@@ -58,6 +59,16 @@ final class AdapterNormalizer implements NormalizerInterface, NormalizerAwareInt
 
         if ($eligibleVisitor instanceof ValueObjectVisitor) {
             return true;
+        }
+
+        if (!$this->normalizer instanceof ContextAwareNormalizerInterface) {
+            throw new LogicException(
+                sprintf(
+                    'Normalizer "%s" must be an instance of "%s".',
+                    $this->normalizer::class,
+                    ContextAwareNormalizerInterface::class,
+                )
+            );
         }
 
         return $this->normalizer->supportsNormalization(
