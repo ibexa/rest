@@ -40,5 +40,5 @@ services:
         autoconfigure: true
         arguments:
             $files:
-                - '@@IbexaRestBundle/Resources/api_platform/base.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/base_schemas.yml'
                 - '@@IbexaRestBundle/Resources/api_platform/language_schemas.yml'

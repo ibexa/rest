@@ -1,7 +1,7 @@
 schemas:
     Language:
         allOf:
-            - ref: "#/components/schemas/BaseObject"
+            - $ref: "#/components/schemas/BaseObject"
             - description: This class represents a language in the Repository.
               type: object
               required:
@@ -11,7 +11,7 @@ schemas:
               properties:
                   languageId:
                       description: The language ID (auto generated).
-                      type: integer
+                      type: [string, 'null']
                   languageCode:
                       description: The languageCode code.
                       type: string
@@ -27,7 +27,7 @@ schemas:
                 $ref: "#/components/schemas/Language"
     LanguageList:
         allOf:
-            - ref: "#/components/schemas/BaseObject"
+            - $ref: "#/components/schemas/BaseObject"
             - description: List of languages.
               type: object
               required:
