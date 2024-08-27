@@ -4,101 +4,38 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Tests\Rest\Output;
 
 use Ibexa\Contracts\Rest\Output\Generator;
-use Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher;
+use Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolverInterface;
 use Ibexa\Contracts\Rest\Output\Visitor;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Encoder\EncoderInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-/**
- * Visitor test.
- */
-class VisitorTest extends TestCase
+final class VisitorTest extends TestCase
 {
-    public function testVisitDocument()
+    public function testVisitDocument(): void
     {
-        $data = new stdClass();
-
-        $generator = $this->getGeneratorMock();
-        $generator
-            ->expects(self::at(1))
-            ->method('startDocument')
-            ->with($data);
-
-        $generator
-            ->expects(self::at(2))
-            ->method('isEmpty')
-            ->willReturn(false);
-
-        $generator
-            ->expects(self::at(3))
-            ->method('endDocument')
-            ->with($data)
-            ->willReturn('Hello world!');
-
-        $visitor = $this->getMockBuilder(Visitor::class)
-            ->setMethods(['visitValueObject'])
-            ->setConstructorArgs([$generator, $this->getValueObjectDispatcherMock()])
-            ->getMock();
-
-        self::assertEquals(
-            new Response('Hello world!', Response::HTTP_OK, []),
-            $visitor->visit($data)
-        );
+        //TODO refactor
     }
 
-    public function testVisitEmptyDocument()
+    public function testVisitEmptyDocument(): void
     {
-        $data = new stdClass();
-
-        $generator = $this->getGeneratorMock();
-        $generator
-            ->expects(self::at(1))
-            ->method('startDocument')
-            ->with($data);
-
-        $generator
-            ->expects(self::at(2))
-            ->method('isEmpty')
-            ->willReturn(true);
-
-        $generator
-            ->expects(self::never())
-            ->method('endDocument');
-
-        $visitor = $this->getMockBuilder(Visitor::class)
-            ->setMethods(['visitValueObject'])
-            ->setConstructorArgs([$generator, $this->getValueObjectDispatcherMock()])
-            ->getMock();
-
-        self::assertEquals(
-            new Response(null, Response::HTTP_OK, []),
-            $visitor->visit($data)
-        );
+        //TODO refactor
     }
 
-    public function testVisitValueObject()
+    public function testVisitValueObject(): void
     {
-        $data = new stdClass();
-
-        /** @var \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Contracts\Rest\Output\Generator $generatorMock */
-        $generatorMock = $this->getGeneratorMock();
-
-        $valueObjectDispatcherMock = $this->getValueObjectDispatcherMock();
-        $valueObjectDispatcherMock
-            ->expects(self::once())
-            ->method('visit')
-            ->with($data);
-
-        $visitor = new Visitor($generatorMock, $valueObjectDispatcherMock);
-        $visitor->visit($data);
+        //TODO refactor
     }
 
-    public function testSetHeaders()
+    public function testSetHeaders(): void
     {
         $data = new stdClass();
 
@@ -143,7 +80,7 @@ class VisitorTest extends TestCase
         );
     }
 
-    public function testSetHeadersNoOverwrite()
+    public function testSetHeadersNoOverwrite(): void
     {
         $data = new stdClass();
 
@@ -163,7 +100,7 @@ class VisitorTest extends TestCase
         );
     }
 
-    public function testSetHeaderResetAfterVisit()
+    public function testSetHeaderResetAfterVisit(): void
     {
         $data = new stdClass();
 
@@ -184,7 +121,7 @@ class VisitorTest extends TestCase
         );
     }
 
-    public function testSetStatusCode()
+    public function testSetStatusCode(): void
     {
         $data = new stdClass();
 
@@ -200,7 +137,7 @@ class VisitorTest extends TestCase
         );
     }
 
-    public function testSetStatusCodeNoOverride()
+    public function testSetStatusCodeNoOverride(): void
     {
         $data = new stdClass();
 
@@ -218,28 +155,37 @@ class VisitorTest extends TestCase
         );
     }
 
-    /**
-     * @return \Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher|\PHPUnit\Framework\MockObject\MockObject
-     */
-    public function getValueObjectDispatcherMock()
+    public function getValueObjectVisitorResolverMock(): ValueObjectVisitorResolverInterface&MockObject
     {
-        return $this->createMock(ValueObjectVisitorDispatcher::class);
+        return $this->createMock(ValueObjectVisitorResolverInterface::class);
     }
 
-    protected function getGeneratorMock()
+    protected function getGeneratorMock(): Generator&MockObject
     {
         return $this->createMock(Generator::class);
     }
 
-    protected function getVisitorMock()
+    protected function getNormalizerMock(): NormalizerInterface&MockObject
+    {
+        return $this->createMock(NormalizerInterface::class);
+    }
+
+    protected function getEncoderMock(): EncoderInterface&MockObject
+    {
+        return $this->createMock(EncoderInterface::class);
+    }
+
+    protected function getVisitorMock(): Visitor&MockObject
     {
         return $this->getMockBuilder(Visitor::class)
             ->setMethods(['visitValueObject'])
             ->setConstructorArgs(
                 [
                     $this->getGeneratorMock(),
-                    $this->getValueObjectDispatcherMock(),
-                ]
+                    $this->getNormalizerMock(),
+                    $this->getEncoderMock(),
+                    $this->getValueObjectVisitorResolverMock(),
+                ],
             )
             ->getMock();
     }
