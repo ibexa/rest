@@ -9,9 +9,6 @@ declare(strict_types=1);
 namespace Ibexa\Contracts\Rest\Output;
 
 use Error;
-use Ibexa\Contracts\Core\Repository\LocationService;
-use Ibexa\Rest\Output\Normalizer\TestData;
-use Ibexa\Rest\Server\Values\RestLocation;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\EncoderInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -36,7 +33,6 @@ class Visitor
         private readonly NormalizerInterface $normalizer,
         private readonly EncoderInterface $encoder,
         private readonly ValueObjectVisitorResolverInterface $valueObjectVisitorResolver,
-        private readonly ?LocationService $locationService = null, //TODO to remove
     ) {
         $this->response = new Response('', 200);
     }
@@ -74,18 +70,9 @@ class Visitor
 
     /**
      * Visit struct returned by controllers.
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function visit(mixed $data)
+    public function visit(mixed $data): Response
     {
-        //TODO to remove
-        $data = new TestData();
-        $data->setName('test test');
-        $location = $this->locationService->loadLocation(2);
-        $location = new RestLocation($location, 2);
-        $data->setLocation($location);
-
         $normalizedData = $this->normalizer->normalize($data);
 
         //@todo Needs refactoring!
