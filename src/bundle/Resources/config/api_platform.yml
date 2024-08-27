@@ -40,4 +40,16 @@ services:
         arguments:
             $files:
                 - '@@IbexaRestBundle/Resources/api_platform/base_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/bookmarks_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/content_locations_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/content_objects_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/content_sections_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/content_trash_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/content_type_groups_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/content_types_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/content_url_aliases_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/content_url_wildcards_schemas.yml'
                 - '@@IbexaRestBundle/Resources/api_platform/language_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/object_state_groups_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/services_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/views_schemas.yml'
