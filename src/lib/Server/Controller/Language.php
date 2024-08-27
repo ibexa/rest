@@ -19,24 +19,19 @@ use Traversable;
 
 #[Get(
     uriTemplate: '/languages',
+    name: 'Language list',
     openapi: new Model\Operation(
-        extensionProperties: [
-            'x-visib' => '555'
-        ],
+        summary: 'Lists languages',
         tags: [
-            'Language attr on Controller',
+            'Language',
         ],
         parameters: [
             new Model\Parameter(
                 name: 'Accept',
-                description: 'If set, the list is returned in XML or JSON format.',
-                required: true,
                 in: 'header',
+                required: 'true',
+                description: 'If set, the list is returned in XML or JSON format.',
                 schema: [
-                    'description' => 'If set, the list is returned in XML or JSON format.',
-                    'example' => 'application/vnd.ibexa.api.LanguageList+xml
-application/vnd.ibexa.api.LanguageList+json
-',
                     'type' => 'string',
                 ],
             ),
@@ -48,82 +43,41 @@ application/vnd.ibexa.api.LanguageList+json
                         'schema' => [
                             '$ref' => '#/components/schemas/LanguageList',
                         ],
-                        'example' => <<<XML
-                        <?xml version="1.0" encoding="UTF-8"?>
-                        <LanguageList media-type="application/vnd.ibexa.api.LanguageList+xml" href="/api/ibexa/v2/languages">
-                            <Language media-type="application/vnd.ibexa.api.Language+xml" href="/api/ibexa/v2/languages/eng-GB">
-                                <languageId>2</languageId>
-                                <languageCode>eng-GB</languageCode>
-                                <name>English (United Kingdom)</name>
-                            </Language>
-                            <Language href="/api/ibexa/v2/languages/pol-PL" media-type="application/vnd.ibexa.api.Language+xml">
-                                <languageId>4</languageId>
-                                <languageCode>pol-PL</languageCode>
-                                <name>Polish (polski)</name>
-                            </Language>
-                        </LanguageList>
-                        XML
+                        'example' => LANGUAGE_LIST_XML_EXAMPLE,
                     ],
                     'application/vnd.ibexa.api.LanguageList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LanguageListWrapper',
                         ],
-                        'example' => [
-                            'LanguageList' => [
-                                '_media-type' => 'application/vnd.ibexa.api.LanguageList+json',
-                                '_href' => '/api/ibexa/v2/languages',
-                                'Language' => [
-                                    [
-                                        '_media-type' => 'application/vnd.ibexa.api.Language+json',
-                                        '_href' => '/api/ibexa/v2/languages/eng-GB',
-                                        'languageId' => 2,
-                                        'languageCode' => 'eng-GB',
-                                        'name' => 'English (United Kingdom)',
-                                    ],
-                                    [
-                                        '_media-type' => 'application/vnd.ibexa.api.Language+json',
-                                        '_href' => '/api/ibexa/v2/languages/pol-PL',
-                                        'languageId' => 4,
-                                        'languageCode' => 'pol-PL',
-                                        'name' => 'Polish (polski)',
-                                    ],
-                                ],
-                            ],
-                        ],
+                        'example' => LANGUAGE_LIST_JSON_EXAMPLE,
                     ],
                 ],
             ],
         ],
-        summary: 'Language list',
-        description: 'Lists languages',
     ),
-    name: 'languages',
 )]
 #[Get(
     uriTemplate: '/languages/{code}',
+    name: 'Get language',
     openapi: new Model\Operation(
         tags: [
-            'Language attr on Controller',
+            'Language',
         ],
         parameters: [
             new Model\Parameter(
-                name: 'code',
-                in: 'path',
-                required: true,
+                name: 'Accept',
+                in: 'header',
+                required: 'true',
+                description: 'If set, the language is returned in XML or JSON format.',
                 schema: [
                     'type' => 'string',
                 ],
             ),
             new Model\Parameter(
-                name: 'Accept',
-                description: 'If set, the language is returned in XML or JSON format.',
-                required: true,
-                in: 'header',
+                name: 'code',
+                in: 'path',
+                required: 'true',
                 schema: [
-                    'description' => 'If set, the language is returned in XML or JSON format.',
-                    'example' => 'application/vnd.ibexa.api.Language+xml
-application/vnd.ibexa.api.Language+json
-',
                     'type' => 'string',
                 ],
             ),
@@ -135,35 +89,18 @@ application/vnd.ibexa.api.Language+json
                         'schema' => [
                             '$ref' => '#/components/schemas/Language',
                         ],
-                        'example' => <<<XML
-                          <?xml version="1.0" encoding="UTF-8"?>
-                          <Language media-type="application/vnd.ibexa.api.Language+xml" href="/api/ibexa/v2/languages/eng-GB">
-                           <languageId>2</languageId>
-                           <languageCode>eng-GB</languageCode>
-                           <name>English (United Kingdom)</name>
-                          </Language>
-                        XML
+                        'example' => LANGUAGE_XML_EXAMPLE,
                     ],
                     'application/vnd.ibexa.api.Language+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LanguageWrapper',
                         ],
-                        'example' => [
-                            'Language' => [
-                                '_media-type' => 'application/vnd.ibexa.api.Language+json',
-                                '_href' => '/api/ibexa/v2/languages/eng-GB',
-                                'languageId' => '2',
-                                'languageCode' => 'eng-GB',
-                                'name' => 'English (United Kingdom)',
-                            ],
-                        ],
+                        'example' => LANGUAGE_JSON_EXAMPLE,
                     ],
                 ],
             ],
         ],
-        summary: 'Get language',
     ),
-    name: 'languages_code',
 )]
 final class Language extends RestController
 {
@@ -190,3 +127,64 @@ final class Language extends RestController
         return $this->languageService->loadLanguage($languageCode);
     }
 }
+
+const LANGUAGE_LIST_XML_EXAMPLE = <<<EXAMPLE
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageList media-type="application/vnd.ibexa.api.LanguageList+xml" href="/api/ibexa/v2/languages">
+ <Language media-type="application/vnd.ibexa.api.Language+xml" href="/api/ibexa/v2/languages/eng-GB">
+  <languageId>2</languageId>
+  <languageCode>eng-GB</languageCode>
+  <name>English (United Kingdom)</name>
+ </Language>
+ <Language href="/api/ibexa/v2/languages/pol-PL" media-type="application/vnd.ibexa.api.Language+xml">
+  <languageId>4</languageId>
+  <languageCode>pol-PL</languageCode>
+  <name>Polish (polski)</name>
+ </Language>
+</LanguageList>
+EXAMPLE;
+
+const LANGUAGE_LIST_JSON_EXAMPLE = <<<EXAMPLE
+{
+    "LanguageList": {
+        "_media-type": "application/vnd.ibexa.api.LanguageList+json",
+        "_href": "/api/ibexa/v2/languages",
+        "Language": [
+            {
+                "_media-type": "application/vnd.ibexa.api.Language+json",
+                "_href": "/api/ibexa/v2/languages/eng-GB",
+                "languageId": 2,
+                "languageCode": "eng-GB",
+                "name": "English (United Kingdom)"
+            }, {
+                "_href": "/api/ibexa/v2/languages/pol-PL",
+                "_media-type": "application/vnd.ibexa.api.Language+json",
+                "languageCode": "pol-PL",
+                "languageId": 4,
+                "name": "Polish (polski)"
+            }
+        ]
+    }
+}
+EXAMPLE;
+
+const LANGUAGE_XML_EXAMPLE = <<<EXAMPLE
+<?xml version="1.0" encoding="UTF-8"?>
+<Language media-type="application/vnd.ibexa.api.Language+xml" href="/api/ibexa/v2/languages/eng-GB">
+ <languageId>2</languageId>
+ <languageCode>eng-GB</languageCode>
+ <name>English (United Kingdom)</name>
+</Language>
+EXAMPLE;
+
+const LANGUAGE_JSON_EXAMPLE = <<<EXAMPLE
+{
+    "Language": {
+        "_media-type": "application/vnd.ibexa.api.Language+json",
+        "_href": "/api/ibexa/v2/languages/eng-GB",
+        "languageId": 2,
+        "languageCode": "eng-GB",
+        "name": "English (United Kingdom)"
+    }
+}
+EXAMPLE;
