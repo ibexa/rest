@@ -411,7 +411,7 @@ services:
         tags:
             - ibexa.rest.serializer.encoder
 
-    Ibexa\Contracts\Rest\Output\AdapterNormalizer:
+    Ibexa\Contracts\Rest\Output\VisitorAdapterNormalizer:
         arguments:
             $encoder: '@ibexa.rest.serializer.encoder.json'
             $valueObjectVisitorResolver: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver'
