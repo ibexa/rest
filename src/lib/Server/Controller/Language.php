@@ -29,7 +29,7 @@ use Traversable;
             new Model\Parameter(
                 name: 'Accept',
                 in: 'header',
-                required: 'true',
+                required: true,
                 description: 'If set, the list is returned in XML or JSON format.',
                 schema: [
                     'type' => 'string',
@@ -67,7 +67,7 @@ use Traversable;
             new Model\Parameter(
                 name: 'Accept',
                 in: 'header',
-                required: 'true',
+                required: true,
                 description: 'If set, the language is returned in XML or JSON format.',
                 schema: [
                     'type' => 'string',
@@ -76,7 +76,7 @@ use Traversable;
             new Model\Parameter(
                 name: 'code',
                 in: 'path',
-                required: 'true',
+                required: true,
                 schema: [
                     'type' => 'string',
                 ],
