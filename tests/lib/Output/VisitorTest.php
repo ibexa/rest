@@ -185,7 +185,6 @@ final class VisitorTest extends TestCase
                     $this->getNormalizerMock(),
                     $this->getEncoderMock(),
                     $this->getValueObjectVisitorResolverMock(),
-                    'json',
                 ],
             )
             ->getMock();

@@ -327,6 +327,6 @@ class Json extends Generator
 
     public function toArray(): array
     {
-        return json_decode(json_encode($this->json), true);
+        return json_decode(json_encode($this->json, JSON_THROW_ON_ERROR), true, JSON_THROW_ON_ERROR);
     }
 }
