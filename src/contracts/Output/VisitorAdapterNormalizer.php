@@ -107,6 +107,7 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
             $this->normalizer,
             $this->encoder,
             $this->valueObjectVisitorResolver,
+            'json',
         );
     }
 }

@@ -319,6 +319,7 @@ services:
             $normalizer: '@ibexa.rest.serializer'
             $encoder: '@ibexa.rest.serializer.encoder.json'
             $valueObjectVisitorResolver: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver'
+            $format: 'json'
         tags:
             - { name: ibexa.rest.output.visitor, regexps: ibexa.rest.output.visitor.json.regexps }
 
@@ -329,6 +330,7 @@ services:
             $normalizer: '@ibexa.rest.serializer'
             $encoder: '@ibexa.rest.serializer.encoder.xml'
             $valueObjectVisitorResolver: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver'
+            $format: 'xml'
         tags:
             - { name: ibexa.rest.output.visitor, regexps: ibexa.rest.output.visitor.xml.regexps }
 
