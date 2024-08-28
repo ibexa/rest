@@ -33,6 +33,7 @@ class Visitor
         private readonly NormalizerInterface $normalizer,
         private readonly EncoderInterface $encoder,
         private readonly ValueObjectVisitorResolverInterface $valueObjectVisitorResolver,
+        private readonly string $format,
     ) {
         $this->response = new Response('', 200);
     }
@@ -88,7 +89,7 @@ class Visitor
 
         $response = clone $this->response;
 
-        $response->setContent($this->encoder->encode($normalizedData, 'json'));
+        $response->setContent($this->encoder->encode($normalizedData, $this->format));
 
         // reset the inner response
         $this->response = new Response(null, Response::HTTP_OK);
