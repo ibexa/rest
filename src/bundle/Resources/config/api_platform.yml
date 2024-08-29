@@ -21,6 +21,7 @@ services:
         arguments:
             - '@.inner'
             - '@Ibexa\Bundle\Rest\ApiPlatform\SchemasCollectionFactory'
+            - '@Symfony\Component\HttpKernel\KernelInterface'
 
     ibexa.api_platform.openapi.factory:
         parent: api_platform.openapi.factory
