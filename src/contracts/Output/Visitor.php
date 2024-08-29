@@ -50,7 +50,7 @@ class Visitor
     {
         $this->generator = $generator;
         $this->valueObjectVisitorDispatcher = $valueObjectVisitorDispatcher;
-        $this->response = new Response('', 200);
+        $this->response = new Response('', Response::HTTP_OK);
     }
 
     /**
@@ -114,7 +114,7 @@ class Visitor
         $response->setContent($this->generator->isEmpty() ? null : $this->generator->endDocument($data));
 
         // reset the inner response
-        $this->response = new Response(null, 200);
+        $this->response = new Response(null, Response::HTTP_OK);
         $this->statusCode = null;
 
         return $response;

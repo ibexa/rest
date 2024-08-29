@@ -209,7 +209,7 @@ final class SessionController extends Controller
             $domain
         );
 
-        $response->setStatusCode(404);
+        $response->setStatusCode(Response::HTTP_NOT_FOUND);
         $requestSession->clear();
 
         return $response;

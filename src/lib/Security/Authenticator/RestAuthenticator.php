@@ -101,7 +101,7 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
         $previousToken = $this->tokenStorage->getToken();
         if (
             $previousToken === null ||
-            $previousToken->getUsername() !== $request->attributes->get('username')
+            $previousToken->getUserIdentifier() !== $request->attributes->get('username')
         ) {
             return null;
         }
