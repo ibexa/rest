@@ -43,13 +43,13 @@ use Traversable;
                         'schema' => [
                             '$ref' => '#/components/schemas/LanguageList',
                         ],
-                        'example' => LANGUAGE_LIST_XML_EXAMPLE,
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/languages/GET/LanguageList.xml.example',
                     ],
                     'application/vnd.ibexa.api.LanguageList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LanguageListWrapper',
                         ],
-                        'example' => LANGUAGE_LIST_JSON_EXAMPLE,
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/languages/GET/LanguageList.json.example',
                     ],
                 ],
             ],
@@ -89,13 +89,13 @@ use Traversable;
                         'schema' => [
                             '$ref' => '#/components/schemas/Language',
                         ],
-                        'example' => LANGUAGE_XML_EXAMPLE,
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/languages/code/GET/Language.xml.example',
                     ],
                     'application/vnd.ibexa.api.Language+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LanguageWrapper',
                         ],
-                        'example' => LANGUAGE_JSON_EXAMPLE,
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/languages/code/GET/Language.json.example',
                     ],
                 ],
             ],
@@ -127,64 +127,3 @@ final class Language extends RestController
         return $this->languageService->loadLanguage($languageCode);
     }
 }
-
-const LANGUAGE_LIST_XML_EXAMPLE = <<<EXAMPLE
-<?xml version="1.0" encoding="UTF-8"?>
-<LanguageList media-type="application/vnd.ibexa.api.LanguageList+xml" href="/api/ibexa/v2/languages">
- <Language media-type="application/vnd.ibexa.api.Language+xml" href="/api/ibexa/v2/languages/eng-GB">
-  <languageId>2</languageId>
-  <languageCode>eng-GB</languageCode>
-  <name>English (United Kingdom)</name>
- </Language>
- <Language href="/api/ibexa/v2/languages/pol-PL" media-type="application/vnd.ibexa.api.Language+xml">
-  <languageId>4</languageId>
-  <languageCode>pol-PL</languageCode>
-  <name>Polish (polski)</name>
- </Language>
-</LanguageList>
-EXAMPLE;
-
-const LANGUAGE_LIST_JSON_EXAMPLE = <<<EXAMPLE
-{
-    "LanguageList": {
-        "_media-type": "application/vnd.ibexa.api.LanguageList+json",
-        "_href": "/api/ibexa/v2/languages",
-        "Language": [
-            {
-                "_media-type": "application/vnd.ibexa.api.Language+json",
-                "_href": "/api/ibexa/v2/languages/eng-GB",
-                "languageId": 2,
-                "languageCode": "eng-GB",
-                "name": "English (United Kingdom)"
-            }, {
-                "_href": "/api/ibexa/v2/languages/pol-PL",
-                "_media-type": "application/vnd.ibexa.api.Language+json",
-                "languageCode": "pol-PL",
-                "languageId": 4,
-                "name": "Polish (polski)"
-            }
-        ]
-    }
-}
-EXAMPLE;
-
-const LANGUAGE_XML_EXAMPLE = <<<EXAMPLE
-<?xml version="1.0" encoding="UTF-8"?>
-<Language media-type="application/vnd.ibexa.api.Language+xml" href="/api/ibexa/v2/languages/eng-GB">
- <languageId>2</languageId>
- <languageCode>eng-GB</languageCode>
- <name>English (United Kingdom)</name>
-</Language>
-EXAMPLE;
-
-const LANGUAGE_JSON_EXAMPLE = <<<EXAMPLE
-{
-    "Language": {
-        "_media-type": "application/vnd.ibexa.api.Language+json",
-        "_href": "/api/ibexa/v2/languages/eng-GB",
-        "languageId": 2,
-        "languageCode": "eng-GB",
-        "name": "English (United Kingdom)"
-    }
-}
-EXAMPLE;
