@@ -109,22 +109,10 @@ class Exception extends ValueObjectVisitor
 
         $statusCode = $this->generateErrorCode($generator, $visitor, $data);
 
-        $generator->valueElement(
-            'errorMessage',
-            static::$httpStatusCodes[$statusCode] ?? static::$httpStatusCodes[500]
-        );
+        $errorMessage = $this->getErrorMessage($data, $statusCode);
+        $generator->valueElement('errorMessage', $errorMessage);
 
-        if ($this->debug || $statusCode < 500) {
-            $errorDescription = $data instanceof Translatable && $this->translator
-                ? /** @Ignore */ $this->translator->trans($data->getMessageTemplate(), $data->getParameters(), 'ibexa_repository_exceptions')
-                : $data->getMessage();
-        } else {
-            // Do not leak any file paths and sensitive data on production environments
-            $errorDescription = $this->translator
-                ? /** @Desc("An error has occurred. Please try again later or contact your Administrator.") */ $this->translator->trans('non_verbose_error', [], 'ibexa_repository_exceptions')
-                : 'An error has occurred. Please try again later or contact your Administrator.';
-        }
-
+        $errorDescription = $this->getErrorDescription($data, $statusCode);
         $generator->valueElement('errorDescription', $errorDescription);
 
         if ($this->debug) {
@@ -150,6 +138,29 @@ class Exception extends ValueObjectVisitor
         $generator->valueElement('errorCode', $statusCode);
 
         return $statusCode;
+    }
+
+    protected function getErrorMessage(\Exception $data, int $statusCode): string
+    {
+        return static::$httpStatusCodes[$statusCode] ?? static::$httpStatusCodes[500];
+    }
+
+    protected function getErrorDescription(\Exception $data, int $statusCode): string
+    {
+        if ($this->debug || $statusCode < 500) {
+            $errorDescription = $data instanceof Translatable && $this->translator
+                ? /** @Ignore */
+                $this->translator->trans($data->getMessageTemplate(), $data->getParameters(), 'ibexa_repository_exceptions')
+                : $data->getMessage();
+        } else {
+            // Do not leak any file paths and sensitive data on production environments
+            $errorDescription = $this->translator
+                ? /** @Desc("An error has occurred. Please try again later or contact your Administrator.") */
+                $this->translator->trans('non_verbose_error', [], 'ibexa_repository_exceptions')
+                : 'An error has occurred. Please try again later or contact your Administrator.';
+        }
+
+        return $errorDescription;
     }
 }
 
