@@ -6,7 +6,7 @@ services:
     Ibexa\Rest\Server\Common\Parser:
         abstract: true
         calls:
-            - [ setRequestParser, [ '@Ibexa\Bundle\Rest\RequestParser\Router' ] ]
+            - [ setUriParser, [ '@Ibexa\Contracts\Rest\UriParser\UriParserInterface' ] ]
 
     Ibexa\Rest\Input\Parser\ContentObjectStates:
         parent: Ibexa\Rest\Server\Common\Parser

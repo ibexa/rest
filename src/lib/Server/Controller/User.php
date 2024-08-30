@@ -406,7 +406,7 @@ final class User extends RestController
         try {
             if ($request->query->has('roleId')) {
                 $restUsers = $this->loadUsersAssignedToRole(
-                    $this->requestParser->parseHref($request->query->get('roleId'), 'roleId')
+                    $this->uriParser->getAttributeFromUri($request->query->get('roleId'), 'roleId')
                 );
             } elseif ($request->query->has('remoteId')) {
                 $restUsers = [
@@ -608,7 +608,7 @@ final class User extends RestController
             $userGroupLocation->contentId
         );
 
-        $locationPath = $this->requestParser->parseHref(
+        $locationPath = $this->uriParser->getAttributeFromUri(
             $request->headers->get('Destination'),
             'groupPath'
         );

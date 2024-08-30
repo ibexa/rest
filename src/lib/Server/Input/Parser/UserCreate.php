@@ -81,7 +81,7 @@ class UserCreate extends BaseParser
             }
 
             $contentType = $this->contentTypeService->loadContentType(
-                $this->requestParser->parseHref($data['ContentType']['_href'], 'contentTypeId')
+                $this->uriParser->getAttributeFromUri($data['ContentType']['_href'], 'contentTypeId')
             );
         }
 
@@ -114,7 +114,7 @@ class UserCreate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the Section element in UserCreate.");
             }
 
-            $userCreateStruct->sectionId = $this->requestParser->parseHref($data['Section']['_href'], 'sectionId');
+            $userCreateStruct->sectionId = $this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
         }
 
         if (array_key_exists('remoteId', $data)) {

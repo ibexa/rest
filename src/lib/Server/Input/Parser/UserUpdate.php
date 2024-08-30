@@ -100,7 +100,7 @@ class UserUpdate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the Section element in UserUpdate.");
             }
 
-            $parsedData['sectionId'] = $this->requestParser->parseHref($data['Section']['_href'], 'sectionId');
+            $parsedData['sectionId'] = $this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
         }
 
         if (array_key_exists('remoteId', $data)) {
@@ -108,7 +108,7 @@ class UserUpdate extends BaseParser
         }
 
         if (array_key_exists('fields', $data)) {
-            $userId = $this->requestParser->parseHref($data['__url'], 'userId');
+            $userId = $this->uriParser->getAttributeFromUri($data['__url'], 'userId');
 
             if (!is_array($data['fields']) || !array_key_exists('field', $data['fields']) || !is_array($data['fields']['field'])) {
                 throw new Exceptions\Parser("Invalid 'fields' element for UserUpdate.");

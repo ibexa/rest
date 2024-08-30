@@ -42,11 +42,6 @@ services:
             - '@ibexa.api.service.field_type'
             - '@Ibexa\Rest\FieldTypeProcessorRegistry'
 
-    Ibexa\Bundle\Rest\RequestParser\Router:
-        arguments:
-            $router: '@router'
-            $uriParser: '@Ibexa\Contracts\Rest\UriParser\UriParserInterface'
-
     Ibexa\Contracts\Rest\UriParser\UriParserInterface: '@Ibexa\Bundle\Rest\UriParser\UriParser'
 
     Ibexa\Bundle\Rest\UriParser\UriParser:
@@ -77,7 +72,7 @@ services:
             - [ setContainer, ["@service_container"] ]
             - [ setInputDispatcher, ['@Ibexa\Rest\Input\Dispatcher'] ]
             - [ setRouter, ["@router"] ]
-            - [ setRequestParser, ['@Ibexa\Bundle\Rest\RequestParser\Router'] ]
+            - [ setUriParser, ['@Ibexa\Contracts\Rest\UriParser\UriParserInterface'] ]
             - [ setRepository, ['@ibexa.api.repository'] ]
 
     Ibexa\Rest\Server\Controller\Root:

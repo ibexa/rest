@@ -823,7 +823,7 @@ class ContentType extends RestController
         $contentType = $this->contentTypeService->loadContentType($contentTypeId);
 
         try {
-            $contentTypeGroupId = $this->requestParser->parseHref(
+            $contentTypeGroupId = $this->uriParser->getAttributeFromUri(
                 $request->query->get('group'),
                 'contentTypeGroupId'
             );
