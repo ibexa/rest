@@ -42,7 +42,10 @@ class RequestListener implements EventSubscriberInterface
     {
         return [
             // 10001 is to ensure that REST requests are tagged before CorsListener is called
-            KernelEvents::REQUEST => ['onKernelRequest', 10001],
+            KernelEvents::REQUEST => [
+                ['onKernelRequest', 10001],
+                ['addAttributeForIbexaRestRoute', 30],
+            ],
         ];
     }
 
@@ -54,6 +57,15 @@ class RequestListener implements EventSubscriberInterface
         $event->getRequest()->attributes->set(
             'is_rest_request',
             $this->uriParser->isRestRequest($event->getRequest())
+        );
+    }
+
+    public function addAttributeForIbexaRestRoute(RequestEvent $event): void
+    {
+        $path = $event->getRequest()->attributes->get('semanticPathinfo');
+        $event->getRequest()->attributes->set(
+            'is_rest_request',
+            $this->uriParser->hasRestPrefix($path)
         );
     }
 
