@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\Rest;
 
+use ApiPlatform\Symfony\Bundle\ApiPlatformBundle;
 use Hautelook\TemplatedUriBundle\HautelookTemplatedUriBundle;
 use Ibexa\Bundle\Rest\IbexaRestBundle;
 use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
@@ -25,6 +26,7 @@ final class IbexaTestKernel extends CoreIbexaTestKernel
 
         yield new HautelookTemplatedUriBundle();
         yield new IbexaRestBundle();
+        yield new ApiPlatformBundle();
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader): void
