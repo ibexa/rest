@@ -68,7 +68,7 @@ abstract class BaseTest extends ParentBaseTest
                         if ($map[2] instanceof \Exception) {
                             throw $map[2];
                         } else {
-                            return $map[2];
+                            return (string)$map[2];
                         }
                     }
                 }
