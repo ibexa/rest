@@ -108,7 +108,7 @@ final class RequestListenerTest extends EventListenerTest
         if (str_starts_with($uri, '/admin')) {
             $uri = substr($uri, strlen('/admin'));
         }
-        $request->attributes->set('semanticPathInfo', $uri);
+        $request->attributes->set('semanticPathinfo', $uri);
         $this->getEventListener()->addAttributeForIbexaRestRoute($event);
 
         return $event->getRequest();

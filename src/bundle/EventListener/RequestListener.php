@@ -62,7 +62,7 @@ class RequestListener implements EventSubscriberInterface
 
     public function addAttributeForIbexaRestRoute(RequestEvent $event): void
     {
-        $path = $event->getRequest()->attributes->get('semanticPathInfo');
+        $path = $event->getRequest()->attributes->get('semanticPathinfo');
         if ($path === null) {
             return;
         }
