@@ -290,14 +290,6 @@ ibexa.rest.binary_content.get_image_variation:
 
 # Views
 
-# Deprecated in favour of /views from Platform 1.0
-ibexa.rest.create_content_view:
-    path: /content/views
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content:createView
-    methods: [POST]
-
-# Views, Platform 1.0
 ibexa.rest.views.create:
     path: /views
     defaults:

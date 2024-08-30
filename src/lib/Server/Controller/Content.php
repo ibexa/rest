@@ -23,7 +23,6 @@ use Ibexa\Rest\Server\Values;
 use Ibexa\Rest\Server\Values\RestContentCreateStruct;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
@@ -788,24 +787,6 @@ class Content extends RestController
         $this->repository->getContentService()->revealContent($contentInfo);
 
         return new Values\NoContent();
-    }
-
-    /**
-     * Creates and executes a content view.
-     *
-     * @deprecated Since platform 1.0. Forwards the request to the new /views location, but returns a 301.
-     *
-     * @return \Ibexa\Rest\Server\Values\RestExecutedView
-     */
-    public function createView()
-    {
-        $response = $this->forward('ezpublish_rest.controller.views:createView');
-
-        // Add 301 status code and location href
-        $response->setStatusCode(Response::HTTP_MOVED_PERMANENTLY);
-        $response->headers->set('Location', $this->router->generate('ibexa.rest.views.create'));
-
-        return $response;
     }
 
     /**

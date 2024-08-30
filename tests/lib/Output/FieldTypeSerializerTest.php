@@ -41,34 +41,6 @@ class FieldTypeSerializerTest extends TestCase
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
-    public function testSerializeFieldValue(
-        APIFieldType $fieldType,
-        $hashValue
-    ): void {
-        $serializer = $this->getFieldTypeSerializer();
-
-        $this->mockFieldTypeServiceGetFieldType(
-            'myFancyFieldType',
-            $fieldType
-        );
-
-        $serializer->serializeFieldValue(
-            $this->mockGeneratorGenerateFieldTypeHash(
-                'fieldValue',
-                $hashValue
-            ),
-            $this->getContentTypeMock(),
-            $this->createFieldMock('myFancyFieldType', 'my-field-value')
-        );
-    }
-
-    /**
-     * @dataProvider provideDataWithFieldValueToSerialize
-     *
-     * @param mixed $hashValue
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     */
     public function testSerializeContentFieldValue(
         APIFieldType $fieldType,
         $hashValue
@@ -105,51 +77,6 @@ class FieldTypeSerializerTest extends TestCase
             ),
             $hash,
         ];
-    }
-
-    public function testSerializeFieldValueWithProcessor(): void
-    {
-        $serializer = $this->getFieldTypeSerializer();
-
-        $processorMock = $this->getFieldTypeProcessorMock();
-        $this->getFieldTypeProcessorRegistryMock()
-            ->expects(self::once())
-            ->method('hasProcessor')
-            ->with('myFancyFieldType')
-            ->willReturn(true);
-        $this->getFieldTypeProcessorRegistryMock()
-            ->expects(self::once())
-            ->method('getProcessor')
-            ->with('myFancyFieldType')
-            ->willReturn($processorMock);
-        $processorMock->expects(self::once())
-            ->method('postProcessValueHash')
-            ->with(self::equalTo([23, 42]))
-            ->willReturn(['post-processed']);
-
-        $fieldTypeMock = $this->getFieldTypeMock();
-
-        $this->mockFieldTypeServiceGetFieldType(
-            'myFancyFieldType',
-            $fieldTypeMock
-        );
-
-        $fieldTypeMock->expects(self::once())
-            ->method('getFieldTypeIdentifier')
-            ->willReturn('myFancyFieldType');
-        $fieldTypeMock->expects(self::once())
-            ->method('toHash')
-            ->with(self::equalTo('my-field-value'))
-            ->willReturn([23, 42]);
-
-        $serializer->serializeFieldValue(
-            $this->mockGeneratorGenerateFieldTypeHash(
-                'fieldValue',
-                ['post-processed']
-            ),
-            $this->getContentTypeMock(),
-            $this->createFieldMock('myFancyFieldType', 'my-field-value')
-        );
     }
 
     public function testSerializeFieldDefaultValue(): void
