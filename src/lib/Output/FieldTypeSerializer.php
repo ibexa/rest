@@ -10,7 +10,6 @@ namespace Ibexa\Rest\Output;
 use Ibexa\Contracts\Core\Repository\FieldType;
 use Ibexa\Contracts\Core\Repository\FieldTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
-use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Rest\FieldTypeProcessorRegistry;
 
