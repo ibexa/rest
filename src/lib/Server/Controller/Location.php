@@ -13,7 +13,6 @@ use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\TrashService;
 use Ibexa\Contracts\Core\Repository\URLAliasService;
 use Ibexa\Contracts\Rest\Exceptions;
-use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
@@ -55,8 +54,6 @@ class Location extends RestController
      */
     protected $urlAliasService;
 
-    private UriParserInterface $uriParser;
-
     /**
      * Construct controller.
      *
@@ -69,14 +66,12 @@ class Location extends RestController
         LocationService $locationService,
         ContentService $contentService,
         TrashService $trashService,
-        URLAliasService $urlAliasService,
-        UriParserInterface $uriParser
+        URLAliasService $urlAliasService
     ) {
         $this->locationService = $locationService;
         $this->contentService = $contentService;
         $this->trashService = $trashService;
         $this->urlAliasService = $urlAliasService;
-        $this->uriParser = $uriParser;
     }
 
     /**
