@@ -10,6 +10,8 @@ use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\RequestParser;
 
 /**
+ * @deprecated 4.6.11, and will be removed in the next major release.
+ *
  * Pattern based Request parser.
  *
  * Handles 2 types of patterns to be used in an URL:

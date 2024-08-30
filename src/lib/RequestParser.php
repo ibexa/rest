@@ -8,6 +8,9 @@ namespace Ibexa\Rest;
 
 /**
  * Interface for Request parsers.
+ *
+ * @deprecated 4.6.11
+ * use \Ibexa\Contracts\Rest\UriParser\UriParserInterface and \Symfony\Component\Routing\RouterInterface instead
  */
 interface RequestParser
 {
