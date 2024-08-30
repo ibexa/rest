@@ -53,7 +53,7 @@ class Exception extends AbstractExceptionVisitor
 
     protected function canDisplayPreviousException(): bool
     {
-        return $this->debug;
+        return true;
     }
 }
 
