@@ -21,7 +21,7 @@ class Exception extends AbstractExceptionVisitor
      */
     protected $debug = false;
 
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface|null */
+    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
     protected $translator;
 
     /**

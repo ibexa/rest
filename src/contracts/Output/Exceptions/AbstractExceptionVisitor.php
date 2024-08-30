@@ -19,7 +19,7 @@ abstract class AbstractExceptionVisitor extends ValueObjectVisitor
     /**
      * Mapping of HTTP status codes to their respective error messages.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected static $httpStatusCodes = [
         400 => 'Bad Request',
@@ -71,6 +71,8 @@ abstract class AbstractExceptionVisitor extends ValueObjectVisitor
 
     /**
      * @param \Exception $data
+     *
+     * @return void
      */
     public function visit(Visitor $visitor, Generator $generator, $data)
     {
@@ -119,16 +121,17 @@ abstract class AbstractExceptionVisitor extends ValueObjectVisitor
 
     protected function getErrorDescription(\Exception $data, int $statusCode): string
     {
+        $translator = $this->getTranslator();
         if ($statusCode < 500 || $this->canDisplayExceptionMessage()) {
-            $errorDescription = $data instanceof Translatable && $this->translator
+            $errorDescription = $data instanceof Translatable && $translator
                 ? /** @Ignore */
-                $this->translator->trans($data->getMessageTemplate(), $data->getParameters(), 'ibexa_repository_exceptions')
+                $translator->trans($data->getMessageTemplate(), $data->getParameters(), 'ibexa_repository_exceptions')
                 : $data->getMessage();
         } else {
             // Do not leak any file paths and sensitive data on production environments
-            $errorDescription = $this->translator
+            $errorDescription = $translator
                 ? /** @Desc("An error has occurred. Please try again later or contact your Administrator.") */
-                $this->translator->trans('non_verbose_error', [], 'ibexa_repository_exceptions')
+                $translator->trans('non_verbose_error', [], 'ibexa_repository_exceptions')
                 : 'An error has occurred. Please try again later or contact your Administrator.';
         }
 
