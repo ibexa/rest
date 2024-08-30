@@ -4,6 +4,8 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace Ibexa\Contracts\Rest\Input\Parser\Query\SortClause;
 
 use Ibexa\Contracts\Rest\Exceptions;
@@ -43,7 +45,7 @@ abstract class BaseSortClauseProcessor implements SortClauseProcessorInterface
     abstract protected function getMediaTypePrefix(): string;
 
     abstract protected function getParserInvalidSortClauseMessage(string $sortClauseName): string;
-    
+
     private function getSortClauseMediaType(string $sortClauseName): string
     {
         $mediaTypePrefix = $this->getMediaTypePrefix();
