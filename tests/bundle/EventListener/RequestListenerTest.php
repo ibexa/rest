@@ -40,6 +40,7 @@ final class RequestListenerTest extends EventListenerTest
             // REST requests
             [self::REST_ROUTE, true],
             ['/api/ibexa/v2/true', true],
+            ['/admin/api/ibexa/v2/true', true],
             ['/api/bundle-name/v2/true', true],
             ['/api/MyBundle12/v2/true', true],
             ['/api/ThisIs_Bundle123/v2/true', true],
@@ -95,13 +96,20 @@ final class RequestListenerTest extends EventListenerTest
 
     protected function performFakeRequest(string $uri, int $type = HttpKernelInterface::MAIN_REQUEST): Request
     {
+        $request = Request::create($uri);
         $event = new RequestEvent(
             $this->createMock(HttpKernelInterface::class),
-            Request::create($uri),
+            $request,
             $type
         );
 
         $this->getEventListener()->onKernelRequest($event);
+
+        if (str_starts_with($uri, '/admin')) {
+            $uri = substr($uri, strlen('/admin'));
+        }
+        $request->attributes->set('semanticPathInfo', $uri);
+        $this->getEventListener()->addAttributeForIbexaRestRoute($event);
 
         return $event->getRequest();
     }
