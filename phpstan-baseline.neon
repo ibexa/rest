@@ -56,19 +56,9 @@ parameters:
 			path: src/bundle/DependencyInjection/Compiler/ValueObjectVisitorPass.php
 
 		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Configuration\\:\\:addRestRootResourcesSection\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Configuration.php
-
-		-
 			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Configuration\\:\\:addRestRootResourcesSection\\(\\) has parameter \\$rootNode with no type specified\\.$#"
 			count: 1
 			path: src/bundle/DependencyInjection/Configuration.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\IbexaRestExtension\\:\\:load\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/IbexaRestExtension.php
 
 		-
 			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\IbexaRestExtension\\:\\:prepend\\(\\) has no return type specified\\.$#"
