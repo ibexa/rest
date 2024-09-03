@@ -13,7 +13,7 @@ use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -21,7 +21,7 @@ use Symfony\Component\Yaml\Yaml;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class IbexaRestExtension extends Extension implements PrependExtensionInterface
+class IbexaRestExtension extends ConfigurableExtension implements PrependExtensionInterface
 {
     public const EXTENSION_NAME = 'ibexa_rest';
 
@@ -31,12 +31,11 @@ class IbexaRestExtension extends Extension implements PrependExtensionInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param array<string, mixed> $mergedConfig
      */
-    public function load(array $configs, ContainerBuilder $container)
+    protected function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
-        $configuration = $this->getConfiguration($configs, $container);
-        $config = $this->processConfiguration($configuration, $configs);
+        $container->setParameter('ibexa.rest.strict_mode', $mergedConfig['strict_mode']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
@@ -46,7 +45,7 @@ class IbexaRestExtension extends Extension implements PrependExtensionInterface
         $loader->load('default_settings.yml');
 
         $processor = new ConfigurationProcessor($container, 'ibexa.site_access.config');
-        $processor->mapConfigArray('rest_root_resources', $config);
+        $processor->mapConfigArray('rest_root_resources', $mergedConfig);
     }
 
     public function prepend(ContainerBuilder $container)
