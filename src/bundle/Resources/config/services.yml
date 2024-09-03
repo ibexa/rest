@@ -1,9 +1,9 @@
 parameters:
     ibexa.rest.output.visitor.json.regexps:
-        - '(^application/vnd\.ibexa\.api\.[A-Za-z]+\+json$)'
+        - '(^application/vnd\.ibexa\.api(\.[A-Za-z]+)+\+json$)'
         - '(^application/json$)'
     ibexa.rest.output.visitor.xml.regexps:
-        - '(^application/vnd\.ibexa\.api\.[A-Za-z]+\+xml$)'
+        - '(^application/vnd\.ibexa\.api(\.[A-Za-z]+)+\+xml$)'
         - '(^application/xml$)'
         - '(^.*/.*$)'
     ibexa.rest.path_prefix.pattern: !php/const \Ibexa\Bundle\Rest\UriParser\UriParser::DEFAULT_REST_PREFIX_PATTERN
