@@ -5596,11 +5596,6 @@ parameters:
 			path: tests/lib/FieldTypeProcessor/DateProcessorTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\ImageProcessorTest\\:\\:getRouterMock\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\ImageProcessorTest\\:\\:getVariations\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
