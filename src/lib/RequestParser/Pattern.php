@@ -10,7 +10,7 @@ use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\RequestParser;
 
 /**
- * @deprecated 4.6.11, and will be removed in the next major release.
+ * @deprecated 4.6.11 The \Ibexa\Rest\RequestParser\Pattern is deprecated, will be removed in 5.0.0.
  *
  * Pattern based Request parser.
  *
