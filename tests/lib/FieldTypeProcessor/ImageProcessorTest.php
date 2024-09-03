@@ -8,11 +8,12 @@
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Rest\FieldTypeProcessor\ImageProcessor;
+use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Routing\RouterInterface;
 
 class ImageProcessorTest extends BinaryInputProcessorTest
 {
-    protected RouterInterface $router;
+    protected RouterInterface&MockObject $router;
 
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\ImageProcessor::postProcessValueHash
@@ -67,10 +68,7 @@ class ImageProcessorTest extends BinaryInputProcessorTest
         );
     }
 
-    /**
-     * @returns RouterInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getRouterMock()
+    protected function getRouterMock(): RouterInterface&MockObject
     {
         if (!isset($this->router)) {
             $this->router = $this->createMock(RouterInterface::class);
