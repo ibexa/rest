@@ -269,4 +269,14 @@ class Xml extends Generator
     {
         return [];
     }
+
+    public function getEncoderContext(array $data): array
+    {
+        return [];
+    }
+
+    public function transformData(array $normalizedData): array
+    {
+        return $normalizedData;
+    }
 }
