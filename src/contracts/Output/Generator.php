@@ -421,4 +421,18 @@ abstract class Generator
      * @return array<mixed>
      */
     abstract public function toArray(): array;
+
+    /**
+     * @param array<mixed> $data
+     *
+     * @return array<mixed>
+     */
+    abstract public function getEncoderContext(array $data): array;
+
+    /**
+     * @param array<mixed> $normalizedData
+     *
+     * @return array<mixed>
+     */
+    abstract public function transformData(array $normalizedData): array;
 }

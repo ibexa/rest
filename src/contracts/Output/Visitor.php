@@ -74,7 +74,7 @@ class Visitor
      */
     public function visit(mixed $data): Response
     {
-        $normalizedData = $this->normalizer->normalize($data);
+        [$normalizedData, $encoderContext] = $this->normalizer->normalize($data, $this->format);
 
         //@todo Needs refactoring!
         // A hackish solution to enable outer visitors to disable setting
@@ -89,7 +89,9 @@ class Visitor
 
         $response = clone $this->response;
 
-        $response->setContent($this->encoder->encode($normalizedData, $this->format));
+        $content = $this->encoder->encode($normalizedData, $this->format, $encoderContext);
+
+        $response->setContent($content);
 
         // reset the inner response
         $this->response = new Response(null, Response::HTTP_OK);
