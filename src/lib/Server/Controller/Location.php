@@ -7,6 +7,11 @@
 
 namespace Ibexa\Rest\Server\Controller;
 
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
+use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\LocationService;
@@ -20,7 +25,339 @@ use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
+#[Get(
+    uriTemplate: '/content/locations',
+    name: 'Load Locations by id/remoteId/urlAlias',
+    openapi: new Model\Operation(
+        summary: 'Loads the Location for a given ID (x), remote ID or URL alias.',
+        tags: [
+            'Location',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'content' => [
+                    'application/vnd.ibexa.api.LocationList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Location',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.LocationList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/LocationWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_TEMPORARY_REDIRECT => [
+                'description' => 'Temporary redirect to the main resource URL.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the Location with the given ID (remote ID or URL  Alias) does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/content/locations/{path}',
+    name: 'Load Location',
+    openapi: new Model\Operation(
+        summary: 'Loads the Location for the given path e.g. \'/content/locations/1/2/61\'.',
+        tags: [
+            'Location',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the new Location is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'If-None-Match',
+                in: 'header',
+                required: true,
+                description: 'ETag',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'path',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'content' => [
+                    'application/vnd.ibexa.api.Location+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Location',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.Location+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/LocationWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized to read this Location.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the Location with the given path does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Delete(
+    uriTemplate: '/content/locations/{path}',
+    name: 'Delete subtree',
+    openapi: new Model\Operation(
+        summary: 'Deletes the complete subtree for the given path. Every content item which does not have any other Location is deleted. Otherwise the deleted Location is removed from the content item. The children are recursively deleted.',
+        tags: [
+            'Location',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'path',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_NO_CONTENT => [
+                'description' => 'No Content - deleted.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized to delete this subtree.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the Location with the given ID does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Patch(
+    uriTemplate: '/content/locations/{path}',
+    name: 'Update Location',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Updates the Location. This method can also be used to hide/reveal a Location via the hidden field in the LocationUpdate. PATCH or POST with header X-HTTP-Method-Override PATCH.',
+        tags: [
+            'Location',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the Location is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'The LocationUpdate schema encoded in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'If-Match',
+                in: 'header',
+                required: true,
+                description: 'ETag',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'path',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.LocationUpdate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/LocationUpdateStruct',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/locations/location_id/PATCH/LocationUpdate.xml.example',
+                ],
+                'application/vnd.ibexa.api.LocationUpdate+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/LocationUpdateStructWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/locations/location_id/PATCH/LocationUpdate.json.example',
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_OK => [
+                'content' => [
+                    'application/vnd.ibexa.api.Location+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Location',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.Location+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/LocationWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized to update this Location.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the Location with the given ID does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/content/locations/{path}/children',
+    name: 'Get child Locations.',
+    openapi: new Model\Operation(
+        summary: 'Loads all child Locations for the given parent Location.',
+        tags: [
+            'Location',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the new Location list is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'path',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'content' => [
+                    'application/vnd.ibexa.api.LocationList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/LocationList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/GET/LocationList.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.LocationList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/LocationList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/GET/LocationList.xml.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized to read this content item.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the content item with the given ID does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/content/locations/{path}/urlaliases',
+    name: 'List URL aliases for Location',
+    openapi: new Model\Operation(
+        summary: 'Returns the list of URL aliases for a Location.',
+        tags: [
+            'Location',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the URL alias list contains only references and is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'path',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - returns the list of URL aliases.',
+                'content' => [
+                    'application/vnd.ibexa.api.UrlAliasRefList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UrlAliasRefList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/GET/UrlAliasRefList.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.UrlAliasRefList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UrlAliasRefListWrapper',
+                        ],
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - The user has no permission to read URL aliases.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The Location was not found.',
+            ],
+        ],
+    ),
+)]
 /**
  * Location controller.
  */
