@@ -72,6 +72,12 @@ final class OpenApiFactory implements OpenApiFactoryInterface
                     continue;
                 }
 
+                $responses = $operation->getResponses();
+
+                if ($responses === null) {
+                    continue;
+                }
+
                 $newOperation = $operation;
 
                 /**
