@@ -399,7 +399,7 @@ XML;
     {
         $request = $this->createAuthenticationHttpRequest($this->getLoginUsername(), $this->getLoginPassword());
         $response = $this->sendHttpRequest($request);
-        self::assertHttpResponseCodeEquals($response, 201);
+        self::assertHttpResponseCodeEquals($response, 200);
 
         return json_decode($response->getBody()->getContents(), false, JSON_THROW_ON_ERROR)->Session;
     }
