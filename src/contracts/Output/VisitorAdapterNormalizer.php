@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\Rest\Output;
 
+use Ibexa\Rest\Output\Generator\InMemory\Xml as InMemoryXml;
 use Ibexa\Rest\Output\Generator\Json;
 use LogicException;
 use Symfony\Component\Serializer\Encoder\EncoderInterface;
@@ -38,7 +39,7 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
             : null;
 
         if ($eligibleVisitor instanceof ValueObjectVisitor) {
-            return $this->visitValueObject($object, $eligibleVisitor);
+            return $this->visitValueObject($object, $eligibleVisitor, $format);
         }
 
         return $this->normalizer->normalize($object, $format, $context);
@@ -79,11 +80,14 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
     }
 
     /**
-     * @return array<mixed>
+     * @return array<array<mixed>, array<mixed>>
      */
-    private function visitValueObject(object $object, ValueObjectVisitor $valueObjectVisitor): array
-    {
-        $visitor = $this->createVisitor();
+    private function visitValueObject(
+        object $object,
+        ValueObjectVisitor $valueObjectVisitor,
+        string $format
+    ): array {
+        $visitor = $this->createVisitor($format);
         $generator = $visitor->getGenerator();
 
         $generator->reset();
@@ -93,21 +97,26 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
 
         $generator->endDocument($object);
 
-        return $generator->toArray();
+        $normalizedData = $generator->toArray();
+        $encoderContext = $generator->getEncoderContext($normalizedData);
+
+        return [$generator->transformData($normalizedData), $encoderContext];
     }
 
-    private function createVisitor(): Visitor
+    private function createVisitor(string $format): Visitor
     {
         $fieldTypeHashGenerator = new Json\FieldTypeHashGenerator($this->normalizer);
 
-        $generator = new Json($fieldTypeHashGenerator);
+        $generator = $format === 'xml'
+            ? new InMemoryXml($fieldTypeHashGenerator)
+            : new Json($fieldTypeHashGenerator);
 
         return new Visitor(
             $generator,
             $this->normalizer,
             $this->encoder,
             $this->valueObjectVisitorResolver,
-            'json',
+            $format,
         );
     }
 }
