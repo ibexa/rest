@@ -8,6 +8,11 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Controller;
 
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
+use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
@@ -24,6 +29,283 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 
+#[Post(
+    uriTemplate: '/user/sessions',
+    name: 'Create session (login a User)',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Performs a login for the user or checks if session exists and returns the session and session cookie. The client will need to remember both session name/ID and CSRF token as this is for security reasons not exposed via GET.',
+        tags: [
+            'User Session',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the session is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'The SessionInput schema encoded in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Cookie',
+                in: 'header',
+                required: true,
+                description: 'Only needed for session\'s checking {sessionName}={sessionID}.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'Only needed for session\'s checking. The {csrfToken} needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.SessionInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/SessionInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/SessionInput.xml.example',
+                ],
+                'application/vnd.ibexa.api.SessionInput+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/SessionInputWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/SessionInput.json.example',
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'Session already exists.',
+                'content' => [
+                    'application/vnd.ibexa.api.Session+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Session',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.Session+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/SessionWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_CREATED => [
+                'description' => 'Session is created.',
+                'content' => [
+                    'application/vnd.ibexa.api.Session+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Session',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.Session+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/SessionWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - the input does not match the input schema definition.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the authorization failed.',
+            ],
+            Response::HTTP_CONFLICT => [
+                'description' => 'Error - header contained a session cookie but different user was authorized.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/user/sessions/current',
+    name: 'Get current session',
+    openapi: new Model\Operation(
+        summary: 'Get current user session, if any.',
+        tags: [
+            'User Session',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Cookie',
+                in: 'header',
+                required: true,
+                description: 'Only needed for session\'s checking {sessionName}={sessionID}.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the session is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'User is currently logged in and has a valid session.',
+                'content' => [
+                    'application/vnd.ibexa.api.Session+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Session',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.Session+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/SessionWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'User does not have a valid session, or it has expired.',
+            ],
+        ],
+    ),
+)]
+#[Delete(
+    uriTemplate: '/user/sessions/{sessionId}',
+    name: 'Delete session (logout a User)',
+    openapi: new Model\Operation(
+        summary: 'The user session is removed i.e. the user is logged out.',
+        tags: [
+            'User Session',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Cookie',
+                in: 'header',
+                required: true,
+                description: '{sessionName}={sessionID}',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The {csrfToken} needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'sessionId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_NO_CONTENT => [
+                'description' => 'OK - session deleted.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the session does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Post(
+    uriTemplate: '/user/sessions/{sessionId}/refresh',
+    name: 'Refresh session (deprecated)',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapiContext: ['requestBody' => false],
+    openapi: new Model\Operation(
+        summary: 'Get the session\'s User information. Deprecated as of Ibexa DXP 4.6, use GET /user/sessions/current instead.',
+        tags: [
+            'User Session',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Cookie',
+                in: 'header',
+                required: true,
+                description: '{sessionName}={sessionID}',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The {csrfToken} needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'sessionId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'content' => [
+                    'application/vnd.ibexa.api.Session+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Session',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.Session+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/SessionWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the session does not exist.',
+            ],
+        ],
+    ),
+)]
 /**
  * @internal
  */

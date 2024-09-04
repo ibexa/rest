@@ -7,6 +7,12 @@
 
 namespace Ibexa\Rest\Server\Controller;
 
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
+use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions\LimitationValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException as APINotFoundException;
@@ -25,7 +31,1189 @@ use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Values;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
+#[Get(
+    uriTemplate: '/user/roles',
+    name: 'Load Roles',
+    openapi: new Model\Operation(
+        summary: 'Returns a list of all Roles.',
+        tags: [
+            'User Role',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the user list returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - list of all Roles.',
+                'content' => [
+                    'application/vnd.ibexa.api.RoleList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/GET/RoleList.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.RoleList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/GET/RoleList.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user has no permission to read Roles.',
+            ],
+        ],
+    ),
+)]
+#[Post(
+    uriTemplate: '/user/roles',
+    name: 'Create Role or Role draft',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Creates a new Role or Role draft.',
+        tags: [
+            'User Role',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the new user is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'The RoleInput schema encoded in XML or JSON.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.RoleInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/RoleInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/RoleInput.xml.example',
+                ],
+                'application/vnd.ibexa.api.RoleInput+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/RoleInputWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/RoleInput.json.example',
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_CREATED => [
+                'content' => [
+                    'application/vnd.ibexa.api.Role+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Role',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.Role+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - the input does not match the input schema definition.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized to create a Role or a Role draft.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/user/roles/{id}',
+    name: 'Load Role',
+    openapi: new Model\Operation(
+        summary: 'Loads a Role for the given ID.',
+        tags: [
+            'User Role',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the user list returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'If-None-Match',
+                in: 'header',
+                required: true,
+                description: 'ETag',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - Role for the given ID.',
+                'content' => [
+                    'application/vnd.ibexa.api.Role+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Role',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.Role+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user has no permission to read Roles.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the Role does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Post(
+    uriTemplate: '/user/roles/{id}',
+    name: 'Create Role Draft',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapiContext: ['requestBody' => false],
+    openapi: new Model\Operation(
+        summary: 'Creates a new Role draft from an existing Role.',
+        tags: [
+            'User Role',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the new user is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'The RoleInput schema encoded in XML or JSON.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_CREATED => [
+                'content' => [
+                    'application/vnd.ibexa.api.RoleDraft+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleDraft',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/POST/RoleDraft.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.RoleDraft+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleDraftWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized to create a Role or a Role draft',
+            ],
+        ],
+    ),
+)]
+#[Patch(
+    uriTemplate: '/user/roles/{id}',
+    name: 'Update Role',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Updates a Role. PATCH or POST with header X-HTTP-Method-Override PATCH',
+        tags: [
+            'User Role',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the new user is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'The RoleInput schema encoded in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'If-Match',
+                in: 'header',
+                required: true,
+                description: 'ETag Causes to patch only if the specified ETag is the current one. Otherwise a 412 is returned.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.RoleInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/RoleInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/RoleInput.xml.example',
+                ],
+                'application/vnd.ibexa.api.RoleInput+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/RoleInputWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/RoleInput.json.example',
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - Role updated',
+                'content' => [
+                    'application/vnd.ibexa.api.Role+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Role',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.Role+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - the input does not match the input schema definition.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized to update the Role.',
+            ],
+            Response::HTTP_PRECONDITION_FAILED => [
+                'description' => 'Error - the current ETag does not match with the provided one in the If-Match header.',
+            ],
+        ],
+    ),
+)]
+#[Delete(
+    uriTemplate: '/user/roles/{id}',
+    name: 'Delete Role',
+    openapi: new Model\Operation(
+        summary: 'The given Role and all assignments to Users or User Groups are deleted.',
+        tags: [
+            'User Role',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_NO_CONTENT => [
+                'description' => 'No Content.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the User is not authorized to delete this Role.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/user/roles/{id}/draft',
+    name: 'Load Role draft',
+    openapi: new Model\Operation(
+        summary: 'Loads a Role draft by original Role ID.',
+        tags: [
+            'User Role',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the User list returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'If-None-Match',
+                in: 'header',
+                required: true,
+                description: 'ETag',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - Role draft by original Role ID.',
+                'content' => [
+                    'application/vnd.ibexa.api.Role+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Role',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.Role+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user has no permission to read Roles.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - there is no draft or Role with the given ID.',
+            ],
+        ],
+    ),
+)]
+#[Patch(
+    uriTemplate: '/user/roles/{id}/draft',
+    name: 'Update Role draft',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Updates a Role draft. PATCH or POST with header X-HTTP-Method-Override PATCH.',
+        tags: [
+            'User Role',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the updated Role is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'The RoleInput schema encoded in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'If-Match',
+                in: 'header',
+                required: true,
+                description: 'Performs a PATCH only if the specified ETag is the current one. Otherwise a 412 is returned.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.RoleInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/RoleInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/RoleInput.xml.example',
+                ],
+                'application/vnd.ibexa.api.RoleInput+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/RoleInputWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/RoleInput.json.example',
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - Role draft updated.',
+                'content' => [
+                    'application/vnd.ibexa.api.Role+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Role',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.Role+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - the input does not match the input schema definition.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized to update the Role.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - there is no draft or Role with the given ID.',
+            ],
+            Response::HTTP_PRECONDITION_FAILED => [
+                'description' => 'Error - the current ETag does not match with the one provided in the If-Match header.',
+            ],
+        ],
+    ),
+)]
+#[Delete(
+    uriTemplate: '/user/roles/{id}/draft',
+    name: 'Delete Role draft',
+    openapi: new Model\Operation(
+        summary: 'The given Role draft is deleted.',
+        tags: [
+            'User Role',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_NO_CONTENT => [
+                'description' => 'No Content.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized to delete this Role.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/user/roles/{id}/policies',
+    name: 'Load Policies',
+    openapi: new Model\Operation(
+        summary: 'Loads Policies for the given Role.',
+        tags: [
+            'User Role',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the Policy list is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'content' => [
+                    'application/vnd.ibexa.api.PolicyList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/PolicyList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/GET/PolicyList.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.PolicyList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/PolicyListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/GET/PolicyList.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user has no permission to read Roles.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the Role does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Delete(
+    uriTemplate: '/user/roles/{id}/policies',
+    name: 'Delete Policies',
+    openapi: new Model\Operation(
+        summary: 'All Policies of the given Role are deleted.',
+        tags: [
+            'User Role',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_NO_CONTENT => [
+                'description' => 'No Content - all Policies of the given Role are deleted.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized to delete this content type.',
+            ],
+        ],
+    ),
+)]
+#[Post(
+    uriTemplate: '/user/roles/{id}/policies',
+    name: 'Create Policy',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Creates a Policy',
+        tags: [
+            'User Role',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the updated Policy is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'If set, the updated Policy is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.PolicyCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/PolicyCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/POST/PolicyCreate.xml.example',
+                ],
+                'application/vnd.ibexa.api.PolicyCreate+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/PolicyCreateWrapper',
+                    ],
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_CREATED => [
+                'content' => [
+                    'application/vnd.ibexa.api.Policy+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Policy',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/PATCH/Policy.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.Policy+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/PolicyWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/GET/Policy.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - the input does not match the input schema definition or validation of limitation in PolicyCreate fails.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized to create the Policy.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the Role does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Patch(
+    uriTemplate: '/user/roles/{id}/policies/{id}',
+    name: 'Update Policy',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Updates a Policy. PATCH or POST with header X-HTTP-Method-Override PATCH.',
+        tags: [
+            'User Role',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the updated Policy is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'If set, the updated Policy is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'If-Match',
+                in: 'header',
+                required: true,
+                description: 'Causes to patch only if the specified ETag is the current one. Otherwise a 412 is returned.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.PolicyUpdate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/PolicyUpdate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/PATCH/PolicyUpdate.xml.example',
+                ],
+                'application/vnd.ibexa.api.PolicyUpdate+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/PolicyUpdateWrapper',
+                    ],
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_OK => [
+                'content' => [
+                    'application/vnd.ibexa.api.Policy+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Policy',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/PATCH/Policy.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.Policy+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/PolicyWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/GET/Policy.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - the input does not match the input schema definition or validation of limitation in PolicyUpdate fails.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized to update the Policy.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the Role does not exist.',
+            ],
+            Response::HTTP_PRECONDITION_FAILED => [
+                'description' => 'Error - the current ETag does not match with the one provided in the If-Match header.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/user/roles/{id}/policies/{id}',
+    name: 'Load Policy',
+    openapi: new Model\Operation(
+        summary: 'Loads a Policy for the given module and function.',
+        tags: [
+            'User Role',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the Policy is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'If-None-Match',
+                in: 'header',
+                required: true,
+                description: 'ETag',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'content' => [
+                    'application/vnd.ibexa.api.Policy+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Policy',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/PATCH/Policy.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.Policy+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/PolicyWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/GET/Policy.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user has no permission to read Roles.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the Role or Policy does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Delete(
+    uriTemplate: '/user/roles/{id}/policies/{id}',
+    name: 'Delete Policy',
+    openapi: new Model\Operation(
+        summary: 'Deletes given Policy.',
+        tags: [
+            'User Role',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_NO_CONTENT => [
+                'description' => 'No Content - the given Policy is deleted.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized to delete this content type.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the Role or Policy does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/user/groups/{path}/roles',
+    name: 'Load Roles for User Group',
+    openapi: new Model\Operation(
+        summary: 'Returns a list of all Roles assigned to the given User Group.',
+        tags: [
+            'User Group',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the Role assignment list is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'path',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'content' => [
+                    'application/vnd.ibexa.api.RoleAssignmentList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleAssignmentList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/role_id/GET/RoleAssignment.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.RoleAssignmentList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleAssignmentListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/role_id/DELETE/RoleAssignmentList.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - the user has no permission to read Roles.',
+            ],
+        ],
+    ),
+)]
+#[Post(
+    uriTemplate: '/user/groups/{path}/roles',
+    name: 'Assign Role to User Group',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Assigns a Role to a User Group.',
+        tags: [
+            'User Group',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the updated Role assignment list is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'The RoleAssignInput schema encoded in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'path',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.RoleAssignInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/RoleAssignInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/roles/POST/RoleAssignInput.xml.example',
+                ],
+                'application/vnd.ibexa.api.RoleAssignInput+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/RoleAssignInputWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/POST/RoleAssignInput.json.example',
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_OK => [
+                'content' => [
+                    'application/vnd.ibexa.api.RoleAssignmentList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleAssignmentList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/role_id/GET/RoleAssignment.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.RoleAssignmentList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleAssignmentListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/role_id/DELETE/RoleAssignmentList.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - validation of limitation in RoleAssignInput fails.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized to assign this Role.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/user/groups/{path}/roles/{roleId}',
+    name: 'Load User Group Role Assignment',
+    openapi: new Model\Operation(
+        summary: 'Returns a Role assignment of the given User Group.',
+        tags: [
+            'User Group',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the Role assignment list is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'path',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'roleId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - returns a Role assignment of the given User Group.',
+                'content' => [
+                    'application/vnd.ibexa.api.RoleAssignment+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleAssignment',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/role_id/GET/RoleAssignment.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.RoleAssignment+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleAssignmentWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/role_id/GET/RoleAssignment.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user has no permission to read Roles.',
+            ],
+        ],
+    ),
+)]
+#[Delete(
+    uriTemplate: '/user/groups/{path}/roles/{roleId}',
+    name: 'Unassign Role from User Group',
+    openapi: new Model\Operation(
+        summary: 'The given Role is removed from the User or User Group.',
+        tags: [
+            'User Group',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the updated Role assignment list is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'path',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'roleId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'content' => [
+                    'application/vnd.ibexa.api.RoleAssignmentList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleAssignmentList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/role_id/GET/RoleAssignment.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.RoleAssignmentList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleAssignmentListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/role_id/DELETE/RoleAssignmentList.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized to delete this Role assignment.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/user/policies',
+    name: 'List Policies for User',
+    openapi: new Model\Operation(
+        summary: 'Search all Policies which are applied to a given User.',
+        tags: [
+            'User Policy',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the Policy list is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - Policies which are applied to a given User.',
+                'content' => [
+                    'application/vnd.ibexa.api.PolicyList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/PolicyList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/GET/PolicyList.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.PolicyList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/PolicyListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/GET/PolicyList.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user has no permission to read Roles.',
+            ],
+        ],
+    ),
+)]
 /**
  * Role controller.
  */
