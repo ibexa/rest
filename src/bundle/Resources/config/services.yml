@@ -397,3 +397,8 @@ services:
         abstract: true
         arguments:
             $parsingDispatcher: '@Ibexa\Contracts\Rest\Input\ParsingDispatcher'
+
+    Ibexa\Contracts\Rest\Input\Parser\Query\SortClause\BaseSortClauseProcessor:
+        abstract: true
+        arguments:
+            $parsingDispatcher: '@Ibexa\Contracts\Rest\Input\ParsingDispatcher'
