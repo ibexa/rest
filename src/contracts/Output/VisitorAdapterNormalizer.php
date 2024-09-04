@@ -39,7 +39,7 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
             : null;
 
         if ($eligibleVisitor instanceof ValueObjectVisitor) {
-            return $this->visitValueObject($object, $eligibleVisitor, $format);
+            return $this->visitValueObject($object, $eligibleVisitor, $format, $context);
         }
 
         return $this->normalizer->normalize($object, $format, $context);
@@ -80,15 +80,19 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
     }
 
     /**
+     * @param array<mixed> $context
+     *
      * @return array<array<mixed>, array<mixed>>
      */
     private function visitValueObject(
         object $object,
         ValueObjectVisitor $valueObjectVisitor,
-        string $format
+        string $format,
+        array $context,
     ): array {
-        $visitor = $this->createVisitor($format);
-        $generator = $visitor->getGenerator();
+        $generator = $this->createGenerator($format);
+
+        $visitor = $context['visitor'] ?? $this->createVisitor($format, $generator);
 
         $generator->reset();
         $generator->startDocument($object);
@@ -103,14 +107,17 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
         return [$generator->transformData($normalizedData), $encoderContext];
     }
 
-    private function createVisitor(string $format): Visitor
+    private function createGenerator(string $format): Generator
     {
         $fieldTypeHashGenerator = new Json\FieldTypeHashGenerator($this->normalizer);
 
-        $generator = $format === 'xml'
+        return $format === 'xml'
             ? new InMemoryXml($fieldTypeHashGenerator)
             : new Json($fieldTypeHashGenerator);
+    }
 
+    private function createVisitor(string $format, Generator $generator): Visitor
+    {
         return new Visitor(
             $generator,
             $this->normalizer,
