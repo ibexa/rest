@@ -55,3 +55,8 @@ services:
                 - '@@IbexaRestBundle/Resources/api_platform/object_state_groups_schemas.yml'
                 - '@@IbexaRestBundle/Resources/api_platform/services_schemas.yml'
                 - '@@IbexaRestBundle/Resources/api_platform/views_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/user/roles_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/user/sessions_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/user/token_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/user/user_groups_schemas.yml'
+                - '@@IbexaRestBundle/Resources/api_platform/user/users_schemas.yml'

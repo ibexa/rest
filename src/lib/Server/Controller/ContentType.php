@@ -7,6 +7,12 @@
 
 namespace Ibexa\Rest\Server\Controller;
 
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
+use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentTypeFieldDefinitionValidationException;
@@ -24,7 +30,1481 @@ use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
+#[Get(
+    uriTemplate: '/content/types',
+    name: 'List content types',
+    openapi: new Model\Operation(
+        summary: 'Returns a list of content types.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the list of content type info objects or content types (including Field definitions) is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - returns a list of content types.',
+                'content' => [
+                    'application/vnd.ibexa.api.ContentTypeInfoList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeInfoList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeInfoList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeInfoListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeList',
+                        ],
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeListWrapper',
+                        ],
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user has no permission to read the content types.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/content/types/{contentTypeId}',
+    name: 'Get content type',
+    openapi: new Model\Operation(
+        summary: 'Returns the content type with the provided ID.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the content type is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'If-None-Match',
+                in: 'header',
+                required: true,
+                description: 'ETag',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - returns the content type.',
+                'content' => [
+                    'application/vnd.ibexa.api.ContentType+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentType',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PUBLISH/ContentType.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentType+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/GET/ContentType.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to read this content type.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - The content type does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Post(
+    uriTemplate: '/content/types/{contentTypeId}',
+    name: 'Create Draft',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Creates a draft and updates it with the given data.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the new content type draft is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'The content type Update schema encoded in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.ContentTypeUpdate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentTypeUpdate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeUpdate.xml.example',
+                ],
+                'application/vnd.ibexa.api.ContentTypeUpdate+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentTypeUpdateWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeUpdate.json.example',
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_CREATED => [
+                'description' => 'Draft created.',
+                'content' => [
+                    'application/vnd.ibexa.api.ContentTypeInfo+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeInfo',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PATCH/ContentTypeInfo.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeInfo+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeInfoWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PATCH/ContentTypeInfo.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - The input does not match the input schema definition.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to create the draft.',
+            ],
+            Response::HTTP_FORBIDDEN => [
+                'description' => 'Error - A content type with the given new identifier already exists. A draft already exists.',
+            ],
+        ],
+    ),
+)]
+#[Delete(
+    uriTemplate: '/content/types/{contentTypeId}',
+    name: 'Delete content type',
+    openapi: new Model\Operation(
+        summary: 'Deletes the provided content type.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_NO_CONTENT => [
+                'description' => 'No Content - content type deleted.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to delete this content type.',
+            ],
+            Response::HTTP_FORBIDDEN => [
+                'description' => 'Error - There are object instances of this content type.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - The content type does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/content/types/{contentTypeId}/fieldDefinitions',
+    name: 'Get Field definition list',
+    openapi: new Model\Operation(
+        summary: 'Returns all Field definitions of the provided content type.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the Field definitions are returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - return a list of Field definitions.',
+                'content' => [
+                    'application/vnd.ibexa.api.FieldDefinitionList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinitions',
+                        ],
+                    ],
+                    'application/vnd.ibexa.api.FieldDefinitionList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinitionsWrapper',
+                        ],
+                    ],
+                ],
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - The content type does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/content/types/{contentTypeId}/fieldDefinitions/{fieldDefinitionId}',
+    name: 'Get Field definition',
+    openapi: new Model\Operation(
+        summary: 'Returns the Field definition by the given ID.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the Field definition is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'fieldDefinitionId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - returns the Field definition.',
+                'content' => [
+                    'application/vnd.ibexa.api.FieldDefinition+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinition',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/field_definition_id/GET/FieldDefinition.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.FieldDefinition+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinitionWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/field_definition_id/GET/FieldDefinition.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to read the content type.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - The content type does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/content/types/{contentTypeId}/draft',
+    name: 'Get content type draft',
+    openapi: new Model\Operation(
+        summary: 'Returns the draft of the content type with the provided ID.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the content type is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - returns the content type.',
+                'content' => [
+                    'application/vnd.ibexa.api.ContentType+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentType',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PUBLISH/ContentType.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentType+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/GET/ContentType.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to read this content type.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - The content type does not exist or does not have a draft.',
+            ],
+        ],
+    ),
+)]
+#[Patch(
+    uriTemplate: '/content/types/{contentTypeId}/draft',
+    name: 'Update content type draft',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Updates metadata of a draft. This method does not handle Field definitions. PATCH or POST with header X-HTTP-Method-Override PATCH.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the new content type draft is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'The content type update schema encoded in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.ContentTypeUpdate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentTypeUpdate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeUpdate.xml.example',
+                ],
+                'application/vnd.ibexa.api.ContentTypeUpdate+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentTypeUpdateWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeUpdate.json.example',
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'Draft metadata updated.',
+                'content' => [
+                    'application/vnd.ibexa.api.ContentTypeInfo+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeInfo',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PATCH/ContentTypeInfo.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeInfo+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeInfoWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PATCH/ContentTypeInfo.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - The input does not match the input schema definition.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to update the draft.',
+            ],
+            Response::HTTP_FORBIDDEN => [
+                'description' => 'Error - A content type with the given new identifier already exists.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - There is no draft for this content type.',
+            ],
+        ],
+    ),
+)]
+#[Delete(
+    uriTemplate: '/content/types/{contentTypeId}/draft',
+    name: 'Delete content type draft',
+    openapi: new Model\Operation(
+        summary: 'Deletes the provided content type draft.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_NO_CONTENT => [
+                'description' => 'No Content - content type draft deleted.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to delete this content type draft.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - The content type draft does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/content/types/{contentTypeId}/draft/fieldDefinitions',
+    name: 'Get Draft Field definition list',
+    openapi: new Model\Operation(
+        summary: 'Returns all Field definitions of the provided content type Draft.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the Field definitions are returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - return a list of Field definitions.',
+                'content' => [
+                    'application/vnd.ibexa.api.FieldDefinitionList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinitions',
+                        ],
+                    ],
+                    'application/vnd.ibexa.api.FieldDefinitionList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinitionsWrapper',
+                        ],
+                    ],
+                ],
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - The content type draft does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Post(
+    uriTemplate: '/content/types/{contentTypeId}/draft/fieldDefinitions',
+    name: 'Add content type Draft Field definition',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Creates a new Field definition for the given content type.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the new Field definition is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'The Field Definition Create schema encoded in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.FieldDefinitionCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/FieldDefinitionCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/field_definitions/POST/FieldDefinitionCreate.xml.example',
+                ],
+                'application/vnd.ibexa.api.FieldDefinitionCreate+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/FieldDefinitionCreateWrapper',
+                    ],
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_CREATED => [
+                'description' => 'Field definition created.',
+                'content' => [
+                    'application/vnd.ibexa.api.FieldDefinition+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinition',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/field_definition_id/GET/FieldDefinition.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.FieldDefinition+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinitionWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/field_definition_id/GET/FieldDefinition.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - The input does not match the input schema definition or validation on the Field definition fails.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to add a Field definition.',
+            ],
+            Response::HTTP_FORBIDDEN => [
+                'description' => 'Error - A Field definition with the same identifier already exists in the given content type. The Field definition is of singular type, already existing in the given content type. The Field definition you want to add is of a type that can\'t be added to a content type that already has content instances.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}',
+    name: 'Get content type Draft Field definition',
+    openapi: new Model\Operation(
+        summary: 'Returns the Field definition by the given ID.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the Field definition is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'fieldDefinitionId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - returns the Field definition.',
+                'content' => [
+                    'application/vnd.ibexa.api.FieldDefinition+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinition',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/field_definition_id/GET/FieldDefinition.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.FieldDefinition+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinitionWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/field_definition_id/GET/FieldDefinition.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to read the content type draft.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - The content type or draft does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Patch(
+    uriTemplate: '/content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}',
+    name: 'Update content type Draft Field definition',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Updates the attributes of a Field definition.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the updated Field definition is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'The Field definition update schema encoded in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'fieldDefinitionId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.FieldDefinitionUpdate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/FieldDefinitionUpdate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/field_definitions/field_definition_id/PATCH/FieldDefinitionUpdate.xml.example',
+                ],
+                'application/vnd.ibexa.api.FieldDefinitionUpdate+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/FieldDefinitionUpdateWrapper',
+                    ],
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - attributes updated.',
+                'content' => [
+                    'application/vnd.ibexa.api.FieldDefinition+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinition',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/field_definition_id/GET/FieldDefinition.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.FieldDefinition+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinitionWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/field_definition_id/GET/FieldDefinition.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - The input does not match the input schema definition.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to update the Field definition.',
+            ],
+            Response::HTTP_FORBIDDEN => [
+                'description' => 'Error - A Field definition with the given identifier already exists in the given content type.',
+            ],
+        ],
+    ),
+)]
+#[Delete(
+    uriTemplate: '/content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}',
+    name: 'Delete content type Draft Field definition',
+    openapi: new Model\Operation(
+        summary: 'Deletes the provided Field definition.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'fieldDefinitionId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_NO_CONTENT => [
+                'description' => 'No Content - Field definition deleted.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to delete this content type.',
+            ],
+            Response::HTTP_FORBIDDEN => [
+                'description' => 'Error - There is no draft of the content type assigned to the authenticated user.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/content/types/{contentTypeId}/groups',
+    name: 'Get groups of content type',
+    openapi: new Model\Operation(
+        summary: 'Returns the content type group to which content type belongs to.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the content type group list is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'content' => [
+                    'application/vnd.ibexa.api.ContentTypeGroupRefList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroupRefList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/id/DELETE/ContentTypeGroupRefList.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeGroupRefList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroupRefListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/id/DELETE/ContentTypeGroupRefList.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to read this content type.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - The content type does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Post(
+    uriTemplate: '/content/types/{contentTypeId}/groups',
+    name: 'Link group to content type',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapiContext: ['requestBody' => false],
+    openapi: new Model\Operation(
+        summary: 'Links a content type group to the content type and returns the updated group list.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the updated content type group list is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'content' => [
+                    'application/vnd.ibexa.api.ContentTypeGroupRefList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroupRefList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/id/DELETE/ContentTypeGroupRefList.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeGroupRefList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroupRefListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/id/DELETE/ContentTypeGroupRefList.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - The input does not match the input schema definition.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to add a group.',
+            ],
+            Response::HTTP_FORBIDDEN => [
+                'description' => 'Error - The content type is already assigned to the group.',
+            ],
+        ],
+    ),
+)]
+#[Delete(
+    uriTemplate: '/content/types/{contentTypeId}/groups/{id}',
+    name: 'Unlink group from content type',
+    openapi: new Model\Operation(
+        summary: 'Removes the given group from the content type and returns the updated group list.',
+        tags: [
+            'Type',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the updated content type group list is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'id',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'content' => [
+                    'application/vnd.ibexa.api.ContentTypeGroupRefList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroupRefList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/id/DELETE/ContentTypeGroupRefList.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeGroupRefList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroupRefListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/id/DELETE/ContentTypeGroupRefList.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to delete this content type.',
+            ],
+            Response::HTTP_FORBIDDEN => [
+                'description' => 'Error - content type cannot be unlinked from the only remaining group.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - The resource does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/content/typegroups',
+    name: 'Get content type groups',
+    openapi: new Model\Operation(
+        summary: 'Returns a list of all content type groups. If an identifier is provided, loads the content type group for this identifier.',
+        tags: [
+            'Type Groups',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the content type group list is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - returns a list of content type groups.',
+                'content' => [
+                    'application/vnd.ibexa.api.ContentTypeGroupList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroupList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/GET/ContentTypeGroupList.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeGroupList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroupListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/GET/ContentTypeGroupList.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_TEMPORARY_REDIRECT => [
+                'description' => 'Temporary redirect.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user has no permission to read content types.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - The content type group with the given identifier does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Post(
+    uriTemplate: '/content/typegroups',
+    name: 'Create content type group',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Creates a new content type group.',
+        tags: [
+            'Type Groups',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the new content type group is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'The content type group input schema encoded in XML or JSON.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.ContentTypeGroupInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentTypeGroupInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/POST/ContentTypeGroupInput.xml.example',
+                ],
+                'application/vnd.ibexa.api.ContentTypeGroupInput+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentTypeGroupInputWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/POST/ContentTypeGroupInput.json.example',
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_CREATED => [
+                'description' => 'Content type group created.',
+                'content' => [
+                    'application/vnd.ibexa.api.ContentTypeGroup+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroup',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/POST/ContentTypeGroup.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeGroup+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroupWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/PATCH/ContentTypeGroup.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - The input does not match the input schema definition.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to create this content type group.',
+            ],
+            Response::HTTP_FORBIDDEN => [
+                'description' => 'Error - A content type group with the same identifier already exists.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/content/typegroups/{contentTypeGroupId}',
+    name: 'Get content type group',
+    openapi: new Model\Operation(
+        summary: 'Returns the content type group with provided ID.',
+        tags: [
+            'Type Groups',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the content type group is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'If-None-Match',
+                in: 'header',
+                required: true,
+                description: 'ETag',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeGroupId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - returns the content type group.',
+                'content' => [
+                    'application/vnd.ibexa.api.ContentTypeGroup+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeGroup+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to read this content type group.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - The content type group does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Patch(
+    uriTemplate: '/content/typegroups/{contentTypeGroupId}',
+    name: 'Update content type group',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Updates a content type group. PATCH or POST with header X-HTTP-Method-Override PATCH.',
+        tags: [
+            'Type Groups',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the updated content type group is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'The content type group input schema encoded in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'If-Match',
+                in: 'header',
+                required: true,
+                description: 'ETag causes patching only if the specified ETag is the current one. Otherwise a 412 is returned.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeGroupId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.ContentTypeGroupInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentTypeGroupInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/POST/ContentTypeGroupInput.xml.example',
+                ],
+                'application/vnd.ibexa.api.ContentTypeGroupInput+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentTypeGroupInputWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/POST/ContentTypeGroupInput.json.example',
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'Content type group updated.',
+                'content' => [
+                    'application/vnd.ibexa.api.ContentTypeGroup+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroup',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/POST/ContentTypeGroup.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeGroup+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroupWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/PATCH/ContentTypeGroup.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - The input does not match the input schema definition.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to create this content type group.',
+            ],
+            Response::HTTP_FORBIDDEN => [
+                'description' => 'Error - A content type group with the given identifier already exists.',
+            ],
+            Response::HTTP_PRECONDITION_FAILED => [
+                'description' => 'Error - The current ETag does not match the one provided in the If-Match header.',
+            ],
+        ],
+    ),
+)]
+#[Delete(
+    uriTemplate: '/content/typegroups/{contentTypeGroupId}',
+    name: 'Delete content type group',
+    openapi: new Model\Operation(
+        summary: 'Deletes the provided content type group.',
+        tags: [
+            'Type Groups',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'contentTypeGroupId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_NO_CONTENT => [
+                'description' => 'No Content - content type group deleted.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to delete this content type group.',
+            ],
+            Response::HTTP_FORBIDDEN => [
+                'description' => 'Error - The content type group is not empty.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - The content type group does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/content/typegroups/{contentTypeGroupId}/types',
+    name: 'List content types for group',
+    openapi: new Model\Operation(
+        summary: 'Returns a list of content types in the provided group.',
+        tags: [
+            'Type Groups',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the list of content type info objects or content types (including Field definitions) is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeGroupId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - returns a list on content types.',
+                'content' => [
+                    'application/vnd.ibexa.api.ContentTypeInfoList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeInfoList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/types/GET/ContentTypeInfoList.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeInfoList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeInfoListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user has no permission to read the content types.',
+            ],
+        ],
+    ),
+)]
+#[Post(
+    uriTemplate: '/content/typegroups/{contentTypeGroupId}/types',
+    name: 'Create content type',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Creates a new content type draft in the given content type group.',
+        tags: [
+            'Type Groups',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the new content type or draft is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'The content type Create schema encoded in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentTypeGroupId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.ContentTypeCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentTypeCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/types/POST/ContentTypeCreate.xml.example',
+                ],
+                'application/vnd.ibexa.api.ContentTypeCreate+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentTypeCreateWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/types/POST/ContentTypeCreate.json.example',
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_CREATED => [
+                'description' => 'Content type created.',
+                'content' => [
+                    'application/vnd.ibexa.api.ContentType+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentType',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PUBLISH/ContentType.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentType+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeWrapper',
+                        ],
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - The input does not match the input schema definition. Validation on a Field definition fails. Validation of the content type fails, e.g. multiple Fields of a same singular Field Type are provided. Publish is set to true and the input is not complete e.g. no Field definitions are provided.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to create this content type.',
+            ],
+            Response::HTTP_FORBIDDEN => [
+                'description' => 'Error - A content type with same identifier already exists.',
+            ],
+        ],
+    ),
+)]
 /**
  * ContentType controller.
  */
