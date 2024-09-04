@@ -74,7 +74,7 @@ class Visitor
      */
     public function visit(mixed $data): Response
     {
-        [$normalizedData, $encoderContext] = $this->normalizer->normalize($data, $this->format);
+        [$normalizedData, $encoderContext] = $this->normalizer->normalize($data, $this->format, ['visitor' => $this]);
 
         //@todo Needs refactoring!
         // A hackish solution to enable outer visitors to disable setting
@@ -144,5 +144,10 @@ class Visitor
     public function getGenerator(): Generator
     {
         return $this->generator;
+    }
+
+    public function setGenerator(Generator $generator): void
+    {
+        $this->generator = $generator;
     }
 }
