@@ -329,4 +329,14 @@ class Json extends Generator
     {
         return json_decode(json_encode($this->json, JSON_THROW_ON_ERROR), true, JSON_THROW_ON_ERROR);
     }
+
+    public function getEncoderContext(array $data): array
+    {
+        return [];
+    }
+
+    public function transformData(array $normalizedData): array
+    {
+        return $normalizedData;
+    }
 }
