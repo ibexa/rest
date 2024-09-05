@@ -26,7 +26,27 @@ parameters:
 			path: src/bundle/CorsOptions/RestProvider.php
 
 		-
+			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Compiler\\\\FieldTypeProcessorPass\\:\\:process\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/bundle/DependencyInjection/Compiler/FieldTypeProcessorPass.php
+
+		-
+			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Compiler\\\\InputHandlerPass\\:\\:process\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/bundle/DependencyInjection/Compiler/InputHandlerPass.php
+
+		-
+			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Compiler\\\\InputParserPass\\:\\:process\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/bundle/DependencyInjection/Compiler/InputParserPass.php
+
+		-
 			message: "#^Argument of an invalid type array\\|bool\\|float\\|int\\|string\\|null supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/bundle/DependencyInjection/Compiler/OutputVisitorPass.php
+
+		-
+			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Compiler\\\\OutputVisitorPass\\:\\:process\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/bundle/DependencyInjection/Compiler/OutputVisitorPass.php
 
@@ -34,6 +54,11 @@ parameters:
 			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Configuration\\:\\:addRestRootResourcesSection\\(\\) has parameter \\$rootNode with no type specified\\.$#"
 			count: 1
 			path: src/bundle/DependencyInjection/Configuration.php
+
+		-
+			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\IbexaRestExtension\\:\\:prepend\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/bundle/DependencyInjection/IbexaRestExtension.php
 
 		-
 			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\IbexaRestExtension\\:\\:prependRouterConfiguration\\(\\) has no return type specified\\.$#"
@@ -49,6 +74,11 @@ parameters:
 			message: "#^Property Ibexa\\\\Bundle\\\\Rest\\\\EventListener\\\\UserCheckRequestListener\\:\\:\\$permissionResolver is never read, only written\\.$#"
 			count: 1
 			path: src/bundle/EventListener/UserCheckRequestListener.php
+
+		-
+			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\RequestParser\\\\Router\\:\\:generate\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/bundle/RequestParser/Router.php
 
 		-
 			message: "#^Call to method mapCollection\\(\\) on an unknown class Ibexa\\\\Bundle\\\\Rest\\\\Routing\\\\RouteCollectionMapperMapper\\.$#"
@@ -316,6 +346,11 @@ parameters:
 			path: src/contracts/Output/Generator.php
 
 		-
+			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\ValueObjectVisitor\\:\\:setRequestParser\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/contracts/Output/ValueObjectVisitor.php
+
+		-
 			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\ValueObjectVisitor\\:\\:setRouter\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/contracts/Output/ValueObjectVisitor.php
@@ -366,37 +401,17 @@ parameters:
 			path: src/contracts/Output/ValueObjectVisitor.php
 
 		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcher\\:\\:addVisitor\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/ValueObjectVisitorDispatcher.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcher\\:\\:setOutputGenerator\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/ValueObjectVisitorDispatcher.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcher\\:\\:setOutputVisitor\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/ValueObjectVisitorDispatcher.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Visitor.php
-
-		-
 			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setStatus\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/contracts/Output/Visitor.php
 
 		-
-			message: "#^Property Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:\\$statusCode \\(int\\) does not accept null\\.$#"
+			message: "#^Offset 0 does not exist on array\\<int, string\\|null\\>\\|string\\|null\\.$#"
 			count: 1
 			path: src/contracts/Output/Visitor.php
 
 		-
-			message: "#^Property Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:\\$valueObjectVisitorDispatcher \\(Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcher\\) does not accept default value of type array\\.$#"
+			message: "#^Parameter \\#1 \\$key of method Symfony\\\\Component\\\\HttpFoundation\\\\ResponseHeaderBag\\:\\:remove\\(\\) expects string, int\\|string given\\.$#"
 			count: 1
 			path: src/contracts/Output/Visitor.php
 
@@ -461,6 +476,11 @@ parameters:
 			path: src/lib/FieldTypeProcessorRegistry.php
 
 		-
+			message: "#^Method Ibexa\\\\Rest\\\\Input\\\\BaseParser\\:\\:setRequestParser\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/lib/Input/BaseParser.php
+
+		-
 			message: "#^Method Ibexa\\\\Rest\\\\Input\\\\Dispatcher\\:\\:addHandler\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Input/Dispatcher.php
@@ -496,31 +516,6 @@ parameters:
 			path: src/lib/Input/Handler/Json.php
 
 		-
-			message: "#^Access to an undefined property DOMNode\\:\\:\\$data\\.$#"
-			count: 2
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: "#^Access to an undefined property DOMNode\\:\\:\\$tagName\\.$#"
-			count: 2
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: "#^Access to an undefined property DOMNode\\:\\:\\$wholeText\\.$#"
-			count: 2
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: "#^Call to an undefined method DOMNode\\:\\:hasAttribute\\(\\)\\.$#"
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Input\\\\Handler\\\\Xml\\:\\:convert\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
@@ -547,11 +542,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Input\\\\Handler\\\\Xml\\:\\:parseFieldTypeValues\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: "#^Parameter \\#1 \\$domElement of method Ibexa\\\\Rest\\\\Input\\\\Handler\\\\Xml\\:\\:parseFieldTypeHash\\(\\) expects DOMElement, DOMNode given\\.$#"
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
 
@@ -911,6 +901,76 @@ parameters:
 			path: src/lib/Output/ValueObjectVisitor/ContentObjectStates.php
 
 		-
+			message: "#^Method Ibexa\\\\Rest\\\\RequestParser\\:\\:generate\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/RequestParser.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\RequestParser\\:\\:parse\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/RequestParser.php
+
+		-
+			message: "#^Property Ibexa\\\\Rest\\\\RequestParser\\\\EzPublish\\:\\:\\$map type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/RequestParser/EzPublish.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\RequestParser\\\\Pattern\\:\\:__construct\\(\\) has parameter \\$map with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/RequestParser/Pattern.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\RequestParser\\\\Pattern\\:\\:addPattern\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/lib/RequestParser/Pattern.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\RequestParser\\\\Pattern\\:\\:generate\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/RequestParser/Pattern.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\RequestParser\\\\Pattern\\:\\:parse\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/RequestParser/Pattern.php
+
+		-
+			message: "#^PHPDoc tag @param references unknown parameter\\: \\$type$#"
+			count: 1
+			path: src/lib/RequestParser/Pattern.php
+
+		-
+			message: "#^Property Ibexa\\\\Rest\\\\RequestParser\\\\Pattern\\:\\:\\$compileCache type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/RequestParser/Pattern.php
+
+		-
+			message: "#^Property Ibexa\\\\Rest\\\\RequestParser\\\\Pattern\\:\\:\\$map type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/RequestParser/Pattern.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\:\\:setInputDispatcher\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\:\\:setRepository\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\:\\:setRequestParser\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\:\\:setRouter\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller.php
+
+		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\BinaryContent\\:\\:getImageVariation\\(\\) should return Ibexa\\\\Contracts\\\\Core\\\\Variation\\\\Values\\\\Variation but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/BinaryContent.php
@@ -941,6 +1001,26 @@ parameters:
 			path: src/lib/Server/Controller/Bookmark.php
 
 		-
+			message: "#^Cannot call method get\\(\\) on Symfony\\\\Component\\\\DependencyInjection\\\\ContainerInterface\\|null\\.$#"
+			count: 2
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: "#^Cannot call method getCurrentRequest\\(\\) on object\\|null\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: "#^Cannot call method handle\\(\\) on object\\|null\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\Content\\:\\:createView\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestExecutedView but returns Symfony\\\\Component\\\\HttpFoundation\\\\Response\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\Content\\:\\:loadContent\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestContent but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Content.php
@@ -961,8 +1041,28 @@ parameters:
 			path: src/lib/Server/Controller/Content.php
 
 		-
+			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, int\\|null given\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
 			message: "#^Parameter \\#1 \\$parentLocationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:newLocationCreateStruct\\(\\) expects int, string given\\.$#"
 			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: "#^Parameter \\#1 \\$versions of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\VersionList constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\> given\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: "#^Parameter \\#3 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\Version constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
+			count: 4
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestContent constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>\\|null, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>\\|null given\\.$#"
+			count: 2
 			path: src/lib/Server/Controller/Content.php
 
 		-
@@ -1117,7 +1217,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$contentTypeGroupId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentTypeService\\:\\:loadContentTypeGroup\\(\\) expects int, string given\\.$#"
-			count: 2
+			count: 1
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
@@ -1136,17 +1236,17 @@ parameters:
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
+			message: "#^Parameter \\#1 \\$href of method Ibexa\\\\Rest\\\\RequestParser\\:\\:parseHref\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
 			message: "#^Parameter \\#1 \\$identifier of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentTypeService\\:\\:loadContentTypeByIdentifier\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
 			message: "#^Parameter \\#1 \\$remoteId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentTypeService\\:\\:loadContentTypeByRemoteId\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/ContentType.php
-
-		-
-			message: "#^Parameter \\#1 \\$uri of method Ibexa\\\\Contracts\\\\Rest\\\\UriParser\\\\UriParserInterface\\:\\:getAttributeFromUri\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/ContentType.php
 
@@ -1171,11 +1271,6 @@ parameters:
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
-			message: "#^Parameter \\#2 \\.\\.\\.\\$arrays of function array_merge expects array, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\ContentType\\\\ContentType\\> given\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/ContentType.php
-
-		-
 			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/ContentType.php
@@ -1196,17 +1291,22 @@ parameters:
 			path: src/lib/Server/Controller/Location.php
 
 		-
+			message: "#^Parameter \\#1 \\$href of method Ibexa\\\\Rest\\\\RequestParser\\:\\:parseHref\\(\\) expects string, string\\|null given\\.$#"
+			count: 3
+			path: src/lib/Server/Controller/Location.php
+
+		-
+			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string given\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/Location.php
+
+		-
 			message: "#^Parameter \\#1 \\$remoteId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocationByRemoteId\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Location.php
 
 		-
-			message: "#^Parameter \\#1 \\$uri of method Ibexa\\\\Contracts\\\\Rest\\\\UriParser\\\\UriParserInterface\\:\\:getAttributeFromUri\\(\\) expects string, string\\|null given\\.$#"
-			count: 3
-			path: src/lib/Server/Controller/Location.php
-
-		-
-			message: "#^Parameter \\#1 \\$uri of method Ibexa\\\\Contracts\\\\Rest\\\\UriParser\\\\UriParserInterface\\:\\:matchUri\\(\\) expects string, string\\|null given\\.$#"
+			message: "#^Parameter \\#1 \\$url of method Ibexa\\\\Rest\\\\RequestParser\\:\\:parse\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Location.php
 
@@ -1406,11 +1506,6 @@ parameters:
 			path: src/lib/Server/Controller/Role.php
 
 		-
-			message: "#^Parameter \\#1 \\$array of function array_slice expects array, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\Role\\> given\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/Role.php
-
-		-
 			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string given\\.$#"
 			count: 4
 			path: src/lib/Server/Controller/Role.php
@@ -1433,11 +1528,6 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$roleAssignments of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RoleAssignmentList constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\RoleAssignment\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\UserGroupRoleAssignment\\|Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\UserRoleAssignment\\> given\\.$#"
 			count: 3
-			path: src/lib/Server/Controller/Role.php
-
-		-
-			message: "#^Parameter \\#1 \\.\\.\\.\\$arrays of function array_merge expects array, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\Policy\\> given\\.$#"
-			count: 1
 			path: src/lib/Server/Controller/Role.php
 
 		-
@@ -1521,12 +1611,12 @@ parameters:
 			path: src/lib/Server/Controller/Trash.php
 
 		-
-			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string given\\.$#"
+			message: "#^Parameter \\#1 \\$href of method Ibexa\\\\Rest\\\\RequestParser\\:\\:parseHref\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Trash.php
 
 		-
-			message: "#^Parameter \\#1 \\$uri of method Ibexa\\\\Contracts\\\\Rest\\\\UriParser\\\\UriParserInterface\\:\\:getAttributeFromUri\\(\\) expects string, string\\|null given\\.$#"
+			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Trash.php
 
@@ -1601,6 +1691,16 @@ parameters:
 			path: src/lib/Server/Controller/User.php
 
 		-
+			message: "#^Parameter \\#1 \\$href of method Ibexa\\\\Rest\\\\RequestParser\\:\\:parseHref\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\UserService\\:\\:loadUserGroup\\(\\) expects int, string given\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
 			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, int\\|null given\\.$#"
 			count: 14
 			path: src/lib/Server/Controller/User.php
@@ -1613,6 +1713,21 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$remoteId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentService\\:\\:loadContentInfoByRemoteId\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Parameter \\#1 \\$versions of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\VersionList constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\> given\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUser constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
+			count: 5
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUserGroup constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
+			count: 10
 			path: src/lib/Server/Controller/User.php
 
 		-
@@ -1791,11 +1906,6 @@ parameters:
 			path: src/lib/Server/Input/Parser/ContentCreate.php
 
 		-
-			message: "#^Parameter \\#1 \\$contentTypeId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentTypeService\\:\\:loadContentType\\(\\) expects int, string given\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/ContentCreate.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\ContentTypeCreate\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/ContentTypeCreate.php
@@ -1852,6 +1962,11 @@ parameters:
 
 		-
 			message: "#^Possibly invalid array key type \\(array\\<int, string\\>\\|string\\)\\.$#"
+			count: 2
+			path: src/lib/Server/Input/Parser/Criterion.php
+
+		-
+			message: "#^Property Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\:\\:\\$criterionIdMap type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion.php
 
@@ -2076,11 +2191,6 @@ parameters:
 			path: src/lib/Server/Input/Parser/FieldDefinitionUpdate.php
 
 		-
-			message: "#^Parameter \\#1 \\$contentTypeId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentTypeService\\:\\:loadContentTypeDraft\\(\\) expects int, string given\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/FieldDefinitionUpdate.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Limitation\\\\PathStringRouteBasedLimitationParser\\:\\:parseIdFromHref\\(\\) has parameter \\$limitationValue with no type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Limitation/PathStringRouteBasedLimitationParser.php
@@ -2171,6 +2281,16 @@ parameters:
 			path: src/lib/Server/Input/Parser/Query.php
 
 		-
+			message: "#^Property Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\:\\:\\$filter \\(Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\Criterion\\) does not accept Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\Criterion\\|null\\.$#"
+			count: 1
+			path: src/lib/Server/Input/Parser/Query.php
+
+		-
+			message: "#^Property Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\:\\:\\$query \\(Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\Criterion\\) does not accept Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\Criterion\\|null\\.$#"
+			count: 1
+			path: src/lib/Server/Input/Parser/Query.php
+
+		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\RelationCreate\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/RelationCreate.php
@@ -2256,17 +2376,7 @@ parameters:
 			path: src/lib/Server/Input/Parser/UserCreate.php
 
 		-
-			message: "#^Parameter \\#1 \\$contentTypeId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentTypeService\\:\\:loadContentType\\(\\) expects int, string given\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/UserCreate.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\UserGroupCreate\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/UserGroupCreate.php
-
-		-
-			message: "#^Parameter \\#1 \\$contentTypeId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentTypeService\\:\\:loadContentType\\(\\) expects int, string given\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/UserGroupCreate.php
 
@@ -2281,12 +2391,22 @@ parameters:
 			path: src/lib/Server/Input/Parser/UserGroupUpdate.php
 
 		-
+			message: "#^Parameter \\#1 \\$fieldDefIdentifier of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\ContentStruct\\:\\:setField\\(\\) expects string, int\\|string given\\.$#"
+			count: 1
+			path: src/lib/Server/Input/Parser/UserGroupUpdate.php
+
+		-
 			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string given\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/UserGroupUpdate.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\UserUpdate\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/Server/Input/Parser/UserUpdate.php
+
+		-
+			message: "#^Parameter \\#1 \\$fieldDefIdentifier of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\ContentStruct\\:\\:setField\\(\\) expects string, int\\|string given\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/UserUpdate.php
 
@@ -2371,17 +2491,17 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentFieldValidationException.php
 
 		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\ContentFieldValidationException\\:\\:visit\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Output/ValueObjectVisitor/ContentFieldValidationException.php
+
+		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\ContentList\\:\\:visit\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentList.php
 
 		-
 			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:startAttribute\\(\\) expects string, int given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ContentList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentList.php
 
@@ -2401,11 +2521,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeGroupList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeGroupList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\ContentTypeGroupRefList\\:\\:visit\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeGroupRefList.php
@@ -2416,17 +2531,7 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeInfoList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeInfoList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\ContentTypeList\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeList.php
 
@@ -2452,11 +2557,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\CountryList\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/CountryList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/CountryList.php
 
@@ -2651,17 +2751,22 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/DeletedUserSession.php
 
 		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\Exception\\:\\:visit\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Output/ValueObjectVisitor/Exception.php
+
+		-
+			message: "#^Property Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\Exception\\:\\:\\$httpStatusCodes type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/Server/Output/ValueObjectVisitor/Exception.php
+
+		-
 			message: "#^Property Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\Exception\\:\\:\\$translator \\(Symfony\\\\Contracts\\\\Translation\\\\TranslatorInterface\\) does not accept Symfony\\\\Contracts\\\\Translation\\\\TranslatorInterface\\|null\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/Exception.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\FieldDefinitionList\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/FieldDefinitionList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/FieldDefinitionList.php
 
@@ -2682,6 +2787,11 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\Location\\:\\:visitLocationAttributes\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Output/ValueObjectVisitor/Location.php
+
+		-
+			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestContent constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>\\|null, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/Location.php
 
@@ -2716,27 +2826,12 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/ObjectStateGroupList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ObjectStateGroupList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\ObjectStateList\\:\\:visit\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/ObjectStateList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ObjectStateList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\Options\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Options.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, int given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/Options.php
 
@@ -2762,11 +2857,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\PolicyList\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/PolicyList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/PolicyList.php
 
@@ -2837,6 +2927,11 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:startAttribute\\(\\) expects string, float given\\.$#"
+			count: 1
+			path: src/lib/Server/Output/ValueObjectVisitor/RestExecutedView.php
+
+		-
+			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestContent constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>\\|null, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/RestExecutedView.php
 
@@ -2951,11 +3046,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/RoleList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/RoleList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\Root\\:\\:visit\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/Root.php
@@ -2972,11 +3062,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\SectionList\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/SectionList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/SectionList.php
 
@@ -3036,7 +3121,17 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/User.php
 
 		-
+			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUser constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
+			count: 1
+			path: src/lib/Server/Output/ValueObjectVisitor/User.php
+
+		-
 			message: "#^Parameter \\#4 \\$mainLocation of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUserGroup constructor expects Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Location, Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Location\\|null given\\.$#"
+			count: 1
+			path: src/lib/Server/Output/ValueObjectVisitor/UserGroup.php
+
+		-
+			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUserGroup constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/UserGroup.php
 
@@ -3046,17 +3141,7 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/UserGroupList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/UserGroupList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\UserGroupRefList\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/UserGroupRefList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/UserGroupRefList.php
 
@@ -3066,17 +3151,7 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/UserList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/UserList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\UserRefList\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/UserRefList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/UserRefList.php
 
@@ -3087,11 +3162,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\UserSession\\:\\:visitUserSessionAttributes\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/UserSession.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/UserSession.php
 
@@ -3122,11 +3192,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\VersionList\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/VersionList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/VersionList.php
 
@@ -3371,19 +3436,9 @@ parameters:
 			path: tests/bundle/DependencyInjection/Compiler/OutputVisitorPassTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Compiler\\\\ValueObjectVisitorPassTest\\:\\:testProcess\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/bundle/DependencyInjection/Compiler/ValueObjectVisitorPassTest.php
-
-		-
 			message: "#^Parameter \\#2 \\$method of function method_exists expects string, array\\<int\\|string, int\\|string\\>\\|int\\|string given\\.$#"
 			count: 1
 			path: tests/bundle/EventListener/EventListenerTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$string of function base64_encode expects string, string\\|false given\\.$#"
-			count: 1
-			path: tests/bundle/Functional/BinaryContentTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\ContentTest\\:\\:assertTranslationDoesNotExist\\(\\) has parameter \\$versionItem with no value type specified in iterable type array\\.$#"
@@ -5291,6 +5346,16 @@ parameters:
 			path: tests/bundle/Functional/ViewTest.php
 
 		-
+			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\RequestParser\\\\RouterTest\\:\\:getRouterMock\\(\\) should return PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\Routing\\\\RouterInterface but returns Symfony\\\\Component\\\\Routing\\\\RouterInterface\\.$#"
+			count: 1
+			path: tests/bundle/RequestParser/RouterTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\RequestParser\\\\RouterTest\\:\\:\\$routePrefix has no type specified\\.$#"
+			count: 1
+			path: tests/bundle/RequestParser/RouterTest.php
+
+		-
 			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Routing\\\\OptionsLoader\\\\MapperTest\\:\\:testGetOptionsRouteName\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/bundle/Routing/OptionsLoader/MapperTest.php
@@ -5476,12 +5541,27 @@ parameters:
 			path: tests/lib/FieldTypeProcessor/DateProcessorTest.php
 
 		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\ImageProcessorTest\\:\\:getRouterMock\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
+
+		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\ImageProcessorTest\\:\\:getVariations\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\ImageProcessorTest\\:\\:testPostProcessValueHash\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\ImageProcessorTest\\:\\:\\$requestParser \\(Ibexa\\\\Rest\\\\RequestParser\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\Routing\\\\RouterInterface\\.$#"
+			count: 1
+			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\ImageProcessorTest\\:\\:\\$requestParser \\(Ibexa\\\\Rest\\\\RequestParser\\) in isset\\(\\) is not nullable\\.$#"
 			count: 1
 			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
 
@@ -6421,6 +6501,11 @@ parameters:
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
 		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorBaseTest\\:\\:getRequestParser\\(\\) should return Ibexa\\\\Rest\\\\RequestParser&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject but returns Ibexa\\\\Rest\\\\RequestParser\\.$#"
+			count: 1
+			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
+
+		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorBaseTest\\:\\:getVisitor\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
@@ -6446,6 +6531,11 @@ parameters:
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
 		-
+			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorBaseTest\\:\\:\\$requestParser \\(Ibexa\\\\Rest\\\\RequestParser\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
+
+		-
 			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorBaseTest\\:\\:\\$routerMock \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\Routing\\\\RouterInterface\\) does not accept null\\.$#"
 			count: 1
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
@@ -6466,99 +6556,14 @@ parameters:
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcherTest\\:\\:testVisitValueObject\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcherTest\\:\\:testVisitValueObjectInvalidType\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcherTest\\:\\:testVisitValueObjectNoMatch\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcherTest\\:\\:testVisitValueObjectParentMatch\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcherTest\\:\\:testVisitValueObjectSecondRuleParentMatch\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$data of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcher\\:\\:visit\\(\\) expects object, int given\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcherTest\\:\\:\\$outputGeneratorMock \\(Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\) in isset\\(\\) is not nullable\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcherTest\\:\\:\\$outputVisitorMock \\(Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\) in isset\\(\\) is not nullable\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:getGeneratorMock\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:getVisitorMock\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testSetFilteredHeaders\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/Output/VisitorTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testSetHeaderResetAfterVisit\\(\\) has no return type specified\\.$#"
+			message: "#^Call to method setRequestParser\\(\\) on an unknown class Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Base\\.$#"
 			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testSetHeaders\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testSetHeadersNoOverwrite\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testSetStatusCode\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testSetStatusCodeNoOverride\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testVisitDocument\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testVisitEmptyDocument\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testVisitValueObject\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
+			path: tests/lib/Server/Input/Parser/BaseTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\BaseTest\\:\\:getParseHrefExpectationsMap\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -6571,12 +6576,22 @@ parameters:
 			path: tests/lib/Server/Input/Parser/BaseTest.php
 
 		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\BaseTest\\:\\:internalGetParser\\(\\) has invalid return type Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Base\\.$#"
+			count: 1
+			path: tests/lib/Server/Input/Parser/BaseTest.php
+
+		-
 			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\BaseTest\\:\\:\\$parserTools \\(Ibexa\\\\Rest\\\\Input\\\\ParserTools\\) in isset\\(\\) is not nullable\\.$#"
 			count: 1
 			path: tests/lib/Server/Input/Parser/BaseTest.php
 
 		-
 			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\BaseTest\\:\\:\\$parsingDispatcherMock \\(Ibexa\\\\Contracts\\\\Rest\\\\Input\\\\ParsingDispatcher&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\) in isset\\(\\) is not nullable\\.$#"
+			count: 1
+			path: tests/lib/Server/Input/Parser/BaseTest.php
+
+		-
+			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\BaseTest\\:\\:\\$requestParserMock \\(Ibexa\\\\Rest\\\\RequestParser&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\) in isset\\(\\) is not nullable\\.$#"
 			count: 1
 			path: tests/lib/Server/Input/Parser/BaseTest.php
 
@@ -7108,6 +7123,16 @@ parameters:
 		-
 			message: "#^Call to an undefined method Ibexa\\\\Contracts\\\\Rest\\\\Input\\\\ParsingDispatcher\\:\\:expects\\(\\)\\.$#"
 			count: 6
+			path: tests/lib/Server/Input/Parser/QueryParserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\QueryParserTest\\:\\:internalGetParser\\(\\) has invalid return type Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Base\\.$#"
+			count: 1
+			path: tests/lib/Server/Input/Parser/QueryParserTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\QueryParserTest\\:\\:internalGetParser\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Base but returns Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\ContentQuery\\.$#"
+			count: 1
 			path: tests/lib/Server/Input/Parser/QueryParserTest.php
 
 		-
@@ -9424,3 +9449,83 @@ parameters:
 			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\VersionTest\\:\\:\\$fieldTypeSerializerMock has no type specified\\.$#"
 			count: 1
 			path: tests/lib/Server/Output/ValueObjectVisitor/VersionTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:getParseValues\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testGenerateMissingValue\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testGenerateSuperfluousValue\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testGenerateUnknownUrlType\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testGenerateUrl\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testGenerateUrl\\(\\) has parameter \\$type with no type specified\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testGenerateUrl\\(\\) has parameter \\$url with no type specified\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testGenerateUrl\\(\\) has parameter \\$values with no type specified\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testParseInvalidPattern\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testParseUnknownUrlType\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testParseUrl\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testParseUrl\\(\\) has parameter \\$type with no type specified\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testParseUrl\\(\\) has parameter \\$url with no type specified\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testParseUrl\\(\\) has parameter \\$values with no type specified\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testPatternDoesNotMatch\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php
+
+		-
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testPatternDoesNotMatchTrailing\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: tests/lib/UrlHandler/PatternTest.php

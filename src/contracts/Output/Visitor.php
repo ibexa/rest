@@ -43,11 +43,8 @@ class Visitor
      *
      * Does not allow overwriting of response headers. The first definition of
      * a header will be used.
-     *
-     * @param string $name
-     * @param string $value
      */
-    public function setHeader($name, $value)
+    public function setHeader(string $name, mixed $value): void
     {
         if (!$this->response->headers->has($name)) {
             $this->response->headers->set($name, $value);
@@ -74,7 +71,13 @@ class Visitor
      */
     public function visit(mixed $data): Response
     {
-        [$normalizedData, $encoderContext] = $this->normalizer->normalize($data, $this->format, ['visitor' => $this]);
+        $normalizedData = $this->normalizer->normalize($data, $this->format, ['visitor' => $this]);
+        $encoderContext = [];
+
+        if (isset($normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT])) {
+            $encoderContext = $normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT];
+            unset($normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT]);
+        }
 
         //@todo Needs refactoring!
         // A hackish solution to enable outer visitors to disable setting
@@ -144,10 +147,5 @@ class Visitor
     public function getGenerator(): Generator
     {
         return $this->generator;
-    }
-
-    public function setGenerator(Generator $generator): void
-    {
-        $this->generator = $generator;
     }
 }
