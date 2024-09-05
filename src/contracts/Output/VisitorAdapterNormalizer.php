@@ -90,9 +90,8 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
         string $format,
         array $context,
     ): array {
-        $generator = $this->createGenerator($format);
-
-        $visitor = $context['visitor'] ?? $this->createVisitor($format, $generator);
+        $visitor = $context['visitor'] ?? $this->createVisitor($format);
+        $generator = $visitor->getGenerator();
 
         $generator->reset();
         $generator->startDocument($object);
@@ -116,8 +115,10 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
             : new Json($fieldTypeHashGenerator);
     }
 
-    private function createVisitor(string $format, Generator $generator): Visitor
+    private function createVisitor(string $format): Visitor
     {
+        $generator = $this->createGenerator($format);
+
         return new Visitor(
             $generator,
             $this->normalizer,
