@@ -64,7 +64,27 @@ final class Xml extends Json
             $data['#'] = $normalizedData[$topNodeName];
         }
 
-        return $data;
+        return $this->clearEmptyArrays($data);
+    }
+
+    /**
+     * @param array<mixed> $array
+     *
+     * @return array<mixed>
+     */
+    private function clearEmptyArrays(array &$array): array
+    {
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $array[$key] = $this->clearEmptyArrays($value);
+
+                if (empty($array[$key])) {
+                    unset($array[$key]);
+                }
+            }
+        }
+
+        return $array;
     }
 
     public function getEncoderContext(array $data): array
