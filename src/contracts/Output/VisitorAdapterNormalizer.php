@@ -23,6 +23,8 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
 
     private const string CALLED_CONTEXT = __CLASS__ . '_CALLED';
 
+    public const string ENCODER_CONTEXT = 'ENCODER_CONTEXT';
+
     public function __construct(
         private readonly EncoderInterface $encoder,
         private readonly ValueObjectVisitorResolverInterface $valueObjectVisitorResolver,
@@ -82,12 +84,12 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
     /**
      * @param array<mixed> $context
      *
-     * @return array<array<mixed>, array<mixed>>
+     * @return array<mixed>
      */
     private function visitValueObject(
         object $object,
         ValueObjectVisitor $valueObjectVisitor,
-        string $format,
+        ?string $format,
         array $context,
     ): array {
         $visitor = $context['visitor'] ?? $this->createVisitor($format);
@@ -102,8 +104,11 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
 
         $normalizedData = $generator->toArray();
         $encoderContext = $generator->getEncoderContext($normalizedData);
+        $transformedData = $generator->transformData($normalizedData);
 
-        return [$generator->transformData($normalizedData), $encoderContext];
+        $transformedData[self::ENCODER_CONTEXT] = $encoderContext;
+
+        return $transformedData;
     }
 
     private function createGenerator(string $format): Generator
@@ -115,8 +120,10 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
             : new Json($fieldTypeHashGenerator);
     }
 
-    private function createVisitor(string $format): Visitor
+    private function createVisitor(?string $format): Visitor
     {
+        $format = $format ?: 'json';
+
         $generator = $this->createGenerator($format);
 
         return new Visitor(

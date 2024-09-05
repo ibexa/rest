@@ -29,6 +29,28 @@ final class Xml extends Json
         $this->json->{'@' . $name} = $value;
     }
 
+    public function startValueElement(string $name, $value, array $attributes = []): void
+    {
+        $this->checkStartValueElement($name);
+
+        if (empty($attributes)) {
+            $jsonValue = $value;
+        } else {
+            $jsonValue = new Json\JsonObject($this->json);
+            foreach ($attributes as $attributeName => $attributeValue) {
+                $jsonValue->{'@' . $attributeName} = $attributeValue;
+            }
+            /** @phpstan-ignore-next-line */
+            $jsonValue->{'#'} = $value;
+        }
+
+        if ($this->json instanceof Json\ArrayObject) {
+            $this->json[] = $jsonValue;
+        } else {
+            $this->json->$name = $jsonValue;
+        }
+    }
+
     public function transformData(array $normalizedData): array
     {
         $topNodeName = array_key_first($normalizedData);
