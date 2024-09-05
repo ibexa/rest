@@ -33,11 +33,14 @@ final class Xml extends Json
     {
         $topNodeName = array_key_first($normalizedData);
         $data = array_filter(
-            $normalizedData[$topNodeName],
+            $normalizedData[$topNodeName] ?? [],
             static fn (string $key): bool => str_starts_with($key, '@'),
             ARRAY_FILTER_USE_KEY,
         );
-        $data['#'] = $normalizedData[$topNodeName];
+
+        if ($topNodeName !== null) {
+            $data['#'] = $normalizedData[$topNodeName];
+        }
 
         return $data;
     }
