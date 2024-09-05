@@ -343,7 +343,15 @@ services:
 
     Ibexa\Rest\Output\Generator\InMemory\Xml:
         arguments:
-            $fieldTypeHashGenerator: '@Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator'
+            $fieldTypeHashGenerator: '@Ibexa\Rest\Output\Generator\InMemory\Xml\FieldTypeHashGenerator'
+
+    Ibexa\Rest\Output\Generator\InMemory\Xml\FieldTypeHashGenerator:
+        arguments:
+            $normalizer: '@ibexa.rest.serializer'
+            $logger: '@logger'
+            $strictMode: '%ibexa.rest.strict_mode%'
+        tags:
+            - { name: monolog.logger, channel: ibexa.rest }
 
     Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator:
         arguments:
