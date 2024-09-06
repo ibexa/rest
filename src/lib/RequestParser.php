@@ -8,6 +8,8 @@ namespace Ibexa\Rest;
 
 /**
  * Interface for Request parsers.
+ *
+ * @deprecated 4.6.11 The \Ibexa\Rest\RequestParser is deprecated, will be removed in 5.0.0. Use \Ibexa\Contracts\Rest\UriParser\UriParserInterface and \Symfony\Component\Routing\RouterInterface instead.
  */
 interface RequestParser
 {
