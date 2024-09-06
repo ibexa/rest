@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\Reference;
  * Compiler pass for the ibexa.rest.output.value_object.visitor tag.
  * Maps a fully qualified class to a value object visitor.
  */
-final class ValueObjectVisitorResolverPass implements CompilerPassInterface
+final readonly class ValueObjectVisitorResolverPass implements CompilerPassInterface
 {
     public const string OUTPUT_VALUE_OBJECT_VISITOR_SERVICE_TAG = 'ibexa.rest.output.value_object.visitor';
 
