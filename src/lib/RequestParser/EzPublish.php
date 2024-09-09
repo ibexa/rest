@@ -8,6 +8,8 @@
 namespace Ibexa\Rest\RequestParser;
 
 /**
+ * @deprecated 4.6.11 The \Ibexa\Rest\RequestParser\EzPublish is deprecated, will be removed in 5.0.0.
+ *
  * Pattern based Request parser pre-configured for Ibexa.
  */
 class EzPublish extends Pattern
