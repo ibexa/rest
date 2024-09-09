@@ -39,7 +39,7 @@ final class IsBookmarkedTest extends SearchCriterionTestCase
         yield 'Not bookmarked locations' => [
             'json',
             $this->buildJsonCriterionQuery('"IsBookmarkedCriterion": false'),
-            11,
+            15, // <- This can differ between DXP versions.
         ];
     }
 
