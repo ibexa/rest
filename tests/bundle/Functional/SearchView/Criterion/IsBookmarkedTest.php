@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\Functional\SearchView\Criterion;
 
 use Ibexa\Tests\Bundle\Rest\Functional\SearchView\SearchCriterionTestCase;
@@ -38,7 +39,7 @@ final class IsBookmarkedTest extends SearchCriterionTestCase
         yield 'Not bookmarked locations' => [
             'json',
             $this->buildJsonCriterionQuery('"IsBookmarkedCriterion": false'),
-            11,
+            15, // <- This can differ between DXP versions.
         ];
     }
 

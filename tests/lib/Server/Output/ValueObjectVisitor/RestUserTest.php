@@ -73,7 +73,10 @@ class RestUserTest extends BaseContentValueObjectVisitorTestCase
     protected function getBasicRestUser(): RestUser
     {
         return new RestUser(
-            new Values\User\User(),
+            new Values\User\User([
+                'login' => 'rest_user',
+                'email' => 'rest_user@ibexa.co',
+            ]),
             $this->getMockForAbstractClass(ContentType::class),
             $this->getContentInfoStub(),
             new Values\Content\Location(
