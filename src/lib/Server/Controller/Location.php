@@ -290,9 +290,8 @@ use Symfony\Component\HttpFoundation\Response;
                     ],
                     'application/vnd.ibexa.api.LocationList+json' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/LocationList',
+                            '$ref' => '#/components/schemas/LocationListWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/GET/LocationList.xml.example',
                     ],
                 ],
             ],
