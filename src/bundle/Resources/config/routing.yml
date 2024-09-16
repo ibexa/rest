@@ -348,19 +348,19 @@ ibexa.rest.views.load.results:
 ibexa.rest.load_object_state_groups:
     path: /content/objectstategroups
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState:loadObjectStateGroups
+        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupListController:loadObjectStateGroups
     methods: [GET]
 
 ibexa.rest.create_object_state_group:
     path: /content/objectstategroups
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState:createObjectStateGroup
+        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupCreateController:createObjectStateGroup
     methods: [POST]
 
 ibexa.rest.load_object_state_group:
     path: /content/objectstategroups/{objectStateGroupId}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState:loadObjectStateGroup
+        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupLoadByIdController:loadObjectStateGroup
     methods: [GET]
     requirements:
         objectStateGroupId: \d+
@@ -368,7 +368,7 @@ ibexa.rest.load_object_state_group:
 ibexa.rest.update_object_state_group:
     path: /content/objectstategroups/{objectStateGroupId}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState:updateObjectStateGroup
+        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupUpdateController:updateObjectStateGroup
     methods: [PATCH]
     requirements:
         objectStateGroupId: \d+
@@ -376,7 +376,7 @@ ibexa.rest.update_object_state_group:
 ibexa.rest.delete_object_state_group:
     path: /content/objectstategroups/{objectStateGroupId}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState:deleteObjectStateGroup
+        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupDeleteController:deleteObjectStateGroup
     methods: [DELETE]
     requirements:
         objectStateGroupId: \d+
@@ -384,7 +384,7 @@ ibexa.rest.delete_object_state_group:
 ibexa.rest.load_object_states:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState:loadObjectStates
+        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateListController:loadObjectStates
     methods: [GET]
     requirements:
         objectStateGroupId: \d+
@@ -392,7 +392,7 @@ ibexa.rest.load_object_states:
 ibexa.rest.create_object_state:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState:createObjectState
+        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateCreateController:createObjectState
     methods: [POST]
     requirements:
         objectStateGroupId: \d+
@@ -400,7 +400,7 @@ ibexa.rest.create_object_state:
 ibexa.rest.load_object_state:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates/{objectStateId}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState:loadObjectState
+        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateLoadByIdController:loadObjectState
     methods: [GET]
     requirements:
         objectStateGroupId: \d+
@@ -409,7 +409,7 @@ ibexa.rest.load_object_state:
 ibexa.rest.update_object_state:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates/{objectStateId}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState:updateObjectState
+        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateUpdateController:updateObjectState
     methods: [PATCH]
     requirements:
         objectStateGroupId: \d+
@@ -418,7 +418,7 @@ ibexa.rest.update_object_state:
 ibexa.rest.delete_object_state:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates/{objectStateId}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState:deleteObjectState
+        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupDeleteController:deleteObjectState
     methods: [DELETE]
     requirements:
         objectStateGroupId: \d+
@@ -427,7 +427,7 @@ ibexa.rest.delete_object_state:
 ibexa.rest.get_object_states_for_content:
     path: /content/objects/{contentId}/objectstates
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState:getObjectStatesForContent
+        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStatesForContnetListController:getObjectStatesForContent
     methods: [GET]
     requirements:
         contentId: \d+
@@ -435,7 +435,7 @@ ibexa.rest.get_object_states_for_content:
 ibexa.rest.set_object_states_for_content:
     path: /content/objects/{contentId}/objectstates
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState:setObjectStatesForContent
+        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStatesForContentUpdateController:setObjectStatesForContent
     methods: [PATCH]
     requirements:
         contentId: \d+
