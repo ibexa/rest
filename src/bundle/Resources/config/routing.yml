@@ -14,19 +14,6 @@ ibexa.api_platform.documentation:
         index: index
         _format: ~
 
-
-# OpenAPI documentation
-
-
-ibexa.api_platform.documentation:
-    path: /doc/{index}.{_format}
-    controller: ibexa.api_platform.action.entrypoint
-    defaults:
-        index: index
-        _format: ~
-
-
-
 # Sections
 
 ibexa.rest.list_sections:
@@ -71,7 +58,7 @@ ibexa.rest.refresh_session:
 
 ibexa.rest.content.copy:
     path: /content/objects/{contentId}
-    controller: Ibexa\Rest\Server\Controller\Content::copy
+    controller: Ibexa\Rest\Server\Controller\Content\ContentCopyController::copy
     condition: 'ibexa_get_media_type(request) === "CopyContentInput"'
     methods: [POST]
     options:
@@ -81,7 +68,7 @@ ibexa.rest.content.copy:
 
 ibexa.rest.content.create_draft_from_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
-    controller: Ibexa\Rest\Server\Controller\Content::createDraftFromVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentDraftCreateFromVersionController::createDraftFromVersion
     condition: 'ibexa_get_media_type(request) === "CreateDraftFromVersionInput"'
     methods: [POST]
     options:
@@ -89,7 +76,7 @@ ibexa.rest.content.create_draft_from_version:
 
 ibexa.rest.content.create_draft_from_current_version:
     path: /content/objects/{contentId}/currentversion
-    controller: Ibexa\Rest\Server\Controller\Content::createDraftFromCurrentVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentDraftCreateFromCurrentVersionController::createDraftFromCurrentVersion
     condition: 'ibexa_get_media_type(request) === "CreateDraftFromCurrentVersionInput"'
     methods: [POST]
     options:
@@ -99,7 +86,7 @@ ibexa.rest.content.create_draft_from_current_version:
 
 ibexa.rest.content.publish_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
-    controller: Ibexa\Rest\Server\Controller\Content::publishVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentVersionPublishController::publishVersion
     condition: 'ibexa_get_media_type(request) === "PublishContentVersionInput"'
     methods: [POST]
     options:
@@ -110,64 +97,64 @@ ibexa.rest.content.publish_version:
 
 ibexa.rest.redirect_content:
     path: /content/objects
-    controller: Ibexa\Rest\Server\Controller\Content::redirectContent
+    controller: Ibexa\Rest\Server\Controller\Content\ContentRedirectController::redirectContent
     methods: [GET]
 
 ibexa.rest.create_content:
     path: /content/objects
-    controller: Ibexa\Rest\Server\Controller\Content::createContent
+    controller: Ibexa\Rest\Server\Controller\Content\ContentCreateController::createContent
     methods: [POST]
 
 ibexa.rest.update_content_metadata:
     path: /content/objects/{contentId}
-    controller: Ibexa\Rest\Server\Controller\Content::updateContentMetadata
+    controller: Ibexa\Rest\Server\Controller\Content\ContentMetadataUpdateController::updateContentMetadata
     methods: [PATCH]
     requirements:
         contentId: \d+
 
 ibexa.rest.load_content:
     path: /content/objects/{contentId}
-    controller: Ibexa\Rest\Server\Controller\Content::loadContent
+    controller: Ibexa\Rest\Server\Controller\Content\ContentLoadByIdController::loadContent
     methods: [GET]
     requirements:
         contentId: \d+
 
 ibexa.rest.delete_content:
     path: /content/objects/{contentId}
-    controller: Ibexa\Rest\Server\Controller\Content::deleteContent
+    controller: Ibexa\Rest\Server\Controller\Content\ContentDeleteController::deleteContent
     methods: [DELETE]
     requirements:
         contentId: \d+
 
 ibexa.rest.copy_content:
     path: /content/objects/{contentId}
-    controller: Ibexa\Rest\Server\Controller\Content::copyContent
+    controller: Ibexa\Rest\Server\Controller\Content\ContentCopyController::copyContent
     methods: [COPY]
     requirements:
         contentId: \d+
 
 ibexa.rest.delete_content_translation:
     path: /content/objects/{contentId}/translations/{languageCode}
-    controller: Ibexa\Rest\Server\Controller\Content::deleteContentTranslation
+    controller: Ibexa\Rest\Server\Controller\Content\ContentTranslationDeleteController::deleteContentTranslation
     methods: [DELETE]
 
 ibexa.rest.redirect_current_version_relations:
     path: /content/objects/{contentId}/relations
-    controller: Ibexa\Rest\Server\Controller\Content::redirectCurrentVersionRelations
+    controller: Ibexa\Rest\Server\Controller\Content\ContentCurrentVersionRelationsRedirectController::redirectCurrentVersionRelations
     methods: [GET]
     requirements:
         contentId: \d+
 
 ibexa.rest.load_content_versions:
     path: /content/objects/{contentId}/versions
-    controller: Ibexa\Rest\Server\Controller\Content::loadContentVersions
+    controller: Ibexa\Rest\Server\Controller\Content\ContentVersionsListController::loadContentVersions
     methods: [GET]
     requirements:
         contentId: \d+
 
 ibexa.rest.load_version_relations:
     path: /content/objects/{contentId}/versions/{versionNumber}/relations
-    controller: Ibexa\Rest\Server\Controller\Content::loadVersionRelations
+    controller: Ibexa\Rest\Server\Controller\Content\ContentVersionsRelationsListController::loadVersionRelations
     methods: [GET]
     requirements:
         contentId: \d+
@@ -175,7 +162,7 @@ ibexa.rest.load_version_relations:
 
 ibexa.rest.create_relation:
     path: /content/objects/{contentId}/versions/{versionNumber}/relations
-    controller: Ibexa\Rest\Server\Controller\Content::createRelation
+    controller: Ibexa\Rest\Server\Controller\Content\ContentRelationCreateController::createRelation
     methods: [POST]
     requirements:
         contentId: \d+
@@ -183,7 +170,7 @@ ibexa.rest.create_relation:
 
 ibexa.rest.load_version_relation:
     path: /content/objects/{contentId}/versions/{versionNumber}/relations/{relationId}
-    controller: Ibexa\Rest\Server\Controller\Content::loadVersionRelation
+    controller: Ibexa\Rest\Server\Controller\Content\ContentVersionRelationLoadByIdController::loadVersionRelation
     methods: [GET]
     requirements:
         contentId: \d+
@@ -192,7 +179,7 @@ ibexa.rest.load_version_relation:
 
 ibexa.rest.remove_relation:
     path: /content/objects/{contentId}/versions/{versionNumber}/relations/{relationId}
-    controller: Ibexa\Rest\Server\Controller\Content::removeRelation
+    controller: Ibexa\Rest\Server\Controller\Content\ContentVersionRelationDeleteController::removeRelation
     methods: [DELETE]
     requirements:
         contentId: \d+
@@ -201,7 +188,7 @@ ibexa.rest.remove_relation:
 
 ibexa.rest.load_content_in_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
-    controller: Ibexa\Rest\Server\Controller\Content::loadContentInVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentInVersionLoadController::loadContentInVersion
     methods: [GET]
     requirements:
         contentId: \d+
@@ -209,7 +196,7 @@ ibexa.rest.load_content_in_version:
 
 ibexa.rest.update_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
-    controller: Ibexa\Rest\Server\Controller\Content::updateVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentVersionUpdateController::updateVersion
     methods: [PATCH]
     requirements:
         contentId: \d+
@@ -217,7 +204,7 @@ ibexa.rest.update_version:
 
 ibexa.rest.delete_content_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
-    controller: Ibexa\Rest\Server\Controller\Content::deleteContentVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentVersionDeleteController::deleteContentVersion
     methods: [DELETE]
     requirements:
         contentId: \d+
@@ -225,7 +212,7 @@ ibexa.rest.delete_content_version:
 
 ibexa.rest.delete_translation_from_draft:
     path: /content/objects/{contentId}/versions/{versionNumber}/translations/{languageCode}
-    controller: Ibexa\Rest\Server\Controller\Content::deleteTranslationFromDraft
+    controller: Ibexa\Rest\Server\Controller\Content\ContentDraftTranslationDeleteController::deleteTranslationFromDraft
     methods: [DELETE]
     requirements:
         contentId: \d+
@@ -233,7 +220,7 @@ ibexa.rest.delete_translation_from_draft:
 
 ibexa.rest.create_draft_from_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
-    controller: Ibexa\Rest\Server\Controller\Content::createDraftFromVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentDraftCreateFromVersionController::createDraftFromVersion
     methods: [COPY]
     requirements:
         contentId: \d+
@@ -241,7 +228,7 @@ ibexa.rest.create_draft_from_version:
 
 ibexa.rest.publish_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
-    controller: Ibexa\Rest\Server\Controller\Content::publishVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentVersionPublishController::publishVersion
     methods: [PUBLISH]
     requirements:
         contentId: \d+
@@ -249,28 +236,28 @@ ibexa.rest.publish_version:
 
 ibexa.rest.redirect_current_version:
     path: /content/objects/{contentId}/currentversion
-    controller: Ibexa\Rest\Server\Controller\Content::redirectCurrentVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentCurrentVersionRedirectController::redirectCurrentVersion
     methods: [GET]
     requirements:
         contentId: \d+
 
 ibexa.rest.create_draft_from_current_version:
     path: /content/objects/{contentId}/currentversion
-    controller: Ibexa\Rest\Server\Controller\Content::createDraftFromCurrentVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentDraftCreateFromCurrentVersionController::createDraftFromCurrentVersion
     methods: [COPY]
     requirements:
         contentId: \d+
 
 ibexa.rest.hide_content:
     path: /content/objects/{contentId}/hide
-    controller: Ibexa\Rest\Server\Controller\Content::hideContent
+    controller: Ibexa\Rest\Server\Controller\Content\ContentHideController::hideContent
     methods: [POST]
     requirements:
         contentId: \d+
 
 ibexa.rest.reveal_content:
     path: /content/objects/{contentId}/reveal
-    controller: Ibexa\Rest\Server\Controller\Content::revealContent
+    controller: Ibexa\Rest\Server\Controller\Content\ContentRevealController::revealContent
     methods: [POST]
     requirements:
         contentId: \d+
@@ -518,7 +505,7 @@ ibexa.rest.create_location:
 
 ibexa.rest.content_type.publish_draft:
     path: /content/types/{contentTypeId}/draft
-    controller: Ibexa\Rest\Server\Controller\ContentType::publishContentTypeDraft
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftPublishController::publishContentTypeDraft
     condition: 'ibexa_get_media_type(request) === "PublishContentTypeInput"'
     methods: [POST]
     options:
@@ -528,7 +515,7 @@ ibexa.rest.content_type.publish_draft:
 
 ibexa.rest.content_type.copy:
     path: /content/types/{contentTypeId}
-    controller: Ibexa\Rest\Server\Controller\ContentType::copyContentType
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeCopyController::copyContentType
     condition: 'ibexa_get_media_type(request) === "CopyContentTypeInput"'
     methods: [POST]
     options:
@@ -538,45 +525,45 @@ ibexa.rest.content_type.copy:
 
 ibexa.rest.load_content_type_group_list:
     path: /content/typegroups
-    controller: Ibexa\Rest\Server\Controller\ContentType::loadContentTypeGroupList
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupsListController::loadContentTypeGroupList
     methods: [GET]
 
 ibexa.rest.create_content_type_group:
     path: /content/typegroups
-    controller: Ibexa\Rest\Server\Controller\ContentType::createContentTypeGroup
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupCreateController::createContentTypeGroup
     methods: [POST]
 
 ibexa.rest.load_content_type_group:
     path: /content/typegroups/{contentTypeGroupId}
-    controller: Ibexa\Rest\Server\Controller\ContentType::loadContentTypeGroup
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupLoadByIdController::loadContentTypeGroup
     methods: [GET]
     requirements:
         contentTypeGroupId: \d+
 
 ibexa.rest.update_content_type_group:
     path: /content/typegroups/{contentTypeGroupId}
-    controller: Ibexa\Rest\Server\Controller\ContentType::updateContentTypeGroup
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupUpdateController::updateContentTypeGroup
     methods: [PATCH]
     requirements:
         contentTypeGroupId: \d+
 
 ibexa.rest.delete_content_type_group:
     path: /content/typegroups/{contentTypeGroupId}
-    controller: Ibexa\Rest\Server\Controller\ContentType::deleteContentTypeGroup
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupDeleteController::deleteContentTypeGroup
     methods: [DELETE]
     requirements:
         contentTypeGroupId: \d+
 
 ibexa.rest.list_content_types_for_group:
     path: /content/typegroups/{contentTypeGroupId}/types
-    controller: Ibexa\Rest\Server\Controller\ContentType::listContentTypesForGroup
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeListForGroupController::listContentTypesForGroup
     methods: [GET]
     requirements:
         contentTypeGroupId: \d+
 
 ibexa.rest.create_content_type:
     path: /content/typegroups/{contentTypeGroupId}/types
-    controller: Ibexa\Rest\Server\Controller\ContentType::createContentType
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeCreateController::createContentType
     methods: [POST]
     requirements:
         contentTypeGroupId: \d+
@@ -584,54 +571,54 @@ ibexa.rest.create_content_type:
 ibexa.rest.list_content_types:
     # @todo: Handle all GET parameters
     path: /content/types
-    controller: Ibexa\Rest\Server\Controller\ContentType::listContentTypes
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeListController::listContentTypes
     methods: [GET]
 
 ibexa.rest.copy_content_type:
     path: /content/types/{contentTypeId}
-    controller: Ibexa\Rest\Server\Controller\ContentType::copyContentType
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeCopyController::copyContentType
     methods: [COPY]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.load_content_type:
     path: /content/types/{contentTypeId}
-    controller: Ibexa\Rest\Server\Controller\ContentType::loadContentType
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeLoadByIdController::loadContentType
     methods: [GET]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.create_content_type_draft:
     path: /content/types/{contentTypeId}
-    controller: Ibexa\Rest\Server\Controller\ContentType::createContentTypeDraft
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftCreateController::createContentTypeDraft
     methods: [POST]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.delete_content_type:
     path: /content/types/{contentTypeId}
-    controller: Ibexa\Rest\Server\Controller\ContentType::deleteContentType
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDeleteController::deleteContentType
     methods: [DELETE]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.delete_content_type_draft:
     path: /content/types/{contentTypeId}/draft
-    controller: Ibexa\Rest\Server\Controller\ContentType::deleteContentTypeDraft
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftDeleteController::deleteContentTypeDraft
     methods: [DELETE]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.load_content_type_field_definition_list:
     path: /content/types/{contentTypeId}/fieldDefinitions
-    controller: Ibexa\Rest\Server\Controller\ContentType::loadContentTypeFieldDefinitionList
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeFieldDefinitionListController::loadContentTypeFieldDefinitionList
     methods: [GET]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.load_content_type_field_definition:
     path: /content/types/{contentTypeId}/fieldDefinitions/{fieldDefinitionId}
-    controller: Ibexa\Rest\Server\Controller\ContentType::loadContentTypeFieldDefinition
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeFieldDefinitionLoadByIdController::loadContentTypeFieldDefinition
     methods: [GET]
     requirements:
         contentTypeId: \d+
@@ -639,7 +626,7 @@ ibexa.rest.load_content_type_field_definition:
 
 ibexa.rest.load_content_type_field_definition_by_identifier:
     path: /content/types/{contentTypeId}/fieldDefinition/{fieldDefinitionIdentifier}
-    controller: Ibexa\Rest\Server\Controller\ContentType::loadContentTypeFieldDefinitionByIdentifier
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeFieldDefinitionLoadByIdentifierController::loadContentTypeFieldDefinitionByIdentifier
     methods: [GET]
     requirements:
         contentTypeId: \d+
@@ -647,42 +634,42 @@ ibexa.rest.load_content_type_field_definition_by_identifier:
 
 ibexa.rest.load_content_type_draft:
     path: /content/types/{contentTypeId}/draft
-    controller: Ibexa\Rest\Server\Controller\ContentType::loadContentTypeDraft
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftLoadController::loadContentTypeDraft
     methods: [GET]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.update_content_type_draft:
     path: /content/types/{contentTypeId}/draft
-    controller: Ibexa\Rest\Server\Controller\ContentType::updateContentTypeDraft
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftUpdateController::updateContentTypeDraft
     methods: [PATCH]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.publish_content_type_draft:
     path: /content/types/{contentTypeId}/draft
-    controller: Ibexa\Rest\Server\Controller\ContentType::publishContentTypeDraft
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftPublishController::publishContentTypeDraft
     methods: [PUBLISH]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.load_content_type_draft_field_definition_list:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions
-    controller: Ibexa\Rest\Server\Controller\ContentType::loadContentTypeDraftFieldDefinitionList
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFieldDefinitionListController::loadContentTypeDraftFieldDefinitionList
     methods: [GET]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.add_content_type_draft_field_definition:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions
-    controller: Ibexa\Rest\Server\Controller\ContentType::addContentTypeDraftFieldDefinition
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFeildDefinitionAddController::addContentTypeDraftFieldDefinition
     methods: [POST]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.load_content_type_draft_field_definition:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}
-    controller: Ibexa\Rest\Server\Controller\ContentType::loadContentTypeDraftFieldDefinition
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFieldDefinitionLoadByIdController::loadContentTypeDraftFieldDefinition
     methods: [GET]
     requirements:
         contentTypeId: \d+
@@ -690,7 +677,7 @@ ibexa.rest.load_content_type_draft_field_definition:
 
 ibexa.rest.update_content_type_draft_field_definition:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}
-    controller: Ibexa\Rest\Server\Controller\ContentType::updateContentTypeDraftFieldDefinition
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFieldDefinitionUpdateController::updateContentTypeDraftFieldDefinition
     methods: [PATCH]
     requirements:
         contentTypeId: \d+
@@ -698,7 +685,7 @@ ibexa.rest.update_content_type_draft_field_definition:
 
 ibexa.rest.remove_content_type_draft_field_definition:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}
-    controller: Ibexa\Rest\Server\Controller\ContentType::removeContentTypeDraftFieldDefinition
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFieldDefinitionDeleteController::removeContentTypeDraftFieldDefinition
     methods: [DELETE]
     requirements:
         contentTypeId: \d+
@@ -706,7 +693,7 @@ ibexa.rest.remove_content_type_draft_field_definition:
 
 ibexa.rest.load_groups_of_content_type:
     path: /content/types/{contentTypeId}/groups
-    controller: Ibexa\Rest\Server\Controller\ContentType::loadGroupsOfContentType
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupListController::loadGroupsOfContentType
     methods: [GET]
     requirements:
         contentTypeId: \d+
@@ -714,14 +701,14 @@ ibexa.rest.load_groups_of_content_type:
 ibexa.rest.link_content_type_to_group:
     # Handle GET parameter group in controller. Most likely already done
     path: /content/types/{contentTypeId}/groups
-    controller: Ibexa\Rest\Server\Controller\ContentType::linkContentTypeToGroup
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeLinkToGroupController::linkContentTypeToGroup
     methods: [POST]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.unlink_content_type_from_group:
     path: /content/types/{contentTypeId}/groups/{contentTypeGroupId}
-    controller: Ibexa\Rest\Server\Controller\ContentType::unlinkContentTypeFromGroup
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeUnlinkFromGroupController::unlinkContentTypeFromGroup
     methods: [DELETE]
     requirements:
         contentTypeId: \d+
@@ -1196,28 +1183,28 @@ ibexa.rest.load_country_list:
 
 ibexa.rest.create_bookmark:
     path: /bookmark/{locationId}
-    controller: Ibexa\Rest\Server\Controller\Bookmark::createBookmark
+    controller: Ibexa\Rest\Server\Controller\Bookmark\BookmarkCreateController::createBookmark
     methods: [POST]
     requirements:
         locationId: "[0-9]+"
 
 ibexa.rest.delete_bookmark:
     path: /bookmark/{locationId}
-    controller: Ibexa\Rest\Server\Controller\Bookmark::deleteBookmark
+    controller: Ibexa\Rest\Server\Controller\Bookmark\BookmarkDeleteController::deleteBookmark
     methods: [DELETE]
     requirements:
         locationId: "[0-9]+"
 
 ibexa.rest.is_bookmarked:
     path: /bookmark/{locationId}
-    controller: Ibexa\Rest\Server\Controller\Bookmark::isBookmarked
+    controller: Ibexa\Rest\Server\Controller\Bookmark\BookmarkIsBookmarkedController::isBookmarked
     methods: [GET, HEAD]
     requirements:
         locationId: "[0-9]+"
 
 ibexa.rest.load_bookmarks:
     path: /bookmark
-    controller: Ibexa\Rest\Server\Controller\Bookmark::loadBookmarks
+    controller: Ibexa\Rest\Server\Controller\Bookmark\BookmarkListController::loadBookmarks
     methods: [GET]
 
 # JWT
