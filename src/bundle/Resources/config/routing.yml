@@ -871,19 +871,19 @@ ibexa.rest.restore_trash_item:
 ibexa.rest.list_url_wildcards:
     path: /content/urlwildcards
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLWildcard:listURLWildcards
+        _controller: Ibexa\Rest\Server\Controller\URLWildcard\URLWildcardListController:listURLWildcards
     methods: [GET]
 
 ibexa.rest.create_url_wildcard:
     path: /content/urlwildcards
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLWildcard:createURLWildcard
+        _controller: Ibexa\Rest\Server\Controller\URLWildcard\URLWildcardCreateController:createURLWildcard
     methods: [POST]
 
 ibexa.rest.load_url_wildcard:
     path: /content/urlwildcards/{urlWildcardId}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLWildcard:loadURLWildcard
+        _controller: Ibexa\Rest\Server\Controller\URLWildcard\URLWildcardLoadByIdController:loadURLWildcard
     methods: [GET]
     requirements:
         urlWildcardId: \d+
@@ -891,7 +891,7 @@ ibexa.rest.load_url_wildcard:
 ibexa.rest.delete_url_wildcard:
     path: /content/urlwildcards/{urlWildcardId}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLWildcard:deleteURLWildcard
+        _controller: Ibexa\Rest\Server\Controller\URLWildcard\URLWildcardDeleteController:deleteURLWildcard
     methods: [DELETE]
     requirements:
         urlWildcardId: \d+
