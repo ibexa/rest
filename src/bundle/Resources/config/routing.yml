@@ -18,31 +18,31 @@ ibexa.api_platform.documentation:
 
 ibexa.rest.list_sections:
     path: /content/sections
-    controller: Ibexa\Rest\Server\Controller\Section::listSections
+    controller: Ibexa\Rest\Server\Controller\Section\SectionListController::listSections
     methods: [GET]
 
 ibexa.rest.create_section:
     path: /content/sections
-    controller: Ibexa\Rest\Server\Controller\Section::createSection
+    controller: Ibexa\Rest\Server\Controller\Section\SectionCreateController::createSection
     methods: [POST]
 
 ibexa.rest.load_section:
     path: /content/sections/{sectionId}
-    controller: Ibexa\Rest\Server\Controller\Section::loadSection
+    controller: Ibexa\Rest\Server\Controller\Section\SectionLoadByIdController::loadSection
     methods: [GET]
     requirements:
         sectionId: \d+
 
 ibexa.rest.update_section:
     path: /content/sections/{sectionId}
-    controller: Ibexa\Rest\Server\Controller\Section::updateSection
+    controller: Ibexa\Rest\Server\Controller\Section\SectionUpdateController::updateSection
     methods: [PATCH]
     requirements:
         sectionId: \d+
 
 ibexa.rest.delete_section:
     path: /content/sections/{sectionId}
-    controller: Ibexa\Rest\Server\Controller\Section::deleteSection
+    controller: Ibexa\Rest\Server\Controller\Section\SectionDeleteController::deleteSection
     methods: [DELETE]
     requirements:
         sectionId: \d+
