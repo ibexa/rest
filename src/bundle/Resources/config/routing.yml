@@ -918,7 +918,7 @@ ibexa.rest.delete_policy:
 
 ibexa.rest.user_group.move:
     path: /user/groups/{groupPath}
-    controller: Ibexa\Rest\Server\Controller\User::moveGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupMoveController::moveGroup
     condition: 'ibexa_get_media_type(request) === "MoveUserGroupInput"'
     methods: [POST]
     options:
@@ -928,57 +928,57 @@ ibexa.rest.user_group.move:
 
 ibexa.rest.verify_users:
     path: /user/users
-    controller: Ibexa\Rest\Server\Controller\User::verifyUsers
+    controller: Ibexa\Rest\Server\Controller\User\UserVerifyController::verifyUsers
     methods: [HEAD]
 
 ibexa.rest.load_users:
     path: /user/users
-    controller: Ibexa\Rest\Server\Controller\User::loadUsers
+    controller: Ibexa\Rest\Server\Controller\User\UserListController::loadUsers
     methods: [GET]
 
 ibexa.rest.load_user:
     path: /user/users/{userId}
-    controller: Ibexa\Rest\Server\Controller\User::loadUser
+    controller: Ibexa\Rest\Server\Controller\User\UserLoadByIdController::loadUser
     methods: [GET]
     requirements:
         userId: \d+
 
 ibexa.rest.current_user:
     path: /user/current
-    controller: Ibexa\Rest\Server\Controller\User::redirectToCurrentUser
+    controller: Ibexa\Rest\Server\Controller\User\UserRedirectToCurrentUserController::redirectToCurrentUser
     methods: [GET]
 
 ibexa.rest.update_user:
     path: /user/users/{userId}
-    controller: Ibexa\Rest\Server\Controller\User::updateUser
+    controller: Ibexa\Rest\Server\Controller\User\UserUpdateController::updateUser
     methods: [PATCH]
     requirements:
         userId: \d+
 
 ibexa.rest.delete_user:
     path: /user/users/{userId}
-    controller: Ibexa\Rest\Server\Controller\User::deleteUser
+    controller: Ibexa\Rest\Server\Controller\User\UserDeleteController::deleteUser
     methods: [DELETE]
     requirements:
         userId: \d+
 
 ibexa.rest.load_user_groups_of_user:
     path: /user/users/{userId}/groups
-    controller: Ibexa\Rest\Server\Controller\User::loadUserGroupsOfUser
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupsOfUserListController::loadUserGroupsOfUser
     methods: [GET]
     requirements:
         userId: \d+
 
 ibexa.rest.assign_user_to_user_group:
     path: /user/users/{userId}/groups
-    controller: Ibexa\Rest\Server\Controller\User::assignUserToUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserAssignToUserGroupController::assignUserToUserGroup
     methods: [POST]
     requirements:
         userId: \d+
 
 ibexa.rest.unassign_user_from_user_group:
     path: /user/users/{userId}/groups/{groupPath}
-    controller: Ibexa\Rest\Server\Controller\User::unassignUserFromUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserUnassignFromUserGroupController::unassignUserFromUserGroup
     methods: [DELETE]
     requirements:
         userId: \d+
@@ -986,7 +986,7 @@ ibexa.rest.unassign_user_from_user_group:
 
 ibexa.rest.load_user_drafts:
     path: /user/users/{userId}/drafts
-    controller: Ibexa\Rest\Server\Controller\User::loadUserDrafts
+    controller: Ibexa\Rest\Server\Controller\User\UserDraftListController::loadUserDrafts
     methods: [GET]
     requirements:
         userId: \d+
@@ -1023,71 +1023,71 @@ ibexa.rest.unassign_role_from_user:
 
 ibexa.rest.load_user_groups:
     path: /user/groups
-    controller: Ibexa\Rest\Server\Controller\User::loadUserGroups
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupListController::loadUserGroups
     methods: [GET]
 
 ibexa.rest.load_root_user_group:
     path: /user/groups/root
-    controller: Ibexa\Rest\Server\Controller\User::loadRootUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupOfRootLoadController::loadRootUserGroup
     methods: [GET]
 
 ibexa.rest.create_root_user_group:
     path: /user/groups/subgroups
-    controller: Ibexa\Rest\Server\Controller\User::createUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupCreateController::createUserGroup
     methods: [POST]
 
 ibexa.rest.load_user_group:
     path: /user/groups/{groupPath}
-    controller: Ibexa\Rest\Server\Controller\User::loadUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupLoadByPathController::loadUserGroup
     methods: [GET]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.update_user_group:
     path: /user/groups/{groupPath}
-    controller: Ibexa\Rest\Server\Controller\User::updateUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupUpdateController::updateUserGroup
     methods: [PATCH]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.delete_user_group:
     path: /user/groups/{groupPath}
-    controller: Ibexa\Rest\Server\Controller\User::deleteUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupDeleteController::deleteUserGroup
     methods: [DELETE]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.move_user_group:
     path: /user/groups/{groupPath}
-    controller: Ibexa\Rest\Server\Controller\User::moveUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupMoveController::moveUserGroup
     methods: [MOVE]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.load_sub_user_groups:
     path: /user/groups/{groupPath}/subgroups
-    controller: Ibexa\Rest\Server\Controller\User::loadSubUserGroups
+    controller: Ibexa\Rest\Server\Controller\User\UserSubGroupListController::loadSubUserGroups
     methods: [GET]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.create_user_group:
     path: /user/groups/{groupPath}/subgroups
-    controller: Ibexa\Rest\Server\Controller\User::createUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupCreateController::createUserGroup
     methods: [POST]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.load_users_from_group:
     path: /user/groups/{groupPath}/users
-    controller: Ibexa\Rest\Server\Controller\User::loadUsersFromGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupUsersListController::loadUsersFromGroup
     methods: [GET]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.create_user:
     path: /user/groups/{groupPath}/users
-    controller: Ibexa\Rest\Server\Controller\User::createUser
+    controller: Ibexa\Rest\Server\Controller\User\UserCreateController::createUser
     methods: [POST]
     requirements:
         groupPath: "[0-9/]+"
