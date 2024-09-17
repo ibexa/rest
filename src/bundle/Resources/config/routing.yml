@@ -63,7 +63,7 @@ ibexa.rest.delete_section:
 ibexa.rest.refresh_session:
     path: /user/sessions/{sessionId}/refresh
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\SessionController:refreshSessionAction
+        _controller: Ibexa\Rest\Server\Controller\Session\SessionRefreshController:refreshSessionAction
         csrf_protection: false
     methods: [POST]
 
@@ -1288,13 +1288,13 @@ ibexa.rest.unassign_role_from_user_group:
 ibexa.rest.create_session:
     path: /user/sessions
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\SessionController:createSessionAction
+        _controller: Ibexa\Rest\Server\Controller\Session\SessionCreateController:createSessionAction
         csrf_protection: false
     methods: [POST]
 
 ibexa.rest.check_session:
     path: /user/sessions/current
-    controller: Ibexa\Rest\Server\Controller\SessionController::checkSessionAction
+    controller: Ibexa\Rest\Server\Controller\Session\SessionCheckController::checkSessionAction
     methods: [GET]
     defaults:
         csrf_protection: false
@@ -1302,7 +1302,7 @@ ibexa.rest.check_session:
 ibexa.rest.delete_session:
     path: /user/sessions/{sessionId}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\SessionController:deleteSessionAction
+        _controller: Ibexa\Rest\Server\Controller\Session\SessionDeleteController:deleteSessionAction
         csrf_protection: false
     methods: [DELETE]
 
