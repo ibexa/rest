@@ -794,7 +794,7 @@ ibexa.rest.list_policies_for_user:
 
 ibexa.rest.role.publish:
     path: /user/roles/{roleId}/draft
-    controller: Ibexa\Rest\Server\Controller\Role::publishRoleDraft
+    controller: Ibexa\Rest\Server\Controller\Role\RoleDraftPublishController::publishRoleDraft
     condition: 'ibexa_get_media_type(request) === "PublishRoleInput"'
     methods: [POST]
     options:
@@ -804,95 +804,95 @@ ibexa.rest.role.publish:
 
 ibexa.rest.list_roles:
     path: /user/roles
-    controller: Ibexa\Rest\Server\Controller\Role::listRoles
+    controller: Ibexa\Rest\Server\Controller\Role\RoleListController::listRoles
     methods: [GET]
 
 ibexa.rest.create_role:
     path: /user/roles
-    controller: Ibexa\Rest\Server\Controller\Role::createRole
+    controller: Ibexa\Rest\Server\Controller\Role\RoleCreateController::createRole
     methods: [POST]
     requirements:
 
 ibexa.rest.create_role_draft:
     path: /user/roles/{roleId}
-    controller: Ibexa\Rest\Server\Controller\Role::createRoleDraft
+    controller: Ibexa\Rest\Server\Controller\Role\RoleDraftCreateController::createRoleDraft
     methods: [POST]
     requirements:
         roleId: \d+
 
 ibexa.rest.load_role:
     path: /user/roles/{roleId}
-    controller: Ibexa\Rest\Server\Controller\Role::loadRole
+    controller: Ibexa\Rest\Server\Controller\Role\RoleLoadByIdController::loadRole
     methods: [GET]
     requirements:
         roleId: \d+
 
 ibexa.rest.load_role_draft:
     path: /user/roles/{roleId}/draft
-    controller: Ibexa\Rest\Server\Controller\Role::loadRoleDraft
+    controller: Ibexa\Rest\Server\Controller\Role\RoleDraftLoadByRoleIdController::loadRoleDraft
     methods: [GET]
     requirements:
         roleId: \d+
 
 ibexa.rest.update_role:
     path: /user/roles/{roleId}
-    controller: Ibexa\Rest\Server\Controller\Role::updateRole
+    controller: Ibexa\Rest\Server\Controller\Role\RoleUpdateController::updateRole
     methods: [PATCH]
     requirements:
         roleId: \d+
 
 ibexa.rest.update_role_draft:
     path: /user/roles/{roleId}/draft
-    controller: Ibexa\Rest\Server\Controller\Role::updateRoleDraft
+    controller: Ibexa\Rest\Server\Controller\Role\RoleDraftUpdateController::updateRoleDraft
     methods: [PATCH]
     requirements:
         roleId: \d+
 
 ibexa.rest.publish_role_draft:
     path: /user/roles/{roleId}/draft
-    controller: Ibexa\Rest\Server\Controller\Role::publishRoleDraft
+    controller: Ibexa\Rest\Server\Controller\Role\RoleDraftPublishController::publishRoleDraft
     methods: [PUBLISH]
     requirements:
         roleId: \d+
 
 ibexa.rest.delete_role:
     path: /user/roles/{roleId}
-    controller: Ibexa\Rest\Server\Controller\Role::deleteRole
+    controller: Ibexa\Rest\Server\Controller\Role\RoleDeleteController::deleteRole
     methods: [DELETE]
     requirements:
         roleId: \d+
 
 ibexa.rest.delete_role_draft:
     path: /user/roles/{roleId}/draft
-    controller: Ibexa\Rest\Server\Controller\Role::deleteRoleDraft
+    controller: Ibexa\Rest\Server\Controller\Role\RoleDraftDeleteController::deleteRoleDraft
     methods: [DELETE]
     requirements:
         roleId: \d+
 
 ibexa.rest.load_policies:
     path: /user/roles/{roleId}/policies
-    controller: Ibexa\Rest\Server\Controller\Role::loadPolicies
+    controller: Ibexa\Rest\Server\Controller\Role\RolePolicyListController::loadPolicies
     methods: [GET]
     requirements:
         roleId: \d+
 
 ibexa.rest.add_policy:
     path: /user/roles/{roleId}/policies
-    controller: Ibexa\Rest\Server\Controller\Role::addPolicy
+    controller: Ibexa\Rest\Server\Controller\Role\RolePolicyCreateController::addPolicy
     methods: [POST]
     requirements:
         roleId: \d+
 
 ibexa.rest.delete_policies:
     path: /user/roles/{roleId}/policies
-    controller: Ibexa\Rest\Server\Controller\Role::deletePolicies
+    controller: Ibexa\Rest\Server\Controller\Role\RolePolicyDeleteAllFromRoleController::deletePolicies
     methods: [DELETE]
     requirements:
         roleId: \d+
 
 ibexa.rest.load_policy:
     path: /user/roles/{roleId}/policies/{policyId}
-    controller: Ibexa\Rest\Server\Controller\Role::loadPolicy
+    controller: Ibexa\Rest\Server\Controller\Role\RolePolicyLoadByIdController::loadPolicy
     methods: [GET]
     requirements:
         roleId: \d+
@@ -900,7 +900,7 @@ ibexa.rest.load_policy:
 
 ibexa.rest.update_policy:
     path: /user/roles/{roleId}/policies/{policyId}
-    controller: Ibexa\Rest\Server\Controller\Role::updatePolicy
+    controller: Ibexa\Rest\Server\Controller\Role\RolePolicyUpdateController::updatePolicy
     methods: [PATCH]
     requirements:
         roleId: \d+
@@ -908,7 +908,7 @@ ibexa.rest.update_policy:
 
 ibexa.rest.delete_policy:
     path: /user/roles/{roleId}/policies/{policyId}
-    controller: Ibexa\Rest\Server\Controller\Role::deletePolicy
+    controller: Ibexa\Rest\Server\Controller\Role\RolePolicyDeleteController::deletePolicy
     methods: [DELETE]
     requirements:
         roleId: \d+
@@ -993,21 +993,21 @@ ibexa.rest.load_user_drafts:
 
 ibexa.rest.load_role_assignments_for_user:
     path: /user/users/{userId}/roles
-    controller: Ibexa\Rest\Server\Controller\Role::loadRoleAssignmentsForUser
+    controller: Ibexa\Rest\Server\Controller\Role\RoleAssignmentForUserListController::loadRoleAssignmentsForUser
     methods: [GET]
     requirements:
         userId: \d+
 
 ibexa.rest.assign_role_to_user:
     path: /user/users/{userId}/roles
-    controller: Ibexa\Rest\Server\Controller\Role::assignRoleToUser
+    controller: Ibexa\Rest\Server\Controller\Role\RoleAssignToUserController::assignRoleToUser
     methods: [POST]
     requirements:
         userId: \d+
 
 ibexa.rest.load_role_assignment_for_user:
     path: /user/users/{userId}/roles/{roleId}
-    controller: Ibexa\Rest\Server\Controller\Role::loadRoleAssignmentForUser
+    controller: Ibexa\Rest\Server\Controller\Role\RoleAssignmentForUserLoadByIdController::loadRoleAssignmentForUser
     methods: [GET]
     requirements:
         userId: \d+
@@ -1015,7 +1015,7 @@ ibexa.rest.load_role_assignment_for_user:
 
 ibexa.rest.unassign_role_from_user:
     path: /user/users/{userId}/roles/{roleId}
-    controller: Ibexa\Rest\Server\Controller\Role::unassignRoleFromUser
+    controller: Ibexa\Rest\Server\Controller\Role\RoleUnassignFromUserController::unassignRoleFromUser
     methods: [DELETE]
     requirements:
         userId: \d+
@@ -1094,21 +1094,21 @@ ibexa.rest.create_user:
 
 ibexa.rest.load_role_assignments_for_user_group:
     path: /user/groups/{groupPath}/roles
-    controller: Ibexa\Rest\Server\Controller\Role::loadRoleAssignmentsForUserGroup
+    controller: Ibexa\Rest\Server\Controller\Role\RoleAssignmentForUserGroupListController::loadRoleAssignmentsForUserGroup
     methods: [GET]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.assign_role_to_user_group:
     path: /user/groups/{groupPath}/roles
-    controller: Ibexa\Rest\Server\Controller\Role::assignRoleToUserGroup
+    controller: Ibexa\Rest\Server\Controller\Role\RoleAssignToUserGroupController::assignRoleToUserGroup
     methods: [POST]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.load_role_assignment_for_user_group:
     path: /user/groups/{groupPath}/roles/{roleId}
-    controller: Ibexa\Rest\Server\Controller\Role::loadRoleAssignmentForUserGroup
+    controller: Ibexa\Rest\Server\Controller\Role\RoleAssignmentForUserGroupLoadByIdController::loadRoleAssignmentForUserGroup
     methods: [GET]
     requirements:
         groupPath: "[0-9/]+"
@@ -1116,7 +1116,7 @@ ibexa.rest.load_role_assignment_for_user_group:
 
 ibexa.rest.unassign_role_from_user_group:
     path: /user/groups/{groupPath}/roles/{roleId}
-    controller: Ibexa\Rest\Server\Controller\Role::unassignRoleFromUserGroup
+    controller: Ibexa\Rest\Server\Controller\Role\RoleUnassignFromUserGroupController::unassignRoleFromUserGroup
     methods: [DELETE]
     requirements:
         groupPath: "[0-9/]+"
