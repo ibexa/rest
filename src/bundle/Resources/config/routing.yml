@@ -1312,13 +1312,13 @@ ibexa.rest.delete_session:
 ibexa.rest.list_global_url_aliases:
     path: /content/urlaliases
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLAlias:listGlobalURLAliases
+        _controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasListGlobalController:listGlobalURLAliases
     methods: [GET]
 
 ibexa.rest.list_location_url_aliases:
     path: /content/locations/{locationPath}/urlaliases
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLAlias:listLocationURLAliases
+        _controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasListLocationController:listLocationURLAliases
     methods: [GET]
     requirements:
         locationPath: "[0-9/]+"
@@ -1326,19 +1326,19 @@ ibexa.rest.list_location_url_aliases:
 ibexa.rest.create_url_alias:
     path: /content/urlaliases
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLAlias:createURLAlias
+        _controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasCreateController:createURLAlias
     methods: [POST]
 
 ibexa.rest.load_url_alias:
     path: /content/urlaliases/{urlAliasId}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLAlias:loadURLAlias
+        _controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasLoadByIdController:loadURLAlias
     methods: [GET]
 
 ibexa.rest.delete_url_alias:
     path: /content/urlaliases/{urlAliasId}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLAlias:deleteURLAlias
+        _controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasDeleteController:deleteURLAlias
     methods: [DELETE]
 
 
