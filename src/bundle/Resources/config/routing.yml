@@ -467,7 +467,7 @@ ibexa.rest.location.copy:
 
 ibexa.rest.trash_location:
     path: /content/locations/{locationPath}
-    controller: Ibexa\Rest\Server\Controller\Trash::trashLocation
+    controller: Ibexa\Rest\Server\Controller\Trash\LocationTrashController::trashLocation
     condition: 'ibexa_get_media_type(request) === "TrashLocationInput"'
     methods: [POST, TRASH]
     options:
@@ -820,7 +820,7 @@ ibexa.rest.unlink_content_type_from_group:
 
 ibexa.rest.trash.restore_trash_item:
     path: /content/trash/{trashItemId}
-    controller: Ibexa\Rest\Server\Controller\Trash::restoreItem
+    controller: Ibexa\Rest\Server\Controller\Trash\TrashItemRestoreController::restoreItem
     condition: 'ibexa_get_media_type(request) === "RestoreTrashItemInput"'
     methods: [POST]
     options:
@@ -831,19 +831,19 @@ ibexa.rest.trash.restore_trash_item:
 ibexa.rest.load_trash_items:
     path: /content/trash
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Trash:loadTrashItems
+        _controller: Ibexa\Rest\Server\Controller\Trash\TrashItemListController:loadTrashItems
     methods: [GET]
 
 ibexa.rest.empty_trash:
     path: /content/trash
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Trash:emptyTrash
+        _controller: Ibexa\Rest\Server\Controller\Trash\TrashEmptyController:emptyTrash
     methods: [DELETE]
 
 ibexa.rest.load_trash_item:
     path: /content/trash/{trashItemId}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Trash:loadTrashItem
+        _controller: Ibexa\Rest\Server\Controller\Trash\TrashItemLoadByIdController:loadTrashItem
     methods: [GET]
     requirements:
         trashItemId: \d+
@@ -851,7 +851,7 @@ ibexa.rest.load_trash_item:
 ibexa.rest.delete_trash_item:
     path: /content/trash/{trashItemId}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Trash:deleteTrashItem
+        _controller: Ibexa\Rest\Server\Controller\Trash\TrashItemDeleteController:deleteTrashItem
     methods: [DELETE]
     requirements:
         trashItemId: \d+
@@ -859,7 +859,7 @@ ibexa.rest.delete_trash_item:
 ibexa.rest.restore_trash_item:
     path: /content/trash/{trashItemId}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Trash:restoreTrashItem
+        _controller: Ibexa\Rest\Server\Controller\Trash\TrashItemRestoreController:restoreTrashItem
     methods: [MOVE]
     requirements:
         trashItemId: \d+
