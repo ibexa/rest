@@ -446,12 +446,12 @@ ibexa.rest.set_object_states_for_content:
 ibexa.rest.languages.list:
     path: /languages
     methods: [GET]
-    controller: Ibexa\Rest\Server\Controller\Language::listLanguages
+    controller: Ibexa\Rest\Server\Controller\Language\LanguageListController::listLanguages
 
 ibexa.rest.languages.view:
     path: /languages/{languageCode}
     methods: [GET]
-    controller: Ibexa\Rest\Server\Controller\Language::loadLanguage
+    controller: Ibexa\Rest\Server\Controller\Language\LanguageLoadByIdController::loadLanguage
 
 # Locations
 
