@@ -28,7 +28,101 @@ use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
+#[Patch(
+    uriTemplate: '/content/objects/{contentId}/objectstates',
+    name: 'Set Object states of content item',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
+    openapi: new Model\Operation(
+        summary: 'Updates Object states of a content item. An Object state in the input overrides the state of the Object state group. PATCH or POST with header X-HTTP-Method-Override PATCH.',
+        tags: [
+            'Objects',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'Accept',
+                in: 'header',
+                required: true,
+                description: 'If set, the updated Object state is returned in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'Content-Type',
+                in: 'header',
+                required: true,
+                description: 'The content item Object states input schema encoded in XML or JSON format.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'If-Match',
+                in: 'header',
+                required: true,
+                description: 'ETag',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'contentId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject([
+                'application/vnd.ibexa.api.ContentObjectStates+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentObjectStates',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.response.xml.example',
+                ],
+                'application/vnd.ibexa.api.ContentObjectStates+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentObjectStatesWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/GET/ContentObjectStates.json.example',
+                ],
+            ]),
+        ),
+        responses: [
+            Response::HTTP_NO_CONTENT => [
+                'description' => 'OK - Object state updated.',
+                'content' => [
+                    'application/vnd.ibexa.api.ContentObjectStates+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentObjectStates',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.response.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentObjectStates+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentObjectStatesWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/GET/ContentObjectStates.json.example',
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - The input does not match the input schema definition.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - The user is not authorized to set an Object state.',
+            ],
+            Response::HTTP_FORBIDDEN => [
+                'description' => 'Error - The input contains multiple Object states of the same Object state group.',
+            ],
+            Response::HTTP_PRECONDITION_FAILED => [
+                'description' => 'Error - The current ETag does not match the one provided in the If-Match header.',
+            ],
+        ],
+    ),
+)]
 class ObjectStatesForContentUpdateController extends RestController
 {
     protected ObjectStateService $objectStateService;

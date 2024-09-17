@@ -427,7 +427,7 @@ ibexa.rest.delete_object_state:
 ibexa.rest.get_object_states_for_content:
     path: /content/objects/{contentId}/objectstates
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStatesForContnetListController:getObjectStatesForContent
+        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStatesForContentListController:getObjectStatesForContent
     methods: [GET]
     requirements:
         contentId: \d+
