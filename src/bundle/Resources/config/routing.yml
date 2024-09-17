@@ -1131,7 +1131,7 @@ ibexa.rest.create_session:
 
 ibexa.rest.check_session:
     path: /user/sessions/current
-    controller: Ibexa\Rest\Server\Controller\SessionController::checkSessionAction
+    controller: Ibexa\Rest\Server\Controller\Session\SessionCheckController::checkSessionAction
     methods: [GET]
     defaults:
         csrf_protection: false
