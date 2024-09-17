@@ -457,7 +457,7 @@ ibexa.rest.languages.view:
 
 ibexa.rest.location.copy:
     path: /content/locations/{locationPath}
-    controller: Ibexa\Rest\Server\Controller\Location::copy
+    controller: Ibexa\Rest\Server\Controller\Location\LocationSubtreeCopyController::copy
     condition: 'ibexa_get_media_type(request) === "CopyLocationInput"'
     methods: [POST]
     options:
@@ -477,7 +477,7 @@ ibexa.rest.trash_location:
 
 ibexa.rest.location.swap:
     path: /content/locations/{locationPath}
-    controller: Ibexa\Rest\Server\Controller\Location::swap
+    controller: Ibexa\Rest\Server\Controller\Location\LocationSwapController::swap
     condition: 'ibexa_get_media_type(request) === "SwapLocationInput"'
     methods: [POST]
     options:
@@ -487,7 +487,7 @@ ibexa.rest.location.swap:
 
 ibexa.rest.location.move:
     path: /content/locations/{locationPath}
-    controller: Ibexa\Rest\Server\Controller\Location::moveLocation
+    controller: Ibexa\Rest\Server\Controller\Location\LocationSubtreeMoveController::moveLocation
     condition: 'ibexa_get_media_type(request) === "MoveLocationInput"'
     methods: [POST]
     options:
@@ -498,13 +498,13 @@ ibexa.rest.location.move:
 ibexa.rest.redirect_location:
     path: /content/locations
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location:redirectLocation
+        _controller: Ibexa\Rest\Server\Controller\Location\LocationRedirectController:redirectLocation
     methods: [GET]
 
 ibexa.rest.load_location:
     path: /content/locations/{locationPath}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location:loadLocation
+        _controller: Ibexa\Rest\Server\Controller\Location\LocationLoadByPathController:loadLocation
     methods: [GET]
     requirements:
         locationPath: "[0-9/]+"
@@ -512,7 +512,7 @@ ibexa.rest.load_location:
 ibexa.rest.update_location:
     path: /content/locations/{locationPath}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location:updateLocation
+        _controller: Ibexa\Rest\Server\Controller\Location\LocationUpdateController:updateLocation
     methods: [PATCH]
     requirements:
         locationPath: "[0-9/]+"
@@ -520,7 +520,7 @@ ibexa.rest.update_location:
 ibexa.rest.delete_subtree:
     path: /content/locations/{locationPath}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location:deleteSubtree
+        _controller: Ibexa\Rest\Server\Controller\Location\LocationSubtreeDeleteController:deleteSubtree
     methods: [DELETE]
     requirements:
         locationPath: "[0-9/]+"
@@ -528,7 +528,7 @@ ibexa.rest.delete_subtree:
 ibexa.rest.copy_subtree:
     path: /content/locations/{locationPath}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location:copySubtree
+        _controller: Ibexa\Rest\Server\Controller\Location\LocationSubtreeCopyController:copySubtree
     methods: [COPY]
     requirements:
         locationPath: "[0-9/]+"
@@ -536,7 +536,7 @@ ibexa.rest.copy_subtree:
 ibexa.rest.move_subtree:
     path: /content/locations/{locationPath}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location:moveSubtree
+        _controller: Ibexa\Rest\Server\Controller\Location\LocationSubtreeMoveController:moveSubtree
     methods: [MOVE]
     requirements:
         locationPath: "[0-9/]+"
@@ -544,7 +544,7 @@ ibexa.rest.move_subtree:
 ibexa.rest.swap_location:
     path: /content/locations/{locationPath}
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location:swapLocation
+        _controller: Ibexa\Rest\Server\Controller\Location\LocationSwapController:swapLocation
     methods: [SWAP]
     requirements:
         locationPath: "[0-9/]+"
@@ -552,7 +552,7 @@ ibexa.rest.swap_location:
 ibexa.rest.load_location_children:
     path: /content/locations/{locationPath}/children
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location:loadLocationChildren
+        _controller: Ibexa\Rest\Server\Controller\Location\LocationChildrenListController:loadLocationChildren
     methods: [GET]
     requirements:
         locationPath: "[0-9/]+"
@@ -560,7 +560,7 @@ ibexa.rest.load_location_children:
 ibexa.rest.load_locations_for_content:
     path: /content/objects/{contentId}/locations
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location:loadLocationsForContent
+        _controller: Ibexa\Rest\Server\Controller\Location\LocationForContentListController:loadLocationsForContent
     methods: [GET]
     requirements:
         contentId: \d+
@@ -568,7 +568,7 @@ ibexa.rest.load_locations_for_content:
 ibexa.rest.create_location:
     path: /content/objects/{contentId}/locations
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location:createLocation
+        _controller: Ibexa\Rest\Server\Controller\Location\LocationCreateController:createLocation
     methods: [POST]
     requirements:
         contentId: \d+
