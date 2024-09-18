@@ -584,10 +584,10 @@ final class User extends RestController
         );
 
         return new Values\VersionList(
-            array_map(
-                static fn (ContentDraftListItemInterface $draftListItem): VersionInfo => $draftListItem->getVersionInfo(),
+            array_filter(array_map(
+                static fn (ContentDraftListItemInterface $draftListItem): ?VersionInfo => $draftListItem->getVersionInfo(),
                 $contentDrafts->items
-            ),
+            )),
             $request->getPathInfo()
         );
     }
