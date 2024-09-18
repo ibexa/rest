@@ -13,9 +13,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\LanguageService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language as ApiLanguage;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values\LanguageList;
 use Symfony\Component\HttpFoundation\Response;
-use Traversable;
 
 #[Get(
     uriTemplate: '/languages/{code}',

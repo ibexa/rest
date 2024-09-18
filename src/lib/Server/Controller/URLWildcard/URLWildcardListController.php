@@ -7,19 +7,11 @@
 
 namespace Ibexa\Rest\Server\Controller\URLWildcard;
 
-use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\Post;
-use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
-use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\URLWildcardService;
-use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
-use JMS\TranslationBundle\Annotation\Ignore;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
