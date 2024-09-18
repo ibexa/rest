@@ -7,21 +7,11 @@
 
 namespace Ibexa\Rest\Server\Controller\Section;
 
-use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\Patch;
-use ApiPlatform\Metadata\Post;
-use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
-use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\SectionService;
-use Ibexa\Contracts\Core\Repository\Values\Content\SectionCreateStruct;
-use Ibexa\Contracts\Core\Repository\Values\Content\SectionUpdateStruct;
-use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
-use Ibexa\Rest\Server\Values\NoContent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -111,7 +101,7 @@ class SectionListController extends RestController
     public function loadSectionByIdentifier(Request $request)
     {
         return $this->sectionService->loadSectionByIdentifier(
-        // GET variable
+            // GET variable
             $request->query->get('identifier')
         );
     }
