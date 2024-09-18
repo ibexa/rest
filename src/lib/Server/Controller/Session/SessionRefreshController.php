@@ -8,26 +8,12 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Controller\Session;
 
-use ApiPlatform\Metadata\Delete;
-use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
-use Ibexa\Contracts\Core\Repository\PermissionResolver;
-use Ibexa\Contracts\Core\Repository\UserService;
-use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
-use Ibexa\Contracts\Rest\Exceptions\UnauthorizedException;
-use Ibexa\Rest\Server\Controller;
-use Ibexa\Rest\Server\Exceptions;
-use Ibexa\Rest\Server\Security\CsrfTokenManager;
 use Ibexa\Rest\Server\Values;
-use Ibexa\Rest\Value as RestValue;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface as SecurityTokenStorageInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Csrf\CsrfToken;
 
 #[Post(
     uriTemplate: '/user/sessions/{sessionId}/refresh',

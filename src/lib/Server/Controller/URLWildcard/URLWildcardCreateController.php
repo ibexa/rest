@@ -7,8 +7,6 @@
 
 namespace Ibexa\Rest\Server\Controller\URLWildcard;
 
-use ApiPlatform\Metadata\Delete;
-use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
