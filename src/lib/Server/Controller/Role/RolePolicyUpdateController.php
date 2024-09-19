@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Patch(
-    uriTemplate: '/user/roles/{id}/policies/{id}',
+    uriTemplate: '/user/roles/{roleId}/policies/{policyId}',
     name: 'Update Policy',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
@@ -56,7 +56,7 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ),
             new Model\Parameter(
-                name: 'id',
+                name: 'policyId',
                 in: 'path',
                 required: true,
                 schema: [
