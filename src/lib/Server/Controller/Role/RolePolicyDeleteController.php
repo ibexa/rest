@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
-    uriTemplate: '/user/roles/{id}/policies/{id}',
+    uriTemplate: '/user/roles/{roleId}/policies/{policyId}',
     name: 'Delete Policy',
     openapi: new Model\Operation(
         summary: 'Deletes given Policy.',
@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'id',
+                name: 'policyId',
                 in: 'path',
                 required: true,
                 schema: [
