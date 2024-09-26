@@ -19,7 +19,6 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
     uriTemplate: '/content/views',
     name: 'Create View (deprecated)',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
-    openapiContext: ['requestBody' => false],
     openapi: new Model\Operation(
         summary: 'Executes a query and returns View including the results. The View input reflects the criteria model of the public PHP API. Deprecated as of eZ Platform 1.0 and will respond 301, use POST /views instead.',
         tags: [
@@ -53,6 +52,9 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
                 'description' => 'Error - the input does not match the input schema definition.',
             ],
         ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject(),
+        ),
     ),
 )]
 class ContentViewController extends RestController

@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/reveal',
     name: 'Reveal content item',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
-    openapiContext: ['requestBody' => false],
     openapi: new Model\Operation(
         summary: 'Makes or keep the content item visible',
         tags: [
@@ -34,6 +33,9 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ),
         ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject(),
+        ),
         responses: [
             Response::HTTP_NO_CONTENT => [
                 'description' => 'OK - Object item is revealed.',

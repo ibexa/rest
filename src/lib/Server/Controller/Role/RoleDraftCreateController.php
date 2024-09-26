@@ -25,7 +25,6 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/roles/{id}',
     name: 'Create Role Draft',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
-    openapiContext: ['requestBody' => false],
     openapi: new Model\Operation(
         summary: 'Creates a new Role draft from an existing Role.',
         tags: [
@@ -80,6 +79,9 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - the user is not authorized to create a Role or a Role draft',
             ],
         ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject(),
+        ),
     ),
 )]
 class RoleDraftCreateController extends RoleBaseController

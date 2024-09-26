@@ -33,6 +33,9 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - the content with the given remote ID does not exist.',
             ],
         ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject(),
+        ),
     ),
 )]
 class ContentRedirectController extends RestController

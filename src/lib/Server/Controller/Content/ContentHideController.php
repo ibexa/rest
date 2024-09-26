@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/hide',
     name: 'Hide content item',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
-    openapiContext: ['requestBody' => false],
     openapi: new Model\Operation(
         summary: 'Makes or keep the content item invisible',
         tags: [
@@ -45,6 +44,9 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - The content item was not found.',
             ],
         ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject(),
+        ),
     ),
 )]
 class ContentHideController extends RestController

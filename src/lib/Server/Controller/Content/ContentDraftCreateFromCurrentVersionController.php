@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/currentversion',
     name: 'Create a draft from current version',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
-    openapiContext: ['requestBody' => false],
     openapi: new Model\Operation(
         summary: 'The system creates a new draft as a copy of the current version. COPY or POST with header X-HTTP-Method-Override COPY.',
         tags: [
@@ -72,6 +71,9 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - the content item was not found.',
             ],
         ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject(),
+        ),
     ),
 )]
 class ContentDraftCreateFromCurrentVersionController extends RestController

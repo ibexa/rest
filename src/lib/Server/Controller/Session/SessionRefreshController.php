@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/sessions/{sessionId}/refresh',
     name: 'Refresh session (deprecated)',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
-    openapiContext: ['requestBody' => false],
     openapi: new Model\Operation(
         summary: 'Get the session\'s User information. Deprecated as of Ibexa DXP 4.6, use GET /user/sessions/current instead.',
         tags: [
@@ -82,6 +81,9 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - the session does not exist.',
             ],
         ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject(),
+        ),
     ),
 )]
 /**

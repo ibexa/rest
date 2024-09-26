@@ -39,12 +39,7 @@ class UserBaseController extends RestController
 
     protected SectionService $sectionService;
 
-    /**
-     * Repository.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Repository
-     */
-    protected $repository;
+    protected Repository $repository;
 
     protected PermissionResolver $permissionResolver;
 
