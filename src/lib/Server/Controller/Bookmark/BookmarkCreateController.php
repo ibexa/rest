@@ -24,7 +24,6 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/bookmark/{locationId}',
     name: 'Create bookmark',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
-    openapiContext: ['requestBody' => false],
     openapi: new Model\Operation(
         summary: 'Add given Location to bookmarks of the current user.',
         tags: [
@@ -54,6 +53,9 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - Location is already bookmarked.',
             ],
         ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject(),
+        ),
     ),
 )]
 class BookmarkCreateController extends RestController

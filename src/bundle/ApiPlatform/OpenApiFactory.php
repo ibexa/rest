@@ -32,7 +32,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         $openApi = ($this->decorated)($context);
         $openApi = $this->addSchemas($openApi);
 
-        $this->insertExampleFilesContent($openApi);
+        //$this->insertExampleFilesContent($openApi);
 
         return $openApi;
     }

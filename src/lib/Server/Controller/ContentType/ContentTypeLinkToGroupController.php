@@ -23,7 +23,6 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/types/{contentTypeId}/groups',
     name: 'Link group to content type',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
-    openapiContext: ['requestBody' => false],
     openapi: new Model\Operation(
         summary: 'Links a content type group to the content type and returns the updated group list.',
         tags: [
@@ -75,6 +74,9 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - The content type is already assigned to the group.',
             ],
         ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject(),
+        ),
     ),
 )]
 class ContentTypeLinkToGroupController extends RestController

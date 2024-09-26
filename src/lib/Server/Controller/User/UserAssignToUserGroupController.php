@@ -22,7 +22,6 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/users/{userId}/groups',
     name: 'Assign User Group',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
-    openapiContext: ['requestBody' => false],
     openapi: new Model\Operation(
         summary: 'Assigns the User to a User Group.',
         tags: [
@@ -74,6 +73,9 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - the User does not exist.',
             ],
         ],
+        requestBody: new Model\RequestBody(
+            content: new \ArrayObject(),
+        ),
     ),
 )]
 final class UserAssignToUserGroupController extends UserBaseController
