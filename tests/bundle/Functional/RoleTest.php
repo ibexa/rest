@@ -713,7 +713,7 @@ XML;
         $href = $response->getHeader('Location')[0];
 
         $this->sendHttpRequest(
-            $this->createHttpRequest('PUBLISH', $href)
+            $this->createHttpRequest('PUBLISH', $href . '/draft')
         );
 
         $this->addCreatedElement($href);
