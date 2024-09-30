@@ -135,7 +135,7 @@ class Role extends RestController
         $roles = [];
         if ($request->query->has('identifier')) {
             try {
-                $role = $this->roleService->loadRoleByIdentifier($request->query->get('identifier'));
+                $role = $this->roleService->loadRoleByIdentifier((string)$request->query->get('identifier'));
                 $roles[] = $role;
             } catch (APINotFoundException $e) {
                 // Do nothing

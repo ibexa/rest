@@ -1251,11 +1251,6 @@ parameters:
 			path: src/lib/Server/Controller/Location.php
 
 		-
-			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string given\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/Location.php
-
-		-
 			message: "#^Parameter \\#1 \\$remoteId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocationByRemoteId\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Location.php
@@ -1651,11 +1646,6 @@ parameters:
 			path: src/lib/Server/Controller/User.php
 
 		-
-			message: "#^Parameter \\#1 \\$id of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\UserService\\:\\:loadUserGroup\\(\\) expects int, string given\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
 			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, int\\|null given\\.$#"
 			count: 14
 			path: src/lib/Server/Controller/User.php
@@ -1917,11 +1907,6 @@ parameters:
 
 		-
 			message: "#^Possibly invalid array key type \\(array\\<int, string\\>\\|string\\)\\.$#"
-			count: 2
-			path: src/lib/Server/Input/Parser/Criterion.php
-
-		-
-			message: "#^Property Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\:\\:\\$criterionIdMap type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion.php
 

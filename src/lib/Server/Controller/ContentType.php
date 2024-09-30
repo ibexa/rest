@@ -156,8 +156,10 @@ class ContentType extends RestController
     public function loadContentTypeGroupList(Request $request)
     {
         if ($request->query->has('identifier')) {
+            /** @var string $identifier */
+            $identifier = $request->query->get('identifier');
             $contentTypeGroup = $this->contentTypeService->loadContentTypeGroupByIdentifier(
-                $request->query->get('identifier')
+                $identifier
             );
 
             return new Values\TemporaryRedirect(
@@ -241,6 +243,7 @@ class ContentType extends RestController
         $contentTypes = $this->getContentTypeList();
         $sort = $request->query->get('sort');
         if ($request->query->has('orderby')) {
+            /** @var string $orderby */
             $orderby = $request->query->get('orderby');
             $this->sortContentTypeList($contentTypes, $orderby, $sort);
         }

@@ -44,7 +44,7 @@ class Content extends RestController
         }
 
         $contentInfo = $this->repository->getContentService()->loadContentInfoByRemoteId(
-            $request->query->get('remoteId')
+            (string)$request->query->get('remoteId')
         );
 
         return new Values\TemporaryRedirect(
@@ -79,10 +79,7 @@ class Content extends RestController
         $contentVersion = null;
         $relations = null;
         if ($this->getMediaType($request) === 'application/vnd.ibexa.api.content') {
-            $languages = Language::ALL;
-            if ($request->query->has('languages')) {
-                $languages = explode(',', $request->query->get('languages'));
-            }
+            $languages = $this->getLanguages($request);
 
             $contentVersion = $this->repository->getContentService()->loadContent($contentId, $languages);
             $relations = $this->repository->getContentService()->loadRelations($contentVersion->getVersionInfo());
@@ -189,10 +186,7 @@ class Content extends RestController
      */
     public function loadContentInVersion($contentId, $versionNumber, Request $request)
     {
-        $languages = Language::ALL;
-        if ($request->query->has('languages')) {
-            $languages = explode(',', $request->query->get('languages'));
-        }
+        $languages = $this->getLanguages($request);
 
         $content = $this->repository->getContentService()->loadContent(
             $contentId,
@@ -266,6 +260,7 @@ class Content extends RestController
      */
     public function copyContent($contentId, Request $request)
     {
+        /** @var string $destination */
         $destination = $request->headers->get('Destination');
 
         $parentLocationParts = explode('/', $destination);
@@ -526,10 +521,7 @@ class Content extends RestController
             throw new RESTContentFieldValidationException($e);
         }
 
-        $languages = null;
-        if ($request->query->has('languages')) {
-            $languages = explode(',', $request->query->get('languages'));
-        }
+        $languages = $this->getLanguages($request);
 
         // Reload the content to handle languages GET parameter
         $content = $this->repository->getContentService()->loadContent(
@@ -866,5 +858,20 @@ class Content extends RestController
                 ),
             ]
         );
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getLanguages(Request $request): array
+    {
+        $languages = Language::ALL;
+        if ($request->query->has('languages')) {
+            /** @var string $languagesString */
+            $languagesString = $request->query->get('languages');
+            $languages = explode(',', $languagesString);
+        }
+
+        return $languages;
     }
 }
