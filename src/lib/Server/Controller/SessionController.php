@@ -97,6 +97,42 @@ final class SessionController extends Controller
     }
 
     /**
+     * Refresh given session.
+     *
+     * @deprecated 5.0.0 The "SessionController::refreshSessionAction()" method is deprecated, will be removed in the next API version. Use SessionController::checkSessionAction() instead.
+     *
+     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     */
+    public function refreshSessionAction(string $sessionId, Request $request): Values\UserSession|Response
+    {
+        trigger_deprecation(
+            'ibexa/rest',
+            '4.6.7',
+            sprintf('The %s() method is deprecated, will be removed in the next API version.', __METHOD__)
+        );
+
+        $session = $request->getSession();
+
+        if ($session === null || !$session->isStarted() || $session->getId() !== $sessionId || !$this->hasStoredCsrfToken()) {
+            return $this->logout($request);
+        }
+
+        $this->checkCsrfToken($request);
+        $currentUser = $this->userService->loadUser(
+            $this->permissionResolver->getCurrentUserReference()->getUserId()
+        );
+
+        return new Values\UserSession(
+            $currentUser,
+            $session->getName(),
+            $session->getId(),
+            $request->headers->get('X-CSRF-Token') ?? '',
+            false
+        );
+    }
+
+    /**
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function deleteSessionAction(string $sessionId, Request $request): Values\DeletedUserSession|Response
