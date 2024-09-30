@@ -36,11 +36,6 @@ parameters:
 			path: src/lib/Server/Controller/Content.php
 
 		-
-			message: "#^Parameter \\#2 \\$string of function explode expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/Content.php
-
-		-
 			message: "#^Parameter \\#2 \\.\\.\\.\\$arrays of function array_merge expects array, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\ContentType\\\\ContentType\\> given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/ContentType.php
