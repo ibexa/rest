@@ -69,14 +69,7 @@ class Role extends RestController
         $this->locationService = $locationService;
     }
 
-    /**
-     * Create new role.
-     *
-     * Defaults to publishing the role, but you can create a draft instead by setting the POST parameter publish=false
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedRole
-     */
-    public function createRole(Request $request)
+    public function createRole(Request $request): Values\CreatedRole
     {
         try {
             $roleDraft = $this->roleService->createRole(
