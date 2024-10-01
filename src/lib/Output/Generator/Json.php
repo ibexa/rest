@@ -318,7 +318,7 @@ class Json extends Generator
      *
      * @param bool $boolValue
      *
-     * @return bool
+     * @return mixed
      */
     public function serializeBool($boolValue)
     {
