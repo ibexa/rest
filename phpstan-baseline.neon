@@ -1051,8 +1051,18 @@ parameters:
 			path: src/lib/Server/Controller/Content.php
 
 		-
+			message: "#^Parameter \\#1 \\$remoteId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentService\\:\\:loadContentInfoByRemoteId\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
 			message: "#^Parameter \\#1 \\$versions of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\VersionList constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\> given\\.$#"
 			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: "#^Parameter \\#2 \\$string of function explode expects string, string\\|null given\\.$#"
+			count: 3
 			path: src/lib/Server/Controller/Content.php
 
 		-
@@ -1221,6 +1231,11 @@ parameters:
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
+			message: "#^Parameter \\#1 \\$contentTypeGroupIdentifier of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentTypeService\\:\\:loadContentTypeGroupByIdentifier\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
 			message: "#^Parameter \\#1 \\$contentTypeGroups of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\ContentTypeGroupList constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\ContentType\\\\ContentTypeGroup\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\ContentType\\\\ContentTypeGroup\\> given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/ContentType.php
@@ -1271,6 +1286,11 @@ parameters:
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
+			message: "#^Parameter \\#2 \\$orderby of method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\ContentType\\:\\:sortContentTypeList\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
 			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/ContentType.php
@@ -1296,12 +1316,17 @@ parameters:
 			path: src/lib/Server/Controller/Location.php
 
 		-
-			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string given\\.$#"
+			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Location.php
 
 		-
 			message: "#^Parameter \\#1 \\$remoteId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocationByRemoteId\\(\\) expects string, string\\|null given\\.$#"
+			count: 2
+			path: src/lib/Server/Controller/Location.php
+
+		-
+			message: "#^Parameter \\#1 \\$url of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\URLAliasService\\:\\:lookup\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Location.php
 
@@ -1392,6 +1417,11 @@ parameters:
 
 		-
 			message: "#^Dead catch \\- Ibexa\\\\Contracts\\\\Rest\\\\Exceptions\\\\Parser is never thrown in the try block\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/Role.php
+
+		-
+			message: "#^Left side of && is always true\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Role.php
 
@@ -1502,6 +1532,11 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\Role\\:\\:updateRole\\(\\) has parameter \\$roleId with no type specified\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/Role.php
+
+		-
+			message: "#^Parameter \\#1 \\$identifier of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\RoleService\\:\\:loadRoleByIdentifier\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Role.php
 
@@ -1691,12 +1726,17 @@ parameters:
 			path: src/lib/Server/Controller/User.php
 
 		-
-			message: "#^Parameter \\#1 \\$href of method Ibexa\\\\Rest\\\\RequestParser\\:\\:parseHref\\(\\) expects string, string\\|null given\\.$#"
+			message: "#^Parameter \\#1 \\$email of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\UserService\\:\\:loadUsersByEmail\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/User.php
 
 		-
-			message: "#^Parameter \\#1 \\$id of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\UserService\\:\\:loadUserGroup\\(\\) expects int, string given\\.$#"
+			message: "#^Parameter \\#1 \\$href of method Ibexa\\\\Rest\\\\RequestParser\\:\\:parseHref\\(\\) expects string, string\\|null given\\.$#"
+			count: 2
+			path: src/lib/Server/Controller/User.php
+
+		-
+			message: "#^Parameter \\#1 \\$id of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\UserService\\:\\:loadUserGroup\\(\\) expects int, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/User.php
 
@@ -1706,13 +1746,18 @@ parameters:
 			path: src/lib/Server/Controller/User.php
 
 		-
+			message: "#^Parameter \\#1 \\$login of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\UserService\\:\\:loadUserByLogin\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
 			message: "#^Parameter \\#1 \\$path of method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\User\\:\\:extractLocationIdFromPath\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/User.php
 
 		-
 			message: "#^Parameter \\#1 \\$remoteId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentService\\:\\:loadContentInfoByRemoteId\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
+			count: 2
 			path: src/lib/Server/Controller/User.php
 
 		-
@@ -1962,7 +2007,7 @@ parameters:
 
 		-
 			message: "#^Possibly invalid array key type \\(array\\<int, string\\>\\|string\\)\\.$#"
-			count: 2
+			count: 1
 			path: src/lib/Server/Input/Parser/Criterion.php
 
 		-
