@@ -6526,7 +6526,7 @@ parameters:
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
 		-
-			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorBaseTest\\:\\:\\$generator \\(Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\) in isset\\(\\) is not nullable\\.$#"
+			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorBaseTest\\:\\:\\$generator \\(Ibexa\\\\Rest\\\\Output\\\\Generator\\\\InMemory\\\\Xml\\) in isset\\(\\) is not nullable\\.$#"
 			count: 1
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
