@@ -91,30 +91,30 @@ final class Xml extends Json
             $data['#'] = $normalizedData[$topNodeName];
         }
 
-        return $data;
+        return $this->clearEmptyArrays($data);
     }
 
-//    /**
-//     * @param array<mixed> $array
-//     *
-//     * @return array<mixed>
-//     */
-//    private function clearEmptyArrays(array &$array): array
-//    {
-//        foreach ($array as $key => &$value) {
-//            if (is_array($value)) {
-//                // Recursively apply the function to the nested array
-//                $this->clearEmptyArrays($value);
-//
-//                // Remove the field if it's an empty array after recursion
-//                if (empty($value)) {
-//                    unset($array[$key]);
-//                }
-//            }
-//        }
-//
-//        return $array;
-//    }
+    /**
+     * @param array<mixed> $array
+     *
+     * @return array<mixed>
+     */
+    private function clearEmptyArrays(array &$array): array
+    {
+        foreach ($array as $key => &$value) {
+            if (is_array($value)) {
+                // Recursively apply the function to the nested array
+                $this->clearEmptyArrays($value);
+
+                // Remove the field if it's an empty array after recursion
+                if (empty($value)) {
+                    unset($array[$key]);
+                }
+            }
+        }
+
+        return $array;
+    }
 
     public function getEncoderContext(array $data): array
     {
