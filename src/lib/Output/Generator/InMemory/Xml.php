@@ -71,14 +71,26 @@ final class Xml extends Json
 
         $encoderContext = $this->getEncoderContext($normalizedData);
         $encoderContext['as_collection'] = true;
-        $transformedData = $this->transformData($normalizedData);
 
         $serializer = new Serializer([new ObjectNormalizer()], [new XmlEncoder()]);
 
-        return $serializer->encode($transformedData, 'xml', $encoderContext);
+        return $serializer->encode($normalizedData, 'xml', $encoderContext);
     }
 
-    public function transformData(array $normalizedData): array
+    public function toArray(): array
+    {
+        $data = parent::toArray();
+        $this->transformData($data);
+
+        return $data;
+    }
+
+    /**
+     * @param array<mixed> $normalizedData
+     *
+     * @return array<mixed>
+     */
+    private function transformData(array $normalizedData): array
     {
         $topNodeName = array_key_first($normalizedData);
         $data = array_filter(
