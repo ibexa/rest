@@ -334,9 +334,4 @@ class Json extends Generator
     {
         return [];
     }
-
-    public function transformData(array $normalizedData): array
-    {
-        return $normalizedData;
-    }
 }
