@@ -8,10 +8,11 @@
 namespace Ibexa\Tests\Rest\Output;
 
 use Ibexa\Contracts\Rest\Output\Visitor;
+use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Ibexa\Rest\Output\Generator;
-use Ibexa\Rest\RequestParser;
 use Ibexa\Tests\Rest\AssertXmlTagTrait;
 use Ibexa\Tests\Rest\Server;
+use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -35,11 +36,6 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     protected $generator;
 
     /**
-     * @var \Ibexa\Rest\RequestParser
-     */
-    protected $requestParser;
-
-    /**
      * @var \Symfony\Component\Routing\RouterInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $routerMock;
@@ -54,6 +50,8 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
 
     /** @var int */
     private $templatedRouterCallIndex = 0;
+
+    private UriParserInterface&MockObject $uriParser;
 
     /**
      * Gets the visitor mock.
@@ -133,23 +131,20 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     protected function getVisitor()
     {
         $visitor = $this->internalGetVisitor();
-        $visitor->setRequestParser($this->getRequestParser());
+        $visitor->setUriParser($this->getUriParser());
         $visitor->setRouter($this->getRouterMock());
         $visitor->setTemplateRouter($this->getTemplatedRouterMock());
 
         return $visitor;
     }
 
-    /**
-     * @return \Ibexa\Rest\RequestParser|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getRequestParser()
+    protected function getUriParser(): UriParserInterface&MockObject
     {
-        if (!isset($this->requestParser)) {
-            $this->requestParser = $this->createMock(RequestParser::class);
+        if (!isset($this->uriParser)) {
+            $this->uriParser = $this->createMock(UriParserInterface::class);
         }
 
-        return $this->requestParser;
+        return $this->uriParser;
     }
 
     /**

@@ -81,11 +81,6 @@ parameters:
 			path: src/bundle/EventListener/UserCheckRequestListener.php
 
 		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\RequestParser\\\\Router\\:\\:generate\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/bundle/RequestParser/Router.php
-
-		-
 			message: "#^Call to method mapCollection\\(\\) on an unknown class Ibexa\\\\Bundle\\\\Rest\\\\Routing\\\\RouteCollectionMapperMapper\\.$#"
 			count: 1
 			path: src/bundle/Routing/OptionsLoader.php
@@ -351,11 +346,6 @@ parameters:
 			path: src/contracts/Output/Generator.php
 
 		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\ValueObjectVisitor\\:\\:setRequestParser\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/ValueObjectVisitor.php
-
-		-
 			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\ValueObjectVisitor\\:\\:setRouter\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/contracts/Output/ValueObjectVisitor.php
@@ -509,11 +499,6 @@ parameters:
 			message: "#^Method Ibexa\\\\Rest\\\\FieldTypeProcessorRegistry\\:\\:registerProcessor\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/FieldTypeProcessorRegistry.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Input\\\\BaseParser\\:\\:setRequestParser\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Input/BaseParser.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Input\\\\Dispatcher\\:\\:addHandler\\(\\) has no return type specified\\.$#"
@@ -936,67 +921,12 @@ parameters:
 			path: src/lib/Output/ValueObjectVisitor/ContentObjectStates.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\RequestParser\\:\\:generate\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/RequestParser.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\RequestParser\\:\\:parse\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/RequestParser.php
-
-		-
-			message: "#^Property Ibexa\\\\Rest\\\\RequestParser\\\\EzPublish\\:\\:\\$map type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/RequestParser/EzPublish.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\RequestParser\\\\Pattern\\:\\:__construct\\(\\) has parameter \\$map with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/RequestParser/Pattern.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\RequestParser\\\\Pattern\\:\\:addPattern\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/RequestParser/Pattern.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\RequestParser\\\\Pattern\\:\\:generate\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/RequestParser/Pattern.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\RequestParser\\\\Pattern\\:\\:parse\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/RequestParser/Pattern.php
-
-		-
-			message: "#^PHPDoc tag @param references unknown parameter\\: \\$type$#"
-			count: 1
-			path: src/lib/RequestParser/Pattern.php
-
-		-
-			message: "#^Property Ibexa\\\\Rest\\\\RequestParser\\\\Pattern\\:\\:\\$compileCache type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/RequestParser/Pattern.php
-
-		-
-			message: "#^Property Ibexa\\\\Rest\\\\RequestParser\\\\Pattern\\:\\:\\$map type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/RequestParser/Pattern.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\:\\:setInputDispatcher\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Controller.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\:\\:setRepository\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\:\\:setRequestParser\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Controller.php
 
@@ -1047,11 +977,6 @@ parameters:
 
 		-
 			message: "#^Cannot call method handle\\(\\) on object\\|null\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/Content.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\Content\\:\\:createView\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestExecutedView but returns Symfony\\\\Component\\\\HttpFoundation\\\\Response\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Content.php
 
@@ -1252,7 +1177,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$contentTypeGroupId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentTypeService\\:\\:loadContentTypeGroup\\(\\) expects int, string given\\.$#"
-			count: 1
+			count: 2
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
@@ -1271,17 +1196,17 @@ parameters:
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
-			message: "#^Parameter \\#1 \\$href of method Ibexa\\\\Rest\\\\RequestParser\\:\\:parseHref\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/ContentType.php
-
-		-
 			message: "#^Parameter \\#1 \\$identifier of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentTypeService\\:\\:loadContentTypeByIdentifier\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
 			message: "#^Parameter \\#1 \\$remoteId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentTypeService\\:\\:loadContentTypeByRemoteId\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: "#^Parameter \\#1 \\$uri of method Ibexa\\\\Contracts\\\\Rest\\\\UriParser\\\\UriParserInterface\\:\\:getAttributeFromUri\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/ContentType.php
 
@@ -1326,22 +1251,17 @@ parameters:
 			path: src/lib/Server/Controller/Location.php
 
 		-
-			message: "#^Parameter \\#1 \\$href of method Ibexa\\\\Rest\\\\RequestParser\\:\\:parseHref\\(\\) expects string, string\\|null given\\.$#"
-			count: 3
-			path: src/lib/Server/Controller/Location.php
-
-		-
-			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string given\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/Location.php
-
-		-
 			message: "#^Parameter \\#1 \\$remoteId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocationByRemoteId\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Location.php
 
 		-
-			message: "#^Parameter \\#1 \\$url of method Ibexa\\\\Rest\\\\RequestParser\\:\\:parse\\(\\) expects string, string\\|null given\\.$#"
+			message: "#^Parameter \\#1 \\$uri of method Ibexa\\\\Contracts\\\\Rest\\\\UriParser\\\\UriParserInterface\\:\\:getAttributeFromUri\\(\\) expects string, string\\|null given\\.$#"
+			count: 3
+			path: src/lib/Server/Controller/Location.php
+
+		-
+			message: "#^Parameter \\#1 \\$uri of method Ibexa\\\\Contracts\\\\Rest\\\\UriParser\\\\UriParserInterface\\:\\:matchUri\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Location.php
 
@@ -1646,12 +1566,12 @@ parameters:
 			path: src/lib/Server/Controller/Trash.php
 
 		-
-			message: "#^Parameter \\#1 \\$href of method Ibexa\\\\Rest\\\\RequestParser\\:\\:parseHref\\(\\) expects string, string\\|null given\\.$#"
+			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Trash.php
 
 		-
-			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string given\\.$#"
+			message: "#^Parameter \\#1 \\$uri of method Ibexa\\\\Contracts\\\\Rest\\\\UriParser\\\\UriParserInterface\\:\\:getAttributeFromUri\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Trash.php
 
@@ -1722,16 +1642,6 @@ parameters:
 
 		-
 			message: "#^Expression \"\\$this\\-\\>loadUsers\\(\\$request\\)\\-\\>users\" on a separate line does not do anything\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Parameter \\#1 \\$href of method Ibexa\\\\Rest\\\\RequestParser\\:\\:parseHref\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: "#^Parameter \\#1 \\$id of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\UserService\\:\\:loadUserGroup\\(\\) expects int, string given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/User.php
 
@@ -1936,6 +1846,11 @@ parameters:
 			path: src/lib/Server/Input/Parser/ContentCreate.php
 
 		-
+			message: "#^Parameter \\#1 \\$contentTypeId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentTypeService\\:\\:loadContentType\\(\\) expects int, string given\\.$#"
+			count: 1
+			path: src/lib/Server/Input/Parser/ContentCreate.php
+
+		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\ContentTypeCreate\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/ContentTypeCreate.php
@@ -1992,11 +1907,6 @@ parameters:
 
 		-
 			message: "#^Possibly invalid array key type \\(array\\<int, string\\>\\|string\\)\\.$#"
-			count: 2
-			path: src/lib/Server/Input/Parser/Criterion.php
-
-		-
-			message: "#^Property Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\:\\:\\$criterionIdMap type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion.php
 
@@ -2221,6 +2131,11 @@ parameters:
 			path: src/lib/Server/Input/Parser/FieldDefinitionUpdate.php
 
 		-
+			message: "#^Parameter \\#1 \\$contentTypeId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentTypeService\\:\\:loadContentTypeDraft\\(\\) expects int, string given\\.$#"
+			count: 1
+			path: src/lib/Server/Input/Parser/FieldDefinitionUpdate.php
+
+		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Limitation\\\\PathStringRouteBasedLimitationParser\\:\\:parseIdFromHref\\(\\) has parameter \\$limitationValue with no type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Limitation/PathStringRouteBasedLimitationParser.php
@@ -2406,7 +2321,17 @@ parameters:
 			path: src/lib/Server/Input/Parser/UserCreate.php
 
 		-
+			message: "#^Parameter \\#1 \\$contentTypeId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentTypeService\\:\\:loadContentType\\(\\) expects int, string given\\.$#"
+			count: 1
+			path: src/lib/Server/Input/Parser/UserCreate.php
+
+		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\UserGroupCreate\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/Server/Input/Parser/UserGroupCreate.php
+
+		-
+			message: "#^Parameter \\#1 \\$contentTypeId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentTypeService\\:\\:loadContentType\\(\\) expects int, string given\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/UserGroupCreate.php
 
@@ -5471,16 +5396,6 @@ parameters:
 			path: tests/bundle/Functional/ViewTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\RequestParser\\\\RouterTest\\:\\:getRouterMock\\(\\) should return PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\Routing\\\\RouterInterface but returns Symfony\\\\Component\\\\Routing\\\\RouterInterface\\.$#"
-			count: 1
-			path: tests/bundle/RequestParser/RouterTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\RequestParser\\\\RouterTest\\:\\:\\$routePrefix has no type specified\\.$#"
-			count: 1
-			path: tests/bundle/RequestParser/RouterTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Routing\\\\OptionsLoader\\\\MapperTest\\:\\:testGetOptionsRouteName\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/bundle/Routing/OptionsLoader/MapperTest.php
@@ -5666,27 +5581,12 @@ parameters:
 			path: tests/lib/FieldTypeProcessor/DateProcessorTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\ImageProcessorTest\\:\\:getRouterMock\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\ImageProcessorTest\\:\\:getVariations\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\ImageProcessorTest\\:\\:testPostProcessValueHash\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\ImageProcessorTest\\:\\:\\$requestParser \\(Ibexa\\\\Rest\\\\RequestParser\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Symfony\\\\Component\\\\Routing\\\\RouterInterface\\.$#"
-			count: 1
-			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\FieldTypeProcessor\\\\ImageProcessorTest\\:\\:\\$requestParser \\(Ibexa\\\\Rest\\\\RequestParser\\) in isset\\(\\) is not nullable\\.$#"
 			count: 1
 			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
 
@@ -6626,11 +6526,6 @@ parameters:
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorBaseTest\\:\\:getRequestParser\\(\\) should return Ibexa\\\\Rest\\\\RequestParser&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject but returns Ibexa\\\\Rest\\\\RequestParser\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorBaseTest\\:\\:getVisitor\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
@@ -6652,11 +6547,6 @@ parameters:
 
 		-
 			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorBaseTest\\:\\:\\$generator \\(Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\) in isset\\(\\) is not nullable\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorBaseTest\\:\\:\\$requestParser \\(Ibexa\\\\Rest\\\\RequestParser\\) in isset\\(\\) is not nullable\\.$#"
 			count: 1
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
@@ -6776,11 +6666,6 @@ parameters:
 			path: tests/lib/Output/VisitorTest.php
 
 		-
-			message: "#^Call to method setRequestParser\\(\\) on an unknown class Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Base\\.$#"
-			count: 1
-			path: tests/lib/Server/Input/Parser/BaseTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\BaseTest\\:\\:getParseHrefExpectationsMap\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/lib/Server/Input/Parser/BaseTest.php
@@ -6791,22 +6676,12 @@ parameters:
 			path: tests/lib/Server/Input/Parser/BaseTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\BaseTest\\:\\:internalGetParser\\(\\) has invalid return type Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Base\\.$#"
-			count: 1
-			path: tests/lib/Server/Input/Parser/BaseTest.php
-
-		-
 			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\BaseTest\\:\\:\\$parserTools \\(Ibexa\\\\Rest\\\\Input\\\\ParserTools\\) in isset\\(\\) is not nullable\\.$#"
 			count: 1
 			path: tests/lib/Server/Input/Parser/BaseTest.php
 
 		-
 			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\BaseTest\\:\\:\\$parsingDispatcherMock \\(Ibexa\\\\Contracts\\\\Rest\\\\Input\\\\ParsingDispatcher&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\) in isset\\(\\) is not nullable\\.$#"
-			count: 1
-			path: tests/lib/Server/Input/Parser/BaseTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\BaseTest\\:\\:\\$requestParserMock \\(Ibexa\\\\Rest\\\\RequestParser&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\) in isset\\(\\) is not nullable\\.$#"
 			count: 1
 			path: tests/lib/Server/Input/Parser/BaseTest.php
 
@@ -7338,16 +7213,6 @@ parameters:
 		-
 			message: "#^Call to an undefined method Ibexa\\\\Contracts\\\\Rest\\\\Input\\\\ParsingDispatcher\\:\\:expects\\(\\)\\.$#"
 			count: 6
-			path: tests/lib/Server/Input/Parser/QueryParserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\QueryParserTest\\:\\:internalGetParser\\(\\) has invalid return type Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Base\\.$#"
-			count: 1
-			path: tests/lib/Server/Input/Parser/QueryParserTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\QueryParserTest\\:\\:internalGetParser\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Base but returns Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\ContentQuery\\.$#"
-			count: 1
 			path: tests/lib/Server/Input/Parser/QueryParserTest.php
 
 		-
@@ -9664,83 +9529,3 @@ parameters:
 			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\VersionTest\\:\\:\\$fieldTypeSerializerMock has no type specified\\.$#"
 			count: 1
 			path: tests/lib/Server/Output/ValueObjectVisitor/VersionTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:getParseValues\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testGenerateMissingValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testGenerateSuperfluousValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testGenerateUnknownUrlType\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testGenerateUrl\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testGenerateUrl\\(\\) has parameter \\$type with no type specified\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testGenerateUrl\\(\\) has parameter \\$url with no type specified\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testGenerateUrl\\(\\) has parameter \\$values with no type specified\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testParseInvalidPattern\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testParseUnknownUrlType\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testParseUrl\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testParseUrl\\(\\) has parameter \\$type with no type specified\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testParseUrl\\(\\) has parameter \\$url with no type specified\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testParseUrl\\(\\) has parameter \\$values with no type specified\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testPatternDoesNotMatch\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\UrlHandler\\\\PatternTest\\:\\:testPatternDoesNotMatchTrailing\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/UrlHandler/PatternTest.php

@@ -71,7 +71,6 @@ class HttpOptionsTest extends TestCase
             ['/content/objects/1/currentversion', ['POST'], 'CreateDraftFromCurrentVersionInput+json'],
             ['/content/objects/1/currentversion', ['GET', 'COPY']],
             ['/content/binary/images/1-2-3/variations/123', ['GET']],
-            ['/content/views', ['POST']],
             ['/views', ['POST', 'GET']],
             ['/views/1', ['GET']],
             ['/views/1/results', ['GET']],

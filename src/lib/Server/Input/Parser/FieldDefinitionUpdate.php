@@ -161,8 +161,8 @@ class FieldDefinitionUpdate extends BaseParser
      */
     protected function getFieldDefinition(array $data)
     {
-        $contentTypeId = $this->requestParser->parseHref($data['__url'], 'contentTypeId');
-        $fieldDefinitionId = $this->requestParser->parseHref($data['__url'], 'fieldDefinitionId');
+        $contentTypeId = $this->uriParser->getAttributeFromUri($data['__url'], 'contentTypeId');
+        $fieldDefinitionId = $this->uriParser->getAttributeFromUri($data['__url'], 'fieldDefinitionId');
 
         $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
         foreach ($contentTypeDraft->getFieldDefinitions() as $fieldDefinition) {

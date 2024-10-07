@@ -69,28 +69,14 @@ class Role extends RestController
         $this->locationService = $locationService;
     }
 
-    /**
-     * Create new role.
-     *
-     * Defaults to publishing the role, but you can create a draft instead by setting the POST parameter publish=false
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedRole
-     */
-    public function createRole(Request $request)
+    public function createRole(Request $request): Values\CreatedRole
     {
-        $publish = (
-            !$request->query->has('publish') ||
-            ($request->query->has('publish') && $request->query->get('publish') === 'true')
-        );
-
         try {
             $roleDraft = $this->roleService->createRole(
                 $this->inputDispatcher->parse(
                     new Message(
                         [
                             'Content-Type' => $request->headers->get('Content-Type'),
-                            // @todo Needs refactoring! Temporary solution so parser has access to get parameters
-                            '__publish' => $publish,
                         ],
                         $request->getContent()
                     )
@@ -104,20 +90,6 @@ class Role extends RestController
             throw new BadRequestException($e->getMessage());
         } catch (Exceptions\Parser $e) {
             throw new BadRequestException($e->getMessage());
-        }
-
-        if ($publish) {
-            @trigger_error(
-                "Create and publish role in the same operation is deprecated, and will be removed in the future.\n" .
-                'Instead, publish the role draft using Role::publishRoleDraft().',
-                E_USER_DEPRECATED
-            );
-
-            $this->roleService->publishRoleDraft($roleDraft);
-
-            $role = $this->roleService->loadRole($roleDraft->id);
-
-            return new Values\CreatedRole(['role' => new Values\RestRole($role)]);
         }
 
         return new Values\CreatedRole(['role' => new Values\RestRole($roleDraft)]);
@@ -163,7 +135,7 @@ class Role extends RestController
         $roles = [];
         if ($request->query->has('identifier')) {
             try {
-                $role = $this->roleService->loadRoleByIdentifier($request->query->get('identifier'));
+                $role = $this->roleService->loadRoleByIdentifier((string)$request->query->get('identifier'));
                 $roles[] = $role;
             } catch (APINotFoundException $e) {
                 // Do nothing

@@ -9,7 +9,7 @@ namespace Ibexa\Contracts\Rest\Output;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation;
-use Ibexa\Rest\RequestParser;
+use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -17,12 +17,7 @@ use Symfony\Component\Routing\RouterInterface;
  */
 abstract class ValueObjectVisitor
 {
-    /**
-     * URL handler for URL generation.
-     *
-     * @var \Ibexa\Rest\RequestParser
-     */
-    protected $requestParser;
+    protected UriParserInterface $uriParser;
 
     /**
      * @var \Symfony\Component\Routing\RouterInterface
@@ -56,9 +51,9 @@ abstract class ValueObjectVisitor
         $this->templateRouter = $templateRouter;
     }
 
-    public function setRequestParser(RequestParser $requestParser)
+    public function setUriParser(UriParserInterface $uriParser): void
     {
-        $this->requestParser = $requestParser;
+        $this->uriParser = $uriParser;
     }
 
     /**
