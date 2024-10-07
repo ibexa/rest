@@ -17,7 +17,9 @@ use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\RoleService;
 use Ibexa\Contracts\Core\Repository\SectionService;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\Content\DraftList\ContentDraftListItemInterface;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
+use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Contracts\Core\Repository\Values\User\User as RepositoryUser;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroupRoleAssignment;
 use Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment;
@@ -577,11 +579,17 @@ final class User extends RestController
      */
     public function loadUserDrafts(int $userId, Request $request): Values\VersionList
     {
-        $contentDrafts = $this->contentService->loadContentDrafts(
+        $contentDrafts = $this->contentService->loadContentDraftList(
             $this->userService->loadUser($userId)
         );
 
-        return new Values\VersionList($contentDrafts, $request->getPathInfo());
+        return new Values\VersionList(
+            array_filter(array_map(
+                static fn (ContentDraftListItemInterface $draftListItem): ?VersionInfo => $draftListItem->getVersionInfo(),
+                $contentDrafts->items
+            )),
+            $request->getPathInfo()
+        );
     }
 
     /**
