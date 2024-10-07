@@ -406,7 +406,7 @@ final class User extends RestController
         try {
             if ($request->query->has('roleId')) {
                 $restUsers = $this->loadUsersAssignedToRole(
-                    $this->uriParser->getAttributeFromUri($request->query->get('roleId'), 'roleId')
+                    $this->uriParser->getAttributeFromUri((string)$request->query->get('roleId'), 'roleId')
                 );
             } elseif ($request->query->has('remoteId')) {
                 $restUsers = [
