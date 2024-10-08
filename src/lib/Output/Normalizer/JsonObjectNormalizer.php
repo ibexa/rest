@@ -25,8 +25,6 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
     {
         $vars = get_object_vars($object);
 
-        unset($vars['_ref_parent']);
-
         foreach ($vars as $name => $value) {
             $vars[$name] = $this->normalizer->normalize($value, $format, $context);
         }

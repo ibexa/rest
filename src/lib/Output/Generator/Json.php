@@ -143,7 +143,7 @@ class Json extends Generator
 
         $object = new Json\JsonObject($this->json);
 
-        if ($this->json instanceof Json\ArrayObject) {
+        if ($this->json instanceof Json\ArrayObject || $this->json instanceof Data\ArrayList) {
             $this->json->append($object);
             $this->json = $object;
         } else {
