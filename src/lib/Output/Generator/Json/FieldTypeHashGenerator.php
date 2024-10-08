@@ -105,7 +105,7 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
     {
         $arrayObject = new ArrayObject($parent);
         foreach ($listArray as $listItem) {
-            $arrayObject[] = $this->generateValue($arrayObject, $listItem);
+            $arrayObject->append($this->generateValue($arrayObject, $listItem));
         }
 
         return $arrayObject;
