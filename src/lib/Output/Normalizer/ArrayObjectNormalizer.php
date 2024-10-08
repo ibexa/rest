@@ -21,8 +21,6 @@ final class ArrayObjectNormalizer implements NormalizerInterface
     {
         $data = get_object_vars($object);
 
-        unset($data['_ref_parent']);
-
         foreach ($data as $key => $value) {
             $data[$key] = $this->normalize($value, $format, $context);
         }
