@@ -441,7 +441,7 @@ abstract class Generator
     {
         throw new \LogicException(sprintf(
             '%s does not maintain state',
-            get_class($this),
+            static::class,
         ));
     }
 

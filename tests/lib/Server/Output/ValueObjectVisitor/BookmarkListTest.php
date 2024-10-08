@@ -94,6 +94,7 @@ class BookmarkListTest extends ValueObjectVisitorBaseTest
         $document->loadXML($result);
         $xpath = new DOMXPath($document);
 
+        dump($result);
         self::assertEquals(count($this->data->items), $xpath->query($query)->length);
     }
 
