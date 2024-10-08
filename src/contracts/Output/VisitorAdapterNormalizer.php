@@ -102,12 +102,18 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
 
         $generator->endDocument($object);
 
-        $normalizedData = $generator->toArray();
-        $encoderContext = $generator->getEncoderContext($normalizedData);
+        $data = $generator->getData();
 
-        $normalizedData[self::ENCODER_CONTEXT] = $encoderContext;
+        return $this->normalizer->normalize($data, $format, $context + [
+            self::CALLED_CONTEXT => true,
+        ]);
 
-        return $normalizedData;
+        // $encoderContext = $generator->getEncoderContext($normalizedData);
+        // $normalizedData = $generator->toArray();
+
+        // $normalizedData[self::ENCODER_CONTEXT] = $encoderContext;
+
+        // return $normalizedData;
     }
 
     private function createGenerator(string $format): Generator

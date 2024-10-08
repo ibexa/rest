@@ -422,6 +422,14 @@ abstract class Generator
      */
     abstract public function toArray(): array;
 
+    public function getData(): object
+    {
+        throw new \LogicException(sprintf(
+            '%s does not maintain state',
+            get_class($this),
+        ));
+    }
+
     /**
      * @param array<mixed> $data
      *
