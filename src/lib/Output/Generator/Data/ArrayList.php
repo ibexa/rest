@@ -15,7 +15,7 @@ final class ArrayList extends \ArrayObject
 
     public function __construct(
         string $name,
-        object $parent
+        ?object $parent = null
     ) {
         $this->name = $name;
         $this->parent = $parent;
@@ -28,15 +28,5 @@ final class ArrayList extends \ArrayObject
     public function getParent(): object
     {
         return $this->parent;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): void
-    {
-        $this->name = $name;
     }
 }
