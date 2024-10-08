@@ -8,7 +8,11 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Output\Generator\InMemory;
 
+use Ibexa\Rest\Output\Generator\Data;
 use Ibexa\Rest\Output\Generator\Json;
+use Ibexa\Rest\Output\Normalizer\ArrayListNormalizer;
+use Ibexa\Rest\Output\Normalizer\ArrayObjectNormalizer;
+use Ibexa\Rest\Output\Normalizer\JsonObjectNormalizer;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
@@ -18,6 +22,16 @@ final class Xml extends Json
     public function getMediaType($name): string
     {
         return $this->generateMediaTypeWithVendor($name, 'xml', $this->vendor);
+    }
+
+    #[\Override]
+    public function startList($name): void
+    {
+        $this->checkStartList($name);
+        $array = new Data\ArrayList($name, $this->json);
+
+        $this->json->$name = $array;
+        $this->json = $array;
     }
 
     /**
@@ -47,12 +61,12 @@ final class Xml extends Json
             foreach ($attributes as $attributeName => $attributeValue) {
                 $jsonValue->{'@' . $attributeName} = $attributeValue;
             }
-            /** @phpstan-ignore-next-line */
+
             $jsonValue->{'#'} = $value;
         }
 
         if ($this->json instanceof Json\ArrayObject) {
-            $this->json[] = $jsonValue;
+            $this->json->append($jsonValue);
         } else {
             $this->json->$name = $jsonValue;
         }
@@ -69,12 +83,22 @@ final class Xml extends Json
 
         $normalizedData = $this->toArray();
 
-        $encoderContext = $this->getEncoderContext($normalizedData);
+        $data = $this->getData();
+
+        $encoderContext = [];
+        // $encoderContext = $this->getEncoderContext($normalizedData);
         $encoderContext['as_collection'] = true;
 
-        $serializer = new Serializer([new ObjectNormalizer()], [new XmlEncoder()]);
+        $normalizers = [
+            new ArrayListNormalizer(),
+            new JsonObjectNormalizer(),
+            new ArrayObjectNormalizer(),
+            new ObjectNormalizer(),
+        ];
+        $encoders = [new XmlEncoder()];
+        $serializer = new Serializer($normalizers, $encoders);
 
-        return $serializer->encode($normalizedData, 'xml', $encoderContext);
+        return $serializer->serialize($data, 'xml', $encoderContext);
     }
 
     public function toArray(): array
