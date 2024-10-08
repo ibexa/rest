@@ -81,8 +81,6 @@ final class Xml extends Json
     {
         parent::endDocument($data);
 
-        $normalizedData = $this->toArray();
-
         $data = $this->getData();
 
         if (!$data instanceof Json\JsonObject) {
