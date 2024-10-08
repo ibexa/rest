@@ -334,7 +334,7 @@ class Json extends Generator
         return $this->json;
     }
 
-    public function getEncoderContext(array $data): array
+    protected function getEncoderContext(array $data): array
     {
         return [];
     }

@@ -450,5 +450,5 @@ abstract class Generator
      *
      * @return array<mixed>
      */
-    abstract public function getEncoderContext(array $data): array;
+    abstract protected function getEncoderContext(array $data): array;
 }
