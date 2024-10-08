@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Output\Normalizer;
 
+use Ibexa\Rest\Output\Generator\Data\ArrayList;
 use Ibexa\Rest\Output\Generator\Json\JsonObject;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
@@ -25,8 +26,14 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
     {
         $vars = get_object_vars($object);
 
-        foreach ($vars as $name => $value) {
-            $vars[$name] = $this->normalizer->normalize($value, $format, $context);
+        foreach ($vars as $key => $value) {
+            if ($value instanceof ArrayList) {
+                $name = $value->getName();
+                unset($vars[$key]);
+                $vars[$name] = $this->normalizer->normalize($value, $format, $context);
+            } else {
+                $vars[$key] = $this->normalizer->normalize($value, $format, $context);
+            }
         }
 
         return $vars;
