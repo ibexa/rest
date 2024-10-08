@@ -324,11 +324,6 @@ class Json extends Generator
         return (bool)$boolValue;
     }
 
-    public function toArray(): array
-    {
-        return json_decode(json_encode($this->json, JSON_THROW_ON_ERROR), true, JSON_THROW_ON_ERROR);
-    }
-
     public function getData(): object
     {
         return $this->json;

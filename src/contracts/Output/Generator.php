@@ -417,11 +417,6 @@ abstract class Generator
      */
     abstract public function serializeBool($boolValue);
 
-    /**
-     * @return array<mixed>
-     */
-    abstract public function toArray(): array;
-
     public function getData(): object
     {
         throw new \LogicException(sprintf(
