@@ -85,8 +85,12 @@ final class Xml extends Json
 
         $data = $this->getData();
 
-        $encoderContext = [];
-        // $encoderContext = $this->getEncoderContext($normalizedData);
+        if (!$data instanceof Json\JsonObject) {
+            throw new \LogicException('Expected an instance of JsonObject');
+        }
+
+        $vars = get_object_vars($data);
+        $encoderContext = $this->getEncoderContext($vars);
         $encoderContext['as_collection'] = true;
 
         $normalizers = [
@@ -152,7 +156,7 @@ final class Xml extends Json
         return $array;
     }
 
-    public function getEncoderContext(array $data): array
+    protected function getEncoderContext(array $data): array
     {
         return [
             XmlEncoder::ROOT_NODE_NAME => array_key_first($data),
