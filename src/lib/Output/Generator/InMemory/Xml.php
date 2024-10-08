@@ -103,14 +103,6 @@ final class Xml extends Json
         return $serializer->serialize($data, 'xml', $encoderContext);
     }
 
-    public function toArray(): array
-    {
-        $data = parent::toArray();
-        $this->transformData($data);
-
-        return $data;
-    }
-
     /**
      * @param array<mixed> $normalizedData
      *
