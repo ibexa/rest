@@ -431,11 +431,4 @@ abstract class Generator
      * @return array<mixed>
      */
     abstract public function getEncoderContext(array $data): array;
-
-    /**
-     * @param array<mixed> $data
-     *
-     * @return array<mixed>
-     */
-    abstract public function transformDataForEncoder(array $data): array;
 }

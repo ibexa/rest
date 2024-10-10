@@ -274,9 +274,4 @@ class Xml extends Generator
     {
         return [];
     }
-
-    public function transformDataForEncoder(array $data): array
-    {
-        return $data;
-    }
 }

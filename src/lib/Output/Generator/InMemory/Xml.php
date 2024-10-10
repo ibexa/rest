@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Output\Generator\InMemory;
 
+use Ibexa\Contracts\Rest\Output\VisitorAdapterNormalizer;
 use Ibexa\Rest\Output\Generator\Data;
 use Ibexa\Rest\Output\Generator\Data\ArrayList;
 use Ibexa\Rest\Output\Generator\Json;
@@ -91,6 +92,7 @@ final class Xml extends Json
         $vars = get_object_vars($data);
         $encoderContext = $this->getEncoderContext($vars);
         $encoderContext['as_collection'] = true;
+        $encoderContext[VisitorAdapterNormalizer::OUTER_ELEMENT] = true;
 
         $normalizers = [
             new ArrayListNormalizer(),
@@ -101,10 +103,7 @@ final class Xml extends Json
         $encoders = [new XmlEncoder()];
         $serializer = new Serializer($normalizers, $encoders);
 
-        $normalizedData = $serializer->normalize($data, 'xml');
-        $normalizedData = $this->transformDataForEncoder($normalizedData);
-
-        return $serializer->encode($normalizedData, 'xml', $encoderContext);
+        return $serializer->serialize($data, 'xml', $encoderContext);
     }
 
     public function getEncoderContext(array $data): array
@@ -112,19 +111,5 @@ final class Xml extends Json
         return [
             XmlEncoder::ROOT_NODE_NAME => array_key_first($data),
         ];
-    }
-
-    public function transformDataForEncoder(array $data): array
-    {
-        $firstKey = array_key_first($data);
-
-        if ($firstKey === null) {
-            return $data;
-        }
-
-        $data['#'] = $data[$firstKey];
-        unset($data[$firstKey]);
-
-        return $data;
     }
 }

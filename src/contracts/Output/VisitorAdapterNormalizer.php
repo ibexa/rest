@@ -22,6 +22,8 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
 
     public const string ENCODER_CONTEXT = 'ENCODER_CONTEXT';
 
+    public const string OUTER_ELEMENT = 'outer_element';
+
     public function __construct(
         private readonly ValueObjectVisitorResolverInterface $valueObjectVisitorResolver,
     ) {
@@ -104,11 +106,28 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
 
         $data = $generator->getData();
 
-        $normalizedData = $this->normalizer->normalize($data, $format, $context + [
-            self::CALLED_CONTEXT => true,
-        ]);
-        $normalizedData = $generator->transformDataForEncoder($normalizedData);
+        $normalizedData = $this->normalizer->normalize(
+            $data,
+            $format,
+            $this->buildContext($context, $format),
+        );
 
         return $normalizedData + [self::ENCODER_CONTEXT => $generator->getEncoderContext(get_object_vars($data))];
+    }
+
+    /**
+     * @param array<mixed> $context
+     *
+     * @return array<mixed>
+     */
+    private function buildContext(array $context, ?string $format): array
+    {
+        $context += [self::CALLED_CONTEXT => true];
+
+        if ($format === 'xml') {
+            $context += [self::OUTER_ELEMENT => true, 'as_collection' => true];
+        }
+
+        return $context;
     }
 }
