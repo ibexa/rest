@@ -30,6 +30,9 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
         foreach ($vars as $key => $value) {
             if ($value instanceof ArrayList) {
                 $name = $value->getName();
+                if ($value->count() === 0) {
+                    continue;
+                }
                 $data[$name] = $this->normalizer->normalize($value, $format, $context);
             } else {
                 $data[$key] = $this->normalizer->normalize($value, $format, $context);
