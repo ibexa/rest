@@ -91,7 +91,6 @@ final class Xml extends Json
         $vars = get_object_vars($data);
         $encoderContext = $this->getEncoderContext($vars);
         $encoderContext['as_collection'] = true;
-        $encoderContext['outer_element'] = true;
 
         $normalizers = [
             new ArrayListNormalizer(),
@@ -102,13 +101,30 @@ final class Xml extends Json
         $encoders = [new XmlEncoder()];
         $serializer = new Serializer($normalizers, $encoders);
 
-        return $serializer->serialize($data, 'xml', $encoderContext);
+        $normalizedData = $serializer->normalize($data, 'xml');
+        $normalizedData = $this->transformDataForEncoder($normalizedData);
+
+        return $serializer->encode($normalizedData, 'xml', $encoderContext);
     }
 
-    protected function getEncoderContext(array $data): array
+    public function getEncoderContext(array $data): array
     {
         return [
             XmlEncoder::ROOT_NODE_NAME => array_key_first($data),
         ];
+    }
+
+    public function transformDataForEncoder(array $data): array
+    {
+        $firstKey = array_key_first($data);
+
+        if ($firstKey === null) {
+            return $data;
+        }
+
+        $data['#'] = $data[$firstKey];
+        unset($data[$firstKey]);
+
+        return $data;
     }
 }

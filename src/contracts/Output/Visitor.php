@@ -71,9 +71,13 @@ class Visitor
      */
     public function visit(mixed $data): Response
     {
-        $normalizedData = $this->normalizer->normalize($data, $this->format, ['visitor' => $this]);
-        $encoderContext = [];
+        $normalizedData = $this->normalizer->normalize(
+            $data,
+            $this->format,
+            ['visitor' => $this],
+        );
 
+        $encoderContext = [];
         if (isset($normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT])) {
             $encoderContext = $normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT];
             unset($normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT]);

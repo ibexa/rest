@@ -430,7 +430,6 @@ services:
 
     Ibexa\Contracts\Rest\Output\VisitorAdapterNormalizer:
         arguments:
-            $encoder: '@ibexa.rest.serializer.encoder.json'
             $valueObjectVisitorResolver: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver'
         tags:
             - { name: ibexa.rest.serializer.normalizer, priority: -1000 }
