@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Output\Generator\InMemory;
 
 use Ibexa\Rest\Output\Generator\Data;
+use Ibexa\Rest\Output\Generator\Data\ArrayList;
 use Ibexa\Rest\Output\Generator\Json;
 use Ibexa\Rest\Output\Normalizer\ArrayListNormalizer;
 use Ibexa\Rest\Output\Normalizer\ArrayObjectNormalizer;
@@ -65,7 +66,7 @@ final class Xml extends Json
             $jsonValue->{'#'} = $value;
         }
 
-        if ($this->json instanceof Json\ArrayObject) {
+        if ($this->json instanceof Json\ArrayObject || $this->json instanceof ArrayList) {
             $this->json->append($jsonValue);
         } else {
             $this->json->$name = $jsonValue;
@@ -90,6 +91,7 @@ final class Xml extends Json
         $vars = get_object_vars($data);
         $encoderContext = $this->getEncoderContext($vars);
         $encoderContext['as_collection'] = true;
+        $encoderContext['outer_element'] = true;
 
         $normalizers = [
             new ArrayListNormalizer(),
@@ -101,49 +103,6 @@ final class Xml extends Json
         $serializer = new Serializer($normalizers, $encoders);
 
         return $serializer->serialize($data, 'xml', $encoderContext);
-    }
-
-    /**
-     * @param array<mixed> $normalizedData
-     *
-     * @return array<mixed>
-     */
-    private function transformData(array $normalizedData): array
-    {
-        $topNodeName = array_key_first($normalizedData);
-        $data = array_filter(
-            $normalizedData[$topNodeName] ?? [],
-            static fn (string $key): bool => str_starts_with($key, '@'),
-            ARRAY_FILTER_USE_KEY,
-        );
-
-        if ($topNodeName !== null) {
-            $data['#'] = $normalizedData[$topNodeName];
-        }
-
-        return $this->clearEmptyArrays($data);
-    }
-
-    /**
-     * @param array<mixed> $array
-     *
-     * @return array<mixed>
-     */
-    private function clearEmptyArrays(array &$array): array
-    {
-        foreach ($array as $key => &$value) {
-            if (is_array($value)) {
-                // Recursively apply the function to the nested array
-                $this->clearEmptyArrays($value);
-
-                // Remove the field if it's an empty array after recursion
-                if (empty($value)) {
-                    unset($array[$key]);
-                }
-            }
-        }
-
-        return $array;
     }
 
     protected function getEncoderContext(array $data): array
