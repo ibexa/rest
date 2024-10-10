@@ -26,16 +26,13 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
     {
         $vars = get_object_vars($object);
 
-        $isOuterElement = $context['outer_element'] ?? false;
-        unset($context['outer_element']);
-
         $data = [];
         foreach ($vars as $key => $value) {
             if ($value instanceof ArrayList) {
                 $name = $value->getName();
                 $data[$name] = $this->normalizer->normalize($value, $format, $context);
             } else {
-                $data[$isOuterElement && count($vars) === 1 ? '#' : $key] = $this->normalizer->normalize($value, $format, $context);
+                $data[$key] = $this->normalizer->normalize($value, $format, $context);
             }
         }
 

@@ -335,8 +335,13 @@ class Json extends Generator
         return $this->json;
     }
 
-    protected function getEncoderContext(array $data): array
+    public function getEncoderContext(array $data): array
     {
         return [];
+    }
+
+    public function transformDataForEncoder(array $data): array
+    {
+        return $data;
     }
 }
