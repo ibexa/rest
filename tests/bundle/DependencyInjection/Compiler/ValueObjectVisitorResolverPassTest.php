@@ -7,16 +7,16 @@
 
 namespace Ibexa\Tests\Bundle\Rest\DependencyInjection\Compiler;
 
-use Ibexa\Bundle\Rest\DependencyInjection\Compiler\ValueObjectVisitorPass;
-use Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher;
+use Ibexa\Bundle\Rest\DependencyInjection\Compiler\ValueObjectVisitorResolverPass;
+use Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-class ValueObjectVisitorPassTest extends TestCase
+final class ValueObjectVisitorResolverPassTest extends TestCase
 {
-    public function testProcess()
+    public function testProcess(): void
     {
         $visitorDefinition = new Definition();
         $visitorDefinition->addTag('ibexa.rest.output.value_object.visitor', ['type' => 'test']);
@@ -24,16 +24,16 @@ class ValueObjectVisitorPassTest extends TestCase
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->addDefinitions(
             [
-                ValueObjectVisitorDispatcher::class => new Definition(),
+                ValueObjectVisitorResolver::class => new Definition(),
                 'ezpublish_rest.output.value_object_visitor.test' => $visitorDefinition,
             ]
         );
 
-        $compilerPass = new ValueObjectVisitorPass();
+        $compilerPass = new ValueObjectVisitorResolverPass();
         $compilerPass->process($containerBuilder);
 
         $dispatcherMethodCalls = $containerBuilder
-            ->getDefinition(ValueObjectVisitorDispatcher::class)
+            ->getDefinition(ValueObjectVisitorResolver::class)
             ->getMethodCalls();
         self::assertTrue(isset($dispatcherMethodCalls[0][0]), 'Failed asserting that dispatcher has a method call');
         self::assertEquals('addVisitor', $dispatcherMethodCalls[0][0], "Failed asserting that called method is 'addVisitor'");

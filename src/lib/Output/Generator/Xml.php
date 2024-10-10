@@ -264,4 +264,14 @@ class Xml extends Generator
     {
         return $boolValue ? 'true' : 'false';
     }
+
+    public function toArray(): array
+    {
+        return [];
+    }
+
+    public function getEncoderContext(array $data): array
+    {
+        return [];
+    }
 }
