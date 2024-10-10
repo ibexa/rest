@@ -51,11 +51,6 @@ parameters:
 			path: src/bundle/DependencyInjection/Compiler/OutputVisitorPass.php
 
 		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Compiler\\\\ValueObjectVisitorPass\\:\\:process\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Compiler/ValueObjectVisitorPass.php
-
-		-
 			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Configuration\\:\\:addRestRootResourcesSection\\(\\) has parameter \\$rootNode with no type specified\\.$#"
 			count: 1
 			path: src/bundle/DependencyInjection/Configuration.php
@@ -396,26 +391,6 @@ parameters:
 			path: src/contracts/Output/ValueObjectVisitor.php
 
 		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcher\\:\\:addVisitor\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/ValueObjectVisitorDispatcher.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcher\\:\\:setOutputGenerator\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/ValueObjectVisitorDispatcher.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcher\\:\\:setOutputVisitor\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/ValueObjectVisitorDispatcher.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Visitor.php
-
-		-
 			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setStatus\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/contracts/Output/Visitor.php
@@ -431,14 +406,9 @@ parameters:
 			path: src/contracts/Output/Visitor.php
 
 		-
-			message: "#^Property Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:\\$statusCode \\(int\\) does not accept null\\.$#"
+			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\VisitorAdapterNormalizer\\:\\:visitValueObject\\(\\) should return array but returns array\\|ArrayObject\\<\\(int\\|string\\), mixed\\>\\|bool\\|float\\|int\\|string\\|null\\.$#"
 			count: 1
-			path: src/contracts/Output/Visitor.php
-
-		-
-			message: "#^Property Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:\\$valueObjectVisitorDispatcher \\(Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcher\\) does not accept default value of type array\\.$#"
-			count: 1
-			path: src/contracts/Output/Visitor.php
+			path: src/contracts/Output/VisitorAdapterNormalizer.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\FieldTypeProcessor\\\\BaseRelationProcessor\\:\\:setLocationService\\(\\) has no return type specified\\.$#"
@@ -646,6 +616,11 @@ parameters:
 			path: src/lib/Output/FieldTypeSerializer.php
 
 		-
+			message: "#^Access to an undefined property Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject\\:\\:\\$\\#\\.$#"
+			count: 1
+			path: src/lib/Output/Generator/InMemory/Xml.php
+
+		-
 			message: "#^Access to an undefined property Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject\\:\\:\\$\\#text\\.$#"
 			count: 1
 			path: src/lib/Output/Generator/Json.php
@@ -656,17 +631,7 @@ parameters:
 			path: src/lib/Output/Generator/Json.php
 
 		-
-			message: "#^Cannot call method getParent\\(\\) on array\\.$#"
-			count: 3
-			path: src/lib/Output/Generator/Json.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:endAttribute\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:endDocument\\(\\) should return string but returns string\\|false\\.$#"
 			count: 1
 			path: src/lib/Output/Generator/Json.php
 
@@ -721,23 +686,13 @@ parameters:
 			path: src/lib/Output/Generator/Json.php
 
 		-
-			message: "#^Parameter \\#1 \\$parent of method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\FieldTypeHashGenerator\\:\\:generateHashValue\\(\\) expects Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\ArrayObject\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject, array given\\.$#"
+			message: "#^Parameter \\#1 \\$parent of method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\FieldTypeHashGenerator\\:\\:generateHashValue\\(\\) expects Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\ArrayObject\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject, Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Data\\\\ArrayList\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\ArrayObject\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject given\\.$#"
 			count: 1
 			path: src/lib/Output/Generator/Json.php
 
 		-
-			message: "#^Property Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:\\$json \\(array\\) does not accept Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\ArrayObject\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json.php
-
-		-
-			message: "#^Property Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:\\$json \\(array\\) does not accept Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject\\.$#"
-			count: 5
-			path: src/lib/Output/Generator/Json.php
-
-		-
-			message: "#^Property Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:\\$json type has no value type specified in iterable type array\\.$#"
-			count: 1
+			message: "#^Property Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:\\$json \\(Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Data\\\\ArrayList\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\ArrayObject\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject\\) does not accept object\\.$#"
+			count: 3
 			path: src/lib/Output/Generator/Json.php
 
 		-
@@ -822,6 +777,21 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:startObjectElement\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/lib/Output/Generator/Xml.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/Output/Generator/Xml.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:transformData\\(\\) has parameter \\$normalizedData with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/Output/Generator/Xml.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:transformData\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Output/Generator/Xml.php
 
@@ -2461,11 +2431,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ContentList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\ContentTypeGroup\\:\\:visit\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeGroup.php
@@ -2481,11 +2446,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeGroupList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeGroupList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\ContentTypeGroupRefList\\:\\:visit\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeGroupRefList.php
@@ -2496,17 +2456,7 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeInfoList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeInfoList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\ContentTypeList\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeList.php
 
@@ -2532,11 +2482,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\CountryList\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/CountryList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/CountryList.php
 
@@ -2751,11 +2696,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/FieldDefinitionList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/FieldDefinitionList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\ImageVariation\\:\\:visit\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/ImageVariation.php
@@ -2811,27 +2751,12 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/ObjectStateGroupList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ObjectStateGroupList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\ObjectStateList\\:\\:visit\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/ObjectStateList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ObjectStateList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\Options\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Options.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, int given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/Options.php
 
@@ -2857,11 +2782,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\PolicyList\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/PolicyList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/PolicyList.php
 
@@ -3051,11 +2971,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/RoleList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/RoleList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\Root\\:\\:visit\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/Root.php
@@ -3072,11 +2987,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\SectionList\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/SectionList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/SectionList.php
 
@@ -3156,17 +3066,7 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/UserGroupList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/UserGroupList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\UserGroupRefList\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/UserGroupRefList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/UserGroupRefList.php
 
@@ -3176,17 +3076,7 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/UserList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/UserList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\UserRefList\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/UserRefList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/UserRefList.php
 
@@ -3197,11 +3087,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\UserSession\\:\\:visitUserSessionAttributes\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/UserSession.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/UserSession.php
 
@@ -3232,11 +3117,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\VersionList\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/VersionList.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setHeader\\(\\) expects string, false given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/VersionList.php
 
@@ -3479,11 +3359,6 @@ parameters:
 			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Compiler\\\\OutputVisitorPassTest\\:\\:testProcess\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/bundle/DependencyInjection/Compiler/OutputVisitorPassTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Compiler\\\\ValueObjectVisitorPassTest\\:\\:testProcess\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/bundle/DependencyInjection/Compiler/ValueObjectVisitorPassTest.php
 
 		-
 			message: "#^Parameter \\#2 \\$method of function method_exists expects string, array\\<int\\|string, int\\|string\\>\\|int\\|string given\\.$#"
@@ -6571,97 +6446,7 @@ parameters:
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcherTest\\:\\:testVisitValueObject\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcherTest\\:\\:testVisitValueObjectInvalidType\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcherTest\\:\\:testVisitValueObjectNoMatch\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcherTest\\:\\:testVisitValueObjectParentMatch\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcherTest\\:\\:testVisitValueObjectSecondRuleParentMatch\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$data of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcher\\:\\:visit\\(\\) expects object, int given\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcherTest\\:\\:\\$outputGeneratorMock \\(Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\) in isset\\(\\) is not nullable\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Output\\\\ValueObjectVisitorDispatcherTest\\:\\:\\$outputVisitorMock \\(Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor&PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\) in isset\\(\\) is not nullable\\.$#"
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:getGeneratorMock\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:getVisitorMock\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testSetFilteredHeaders\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testSetHeaderResetAfterVisit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testSetHeaders\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testSetHeadersNoOverwrite\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testSetStatusCode\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testSetStatusCodeNoOverride\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testVisitDocument\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testVisitEmptyDocument\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testVisitValueObject\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/Output/VisitorTest.php
 
