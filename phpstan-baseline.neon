@@ -616,11 +616,6 @@ parameters:
 			path: src/lib/Output/Generator/InMemory/Xml.php
 
 		-
-			message: "#^Parameter \\#1 \\$data of method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\InMemory\\\\Xml\\:\\:transformDataForEncoder\\(\\) expects array, array\\|ArrayObject\\<\\(int\\|string\\), mixed\\>\\|bool\\|float\\|int\\|string\\|null given\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/InMemory/Xml.php
-
-		-
 			message: "#^Access to an undefined property Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject\\:\\:\\$\\#text\\.$#"
 			count: 1
 			path: src/lib/Output/Generator/Json.php
