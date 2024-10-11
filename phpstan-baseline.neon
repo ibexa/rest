@@ -2891,11 +2891,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentFieldValidationException.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\ContentFieldValidationException\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ContentFieldValidationException.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\ContentList\\:\\:visit\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentList.php
@@ -3174,16 +3169,6 @@ parameters:
 			message: "#^Parameter \\#3 \\$data of method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\NoContent\\:\\:visit\\(\\) expects Ibexa\\\\Rest\\\\Server\\\\Values\\\\NoContent, Ibexa\\\\Rest\\\\Server\\\\Values\\\\DeletedUserSession given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/DeletedUserSession.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\Exception\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Exception.php
-
-		-
-			message: "#^Property Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\Exception\\:\\:\\$httpStatusCodes type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Exception.php
 
 		-
 			message: "#^Property Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\Exception\\:\\:\\$translator \\(Symfony\\\\Contracts\\\\Translation\\\\TranslatorInterface\\) does not accept Symfony\\\\Contracts\\\\Translation\\\\TranslatorInterface\\|null\\.$#"

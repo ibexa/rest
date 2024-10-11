@@ -11,6 +11,7 @@ use Ibexa\CodeStyle\PhpCsFixer\InternalConfigFactory;
 $configFactory = new InternalConfigFactory();
 $configFactory->withRules([
     'declare_strict_types' => false,
+    'phpdoc_no_empty_return' => false,
 ]);
 
 return $configFactory
