@@ -80,7 +80,7 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * JSON array, otherwise a JSON object
      *
      * @param \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject $parent
-     * @param array $value
+     * @param array<mixed> $value
      *
      * @return \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject
      */
@@ -97,9 +97,9 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * Generates a JSON array from the given $hashArray with $parent.
      *
      * @param \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject $parent
-     * @param array $listArray
+     * @param array<int> $listArray
      *
-     * @return \Ibexa\Rest\Output\Generator\Json\ArrayObject
+     * @return \Ibexa\Rest\Output\Generator\Json\ArrayObject|JsonObject
      */
     protected function generateListArray($parent, array $listArray)
     {
@@ -115,7 +115,7 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * Generates a JSON object from the given $hashArray with $parent.
      *
      * @param \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject $parent
-     * @param array $hashArray
+     * @param array<mixed> $hashArray
      *
      * @return \Ibexa\Rest\Output\Generator\Json\JsonObject
      */
@@ -152,7 +152,7 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      *
      * @return mixed
      */
-    private function generateObjectValue($parent, object $value)
+    protected function generateObjectValue($parent, object $value)
     {
         try {
             $value = $this->normalizer->normalize($value, 'json', ['parent' => $parent]);

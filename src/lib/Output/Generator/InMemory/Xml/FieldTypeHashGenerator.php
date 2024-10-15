@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Output\Generator\InMemory\Xml;
 
-use Ibexa\Rest\Output\Generator\Data\ArrayList;
 use Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator as JsonFieldTypeHashGenerator;
 use Ibexa\Rest\Output\Generator\Json\JsonObject;
 
@@ -24,17 +23,13 @@ final class FieldTypeHashGenerator extends JsonFieldTypeHashGenerator
             return sprintf('%F', $value);
         } elseif (is_array($value)) {
             return $this->generateArrayValue($parent, $value);
+        } elseif (is_object($value)) {
+            return $this->generateObjectValue($parent, $value);
         } else {
             return $value;
         }
     }
 
-    /**
-     * Generates an array value from $value.
-     *
-     * @param array $value
-     * @param string|null $key
-     */
     protected function generateArrayValue($parent, $value)
     {
         if ($this->isNumericArray($value)) {
@@ -44,22 +39,20 @@ final class FieldTypeHashGenerator extends JsonFieldTypeHashGenerator
         }
     }
 
-    /**
-     * Generates a JSON array from the given $hashArray with $parent.
-     *
-     * @param \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject $parent
-     * @param array $listArray
-     *
-     * @return \Ibexa\Rest\Output\Generator\Json\ArrayObject
-     */
     protected function generateListArray($parent, array $listArray)
     {
-        $arrayList = new ArrayList('value', $parent);
+        $object = new JsonObject($parent);
+
+        /** @phpstan-ignore-next-line */
+        $object->value = [];
+
         foreach ($listArray as $listItem) {
-            $arrayList->append($this->generateValue($parent, $listItem));
+            $object->value[] = [
+                '#' => $this->generateValue($object, $listItem),
+            ];
         }
 
-        return $arrayList;
+        return $object;
     }
 
     /**

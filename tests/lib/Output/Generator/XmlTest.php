@@ -79,8 +79,6 @@ final class XmlTest extends GeneratorTest
 
         $response = $generator->endDocument('test');
 
-        dump($response);
-
         self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
             $response,

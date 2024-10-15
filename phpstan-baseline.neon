@@ -696,22 +696,7 @@ parameters:
 			path: src/lib/Output/Generator/Json/FieldTypeHashGenerator.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\FieldTypeHashGenerator\\:\\:generateArrayValue\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\FieldTypeHashGenerator\\:\\:generateHashArray\\(\\) has parameter \\$hashArray with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json/FieldTypeHashGenerator.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\FieldTypeHashGenerator\\:\\:generateHashValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\FieldTypeHashGenerator\\:\\:generateListArray\\(\\) has parameter \\$listArray with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Output/Generator/Json/FieldTypeHashGenerator.php
 
@@ -1461,11 +1446,6 @@ parameters:
 			path: src/lib/Server/Controller/User.php
 
 		-
-			message: "#^Parameter \\#1 \\$remoteId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentService\\:\\:loadContentInfoByRemoteId\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
 			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUser constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
 			count: 5
 			path: src/lib/Server/Controller/User.php
@@ -1712,7 +1692,7 @@ parameters:
 
 		-
 			message: "#^Possibly invalid array key type \\(array\\<int, string\\>\\|string\\)\\.$#"
-			count: 1
+			count: 2
 			path: src/lib/Server/Input/Parser/Criterion.php
 
 		-
@@ -1759,6 +1739,16 @@ parameters:
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\FullText\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion/FullText.php
+
+		-
+			message: "#^Instantiated class Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\Criterion\\\\Location\\\\IsBookmarked not found\\.$#"
+			count: 1
+			path: src/lib/Server/Input/Parser/Criterion/IsBookmarked.php
+
+		-
+			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\IsBookmarked\\:\\:parse\\(\\) has invalid return type Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\Criterion\\\\Location\\\\IsBookmarked\\.$#"
+			count: 1
+			path: src/lib/Server/Input/Parser/Criterion/IsBookmarked.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\LanguageCode\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
@@ -6019,31 +6009,6 @@ parameters:
 			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\JsonTest\\:\\:\\$generator \\(Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\) in isset\\(\\) is not nullable\\.$#"
 			count: 1
 			path: tests/lib/Output/Generator/JsonTest.php
-
-		-
-			message: "#^Call to method setFormatOutput\\(\\) on an unknown class Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/Xml/FieldTypeHashGeneratorTest.php
-
-		-
-			message: "#^Instantiated class Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml not found\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/Xml/FieldTypeHashGeneratorTest.php
-
-		-
-			message: "#^Instantiated class Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator not found\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/Xml/FieldTypeHashGeneratorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGeneratorTest\\:\\:initializeFieldTypeHashGenerator\\(\\) has invalid return type Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/Xml/FieldTypeHashGeneratorTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGeneratorTest\\:\\:initializeGenerator\\(\\) has invalid return type Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/Xml/FieldTypeHashGeneratorTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$boolValue of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:serializeBool\\(\\) expects bool, string given\\.$#"
