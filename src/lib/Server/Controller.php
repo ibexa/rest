@@ -8,8 +8,8 @@
 namespace Ibexa\Rest\Server;
 
 use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Ibexa\Rest\Input\Dispatcher as InputDispatcher;
-use Ibexa\Rest\RequestParser;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,10 +29,7 @@ abstract class Controller implements ContainerAwareInterface
      */
     protected $router;
 
-    /**
-     * @var \Ibexa\Rest\RequestParser
-     */
-    protected $requestParser;
+    protected UriParserInterface $uriParser;
 
     /**
      * Repository.
@@ -56,9 +53,9 @@ abstract class Controller implements ContainerAwareInterface
         $this->repository = $repository;
     }
 
-    public function setRequestParser(RequestParser $requestParser)
+    public function setUriParser(UriParserInterface $uriParser): void
     {
-        $this->requestParser = $requestParser;
+        $this->uriParser = $uriParser;
     }
 
     /**

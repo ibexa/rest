@@ -17,7 +17,9 @@ use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Core\Repository\RoleService;
 use Ibexa\Contracts\Core\Repository\SectionService;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\Content\DraftList\ContentDraftListItemInterface;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
+use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Contracts\Core\Repository\Values\User\User as RepositoryUser;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroupRoleAssignment;
 use Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment;
@@ -404,7 +406,7 @@ final class User extends RestController
         try {
             if ($request->query->has('roleId')) {
                 $restUsers = $this->loadUsersAssignedToRole(
-                    $this->requestParser->parseHref($request->query->get('roleId'), 'roleId')
+                    $this->uriParser->getAttributeFromUri((string)$request->query->get('roleId'), 'roleId')
                 );
             } elseif ($request->query->has('remoteId')) {
                 $restUsers = [
@@ -418,11 +420,11 @@ final class User extends RestController
             } elseif ($request->query->has('login')) {
                 $restUsers = [
                     $this->buildRestUserObject(
-                        $this->userService->loadUserByLogin($request->query->get('login'), Language::ALL)
+                        $this->userService->loadUserByLogin((string)$request->query->get('login'), Language::ALL)
                     ),
                 ];
             } elseif ($request->query->has('email')) {
-                foreach ($this->userService->loadUsersByEmail($request->query->get('email'), Language::ALL) as $user) {
+                foreach ($this->userService->loadUsersByEmail((string)$request->query->get('email'), Language::ALL) as $user) {
                     $restUsers[] = $this->buildRestUserObject($user);
                 }
             }
@@ -490,7 +492,7 @@ final class User extends RestController
     {
         $restUserGroups = [];
         if ($request->query->has('id')) {
-            $userGroup = $this->userService->loadUserGroup($request->query->get('id'), Language::ALL);
+            $userGroup = $this->userService->loadUserGroup((int)$request->query->get('id'), Language::ALL);
             $userGroupContentInfo = $userGroup->getVersionInfo()->getContentInfo();
             $userGroupMainLocation = $this->locationService->loadLocation($userGroupContentInfo->mainLocationId);
             $contentType = $this->contentTypeService->loadContentType($userGroupContentInfo->contentTypeId);
@@ -524,7 +526,7 @@ final class User extends RestController
      */
     public function loadUserGroupByRemoteId(Request $request): Values\RestUserGroup
     {
-        $contentInfo = $this->contentService->loadContentInfoByRemoteId($request->query->get('remoteId'));
+        $contentInfo = $this->contentService->loadContentInfoByRemoteId((string)$request->query->get('remoteId'));
         $userGroup = $this->userService->loadUserGroup($contentInfo->id, Language::ALL);
         $userGroupLocation = $this->locationService->loadLocation($contentInfo->mainLocationId);
         $contentType = $this->contentTypeService->loadContentType($contentInfo->contentTypeId);
@@ -577,11 +579,17 @@ final class User extends RestController
      */
     public function loadUserDrafts(int $userId, Request $request): Values\VersionList
     {
-        $contentDrafts = $this->contentService->loadContentDrafts(
+        $contentDrafts = $this->contentService->loadContentDraftList(
             $this->userService->loadUser($userId)
         );
 
-        return new Values\VersionList($contentDrafts, $request->getPathInfo());
+        return new Values\VersionList(
+            array_filter(array_map(
+                static fn (ContentDraftListItemInterface $draftListItem): ?VersionInfo => $draftListItem->getVersionInfo(),
+                $contentDrafts->items
+            )),
+            $request->getPathInfo()
+        );
     }
 
     /**
@@ -600,8 +608,8 @@ final class User extends RestController
             $userGroupLocation->contentId
         );
 
-        $locationPath = $this->requestParser->parseHref(
-            $request->headers->get('Destination'),
+        $locationPath = $this->uriParser->getAttributeFromUri(
+            (string)$request->headers->get('Destination'),
             'groupPath'
         );
 

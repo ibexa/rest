@@ -1,47 +1,7 @@
-parameters:
-
-    # Errors
-
-    # Section
-
-    # URLWildcard
-
-    # URLAlias
-
-    # Content
-
-    # User group
-
-    # User
-
-    # ContentType
-
-    # Object state
-
-    # View
-
-    # Trash
-
-    # Location
-
-    # Roles
-
-    # Relation
-
-    # Field Definition
-
-    # Content type Group
-
-    # HTTP
-
-    # Cache
-
-    # Services
-
 services:
     Ibexa\Contracts\Rest\Output\ValueObjectVisitor:
         calls:
-            - [ setRequestParser, [ '@Ibexa\Bundle\Rest\RequestParser\Router' ] ]
+            - [ setUriParser, [ '@Ibexa\Contracts\Rest\UriParser\UriParserInterface' ] ]
             - [ setRouter, [ "@router" ] ]
             - [ setTemplateRouter, [ '@Ibexa\Bundle\Core\Routing\DefaultRouter'] ]
 

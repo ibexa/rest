@@ -171,7 +171,7 @@ class Trash extends RestController
         if ($request->headers->has('Destination')) {
             $locationPathParts = explode(
                 '/',
-                $this->requestParser->parseHref($request->headers->get('Destination'), 'locationPath')
+                $this->uriParser->getAttributeFromUri($request->headers->get('Destination'), 'locationPath')
             );
 
             try {

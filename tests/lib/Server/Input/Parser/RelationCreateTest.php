@@ -69,7 +69,7 @@ class RelationCreateTest extends BaseTest
     protected function internalGetParser()
     {
         $parser = new RelationCreate();
-        $parser->setRequestParser($this->getRequestParserMock());
+        $parser->setUriParser($this->getUriParserMock());
 
         return $parser;
     }

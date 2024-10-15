@@ -321,21 +321,6 @@ abstract class Generator
     abstract public function getMediaType($name);
 
     /**
-     * Generates a media type from $name and $type.
-     *
-     * @deprecated 6.13.5 please start to use generateMediaTypeWithVendor()
-     *
-     * @param string $name
-     * @param string $type
-     *
-     * @return string
-     */
-    protected function generateMediaType($name, $type)
-    {
-        return "application/vnd.ibexa.api.{$name}+{$type}";
-    }
-
-    /**
      * Generates a media type from $name, $type and $vendor.
      *
      * @param string $name
@@ -445,5 +430,5 @@ abstract class Generator
      *
      * @return array<mixed>
      */
-    abstract protected function getEncoderContext(array $data): array;
+    abstract public function getEncoderContext(array $data): array;
 }

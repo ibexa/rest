@@ -109,7 +109,7 @@ class ContentCreate extends BaseParser
         }
 
         $contentType = $this->contentTypeService->loadContentType(
-            $this->requestParser->parseHref($data['ContentType']['_href'], 'contentTypeId')
+            $this->uriParser->getAttributeFromUri($data['ContentType']['_href'], 'contentTypeId')
         );
 
         $contentCreateStruct = $this->contentService->newContentCreateStruct($contentType, $data['mainLanguageCode']);
@@ -119,7 +119,7 @@ class ContentCreate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the Section element in ContentCreate.");
             }
 
-            $contentCreateStruct->sectionId = $this->requestParser->parseHref($data['Section']['_href'], 'sectionId');
+            $contentCreateStruct->sectionId = $this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
         }
 
         if (array_key_exists('alwaysAvailable', $data)) {
@@ -139,7 +139,7 @@ class ContentCreate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the User element in ContentCreate.");
             }
 
-            $contentCreateStruct->ownerId = $this->requestParser->parseHref($data['User']['_href'], 'userId');
+            $contentCreateStruct->ownerId = $this->uriParser->getAttributeFromUri($data['User']['_href'], 'userId');
         }
 
         if (!array_key_exists('fields', $data) || !is_array($data['fields']) || !is_array($data['fields']['field'])) {

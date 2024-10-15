@@ -8,10 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\Rest\Output;
 
-use Ibexa\Rest\Output\Generator\InMemory\Xml as InMemoryXml;
-use Ibexa\Rest\Output\Generator\Json;
 use LogicException;
-use Symfony\Component\Serializer\Encoder\EncoderInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
@@ -25,8 +22,9 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
 
     public const string ENCODER_CONTEXT = 'ENCODER_CONTEXT';
 
+    public const string OUTER_ELEMENT = 'outer_element';
+
     public function __construct(
-        private readonly EncoderInterface $encoder,
         private readonly ValueObjectVisitorResolverInterface $valueObjectVisitorResolver,
     ) {
     }
@@ -70,7 +68,7 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
                     'Normalizer "%s" must be an instance of "%s".',
                     $this->normalizer::class,
                     ContextAwareNormalizerInterface::class,
-                )
+                ),
             );
         }
 
@@ -92,7 +90,11 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
         ?string $format,
         array $context,
     ): array {
-        $visitor = $context['visitor'] ?? $this->createVisitor($format);
+        if (!isset($context['visitor'])) {
+            throw new LogicException('Context must have the "Visitor" instance passed.');
+        }
+
+        $visitor = $context['visitor'];
         $generator = $visitor->getGenerator();
 
         $generator->reset();
@@ -104,39 +106,28 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
 
         $data = $generator->getData();
 
-        return $this->normalizer->normalize($data, $format, $context + [
-            self::CALLED_CONTEXT => true,
-        ]);
-
-        // $encoderContext = $generator->getEncoderContext($normalizedData);
-        // $normalizedData = $generator->toArray();
-
-        // $normalizedData[self::ENCODER_CONTEXT] = $encoderContext;
-
-        // return $normalizedData;
-    }
-
-    private function createGenerator(string $format): Generator
-    {
-        $fieldTypeHashGenerator = new Json\FieldTypeHashGenerator($this->normalizer);
-
-        return $format === 'xml'
-            ? new InMemoryXml($fieldTypeHashGenerator)
-            : new Json($fieldTypeHashGenerator);
-    }
-
-    private function createVisitor(?string $format): Visitor
-    {
-        $format = $format ?: 'json';
-
-        $generator = $this->createGenerator($format);
-
-        return new Visitor(
-            $generator,
-            $this->normalizer,
-            $this->encoder,
-            $this->valueObjectVisitorResolver,
+        $normalizedData = $this->normalizer->normalize(
+            $data,
             $format,
+            $this->buildContext($context, $format),
         );
+
+        return $normalizedData + [self::ENCODER_CONTEXT => $generator->getEncoderContext(get_object_vars($data))];
+    }
+
+    /**
+     * @param array<mixed> $context
+     *
+     * @return array<mixed>
+     */
+    private function buildContext(array $context, ?string $format): array
+    {
+        $context += [self::CALLED_CONTEXT => true];
+
+        if ($format === 'xml') {
+            $context += [self::OUTER_ELEMENT => true];
+        }
+
+        return $context;
     }
 }

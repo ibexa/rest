@@ -71,7 +71,7 @@ class UserGroupCreate extends BaseParser
             }
 
             $contentType = $this->contentTypeService->loadContentType(
-                $this->requestParser->parseHref($data['ContentType']['_href'], 'contentTypeId')
+                $this->uriParser->getAttributeFromUri($data['ContentType']['_href'], 'contentTypeId')
             );
         }
 
@@ -86,7 +86,7 @@ class UserGroupCreate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the Section element in UserGroupCreate.");
             }
 
-            $userGroupCreateStruct->sectionId = $this->requestParser->parseHref($data['Section']['_href'], 'sectionId');
+            $userGroupCreateStruct->sectionId = $this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
         }
 
         if (array_key_exists('remoteId', $data)) {

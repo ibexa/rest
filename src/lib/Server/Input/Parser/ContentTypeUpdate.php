@@ -118,7 +118,7 @@ class ContentTypeUpdate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the User element in ContentTypeUpdate.");
             }
 
-            $contentTypeUpdateStruct->modifierId = $this->requestParser->parseHref($data['User']['_href'], 'userId');
+            $contentTypeUpdateStruct->modifierId = $this->uriParser->getAttributeFromUri($data['User']['_href'], 'userId');
         }
 
         return $contentTypeUpdateStruct;

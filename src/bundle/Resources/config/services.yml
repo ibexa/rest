@@ -42,11 +42,6 @@ services:
             - '@ibexa.api.service.field_type'
             - '@Ibexa\Rest\FieldTypeProcessorRegistry'
 
-    Ibexa\Bundle\Rest\RequestParser\Router:
-        arguments:
-            $router: '@router'
-            $uriParser: '@Ibexa\Contracts\Rest\UriParser\UriParserInterface'
-
     Ibexa\Contracts\Rest\UriParser\UriParserInterface: '@Ibexa\Bundle\Rest\UriParser\UriParser'
 
     Ibexa\Bundle\Rest\UriParser\UriParser:
@@ -77,7 +72,7 @@ services:
             - [ setContainer, ["@service_container"] ]
             - [ setInputDispatcher, ['@Ibexa\Rest\Input\Dispatcher'] ]
             - [ setRouter, ["@router"] ]
-            - [ setRequestParser, ['@Ibexa\Bundle\Rest\RequestParser\Router'] ]
+            - [ setUriParser, ['@Ibexa\Contracts\Rest\UriParser\UriParserInterface'] ]
             - [ setRepository, ['@ibexa.api.repository'] ]
 
     Ibexa\Rest\Server\Controller\Root:
@@ -436,10 +431,21 @@ services:
 
     Ibexa\Contracts\Rest\Output\VisitorAdapterNormalizer:
         arguments:
-            $encoder: '@ibexa.rest.serializer.encoder.json'
             $valueObjectVisitorResolver: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver'
         tags:
             - { name: ibexa.rest.serializer.normalizer, priority: -1000 }
+
+    Ibexa\Rest\Output\Normalizer\JsonObjectNormalizer:
+        tags:
+            - { name: ibexa.rest.serializer.normalizer, priority: -500 }
+
+    Ibexa\Rest\Output\Normalizer\ArrayListNormalizer:
+        tags:
+            - { name: ibexa.rest.serializer.normalizer, priority: -400 }
+
+    Ibexa\Rest\Output\Normalizer\ArrayObjectNormalizer:
+        tags:
+            - { name: ibexa.rest.serializer.normalizer, priority: -400 }
 
     Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolverInterface: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitor'
 

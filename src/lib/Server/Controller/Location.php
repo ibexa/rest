@@ -84,11 +84,11 @@ class Location extends RestController
     public function redirectLocation(Request $request)
     {
         if ($request->query->has('id')) {
-            $location = $this->locationService->loadLocation($request->query->get('id'));
+            $location = $this->locationService->loadLocation((int)$request->query->get('id'));
         } elseif ($request->query->has('remoteId')) {
-            $location = $this->locationService->loadLocationByRemoteId($request->query->get('remoteId'));
+            $location = $this->locationService->loadLocationByRemoteId((string)$request->query->get('remoteId'));
         } elseif ($request->query->has('urlAlias')) {
-            $urlAlias = $this->urlAliasService->lookup($request->query->get('urlAlias'));
+            $urlAlias = $this->urlAliasService->lookup((string)$request->query->get('urlAlias'));
             $location = $this->locationService->loadLocation($urlAlias->destination);
         } else {
             throw new BadRequestException("At least one of 'id', 'remoteId' or 'urlAlias' parameters is required.");
@@ -193,7 +193,7 @@ class Location extends RestController
 
         $destinationLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath(
-                $this->requestParser->parseHref(
+                $this->uriParser->getAttributeFromUri(
                     $request->headers->get('Destination'),
                     'locationPath'
                 )
@@ -260,7 +260,7 @@ class Location extends RestController
         try {
             // First check to see if the destination is for moving within another subtree
             $destinationLocationId = $this->extractLocationIdFromPath(
-                $this->requestParser->parseHref($destinationHref, 'locationPath')
+                $this->uriParser->getAttributeFromUri($destinationHref, 'locationPath')
             );
 
             // We're moving the subtree
@@ -281,7 +281,7 @@ class Location extends RestController
         } catch (Exceptions\InvalidArgumentException $e) {
             // If parsing of destination fails, let's try to see if destination is trash
             try {
-                $route = $this->requestParser->parse($destinationHref);
+                $route = $this->uriParser->matchUri($destinationHref);
                 if (!isset($route['_route']) || $route['_route'] !== 'ibexa.rest.load_trash_items') {
                     throw new Exceptions\InvalidArgumentException('');
                 }
@@ -354,7 +354,7 @@ class Location extends RestController
 
         $destinationLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath(
-                $this->requestParser->parseHref(
+                $this->uriParser->getAttributeFromUri(
                     $request->headers->get('Destination'),
                     'locationPath'
                 )

@@ -274,9 +274,4 @@ class Xml extends Generator
     {
         return [];
     }
-
-    public function transformData(array $normalizedData): array
-    {
-        return $normalizedData;
-    }
 }
