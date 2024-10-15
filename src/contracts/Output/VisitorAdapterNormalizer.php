@@ -125,7 +125,7 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
         $context += [self::CALLED_CONTEXT => true];
 
         if ($format === 'xml') {
-            $context += [self::OUTER_ELEMENT => true, 'as_collection' => true];
+            $context += [self::OUTER_ELEMENT => true];
         }
 
         return $context;

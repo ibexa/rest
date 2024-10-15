@@ -721,156 +721,6 @@ parameters:
 			path: src/lib/Output/Generator/Json/FieldTypeHashGenerator.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:endAttribute\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:endHashElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:endList\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:endObjectElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:endValueElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:generateFieldTypeHash\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:startAttribute\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:startDocument\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:startHashElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:startList\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:startObjectElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\:\\:toArray\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml.php
-
-		-
-			message: "#^Parameter \\#1 \\$content of method XMLWriter\\:\\:text\\(\\) expects string, bool\\|float\\|int\\|string\\|null given\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml.php
-
-		-
-			message: "#^Cannot call method error\\(\\) on Psr\\\\Log\\\\LoggerInterface\\|null\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\:\\:generateArrayValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\:\\:generateArrayValue\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\:\\:generateBooleanValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\:\\:generateFloatValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\:\\:generateHashArray\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\:\\:generateHashArray\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\:\\:generateHashValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\:\\:generateIntegerValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\:\\:generateKeyAttribute\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\:\\:generateListArray\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\:\\:generateListArray\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\:\\:generateNullValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\:\\:generateStringValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\:\\:generateValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\:\\:isNumericArray\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Parameter \\#1 \\$content of method XMLWriter\\:\\:text\\(\\) expects string, int given\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Xml/FieldTypeHashGenerator.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\ValueObjectVisitor\\\\ContentObjectStates\\:\\:visit\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Output/ValueObjectVisitor/ContentObjectStates.php
@@ -6171,74 +6021,29 @@ parameters:
 			path: tests/lib/Output/Generator/JsonTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\XmlTest\\:\\:testGeneratorAttribute\\(\\) has no return type specified\\.$#"
+			message: "#^Call to method setFormatOutput\\(\\) on an unknown class Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\.$#"
 			count: 1
-			path: tests/lib/Output/Generator/XmlTest.php
+			path: tests/lib/Output/Generator/Xml/FieldTypeHashGeneratorTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\XmlTest\\:\\:testGeneratorDocument\\(\\) has no return type specified\\.$#"
+			message: "#^Instantiated class Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml not found\\.$#"
 			count: 1
-			path: tests/lib/Output/Generator/XmlTest.php
+			path: tests/lib/Output/Generator/Xml/FieldTypeHashGeneratorTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\XmlTest\\:\\:testGeneratorElement\\(\\) has no return type specified\\.$#"
+			message: "#^Instantiated class Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator not found\\.$#"
 			count: 1
-			path: tests/lib/Output/Generator/XmlTest.php
+			path: tests/lib/Output/Generator/Xml/FieldTypeHashGeneratorTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\XmlTest\\:\\:testGeneratorElementList\\(\\) has no return type specified\\.$#"
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGeneratorTest\\:\\:initializeFieldTypeHashGenerator\\(\\) has invalid return type Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGenerator\\.$#"
 			count: 1
-			path: tests/lib/Output/Generator/XmlTest.php
+			path: tests/lib/Output/Generator/Xml/FieldTypeHashGeneratorTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\XmlTest\\:\\:testGeneratorElementMediaTypeOverwrite\\(\\) has no return type specified\\.$#"
+			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\Xml\\\\FieldTypeHashGeneratorTest\\:\\:initializeGenerator\\(\\) has invalid return type Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Xml\\.$#"
 			count: 1
-			path: tests/lib/Output/Generator/XmlTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\XmlTest\\:\\:testGeneratorHashElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/XmlTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\XmlTest\\:\\:testGeneratorMultipleAttributes\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/XmlTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\XmlTest\\:\\:testGeneratorStackedElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/XmlTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\XmlTest\\:\\:testGeneratorStartEndAttribute\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/XmlTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\XmlTest\\:\\:testGeneratorStartEndValueElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/XmlTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\XmlTest\\:\\:testGeneratorValueElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/XmlTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\XmlTest\\:\\:testGeneratorValueList\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/XmlTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\XmlTest\\:\\:testGetMediaType\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/XmlTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\XmlTest\\:\\:testSerializeBool\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/XmlTest.php
+			path: tests/lib/Output/Generator/Xml/FieldTypeHashGeneratorTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$boolValue of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:serializeBool\\(\\) expects bool, string given\\.$#"

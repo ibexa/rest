@@ -130,6 +130,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
 
     public function testGenerateStringValueWithSpecialChars()
     {
+        //TODO remove CData when Symfony 6.4 arrives as it has such an option
         $this->getGenerator()->generateFieldTypeHash(
             'fieldValue',
             '<?xml version="1.0" encoding="UTF-8"?><ezxml>Sindelfingen</ezxml>'

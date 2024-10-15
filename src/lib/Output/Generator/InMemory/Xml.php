@@ -47,7 +47,7 @@ final class Xml extends Json
         $this->json->{'@' . $name} = $value;
     }
 
-    public function serializeBool($boolValue)
+    public function serializeBool($boolValue): string
     {
         return $boolValue ? 'true' : 'false';
     }
@@ -91,8 +91,6 @@ final class Xml extends Json
 
         $vars = get_object_vars($data);
         $encoderContext = $this->getEncoderContext($vars);
-        $encoderContext['as_collection'] = true;
-        $encoderContext[VisitorAdapterNormalizer::OUTER_ELEMENT] = true;
 
         $normalizers = [
             new ArrayListNormalizer(),
@@ -110,6 +108,10 @@ final class Xml extends Json
     {
         return [
             XmlEncoder::ROOT_NODE_NAME => array_key_first($data),
+            XmlEncoder::VERSION => '1.0',
+            XmlEncoder::ENCODING => 'UTF-8',
+            XmlEncoder::AS_COLLECTION => true,
+            VisitorAdapterNormalizer::OUTER_ELEMENT => true,
         ];
     }
 }
