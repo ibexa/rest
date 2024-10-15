@@ -1446,6 +1446,11 @@ parameters:
 			path: src/lib/Server/Controller/User.php
 
 		-
+			message: "#^Parameter \\#1 \\$remoteId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\ContentService\\:\\:loadContentInfoByRemoteId\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/User.php
+
+		-
 			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUser constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
 			count: 5
 			path: src/lib/Server/Controller/User.php
@@ -1692,7 +1697,7 @@ parameters:
 
 		-
 			message: "#^Possibly invalid array key type \\(array\\<int, string\\>\\|string\\)\\.$#"
-			count: 2
+			count: 1
 			path: src/lib/Server/Input/Parser/Criterion.php
 
 		-
@@ -1739,16 +1744,6 @@ parameters:
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\FullText\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion/FullText.php
-
-		-
-			message: "#^Instantiated class Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\Criterion\\\\Location\\\\IsBookmarked not found\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/IsBookmarked.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\IsBookmarked\\:\\:parse\\(\\) has invalid return type Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\Criterion\\\\Location\\\\IsBookmarked\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/IsBookmarked.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\LanguageCode\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
