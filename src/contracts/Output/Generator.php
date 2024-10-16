@@ -416,4 +416,19 @@ abstract class Generator
      * @return mixed
      */
     abstract public function serializeBool($boolValue);
+
+    public function getData(): object
+    {
+        throw new \LogicException(sprintf(
+            '%s does not maintain state',
+            static::class,
+        ));
+    }
+
+    /**
+     * @param array<mixed> $data
+     *
+     * @return array<mixed>
+     */
+    abstract public function getEncoderContext(array $data): array;
 }

@@ -1,5 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<element media-type="application/vnd.ibexa.api.element+xml">
- <simpleValue>value1</simpleValue>
- <simpleValue>value2</simpleValue>
-</element>
+<element media-type="application/vnd.ibexa.api.element+xml"><simpleValue>value1</simpleValue><simpleValue>value2</simpleValue></element>
