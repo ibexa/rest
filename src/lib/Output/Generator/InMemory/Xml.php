@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-final class Xml extends Json
+class Xml extends Json
 {
     public const string OUTER_ELEMENT = 'outer_element';
 
