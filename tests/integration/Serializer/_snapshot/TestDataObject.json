@@ -1,0 +1,142 @@
+{
+    "string": "some_string",
+    "int": 1,
+    "innerObject": null,
+    "location": {
+        "_media-type": "application\/vnd.ibexa.api.Location+json",
+        "_href": "\/api\/ibexa\/v2\/content\/locations\/1\/2",
+        "id": 2,
+        "priority": 0,
+        "hidden": false,
+        "invisible": false,
+        "ParentLocation": {
+            "_media-type": "application\/vnd.ibexa.api.Location+json",
+            "_href": "\/api\/ibexa\/v2\/content\/locations\/1"
+        },
+        "pathString": "\/1\/2\/",
+        "depth": 1,
+        "childCount": 1,
+        "remoteId": "f3e90596361e31d496d4026eb624c983",
+        "Children": {
+            "_media-type": "application\/vnd.ibexa.api.LocationList+json",
+            "_href": "\/api\/ibexa\/v2\/content\/locations\/1\/2\/children"
+        },
+        "Content": {
+            "_media-type": "application\/vnd.ibexa.api.Content+json",
+            "_href": "\/api\/ibexa\/v2\/content\/objects\/57"
+        },
+        "sortField": "PRIORITY",
+        "sortOrder": "ASC",
+        "UrlAliases": {
+            "_media-type": "application\/vnd.ibexa.api.UrlAliasRefList+json",
+            "_href": "\/api\/ibexa\/v2\/content\/locations\/1\/2\/urlaliases"
+        },
+        "ContentInfo": {
+            "_media-type": "application\/vnd.ibexa.api.ContentInfo+json",
+            "_href": "\/api\/ibexa\/v2\/content\/objects\/57",
+            "Content": {
+                "_media-type": "application\/vnd.ibexa.api.Content+json",
+                "_href": "\/api\/ibexa\/v2\/content\/objects\/57",
+                "_remoteId": "8a9c9c761004866fb458d89910f52bee",
+                "_id": 57,
+                "ContentType": {
+                    "_media-type": "application\/vnd.ibexa.api.ContentType+json",
+                    "_href": "\/api\/ibexa\/v2\/content\/types\/21"
+                },
+                "Name": "Home",
+                "TranslatedName": "Home",
+                "Versions": {
+                    "_media-type": "application\/vnd.ibexa.api.VersionList+json",
+                    "_href": "\/api\/ibexa\/v2\/content\/objects\/57\/versions"
+                },
+                "CurrentVersion": {
+                    "_media-type": "application\/vnd.ibexa.api.Version+json",
+                    "_href": "\/api\/ibexa\/v2\/content\/objects\/57\/currentversion",
+                    "Version": {
+                        "_media-type": "application\/vnd.ibexa.api.Version+json",
+                        "_href": "\/api\/ibexa\/v2\/content\/objects\/57\/versions\/1",
+                        "VersionInfo": {
+                            "id": 504,
+                            "versionNo": 1,
+                            "status": "PUBLISHED",
+                            "modificationDate": "2007-11-28T16:51:36+00:00",
+                            "Creator": {
+                                "_media-type": "application\/vnd.ibexa.api.User+json",
+                                "_href": "\/api\/ibexa\/v2\/user\/users\/14"
+                            },
+                            "creationDate": "2007-11-28T16:50:55+00:00",
+                            "initialLanguageCode": "eng-GB",
+                            "languageCodes": "eng-GB",
+                            "VersionTranslationInfo": {
+                                "_media-type": "application\/vnd.ibexa.api.VersionTranslationInfo+json",
+                                "Language": [
+                                    {
+                                        "languageCode": "eng-GB"
+                                    }
+                                ]
+                            },
+                            "names": {
+                                "value": [
+                                    {
+                                        "_languageCode": "eng-GB",
+                                        "#text": "Home"
+                                    }
+                                ]
+                            },
+                            "Content": {
+                                "_media-type": "application\/vnd.ibexa.api.ContentInfo+json",
+                                "_href": "\/api\/ibexa\/v2\/content\/objects\/57"
+                            }
+                        },
+                        "Fields": {
+                            "field": [
+                                {
+                                    "id": 186,
+                                    "fieldDefinitionIdentifier": "name",
+                                    "languageCode": "eng-GB",
+                                    "fieldTypeIdentifier": "ezstring",
+                                    "fieldValue": "Home"
+                                }
+                            ]
+                        },
+                        "Relations": {
+                            "_media-type": "application\/vnd.ibexa.api.RelationList+json",
+                            "_href": "\/api\/ibexa\/v2\/content\/objects\/57\/versions\/1\/relations",
+                            "Relation": []
+                        },
+                        "Thumbnail": {
+                            "_media-type": "application\/vnd.ibexa.api.Thumbnail+json"
+                        }
+                    }
+                },
+                "Section": {
+                    "_media-type": "application\/vnd.ibexa.api.Section+json",
+                    "_href": "\/api\/ibexa\/v2\/content\/sections\/1"
+                },
+                "MainLocation": {
+                    "_media-type": "application\/vnd.ibexa.api.Location+json",
+                    "_href": "\/api\/ibexa\/v2\/content\/locations\/1\/2"
+                },
+                "Locations": {
+                    "_media-type": "application\/vnd.ibexa.api.LocationList+json",
+                    "_href": "\/api\/ibexa\/v2\/content\/objects\/57\/locations"
+                },
+                "Owner": {
+                    "_media-type": "application\/vnd.ibexa.api.User+json",
+                    "_href": "\/api\/ibexa\/v2\/user\/users\/14"
+                },
+                "lastModificationDate": "2007-11-28T16:51:36+00:00",
+                "publishedDate": "2007-11-19T13:54:46+00:00",
+                "mainLanguageCode": "eng-GB",
+                "currentVersionNo": 1,
+                "alwaysAvailable": true,
+                "isHidden": false,
+                "status": "PUBLISHED",
+                "ObjectStates": {
+                    "_media-type": "application\/vnd.ibexa.api.ContentObjectStates+json",
+                    "_href": "\/api\/ibexa\/v2\/content\/objects\/57\/objectstates"
+                }
+            }
+        }
+    }
+}

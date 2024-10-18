@@ -4,21 +4,23 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Tests\Rest\Output\Generator;
 
-use Ibexa\Rest\Output\Generator\Xml;
-use Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator;
+use Ibexa\Contracts\Rest\Output\Generator;
+use Ibexa\Rest\Output\Generator\InMemory;
 use Ibexa\Tests\Rest\Output\GeneratorTest;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 require_once __DIR__ . '/../GeneratorTest.php';
 
 /**
  * Xml generator test class.
  */
-class XmlTest extends GeneratorTest
+final class XmlTest extends GeneratorTest
 {
-    public function testGeneratorDocument()
+    public function testGeneratorDocument(): void
     {
         $generator = $this->getGenerator();
 
@@ -26,11 +28,11 @@ class XmlTest extends GeneratorTest
 
         self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
-            $generator->endDocument('test')
+            $generator->endDocument('test'),
         );
     }
 
-    public function testGeneratorElement()
+    public function testGeneratorElement(): void
     {
         $generator = $this->getGenerator();
 
@@ -45,7 +47,7 @@ class XmlTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorElementMediaTypeOverwrite()
+    public function testGeneratorElementMediaTypeOverwrite(): void
     {
         $generator = $this->getGenerator();
 
@@ -60,7 +62,7 @@ class XmlTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorStackedElement()
+    public function testGeneratorStackedElement(): void
     {
         $generator = $this->getGenerator();
 
@@ -75,11 +77,11 @@ class XmlTest extends GeneratorTest
 
         self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
-            $generator->endDocument('test')
+            $generator->endDocument('test'),
         );
     }
 
-    public function testGeneratorAttribute()
+    public function testGeneratorAttribute(): void
     {
         $generator = $this->getGenerator();
 
@@ -97,7 +99,7 @@ class XmlTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorStartEndAttribute()
+    public function testGeneratorStartEndAttribute(): void
     {
         $generator = $this->getGenerator();
 
@@ -116,7 +118,7 @@ class XmlTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorMultipleAttributes()
+    public function testGeneratorMultipleAttributes(): void
     {
         $generator = $this->getGenerator();
 
@@ -135,7 +137,7 @@ class XmlTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorValueElement()
+    public function testGeneratorValueElement(): void
     {
         $generator = $this->getGenerator();
 
@@ -149,11 +151,11 @@ class XmlTest extends GeneratorTest
 
         self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
-            $generator->endDocument('test')
+            $generator->endDocument('test'),
         );
     }
 
-    public function testGeneratorStartEndValueElement()
+    public function testGeneratorStartEndValueElement(): void
     {
         $generator = $this->getGenerator();
 
@@ -172,7 +174,7 @@ class XmlTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorElementList()
+    public function testGeneratorElementList(): void
     {
         $generator = $this->getGenerator();
 
@@ -198,7 +200,7 @@ class XmlTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorHashElement()
+    public function testGeneratorHashElement(): void
     {
         $generator = $this->getGenerator();
 
@@ -220,7 +222,7 @@ class XmlTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorValueList()
+    public function testGeneratorValueList(): void
     {
         $generator = $this->getGenerator();
 
@@ -250,7 +252,7 @@ class XmlTest extends GeneratorTest
         );
     }
 
-    public function testGetMediaType()
+    public function testGetMediaType(): void
     {
         $generator = $this->getGenerator();
 
@@ -260,7 +262,7 @@ class XmlTest extends GeneratorTest
         );
     }
 
-    public function testSerializeBool()
+    public function testSerializeBool(): void
     {
         $generator = $this->getGenerator();
 
@@ -269,11 +271,14 @@ class XmlTest extends GeneratorTest
         self::assertTrue($generator->serializeBool('notbooleanbuttrue') === 'true');
     }
 
-    protected function getGenerator()
+    protected function getGenerator(): Generator
     {
         if (!isset($this->generator)) {
-            $this->generator = new Xml(
-                $this->createMock(FieldTypeHashGenerator::class)
+            $fieldTypeHashGenerator = new InMemory\Xml\FieldTypeHashGenerator(
+                $this->createMock(NormalizerInterface::class),
+            );
+            $this->generator = new InMemory\Xml(
+                $fieldTypeHashGenerator,
             );
         }
         $this->generator->setFormatOutput(true);
