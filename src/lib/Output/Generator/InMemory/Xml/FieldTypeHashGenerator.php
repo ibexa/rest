@@ -30,7 +30,7 @@ final class FieldTypeHashGenerator extends JsonFieldTypeHashGenerator
         }
     }
 
-    protected function generateArrayValue($parent, $value)
+    protected function generateArrayValue($parent, $value): JsonObject
     {
         if ($this->isNumericArray($value)) {
             return $this->generateListArray($parent, $value);
@@ -39,7 +39,7 @@ final class FieldTypeHashGenerator extends JsonFieldTypeHashGenerator
         }
     }
 
-    protected function generateListArray($parent, array $listArray)
+    protected function generateListArray($parent, array $listArray): JsonObject
     {
         $object = new JsonObject($parent);
 
@@ -55,15 +55,7 @@ final class FieldTypeHashGenerator extends JsonFieldTypeHashGenerator
         return $object;
     }
 
-    /**
-     * Generates a JSON object from the given $hashArray with $parent.
-     *
-     * @param \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject $parent
-     * @param array<mixed> $hashArray
-     *
-     * @return \Ibexa\Rest\Output\Generator\Json\JsonObject
-     */
-    protected function generateHashArray($parent, array $hashArray)
+    protected function generateHashArray($parent, array $hashArray): JsonObject
     {
         $object = new JsonObject($parent);
 

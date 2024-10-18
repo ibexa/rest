@@ -20,26 +20,84 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class VisitorTest extends TestCase
 {
+    private Visitor $visitor;
+
+    private NormalizerInterface&MockObject $normalizer;
+
+    private EncoderInterface&MockObject $encoder;
+
+    private Generator&MockObject $generator;
+
+    private ValueObjectVisitorResolverInterface&MockObject $valueObjectVisitorResolver;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->generator = $this->createMock(Generator::class);
+        $this->normalizer = $this->createMock(NormalizerInterface::class);
+        $this->encoder = $this->createMock(EncoderInterface::class);
+        $this->valueObjectVisitorResolver = $this->createMock(ValueObjectVisitorResolverInterface::class);
+
+        $this->visitor = new Visitor(
+            $this->generator,
+            $this->normalizer,
+            $this->encoder,
+            $this->valueObjectVisitorResolver,
+            'json',
+        );
+    }
+
     public function testVisitDocument(): void
     {
-        //TODO refactor
+        $data = new stdClass();
+        $content = 'Hello world!';
+
+        $this->normalizer
+            ->expects(self::once())
+            ->method('normalize')
+            ->with($data, 'json', ['visitor' => $this->visitor])
+            ->willReturn($content);
+
+        $this->encoder
+            ->expects(self::once())
+            ->method('encode')
+            ->with($content)
+            ->willReturn($content);
+
+        self::assertEquals(
+            new Response($content, Response::HTTP_OK, []),
+            $this->visitor->visit($data),
+        );
     }
 
     public function testVisitEmptyDocument(): void
     {
-        //TODO refactor
-    }
+        $data = new stdClass();
 
-    public function testVisitValueObject(): void
-    {
-        //TODO refactor
+        $this->normalizer
+            ->expects(self::once())
+            ->method('normalize')
+            ->with($data, 'json', ['visitor' => $this->visitor])
+            ->willReturn(null);
+
+        $this->encoder
+            ->expects(self::once())
+            ->method('encode')
+            ->with(null)
+            ->willReturn(null);
+
+        self::assertEquals(
+            new Response(null, Response::HTTP_OK, []),
+            $this->visitor->visit($data),
+        );
     }
 
     public function testSetHeaders(): void
     {
         $data = new stdClass();
 
-        $visitor = $this->getVisitorMock();
+        $visitor = $this->visitor;
 
         $visitor->setHeader('Content-Type', 'text/xml');
         self::assertEquals(
@@ -48,22 +106,20 @@ final class VisitorTest extends TestCase
                 Response::HTTP_OK,
                 [
                     'Content-Type' => 'text/xml',
-                ]
+                ],
             ),
-            $visitor->visit($data)
+            $visitor->visit($data),
         );
     }
 
     /**
      * @todo This is a test for a feature that needs refactoring.
-     *
-     * @see \Ibexa\Contracts\Rest\Output\Visitor::visit
      */
-    public function testSetFilteredHeaders()
+    public function testSetFilteredHeaders(): void
     {
         $data = new stdClass();
 
-        $visitor = $this->getVisitorMock();
+        $visitor = $this->visitor;
 
         $visitor->setHeader('Content-Type', 'text/xml');
         $visitor->setHeader('Accept-Patch', false);
@@ -76,7 +132,7 @@ final class VisitorTest extends TestCase
                     'Accept-Patch' => [0 => ''],
                 ]
             ),
-            $visitor->visit($data)
+            $visitor->visit($data),
         );
     }
 
@@ -84,7 +140,7 @@ final class VisitorTest extends TestCase
     {
         $data = new stdClass();
 
-        $visitor = $this->getVisitorMock();
+        $visitor = $this->visitor;
 
         $visitor->setHeader('Content-Type', 'text/xml');
         $visitor->setHeader('Content-Type', 'text/html');
@@ -94,9 +150,9 @@ final class VisitorTest extends TestCase
                 Response::HTTP_OK,
                 [
                     'Content-Type' => 'text/xml',
-                ]
+                ],
             ),
-            $visitor->visit($data)
+            $visitor->visit($data),
         );
     }
 
@@ -104,7 +160,7 @@ final class VisitorTest extends TestCase
     {
         $data = new stdClass();
 
-        $visitor = $this->getVisitorMock();
+        $visitor = $this->visitor;
 
         $visitor->setHeader('Content-Type', 'text/xml');
 
@@ -115,9 +171,9 @@ final class VisitorTest extends TestCase
             new Response(
                 null,
                 Response::HTTP_OK,
-                []
+                [],
             ),
-            $result
+            $result,
         );
     }
 
@@ -125,15 +181,15 @@ final class VisitorTest extends TestCase
     {
         $data = new stdClass();
 
-        $visitor = $this->getVisitorMock();
+        $visitor = $this->visitor;
 
         $visitor->setStatus(201);
         self::assertEquals(
             new Response(
                 null,
-                Response::HTTP_CREATED
+                Response::HTTP_CREATED,
             ),
-            $visitor->visit($data)
+            $visitor->visit($data),
         );
     }
 
@@ -141,7 +197,7 @@ final class VisitorTest extends TestCase
     {
         $data = new stdClass();
 
-        $visitor = $this->getVisitorMock();
+        $visitor = $this->visitor;
 
         $visitor->setStatus(201);
         $visitor->setStatus(404);
@@ -149,45 +205,9 @@ final class VisitorTest extends TestCase
         self::assertEquals(
             new Response(
                 null,
-                Response::HTTP_CREATED
+                Response::HTTP_CREATED,
             ),
-            $visitor->visit($data)
+            $visitor->visit($data),
         );
-    }
-
-    public function getValueObjectVisitorResolverMock(): ValueObjectVisitorResolverInterface&MockObject
-    {
-        return $this->createMock(ValueObjectVisitorResolverInterface::class);
-    }
-
-    protected function getGeneratorMock(): Generator&MockObject
-    {
-        return $this->createMock(Generator::class);
-    }
-
-    protected function getNormalizerMock(): NormalizerInterface&MockObject
-    {
-        return $this->createMock(NormalizerInterface::class);
-    }
-
-    protected function getEncoderMock(): EncoderInterface&MockObject
-    {
-        return $this->createMock(EncoderInterface::class);
-    }
-
-    protected function getVisitorMock(): Visitor&MockObject
-    {
-        return $this->getMockBuilder(Visitor::class)
-            ->setMethods(['visitValueObject'])
-            ->setConstructorArgs(
-                [
-                    $this->getGeneratorMock(),
-                    $this->getNormalizerMock(),
-                    $this->getEncoderMock(),
-                    $this->getValueObjectVisitorResolverMock(),
-                    'json',
-                ],
-            )
-            ->getMock();
     }
 }

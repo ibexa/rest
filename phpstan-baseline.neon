@@ -6196,11 +6196,6 @@ parameters:
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\VisitorTest\\:\\:testSetFilteredHeaders\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/VisitorTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\BaseTest\\:\\:getParseHrefExpectationsMap\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/lib/Server/Input/Parser/BaseTest.php

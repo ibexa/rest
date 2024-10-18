@@ -8,7 +8,10 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\Rest\Output;
 
+use Ibexa\Contracts\Rest\Output\Generator as BaseGenerator;
+use Ibexa\Rest\Output\Generator;
 use LogicException;
+use Symfony\Component\Serializer\Encoder\EncoderInterface;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
@@ -22,9 +25,9 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
 
     public const string ENCODER_CONTEXT = 'ENCODER_CONTEXT';
 
-    public const string OUTER_ELEMENT = 'outer_element';
-
     public function __construct(
+        private readonly EncoderInterface $jsonEncoder,
+        private readonly EncoderInterface $xmlEncoder,
         private readonly ValueObjectVisitorResolverInterface $valueObjectVisitorResolver,
     ) {
     }
@@ -90,11 +93,7 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
         ?string $format,
         array $context,
     ): array {
-        if (!isset($context['visitor'])) {
-            throw new LogicException('Context must have the "Visitor" instance passed.');
-        }
-
-        $visitor = $context['visitor'];
+        $visitor = $context['visitor'] ?? $this->createVisitor($format);
         $generator = $visitor->getGenerator();
 
         $generator->reset();
@@ -125,9 +124,37 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
         $context += [self::CALLED_CONTEXT => true];
 
         if ($format === 'xml') {
-            $context += [self::OUTER_ELEMENT => true];
+            $context += [Generator\InMemory\Xml::OUTER_ELEMENT => true];
         }
 
         return $context;
+    }
+
+    private function createGenerator(string $format): BaseGenerator
+    {
+        if ($format === 'xml') {
+            return new Generator\InMemory\Xml(
+                new Generator\InMemory\Xml\FieldTypeHashGenerator($this->normalizer),
+            );
+        }
+
+        return new Generator\Json(
+            new Generator\Json\FieldTypeHashGenerator($this->normalizer),
+        );
+    }
+
+    private function createVisitor(?string $format): Visitor
+    {
+        $format = $format ?: 'json';
+
+        $generator = $this->createGenerator($format);
+
+        return new Visitor(
+            $generator,
+            $this->normalizer,
+            $format === 'xml' ? $this->xmlEncoder : $this->jsonEncoder,
+            $this->valueObjectVisitorResolver,
+            $format,
+        );
     }
 }

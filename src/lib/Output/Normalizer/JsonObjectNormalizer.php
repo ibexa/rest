@@ -7,8 +7,8 @@
 
 namespace Ibexa\Rest\Output\Normalizer;
 
-use Ibexa\Contracts\Rest\Output\VisitorAdapterNormalizer;
 use Ibexa\Rest\Output\Generator\Data\ArrayList;
+use Ibexa\Rest\Output\Generator\InMemory;
 use Ibexa\Rest\Output\Generator\Json\JsonObject;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
@@ -27,8 +27,8 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
     {
         $vars = get_object_vars($object);
 
-        $isOuterElement = $context[VisitorAdapterNormalizer::OUTER_ELEMENT] ?? false;
-        unset($context[VisitorAdapterNormalizer::OUTER_ELEMENT]);
+        $isOuterElement = $context[InMemory\Xml::OUTER_ELEMENT] ?? false;
+        unset($context[InMemory\Xml::OUTER_ELEMENT]);
 
         $data = [];
         foreach ($vars as $key => $value) {

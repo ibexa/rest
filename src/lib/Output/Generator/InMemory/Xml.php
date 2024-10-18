@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Output\Generator\InMemory;
 
-use Ibexa\Contracts\Rest\Output\VisitorAdapterNormalizer;
 use Ibexa\Rest\Output\Generator\Data;
 use Ibexa\Rest\Output\Generator\Data\ArrayList;
 use Ibexa\Rest\Output\Generator\Json;
@@ -21,6 +20,8 @@ use Symfony\Component\Serializer\Serializer;
 
 final class Xml extends Json
 {
+    public const string OUTER_ELEMENT = 'outer_element';
+
     public function getMediaType($name): string
     {
         return $this->generateMediaTypeWithVendor($name, 'xml', $this->vendor);
@@ -36,10 +37,6 @@ final class Xml extends Json
         $this->json = $array;
     }
 
-    /**
-     * @param string $name
-     * @param string $value
-     */
     public function startAttribute($name, $value): void
     {
         $this->checkStartAttribute($name);
@@ -74,11 +71,6 @@ final class Xml extends Json
         }
     }
 
-    /**
-     * End document.
-     *
-     * Returns the generated document as a string.
-     */
     public function endDocument(mixed $data): string
     {
         parent::endDocument($data);
@@ -111,7 +103,8 @@ final class Xml extends Json
             XmlEncoder::VERSION => '1.0',
             XmlEncoder::ENCODING => 'UTF-8',
             XmlEncoder::AS_COLLECTION => true,
-            VisitorAdapterNormalizer::OUTER_ELEMENT => true,
+            XmlEncoder::FORMAT_OUTPUT => true,
+            self::OUTER_ELEMENT => true,
         ];
     }
 }

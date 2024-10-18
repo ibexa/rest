@@ -1,0 +1,4 @@
+services:
+    Ibexa\Tests\Integration\Rest\Serializer\TestDataObjectNormalizer:
+        tags:
+            - { name: ibexa.rest.serializer.normalizer }

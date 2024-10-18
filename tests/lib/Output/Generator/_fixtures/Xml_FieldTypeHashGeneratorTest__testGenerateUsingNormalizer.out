@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Field><fieldValue><value key="id">1</value><value key="type">foo</value><value key="internal_hash"><value key="foo">bar</value></value><value key="internal_list"><value>42</value><value>56</value></value></fieldValue></Field>
+<Field>
+ <fieldValue>
+  <value key="id">1</value>
+  <value key="type">foo</value>
+  <value key="internal_hash">
+   <value key="foo">bar</value>
+  </value>
+  <value key="internal_list">
+   <value>42</value>
+   <value>56</value>
+  </value>
+ </fieldValue>
+</Field>
