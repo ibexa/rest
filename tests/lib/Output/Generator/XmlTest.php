@@ -26,11 +26,9 @@ final class XmlTest extends GeneratorTest
 
         $generator->startDocument('test');
 
-        $response = $generator->endDocument('test');
-
         self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
-            $response,
+            $generator->endDocument('test'),
         );
     }
 
@@ -77,11 +75,9 @@ final class XmlTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        $response = $generator->endDocument('test');
-
         self::assertSame(
             file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
-            $response,
+            $generator->endDocument('test'),
         );
     }
 
@@ -211,7 +207,6 @@ final class XmlTest extends GeneratorTest
         $generator->startDocument('test');
 
         $generator->startHashElement('elements');
-        $generator->startList('element');
 
         $generator->startValueElement('element', 'element value 1', ['attribute' => 'attribute value 1']);
         $generator->endValueElement('element');
@@ -219,7 +214,6 @@ final class XmlTest extends GeneratorTest
         $generator->startValueElement('element', 'element value 2', ['attribute' => 'attribute value 2']);
         $generator->endValueElement('element');
 
-        $generator->endList('element');
         $generator->endHashElement('elements');
 
         self::assertSame(

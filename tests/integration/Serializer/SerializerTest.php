@@ -11,7 +11,6 @@ namespace Ibexa\Tests\Integration\Rest\Serializer;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Test\Core\IbexaKernelTestCase;
 use Ibexa\Tests\Bundle\Rest\Functional\ResourceAssertionsTrait;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Serializer;
 
 final class SerializerTest extends IbexaKernelTestCase
