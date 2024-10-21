@@ -211,8 +211,8 @@ final class XmlTest extends GeneratorTest
         $generator->startValueElement('element', 'element value 1', ['attribute' => 'attribute value 1']);
         $generator->endValueElement('element');
 
-        $generator->startValueElement('element', 'element value 2', ['attribute' => 'attribute value 2']);
-        $generator->endValueElement('element');
+        $generator->startValueElement('element2', 'element value 2', ['attribute' => 'attribute value 2']);
+        $generator->endValueElement('element2');
 
         $generator->endHashElement('elements');
 
