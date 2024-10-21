@@ -5801,16 +5801,6 @@ parameters:
 			path: tests/lib/Output/FieldTypeSerializerTest.php
 
 		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\FieldTypeHashGeneratorBaseTest\\:\\:assertSerializationSame\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/FieldTypeHashGeneratorBaseTest.php
-
-		-
-			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\FieldTypeHashGeneratorBaseTest\\:\\:assertSerializationSame\\(\\) has parameter \\$functionName with no type specified\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/FieldTypeHashGeneratorBaseTest.php
-
-		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\FieldTypeHashGeneratorBaseTest\\:\\:getFieldTypeHashGenerator\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/Output/Generator/FieldTypeHashGeneratorBaseTest.php

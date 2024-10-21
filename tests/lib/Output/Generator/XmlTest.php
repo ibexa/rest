@@ -26,8 +26,8 @@ final class XmlTest extends GeneratorTest
 
         $generator->startDocument('test');
 
-        self::assertSame(
-            file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
+        $this->compareXmls(
+            __DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml',
             $generator->endDocument('test'),
         );
     }
@@ -41,8 +41,8 @@ final class XmlTest extends GeneratorTest
         $generator->startObjectElement('element');
         $generator->endObjectElement('element');
 
-        self::assertSame(
-            file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
+        $this->compareXmls(
+            __DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml',
             $generator->endDocument('test')
         );
     }
@@ -56,8 +56,8 @@ final class XmlTest extends GeneratorTest
         $generator->startObjectElement('element', 'User');
         $generator->endObjectElement('element');
 
-        self::assertSame(
-            file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
+        $this->compareXmls(
+            __DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml',
             $generator->endDocument('test')
         );
     }
@@ -75,8 +75,8 @@ final class XmlTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        self::assertSame(
-            file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
+        $this->compareXmls(
+            __DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml',
             $generator->endDocument('test'),
         );
     }
@@ -93,8 +93,8 @@ final class XmlTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        self::assertSame(
-            file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
+        $this->compareXmls(
+            __DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml',
             $generator->endDocument('test')
         );
     }
@@ -112,8 +112,8 @@ final class XmlTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        self::assertSame(
-            file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
+        $this->compareXmls(
+            __DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml',
             $generator->endDocument('test')
         );
     }
@@ -131,8 +131,8 @@ final class XmlTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        self::assertSame(
-            file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
+        $this->compareXmls(
+            __DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml',
             $generator->endDocument('test')
         );
     }
@@ -149,8 +149,8 @@ final class XmlTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        self::assertSame(
-            file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
+        $this->compareXmls(
+            __DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml',
             $generator->endDocument('test'),
         );
     }
@@ -168,8 +168,8 @@ final class XmlTest extends GeneratorTest
 
         $generator->endObjectElement('element');
 
-        self::assertSame(
-            file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
+        $this->compareXmls(
+            __DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml',
             $generator->endDocument('test')
         );
     }
@@ -194,8 +194,8 @@ final class XmlTest extends GeneratorTest
 
         $generator->endObjectElement('elementList');
 
-        self::assertSame(
-            file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
+        $this->compareXmls(
+            __DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml',
             $generator->endDocument('test')
         );
     }
@@ -216,8 +216,8 @@ final class XmlTest extends GeneratorTest
 
         $generator->endHashElement('elements');
 
-        self::assertSame(
-            file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
+        $this->compareXmls(
+            __DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml',
             $generator->endDocument('test')
         );
     }
@@ -238,8 +238,8 @@ final class XmlTest extends GeneratorTest
         $generator->endList('simpleValue');
         $generator->endObjectElement('element');
 
-        self::assertSame(
-            file_get_contents(__DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml'),
+        $this->compareXmls(
+            __DIR__ . '/_fixtures/' . __FUNCTION__ . '.xml',
             $generator->endDocument('test')
         );
     }
@@ -284,5 +284,20 @@ final class XmlTest extends GeneratorTest
         $this->generator->setFormatOutput(true);
 
         return $this->generator;
+    }
+
+    private function compareXmls(string|false $expected, string $result): void
+    {
+        $expectedXml = new \DOMDocument();
+        $expectedXml->preserveWhiteSpace = false;
+        $expectedXml->formatOutput = true;
+        $expectedXml->load((string)$expected);
+
+        $actualXml = new \DOMDocument();
+        $actualXml->preserveWhiteSpace = false;
+        $actualXml->formatOutput = true;
+        $actualXml->loadXML($result);
+
+        self::assertEquals($expectedXml->saveXML(), $actualXml->saveXML());
     }
 }

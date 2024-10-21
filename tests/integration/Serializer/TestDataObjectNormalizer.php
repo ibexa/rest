@@ -24,19 +24,18 @@ final class TestDataObjectNormalizer implements NormalizerInterface, NormalizerA
     {
         assert($object instanceof TestDataObject);
 
-        $scalarData = [
+        $data = [
             'string' => $object->string,
             'int' => $object->int,
-            'innerObject' => $object->innerObject,
             'location' => null,
         ];
 
         if ($object->apiLocation instanceof Location) {
-            $normalizedLocation = $this->normalizer->normalize($object->apiLocation);
-            $scalarData['location'] = $normalizedLocation['Location'] ?? null;
+            $normalizedLocation = $this->normalizer->normalize($object->apiLocation, $format);
+            $data['location'] = $normalizedLocation['#'] ?? $normalizedLocation['Location'] ?? null;
         }
 
-        return $scalarData;
+        return $data;
     }
 
     public function supportsNormalization(mixed $data, ?string $format = null): bool

@@ -77,7 +77,7 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
 
         return $this->normalizer->supportsNormalization(
             $data,
-            null,
+            $format,
             $context + [self::CALLED_CONTEXT => true],
         );
     }

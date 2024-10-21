@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Output\Generator\InMemory;
 
 use Ibexa\Rest\Output\Generator\Data;
-use Ibexa\Rest\Output\Generator\Data\ArrayList;
 use Ibexa\Rest\Output\Generator\Json;
 use Ibexa\Rest\Output\Normalizer\ArrayListNormalizer;
 use Ibexa\Rest\Output\Normalizer\ArrayObjectNormalizer;
@@ -22,6 +21,7 @@ class Xml extends Json
 {
     public const string OUTER_ELEMENT = 'outer_element';
 
+    #[\Override]
     public function getMediaType($name): string
     {
         return $this->generateMediaTypeWithVendor($name, 'xml', $this->vendor);
@@ -31,12 +31,16 @@ class Xml extends Json
     public function startList($name): void
     {
         $this->checkStartList($name);
+
+        $this->isEmpty = false;
+
         $array = new Data\ArrayList($name, $this->json);
 
         $this->json->$name = $array;
         $this->json = $array;
     }
 
+    #[\Override]
     public function startAttribute($name, $value): void
     {
         $this->checkStartAttribute($name);
@@ -44,11 +48,13 @@ class Xml extends Json
         $this->json->{'@' . $name} = $value;
     }
 
+    #[\Override]
     public function serializeBool($boolValue): string
     {
         return $boolValue ? 'true' : 'false';
     }
 
+    #[\Override]
     public function startValueElement(string $name, $value, array $attributes = []): void
     {
         $this->checkStartValueElement($name);
@@ -64,13 +70,14 @@ class Xml extends Json
             $jsonValue->{'#'} = $value;
         }
 
-        if ($this->json instanceof Json\ArrayObject || $this->json instanceof ArrayList) {
+        if ($this->json instanceof Json\ArrayObject || $this->json instanceof Data\ArrayList) {
             $this->json->append($jsonValue);
         } else {
             $this->json->$name = $jsonValue;
         }
     }
 
+    #[\Override]
     public function endDocument(mixed $data): string
     {
         parent::endDocument($data);
@@ -96,6 +103,7 @@ class Xml extends Json
         return $serializer->serialize($data, 'xml', $encoderContext);
     }
 
+    #[\Override]
     public function getEncoderContext(array $data): array
     {
         return [

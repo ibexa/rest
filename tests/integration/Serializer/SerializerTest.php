@@ -46,7 +46,6 @@ final class SerializerTest extends IbexaKernelTestCase
         $expectedData = [
             'string' => 'some_string',
             'int' => 1,
-            'innerObject' => null,
             'location' => null,
         ];
 
@@ -60,11 +59,10 @@ final class SerializerTest extends IbexaKernelTestCase
         $dataObject = new TestDataObject(
             'some_string',
             1,
-            null,
             $this->locationService->loadLocation(2),
         );
 
-        $normalizedData = $this->serializer->normalize($dataObject);
+        $normalizedData = $this->serializer->normalize($dataObject, 'json');
 
         self::assertSame(
             'application/vnd.ibexa.api.Location+json',
@@ -83,19 +81,34 @@ final class SerializerTest extends IbexaKernelTestCase
         );
     }
 
-    public function testSerializeTestDataObjectWithApiLocation(): void
+    public function testSerializeTestDataObjectWithApiLocationXml(): void
     {
         $dataObject = new TestDataObject(
             'some_string',
             1,
-            null,
             $this->locationService->loadLocation(2),
         );
 
         $serializedData = $this->serializer->serialize($dataObject, 'xml');
-        self::assertResponseMatchesXmlSnapshot(
-            $serializedData,
-            self::SNAPSHOT_DIR . '/TestDataObject.xml',
+        $expectedXml = new \DOMDocument();
+        $expectedXml->preserveWhiteSpace = false;
+        $expectedXml->formatOutput = true;
+        $expectedXml->load(self::SNAPSHOT_DIR . '/TestDataObject.xml');
+
+        $actualXml = new \DOMDocument();
+        $actualXml->preserveWhiteSpace = false;
+        $actualXml->formatOutput = true;
+        $actualXml->loadXML($serializedData);
+
+        self::assertSame($expectedXml->saveXML(), $actualXml->saveXML());
+    }
+
+    public function testSerializeTestDataObjectWithApiLocationJson(): void
+    {
+        $dataObject = new TestDataObject(
+            'some_string',
+            1,
+            $this->locationService->loadLocation(2),
         );
 
         $serializedData = $this->serializer->serialize($dataObject, 'json');

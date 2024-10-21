@@ -284,18 +284,31 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         return $this->getGenerator()->endDocument('Version');
     }
 
-    private function assertSerializationSame($functionName)
+    private function assertSerializationSame(string $functionName): void
     {
         $fixtureFile = $this->getFixtureFile($functionName);
+        $isXml = str_starts_with(basename($fixtureFile), 'Xml');
+
         $actualResult = $this->getGeneratorOutput();
 
-        // file_put_contents( $fixtureFile, $actualResult );
-        // $this->markTestIncomplete( "Wrote fixture to '{$fixtureFile}'." );
+        if ($isXml) {
+            $expectedXml = new \DOMDocument();
+            $expectedXml->preserveWhiteSpace = false;
+            $expectedXml->formatOutput = true;
+            $expectedXml->load($fixtureFile);
 
-        self::assertSame(
-            file_get_contents($this->getFixtureFile($functionName)),
-            $actualResult
-        );
+            $actualXml = new \DOMDocument();
+            $actualXml->preserveWhiteSpace = false;
+            $actualXml->formatOutput = true;
+            $actualXml->loadXML($actualResult);
+
+            self::assertSame($expectedXml->saveXML(), $actualXml->saveXML());
+        } else {
+            self::assertSame(
+                file_get_contents($this->getFixtureFile($functionName)),
+                $actualResult
+            );
+        }
     }
 
     private function getFixtureFile($functionName)

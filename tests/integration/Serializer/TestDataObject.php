@@ -15,7 +15,6 @@ final readonly class TestDataObject
     public function __construct(
         public string $string,
         public int $int,
-        public ?self $innerObject = null,
         public ?Location $apiLocation = null,
     ) {
     }
