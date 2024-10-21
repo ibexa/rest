@@ -1,7 +1,6 @@
 {
     "string": "some_string",
     "int": 1,
-    "innerObject": null,
     "location": {
         "_media-type": "application\/vnd.ibexa.api.Location+json",
         "_href": "\/api\/ibexa\/v2\/content\/locations\/1\/2",

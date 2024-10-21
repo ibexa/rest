@@ -19,12 +19,10 @@ final class ArrayList extends \ArrayObject
     ) {
         $this->name = $name;
         $this->parent = $parent;
+
         parent::__construct();
     }
 
-    /**
-     * @return object
-     */
     public function getParent(): object
     {
         return $this->parent;
