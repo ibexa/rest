@@ -7,15 +7,18 @@
 
 namespace Ibexa\Rest\Output\Generator\Data;
 
+use Ibexa\Rest\Output\Generator\Json\ArrayObject;
+use Ibexa\Rest\Output\Generator\Json\JsonObject;
+
 final class ArrayList extends \ArrayObject
 {
-    private object $parent;
+    private self|JsonObject|ArrayObject|null $parent;
 
     private string $name;
 
     public function __construct(
         string $name,
-        object $parent
+        self|JsonObject|ArrayObject|null $parent,
     ) {
         $this->name = $name;
         $this->parent = $parent;
@@ -23,7 +26,7 @@ final class ArrayList extends \ArrayObject
         parent::__construct();
     }
 
-    public function getParent(): object
+    public function getParent(): self|JsonObject|ArrayObject|null
     {
         return $this->parent;
     }

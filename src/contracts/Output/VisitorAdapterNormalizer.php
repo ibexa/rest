@@ -124,7 +124,7 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
         $context += [self::CALLED_CONTEXT => true];
 
         if ($format === 'xml') {
-            $context += [Generator\InMemory\Xml::OUTER_ELEMENT => true];
+            $context += [Generator\Xml::OUTER_ELEMENT => true];
         }
 
         return $context;
@@ -133,8 +133,8 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
     private function createGenerator(string $format): BaseGenerator
     {
         if ($format === 'xml') {
-            return new Generator\InMemory\Xml(
-                new Generator\InMemory\Xml\FieldTypeHashGenerator($this->normalizer),
+            return new Generator\Xml(
+                new Generator\Xml\FieldTypeHashGenerator($this->normalizer),
             );
         }
 

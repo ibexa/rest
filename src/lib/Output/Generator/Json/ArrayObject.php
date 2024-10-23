@@ -7,7 +7,9 @@
 
 namespace Ibexa\Rest\Output\Generator\Json;
 
+use AllowDynamicProperties;
 use ArrayObject as NativeArrayObject;
+use Ibexa\Rest\Output\Generator\Data\ArrayList;
 
 /**
  * Json array object.
@@ -15,31 +17,28 @@ use ArrayObject as NativeArrayObject;
  * Special JSON array object implementation, which allows to access the
  * parent object it is assigned to again.
  */
+#[AllowDynamicProperties]
 class ArrayObject extends NativeArrayObject
 {
     /**
      * Reference to the parent node.
-     *
-     * @var \Ibexa\Rest\Output\Generator\Json\JsonObject
      */
-    protected $_ref_parent;
+    protected self|JsonObject|ArrayList|null $_ref_parent;
 
     /**
      * Construct from optional parent node.
-     *
-     * @param mixed $_ref_parent
      */
-    public function __construct($_ref_parent)
+    public function __construct(self|JsonObject|ArrayList|null $_ref_parent)
     {
         $this->_ref_parent = $_ref_parent;
+
+        parent::__construct();
     }
 
     /**
      * Get Parent of current node.
-     *
-     * @return \Ibexa\Rest\Output\Generator\Json\JsonObject
      */
-    public function getParent()
+    public function getParent(): self|JsonObject|ArrayList|null
     {
         return $this->_ref_parent;
     }

@@ -6,10 +6,9 @@
  */
 declare(strict_types=1);
 
-namespace Ibexa\Rest\Output\Generator\InMemory;
+namespace Ibexa\Rest\Output\Generator;
 
-use Ibexa\Rest\Output\Generator\Data;
-use Ibexa\Rest\Output\Generator\Json;
+use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Rest\Output\Normalizer\ArrayListNormalizer;
 use Ibexa\Rest\Output\Normalizer\ArrayObjectNormalizer;
 use Ibexa\Rest\Output\Normalizer\JsonObjectNormalizer;
@@ -17,18 +16,26 @@ use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-class Xml extends Json
+class Xml extends Generator
 {
     public const string OUTER_ELEMENT = 'outer_element';
 
+    public function __construct(
+        Xml\FieldTypeHashGenerator $fieldTypeHashGenerator,
+        string $vendor = 'vnd.ibexa.api',
+    ) {
+        $this->fieldTypeHashGenerator = $fieldTypeHashGenerator;
+        $this->vendor = $vendor;
+    }
+
     #[\Override]
-    public function getMediaType($name): string
+    public function getMediaType(string $name): string
     {
         return $this->generateMediaTypeWithVendor($name, 'xml', $this->vendor);
     }
 
     #[\Override]
-    public function startList($name): void
+    public function startList(string $name): void
     {
         $this->checkStartList($name);
 
@@ -41,7 +48,7 @@ class Xml extends Json
     }
 
     #[\Override]
-    public function startAttribute($name, $value): void
+    public function startAttribute(string $name, mixed $value): void
     {
         $this->checkStartAttribute($name);
 
@@ -49,13 +56,13 @@ class Xml extends Json
     }
 
     #[\Override]
-    public function serializeBool($boolValue): string
+    public function serializeBool(mixed $boolValue): string
     {
         return $boolValue ? 'true' : 'false';
     }
 
     #[\Override]
-    public function startValueElement(string $name, $value, array $attributes = []): void
+    public function startValueElement(string $name, mixed $value, array $attributes = []): void
     {
         $this->checkStartValueElement($name);
 
@@ -80,7 +87,7 @@ class Xml extends Json
     #[\Override]
     public function endDocument(mixed $data): string
     {
-        parent::endDocument($data);
+        parent::checkEndDocument($data);
 
         $data = $this->getData();
 
@@ -101,6 +108,12 @@ class Xml extends Json
         $serializer = new Serializer($normalizers, $encoders);
 
         return $serializer->serialize($data, 'xml', $encoderContext);
+    }
+
+    #[\Override]
+    public function getData(): Json\JsonObject|Json\ArrayObject|Data\ArrayList
+    {
+        return $this->json;
     }
 
     #[\Override]

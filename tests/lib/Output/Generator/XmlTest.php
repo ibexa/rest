@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Rest\Output\Generator;
 
 use Ibexa\Contracts\Rest\Output\Generator;
-use Ibexa\Rest\Output\Generator\InMemory;
+use Ibexa\Rest\Output\Generator\Xml;
 use Ibexa\Tests\Rest\Output\GeneratorTest;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
@@ -274,10 +274,10 @@ final class XmlTest extends GeneratorTest
     protected function getGenerator(): Generator
     {
         if (!isset($this->generator)) {
-            $fieldTypeHashGenerator = new InMemory\Xml\FieldTypeHashGenerator(
+            $fieldTypeHashGenerator = new Xml\FieldTypeHashGenerator(
                 $this->createMock(NormalizerInterface::class),
             );
-            $this->generator = new InMemory\Xml(
+            $this->generator = new Xml(
                 $fieldTypeHashGenerator,
             );
         }

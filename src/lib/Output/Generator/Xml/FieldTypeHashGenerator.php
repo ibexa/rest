@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace Ibexa\Rest\Output\Generator\InMemory\Xml;
+namespace Ibexa\Rest\Output\Generator\Xml;
 
 use Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator as JsonFieldTypeHashGenerator;
 use Ibexa\Rest\Output\Generator\Json\JsonObject;
@@ -42,8 +42,6 @@ final class FieldTypeHashGenerator extends JsonFieldTypeHashGenerator
     protected function generateListArray($parent, array $listArray): JsonObject
     {
         $object = new JsonObject($parent);
-
-        /** @phpstan-ignore-next-line */
         $object->value = [];
 
         foreach ($listArray as $listItem) {
@@ -58,8 +56,6 @@ final class FieldTypeHashGenerator extends JsonFieldTypeHashGenerator
     protected function generateHashArray($parent, array $hashArray): JsonObject
     {
         $object = new JsonObject($parent);
-
-        /** @phpstan-ignore-next-line */
         $object->value = [];
 
         foreach ($hashArray as $hashKey => $hashItem) {

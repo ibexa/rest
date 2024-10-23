@@ -325,7 +325,7 @@ services:
     ibexa.rest.output.visitor.xml:
         class: Ibexa\Contracts\Rest\Output\Visitor
         arguments:
-            $generator: '@Ibexa\Rest\Output\Generator\InMemory\Xml'
+            $generator: '@Ibexa\Rest\Output\Generator\Xml'
             $normalizer: '@ibexa.rest.serializer'
             $encoder: '@ibexa.rest.serializer.encoder.xml'
             $valueObjectVisitorResolver: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver'
@@ -334,11 +334,11 @@ services:
             - { name: ibexa.rest.output.visitor, regexps: ibexa.rest.output.visitor.xml.regexps }
 
     # format output generators
-    Ibexa\Rest\Output\Generator\InMemory\Xml:
+    Ibexa\Rest\Output\Generator\Xml:
         arguments:
-            $fieldTypeHashGenerator: '@Ibexa\Rest\Output\Generator\InMemory\Xml\FieldTypeHashGenerator'
+            $fieldTypeHashGenerator: '@Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator'
 
-    Ibexa\Rest\Output\Generator\InMemory\Xml\FieldTypeHashGenerator:
+    Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator:
         arguments:
             $normalizer: '@ibexa.rest.serializer'
             $logger: '@logger'

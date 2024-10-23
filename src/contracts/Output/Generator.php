@@ -4,8 +4,13 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Contracts\Rest\Output;
+
+use Ibexa\Rest\Output\Generator\Data;
+use Ibexa\Rest\Output\Generator\Json;
+use Ibexa\Rest\Output\Generator\Xml;
 
 /**
  * Output generator.
@@ -13,31 +18,55 @@ namespace Ibexa\Contracts\Rest\Output;
 abstract class Generator
 {
     /**
+     * Keeps track if the document is still empty.
+     */
+    protected bool $isEmpty = true;
+
+    /**
      * Generator creation stack.
      *
      * Use to check if it is OK to start / close the requested element in the
      * current state.
-     *
-     * @var array
      */
-    protected $stack = [];
+    protected array $stack = [];
 
     /**
      * If set to true, output will be formatted and indented.
-     *
-     * @var bool
      */
-    protected $formatOutput = false;
+    protected bool $formatOutput = false;
 
-    public function setFormatOutput($formatOutput)
+    /**
+     * Enables developer to modify REST response media type prefix.
+     */
+    protected string $vendor;
+
+    /**
+     * Generator for field type hash values.
+     */
+    protected Json\FieldTypeHashGenerator|Xml\FieldTypeHashGenerator $fieldTypeHashGenerator;
+
+    /**
+     * Data structure which is build during visiting.
+     */
+    protected Json\JsonObject|Json\ArrayObject|Data\ArrayList $json;
+
+    public function setFormatOutput(bool $formatOutput): void
     {
-        $this->formatOutput = (bool)$formatOutput;
+        $this->formatOutput = $formatOutput;
+    }
+
+    /**
+     * Returns if the document is empty or already contains data.
+     */
+    public function isEmpty(): bool
+    {
+        return $this->isEmpty;
     }
 
     /**
      * Reset output visitor to a virgin state.
      */
-    public function reset()
+    public function reset(): void
     {
         $this->stack = [];
         $this->isEmpty = true;
@@ -45,24 +74,20 @@ abstract class Generator
 
     /**
      * Start document.
-     *
-     * @param mixed $data
      */
-    abstract public function startDocument($data);
+    public function startDocument(mixed $data): void
+    {
+        $this->checkStartDocument($data);
 
-    /**
-     * Returns if the document is empty or already contains data.
-     *
-     * @return bool
-     */
-    abstract public function isEmpty();
+        $this->isEmpty = true;
+
+        $this->json = new Json\JsonObject();
+    }
 
     /**
      * Check start document.
-     *
-     * @param mixed $data
      */
-    protected function checkStartDocument($data)
+    protected function checkStartDocument(mixed $data): void
     {
         if (count($this->stack)) {
             throw new Exceptions\OutputGeneratorException(
@@ -75,39 +100,65 @@ abstract class Generator
 
     /**
      * End document.
-     *
-     * Returns the generated document as a string.
-     *
-     * @param mixed $data
-     *
-     * @return string
      */
-    abstract public function endDocument($data);
+    abstract public function endDocument(mixed $data): string;
 
     /**
      * Check end document.
-     *
-     * @param mixed $data
      */
-    protected function checkEndDocument($data)
+    protected function checkEndDocument(mixed $data): void
     {
         $this->checkEnd('document', $data);
     }
 
     /**
      * Start object element.
-     *
-     * @param string $name
-     * @param string $mediaTypeName
      */
-    abstract public function startObjectElement($name, $mediaTypeName = null);
+    public function startObjectElement(string $name, ?string $mediaTypeName = null): void
+    {
+        $this->checkStartObjectElement($name);
+
+        $this->isEmpty = false;
+
+        $mediaTypeName ??= $name;
+
+        $object = new Json\JsonObject($this->json);
+
+        if ($this->json instanceof Json\ArrayObject || $this->json instanceof Data\ArrayList) {
+            $this->json->append($object);
+            if ($this->json instanceof Data\ArrayList) {
+                $this->json->setName($name);
+            }
+            $this->json = $object;
+        } else {
+            $this->json->$name = $object;
+            $this->json = $object;
+        }
+
+        $this->attribute('media-type', $this->getMediaType($mediaTypeName));
+    }
+
+    /**
+     * End object element.
+     */
+    public function endObjectElement(string $name): void
+    {
+        $this->checkEndObjectElement($name);
+
+        if ($this->json->getParent() === null) {
+            throw new \LogicException(sprintf(
+                'Parent element at %s cannot be `null`.',
+                __METHOD__,
+            ));
+        }
+
+        $this->json = $this->json->getParent();
+    }
 
     /**
      * Check start object element.
-     *
-     * @param mixed $data
      */
-    protected function checkStartObjectElement($data)
+    protected function checkStartObjectElement(mixed $data): void
     {
         $this->checkStart('objectElement', $data, ['document', 'objectElement', 'hashElement', 'list']);
 
@@ -124,35 +175,40 @@ abstract class Generator
     }
 
     /**
-     * End object element.
-     *
-     * @param string $name
-     */
-    abstract public function endObjectElement($name);
-
-    /**
      * Check end object element.
-     *
-     * @param mixed $data
      */
-    protected function checkEndObjectElement($data)
+    protected function checkEndObjectElement(mixed $data): void
     {
         $this->checkEnd('objectElement', $data);
     }
 
     /**
      * Start hash element.
-     *
-     * @param string $name
      */
-    abstract public function startHashElement($name);
+    public function startHashElement(string $name): void
+    {
+        $this->checkStartHashElement($name);
+
+        $this->isEmpty = false;
+
+        $object = new Json\JsonObject($this->json);
+
+        if ($this->json instanceof Json\ArrayObject || $this->json instanceof Data\ArrayList) {
+            $this->json->append($object);
+            if ($this->json instanceof Data\ArrayList) {
+                $this->json->setName($name);
+            }
+            $this->json = $object;
+        } else {
+            $this->json->$name = $object;
+            $this->json = $object;
+        }
+    }
 
     /**
      * Check start hash element.
-     *
-     * @param mixed $data
      */
-    protected function checkStartHashElement($data)
+    protected function checkStartHashElement(mixed $data): void
     {
         $this->checkStart('hashElement', $data, ['document', 'objectElement', 'hashElement', 'list']);
 
@@ -170,28 +226,33 @@ abstract class Generator
 
     /**
      * End hash element.
-     *
-     * @param string $name
      */
-    abstract public function endHashElement($name);
+    public function endHashElement(string $name): void
+    {
+        $this->checkEndHashElement($name);
+
+        if ($this->json->getParent() === null) {
+            throw new \LogicException(sprintf(
+                'Parent element at %s cannot be `null`.',
+                __METHOD__,
+            ));
+        }
+
+        $this->json = $this->json->getParent();
+    }
 
     /**
      * Check end hash element.
-     *
-     * @param mixed $data
      */
-    protected function checkEndHashElement($data)
+    protected function checkEndHashElement(mixed $data): void
     {
         $this->checkEnd('hashElement', $data);
     }
 
     /**
      * Generate value element with given $name and $value.
-     *
-     * @param string $name
-     * @param mixed $value
      */
-    public function valueElement(string $name, $value): void
+    public function valueElement(string $name, mixed $value): void
     {
         $this->startValueElement($name, $value);
         $this->endValueElement($name);
@@ -201,76 +262,74 @@ abstract class Generator
      * @phpstan-param scalar|null $value
      * @phpstan-param array<string, scalar|null> $attributes
      */
-    abstract public function startValueElement(string $name, $value, array $attributes = []): void;
+    abstract public function startValueElement(string $name, mixed $value, array $attributes = []): void;
 
     /**
      * Check start value element.
-     *
-     * @param mixed $data
      */
-    protected function checkStartValueElement($data)
+    protected function checkStartValueElement(mixed $data): void
     {
         $this->checkStart('valueElement', $data, ['objectElement', 'hashElement', 'list']);
     }
 
     /**
      * End value element.
-     *
-     * @param string $name
      */
-    abstract public function endValueElement($name);
+    public function endValueElement(string $name): void
+    {
+        $this->checkEndValueElement($name);
+    }
 
     /**
      * Check end value element.
-     *
-     * @param mixed $data
      */
-    protected function checkEndValueElement($data)
+    protected function checkEndValueElement(mixed $data): void
     {
         $this->checkEnd('valueElement', $data);
     }
 
     /**
      * Start list.
-     *
-     * @param string $name
      */
-    abstract public function startList($name);
+    abstract public function startList(string $name): void;
 
     /**
      * Check start list.
-     *
-     * @param mixed $data
      */
-    protected function checkStartList($data)
+    protected function checkStartList(mixed $data): void
     {
         $this->checkStart('list', $data, ['objectElement', 'hashElement']);
     }
 
     /**
      * End list.
-     *
-     * @param string $name
      */
-    abstract public function endList($name);
+    public function endList(string $name): void
+    {
+        $this->checkEndList($name);
+
+        if ($this->json->getParent() === null) {
+            throw new \LogicException(sprintf(
+                'Parent element at %s cannot be `null`.',
+                __METHOD__,
+            ));
+        }
+
+        $this->json = $this->json->getParent();
+    }
 
     /**
      * Check end list.
-     *
-     * @param mixed $data
      */
-    protected function checkEndList($data)
+    protected function checkEndList(mixed $data): void
     {
         $this->checkEnd('list', $data);
     }
 
     /**
      * Generate attribute with given $name and $value.
-     *
-     * @param string $name
-     * @param mixed $value
      */
-    public function attribute(string $name, $value): void
+    public function attribute(string $name, mixed $value): void
     {
         $this->startAttribute($name, $value);
         $this->endAttribute($name);
@@ -278,59 +337,46 @@ abstract class Generator
 
     /**
      * Start attribute.
-     *
-     * @param string $name
-     * @param string $value
      */
-    abstract public function startAttribute($name, $value);
+    abstract public function startAttribute(string $name, mixed $value): void;
 
     /**
      * Check start attribute.
-     *
-     * @param mixed $data
      */
-    protected function checkStartAttribute($data)
+    protected function checkStartAttribute(mixed $data): void
     {
         $this->checkStart('attribute', $data, ['objectElement', 'hashElement']);
     }
 
     /**
      * End attribute.
-     *
-     * @param string $name
      */
-    abstract public function endAttribute($name);
+    public function endAttribute(string $name): void
+    {
+        $this->checkEndAttribute($name);
+    }
 
     /**
      * Check end attribute.
-     *
-     * @param mixed $data
      */
-    protected function checkEndAttribute($data)
+    protected function checkEndAttribute(mixed $data): void
     {
         $this->checkEnd('attribute', $data);
     }
 
     /**
      * Get media type.
-     *
-     * @param string $name
-     *
-     * @return string
      */
-    abstract public function getMediaType($name);
+    abstract public function getMediaType(string $name): string;
 
     /**
      * Generates a media type from $name, $type and $vendor.
-     *
-     * @param string $name
-     * @param string $type
-     * @param string $vendor
-     *
-     * @return string
      */
-    protected function generateMediaTypeWithVendor($name, $type, $vendor = 'vnd.ibexa.api')
-    {
+    protected function generateMediaTypeWithVendor(
+        string $name,
+        string $type,
+        string $vendor = 'vnd.ibexa.api'
+    ): string {
         return "application/{$vendor}.{$name}+{$type}";
     }
 
@@ -338,20 +384,22 @@ abstract class Generator
      * Generates a generic representation of the scalar, hash or list given in
      * $hashValue into the document, using an element of $hashElementName as
      * its parent.
-     *
-     * @param string $hashElementName
-     * @param mixed $hashValue
      */
-    abstract public function generateFieldTypeHash($hashElementName, $hashValue);
+    public function generateFieldTypeHash(string $hashElementName, mixed $hashValue): void
+    {
+        $this->fieldTypeHashGenerator->generateHashValue(
+            $this->json,
+            $hashElementName,
+            $hashValue
+        );
+    }
 
     /**
      * Check close / end operation.
      *
-     * @param string $type
-     * @param mixed $data
      * @param array $validParents
      */
-    protected function checkStart($type, $data, array $validParents)
+    protected function checkStart(string $type, mixed $data, array $validParents): void
     {
         $lastTag = end($this->stack);
 
@@ -379,11 +427,8 @@ abstract class Generator
 
     /**
      * Check close / end operation.
-     *
-     * @param string $type
-     * @param mixed $data
      */
-    protected function checkEnd($type, $data)
+    protected function checkEnd(string $type, mixed $data): void
     {
         $lastTag = array_pop($this->stack);
 
@@ -410,14 +455,10 @@ abstract class Generator
 
     /**
      * Serializes a boolean value.
-     *
-     * @param bool $boolValue
-     *
-     * @return mixed
      */
-    abstract public function serializeBool($boolValue);
+    abstract public function serializeBool(mixed $boolValue): bool|string;
 
-    public function getData(): object
+    public function getData(): Json\JsonObject|Json\ArrayObject|Data\ArrayList
     {
         throw new \LogicException(sprintf(
             '%s does not maintain state',

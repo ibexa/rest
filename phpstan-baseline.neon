@@ -186,152 +186,7 @@ parameters:
 			path: src/contracts/Output/Exceptions/NoVisitorFoundException.php
 
 		-
-			message: "#^Access to an undefined property Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:\\$isEmpty\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkEnd\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkEndAttribute\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkEndDocument\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkEndHashElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkEndList\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkEndObjectElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkEndValueElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkStart\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
 			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkStart\\(\\) has parameter \\$validParents with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkStartAttribute\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkStartDocument\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkStartHashElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkStartList\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkStartObjectElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkStartValueElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:endAttribute\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:endHashElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:endList\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:endObjectElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:endValueElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:generateFieldTypeHash\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:reset\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:setFormatOutput\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:setFormatOutput\\(\\) has parameter \\$formatOutput with no type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:startAttribute\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:startDocument\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:startHashElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:startList\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:startObjectElement\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/contracts/Output/Generator.php
 
@@ -626,71 +481,6 @@ parameters:
 			path: src/lib/Output/Generator/Json.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:endAttribute\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:endHashElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:endList\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:endObjectElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:endValueElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:generateFieldTypeHash\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:startAttribute\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:startDocument\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:startHashElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:startList\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:startObjectElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json.php
-
-		-
-			message: "#^Parameter \\#1 \\$parent of method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\FieldTypeHashGenerator\\:\\:generateHashValue\\(\\) expects Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\ArrayObject\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject, Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Data\\\\ArrayList\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\ArrayObject\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject given\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json.php
-
-		-
-			message: "#^Property Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\:\\:\\$json \\(Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Data\\\\ArrayList\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\ArrayObject\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject\\) does not accept object\\.$#"
-			count: 3
-			path: src/lib/Output/Generator/Json.php
-
-		-
 			message: "#^Cannot call method error\\(\\) on Psr\\\\Log\\\\LoggerInterface\\|null\\.$#"
 			count: 1
 			path: src/lib/Output/Generator/Json/FieldTypeHashGenerator.php
@@ -702,6 +492,11 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\FieldTypeHashGenerator\\:\\:isNumericArray\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/Output/Generator/Json/FieldTypeHashGenerator.php
+
+		-
+			message: "#^Parameter \\#1 \\$parent of method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\FieldTypeHashGenerator\\:\\:generateValue\\(\\) expects Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\ArrayObject\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject, Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Data\\\\ArrayList\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\ArrayObject\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject given\\.$#"
 			count: 1
 			path: src/lib/Output/Generator/Json/FieldTypeHashGenerator.php
 
@@ -2246,11 +2041,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentList.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:startAttribute\\(\\) expects string, int given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ContentList.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\ContentTypeGroup\\:\\:visit\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeGroup.php
@@ -2671,11 +2461,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/RestExecutedView.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:startAttribute\\(\\) expects string, float given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/RestExecutedView.php
-
-		-
 			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestContent constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>\\|null, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/RestExecutedView.php
@@ -2731,17 +2516,7 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/RestUser.php
 
 		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:startAttribute\\(\\) expects string, int given\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/RestUser.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Output\\\\ValueObjectVisitor\\\\RestUserGroup\\:\\:visit\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/RestUserGroup.php
-
-		-
-			message: "#^Parameter \\#2 \\$value of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:startAttribute\\(\\) expects string, int given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/RestUserGroup.php
 
@@ -5986,19 +5761,9 @@ parameters:
 			path: tests/lib/Output/Generator/JsonTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$boolValue of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:serializeBool\\(\\) expects bool, string given\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/JsonTest.php
-
-		-
 			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Output\\\\Generator\\\\JsonTest\\:\\:\\$generator \\(Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\) in isset\\(\\) is not nullable\\.$#"
 			count: 1
 			path: tests/lib/Output/Generator/JsonTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$boolValue of method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:serializeBool\\(\\) expects bool, string given\\.$#"
-			count: 1
-			path: tests/lib/Output/Generator/XmlTest.php
 
 		-
 			message: "#^Property Ibexa\\\\Tests\\\\Rest\\\\Output\\\\GeneratorTest\\:\\:\\$generator \\(Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\) in isset\\(\\) is not nullable\\.$#"

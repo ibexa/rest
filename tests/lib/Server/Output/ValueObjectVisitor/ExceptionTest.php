@@ -10,7 +10,7 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use DOMDocument;
 use DOMXPath;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
-use Ibexa\Rest\Output\Generator\InMemory\Xml;
+use Ibexa\Rest\Output\Generator\Xml;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\Exception as ExceptionValueObjectVisitor;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 use Symfony\Contracts\Translation\TranslatorInterface;

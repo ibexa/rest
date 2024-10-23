@@ -36,7 +36,7 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * Generates the field type value $hashValue as a child of the given Object
      * using $hashElementName as the property name.
      *
-     * @param \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject $parent
+     * @param \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject|\Ibexa\Rest\Output\Generator\Data\ArrayList $parent
      * @param string $hashElementName
      * @param mixed $hashValue
      */
@@ -96,7 +96,7 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
     /**
      * Generates a JSON array from the given $hashArray with $parent.
      *
-     * @param \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject $parent
+     * @param \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject|\Ibexa\Rest\Output\Generator\Data\ArrayList $parent
      * @param array<int> $listArray
      *
      * @return \Ibexa\Rest\Output\Generator\Json\ArrayObject|JsonObject
