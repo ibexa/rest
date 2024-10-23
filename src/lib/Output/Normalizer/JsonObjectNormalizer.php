@@ -8,8 +8,8 @@
 namespace Ibexa\Rest\Output\Normalizer;
 
 use Ibexa\Rest\Output\Generator\Data\ArrayList;
-use Ibexa\Rest\Output\Generator\Xml;
 use Ibexa\Rest\Output\Generator\Json\JsonObject;
+use Ibexa\Rest\Output\Generator\Xml;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
