@@ -7,8 +7,8 @@
 
 namespace Ibexa\Tests\Rest\Output\Generator\Xml;
 
-use Ibexa\Rest\Output\Generator\InMemory\Xml;
-use Ibexa\Rest\Output\Generator\InMemory\Xml\FieldTypeHashGenerator;
+use Ibexa\Rest\Output\Generator\Xml;
+use Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator;
 use Ibexa\Tests\Rest\Output\Generator\FieldTypeHashGeneratorBaseTest;
 
 final class FieldTypeHashGeneratorTest extends FieldTypeHashGeneratorBaseTest
