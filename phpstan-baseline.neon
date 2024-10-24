@@ -476,26 +476,6 @@ parameters:
 			path: src/lib/Output/Generator/Json.php
 
 		-
-			message: "#^Cannot call method error\\(\\) on Psr\\\\Log\\\\LoggerInterface\\|null\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\FieldTypeHashGenerator\\:\\:generateHashValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\FieldTypeHashGenerator\\:\\:isNumericArray\\(\\) has parameter \\$value with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json/FieldTypeHashGenerator.php
-
-		-
-			message: "#^Parameter \\#1 \\$parent of method Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\FieldTypeHashGenerator\\:\\:generateValue\\(\\) expects Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\ArrayObject\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject, Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Data\\\\ArrayList\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\ArrayObject\\|Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject given\\.$#"
-			count: 1
-			path: src/lib/Output/Generator/Json/FieldTypeHashGenerator.php
-
-		-
 			message: "#^Access to an undefined property Ibexa\\\\Rest\\\\Output\\\\Generator\\\\Json\\\\JsonObject\\:\\:\\$\\#\\.$#"
 			count: 1
 			path: src/lib/Output/Generator/Xml.php
