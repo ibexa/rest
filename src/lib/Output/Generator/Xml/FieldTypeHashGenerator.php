@@ -8,12 +8,14 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Output\Generator\Xml;
 
-use Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator as JsonFieldTypeHashGenerator;
+use Ibexa\Rest\Output\Generator\AbstractFieldTypeHashGenerator;
+use Ibexa\Rest\Output\Generator\Data\ArrayList;
+use Ibexa\Rest\Output\Generator\Json\ArrayObject;
 use Ibexa\Rest\Output\Generator\Json\JsonObject;
 
-final class FieldTypeHashGenerator extends JsonFieldTypeHashGenerator
+final class FieldTypeHashGenerator extends AbstractFieldTypeHashGenerator
 {
-    protected function generateValue($parent, $value): mixed
+    protected function generateValue(JsonObject|ArrayObject|ArrayList $parent, mixed $value): mixed
     {
         if ($value === null) {
             return null;
@@ -30,17 +32,10 @@ final class FieldTypeHashGenerator extends JsonFieldTypeHashGenerator
         }
     }
 
-    protected function generateArrayValue($parent, $value): JsonObject
-    {
-        if ($this->isNumericArray($value)) {
-            return $this->generateListArray($parent, $value);
-        } else {
-            return $this->generateHashArray($parent, $value);
-        }
-    }
-
-    protected function generateListArray($parent, array $listArray): JsonObject
-    {
+    protected function generateListArray(
+        JsonObject|ArrayObject|ArrayList $parent,
+        array $listArray,
+    ): JsonObject|ArrayObject|ArrayList {
         $object = new JsonObject($parent);
         $object->value = [];
 
@@ -53,8 +48,10 @@ final class FieldTypeHashGenerator extends JsonFieldTypeHashGenerator
         return $object;
     }
 
-    protected function generateHashArray($parent, array $hashArray): JsonObject
-    {
+    protected function generateHashArray(
+        JsonObject|ArrayObject|ArrayList $parent,
+        array $hashArray,
+    ): JsonObject|ArrayObject|ArrayList {
         $object = new JsonObject($parent);
         $object->value = [];
 
