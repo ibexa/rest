@@ -7,7 +7,6 @@
 
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
@@ -16,6 +15,7 @@ use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
+use Ibexa\Core\Helper\RelationListHelper;
 use Ibexa\Rest\Server\Values\RestContent as RestContentValue;
 
 /**
@@ -23,30 +23,10 @@ use Ibexa\Rest\Server\Values\RestContent as RestContentValue;
  */
 class RestExecutedView extends ValueObjectVisitor
 {
-    /**
-     * Location service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
-     */
-    protected $locationService;
-
-    /**
-     * Content service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
-     */
-    protected $contentService;
-
-    /**
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
-     * @param \Ibexa\Contracts\Core\Repository\ContentService $contentService
-     */
     public function __construct(
-        LocationService $locationService,
-        ContentService $contentService
+        private readonly LocationService $locationService,
+        private readonly RelationListHelper $relationListHelper
     ) {
-        $this->locationService = $locationService;
-        $this->contentService = $contentService;
     }
 
     /**
@@ -128,7 +108,7 @@ class RestExecutedView extends ValueObjectVisitor
                     $mainLocation,
                     $searchHit->valueObject,
                     $searchHit->valueObject->getContentType(),
-                    $this->contentService->loadRelations($searchHit->valueObject->getVersionInfo())
+                    $this->relationListHelper->getRelations($searchHit->valueObject->getVersionInfo())
                 );
             } elseif ($searchHit->valueObject instanceof ApiValues\Location) {
                 $valueObject = $searchHit->valueObject;

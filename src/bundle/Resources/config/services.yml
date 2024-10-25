@@ -149,6 +149,7 @@ services:
             - '@ibexa.api.service.section'
             - '@ibexa.api.repository'
             - '@Ibexa\Contracts\Core\Repository\PermissionResolver'
+            - '@Ibexa\Core\Helper\RelationListHelper'
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\URLWildcard:

@@ -7,13 +7,13 @@
 
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
+use Ibexa\Core\Helper\RelationListHelper;
 use Ibexa\Rest\Server\Values\RestContent as RestContentValue;
 
 /**
@@ -21,18 +21,10 @@ use Ibexa\Rest\Server\Values\RestContent as RestContentValue;
  */
 class Location extends ValueObjectVisitor
 {
-    /** @var \Ibexa\Contracts\Core\Repository\LocationService */
-    private $locationService;
-
-    /** @var \Ibexa\Contracts\Core\Repository\ContentService */
-    private $contentService;
-
     public function __construct(
-        LocationService $locationService,
-        ContentService $contentService
+        private readonly LocationService $locationService,
+        private readonly RelationListHelper $relationListHelper
     ) {
-        $this->locationService = $locationService;
-        $this->contentService = $contentService;
     }
 
     /**
@@ -172,7 +164,7 @@ class Location extends ValueObjectVisitor
                 $mainLocation,
                 $content,
                 $content->getContentType(),
-                $this->contentService->loadRelations($content->getVersionInfo())
+                $this->relationListHelper->getRelations($content->getVersionInfo())
             )
         );
 
