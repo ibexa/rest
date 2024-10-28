@@ -11,8 +11,10 @@ use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\RelationList;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
+use Ibexa\Core\Helper\RelationListHelper;
 use Ibexa\Core\Repository\Values\Content;
 use Ibexa\Core\Repository\Values\Content as ApiValues;
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
@@ -115,7 +117,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     {
         return new ValueObjectVisitor\RestExecutedView(
             $this->getLocationServiceMock(),
-            $this->getContentServiceMock(),
+            new RelationListHelper($this->getContentServiceMock())
         );
     }
 
@@ -133,7 +135,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     public function getContentServiceMock()
     {
         $contentService = $this->createMock(ContentService::class);
-        $contentService->method('loadRelations')->willReturn([]);
+        $contentService->method('loadRelationList')->willReturn(new RelationList([]));
 
         return $contentService;
     }

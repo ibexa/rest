@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Parameter \\#1 \\$input of function array_slice expects array, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/Content.php
-
-		-
 			message: "#^Parameter \\#2 \\$str of function explode expects string, string\\|null given\\.$#"
 			count: 4
 			path: src/lib/Server/Controller/Content.php

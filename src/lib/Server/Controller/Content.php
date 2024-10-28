@@ -31,7 +31,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
  */
 class Content extends RestController
 {
-    public function __construct(private readonly RelationListHelper $relationListHelper, private readonly RelationListHelper $relationListHelper)
+    public function __construct(private readonly RelationListHelper $relationListHelper)
     {
     }
 

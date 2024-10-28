@@ -11,7 +11,9 @@ use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as ApiLocation;
+use Ibexa\Contracts\Core\Repository\Values\Content\RelationList;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException;
+use Ibexa\Core\Helper\RelationListHelper;
 use Ibexa\Core\Repository\Values\Content\Content;
 use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Core\Repository\Values\Content\VersionInfo;
@@ -77,9 +79,9 @@ final class LocationTest extends ValueObjectVisitorBaseTest
         $this->mockLoadLocation($location);
 
         $this->contentServiceMock->expects(self::once())
-            ->method('loadRelations')
+            ->method('loadRelationList')
             ->with($versionInfo)
-            ->willReturn([]);
+            ->willReturn(new RelationList([]));
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -139,6 +141,9 @@ final class LocationTest extends ValueObjectVisitorBaseTest
 
     protected function internalGetVisitor(): ValueObjectVisitor\Location
     {
-        return new ValueObjectVisitor\Location($this->locationServiceMock, $this->contentServiceMock);
+        return new ValueObjectVisitor\Location(
+            $this->locationServiceMock,
+            new RelationListHelper($this->contentServiceMock)
+        );
     }
 }
