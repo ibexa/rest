@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Controller;
 
+use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
@@ -31,8 +32,10 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
  */
 class Content extends RestController
 {
-    public function __construct(private readonly RelationListHelper $relationListHelper)
-    {
+    public function __construct(
+        private readonly ContentService $contentService,
+        private readonly RelationListHelper $relationListHelper
+    ) {
     }
 
     /**
@@ -610,18 +613,23 @@ class Content extends RestController
         $limit = $request->query->has('limit') ? (int)$request->query->get('limit') : -1;
 
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
-        $relationList = $this->relationListHelper->getRelations(
-            $this->repository->getContentService()->loadVersionInfo($contentInfo, $versionNumber)
+        $relationList = $this->contentService->loadRelationList(
+            $this->repository->getContentService()->loadVersionInfo($contentInfo, $versionNumber),
+            $offset,
+            $limit,
         );
 
-        $relationList = array_slice(
-            $relationList,
-            $offset >= 0 ? $offset : 0,
-            $limit >= 0 ? $limit : null
-        );
+        $relations = [];
+        foreach ($relationList as $relationListItem) {
+            if ($relationListItem->hasRelation()) {
+                /** @var \Ibexa\Core\Repository\Values\Content\Relation $relation */
+                $relation = $relationListItem->getRelation();
+                $relations[] = $relation;
+            }
+        }
 
         $relationListValue = new Values\RelationList(
-            $relationList,
+            $relations,
             $contentId,
             $versionNumber,
             $request->getPathInfo()

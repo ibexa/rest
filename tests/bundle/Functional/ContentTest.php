@@ -374,7 +374,7 @@ XML;
 
     /**
      * @depends testCreateDraftFromVersion
-     * Covers POST /content/objects/<contentId>/versions/<versionNumber>/relations/<relationId>
+     * Covers POST /content/objects/<contentId>/versions/<versionNumber>/relations
      *
      * @return string created relation HREF (/content/objects/<contentId>/versions/<versionNumber>/relations/<relationId>
      */
