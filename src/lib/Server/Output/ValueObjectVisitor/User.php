@@ -8,16 +8,16 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
+use Ibexa\Contracts\Core\Repository\ContentService\RelationListFacade;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
-use Ibexa\Core\Helper\RelationListHelper;
 use Ibexa\Rest\Output\DelegateValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestUser;
 
 final class User extends ValueObjectVisitor implements DelegateValueObjectVisitor
 {
-    public function __construct(private readonly RelationListHelper $relationListHelper)
+    public function __construct(private readonly RelationListFacade $relationListFacade)
     {
     }
 
@@ -32,8 +32,10 @@ final class User extends ValueObjectVisitor implements DelegateValueObjectVisito
                 $data->getContentType(),
                 $data->contentInfo,
                 $data->contentInfo->getMainLocation(),
-                $this->relationListHelper->getRelations(
-                    $data->getVersionInfo()
+                iterator_to_array(
+                    $this->relationListFacade->getRelations(
+                        $data->getVersionInfo()
+                    )
                 )
             )
         );

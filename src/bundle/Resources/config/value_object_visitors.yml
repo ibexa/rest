@@ -221,7 +221,7 @@ services:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
         class: Ibexa\Rest\Server\Output\ValueObjectVisitor\UserGroup
         arguments:
-            $relationListHelper: '@Ibexa\Core\Helper\RelationListHelper'
+            $relationListFacade: '@Ibexa\Contracts\Core\Repository\ContentService\RelationListFacade'
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Values\User\UserGroup }
 
@@ -272,7 +272,7 @@ services:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
         class: Ibexa\Rest\Server\Output\ValueObjectVisitor\User
         arguments:
-            $relationListHelper: '@Ibexa\Core\Helper\RelationListHelper'
+            $relationListFacade: '@Ibexa\Contracts\Core\Repository\ContentService\RelationListFacade'
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Values\User\User }
 
@@ -477,7 +477,7 @@ services:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Contracts\Core\Repository\Values\Content\Location }
         arguments:
             $locationService: '@ibexa.api.service.location'
-            $relationListHelper: '@Ibexa\Core\Helper\RelationListHelper'
+            $relationListFacade: '@Ibexa\Contracts\Core\Repository\ContentService\RelationListFacade'
 
     Ibexa\Rest\Server\Output\ValueObjectVisitor\LocationList:
         parent: Ibexa\Contracts\Rest\Output\ValueObjectVisitor
@@ -504,7 +504,7 @@ services:
         class: Ibexa\Rest\Server\Output\ValueObjectVisitor\RestExecutedView
         arguments:
             - '@ibexa.api.service.location'
-            - '@Ibexa\Core\Helper\RelationListHelper'
+            - '@Ibexa\Contracts\Core\Repository\ContentService\RelationListFacade'
         tags:
             - { name: ibexa.rest.output.value_object.visitor, type: Ibexa\Rest\Server\Values\RestExecutedView }
 

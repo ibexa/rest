@@ -11,16 +11,15 @@ use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
-use Ibexa\Contracts\Core\Repository\Values\Content\RelationList;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
-use Ibexa\Core\Helper\RelationListHelper;
 use Ibexa\Core\Repository\Values\Content;
 use Ibexa\Core\Repository\Values\Content as ApiValues;
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestExecutedView;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class RestExecutedViewTest extends ValueObjectVisitorBaseTest
 {
@@ -117,7 +116,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     {
         return new ValueObjectVisitor\RestExecutedView(
             $this->getLocationServiceMock(),
-            new RelationListHelper($this->getContentServiceMock())
+            $this->getRelationListFacadeMock()
         );
     }
 
@@ -129,15 +128,14 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         return $this->createMock(LocationService::class);
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\ContentService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    public function getContentServiceMock()
+    private function getRelationListFacadeMock(): ContentService\RelationListFacade&MockObject
     {
-        $contentService = $this->createMock(ContentService::class);
-        $contentService->method('loadRelationList')->willReturn(new RelationList([]));
+        $relationListFacade = $this->createMock(ContentService\RelationListFacade::class);
+        $relationListFacade->method('getRelations')->willReturnCallback(
+            static fn () => yield
+        );
 
-        return $contentService;
+        return $relationListFacade;
     }
 
     /**

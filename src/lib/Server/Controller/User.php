@@ -25,7 +25,6 @@ use Ibexa\Contracts\Core\Repository\Values\User\UserGroupRoleAssignment;
 use Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment;
 use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException;
-use Ibexa\Core\Helper\RelationListHelper;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions;
@@ -63,7 +62,7 @@ final class User extends RestController
 
     private PermissionResolver $permissionResolver;
 
-    private RelationListHelper $relationListHelper;
+    private ContentService\RelationListFacade $relationListFacade;
 
     public function __construct(
         UserService $userService,
@@ -74,7 +73,7 @@ final class User extends RestController
         SectionService $sectionService,
         Repository $repository,
         PermissionResolver $permissionResolver,
-        RelationListHelper $relationListHelper
+        ContentService\RelationListFacade $relationListFacade
     ) {
         $this->userService = $userService;
         $this->roleService = $roleService;
@@ -84,7 +83,7 @@ final class User extends RestController
         $this->sectionService = $sectionService;
         $this->repository = $repository;
         $this->permissionResolver = $permissionResolver;
-        $this->relationListHelper = $relationListHelper;
+        $this->relationListFacade = $relationListFacade;
     }
 
     /**
@@ -126,7 +125,7 @@ final class User extends RestController
                 $contentType,
                 $userGroupContentInfo,
                 $userGroupLocation,
-                $this->relationListHelper->getRelations($userGroup->getVersionInfo())
+                iterator_to_array($this->relationListFacade->getRelations($userGroup->getVersionInfo()))
             ),
             ['locationId' => $userGroupLocation->id]
         );
@@ -141,7 +140,7 @@ final class User extends RestController
 
         try {
             $userMainLocation = $this->locationService->loadLocation($userContentInfo->mainLocationId);
-            $relations = $this->relationListHelper->getRelations($user->getVersionInfo());
+            $relations = $this->relationListFacade->getRelations($user->getVersionInfo());
         } catch (UnauthorizedException $e) {
             // TODO: Hack for special case to allow current logged in user to load him/here self (but not relations)
             if ($user->id == $this->permissionResolver->getCurrentUserReference()->getUserId()) {
@@ -163,7 +162,7 @@ final class User extends RestController
                 $contentType,
                 $userContentInfo,
                 $userMainLocation,
-                $relations
+                iterator_to_array($relations)
             ),
             ['locationId' => $userContentInfo->mainLocationId]
         );
@@ -224,7 +223,7 @@ final class User extends RestController
                     $contentType,
                     $createdContentInfo,
                     $createdLocation,
-                    $this->relationListHelper->getRelations($createdUserGroup->getVersionInfo())
+                    iterator_to_array($this->relationListFacade->getRelations($createdUserGroup->getVersionInfo()))
                 ),
             ]
         );
@@ -269,7 +268,7 @@ final class User extends RestController
                     $contentType,
                     $createdContentInfo,
                     $createdLocation,
-                    $this->relationListHelper->getRelations($createdUser->getVersionInfo())
+                    iterator_to_array($this->relationListFacade->getRelations($createdUser->getVersionInfo()))
                 ),
             ]
         );
@@ -314,7 +313,7 @@ final class User extends RestController
             $contentType,
             $updatedGroup->getVersionInfo()->getContentInfo(),
             $userGroupLocation,
-            $this->relationListHelper->getRelations($updatedGroup->getVersionInfo())
+            iterator_to_array($this->relationListFacade->getRelations($updatedGroup->getVersionInfo()))
         );
     }
 
@@ -351,7 +350,7 @@ final class User extends RestController
             $contentType,
             $updatedContentInfo,
             $mainLocation,
-            $this->relationListHelper->getRelations($updatedUser->getVersionInfo())
+            iterator_to_array($this->relationListFacade->getRelations($updatedUser->getVersionInfo()))
         );
     }
 
@@ -486,7 +485,7 @@ final class User extends RestController
             $this->contentTypeService->loadContentType($user->contentInfo->contentTypeId),
             $user->contentInfo,
             $this->locationService->loadLocation($user->contentInfo->mainLocationId),
-            $this->relationListHelper->getRelations($user->getVersionInfo())
+            iterator_to_array($this->relationListFacade->getRelations($user->getVersionInfo()))
         );
     }
 
@@ -508,7 +507,7 @@ final class User extends RestController
                     $contentType,
                     $userGroupContentInfo,
                     $userGroupMainLocation,
-                    $this->relationListHelper->getRelations($userGroup->getVersionInfo())
+                    iterator_to_array($this->relationListFacade->getRelations($userGroup->getVersionInfo()))
                 ),
             ];
         } elseif ($request->query->has('roleId')) {
@@ -541,7 +540,7 @@ final class User extends RestController
             $contentType,
             $contentInfo,
             $userGroupLocation,
-            $this->relationListHelper->getRelations($userGroup->getVersionInfo())
+            iterator_to_array($this->relationListFacade->getRelations($userGroup->getVersionInfo()))
         );
     }
 
@@ -571,7 +570,7 @@ final class User extends RestController
                     $contentType,
                     $userGroupContentInfo,
                     $userGroupLocation,
-                    $this->relationListHelper->getRelations($userGroup->getVersionInfo())
+                    iterator_to_array($this->relationListFacade->getRelations($userGroup->getVersionInfo()))
                 );
             }
         }
@@ -722,7 +721,7 @@ final class User extends RestController
                 $contentType,
                 $subGroupContentInfo,
                 $subGroupLocation,
-                $this->relationListHelper->getRelations($subGroup->getVersionInfo())
+                iterator_to_array($this->relationListFacade->getRelations($subGroup->getVersionInfo()))
             );
         }
 
@@ -768,7 +767,7 @@ final class User extends RestController
                 $contentType,
                 $userGroupContentInfo,
                 $userGroupLocation,
-                $this->relationListHelper->getRelations($userGroup->getVersionInfo())
+                iterator_to_array($this->relationListFacade->getRelations($userGroup->getVersionInfo()))
             );
         }
 
@@ -812,7 +811,7 @@ final class User extends RestController
                 $contentType,
                 $userContentInfo,
                 $userLocation,
-                $this->relationListHelper->getRelations($user->getVersionInfo())
+                iterator_to_array($this->relationListFacade->getRelations($user->getVersionInfo()))
             );
         }
 
@@ -864,7 +863,7 @@ final class User extends RestController
                 $contentType,
                 $userGroupContentInfo,
                 $userGroupLocation,
-                $this->relationListHelper->getRelations($userGroup->getVersionInfo())
+                iterator_to_array($this->relationListFacade->getRelations($userGroup->getVersionInfo()))
             );
         }
 
@@ -922,7 +921,7 @@ final class User extends RestController
                 $contentType,
                 $userGroupContentInfo,
                 $userGroupLocation,
-                $this->relationListHelper->getRelations($userGroup->getVersionInfo())
+                iterator_to_array($this->relationListFacade->getRelations($userGroup->getVersionInfo()))
             );
         }
 

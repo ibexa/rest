@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
+use Ibexa\Contracts\Core\Repository\ContentService\RelationListFacade;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
@@ -15,7 +16,6 @@ use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
-use Ibexa\Core\Helper\RelationListHelper;
 use Ibexa\Rest\Server\Values\RestContent as RestContentValue;
 
 /**
@@ -25,7 +25,7 @@ class RestExecutedView extends ValueObjectVisitor
 {
     public function __construct(
         private readonly LocationService $locationService,
-        private readonly RelationListHelper $relationListHelper
+        private readonly RelationListFacade $relationListFacade
     ) {
     }
 
@@ -108,7 +108,11 @@ class RestExecutedView extends ValueObjectVisitor
                     $mainLocation,
                     $searchHit->valueObject,
                     $searchHit->valueObject->getContentType(),
-                    $this->relationListHelper->getRelations($searchHit->valueObject->getVersionInfo())
+                    iterator_to_array(
+                        $this->relationListFacade->getRelations(
+                            $searchHit->valueObject->getVersionInfo()
+                        )
+                    )
                 );
             } elseif ($searchHit->valueObject instanceof ApiValues\Location) {
                 $valueObject = $searchHit->valueObject;
