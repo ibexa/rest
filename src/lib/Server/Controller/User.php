@@ -62,7 +62,7 @@ final class User extends RestController
 
     private PermissionResolver $permissionResolver;
 
-    private ContentService\RelationListFacade $relationListFacade;
+    private ContentService\RelationListFacadeInterface $relationListFacade;
 
     public function __construct(
         UserService $userService,
@@ -73,7 +73,7 @@ final class User extends RestController
         SectionService $sectionService,
         Repository $repository,
         PermissionResolver $permissionResolver,
-        ContentService\RelationListFacade $relationListFacade
+        ContentService\RelationListFacadeInterface $relationListFacade
     ) {
         $this->userService = $userService;
         $this->roleService = $roleService;

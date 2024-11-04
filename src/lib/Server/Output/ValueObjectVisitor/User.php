@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Contracts\Core\Repository\ContentService\RelationListFacade;
+use Ibexa\Contracts\Core\Repository\ContentService\RelationListFacadeInterface;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
@@ -17,7 +17,7 @@ use Ibexa\Rest\Server\Values\RestUser;
 
 final class User extends ValueObjectVisitor implements DelegateValueObjectVisitor
 {
-    public function __construct(private readonly RelationListFacade $relationListFacade)
+    public function __construct(private readonly RelationListFacadeInterface $relationListFacade)
     {
     }
 

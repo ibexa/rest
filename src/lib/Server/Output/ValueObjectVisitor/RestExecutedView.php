@@ -7,7 +7,7 @@
 
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Contracts\Core\Repository\ContentService\RelationListFacade;
+use Ibexa\Contracts\Core\Repository\ContentService\RelationListFacadeInterface;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
@@ -25,7 +25,7 @@ class RestExecutedView extends ValueObjectVisitor
 {
     public function __construct(
         private readonly LocationService $locationService,
-        private readonly RelationListFacade $relationListFacade
+        private readonly RelationListFacadeInterface $relationListFacade
     ) {
     }
 

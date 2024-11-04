@@ -128,9 +128,9 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         return $this->createMock(LocationService::class);
     }
 
-    private function getRelationListFacadeMock(): ContentService\RelationListFacade&MockObject
+    private function getRelationListFacadeMock(): ContentService\RelationListFacadeInterface&MockObject
     {
-        $relationListFacade = $this->createMock(ContentService\RelationListFacade::class);
+        $relationListFacade = $this->createMock(ContentService\RelationListFacadeInterface::class);
         $relationListFacade->method('getRelations')->willReturnCallback(
             static fn () => yield
         );

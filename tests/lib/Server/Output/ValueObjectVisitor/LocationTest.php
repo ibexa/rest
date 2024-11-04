@@ -30,12 +30,12 @@ final class LocationTest extends ValueObjectVisitorBaseTest
 
     private LocationService&MockObject $locationServiceMock;
 
-    private ContentService\RelationListFacade&MockObject $relationListFacade;
+    private ContentService\RelationListFacadeInterface&MockObject $relationListFacade;
 
     protected function setUp(): void
     {
         $this->locationServiceMock = $this->createMock(LocationService::class);
-        $this->relationListFacade = $this->createMock(ContentService\RelationListFacade::class);
+        $this->relationListFacade = $this->createMock(ContentService\RelationListFacadeInterface::class);
 
         parent::setUp();
     }

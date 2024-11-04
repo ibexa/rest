@@ -30,7 +30,7 @@ class Content extends RestController
 {
     public function __construct(
         private readonly ContentService $contentService,
-        private readonly ContentService\RelationListFacade $relationListFacade
+        private readonly ContentService\RelationListFacadeInterface $relationListFacade
     ) {
     }
 
