@@ -31,9 +31,7 @@ final class SerializerTest extends IbexaKernelTestCase
             Serializer::class,
             'ibexa.rest.serializer',
         );
-        $this->locationService = $this->getIbexaTestCore()->getServiceByClassName(
-            LocationService::class,
-        );
+        $this->locationService = $this->getIbexaTestCore()->getLocationService();
     }
 
     public function testSerializeTestDataObject(): void
