@@ -186,16 +186,6 @@ parameters:
 			path: src/contracts/Output/Exceptions/NoVisitorFoundException.php
 
 		-
-			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:checkStart\\(\\) has parameter \\$validParents with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
-			message: "#^Property Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Generator\\:\\:\\$stack type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/contracts/Output/Generator.php
-
-		-
 			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\ValueObjectVisitor\\:\\:setRouter\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/contracts/Output/ValueObjectVisitor.php

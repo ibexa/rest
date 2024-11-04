@@ -18,13 +18,14 @@ class Json extends Generator
         string $vendor = 'vnd.ibexa.api',
     ) {
         $this->fieldTypeHashGenerator = $fieldTypeHashGenerator;
-        $this->vendor = $vendor;
+
+        parent::__construct($vendor);
     }
 
     #[\Override]
     public function endDocument(mixed $data): string
     {
-        parent::checkEndDocument($data);
+        $this->checkEndDocument($data);
 
         $jsonEncodeOptions = JSON_THROW_ON_ERROR;
         if ($this->formatOutput && defined('JSON_PRETTY_PRINT')) {
@@ -80,7 +81,7 @@ class Json extends Generator
     #[\Override]
     public function getMediaType(string $name): string
     {
-        return $this->generateMediaTypeWithVendor($name, 'json', $this->vendor);
+        return $this->generateMediaTypeWithVendor($name, 'json', $this->getVendor());
     }
 
     #[\Override]

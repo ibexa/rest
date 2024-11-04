@@ -134,9 +134,7 @@ class Visitor
     /**
      * Generates a media type for $type based on the used generator.
      *
-     * @param string $type
-     *
-     * @see \Ibexa\Rest\Generator::getMediaType()
+     * @see \Ibexa\Contracts\Rest\Output\Generator::getMediaType()
      */
     public function getMediaType(string $type): string
     {
