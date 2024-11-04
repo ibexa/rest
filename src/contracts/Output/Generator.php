@@ -8,9 +8,9 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\Rest\Output;
 
+use Ibexa\Rest\Output\Generator\AbstractFieldTypeHashGenerator;
 use Ibexa\Rest\Output\Generator\Data;
 use Ibexa\Rest\Output\Generator\Json;
-use Ibexa\Rest\Output\Generator\Xml;
 
 /**
  * Output generator.
@@ -43,12 +43,12 @@ abstract class Generator
     /**
      * Generator for field type hash values.
      */
-    protected Json\FieldTypeHashGenerator|Xml\FieldTypeHashGenerator $fieldTypeHashGenerator;
+    protected AbstractFieldTypeHashGenerator $fieldTypeHashGenerator;
 
     /**
      * Data structure which is build during visiting.
      */
-    protected Json\JsonObject|Json\ArrayObject|Data\ArrayList $json;
+    protected Data\DataObjectInterface $json;
 
     public function setFormatOutput(bool $formatOutput): void
     {
@@ -458,7 +458,7 @@ abstract class Generator
      */
     abstract public function serializeBool(mixed $boolValue): bool|string;
 
-    public function getData(): Json\JsonObject|Json\ArrayObject|Data\ArrayList
+    public function getData(): Data\DataObjectInterface
     {
         throw new \LogicException(sprintf(
             '%s does not maintain state',

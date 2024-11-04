@@ -145,7 +145,7 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
 
     private function createVisitor(?string $format): Visitor
     {
-        $format = $format ?: 'json';
+        $format ??= 'json';
 
         $generator = $this->createGenerator($format);
 
