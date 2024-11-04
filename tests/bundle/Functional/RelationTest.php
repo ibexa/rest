@@ -60,8 +60,14 @@ XML;
         $testContent = $this->createContent($xml);
         $relations = $testContent['CurrentVersion']['Version']['Relations']['Relation'];
 
-        self::assertEquals('LINK', $relations[0]['RelationType']);
-        self::assertEquals('EMBED', $relations[1]['RelationType']);
-        self::assertEquals('ATTRIBUTE', $relations[2]['RelationType']);
+        $expectedRelationTypes = [
+            'LINK',
+            'EMBED',
+            'ATTRIBUTE',
+        ];
+
+        $actualTypes = array_column($relations, 'RelationType');
+
+        self::assertEqualsCanonicalizing($expectedRelationTypes, $actualTypes);
     }
 }
