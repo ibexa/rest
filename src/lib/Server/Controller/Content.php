@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Controller;
 
+use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
@@ -25,11 +26,14 @@ use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-/**
- * Content controller.
- */
 class Content extends RestController
 {
+    public function __construct(
+        private readonly ContentService $contentService,
+        private readonly ContentService\RelationListFacadeInterface $relationListFacade
+    ) {
+    }
+
     /**
      * Loads a content info by remote ID.
      *
@@ -82,7 +86,7 @@ class Content extends RestController
             $languages = $this->getLanguages($request);
 
             $contentVersion = $this->repository->getContentService()->loadContent($contentId, $languages);
-            $relations = $this->repository->getContentService()->loadRelations($contentVersion->getVersionInfo());
+            $relations = $this->relationListFacade->getRelations($contentVersion->getVersionInfo());
         }
 
         $restContent = new Values\RestContent(
@@ -90,7 +94,7 @@ class Content extends RestController
             $mainLocation,
             $contentVersion,
             $contentType,
-            $relations,
+            $relations !== null ? iterator_to_array($relations) : null,
             $request->getPathInfo()
         );
 
@@ -200,7 +204,7 @@ class Content extends RestController
         $versionValue = new Values\Version(
             $content,
             $contentType,
-            $this->repository->getContentService()->loadRelations($content->getVersionInfo()),
+            iterator_to_array($this->relationListFacade->getRelations($content->getVersionInfo())),
             $request->getPathInfo()
         );
 
@@ -435,7 +439,7 @@ class Content extends RestController
                 'version' => new Values\Version(
                     $contentDraft,
                     $contentType,
-                    $this->repository->getContentService()->loadRelations($contentDraft->getVersionInfo())
+                    iterator_to_array($this->relationListFacade->getRelations($contentDraft->getVersionInfo()))
                 ),
             ]
         );
@@ -469,7 +473,7 @@ class Content extends RestController
                 'version' => new Values\Version(
                     $contentDraft,
                     $contentType,
-                    $this->repository->getContentService()->loadRelations($contentDraft->getVersionInfo())
+                    iterator_to_array($this->relationListFacade->getRelations($contentDraft->getVersionInfo()))
                 ),
             ]
         );
@@ -536,7 +540,7 @@ class Content extends RestController
         return new Values\Version(
             $content,
             $contentType,
-            $this->repository->getContentService()->loadRelations($content->getVersionInfo()),
+            iterator_to_array($this->relationListFacade->getRelations($content->getVersionInfo())),
             $request->getPathInfo()
         );
     }
@@ -605,18 +609,23 @@ class Content extends RestController
         $limit = $request->query->has('limit') ? (int)$request->query->get('limit') : -1;
 
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
-        $relationList = $this->repository->getContentService()->loadRelations(
-            $this->repository->getContentService()->loadVersionInfo($contentInfo, $versionNumber)
+        $relationList = $this->contentService->loadRelationList(
+            $this->repository->getContentService()->loadVersionInfo($contentInfo, $versionNumber),
+            $offset,
+            $limit,
         );
 
-        $relationList = array_slice(
-            $relationList,
-            $offset >= 0 ? $offset : 0,
-            $limit >= 0 ? $limit : null
-        );
+        $relations = [];
+        foreach ($relationList as $relationListItem) {
+            if ($relationListItem->hasRelation()) {
+                /** @var \Ibexa\Core\Repository\Values\Content\Relation $relation */
+                $relation = $relationListItem->getRelation();
+                $relations[] = $relation;
+            }
+        }
 
         $relationListValue = new Values\RelationList(
-            $relationList,
+            $relations,
             $contentId,
             $versionNumber,
             $request->getPathInfo()
@@ -646,7 +655,7 @@ class Content extends RestController
     public function loadVersionRelation($contentId, $versionNumber, $relationId, Request $request)
     {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
-        $relationList = $this->repository->getContentService()->loadRelations(
+        $relationList = $this->relationListFacade->getRelations(
             $this->repository->getContentService()->loadVersionInfo($contentInfo, $versionNumber)
         );
 
@@ -687,7 +696,7 @@ class Content extends RestController
             $versionNumber
         );
 
-        $versionRelations = $this->repository->getContentService()->loadRelations($versionInfo);
+        $versionRelations = $this->relationListFacade->getRelations($versionInfo);
         foreach ($versionRelations as $relation) {
             if ($relation->id == $relationId) {
                 if ($relation->type !== Relation::COMMON) {
@@ -739,7 +748,7 @@ class Content extends RestController
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
-        $existingRelations = $this->repository->getContentService()->loadRelations($versionInfo);
+        $existingRelations = $this->relationListFacade->getRelations($versionInfo);
         foreach ($existingRelations as $existingRelation) {
             if ($existingRelation->getDestinationContentInfo()->id == $destinationContentId) {
                 throw new ForbiddenException('Relation of type COMMON to the selected destination content ID already exists');
@@ -844,7 +853,7 @@ class Content extends RestController
             $contentType = $this->repository->getContentTypeService()->loadContentType(
                 $content->getVersionInfo()->getContentInfo()->contentTypeId
             );
-            $relations = $this->repository->getContentService()->loadRelations($contentValue->getVersionInfo());
+            $relations = $this->relationListFacade->getRelations($contentValue->getVersionInfo());
         }
 
         return new Values\CreatedContent(
@@ -854,7 +863,7 @@ class Content extends RestController
                     null,
                     $contentValue,
                     $contentType,
-                    $relations
+                    $relations !== null ? iterator_to_array($relations) : null,
                 ),
             ]
         );

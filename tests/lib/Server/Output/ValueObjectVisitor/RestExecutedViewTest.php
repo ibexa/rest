@@ -19,6 +19,7 @@ use Ibexa\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestExecutedView;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class RestExecutedViewTest extends ValueObjectVisitorBaseTest
 {
@@ -115,7 +116,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     {
         return new ValueObjectVisitor\RestExecutedView(
             $this->getLocationServiceMock(),
-            $this->getContentServiceMock(),
+            $this->getRelationListFacadeMock()
         );
     }
 
@@ -127,15 +128,14 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         return $this->createMock(LocationService::class);
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\ContentService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    public function getContentServiceMock()
+    private function getRelationListFacadeMock(): ContentService\RelationListFacadeInterface&MockObject
     {
-        $contentService = $this->createMock(ContentService::class);
-        $contentService->method('loadRelations')->willReturn([]);
+        $relationListFacade = $this->createMock(ContentService\RelationListFacadeInterface::class);
+        $relationListFacade->method('getRelations')->willReturnCallback(
+            static fn () => yield
+        );
 
-        return $contentService;
+        return $relationListFacade;
     }
 
     /**
