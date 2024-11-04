@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Rest\Output\Normalizer;
 
@@ -19,8 +20,10 @@ final class ArrayListNormalizer implements NormalizerInterface, NormalizerAwareI
     /**
      * @param \Ibexa\Rest\Output\Generator\Data\ArrayList $object
      * @param array<mixed> $context
+     *
+     * @return array<mixed>
      */
-    public function normalize($object, ?string $format = null, array $context = [])
+    public function normalize($object, ?string $format = null, array $context = []): array
     {
         $data = [];
         foreach ($object as $key => $value) {

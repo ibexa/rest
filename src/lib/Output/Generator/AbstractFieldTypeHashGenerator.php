@@ -7,8 +7,7 @@
 
 namespace Ibexa\Rest\Output\Generator;
 
-use Ibexa\Rest\Output\Generator\Data\ArrayList;
-use Ibexa\Rest\Output\Generator\Json\ArrayObject;
+use Ibexa\Rest\Output\Generator\Data\DataObjectInterface;
 use Ibexa\Rest\Output\Generator\Json\JsonObject;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
@@ -40,7 +39,7 @@ abstract class AbstractFieldTypeHashGenerator implements LoggerAwareInterface
      * using $hashElementName as the property name.
      */
     public function generateHashValue(
-        JsonObject|ArrayObject|ArrayList $parent,
+        DataObjectInterface $parent,
         string $hashElementName,
         mixed $hashValue
     ): void {
@@ -57,9 +56,9 @@ abstract class AbstractFieldTypeHashGenerator implements LoggerAwareInterface
      * @param array<mixed> $value
      */
     protected function generateArrayValue(
-        JsonObject|ArrayObject|ArrayList $parent,
+        DataObjectInterface $parent,
         array $value,
-    ): JsonObject|ArrayObject|ArrayList {
+    ): DataObjectInterface {
         if ($this->isNumericArray($value)) {
             return $this->generateListArray($parent, $value);
         } else {
@@ -71,7 +70,7 @@ abstract class AbstractFieldTypeHashGenerator implements LoggerAwareInterface
      * Generates and returns a value based on $hashValue type, with $parent (
      * if the type of $hashValue supports it).
      */
-    abstract protected function generateValue(JsonObject|ArrayObject|ArrayList $parent, mixed $value): mixed;
+    abstract protected function generateValue(DataObjectInterface $parent, mixed $value): mixed;
 
     /**
      * Checks if the given $value is a purely numeric array.
@@ -89,7 +88,7 @@ abstract class AbstractFieldTypeHashGenerator implements LoggerAwareInterface
         return true;
     }
 
-    protected function generateObjectValue(JsonObject|ArrayObject|ArrayList $parent, object $value): mixed
+    protected function generateObjectValue(DataObjectInterface $parent, object $value): mixed
     {
         try {
             $value = $this->normalizer->normalize($value, 'json', ['parent' => $parent]);
@@ -126,9 +125,9 @@ abstract class AbstractFieldTypeHashGenerator implements LoggerAwareInterface
      * @param array<int> $listArray
      */
     abstract protected function generateListArray(
-        JsonObject|ArrayObject|ArrayList $parent,
+        DataObjectInterface $parent,
         array $listArray,
-    ): JsonObject|ArrayObject|ArrayList;
+    ): DataObjectInterface;
 
     /**
      * Generates a JSON object from the given $hashArray with $parent.
@@ -136,7 +135,7 @@ abstract class AbstractFieldTypeHashGenerator implements LoggerAwareInterface
      * @param array<mixed> $hashArray
      */
     abstract protected function generateHashArray(
-        JsonObject|ArrayObject|ArrayList $parent,
+        DataObjectInterface $parent,
         array $hashArray,
-    ): JsonObject|ArrayObject|ArrayList;
+    ): JsonObject;
 }

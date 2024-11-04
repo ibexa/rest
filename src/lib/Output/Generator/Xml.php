@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Output\Generator;
 
 use Ibexa\Contracts\Rest\Output\Generator;
+use Ibexa\Rest\Output\Generator\Data\DataObjectInterface;
 use Ibexa\Rest\Output\Normalizer\ArrayListNormalizer;
 use Ibexa\Rest\Output\Normalizer\ArrayObjectNormalizer;
 use Ibexa\Rest\Output\Normalizer\JsonObjectNormalizer;
@@ -111,7 +112,7 @@ class Xml extends Generator
     }
 
     #[\Override]
-    public function getData(): Json\JsonObject|Json\ArrayObject|Data\ArrayList
+    public function getData(): DataObjectInterface
     {
         return $this->json;
     }

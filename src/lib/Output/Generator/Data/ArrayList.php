@@ -4,29 +4,25 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Rest\Output\Generator\Data;
 
-use Ibexa\Rest\Output\Generator\Json\ArrayObject;
-use Ibexa\Rest\Output\Generator\Json\JsonObject;
-
-final class ArrayList extends \ArrayObject
+final class ArrayList extends \ArrayObject implements DataObjectInterface
 {
-    private self|JsonObject|ArrayObject|null $parent;
+    private ?DataObjectInterface $parent;
 
     private string $name;
 
-    public function __construct(
-        string $name,
-        self|JsonObject|ArrayObject|null $parent,
-    ) {
+    public function __construct(string $name, ?DataObjectInterface $parent)
+    {
         $this->name = $name;
         $this->parent = $parent;
 
         parent::__construct();
     }
 
-    public function getParent(): self|JsonObject|ArrayObject|null
+    public function getParent(): ?DataObjectInterface
     {
         return $this->parent;
     }

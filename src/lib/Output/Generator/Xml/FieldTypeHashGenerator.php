@@ -9,13 +9,12 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Output\Generator\Xml;
 
 use Ibexa\Rest\Output\Generator\AbstractFieldTypeHashGenerator;
-use Ibexa\Rest\Output\Generator\Data\ArrayList;
-use Ibexa\Rest\Output\Generator\Json\ArrayObject;
+use Ibexa\Rest\Output\Generator\Data\DataObjectInterface;
 use Ibexa\Rest\Output\Generator\Json\JsonObject;
 
 final class FieldTypeHashGenerator extends AbstractFieldTypeHashGenerator
 {
-    protected function generateValue(JsonObject|ArrayObject|ArrayList $parent, mixed $value): mixed
+    protected function generateValue(DataObjectInterface $parent, mixed $value): mixed
     {
         if ($value === null) {
             return null;
@@ -33,9 +32,9 @@ final class FieldTypeHashGenerator extends AbstractFieldTypeHashGenerator
     }
 
     protected function generateListArray(
-        JsonObject|ArrayObject|ArrayList $parent,
+        DataObjectInterface $parent,
         array $listArray,
-    ): JsonObject|ArrayObject|ArrayList {
+    ): DataObjectInterface {
         $object = new JsonObject($parent);
         $object->value = [];
 
@@ -49,9 +48,9 @@ final class FieldTypeHashGenerator extends AbstractFieldTypeHashGenerator
     }
 
     protected function generateHashArray(
-        JsonObject|ArrayObject|ArrayList $parent,
+        DataObjectInterface $parent,
         array $hashArray,
-    ): JsonObject|ArrayObject|ArrayList {
+    ): JsonObject {
         $object = new JsonObject($parent);
         $object->value = [];
 

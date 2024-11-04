@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Output\Generator\Json;
 
 use AllowDynamicProperties;
-use Ibexa\Rest\Output\Generator\Data\ArrayList;
+use Ibexa\Rest\Output\Generator\Data\DataObjectInterface;
 
 /**
  * Json object.
@@ -18,17 +18,17 @@ use Ibexa\Rest\Output\Generator\Data\ArrayList;
  * parent object it is assigned to again.
  */
 #[AllowDynamicProperties]
-class JsonObject
+class JsonObject implements DataObjectInterface
 {
     /**
      * Reference to the parent node.
      */
-    protected self|ArrayList|ArrayObject|null $_ref_parent;
+    protected ?DataObjectInterface $_ref_parent;
 
     /**
      * Construct from optional parent node.
      */
-    public function __construct(self|ArrayList|ArrayObject|null $_ref_parent = null)
+    public function __construct(?DataObjectInterface $_ref_parent = null)
     {
         $this->_ref_parent = $_ref_parent;
     }
@@ -36,7 +36,7 @@ class JsonObject
     /**
      * Get parent of the current node.
      */
-    public function getParent(): self|ArrayList|ArrayObject|null
+    public function getParent(): ?DataObjectInterface
     {
         return $this->_ref_parent;
     }
