@@ -1,0 +1,30 @@
+services:
+    ibexa.rest.serializer.encoder.json:
+        class: Symfony\Component\Serializer\Encoder\JsonEncoder
+        tags:
+            - ibexa.rest.serializer.encoder
+
+    ibexa.rest.serializer.encoder.xml:
+        class: Symfony\Component\Serializer\Encoder\XmlEncoder
+        tags:
+            - ibexa.rest.serializer.encoder
+
+    Ibexa\Contracts\Rest\Output\VisitorAdapterNormalizer:
+        arguments:
+            $jsonEncoder: '@ibexa.rest.serializer.encoder.json'
+            $xmlEncoder: '@ibexa.rest.serializer.encoder.xml'
+            $valueObjectVisitorResolver: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver'
+        tags:
+            - { name: ibexa.rest.serializer.normalizer, priority: -1000 }
+
+    Ibexa\Rest\Output\Normalizer\JsonObjectNormalizer:
+        tags:
+            - { name: ibexa.rest.serializer.normalizer, priority: -500 }
+
+    Ibexa\Rest\Output\Normalizer\ArrayListNormalizer:
+        tags:
+            - { name: ibexa.rest.serializer.normalizer, priority: -400 }
+
+    Ibexa\Rest\Output\Normalizer\ArrayObjectNormalizer:
+        tags:
+            - { name: ibexa.rest.serializer.normalizer, priority: -400 }

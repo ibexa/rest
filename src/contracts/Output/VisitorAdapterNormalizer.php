@@ -34,6 +34,8 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
 
     /**
      * @param array<string, mixed> $context
+     *
+     * @throws \LogicException
      */
     public function normalize(mixed $object, ?string $format = null, array $context = []): mixed
     {
@@ -86,6 +88,8 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
      * @param array<mixed> $context
      *
      * @return array<mixed>
+     *
+     * @throws \LogicException
      */
     private function visitValueObject(
         object $object,
@@ -130,6 +134,9 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
         return $context;
     }
 
+    /**
+     * @throws \LogicException
+     */
     private function createGenerator(string $format): BaseGenerator
     {
         if ($format === 'xml') {
@@ -138,11 +145,20 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
             );
         }
 
-        return new Generator\Json(
-            new Generator\Json\FieldTypeHashGenerator($this->normalizer),
+        if ($format === 'json') {
+            return new Generator\Json(
+                new Generator\Json\FieldTypeHashGenerator($this->normalizer),
+            );
+        }
+
+        throw new LogicException(
+            sprintf('%s format is not supported by %s.', $format, self::class),
         );
     }
 
+    /**
+     * @throws \LogicException
+     */
     private function createVisitor(?string $format): Visitor
     {
         $format ??= 'json';

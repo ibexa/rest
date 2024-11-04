@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Rest\Output\Generator;
 
@@ -104,8 +105,7 @@ abstract class AbstractFieldTypeHashGenerator implements LoggerAwareInterface
                 'ibexa.rest.serializer.normalizer',
             );
 
-            assert($this->logger instanceof LoggerInterface);
-            $this->logger->error($message, [
+            $this->logger?->error($message, [
                 'exception' => $e,
             ]);
 

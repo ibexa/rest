@@ -17,7 +17,7 @@ final class SerializerTest extends IbexaKernelTestCase
 {
     use ResourceAssertionsTrait;
 
-    private const SNAPSHOT_DIR = __DIR__ . '/_snapshot';
+    private const string SNAPSHOT_DIR = __DIR__ . '/_snapshot';
 
     private Serializer $serializer;
 
@@ -49,7 +49,7 @@ final class SerializerTest extends IbexaKernelTestCase
 
         $serializedData = $this->serializer->serialize($dataObject, 'json');
 
-        self::assertSame(json_encode($expectedData), $serializedData);
+        self::assertSame(json_encode($expectedData, JSON_THROW_ON_ERROR), $serializedData);
     }
 
     public function testNormalizeTestDataObjectWithApiLocation(): void

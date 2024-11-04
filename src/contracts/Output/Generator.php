@@ -17,6 +17,8 @@ use Ibexa\Rest\Output\Generator\Json;
  */
 abstract class Generator
 {
+    protected const string NULL_PARENT_ELEMENT_EXCEPTION_MESSAGE = 'Parent element at %s cannot be `null`.';
+
     /**
      * Keeps track if the document is still empty.
      */
@@ -28,6 +30,7 @@ abstract class Generator
      * Use to check if it is OK to start / close the requested element in the
      * current state.
      */
+    /** @var array<array{string, mixed, array<mixed>}> */
     protected array $stack = [];
 
     /**
@@ -38,7 +41,7 @@ abstract class Generator
     /**
      * Enables developer to modify REST response media type prefix.
      */
-    protected string $vendor;
+    private string $vendor;
 
     /**
      * Generator for field type hash values.
@@ -49,6 +52,11 @@ abstract class Generator
      * Data structure which is build during visiting.
      */
     protected Data\DataObjectInterface $json;
+
+    public function __construct(string $vendor)
+    {
+        $this->vendor = $vendor;
+    }
 
     public function setFormatOutput(bool $formatOutput): void
     {
@@ -61,6 +69,11 @@ abstract class Generator
     public function isEmpty(): bool
     {
         return $this->isEmpty;
+    }
+
+    protected function getVendor(): string
+    {
+        return $this->vendor;
     }
 
     /**
@@ -122,18 +135,7 @@ abstract class Generator
 
         $mediaTypeName ??= $name;
 
-        $object = new Json\JsonObject($this->json);
-
-        if ($this->json instanceof Json\ArrayObject || $this->json instanceof Data\ArrayList) {
-            $this->json->append($object);
-            if ($this->json instanceof Data\ArrayList) {
-                $this->json->setName($name);
-            }
-            $this->json = $object;
-        } else {
-            $this->json->$name = $object;
-            $this->json = $object;
-        }
+        $this->createObjectElement($name);
 
         $this->attribute('media-type', $this->getMediaType($mediaTypeName));
     }
@@ -147,7 +149,7 @@ abstract class Generator
 
         if ($this->json->getParent() === null) {
             throw new \LogicException(sprintf(
-                'Parent element at %s cannot be `null`.',
+                self::NULL_PARENT_ELEMENT_EXCEPTION_MESSAGE,
                 __METHOD__,
             ));
         }
@@ -162,16 +164,7 @@ abstract class Generator
     {
         $this->checkStart('objectElement', $data, ['document', 'objectElement', 'hashElement', 'list']);
 
-        $last = count($this->stack) - 2;
-        if ($this->stack[$last][0] !== 'list') {
-            // Ensure object element type only occurs once outside of lists
-            if (isset($this->stack[$last][2][$data])) {
-                throw new Exceptions\OutputGeneratorException(
-                    "Element {$data} may only occur once inside {$this->stack[$last][0]}."
-                );
-            }
-        }
-        $this->stack[$last][2][$data] = true;
+        $this->checkStack($data);
     }
 
     /**
@@ -191,18 +184,7 @@ abstract class Generator
 
         $this->isEmpty = false;
 
-        $object = new Json\JsonObject($this->json);
-
-        if ($this->json instanceof Json\ArrayObject || $this->json instanceof Data\ArrayList) {
-            $this->json->append($object);
-            if ($this->json instanceof Data\ArrayList) {
-                $this->json->setName($name);
-            }
-            $this->json = $object;
-        } else {
-            $this->json->$name = $object;
-            $this->json = $object;
-        }
+        $this->createObjectElement($name);
     }
 
     /**
@@ -212,16 +194,7 @@ abstract class Generator
     {
         $this->checkStart('hashElement', $data, ['document', 'objectElement', 'hashElement', 'list']);
 
-        $last = count($this->stack) - 2;
-        if ($this->stack[$last][0] !== 'list') {
-            // Ensure hash element type only occurs once outside of lists
-            if (isset($this->stack[$last][2][$data])) {
-                throw new Exceptions\OutputGeneratorException(
-                    "Element {$data} may only occur once inside {$this->stack[$last][0]}."
-                );
-            }
-        }
-        $this->stack[$last][2][$data] = true;
+        $this->checkStack($data);
     }
 
     /**
@@ -233,7 +206,7 @@ abstract class Generator
 
         if ($this->json->getParent() === null) {
             throw new \LogicException(sprintf(
-                'Parent element at %s cannot be `null`.',
+                self::NULL_PARENT_ELEMENT_EXCEPTION_MESSAGE,
                 __METHOD__,
             ));
         }
@@ -310,7 +283,7 @@ abstract class Generator
 
         if ($this->json->getParent() === null) {
             throw new \LogicException(sprintf(
-                'Parent element at %s cannot be `null`.',
+                self::NULL_PARENT_ELEMENT_EXCEPTION_MESSAGE,
                 __METHOD__,
             ));
         }
@@ -397,7 +370,7 @@ abstract class Generator
     /**
      * Check close / end operation.
      *
-     * @param array $validParents
+     * @param array<string> $validParents
      */
     protected function checkStart(string $type, mixed $data, array $validParents): void
     {
@@ -458,13 +431,7 @@ abstract class Generator
      */
     abstract public function serializeBool(mixed $boolValue): bool|string;
 
-    public function getData(): Data\DataObjectInterface
-    {
-        throw new \LogicException(sprintf(
-            '%s does not maintain state',
-            static::class,
-        ));
-    }
+    abstract protected function getData(): Data\DataObjectInterface;
 
     /**
      * @param array<mixed> $data
@@ -472,4 +439,31 @@ abstract class Generator
      * @return array<mixed>
      */
     abstract public function getEncoderContext(array $data): array;
+
+    private function createObjectElement(string $name): void
+    {
+        $object = new Json\JsonObject($this->json);
+
+        if ($this->json instanceof Json\ArrayObject || $this->json instanceof Data\ArrayList) {
+            $this->json->append($object);
+            if ($this->json instanceof Data\ArrayList) {
+                $this->json->setName($name);
+            }
+            $this->json = $object;
+        } else {
+            $this->json->$name = $object;
+            $this->json = $object;
+        }
+    }
+
+    protected function checkStack(mixed $data): void
+    {
+        $last = count($this->stack) - 2;
+        if ($this->stack[$last][0] !== 'list' && isset($this->stack[$last][2][$data])) {
+            throw new Exceptions\OutputGeneratorException(
+                "Element {$data} may only occur once inside {$this->stack[$last][0]}."
+            );
+        }
+        $this->stack[$last][2][$data] = true;
+    }
 }

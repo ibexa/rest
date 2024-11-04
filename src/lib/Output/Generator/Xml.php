@@ -26,13 +26,14 @@ class Xml extends Generator
         string $vendor = 'vnd.ibexa.api',
     ) {
         $this->fieldTypeHashGenerator = $fieldTypeHashGenerator;
-        $this->vendor = $vendor;
+
+        parent::__construct($vendor);
     }
 
     #[\Override]
     public function getMediaType(string $name): string
     {
-        return $this->generateMediaTypeWithVendor($name, 'xml', $this->vendor);
+        return $this->generateMediaTypeWithVendor($name, 'xml', $this->getVendor());
     }
 
     #[\Override]
@@ -88,7 +89,7 @@ class Xml extends Generator
     #[\Override]
     public function endDocument(mixed $data): string
     {
-        parent::checkEndDocument($data);
+        $this->checkEndDocument($data);
 
         $data = $this->getData();
 
