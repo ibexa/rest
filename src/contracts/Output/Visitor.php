@@ -35,7 +35,7 @@ class Visitor
         private readonly ValueObjectVisitorResolverInterface $valueObjectVisitorResolver,
         private readonly string $format,
     ) {
-        $this->response = new Response('', 200);
+        $this->response = new Response('', Response::HTTP_OK);
     }
 
     /**
