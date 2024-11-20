@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Controller;
 
+use Exception;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException;
@@ -23,12 +24,17 @@ use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Rest\Server\Values\RestContentCreateStruct;
 use JMS\TranslationBundle\Annotation\Ignore;
+use LogicException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class Content extends RestController
 {
     public function __construct(
+        private readonly RequestStack $requestStack,
+        private readonly HttpKernelInterface $kernel,
         private readonly ContentService $contentService,
         private readonly ContentService\RelationListFacadeInterface $relationListFacade
     ) {
@@ -147,7 +153,9 @@ class Content extends RestController
         }
 
         try {
-            $locationInfo = $this->repository->getLocationService()->loadLocation($contentInfo->mainLocationId);
+            $locationInfo = null !== $contentInfo->mainLocationId
+                ? $this->repository->getLocationService()->loadLocation($contentInfo->mainLocationId)
+                : null;
         } catch (NotFoundException $e) {
             $locationInfo = null;
         }
@@ -340,7 +348,7 @@ class Content extends RestController
             $this->repository->commit();
 
             return new Values\NoContent();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->repository->rollback();
             throw $e;
         }
@@ -350,16 +358,16 @@ class Content extends RestController
      * Returns a list of all versions of the content. This method does not
      * include fields and relations in the Version elements of the response.
      *
-     * @param mixed $contentId
-     *
-     * @return \Ibexa\Rest\Server\Values\VersionList
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function loadContentVersions($contentId, Request $request)
+    public function loadContentVersions(int $contentId, Request $request): Values\VersionList
     {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
 
         return new Values\VersionList(
-            $this->repository->getContentService()->loadVersions($contentInfo),
+            iterator_to_array($this->repository->getContentService()->loadVersions($contentInfo)),
             $request->getPathInfo()
         );
     }
@@ -791,16 +799,18 @@ class Content extends RestController
     }
 
     /**
-     * @param string $controller
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
-    protected function forward($controller)
+    protected function forward(string $controller): Response
     {
         $path['_controller'] = $controller;
-        $subRequest = $this->container->get('request_stack')->getCurrentRequest()->duplicate(null, null, $path);
+        $request = $this->requestStack->getCurrentRequest();
+        if ($request === null) {
+            throw new LogicException('No requests in the stack');
+        }
+        $subRequest = $request->duplicate(null, null, $path);
 
-        return $this->container->get('http_kernel')->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
+        return $this->kernel->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
     }
 
     /**

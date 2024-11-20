@@ -136,6 +136,7 @@ class VisitorTest extends TestCase
                 Response::HTTP_OK,
                 [
                     'Content-Type' => 'text/xml',
+                    'Accept-Patch' => [0 => ''],
                 ]
             ),
             $visitor->visit($data)

@@ -58,7 +58,7 @@ final class User extends RestController
      *
      * @var \Ibexa\Contracts\Core\Repository\Repository
      */
-    protected $repository;
+    protected Repository $repository;
 
     private PermissionResolver $permissionResolver;
 
