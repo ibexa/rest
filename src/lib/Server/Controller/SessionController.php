@@ -73,13 +73,10 @@ final class SessionController extends Controller
         }
     }
 
-    /**
-     * @return \Ibexa\Rest\Server\Values\UserSession|\Symfony\Component\HttpFoundation\Response
-     */
-    public function checkSessionAction(Request $request)
+    public function checkSessionAction(Request $request): Values\UserSession|Response
     {
         $session = $request->getSession();
-        if ($session === null || !$session->isStarted()) {
+        if (!$session->isStarted()) {
             return $this->logout($request);
         }
 
@@ -99,9 +96,7 @@ final class SessionController extends Controller
     /**
      * Refresh given session.
      *
-     * @deprecated 4.6.7 The "SessionController::refreshSessionAction()" method is deprecated, will be removed in the next API version. Use SessionController::checkSessionAction() instead.
-     *
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function refreshSessionAction(string $sessionId, Request $request): Values\UserSession|Response
@@ -114,7 +109,7 @@ final class SessionController extends Controller
 
         $session = $request->getSession();
 
-        if ($session === null || !$session->isStarted() || $session->getId() !== $sessionId || !$this->hasStoredCsrfToken()) {
+        if (!$session->isStarted() || $session->getId() !== $sessionId || !$this->hasStoredCsrfToken()) {
             return $this->logout($request);
         }
 
