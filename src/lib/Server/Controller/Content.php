@@ -154,7 +154,9 @@ class Content extends RestController
         }
 
         try {
-            $locationInfo = $this->repository->getLocationService()->loadLocation($contentInfo->mainLocationId);
+            $locationInfo = null !== $contentInfo->mainLocationId
+                ? $this->repository->getLocationService()->loadLocation($contentInfo->mainLocationId)
+                : null;
         } catch (NotFoundException $e) {
             $locationInfo = null;
         }
@@ -357,11 +359,11 @@ class Content extends RestController
      * Returns a list of all versions of the content. This method does not
      * include fields and relations in the Version elements of the response.
      *
-     * @param mixed $contentId
-     *
-     * @return \Ibexa\Rest\Server\Values\VersionList
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function loadContentVersions($contentId, Request $request)
+    public function loadContentVersions(int $contentId, Request $request): Values\VersionList
     {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
 
