@@ -8,7 +8,9 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Output\Generator\Data;
 
-final class ArrayList extends \ArrayObject implements DataObjectInterface
+use ArrayObject;
+
+final class ArrayList extends ArrayObject implements DataObjectInterface
 {
     private ?DataObjectInterface $parent;
 

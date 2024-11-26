@@ -19,7 +19,7 @@ use Ibexa\Rest\Output\Generator\Data\DataObjectInterface;
  * parent object it is assigned to again.
  */
 #[AllowDynamicProperties]
-class ArrayObject extends NativeArrayObject implements DataObjectInterface
+final class ArrayObject extends NativeArrayObject implements DataObjectInterface
 {
     /**
      * Reference to the parent node.

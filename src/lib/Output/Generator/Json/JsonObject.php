@@ -18,12 +18,12 @@ use Ibexa\Rest\Output\Generator\Data\DataObjectInterface;
  * parent object it is assigned to again.
  */
 #[AllowDynamicProperties]
-class JsonObject implements DataObjectInterface
+final class JsonObject implements DataObjectInterface
 {
     /**
      * Reference to the parent node.
      */
-    protected ?DataObjectInterface $_ref_parent;
+    private ?DataObjectInterface $_ref_parent;
 
     /**
      * Construct from optional parent node.
