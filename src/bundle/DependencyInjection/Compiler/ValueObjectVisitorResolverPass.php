@@ -4,33 +4,35 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 
-use Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher;
+use Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Compiler pass for the ibexa.rest.output.value_object.visitor tag.
- * Maps an fully qualified class to a value object visitor.
+ * Maps a fully qualified class to a value object visitor.
  */
-class ValueObjectVisitorPass implements CompilerPassInterface
+final readonly class ValueObjectVisitorResolverPass implements CompilerPassInterface
 {
-    public const OUTPUT_VALUE_OBJECT_VISITOR_SERVICE_TAG = 'ibexa.rest.output.value_object.visitor';
+    public const string OUTPUT_VALUE_OBJECT_VISITOR_SERVICE_TAG = 'ibexa.rest.output.value_object.visitor';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
-        if (!$container->hasDefinition(ValueObjectVisitorDispatcher::class)) {
+        if (!$container->hasDefinition(ValueObjectVisitorResolver::class)) {
             return;
         }
 
-        $definition = $container->getDefinition(ValueObjectVisitorDispatcher::class);
+        $definition = $container->getDefinition(ValueObjectVisitorResolver::class);
 
         $taggedServiceIds = $container->findTaggedServiceIds(
             self::OUTPUT_VALUE_OBJECT_VISITOR_SERVICE_TAG
         );
+
         foreach ($taggedServiceIds as $id => $attributes) {
             foreach ($attributes as $attribute) {
                 if (!isset($attribute['type'])) {

@@ -31,7 +31,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     /**
      * Output generator.
      *
-     * @var \Ibexa\Rest\Output\Generator\Xml
+     * @var \Ibexa\Rest\Output\Generator\Xml|null
      */
     protected $generator;
 
@@ -95,8 +95,8 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
         if (!isset($this->generator)) {
             $this->generator = new Generator\Xml(
                 new Generator\Xml\FieldTypeHashGenerator(
-                    $this->createMock(NormalizerInterface::class)
-                )
+                    $this->createMock(NormalizerInterface::class),
+                ),
             );
         }
 
