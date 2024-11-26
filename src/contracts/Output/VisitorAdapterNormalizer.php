@@ -36,6 +36,8 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
      * @param array<string, mixed> $context
      *
      * @throws \LogicException
+     *
+     * {@inheritDoc}
      */
     public function normalize(mixed $object, ?string $format = null, array $context = []): mixed
     {

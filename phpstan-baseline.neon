@@ -571,7 +571,7 @@ parameters:
 			path: src/lib/Server/Controller/Content.php
 
 		-
-			message: "#^Parameter \\#1 \\$versions of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\VersionList constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\>, iterable\\<int, Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\> given\\.$#"
+			message: "#^Parameter \\#1 \\$versions of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\VersionList constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\> given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Content.php
 

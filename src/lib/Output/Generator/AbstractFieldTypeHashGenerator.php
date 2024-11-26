@@ -89,6 +89,9 @@ abstract class AbstractFieldTypeHashGenerator implements LoggerAwareInterface
         return true;
     }
 
+    /**
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     */
     protected function generateObjectValue(DataObjectInterface $parent, object $value): mixed
     {
         try {
