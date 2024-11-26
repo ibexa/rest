@@ -104,9 +104,7 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
 
         $generator->reset();
         $generator->startDocument($object);
-
         $valueObjectVisitor->visit($visitor, $generator, $object);
-
         $generator->endDocument($object);
 
         $data = $generator->getData();

@@ -140,9 +140,6 @@ abstract class Generator
         $this->attribute('media-type', $this->getMediaType($mediaTypeName));
     }
 
-    /**
-     * End object element.
-     */
     public function endObjectElement(string $name): void
     {
         $this->checkEndObjectElement($name);
@@ -157,9 +154,6 @@ abstract class Generator
         $this->json = $this->json->getParent();
     }
 
-    /**
-     * Check start object element.
-     */
     protected function checkStartObjectElement(mixed $data): void
     {
         $this->checkStart('objectElement', $data, ['document', 'objectElement', 'hashElement', 'list']);
