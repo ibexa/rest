@@ -22,6 +22,8 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
      * @param array<mixed> $context
      *
      * @return array<mixed>
+     *
+     * {@inheritDoc}
      */
     public function normalize($object, ?string $format = null, array $context = []): array
     {

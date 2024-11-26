@@ -22,6 +22,8 @@ final class ArrayListNormalizer implements NormalizerInterface, NormalizerAwareI
      * @param array<mixed> $context
      *
      * @return array<mixed>
+     *
+     * {@inheritDoc}
      */
     public function normalize($object, ?string $format = null, array $context = []): array
     {
