@@ -23,7 +23,7 @@ class ImageProcessorTest extends BinaryInputProcessorTest
         $processor = $this->getProcessor();
 
         $inputHash = [
-            'path' => 'var/some_site/223-1-eng-US/Cool-File.jpg',
+            'inputUri' => 'var/some_site/223-1-eng-US/Cool-File.jpg',
             'imageId' => '223-12345',
         ];
 
