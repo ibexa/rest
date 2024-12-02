@@ -163,8 +163,6 @@ class ParserTools
                 return Values\Content\Location::SORT_FIELD_PRIORITY;
             case 'NAME':
                 return Values\Content\Location::SORT_FIELD_NAME;
-            case 'MODIFIED_SUBNODE':
-                return Values\Content\Location::SORT_FIELD_MODIFIED_SUBNODE;
             case 'NODE_ID':
                 return Values\Content\Location::SORT_FIELD_NODE_ID;
             case 'CONTENTOBJECT_ID':

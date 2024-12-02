@@ -167,8 +167,6 @@ abstract class ValueObjectVisitor
                 return 'PRIORITY';
             case Location::SORT_FIELD_NAME:
                 return 'NAME';
-            case Location::SORT_FIELD_MODIFIED_SUBNODE:
-                return 'MODIFIED_SUBNODE';
             case Location::SORT_FIELD_NODE_ID:
                 return 'NODE_ID';
             case Location::SORT_FIELD_CONTENTOBJECT_ID:
