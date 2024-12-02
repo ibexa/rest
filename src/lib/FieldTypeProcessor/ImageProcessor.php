@@ -64,7 +64,7 @@ class ImageProcessor extends BinaryInputProcessor
             return $outgoingValueHash;
         }
 
-        $outgoingValueHash['path'] = '/' . $outgoingValueHash['path'];
+        $outgoingValueHash['path'] = '/' . $outgoingValueHash['inputUri'];
         foreach ($this->variations as $variationIdentifier) {
             $outgoingValueHash['variations'][$variationIdentifier] = [
                 'href' => $this->router->generate(
