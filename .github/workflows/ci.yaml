@@ -33,7 +33,8 @@ jobs:
         name: Unit & integration tests
         runs-on: "ubuntu-22.04"
         timeout-minutes: 15
-
+        env:
+            COMPOSER_ROOT_VERSION=dev-ibx-8534-core-v5-p2
         strategy:
             fail-fast: false
             matrix:
@@ -69,3 +70,5 @@ jobs:
     functional-tests:
         name: "REST functional tests"
         uses: ./.github/workflows/integration-tests-callable.yaml
+        env:
+            COMPOSER_ROOT_VERSION=dev-ibx-8534-core-v5-p2
