@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion as CriterionValue;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\CriterionInterface;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Server\Input\Parser\Criterion as CriterionParser;
 
@@ -89,11 +90,8 @@ abstract class Query extends CriterionParser
 
     /**
      * @param array $criteriaArray
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion|null A criterion, or a LogicalAnd with a set of Criterion, or null if an empty array was given
      */
-    private function processCriteriaArray(array $criteriaArray, ParsingDispatcher $parsingDispatcher)
+    private function processCriteriaArray(array $criteriaArray, ParsingDispatcher $parsingDispatcher): ?CriterionInterface
     {
         if (count($criteriaArray) === 0) {
             return null;

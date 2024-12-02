@@ -15,6 +15,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Contracts\Rest\Exceptions;
+use function Ibexa\PolyfillPhp82\iterator_to_array;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
@@ -359,7 +360,7 @@ class Content extends RestController
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
 
         return new Values\VersionList(
-            $this->repository->getContentService()->loadVersions($contentInfo),
+            iterator_to_array($this->repository->getContentService()->loadVersions($contentInfo)),
             $request->getPathInfo()
         );
     }
