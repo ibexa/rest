@@ -1011,11 +1011,6 @@ parameters:
 			path: src/lib/Server/Controller/Content.php
 
 		-
-			message: "#^Parameter \\#1 \\$versions of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\VersionList constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\> given\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/Content.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\ContentType\\:\\:addContentTypeDraftFieldDefinition\\(\\) has parameter \\$contentTypeId with no type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/ContentType.php
@@ -2202,16 +2197,6 @@ parameters:
 
 		-
 			message: "#^Property Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\:\\:\\$facetBuilders \\(array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\FacetBuilder\\>\\) does not accept array\\<int\\<0, max\\>, Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\ValueObject\\>\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Query.php
-
-		-
-			message: "#^Property Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\:\\:\\$filter \\(Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\Criterion\\) does not accept Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\Criterion\\|null\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Query.php
-
-		-
-			message: "#^Property Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\:\\:\\$query \\(Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\Criterion\\) does not accept Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\Criterion\\|null\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Query.php
 
