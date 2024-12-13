@@ -1206,17 +1206,17 @@ parameters:
 			path: src/lib/Server/Controller/Content.php
 
 		-
-			message: "#^Parameter \\#1 \\$versions of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\VersionList constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\> given\\.$#"
+			message: "#^Parameter \\#1 \\$versions of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\VersionList constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\>, iterable\\<int, Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\VersionInfo\\> given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Content.php
 
 		-
-			message: "#^Parameter \\#3 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\Version constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
+			message: "#^Parameter \\#3 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\Version constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<int, Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
 			count: 4
 			path: src/lib/Server/Controller/Content.php
 
 		-
-			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestContent constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>\\|null, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>\\|null given\\.$#"
+			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestContent constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>\\|null, iterable\\<int, Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>\\|null given\\.$#"
 			count: 2
 			path: src/lib/Server/Controller/Content.php
 
@@ -2116,12 +2116,12 @@ parameters:
 			path: src/lib/Server/Controller/User.php
 
 		-
-			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUser constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
+			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUser constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<int, Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
 			count: 5
 			path: src/lib/Server/Controller/User.php
 
 		-
-			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUserGroup constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
+			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUserGroup constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<int, Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
 			count: 10
 			path: src/lib/Server/Controller/User.php
 
@@ -3206,7 +3206,7 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/Location.php
 
 		-
-			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestContent constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>\\|null, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
+			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestContent constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>\\|null, iterable\\<int, Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/Location.php
 
@@ -3366,7 +3366,7 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/RestExecutedView.php
 
 		-
-			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestContent constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>\\|null, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
+			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestContent constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>\\|null, iterable\\<int, Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/RestExecutedView.php
 
@@ -3566,7 +3566,7 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/User.php
 
 		-
-			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUser constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
+			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUser constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<int, Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/User.php
 
@@ -3576,7 +3576,7 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/UserGroup.php
 
 		-
-			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUserGroup constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
+			message: "#^Parameter \\#5 \\$relations of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestUserGroup constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\>, iterable\\<int, Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/UserGroup.php
 
