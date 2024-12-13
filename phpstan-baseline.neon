@@ -536,6 +536,31 @@ parameters:
 			path: src/lib/Input/Handler/Json.php
 
 		-
+			message: "#^Access to an undefined property DOMNode\\:\\:\\$data\\.$#"
+			count: 2
+			path: src/lib/Input/Handler/Xml.php
+
+		-
+			message: "#^Access to an undefined property DOMNode\\:\\:\\$tagName\\.$#"
+			count: 2
+			path: src/lib/Input/Handler/Xml.php
+
+		-
+			message: "#^Access to an undefined property DOMNode\\:\\:\\$wholeText\\.$#"
+			count: 2
+			path: src/lib/Input/Handler/Xml.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
+			count: 1
+			path: src/lib/Input/Handler/Xml.php
+
+		-
+			message: "#^Call to an undefined method DOMNode\\:\\:hasAttribute\\(\\)\\.$#"
+			count: 1
+			path: src/lib/Input/Handler/Xml.php
+
+		-
 			message: "#^Method Ibexa\\\\Rest\\\\Input\\\\Handler\\\\Xml\\:\\:convert\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
@@ -562,6 +587,11 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Input\\\\Handler\\\\Xml\\:\\:parseFieldTypeValues\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/lib/Input/Handler/Xml.php
+
+		-
+			message: "#^Parameter \\#1 \\$domElement of method Ibexa\\\\Rest\\\\Input\\\\Handler\\\\Xml\\:\\:parseFieldTypeHash\\(\\) expects DOMElement, DOMNode given\\.$#"
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
 
@@ -1216,6 +1246,11 @@ parameters:
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
+			message: "#^Parameter \\#2 \\.\\.\\.\\$arrays of function array_merge expects array, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\ContentType\\\\ContentType\\> given\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
 			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/ContentType.php
@@ -1446,6 +1481,11 @@ parameters:
 			path: src/lib/Server/Controller/Role.php
 
 		-
+			message: "#^Parameter \\#1 \\$array of function array_slice expects array, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\Role\\> given\\.$#"
+			count: 1
+			path: src/lib/Server/Controller/Role.php
+
+		-
 			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string given\\.$#"
 			count: 4
 			path: src/lib/Server/Controller/Role.php
@@ -1468,6 +1508,11 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$roleAssignments of class Ibexa\\\\Rest\\\\Server\\\\Values\\\\RoleAssignmentList constructor expects array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\RoleAssignment\\>, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\UserGroupRoleAssignment\\|Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\UserRoleAssignment\\> given\\.$#"
 			count: 3
+			path: src/lib/Server/Controller/Role.php
+
+		-
+			message: "#^Parameter \\#1 \\.\\.\\.\\$arrays of function array_merge expects array, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\Policy\\> given\\.$#"
+			count: 1
 			path: src/lib/Server/Controller/Role.php
 
 		-
@@ -3419,6 +3464,11 @@ parameters:
 			message: "#^Parameter \\#2 \\$method of function method_exists expects string, array\\<int\\|string, int\\|string\\>\\|int\\|string given\\.$#"
 			count: 1
 			path: tests/bundle/EventListener/EventListenerTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function base64_encode expects string, string\\|false given\\.$#"
+			count: 1
+			path: tests/bundle/Functional/BinaryContentTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Bundle\\\\Rest\\\\Functional\\\\ContentTest\\:\\:assertTranslationDoesNotExist\\(\\) has parameter \\$versionItem with no value type specified in iterable type array\\.$#"
