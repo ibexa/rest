@@ -51,8 +51,18 @@ class Views extends Controller
             $method = [$this->searchService, 'findContent'];
         }
 
+        $languages = [];
+        if ($viewInput->languageCodes !== null) {
+            $languages = $viewInput->languageCodes;
+        }
+
+        if ($viewInput->languageCode !== null) {
+            $languages[] = $viewInput->languageCode;
+            $languages = array_unique($languages);
+        }
+
         $languageFilter = [
-            'languages' => null !== $viewInput->languageCode ? [$viewInput->languageCode] : Language::ALL,
+            'languages' => empty($languages) ? Language::ALL : $languages,
             'useAlwaysAvailable' => $viewInput->useAlwaysAvailable ?? true,
         ];
         $query = $viewInput->query->query;

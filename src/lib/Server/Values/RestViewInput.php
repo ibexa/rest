@@ -33,6 +33,11 @@ class RestViewInput extends RestValue
     public $languageCode;
 
     /**
+     * @var [string]|null
+     */
+    public $languageCodes;
+
+    /**
      * @var bool|null
      */
     public $useAlwaysAvailable;

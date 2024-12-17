@@ -38,6 +38,9 @@ class ViewInputOneDotOne extends CriterionParser
 
         // language params
         $restViewInput->languageCode = $data['languageCode'] ?? null;
+        $restViewInput->languageCodes =
+            array_key_exists('languageCodes', $data) && is_array($data['languageCodes'])
+            ? $data['languageCodes'] : null;
         $restViewInput->useAlwaysAvailable = $data['useAlwaysAvailable'] ?? null;
 
         // query
