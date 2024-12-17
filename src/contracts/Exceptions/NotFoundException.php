@@ -9,10 +9,10 @@ namespace Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException as APINotFoundException;
 
 /**
- * Implementation of the {@link \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException}
- * interface.
+ * REST API equivalent of PHP API's NotFoundException.
  *
- * @see \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+ * Implementation of the {@see \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException}
+ * interface.
  */
 class NotFoundException extends APINotFoundException
 {
