@@ -28,3 +28,7 @@ services:
     Ibexa\Rest\Output\Normalizer\ArrayObjectNormalizer:
         tags:
             - { name: ibexa.rest.serializer.normalizer, priority: -400 }
+
+    Symfony\Component\Serializer\Normalizer\ObjectNormalizer:
+        tags:
+            - { name: ibexa.rest.serializer.normalizer, priority: -1000 }
