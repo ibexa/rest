@@ -127,8 +127,10 @@ abstract class Generator
     /**
      * Start object element.
      */
-    public function startObjectElement(string $name, ?string $mediaTypeName = null): void
+    public function startObjectElement(string|int $name, ?string $mediaTypeName = null): void
     {
+        $name = (string)$name;
+
         $this->checkStartObjectElement($name);
 
         $this->isEmpty = false;
@@ -140,8 +142,10 @@ abstract class Generator
         $this->attribute('media-type', $this->getMediaType($mediaTypeName));
     }
 
-    public function endObjectElement(string $name): void
+    public function endObjectElement(string|int $name): void
     {
+        $name = (string)$name;
+
         $this->checkEndObjectElement($name);
 
         if ($this->json->getParent() === null) {
