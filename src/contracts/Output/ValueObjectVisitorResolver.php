@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\Rest\Output;
 
+use Throwable;
+
 final class ValueObjectVisitorResolver implements ValueObjectVisitorResolverInterface
 {
     /** @var array<class-string, \Ibexa\Contracts\Rest\Output\ValueObjectVisitor> */
@@ -30,6 +32,10 @@ final class ValueObjectVisitorResolver implements ValueObjectVisitorResolverInte
                 return $this->visitors[$className];
             }
         } while ($className = get_parent_class($className));
+
+        if ($object instanceof Throwable) {
+            throw $object;
+        }
 
         return null;
     }
