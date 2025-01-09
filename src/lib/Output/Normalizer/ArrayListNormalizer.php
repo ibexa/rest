@@ -29,7 +29,18 @@ final class ArrayListNormalizer implements NormalizerInterface, NormalizerAwareI
     {
         $data = [];
         foreach ($object as $key => $value) {
-            $data[$key] = $this->normalizer->normalize($value, $format, $context);
+            if (is_array($value)) {
+                // If it's an array we assume that an array's first key is value that we have to store as a name of a parent element
+                $parentKeyThatMustBeStored = array_key_first($value);
+                $arrayCopy = $object->getArrayCopy();
+                $reformattedArrayCopy = [];
+                foreach ($arrayCopy as $arrayItem) {
+                    $reformattedArrayCopy[] = $arrayItem[$parentKeyThatMustBeStored];
+                }
+                $data[$parentKeyThatMustBeStored] = $this->normalizer->normalize($reformattedArrayCopy, $format, $context);
+            } else {
+                $data[$key] = $this->normalizer->normalize($value, $format, $context);
+            }
         }
 
         return $data;

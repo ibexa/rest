@@ -40,7 +40,15 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
                 if ($value->count() === 0) {
                     continue;
                 }
-                $data[$name] = $this->normalizer->normalize($value, $format, $context);
+
+                $normalizedData = $this->normalizer->normalize($value, $format, $context);
+
+                if (is_array($normalizedData) && !array_is_list($normalizedData)) {
+                    $innerElementKeyReplacingCurrent = array_key_first($normalizedData);
+                    $data[$innerElementKeyReplacingCurrent] = $normalizedData[$innerElementKeyReplacingCurrent];
+                } else {
+                    $data[$name] = $normalizedData;
+                }
             } else {
                 $modifiedKey = $isOuterElement && count($vars) === 1 ? '#' : $key;
                 $data[$modifiedKey] = $this->normalizer->normalize($value, $format, $context);

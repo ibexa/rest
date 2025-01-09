@@ -80,7 +80,9 @@ class Xml extends Generator
         }
 
         if ($this->json instanceof Json\ArrayObject || $this->json instanceof Data\ArrayList) {
-            $this->json->append($jsonValue);
+            // We deliberately pass an array here to not missing the `$name` variable that is crucial for generating XML.
+            // In v3.3 the XMLWriter was generating each element with a name based on the `$name` variable.
+            $this->json->append([$name => $jsonValue]);
         } else {
             $this->json->$name = $jsonValue;
         }
