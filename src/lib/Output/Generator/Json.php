@@ -99,7 +99,9 @@ class Json extends Generator
     #[\Override]
     public function getEncoderContext(array $data): array
     {
-        return [];
+        return [
+            'json_encode_options' => JSON_PRETTY_PRINT,
+        ];
     }
 
     /**
