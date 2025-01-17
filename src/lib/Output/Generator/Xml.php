@@ -68,6 +68,8 @@ class Xml extends Generator
     {
         $this->checkStartValueElement($name);
 
+        $value = $value === false ? null : $value;
+
         if (empty($attributes)) {
             $jsonValue = $value;
         } else {
