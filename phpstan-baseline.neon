@@ -2281,22 +2281,12 @@ parameters:
 			path: src/lib/Server/Input/Parser/UserGroupUpdate.php
 
 		-
-			message: "#^Parameter \\#1 \\$fieldDefIdentifier of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\ContentStruct\\:\\:setField\\(\\) expects string, int\\|string given\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/UserGroupUpdate.php
-
-		-
 			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string given\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/UserGroupUpdate.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\UserUpdate\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/UserUpdate.php
-
-		-
-			message: "#^Parameter \\#1 \\$fieldDefIdentifier of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\ContentStruct\\:\\:setField\\(\\) expects string, int\\|string given\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/UserUpdate.php
 
