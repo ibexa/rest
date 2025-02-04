@@ -41,6 +41,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
             [
                 'identifier' => 'test_view',
                 'searchResults' => new SearchResult([
+                    'totalCount' => null,
                     'searchHits' => [
                         $this->buildContentSearchHit(),
                         $this->buildLocationSearchHit(),

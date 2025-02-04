@@ -26,44 +26,14 @@ parameters:
 			path: src/bundle/CorsOptions/RestProvider.php
 
 		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Compiler\\\\FieldTypeProcessorPass\\:\\:process\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Compiler/FieldTypeProcessorPass.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Compiler\\\\InputHandlerPass\\:\\:process\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Compiler/InputHandlerPass.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Compiler\\\\InputParserPass\\:\\:process\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Compiler/InputParserPass.php
-
-		-
 			message: "#^Argument of an invalid type array\\|bool\\|float\\|int\\|string\\|null supplied for foreach, only iterables are supported\\.$#"
 			count: 1
 			path: src/bundle/DependencyInjection/Compiler/OutputVisitorPass.php
 
 		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Compiler\\\\OutputVisitorPass\\:\\:process\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Compiler/OutputVisitorPass.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Compiler\\\\ValueObjectVisitorPass\\:\\:process\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/Compiler/ValueObjectVisitorPass.php
-
-		-
 			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\Configuration\\:\\:addRestRootResourcesSection\\(\\) has parameter \\$rootNode with no type specified\\.$#"
 			count: 1
 			path: src/bundle/DependencyInjection/Configuration.php
-
-		-
-			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\IbexaRestExtension\\:\\:prepend\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/bundle/DependencyInjection/IbexaRestExtension.php
 
 		-
 			message: "#^Method Ibexa\\\\Bundle\\\\Rest\\\\DependencyInjection\\\\IbexaRestExtension\\:\\:prependRouterConfiguration\\(\\) has no return type specified\\.$#"
@@ -417,16 +387,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Contracts\\\\Rest\\\\Output\\\\Visitor\\:\\:setStatus\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/contracts/Output/Visitor.php
-
-		-
-			message: "#^Offset 0 does not exist on array\\<int, string\\|null\\>\\|string\\|null\\.$#"
-			count: 1
-			path: src/contracts/Output/Visitor.php
-
-		-
-			message: "#^Parameter \\#1 \\$key of method Symfony\\\\Component\\\\HttpFoundation\\\\ResponseHeaderBag\\:\\:remove\\(\\) expects string, int\\|string given\\.$#"
 			count: 1
 			path: src/contracts/Output/Visitor.php
 
@@ -951,21 +911,6 @@ parameters:
 			path: src/lib/Output/ValueObjectVisitor/ContentObjectStates.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\:\\:setInputDispatcher\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\:\\:setRepository\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\:\\:setRouter\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Controller.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\BinaryContent\\:\\:getImageVariation\\(\\) should return Ibexa\\\\Contracts\\\\Core\\\\Variation\\\\Values\\\\Variation but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/BinaryContent.php
@@ -996,21 +941,6 @@ parameters:
 			path: src/lib/Server/Controller/Bookmark.php
 
 		-
-			message: "#^Cannot call method get\\(\\) on Symfony\\\\Component\\\\DependencyInjection\\\\ContainerInterface\\|null\\.$#"
-			count: 2
-			path: src/lib/Server/Controller/Content.php
-
-		-
-			message: "#^Cannot call method getCurrentRequest\\(\\) on object\\|null\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/Content.php
-
-		-
-			message: "#^Cannot call method handle\\(\\) on object\\|null\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/Content.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\Content\\:\\:loadContent\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\RestContent but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Content.php
@@ -1027,11 +957,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Controller\\\\Content\\:\\:loadVersionRelations\\(\\) should return Ibexa\\\\Rest\\\\Server\\\\Values\\\\RelationList but returns Ibexa\\\\Rest\\\\Server\\\\Values\\\\CachedValue\\.$#"
-			count: 1
-			path: src/lib/Server/Controller/Content.php
-
-		-
-			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, int\\|null given\\.$#"
 			count: 1
 			path: src/lib/Server/Controller/Content.php
 
@@ -2356,22 +2281,12 @@ parameters:
 			path: src/lib/Server/Input/Parser/UserGroupUpdate.php
 
 		-
-			message: "#^Parameter \\#1 \\$fieldDefIdentifier of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\ContentStruct\\:\\:setField\\(\\) expects string, int\\|string given\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/UserGroupUpdate.php
-
-		-
 			message: "#^Parameter \\#1 \\$locationId of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\LocationService\\:\\:loadLocation\\(\\) expects int, string given\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/UserGroupUpdate.php
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\UserUpdate\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/UserUpdate.php
-
-		-
-			message: "#^Parameter \\#1 \\$fieldDefIdentifier of method Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\ContentStruct\\:\\:setField\\(\\) expects string, int\\|string given\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/UserUpdate.php
 
