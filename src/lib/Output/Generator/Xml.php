@@ -4,264 +4,134 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Rest\Output\Generator;
 
 use Ibexa\Contracts\Rest\Output\Generator;
+use Ibexa\Rest\Output\Generator\Data\DataObjectInterface;
+use Ibexa\Rest\Output\Normalizer\ArrayListNormalizer;
+use Ibexa\Rest\Output\Normalizer\ArrayObjectNormalizer;
+use Ibexa\Rest\Output\Normalizer\JsonObjectNormalizer;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
-/**
- * Xml generator.
- */
 class Xml extends Generator
 {
-    /**
-     * XMLWriter.
-     *
-     * @var \XMLWriter
-     */
-    protected $xmlWriter;
+    public const string OUTER_ELEMENT = 'outer_element';
 
-    /**
-     * Generator for field type hash values.
-     *
-     * @var \Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator
-     */
-    protected $hashGenerator;
+    public function __construct(
+        Xml\FieldTypeHashGenerator $fieldTypeHashGenerator,
+        string $vendor = 'vnd.ibexa.api',
+    ) {
+        $this->fieldTypeHashGenerator = $fieldTypeHashGenerator;
 
-    /**
-     * Keeps track if the document received some content.
-     *
-     * @var bool
-     */
-    protected $isEmpty = true;
-
-    /**
-     * Enables developer to modify REST response media type prefix.
-     *
-     * @var string
-     */
-    protected $vendor;
-
-    /**
-     * @param \Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator $hashGenerator
-     * @param string $vendor
-     */
-    public function __construct(Xml\FieldTypeHashGenerator $hashGenerator, $vendor = 'vnd.ibexa.api')
-    {
-        $this->hashGenerator = $hashGenerator;
-        $this->vendor = $vendor;
+        parent::__construct($vendor);
     }
 
-    /**
-     * Start document.
-     *
-     * @param mixed $data
-     */
-    public function startDocument($data)
+    #[\Override]
+    public function getMediaType(string $name): string
     {
-        $this->checkStartDocument($data);
-
-        $this->isEmpty = true;
-
-        $this->xmlWriter = new \XMLWriter();
-        $this->xmlWriter->openMemory();
-        $this->xmlWriter->setIndent($this->formatOutput);
-        $this->xmlWriter->startDocument('1.0', 'UTF-8');
+        return $this->generateMediaTypeWithVendor($name, 'xml', $this->getVendor());
     }
 
-    /**
-     * Returns if the document is empty or already contains data.
-     *
-     * @return bool
-     */
-    public function isEmpty()
-    {
-        return $this->isEmpty;
-    }
-
-    /**
-     * End document.
-     *
-     * Returns the generated document as a string.
-     *
-     * @param mixed $data
-     *
-     * @return string
-     */
-    public function endDocument($data)
-    {
-        $this->checkEndDocument($data);
-
-        $this->xmlWriter->endDocument();
-
-        return $this->xmlWriter->outputMemory();
-    }
-
-    /**
-     * Start object element.
-     *
-     * @param string $name
-     * @param string $mediaTypeName
-     */
-    public function startObjectElement($name, $mediaTypeName = null)
-    {
-        $this->checkStartObjectElement($name);
-
-        $this->isEmpty = false;
-
-        $mediaTypeName = $mediaTypeName ?: $name;
-
-        $this->xmlWriter->startElement($name);
-
-        $this->startAttribute('media-type', $this->getMediaType($mediaTypeName));
-        $this->endAttribute('media-type');
-    }
-
-    /**
-     * End object element.
-     *
-     * @param string $name
-     */
-    public function endObjectElement($name)
-    {
-        $this->checkEndObjectElement($name);
-
-        $this->xmlWriter->endElement();
-    }
-
-    /**
-     * Start hash element.
-     *
-     * @param string $name
-     */
-    public function startHashElement($name)
-    {
-        $this->checkStartHashElement($name);
-
-        $this->isEmpty = false;
-
-        $this->xmlWriter->startElement($name);
-    }
-
-    /**
-     * End hash element.
-     *
-     * @param string $name
-     */
-    public function endHashElement($name)
-    {
-        $this->checkEndHashElement($name);
-
-        $this->xmlWriter->endElement();
-    }
-
-    public function startValueElement(string $name, $value, array $attributes = []): void
-    {
-        $this->checkStartValueElement($name);
-
-        $this->xmlWriter->startElement($name);
-
-        foreach ($attributes as $attributeName => $attributeValue) {
-            $this->xmlWriter->startAttribute($attributeName);
-            $this->xmlWriter->text($attributeValue);
-            $this->xmlWriter->endAttribute();
-        }
-
-        $this->xmlWriter->text((string)$value);
-    }
-
-    /**
-     * End value element.
-     *
-     * @param string $name
-     */
-    public function endValueElement($name)
-    {
-        $this->checkEndValueElement($name);
-
-        $this->xmlWriter->endElement();
-    }
-
-    /**
-     * Start list.
-     *
-     * @param string $name
-     */
-    public function startList($name)
+    #[\Override]
+    public function startList(string $name): void
     {
         $this->checkStartList($name);
+
+        $this->isEmpty = false;
+
+        $array = new Data\ArrayList($name, $this->json);
+
+        $this->json->$name = $array;
+        $this->json = $array;
     }
 
-    /**
-     * End list.
-     *
-     * @param string $name
-     */
-    public function endList($name)
-    {
-        $this->checkEndList($name);
-    }
-
-    /**
-     * Start attribute.
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function startAttribute($name, $value)
+    #[\Override]
+    public function startAttribute(string $name, mixed $value): void
     {
         $this->checkStartAttribute($name);
 
-        $this->xmlWriter->startAttribute($name);
-        $this->xmlWriter->text((string)$value);
+        $this->json->{'@' . $name} = $value;
     }
 
-    /**
-     * End attribute.
-     *
-     * @param string $name
-     */
-    public function endAttribute($name)
-    {
-        $this->checkEndAttribute($name);
-
-        $this->xmlWriter->endAttribute();
-    }
-
-    /**
-     * Get media type.
-     *
-     * @param string $name
-     *
-     * @return string
-     */
-    public function getMediaType($name)
-    {
-        return $this->generateMediaTypeWithVendor($name, 'xml', $this->vendor);
-    }
-
-    /**
-     * Generates a generic representation of the scalar, hash or list given in
-     * $hashValue into the document, using an element of $hashElementName as
-     * its parent.
-     *
-     * @param string $hashElementName
-     * @param mixed $hashValue
-     */
-    public function generateFieldTypeHash($hashElementName, $hashValue)
-    {
-        $this->hashGenerator->generateHashValue($this->xmlWriter, $hashElementName, $hashValue);
-    }
-
-    /**
-     * Serializes a boolean value.
-     *
-     * @param bool $boolValue
-     *
-     * @return string
-     */
-    public function serializeBool($boolValue)
+    #[\Override]
+    public function serializeBool(mixed $boolValue): string
     {
         return $boolValue ? 'true' : 'false';
+    }
+
+    #[\Override]
+    public function startValueElement(string $name, mixed $value, array $attributes = []): void
+    {
+        $this->checkStartValueElement($name);
+
+        $value = $value === false ? null : $value;
+
+        if (empty($attributes)) {
+            $jsonValue = $value;
+        } else {
+            $jsonValue = new Json\JsonObject($this->json);
+            foreach ($attributes as $attributeName => $attributeValue) {
+                $jsonValue->{'@' . $attributeName} = $attributeValue;
+            }
+
+            $jsonValue->{'#'} = $value;
+        }
+
+        if ($this->json instanceof Json\ArrayObject || $this->json instanceof Data\ArrayList) {
+            // We deliberately pass an array here to not missing the `$name` variable that is crucial for generating XML.
+            // In v3.3 the XMLWriter was generating each element with a name based on the `$name` variable.
+            $this->json->append([$name => $jsonValue]);
+        } else {
+            $this->json->$name = $jsonValue;
+        }
+    }
+
+    #[\Override]
+    public function endDocument(mixed $data): string
+    {
+        $this->checkEndDocument($data);
+
+        $data = $this->getData();
+
+        if (!$data instanceof Json\JsonObject) {
+            throw new \LogicException('Expected an instance of JsonObject');
+        }
+
+        $vars = get_object_vars($data);
+        $encoderContext = $this->getEncoderContext($vars);
+
+        $normalizers = [
+            new ArrayListNormalizer(),
+            new JsonObjectNormalizer(),
+            new ArrayObjectNormalizer(),
+            new ObjectNormalizer(),
+        ];
+        $encoders = [new XmlEncoder()];
+        $serializer = new Serializer($normalizers, $encoders);
+
+        return $serializer->serialize($data, 'xml', $encoderContext);
+    }
+
+    #[\Override]
+    public function getData(): DataObjectInterface
+    {
+        return $this->json;
+    }
+
+    #[\Override]
+    public function getEncoderContext(array $data): array
+    {
+        return [
+            XmlEncoder::ROOT_NODE_NAME => array_key_first($data),
+            XmlEncoder::VERSION => '1.0',
+            XmlEncoder::ENCODING => 'UTF-8',
+            XmlEncoder::AS_COLLECTION => true,
+            XmlEncoder::FORMAT_OUTPUT => true,
+            self::OUTER_ELEMENT => true,
+        ];
     }
 }

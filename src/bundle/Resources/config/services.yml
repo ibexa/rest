@@ -148,7 +148,6 @@ services:
             - '@ibexa.api.service.section'
             - '@ibexa.api.repository'
             - '@Ibexa\Contracts\Core\Repository\PermissionResolver'
-            - '@Ibexa\Contracts\Core\Repository\ContentService\RelationListFacadeInterface'
         tags: [controller.service_arguments]
 
     Ibexa\Rest\Server\Controller\URLWildcard:
@@ -315,25 +314,29 @@ services:
     ibexa.rest.output.visitor.json:
         class: Ibexa\Contracts\Rest\Output\Visitor
         arguments:
-            - '@Ibexa\Rest\Output\Generator\Json'
-            - '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher'
+            $generator: '@Ibexa\Rest\Output\Generator\Json'
+            $normalizer: '@ibexa.rest.serializer'
+            $encoder: '@ibexa.rest.serializer.encoder.json'
+            $valueObjectVisitorResolver: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver'
+            $format: 'json'
         tags:
             - { name: ibexa.rest.output.visitor, regexps: ibexa.rest.output.visitor.json.regexps }
 
     ibexa.rest.output.visitor.xml:
         class: Ibexa\Contracts\Rest\Output\Visitor
         arguments:
-            - '@Ibexa\Rest\Output\Generator\Xml'
-            - '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher'
+            $generator: '@Ibexa\Rest\Output\Generator\Xml'
+            $normalizer: '@ibexa.rest.serializer'
+            $encoder: '@ibexa.rest.serializer.encoder.xml'
+            $valueObjectVisitorResolver: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver'
+            $format: 'xml'
         tags:
             - { name: ibexa.rest.output.visitor, regexps: ibexa.rest.output.visitor.xml.regexps }
 
     # format output generators
     Ibexa\Rest\Output\Generator\Xml:
         arguments:
-            - '@Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator'
-        calls:
-            - [ setFormatOutput, [ "%kernel.debug%" ] ]
+            $fieldTypeHashGenerator: '@Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator'
 
     Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator:
         arguments:
@@ -358,8 +361,6 @@ services:
             - { name: monolog.logger, channel: ibexa.rest }
 
     # value objects visitors
-    Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher: ~
-
     ibexa.rest.output.value_object_visitor.Exception.InvalidArgumentException:
         class: Ibexa\Rest\Server\Output\ValueObjectVisitor\InvalidArgumentException
         tags:
@@ -402,6 +403,10 @@ services:
         abstract: true
         arguments:
             $parsingDispatcher: '@Ibexa\Contracts\Rest\Input\ParsingDispatcher'
+
+    Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolverInterface: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitor'
+
+    Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver: ~
 
     Ibexa\Contracts\Rest\Input\Parser\Query\SortClause\BaseSortClauseProcessor:
         abstract: true

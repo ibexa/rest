@@ -94,11 +94,38 @@ final class LocationTest extends ValueObjectVisitorBaseTest
 
         $this->assertXMLTag(
             [
-                'tag' => 'Location',
-                'content' => $location->id . 1 . 'false' . 'false',
+                'tag' => 'id',
+                'content' => $location->id,
             ],
             $result,
-            'Invalid <Location> element.',
+            'Invalid <id> element.',
+        );
+
+        $this->assertXMLTag(
+            [
+                'tag' => 'priority',
+                'content' => 1,
+            ],
+            $result,
+            'Invalid <priority> element.',
+        );
+
+        $this->assertXMLTag(
+            [
+                'tag' => 'hidden',
+                'content' => 'false',
+            ],
+            $result,
+            'Invalid <hidden> element.',
+        );
+
+        $this->assertXMLTag(
+            [
+                'tag' => 'invisible',
+                'content' => 'false',
+            ],
+            $result,
+            'Invalid <invisible> element.',
         );
     }
 
