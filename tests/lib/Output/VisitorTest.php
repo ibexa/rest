@@ -85,7 +85,7 @@ final class VisitorTest extends TestCase
             ->expects(self::once())
             ->method('encode')
             ->with(null)
-            ->willReturn(null);
+            ->willReturn('');
 
         self::assertEquals(
             new Response(null, Response::HTTP_OK, []),
@@ -122,7 +122,7 @@ final class VisitorTest extends TestCase
         $visitor = $this->visitor;
 
         $visitor->setHeader('Content-Type', 'text/xml');
-        $visitor->setHeader('Accept-Patch', false);
+        $visitor->setHeader('Accept-Patch', null);
         self::assertEquals(
             new Response(
                 null,
