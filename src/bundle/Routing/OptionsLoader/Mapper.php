@@ -14,18 +14,13 @@ use Symfony\Component\Routing\Route;
  */
 class Mapper
 {
-    /**
-     * @param $route Route REST route
-     *
-     * @return \Symfony\Component\Routing\Route
-     */
-    public function mapRoute(Route $route)
+    public function mapRoute(Route $route): Route
     {
         $optionsRoute = clone $route;
         $optionsRoute->setMethods(['OPTIONS']);
         $optionsRoute->setDefault(
             '_controller',
-            'Ibexa\Rest\Server\Controller\Options:getRouteOptions'
+            'Ibexa\Rest\Server\Controller\Options::getRouteOptions'
         );
 
         $optionsRoute->setDefault(
