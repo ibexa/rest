@@ -1,10 +1,8 @@
 # Root resource
 
-
 ibexa.rest.load_root_resource:
     path: /
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Root:loadRootResource
+    controller: Ibexa\Rest\Server\Controller\Root::loadRootResource
     methods: [GET]
 
 
@@ -23,52 +21,45 @@ ibexa.api_platform.documentation:
 
 # Sections
 
-
 ibexa.rest.list_sections:
     path: /content/sections
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Section\SectionListController:listSections
+    controller: Ibexa\Rest\Server\Controller\Section\SectionListController::listSections
     methods: [GET]
 
 ibexa.rest.create_section:
     path: /content/sections
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Section\SectionCreateController:createSection
+    controller: Ibexa\Rest\Server\Controller\Section\SectionCreateController::createSection
     methods: [POST]
 
 ibexa.rest.load_section:
     path: /content/sections/{sectionId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Section\SectionLoadByIdController:loadSection
+    controller: Ibexa\Rest\Server\Controller\Section\SectionLoadByIdController::loadSection
     methods: [GET]
     requirements:
         sectionId: \d+
 
 ibexa.rest.update_section:
     path: /content/sections/{sectionId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Section\SectionUpdateController:updateSection
+    controller: Ibexa\Rest\Server\Controller\Section\SectionUpdateController::updateSection
     methods: [PATCH]
     requirements:
         sectionId: \d+
 
 ibexa.rest.delete_section:
     path: /content/sections/{sectionId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Section\SectionDeleteController:deleteSection
+    controller: Ibexa\Rest\Server\Controller\Section\SectionDeleteController::deleteSection
     methods: [DELETE]
     requirements:
         sectionId: \d+
 
 ibexa.rest.refresh_session:
     path: /user/sessions/{sessionId}/refresh
+    controller: Ibexa\Rest\Server\Controller\SessionController:refreshSessionAction
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Session\SessionRefreshController:refreshSessionAction
         csrf_protection: false
     methods: [POST]
 
 # Content
-
 
 ibexa.rest.content.copy:
     path: /content/objects/{contentId}
@@ -111,74 +102,64 @@ ibexa.rest.content.publish_version:
 
 ibexa.rest.redirect_content:
     path: /content/objects
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentRedirectController:redirectContent
+    controller: Ibexa\Rest\Server\Controller\Content\ContentRedirectController::redirectContent
     methods: [GET]
 
 ibexa.rest.create_content:
     path: /content/objects
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentCreateController:createContent
+    controller: Ibexa\Rest\Server\Controller\Content\ContentCreateController::createContent
     methods: [POST]
 
 ibexa.rest.update_content_metadata:
     path: /content/objects/{contentId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentMetadataUpdateController:updateContentMetadata
+    controller: Ibexa\Rest\Server\Controller\Content\ContentMetadataUpdateController::updateContentMetadata
     methods: [PATCH]
     requirements:
         contentId: \d+
 
 ibexa.rest.load_content:
     path: /content/objects/{contentId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentLoadByIdController:loadContent
+    controller: Ibexa\Rest\Server\Controller\Content\ContentLoadByIdController::loadContent
     methods: [GET]
     requirements:
         contentId: \d+
 
 ibexa.rest.delete_content:
     path: /content/objects/{contentId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentDeleteController:deleteContent
+    controller: Ibexa\Rest\Server\Controller\Content\ContentDeleteController::deleteContent
     methods: [DELETE]
     requirements:
         contentId: \d+
 
 ibexa.rest.copy_content:
     path: /content/objects/{contentId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentCopyController:copyContent
+    controller: Ibexa\Rest\Server\Controller\Content\ContentCopyController::copyContent
     methods: [COPY]
     requirements:
         contentId: \d+
 
 ibexa.rest.delete_content_translation:
     path: /content/objects/{contentId}/translations/{languageCode}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentTranslationDeleteController:deleteContentTranslation
+    controller: Ibexa\Rest\Server\Controller\Content\ContentTranslationDeleteController::deleteContentTranslation
     methods: [DELETE]
 
 ibexa.rest.redirect_current_version_relations:
     path: /content/objects/{contentId}/relations
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentCurrentVersionRelationsRedirectController:redirectCurrentVersionRelations
+    controller: Ibexa\Rest\Server\Controller\Content\ContentCurrentVersionRelationsRedirectController::redirectCurrentVersionRelations
     methods: [GET]
     requirements:
         contentId: \d+
 
 ibexa.rest.load_content_versions:
     path: /content/objects/{contentId}/versions
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentVersionsListController:loadContentVersions
+    controller: Ibexa\Rest\Server\Controller\Content\ContentVersionsListController::loadContentVersions
     methods: [GET]
     requirements:
         contentId: \d+
 
 ibexa.rest.load_version_relations:
     path: /content/objects/{contentId}/versions/{versionNumber}/relations
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentVersionsRelationsListController:loadVersionRelations
+    controller: Ibexa\Rest\Server\Controller\Content\ContentVersionsRelationsListController::loadVersionRelations
     methods: [GET]
     requirements:
         contentId: \d+
@@ -186,8 +167,7 @@ ibexa.rest.load_version_relations:
 
 ibexa.rest.create_relation:
     path: /content/objects/{contentId}/versions/{versionNumber}/relations
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentRelationCreateController:createRelation
+    controller: Ibexa\Rest\Server\Controller\Content\ContentRelationCreateController::createRelation
     methods: [POST]
     requirements:
         contentId: \d+
@@ -195,8 +175,7 @@ ibexa.rest.create_relation:
 
 ibexa.rest.load_version_relation:
     path: /content/objects/{contentId}/versions/{versionNumber}/relations/{relationId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentVersionRelationLoadByIdController:loadVersionRelation
+    controller: Ibexa\Rest\Server\Controller\Content\ContentVersionRelationLoadByIdController::loadVersionRelation
     methods: [GET]
     requirements:
         contentId: \d+
@@ -205,8 +184,7 @@ ibexa.rest.load_version_relation:
 
 ibexa.rest.remove_relation:
     path: /content/objects/{contentId}/versions/{versionNumber}/relations/{relationId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentVersionRelationDeleteController:removeRelation
+    controller: Ibexa\Rest\Server\Controller\Content\ContentVersionRelationDeleteController::removeRelation
     methods: [DELETE]
     requirements:
         contentId: \d+
@@ -215,8 +193,7 @@ ibexa.rest.remove_relation:
 
 ibexa.rest.load_content_in_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentInVersionLoadController:loadContentInVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentInVersionLoadController::loadContentInVersion
     methods: [GET]
     requirements:
         contentId: \d+
@@ -224,8 +201,7 @@ ibexa.rest.load_content_in_version:
 
 ibexa.rest.update_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentVersionUpdateController:updateVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentVersionUpdateController::updateVersion
     methods: [PATCH]
     requirements:
         contentId: \d+
@@ -233,8 +209,7 @@ ibexa.rest.update_version:
 
 ibexa.rest.delete_content_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentVersionDeleteController:deleteContentVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentVersionDeleteController::deleteContentVersion
     methods: [DELETE]
     requirements:
         contentId: \d+
@@ -242,8 +217,7 @@ ibexa.rest.delete_content_version:
 
 ibexa.rest.delete_translation_from_draft:
     path: /content/objects/{contentId}/versions/{versionNumber}/translations/{languageCode}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentDraftTranslationDeleteController:deleteTranslationFromDraft
+    controller: Ibexa\Rest\Server\Controller\Content\ContentDraftTranslationDeleteController::deleteTranslationFromDraft
     methods: [DELETE]
     requirements:
         contentId: \d+
@@ -251,8 +225,7 @@ ibexa.rest.delete_translation_from_draft:
 
 ibexa.rest.create_draft_from_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentDraftCreateFromVersionController:createDraftFromVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentDraftCreateFromVersionController::createDraftFromVersion
     methods: [COPY]
     requirements:
         contentId: \d+
@@ -260,8 +233,7 @@ ibexa.rest.create_draft_from_version:
 
 ibexa.rest.publish_version:
     path: /content/objects/{contentId}/versions/{versionNumber}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentVersionPublishController:publishVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentVersionPublishController::publishVersion
     methods: [PUBLISH]
     requirements:
         contentId: \d+
@@ -269,32 +241,28 @@ ibexa.rest.publish_version:
 
 ibexa.rest.redirect_current_version:
     path: /content/objects/{contentId}/currentversion
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentCurrentVersionRedirectController:redirectCurrentVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentCurrentVersionRedirectController::redirectCurrentVersion
     methods: [GET]
     requirements:
         contentId: \d+
 
 ibexa.rest.create_draft_from_current_version:
     path: /content/objects/{contentId}/currentversion
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentDraftCreateFromCurrentVersionController:createDraftFromCurrentVersion
+    controller: Ibexa\Rest\Server\Controller\Content\ContentDraftCreateFromCurrentVersionController::createDraftFromCurrentVersion
     methods: [COPY]
     requirements:
         contentId: \d+
 
 ibexa.rest.hide_content:
     path: /content/objects/{contentId}/hide
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentHideController:hideContent
+    controller: Ibexa\Rest\Server\Controller\Content\ContentHideController::hideContent
     methods: [POST]
     requirements:
         contentId: \d+
 
 ibexa.rest.reveal_content:
     path: /content/objects/{contentId}/reveal
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\ContentRevealController:revealContent
+    controller: Ibexa\Rest\Server\Controller\Content\ContentRevealController::revealContent
     methods: [POST]
     requirements:
         contentId: \d+
@@ -303,104 +271,83 @@ ibexa.rest.reveal_content:
 
 ibexa.rest.binary_content.get_image_variation:
     path: /content/binary/images/{imageId}/variations/{variationIdentifier}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\BinaryContent:getImageVariation
+    controller: Ibexa\Rest\Server\Controller\BinaryContent::getImageVariation
     methods: [GET]
     requirements:
         imageId: \d+-\d+(-\d+)?
 
 # Views
 
-# Deprecated in favour of /views from Platform 1.0
-ibexa.rest.create_content_view:
-    path: /content/views
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Content\Content:createView
-    methods: [POST]
-
-# Views, Platform 1.0
 ibexa.rest.views.create:
     path: /views
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Views:createView
+    controller: Ibexa\Rest\Server\Controller\Views::createView
     methods: [POST]
 
 ibexa.rest.views.list:
     path: /views
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Views:listView
+    controller: Ibexa\Rest\Server\Controller\Views::listView
     methods: [GET]
 
 ibexa.rest.views.load:
     path : /views/{viewId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Views:getView
+    controller: Ibexa\Rest\Server\Controller\Views::getView
     methods: [GET]
 
 ibexa.rest.views.load.results:
     path: /views/{viewId}/results
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Views:loadViewResults
+    controller: Ibexa\Rest\Server\Controller\Views::loadViewResults
     methods: [GET]
-# Object states
 
+# Object states
 
 ibexa.rest.load_object_state_groups:
     path: /content/objectstategroups
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupListController:loadObjectStateGroups
+    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupListController::loadObjectStateGroups
     methods: [GET]
 
 ibexa.rest.create_object_state_group:
     path: /content/objectstategroups
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupCreateController:createObjectStateGroup
+    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupCreateController::createObjectStateGroup
     methods: [POST]
 
 ibexa.rest.load_object_state_group:
     path: /content/objectstategroups/{objectStateGroupId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupLoadByIdController:loadObjectStateGroup
+    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupLoadByIdController::loadObjectStateGroup
     methods: [GET]
     requirements:
         objectStateGroupId: \d+
 
 ibexa.rest.update_object_state_group:
     path: /content/objectstategroups/{objectStateGroupId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupUpdateController:updateObjectStateGroup
+    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupUpdateController::updateObjectStateGroup
     methods: [PATCH]
     requirements:
         objectStateGroupId: \d+
 
 ibexa.rest.delete_object_state_group:
     path: /content/objectstategroups/{objectStateGroupId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupDeleteController:deleteObjectStateGroup
+    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupDeleteController::deleteObjectStateGroup
     methods: [DELETE]
     requirements:
         objectStateGroupId: \d+
 
 ibexa.rest.load_object_states:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateListController:loadObjectStates
+    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateListController::loadObjectStates
     methods: [GET]
     requirements:
         objectStateGroupId: \d+
 
 ibexa.rest.create_object_state:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateCreateController:createObjectState
+    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateCreateController::createObjectState
     methods: [POST]
     requirements:
         objectStateGroupId: \d+
 
 ibexa.rest.load_object_state:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates/{objectStateId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateLoadByIdController:loadObjectState
+    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateLoadByIdController::loadObjectState
     methods: [GET]
     requirements:
         objectStateGroupId: \d+
@@ -408,8 +355,7 @@ ibexa.rest.load_object_state:
 
 ibexa.rest.update_object_state:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates/{objectStateId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateUpdateController:updateObjectState
+    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateUpdateController::updateObjectState
     methods: [PATCH]
     requirements:
         objectStateGroupId: \d+
@@ -417,8 +363,7 @@ ibexa.rest.update_object_state:
 
 ibexa.rest.delete_object_state:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates/{objectStateId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupDeleteController:deleteObjectState
+    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupDeleteController::deleteObjectState
     methods: [DELETE]
     requirements:
         objectStateGroupId: \d+
@@ -426,16 +371,14 @@ ibexa.rest.delete_object_state:
 
 ibexa.rest.get_object_states_for_content:
     path: /content/objects/{contentId}/objectstates
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStatesForContentListController:getObjectStatesForContent
+    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStatesForContentListController::getObjectStatesForContent
     methods: [GET]
     requirements:
         contentId: \d+
 
 ibexa.rest.set_object_states_for_content:
     path: /content/objects/{contentId}/objectstates
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStatesForContentUpdateController:setObjectStatesForContent
+    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStatesForContentUpdateController::setObjectStatesForContent
     methods: [PATCH]
     requirements:
         contentId: \d+
@@ -497,85 +440,73 @@ ibexa.rest.location.move:
 
 ibexa.rest.redirect_location:
     path: /content/locations
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location\LocationRedirectController:redirectLocation
+    controller: Ibexa\Rest\Server\Controller\Location\LocationRedirectController::redirectLocation
     methods: [GET]
 
 ibexa.rest.load_location:
     path: /content/locations/{locationPath}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location\LocationLoadByPathController:loadLocation
+    controller: Ibexa\Rest\Server\Controller\Location\LocationLoadByPathController::loadLocation
     methods: [GET]
     requirements:
         locationPath: "[0-9/]+"
 
 ibexa.rest.update_location:
     path: /content/locations/{locationPath}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location\LocationUpdateController:updateLocation
+    controller: Ibexa\Rest\Server\Controller\Location\LocationUpdateController::updateLocation
     methods: [PATCH]
     requirements:
         locationPath: "[0-9/]+"
 
 ibexa.rest.delete_subtree:
     path: /content/locations/{locationPath}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location\LocationSubtreeDeleteController:deleteSubtree
+    controller: Ibexa\Rest\Server\Controller\Location\LocationSubtreeDeleteController::deleteSubtree
     methods: [DELETE]
     requirements:
         locationPath: "[0-9/]+"
 
 ibexa.rest.copy_subtree:
     path: /content/locations/{locationPath}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location\LocationSubtreeCopyController:copySubtree
+    controller: Ibexa\Rest\Server\Controller\Location\LocationSubtreeCopyController::copySubtree
     methods: [COPY]
     requirements:
         locationPath: "[0-9/]+"
 
 ibexa.rest.move_subtree:
     path: /content/locations/{locationPath}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location\LocationSubtreeMoveController:moveSubtree
+    controller: Ibexa\Rest\Server\Controller\Location\LocationSubtreeMoveController::moveSubtree
     methods: [MOVE]
     requirements:
         locationPath: "[0-9/]+"
 
 ibexa.rest.swap_location:
     path: /content/locations/{locationPath}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location\LocationSwapController:swapLocation
+    controller: Ibexa\Rest\Server\Controller\Location\LocationSwapController::swapLocation
     methods: [SWAP]
     requirements:
         locationPath: "[0-9/]+"
 
 ibexa.rest.load_location_children:
     path: /content/locations/{locationPath}/children
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location\LocationChildrenListController:loadLocationChildren
+    controller: Ibexa\Rest\Server\Controller\Location\LocationChildrenListController::loadLocationChildren
     methods: [GET]
     requirements:
         locationPath: "[0-9/]+"
 
 ibexa.rest.load_locations_for_content:
     path: /content/objects/{contentId}/locations
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location\LocationForContentListController:loadLocationsForContent
+    controller: Ibexa\Rest\Server\Controller\Location\LocationForContentListController::loadLocationsForContent
     methods: [GET]
     requirements:
         contentId: \d+
 
 ibexa.rest.create_location:
     path: /content/objects/{contentId}/locations
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Location\LocationCreateController:createLocation
+    controller: Ibexa\Rest\Server\Controller\Location\LocationCreateController::createLocation
     methods: [POST]
     requirements:
         contentId: \d+
 
-
 # Content types
-
 
 ibexa.rest.content_type.publish_draft:
     path: /content/types/{contentTypeId}/draft
@@ -599,52 +530,45 @@ ibexa.rest.content_type.copy:
 
 ibexa.rest.load_content_type_group_list:
     path: /content/typegroups
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupsListController:loadContentTypeGroupList
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupsListController::loadContentTypeGroupList
     methods: [GET]
 
 ibexa.rest.create_content_type_group:
     path: /content/typegroups
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupCreateController:createContentTypeGroup
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupCreateController::createContentTypeGroup
     methods: [POST]
 
 ibexa.rest.load_content_type_group:
     path: /content/typegroups/{contentTypeGroupId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupLoadByIdController:loadContentTypeGroup
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupLoadByIdController::loadContentTypeGroup
     methods: [GET]
     requirements:
         contentTypeGroupId: \d+
 
 ibexa.rest.update_content_type_group:
     path: /content/typegroups/{contentTypeGroupId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupUpdateController:updateContentTypeGroup
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupUpdateController::updateContentTypeGroup
     methods: [PATCH]
     requirements:
         contentTypeGroupId: \d+
 
 ibexa.rest.delete_content_type_group:
     path: /content/typegroups/{contentTypeGroupId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupDeleteController:deleteContentTypeGroup
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupDeleteController::deleteContentTypeGroup
     methods: [DELETE]
     requirements:
         contentTypeGroupId: \d+
 
 ibexa.rest.list_content_types_for_group:
     path: /content/typegroups/{contentTypeGroupId}/types
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeListForGroupController:listContentTypesForGroup
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeListForGroupController::listContentTypesForGroup
     methods: [GET]
     requirements:
         contentTypeGroupId: \d+
 
 ibexa.rest.create_content_type:
     path: /content/typegroups/{contentTypeGroupId}/types
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeCreateController:createContentType
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeCreateController::createContentType
     methods: [POST]
     requirements:
         contentTypeGroupId: \d+
@@ -652,62 +576,54 @@ ibexa.rest.create_content_type:
 ibexa.rest.list_content_types:
     # @todo: Handle all GET parameters
     path: /content/types
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeListController:listContentTypes
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeListController::listContentTypes
     methods: [GET]
 
 ibexa.rest.copy_content_type:
     path: /content/types/{contentTypeId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeCopyController:copyContentType
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeCopyController::copyContentType
     methods: [COPY]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.load_content_type:
     path: /content/types/{contentTypeId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeLoadByIdController:loadContentType
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeLoadByIdController::loadContentType
     methods: [GET]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.create_content_type_draft:
     path: /content/types/{contentTypeId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftCreateController:createContentTypeDraft
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftCreateController::createContentTypeDraft
     methods: [POST]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.delete_content_type:
     path: /content/types/{contentTypeId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDeleteController:deleteContentType
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDeleteController::deleteContentType
     methods: [DELETE]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.delete_content_type_draft:
     path: /content/types/{contentTypeId}/draft
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftDeleteController:deleteContentTypeDraft
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftDeleteController::deleteContentTypeDraft
     methods: [DELETE]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.load_content_type_field_definition_list:
     path: /content/types/{contentTypeId}/fieldDefinitions
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeFieldDefinitionListController:loadContentTypeFieldDefinitionList
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeFieldDefinitionListController::loadContentTypeFieldDefinitionList
     methods: [GET]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.load_content_type_field_definition:
     path: /content/types/{contentTypeId}/fieldDefinitions/{fieldDefinitionId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeFieldDefinitionLoadByIdController:loadContentTypeFieldDefinition
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeFieldDefinitionLoadByIdController::loadContentTypeFieldDefinition
     methods: [GET]
     requirements:
         contentTypeId: \d+
@@ -723,48 +639,42 @@ ibexa.rest.load_content_type_field_definition_by_identifier:
 
 ibexa.rest.load_content_type_draft:
     path: /content/types/{contentTypeId}/draft
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftLoadController:loadContentTypeDraft
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftLoadController::loadContentTypeDraft
     methods: [GET]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.update_content_type_draft:
     path: /content/types/{contentTypeId}/draft
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftUpdateController:updateContentTypeDraft
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftUpdateController::updateContentTypeDraft
     methods: [PATCH]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.publish_content_type_draft:
     path: /content/types/{contentTypeId}/draft
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftPublishController:publishContentTypeDraft
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftPublishController::publishContentTypeDraft
     methods: [PUBLISH]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.load_content_type_draft_field_definition_list:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFieldDefinitionListController:loadContentTypeDraftFieldDefinitionList
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFieldDefinitionListController::loadContentTypeDraftFieldDefinitionList
     methods: [GET]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.add_content_type_draft_field_definition:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFeildDefinitionAddController:addContentTypeDraftFieldDefinition
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFeildDefinitionAddController::addContentTypeDraftFieldDefinition
     methods: [POST]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.load_content_type_draft_field_definition:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFieldDefinitionLoadByIdController:loadContentTypeDraftFieldDefinition
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFieldDefinitionLoadByIdController::loadContentTypeDraftFieldDefinition
     methods: [GET]
     requirements:
         contentTypeId: \d+
@@ -772,8 +682,7 @@ ibexa.rest.load_content_type_draft_field_definition:
 
 ibexa.rest.update_content_type_draft_field_definition:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFieldDefinitionUpdateController:updateContentTypeDraftFieldDefinition
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFieldDefinitionUpdateController::updateContentTypeDraftFieldDefinition
     methods: [PATCH]
     requirements:
         contentTypeId: \d+
@@ -781,8 +690,7 @@ ibexa.rest.update_content_type_draft_field_definition:
 
 ibexa.rest.remove_content_type_draft_field_definition:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFieldDefinitionDeleteController:removeContentTypeDraftFieldDefinition
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFieldDefinitionDeleteController::removeContentTypeDraftFieldDefinition
     methods: [DELETE]
     requirements:
         contentTypeId: \d+
@@ -790,8 +698,7 @@ ibexa.rest.remove_content_type_draft_field_definition:
 
 ibexa.rest.load_groups_of_content_type:
     path: /content/types/{contentTypeId}/groups
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupListController:loadGroupsOfContentType
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeGroupListController::loadGroupsOfContentType
     methods: [GET]
     requirements:
         contentTypeId: \d+
@@ -799,24 +706,20 @@ ibexa.rest.load_groups_of_content_type:
 ibexa.rest.link_content_type_to_group:
     # Handle GET parameter group in controller. Most likely already done
     path: /content/types/{contentTypeId}/groups
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeLinkToGroupController:linkContentTypeToGroup
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeLinkToGroupController::linkContentTypeToGroup
     methods: [POST]
     requirements:
         contentTypeId: \d+
 
 ibexa.rest.unlink_content_type_from_group:
     path: /content/types/{contentTypeId}/groups/{contentTypeGroupId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeUnlinkFromGroupController:unlinkContentTypeFromGroup
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeUnlinkFromGroupController::unlinkContentTypeFromGroup
     methods: [DELETE]
     requirements:
         contentTypeId: \d+
         contentTypeGroupId: \d+
 
-
 # Trash
-
 
 ibexa.rest.trash.restore_trash_item:
     path: /content/trash/{trashItemId}
@@ -830,85 +733,69 @@ ibexa.rest.trash.restore_trash_item:
 
 ibexa.rest.load_trash_items:
     path: /content/trash
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Trash\TrashItemListController:loadTrashItems
+    controller: Ibexa\Rest\Server\Controller\Trash\TrashItemListController::loadTrashItems
     methods: [GET]
 
 ibexa.rest.empty_trash:
     path: /content/trash
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Trash\TrashEmptyController:emptyTrash
+    controller: Ibexa\Rest\Server\Controller\Trash\TrashEmptyController::emptyTrash
     methods: [DELETE]
 
 ibexa.rest.load_trash_item:
     path: /content/trash/{trashItemId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Trash\TrashItemLoadByIdController:loadTrashItem
+    controller: Ibexa\Rest\Server\Controller\Trash\TrashItemLoadByIdController::loadTrashItem
     methods: [GET]
     requirements:
         trashItemId: \d+
 
 ibexa.rest.delete_trash_item:
     path: /content/trash/{trashItemId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Trash\TrashItemDeleteController:deleteTrashItem
+    controller: Ibexa\Rest\Server\Controller\Trash\TrashItemDeleteController::deleteTrashItem
     methods: [DELETE]
     requirements:
         trashItemId: \d+
 
 ibexa.rest.restore_trash_item:
     path: /content/trash/{trashItemId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Trash\TrashItemRestoreController:restoreTrashItem
+    controller: Ibexa\Rest\Server\Controller\Trash\TrashItemRestoreController::restoreTrashItem
     methods: [MOVE]
     requirements:
         trashItemId: \d+
 
-
 # URL wildcards
-
 
 ibexa.rest.list_url_wildcards:
     path: /content/urlwildcards
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLWildcard\URLWildcardListController:listURLWildcards
+    controller: Ibexa\Rest\Server\Controller\URLWildcard\URLWildcardListController::listURLWildcards
     methods: [GET]
 
 ibexa.rest.create_url_wildcard:
     path: /content/urlwildcards
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLWildcard\URLWildcardCreateController:createURLWildcard
+    controller: Ibexa\Rest\Server\Controller\URLWildcard\URLWildcardCreateController::createURLWildcard
     methods: [POST]
 
 ibexa.rest.load_url_wildcard:
     path: /content/urlwildcards/{urlWildcardId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLWildcard\URLWildcardLoadByIdController:loadURLWildcard
+    controller: Ibexa\Rest\Server\Controller\URLWildcard\URLWildcardLoadByIdController::loadURLWildcard
     methods: [GET]
     requirements:
         urlWildcardId: \d+
 
 ibexa.rest.delete_url_wildcard:
     path: /content/urlwildcards/{urlWildcardId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLWildcard\URLWildcardDeleteController:deleteURLWildcard
+    controller: Ibexa\Rest\Server\Controller\URLWildcard\URLWildcardDeleteController::deleteURLWildcard
     methods: [DELETE]
     requirements:
         urlWildcardId: \d+
 
-
 # User policies
-
 
 ibexa.rest.list_policies_for_user:
     path: /user/policies
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\Role:listPoliciesForUser
+    controller: Ibexa\Rest\Server\Controller\Role\Role::listPoliciesForUser
     methods: [GET]
 
-
 # Roles
-
 
 ibexa.rest.role.publish:
     path: /user/roles/{roleId}/draft
@@ -922,109 +809,95 @@ ibexa.rest.role.publish:
 
 ibexa.rest.list_roles:
     path: /user/roles
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleListController:listRoles
+    controller: Ibexa\Rest\Server\Controller\Role\RoleListController::listRoles
     methods: [GET]
 
 ibexa.rest.create_role:
     path: /user/roles
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleCreateController:createRole
+    controller: Ibexa\Rest\Server\Controller\Role\RoleCreateController::createRole
     methods: [POST]
     requirements:
 
 ibexa.rest.create_role_draft:
     path: /user/roles/{roleId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleDraftCreateController:createRoleDraft
+    controller: Ibexa\Rest\Server\Controller\Role\RoleDraftCreateController::createRoleDraft
     methods: [POST]
     requirements:
         roleId: \d+
 
 ibexa.rest.load_role:
     path: /user/roles/{roleId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleLoadByIdController:loadRole
+    controller: Ibexa\Rest\Server\Controller\Role\RoleLoadByIdController::loadRole
     methods: [GET]
     requirements:
         roleId: \d+
 
 ibexa.rest.load_role_draft:
     path: /user/roles/{roleId}/draft
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleDraftLoadByRoleIdController:loadRoleDraft
+    controller: Ibexa\Rest\Server\Controller\Role\RoleDraftLoadByRoleIdController::loadRoleDraft
     methods: [GET]
     requirements:
         roleId: \d+
 
 ibexa.rest.update_role:
     path: /user/roles/{roleId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleUpdateController:updateRole
+    controller: Ibexa\Rest\Server\Controller\Role\RoleUpdateController::updateRole
     methods: [PATCH]
     requirements:
         roleId: \d+
 
 ibexa.rest.update_role_draft:
     path: /user/roles/{roleId}/draft
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleDraftUpdateController:updateRoleDraft
+    controller: Ibexa\Rest\Server\Controller\Role\RoleDraftUpdateController::updateRoleDraft
     methods: [PATCH]
     requirements:
         roleId: \d+
 
 ibexa.rest.publish_role_draft:
     path: /user/roles/{roleId}/draft
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleDraftPublishController:publishRoleDraft
+    controller: Ibexa\Rest\Server\Controller\Role\RoleDraftPublishController::publishRoleDraft
     methods: [PUBLISH]
     requirements:
         roleId: \d+
 
 ibexa.rest.delete_role:
     path: /user/roles/{roleId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleDeleteController:deleteRole
+    controller: Ibexa\Rest\Server\Controller\Role\RoleDeleteController::deleteRole
     methods: [DELETE]
     requirements:
         roleId: \d+
 
 ibexa.rest.delete_role_draft:
     path: /user/roles/{roleId}/draft
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleDraftDeleteController:deleteRoleDraft
+    controller: Ibexa\Rest\Server\Controller\Role\RoleDraftDeleteController::deleteRoleDraft
     methods: [DELETE]
     requirements:
         roleId: \d+
 
 ibexa.rest.load_policies:
     path: /user/roles/{roleId}/policies
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RolePolicyListController:loadPolicies
+    controller: Ibexa\Rest\Server\Controller\Role\RolePolicyListController::loadPolicies
     methods: [GET]
     requirements:
         roleId: \d+
 
 ibexa.rest.add_policy:
     path: /user/roles/{roleId}/policies
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RolePolicyCreateController:addPolicy
+    controller: Ibexa\Rest\Server\Controller\Role\RolePolicyCreateController::addPolicy
     methods: [POST]
     requirements:
         roleId: \d+
 
 ibexa.rest.delete_policies:
     path: /user/roles/{roleId}/policies
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RolePolicyDeleteAllFromRoleController:deletePolicies
+    controller: Ibexa\Rest\Server\Controller\Role\RolePolicyDeleteAllFromRoleController::deletePolicies
     methods: [DELETE]
     requirements:
         roleId: \d+
 
 ibexa.rest.load_policy:
     path: /user/roles/{roleId}/policies/{policyId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RolePolicyLoadByIdController:loadPolicy
+    controller: Ibexa\Rest\Server\Controller\Role\RolePolicyLoadByIdController::loadPolicy
     methods: [GET]
     requirements:
         roleId: \d+
@@ -1032,8 +905,7 @@ ibexa.rest.load_policy:
 
 ibexa.rest.update_policy:
     path: /user/roles/{roleId}/policies/{policyId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RolePolicyUpdateController:updatePolicy
+    controller: Ibexa\Rest\Server\Controller\Role\RolePolicyUpdateController::updatePolicy
     methods: [PATCH]
     requirements:
         roleId: \d+
@@ -1041,13 +913,11 @@ ibexa.rest.update_policy:
 
 ibexa.rest.delete_policy:
     path: /user/roles/{roleId}/policies/{policyId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RolePolicyDeleteController:deletePolicy
+    controller: Ibexa\Rest\Server\Controller\Role\RolePolicyDeleteController::deletePolicy
     methods: [DELETE]
     requirements:
         roleId: \d+
         policyId: \d+
-
 
 # Users
 
@@ -1063,20 +933,17 @@ ibexa.rest.user_group.move:
 
 ibexa.rest.verify_users:
     path: /user/users
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserVerifyController:verifyUsers
+    controller: Ibexa\Rest\Server\Controller\User\UserVerifyController::verifyUsers
     methods: [HEAD]
 
 ibexa.rest.load_users:
     path: /user/users
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserListController:loadUsers
+    controller: Ibexa\Rest\Server\Controller\User\UserListController::loadUsers
     methods: [GET]
 
 ibexa.rest.load_user:
     path: /user/users/{userId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserLoadByIdController:loadUser
+    controller: Ibexa\Rest\Server\Controller\User\UserLoadByIdController::loadUser
     methods: [GET]
     requirements:
         userId: \d+
@@ -1088,40 +955,35 @@ ibexa.rest.current_user:
 
 ibexa.rest.update_user:
     path: /user/users/{userId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserUpdateController:updateUser
+    controller: Ibexa\Rest\Server\Controller\User\UserUpdateController::updateUser
     methods: [PATCH]
     requirements:
         userId: \d+
 
 ibexa.rest.delete_user:
     path: /user/users/{userId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserDeleteController:deleteUser
+    controller: Ibexa\Rest\Server\Controller\User\UserDeleteController::deleteUser
     methods: [DELETE]
     requirements:
         userId: \d+
 
 ibexa.rest.load_user_groups_of_user:
     path: /user/users/{userId}/groups
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserGroupsOfUserListController:loadUserGroupsOfUser
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupsOfUserListController::loadUserGroupsOfUser
     methods: [GET]
     requirements:
         userId: \d+
 
 ibexa.rest.assign_user_to_user_group:
     path: /user/users/{userId}/groups
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserAssignToUserGroupController:assignUserToUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserAssignToUserGroupController::assignUserToUserGroup
     methods: [POST]
     requirements:
         userId: \d+
 
 ibexa.rest.unassign_user_from_user_group:
     path: /user/users/{userId}/groups/{groupPath}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserUnassignFromUserGroupController:unassignUserFromUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserUnassignFromUserGroupController::unassignUserFromUserGroup
     methods: [DELETE]
     requirements:
         userId: \d+
@@ -1129,32 +991,28 @@ ibexa.rest.unassign_user_from_user_group:
 
 ibexa.rest.load_user_drafts:
     path: /user/users/{userId}/drafts
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserDraftListController:loadUserDrafts
+    controller: Ibexa\Rest\Server\Controller\User\UserDraftListController::loadUserDrafts
     methods: [GET]
     requirements:
         userId: \d+
 
 ibexa.rest.load_role_assignments_for_user:
     path: /user/users/{userId}/roles
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleAssignmentForUserListController:loadRoleAssignmentsForUser
+    controller: Ibexa\Rest\Server\Controller\Role\RoleAssignmentForUserListController::loadRoleAssignmentsForUser
     methods: [GET]
     requirements:
         userId: \d+
 
 ibexa.rest.assign_role_to_user:
     path: /user/users/{userId}/roles
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleAssignToUserController:assignRoleToUser
+    controller: Ibexa\Rest\Server\Controller\Role\RoleAssignToUserController::assignRoleToUser
     methods: [POST]
     requirements:
         userId: \d+
 
 ibexa.rest.load_role_assignment_for_user:
     path: /user/users/{userId}/roles/{roleId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleAssignmentForUserLoadByIdController:loadRoleAssignmentForUser
+    controller: Ibexa\Rest\Server\Controller\Role\RoleAssignmentForUserLoadByIdController::loadRoleAssignmentForUser
     methods: [GET]
     requirements:
         userId: \d+
@@ -1162,8 +1020,7 @@ ibexa.rest.load_role_assignment_for_user:
 
 ibexa.rest.unassign_role_from_user:
     path: /user/users/{userId}/roles/{roleId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleUnassignFromUserController:unassignRoleFromUser
+    controller: Ibexa\Rest\Server\Controller\Role\RoleUnassignFromUserController::unassignRoleFromUser
     methods: [DELETE]
     requirements:
         userId: \d+
@@ -1171,106 +1028,92 @@ ibexa.rest.unassign_role_from_user:
 
 ibexa.rest.load_user_groups:
     path: /user/groups
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserGroupListController:loadUserGroups
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupListController::loadUserGroups
     methods: [GET]
 
 ibexa.rest.load_root_user_group:
     path: /user/groups/root
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserGroupOfRootLoadController:loadRootUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupOfRootLoadController::loadRootUserGroup
     methods: [GET]
 
 ibexa.rest.create_root_user_group:
     path: /user/groups/subgroups
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserGroupCreateController:createUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupCreateController::createUserGroup
     methods: [POST]
 
 ibexa.rest.load_user_group:
     path: /user/groups/{groupPath}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserGroupLoadByPathController:loadUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupLoadByPathController::loadUserGroup
     methods: [GET]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.update_user_group:
     path: /user/groups/{groupPath}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserGroupUpdateController:updateUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupUpdateController::updateUserGroup
     methods: [PATCH]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.delete_user_group:
     path: /user/groups/{groupPath}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserGroupDeleteController:deleteUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupDeleteController::deleteUserGroup
     methods: [DELETE]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.move_user_group:
     path: /user/groups/{groupPath}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserGroupMoveController:moveUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupMoveController::moveUserGroup
     methods: [MOVE]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.load_sub_user_groups:
     path: /user/groups/{groupPath}/subgroups
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserSubGroupListController:loadSubUserGroups
+    controller: Ibexa\Rest\Server\Controller\User\UserSubGroupListController::loadSubUserGroups
     methods: [GET]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.create_user_group:
     path: /user/groups/{groupPath}/subgroups
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserGroupCreateController:createUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupCreateController::createUserGroup
     methods: [POST]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.load_users_from_group:
     path: /user/groups/{groupPath}/users
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserGroupUsersListController:loadUsersFromGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupUsersListController::loadUsersFromGroup
     methods: [GET]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.create_user:
     path: /user/groups/{groupPath}/users
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\User\UserCreateController:createUser
+    controller: Ibexa\Rest\Server\Controller\User\UserCreateController::createUser
     methods: [POST]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.load_role_assignments_for_user_group:
     path: /user/groups/{groupPath}/roles
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleAssignmentForUserGroupListController:loadRoleAssignmentsForUserGroup
+    controller: Ibexa\Rest\Server\Controller\Role\RoleAssignmentForUserGroupListController::loadRoleAssignmentsForUserGroup
     methods: [GET]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.assign_role_to_user_group:
     path: /user/groups/{groupPath}/roles
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleAssignToUserGroupController:assignRoleToUserGroup
+    controller: Ibexa\Rest\Server\Controller\Role\RoleAssignToUserGroupController::assignRoleToUserGroup
     methods: [POST]
     requirements:
         groupPath: "[0-9/]+"
 
 ibexa.rest.load_role_assignment_for_user_group:
     path: /user/groups/{groupPath}/roles/{roleId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleAssignmentForUserGroupLoadByIdController:loadRoleAssignmentForUserGroup
+    controller: Ibexa\Rest\Server\Controller\Role\RoleAssignmentForUserGroupLoadByIdController::loadRoleAssignmentForUserGroup
     methods: [GET]
     requirements:
         groupPath: "[0-9/]+"
@@ -1278,8 +1121,7 @@ ibexa.rest.load_role_assignment_for_user_group:
 
 ibexa.rest.unassign_role_from_user_group:
     path: /user/groups/{groupPath}/roles/{roleId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Role\RoleUnassignFromUserGroupController:unassignRoleFromUserGroup
+    controller: Ibexa\Rest\Server\Controller\Role\RoleUnassignFromUserGroupController::unassignRoleFromUserGroup
     methods: [DELETE]
     requirements:
         groupPath: "[0-9/]+"
@@ -1287,8 +1129,8 @@ ibexa.rest.unassign_role_from_user_group:
 
 ibexa.rest.create_session:
     path: /user/sessions
+    controller: Ibexa\Rest\Server\Controller\SessionController::createSessionAction
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Session\SessionCreateController:createSessionAction
         csrf_protection: false
     methods: [POST]
 
@@ -1301,89 +1143,77 @@ ibexa.rest.check_session:
 
 ibexa.rest.delete_session:
     path: /user/sessions/{sessionId}
+    controller: Ibexa\Rest\Server\Controller\SessionController::deleteSessionAction
     defaults:
-        _controller: Ibexa\Rest\Server\Controller\Session\SessionDeleteController:deleteSessionAction
         csrf_protection: false
     methods: [DELETE]
 
 # URL aliases
 
-
 ibexa.rest.list_global_url_aliases:
     path: /content/urlaliases
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasListGlobalController:listGlobalURLAliases
+    controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasListGlobalController::listGlobalURLAliases
     methods: [GET]
 
 ibexa.rest.list_location_url_aliases:
     path: /content/locations/{locationPath}/urlaliases
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasListLocationController:listLocationURLAliases
+    controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasListLocationController::listLocationURLAliases
     methods: [GET]
     requirements:
         locationPath: "[0-9/]+"
 
 ibexa.rest.create_url_alias:
     path: /content/urlaliases
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasCreateController:createURLAlias
+    controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasCreateController::createURLAlias
     methods: [POST]
 
 ibexa.rest.load_url_alias:
     path: /content/urlaliases/{urlAliasId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasLoadByIdController:loadURLAlias
+    controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasLoadByIdController::loadURLAlias
     methods: [GET]
 
 ibexa.rest.delete_url_alias:
     path: /content/urlaliases/{urlAliasId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasDeleteController:deleteURLAlias
+    controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasDeleteController::deleteURLAlias
     methods: [DELETE]
-
 
 # Services
 
-
 ibexa.rest.load_country_list:
     path: /services/countries
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Services:loadCountryList
+    controller: Ibexa\Rest\Server\Controller\Services::loadCountryList
     methods: [GET]
 
 # Bookmark
 
 ibexa.rest.create_bookmark:
     path: /bookmark/{locationId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Bookmark\BookmarkCreateController:createBookmark
+    controller: Ibexa\Rest\Server\Controller\Bookmark\BookmarkCreateController::createBookmark
     methods: [POST]
     requirements:
         locationId: "[0-9]+"
 
 ibexa.rest.delete_bookmark:
     path: /bookmark/{locationId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Bookmark\BookmarkDeleteController:deleteBookmark
+    controller: Ibexa\Rest\Server\Controller\Bookmark\BookmarkDeleteController::deleteBookmark
     methods: [DELETE]
     requirements:
         locationId: "[0-9]+"
 
 ibexa.rest.is_bookmarked:
     path: /bookmark/{locationId}
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Bookmark\BookmarkIsBookmarkedController:isBookmarked
+    controller: Ibexa\Rest\Server\Controller\Bookmark\BookmarkIsBookmarkedController::isBookmarked
     methods: [GET, HEAD]
     requirements:
         locationId: "[0-9]+"
 
 ibexa.rest.load_bookmarks:
     path: /bookmark
-    defaults:
-        _controller: Ibexa\Rest\Server\Controller\Bookmark\BookmarkListController:loadBookmarks
+    controller: Ibexa\Rest\Server\Controller\Bookmark\BookmarkListController::loadBookmarks
     methods: [GET]
 
 # JWT
+
 ibexa.rest.create_token:
     path: /user/token/jwt
     controller: Ibexa\Rest\Server\Controller\JWT::createToken

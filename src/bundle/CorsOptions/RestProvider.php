@@ -52,7 +52,7 @@ class RestProvider implements ProviderInterface
     {
         try {
             $route = $this->requestMatcher->matchRequest(
-                Request::create($uri, 'OPTIONS')
+                Request::create($uri, Request::METHOD_OPTIONS)
             );
             if (isset($route['allowedMethods'])) {
                 return explode(',', $route['allowedMethods']);

@@ -46,7 +46,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
              ->willReturn(self::NON_VERBOSE_ERROR_DESCRIPTION);
 
         $visitor = $this->internalGetNonDebugVisitor();
-        $visitor->setRequestParser($this->getRequestParser());
+        $visitor->setUriParser($this->getUriParser());
         $visitor->setRouter($this->getRouterMock());
         $visitor->setTemplateRouter($this->getTemplatedRouterMock());
 

@@ -1,9 +1,9 @@
 parameters:
     ibexa.rest.output.visitor.json.regexps:
-        - '(^application/vnd\.ibexa\.api\.[A-Za-z]+\+json$)'
+        - '(^application/vnd\.ibexa\.api(\.[A-Za-z]+)+\+json$)'
         - '(^application/json$)'
     ibexa.rest.output.visitor.xml.regexps:
-        - '(^application/vnd\.ibexa\.api\.[A-Za-z]+\+xml$)'
+        - '(^application/vnd\.ibexa\.api(\.[A-Za-z]+)+\+xml$)'
         - '(^application/xml$)'
         - '(^.*/.*$)'
     ibexa.rest.path_prefix.pattern: !php/const \Ibexa\Bundle\Rest\UriParser\UriParser::DEFAULT_REST_PREFIX_PATTERN
@@ -42,11 +42,6 @@ services:
             - '@ibexa.api.service.field_type'
             - '@Ibexa\Rest\FieldTypeProcessorRegistry'
 
-    Ibexa\Bundle\Rest\RequestParser\Router:
-        arguments:
-            $router: '@router'
-            $uriParser: '@Ibexa\Contracts\Rest\UriParser\UriParserInterface'
-
     Ibexa\Contracts\Rest\UriParser\UriParserInterface: '@Ibexa\Bundle\Rest\UriParser\UriParser'
 
     Ibexa\Bundle\Rest\UriParser\UriParser:
@@ -74,10 +69,9 @@ services:
     Ibexa\Rest\Server\Controller:
         autowire: true
         calls:
-            - [ setContainer, ["@service_container"] ]
             - [ setInputDispatcher, ['@Ibexa\Rest\Input\Dispatcher'] ]
             - [ setRouter, ["@router"] ]
-            - [ setRequestParser, ['@Ibexa\Bundle\Rest\RequestParser\Router'] ]
+            - [ setUriParser, ['@Ibexa\Contracts\Rest\UriParser\UriParserInterface'] ]
             - [ setRepository, ['@ibexa.api.repository'] ]
 
     Ibexa\Rest\Server\Controller\Root:
@@ -138,6 +132,7 @@ services:
         resource: '../../../lib/Server/Controller/ObjectState'
         autowire: true
         autoconfigure: true
+            - '@Ibexa\Contracts\Core\Repository\ContentService\RelationListFacadeInterface'
         tags:
             - controller.service_arguments
 
@@ -344,6 +339,7 @@ services:
         arguments:
             $normalizer: '@ibexa.rest.serializer'
             $logger: '@logger'
+            $strictMode: '%ibexa.rest.strict_mode%'
         tags:
             - { name: monolog.logger, channel: ibexa.rest }
 
@@ -357,6 +353,7 @@ services:
         arguments:
             $normalizer: '@ibexa.rest.serializer'
             $logger: '@logger'
+            $strictMode: '%ibexa.rest.strict_mode%'
         tags:
             - { name: monolog.logger, channel: ibexa.rest }
 
@@ -400,3 +397,13 @@ services:
     Ibexa\Contracts\Rest\Input\MediaTypeParser: ~
 
     Ibexa\Contracts\Rest\Input\MediaTypeParserInterface: '@Ibexa\Contracts\Rest\Input\MediaTypeParser'
+
+    Ibexa\Contracts\Rest\Input\Parser\Query\Criterion\BaseCriterionProcessor:
+        abstract: true
+        arguments:
+            $parsingDispatcher: '@Ibexa\Contracts\Rest\Input\ParsingDispatcher'
+
+    Ibexa\Contracts\Rest\Input\Parser\Query\SortClause\BaseSortClauseProcessor:
+        abstract: true
+        arguments:
+            $parsingDispatcher: '@Ibexa\Contracts\Rest\Input\ParsingDispatcher'

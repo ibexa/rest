@@ -37,7 +37,7 @@ class ContentUpdate extends BaseParser
 
         if (array_key_exists('Section', $data) && is_array($data['Section']) && isset($data['Section']['_href'])) {
             try {
-                $parsedData['sectionId'] = $this->requestParser->parseHref($data['Section']['_href'], 'sectionId');
+                $parsedData['sectionId'] = $this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
             } catch (Exceptions\InvalidArgumentException $e) {
                 throw new Exceptions\Parser('Invalid format for the <Section> reference in <ContentUpdate>.');
             }
@@ -45,7 +45,7 @@ class ContentUpdate extends BaseParser
 
         if (array_key_exists('Owner', $data) && is_array($data['Owner']) && isset($data['Owner']['_href'])) {
             try {
-                $parsedData['ownerId'] = $this->requestParser->parseHref($data['Owner']['_href'], 'userId');
+                $parsedData['ownerId'] = $this->uriParser->getAttributeFromUri($data['Owner']['_href'], 'userId');
             } catch (Exceptions\InvalidArgumentException $e) {
                 throw new Exceptions\Parser('Invalid format for the <Owner> reference in <ContentUpdate>.');
             }
@@ -57,7 +57,7 @@ class ContentUpdate extends BaseParser
 
         if (array_key_exists('MainLocation', $data)) {
             try {
-                $mainLocationIdParts = explode('/', $this->requestParser->parseHref($data['MainLocation']['_href'], 'locationPath'));
+                $mainLocationIdParts = explode('/', $this->uriParser->getAttributeFromUri($data['MainLocation']['_href'], 'locationPath'));
                 $parsedData['mainLocationId'] = array_pop($mainLocationIdParts);
             } catch (Exceptions\InvalidArgumentException $e) {
                 throw new Exceptions\Parser('Invalid format for the <MainLocation> reference in <ContentUpdate>.');

@@ -45,14 +45,13 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
     public function authenticate(Request $request): Passport
     {
         $existingUserToken = $this->fetchExistingToken($request);
-        if ($this->canUserFromSessionBeAuthenticated($existingUserToken)) {
+        if (null !== $existingUserToken && $this->canUserFromSessionBeAuthenticated($existingUserToken)) {
             $existingUser = $existingUserToken->getUser();
 
             return $this->createAuthorizationPassport(
-                /** @phpstan-ignore-next-line */
                 $existingUser->getUserIdentifier(),
-                /** @phpstan-ignore-next-line */
-                $existingUser->getPassword()
+                // @todo not sure how to refactor this
+                ''
             );
         }
 
@@ -101,7 +100,7 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
         $previousToken = $this->tokenStorage->getToken();
         if (
             $previousToken === null ||
-            $previousToken->getUsername() !== $request->attributes->get('username')
+            $previousToken->getUserIdentifier() !== $request->attributes->get('username')
         ) {
             return null;
         }
@@ -112,17 +111,11 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
     }
 
     /**
-     * @phpstan-assert-if-true !null $existingUserToken
+     * @phpstan-assert-if-true !null $existingUserToken->getUser()
      */
     private function canUserFromSessionBeAuthenticated(?TokenInterface $existingUserToken): bool
     {
-        if ($existingUserToken === null) {
-            return false;
-        }
-
-        $user = $existingUserToken->getUser();
-
-        return !($user === null || $user->getPassword() === null);
+        return $existingUserToken?->getUser() !== null;
     }
 
     private function createAuthorizationPassport(string $login, string $password): Passport

@@ -46,7 +46,7 @@ class VisitorTest extends TestCase
             ->getMock();
 
         self::assertEquals(
-            new Response('Hello world!', 200, []),
+            new Response('Hello world!', Response::HTTP_OK, []),
             $visitor->visit($data)
         );
     }
@@ -76,7 +76,7 @@ class VisitorTest extends TestCase
             ->getMock();
 
         self::assertEquals(
-            new Response(null, 200, []),
+            new Response(null, Response::HTTP_OK, []),
             $visitor->visit($data)
         );
     }
@@ -108,7 +108,7 @@ class VisitorTest extends TestCase
         self::assertEquals(
             new Response(
                 null,
-                200,
+                Response::HTTP_OK,
                 [
                     'Content-Type' => 'text/xml',
                 ]
@@ -133,9 +133,10 @@ class VisitorTest extends TestCase
         self::assertEquals(
             new Response(
                 null,
-                200,
+                Response::HTTP_OK,
                 [
                     'Content-Type' => 'text/xml',
+                    'Accept-Patch' => [0 => ''],
                 ]
             ),
             $visitor->visit($data)
@@ -153,7 +154,7 @@ class VisitorTest extends TestCase
         self::assertEquals(
             new Response(
                 null,
-                200,
+                Response::HTTP_OK,
                 [
                     'Content-Type' => 'text/xml',
                 ]
@@ -176,7 +177,7 @@ class VisitorTest extends TestCase
         self::assertEquals(
             new Response(
                 null,
-                200,
+                Response::HTTP_OK,
                 []
             ),
             $result
@@ -193,7 +194,7 @@ class VisitorTest extends TestCase
         self::assertEquals(
             new Response(
                 null,
-                201
+                Response::HTTP_CREATED
             ),
             $visitor->visit($data)
         );
@@ -211,7 +212,7 @@ class VisitorTest extends TestCase
         self::assertEquals(
             new Response(
                 null,
-                201
+                Response::HTTP_CREATED
             ),
             $visitor->visit($data)
         );

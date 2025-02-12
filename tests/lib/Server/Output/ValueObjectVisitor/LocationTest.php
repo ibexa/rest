@@ -18,6 +18,7 @@ use Ibexa\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 final class LocationTest extends ValueObjectVisitorBaseTest
 {
@@ -27,16 +28,14 @@ final class LocationTest extends ValueObjectVisitorBaseTest
 
     private const LOCATION_ID = 55;
 
-    /** @var \Ibexa\Contracts\Core\Repository\LocationService&\PHPUnit\Framework\MockObject\MockObject */
-    private LocationService $locationServiceMock;
+    private LocationService&MockObject $locationServiceMock;
 
-    /** @var \Ibexa\Contracts\Core\Repository\ContentService&\PHPUnit\Framework\MockObject\MockObject */
-    private ContentService $contentServiceMock;
+    private ContentService\RelationListFacadeInterface&MockObject $relationListFacade;
 
     protected function setUp(): void
     {
         $this->locationServiceMock = $this->createMock(LocationService::class);
-        $this->contentServiceMock = $this->createMock(ContentService::class);
+        $this->relationListFacade = $this->createMock(ContentService\RelationListFacadeInterface::class);
 
         parent::setUp();
     }
@@ -76,10 +75,12 @@ final class LocationTest extends ValueObjectVisitorBaseTest
 
         $this->mockLoadLocation($location);
 
-        $this->contentServiceMock->expects(self::once())
-            ->method('loadRelations')
+        $this->relationListFacade->expects(self::once())
+            ->method('getRelations')
             ->with($versionInfo)
-            ->willReturn([]);
+            ->willReturnCallback(
+                static fn () => yield
+            );
 
         $visitor->visit(
             $this->getVisitorMock(),
@@ -139,6 +140,9 @@ final class LocationTest extends ValueObjectVisitorBaseTest
 
     protected function internalGetVisitor(): ValueObjectVisitor\Location
     {
-        return new ValueObjectVisitor\Location($this->locationServiceMock, $this->contentServiceMock);
+        return new ValueObjectVisitor\Location(
+            $this->locationServiceMock,
+            $this->relationListFacade
+        );
     }
 }

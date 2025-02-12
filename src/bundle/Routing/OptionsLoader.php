@@ -30,12 +30,12 @@ class OptionsLoader extends Loader
      *
      * @return \Symfony\Component\Routing\RouteCollection
      */
-    public function load($resource, $type = null)
+    public function load(mixed $resource, $type = null)
     {
         return $this->routeCollectionMapper->mapCollection($this->import($resource));
     }
 
-    public function supports($resource, $type = null)
+    public function supports($resource, $type = null): bool
     {
         return $type === 'rest_options';
     }

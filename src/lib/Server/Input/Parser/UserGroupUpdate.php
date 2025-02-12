@@ -86,7 +86,7 @@ class UserGroupUpdate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the Section element in UserGroupUpdate.");
             }
 
-            $parsedData['sectionId'] = $this->requestParser->parseHref($data['Section']['_href'], 'sectionId');
+            $parsedData['sectionId'] = $this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
         }
 
         if (array_key_exists('remoteId', $data)) {
@@ -94,7 +94,7 @@ class UserGroupUpdate extends BaseParser
         }
 
         if (array_key_exists('fields', $data)) {
-            $groupLocationParts = explode('/', $this->requestParser->parseHref($data['__url'], 'groupPath'));
+            $groupLocationParts = explode('/', $this->uriParser->getAttributeFromUri($data['__url'], 'groupPath'));
 
             $groupLocation = $this->locationService->loadLocation(array_pop($groupLocationParts));
 
