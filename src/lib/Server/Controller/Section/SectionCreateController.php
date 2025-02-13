@@ -9,7 +9,6 @@ namespace Ibexa\Rest\Server\Controller\Section;
 
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
-use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\SectionService;
 use Ibexa\Rest\Message;
@@ -22,34 +21,33 @@ use Symfony\Component\HttpFoundation\Response;
 #[Post(
     uriTemplate: '/content/sections',
     name: 'Create new Section',
-    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
-    openapi: new Model\Operation(
-        summary: 'Creates a new Section.',
-        tags: [
+    openapiContext: [
+        'summary' => 'Creates a new Section.',
+        'tags' => [
             'Section',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the new Section is returned in XML or JSON format.',
-                schema: [
+        'parameters' => [
+            [
+                'name' => 'Accept',
+                'in' => 'header',
+                'required' => true,
+                'description' => 'If set, the new Section is returned in XML or JSON format.',
+                'schema' => [
                     'type' => 'string',
                 ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The Section input schema encoded in XML or JSON format.',
-                schema: [
+            ],
+            [
+                'name' => 'Content-Type',
+                'in' => 'header',
+                'required' => true,
+                'description' => 'The Section input schema encoded in XML or JSON format.',
+                'schema' => [
                     'type' => 'string',
                 ],
-            ),
+            ],
         ],
-        requestBody: new Model\RequestBody(
-            content: new \ArrayObject([
+        'requestBody' => [
+            'content' => [
                 'application/vnd.ibexa.api.SectionInput+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/SectionInput',
@@ -62,9 +60,9 @@ use Symfony\Component\HttpFoundation\Response;
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/POST/SectionInput.json.example',
                 ],
-            ]),
-        ),
-        responses: [
+            ],
+        ],
+        'responses' => [
             Response::HTTP_CREATED => [
                 'content' => [
                     'application/vnd.ibexa.api.Section+xml' => [
@@ -82,7 +80,7 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ],
         ],
-    ),
+    ],
 )]
 class SectionCreateController extends RestController
 {
