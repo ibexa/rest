@@ -8,7 +8,6 @@
 namespace Ibexa\Rest\Server\Controller\Section;
 
 use ApiPlatform\Metadata\Delete;
-use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\SectionService;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values\NoContent;
@@ -17,22 +16,22 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/sections/{sectionId}',
     name: 'Delete Section',
-    openapi: new Model\Operation(
-        summary: 'The given Section is deleted.',
-        tags: [
+    openapiContext: [
+        'summary' => 'The given Section is deleted.',
+        'tags' => [
             'Section',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'sectionId',
-                in: 'path',
-                required: true,
-                schema: [
+        'parameters' => [
+            [
+                'name' => 'sectionId',
+                'in' => 'path',
+                'required' => true,
+                'schema' => [
                     'type' => 'string',
                 ],
-            ),
+            ],
         ],
-        responses: [
+        'responses' => [
             Response::HTTP_NO_CONTENT => [
                 'description' => 'No Content - given Section is deleted.',
             ],
@@ -43,7 +42,7 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - the Section does not exist.',
             ],
         ],
-    ),
+    ],
 )]
 class SectionDeleteController extends RestController
 {
