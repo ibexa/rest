@@ -70,7 +70,7 @@ class VersionUpdate extends BaseParser
                 throw new Exceptions\Parser("Invalid 'fields' element for VersionUpdate.");
             }
 
-            $contentId = $this->requestParser->parseHref($data['__url'], 'contentId');
+            $contentId = $this->uriParser->getAttributeFromUri($data['__url'], 'contentId');
 
             foreach ($data['fields']['field'] as $fieldData) {
                 if (!array_key_exists('fieldDefinitionIdentifier', $fieldData)) {

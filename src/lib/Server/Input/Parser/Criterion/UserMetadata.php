@@ -18,16 +18,11 @@ use Ibexa\Rest\Input\BaseParser;
 class UserMetadata extends BaseParser
 {
     /**
-     * Parses input structure to a Criterion object.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @phpstan-param array{UserMetadataCriterion: array{Target: string, Value: int|string|array}} $data
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\UserMetadata
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): UserMetadataCriterion
     {
         if (!isset($data['UserMetadataCriterion'])) {
             throw new Exceptions\Parser('Invalid <UserMetadataCriterion> format');
@@ -49,7 +44,7 @@ class UserMetadata extends BaseParser
 
         $value = is_array($data['UserMetadataCriterion']['Value'])
             ? $data['UserMetadataCriterion']['Value']
-            : explode(',', $data['UserMetadataCriterion']['Value']);
+            : explode(',', (string)$data['UserMetadataCriterion']['Value']);
 
         return new UserMetadataCriterion($target, null, $value);
     }

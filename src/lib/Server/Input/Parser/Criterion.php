@@ -18,7 +18,7 @@ use Ibexa\Rest\Input\BaseParser;
 abstract class Criterion extends BaseParser
 {
     /**
-     * @var array
+     * @var string[]
      */
     protected static $criterionIdMap = [
         'AND' => 'LogicalAnd',

@@ -34,6 +34,6 @@ class RelationCreate extends BaseParser
             throw new Exceptions\Parser("Missing '_href' attribute for the Destination element in RelationCreate.");
         }
 
-        return $this->requestParser->parseHref($data['Destination']['_href'], 'contentId');
+        return $this->uriParser->getAttributeFromUri($data['Destination']['_href'], 'contentId');
     }
 }

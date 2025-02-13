@@ -8,9 +8,10 @@
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
+use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Ibexa\Rest\Input;
-use Ibexa\Rest\RequestParser;
 use Ibexa\Tests\Rest\Server\BaseTest as ParentBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Base test for input parsers.
@@ -22,10 +23,7 @@ abstract class BaseTest extends ParentBaseTest
      */
     protected $parsingDispatcherMock;
 
-    /**
-     * @var \Ibexa\Rest\RequestParser|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $requestParserMock;
+    protected UriParserInterface&MockObject $uriParserMock;
 
     /**
      * @var \Ibexa\Rest\Input\ParserTools
@@ -59,14 +57,9 @@ abstract class BaseTest extends ParentBaseTest
         return [];
     }
 
-    /**
-     * Get the Request parser.
-     *
-     * @return \Ibexa\Rest\RequestParser|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getRequestParserMock()
+    protected function getUriParserMock(): UriParserInterface&MockObject
     {
-        if (!isset($this->requestParserMock)) {
+        if (!isset($this->uriParserMock)) {
             $that = &$this;
 
             $callback = static function ($href, $attribute) use ($that) {
@@ -75,7 +68,7 @@ abstract class BaseTest extends ParentBaseTest
                         if ($map[2] instanceof \Exception) {
                             throw $map[2];
                         } else {
-                            return $map[2];
+                            return (string)$map[2];
                         }
                     }
                 }
@@ -83,15 +76,15 @@ abstract class BaseTest extends ParentBaseTest
                 return null;
             };
 
-            $this->requestParserMock = $this->createMock(RequestParser::class);
+            $this->uriParserMock = $this->createMock(UriParserInterface::class);
 
-            $this->requestParserMock
+            $this->uriParserMock
                 ->expects(self::any())
-                ->method('parseHref')
+                ->method('getAttributeFromUri')
                 ->willReturnCallback($callback);
         }
 
-        return $this->requestParserMock;
+        return $this->uriParserMock;
     }
 
     /**
@@ -111,7 +104,7 @@ abstract class BaseTest extends ParentBaseTest
     protected function getParser()
     {
         $parser = $this->internalGetParser();
-        $parser->setRequestParser($this->getRequestParserMock());
+        $parser->setUriParser($this->getUriParserMock());
 
         return $parser;
     }
@@ -119,7 +112,7 @@ abstract class BaseTest extends ParentBaseTest
     /**
      * Must return the tested parser object.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\Base
+     * @return \Ibexa\Rest\Input\BaseParser
      */
     abstract protected function internalGetParser();
 }

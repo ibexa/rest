@@ -3,17 +3,17 @@ services:
         parent: api_platform.action.entrypoint
         arguments:
             index_0: '@Ibexa\Bundle\Rest\ApiPlatform\ClassNameResourceNameCollectionFactory'
-            index_1: '@ibexa.api_platform.state_provider.documentation.content_negotiation'
+            #index_1: '@ibexa.api_platform.state_provider.documentation.content_negotiation'
 
-    ibexa.api_platform.state_provider.documentation.content_negotiation:
-        parent: api_platform.state_provider.documentation.content_negotiation
-        arguments:
-            index_0: '@ibexa.api_platform.swagger_ui.documentation.provider'
+    #ibexa.api_platform.state_provider.documentation.content_negotiation:
+    #    parent: api_platform.state_provider.documentation.content_negotiation
+    #    arguments:
+    #        index_0: '@ibexa.api_platform.swagger_ui.documentation.provider'
 
-    ibexa.api_platform.swagger_ui.documentation.provider:
-        parent: api_platform.swagger_ui.documentation.provider
-        arguments:
-            index_1: '@ibexa.api_platform.ibexa_openapi.factory'
+    #ibexa.api_platform.swagger_ui.documentation.provider:
+    #    parent: api_platform.swagger_ui.documentation.provider
+    #    arguments:
+    #        index_1: '@ibexa.api_platform.ibexa_openapi.factory'
 
     ibexa.api_platform.ibexa_openapi.factory:
         class: 'Ibexa\Bundle\Rest\ApiPlatform\OpenApiFactory'

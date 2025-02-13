@@ -14,48 +14,6 @@ class RoleTest extends RESTFunctionalTestCase
     /**
      * Covers POST /user/roles.
      *
-     * BC compatible mode, will return a role
-     *
-     * @return string The created role href
-     */
-    public function testCreateRole()
-    {
-        $xml = <<< XML
-<?xml version="1.0" encoding="UTF-8"?>
-<RoleInput>
-  <identifier>testCreateRole</identifier>
-  <mainLanguageCode>eng-GB</mainLanguageCode>
-  <names>
-    <value languageCode="eng-GB">testCreateRole</value>
-  </names>
-  <descriptions>
-    <value languageCode="eng-GB">testCreateRole description</value>
-  </descriptions>
-</RoleInput>
-XML;
-        $request = $this->createHttpRequest(
-            'POST',
-            '/api/ibexa/v2/user/roles',
-            'RoleInput+xml',
-            'Role+json',
-            $xml
-        );
-        $response = $this->sendHttpRequest($request);
-
-        self::assertHttpResponseCodeEquals($response, 201);
-        self::assertHttpResponseHasHeader($response, 'Location');
-
-        $href = $response->getHeader('Location')[0];
-        $this->addCreatedElement($href);
-
-        return $href;
-    }
-
-    /**
-     * Covers POST /user/roles.
-     *
-     * BC incompatible mode, will return a role draft
-     *
      * @return string The created role draft href
      */
     public function testCreateRoleWithDraft()
@@ -75,7 +33,7 @@ XML;
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ibexa/v2/user/roles?publish=false',
+            '/api/ibexa/v2/user/roles',
             'RoleInput+xml',
             'RoleDraft+json',
             $xml
@@ -104,7 +62,7 @@ XML;
     }
 
     /**
-     * @depends testCreateRole
+     * @depends testPublishRoleDraft
      * Covers GET /user/roles/{roleId}
      */
     public function testLoadRole($roleHref)
@@ -117,7 +75,7 @@ XML;
     }
 
     /**
-     * @depends testCreateRole
+     * @depends testPublishRoleDraft
      * Covers POST /user/roles/{roleId}
      *
      * @return string The created role draft href
@@ -169,7 +127,7 @@ XML;
     }
 
     /**
-     * @depends testCreateRole
+     * @depends testPublishRoleDraft
      * Covers PATCH /user/roles/{roleId}
      */
     public function testUpdateRole($roleHref)
@@ -229,7 +187,7 @@ XML;
     /**
      * Covers POST /user/roles/{roleId}/policies.
      *
-     * @depends testCreateRole
+     * @depends testPublishRoleDraft
      *
      * @return string The created policy href
      */
@@ -326,7 +284,7 @@ XML;
     /**
      * Covers GET /user/roles/{roleId}/policies.
      *
-     * @depends testCreateRole
+     * @depends testPublishRoleDraft
      */
     public function testLoadPolicies($roleHref)
     {
@@ -398,7 +356,7 @@ XML;
     }
 
     /**
-     * @depends testCreateRole
+     * @depends testPublishRoleDraft
      * Covers POST /user/users/{userId}/roles
      *
      * @return string assigned role href
@@ -509,7 +467,7 @@ XML;
     }
 
     /**
-     * @depends testCreateRole
+     * @depends testPublishRoleDraft
      * Covers POST /user/groups/{groupId}/roles
      *
      * @return string role assignment href
@@ -641,7 +599,7 @@ XML;
     /**
      * Covers DELETE /user/roles/{roleId}/policies.
      *
-     * @depends testCreateRole
+     * @depends testPublishRoleDraft
      */
     public function testDeletePolicies($roleHref)
     {
@@ -655,7 +613,7 @@ XML;
     /**
      * Covers DELETE /user/roles/{roleId}.
      *
-     * @depends testCreateRole
+     * @depends testPublishRoleDraft
      */
     public function testDeleteRole($roleHref)
     {
@@ -683,6 +641,11 @@ XML;
             'Location',
             '/api/ibexa/v2/user/roles/' . preg_replace('/.*roles\/(\d+).*/', '$1', $roleDraftHref)
         );
+
+        $href = $response->getHeader('Location')[0];
+        $this->addCreatedElement($href);
+
+        return $href;
     }
 
     /**
@@ -748,6 +711,10 @@ XML;
         self::assertHttpResponseCodeEquals($response, 201);
         self::assertHttpResponseHasHeader($response, 'Location');
         $href = $response->getHeader('Location')[0];
+
+        $this->sendHttpRequest(
+            $this->createHttpRequest('PUBLISH', $href . '/draft')
+        );
 
         $this->addCreatedElement($href);
 

@@ -43,7 +43,7 @@ final class ResponseListenerTest extends EventListenerTest
     {
         $this->eventValue = new stdClass();
         $this->exceptionEventValue = new Exception();
-        $this->response = new Response('BODY', 406, ['foo' => 'bar']);
+        $this->response = new Response('BODY', Response::HTTP_NOT_ACCEPTABLE, ['foo' => 'bar']);
     }
 
     public function provideExpectedSubscribedEventTypes(): array

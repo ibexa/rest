@@ -43,10 +43,10 @@ class ContentObjectStates extends BaseParser
             $states[] = new RestObjectState(
                 new ObjectState(
                     [
-                        'id' => $this->requestParser->parseHref($rawStateData['_href'], 'objectStateId'),
+                        'id' => $this->uriParser->getAttributeFromUri($rawStateData['_href'], 'objectStateId'),
                     ]
                 ),
-                $this->requestParser->parseHref($rawStateData['_href'], 'objectStateGroupId')
+                $this->uriParser->getAttributeFromUri($rawStateData['_href'], 'objectStateGroupId')
             );
         }
 

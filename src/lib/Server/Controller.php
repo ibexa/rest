@@ -8,67 +8,47 @@
 namespace Ibexa\Rest\Server;
 
 use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Ibexa\Rest\Input\Dispatcher as InputDispatcher;
-use Ibexa\Rest\RequestParser;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 
-abstract class Controller implements ContainerAwareInterface
+abstract class Controller
 {
-    use ContainerAwareTrait;
+    protected InputDispatcher $inputDispatcher;
 
-    /**
-     * @var \Ibexa\Rest\Input\Dispatcher
-     */
-    protected $inputDispatcher;
+    protected RouterInterface $router;
 
-    /**
-     * @var \Symfony\Component\Routing\RouterInterface
-     */
-    protected $router;
+    protected UriParserInterface $uriParser;
 
-    /**
-     * @var \Ibexa\Rest\RequestParser
-     */
-    protected $requestParser;
+    protected Repository $repository;
 
-    /**
-     * Repository.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Repository
-     */
-    protected $repository;
-
-    public function setInputDispatcher(InputDispatcher $inputDispatcher)
+    public function setInputDispatcher(InputDispatcher $inputDispatcher): void
     {
         $this->inputDispatcher = $inputDispatcher;
     }
 
-    public function setRouter(RouterInterface $router)
+    public function setRouter(RouterInterface $router): void
     {
         $this->router = $router;
     }
 
-    public function setRepository(Repository $repository)
+    public function setRepository(Repository $repository): void
     {
         $this->repository = $repository;
     }
 
-    public function setRequestParser(RequestParser $requestParser)
+    public function setUriParser(UriParserInterface $uriParser): void
     {
-        $this->requestParser = $requestParser;
+        $this->uriParser = $uriParser;
     }
 
     /**
      * Extracts the requested media type from $request.
      *
      * @todo refactor, maybe to a REST Request with an accepts('content-type') method
-     *
-     * @return string
      */
-    protected function getMediaType(Request $request)
+    protected function getMediaType(Request $request): string
     {
         foreach ($request->getAcceptableContentTypes() as $mimeType) {
             if (preg_match('(^([a-z0-9-/.]+)\+.*$)', strtolower($mimeType), $matches)) {

@@ -8,19 +8,14 @@
 namespace Ibexa\Rest\Input;
 
 use Ibexa\Contracts\Rest\Input\Parser;
-use Ibexa\Rest\RequestParser;
+use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 
 abstract class BaseParser extends Parser
 {
-    /**
-     * URL handler.
-     *
-     * @var \Ibexa\Rest\RequestParser
-     */
-    protected $requestParser;
+    protected UriParserInterface $uriParser;
 
-    public function setRequestParser(RequestParser $requestParser)
+    public function setUriParser(UriParserInterface $uriParser): void
     {
-        $this->requestParser = $requestParser;
+        $this->uriParser = $uriParser;
     }
 }
