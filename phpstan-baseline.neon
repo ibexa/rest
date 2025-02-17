@@ -1831,16 +1831,6 @@ parameters:
 			path: src/lib/Server/Input/Parser/Criterion.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\:\\:getFacetBuilderMediaType\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\:\\:getFacetBuilderMediaType\\(\\) has parameter \\$facetBuilderName with no type specified\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\:\\:getSortClauseMediaType\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion.php
@@ -2016,51 +2006,6 @@ parameters:
 			path: src/lib/Server/Input/Parser/Criterion/Visibility.php
 
 		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FacetBuilder\\\\ContentTypeParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/FacetBuilder/ContentTypeParser.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FacetBuilder\\\\CriterionParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/FacetBuilder/CriterionParser.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FacetBuilder\\\\DateRangeParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/FacetBuilder/DateRangeParser.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FacetBuilder\\\\FieldParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/FacetBuilder/FieldParser.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FacetBuilder\\\\FieldRangeParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/FacetBuilder/FieldRangeParser.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FacetBuilder\\\\LocationParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/FacetBuilder/LocationParser.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FacetBuilder\\\\SectionParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/FacetBuilder/SectionParser.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FacetBuilder\\\\TermParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/FacetBuilder/TermParser.php
-
-		-
-			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FacetBuilder\\\\UserParser\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/FacetBuilder/UserParser.php
-
-		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FieldDefinitionCreate\\:\\:parse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/FieldDefinitionCreate.php
@@ -2162,11 +2107,6 @@ parameters:
 
 		-
 			message: "#^Method Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Query\\:\\:processSortClauses\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/lib/Server/Input/Parser/Query.php
-
-		-
-			message: "#^Property Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\:\\:\\$facetBuilders \\(array\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Query\\\\FacetBuilder\\>\\) does not accept array\\<int\\<0, max\\>, Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\ValueObject\\>\\.$#"
 			count: 1
 			path: src/lib/Server/Input/Parser/Query.php
 
@@ -6889,11 +6829,6 @@ parameters:
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\UserMetadataTest\\:\\:testParseProvider\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/lib/Server/Input/Parser/Criterion/UserMetadataTest.php
-
-		-
-			message: "#^Class Ibexa\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\Criterion\\\\LocationId does not have a constructor and must be instantiated without any parameters\\.$#"
-			count: 4
-			path: tests/lib/Server/Input/Parser/FacetBuilder/FacetBuilderParserTest.php
 
 		-
 			message: "#^Method Ibexa\\\\Tests\\\\Rest\\\\Server\\\\Input\\\\Parser\\\\FieldDefinitionCreateTest\\:\\:getInputArray\\(\\) return type has no value type specified in iterable type array\\.$#"
