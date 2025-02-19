@@ -8,15 +8,15 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Security;
 
+use Symfony\Component\HttpFoundation\ChainRequestMatcher;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestMatcher;
 
 /**
  * @internal
  *
  * This class is mandatory for JWT REST calls recognition. It's used within security.firewalls.ibexa_jwt_rest.request_matcher configuration key.
  */
-final class AuthorizationHeaderRESTRequestMatcher extends RequestMatcher
+final class AuthorizationHeaderRESTRequestMatcher extends ChainRequestMatcher
 {
     private ?string $headerName;
 
