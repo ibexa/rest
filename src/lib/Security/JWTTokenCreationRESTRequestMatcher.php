@@ -9,14 +9,14 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Security;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestMatcher;
+use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 
 /**
  * @internal
  *
  * This class is mandatory for JWT REST calls recognition. It's used within security.firewalls.ibexa_jwt_rest.request_matcher configuration key.
  */
-final class JWTTokenCreationRESTRequestMatcher extends RequestMatcher
+final class JWTTokenCreationRESTRequestMatcher implements RequestMatcherInterface
 {
     public function matches(Request $request): bool
     {
@@ -24,10 +24,6 @@ final class JWTTokenCreationRESTRequestMatcher extends RequestMatcher
             return false;
         }
 
-        if ($request->attributes->get('_route') === 'ibexa.rest.create_token') {
-            return parent::matches($request);
-        }
-
-        return false;
+        return $request->attributes->get('_route') === 'ibexa.rest.create_token';
     }
 }
