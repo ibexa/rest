@@ -9,33 +9,20 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Security;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestMatcher;
+use Symfony\Component\HttpFoundation\RequestMatcherInterface;
 
 /**
  * @internal
  *
  * This class is mandatory for JWT REST calls recognition. It's used within security.firewalls.ibexa_jwt_rest.request_matcher configuration key.
  */
-final class AuthorizationHeaderRESTRequestMatcher extends RequestMatcher
+final class AuthorizationHeaderRESTRequestMatcher implements RequestMatcherInterface
 {
-    private ?string $headerName;
+    private const string DEFAULT_HEADER_NAME = 'Authorization';
 
-    /**
-     * @param array<string, mixed> $attributes
-     */
     public function __construct(
-        ?string $headerName = null,
-        string $path = null,
-        string $host = null,
-        $methods = null,
-        $ips = null,
-        array $attributes = [],
-        $schemes = null,
-        int $port = null
+        private ?string $headerName = null,
     ) {
-        parent::__construct($path, $host, $methods, $ips, $attributes, $schemes, $port);
-
-        $this->headerName = $headerName;
     }
 
     public function matches(Request $request): bool
@@ -44,10 +31,6 @@ final class AuthorizationHeaderRESTRequestMatcher extends RequestMatcher
             return false;
         }
 
-        if (!empty($request->headers->get($this->headerName ?? 'Authorization'))) {
-            return parent::matches($request);
-        }
-
-        return false;
+        return $request->headers->has($this->headerName ?? self::DEFAULT_HEADER_NAME);
     }
 }
