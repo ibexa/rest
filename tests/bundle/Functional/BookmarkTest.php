@@ -13,6 +13,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BookmarkTest extends RESTFunctionalTestCase
 {
+    /**
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     */
     public function testCreateBookmark(): int
     {
         $content = $this->createFolder(__FUNCTION__, '/api/ibexa/v2/content/locations/1/2');
@@ -28,13 +31,15 @@ class BookmarkTest extends RESTFunctionalTestCase
 
         $response = $this->sendHttpRequest($request);
 
-        self::assertHttpResponseCodeEquals($response, Response::HTTP_CREATED);
+        $this->assertHttpResponseCodeEquals($response, Response::HTTP_CREATED);
 
         return $locationId;
     }
 
     /**
      * @depends testCreateBookmark
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      */
     public function testCreateBookmarkIfAlreadyExists(int $locationId): void
     {
@@ -45,11 +50,13 @@ class BookmarkTest extends RESTFunctionalTestCase
 
         $response = $this->sendHttpRequest($request);
 
-        self::assertHttpResponseCodeEquals($response, Response::HTTP_CONFLICT);
+        $this->assertHttpResponseCodeEquals($response, Response::HTTP_CONFLICT);
     }
 
     /**
      * @depends testCreateBookmark
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      */
     public function testIsBookmarked(int $locationId): void
     {
@@ -60,13 +67,16 @@ class BookmarkTest extends RESTFunctionalTestCase
 
         $response = $this->sendHttpRequest($request);
 
-        self::assertHttpResponseCodeEquals($response, Response::HTTP_OK);
+        $this->assertHttpResponseCodeEquals($response, Response::HTTP_OK);
     }
 
-    public function testIsBookmarkedReturnsNotFound(): void
+    /**
+     * @depends testDeleteBookmark
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     */
+    public function testIsBookmarkedReturnsNotFound(int $locationId): void
     {
-        $locationId = 43;
-
         $request = $this->createHttpRequest(
             'HEAD',
             '/api/ibexa/v2/bookmark/' . $locationId
@@ -74,13 +84,15 @@ class BookmarkTest extends RESTFunctionalTestCase
 
         $response = $this->sendHttpRequest($request);
 
-        self::assertHttpResponseCodeEquals($response, Response::HTTP_NOT_FOUND);
+        $this->assertHttpResponseCodeEquals($response, Response::HTTP_NOT_FOUND);
     }
 
     /**
      * @depends testCreateBookmark
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      */
-    public function testDeleteBookmark(int $locationId): void
+    public function testDeleteBookmark(int $locationId): int
     {
         $request = $this->createHttpRequest(
             'DELETE',
@@ -89,9 +101,14 @@ class BookmarkTest extends RESTFunctionalTestCase
 
         $response = $this->sendHttpRequest($request);
 
-        self::assertHttpResponseCodeEquals($response, Response::HTTP_NO_CONTENT);
+        $this->assertHttpResponseCodeEquals($response, Response::HTTP_NO_CONTENT);
+
+        return $locationId;
     }
 
+    /**
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     */
     public function testLoadBookmarks(): void
     {
         $request = $this->createHttpRequest(
@@ -103,13 +120,16 @@ class BookmarkTest extends RESTFunctionalTestCase
 
         $response = $this->sendHttpRequest($request);
 
-        self::assertHttpResponseCodeEquals($response, Response::HTTP_OK);
+        $this->assertHttpResponseCodeEquals($response, Response::HTTP_OK);
     }
 
-    public function testDeleteBookmarkReturnNotFound(): void
+    /**
+     * @depends testDeleteBookmark
+     *
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     */
+    public function testDeleteBookmarkReturnNotFound(int $locationId): void
     {
-        $locationId = 43;
-
         $request = $this->createHttpRequest(
             'DELETE',
             '/api/ibexa/v2/bookmark/' . $locationId
@@ -117,6 +137,6 @@ class BookmarkTest extends RESTFunctionalTestCase
 
         $response = $this->sendHttpRequest($request);
 
-        self::assertHttpResponseCodeEquals($response, Response::HTTP_NOT_FOUND);
+        $this->assertHttpResponseCodeEquals($response, Response::HTTP_NOT_FOUND);
     }
 }

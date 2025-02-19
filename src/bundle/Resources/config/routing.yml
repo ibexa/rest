@@ -40,7 +40,7 @@ ibexa.rest.delete_section:
 
 ibexa.rest.refresh_session:
     path: /user/sessions/{sessionId}/refresh
-    controller: Ibexa\Rest\Server\Controller\SessionController:refreshSessionAction
+    controller: Ibexa\Rest\Server\Controller\SessionController::refreshSessionAction
     defaults:
         csrf_protection: false
     methods: [POST]
