@@ -48,28 +48,6 @@ abstract class Criterion extends BaseParser
     }
 
     /**
-     * Dispatches parsing of a facet builder name + data to its own parser.
-     *
-     * @param string $facetBuilderName
-     * @param mixed $facetBuilderData
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject
-     */
-    public function dispatchFacetBuilder($facetBuilderName, $facetBuilderData, ParsingDispatcher $parsingDispatcher)
-    {
-        $mediaType = $this->getFacetBuilderMediaType($facetBuilderName);
-
-        try {
-            return $parsingDispatcher->parse([$facetBuilderName => $facetBuilderData], $mediaType);
-        } catch (Exceptions\Parser $e) {
-            throw new Exceptions\Parser("Invalid FacetBuilder id <$facetBuilderName>", 0, $e);
-        }
-    }
-
-    /**
      * Dispatches parsing of a aggregation name + data to its own parser.
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation
@@ -118,11 +96,6 @@ abstract class Criterion extends BaseParser
     protected function getSortClauseMediaType($sortClauseName)
     {
         return 'application/vnd.ibexa.api.internal.sortclause.' . $sortClauseName;
-    }
-
-    protected function getFacetBuilderMediaType($facetBuilderName)
-    {
-        return 'application/vnd.ibexa.api.internal.facetbuilder.' . $facetBuilderName;
     }
 
     protected function getAggregationMediaType(string $aggregationName): string
