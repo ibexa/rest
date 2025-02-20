@@ -46,7 +46,14 @@ class Visitor
      */
     public function setHeader(string $name, mixed $value): void
     {
-        $value = is_bool($value) || is_int($value) ? (string)$value : $value;
+        if (is_bool($value) || is_int($value)) {
+            trigger_deprecation(
+                'ibexa/rest',
+                '5.0.0',
+                sprintf('Calling %s with second argument being bool or int is deprecated.', __METHOD__),
+            );
+            $value = (string)$value;
+        }
 
         if (!$this->response->headers->has($name)) {
             $this->response->headers->set($name, $value);
