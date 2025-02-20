@@ -46,6 +46,8 @@ class Visitor
      */
     public function setHeader(string $name, mixed $value): void
     {
+        $value = is_bool($value) || is_int($value) ? (string)$value : $value;
+
         if (!$this->response->headers->has($name)) {
             $this->response->headers->set($name, $value);
         }
