@@ -12,11 +12,11 @@ use Ibexa\Bundle\Rest\Exception\UnexpectedUserException;
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Security\Core\Security;
 
 final class UserCheckRequestListener implements EventSubscriberInterface, LoggerAwareInterface
 {
