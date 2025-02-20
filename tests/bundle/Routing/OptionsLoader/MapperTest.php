@@ -77,7 +77,7 @@ class MapperTest extends TestCase
         );
 
         self::assertEquals(
-            'Ibexa\Rest\Server\Controller\Options:getRouteOptions',
+            'Ibexa\Rest\Server\Controller\Options::getRouteOptions',
             $optionsRoute->getDefault('_controller')
         );
     }

@@ -4,99 +4,104 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Rest\Output\Generator;
 
 use Ibexa\Contracts\Rest\Output\Generator;
+use Ibexa\Rest\Output\Generator\Data\DataObjectInterface;
 
-/**
- * Json generator.
- */
 class Json extends Generator
 {
-    /**
-     * Data structure which is build during visiting;.
-     *
-     * @var array
-     */
-    protected $json;
-
-    /**
-     * Generator for field type hash values.
-     *
-     * @var \Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator
-     */
-    protected $fieldTypeHashGenerator;
-
-    /**
-     * Keeps track if the document is still empty.
-     *
-     * @var bool
-     */
-    protected $isEmpty = true;
-
-    /**
-     * Enables developer to modify REST response media type prefix.
-     *
-     * @var string
-     */
-    protected $vendor;
-
-    /**
-     * @param \Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator $fieldTypeHashGenerator
-     * @param string $vendor
-     */
-    public function __construct(Json\FieldTypeHashGenerator $fieldTypeHashGenerator, $vendor = 'vnd.ibexa.api')
-    {
+    public function __construct(
+        Json\FieldTypeHashGenerator $fieldTypeHashGenerator,
+        string $vendor = 'vnd.ibexa.api',
+    ) {
         $this->fieldTypeHashGenerator = $fieldTypeHashGenerator;
-        $this->vendor = $vendor;
+
+        parent::__construct($vendor);
     }
 
-    /**
-     * Start document.
-     *
-     * @param mixed $data
-     */
-    public function startDocument($data)
-    {
-        $this->checkStartDocument($data);
-
-        $this->isEmpty = true;
-
-        $this->json = new Json\JsonObject();
-    }
-
-    /**
-     * Returns if the document is empty or already contains data.
-     *
-     * @return bool
-     */
-    public function isEmpty()
-    {
-        return $this->isEmpty;
-    }
-
-    /**
-     * End document.
-     *
-     * Returns the generated document as a string.
-     *
-     * @param mixed $data
-     *
-     * @return string
-     */
-    public function endDocument($data)
+    #[\Override]
+    public function endDocument(mixed $data): string
     {
         $this->checkEndDocument($data);
 
-        $jsonEncodeOptions = 0;
+        $jsonEncodeOptions = JSON_THROW_ON_ERROR;
         if ($this->formatOutput && defined('JSON_PRETTY_PRINT')) {
-            $jsonEncodeOptions = JSON_PRETTY_PRINT;
+            $jsonEncodeOptions |= JSON_PRETTY_PRINT;
         }
 
-        $this->json = $this->convertArrayObjects($this->json);
+        $data = $this->convertArrayObjects($this->json);
 
-        return json_encode($this->json, $jsonEncodeOptions);
+        return json_encode($data, $jsonEncodeOptions);
+    }
+
+    #[\Override]
+    public function startValueElement(string $name, mixed $value, array $attributes = []): void
+    {
+        $this->checkStartValueElement($name);
+
+        if (empty($attributes)) {
+            $jsonValue = $value;
+        } else {
+            $jsonValue = new Json\JsonObject($this->json);
+            foreach ($attributes as $attributeName => $attributeValue) {
+                $jsonValue->{'_' . $attributeName} = $attributeValue;
+            }
+            $jsonValue->{'#text'} = $value;
+        }
+
+        if ($this->json instanceof Json\ArrayObject) {
+            $this->json->append($jsonValue);
+        } else {
+            $this->json->$name = $jsonValue;
+        }
+    }
+
+    #[\Override]
+    public function startList(string $name): void
+    {
+        $this->checkStartList($name);
+
+        $array = new Json\ArrayObject($this->json);
+
+        $this->json->$name = $array;
+        $this->json = $array;
+    }
+
+    #[\Override]
+    public function startAttribute(string $name, mixed $value): void
+    {
+        $this->checkStartAttribute($name);
+
+        $this->json->{'_' . $name} = $value;
+    }
+
+    #[\Override]
+    public function getMediaType(string $name): string
+    {
+        return $this->generateMediaTypeWithVendor($name, 'json', $this->getVendor());
+    }
+
+    #[\Override]
+    public function serializeBool(mixed $boolValue): bool
+    {
+        return (bool)$boolValue;
+    }
+
+    #[\Override]
+    public function getData(): DataObjectInterface
+    {
+        return $this->json;
+    }
+
+    #[\Override]
+    public function getEncoderContext(array $data): array
+    {
+        return [
+            'json_encode_options' => JSON_PRETTY_PRINT,
+        ];
     }
 
     /**
@@ -104,12 +109,8 @@ class Json extends Generator
      *
      * Recursively convert all ArrayObjects into arrays in the full data
      * structure.
-     *
-     * @param mixed $data
-     *
-     * @return mixed
      */
-    protected function convertArrayObjects($data)
+    private function convertArrayObjects(mixed $data): mixed
     {
         if ($data instanceof Json\ArrayObject) {
             // @todo: Check if we need to convert arrays with only one single
@@ -125,203 +126,5 @@ class Json extends Generator
         }
 
         return $data;
-    }
-
-    /**
-     * Start object element.
-     *
-     * @param string $name
-     * @param string $mediaTypeName
-     */
-    public function startObjectElement($name, $mediaTypeName = null)
-    {
-        $this->checkStartObjectElement($name);
-
-        $this->isEmpty = false;
-
-        $mediaTypeName = $mediaTypeName ?: $name;
-
-        $object = new Json\JsonObject($this->json);
-
-        if ($this->json instanceof Json\ArrayObject) {
-            $this->json[] = $object;
-            $this->json = $object;
-        } else {
-            $this->json->$name = $object;
-            $this->json = $object;
-        }
-
-        $this->startAttribute('media-type', $this->getMediaType($mediaTypeName));
-        $this->endAttribute('media-type');
-    }
-
-    /**
-     * End object element.
-     *
-     * @param string $name
-     */
-    public function endObjectElement($name)
-    {
-        $this->checkEndObjectElement($name);
-
-        $this->json = $this->json->getParent();
-    }
-
-    /**
-     * Start hash element.
-     *
-     * @param string $name
-     */
-    public function startHashElement($name)
-    {
-        $this->checkStartHashElement($name);
-
-        $this->isEmpty = false;
-
-        $object = new Json\JsonObject($this->json);
-
-        if ($this->json instanceof Json\ArrayObject) {
-            $this->json[] = $object;
-            $this->json = $object;
-        } else {
-            $this->json->$name = $object;
-            $this->json = $object;
-        }
-    }
-
-    /**
-     * End hash element.
-     *
-     * @param string $name
-     */
-    public function endHashElement($name)
-    {
-        $this->checkEndHashElement($name);
-
-        $this->json = $this->json->getParent();
-    }
-
-    public function startValueElement(string $name, $value, array $attributes = []): void
-    {
-        $this->checkStartValueElement($name);
-
-        $jsonValue = null;
-
-        if (empty($attributes)) {
-            $jsonValue = $value;
-        } else {
-            $jsonValue = new Json\JsonObject($this->json);
-            foreach ($attributes as $attributeName => $attributeValue) {
-                $jsonValue->{'_' . $attributeName} = $attributeValue;
-            }
-            $jsonValue->{'#text'} = $value;
-        }
-
-        if ($this->json instanceof Json\ArrayObject) {
-            $this->json[] = $jsonValue;
-        } else {
-            $this->json->$name = $jsonValue;
-        }
-    }
-
-    /**
-     * End value element.
-     *
-     * @param string $name
-     */
-    public function endValueElement($name)
-    {
-        $this->checkEndValueElement($name);
-    }
-
-    /**
-     * Start list.
-     *
-     * @param string $name
-     */
-    public function startList($name)
-    {
-        $this->checkStartList($name);
-
-        $array = new Json\ArrayObject($this->json);
-
-        $this->json->$name = $array;
-        $this->json = $array;
-    }
-
-    /**
-     * End list.
-     *
-     * @param string $name
-     */
-    public function endList($name)
-    {
-        $this->checkEndList($name);
-
-        $this->json = $this->json->getParent();
-    }
-
-    /**
-     * Start attribute.
-     *
-     * @param string $name
-     * @param string $value
-     */
-    public function startAttribute($name, $value)
-    {
-        $this->checkStartAttribute($name);
-
-        $this->json->{'_' . $name} = $value;
-    }
-
-    /**
-     * End attribute.
-     *
-     * @param string $name
-     */
-    public function endAttribute($name)
-    {
-        $this->checkEndAttribute($name);
-    }
-
-    /**
-     * Get media type.
-     *
-     * @param string $name
-     *
-     * @return string
-     */
-    public function getMediaType($name)
-    {
-        return $this->generateMediaTypeWithVendor($name, 'json', $this->vendor);
-    }
-
-    /**
-     * Generates a generic representation of the scalar, hash or list given in
-     * $hashValue into the document, using an element of $hashElementName as
-     * its parent.
-     *
-     * @param string $hashElementName
-     * @param mixed $hashValue
-     */
-    public function generateFieldTypeHash($hashElementName, $hashValue)
-    {
-        $this->fieldTypeHashGenerator->generateHashValue(
-            $this->json,
-            $hashElementName,
-            $hashValue
-        );
-    }
-
-    /**
-     * Serializes a boolean value.
-     *
-     * @param bool $boolValue
-     *
-     * @return bool
-     */
-    public function serializeBool($boolValue)
-    {
-        return (bool)$boolValue;
     }
 }
