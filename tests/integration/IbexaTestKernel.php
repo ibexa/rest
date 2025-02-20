@@ -16,6 +16,7 @@ use Ibexa\Rest\Server\Controller\Root as RestRootController;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Serializer\Serializer;
 
 final class IbexaTestKernel extends CoreIbexaTestKernel
 {
@@ -45,6 +46,12 @@ final class IbexaTestKernel extends CoreIbexaTestKernel
         yield UriParserInterface::class;
     }
 
+    protected static function getExposedServicesById(): iterable
+    {
+        yield from parent::getExposedServicesById();
+        yield 'ibexa.rest.serializer' => Serializer::class;
+    }
+
     private static function loadRouting(ContainerBuilder $container): void
     {
         $container->loadFromExtension('framework', [
@@ -52,5 +59,12 @@ final class IbexaTestKernel extends CoreIbexaTestKernel
                 'resource' => __DIR__ . '/Resources/test_routing.yaml',
             ],
         ]);
+    }
+
+    protected function loadServices(LoaderInterface $loader): void
+    {
+        parent::loadServices($loader);
+
+        $loader->load(__DIR__ . '/Resources/services.yaml');
     }
 }
