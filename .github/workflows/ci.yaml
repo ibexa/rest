@@ -31,7 +31,7 @@ jobs:
 
     rector:
         name: Run rector
-        uses: ibexa/gh-workflows/.github/workflows/rector.yml@main
+        uses: ibexa/gh-workflows/.github/workflows/rector.yml@ibx-9627-rector-ci
 
     tests:
         name: Unit & integration tests
