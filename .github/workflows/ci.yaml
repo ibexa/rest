@@ -31,28 +31,7 @@ jobs:
 
     rector:
         name: Run rector
-        runs-on: "ubuntu-22.04"
-        strategy:
-            matrix:
-                php:
-                    - '8.3'
-        steps:
-            -   uses: actions/checkout@v4
-
-            -   name: Setup PHP Action
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: ${{ matrix.php }}
-                    coverage: none
-                    extensions: 'pdo_sqlite, gd'
-                    tools: cs2pr
-
-            -   uses: ramsey/composer-install@v3
-                with:
-                    dependency-versions: highest
-
-            -   name: Run rector
-                run: vendor/bin/rector process --dry-run --ansi
+        uses: ibexa/gh-workflows/.github/workflows/rector.yml@main
 
     tests:
         name: Unit & integration tests
