@@ -216,6 +216,11 @@ parameters:
 			path: src/contracts/Output/Visitor.php
 
 		-
+			message: "#^Method Symfony\\\\Component\\\\Serializer\\\\Normalizer\\\\NormalizerInterface\\:\\:supportsNormalization\\(\\) invoked with 3 parameters, 1\\-2 required\\.$#"
+			count: 1
+			path: src/contracts/Output/VisitorAdapterNormalizer.php
+
+		-
 			message: "#^Method Ibexa\\\\Rest\\\\FieldTypeProcessor\\\\BaseRelationProcessor\\:\\:setLocationService\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/lib/FieldTypeProcessor/BaseRelationProcessor.php
