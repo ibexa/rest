@@ -12,12 +12,11 @@ use Ibexa\Contracts\Rest\Output\Generator as BaseGenerator;
 use Ibexa\Rest\Output\Generator;
 use LogicException;
 use Symfony\Component\Serializer\Encoder\EncoderInterface;
-use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerAwareInterface, ContextAwareNormalizerInterface
+final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
     use NormalizerAwareTrait;
 
@@ -35,11 +34,9 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
     /**
      * @param array<string, mixed> $context
      *
-     * @throws \LogicException
-     *
-     * {@inheritDoc}
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
-    public function normalize(mixed $object, ?string $format = null, array $context = []): mixed
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array|bool|string|int|float|null|\ArrayObject
     {
         $eligibleVisitor = is_object($object)
             ? $this->valueObjectVisitorResolver->resolveValueObjectVisitor($object)
@@ -69,12 +66,12 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
             return true;
         }
 
-        if (!$this->normalizer instanceof ContextAwareNormalizerInterface) {
+        if (!$this->normalizer instanceof NormalizerInterface) {
             throw new LogicException(
                 sprintf(
                     'Normalizer "%s" must be an instance of "%s".',
                     $this->normalizer::class,
-                    ContextAwareNormalizerInterface::class,
+                    NormalizerInterface::class,
                 ),
             );
         }
