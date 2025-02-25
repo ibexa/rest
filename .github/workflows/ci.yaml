@@ -25,7 +25,6 @@ jobs:
             - uses: ramsey/composer-install@v3
               with:
                   dependency-versions: highest
-                  composer-options: "--ignore-platform-reqs --optimize-autoloader"
 
             - name: Run code style check
               run: composer run-script check-cs -- --format=checkstyle | cs2pr
