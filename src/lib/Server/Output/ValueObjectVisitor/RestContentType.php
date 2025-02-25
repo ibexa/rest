@@ -127,7 +127,7 @@ class RestContentType extends RestContentTypeBase
 
         $generator->startValueElement(
             'isContainer',
-            $this->serializeBool($generator, $contentType->isContainer)
+            $this->serializeBool($generator, $contentType->isContainer())
         );
         $generator->endValueElement('isContainer');
 
