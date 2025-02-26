@@ -13,12 +13,12 @@ use ApiPlatform\OpenApi\Model\Response;
 use ApiPlatform\OpenApi\OpenApi;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-final class OpenApiFactory implements OpenApiFactoryInterface
+final readonly class OpenApiFactory implements OpenApiFactoryInterface
 {
     public function __construct(
-        private readonly OpenApiFactoryInterface $decorated,
-        private readonly SchemasCollectionFactory $schemaCollectionFactory,
-        private readonly KernelInterface $kernel,
+        private OpenApiFactoryInterface $decorated,
+        private SchemasCollectionFactory $schemaCollectionFactory,
+        private KernelInterface $kernel,
     ) {
     }
 
@@ -80,11 +80,7 @@ final class OpenApiFactory implements OpenApiFactoryInterface
 
                 $newOperation = $operation;
 
-                /**
-                 * @var int $responseCode
-                 * @var \ApiPlatform\OpenApi\Model\Response|array<string, array<mixed>> $response
-                 */
-                foreach ($operation->getResponses() as $responseCode => $response) {
+                foreach ($responses as $responseCode => $response) {
                     if (!is_array($response) || !array_key_exists('content', $response)) {
                         continue;
                     }
