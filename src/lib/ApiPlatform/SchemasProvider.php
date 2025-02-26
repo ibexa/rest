@@ -14,7 +14,7 @@ use Symfony\Component\Yaml\Yaml;
 final readonly class SchemasProvider implements SchemasProviderInterface
 {
     /**
-     * @param array<string> $files
+     * @param array<int, string> $files
      */
     public function __construct(
         private KernelInterface $kernel,

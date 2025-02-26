@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\Rest\ApiPlatform;
 
 use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
+use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
 use ApiPlatform\OpenApi\OpenApi;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -23,7 +24,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
     }
 
     /**
-     * @param array<mixed> $context
+     * @param array<string, mixed> $context
      */
     public function __invoke(array $context = []): OpenApi
     {
@@ -43,9 +44,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         $components = $openApi->getComponents();
         $components = $components->withSchemas(new \ArrayObject($schemas));
 
-        $openApi = $openApi->withComponents($components);
-
-        return $openApi;
+        return $openApi->withComponents($components);
     }
 
     private function insertExampleFilesContent(OpenApi $openApi): void
@@ -54,83 +53,26 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
 
         /** @var \ApiPlatform\OpenApi\Model\PathItem $pathItem */
         foreach ($paths->getPaths() as $path => $pathItem) {
-            $newPathItem = $pathItem;
+            $newPathItem = clone $pathItem;
 
-            /** @var array<string, \ApiPlatform\OpenApi\Model\Operation|null> $methods */
             $methods = [
-                'GET' => $pathItem->getGet(),
-                'PUT' => $pathItem->getPut(),
-                'POST' => $pathItem->getPost(),
-                'DELETE' => $pathItem->getDelete(),
-                'OPTIONS' => $pathItem->getOptions(),
-                'HEAD' => $pathItem->getHead(),
-                'PATCH' => $pathItem->getPatch(),
-                'TRACE' => $pathItem->getTrace(),
+                'GET' => [$pathItem->getGet(), 'withGet'],
+                'PUT' => [$pathItem->getPut(), 'withPut'],
+                'POST' => [$pathItem->getPost(), 'withPost'],
+                'DELETE' => [$pathItem->getDelete(), 'withDelete'],
+                'OPTIONS' => [$pathItem->getOptions(), 'withOptions'],
+                'HEAD' => [$pathItem->getHead(), 'withHead'],
+                'PATCH' => [$pathItem->getPatch(), 'withPatch'],
+                'TRACE' => [$pathItem->getTrace(), 'withTrace'],
             ];
-            foreach ($methods as $method => $operation) {
-                if (empty($operation)) {
+            foreach ($methods as [$operation, $setter]) {
+                if ($operation === null || $operation->getResponses() === null) {
                     continue;
                 }
 
-                $responses = $operation->getResponses();
-                if ($responses === null) {
-                    continue;
-                }
-
-                $newOperation = $operation;
-
-                foreach ($responses as $responseCode => $response) {
-                    if (!is_array($response) || !array_key_exists('content', $response)) {
-                        continue;
-                    }
-
-                    $content = $response['content'];
-                    $newContent = $content;
-
-                    foreach ($newContent as $mediaType => $responseContent) {
-                        if (array_key_exists('x-ibexa-example-file', $responseContent)) {
-                            $exampleFilePath = $this->kernel->locateResource($responseContent['x-ibexa-example-file']);
-                            $exampleFileContent = file_get_contents($exampleFilePath);
-                            $newContent[$mediaType]['example'] = $exampleFileContent;
-                            unset($newContent[$mediaType]['x-ibexa-example-file']);
-                        }
-                    }
-
-                    if ($newContent !== $content) {
-                        $newOperation = $newOperation->withResponse(
-                            $responseCode,
-                            new Response((string)$responseCode, new \ArrayObject($newContent)),
-                        );
-                    }
-                }
-
+                $newOperation = $this->processOperationResponses($operation);
                 if ($newOperation !== $operation) {
-                    switch ($method) {
-                        case 'GET':
-                            $newPathItem = $newPathItem->withGet($newOperation);
-                            break;
-                        case 'PUT':
-                            $newPathItem = $newPathItem->withPut($newOperation);
-                            break;
-                        case 'POST':
-                            $newPathItem = $newPathItem->withPost($newOperation);
-                            break;
-                        case 'DELETE':
-                            $newPathItem = $newPathItem->withDelete($newOperation);
-                            break;
-                        case 'OPTIONS':
-                            $newPathItem = $newPathItem->withOptions($newOperation);
-                            break;
-                        case 'HEAD':
-                            $newPathItem = $newPathItem->withHead($newOperation);
-                            break;
-                        case 'PATCH':
-                            $newPathItem = $newPathItem->withPatch($newOperation);
-                            break;
-                        case 'TRACE':
-                            $newPathItem = $newPathItem->withTrace($newOperation);
-                            break;
-                    }
+                    $newPathItem = $newPathItem->$setter($newOperation);
                 }
             }
 
@@ -138,5 +80,39 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
                 $paths->addPath($path, $newPathItem);
             }
         }
+    }
+
+    private function processOperationResponses(Operation $operation): Operation
+    {
+        $newOperation = $operation;
+
+        foreach (($operation->getResponses() ?? []) as $responseCode => $response) {
+            if (!is_array($response) || !array_key_exists('content', $response)) {
+                continue;
+            }
+
+            $newContent = $response['content'];
+
+            foreach ($newContent as $mediaType => $responseContent) {
+                if (!array_key_exists('x-ibexa-example-file', $responseContent)) {
+                    continue;
+                }
+
+                $exampleFilePath = $this->kernel->locateResource($responseContent['x-ibexa-example-file']);
+                $exampleFileContent = file_get_contents($exampleFilePath);
+
+                $newContent[$mediaType]['example'] = $exampleFileContent;
+                unset($newContent[$mediaType]['x-ibexa-example-file']);
+            }
+
+            if ($newContent !== $response['content']) {
+                $newOperation = $newOperation->withResponse(
+                    $responseCode,
+                    new Response((string)$responseCode, new \ArrayObject($newContent)),
+                );
+            }
+        }
+
+        return $newOperation;
     }
 }

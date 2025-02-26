@@ -31,7 +31,6 @@ services:
     Ibexa\Bundle\Rest\ApiPlatform\ClassNameResourceNameCollectionFactory: ~
 
     # Collecting schemas
-
     Ibexa\Bundle\Rest\ApiPlatform\SchemasCollectionFactory: ~
 
     ibexa.api_platform.schemas_provider.rest:
