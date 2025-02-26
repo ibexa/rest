@@ -16,9 +16,7 @@ use ApiPlatform\Metadata\Resource\ResourceNameCollection;
  */
 final class ClassNameResourceNameCollectionFactory implements ResourceNameCollectionFactoryInterface
 {
-    /**
-     * @var array<string>
-     */
+    /** @var array<string> */
     private array $resources = [];
 
     public function create(): ResourceNameCollection
@@ -27,7 +25,7 @@ final class ClassNameResourceNameCollectionFactory implements ResourceNameCollec
     }
 
     /**
-     * @param array<string> $newResources
+     * @param array<int, string> $newResources
      */
     public function addResources(array $newResources): void
     {

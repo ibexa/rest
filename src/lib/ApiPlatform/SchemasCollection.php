@@ -8,13 +8,14 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\ApiPlatform;
 
-final class SchemasCollection implements \IteratorAggregate, \Countable
+final readonly class SchemasCollection implements \IteratorAggregate, \Countable
 {
     /**
      * @param array<string, mixed> $schemas
      */
-    public function __construct(private readonly array $schemas = [])
-    {
+    public function __construct(
+        private array $schemas = [],
+    ) {
     }
 
     /**

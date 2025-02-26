@@ -17,15 +17,12 @@ use Ibexa\Rest\ApiPlatform\SchemasProviderInterface;
  */
 final class SchemasCollectionFactory implements SchemasCollectionFactoryInterface
 {
-    /**
-     * @var array<SchemasProviderInterface>
-     */
+    /** @var array<SchemasProviderInterface> */
     private array $providers = [];
 
     public function create(): SchemasCollection
     {
         $schemas = [];
-
         foreach ($this->providers as $provider) {
             $schemas = array_merge($schemas, $provider->getSchemas());
         }

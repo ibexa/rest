@@ -11,14 +11,14 @@ namespace Ibexa\Rest\ApiPlatform;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Yaml\Yaml;
 
-final class SchemasProvider implements SchemasProviderInterface
+final readonly class SchemasProvider implements SchemasProviderInterface
 {
     /**
      * @param array<string> $files
      */
     public function __construct(
-        private readonly KernelInterface $kernel,
-        private readonly array $files,
+        private KernelInterface $kernel,
+        private array $files,
     ) {
     }
 

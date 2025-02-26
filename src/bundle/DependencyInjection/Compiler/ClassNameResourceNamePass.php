@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 
@@ -11,9 +12,9 @@ use Ibexa\Bundle\Rest\ApiPlatform\ClassNameResourceNameCollectionFactory;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ClassNameResourceNamePass implements CompilerPassInterface
+final readonly class ClassNameResourceNamePass implements CompilerPassInterface
 {
-    public const API_PLATFORM_RESOURCE_SERVICE_TAG = 'ibexa.api_platform.resource';
+    public const string API_PLATFORM_RESOURCE_SERVICE_TAG = 'ibexa.api_platform.resource';
 
     public function process(ContainerBuilder $container): void
     {
@@ -28,7 +29,7 @@ class ClassNameResourceNamePass implements CompilerPassInterface
             $taggedServiceDefinition = $container->getDefinition($id);
             $definition->addMethodCall(
                 'addResources',
-                [[$taggedServiceDefinition->getClass()]]
+                [[$taggedServiceDefinition->getClass()]],
             );
         }
     }

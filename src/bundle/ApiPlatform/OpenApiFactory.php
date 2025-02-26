@@ -73,7 +73,6 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
                 }
 
                 $responses = $operation->getResponses();
-
                 if ($responses === null) {
                     continue;
                 }

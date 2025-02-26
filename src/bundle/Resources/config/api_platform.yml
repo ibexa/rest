@@ -16,7 +16,7 @@ services:
             index_1: '@ibexa.api_platform.ibexa_openapi.factory'
 
     ibexa.api_platform.ibexa_openapi.factory:
-        class: 'Ibexa\Bundle\Rest\ApiPlatform\OpenApiFactory'
+        class: Ibexa\Bundle\Rest\ApiPlatform\OpenApiFactory
         decorates: ibexa.api_platform.openapi.factory
         arguments:
             - '@.inner'
@@ -29,7 +29,6 @@ services:
             index_0: '@Ibexa\Bundle\Rest\ApiPlatform\ClassNameResourceNameCollectionFactory'
 
     Ibexa\Bundle\Rest\ApiPlatform\ClassNameResourceNameCollectionFactory: ~
-
 
     # Collecting schemas
 
