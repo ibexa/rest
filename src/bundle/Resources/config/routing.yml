@@ -5,6 +5,15 @@ ibexa.rest.load_root_resource:
     controller: Ibexa\Rest\Server\Controller\Root::loadRootResource
     methods: [GET]
 
+# OpenAPI documentation
+
+ibexa.api_platform.documentation:
+    path: /doc/{index}.{_format}
+    controller: ibexa.api_platform.action.entrypoint
+    defaults:
+        index: index
+        _format: ~
+
 # Sections
 
 ibexa.rest.list_sections:
