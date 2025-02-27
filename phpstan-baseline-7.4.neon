@@ -44,3 +44,27 @@ parameters:
 			message: "#^Parameter \\#2 \\$newvalue of function ini_set expects string, int given\\.$#"
 			count: 2
 			path: tests/lib/Output/Generator/FieldTypeHashGeneratorBaseTest.php
+
+		-
+			message: '#^Access to an undefined property DOMNode\:\:\$data\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/lib/Input/Handler/Xml.php
+
+		-
+			message: '#^Access to an undefined property DOMNode\:\:\$tagName\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/lib/Input/Handler/Xml.php
+
+		-
+			message: '#^Access to an undefined property DOMNode\:\:\$wholeText\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/lib/Input/Handler/Xml.php
+
+		-
+			message: '#^Parameter \#1 \$domElement of method Ibexa\\Rest\\Input\\Handler\\Xml\:\:parseFieldTypeHash\(\) expects DOMElement, DOMNode given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Input/Handler/Xml.php
