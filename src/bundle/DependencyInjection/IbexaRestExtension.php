@@ -67,6 +67,7 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
 
         $this->prependRouterConfiguration($container);
         $this->prependJMSTranslation($container);
+        $this->prependApiPlatformConfiguration($container);
     }
 
     private function prependRouterConfiguration(ContainerBuilder $container)
@@ -89,6 +90,34 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
                 ],
             ],
         ]);
+    }
+
+    private function prependApiPlatformConfiguration(ContainerBuilder $container): void
+    {
+        $config = [
+            'title' => 'Ibexa API',
+            'version' => '1.0.0',
+            'defaults' => [
+                'stateless' => true,
+                'cache_headers' => [
+                    'vary' => ['Content-Type', 'Authorization', 'Origin'],
+                ],
+                'formats' => [
+                    'json' => ['application/json'],
+                ],
+            ],
+            'enable_re_doc' => false,
+            'graphql' => [
+                'graphiql' => [
+                    'enabled' => false,
+                ],
+                'graphql_playground' => [
+                    'enabled' => false,
+                ],
+            ],
+        ];
+
+        $container->prependExtensionConfig('api_platform', $config);
     }
 
     private function configureApiPlatformAutotagging(ContainerBuilder $container): void

@@ -68,7 +68,12 @@
             "*": false
         },
         "process-timeout": 600,
-        "sort-packages": true
+        "sort-packages": true,
+        "symfony": {
+            "recipes": {
+                "api-platform/core": false
+            }
+        }
     },
     "scripts": {
         "fix-cs": "php-cs-fixer fix --config=.php-cs-fixer.php -v --show-progress=dots",
