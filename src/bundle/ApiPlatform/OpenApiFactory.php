@@ -12,6 +12,7 @@ use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
 use ApiPlatform\OpenApi\OpenApi;
+use ArrayObject;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 final readonly class OpenApiFactory implements OpenApiFactoryInterface
@@ -28,7 +29,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
      */
     public function __invoke(array $context = []): OpenApi
     {
-        $openApi = $this->decorated->__invoke($context);
+        $openApi = ($this->decorated)($context);
         $openApi = $this->addSchemas($openApi);
 
         $this->insertExampleFilesContent($openApi);
@@ -42,7 +43,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         $schemas = iterator_to_array($schemasCollection);
 
         $components = $openApi->getComponents();
-        $components = $components->withSchemas(new \ArrayObject($schemas));
+        $components = $components->withSchemas(new ArrayObject($schemas));
 
         return $openApi->withComponents($components);
     }
@@ -108,7 +109,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
             if ($newContent !== $response['content']) {
                 $newOperation = $newOperation->withResponse(
                     $responseCode,
-                    new Response((string)$responseCode, new \ArrayObject($newContent)),
+                    new Response((string)$responseCode, new ArrayObject($newContent)),
                 );
             }
         }
