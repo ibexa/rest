@@ -1,0 +1,11 @@
+schemas:
+    BaseObject:
+        type: object
+        required:
+            - _media-type
+            - _href
+        properties:
+            _media-type:
+                type: string
+            _href:
+                type: string
