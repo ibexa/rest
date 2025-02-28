@@ -11,7 +11,6 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Server\Controller as RestController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
@@ -71,7 +70,7 @@ class ContentViewController extends RestController
         $response = $this->forward('ezpublish_rest.controller.views:createView');
 
         // Add 301 status code and location href
-        $response->setStatusCode(301);
+        $response->setStatusCode(Response::HTTP_MOVED_PERMANENTLY);
         $response->headers->set('Location', $this->router->generate('ibexa.rest.views.create'));
 
         return $response;
@@ -80,7 +79,7 @@ class ContentViewController extends RestController
     /**
      * @param string $controller
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     protected function forward($controller)
     {
