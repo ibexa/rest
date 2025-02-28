@@ -8,6 +8,10 @@
 namespace Ibexa\Bundle\Rest\DependencyInjection;
 
 use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\ConfigurationProcessor;
+use Ibexa\Bundle\Rest\DependencyInjection\Compiler\ClassNameResourceNamePass;
+use Ibexa\Bundle\Rest\DependencyInjection\Compiler\SchemaProviderPass;
+use Ibexa\Rest\ApiPlatform\SchemasProviderInterface;
+use Ibexa\Rest\Server\Controller as RestController;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -35,10 +39,13 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
      */
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container): void
     {
+        $this->configureApiPlatformAutotagging($container);
+
         $container->setParameter('ibexa.rest.strict_mode', $mergedConfig['strict_mode']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('api_platform.yml');
         $loader->load('value_object_visitors.yml');
         $loader->load('input_parsers.yml');
         $loader->load('security.yml');
@@ -60,6 +67,7 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
 
         $this->prependRouterConfiguration($container);
         $this->prependJMSTranslation($container);
+        $this->prependApiPlatformConfiguration($container);
     }
 
     private function prependRouterConfiguration(ContainerBuilder $container)
@@ -82,5 +90,42 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
                 ],
             ],
         ]);
+    }
+
+    private function prependApiPlatformConfiguration(ContainerBuilder $container): void
+    {
+        $config = [
+            'title' => 'Ibexa API',
+            'version' => '1.0.0',
+            'defaults' => [
+                'stateless' => true,
+                'cache_headers' => [
+                    'vary' => ['Content-Type', 'Authorization', 'Origin'],
+                ],
+                'formats' => [
+                    'json' => ['application/json'],
+                ],
+            ],
+            'enable_re_doc' => false,
+            'graphql' => [
+                'graphiql' => [
+                    'enabled' => false,
+                ],
+                'graphql_playground' => [
+                    'enabled' => false,
+                ],
+            ],
+        ];
+
+        $container->prependExtensionConfig('api_platform', $config);
+    }
+
+    private function configureApiPlatformAutotagging(ContainerBuilder $container): void
+    {
+        $container->registerForAutoconfiguration(RestController::class)
+            ->addTag(ClassNameResourceNamePass::API_PLATFORM_RESOURCE_SERVICE_TAG);
+
+        $container->registerForAutoconfiguration(SchemasProviderInterface::class)
+            ->addTag(SchemaProviderPass::API_PLATFORM_SCHEMA_PROVIDER_SERVICE_TAG);
     }
 }
