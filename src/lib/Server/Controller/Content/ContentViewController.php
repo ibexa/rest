@@ -79,7 +79,7 @@ class ContentViewController extends RestController
     /**
      * @param string $controller
      *
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function forward($controller)
     {
