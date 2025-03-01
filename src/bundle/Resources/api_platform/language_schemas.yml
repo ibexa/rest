@@ -1,0 +1,46 @@
+schemas:
+    Language:
+        allOf:
+            - $ref: "#/components/schemas/BaseObject"
+            - description: This class represents a language in the Repository.
+              type: object
+              required:
+                  - languageId
+                  - languageCode
+                  - name
+              properties:
+                  languageId:
+                      description: The language ID (auto generated).
+                      type: [string, 'null']
+                  languageCode:
+                      description: The languageCode code.
+                      type: string
+                  name:
+                      description: Human readable name of the language.
+                      type: string
+    LanguageWrapper:
+        type: object
+        required:
+            - Language
+        properties:
+            Language:
+                $ref: "#/components/schemas/Language"
+    LanguageList:
+        allOf:
+            - $ref: "#/components/schemas/BaseObject"
+            - description: List of languages.
+              type: object
+              required:
+                  - Language
+              properties:
+                  Language:
+                      type: array
+                      items:
+                          $ref: "#/components/schemas/Language"
+    LanguageListWrapper:
+        type: object
+        required:
+            - LanguageList
+        properties:
+            LanguageList:
+                $ref: "#/components/schemas/LanguageList"
