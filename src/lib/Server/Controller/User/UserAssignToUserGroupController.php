@@ -12,9 +12,9 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions as ApiExceptions;
-use Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Values;
+use LogicException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -92,7 +92,7 @@ final class UserAssignToUserGroupController extends UserBaseController
 
         try {
             $userGroupLocation = $this->locationService->loadLocation(
-                $this->extractLocationIdFromPath($request->query->get('group'))
+                $this->extractLocationIdFromPath($request->query->getString('group'))
             );
         } catch (ApiExceptions\NotFoundException $e) {
             throw new Exceptions\ForbiddenException($e->getMessage());
@@ -108,7 +108,7 @@ final class UserAssignToUserGroupController extends UserBaseController
 
         try {
             $this->userService->assignUserToUserGroup($user, $userGroup);
-        } catch (ApiExceptions\NotFoundException $e) {
+        } catch (ApiExceptions\UnauthorizedException $e) {
             throw new Exceptions\ForbiddenException($e->getMessage());
         }
 
@@ -116,6 +116,11 @@ final class UserAssignToUserGroupController extends UserBaseController
         $restUserGroups = [];
         foreach ($userGroups as $userGroup) {
             $userGroupContentInfo = $userGroup->getVersionInfo()->getContentInfo();
+
+            if ($userGroupContentInfo->mainLocationId === null) {
+                throw new LogicException();
+            }
+
             $userGroupLocation = $this->locationService->loadLocation($userGroupContentInfo->mainLocationId);
             $contentType = $this->contentTypeService->loadContentType($userGroupContentInfo->contentTypeId);
 
@@ -124,7 +129,7 @@ final class UserAssignToUserGroupController extends UserBaseController
                 $contentType,
                 $userGroupContentInfo,
                 $userGroupLocation,
-                $this->contentService->loadRelations($userGroup->getVersionInfo())
+                iterator_to_array($this->relationListFacade->getRelations($userGroup->getVersionInfo()))
             );
         }
 
@@ -136,28 +141,5 @@ final class UserAssignToUserGroupController extends UserBaseController
             ),
             $userId
         );
-    }
-
-    /**
-     * Loads a list of users assigned to role.
-     *
-     * @param mixed $roleId
-     *
-     * @return \Ibexa\Rest\Server\Values\RestUser[]
-     */
-    public function loadUsersAssignedToRole($roleId): array
-    {
-        $role = $this->roleService->loadRole($roleId);
-        $roleAssignments = $this->roleService->getRoleAssignments($role);
-
-        $restUsers = [];
-
-        foreach ($roleAssignments as $roleAssignment) {
-            if ($roleAssignment instanceof UserRoleAssignment) {
-                $restUsers[] = $this->buildRestUserObject($roleAssignment->getUser());
-            }
-        }
-
-        return $restUsers;
     }
 }

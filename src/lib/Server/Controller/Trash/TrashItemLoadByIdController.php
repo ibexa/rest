@@ -78,12 +78,8 @@ class TrashItemLoadByIdController extends RestController
 
     /**
      * Returns the trash item given by id.
-     *
-     * @param $trashItemId
-     *
-     * @return \Ibexa\Rest\Server\Values\RestTrashItem
      */
-    public function loadTrashItem($trashItemId)
+    public function loadTrashItem(int $trashItemId): Values\RestTrashItem
     {
         return new Values\RestTrashItem(
             $trashItem = $this->trashService->loadTrashItem($trashItemId),

@@ -17,6 +17,19 @@ use ApiPlatform\State\OptionsInterface;
 #[\Attribute(\Attribute::TARGET_CLASS | \Attribute::IS_REPEATABLE)]
 final class Head extends HttpOperation
 {
+    /**
+     * @param array<string, mixed>|null $defaults
+     * @param array<string, mixed>|null $denormalizationContext
+     * @param array<string, mixed>|null $exceptionToStatus
+     * @param array<string, mixed> $extraProperties
+     * @param array<string, mixed>|null $hydraContext
+     * @param array<string, mixed>|null $mercure
+     * @param array<string, mixed>|null $normalizationContext
+     * @param array<string, mixed>|null $options
+     * @param array<string, mixed>|null $requirements
+     * @param array<string, mixed>|null $schemes
+     * @param array<string, mixed>|null $validationContext
+     */
     public function __construct(
         ?string $uriTemplate = null,
         ?array $types = null,

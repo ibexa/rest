@@ -14,6 +14,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroupRoleAssignment;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Rest\Value as RestValue;
+use LogicException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -79,9 +80,14 @@ final class UserGroupListController extends UserBaseController
     public function loadUserGroups(Request $request): RestValue
     {
         $restUserGroups = [];
-        if ($request->query->has('id')) {
-            $userGroup = $this->userService->loadUserGroup($request->query->get('id'), Language::ALL);
+        if ($request->query->has('id') && is_int($id = $request->query->get('id'))) {
+            $userGroup = $this->userService->loadUserGroup($id, Language::ALL);
             $userGroupContentInfo = $userGroup->getVersionInfo()->getContentInfo();
+
+            if ($userGroupContentInfo->mainLocationId === null) {
+                throw new LogicException();
+            }
+
             $userGroupMainLocation = $this->locationService->loadLocation($userGroupContentInfo->mainLocationId);
             $contentType = $this->contentTypeService->loadContentType($userGroupContentInfo->contentTypeId);
 
@@ -91,7 +97,7 @@ final class UserGroupListController extends UserBaseController
                     $contentType,
                     $userGroupContentInfo,
                     $userGroupMainLocation,
-                    $this->contentService->loadRelations($userGroup->getVersionInfo())
+                    iterator_to_array($this->relationListFacade->getRelations($userGroup->getVersionInfo())),
                 ),
             ];
         } elseif ($request->query->has('roleId')) {
@@ -114,9 +120,19 @@ final class UserGroupListController extends UserBaseController
      */
     public function loadUserGroupByRemoteId(Request $request): Values\RestUserGroup
     {
-        $contentInfo = $this->contentService->loadContentInfoByRemoteId($request->query->get('remoteId'));
+        if (!is_int($remoteId = $request->query->get('remoteId'))) {
+            throw new LogicException();
+        }
+
+        $contentInfo = $this->contentService->loadContentInfoByRemoteId($remoteId);
         $userGroup = $this->userService->loadUserGroup($contentInfo->id, Language::ALL);
+
+        if ($contentInfo->mainLocationId === null) {
+            throw new LogicException();
+        }
+
         $userGroupLocation = $this->locationService->loadLocation($contentInfo->mainLocationId);
+
         $contentType = $this->contentTypeService->loadContentType($contentInfo->contentTypeId);
 
         return new Values\RestUserGroup(
@@ -124,7 +140,7 @@ final class UserGroupListController extends UserBaseController
             $contentType,
             $contentInfo,
             $userGroupLocation,
-            $this->contentService->loadRelations($userGroup->getVersionInfo())
+            iterator_to_array($this->relationListFacade->getRelations($userGroup->getVersionInfo())),
         );
     }
 
@@ -146,6 +162,11 @@ final class UserGroupListController extends UserBaseController
             if ($roleAssignment instanceof UserGroupRoleAssignment) {
                 $userGroup = $roleAssignment->getUserGroup();
                 $userGroupContentInfo = $userGroup->getVersionInfo()->getContentInfo();
+
+                if ($userGroupContentInfo->mainLocationId === null) {
+                    throw new LogicException();
+                }
+
                 $userGroupLocation = $this->locationService->loadLocation($userGroupContentInfo->mainLocationId);
                 $contentType = $this->contentTypeService->loadContentType($userGroupContentInfo->contentTypeId);
 
@@ -154,7 +175,7 @@ final class UserGroupListController extends UserBaseController
                     $contentType,
                     $userGroupContentInfo,
                     $userGroupLocation,
-                    $this->contentService->loadRelations($userGroup->getVersionInfo())
+                    iterator_to_array($this->relationListFacade->getRelations($userGroup->getVersionInfo())),
                 );
             }
         }

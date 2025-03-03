@@ -13,6 +13,7 @@ use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Values;
+use LogicException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -138,6 +139,11 @@ final class UserUpdateController extends UserBaseController
 
         $updatedUser = $this->userService->updateUser($user, $updateStruct->userUpdateStruct);
         $updatedContentInfo = $updatedUser->getVersionInfo()->getContentInfo();
+
+        if ($updatedContentInfo->mainLocationId === null) {
+            throw new LogicException();
+        }
+
         $mainLocation = $this->locationService->loadLocation($updatedContentInfo->mainLocationId);
         $contentType = $this->contentTypeService->loadContentType($updatedContentInfo->contentTypeId);
 
@@ -146,7 +152,7 @@ final class UserUpdateController extends UserBaseController
             $contentType,
             $updatedContentInfo,
             $mainLocation,
-            $this->contentService->loadRelations($updatedUser->getVersionInfo())
+            iterator_to_array($this->relationListFacade->getRelations($updatedUser->getVersionInfo())),
         );
     }
 }

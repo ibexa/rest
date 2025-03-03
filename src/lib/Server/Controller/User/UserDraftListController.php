@@ -10,6 +10,8 @@ namespace Ibexa\Rest\Server\Controller\User;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\Values\Content\DraftList\ContentDraftListItemInterface;
+use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -70,10 +72,16 @@ final class UserDraftListController extends UserBaseController
      */
     public function loadUserDrafts(int $userId, Request $request): Values\VersionList
     {
-        $contentDrafts = $this->contentService->loadContentDrafts(
+        $contentDrafts = $this->contentService->loadContentDraftList(
             $this->userService->loadUser($userId)
         );
 
-        return new Values\VersionList($contentDrafts, $request->getPathInfo());
+        return new Values\VersionList(
+            array_filter(array_map(
+                static fn (ContentDraftListItemInterface $draftListItem): ?VersionInfo => $draftListItem->getVersionInfo(),
+                $contentDrafts->items,
+            )),
+            $request->getPathInfo()
+        );
     }
 }

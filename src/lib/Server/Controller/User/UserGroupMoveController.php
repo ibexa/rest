@@ -22,7 +22,7 @@ final class UserGroupMoveController extends UserBaseController
      * Moves the user group to another parent.
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function moveUserGroup(string $groupPath, Request $request): Values\ResourceCreated
     {
@@ -34,8 +34,8 @@ final class UserGroupMoveController extends UserBaseController
             $userGroupLocation->contentId
         );
 
-        $locationPath = $this->requestParser->parseHref(
-            $request->headers->get('Destination'),
+        $locationPath = $this->uriParser->getAttributeFromUri(
+            (string)$request->headers->get('Destination'),
             'groupPath'
         );
 
@@ -67,7 +67,7 @@ final class UserGroupMoveController extends UserBaseController
 
     /**
      * @throws \Ibexa\Contracts\Rest\Exceptions\ForbiddenException
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function moveGroup(string $groupPath, Request $request): Values\ResourceCreated
     {

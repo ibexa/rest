@@ -12,6 +12,7 @@ use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\SectionService;
+use Ibexa\Contracts\Core\Repository\Values\Content\Section;
 use Ibexa\Contracts\Core\Repository\Values\Content\SectionCreateStruct;
 use Ibexa\Contracts\Core\Repository\Values\Content\SectionUpdateStruct;
 use Ibexa\Rest\Message;
@@ -127,13 +128,9 @@ class SectionUpdateController extends RestController
     /**
      * Updates a section.
      *
-     * @param $sectionId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Section
      */
-    public function updateSection($sectionId, Request $request)
+    public function updateSection(int $sectionId, Request $request): Section
     {
         $createStruct = $this->inputDispatcher->parse(
             new Message(

@@ -96,8 +96,8 @@ final class SessionRefreshController extends SessionBaseController
      *
      * @deprecated 5.0.0 The "SessionController::refreshSessionAction()" method is deprecated, will be removed in the next API version. Use SessionController::checkSessionAction() instead.
      *
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
     public function refreshSessionAction(string $sessionId, Request $request): Values\UserSession|Response
     {
@@ -109,7 +109,7 @@ final class SessionRefreshController extends SessionBaseController
 
         $session = $request->getSession();
 
-        if ($session === null || !$session->isStarted() || $session->getId() !== $sessionId || !$this->hasStoredCsrfToken()) {
+        if (!$session->isStarted() || $session->getId() !== $sessionId || !$this->hasStoredCsrfToken()) {
             return $this->logout($request);
         }
 

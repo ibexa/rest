@@ -16,6 +16,7 @@ use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
 use JMS\TranslationBundle\Annotation\Ignore;
+use LogicException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -135,7 +136,13 @@ final class UserCreateController extends UserBaseController
         }
 
         $createdContentInfo = $createdUser->getVersionInfo()->getContentInfo();
+
+        if ($createdContentInfo->mainLocationId === null) {
+            throw new LogicException();
+        }
+
         $createdLocation = $this->locationService->loadLocation($createdContentInfo->mainLocationId);
+
         $contentType = $this->contentTypeService->loadContentType($createdContentInfo->contentTypeId);
 
         return new Values\CreatedUser(
@@ -145,7 +152,7 @@ final class UserCreateController extends UserBaseController
                     $contentType,
                     $createdContentInfo,
                     $createdLocation,
-                    $this->contentService->loadRelations($createdUser->getVersionInfo())
+                    iterator_to_array($this->relationListFacade->getRelations($createdUser->getVersionInfo()))
                 ),
             ]
         );

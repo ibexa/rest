@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\URLAliasService;
+use Ibexa\Contracts\Core\Repository\Values\Content\URLAlias as ApiUrlAlias;
 use Ibexa\Rest\Server\Controller as RestController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -78,13 +79,9 @@ class URLAliasLoadByIdController extends RestController
 
     /**
      * Returns the URL alias with the given ID.
-     *
-     * @param $urlAliasId
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\URLAlias
      */
-    public function loadURLAlias($urlAliasId)
+    public function loadURLAlias(mixed $urlAliasId): ApiUrlAlias
     {
-        return $this->urlAliasService->load($urlAliasId);
+        return $this->urlAliasService->load((string)$urlAliasId);
     }
 }

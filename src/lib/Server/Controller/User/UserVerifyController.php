@@ -37,6 +37,9 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 final class UserVerifyController extends UserBaseController
 {
+    /**
+     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     */
     public function verifyUsers(Request $request): Values\OK
     {
         // We let the NotFoundException loadUsers throws if there are no results pass.

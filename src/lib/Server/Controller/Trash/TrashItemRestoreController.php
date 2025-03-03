@@ -30,13 +30,11 @@ class TrashItemRestoreController extends RestController
     /**
      * Restores a trashItem.
      *
-     * @param $trashItemId
-     *
-     * @return \Ibexa\Rest\Server\Values\ResourceCreated
-     *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \InvalidArgumentException
      */
-    public function restoreTrashItem($trashItemId, Request $request)
+    public function restoreTrashItem(int $trashItemId, Request $request): Values\ResourceCreated
     {
         $requestDestination = null;
         try {
@@ -49,11 +47,11 @@ class TrashItemRestoreController extends RestController
         if ($request->headers->has('Destination')) {
             $locationPathParts = explode(
                 '/',
-                $this->requestParser->parseHref($request->headers->get('Destination'), 'locationPath')
+                $this->uriParser->getAttributeFromUri((string)$request->headers->get('Destination'), 'locationPath')
             );
 
             try {
-                $parentLocation = $this->locationService->loadLocation(array_pop($locationPathParts));
+                $parentLocation = $this->locationService->loadLocation((int)array_pop($locationPathParts));
             } catch (NotFoundException $e) {
                 throw new ForbiddenException(/** @Ignore */ $e->getMessage());
             }

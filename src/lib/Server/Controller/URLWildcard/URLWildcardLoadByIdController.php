@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\URLWildcard;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\URLWildcardService;
+use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard;
 use Ibexa\Rest\Server\Controller as RestController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -76,12 +77,8 @@ class URLWildcardLoadByIdController extends RestController
 
     /**
      * Returns the URL wildcard with the given id.
-     *
-     * @param $urlWildcardId
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard
      */
-    public function loadURLWildcard($urlWildcardId)
+    public function loadURLWildcard(int $urlWildcardId): UrlWildcard
     {
         return $this->urlWildcardService->load($urlWildcardId);
     }

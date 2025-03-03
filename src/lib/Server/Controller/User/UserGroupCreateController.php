@@ -13,6 +13,7 @@ use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Values;
+use LogicException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -176,8 +177,8 @@ final class UserGroupCreateController extends UserBaseController
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
      */
     public function createUserGroup(string $groupPath, Request $request): Values\CreatedUserGroup
     {
@@ -198,6 +199,11 @@ final class UserGroupCreateController extends UserBaseController
         );
 
         $createdContentInfo = $createdUserGroup->getVersionInfo()->getContentInfo();
+
+        if ($createdContentInfo->mainLocationId === null) {
+            throw new LogicException();
+        }
+
         $createdLocation = $this->locationService->loadLocation($createdContentInfo->mainLocationId);
         $contentType = $this->contentTypeService->loadContentType($createdContentInfo->contentTypeId);
 
@@ -208,7 +214,7 @@ final class UserGroupCreateController extends UserBaseController
                     $contentType,
                     $createdContentInfo,
                     $createdLocation,
-                    $this->contentService->loadRelations($createdUserGroup->getVersionInfo())
+                    iterator_to_array($this->relationListFacade->getRelations($createdUserGroup->getVersionInfo())),
                 ),
             ]
         );

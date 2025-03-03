@@ -13,6 +13,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions as ApiExceptions;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Values;
+use LogicException;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
@@ -108,6 +109,11 @@ final class UserUnassignFromUserGroupController extends UserBaseController
         $restUserGroups = [];
         foreach ($userGroups as $userGroup) {
             $userGroupContentInfo = $userGroup->getVersionInfo()->getContentInfo();
+
+            if ($userGroupContentInfo->mainLocationId === null) {
+                throw new LogicException();
+            }
+
             $userGroupLocation = $this->locationService->loadLocation($userGroupContentInfo->mainLocationId);
             $contentType = $this->contentTypeService->loadContentType($userGroupContentInfo->contentTypeId);
 
@@ -116,7 +122,7 @@ final class UserUnassignFromUserGroupController extends UserBaseController
                 $contentType,
                 $userGroupContentInfo,
                 $userGroupLocation,
-                $this->contentService->loadRelations($userGroup->getVersionInfo())
+                iterator_to_array($this->relationListFacade->getRelations($userGroup->getVersionInfo())),
             );
         }
 

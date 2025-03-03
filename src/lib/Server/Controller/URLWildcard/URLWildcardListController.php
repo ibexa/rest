@@ -66,13 +66,17 @@ class URLWildcardListController extends RestController
 
     /**
      * Returns the list of URL wildcards.
-     *
-     * @return \Ibexa\Rest\Server\Values\URLWildcardList
      */
-    public function listURLWildcards()
+    public function listURLWildcards(): Values\URLWildcardList
     {
+        $wildcards = $this->urlWildcardService->loadAll();
+        $array = [];
+        foreach ($wildcards as $wildcard) {
+            $array[] = $wildcard;
+        }
+
         return new Values\URLWildcardList(
-            $this->urlWildcardService->loadAll()
+            $array,
         );
     }
 }

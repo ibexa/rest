@@ -13,6 +13,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Rest\Value as RestValue;
+use LogicException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -92,6 +93,11 @@ final class UserGroupsOfUserListController extends UserBaseController
         $restUserGroups = [];
         foreach ($userGroups as $userGroup) {
             $userGroupContentInfo = $userGroup->getVersionInfo()->getContentInfo();
+
+            if ($userGroupContentInfo->mainLocationId === null) {
+                throw new LogicException();
+            }
+
             $userGroupLocation = $this->locationService->loadLocation($userGroupContentInfo->mainLocationId);
             $contentType = $this->contentTypeService->loadContentType($userGroupContentInfo->contentTypeId);
 
@@ -100,7 +106,7 @@ final class UserGroupsOfUserListController extends UserBaseController
                 $contentType,
                 $userGroupContentInfo,
                 $userGroupLocation,
-                $this->contentService->loadRelations($userGroup->getVersionInfo())
+                iterator_to_array($this->relationListFacade->getRelations($userGroup->getVersionInfo())),
             );
         }
 

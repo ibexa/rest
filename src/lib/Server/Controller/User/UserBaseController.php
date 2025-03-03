@@ -19,10 +19,11 @@ use Ibexa\Contracts\Core\Repository\SectionService;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Contracts\Core\Repository\Values\User\User as RepositoryUser;
+use Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment;
 use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
-use Ibexa\Rest\Value as RestValue;
+use LogicException;
 use Symfony\Component\HttpFoundation\Request;
 
 class UserBaseController extends RestController
@@ -43,6 +44,8 @@ class UserBaseController extends RestController
 
     protected PermissionResolver $permissionResolver;
 
+    protected ContentService\RelationListFacadeInterface $relationListFacade;
+
     public function __construct(
         UserService $userService,
         RoleService $roleService,
@@ -51,7 +54,8 @@ class UserBaseController extends RestController
         LocationService $locationService,
         SectionService $sectionService,
         Repository $repository,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        ContentService\RelationListFacadeInterface $relationListFacade
     ) {
         $this->userService = $userService;
         $this->roleService = $roleService;
@@ -61,25 +65,26 @@ class UserBaseController extends RestController
         $this->sectionService = $sectionService;
         $this->repository = $repository;
         $this->permissionResolver = $permissionResolver;
+        $this->relationListFacade = $relationListFacade;
     }
 
     /**
      * Loads users.
      */
-    public function loadUsers(Request $request): RestValue
+    public function loadUsers(Request $request): Values\UserList|Values\UserRefList
     {
         $restUsers = [];
 
         try {
             if ($request->query->has('roleId')) {
                 $restUsers = $this->loadUsersAssignedToRole(
-                    $this->requestParser->parseHref($request->query->get('roleId'), 'roleId')
+                    $this->uriParser->getAttributeFromUri($request->query->getString('roleId'), 'roleId')
                 );
             } elseif ($request->query->has('remoteId')) {
                 $restUsers = [
                     $this->buildRestUserObject(
                         $this->userService->loadUser(
-                            $this->contentService->loadContentInfoByRemoteId($request->query->get('remoteId'))->id,
+                            $this->contentService->loadContentInfoByRemoteId($request->query->getString('remoteId'))->id,
                             Language::ALL
                         )
                     ),
@@ -87,11 +92,11 @@ class UserBaseController extends RestController
             } elseif ($request->query->has('login')) {
                 $restUsers = [
                     $this->buildRestUserObject(
-                        $this->userService->loadUserByLogin($request->query->get('login'), Language::ALL)
+                        $this->userService->loadUserByLogin((string)$request->query->get('login'), Language::ALL)
                     ),
                 ];
             } elseif ($request->query->has('email')) {
-                foreach ($this->userService->loadUsersByEmail($request->query->get('email'), Language::ALL) as $user) {
+                foreach ($this->userService->loadUsersByEmail((string)$request->query->get('email'), Language::ALL) as $user) {
                     $restUsers[] = $this->buildRestUserObject($user);
                 }
             }
@@ -112,13 +117,40 @@ class UserBaseController extends RestController
 
     protected function buildRestUserObject(RepositoryUser $user): Values\RestUser
     {
+        if ($user->contentInfo->mainLocationId === null) {
+            throw new LogicException();
+        }
+
         return new Values\RestUser(
             $user,
             $this->contentTypeService->loadContentType($user->contentInfo->contentTypeId),
             $user->contentInfo,
             $this->locationService->loadLocation($user->contentInfo->mainLocationId),
-            $this->contentService->loadRelations($user->getVersionInfo())
+            iterator_to_array($this->relationListFacade->getRelations($user->getVersionInfo()))
         );
+    }
+
+    /**
+     * Loads a list of users assigned to role.
+     *
+     * @param mixed $roleId
+     *
+     * @return \Ibexa\Rest\Server\Values\RestUser[]
+     */
+    public function loadUsersAssignedToRole($roleId): array
+    {
+        $role = $this->roleService->loadRole($roleId);
+        $roleAssignments = $this->roleService->getRoleAssignments($role);
+
+        $restUsers = [];
+
+        foreach ($roleAssignments as $roleAssignment) {
+            if ($roleAssignment instanceof UserRoleAssignment) {
+                $restUsers[] = $this->buildRestUserObject($roleAssignment->getUser());
+            }
+        }
+
+        return $restUsers;
     }
 
     /**

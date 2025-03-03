@@ -77,7 +77,7 @@ final class SessionCheckController extends SessionBaseController
     public function checkSessionAction(Request $request)
     {
         $session = $request->getSession();
-        if ($session === null || !$session->isStarted()) {
+        if (!$session->isStarted()) {
             return $this->logout($request);
         }
 

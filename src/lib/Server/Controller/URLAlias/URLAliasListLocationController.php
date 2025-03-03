@@ -79,24 +79,25 @@ class URLAliasListLocationController extends RestController
 
     /**
      * Returns the list of URL aliases for a location.
-     *
-     * @param $locationPath
-     *
-     * @return \Ibexa\Rest\Server\Values\URLAliasRefList
      */
-    public function listLocationURLAliases($locationPath, Request $request)
+    public function listLocationURLAliases(string $locationPath, Request $request): Values\CachedValue
     {
         $locationPathParts = explode('/', $locationPath);
 
         $location = $this->locationService->loadLocation(
-            array_pop($locationPathParts)
+            (int)array_pop($locationPathParts)
         );
 
         $custom = !($request->query->has('custom') && $request->query->get('custom') === 'false');
 
+        $locationAliasesArray = [];
+        foreach ($this->urlAliasService->listLocationAliases($location, $custom) as $locationAlias) {
+            $locationAliasesArray[] = $locationAlias;
+        }
+
         return new Values\CachedValue(
             new Values\URLAliasRefList(
-                $this->urlAliasService->listLocationAliases($location, $custom),
+                $locationAliasesArray,
                 $request->getPathInfo()
             ),
             ['locationId' => $location->id]

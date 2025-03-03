@@ -149,7 +149,7 @@ final class UserGroupUpdateController extends UserBaseController
             $contentType,
             $updatedGroup->getVersionInfo()->getContentInfo(),
             $userGroupLocation,
-            $this->contentService->loadRelations($updatedGroup->getVersionInfo())
+            iterator_to_array($this->relationListFacade->getRelations($updatedGroup->getVersionInfo())),
         );
     }
 }

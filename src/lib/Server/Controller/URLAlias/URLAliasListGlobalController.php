@@ -68,13 +68,16 @@ class URLAliasListGlobalController extends RestController
 
     /**
      * Returns the list of global URL aliases.
-     *
-     * @return \Ibexa\Rest\Server\Values\URLAliasRefList
      */
-    public function listGlobalURLAliases()
+    public function listGlobalURLAliases(): Values\URLAliasRefList
     {
+        $globalAliasesArray = [];
+        foreach ($this->urlAliasService->listGlobalAliases() as $alias) {
+            $globalAliasesArray[] = $alias;
+        }
+
         return new Values\URLAliasRefList(
-            $this->urlAliasService->listGlobalAliases(),
+            $globalAliasesArray,
             $this->router->generate('ibexa.rest.list_global_url_aliases')
         );
     }

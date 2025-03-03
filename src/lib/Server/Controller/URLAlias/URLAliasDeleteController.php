@@ -56,12 +56,8 @@ class URLAliasDeleteController extends RestController
 
     /**
      * The given URL alias is deleted.
-     *
-     * @param $urlAliasId
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteURLAlias($urlAliasId)
+    public function deleteURLAlias(string $urlAliasId): Values\NoContent
     {
         $this->urlAliasService->removeAliases(
             [

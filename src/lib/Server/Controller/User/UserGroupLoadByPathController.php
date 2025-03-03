@@ -109,7 +109,7 @@ final class UserGroupLoadByPathController extends UserBaseController
                 $contentType,
                 $userGroupContentInfo,
                 $userGroupLocation,
-                $this->contentService->loadRelations($userGroup->getVersionInfo())
+                iterator_to_array($this->relationListFacade->getRelations($userGroup->getVersionInfo())),
             ),
             ['locationId' => $userGroupLocation->id]
         );

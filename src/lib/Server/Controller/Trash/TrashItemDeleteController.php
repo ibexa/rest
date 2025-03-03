@@ -56,12 +56,8 @@ class TrashItemDeleteController extends RestController
 
     /**
      * Deletes the given trash item.
-     *
-     * @param $trashItemId
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteTrashItem($trashItemId)
+    public function deleteTrashItem(int $trashItemId): Values\NoContent
     {
         $this->trashService->deleteTrashItem(
             $this->trashService->loadTrashItem($trashItemId)

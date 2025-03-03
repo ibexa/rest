@@ -14,6 +14,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Rest\Value as RestValue;
+use LogicException;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -88,9 +89,13 @@ final class UserLoadByIdController extends UserBaseController
         $userContentInfo = $user->getVersionInfo()->getContentInfo();
         $contentType = $this->contentTypeService->loadContentType($userContentInfo->contentTypeId);
 
+        if ($userContentInfo->mainLocationId === null) {
+            throw new LogicException();
+        }
+
         try {
             $userMainLocation = $this->locationService->loadLocation($userContentInfo->mainLocationId);
-            $relations = $this->contentService->loadRelations($user->getVersionInfo());
+            $relations = iterator_to_array($this->relationListFacade->getRelations($user->getVersionInfo()));
         } catch (UnauthorizedException $e) {
             // TODO: Hack for special case to allow current logged in user to load him/here self (but not relations)
             if ($user->id == $this->permissionResolver->getCurrentUserReference()->getUserId()) {

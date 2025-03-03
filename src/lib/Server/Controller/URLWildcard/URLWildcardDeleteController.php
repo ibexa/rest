@@ -54,12 +54,8 @@ class URLWildcardDeleteController extends RestController
 
     /**
      * The given URL wildcard is deleted.
-     *
-     * @param $urlWildcardId
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteURLWildcard($urlWildcardId)
+    public function deleteURLWildcard(int $urlWildcardId): Values\NoContent
     {
         $this->urlWildcardService->remove(
             $this->urlWildcardService->load($urlWildcardId)
