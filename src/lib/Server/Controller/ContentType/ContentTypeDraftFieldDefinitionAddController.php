@@ -20,6 +20,7 @@ use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedFieldDefinition;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -106,7 +107,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
     ),
 )]
-class ContentTypeDraftFeildDefinitionAddController extends RestController
+class ContentTypeDraftFieldDefinitionAddController extends RestController
 {
     protected ContentTypeService $contentTypeService;
 
@@ -118,14 +119,10 @@ class ContentTypeDraftFeildDefinitionAddController extends RestController
     /**
      * Creates a new field definition for the given content type draft.
      *
-     * @param $contentTypeId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedFieldDefinition
      */
-    public function addContentTypeDraftFieldDefinition($contentTypeId, Request $request)
+    public function addContentTypeDraftFieldDefinition(int $contentTypeId, Request $request): CreatedFieldDefinition
     {
         $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
         $fieldDefinitionCreate = $this->inputDispatcher->parse(
@@ -133,14 +130,14 @@ class ContentTypeDraftFeildDefinitionAddController extends RestController
                 [
                     'Content-Type' => $request->headers->get('Content-Type'),
                 ],
-                $request->getContent()
+                $request->getContent(),
             )
         );
 
         try {
             $this->contentTypeService->addFieldDefinition(
                 $contentTypeDraft,
-                $fieldDefinitionCreate
+                $fieldDefinitionCreate,
             );
         } catch (InvalidArgumentException $e) {
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
@@ -153,7 +150,7 @@ class ContentTypeDraftFeildDefinitionAddController extends RestController
         $updatedDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
         foreach ($updatedDraft->getFieldDefinitions() as $fieldDefinition) {
             if ($fieldDefinition->identifier == $fieldDefinitionCreate->identifier) {
-                return new Values\CreatedFieldDefinition(
+                return new CreatedFieldDefinition(
                     [
                         'fieldDefinition' => new Values\RestFieldDefinition($updatedDraft, $fieldDefinition),
                     ]

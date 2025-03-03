@@ -120,13 +120,9 @@ class ObjectStateCreateController extends RestController
     /**
      * Creates a new object state.
      *
-     * @param $objectStateGroupId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedObjectState
      */
-    public function createObjectState($objectStateGroupId, Request $request)
+    public function createObjectState(int $objectStateGroupId, Request $request): \Ibexa\Rest\Server\Values\CreatedObjectState
     {
         $objectStateGroup = $this->objectStateService->loadObjectStateGroup($objectStateGroupId);
 

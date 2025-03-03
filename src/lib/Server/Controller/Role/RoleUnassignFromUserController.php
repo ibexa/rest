@@ -74,13 +74,8 @@ class RoleUnassignFromUserController extends RoleBaseController
 {
     /**
      * Un-assigns role from user.
-     *
-     * @param $userId
-     * @param $roleId
-     *
-     * @return \Ibexa\Rest\Server\Values\RoleAssignmentList
      */
-    public function unassignRoleFromUser($userId, $roleId)
+    public function unassignRoleFromUser(int $userId, int $roleId): Values\RoleAssignmentList
     {
         $user = $this->userService->loadUser($userId);
 
@@ -90,7 +85,11 @@ class RoleUnassignFromUserController extends RoleBaseController
                 $this->roleService->removeRoleAssignment($roleAssignment);
             }
         }
-        $newRoleAssignments = $this->roleService->getRoleAssignmentsForUser($user);
+        $newRoleAssignmentsIterable = $this->roleService->getRoleAssignmentsForUser($user);
+        $newRoleAssignments = [];
+        foreach ($newRoleAssignmentsIterable as $roleAssignment) {
+            $newRoleAssignments[] = $roleAssignment;
+        }
 
         return new Values\RoleAssignmentList($newRoleAssignments, $user->id);
     }

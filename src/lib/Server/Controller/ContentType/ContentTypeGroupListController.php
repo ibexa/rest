@@ -12,7 +12,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\ContentTypeGroupRefList;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -79,16 +79,12 @@ class ContentTypeGroupListController extends RestController
 
     /**
      * Returns the content type groups the content type belongs to.
-     *
-     * @param $contentTypeId
-     *
-     * @return \Ibexa\Rest\Server\Values\ContentTypeGroupRefList
      */
-    public function loadGroupsOfContentType($contentTypeId)
+    public function loadGroupsOfContentType(int $contentTypeId): ContentTypeGroupRefList
     {
         $contentType = $this->contentTypeService->loadContentType($contentTypeId, Language::ALL);
 
-        return new Values\ContentTypeGroupRefList(
+        return new ContentTypeGroupRefList(
             $contentType,
             $contentType->getContentTypeGroups()
         );

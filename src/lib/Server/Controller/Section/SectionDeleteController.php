@@ -56,12 +56,8 @@ class SectionDeleteController extends RestController
 
     /**
      * Delete a section by ID.
-     *
-     * @param $sectionId
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteSection($sectionId)
+    public function deleteSection(int $sectionId): NoContent
     {
         $this->sectionService->deleteSection(
             $this->sectionService->loadSection($sectionId)

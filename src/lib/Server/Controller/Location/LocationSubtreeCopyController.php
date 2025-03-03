@@ -43,12 +43,8 @@ class LocationSubtreeCopyController extends LocationBaseController
 
     /**
      * Copies a subtree to a new destination.
-     *
-     * @param string $locationPath
-     *
-     * @return \Ibexa\Rest\Server\Values\ResourceCreated
      */
-    public function copySubtree($locationPath, Request $request)
+    public function copySubtree(string $locationPath, Request $request): \Ibexa\Rest\Server\Values\ResourceCreated
     {
         $location = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($locationPath)
@@ -56,9 +52,9 @@ class LocationSubtreeCopyController extends LocationBaseController
 
         $destinationLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath(
-                $this->requestParser->parseHref(
-                    $request->headers->get('Destination'),
-                    'locationPath'
+                $this->uriParser->getAttributeFromUri(
+                    (string)$request->headers->get('Destination'),
+                    'locationPath',
                 )
             )
         );

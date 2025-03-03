@@ -79,12 +79,8 @@ class LocationLoadByPathController extends LocationBaseController
 {
     /**
      * Loads a location.
-     *
-     * @param string $locationPath
-     *
-     * @return \Ibexa\Rest\Server\Values\RestLocation
      */
-    public function loadLocation($locationPath)
+    public function loadLocation(string $locationPath): Values\CachedValue
     {
         $location = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($locationPath)

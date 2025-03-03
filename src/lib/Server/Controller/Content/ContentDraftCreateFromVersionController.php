@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Response;
@@ -82,21 +83,23 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class ContentDraftCreateFromVersionController extends RestController
 {
+    public function __construct(
+        private readonly ContentService\RelationListFacadeInterface $relationListFacade
+    ) {
+    }
+
     /**
      * The system creates a new draft version as a copy from the given version.
-     *
-     * @param mixed $contentId
-     * @param mixed $versionNumber
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedVersion
      */
-    public function createDraftFromVersion($contentId, $versionNumber)
+    public function createDraftFromVersion(int $contentId, int $versionNumber): Values\CreatedVersion
     {
-        $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
+        $contentService = $this->repository->getContentService();
+
+        $contentInfo = $contentService->loadContentInfo($contentId);
         $contentType = $this->repository->getContentTypeService()->loadContentType($contentInfo->contentTypeId);
-        $contentDraft = $this->repository->getContentService()->createContentDraft(
+        $contentDraft = $contentService->createContentDraft(
             $contentInfo,
-            $this->repository->getContentService()->loadVersionInfo($contentInfo, $versionNumber)
+            $contentService->loadVersionInfo($contentInfo, $versionNumber)
         );
 
         return new Values\CreatedVersion(
@@ -104,7 +107,7 @@ class ContentDraftCreateFromVersionController extends RestController
                 'version' => new Values\Version(
                     $contentDraft,
                     $contentType,
-                    $this->repository->getContentService()->loadRelations($contentDraft->getVersionInfo())
+                    iterator_to_array($this->relationListFacade->getRelations($contentDraft->getVersionInfo())),
                 ),
             ]
         );

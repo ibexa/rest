@@ -13,6 +13,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroupCreateStruct;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroupUpdateStruct;
 use Ibexa\Rest\Message;
@@ -129,13 +130,9 @@ class ContentTypeGroupUpdateController extends RestController
     /**
      * Updates a content type group.
      *
-     * @param $contentTypeGroupId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup
      */
-    public function updateContentTypeGroup($contentTypeGroupId, Request $request)
+    public function updateContentTypeGroup(int $contentTypeGroupId, Request $request): ContentTypeGroup
     {
         $createStruct = $this->inputDispatcher->parse(
             new Message(

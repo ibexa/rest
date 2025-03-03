@@ -123,16 +123,14 @@ class ContentTypeDraftFieldDefinitionUpdateController extends RestController
     /**
      * Updates the attributes of a field definition.
      *
-     * @param $contentTypeId
-     * @param $fieldDefinitionId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Rest\Server\Values\FieldDefinitionList
      */
-    public function updateContentTypeDraftFieldDefinition($contentTypeId, $fieldDefinitionId, Request $request)
-    {
+    public function updateContentTypeDraftFieldDefinition(
+        int $contentTypeId,
+        int $fieldDefinitionId,
+        Request $request
+    ): Values\RestFieldDefinition {
         $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
         $fieldDefinitionUpdate = $this->inputDispatcher->parse(
             new Message(

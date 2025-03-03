@@ -90,17 +90,17 @@ class ContentTypeListForGroupController extends RestController
 
     /**
      * Returns a list of content types of the group.
-     *
-     * @param string $contentTypeGroupId
-     *
-     * @return \Ibexa\Rest\Server\Values\ContentTypeList|\Ibexa\Rest\Server\Values\ContentTypeInfoList
      */
-    public function listContentTypesForGroup($contentTypeGroupId, Request $request)
+    public function listContentTypesForGroup(int $contentTypeGroupId, Request $request): \Ibexa\Rest\Server\Values\ContentTypeList|\Ibexa\Rest\Server\Values\ContentTypeInfoList
     {
-        $contentTypes = $this->contentTypeService->loadContentTypes(
+        $contentTypesIterable = $this->contentTypeService->loadContentTypes(
             $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId, Language::ALL),
-            Language::ALL
+            Language::ALL,
         );
+        $contentTypes = [];
+        foreach ($contentTypesIterable as $contentType) {
+            $contentTypes[] = $contentType;
+        }
 
         if ($this->getMediaType($request) === 'application/vnd.ibexa.api.contenttypelist') {
             return new Values\ContentTypeList($contentTypes, $request->getPathInfo());

@@ -91,12 +91,8 @@ class ObjectStatesForContentListController extends RestController
 
     /**
      * Returns the object states of content.
-     *
-     * @param $contentId
-     *
-     * @return \Ibexa\Rest\Values\ContentObjectStates
      */
-    public function getObjectStatesForContent($contentId)
+    public function getObjectStatesForContent(int $contentId): \Ibexa\Rest\Values\ContentObjectStates
     {
         $groups = $this->objectStateService->loadObjectStateGroups();
         $contentInfo = $this->contentService->loadContentInfo($contentId);

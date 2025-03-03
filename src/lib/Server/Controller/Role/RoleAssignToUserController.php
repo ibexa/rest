@@ -100,12 +100,8 @@ class RoleAssignToUserController extends RoleBaseController
 {
     /**
      * Assigns role to user.
-     *
-     * @param $userId
-     *
-     * @return \Ibexa\Rest\Server\Values\RoleAssignmentList
      */
-    public function assignRoleToUser($userId, Request $request)
+    public function assignRoleToUser(int $userId, Request $request): \Ibexa\Rest\Server\Values\RoleAssignmentList
     {
         $roleAssignment = $this->inputDispatcher->parse(
             new Message(
@@ -123,7 +119,11 @@ class RoleAssignToUserController extends RoleBaseController
             throw new BadRequestException($e->getMessage());
         }
 
-        $roleAssignments = $this->roleService->getRoleAssignmentsForUser($user);
+        $roleAssignmentsIterable = $this->roleService->getRoleAssignmentsForUser($user);
+        $roleAssignments = [];
+        foreach ($roleAssignmentsIterable as $roleAssignment) {
+            $roleAssignments[] = $roleAssignment;
+        }
 
         return new Values\RoleAssignmentList($roleAssignments, $user->id);
     }

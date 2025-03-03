@@ -78,17 +78,12 @@ class RoleAssignmentForUserGroupLoadByIdController extends RoleBaseController
     /**
      * Returns a role assignment to the given user group.
      *
-     * @param $groupPath
-     * @param $roleId
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Rest\Server\Values\RestUserGroupRoleAssignment
      */
-    public function loadRoleAssignmentForUserGroup($groupPath, $roleId, Request $request)
+    public function loadRoleAssignmentForUserGroup(string $groupPath, int $roleId, Request $request): \Ibexa\Rest\Server\Values\RestUserGroupRoleAssignment
     {
         $groupLocationParts = explode('/', $groupPath);
-        $groupLocation = $this->locationService->loadLocation(array_pop($groupLocationParts));
+        $groupLocation = $this->locationService->loadLocation((int)array_pop($groupLocationParts));
         $userGroup = $this->userService->loadUserGroup($groupLocation->contentId);
 
         $roleAssignments = $this->roleService->getRoleAssignmentsForUserGroup($userGroup);

@@ -131,13 +131,9 @@ class ObjectStatesForContentUpdateController extends RestController
      * Updates object states of content
      * An object state in the input overrides the state of the object state group.
      *
-     * @param $contentId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
-     * @return \Ibexa\Rest\Values\ContentObjectStates
      */
-    public function setObjectStatesForContent($contentId, Request $request)
+    public function setObjectStatesForContent(int $contentId, Request $request): \Ibexa\Rest\Values\ContentObjectStates
     {
         $newObjectStates = $this->inputDispatcher->parse(
             new Message(

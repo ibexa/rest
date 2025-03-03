@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 use Ibexa\Rest\Message;
@@ -103,19 +104,21 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class ContentRelationCreateController extends RestController
 {
+    public function __construct(
+        private readonly ContentService\RelationListFacadeInterface $relationListFacade
+    ) {
+    }
+
     /**
      * Creates a new relation of type COMMON for the given draft.
      *
-     * @param mixed $contentId
-     * @param int $versionNumber
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException if version $versionNumber isn't a draft
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException if a relation to the same content already exists
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedRelation
      */
-    public function createRelation($contentId, $versionNumber, Request $request)
+    public function createRelation(int $contentId, int $versionNumber, Request $request): Values\CreatedRelation
     {
+        $contentService = $this->repository->getContentService();
+
         $destinationContentId = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -123,26 +126,29 @@ class ContentRelationCreateController extends RestController
             )
         );
 
-        $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
-        $versionInfo = $this->repository->getContentService()->loadVersionInfo($contentInfo, $versionNumber);
+        $contentInfo = $contentService->loadContentInfo($contentId);
+        $versionInfo = $contentService->loadVersionInfo($contentInfo, $versionNumber);
         if (!$versionInfo->isDraft()) {
             throw new ForbiddenException('Relation of type COMMON can only be added to drafts');
         }
 
         try {
-            $destinationContentInfo = $this->repository->getContentService()->loadContentInfo($destinationContentId);
+            $destinationContentInfo = $contentService->loadContentInfo($destinationContentId);
         } catch (NotFoundException $e) {
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
-        $existingRelations = $this->repository->getContentService()->loadRelations($versionInfo);
+        $existingRelations = iterator_to_array($this->relationListFacade->getRelations(
+            $versionInfo,
+        ));
+
         foreach ($existingRelations as $existingRelation) {
             if ($existingRelation->getDestinationContentInfo()->id == $destinationContentId) {
                 throw new ForbiddenException('Relation of type COMMON to the selected destination content ID already exists');
             }
         }
 
-        $relation = $this->repository->getContentService()->addRelation($versionInfo, $destinationContentInfo);
+        $relation = $contentService->addRelation($versionInfo, $destinationContentInfo);
 
         return new Values\CreatedRelation(
             [

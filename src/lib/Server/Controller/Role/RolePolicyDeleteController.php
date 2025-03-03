@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Values\User\PolicyDraft;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,14 +52,9 @@ class RolePolicyDeleteController extends RoleBaseController
     /**
      * Delete a policy from role.
      *
-     * @param int $roleId ID of a role draft
-     * @param int $policyId ID of a policy
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deletePolicy($roleId, $policyId, Request $request)
+    public function deletePolicy(int $roleId, int $policyId, Request $request): \Ibexa\Rest\Server\Values\NoContent
     {
         try {
             // First try to treat $roleId as a role draft ID.
@@ -70,7 +66,7 @@ class RolePolicyDeleteController extends RoleBaseController
                     break;
                 }
             }
-            if ($policy !== null) {
+            if ($policy !== null && $policy instanceof PolicyDraft) {
                 $this->roleService->removePolicyByRoleDraft($roleDraft, $policy);
 
                 return new Values\NoContent();
@@ -82,6 +78,7 @@ class RolePolicyDeleteController extends RoleBaseController
             );
             $policy = null;
             foreach ($roleDraft->getPolicies() as $rolePolicy) {
+                assert($rolePolicy instanceof PolicyDraft);
                 if ($rolePolicy->originalId == $policyId) {
                     $policy = $rolePolicy;
                     break;
@@ -94,6 +91,7 @@ class RolePolicyDeleteController extends RoleBaseController
                 return new Values\NoContent();
             }
         }
+
         throw new Exceptions\NotFoundException("Policy not found: '{$request->getPathInfo()}'.");
     }
 }

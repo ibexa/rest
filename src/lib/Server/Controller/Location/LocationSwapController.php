@@ -15,20 +15,16 @@ class LocationSwapController extends LocationBaseController
 {
     /**
      * Swaps a location with another one.
-     *
-     * @param string $locationPath
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function swapLocation($locationPath, Request $request)
+    public function swapLocation(string $locationPath, Request $request): \Ibexa\Rest\Server\Values\NoContent
     {
         $locationId = $this->extractLocationIdFromPath($locationPath);
         $location = $this->locationService->loadLocation($locationId);
 
         $destinationLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath(
-                $this->requestParser->parseHref(
-                    $request->headers->get('Destination'),
+                $this->uriParser->getAttributeFromUri(
+                    (string)$request->headers->get('Destination'),
                     'locationPath'
                 )
             )

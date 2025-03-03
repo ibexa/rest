@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Rest\Message;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -110,12 +111,8 @@ class RoleUpdateController extends RoleBaseController
 {
     /**
      * Updates a role.
-     *
-     * @param $roleId
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\Role
      */
-    public function updateRole($roleId, Request $request)
+    public function updateRole(int $roleId, Request $request): Role
     {
         $createStruct = $this->inputDispatcher->parse(
             new Message(

@@ -23,12 +23,8 @@ class ContentTypeCopyController extends RestController
     /**
      * Copies a content type. The identifier of the copy is changed to
      * copy_of_<originalBaseIdentifier>_<newTypeId> and a new remoteId is generated.
-     *
-     * @param $contentTypeId
-     *
-     * @return \Ibexa\Rest\Server\Values\ResourceCreated
      */
-    public function copyContentType($contentTypeId)
+    public function copyContentType(int $contentTypeId): Values\ResourceCreated
     {
         $copiedContentType = $this->contentTypeService->copyContentType(
             $this->contentTypeService->loadContentType($contentTypeId)

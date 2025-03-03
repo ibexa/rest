@@ -87,7 +87,7 @@ class RolePolicyLoadByIdController extends RoleBaseController
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\User\Policy
      */
-    public function loadPolicy($roleId, $policyId, Request $request)
+    public function loadPolicy(int $roleId, int $policyId, Request $request)
     {
         $loadedRole = $this->roleService->loadRole($roleId);
         foreach ($loadedRole->getPolicies() as $policy) {

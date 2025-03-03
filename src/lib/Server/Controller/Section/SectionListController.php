@@ -77,17 +77,19 @@ class SectionListController extends RestController
 
     /**
      * List sections.
-     *
-     * @return \Ibexa\Rest\Server\Values\SectionList
      */
-    public function listSections(Request $request)
+    public function listSections(Request $request): Values\SectionList
     {
         if ($request->query->has('identifier')) {
             $sections = [
                 $this->loadSectionByIdentifier($request),
             ];
         } else {
-            $sections = $this->sectionService->loadSections();
+            $sectionsIterable = $this->sectionService->loadSections();
+            $sections = [];
+            foreach ($sectionsIterable as $section) {
+                $sections[] = $section;
+            }
         }
 
         return new Values\SectionList($sections, $request->getPathInfo());
@@ -95,14 +97,12 @@ class SectionListController extends RestController
 
     /**
      * Loads section by identifier.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Section
      */
-    public function loadSectionByIdentifier(Request $request)
+    public function loadSectionByIdentifier(Request $request): \Ibexa\Contracts\Core\Repository\Values\Content\Section
     {
         return $this->sectionService->loadSectionByIdentifier(
             // GET variable
-            $request->query->get('identifier')
+            $request->query->getString('identifier')
         );
     }
 }

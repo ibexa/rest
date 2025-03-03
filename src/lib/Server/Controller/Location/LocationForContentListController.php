@@ -79,12 +79,8 @@ class LocationForContentListController extends LocationBaseController
 {
     /**
      * Loads all locations for content object.
-     *
-     * @param mixed $contentId
-     *
-     * @return \Ibexa\Rest\Server\Values\LocationList
      */
-    public function loadLocationsForContent($contentId, Request $request)
+    public function loadLocationsForContent(int $contentId, Request $request): Values\CachedValue
     {
         $restLocations = [];
         $contentInfo = $this->contentService->loadContentInfo($contentId);

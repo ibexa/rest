@@ -69,12 +69,8 @@ class LocationChildrenListController extends LocationBaseController
 {
     /**
      * Loads child locations of a location.
-     *
-     * @param string $locationPath
-     *
-     * @return \Ibexa\Rest\Server\Values\LocationList
      */
-    public function loadLocationChildren($locationPath, Request $request)
+    public function loadLocationChildren(string $locationPath, Request $request): Values\CachedValue
     {
         $offset = $request->query->has('offset') ? (int)$request->query->get('offset') : 0;
         $limit = $request->query->has('limit') ? (int)$request->query->get('limit') : 10;

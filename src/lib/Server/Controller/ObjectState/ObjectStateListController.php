@@ -90,17 +90,19 @@ class ObjectStateListController extends RestController
 
     /**
      * Returns a list of all object states of the given group.
-     *
-     * @param $objectStateGroupId
-     *
-     * @return \Ibexa\Rest\Server\Values\ObjectStateList
      */
-    public function loadObjectStates($objectStateGroupId)
+    public function loadObjectStates(int $objectStateGroupId): \Ibexa\Rest\Server\Values\ObjectStateList
     {
         $objectStateGroup = $this->objectStateService->loadObjectStateGroup($objectStateGroupId);
 
+        $objectStatesIterable = $this->objectStateService->loadObjectStates($objectStateGroup, Language::ALL);
+        $objectStates = [];
+        foreach ($objectStatesIterable as $objectState) {
+            $objectStates[] = $objectState;
+        }
+
         return new Values\ObjectStateList(
-            $this->objectStateService->loadObjectStates($objectStateGroup, Language::ALL),
+            $objectStates,
             $objectStateGroup->id
         );
     }

@@ -44,12 +44,8 @@ class RoleDeleteController extends RoleBaseController
 {
     /**
      * Delete a role by ID.
-     *
-     * @param $roleId
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteRole($roleId)
+    public function deleteRole(int $roleId): \Ibexa\Rest\Server\Values\NoContent
     {
         $this->roleService->deleteRole(
             $this->roleService->loadRole($roleId)

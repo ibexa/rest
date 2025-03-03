@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException;
 use Ibexa\Rest\Message;
@@ -103,6 +104,11 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class ContentCreateController extends RestController
 {
+    public function __construct(
+        private readonly ContentService\RelationListFacadeInterface $relationListFacade
+    ) {
+    }
+
     /**
      * Creates a new content draft assigned to the authenticated user.
      * If a different userId is given in the input it is assigned to the
@@ -173,7 +179,7 @@ class ContentCreateController extends RestController
             $contentType = $this->repository->getContentTypeService()->loadContentType(
                 $content->getVersionInfo()->getContentInfo()->contentTypeId
             );
-            $relations = $this->repository->getContentService()->loadRelations($contentValue->getVersionInfo());
+            $relations = iterator_to_array($this->relationListFacade->getRelations($contentValue->getVersionInfo()));
         }
 
         return new Values\CreatedContent(

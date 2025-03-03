@@ -11,7 +11,6 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions\LimitationValidationException;
-use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Core\Base\Exceptions\ForbiddenException;
 use Ibexa\Core\Base\Exceptions\InvalidArgumentException;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException;
@@ -97,7 +96,7 @@ class RoleDraftCreateController extends RoleBaseController
      *
      * @return \Ibexa\Rest\Server\Values\CreatedRole
      */
-    public function createRoleDraft($roleId, Request $request)
+    public function createRoleDraft(int $roleId, Request $request): Values\CreatedRole
     {
         try {
             $roleDraft = $this->roleService->createRoleDraft(
@@ -108,8 +107,6 @@ class RoleDraftCreateController extends RoleBaseController
         } catch (UnauthorizedException $e) {
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         } catch (LimitationValidationException $e) {
-            throw new BadRequestException($e->getMessage());
-        } catch (Exceptions\Parser $e) {
             throw new BadRequestException($e->getMessage());
         }
 

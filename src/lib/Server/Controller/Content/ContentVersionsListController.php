@@ -10,7 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\VersionList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -69,18 +69,21 @@ class ContentVersionsListController extends RestController
     /**
      * Returns a list of all versions of the content. This method does not
      * include fields and relations in the Version elements of the response.
-     *
-     * @param mixed $contentId
-     *
-     * @return \Ibexa\Rest\Server\Values\VersionList
      */
-    public function loadContentVersions($contentId, Request $request)
+    public function loadContentVersions(int $contentId, Request $request): VersionList
     {
-        $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
+        $contentService = $this->repository->getContentService();
+        $contentInfo = $contentService->loadContentInfo($contentId);
 
-        return new Values\VersionList(
-            $this->repository->getContentService()->loadVersions($contentInfo),
-            $request->getPathInfo()
+        $versionsIterable = $contentService->loadVersions($contentInfo);
+        $versions = [];
+        foreach ($versionsIterable as $version) {
+            $versions[] = $version;
+        }
+
+        return new VersionList(
+            $versions,
+            $request->getPathInfo(),
         );
     }
 }

@@ -61,15 +61,13 @@ class RoleListController extends RoleBaseController
 {
     /**
      * Loads list of roles.
-     *
-     * @return \Ibexa\Rest\Server\Values\RoleList
      */
-    public function listRoles(Request $request)
+    public function listRoles(Request $request): \Ibexa\Rest\Server\Values\RoleList
     {
         $roles = [];
         if ($request->query->has('identifier')) {
             try {
-                $role = $this->roleService->loadRoleByIdentifier($request->query->get('identifier'));
+                $role = $this->roleService->loadRoleByIdentifier((string)$request->query->get('identifier'));
                 $roles[] = $role;
             } catch (APINotFoundException $e) {
                 // Do nothing
@@ -78,8 +76,13 @@ class RoleListController extends RoleBaseController
             $offset = $request->query->has('offset') ? (int)$request->query->get('offset') : 0;
             $limit = $request->query->has('limit') ? (int)$request->query->get('limit') : -1;
 
+            $rolesArray = [];
+            foreach ($this->roleService->loadRoles() as $role) {
+                $rolesArray[] = $role;
+            }
+
             $roles = array_slice(
-                $this->roleService->loadRoles(),
+                $rolesArray,
                 $offset >= 0 ? $offset : 0,
                 $limit >= 0 ? $limit : null
             );

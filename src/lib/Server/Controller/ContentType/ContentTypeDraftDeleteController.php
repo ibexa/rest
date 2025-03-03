@@ -56,12 +56,8 @@ class ContentTypeDraftDeleteController extends RestController
 
     /**
      * The given content type draft is deleted.
-     *
-     * @param $contentTypeId
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteContentTypeDraft($contentTypeId)
+    public function deleteContentTypeDraft(int $contentTypeId): Values\NoContent
     {
         $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
         $this->contentTypeService->deleteContentType($contentTypeDraft);

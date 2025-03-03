@@ -11,7 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\FieldDefinitionList;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -74,18 +74,14 @@ class ContentTypeDraftFieldDefinitionListController extends RestController
 
     /**
      * Loads field definitions for a given content type draft.
-     *
-     * @param $contentTypeId
-     *
-     * @return \Ibexa\Rest\Server\Values\FieldDefinitionList
      */
-    public function loadContentTypeDraftFieldDefinitionList($contentTypeId)
+    public function loadContentTypeDraftFieldDefinitionList(int $contentTypeId): FieldDefinitionList
     {
         $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
 
-        return new Values\FieldDefinitionList(
+        return new FieldDefinitionList(
             $contentTypeDraft,
-            $contentTypeDraft->getFieldDefinitions()
+            $contentTypeDraft->getFieldDefinitions()->toArray(),
         );
     }
 }

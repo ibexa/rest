@@ -91,28 +91,24 @@ class ContentTypeLinkToGroupController extends RestController
     /**
      * Links a content type group to the content type and returns the updated group list.
      *
-     * @param mixed $contentTypeId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
-     *
-     * @return \Ibexa\Rest\Server\Values\ContentTypeGroupRefList
      */
-    public function linkContentTypeToGroup($contentTypeId, Request $request)
+    public function linkContentTypeToGroup(int $contentTypeId, Request $request): \Ibexa\Rest\Server\Values\ContentTypeGroupRefList
     {
         $contentType = $this->contentTypeService->loadContentType($contentTypeId);
 
         try {
-            $contentTypeGroupId = $this->requestParser->parseHref(
-                $request->query->get('group'),
-                'contentTypeGroupId'
+            $contentTypeGroupId = $this->uriParser->getAttributeFromUri(
+                $request->query->getString('group'),
+                'contentTypeGroupId',
             );
         } catch (Exceptions\InvalidArgumentException $e) {
             // Group URI does not match the required value
             throw new BadRequestException($e->getMessage());
         }
 
-        $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId);
+        $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup((int)$contentTypeGroupId);
 
         $existingContentTypeGroups = $contentType->getContentTypeGroups();
         $contentTypeInGroup = false;

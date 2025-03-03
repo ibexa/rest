@@ -44,12 +44,8 @@ class RolePolicyDeleteAllFromRoleController extends RoleBaseController
 {
     /**
      * Deletes all policies from a role.
-     *
-     * @param $roleId
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deletePolicies($roleId)
+    public function deletePolicies(int $roleId): \Ibexa\Rest\Server\Values\NoContent
     {
         $loadedRole = $this->roleService->loadRole($roleId);
         $roleDraft = $this->roleService->createRoleDraft($loadedRole);

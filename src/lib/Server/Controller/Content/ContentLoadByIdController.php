@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
@@ -90,17 +91,19 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class ContentLoadByIdController extends RestController
 {
+    public function __construct(
+        private readonly ContentService\RelationListFacadeInterface $relationListFacade
+    ) {
+    }
+
     /**
      * Loads a content info, potentially with the current version embedded.
-     *
-     * @param mixed $contentId
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Ibexa\Rest\Server\Values\RestContent
      */
-    public function loadContent($contentId, Request $request)
+    public function loadContent(int $contentId, Request $request): Values\CachedValue|Values\RestContent
     {
-        $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
+        $contentService = $this->repository->getContentService();
+
+        $contentInfo = $contentService->loadContentInfo($contentId);
 
         $mainLocation = null;
         if (!empty($contentInfo->mainLocationId)) {
@@ -114,11 +117,11 @@ class ContentLoadByIdController extends RestController
         if ($this->getMediaType($request) === 'application/vnd.ibexa.api.content') {
             $languages = Language::ALL;
             if ($request->query->has('languages')) {
-                $languages = explode(',', $request->query->get('languages'));
+                $languages = explode(',', $request->query->getString('languages'));
             }
 
-            $contentVersion = $this->repository->getContentService()->loadContent($contentId, $languages);
-            $relations = $this->repository->getContentService()->loadRelations($contentVersion->getVersionInfo());
+            $contentVersion = $contentService->loadContent($contentId, $languages);
+            $relations = iterator_to_array($this->relationListFacade->getRelations($contentVersion->getVersionInfo()));
         }
 
         $restContent = new Values\RestContent(

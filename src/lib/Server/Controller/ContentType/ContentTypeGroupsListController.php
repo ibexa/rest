@@ -76,14 +76,12 @@ class ContentTypeGroupsListController extends RestController
 
     /**
      * Returns a list of all content type groups.
-     *
-     * @return \Ibexa\Rest\Server\Values\ContentTypeGroupList
      */
-    public function loadContentTypeGroupList(Request $request)
+    public function loadContentTypeGroupList(Request $request): Values\TemporaryRedirect|\Ibexa\Rest\Server\Values\ContentTypeGroupList
     {
         if ($request->query->has('identifier')) {
             $contentTypeGroup = $this->contentTypeService->loadContentTypeGroupByIdentifier(
-                $request->query->get('identifier')
+                $request->query->getString('identifier'),
             );
 
             return new Values\TemporaryRedirect(
@@ -96,8 +94,14 @@ class ContentTypeGroupsListController extends RestController
             );
         }
 
+        $contentTypeGroupsIterable = $this->contentTypeService->loadContentTypeGroups(Language::ALL);
+        $contentTypeGroups = [];
+        foreach ($contentTypeGroupsIterable as $contentTypeGroup) {
+            $contentTypeGroups[] = $contentTypeGroup;
+        }
+
         return new Values\ContentTypeGroupList(
-            $this->contentTypeService->loadContentTypeGroups(Language::ALL)
+            $contentTypeGroups,
         );
     }
 }

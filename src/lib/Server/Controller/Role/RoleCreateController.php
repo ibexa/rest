@@ -107,7 +107,7 @@ class RoleCreateController extends RoleBaseController
     {
         $publish = (
             !$request->query->has('publish') ||
-            ($request->query->has('publish') && $request->query->get('publish') === 'true')
+            ($request->query->get('publish') === 'true')
         );
 
         try {

@@ -12,7 +12,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\FieldDefinitionList;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -76,17 +76,13 @@ class ContentTypeFieldDefinitionListController extends RestController
     /**
      * Loads field definitions for a given content type.
      *
-     * @param $contentTypeId
-     *
-     * @return \Ibexa\Rest\Server\Values\FieldDefinitionList
-     *
      * @todo Check why this isn't in the specs
      */
-    public function loadContentTypeFieldDefinitionList($contentTypeId)
+    public function loadContentTypeFieldDefinitionList(int $contentTypeId): FieldDefinitionList
     {
         $contentType = $this->contentTypeService->loadContentType($contentTypeId, Language::ALL);
 
-        return new Values\FieldDefinitionList(
+        return new FieldDefinitionList(
             $contentType,
             $contentType->getFieldDefinitions()->toArray()
         );

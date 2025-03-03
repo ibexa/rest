@@ -74,16 +74,11 @@ class RoleUnassignFromUserGroupController extends RoleBaseController
 {
     /**
      * Un-assigns role from user group.
-     *
-     * @param $groupPath
-     * @param $roleId
-     *
-     * @return \Ibexa\Rest\Server\Values\RoleAssignmentList
      */
-    public function unassignRoleFromUserGroup($groupPath, $roleId)
+    public function unassignRoleFromUserGroup(string $groupPath, int $roleId): Values\RoleAssignmentList
     {
         $groupLocationParts = explode('/', $groupPath);
-        $groupLocation = $this->locationService->loadLocation(array_pop($groupLocationParts));
+        $groupLocation = $this->locationService->loadLocation((int)array_pop($groupLocationParts));
         $userGroup = $this->userService->loadUserGroup($groupLocation->contentId);
 
         $roleAssignments = $this->roleService->getRoleAssignmentsForUserGroup($userGroup);
@@ -92,7 +87,11 @@ class RoleUnassignFromUserGroupController extends RoleBaseController
                 $this->roleService->removeRoleAssignment($roleAssignment);
             }
         }
-        $roleAssignments = $this->roleService->getRoleAssignmentsForUserGroup($userGroup);
+        $roleAssignmentsIterable = $this->roleService->getRoleAssignmentsForUserGroup($userGroup);
+        $roleAssignments = [];
+        foreach ($roleAssignmentsIterable as $roleAssignment) {
+            $roleAssignments[] = $roleAssignment;
+        }
 
         return new Values\RoleAssignmentList($roleAssignments, $groupPath, true);
     }

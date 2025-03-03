@@ -117,13 +117,9 @@ class ContentTypeDraftCreateController extends RestController
     /**
      * Creates a draft and updates it with the given data.
      *
-     * @param $contentTypeId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedContentType
      */
-    public function createContentTypeDraft($contentTypeId, Request $request)
+    public function createContentTypeDraft(int $contentTypeId, Request $request): Values\CreatedContentType
     {
         $contentType = $this->contentTypeService->loadContentType($contentTypeId);
 

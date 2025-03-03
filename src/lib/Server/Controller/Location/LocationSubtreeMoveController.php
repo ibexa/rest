@@ -19,24 +19,19 @@ class LocationSubtreeMoveController extends LocationBaseController
     /**
      * Moves a subtree to a new location.
      *
-     * @param string $locationPath
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException if the Destination header cannot be parsed as location or trash
-     *
-     * @return \Ibexa\Rest\Server\Values\ResourceCreated|\Ibexa\Rest\Server\Values\NoContent
      */
-    public function moveSubtree($locationPath, Request $request)
+    public function moveSubtree(string $locationPath, Request $request): \Ibexa\Rest\Server\Values\ResourceCreated|\Ibexa\Rest\Server\Values\NoContent
     {
         $locationToMove = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($locationPath)
         );
 
-        $destinationLocationId = null;
-        $destinationHref = $request->headers->get('Destination');
+        $destinationHref = (string)$request->headers->get('Destination');
         try {
             // First check to see if the destination is for moving within another subtree
             $destinationLocationId = $this->extractLocationIdFromPath(
-                $this->requestParser->parseHref($destinationHref, 'locationPath')
+                $this->uriParser->getAttributeFromUri($destinationHref, 'locationPath')
             );
 
             // We're moving the subtree
@@ -57,7 +52,7 @@ class LocationSubtreeMoveController extends LocationBaseController
         } catch (Exceptions\InvalidArgumentException $e) {
             // If parsing of destination fails, let's try to see if destination is trash
             try {
-                $route = $this->requestParser->parse($destinationHref);
+                $route = $this->uriParser->matchUri($destinationHref);
                 if (!isset($route['_route']) || $route['_route'] !== 'ibexa.rest.load_trash_items') {
                     throw new Exceptions\InvalidArgumentException('');
                 }

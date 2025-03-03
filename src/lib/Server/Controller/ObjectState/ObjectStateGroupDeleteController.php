@@ -60,12 +60,8 @@ class ObjectStateGroupDeleteController extends RestController
 
     /**
      * The given object state group including the object states is deleted.
-     *
-     * @param $objectStateGroupId
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteObjectStateGroup($objectStateGroupId)
+    public function deleteObjectStateGroup(int $objectStateGroupId): \Ibexa\Rest\Server\Values\NoContent
     {
         $this->objectStateService->deleteObjectStateGroup(
             $this->objectStateService->loadObjectStateGroup($objectStateGroupId)

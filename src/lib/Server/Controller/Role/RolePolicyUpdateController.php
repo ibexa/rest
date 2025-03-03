@@ -12,6 +12,7 @@ use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions\LimitationValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Values\User\PolicyDraft;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
@@ -116,14 +117,9 @@ class RolePolicyUpdateController extends RoleBaseController
     /**
      * Updates a policy.
      *
-     * @param int $roleId ID of a role draft
-     * @param int $policyId ID of a policy
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\Policy
      */
-    public function updatePolicy($roleId, $policyId, Request $request)
+    public function updatePolicy(int $roleId, int $policyId, Request $request): \Ibexa\Contracts\Core\Repository\Values\User\Policy
     {
         $updateStruct = $this->inputDispatcher->parse(
             new Message(
@@ -135,6 +131,8 @@ class RolePolicyUpdateController extends RoleBaseController
             // First try to treat $roleId as a role draft ID.
             $roleDraft = $this->roleService->loadRoleDraft($roleId);
             foreach ($roleDraft->getPolicies() as $policy) {
+                assert($policy instanceof PolicyDraft);
+
                 if ($policy->id == $policyId) {
                     try {
                         return $this->roleService->updatePolicyByRoleDraft(
@@ -153,6 +151,8 @@ class RolePolicyUpdateController extends RoleBaseController
                 $this->roleService->loadRole($roleId)
             );
             foreach ($roleDraft->getPolicies() as $policy) {
+                assert($policy instanceof PolicyDraft);
+
                 if ($policy->originalId == $policyId) {
                     try {
                         $policyDraft = $this->roleService->updatePolicyByRoleDraft(

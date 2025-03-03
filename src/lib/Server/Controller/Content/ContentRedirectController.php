@@ -54,7 +54,7 @@ class ContentRedirectController extends RestController
         }
 
         $contentInfo = $this->repository->getContentService()->loadContentInfoByRemoteId(
-            $request->query->get('remoteId')
+            $request->query->getString('remoteId')
         );
 
         return new Values\TemporaryRedirect(

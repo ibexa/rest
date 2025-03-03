@@ -7,10 +7,10 @@
 
 namespace Ibexa\Rest\Server\Controller\Content;
 
-use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException;
 use Ibexa\Rest\Message;
@@ -18,7 +18,7 @@ use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Exceptions\ContentFieldValidationException as RESTContentFieldValidationException;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\Version;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -128,18 +128,18 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class ContentVersionUpdateController extends RestController
 {
+    public function __construct(
+        private readonly ContentService\RelationListFacadeInterface $relationListFacade
+    ) {
+    }
+
     /**
      * A specific draft is updated.
      *
-     * @param mixed $contentId
-     * @param mixed $versionNumber
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
-     *
-     * @return \Ibexa\Rest\Server\Values\Version
      */
-    public function updateVersion($contentId, $versionNumber, Request $request)
+    public function updateVersion(int $contentId, int $versionNumber, Request $request): Version
     {
         $contentUpdateStruct = $this->inputDispatcher->parse(
             new Message(
@@ -153,7 +153,7 @@ class ContentVersionUpdateController extends RestController
                         ]
                     ),
                 ],
-                $request->getContent()
+                $request->getContent(),
             )
         );
 
@@ -176,7 +176,7 @@ class ContentVersionUpdateController extends RestController
 
         $languages = null;
         if ($request->query->has('languages')) {
-            $languages = explode(',', $request->query->get('languages'));
+            $languages = explode(',', $request->query->getString('languages'));
         }
 
         // Reload the content to handle languages GET parameter
@@ -189,11 +189,11 @@ class ContentVersionUpdateController extends RestController
             $content->getVersionInfo()->getContentInfo()->contentTypeId
         );
 
-        return new Values\Version(
+        return new Version(
             $content,
             $contentType,
-            $this->repository->getContentService()->loadRelations($content->getVersionInfo()),
-            $request->getPathInfo()
+            iterator_to_array($this->relationListFacade->getRelations($content->getVersionInfo())),
+            $request->getPathInfo(),
         );
     }
 }

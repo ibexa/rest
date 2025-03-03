@@ -100,12 +100,8 @@ class RoleAssignToUserGroupController extends RoleBaseController
 {
     /**
      * Assigns role to user group.
-     *
-     * @param $groupPath
-     *
-     * @return \Ibexa\Rest\Server\Values\RoleAssignmentList
      */
-    public function assignRoleToUserGroup($groupPath, Request $request)
+    public function assignRoleToUserGroup(string $groupPath, Request $request): \Ibexa\Rest\Server\Values\RoleAssignmentList
     {
         $roleAssignment = $this->inputDispatcher->parse(
             new Message(
@@ -115,7 +111,7 @@ class RoleAssignToUserGroupController extends RoleBaseController
         );
 
         $groupLocationParts = explode('/', $groupPath);
-        $groupLocation = $this->locationService->loadLocation(array_pop($groupLocationParts));
+        $groupLocation = $this->locationService->loadLocation((int)array_pop($groupLocationParts));
         $userGroup = $this->userService->loadUserGroup($groupLocation->contentId);
 
         $role = $this->roleService->loadRole($roleAssignment->roleId);
@@ -126,7 +122,11 @@ class RoleAssignToUserGroupController extends RoleBaseController
             throw new BadRequestException($e->getMessage());
         }
 
-        $roleAssignments = $this->roleService->getRoleAssignmentsForUserGroup($userGroup);
+        $roleAssignmentsIterable = $this->roleService->getRoleAssignmentsForUserGroup($userGroup);
+        $roleAssignments = [];
+        foreach ($roleAssignmentsIterable as $roleAssignment) {
+            $roleAssignments[] = $roleAssignment;
+        }
 
         return new Values\RoleAssignmentList($roleAssignments, $groupPath, true);
     }

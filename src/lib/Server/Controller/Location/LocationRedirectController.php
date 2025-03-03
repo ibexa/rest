@@ -64,17 +64,15 @@ class LocationRedirectController extends LocationBaseController
      * Loads the location for a given ID (x)or remote ID.
      *
      * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
-     *
-     * @return \Ibexa\Rest\Server\Values\TemporaryRedirect
      */
-    public function redirectLocation(Request $request)
+    public function redirectLocation(Request $request): \Ibexa\Rest\Server\Values\TemporaryRedirect
     {
         if ($request->query->has('id')) {
-            $location = $this->locationService->loadLocation($request->query->get('id'));
+            $location = $this->locationService->loadLocation($request->query->getInt('id'));
         } elseif ($request->query->has('remoteId')) {
-            $location = $this->locationService->loadLocationByRemoteId($request->query->get('remoteId'));
+            $location = $this->locationService->loadLocationByRemoteId($request->query->getString('remoteId'));
         } elseif ($request->query->has('urlAlias')) {
-            $urlAlias = $this->urlAliasService->lookup($request->query->get('urlAlias'));
+            $urlAlias = $this->urlAliasService->lookup($request->query->getString('urlAlias'));
             $location = $this->locationService->loadLocation($urlAlias->destination);
         } else {
             throw new BadRequestException("At least one of 'id', 'remoteId' or 'urlAlias' parameters is required.");

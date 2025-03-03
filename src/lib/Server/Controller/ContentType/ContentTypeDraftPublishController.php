@@ -10,8 +10,7 @@ namespace Ibexa\Rest\Server\Controller\ContentType;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RestContentType;
 
 class ContentTypeDraftPublishController extends RestController
 {
@@ -25,26 +24,17 @@ class ContentTypeDraftPublishController extends RestController
     /**
      * Publishes a content type draft.
      *
-     * @param $contentTypeId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
-     * @return \Ibexa\Rest\Server\Values\RestContentType
      */
-    public function publishContentTypeDraft($contentTypeId)
+    public function publishContentTypeDraft(int $contentTypeId): RestContentType
     {
         $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
-
-        $fieldDefinitions = $contentTypeDraft->getFieldDefinitions();
-        if (empty($fieldDefinitions)) {
-            throw new ForbiddenException('Cannot publish an empty content type draft');
-        }
 
         $this->contentTypeService->publishContentTypeDraft($contentTypeDraft);
 
         $publishedContentType = $this->contentTypeService->loadContentType($contentTypeDraft->id, Language::ALL);
 
-        return new Values\RestContentType(
+        return new RestContentType(
             $publishedContentType,
             $publishedContentType->getFieldDefinitions()->toArray()
         );

@@ -9,11 +9,12 @@ namespace Ibexa\Rest\Server\Controller\Content;
 
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\NoContent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -69,26 +70,29 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class ContentVersionRelationDeleteController extends RestController
 {
+    public function __construct(
+        private readonly ContentService\RelationListFacadeInterface $relationListFacade
+    ) {
+    }
+
     /**
      * Deletes a relation of the given draft.
      *
-     * @param mixed $contentId
-     * @param int   $versionNumber
-     * @param mixed $relationId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function removeRelation($contentId, $versionNumber, $relationId, Request $request)
+    public function removeRelation(int $contentId, int $versionNumber, int $relationId, Request $request): NoContent
     {
-        $versionInfo = $this->repository->getContentService()->loadVersionInfo(
-            $this->repository->getContentService()->loadContentInfo($contentId),
-            $versionNumber
+        $contentService = $this->repository->getContentService();
+        $versionInfo = $contentService->loadVersionInfo(
+            $contentService->loadContentInfo($contentId),
+            $versionNumber,
         );
 
-        $versionRelations = $this->repository->getContentService()->loadRelations($versionInfo);
+        $versionRelations = iterator_to_array($this->relationListFacade->getRelations(
+            $versionInfo,
+        ));
+
         foreach ($versionRelations as $relation) {
             if ($relation->id == $relationId) {
                 if ($relation->type !== Relation::COMMON) {
@@ -101,7 +105,7 @@ class ContentVersionRelationDeleteController extends RestController
 
                 $this->repository->getContentService()->deleteRelation($versionInfo, $relation->getDestinationContentInfo());
 
-                return new Values\NoContent();
+                return new NoContent();
             }
         }
 

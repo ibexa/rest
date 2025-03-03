@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Request;
@@ -77,23 +78,25 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class ContentVersionsRelationsListController extends RestController
 {
+    public function __construct(
+        private readonly ContentService\RelationListFacadeInterface $relationListFacade,
+    ) {
+    }
+
     /**
      * Loads the relations of the given version.
-     *
-     * @param mixed $contentId
-     * @param mixed $versionNumber
-     *
-     * @return \Ibexa\Rest\Server\Values\RelationList
      */
-    public function loadVersionRelations($contentId, $versionNumber, Request $request)
+    public function loadVersionRelations(int $contentId, int $versionNumber, Request $request): Values\CachedValue|Values\RelationList
     {
         $offset = $request->query->has('offset') ? (int)$request->query->get('offset') : 0;
         $limit = $request->query->has('limit') ? (int)$request->query->get('limit') : -1;
 
-        $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
-        $relationList = $this->repository->getContentService()->loadRelations(
-            $this->repository->getContentService()->loadVersionInfo($contentInfo, $versionNumber)
-        );
+        $contentService = $this->repository->getContentService();
+
+        $contentInfo = $contentService->loadContentInfo($contentId);
+
+        $versionInfo = $contentService->loadVersionInfo($contentInfo, $versionNumber);
+        $relationList = iterator_to_array($this->relationListFacade->getRelations($versionInfo));
 
         $relationList = array_slice(
             $relationList,
@@ -105,7 +108,7 @@ class ContentVersionsRelationsListController extends RestController
             $relationList,
             $contentId,
             $versionNumber,
-            $request->getPathInfo()
+            $request->getPathInfo(),
         );
 
         if ($contentInfo->mainLocationId === null) {

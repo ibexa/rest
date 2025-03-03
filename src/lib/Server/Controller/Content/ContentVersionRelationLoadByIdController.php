@@ -9,7 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
-use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
+use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
@@ -88,23 +88,28 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class ContentVersionRelationLoadByIdController extends RestController
 {
+    public function __construct(
+        private readonly ContentService\RelationListFacadeInterface $relationListFacade
+    ) {
+    }
+
     /**
      * Loads a relation for the given content object and version.
      *
-     * @param mixed $contentId
-     * @param int $versionNumber
-     * @param mixed $relationId
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Rest\Server\Values\RestRelation
      */
-    public function loadVersionRelation($contentId, $versionNumber, $relationId, Request $request)
-    {
-        $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
-        $relationList = $this->repository->getContentService()->loadRelations(
-            $this->repository->getContentService()->loadVersionInfo($contentInfo, $versionNumber)
-        );
+    public function loadVersionRelation(
+        int $contentId,
+        int $versionNumber,
+        int $relationId,
+        Request $request
+    ): Values\CachedValue|Values\RestRelation {
+        $contentService = $this->repository->getContentService();
+        $contentInfo = $contentService->loadContentInfo($contentId);
+
+        $relationList = iterator_to_array($this->relationListFacade->getRelations(
+            $contentService->loadVersionInfo($contentInfo, $versionNumber),
+        ));
 
         foreach ($relationList as $relation) {
             if ($relation->id == $relationId) {

@@ -16,25 +16,21 @@ class ContentCopyController extends RestController
 {
     /**
      * Creates a new content object as copy under the given parent location given in the destination header.
-     *
-     * @param mixed $contentId
-     *
-     * @return \Ibexa\Rest\Server\Values\ResourceCreated
      */
-    public function copyContent($contentId, Request $request)
+    public function copyContent(int $contentId, Request $request): Values\ResourceCreated
     {
-        $destination = $request->headers->get('Destination');
+        $destination = (string)$request->headers->get('Destination');
 
         $parentLocationParts = explode('/', $destination);
         $copiedContent = $this->repository->getContentService()->copyContent(
             $this->repository->getContentService()->loadContentInfo($contentId),
-            $this->repository->getLocationService()->newLocationCreateStruct(array_pop($parentLocationParts))
+            $this->repository->getLocationService()->newLocationCreateStruct((int)array_pop($parentLocationParts))
         );
 
         return new Values\ResourceCreated(
             $this->router->generate(
                 'ibexa.rest.load_content',
-                ['contentId' => $copiedContent->id]
+                ['contentId' => $copiedContent->id],
             )
         );
     }

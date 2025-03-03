@@ -14,6 +14,7 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
+use LogicException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -116,12 +117,8 @@ class ContentMetadataUpdateController extends RestController
 {
     /**
      * Updates a content's metadata.
-     *
-     * @param mixed $contentId
-     *
-     * @return \Ibexa\Rest\Server\Values\RestContent
      */
-    public function updateContentMetadata($contentId, Request $request)
+    public function updateContentMetadata(int $contentId, Request $request): Values\RestContent
     {
         $updateStruct = $this->inputDispatcher->parse(
             new Message(
@@ -150,6 +147,10 @@ class ContentMetadataUpdateController extends RestController
                 $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
                 break;
             }
+        }
+
+        if ($contentInfo->mainLocationId === null) {
+            throw new LogicException();
         }
 
         try {

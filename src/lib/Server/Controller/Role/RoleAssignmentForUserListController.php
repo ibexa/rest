@@ -66,16 +66,16 @@ class RoleAssignmentForUserListController extends RoleBaseController
 {
     /**
      * Loads role assignments for user.
-     *
-     * @param $userId
-     *
-     * @return \Ibexa\Rest\Server\Values\RoleAssignmentList
      */
-    public function loadRoleAssignmentsForUser($userId)
+    public function loadRoleAssignmentsForUser(int $userId): \Ibexa\Rest\Server\Values\RoleAssignmentList
     {
         $user = $this->userService->loadUser($userId);
 
-        $roleAssignments = $this->roleService->getRoleAssignmentsForUser($user);
+        $roleAssignmentsIterable = $this->roleService->getRoleAssignmentsForUser($user);
+        $roleAssignments = [];
+        foreach ($roleAssignmentsIterable as $roleAssignment) {
+            $roleAssignments[] = $roleAssignment;
+        }
 
         return new Values\RoleAssignmentList($roleAssignments, $user->id);
     }

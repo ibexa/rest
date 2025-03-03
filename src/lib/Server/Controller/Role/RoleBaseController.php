@@ -38,14 +38,14 @@ class RoleBaseController extends RestController
      *
      * This is needed because the RoleService addPolicy() and addPolicyByRoleDraft() methods return the role,
      * not the policy.
-     *
-     * @param $role \Ibexa\Contracts\Core\Repository\Values\User\Role
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\Policy
      */
-    protected function getLastAddedPolicy($role)
+    protected function getLastAddedPolicy(\Ibexa\Contracts\Core\Repository\Values\User\Role $role): \Ibexa\Contracts\Core\Repository\Values\User\Policy
     {
-        $policies = $role->getPolicies();
+        $policiesIterable = $role->getPolicies();
+        $policies = [];
+        foreach ($policiesIterable as $policy) {
+            $policies[] = $policy;
+        }
 
         $policyToReturn = $policies[0];
         for ($i = 1, $count = count($policies); $i < $count; ++$i) {

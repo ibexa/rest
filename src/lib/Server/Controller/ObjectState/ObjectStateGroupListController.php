@@ -87,8 +87,14 @@ class ObjectStateGroupListController extends RestController
      */
     public function loadObjectStateGroups()
     {
+        $objectStateGroupsIterable = $this->objectStateService->loadObjectStateGroups(0, -1, Language::ALL);
+        $objectStateGroups = [];
+        foreach ($objectStateGroupsIterable as $objectStateGroup) {
+            $objectStateGroups[] = $objectStateGroup;
+        }
+
         return new Values\ObjectStateGroupList(
-            $this->objectStateService->loadObjectStateGroups(0, -1, Language::ALL)
+            $objectStateGroups,
         );
     }
 }

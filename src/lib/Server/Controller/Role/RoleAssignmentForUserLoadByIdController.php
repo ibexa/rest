@@ -78,20 +78,17 @@ class RoleAssignmentForUserLoadByIdController extends RoleBaseController
     /**
      * Returns a role assignment to the given user.
      *
-     * @param $userId
-     * @param $roleId
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Rest\Server\Values\RestUserRoleAssignment
      */
-    public function loadRoleAssignmentForUser($userId, $roleId, Request $request)
+    public function loadRoleAssignmentForUser(int $userId, int $roleId, Request $request): \Ibexa\Rest\Server\Values\RestUserRoleAssignment
     {
         $user = $this->userService->loadUser($userId);
         $roleAssignments = $this->roleService->getRoleAssignmentsForUser($user);
 
         foreach ($roleAssignments as $roleAssignment) {
             if ($roleAssignment->getRole()->id == $roleId) {
+                assert($roleAssignment instanceof \Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment);
+
                 return new Values\RestUserRoleAssignment($roleAssignment, $userId);
             }
         }

@@ -13,7 +13,7 @@ use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RestFieldDefinition;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -91,20 +91,15 @@ class ContentTypeFieldDefinitionLoadByIdController extends RestController
     /**
      * Returns the field definition given by id.
      *
-     * @param $contentTypeId
-     * @param $fieldDefinitionId
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Rest\Server\Values\RestFieldDefinition
      */
-    public function loadContentTypeFieldDefinition($contentTypeId, $fieldDefinitionId, Request $request)
+    public function loadContentTypeFieldDefinition(int $contentTypeId, int $fieldDefinitionId, Request $request): RestFieldDefinition
     {
         $contentType = $this->contentTypeService->loadContentType($contentTypeId, Language::ALL);
 
         foreach ($contentType->getFieldDefinitions() as $fieldDefinition) {
             if ($fieldDefinition->id == $fieldDefinitionId) {
-                return new Values\RestFieldDefinition(
+                return new RestFieldDefinition(
                     $contentType,
                     $fieldDefinition
                 );

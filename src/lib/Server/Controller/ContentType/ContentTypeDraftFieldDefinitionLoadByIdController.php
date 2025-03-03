@@ -12,7 +12,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RestFieldDefinition;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -90,20 +90,18 @@ class ContentTypeDraftFieldDefinitionLoadByIdController extends RestController
     /**
      * Returns the draft field definition given by id.
      *
-     * @param $contentTypeId
-     * @param $fieldDefinitionId
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Rest\Server\Values\RestFieldDefinition
      */
-    public function loadContentTypeDraftFieldDefinition($contentTypeId, $fieldDefinitionId, Request $request)
-    {
+    public function loadContentTypeDraftFieldDefinition(
+        int $contentTypeId,
+        int $fieldDefinitionId,
+        Request $request
+    ): RestFieldDefinition {
         $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
 
         foreach ($contentTypeDraft->getFieldDefinitions() as $fieldDefinition) {
             if ($fieldDefinition->id == $fieldDefinitionId) {
-                return new Values\RestFieldDefinition(
+                return new RestFieldDefinition(
                     $contentTypeDraft,
                     $fieldDefinition
                 );

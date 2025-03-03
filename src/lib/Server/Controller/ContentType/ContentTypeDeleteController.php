@@ -63,13 +63,9 @@ class ContentTypeDeleteController extends RestController
     /**
      * The given content type is deleted.
      *
-     * @param $contentTypeId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteContentType($contentTypeId)
+    public function deleteContentType(int $contentTypeId): Values\NoContent
     {
         $contentType = $this->contentTypeService->loadContentType($contentTypeId);
 

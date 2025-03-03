@@ -78,12 +78,8 @@ class RoleLoadByIdController extends RoleBaseController
 {
     /**
      * Loads role.
-     *
-     * @param $roleId
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\Role
      */
-    public function loadRole($roleId)
+    public function loadRole(int $roleId): \Ibexa\Contracts\Core\Repository\Values\User\Role
     {
         return $this->roleService->loadRole($roleId);
     }

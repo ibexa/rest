@@ -92,15 +92,10 @@ class ContentTypeUnlinkFromGroupController extends RestController
     /**
      * Removes the given group from the content type and returns the updated group list.
      *
-     * @param $contentTypeId
-     * @param $contentTypeGroupId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Rest\Server\Values\ContentTypeGroupRefList
      */
-    public function unlinkContentTypeFromGroup($contentTypeId, $contentTypeGroupId)
+    public function unlinkContentTypeFromGroup(int $contentTypeId, int $contentTypeGroupId): \Ibexa\Rest\Server\Values\ContentTypeGroupRefList
     {
         $contentType = $this->contentTypeService->loadContentType($contentTypeId);
         $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId);

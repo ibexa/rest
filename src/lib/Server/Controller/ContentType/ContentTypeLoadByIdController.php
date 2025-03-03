@@ -89,12 +89,8 @@ class ContentTypeLoadByIdController extends RestController
 
     /**
      * Loads a content type.
-     *
-     * @param $contentTypeId
-     *
-     * @return \Ibexa\Rest\Server\Values\RestContentType
      */
-    public function loadContentType($contentTypeId)
+    public function loadContentType(int $contentTypeId): \Ibexa\Rest\Server\Values\RestContentType
     {
         $contentType = $this->contentTypeService->loadContentType($contentTypeId, Language::ALL);
 

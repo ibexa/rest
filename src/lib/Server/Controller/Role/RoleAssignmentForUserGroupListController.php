@@ -66,18 +66,18 @@ class RoleAssignmentForUserGroupListController extends RoleBaseController
 {
     /**
      * Loads role assignments for user group.
-     *
-     * @param $groupPath
-     *
-     * @return \Ibexa\Rest\Server\Values\RoleAssignmentList
      */
-    public function loadRoleAssignmentsForUserGroup($groupPath)
+    public function loadRoleAssignmentsForUserGroup(string $groupPath): \Ibexa\Rest\Server\Values\RoleAssignmentList
     {
         $groupLocationParts = explode('/', $groupPath);
-        $groupLocation = $this->locationService->loadLocation(array_pop($groupLocationParts));
+        $groupLocation = $this->locationService->loadLocation((int)array_pop($groupLocationParts));
         $userGroup = $this->userService->loadUserGroup($groupLocation->contentId);
 
-        $roleAssignments = $this->roleService->getRoleAssignmentsForUserGroup($userGroup);
+        $roleAssignmentsIterable = $this->roleService->getRoleAssignmentsForUserGroup($userGroup);
+        $roleAssignments = [];
+        foreach ($roleAssignmentsIterable as $roleAssignment) {
+            $roleAssignments[] = $roleAssignment;
+        }
 
         return new Values\RoleAssignmentList($roleAssignments, $groupPath, true);
     }

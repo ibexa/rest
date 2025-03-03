@@ -70,15 +70,16 @@ class RolePolicyListController extends RoleBaseController
 {
     /**
      * Loads the policies for the role.
-     *
-     * @param $roleId
-     *
-     * @return \Ibexa\Rest\Server\Values\PolicyList
      */
-    public function loadPolicies($roleId, Request $request)
+    public function loadPolicies(int $roleId, Request $request): \Ibexa\Rest\Server\Values\PolicyList
     {
         $loadedRole = $this->roleService->loadRole($roleId);
+        $policiesIterable = $loadedRole->getPolicies();
+        $policies = [];
+        foreach ($policiesIterable as $policy) {
+            $policies[] = $policy;
+        }
 
-        return new Values\PolicyList($loadedRole->getPolicies(), $request->getPathInfo());
+        return new Values\PolicyList($policies, $request->getPathInfo());
     }
 }

@@ -70,7 +70,12 @@ class RolePoliciesForUserListController extends RoleBaseController
 
         $policies = [];
         foreach ($roleAssignments as $roleAssignment) {
-            $policies[] = $roleAssignment->getRole()->getPolicies();
+            $policiesIterable = $roleAssignment->getRole()->getPolicies();
+            $policiesArray = [];
+            foreach ($policiesIterable as $policy) {
+                $policiesArray[] = $policy;
+            }
+            $policies[] = $policiesArray;
         }
 
         return new Values\PolicyList(

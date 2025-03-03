@@ -11,7 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RestContentType;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -79,16 +79,12 @@ class ContentTypeDraftLoadController extends RestController
 
     /**
      * Loads a content type draft.
-     *
-     * @param $contentTypeId
-     *
-     * @return \Ibexa\Rest\Server\Values\RestContentType
      */
-    public function loadContentTypeDraft($contentTypeId)
+    public function loadContentTypeDraft(int $contentTypeId): RestContentType
     {
         $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
 
-        return new Values\RestContentType(
+        return new RestContentType(
             $contentTypeDraft,
             $contentTypeDraft->getFieldDefinitions()->toArray()
         );

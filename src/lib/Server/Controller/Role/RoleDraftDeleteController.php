@@ -46,12 +46,8 @@ class RoleDraftDeleteController extends RoleBaseController
      * Delete a role draft by ID.
      *
      * @since 6.2
-     *
-     * @param $roleId
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteRoleDraft($roleId)
+    public function deleteRoleDraft(int $roleId): \Ibexa\Rest\Server\Values\NoContent
     {
         $this->roleService->deleteRoleDraft(
             $this->roleService->loadRoleDraft($roleId)

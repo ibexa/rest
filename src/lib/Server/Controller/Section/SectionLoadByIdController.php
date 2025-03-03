@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Section;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\SectionService;
+use Ibexa\Contracts\Core\Repository\Values\Content\Section;
 use Ibexa\Rest\Server\Controller as RestController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -86,12 +87,8 @@ class SectionLoadByIdController extends RestController
 
     /**
      * Loads a section.
-     *
-     * @param $sectionId
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Section
      */
-    public function loadSection($sectionId)
+    public function loadSection(int $sectionId): Section
     {
         return $this->sectionService->loadSection($sectionId);
     }

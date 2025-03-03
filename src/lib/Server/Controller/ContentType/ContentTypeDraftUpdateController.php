@@ -17,6 +17,7 @@ use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RestContentType;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -117,15 +118,11 @@ class ContentTypeDraftUpdateController extends RestController
     }
 
     /**
-     * Updates meta data of a draft. This method does not handle field definitions.
-     *
-     * @param $contentTypeId
+     * Updates metadata of a draft. This method does not handle field definitions.
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
-     * @return \Ibexa\Rest\Server\Values\RestContentType
      */
-    public function updateContentTypeDraft($contentTypeId, Request $request)
+    public function updateContentTypeDraft(int $contentTypeId, Request $request): RestContentType
     {
         $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
         $contentTypeUpdateStruct = $this->inputDispatcher->parse(
@@ -146,10 +143,10 @@ class ContentTypeDraftUpdateController extends RestController
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
-        return new Values\RestContentType(
+        return new RestContentType(
             // Reload the content type draft to get the updated values
             $this->contentTypeService->loadContentTypeDraft(
-                $contentTypeDraft->id
+                $contentTypeDraft->id,
             )
         );
     }

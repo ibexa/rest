@@ -12,7 +12,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\NoContent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -67,15 +67,13 @@ class ContentTypeDraftFieldDefinitionDeleteController extends RestController
     /**
      * Deletes a field definition from a content type draft.
      *
-     * @param $contentTypeId
-     * @param $fieldDefinitionId
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function removeContentTypeDraftFieldDefinition($contentTypeId, $fieldDefinitionId, Request $request)
-    {
+    public function removeContentTypeDraftFieldDefinition(
+        int $contentTypeId,
+        int $fieldDefinitionId,
+        Request $request,
+    ): NoContent {
         $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
 
         $fieldDefinition = null;
@@ -94,6 +92,6 @@ class ContentTypeDraftFieldDefinitionDeleteController extends RestController
             $fieldDefinition
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 }

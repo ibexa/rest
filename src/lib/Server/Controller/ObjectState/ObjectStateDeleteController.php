@@ -68,12 +68,8 @@ class ObjectStateDeleteController extends RestController
 
     /**
      * The given object state is deleted.
-     *
-     * @param $objectStateId
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteObjectState($objectStateId)
+    public function deleteObjectState(int $objectStateId): \Ibexa\Rest\Server\Values\NoContent
     {
         $this->objectStateService->deleteObjectState(
             $this->objectStateService->loadObjectState($objectStateId)

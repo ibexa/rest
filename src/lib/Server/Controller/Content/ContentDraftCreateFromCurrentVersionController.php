@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
@@ -78,6 +79,11 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class ContentDraftCreateFromCurrentVersionController extends RestController
 {
+    public function __construct(
+        private readonly ContentService\RelationListFacadeInterface $relationListFacade
+    ) {
+    }
+
     /**
      * The system creates a new draft version as a copy from the current version.
      *
@@ -106,7 +112,7 @@ class ContentDraftCreateFromCurrentVersionController extends RestController
                 'version' => new Values\Version(
                     $contentDraft,
                     $contentType,
-                    $this->repository->getContentService()->loadRelations($contentDraft->getVersionInfo())
+                    iterator_to_array($this->relationListFacade->getRelations($contentDraft->getVersionInfo())),
                 ),
             ]
         );

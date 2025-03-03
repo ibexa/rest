@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup;
 use Ibexa\Rest\Server\Controller as RestController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -88,12 +89,8 @@ class ContentTypeGroupLoadByIdController extends RestController
 
     /**
      * Returns the content type group given by id.
-     *
-     * @param $contentTypeGroupId
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup
      */
-    public function loadContentTypeGroup($contentTypeGroupId)
+    public function loadContentTypeGroup(int $contentTypeGroupId): ContentTypeGroup
     {
         return $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId, Language::ALL);
     }

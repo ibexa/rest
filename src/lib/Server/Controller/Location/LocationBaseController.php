@@ -41,16 +41,14 @@ class LocationBaseController extends RestController
      * Loads a location by remote ID.
      *
      * @todo remove, or use in loadLocation with filter
-     *
-     * @return \Ibexa\Rest\Server\Values\LocationList
      */
-    public function loadLocationByRemoteId(Request $request)
+    public function loadLocationByRemoteId(Request $request): \Ibexa\Rest\Server\Values\LocationList
     {
         return new Values\LocationList(
             [
                 new Values\RestLocation(
                     $location = $this->locationService->loadLocationByRemoteId(
-                        $request->query->get('remoteId')
+                        $request->query->getString('remoteId')
                     ),
                     $this->locationService->getLocationChildCount($location)
                 ),

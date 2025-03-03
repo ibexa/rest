@@ -9,10 +9,12 @@ namespace Ibexa\Rest\Server\Controller\Content;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\Version;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -91,19 +93,22 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class ContentInVersionLoadController extends RestController
 {
+    public function __construct(
+        private readonly ContentService\RelationListFacadeInterface $relationListFacade
+    ) {
+    }
+
     /**
      * Loads a specific version of a given content object.
-     *
-     * @param mixed $contentId
-     * @param int $versionNumber
-     *
-     * @return \Ibexa\Rest\Server\Values\Version
      */
-    public function loadContentInVersion($contentId, $versionNumber, Request $request)
-    {
+    public function loadContentInVersion(
+        int $contentId,
+        int $versionNumber,
+        Request $request
+    ): Version|Values\CachedValue {
         $languages = Language::ALL;
         if ($request->query->has('languages')) {
-            $languages = explode(',', $request->query->get('languages'));
+            $languages = explode(',', $request->query->getString('languages'));
         }
 
         $content = $this->repository->getContentService()->loadContent(
@@ -115,10 +120,10 @@ class ContentInVersionLoadController extends RestController
             $content->getVersionInfo()->getContentInfo()->contentTypeId
         );
 
-        $versionValue = new Values\Version(
+        $versionValue = new Version(
             $content,
             $contentType,
-            $this->repository->getContentService()->loadRelations($content->getVersionInfo()),
+            iterator_to_array($this->relationListFacade->getRelations($content->getVersionInfo())),
             $request->getPathInfo()
         );
 
