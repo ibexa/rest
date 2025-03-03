@@ -45,7 +45,6 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
-        $loader->load('api_platform.yml');
         $loader->load('value_object_visitors.yml');
         $loader->load('input_parsers.yml');
         $loader->load('security.yml');
@@ -94,6 +93,13 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
 
     private function prependApiPlatformConfiguration(ContainerBuilder $container): void
     {
+        if (!$container->hasExtension('api_platform')) {
+            return;
+        }
+
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('api_platform.yml');
+
         $config = [
             'title' => 'Ibexa API',
             'version' => '1.0.0',

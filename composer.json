@@ -28,7 +28,7 @@
         "ext-libxml": "*",
         "ext-simplexml": "*",
         "ext-xmlwriter": "*",
-        "api-platform/core": "^4.0",
+        "api-platform/core": "~4.1.0",
         "hautelook/templated-uri-bundle": "^3.4",
         "ibexa/core": "~5.0.x-dev",
         "ibexa/polyfill-php82": "^1.0",
