@@ -160,7 +160,7 @@ final class UriParserTest extends IbexaKernelTestCase
             'PATCH',
             [
                 '_route' => 'ibexa.rest.update_object_state',
-                '_controller' => 'Ibexa\Rest\Server\Controller\ObjectState::updateObjectState',
+                '_controller' => 'Ibexa\Rest\Server\Controller\ObjectStateUpdateController::updateObjectState',
                 'objectStateGroupId' => '123',
                 'objectStateId' => '456',
             ],
