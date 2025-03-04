@@ -406,7 +406,7 @@ XML;
         );
         $response = $this->sendHttpRequest($request);
 
-        self::assertHttpResponseCodeEquals($response, 200);
+        self::assertHttpResponseCodeEquals($response, 201);
         self::assertHttpResponseHasHeader($response, 'Location');
 
         return $response->getHeader('Location')[0];

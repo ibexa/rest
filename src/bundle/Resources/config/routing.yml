@@ -662,7 +662,7 @@ ibexa.rest.load_content_type_draft_field_definition_list:
 
 ibexa.rest.add_content_type_draft_field_definition:
     path: /content/types/{contentTypeId}/draft/fieldDefinitions
-    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFeildDefinitionAddController::addContentTypeDraftFieldDefinition
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeDraftFieldDefinitionAddController::addContentTypeDraftFieldDefinition
     methods: [POST]
     requirements:
         contentTypeId: \d+

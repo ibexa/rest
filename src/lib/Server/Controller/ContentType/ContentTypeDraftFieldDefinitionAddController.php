@@ -20,7 +20,6 @@ use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
-use Ibexa\Rest\Server\Values\CreatedFieldDefinition;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -122,8 +121,10 @@ class ContentTypeDraftFieldDefinitionAddController extends RestController
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
      */
-    public function addContentTypeDraftFieldDefinition(int $contentTypeId, Request $request): CreatedFieldDefinition
-    {
+    public function addContentTypeDraftFieldDefinition(
+        int $contentTypeId,
+        Request $request
+    ): Values\CreatedFieldDefinition {
         $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
         $fieldDefinitionCreate = $this->inputDispatcher->parse(
             new Message(
@@ -150,10 +151,10 @@ class ContentTypeDraftFieldDefinitionAddController extends RestController
         $updatedDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
         foreach ($updatedDraft->getFieldDefinitions() as $fieldDefinition) {
             if ($fieldDefinition->identifier == $fieldDefinitionCreate->identifier) {
-                return new CreatedFieldDefinition(
+                return new Values\CreatedFieldDefinition(
                     [
                         'fieldDefinition' => new Values\RestFieldDefinition($updatedDraft, $fieldDefinition),
-                    ]
+                    ],
                 );
             }
         }
