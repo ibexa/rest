@@ -81,6 +81,7 @@ services:
 
     Ibexa\Rest\Server\Controller\Section\:
         resource: '../../../lib/Server/Controller/Section'
+        parent: Ibexa\Rest\Server\Controller
         autowire: true
         autoconfigure: true
         tags:
@@ -95,6 +96,7 @@ services:
 
     Ibexa\Rest\Server\Controller\Content\:
         resource: '../../../lib/Server/Controller/Content'
+        parent: Ibexa\Rest\Server\Controller
         autowire: true
         autoconfigure: true
         tags:
@@ -102,6 +104,7 @@ services:
 
     Ibexa\Rest\Server\Controller\ContentType\:
         resource: '../../../lib/Server/Controller/ContentType'
+        parent: Ibexa\Rest\Server\Controller
         autowire: true
         autoconfigure: true
         tags:
@@ -109,6 +112,7 @@ services:
 
     Ibexa\Rest\Server\Controller\Role\:
         resource: '../../../lib/Server/Controller/Role'
+        parent: Ibexa\Rest\Server\Controller
         autowire: true
         autoconfigure: true
         tags:
@@ -116,6 +120,7 @@ services:
 
     Ibexa\Rest\Server\Controller\Language\:
         resource: '../../../lib/Server/Controller/Language'
+        parent: Ibexa\Rest\Server\Controller
         autowire: true
         autoconfigure: true
         tags:
@@ -123,6 +128,7 @@ services:
 
     Ibexa\Rest\Server\Controller\Location\:
         resource: '../../../lib/Server/Controller/Location'
+        parent: Ibexa\Rest\Server\Controller
         autowire: true
         autoconfigure: true
         tags:
@@ -130,6 +136,7 @@ services:
 
     Ibexa\Rest\Server\Controller\ObjectState\:
         resource: '../../../lib/Server/Controller/ObjectState'
+        parent: Ibexa\Rest\Server\Controller
         autowire: true
         autoconfigure: true
         tags:
@@ -137,6 +144,7 @@ services:
 
     Ibexa\Rest\Server\Controller\Trash\:
         resource: '../../../lib/Server/Controller/Trash'
+        parent: Ibexa\Rest\Server\Controller
         autowire: true
         autoconfigure: true
         tags:
@@ -144,6 +152,7 @@ services:
 
     Ibexa\Rest\Server\Controller\User\:
         resource: '../../../lib/Server/Controller/User'
+        parent: Ibexa\Rest\Server\Controller
         autowire: true
         autoconfigure: true
         tags:
@@ -151,6 +160,7 @@ services:
 
     Ibexa\Rest\Server\Controller\URLWildcard\:
         resource: '../../../lib/Server/Controller/URLWildcard'
+        parent: Ibexa\Rest\Server\Controller
         autowire: true
         autoconfigure: true
         tags:
@@ -158,6 +168,7 @@ services:
 
     Ibexa\Rest\Server\Controller\URLAlias\:
         resource: '../../../lib/Server/Controller/URLAlias'
+        parent: Ibexa\Rest\Server\Controller
         autowire: true
         autoconfigure: true
         tags:
@@ -171,6 +182,7 @@ services:
 
     Ibexa\Rest\Server\Controller\Session\:
         resource: '../../../lib/Server/Controller/Session'
+        parent: Ibexa\Rest\Server\Controller
         autowire: true
         autoconfigure: true
         arguments:
@@ -184,6 +196,7 @@ services:
 
     Ibexa\Rest\Server\Controller\Bookmark\:
         resource: '../../../lib/Server/Controller/Bookmark'
+        parent: Ibexa\Rest\Server\Controller
         autowire: true
         autoconfigure: true
         tags:

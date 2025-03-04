@@ -17,7 +17,6 @@ use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Rest\Value as RestValue;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
@@ -85,15 +84,10 @@ class BookmarkCreateController extends RestController
     /**
      * Add given location to bookmarks.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param int $locationId
-     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     *
-     * @return \Ibexa\Rest\Value
      */
-    public function createBookmark(Request $request, int $locationId): RestValue
+    public function createBookmark(int $locationId): RestValue|Values\Conflict
     {
         $location = $this->locationService->loadLocation($locationId);
 
