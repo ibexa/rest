@@ -35,7 +35,7 @@ class OptionsLoader extends Loader
         return $this->routeCollectionMapper->mapCollection($this->import($resource));
     }
 
-    public function supports($resource, $type = null): bool
+    public function supports(mixed $resource, $type = null): bool
     {
         return $type === 'rest_options';
     }
