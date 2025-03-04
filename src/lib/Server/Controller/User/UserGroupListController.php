@@ -120,9 +120,7 @@ final class UserGroupListController extends UserBaseController
      */
     public function loadUserGroupByRemoteId(Request $request): Values\RestUserGroup
     {
-        if (!is_int($remoteId = $request->query->get('remoteId'))) {
-            throw new LogicException();
-        }
+        $remoteId = $request->query->getString('remoteId');
 
         $contentInfo = $this->contentService->loadContentInfoByRemoteId($remoteId);
         $userGroup = $this->userService->loadUserGroup($contentInfo->id, Language::ALL);

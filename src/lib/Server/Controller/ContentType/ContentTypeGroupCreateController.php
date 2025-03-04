@@ -108,15 +108,13 @@ class ContentTypeGroupCreateController extends RestController
      * Creates a new content type group.
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedContentTypeGroup
      */
-    public function createContentTypeGroup(Request $request)
+    public function createContentTypeGroup(Request $request): Values\CreatedContentTypeGroup
     {
         $createStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
-                $request->getContent()
+                $request->getContent(),
             )
         );
 
@@ -124,7 +122,7 @@ class ContentTypeGroupCreateController extends RestController
             return new Values\CreatedContentTypeGroup(
                 [
                     'contentTypeGroup' => $this->contentTypeService->createContentTypeGroup($createStruct),
-                ]
+                ],
             );
         } catch (InvalidArgumentException $e) {
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());

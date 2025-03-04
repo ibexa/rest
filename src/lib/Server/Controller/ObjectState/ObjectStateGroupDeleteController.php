@@ -12,7 +12,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ObjectStateService;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\NoContent;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
@@ -61,12 +61,12 @@ class ObjectStateGroupDeleteController extends RestController
     /**
      * The given object state group including the object states is deleted.
      */
-    public function deleteObjectStateGroup(int $objectStateGroupId): \Ibexa\Rest\Server\Values\NoContent
+    public function deleteObjectStateGroup(int $objectStateGroupId): NoContent
     {
         $this->objectStateService->deleteObjectStateGroup(
             $this->objectStateService->loadObjectStateGroup($objectStateGroupId)
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 }

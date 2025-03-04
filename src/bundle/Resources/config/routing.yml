@@ -358,7 +358,7 @@ ibexa.rest.update_object_state:
 
 ibexa.rest.delete_object_state:
     path: /content/objectstategroups/{objectStateGroupId}/objectstates/{objectStateId}
-    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateGroupDeleteController::deleteObjectState
+    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStateDeleteController::deleteObjectState
     methods: [DELETE]
     requirements:
         objectStateGroupId: \d+
