@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Server\Controller\User;
 
 use ApiPlatform\Metadata\Delete;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Values;
@@ -17,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/user/groups/{path}',
     name: 'Delete User Group',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
         summary: 'The given User Group is deleted.',
         tags: [

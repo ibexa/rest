@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Controller\Trash;
 
 use ApiPlatform\Metadata\Delete;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\TrashService;
@@ -18,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/trash',
     name: 'Empty Trash',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
         summary: 'Empties the Trash.',
         tags: [

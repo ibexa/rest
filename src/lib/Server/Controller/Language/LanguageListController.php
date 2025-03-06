@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Server\Controller\Language;
 
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\LanguageService;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -19,6 +20,7 @@ use Traversable;
 #[Get(
     uriTemplate: '/languages',
     name: 'Language list',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
         summary: 'Lists languages',
         tags: [

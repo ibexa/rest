@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Controller\ContentType;
 
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
@@ -22,6 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/types',
     name: 'List content types',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
         summary: 'Returns a list of content types.',
         tags: [

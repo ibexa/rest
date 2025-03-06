@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Controller\Content;
 
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
@@ -18,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/objects',
     name: 'Load content by remote ID',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
         summary: 'Loads content item for a given remote ID.',
         tags: [

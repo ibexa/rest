@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Controller\ContentType;
 
 use ApiPlatform\Metadata\Delete;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Rest\Exceptions;
@@ -19,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}',
     name: 'Delete content type Draft Field definition',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
         summary: 'Deletes the provided Field definition.',
         tags: [

@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Controller\Role;
 
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Values;
@@ -17,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/user/groups/{path}/roles/{roleId}',
     name: 'Load User Group Role Assignment',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
         summary: 'Returns a Role assignment of the given User Group.',
         tags: [

@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Server\Controller\User;
 
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +19,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[Get(
     uriTemplate: '/user/current',
     name: 'Load current User',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
         summary: 'Loads the current user.',
         tags: [
-            'User Current',
+            'User',
         ],
         parameters: [
             new Model\Parameter(

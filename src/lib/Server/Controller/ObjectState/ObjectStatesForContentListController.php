@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Controller\ObjectState;
 
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
@@ -20,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/objects/{contentId}/objectstates',
     name: 'Get Object states of content item',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
         summary: 'Returns the Object states of a content item',
         tags: [
@@ -61,13 +63,11 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentObjectStates',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.response.xml.example',
                     ],
                     'application/vnd.ibexa.api.ContentObjectStates+json' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/ContentObjectStatesWrapper',
+                            '$ref' => '#/components/schemas/ContentObjectStates',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/GET/ContentObjectStates.json.example',
                     ],
                 ],
             ],

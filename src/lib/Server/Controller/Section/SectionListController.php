@@ -8,8 +8,10 @@
 namespace Ibexa\Rest\Server\Controller\Section;
 
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\SectionService;
+use Ibexa\Contracts\Core\Repository\Values\Content\Section;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/sections',
     name: 'Get Sections',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
         summary: 'Returns a list of all Sections.',
         tags: [
@@ -60,6 +63,7 @@ use Symfony\Component\HttpFoundation\Response;
                     ],
                 ],
             ],
+            //Response::HTTP_NOT_FOUND => [],
             Response::HTTP_UNAUTHORIZED => [
                 'description' => 'Error - The user has no permission to read the Section.',
             ],
@@ -98,7 +102,7 @@ class SectionListController extends RestController
     /**
      * Loads section by identifier.
      */
-    public function loadSectionByIdentifier(Request $request): \Ibexa\Contracts\Core\Repository\Values\Content\Section
+    public function loadSectionByIdentifier(Request $request): Section
     {
         return $this->sectionService->loadSectionByIdentifier(
             // GET variable
