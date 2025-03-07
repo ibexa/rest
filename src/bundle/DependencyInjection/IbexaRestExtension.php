@@ -93,7 +93,8 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
 
     private function prependApiPlatformConfiguration(ContainerBuilder $container): void
     {
-        if (!$container->hasExtension('api_platform')) {
+        $env = $container->getParameter('kernel.environment');
+        if (!$container->hasExtension('api_platform') || $env === 'prod') {
             return;
         }
 
