@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Server\Controller\Bookmark;
 
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\BookmarkService;
 use Ibexa\Contracts\Core\Repository\LocationService;
@@ -21,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/bookmark',
     name: 'List of bookmarks',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
         summary: 'Lists bookmarked Locations for the current user.',
         tags: [

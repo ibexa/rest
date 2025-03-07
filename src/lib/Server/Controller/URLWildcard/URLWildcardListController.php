@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Controller\URLWildcard;
 
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\URLWildcardService;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -17,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/urlwildcards',
     name: 'List URL wildcards',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
         summary: 'Returns a list of URL wildcards.',
         tags: [

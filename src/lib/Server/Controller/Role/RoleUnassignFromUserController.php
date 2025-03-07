@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Controller\Role;
 
 use ApiPlatform\Metadata\Delete;
+use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/user/users/{userId}/roles/{roleId}',
     name: 'Unassign Role from User',
+    extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
         summary: 'The given Role is removed from the user.',
         tags: [

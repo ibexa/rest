@@ -19,16 +19,16 @@ schemas:
             $ref: "#/components/schemas/BaseObject"
     UnixTimestamp:
         type: integer
-        Href:
-            type: object
-            required:
-                - _href
-            properties:
-                _href:
-                    xml:
-                        attribute: true
-                        name: href
-                    type: string
+    Href:
+        type: object
+        required:
+            - _href
+        properties:
+            _href:
+                 xml:
+                    attribute: true
+                    name: href
+                 type: string
     Target:
         description: Struct that stores extra target information for a SortClause object.
         type: object
@@ -76,7 +76,8 @@ schemas:
                 type: string
             "#text":
                 description: Content type description.
-                type: [string, 'null']
+                type: string
+                nullable: true
     ValueObject:
         type: object
         required:
@@ -109,7 +110,8 @@ schemas:
                       type: string
                   "#text":
                       description: Translation contents.
-                      type: [string, 'null']
+                      type: string
+                      nullable: true
     KeyValue:
         description: Key-value structure
         type: object
@@ -120,7 +122,8 @@ schemas:
             _key:
                 type: string
             "#text":
-                type: [string, 'null']
+                type: string
+                nullable: true
     DateRange:
         allOf:
             - $ref: "#/components/schemas/BaseObject"

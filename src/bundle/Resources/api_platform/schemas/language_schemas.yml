@@ -11,7 +11,8 @@ schemas:
               properties:
                   languageId:
                       description: The language ID (auto generated).
-                      type: [string, 'null']
+                      type: string
+                      nullable: true
                   languageCode:
                       description: The languageCode code.
                       type: string
