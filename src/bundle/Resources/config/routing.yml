@@ -13,6 +13,7 @@ ibexa.api_platform.documentation:
     defaults:
         index: index
         _format: ~
+    condition: "'dev' == env('APP_ENV')"
 
 # Sections
 
