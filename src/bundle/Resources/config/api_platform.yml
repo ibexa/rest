@@ -58,3 +58,12 @@ services:
                 - '@@IbexaRestBundle/Resources/api_platform/schemas/user/token_schemas.yml'
                 - '@@IbexaRestBundle/Resources/api_platform/schemas/user/user_groups_schemas.yml'
                 - '@@IbexaRestBundle/Resources/api_platform/schemas/user/users_schemas.yml'
+
+    # OpenAPI Command
+
+    ibexa.api_platform.openapi.command:
+        parent: api_platform.openapi.command
+        arguments:
+            index_0: '@ibexa.api_platform.ibexa_openapi.factory'
+        tags:
+            - { name: 'console.command', command: 'ibexa:openapi' }
