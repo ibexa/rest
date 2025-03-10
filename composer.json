@@ -52,7 +52,7 @@
         "ibexa/rector": "~5.0.x-dev",
         "ibexa/test-core": "~5.0.x-dev",
         "justinrainbow/json-schema": "^5.2",
-        "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+        "matthiasnoback/symfony-dependency-injection-test": "^5.0",
         "nyholm/psr7": "^1.1",
         "phpstan/phpstan": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
