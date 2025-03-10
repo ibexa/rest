@@ -19,10 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/user/groups/{path}/roles',
-    name: 'Assign Role to User Group',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Assigns a Role to a User Group.',
+        summary: 'Assign Role to User Group',
+        description: 'Assigns a Role to a User Group.',
         tags: [
             'User Group',
         ],

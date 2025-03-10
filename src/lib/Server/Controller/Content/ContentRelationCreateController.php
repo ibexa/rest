@@ -23,10 +23,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}/relations',
-    name: 'Create new Relation',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates a new Relation of type COMMON for the given draft.',
+        summary: 'Create new Relation',
+        description: 'Creates a new Relation of type COMMON for the given draft.',
         tags: [
             'Objects',
         ],

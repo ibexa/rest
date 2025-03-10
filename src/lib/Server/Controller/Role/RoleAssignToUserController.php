@@ -19,10 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/user/users/{userId}/roles',
-    name: 'Assign Role to User',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Assigns a Role to a user.',
+        summary: 'Assign Role to User',
+        description: 'Assigns a Role to a user.',
         tags: [
             'User',
         ],

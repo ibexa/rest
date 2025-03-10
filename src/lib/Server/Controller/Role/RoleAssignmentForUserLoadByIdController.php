@@ -17,10 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/user/users/{userId}/roles/{roleId}',
-    name: 'Load User Role Assignment',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Returns a Role assignment to the given User.',
+        summary: 'Load User Role Assignment',
+        description: 'Returns a Role assignment to the given User.',
         tags: [
             'User',
         ],

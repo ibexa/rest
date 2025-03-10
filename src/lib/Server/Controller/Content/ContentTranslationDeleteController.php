@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/content/objects/{contentId}/translations/{languageCode}',
-    name: 'Delete translation (permanently)',
     openapi: new Model\Operation(
-        summary: 'Permanently deletes a translation from all versions of a content item.',
+        summary: 'Delete translation (permanently)',
+        description: 'Permanently deletes a translation from all versions of a content item.',
         tags: [
             'Objects',
         ],

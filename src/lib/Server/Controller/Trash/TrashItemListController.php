@@ -20,10 +20,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/trash',
-    name: 'List Trash items',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Returns a list of all items in the Trash.',
+        summary: 'List Trash items',
+        description: 'Returns a list of all items in the Trash.',
         tags: [
             'Trash',
         ],

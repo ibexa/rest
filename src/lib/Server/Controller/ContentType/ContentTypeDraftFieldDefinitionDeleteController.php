@@ -19,10 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}',
-    name: 'Delete content type Draft Field definition',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Deletes the provided Field definition.',
+        summary: 'Delete content type Draft Field definition',
+        description: 'Deletes the provided Field definition.',
         tags: [
             'Type',
         ],

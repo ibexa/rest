@@ -17,10 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/user/token/jwt',
-    name: 'Create JWT token',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates JWT authentication token.',
+        summary: 'Create JWT token',
+        description: 'Creates JWT authentication token.',
         tags: [
             'User Token',
         ],

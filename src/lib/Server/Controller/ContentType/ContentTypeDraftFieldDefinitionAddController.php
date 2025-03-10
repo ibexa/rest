@@ -26,10 +26,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/content/types/{contentTypeId}/draft/fieldDefinitions',
-    name: 'Add content type Draft Field definition',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates a new Field definition for the given content type.',
+        summary: 'Add content type Draft Field definition',
+        description: 'Creates a new Field definition for the given content type.',
         tags: [
             'Type',
         ],

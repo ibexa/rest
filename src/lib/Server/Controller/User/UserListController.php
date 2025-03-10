@@ -14,9 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/user/users',
-    name: 'List Users',
     openapi: new Model\Operation(
-        summary: 'Load Users either for a given remote ID or Role.',
+        summary: 'List Users',
+        description: 'Load Users either for a given remote ID or Role.',
         tags: [
             'User',
         ],

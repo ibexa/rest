@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/trash/{trashItemid}',
-    name: 'Get Trash item',
     openapi: new Model\Operation(
-        summary: 'Returns the item in Trash with the provided ID.',
+        summary: 'Get Trash item',
+        description: 'Returns the item in Trash with the provided ID.',
         tags: [
             'Trash',
         ],

@@ -19,10 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/user/users/{userId}/drafts',
-    name: 'Load user drafts',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Loads user\'s drafts',
+        summary: 'Load user drafts',
+        description: 'Loads user\'s drafts',
         tags: [
             'User',
         ],

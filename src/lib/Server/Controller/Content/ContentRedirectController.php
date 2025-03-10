@@ -18,10 +18,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/objects',
-    name: 'Load content by remote ID',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Loads content item for a given remote ID.',
+        summary: 'Load content by remote ID',
+        description: 'Loads content item for a given remote ID.',
         tags: [
             'Objects',
         ],

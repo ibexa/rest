@@ -19,9 +19,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/types/{contentTypeId}/fieldDefinitions/{fieldDefinitionId}',
-    name: 'Get Field definition',
     openapi: new Model\Operation(
-        summary: 'Returns the Field definition by the given ID.',
+        summary: 'Get Field definition',
+        description: 'Returns the Field definition by the given ID.',
         tags: [
             'Type',
         ],

@@ -20,10 +20,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/content/objects/{contentId}/locations',
-    name: 'Create new Location for content item',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates a new Location for the given content item.',
+        summary: 'Create new Location for content item',
+        description: 'Creates a new Location for the given content item.',
         tags: [
             'Objects',
         ],

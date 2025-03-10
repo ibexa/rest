@@ -16,10 +16,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/user/policies',
-    name: 'List Policies for User',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Search all Policies which are applied to a given User.',
+        summary: 'List Policies for User',
+        description: 'Search all Policies which are applied to a given User.',
         tags: [
             'User Policy',
         ],

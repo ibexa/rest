@@ -22,10 +22,10 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 #[Post(
     uriTemplate: '/user/sessions',
-    name: 'Create session (login a User)',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Performs a login for the user or checks if session exists and returns the session and session cookie. The client will need to remember both session name/ID and CSRF token as this is for security reasons not exposed via GET.',
+        summary: 'Create session (login a User)',
+        description: 'Performs a login for the user or checks if session exists and returns the session and session cookie. The client will need to remember both session name/ID and CSRF token as this is for security reasons not exposed via GET.',
         tags: [
             'User Session',
         ],

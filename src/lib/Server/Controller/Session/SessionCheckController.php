@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/user/sessions/current',
-    name: 'Get current session',
     openapi: new Model\Operation(
-        summary: 'Get current user session, if any.',
+        summary: 'Get current session',
+        description: 'Get current user session, if any.',
         tags: [
             'User Session',
         ],

@@ -19,9 +19,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/user/groups/{path}/users',
-    name: 'Load Users of Group',
     openapi: new Model\Operation(
-        summary: 'Loads the Users of the Group with the given ID.',
+        summary: 'Load Users of Group',
+        description: 'Loads the Users of the Group with the given ID.',
         tags: [
             'User Group',
         ],

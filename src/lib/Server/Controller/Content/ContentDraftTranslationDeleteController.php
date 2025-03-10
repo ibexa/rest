@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}/translations/{languageCode}',
-    name: 'Delete translation from version draft',
     openapi: new Model\Operation(
-        summary: 'Removes a translation from a version draft.',
+        summary: 'Delete translation from version draft',
+        description: 'Removes a translation from a version draft.',
         tags: [
             'Objects',
         ],

@@ -21,10 +21,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/bookmark/{locationId}',
-    name: 'Create bookmark',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Add given Location to bookmarks of the current user.',
+        summary: 'Create bookmark',
+        description: 'Add given Location to bookmarks of the current user.',
         tags: [
             'Bookmark',
         ],
