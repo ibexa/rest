@@ -18,9 +18,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/objects/{contentId}',
-    name: 'Load content',
     openapi: new Model\Operation(
-        summary: 'Loads the content item for the given ID. Depending on the Accept header the current version is embedded (i.e. the current published version or if it does not exist, the draft of the authenticated user).',
+        summary: 'Load content',
+        description: 'Loads the content item for the given ID. Depending on the Accept header the current version is embedded (i.e. the current published version or if it does not exist, the draft of the authenticated user).',
         tags: [
             'Objects',
         ],

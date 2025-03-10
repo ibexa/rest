@@ -18,10 +18,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[Get(
     uriTemplate: '/user/current',
-    name: 'Load current User',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Loads the current user.',
+        summary: 'Load current User',
+        description: 'Loads the current user.',
         tags: [
             'User',
         ],

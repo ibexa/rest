@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/objects/{contentId}/locations',
-    name: 'Get Locations for content item',
     openapi: new Model\Operation(
-        summary: 'Loads all Locations for the given content item.',
+        summary: 'Get Locations for content item',
+        description: 'Loads all Locations for the given content item.',
         tags: [
             'Objects',
         ],

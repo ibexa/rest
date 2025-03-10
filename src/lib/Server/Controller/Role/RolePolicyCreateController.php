@@ -20,10 +20,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/user/roles/{id}/policies',
-    name: 'Create Policy',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates a Policy',
+        summary: 'Create Policy',
+        description: 'Creates a Policy',
         tags: [
             'User Role',
         ],

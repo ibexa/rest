@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/sections/{sectionId}',
-    name: 'Get Section',
     openapi: new Model\Operation(
-        summary: 'Returns the Section by given Section ID.',
+        summary: 'Get Section',
+        description: 'Returns the Section by given Section ID.',
         tags: [
             'Section',
         ],

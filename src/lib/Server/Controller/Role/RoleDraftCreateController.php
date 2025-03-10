@@ -22,10 +22,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/user/roles/{id}',
-    name: 'Create Role Draft',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates a new Role draft from an existing Role.',
+        summary: 'Create Role Draft',
+        description: 'Creates a new Role draft from an existing Role.',
         tags: [
             'User Role',
         ],

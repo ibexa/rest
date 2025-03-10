@@ -23,10 +23,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Patch(
     uriTemplate: '/content/sections/{sectionId}',
-    name: 'Update a Section',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Updates a Section. PATCH or POST with header X-HTTP-Method-Override PATCH.',
+        summary: 'Update a Section',
+        description: 'Updates a Section. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [
             'Section',
         ],

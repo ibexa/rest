@@ -19,9 +19,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/user/users/{userId}',
-    name: 'Load User',
     openapi: new Model\Operation(
-        summary: 'Loads User with the given ID.',
+        summary: 'Load User',
+        description: 'Loads User with the given ID.',
         tags: [
             'User',
         ],

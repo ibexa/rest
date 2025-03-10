@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}/relations',
-    name: 'Load Relations of content item version',
     openapi: new Model\Operation(
-        summary: 'Loads the Relations of the given version.',
+        summary: 'Load Relations of content item version',
+        description: 'Loads the Relations of the given version.',
         tags: [
             'Objects',
         ],

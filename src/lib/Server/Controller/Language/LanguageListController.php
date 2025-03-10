@@ -19,10 +19,10 @@ use Traversable;
 
 #[Get(
     uriTemplate: '/languages',
-    name: 'Language list',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Lists languages',
+        summary: 'Language list',
+        description: 'Lists languages',
         tags: [
             'Language',
         ],

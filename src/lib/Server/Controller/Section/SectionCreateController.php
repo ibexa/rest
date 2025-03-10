@@ -21,10 +21,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/content/sections',
-    name: 'Create new Section',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates a new Section.',
+        summary: 'Create new Section',
+        description: 'Creates a new Section.',
         tags: [
             'Section',
         ],

@@ -18,10 +18,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/content/trash',
-    name: 'Empty Trash',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Empties the Trash.',
+        summary: 'Empty Trash',
+        description: 'Empties the Trash.',
         tags: [
             'Trash',
         ],

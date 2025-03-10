@@ -15,10 +15,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/user/groups/{path}/roles',
-    name: 'Load Roles for User Group',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Returns a list of all Roles assigned to the given User Group.',
+        summary: 'Load Roles for User Group',
+        description: 'Returns a list of all Roles assigned to the given User Group.',
         tags: [
             'User Group',
         ],

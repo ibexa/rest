@@ -25,10 +25,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Patch(
     uriTemplate: '/content/typegroups/{contentTypeGroupId}',
-    name: 'Update content type group',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Updates a content type group. PATCH or POST with header X-HTTP-Method-Override PATCH.',
+        summary: 'Update content type group',
+        description: 'Updates a content type group. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [
             'Type Groups',
         ],

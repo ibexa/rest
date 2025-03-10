@@ -20,10 +20,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/objects/{contentId}/objectstates',
-    name: 'Get Object states of content item',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Returns the Object states of a content item',
+        summary: 'Get Object states of content item',
+        description: 'Returns the Object states of a content item',
         tags: [
             'Objects',
         ],

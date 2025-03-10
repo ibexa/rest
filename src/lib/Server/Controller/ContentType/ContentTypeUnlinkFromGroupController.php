@@ -18,9 +18,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/content/types/{contentTypeId}/groups/{id}',
-    name: 'Unlink group from content type',
     openapi: new Model\Operation(
-        summary: 'Removes the given group from the content type and returns the updated group list.',
+        summary: 'Unlink group from content type',
+        description: 'Removes the given group from the content type and returns the updated group list.',
         tags: [
             'Type',
         ],

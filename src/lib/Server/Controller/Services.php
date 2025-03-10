@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/services/countries',
-    name: 'Countries list',
     openapi: new Model\Operation(
-        summary: 'Gives access to an ISO-3166 formatted list of world countries. It is useful when presenting a country options list from any application.',
+        summary: 'Countries list',
+        description: 'Gives access to an ISO-3166 formatted list of world countries. It is useful when presenting a country options list from any application.',
         tags: [
             'Services',
         ],

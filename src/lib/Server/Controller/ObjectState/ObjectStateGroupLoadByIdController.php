@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/objectstategroups/{objectStateGroupId}',
-    name: 'Get Object state group',
     openapi: new Model\Operation(
-        summary: 'Returns the Object state group with the provided ID.',
+        summary: 'Get Object state group',
+        description: 'Returns the Object state group with the provided ID.',
         tags: [
             'Object State Groups',
         ],

@@ -19,10 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Patch(
     uriTemplate: '/user/users/{userId}',
-    name: 'Update User',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Updates a User.',
+        summary: 'Update User',
+        description: 'Updates a User.',
         tags: [
             'User',
         ],

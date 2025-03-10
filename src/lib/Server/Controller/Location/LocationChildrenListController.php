@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/locations/{path}/children',
-    name: 'Get child Locations.',
     openapi: new Model\Operation(
-        summary: 'Loads all child Locations for the given parent Location.',
+        summary: 'Get child Locations.',
+        description: 'Loads all child Locations for the given parent Location.',
         tags: [
             'Location',
         ],

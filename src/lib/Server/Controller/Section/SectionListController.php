@@ -19,10 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/sections',
-    name: 'Get Sections',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Returns a list of all Sections.',
+        summary: 'Get Sections',
+        description: 'Returns a list of all Sections.',
         tags: [
             'Section',
         ],

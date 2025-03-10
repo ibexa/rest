@@ -21,10 +21,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/bookmark',
-    name: 'List of bookmarks',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Lists bookmarked Locations for the current user.',
+        summary: 'List of bookmarks',
+        description: 'Lists bookmarked Locations for the current user.',
         tags: [
             'Bookmark',
         ],

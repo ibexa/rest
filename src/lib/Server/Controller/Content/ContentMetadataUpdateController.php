@@ -20,10 +20,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Patch(
     uriTemplate: '/content/objects/{contentId}',
-    name: 'Update content',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'This method updates the content metadata which is independent from a version. PATCH or POST with header X-HTTP-Method-Override PATCH.',
+        summary: 'Update content',
+        description: 'This method updates the content metadata which is independent from a version. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [
             'Objects',
         ],

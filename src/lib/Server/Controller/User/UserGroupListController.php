@@ -21,10 +21,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/user/groups',
-    name: 'Load User Groups',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Loads User Groups for either an an ID or a remote ID or a Role.',
+        summary: 'Load User Groups',
+        description: 'Loads User Groups for either an an ID or a remote ID or a Role.',
         tags: [
             'User Group',
         ],

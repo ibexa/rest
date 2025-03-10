@@ -22,10 +22,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/content/typegroups',
-    name: 'Create content type group',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates a new content type group.',
+        summary: 'Create content type group',
+        description: 'Creates a new content type group.',
         tags: [
             'Type Groups',
         ],
