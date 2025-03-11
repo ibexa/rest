@@ -13,8 +13,7 @@ schemas:
                         type: string
                     Policies:
                         description: Returns the list of policies of this role.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
     RoleWrapper:
         type: object
         required:
@@ -24,8 +23,7 @@ schemas:
                 $ref: "#/components/schemas/Role"
     RoleDraft:
         description: This class represents a draft of a role, extends Role.
-        type:
-            $ref: "#/components/schemas/Role"
+        $ref: "#/components/schemas/Role"
     RoleDraftWrapper:
         type: object
         required:
@@ -221,8 +219,7 @@ schemas:
                         description: Returns the limitation of the role assignment.
                     Role:
                         description: Returns the role to which the User or User group is assigned to.
-                        type:
-                            $ref: "#/components/schemas/Ref"
+                        $ref: "#/components/schemas/Ref"
     RoleAssignmentWrapper:
         type: object
         required:
@@ -239,12 +236,10 @@ schemas:
         properties:
             Role:
                 description: Returns the Role to which the user or user group is assigned to.
-                type:
-                    $ref: "#/components/schemas/Ref"
+                $ref: "#/components/schemas/Ref"
             limitation:
                 description: Returns the Limitation of the Role assignment.
-                type:
-                    $ref: "#/components/schemas/Limitation"
+                $ref: "#/components/schemas/Limitation"
     RoleAssignInputWrapper:
         type: object
         required:

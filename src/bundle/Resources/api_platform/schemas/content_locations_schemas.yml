@@ -36,8 +36,7 @@ schemas:
                       type: string
                   ContentInfo:
                       description: This class provides all version independent information of the content item.
-                      type:
-                          $ref: "#/components/schemas/ContentInfo"
+                      $ref: "#/components/schemas/ContentInfo"
                   ParentLocation:
                       description: Parent Location.
                   Children:

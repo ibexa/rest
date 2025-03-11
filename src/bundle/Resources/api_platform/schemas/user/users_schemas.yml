@@ -40,35 +40,28 @@ schemas:
                         type: string
                     ContentType:
                         description: This class represents a content type.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     name:
                         description: Name of the domain object in a given language.
                         type: string
                     Versions:
                         description: Returns the VersionInfo for this version.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     Section:
                         description: The Section to which the content item is assigned.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     MainLocation:
                         description: Main Location of the object.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     Locations:
                         description: Locations of the object.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     Groups:
                         description: Group User of the content type.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     Owner:
                         description: The owner of the content item.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     publishDate:
                         description: Content publication date.
                         type: string
@@ -96,12 +89,10 @@ schemas:
                         type: boolean
                     UserGroups:
                         description: User groups.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     Roles:
                         description: Roles.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
     UserWrapper:
         type: object
         required:
