@@ -121,7 +121,7 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
                     'enabled' => false,
                 ],
             ],
-            'enable_docs' => $container->getParameter('kernel.environment') === 'dev',
+            'enable_docs' => $container->getParameter('kernel.debug'),
         ];
 
         $container->prependExtensionConfig('api_platform', $config);
