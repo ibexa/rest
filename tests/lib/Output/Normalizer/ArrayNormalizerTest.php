@@ -20,6 +20,8 @@ class ArrayNormalizerTest extends TestCase
 
         $result = $normalizer->normalize($money);
 
+        self::assertIsArray($result);
+
         self::assertSame('100', $result['amount']);
         self::assertSame('EUR', $result['currency']);
     }
