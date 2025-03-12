@@ -13,16 +13,13 @@ schemas:
                 description: Content identifier.
                 type: string
             User:
-                type:
-                    $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/User"
             public:
                 type: boolean
             LocationQuery:
-                type:
-                    $ref: "#/components/schemas/LocationQuery"
+                $ref: "#/components/schemas/LocationQuery"
             Result:
-                type:
-            $ref: "#/components/schemas/BaseObject"
+                $ref: "#/components/schemas/BaseObject"
     ViewInput:
         description: This class represents a View input.
         type: object
@@ -38,8 +35,7 @@ schemas:
             useAlwaysAvailable:
                 type: string
             Query:
-                type:
-                    $ref: "#/components/schemas/Query"
+                $ref: "#/components/schemas/Query"
     ViewInputWrapper:
         type: object
         required:
@@ -53,12 +49,10 @@ schemas:
         properties:
             Filter:
                 description: The Query filter. Can contain multiple criterion, as items of a logical one (by default AND).
-                type:
-                    $ref: "#/components/schemas/Criterion"
+                $ref: "#/components/schemas/Criterion"
             Query:
                 description: The Query query. Can contain multiple criterion, as items of a logical one (by default AND).
-                type:
-                    $ref: "#/components/schemas/Criterion"
+                $ref: "#/components/schemas/Criterion"
             sortClauses:
                 description: Query sorting clauses.
                 type: array
@@ -120,8 +114,7 @@ schemas:
                 type: boolean
             filter:
                 description: An additional facet filter that will further filter the documents the facet will be executed on.
-                type:
-                    $ref: "#/components/schemas/Criterion"
+                $ref: "#/components/schemas/Criterion"
             limit:
                 description: Number of facets (terms) returned.
                 type: integer

@@ -37,29 +37,23 @@ schemas:
                         type: integer
                     ContentType:
                         description: Content type.
-                        type:
-                            $ref: "#/components/schemas/Ref"
+                        $ref: "#/components/schemas/Ref"
                     name:
                         type: string
                     Versions:
                         description: Returns the VersionInfo for this version.
-                        type:
-                            $ref: "#/components/schemas/Ref"
+                        $ref: "#/components/schemas/Ref"
                     Section:
                         description: The Section to which the content item is assigned to.
-                        type:
-                            $ref: "#/components/schemas/Ref"
+                        $ref: "#/components/schemas/Ref"
                     MainLocation:
-                        type:
-                            $ref: "#/components/schemas/Ref"
+                        $ref: "#/components/schemas/Ref"
                     Locations:
                         description: Location of the content item.
-                        type:
-                            $ref: "#/components/schemas/Ref"
+                        $ref: "#/components/schemas/Ref"
                     Owner:
                         description: The owner of the content item.
-                        type:
-                            $ref: "#/components/schemas/Ref"
+                        $ref: "#/components/schemas/Ref"
                     lastModificationDate:
                         description: Content item modification date.
                         type: string
@@ -72,17 +66,13 @@ schemas:
                     Version:
                         $ref: "#/components/schemas/Version"
                     ParentUserGroup:
-                        type:
-                            $ref: "#/components/schemas/Ref"
+                        $ref: "#/components/schemas/Ref"
                     Subgroups:
-                        type:
-                            $ref: "#/components/schemas/Ref"
+                        $ref: "#/components/schemas/Ref"
                     Users:
-                        type:
-                            $ref: "#/components/schemas/Ref"
+                        $ref: "#/components/schemas/Ref"
                     Roles:
-                        type:
-                            $ref: "#/components/schemas/Ref"
+                        $ref: "#/components/schemas/Ref"
     UserGroupWrapper:
         type: object
         required:
@@ -92,8 +82,7 @@ schemas:
                 $ref: "#/components/schemas/UserGroup"
     UserGroupList:
         description: This class represents a User Group list.
-        type:
-            $ref: "#/components/schemas/BaseObject"
+        $ref: "#/components/schemas/BaseObject"
     UserGroupListWrapper:
         type: object
         required:
@@ -134,8 +123,7 @@ schemas:
             remoteId:
                 type: string
             fields:
-                type:
-                    $ref: "#/components/schemas/Fields"
+                $ref: "#/components/schemas/Fields"
     UserGroupCreateWrapper:
         type: object
         required:
@@ -175,8 +163,7 @@ schemas:
                     - Unassign
                 properties:
                     Unassign:
-                        type:
-                            $ref: "#/components/schemas/Unlink"
+                        $ref: "#/components/schemas/Unlink"
     Unlink:
         description: Unlink a content type group from a content type.
         type: object

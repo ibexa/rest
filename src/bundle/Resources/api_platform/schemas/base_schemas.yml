@@ -15,8 +15,7 @@ schemas:
                     name: href
                 type: string
     Ref:
-        type:
-            $ref: "#/components/schemas/BaseObject"
+        $ref: "#/components/schemas/BaseObject"
     UnixTimestamp:
         type: integer
     Href:
@@ -48,8 +47,7 @@ schemas:
                 type: string
             targetData:
                 description: Extra target data, required by some sort clauses, field for instance.
-                type:
-                    $ref: "#/components/schemas/Target"
+                $ref: "#/components/schemas/Target"
     ErrorMessage:
         description: Represents an error response. Might contain additional properties depending on an error type.
         type: object

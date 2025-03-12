@@ -21,8 +21,7 @@ schemas:
                         type: string
                     User:
                         description: User.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
     SessionWrapper:
         type: object
         required:

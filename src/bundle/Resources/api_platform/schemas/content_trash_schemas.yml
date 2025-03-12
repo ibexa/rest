@@ -19,8 +19,7 @@ schemas:
                 $ref: "#/components/schemas/Trash"
     TrashItem:
         description: This class represents a trash item, which is actually a trashed Location.
-        type:
-            $ref: "#/components/schemas/Location"
+        $ref: "#/components/schemas/Location"
     TrashItemWrapper:
         type: object
         required:

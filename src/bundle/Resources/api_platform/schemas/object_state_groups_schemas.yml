@@ -24,8 +24,7 @@ schemas:
                         type: integer
                     ObjectStateGroup:
                         description: The Object state group this Object state belongs to.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     languageCodes:
                         description: The available language codes for names an descriptions.
                         type: string
@@ -158,8 +157,7 @@ schemas:
                         type: string
                     ObjectStates:
                         description: Object States.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     names:
                         description: List of names.
                     descriptions:

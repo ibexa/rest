@@ -20,8 +20,7 @@ schemas:
                         - __href
                     properties:
                         Location:
-                            type:
-                                $ref: "#/components/schemas/Location"
+                            $ref: "#/components/schemas/Location"
                         _media-type:
                             type: string
                         __href:
@@ -32,8 +31,7 @@ schemas:
             - BookmarkList
         properties:
             BookmarkList:
-                type:
-                    $ref: "#/components/schemas/BookmarkList"
+                $ref: "#/components/schemas/BookmarkList"
     SummaryEntry:
         type: object
         required:
@@ -53,28 +51,20 @@ schemas:
             id:
                 type: integer
             names:
-                type:
-                    $ref: "#/components/schemas/SummaryEntryNames"
+                $ref: "#/components/schemas/SummaryEntryNames"
             quantity:
                 type: integer
             Price:
-                type:
-                    $ref: "#/components/schemas/RestPriceWrapper"
+                $ref: "#/components/schemas/RestPriceWrapper"
             PriceInclVat:
-                type:
-                    $ref: "#/components/schemas/RestPriceWrapper"
+                $ref: "#/components/schemas/RestPriceWrapper"
             SubtotalPrice:
-                type:
-                    $ref: "#/components/schemas/RestPriceWrapper"
+                $ref: "#/components/schemas/RestPriceWrapper"
             SubtotalPriceInclVat:
-                type:
-                    $ref: "#/components/schemas/RestPriceWrapper"
+                $ref: "#/components/schemas/RestPriceWrapper"
             VatCategory:
-                type:
-                    $ref: "#/components/schemas/VatCategory"
+                $ref: "#/components/schemas/VatCategory"
             Product:
-                type:
-                    $ref: "#/components/schemas/Product"
+                $ref: "#/components/schemas/Product"
     SummaryEntryNames:
-        type:
-            $ref: "#/components/schemas/ValueObject"
+        $ref: "#/components/schemas/ValueObject"
