@@ -72,8 +72,7 @@ schemas:
                         type: string
                     urlAliasSchema:
                         description: URL alias schema. If nothing is provided, $nameSchema will be used instead.
-                        type: string
-                        nullable: true
+                        type: [string, 'null']
                     nameSchema:
                         description: Name schema. Can be composed of FieldDefinition identifier place holders.
                         type: string
@@ -234,8 +233,7 @@ schemas:
                     remoteId:
                         type: string
                     urlAliasSchema:
-                        type: string
-                        nullable: true
+                        type: [string, 'null']
                     nameSchema:
                         type: string
                     isContainer:
@@ -356,8 +354,7 @@ schemas:
                         type: string
                     urlAliasSchema:
                         description: URL alias schema. If nothing is provided, $nameSchema will be used instead.
-                        type: string
-                        nullable: true
+                        type: [string, 'null']
                     nameSchema:
                         description: Name schema. Can be composed of FieldDefinition identifier place holders.
                         type: string

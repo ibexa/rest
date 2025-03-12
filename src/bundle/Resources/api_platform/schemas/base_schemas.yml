@@ -76,8 +76,7 @@ schemas:
                 type: string
             "#text":
                 description: Content type description.
-                type: string
-                nullable: true
+                type: [string, 'null']
     ValueObject:
         type: object
         required:
@@ -110,8 +109,7 @@ schemas:
                       type: string
                   "#text":
                       description: Translation contents.
-                      type: string
-                      nullable: true
+                      type: [string, 'null']
     KeyValue:
         description: Key-value structure
         type: object
@@ -122,8 +120,7 @@ schemas:
             _key:
                 type: string
             "#text":
-                type: string
-                nullable: true
+                type: [string, 'null']
     DateRange:
         allOf:
             - $ref: "#/components/schemas/BaseObject"
