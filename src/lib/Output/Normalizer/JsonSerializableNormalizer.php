@@ -20,6 +20,8 @@ final class JsonSerializableNormalizer implements NormalizerInterface, Normalize
     /**
      * @param array<mixed> $context
      *
+     * @return string|array<mixed>
+     *
      * {@inheritDoc}
      */
     public function normalize($object, ?string $format = null, array $context = []): string|array
