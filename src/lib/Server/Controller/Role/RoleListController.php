@@ -17,10 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/user/roles',
-    name: 'Load Roles',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Returns a list of all Roles.',
+        summary: 'Load Roles',
+        description: 'Returns a list of all Roles.',
         tags: [
             'User Role',
         ],

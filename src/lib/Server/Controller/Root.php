@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/',
-    name: 'List of root resources',
     openapi: new Model\Operation(
-        summary: 'Lists the root resources of the Ibexa Platform installation.',
+        summary: 'List of root resources',
+        description: 'Lists the root resources of the Ibexa Platform installation.',
         tags: [
             'Root',
         ],

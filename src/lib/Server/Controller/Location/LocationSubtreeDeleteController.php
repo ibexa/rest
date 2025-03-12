@@ -14,9 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/content/locations/{path}',
-    name: 'Delete subtree',
     openapi: new Model\Operation(
-        summary: 'Deletes the complete subtree for the given path. Every content item which does not have any other Location is deleted. Otherwise the deleted Location is removed from the content item. The children are recursively deleted.',
+        summary: 'Delete subtree',
+        description: 'Deletes the complete subtree for the given path. Every content item which does not have any other Location is deleted. Otherwise the deleted Location is removed from the content item. The children are recursively deleted.',
         tags: [
             'Location',
         ],

@@ -19,10 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/typegroups/{contentTypeGroupId}/types',
-    name: 'List content types for group',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Returns a list of content types in the provided group.',
+        summary: 'List content types for group',
+        description: 'Returns a list of content types in the provided group.',
         tags: [
             'Type Groups',
         ],

@@ -17,10 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/user/groups/{path}',
-    name: 'Delete User Group',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'The given User Group is deleted.',
+        summary: 'Delete User Group',
+        description: 'The given User Group is deleted.',
         tags: [
             'User Group',
         ],

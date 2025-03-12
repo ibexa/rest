@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/locations',
-    name: 'Load Locations by id/remoteId/urlAlias',
     openapi: new Model\Operation(
-        summary: 'Loads the Location for a given ID (x), remote ID or URL alias.',
+        summary: 'Load Locations by id/remoteId/urlAlias',
+        description: 'Loads the Location for a given ID (x), remote ID or URL alias.',
         tags: [
             'Location',
         ],

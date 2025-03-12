@@ -19,10 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/objectstategroups/{objectStateGroupId}/objectstates',
-    name: 'List Object states',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Returns a list of all Object states of the given group.',
+        summary: 'List Object states',
+        description: 'Returns a list of all Object states of the given group.',
         tags: [
             'Object State Groups',
         ],

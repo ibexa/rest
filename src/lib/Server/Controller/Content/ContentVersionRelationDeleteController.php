@@ -20,9 +20,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}/relations/{relationId}',
-    name: 'Delete Relation',
     openapi: new Model\Operation(
-        summary: 'Deletes a Relation of the given draft.',
+        summary: 'Delete Relation',
+        description: 'Deletes a Relation of the given draft.',
         tags: [
             'Objects',
         ],

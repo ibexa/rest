@@ -25,10 +25,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/user/roles',
-    name: 'Create Role or Role draft',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates a new Role or Role draft.',
+        summary: 'Create Role or Role draft',
+        description: 'Creates a new Role or Role draft.',
         tags: [
             'User Role',
         ],

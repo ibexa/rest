@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/content/urlwildcards/{wildcardId}',
-    name: 'Delete URL wildcard',
     openapi: new Model\Operation(
-        summary: 'Deletes the given URL wildcard.',
+        summary: 'Delete URL wildcard',
+        description: 'Deletes the given URL wildcard.',
         tags: [
             'Url Wildcard',
         ],

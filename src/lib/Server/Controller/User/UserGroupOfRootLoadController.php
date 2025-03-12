@@ -16,10 +16,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/user/groups/root',
-    name: 'Get root User Group',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Redirects to the root User Group.',
+        summary: 'Get root User Group',
+        description: 'Redirects to the root User Group.',
         tags: [
             'User Group',
         ],

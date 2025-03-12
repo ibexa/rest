@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}',
-    name: 'Delete content version',
     openapi: new Model\Operation(
-        summary: 'Deletes the content version.',
+        summary: 'Delete content version',
+        description: 'Deletes the content version.',
         tags: [
             'Objects',
         ],

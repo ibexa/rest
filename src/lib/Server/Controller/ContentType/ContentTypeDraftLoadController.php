@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/types/{contentTypeId}/draft',
-    name: 'Get content type draft',
     openapi: new Model\Operation(
-        summary: 'Returns the draft of the content type with the provided ID.',
+        summary: 'Get content type draft',
+        description: 'Returns the draft of the content type with the provided ID.',
         tags: [
             'Type',
         ],

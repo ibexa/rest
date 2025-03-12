@@ -18,9 +18,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/user/users/{userId}/groups/{groupId}',
-    name: 'Unassign User Group',
     openapi: new Model\Operation(
-        summary: 'Unassigns the User from a User Group.',
+        summary: 'Unassign User Group',
+        description: 'Unassigns the User from a User Group.',
         tags: [
             'User',
         ],

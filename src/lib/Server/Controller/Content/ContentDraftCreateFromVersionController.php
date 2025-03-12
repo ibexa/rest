@@ -17,10 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}',
-    name: 'Create a draft from a version',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'The system creates a new draft as a copy of the given version. COPY or POST with header X-HTTP-Method-Override COPY.',
+        summary: 'Create a draft from a version',
+        description: 'The system creates a new draft as a copy of the given version. COPY or POST with header X-HTTP-Method-Override COPY.',
         tags: [
             'Objects',
         ],

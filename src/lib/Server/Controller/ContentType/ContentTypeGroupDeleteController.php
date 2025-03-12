@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/content/typegroups/{contentTypeGroupId}',
-    name: 'Delete content type group',
     openapi: new Model\Operation(
-        summary: 'Deletes the provided content type group.',
+        summary: 'Delete content type group',
+        description: 'Deletes the provided content type group.',
         tags: [
             'Type Groups',
         ],

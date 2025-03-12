@@ -17,10 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/urlwildcards',
-    name: 'List URL wildcards',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Returns a list of URL wildcards.',
+        summary: 'List URL wildcards',
+        description: 'Returns a list of URL wildcards.',
         tags: [
             'Url Wildcard',
         ],

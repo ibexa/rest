@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/user/users/{userId}',
-    name: 'Delete User',
     openapi: new Model\Operation(
-        summary: 'Deletes the given User.',
+        summary: 'Delete User',
+        description: 'Deletes the given User.',
         tags: [
             'User',
         ],

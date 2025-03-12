@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/locations/{path}',
-    name: 'Load Location',
     openapi: new Model\Operation(
-        summary: 'Loads the Location for the given path e.g. \'/content/locations/1/2/61\'.',
+        summary: 'Load Location',
+        description: 'Loads the Location for the given path e.g. \'/content/locations/1/2/61\'.',
         tags: [
             'Location',
         ],

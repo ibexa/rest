@@ -21,10 +21,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/content/types/{contentTypeId}/groups',
-    name: 'Link group to content type',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Links a content type group to the content type and returns the updated group list.',
+        summary: 'Link group to content type',
+        description: 'Links a content type group to the content type and returns the updated group list.',
         tags: [
             'Type',
         ],

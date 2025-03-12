@@ -18,10 +18,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Patch(
     uriTemplate: '/user/groups/{path}',
-    name: 'Update User Group',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Updates a User Group. PATCH or POST with header X-HTTP-Method-Override PATCH.',
+        summary: 'Update User Group',
+        description: 'Updates a User Group. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [
             'User Group',
         ],

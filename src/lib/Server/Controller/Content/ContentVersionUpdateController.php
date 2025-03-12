@@ -24,10 +24,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Patch(
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}',
-    name: 'Update version',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'A specific draft is updated. PATCH or POST with header X-HTTP-Method-Override PATCH.',
+        summary: 'Update version',
+        description: 'A specific draft is updated. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [
             'Objects',
         ],

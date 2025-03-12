@@ -23,10 +23,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/views',
-    name: 'Search content',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Executes a query and returns a View including the results.
+        summary: 'Search content',
+        description: 'Executes a query and returns a View including the results.
 View input reflects the criteria model of the public PHP API.
 Refer to [Search Criteria Reference](/en/latest/search/criteria_reference/search_criteria_reference/)',
         tags: [

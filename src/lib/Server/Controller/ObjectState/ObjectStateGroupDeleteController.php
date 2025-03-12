@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/content/objectstategroups/{objectStateGroupId}',
-    name: 'Delete Object state group',
     openapi: new Model\Operation(
-        summary: 'Deletes the given Object state group including Object states.',
+        summary: 'Delete Object state group',
+        description: 'Deletes the given Object state group including Object states.',
         tags: [
             'Object State Groups',
         ],

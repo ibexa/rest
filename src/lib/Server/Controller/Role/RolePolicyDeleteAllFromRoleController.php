@@ -15,10 +15,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/user/roles/{id}/policies',
-    name: 'Delete Policies',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'All Policies of the given Role are deleted.',
+        summary: 'Delete Policies',
+        description: 'All Policies of the given Role are deleted.',
         tags: [
             'User Role',
         ],
