@@ -10,7 +10,7 @@ namespace Ibexa\Rest\Server\Controller;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CountryList;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -56,10 +56,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class Services extends RestController
 {
-    /**
-     * @var array
-     */
-    protected $countriesInfo;
+    protected array $countriesInfo;
 
     public function __construct(array $countriesInfo)
     {
@@ -69,8 +66,8 @@ class Services extends RestController
     /**
      * Loads Country List.
      */
-    public function loadCountryList()
+    public function loadCountryList(): CountryList
     {
-        return new Values\CountryList($this->countriesInfo);
+        return new CountryList($this->countriesInfo);
     }
 }

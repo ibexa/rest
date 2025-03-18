@@ -15,6 +15,7 @@ use Ibexa\Contracts\Core\Repository\TrashService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\Trash;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -75,7 +76,7 @@ class TrashItemListController extends RestController
      *
      * @return \Ibexa\Rest\Server\Values\Trash
      */
-    public function loadTrashItems(Request $request)
+    public function loadTrashItems(Request $request): Trash
     {
         $offset = $request->query->has('offset') ? (int)$request->query->get('offset') : 0;
         $limit = $request->query->has('limit') ? (int)$request->query->get('limit') : -1;
@@ -93,7 +94,7 @@ class TrashItemListController extends RestController
             );
         }
 
-        return new Values\Trash(
+        return new Trash(
             $trashItems,
             $request->getPathInfo()
         );

@@ -10,7 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Session;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\UserSession;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -74,7 +74,7 @@ final class SessionCheckController extends SessionBaseController
     /**
      * @return \Ibexa\Rest\Server\Values\UserSession|\Symfony\Component\HttpFoundation\Response
      */
-    public function checkSessionAction(Request $request)
+    public function checkSessionAction(Request $request): Response|UserSession
     {
         $session = $request->getSession();
         if (!$session->isStarted()) {
@@ -85,7 +85,7 @@ final class SessionCheckController extends SessionBaseController
             $this->permissionResolver->getCurrentUserReference()->getUserId()
         );
 
-        return new Values\UserSession(
+        return new UserSession(
             $currentUser,
             $session->getName(),
             $session->getId(),

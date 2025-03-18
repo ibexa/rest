@@ -8,7 +8,7 @@
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\ObjectState\ObjectState;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\RestObjectState;
 use Ibexa\Rest\Values;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
@@ -78,7 +78,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsObjectStateElement($result)
+    public function testResultContainsObjectStateElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -100,7 +100,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsObjectStateAttributes($result)
+    public function testResultContainsObjectStateAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -123,7 +123,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsObjectStateGroupElement($result)
+    public function testResultContainsObjectStateGroupElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -142,7 +142,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsObjectStateGroupAttributes($result)
+    public function testResultContainsObjectStateGroupAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -165,7 +165,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsIdValueElement($result)
+    public function testResultContainsIdValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -185,7 +185,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsIdentifierValueElement($result)
+    public function testResultContainsIdentifierValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -205,7 +205,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsPriorityValueElement($result)
+    public function testResultContainsPriorityValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -225,7 +225,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsDefaultLanguageCodeValueElement($result)
+    public function testResultContainsDefaultLanguageCodeValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -245,7 +245,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsLanguageCodesValueElement($result)
+    public function testResultContainsLanguageCodesValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -265,7 +265,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsNamesElement($result)
+    public function testResultContainsNamesElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -287,7 +287,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsDescriptionsElement($result)
+    public function testResultContainsDescriptionsElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -307,8 +307,8 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestObjectState
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): RestObjectState
     {
-        return new ValueObjectVisitor\RestObjectState();
+        return new RestObjectState();
     }
 }

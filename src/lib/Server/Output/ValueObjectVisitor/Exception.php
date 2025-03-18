@@ -17,13 +17,10 @@ class Exception extends AbstractExceptionVisitor
 {
     /**
      * Is debug mode enabled?
-     *
-     * @var bool
      */
-    protected $debug = false;
+    protected bool $debug;
 
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
-    protected $translator;
+    protected ?TranslatorInterface $translator;
 
     /**
      * Construct from debug flag.

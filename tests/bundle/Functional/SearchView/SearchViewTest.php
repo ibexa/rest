@@ -21,7 +21,7 @@ class SearchViewTest extends SearchViewTestCase
     protected $contentHrefList;
 
     /** @var string */
-    private $nonSearchableContentHref;
+    private string $nonSearchableContentHref;
 
     /**
      * @throws \Psr\Http\Client\ClientExceptionInterface
@@ -364,7 +364,7 @@ JSON,
      *
      * @return \DOMElement
      */
-    private function buildFieldXml(string $name, string $operator, $value): DOMElement
+    private function buildFieldXml(string $name, string $operator, string|array $value): DOMElement
     {
         $xml = new DOMDocument();
         $element = $xml->createElement('Field');

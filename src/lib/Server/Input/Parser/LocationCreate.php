@@ -20,17 +20,13 @@ class LocationCreate extends BaseParser
 {
     /**
      * Location service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
      */
-    protected $locationService;
+    protected LocationService $locationService;
 
     /**
      * Parser tools.
-     *
-     * @var \Ibexa\Rest\Input\ParserTools
      */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     /**
      * Construct.

@@ -75,7 +75,7 @@ abstract class AbstractExceptionVisitor extends ValueObjectVisitor
      *
      * @return void
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startObjectElement('ErrorMessage');
 

@@ -16,10 +16,7 @@ use Symfony\Component\Routing\RouteCollection;
  */
 class RouteCollectionMapper
 {
-    /**
-     * @var Mapper
-     */
-    protected $mapper;
+    protected Mapper $mapper;
 
     public function __construct(Mapper $mapper)
     {
@@ -33,7 +30,7 @@ class RouteCollectionMapper
      *
      * @return \Symfony\Component\Routing\RouteCollection
      */
-    public function mapCollection(RouteCollection $restRouteCollection)
+    public function mapCollection(RouteCollection $restRouteCollection): RouteCollection
     {
         $optionsRouteCollection = new RouteCollection();
 

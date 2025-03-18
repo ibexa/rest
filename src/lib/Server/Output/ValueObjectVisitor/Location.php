@@ -34,7 +34,7 @@ class Location extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Location $location
      */
-    public function visit(Visitor $visitor, Generator $generator, $location)
+    public function visit(Visitor $visitor, Generator $generator, $location): void
     {
         $generator->startObjectElement('Location');
         $visitor->setHeader('Content-Type', $generator->getMediaType('Location'));

@@ -21,7 +21,7 @@ abstract class BaseTest extends ParentBaseTest
     /**
      * @var \Ibexa\Contracts\Rest\Input\ParsingDispatcher|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected $parsingDispatcherMock;
+    protected ?MockObject $parsingDispatcherMock = null;
 
     protected UriParserInterface&MockObject $uriParserMock;
 
@@ -62,7 +62,7 @@ abstract class BaseTest extends ParentBaseTest
         if (!isset($this->uriParserMock)) {
             $that = &$this;
 
-            $callback = static function ($href, $attribute) use ($that) {
+            $callback = static function ($href, $attribute) use ($that): ?string {
                 foreach ($that->getParseHrefExpectationsMap() as $map) {
                     if ($map[0] == $href && $map[1] == $attribute) {
                         if ($map[2] instanceof \Exception) {

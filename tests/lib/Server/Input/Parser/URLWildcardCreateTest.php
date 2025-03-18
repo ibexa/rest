@@ -15,7 +15,7 @@ class URLWildcardCreateTest extends BaseTest
     /**
      * Tests the URLWildcardCreate parser.
      */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'sourceUrl' => '/source/url',
@@ -40,7 +40,7 @@ class URLWildcardCreateTest extends BaseTest
     /**
      * Test URLWildcardCreate parser throwing exception on missing sourceUrl.
      */
-    public function testParseExceptionOnMissingSourceUrl()
+    public function testParseExceptionOnMissingSourceUrl(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'sourceUrl\' value for URLWildcardCreate.');
@@ -56,7 +56,7 @@ class URLWildcardCreateTest extends BaseTest
     /**
      * Test URLWildcardCreate parser throwing exception on missing destinationUrl.
      */
-    public function testParseExceptionOnMissingDestinationUrl()
+    public function testParseExceptionOnMissingDestinationUrl(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'destinationUrl\' value for URLWildcardCreate.');
@@ -72,7 +72,7 @@ class URLWildcardCreateTest extends BaseTest
     /**
      * Test URLWildcardCreate parser throwing exception on missing forward.
      */
-    public function testParseExceptionOnMissingForward()
+    public function testParseExceptionOnMissingForward(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'forward\' value for URLWildcardCreate.');
@@ -90,7 +90,7 @@ class URLWildcardCreateTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\URLWildcardCreate
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): URLWildcardCreate
     {
         $parser = new URLWildcardCreate($this->getParserTools());
         $parser->setUriParser($this->getUriParserMock());

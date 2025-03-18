@@ -55,7 +55,7 @@ class ContentListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsContentListElement($result)
+    public function testResultContainsContentListElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -74,7 +74,7 @@ class ContentListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsContentListAttributes($result)
+    public function testResultContainsContentListAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -93,7 +93,7 @@ class ContentListTest extends ValueObjectVisitorBaseTest
     /**
      * Test if ContentList visitor visits the children.
      */
-    public function testContentListVisitsChildren()
+    public function testContentListVisitsChildren(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -148,7 +148,7 @@ class ContentListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\ContentList
     {
         return new ValueObjectVisitor\ContentList();
     }

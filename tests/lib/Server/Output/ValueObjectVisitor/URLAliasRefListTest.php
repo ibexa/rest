@@ -19,7 +19,7 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
      *
      * @return \DOMDocument
      */
-    public function testVisit()
+    public function testVisit(): \DOMDocument
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -64,7 +64,7 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testUrlAliasRefListHrefCorrect(\DOMDocument $dom)
+    public function testUrlAliasRefListHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UrlAliasRefList[@href="/some/path"]');
     }
@@ -74,7 +74,7 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testUrlAliasRefListMediaTypeCorrect(\DOMDocument $dom)
+    public function testUrlAliasRefListMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UrlAliasRefList[@media-type="application/vnd.ibexa.api.UrlAliasRefList+xml"]');
     }
@@ -84,7 +84,7 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testUrlAliasHrefCorrect(\DOMDocument $dom)
+    public function testUrlAliasHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UrlAliasRefList/UrlAlias[@href="/content/urlaliases/some-id"]');
     }
@@ -94,7 +94,7 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testUrlAliasMediaTypeCorrect(\DOMDocument $dom)
+    public function testUrlAliasMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UrlAliasRefList/UrlAlias[@media-type="application/vnd.ibexa.api.UrlAlias+xml"]');
     }
@@ -104,7 +104,7 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAliasRefList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\URLAliasRefList
     {
         return new ValueObjectVisitor\URLAliasRefList();
     }

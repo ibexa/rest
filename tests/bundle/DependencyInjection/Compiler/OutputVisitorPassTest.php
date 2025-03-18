@@ -21,7 +21,7 @@ class OutputVisitorPassTest extends AbstractCompilerPassTestCase
         $container->addCompilerPass(new OutputVisitorPass());
     }
 
-    public function testProcess()
+    public function testProcess(): void
     {
         $stringRegexp = '(^.*/.*$)';
         $stringDefinition = new Definition();
@@ -57,7 +57,7 @@ class OutputVisitorPassTest extends AbstractCompilerPassTestCase
         ]);
     }
 
-    public function testPriority()
+    public function testPriority(): void
     {
         $definitions = [
             'high' => [
@@ -101,11 +101,11 @@ class OutputVisitorPassTest extends AbstractCompilerPassTestCase
         }
     }
 
-    protected function getVisitorsInRegistrationOrder()
+    protected function getVisitorsInRegistrationOrder(): array
     {
         $calls = $this->container->getDefinition(AcceptHeaderVisitorDispatcher::class)->getMethodCalls();
 
-        return array_map(static function ($call) {
+        return array_map(static function ($call): string {
             return (string) $call[1][1];
         }, $calls);
     }

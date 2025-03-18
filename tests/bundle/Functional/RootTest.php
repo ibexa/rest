@@ -9,6 +9,7 @@ namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 use Ibexa\Tests\Rest\AssertXmlTagTrait;
+use Psr\Http\Message\StreamInterface;
 
 class RootTest extends RESTFunctionalTestCase
 {
@@ -17,7 +18,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * Covers GET /.
      */
-    public function testLoadRootResource()
+    public function testLoadRootResource(): StreamInterface
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/')
@@ -54,7 +55,7 @@ class RootTest extends RESTFunctionalTestCase
      * @dataProvider getRandomUriSet
      * Covers GET /<wrongUri>
      */
-    public function testCatchAll($uri)
+    public function testCatchAll(string $uri): void
     {
         self::markTestSkipped('@todo fixme');
         $response = $this->sendHttpRequest(
@@ -69,7 +70,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsRootElement($result)
+    public function testResultContainsRootElement($result): void
     {
         $this->assertXMLTag(
             ['tag' => 'Root'],
@@ -86,7 +87,7 @@ class RootTest extends RESTFunctionalTestCase
      *
      * @depends testLoadRootResource
      */
-    public function testResultContainsRootAttributes($result)
+    public function testResultContainsRootAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -104,7 +105,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsContentTag($result)
+    public function testResultContainsContentTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -119,7 +120,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsContentTagAttributes($result)
+    public function testResultContainsContentTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -138,7 +139,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsContentByRemoteIdTag($result)
+    public function testResultContainsContentByRemoteIdTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -153,7 +154,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsContentByRemoteIdTagAttributes($result)
+    public function testResultContainsContentByRemoteIdTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -172,7 +173,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsContentTypesTag($result)
+    public function testResultContainsContentTypesTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -187,7 +188,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsContentTypesTagAttributes($result)
+    public function testResultContainsContentTypesTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -206,7 +207,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsContentTypeByIdentifierTag($result)
+    public function testResultContainsContentTypeByIdentifierTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -221,7 +222,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsContentTypeByIdentifierTagAttributes($result)
+    public function testResultContainsContentTypeByIdentifierTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -240,7 +241,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsContentTypeGroupsTag($result)
+    public function testResultContainsContentTypeGroupsTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -255,7 +256,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsContentTypeGroupsTagAttributes($result)
+    public function testResultContainsContentTypeGroupsTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -274,7 +275,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsContentTypeGroupByIdentifierTag($result)
+    public function testResultContainsContentTypeGroupByIdentifierTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -289,7 +290,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsContentTypeGroupByIdentifierTagAttributes($result)
+    public function testResultContainsContentTypeGroupByIdentifierTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -308,7 +309,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsUsersTag($result)
+    public function testResultContainsUsersTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -323,7 +324,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsUsersTagAttributes($result)
+    public function testResultContainsUsersTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -342,7 +343,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsUsersByRoleIdentifierTag($result)
+    public function testResultContainsUsersByRoleIdentifierTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -357,7 +358,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsUsersByRoleIdentifierTagAttributes($result)
+    public function testResultContainsUsersByRoleIdentifierTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -376,7 +377,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsUsersByRemoteIdentifierTag($result)
+    public function testResultContainsUsersByRemoteIdentifierTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -391,7 +392,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsUsersByRemoteIdentifierTagAttributes($result)
+    public function testResultContainsUsersByRemoteIdentifierTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -410,7 +411,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsUsersByEmailTag($result)
+    public function testResultContainsUsersByEmailTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -425,7 +426,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsUsersByEmailTagAttributes($result)
+    public function testResultContainsUsersByEmailTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -444,7 +445,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsUsersByLoginTag($result)
+    public function testResultContainsUsersByLoginTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -459,7 +460,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsUsersByLoginTagAttributes($result)
+    public function testResultContainsUsersByLoginTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -478,7 +479,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsRolesTag($result)
+    public function testResultContainsRolesTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -493,7 +494,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsRolesTagAttributes($result)
+    public function testResultContainsRolesTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -512,7 +513,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsRootLocationTag($result)
+    public function testResultContainsRootLocationTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -527,7 +528,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsRootLocationTagAttributes($result)
+    public function testResultContainsRootLocationTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -546,7 +547,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsRootUserGroupTag($result)
+    public function testResultContainsRootUserGroupTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -561,7 +562,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsRootUserGroupTagAttributes($result)
+    public function testResultContainsRootUserGroupTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -580,7 +581,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsRootMediaFolderTag($result)
+    public function testResultContainsRootMediaFolderTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -595,7 +596,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsRootMediaFolderTagAttributes($result)
+    public function testResultContainsRootMediaFolderTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -614,7 +615,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsLocationByRemoteIdTag($result)
+    public function testResultContainsLocationByRemoteIdTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -629,7 +630,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsLocationByRemoteIdTagAttributes($result)
+    public function testResultContainsLocationByRemoteIdTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -648,7 +649,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsLocationByPathTag($result)
+    public function testResultContainsLocationByPathTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -663,7 +664,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsLocationByPathTagAttributes($result)
+    public function testResultContainsLocationByPathTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -682,7 +683,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsTrashTag($result)
+    public function testResultContainsTrashTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -697,7 +698,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsTrashTagAttributes($result)
+    public function testResultContainsTrashTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -716,7 +717,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsSectionsTag($result)
+    public function testResultContainsSectionsTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -731,7 +732,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsSectionTagAttributes($result)
+    public function testResultContainsSectionTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -750,7 +751,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsViewsTag($result)
+    public function testResultContainsViewsTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -765,7 +766,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsViewsTagAttributes($result)
+    public function testResultContainsViewsTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -784,7 +785,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsObjectStateGroupsTag($result)
+    public function testResultContainsObjectStateGroupsTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -799,7 +800,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsObjectStateGroupsTagAttributes($result)
+    public function testResultContainsObjectStateGroupsTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -818,7 +819,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsObjectStatesTag($result)
+    public function testResultContainsObjectStatesTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -833,7 +834,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsObjectStatesTagAttributes($result)
+    public function testResultContainsObjectStatesTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -852,7 +853,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsGlobalUrlAliasesTag($result)
+    public function testResultContainsGlobalUrlAliasesTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -867,7 +868,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsGlobalUrlAliasesTagAttributes($result)
+    public function testResultContainsGlobalUrlAliasesTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -886,7 +887,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsUrlWildcardsTag($result)
+    public function testResultContainsUrlWildcardsTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -901,7 +902,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsUrlWildcardsTagAttributes($result)
+    public function testResultContainsUrlWildcardsTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -920,7 +921,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsCreateSessionTag($result)
+    public function testResultContainsCreateSessionTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -935,7 +936,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsCreateSessionTagAttributes($result)
+    public function testResultContainsCreateSessionTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -954,7 +955,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsRefreshSessionTag($result)
+    public function testResultContainsRefreshSessionTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -969,7 +970,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @depends testLoadRootResource
      */
-    public function testResultContainsRefreshSessionTagAttributes($result)
+    public function testResultContainsRefreshSessionTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -985,7 +986,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    public function getRandomUriSet()
+    public function getRandomUriSet(): array
     {
         return [
             ['/api/ibexa/v2/randomUri'],

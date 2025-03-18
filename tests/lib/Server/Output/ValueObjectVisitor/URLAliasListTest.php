@@ -48,7 +48,7 @@ class URLAliasListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsUrlAliasListElement($result)
+    public function testResultContainsUrlAliasListElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -67,7 +67,7 @@ class URLAliasListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsUrlAliasListAttributes($result)
+    public function testResultContainsUrlAliasListAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -86,7 +86,7 @@ class URLAliasListTest extends ValueObjectVisitorBaseTest
     /**
      * Test if URLAliasList visitor visits the children.
      */
-    public function testURLAliasListVisitsChildren()
+    public function testURLAliasListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -117,7 +117,7 @@ class URLAliasListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAliasList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\URLAliasList
     {
         return new ValueObjectVisitor\URLAliasList();
     }

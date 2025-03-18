@@ -27,7 +27,7 @@ class Visibility extends BaseParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Visibility
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): VisibilityCriterion
     {
         if (!array_key_exists('VisibilityCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <VisibilityCriterion> format');

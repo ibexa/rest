@@ -14,7 +14,7 @@ class UrlWildcardTest extends RESTFunctionalTestCase
     /**
      * Covers GET /content/urlwildcards.
      */
-    public function testListURLWildcards()
+    public function testListURLWildcards(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/content/urlwildcards')
@@ -62,7 +62,7 @@ XML;
      *
      * @depends testCreateUrlWildcard
      */
-    public function testLoadUrlWildcard($urlWildcardHref)
+    public function testLoadUrlWildcard(string $urlWildcardHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $urlWildcardHref)
@@ -76,7 +76,7 @@ XML;
      *
      * @depends testCreateUrlWildcard
      */
-    public function testDeleteURLWildcard($urlWildcardHref)
+    public function testDeleteURLWildcard(string $urlWildcardHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $urlWildcardHref)

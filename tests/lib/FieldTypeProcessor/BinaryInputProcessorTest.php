@@ -52,7 +52,7 @@ abstract class BinaryInputProcessorTest extends TestCase
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\BinaryInputProcessor::preProcessValueHash
      */
-    public function testPreProcessValueHashMissingKey()
+    public function testPreProcessValueHashMissingKey(): void
     {
         $processor = $this->getProcessor();
 
@@ -66,7 +66,7 @@ abstract class BinaryInputProcessorTest extends TestCase
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\BinaryInputProcessor::preProcessValueHash
      */
-    public function testPreProcessValueHash()
+    public function testPreProcessValueHash(): void
     {
         $processor = $this->getProcessor();
 

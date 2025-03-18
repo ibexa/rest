@@ -24,7 +24,7 @@ class URLWildcard extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $visitor->setHeader('Content-Type', $generator->getMediaType('UrlWildcard'));
         $generator->startObjectElement('UrlWildcard');

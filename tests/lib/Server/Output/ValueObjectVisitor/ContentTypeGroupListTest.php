@@ -51,7 +51,7 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsContentTypeGroupListElement($result)
+    public function testResultContainsContentTypeGroupListElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -70,7 +70,7 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsContentTypeGroupListAttributes($result)
+    public function testResultContainsContentTypeGroupListAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -89,7 +89,7 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
     /**
      * Test if ContentTypeGroupList visitor visits the children.
      */
-    public function testContentTypeGroupListVisitsChildren()
+    public function testContentTypeGroupListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -119,7 +119,7 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroupList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\ContentTypeGroupList
     {
         return new ValueObjectVisitor\ContentTypeGroupList();
     }

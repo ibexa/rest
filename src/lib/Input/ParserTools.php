@@ -59,7 +59,7 @@ class ParserTools
      *
      * @return bool
      */
-    public function isEmbeddedObject(array $objectElement)
+    public function isEmbeddedObject(array $objectElement): bool
     {
         foreach ($objectElement as $childKey => $childValue) {
             $childKeyIndicator = substr($childKey, 0, 1);
@@ -78,7 +78,7 @@ class ParserTools
      *
      * @return array
      */
-    public function parseTranslatableList(array $listElement)
+    public function parseTranslatableList(array $listElement): array
     {
         $listItems = [];
         foreach ($listElement['value'] as $valueRow) {
@@ -121,7 +121,7 @@ class ParserTools
      *
      * @return int
      */
-    public function parseStatus($contentTypeStatus)
+    public function parseStatus($contentTypeStatus): int
     {
         switch (strtoupper($contentTypeStatus)) {
             case 'DEFINED':
@@ -132,7 +132,7 @@ class ParserTools
                 return Values\ContentType\ContentType::STATUS_MODIFIED;
         }
 
-        throw new \RuntimeException("Unknown content type status '{$contentTypeStatus}.'");
+        throw new RuntimeException("Unknown content type status '{$contentTypeStatus}.'");
     }
 
     /**
@@ -142,7 +142,7 @@ class ParserTools
      *
      * @return int
      */
-    public function parseDefaultSortField($defaultSortFieldString)
+    public function parseDefaultSortField($defaultSortFieldString): int
     {
         switch ($defaultSortFieldString) {
             case 'PATH':
@@ -169,7 +169,7 @@ class ParserTools
                 return Values\Content\Location::SORT_FIELD_CONTENTOBJECT_ID;
         }
 
-        throw new \RuntimeException("Unknown default sort Field: '{$defaultSortFieldString}'.");
+        throw new RuntimeException("Unknown default sort Field: '{$defaultSortFieldString}'.");
     }
 
     /**
@@ -179,7 +179,7 @@ class ParserTools
      *
      * @return int
      */
-    public function parseDefaultSortOrder($defaultSortOrderString)
+    public function parseDefaultSortOrder($defaultSortOrderString): int
     {
         switch (strtoupper($defaultSortOrderString)) {
             case 'ASC':
@@ -188,7 +188,7 @@ class ParserTools
                 return Values\Content\Location::SORT_ORDER_DESC;
         }
 
-        throw new \RuntimeException("Unknown default sort order: '{$defaultSortOrderString}'.");
+        throw new RuntimeException("Unknown default sort order: '{$defaultSortOrderString}'.");
     }
 
     /**
@@ -235,7 +235,7 @@ class ParserTools
      *
      * @todo Use dependency injection system
      */
-    protected function getLimitationByIdentifier($identifier)
+    protected function getLimitationByIdentifier($identifier): ContentTypeLimitation|LanguageLimitation|LocationLimitation|OwnerLimitation|ParentOwnerLimitation|ParentContentTypeLimitation|ParentDepthLimitation|SectionLimitation|SiteAccessLimitation|ObjectStateLimitation|SubtreeLimitation|UserGroupLimitation|ParentUserGroupLimitation
     {
         switch ($identifier) {
             case Values\User\Limitation::CONTENTTYPE:
@@ -263,7 +263,7 @@ class ParserTools
                 return new SectionLimitation();
 
             case Values\User\Limitation::SITEACCESS:
-                return new SiteaccessLimitation();
+                return new SiteAccessLimitation();
 
             case Values\User\Limitation::STATE:
                 return new ObjectStateLimitation();

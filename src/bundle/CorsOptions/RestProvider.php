@@ -20,8 +20,7 @@ use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
  */
 class RestProvider implements ProviderInterface
 {
-    /** @var \Symfony\Component\Routing\Matcher\RequestMatcherInterface */
-    protected $requestMatcher;
+    protected RequestMatcherInterface $requestMatcher;
 
     /**
      * @param \Symfony\Component\Routing\Matcher\RequestMatcherInterface $requestMatcher
@@ -48,7 +47,7 @@ class RestProvider implements ProviderInterface
         return $return;
     }
 
-    protected function getAllowedMethods($uri)
+    protected function getAllowedMethods(string $uri): array
     {
         try {
             $route = $this->requestMatcher->matchRequest(

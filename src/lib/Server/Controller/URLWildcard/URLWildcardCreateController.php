@@ -15,7 +15,7 @@ use Ibexa\Contracts\Core\Repository\URLWildcardService;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedURLWildcard;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -109,7 +109,7 @@ class URLWildcardCreateController extends RestController
      *
      * @return \Ibexa\Rest\Server\Values\CreatedURLWildcard
      */
-    public function createURLWildcard(Request $request)
+    public function createURLWildcard(Request $request): CreatedURLWildcard
     {
         $urlWildcardCreate = $this->inputDispatcher->parse(
             new Message(
@@ -128,7 +128,7 @@ class URLWildcardCreateController extends RestController
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
-        return new Values\CreatedURLWildcard(
+        return new CreatedURLWildcard(
             [
                 'urlWildcard' => $createdURLWildcard,
             ]

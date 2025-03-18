@@ -22,7 +22,7 @@ class InputHandlerPass implements CompilerPassInterface
 {
     public const INPUT_HANDLER_SERVICE_TAG = 'ibexa.rest.input.handler';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition(Dispatcher::class)) {
             return;

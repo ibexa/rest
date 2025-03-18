@@ -9,6 +9,7 @@ namespace Ibexa\Tests\Rest\Input;
 
 use Ibexa\Contracts\Rest\Input\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -17,7 +18,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  */
 class ParsingDispatcherTest extends TestCase
 {
-    public function testParseMissingContentType()
+    public function testParseMissingContentType(): void
     {
         $this->expectException(\Ibexa\Contracts\Rest\Exceptions\Parser::class);
 
@@ -26,7 +27,7 @@ class ParsingDispatcherTest extends TestCase
         $dispatcher->parse([], 'text/unknown');
     }
 
-    public function testParse()
+    public function testParse(): void
     {
         $parser = $this->createParserMock();
         $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class), ['text/html' => $parser]);
@@ -46,7 +47,7 @@ class ParsingDispatcherTest extends TestCase
     /**
      * Verifies that the charset specified in the Content-Type is ignored.
      */
-    public function testParseCharset()
+    public function testParseCharset(): void
     {
         $parser = $this->createParserMock();
         $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class), ['text/html' => $parser]);
@@ -63,7 +64,7 @@ class ParsingDispatcherTest extends TestCase
         );
     }
 
-    public function testParseVersion()
+    public function testParseVersion(): void
     {
         $parserVersionOne = $this->createParserMock();
         $parserVersionTwo = $this->createParserMock();
@@ -81,7 +82,7 @@ class ParsingDispatcherTest extends TestCase
         $dispatcher->parse([42], 'text/html; version=2');
     }
 
-    public function testParseStripFormat()
+    public function testParseStripFormat(): void
     {
         $parser = $this->createParserMock();
         $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class), ['text/html' => $parser]);
@@ -101,7 +102,7 @@ class ParsingDispatcherTest extends TestCase
     /**
      * @return \Ibexa\Contracts\Rest\Input\Parser|\PHPUnit\Framework\MockObject\MockObject
      */
-    private function createParserMock()
+    private function createParserMock(): MockObject
     {
         return $this->createMock(Parser::class);
     }

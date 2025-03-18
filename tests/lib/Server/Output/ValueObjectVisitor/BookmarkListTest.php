@@ -21,7 +21,7 @@ class BookmarkListTest extends ValueObjectVisitorBaseTest
     /**
      * @var \Ibexa\Rest\Server\Values\BookmarkList
      */
-    private $data;
+    private BookmarkList $data;
 
     protected function setUp(): void
     {
@@ -100,7 +100,7 @@ class BookmarkListTest extends ValueObjectVisitorBaseTest
     /**
      * {@inheritdoc}
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\BookmarkList
     {
         return new ValueObjectVisitor\BookmarkList();
     }

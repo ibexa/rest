@@ -10,6 +10,7 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Core\Repository\Values;
 use Ibexa\Rest\Server;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Values\FieldDefinitionList;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 /**
@@ -20,7 +21,7 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
     /**
      * @return \DOMDocument
      */
-    public function testVisitFieldDefinitionList()
+    public function testVisitFieldDefinitionList(): \DOMDocument
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -55,9 +56,9 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
         return $dom;
     }
 
-    protected function getBasicFieldDefinitionList()
+    protected function getBasicFieldDefinitionList(): FieldDefinitionList
     {
-        return new Server\Values\FieldDefinitionList(
+        return new FieldDefinitionList(
             new Values\ContentType\ContentType(
                 [
                     'id' => 'contentTypeId',
@@ -76,7 +77,7 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    public function provideXpathAssertions()
+    public function provideXpathAssertions(): array
     {
         return [
             [
@@ -96,7 +97,7 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
      *
      * @dataProvider provideXpathAssertions
      */
-    public function testGeneratedXml($xpath, \DOMDocument $dom)
+    public function testGeneratedXml(string $xpath, \DOMDocument $dom): void
     {
         $this->assertXPath($dom, $xpath);
     }
@@ -106,7 +107,7 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\FieldDefinitionList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\FieldDefinitionList
     {
         return new ValueObjectVisitor\FieldDefinitionList();
     }

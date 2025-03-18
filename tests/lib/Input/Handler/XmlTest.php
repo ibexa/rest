@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
  */
 class XmlTest extends TestCase
 {
-    public function testConvertInvalidXml()
+    public function testConvertInvalidXml(): void
     {
         $this->expectException(Parser::class);
 
@@ -30,7 +30,10 @@ class XmlTest extends TestCase
         );
     }
 
-    public static function getXmlFixtures()
+    /**
+     * @return array{(string|false), mixed}[]
+     */
+    public static function getXmlFixtures(): array
     {
         $fixtures = [];
         foreach (glob(__DIR__ . '/_fixtures/*.xml') as $xmlFile) {
@@ -46,7 +49,7 @@ class XmlTest extends TestCase
     /**
      * @dataProvider getXmlFixtures
      */
-    public function testConvertXml($xml, $expectation)
+    public function testConvertXml($xml, $expectation): void
     {
         $handler = new Xml();
 

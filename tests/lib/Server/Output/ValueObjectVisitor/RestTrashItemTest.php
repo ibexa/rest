@@ -102,7 +102,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsTrashItemElement($result)
+    public function testResultContainsTrashItemElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -124,7 +124,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsTrashItemAttributes($result)
+    public function testResultContainsTrashItemAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -147,7 +147,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsContentInfoElement($result)
+    public function testResultContainsContentInfoElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -166,7 +166,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsContentInfoAttributes($result)
+    public function testResultContainsContentInfoAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -189,7 +189,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsIdValueElement($result)
+    public function testResultContainsIdValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -209,7 +209,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsPriorityValueElement($result)
+    public function testResultContainsPriorityValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -229,7 +229,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsHiddenValueElement($result)
+    public function testResultContainsHiddenValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -249,7 +249,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsInvisibleValueElement($result)
+    public function testResultContainsInvisibleValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -269,7 +269,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsRemoteIdValueElement($result)
+    public function testResultContainsRemoteIdValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -289,7 +289,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsParentLocationElement($result)
+    public function testResultContainsParentLocationElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -308,7 +308,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsParentLocationAttributes($result)
+    public function testResultContainsParentLocationAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -331,7 +331,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsPathStringValueElement($result)
+    public function testResultContainsPathStringValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -351,7 +351,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsDepthValueElement($result)
+    public function testResultContainsDepthValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -371,7 +371,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsChildCountValueElement($result)
+    public function testResultContainsChildCountValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -391,7 +391,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsContentElement($result)
+    public function testResultContainsContentElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -410,7 +410,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsContentAttributes($result)
+    public function testResultContainsContentAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -433,7 +433,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsSortFieldValueElement($result)
+    public function testResultContainsSortFieldValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -453,7 +453,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsSortOrderValueElement($result)
+    public function testResultContainsSortOrderValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -471,7 +471,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestTrashItem
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\RestTrashItem
     {
         return new ValueObjectVisitor\RestTrashItem();
     }
