@@ -14,25 +14,13 @@ use Ibexa\Rest\FieldTypeProcessorRegistry;
 
 class FieldTypeParser
 {
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
-     */
-    protected $contentService;
+    protected ContentService $contentService;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
-     */
-    protected $contentTypeService;
+    protected ContentTypeService $contentTypeService;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\FieldTypeService
-     */
-    protected $fieldTypeService;
+    protected FieldTypeService $fieldTypeService;
 
-    /**
-     * @var \Ibexa\Rest\FieldTypeProcessorRegistry
-     */
-    protected $fieldTypeProcessorRegistry;
+    protected FieldTypeProcessorRegistry $fieldTypeProcessorRegistry;
 
     /**
      * @param \Ibexa\Contracts\Core\Repository\ContentService $contentService
@@ -62,7 +50,7 @@ class FieldTypeParser
      *
      * @return mixed
      */
-    public function parseFieldValue($contentInfoId, $fieldDefIdentifier, $value)
+    public function parseFieldValue(int $contentInfoId, $fieldDefIdentifier, $value)
     {
         $contentInfo = $this->contentService->loadContentInfo($contentInfoId);
         $contentType = $this->contentTypeService->loadContentType($contentInfo->contentTypeId);

@@ -10,7 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\NoContent;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
@@ -72,7 +72,7 @@ class ContentTranslationDeleteController extends RestController
      *
      * @throws \Exception
      */
-    public function deleteContentTranslation($contentId, $languageCode)
+    public function deleteContentTranslation(int $contentId, string $languageCode): NoContent
     {
         $contentService = $this->repository->getContentService();
 
@@ -86,7 +86,7 @@ class ContentTranslationDeleteController extends RestController
 
             $this->repository->commit();
 
-            return new Values\NoContent();
+            return new NoContent();
         } catch (\Exception $e) {
             $this->repository->rollback();
             throw $e;

@@ -27,7 +27,7 @@ class VersionInfo extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startHashElement('VersionInfo');
         $this->visitVersionInfoAttributes($visitor, $generator, $data);
@@ -41,7 +41,7 @@ class VersionInfo extends ValueObjectVisitor
      *
      * @return string
      */
-    protected function getStatusString($status)
+    protected function getStatusString($status): string
     {
         switch ($status) {
             case Values\Content\VersionInfo::STATUS_DRAFT:

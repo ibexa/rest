@@ -48,7 +48,7 @@ class ContentObjectStatesTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsContentObjectStatesElement($result)
+    public function testResultContainsContentObjectStatesElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -67,7 +67,7 @@ class ContentObjectStatesTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsContentObjectStatesAttributes($result)
+    public function testResultContainsContentObjectStatesAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -87,7 +87,7 @@ class ContentObjectStatesTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentObjectStates
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\ContentObjectStates
     {
         return new ValueObjectVisitor\ContentObjectStates();
     }

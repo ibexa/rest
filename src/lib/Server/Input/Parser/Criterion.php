@@ -93,7 +93,7 @@ abstract class Criterion extends BaseParser
         return 'application/vnd.ibexa.api.internal.criterion.' . $criterionName;
     }
 
-    protected function getSortClauseMediaType($sortClauseName)
+    protected function getSortClauseMediaType(string $sortClauseName)
     {
         return 'application/vnd.ibexa.api.internal.sortclause.' . $sortClauseName;
     }

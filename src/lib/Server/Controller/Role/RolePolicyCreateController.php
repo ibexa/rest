@@ -14,7 +14,7 @@ use Ibexa\Contracts\Core\Repository\Exceptions\LimitationValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedPolicy;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -108,7 +108,7 @@ class RolePolicyCreateController extends RoleBaseController
      *
      * @return \Ibexa\Rest\Server\Values\CreatedPolicy
      */
-    public function addPolicy($roleId, Request $request)
+    public function addPolicy(int $roleId, Request $request): CreatedPolicy
     {
         $createStruct = $this->inputDispatcher->parse(
             new Message(
@@ -138,7 +138,7 @@ class RolePolicyCreateController extends RoleBaseController
             throw new BadRequestException($e->getMessage());
         }
 
-        return new Values\CreatedPolicy(
+        return new CreatedPolicy(
             [
                 'policy' => $this->getLastAddedPolicy($role),
             ]

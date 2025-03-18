@@ -20,10 +20,10 @@ class RelationListProcessorTest extends TestCase
         'SELECTION_DROPDOWN',
     ];
 
-    public function fieldSettingsHashes()
+    public function fieldSettingsHashes(): array
     {
         return array_map(
-            static function ($constantName) {
+            static function ($constantName): array {
                 return [
                     ['selectionMethod' => $constantName],
                     ['selectionMethod' => constant("Ibexa\\Core\\FieldType\\RelationList\\Type::{$constantName}")],
@@ -38,7 +38,7 @@ class RelationListProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
+    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -53,7 +53,7 @@ class RelationListProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)
+    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -63,7 +63,7 @@ class RelationListProcessorTest extends TestCase
         );
     }
 
-    public function testpostProcessFieldSettingsHashLocation()
+    public function testpostProcessFieldSettingsHashLocation(): void
     {
         $processor = $this->getProcessor();
 
@@ -97,7 +97,7 @@ class RelationListProcessorTest extends TestCase
         self::assertEquals(['selectionDefaultLocation' => null], $hash);
     }
 
-    public function testPostProcessValueHash()
+    public function testPostProcessValueHash(): void
     {
         $processor = $this->getProcessor();
 
@@ -124,7 +124,7 @@ class RelationListProcessorTest extends TestCase
     /**
      * @return \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor
      */
-    protected function getProcessor()
+    protected function getProcessor(): RelationListProcessor
     {
         return new RelationListProcessor();
     }

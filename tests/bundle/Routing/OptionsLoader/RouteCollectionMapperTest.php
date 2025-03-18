@@ -28,7 +28,7 @@ class RouteCollectionMapperTest extends TestCase
         );
     }
 
-    public function testAddRestRoutesCollection()
+    public function testAddRestRoutesCollection(): void
     {
         $restRoutesCollection = new RouteCollection();
         $restRoutesCollection->add('ibexa.rest.route_one_get', $this->createRoute('/route/one', ['GET']));

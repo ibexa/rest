@@ -24,7 +24,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
     /** @var \Psr\Log\LoggerInterface&\PHPUnit\Framework\MockObject\MockObject */
     private LoggerInterface $logger;
 
-    private $iniPrecisions;
+    private array $iniPrecisions;
 
     /**
      * To make sure float values are serialized with same precision across php versions we force precision.
@@ -68,7 +68,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         return $this->logger ??= $this->createMock(LoggerInterface::class);
     }
 
-    public function testGenerateNull()
+    public function testGenerateNull(): void
     {
         $this->getGenerator()->generateFieldTypeHash(
             'fieldValue',
@@ -78,7 +78,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         $this->assertSerializationSame(__FUNCTION__);
     }
 
-    public function testGenerateBoolValue()
+    public function testGenerateBoolValue(): void
     {
         $this->getGenerator()->generateFieldTypeHash(
             'fieldValue',
@@ -88,7 +88,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         $this->assertSerializationSame(__FUNCTION__);
     }
 
-    public function testGenerateIntegerValue()
+    public function testGenerateIntegerValue(): void
     {
         $this->getGenerator()->generateFieldTypeHash(
             'fieldValue',
@@ -98,7 +98,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         $this->assertSerializationSame(__FUNCTION__);
     }
 
-    public function testGenerateFloatValue()
+    public function testGenerateFloatValue(): void
     {
         $this->getGenerator()->generateFieldTypeHash(
             'fieldValue',
@@ -108,7 +108,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         $this->assertSerializationSame(__FUNCTION__);
     }
 
-    public function testGenerateStringValue()
+    public function testGenerateStringValue(): void
     {
         $this->getGenerator()->generateFieldTypeHash(
             'fieldValue',
@@ -118,7 +118,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         $this->assertSerializationSame(__FUNCTION__);
     }
 
-    public function testGenerateEmptyStringValue()
+    public function testGenerateEmptyStringValue(): void
     {
         $this->getGenerator()->generateFieldTypeHash(
             'fieldValue',
@@ -128,7 +128,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         $this->assertSerializationSame(__FUNCTION__);
     }
 
-    public function testGenerateStringValueWithSpecialChars()
+    public function testGenerateStringValueWithSpecialChars(): void
     {
         $this->getGenerator()->generateFieldTypeHash(
             'fieldValue',
@@ -138,7 +138,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         $this->assertSerializationSame(__FUNCTION__);
     }
 
-    public function testGenerateListArrayValue()
+    public function testGenerateListArrayValue(): void
     {
         $this->getGenerator()->generateFieldTypeHash(
             'fieldValue',
@@ -153,7 +153,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         $this->assertSerializationSame(__FUNCTION__);
     }
 
-    public function testGenerateHashArrayValue()
+    public function testGenerateHashArrayValue(): void
     {
         $this->getGenerator()->generateFieldTypeHash(
             'fieldValue',
@@ -168,7 +168,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         $this->assertSerializationSame(__FUNCTION__);
     }
 
-    public function testGenerateHashArrayMixedValue()
+    public function testGenerateHashArrayMixedValue(): void
     {
         $this->getGenerator()->generateFieldTypeHash(
             'fieldValue',
@@ -183,7 +183,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         $this->assertSerializationSame(__FUNCTION__);
     }
 
-    public function testGenerateComplexValueAuthor()
+    public function testGenerateComplexValueAuthor(): void
     {
         $this->getGenerator()->generateFieldTypeHash(
             'fieldValue',
@@ -310,7 +310,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         }
     }
 
-    private function getFixtureFile($functionName)
+    private function getFixtureFile(string $functionName): string
     {
         return sprintf(
             '%s/_fixtures/%s__%s.out',
@@ -320,7 +320,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         );
     }
 
-    private function getRelativeClassIdentifier()
+    private function getRelativeClassIdentifier(): string
     {
         $fqClassName = static::class;
 

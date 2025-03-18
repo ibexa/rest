@@ -31,7 +31,7 @@ class ContentUpdate extends BaseParser
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser if $data is invalid
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestContentMetadataUpdateStruct
     {
         $parsedData = [];
 

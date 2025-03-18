@@ -8,11 +8,12 @@
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Rest\Server\Input\Parser\ContentQuery;
 use Ibexa\Rest\Server\Input\Parser\ContentQuery as QueryParser;
 
 class QueryParserTest extends BaseTest
 {
-    public function testParseEmptyQuery()
+    public function testParseEmptyQuery(): void
     {
         $inputArray = [
             'Filter' => [],
@@ -29,7 +30,7 @@ class QueryParserTest extends BaseTest
         self::assertEquals($expectedQuery, $result);
     }
 
-    public function testDispatchOneFilter()
+    public function testDispatchOneFilter(): void
     {
         $inputArray = [
             'Filter' => ['ContentTypeIdentifierCriterion' => 'article'],
@@ -53,7 +54,7 @@ class QueryParserTest extends BaseTest
         self::assertEquals($expectedQuery, $result);
     }
 
-    public function testDispatchMoreThanOneFilter()
+    public function testDispatchMoreThanOneFilter(): void
     {
         $inputArray = [
             'Filter' => ['ContentTypeIdentifierCriterion' => 'article', 'ParentLocationIdCriterion' => 762],
@@ -85,7 +86,7 @@ class QueryParserTest extends BaseTest
         self::assertEquals($expectedQuery, $result);
     }
 
-    public function testDispatchOneQueryItem()
+    public function testDispatchOneQueryItem(): void
     {
         $inputArray = [
             'Query' => ['ContentTypeIdentifierCriterion' => 'article'],
@@ -109,7 +110,7 @@ class QueryParserTest extends BaseTest
         self::assertEquals($expectedQuery, $result);
     }
 
-    public function testDispatchMoreThanOneQueryItem()
+    public function testDispatchMoreThanOneQueryItem(): void
     {
         $inputArray = [
             'Query' => ['ContentTypeIdentifierCriterion' => 'article', 'ParentLocationIdCriterion' => 762],
@@ -144,7 +145,7 @@ class QueryParserTest extends BaseTest
     /**
      * Returns the session input parser.
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): ContentQuery
     {
         return new QueryParser();
     }

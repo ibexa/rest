@@ -18,7 +18,7 @@ class BookmarkList extends ValueObjectVisitor
     /**
      * {@inheritdoc}
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startObjectElement('BookmarkList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('BookmarkList'));

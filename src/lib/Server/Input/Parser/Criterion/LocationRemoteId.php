@@ -27,7 +27,7 @@ class LocationRemoteId extends BaseParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LocationRemoteId
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): LocationRemoteIdCriterion
     {
         if (!array_key_exists('LocationRemoteIdCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <LocationRemoteIdCriterion> format');

@@ -17,7 +17,7 @@ class Root extends RestValue
     /**
      * @var resource[]
      */
-    protected $resources;
+    protected array $resources;
 
     public function __construct(array $resources = [])
     {

@@ -64,7 +64,7 @@ class VersionListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsVersionListElement($result)
+    public function testResultContainsVersionListElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -83,7 +83,7 @@ class VersionListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsVersionListAttributes($result)
+    public function testResultContainsVersionListAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -102,7 +102,7 @@ class VersionListTest extends ValueObjectVisitorBaseTest
     /**
      * Test if VersionList visitor visits the children.
      */
-    public function testVersionListVisitsChildren()
+    public function testVersionListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -151,7 +151,7 @@ class VersionListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\VersionList
     {
         return new ValueObjectVisitor\VersionList();
     }

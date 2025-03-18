@@ -85,7 +85,7 @@ XML;
      * @depends testPublishContent
      * Covers GET /content/objects?remoteId=<remoteId>
      */
-    public function testRedirectContent($restContentHref)
+    public function testRedirectContent($restContentHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/content/objects?remoteId=' . $this->addTestSuffix('testCreateContent'))
@@ -98,7 +98,7 @@ XML;
     /**
      * @depends testPublishContent
      */
-    public function testLoadContent($restContentHref)
+    public function testLoadContent(string $restContentHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $restContentHref)
@@ -111,7 +111,7 @@ XML;
     /**
      * @depends testPublishContent
      */
-    public function testUpdateContentMetadata($restContentHref)
+    public function testUpdateContentMetadata(string $restContentHref): void
     {
         $string = $this->addTestSuffix(__FUNCTION__);
         $content = <<< XML
@@ -163,7 +163,7 @@ XML;
      *
      * @throws \Psr\Http\Client\ClientException
      */
-    public function testRedirectCurrentVersion(string $restContentHref)
+    public function testRedirectCurrentVersion(string $restContentHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$restContentHref/currentversion")
@@ -180,7 +180,7 @@ XML;
      *
      * @param string $restContentVersionHref
      */
-    public function testLoadContentVersion($restContentVersionHref)
+    public function testLoadContentVersion(string $restContentVersionHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $restContentVersionHref)
@@ -251,7 +251,7 @@ XML;
      *
      * @depends testCopyContent
      */
-    public function testDeleteContent($restContentHref)
+    public function testDeleteContent(string $restContentHref): void
     {
         self::markTestSkipped("Fails as the content created by copyContent isn't found");
         $response = $this->sendHttpRequest(
@@ -265,7 +265,7 @@ XML;
      * @depends testPublishContent
      * Covers GET /content/objects/<contentId>/versions
      */
-    public function testLoadContentVersions($restContentHref)
+    public function testLoadContentVersions($restContentHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$restContentHref/versions", '', 'VersionList')
@@ -300,7 +300,7 @@ XML;
      * @param string $restContentVersionHref /api/ibexa/v2/content/objects/<contentId>/versions>/<versionNumber>
      * Covers DELETE /api/ibexa/v2/content/objects/<contentId>/versions>/<versionNumber>
      */
-    public function testDeleteContentVersion($restContentVersionHref)
+    public function testDeleteContentVersion(string $restContentVersionHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $restContentVersionHref)
@@ -315,7 +315,7 @@ XML;
      *
      * @param string $restContentVersionHref /content/objects/<contentId>/versions>/<versionNumber>
      */
-    public function testUpdateVersion($restContentVersionHref)
+    public function testUpdateVersion(string $restContentVersionHref): void
     {
         $xml = <<< XML
 <VersionUpdate>
@@ -345,7 +345,7 @@ XML;
      * @depends testPublishContent
      * Covers GET /content/objects/<contentId>/relations
      */
-    public function testRedirectCurrentVersionRelations($restContentHref)
+    public function testRedirectCurrentVersionRelations($restContentHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$restContentHref/relations")
@@ -363,7 +363,7 @@ XML;
      * @depends testCreateDraftFromVersion
      * Covers GET /content/objects/<contentId>/versions/<versionNumber>/relations
      */
-    public function testLoadVersionRelations($restContentVersionHref)
+    public function testLoadVersionRelations($restContentVersionHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$restContentVersionHref/relations")
@@ -407,7 +407,7 @@ XML;
      * @depends testCreateRelation
      * Covers GET /content/objects/<contentId>/versions/<versionNo>/relations/<relationId>
      */
-    public function testLoadVersionRelation($restContentRelationHref)
+    public function testLoadVersionRelation(string $restContentRelationHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $restContentRelationHref)
@@ -428,7 +428,7 @@ XML;
      *
      * @return array
      */
-    private function loadContent($restContentHref)
+    private function loadContent(string $restContentHref)
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $restContentHref, '', 'ContentInfo+json')
@@ -453,7 +453,7 @@ XML;
      *
      * @param string $restContentVersionHref
      */
-    public function testDeleteTranslationFromDraft($restContentVersionHref)
+    public function testDeleteTranslationFromDraft(string $restContentVersionHref): void
     {
         // create pol-PL Translation
         $translationToDelete = 'pol-PL';
@@ -486,7 +486,7 @@ XML;
      *
      * @param string $restContentVersionHref
      */
-    public function testLoadContentVersionsProvidesDeleteTranslationFromDraftResourceLink($restContentVersionHref)
+    public function testLoadContentVersionsProvidesDeleteTranslationFromDraftResourceLink($restContentVersionHref): void
     {
         $translationToDelete = 'pol-PL';
         // create Version Draft containing pol-PL Translation
@@ -624,7 +624,7 @@ XML;
      *
      * @param string $restContentHref
      */
-    public function testDeleteTranslationOfContentWithSingleTranslationVersion($restContentHref)
+    public function testDeleteTranslationOfContentWithSingleTranslationVersion($restContentHref): void
     {
         // create draft independent from other tests
         $restContentVersionHref = $this->createDraftFromVersion("$restContentHref/versions/1");
@@ -664,7 +664,7 @@ XML;
      *
      * @return string
      */
-    private function createVersionTranslation($restContentVersionHref, $languageCode, $languageName)
+    private function createVersionTranslation(string $restContentVersionHref, string $languageCode, string $languageName): void
     {
         // @todo Implement EZP-21171 to check if Language exists and add it
         // for now adding is done by ez:behat:create-language command executed in Travis job
@@ -702,7 +702,7 @@ XML;
      *
      * @return array
      */
-    private function getVersionInfoFromJSONVersionListByStatus(array $versionList, $status)
+    private function getVersionInfoFromJSONVersionListByStatus(array $versionList, string $status)
     {
         foreach ($versionList['VersionItem'] as $versionItem) {
             if ($versionItem['VersionInfo']['status'] === $status) {
@@ -718,7 +718,7 @@ XML;
      *
      * @param \Psr\Http\Message\ResponseInterface $response
      */
-    private function assertVersionResponseContainsExpectedFields(ResponseInterface $response)
+    private function assertVersionResponseContainsExpectedFields(ResponseInterface $response): void
     {
         self::assertHttpResponseHasHeader($response, 'Content-Type');
         $contentType = $response->getHeader('Content-Type')[0];
@@ -746,7 +746,7 @@ XML;
      *
      * @return array Content structure decoded from JSON
      */
-    private function createContentDraft($restContentTypeHref, $restParentLocationHref, $restSectionHref, $restUserHref, array $fieldValues)
+    private function createContentDraft(string $restContentTypeHref, string $restParentLocationHref, string $restSectionHref, string $restUserHref, array $fieldValues)
     {
         $remoteId = md5(microtime() . uniqid());
         $modificationDate = new \DateTime();
@@ -815,7 +815,7 @@ XML;
      *
      * @return string Content Version Draft REST resource link
      */
-    private function createDraftFromVersion($restContentVersionHref)
+    private function createDraftFromVersion(string $restContentVersionHref)
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('COPY', $restContentVersionHref)
@@ -833,7 +833,7 @@ XML;
      *
      * @param string $restContentVersionHref REST resource link of Version Draft
      */
-    private function publishContentVersionDraft($restContentVersionHref)
+    private function publishContentVersionDraft(string $restContentVersionHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('PUBLISH', $restContentVersionHref)
@@ -847,7 +847,7 @@ XML;
      * @param string $restContentHref REST resource link of Content
      * @param string $languageCode new Main Translation language code
      */
-    private function updateMainTranslation($restContentHref, $languageCode)
+    private function updateMainTranslation(string $restContentHref, string $languageCode): void
     {
         $content = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>

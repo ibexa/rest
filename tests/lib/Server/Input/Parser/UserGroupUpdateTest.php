@@ -21,13 +21,14 @@ use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\UserGroupUpdate;
 use Ibexa\Rest\Server\Values\RestUserGroupUpdateStruct;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class UserGroupUpdateTest extends BaseTest
 {
     /**
      * Tests the UserGroupUpdate parser.
      */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'mainLanguageCode' => 'eng-US',
@@ -97,7 +98,7 @@ class UserGroupUpdateTest extends BaseTest
     /**
      * Test UserGroupUpdate parser throwing exception on missing Section href.
      */
-    public function testParseExceptionOnMissingSectionHref()
+    public function testParseExceptionOnMissingSectionHref(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'_href\' attribute for the Section element in UserGroupUpdate.');
@@ -123,7 +124,7 @@ class UserGroupUpdateTest extends BaseTest
     /**
      * Test UserGroupUpdate parser throwing exception on invalid fields data.
      */
-    public function testParseExceptionOnInvalidFields()
+    public function testParseExceptionOnInvalidFields(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid \'fields\' element for UserGroupUpdate.');
@@ -144,7 +145,7 @@ class UserGroupUpdateTest extends BaseTest
     /**
      * Test UserGroupUpdate parser throwing exception on missing field definition identifier.
      */
-    public function testParseExceptionOnMissingFieldDefinitionIdentifier()
+    public function testParseExceptionOnMissingFieldDefinitionIdentifier(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'fieldDefinitionIdentifier\' element in field data for UserGroupUpdate.');
@@ -171,7 +172,7 @@ class UserGroupUpdateTest extends BaseTest
     /**
      * Test UserGroupUpdate parser throwing exception on missing field value.
      */
-    public function testParseExceptionOnMissingFieldValue()
+    public function testParseExceptionOnMissingFieldValue(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'fieldValue\' element for the \'name\' identifier in UserGroupUpdate.');
@@ -200,7 +201,7 @@ class UserGroupUpdateTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\UserGroupUpdate
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): UserGroupUpdate
     {
         return new UserGroupUpdate(
             $this->getUserServiceMock(),
@@ -215,7 +216,7 @@ class UserGroupUpdateTest extends BaseTest
      *
      * @return \Ibexa\Rest\Input\FieldTypeParser ;
      */
-    private function getFieldTypeParserMock()
+    private function getFieldTypeParserMock(): MockObject
     {
         $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
             ->disableOriginalConstructor()
@@ -242,7 +243,7 @@ class UserGroupUpdateTest extends BaseTest
      *
      * @return \Ibexa\Contracts\Core\Repository\UserService
      */
-    protected function getUserServiceMock()
+    protected function getUserServiceMock(): MockObject
     {
         $userServiceMock = $this->createMock(UserService::class);
 
@@ -260,7 +261,7 @@ class UserGroupUpdateTest extends BaseTest
      *
      * @return \Ibexa\Contracts\Core\Repository\LocationService
      */
-    protected function getLocationServiceMock()
+    protected function getLocationServiceMock(): MockObject
     {
         $userServiceMock = $this->createMock(LocationService::class);
 
@@ -287,7 +288,7 @@ class UserGroupUpdateTest extends BaseTest
      *
      * @return \Ibexa\Contracts\Core\Repository\ContentService
      */
-    protected function getContentServiceMock()
+    protected function getContentServiceMock(): MockObject
     {
         $contentServiceMock = $this->createMock(ContentService::class);
 
@@ -306,7 +307,7 @@ class UserGroupUpdateTest extends BaseTest
         return $contentServiceMock;
     }
 
-    public function getParseHrefExpectationsMap()
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/content/sections/1', 'sectionId', 1],

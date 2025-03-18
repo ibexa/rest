@@ -40,7 +40,7 @@ class Field extends BaseParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Field
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): FieldCriterion
     {
         if (!array_key_exists('Field', $data)) {
             throw new Exceptions\Parser('Invalid <Field> format');
@@ -71,7 +71,7 @@ class Field extends BaseParser
      *
      * @return string
      */
-    private function getOperator($operatorName)
+    private function getOperator($operatorName): string
     {
         $operatorName = strtoupper($operatorName);
         if (!isset(self::OPERATORS[$operatorName])) {

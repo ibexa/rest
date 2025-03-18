@@ -8,6 +8,7 @@
 namespace Ibexa\Tests\Bundle\Rest\Routing;
 
 use Ibexa\Bundle\Rest\Routing\OptionsLoader;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\RouteCollection;
 
@@ -22,7 +23,7 @@ class OptionsLoaderTest extends TestCase
      *
      * @dataProvider getResourceType
      */
-    public function testSupportsResourceType($type, $expected)
+    public function testSupportsResourceType(string $type, bool $expected): void
     {
         self::assertEquals(
             $expected,
@@ -30,7 +31,7 @@ class OptionsLoaderTest extends TestCase
         );
     }
 
-    public function getResourceType()
+    public function getResourceType(): array
     {
         return [
             ['rest_options', true],
@@ -38,7 +39,7 @@ class OptionsLoaderTest extends TestCase
         ];
     }
 
-    public function testLoad()
+    public function testLoad(): void
     {
         $optionsRouteCollection = new RouteCollection();
 
@@ -58,7 +59,7 @@ class OptionsLoaderTest extends TestCase
      *
      * @return \Ibexa\Bundle\Rest\Routing\OptionsLoader|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getOptionsLoader()
+    protected function getOptionsLoader(): MockObject
     {
         $mock = $this->getMockBuilder(OptionsLoader::class)
             ->setConstructorArgs([$this->getRouteCollectionMapperMock()])

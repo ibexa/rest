@@ -14,6 +14,7 @@ use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedLocation;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -111,7 +112,7 @@ class LocationCreateController extends LocationBaseController
      *
      * @return \Ibexa\Rest\Server\Values\CreatedLocation
      */
-    public function createLocation($contentId, Request $request)
+    public function createLocation(int $contentId, Request $request): CreatedLocation
     {
         $locationCreateStruct = $this->inputDispatcher->parse(
             new Message(
@@ -128,6 +129,6 @@ class LocationCreateController extends LocationBaseController
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
-        return new Values\CreatedLocation(['restLocation' => new Values\RestLocation($createdLocation, 0)]);
+        return new CreatedLocation(['restLocation' => new Values\RestLocation($createdLocation, 0)]);
     }
 }

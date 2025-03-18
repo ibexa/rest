@@ -19,6 +19,7 @@ use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedRole;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -103,7 +104,7 @@ class RoleCreateController extends RoleBaseController
      *
      * @return \Ibexa\Rest\Server\Values\CreatedRole
      */
-    public function createRole(Request $request)
+    public function createRole(Request $request): CreatedRole
     {
         $publish = (
             !$request->query->has('publish') ||
@@ -144,9 +145,9 @@ class RoleCreateController extends RoleBaseController
 
             $role = $this->roleService->loadRole($roleDraft->id);
 
-            return new Values\CreatedRole(['role' => new Values\RestRole($role)]);
+            return new CreatedRole(['role' => new Values\RestRole($role)]);
         }
 
-        return new Values\CreatedRole(['role' => new Values\RestRole($roleDraft)]);
+        return new CreatedRole(['role' => new Values\RestRole($roleDraft)]);
     }
 }

@@ -160,7 +160,7 @@ class ContentTypeGroupUpdateController extends RestController
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroupUpdateStruct
      */
-    private function mapToGroupUpdateStruct(ContentTypeGroupCreateStruct $createStruct)
+    private function mapToGroupUpdateStruct(ContentTypeGroupCreateStruct $createStruct): ContentTypeGroupUpdateStruct
     {
         return new ContentTypeGroupUpdateStruct(
             [

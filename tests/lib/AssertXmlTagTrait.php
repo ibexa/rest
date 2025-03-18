@@ -24,7 +24,7 @@ trait AssertXmlTagTrait
      * @param string $actualXml
      * @param string $message
      */
-    public static function assertXMLTag($matcher, $actualXml, $message = '')
+    public static function assertXMLTag($matcher, $actualXml, $message = ''): void
     {
         // Provide default values.
         $matcher += ['attributes' => []];

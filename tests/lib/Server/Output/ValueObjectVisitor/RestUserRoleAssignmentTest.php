@@ -8,7 +8,7 @@
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\User;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserRoleAssignment;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
@@ -75,7 +75,7 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsRoleAssignmentElement($result)
+    public function testResultContainsRoleAssignmentElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -97,7 +97,7 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsRoleAssignmentAttributes($result)
+    public function testResultContainsRoleAssignmentAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -120,7 +120,7 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsRoleElement($result)
+    public function testResultContainsRoleElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -139,7 +139,7 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsRoleAttributes($result)
+    public function testResultContainsRoleAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -160,8 +160,8 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserRoleAssignment
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): RestUserRoleAssignment
     {
-        return new ValueObjectVisitor\RestUserRoleAssignment();
+        return new RestUserRoleAssignment();
     }
 }

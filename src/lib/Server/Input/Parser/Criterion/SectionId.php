@@ -27,7 +27,7 @@ class SectionId extends BaseParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\SectionId
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): SectionIdCriterion
     {
         if (!array_key_exists('SectionIdCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <SectionIdCriterion> format');
