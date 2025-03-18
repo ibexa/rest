@@ -61,7 +61,7 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ],
             Response::HTTP_NOT_FOUND => [
-                'description' => 'If there are no visibile Users matching the filter.',
+                'description' => 'If there are no visible Users matching the filter.',
             ],
         ],
     ),
