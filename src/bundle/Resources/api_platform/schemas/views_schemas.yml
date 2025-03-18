@@ -81,6 +81,9 @@ schemas:
             performCount:
                 description: If true, search engine should perform count even if that means extra lookup.
                 type: boolean
+    LocationQuery:
+        description: This class is used to perform a Location query.
+        $ref: "#/components/schemas/Query"
     Criterion:
         description: Criterion implementations.
         type: object
