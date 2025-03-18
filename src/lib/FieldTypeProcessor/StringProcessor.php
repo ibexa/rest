@@ -14,7 +14,7 @@ class StringProcessor extends FieldTypeProcessor
     /**
      * {@inheritdoc}
      */
-    public function preProcessValueHash($incomingValueHash)
+    public function preProcessValueHash($incomingValueHash): string
     {
         return (string) $incomingValueHash;
     }

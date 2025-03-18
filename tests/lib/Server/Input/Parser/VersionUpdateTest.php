@@ -14,13 +14,14 @@ use Ibexa\Core\Repository\ContentService;
 use Ibexa\Core\Repository\Values\Content\ContentUpdateStruct;
 use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\VersionUpdate;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class VersionUpdateTest extends BaseTest
 {
     /**
      * Tests the VersionUpdate parser.
      */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'initialLanguageCode' => 'eng-US',
@@ -62,7 +63,7 @@ class VersionUpdateTest extends BaseTest
     /**
      * Test VersionUpdate parser throwing exception on invalid fields data.
      */
-    public function testParseExceptionOnInvalidFields()
+    public function testParseExceptionOnInvalidFields(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid \'fields\' element for VersionUpdate.');
@@ -79,7 +80,7 @@ class VersionUpdateTest extends BaseTest
     /**
      * Test VersionUpdate parser throwing exception on missing field definition identifier.
      */
-    public function testParseExceptionOnMissingFieldDefinitionIdentifier()
+    public function testParseExceptionOnMissingFieldDefinitionIdentifier(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'fieldDefinitionIdentifier\' element in Field data for VersionUpdate.');
@@ -102,7 +103,7 @@ class VersionUpdateTest extends BaseTest
     /**
      * Test VersionUpdate parser throwing exception on missing field value.
      */
-    public function testParseExceptionOnMissingFieldValue()
+    public function testParseExceptionOnMissingFieldValue(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'fieldValue\' element for the \'subject\' identifier in VersionUpdate.');
@@ -127,7 +128,7 @@ class VersionUpdateTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\VersionUpdate
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): VersionUpdate
     {
         return new VersionUpdate(
             $this->getContentServiceMock(),
@@ -140,7 +141,7 @@ class VersionUpdateTest extends BaseTest
      *
      * @return \Ibexa\Rest\Input\FieldTypeParser ;
      */
-    private function getFieldTypeParserMock()
+    private function getFieldTypeParserMock(): MockObject
     {
         $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
             ->setMethods([])
@@ -167,7 +168,7 @@ class VersionUpdateTest extends BaseTest
      *
      * @return \Ibexa\Contracts\Core\Repository\ContentService
      */
-    protected function getContentServiceMock()
+    protected function getContentServiceMock(): MockObject
     {
         $contentServiceMock = $this->createMock(ContentService::class);
 
@@ -180,7 +181,7 @@ class VersionUpdateTest extends BaseTest
         return $contentServiceMock;
     }
 
-    public function getParseHrefExpectationsMap()
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/content/objects/42/versions/1', 'contentId', 42],

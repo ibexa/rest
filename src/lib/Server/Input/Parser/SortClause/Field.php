@@ -23,7 +23,7 @@ class Field extends BaseParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Field
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): FieldSortClause
     {
         if (!isset($data['Field'])) {
             throw new Exceptions\Parser("The <Field> Sort Clause doesn't exist in the input structure");
@@ -70,7 +70,7 @@ class Field extends BaseParser
      *
      * @return array
      */
-    private function normalizeData($data)
+    private function normalizeData(array $data): array
     {
         $normalizedData = [];
 

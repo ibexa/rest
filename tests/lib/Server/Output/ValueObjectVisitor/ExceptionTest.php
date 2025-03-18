@@ -13,6 +13,7 @@ use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Rest\Output\Generator\Xml;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\Exception as ExceptionValueObjectVisitor;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ExceptionTest extends ValueObjectVisitorBaseTest
@@ -20,14 +21,14 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
     protected const NON_VERBOSE_ERROR_DESCRIPTION = 'An error has occurred. Please try again later or contact your Administrator.';
 
     /** @var \Symfony\Contracts\Translation\TranslatorInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $translatorMock;
+    private ?MockObject $translatorMock = null;
 
     /**
      * Test the Exception visitor.
      *
      * @return string
      */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -66,7 +67,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsErrorCode($result)
+    public function testResultContainsErrorCode($result): void
     {
         $this->assertXMLTag(
             [
@@ -88,7 +89,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsErrorMessage($result)
+    public function testResultContainsErrorMessage($result): void
     {
         $this->assertXMLTag(
             [
@@ -110,7 +111,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsErrorDescription($result)
+    public function testResultContainsErrorDescription($result): void
     {
         $this->assertXMLTag(
             [
@@ -146,7 +147,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsExceptionAttributes($result)
+    public function testResultContainsExceptionAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -165,9 +166,9 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsPreviousError($result)
+    public function testResultContainsPreviousError($result): void
     {
-        $dom = new \DOMDocument();
+        $dom = new DOMDocument();
         $dom->loadXml($result);
 
         $this->assertXPath(
@@ -181,7 +182,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @return int
      */
-    protected function getExpectedStatusCode()
+    protected function getExpectedStatusCode(): int
     {
         return 500;
     }
@@ -191,7 +192,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @return string
      */
-    protected function getExpectedMessage()
+    protected function getExpectedMessage(): string
     {
         return 'Internal Server Error';
     }
@@ -201,7 +202,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @return \Exception
      */
-    protected function getException()
+    protected function getException(): \Exception
     {
         return new \Exception('Test');
     }
@@ -211,7 +212,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Exception
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ExceptionValueObjectVisitor
     {
         return new ExceptionValueObjectVisitor(true, $this->getTranslatorMock());
     }

@@ -9,6 +9,7 @@ namespace Ibexa\Tests\Bundle\Rest\CorsOptions;
 
 use Exception;
 use Ibexa\Bundle\Rest\CorsOptions\RestProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
@@ -23,7 +24,7 @@ class RestProviderTest extends TestCase
      */
     protected $matchRequestResult = [];
 
-    public function testGetOptions()
+    public function testGetOptions(): void
     {
         $this->matchRequestResult = ['allowedMethods' => 'GET,POST,DELETE'];
 
@@ -35,7 +36,7 @@ class RestProviderTest extends TestCase
         );
     }
 
-    public function testGetOptionsResourceNotFound()
+    public function testGetOptionsResourceNotFound(): void
     {
         $this->matchRequestResult = new ResourceNotFoundException();
         self::assertEquals(
@@ -46,7 +47,7 @@ class RestProviderTest extends TestCase
         );
     }
 
-    public function testGetOptionsMethodNotAllowed()
+    public function testGetOptionsMethodNotAllowed(): void
     {
         $this->matchRequestResult = new MethodNotAllowedException(['OPTIONS']);
         self::assertEquals(
@@ -57,7 +58,7 @@ class RestProviderTest extends TestCase
         );
     }
 
-    public function testGetOptionsException()
+    public function testGetOptionsException(): void
     {
         $this->expectException(Exception::class);
 
@@ -65,7 +66,7 @@ class RestProviderTest extends TestCase
         $this->getProvider()->getOptions($this->createRequest());
     }
 
-    public function testGetOptionsNoMethods()
+    public function testGetOptionsNoMethods(): void
     {
         $this->matchRequestResult = [];
         self::assertEquals(
@@ -76,7 +77,7 @@ class RestProviderTest extends TestCase
         );
     }
 
-    public function testGetOptionsNotRestRequest()
+    public function testGetOptionsNotRestRequest(): void
     {
         $this->matchRequestResult = false;
         self::assertEquals(
@@ -90,7 +91,7 @@ class RestProviderTest extends TestCase
      *
      * @return \Symfony\Component\HttpFoundation\Request
      */
-    protected function createRequest($isRestRequest = true)
+    protected function createRequest($isRestRequest = true): Request
     {
         $request = new Request();
         if ($isRestRequest) {
@@ -100,7 +101,7 @@ class RestProviderTest extends TestCase
         return $request;
     }
 
-    protected function getProvider()
+    protected function getProvider(): RestProvider
     {
         return new RestProvider(
             $this->getRequestMatcherMock()
@@ -110,7 +111,7 @@ class RestProviderTest extends TestCase
     /**
      * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Routing\Matcher\RequestMatcherInterface
      */
-    protected function getRequestMatcherMock()
+    protected function getRequestMatcherMock(): MockObject
     {
         $mock = $this->createMock(RequestMatcherInterface::class);
 

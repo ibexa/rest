@@ -11,7 +11,7 @@ use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\NoContent;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
@@ -68,7 +68,7 @@ class ContentVersionDeleteController extends RestController
      *
      * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteContentVersion($contentId, $versionNumber)
+    public function deleteContentVersion(int $contentId, ?int $versionNumber): NoContent
     {
         $versionInfo = $this->repository->getContentService()->loadVersionInfo(
             $this->repository->getContentService()->loadContentInfo($contentId),
@@ -83,6 +83,6 @@ class ContentVersionDeleteController extends RestController
             $versionInfo
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 }

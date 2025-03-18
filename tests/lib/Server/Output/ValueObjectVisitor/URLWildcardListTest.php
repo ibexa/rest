@@ -54,7 +54,7 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsUrlWildcardListElement($result)
+    public function testResultContainsUrlWildcardListElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -73,7 +73,7 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsUrlWildcardListAttributes($result)
+    public function testResultContainsUrlWildcardListAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -92,7 +92,7 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTest
     /**
      * Test if URLWildcardList visitor visits the children.
      */
-    public function testURLWildcardListVisitsChildren()
+    public function testURLWildcardListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -122,7 +122,7 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcardList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\URLWildcardList
     {
         return new ValueObjectVisitor\URLWildcardList();
     }

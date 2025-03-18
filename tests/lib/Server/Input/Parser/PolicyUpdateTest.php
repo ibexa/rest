@@ -12,13 +12,14 @@ use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\RoleService;
 use Ibexa\Core\Repository\Values\User\PolicyUpdateStruct;
 use Ibexa\Rest\Server\Input\Parser\PolicyUpdate;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PolicyUpdateTest extends BaseTest
 {
     /**
      * Tests the PolicyUpdate parser.
      */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'limitations' => [
@@ -84,7 +85,7 @@ class PolicyUpdateTest extends BaseTest
     /**
      * Test PolicyUpdate parser throwing exception on missing identifier.
      */
-    public function testParseExceptionOnMissingLimitationIdentifier()
+    public function testParseExceptionOnMissingLimitationIdentifier(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'_identifier\' attribute for Limitation.');
@@ -117,7 +118,7 @@ class PolicyUpdateTest extends BaseTest
     /**
      * Test PolicyUpdate parser throwing exception on missing values.
      */
-    public function testParseExceptionOnMissingLimitationValues()
+    public function testParseExceptionOnMissingLimitationValues(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid format for Limitation value in Limitation.');
@@ -140,7 +141,7 @@ class PolicyUpdateTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\PolicyUpdate
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): PolicyUpdate
     {
         return new PolicyUpdate(
             $this->getRoleServiceMock(),
@@ -153,7 +154,7 @@ class PolicyUpdateTest extends BaseTest
      *
      * @return \Ibexa\Contracts\Core\Repository\RoleService
      */
-    protected function getRoleServiceMock()
+    protected function getRoleServiceMock(): MockObject
     {
         $roleServiceMock = $this->createMock(RoleService::class);
 

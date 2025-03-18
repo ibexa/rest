@@ -7,7 +7,7 @@
 
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\Options;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
@@ -18,7 +18,7 @@ class OptionsTest extends ValueObjectVisitorBaseTest
      *
      * @return string
      */
-    public function testVisit()
+    public function testVisit(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -50,8 +50,8 @@ class OptionsTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\NoContent
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): Options
     {
-        return new ValueObjectVisitor\Options();
+        return new Options();
     }
 }

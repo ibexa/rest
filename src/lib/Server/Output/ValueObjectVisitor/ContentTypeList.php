@@ -24,7 +24,7 @@ class ContentTypeList extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\ContentTypeList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startObjectElement('ContentTypeList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('ContentTypeList'));

@@ -29,7 +29,7 @@ class PathStringRouteBasedLimitationParser extends RouteBasedLimitationParser
      *
      * @return false|mixed
      */
-    protected function parseIdFromHref($limitationValue)
+    protected function parseIdFromHref($limitationValue): string
     {
         if (substr($limitationValue['_href'], -1) !== '/') {
             throw new Exceptions\Parser("The '_href' attribute must end with a slash.");

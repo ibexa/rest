@@ -20,15 +20,10 @@ class ObjectStateGroupCreate extends BaseParser
 {
     /**
      * Object state service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\ObjectStateService
      */
-    protected $objectStateService;
+    protected ObjectStateService $objectStateService;
 
-    /**
-     * @var \Ibexa\Rest\Input\ParserTools
-     */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     /**
      * Construct.

@@ -16,7 +16,8 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType as APIContentType;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\ContentTypeInfoList;
+use Ibexa\Rest\Server\Values\ContentTypeList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -88,12 +89,12 @@ class ContentTypeListController extends RestController
      *
      * @return \Ibexa\Rest\Server\Values\ContentTypeList|\Ibexa\Rest\Server\Values\ContentTypeInfoList
      */
-    public function listContentTypes(Request $request)
+    public function listContentTypes(Request $request): ContentTypeInfoList|ContentTypeList
     {
         if ($this->getMediaType($request) === 'application/vnd.ibexa.api.contenttypelist') {
-            $return = new Values\ContentTypeList([], $request->getPathInfo());
+            $return = new ContentTypeList([], $request->getPathInfo());
         } else {
-            $return = new Values\ContentTypeInfoList([], $request->getPathInfo());
+            $return = new ContentTypeInfoList([], $request->getPathInfo());
         }
 
         if ($request->query->has('identifier')) {
@@ -213,7 +214,7 @@ class ContentTypeListController extends RestController
     /**
      * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType[]
      */
-    protected function getContentTypeList()
+    protected function getContentTypeList(): array
     {
         $contentTypes = [];
         foreach ($this->contentTypeService->loadContentTypeGroups() as $contentTypeGroup) {

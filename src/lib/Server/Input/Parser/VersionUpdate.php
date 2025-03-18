@@ -20,17 +20,13 @@ class VersionUpdate extends BaseParser
 {
     /**
      * Content service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
      */
-    protected $contentService;
+    protected ContentService $contentService;
 
     /**
      * FieldType parser.
-     *
-     * @var \Ibexa\Rest\Input\FieldTypeParser
      */
-    protected $fieldTypeParser;
+    protected FieldTypeParser $fieldTypeParser;
 
     /**
      * Construct from content service.

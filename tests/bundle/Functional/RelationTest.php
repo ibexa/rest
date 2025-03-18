@@ -11,7 +11,7 @@ use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 
 class RelationTest extends RESTFunctionalTestCase
 {
-    public function testRelation()
+    public function testRelation(): void
     {
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>

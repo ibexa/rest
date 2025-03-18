@@ -16,8 +16,7 @@ use Ibexa\Rest\Input\ParserTools;
 
 class IsUserEnabled extends BaseParser
 {
-    /** @var \Ibexa\Rest\Input\ParserTools */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     public function __construct(ParserTools $parserTools)
     {

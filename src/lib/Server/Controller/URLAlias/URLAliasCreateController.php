@@ -16,7 +16,7 @@ use Ibexa\Contracts\Core\Repository\URLAliasService;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedURLAlias;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -111,7 +111,7 @@ class URLAliasCreateController extends RestController
      *
      * @return \Ibexa\Rest\Server\Values\CreatedURLAlias
      */
-    public function createURLAlias(Request $request)
+    public function createURLAlias(Request $request): CreatedURLAlias
     {
         $urlAliasCreate = $this->inputDispatcher->parse(
             new Message(
@@ -155,7 +155,7 @@ class URLAliasCreateController extends RestController
             }
         }
 
-        return new Values\CreatedURLAlias(
+        return new CreatedURLAlias(
             [
                 'urlAlias' => $createdURLAlias,
             ]

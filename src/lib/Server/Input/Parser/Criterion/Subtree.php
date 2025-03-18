@@ -27,7 +27,7 @@ class Subtree extends BaseParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Subtree
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): SubtreeCriterion
     {
         if (!array_key_exists('SubtreeCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <SubtreeCriterion> format');

@@ -24,7 +24,7 @@ class VersionTranslationInfo extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\VersionTranslationInfo $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $versionInfo = $data->getVersionInfo();
         if (empty($versionInfo->languageCodes)) {

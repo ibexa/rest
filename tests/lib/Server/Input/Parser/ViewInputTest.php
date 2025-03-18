@@ -16,7 +16,7 @@ class ViewInputTest extends BaseTest
     /**
      * Tests the ViewInput parser.
      */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'identifier' => 'Query identifier',
@@ -40,14 +40,14 @@ class ViewInputTest extends BaseTest
         self::assertEquals($expectedViewInput, $result, 'RestViewInput not created correctly.');
     }
 
-    public function testThrowsExceptionOnMissingIdentifier()
+    public function testThrowsExceptionOnMissingIdentifier(): void
     {
         $this->expectException('Ibexa\\Contracts\\Rest\\Exceptions\\Parser');
         $inputArray = ['Query' => []];
         $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    public function testThrowsExceptionOnMissingQuery()
+    public function testThrowsExceptionOnMissingQuery(): void
     {
         $this->expectException('Ibexa\\Contracts\\Rest\\Exceptions\\Parser');
         $inputArray = ['identifier' => 'foo'];
@@ -59,7 +59,7 @@ class ViewInputTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\ViewInput
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): ViewInput
     {
         return new ViewInput();
     }

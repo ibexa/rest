@@ -12,7 +12,7 @@ class ViewTest extends TestCase
     /**
      * Covers POST /views.
      */
-    public function testViewRequestWithOrStatement()
+    public function testViewRequestWithOrStatement(): void
     {
         $fooRemoteId = md5('View test content foo');
         $barRemoteId = md5('View test content bar');
@@ -53,7 +53,7 @@ XML;
      *
      * @depends testViewRequestWithOrStatement
      */
-    public function testViewRequestWithAndStatement()
+    public function testViewRequestWithAndStatement(): void
     {
         $fooRemoteId = md5('View test content foo');
         $barRemoteId = md5('View test content bar');

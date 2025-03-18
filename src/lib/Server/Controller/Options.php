@@ -22,7 +22,7 @@ class Options extends RestController
      *
      * @return Values\Options
      */
-    public function getRouteOptions($allowedMethods)
+    public function getRouteOptions($allowedMethods): Values\Options
     {
         return new Values\Options(explode(',', $allowedMethods));
     }

@@ -9,7 +9,7 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Base\Exceptions\ContentFieldValidationException as CoreContentFieldValidationException;
 use Ibexa\Core\FieldType\ValidationError;
-use Ibexa\Rest\Server\Exceptions;
+use Ibexa\Rest\Server\Exceptions\ContentFieldValidationException;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 use Symfony\Component\Translation\Translator;
@@ -50,7 +50,7 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsErrorDescription($result)
+    public function testResultContainsErrorDescription($result): void
     {
         self::assertXMLTag(
             [
@@ -69,7 +69,7 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsErrorDetails($result)
+    public function testResultContainsErrorDetails($result): void
     {
         self::assertXMLTag(
             [
@@ -93,7 +93,7 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @return int
      */
-    protected function getExpectedStatusCode()
+    protected function getExpectedStatusCode(): int
     {
         return 400;
     }
@@ -103,7 +103,7 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @return string
      */
-    protected function getExpectedMessage()
+    protected function getExpectedMessage(): string
     {
         return 'Bad Request';
     }
@@ -113,7 +113,7 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @return string
      */
-    protected function getExpectedDescription()
+    protected function getExpectedDescription(): string
     {
         return 'Content fields did not validate';
     }
@@ -123,9 +123,9 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @return \Exception
      */
-    protected function getException()
+    protected function getException(): ContentFieldValidationException
     {
-        return new Exceptions\ContentFieldValidationException(
+        return new ContentFieldValidationException(
             new CoreContentFieldValidationException([
                 1 => [
                     'eng-GB' => new ValidationError(
@@ -152,7 +152,7 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentFieldValidationException
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\ContentFieldValidationException
     {
         return new ValueObjectVisitor\ContentFieldValidationException(false, new Translator('eng-GB'));
     }

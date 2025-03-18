@@ -151,7 +151,7 @@ final class UserGroupListController extends UserBaseController
      *
      * @return \Ibexa\Rest\Server\Values\RestUserGroup[]
      */
-    public function loadUserGroupsAssignedToRole($roleId): array
+    public function loadUserGroupsAssignedToRole(int $roleId): array
     {
         $role = $this->roleService->loadRole($roleId);
         $roleAssignments = $this->roleService->getRoleAssignments($role);

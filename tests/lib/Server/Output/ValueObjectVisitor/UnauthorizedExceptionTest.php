@@ -17,7 +17,7 @@ class UnauthorizedExceptionTest extends ExceptionTest
      *
      * @return int
      */
-    protected function getExpectedStatusCode()
+    protected function getExpectedStatusCode(): int
     {
         return 401;
     }
@@ -27,7 +27,7 @@ class UnauthorizedExceptionTest extends ExceptionTest
      *
      * @return string
      */
-    protected function getExpectedMessage()
+    protected function getExpectedMessage(): string
     {
         return 'Unauthorized';
     }
@@ -37,7 +37,7 @@ class UnauthorizedExceptionTest extends ExceptionTest
      *
      * @return \Exception
      */
-    protected function getException()
+    protected function getException(): \Exception
     {
         return $this->getMockForAbstractClass(UnauthorizedException::class);
     }
@@ -47,7 +47,7 @@ class UnauthorizedExceptionTest extends ExceptionTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UnauthorizedException
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\Exception
     {
         return new ValueObjectVisitor\UnauthorizedException();
     }

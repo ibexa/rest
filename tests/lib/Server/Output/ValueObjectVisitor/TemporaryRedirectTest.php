@@ -7,7 +7,7 @@
 
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\TemporaryRedirect;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
@@ -18,7 +18,7 @@ class TemporaryRedirectTest extends ValueObjectVisitorBaseTest
      *
      * @return string
      */
-    public function testVisit()
+    public function testVisit(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -48,8 +48,8 @@ class TemporaryRedirectTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\TemporaryRedirect
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): TemporaryRedirect
     {
-        return new ValueObjectVisitor\TemporaryRedirect();
+        return new TemporaryRedirect();
     }
 }

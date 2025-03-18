@@ -82,7 +82,7 @@ class Root extends RestController
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
      */
-    public function catchAll()
+    public function catchAll(): never
     {
         throw new NotFoundException('No such route');
     }

@@ -12,7 +12,7 @@ use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
 
 class RouteBasedLimitationParserTest extends BaseTest
 {
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             '_identifier' => 'Section',
@@ -36,12 +36,12 @@ class RouteBasedLimitationParserTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\Limitation\RouteBasedLimitationParser
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): RouteBasedLimitationParser
     {
         return new RouteBasedLimitationParser('sectionId', 'stdClass');
     }
 
-    public function getParseHrefExpectationsMap()
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/content/sections/42', 'sectionId', 42],

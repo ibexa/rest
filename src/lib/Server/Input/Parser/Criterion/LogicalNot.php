@@ -27,7 +27,7 @@ class LogicalNot extends CriterionParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): LogicalNotCriterion
     {
         if (!array_key_exists('NOT', $data) && !is_array($data['NOT'])) {
             throw new Exceptions\Parser('Invalid <NOT> format');

@@ -7,7 +7,6 @@
 
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Contracts\Core\Repository\Values;
 use Ibexa\Contracts\Core\Repository\Values\Content\URLAlias as URLAliasValue;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
@@ -25,7 +24,7 @@ class URLAlias extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\URLAlias $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startObjectElement('UrlAlias');
         $visitor->setHeader('Content-Type', $generator->getMediaType('UrlAlias'));
@@ -40,16 +39,16 @@ class URLAlias extends ValueObjectVisitor
      *
      * @return string
      */
-    protected function serializeType($urlAliasType)
+    protected function serializeType($urlAliasType): string
     {
         switch ($urlAliasType) {
-            case Values\Content\URLAlias::LOCATION:
+            case URLAliasValue::LOCATION:
                 return 'LOCATION';
 
-            case Values\Content\URLAlias::RESOURCE:
+            case URLAliasValue::RESOURCE:
                 return 'RESOURCE';
 
-            case Values\Content\URLAlias::VIRTUAL:
+            case URLAliasValue::VIRTUAL:
                 return 'VIRTUAL';
         }
 
@@ -70,7 +69,7 @@ class URLAlias extends ValueObjectVisitor
         $generator->startAttribute('type', $this->serializeType($data->type));
         $generator->endAttribute('type');
 
-        if ($data->type === Values\Content\URLAlias::LOCATION) {
+        if ($data->type === URLAliasValue::LOCATION) {
             $generator->startObjectElement('location', 'Location');
             $generator->startAttribute(
                 'href',

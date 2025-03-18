@@ -24,7 +24,7 @@ class RestUserRoleAssignment extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\RestUserRoleAssignment $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startObjectElement('RoleAssignment');
         $visitor->setHeader('Content-Type', $generator->getMediaType('RoleAssignment'));

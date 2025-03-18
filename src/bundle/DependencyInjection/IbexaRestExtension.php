@@ -55,7 +55,7 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
         $processor->mapConfigArray('rest_root_resources', $mergedConfig);
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         if ($container->hasExtension('nelmio_cors')) {
             $file = __DIR__ . '/../Resources/config/nelmio_cors.yml';
@@ -69,7 +69,7 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
         $this->prependApiPlatformConfiguration($container);
     }
 
-    private function prependRouterConfiguration(ContainerBuilder $container)
+    private function prependRouterConfiguration(ContainerBuilder $container): void
     {
         $config = ['router' => ['default_router' => ['non_siteaccess_aware_routes' => ['ibexa.rest.']]]];
         $container->prependExtensionConfig('ibexa', $config);

@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\RemoteId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\RemoteId as ContentRemoteIdCriterion;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
@@ -27,7 +28,7 @@ class ContentRemoteId extends BaseParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\RemoteId
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): RemoteId
     {
         if (!array_key_exists('ContentRemoteIdCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <ContentRemoteIdCriterion> format');

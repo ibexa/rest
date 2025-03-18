@@ -24,7 +24,7 @@ class RelationCreate extends BaseParser
      *
      * @return mixed
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): string
     {
         if (!array_key_exists('Destination', $data) || !is_array($data['Destination'])) {
             throw new Exceptions\Parser("Missing or invalid 'Destination' element for RelationCreate.");

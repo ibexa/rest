@@ -30,7 +30,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
      *
      * @return \DOMDocument
      */
-    public function testVisit()
+    public function testVisit(): \DOMDocument
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -77,7 +77,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         return $dom;
     }
 
-    public function provideXpathAssertions()
+    public function provideXpathAssertions(): array
     {
         return [
             ['/View'],
@@ -103,7 +103,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
      *
      * @dataProvider provideXpathAssertions
      */
-    public function testGeneratedXml($xpath, \DOMDocument $dom)
+    public function testGeneratedXml(string $xpath, \DOMDocument $dom): void
     {
         $this->assertXPath($dom, $xpath);
     }
@@ -113,7 +113,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestExecutedView
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\RestExecutedView
     {
         return new ValueObjectVisitor\RestExecutedView(
             $this->getLocationServiceMock(),
@@ -124,7 +124,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     /**
      * @return \Ibexa\Contracts\Core\Repository\LocationService|\PHPUnit\Framework\MockObject\MockObject
      */
-    public function getLocationServiceMock()
+    public function getLocationServiceMock(): MockObject
     {
         return $this->createMock(LocationService::class);
     }
@@ -142,7 +142,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     /**
      * @return \Ibexa\Contracts\Core\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
      */
-    public function getContentTypeServiceMock()
+    public function getContentTypeServiceMock(): MockObject
     {
         return $this->createMock(ContentTypeService::class);
     }
@@ -150,7 +150,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     /**
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit
      */
-    protected function buildContentSearchHit()
+    protected function buildContentSearchHit(): SearchHit
     {
         return new SearchHit([
             'score' => 0.123,
@@ -169,7 +169,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     /**
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit
      */
-    protected function buildLocationSearchHit()
+    protected function buildLocationSearchHit(): SearchHit
     {
         return new SearchHit([
             'score' => 0.234,

@@ -17,10 +17,8 @@ class RestRole extends RestValue
 {
     /**
      * Holds internal role object.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\User\Role
      */
-    protected $innerRole;
+    protected Role $innerRole;
 
     /**
      * Construct.

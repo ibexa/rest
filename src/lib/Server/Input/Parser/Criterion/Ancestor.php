@@ -27,7 +27,7 @@ class Ancestor extends BaseParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Ancestor
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): AncestorCriterion
     {
         if (!array_key_exists('AncestorCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <AncestorCriterion> format');

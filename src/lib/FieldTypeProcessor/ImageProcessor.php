@@ -27,12 +27,9 @@ class ImageProcessor extends BinaryInputProcessor
      *
      * @var string[]
      */
-    protected $variations;
+    protected array $variations;
 
-    /**
-     * @var \Symfony\Component\Routing\RouterInterface
-     */
-    protected $router;
+    protected RouterInterface $router;
 
     /**
      * @param string $temporaryDirectory
@@ -88,7 +85,7 @@ class ImageProcessor extends BinaryInputProcessor
      *
      * @return string
      */
-    protected function generateUrl($path, $variation)
+    protected function generateUrl($path, $variation): string
     {
         $fieldId = '';
         $versionNo = '';

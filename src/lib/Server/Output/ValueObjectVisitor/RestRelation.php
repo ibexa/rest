@@ -24,7 +24,7 @@ class RestRelation extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\RestRelation $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startObjectElement('Relation');
         $visitor->setHeader('Content-Type', $generator->getMediaType('Relation'));
@@ -88,7 +88,7 @@ class RestRelation extends ValueObjectVisitor
      *
      * @return string
      */
-    protected function getRelationTypeString($relationType)
+    protected function getRelationTypeString($relationType): string
     {
         $relationTypeList = [];
 

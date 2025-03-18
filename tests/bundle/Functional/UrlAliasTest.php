@@ -27,7 +27,7 @@ class UrlAliasTest extends RESTFunctionalTestCase
     /**
      * Covers GET /content/urlaliases.
      */
-    public function testListGlobalURLAliases()
+    public function testListGlobalURLAliases(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/content/urlaliases')
@@ -117,7 +117,7 @@ XML;
      * @depends testCreateUrlAlias
      * Covers GET /content/urlaliases/{urlAliasId}
      */
-    public function testLoadURLAlias($urlAliasHref)
+    public function testLoadURLAlias(string $urlAliasHref): void
     {
         self::markTestSkipped('@todo fixme');
 
@@ -135,7 +135,7 @@ XML;
      * @depends testCreateUrlAlias
      * Covers DELETE /content/urlaliases/{urlAliasId}
      */
-    public function testDeleteURLAlias($urlAliasHref)
+    public function testDeleteURLAlias(string $urlAliasHref): void
     {
         self::markTestSkipped('@todo fixme');
 
@@ -154,7 +154,7 @@ XML;
      * @depends testCreateFolder
      * Covers GET /content/locations/{locationPath}/urlaliases
      */
-    public function testListLocationURLAliases($contentLocationHref)
+    public function testListLocationURLAliases($contentLocationHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$contentLocationHref/urlaliases")

@@ -11,13 +11,14 @@ use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\ObjectStateService;
 use Ibexa\Rest\Server\Input\Parser\ObjectStateCreate;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ObjectStateCreateTest extends BaseTest
 {
     /**
      * Tests the ObjectStateCreate parser.
      */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'identifier' => 'test-state',
@@ -84,7 +85,7 @@ class ObjectStateCreateTest extends BaseTest
     /**
      * Test ObjectStateCreate parser throwing exception on missing identifier.
      */
-    public function testParseExceptionOnMissingIdentifier()
+    public function testParseExceptionOnMissingIdentifier(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'identifier\' attribute for ObjectStateCreate.');
@@ -116,7 +117,7 @@ class ObjectStateCreateTest extends BaseTest
     /**
      * Test ObjectStateCreate parser throwing exception on missing priority.
      */
-    public function testParseExceptionOnMissingPriority()
+    public function testParseExceptionOnMissingPriority(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'priority\' attribute for ObjectStateCreate.');
@@ -148,7 +149,7 @@ class ObjectStateCreateTest extends BaseTest
     /**
      * Test ObjectStateCreate parser throwing exception on missing defaultLanguageCode.
      */
-    public function testParseExceptionOnMissingDefaultLanguageCode()
+    public function testParseExceptionOnMissingDefaultLanguageCode(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'defaultLanguageCode\' attribute for ObjectStateCreate.');
@@ -180,7 +181,7 @@ class ObjectStateCreateTest extends BaseTest
     /**
      * Test ObjectStateCreate parser throwing exception on missing names.
      */
-    public function testParseExceptionOnMissingNames()
+    public function testParseExceptionOnMissingNames(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing or invalid \'names\' element for ObjectStateCreate.');
@@ -205,7 +206,7 @@ class ObjectStateCreateTest extends BaseTest
     /**
      * Test ObjectStateCreate parser throwing exception on invalid names structure.
      */
-    public function testParseExceptionOnInvalidNames()
+    public function testParseExceptionOnInvalidNames(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing or invalid \'names\' element for ObjectStateCreate.');
@@ -233,7 +234,7 @@ class ObjectStateCreateTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\ObjectStateCreate
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): ObjectStateCreate
     {
         return new ObjectStateCreate(
             $this->getObjectStateServiceMock(),
@@ -246,7 +247,7 @@ class ObjectStateCreateTest extends BaseTest
      *
      * @return \Ibexa\Contracts\Core\Repository\ObjectStateService
      */
-    protected function getObjectStateServiceMock()
+    protected function getObjectStateServiceMock(): MockObject
     {
         $objectStateServiceMock = $this->createMock(ObjectStateService::class);
 

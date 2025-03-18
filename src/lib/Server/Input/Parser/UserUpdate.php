@@ -23,31 +23,23 @@ class UserUpdate extends BaseParser
 {
     /**
      * User service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\UserService
      */
-    protected $userService;
+    protected UserService $userService;
 
     /**
      * Content service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
      */
-    protected $contentService;
+    protected ContentService $contentService;
 
     /**
      * FieldType parser.
-     *
-     * @var \Ibexa\Rest\Input\FieldTypeParser
      */
-    protected $fieldTypeParser;
+    protected FieldTypeParser $fieldTypeParser;
 
     /**
      * Parser tools.
-     *
-     * @var \Ibexa\Rest\Input\ParserTools
      */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     /**
      * Construct.
@@ -73,7 +65,7 @@ class UserUpdate extends BaseParser
      *
      * @return \Ibexa\Rest\Server\Values\RestUserUpdateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestUserUpdateStruct
     {
         $parsedData = [];
 

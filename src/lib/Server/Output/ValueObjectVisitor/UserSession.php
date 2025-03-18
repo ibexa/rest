@@ -24,7 +24,7 @@ class UserSession extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\UserSession $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $status = $data->created ? 201 : 200;
         $visitor->setStatus($status);

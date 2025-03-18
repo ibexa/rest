@@ -17,7 +17,7 @@ class ForbiddenException extends Exception
      *
      * @return int
      */
-    protected function getStatus()
+    protected function getStatus(): int
     {
         return 403;
     }

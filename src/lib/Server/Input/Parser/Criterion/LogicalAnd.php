@@ -31,7 +31,7 @@ class LogicalAnd extends LogicalOperator
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): Values\Content\Query\Criterion\LogicalAnd
     {
         if (!array_key_exists(static::TAG_NAME, $data) || !is_array($data[static::TAG_NAME])) {
             throw new Exceptions\Parser('Invalid <' . static::TAG_NAME . '> format');

@@ -19,15 +19,10 @@ class RoleInput extends BaseParser
 {
     /**
      * Role service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\RoleService
      */
-    protected $roleService;
+    protected RoleService $roleService;
 
-    /**
-     * @var \Ibexa\Rest\Input\ParserTools
-     */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     /**
      * Construct.

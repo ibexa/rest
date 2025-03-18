@@ -11,7 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\TemporaryRedirect;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -55,11 +55,11 @@ class ContentCurrentVersionRelationsRedirectController extends RestController
      *
      * @return \Ibexa\Rest\Server\Values\TemporaryRedirect
      */
-    public function redirectCurrentVersionRelations($contentId)
+    public function redirectCurrentVersionRelations(int $contentId): TemporaryRedirect
     {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
 
-        return new Values\TemporaryRedirect(
+        return new TemporaryRedirect(
             $this->router->generate(
                 'ibexa.rest.redirect_current_version_relations',
                 [

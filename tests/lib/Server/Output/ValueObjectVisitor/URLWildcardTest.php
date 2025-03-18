@@ -8,7 +8,7 @@
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcard;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class URLWildcardTest extends ValueObjectVisitorBaseTest
@@ -60,7 +60,7 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsUrlWildcardElement($result)
+    public function testResultContainsUrlWildcardElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -83,7 +83,7 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsUrlWildcardAttributes($result)
+    public function testResultContainsUrlWildcardAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -107,7 +107,7 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsSourceUrlValueElement($result)
+    public function testResultContainsSourceUrlValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -127,7 +127,7 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsDestinationUrlValueElement($result)
+    public function testResultContainsDestinationUrlValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -147,7 +147,7 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsForwardValueElement($result)
+    public function testResultContainsForwardValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -165,8 +165,8 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcard
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): URLWildcard
     {
-        return new ValueObjectVisitor\URLWildcard();
+        return new URLWildcard();
     }
 }

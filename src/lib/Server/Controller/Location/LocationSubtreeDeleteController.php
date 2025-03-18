@@ -9,7 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Location;
 
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Model;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\NoContent;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
@@ -52,13 +52,13 @@ class LocationSubtreeDeleteController extends LocationBaseController
      *
      * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteSubtree($locationPath)
+    public function deleteSubtree($locationPath): NoContent
     {
         $location = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($locationPath)
         );
         $this->locationService->deleteLocation($location);
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 }

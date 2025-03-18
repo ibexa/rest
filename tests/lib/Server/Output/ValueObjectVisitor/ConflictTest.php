@@ -7,7 +7,7 @@
 
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\Conflict;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
@@ -18,7 +18,7 @@ class ConflictTest extends ValueObjectVisitorBaseTest
      *
      * @return string
      */
-    public function testVisit()
+    public function testVisit(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -45,8 +45,8 @@ class ConflictTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Conflict
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): Conflict
     {
-        return new ValueObjectVisitor\Conflict();
+        return new Conflict();
     }
 }

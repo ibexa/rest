@@ -7,7 +7,7 @@
 
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\DeletedUserSession;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DeletedUserSessionTest extends ValueObjectVisitorBaseTest
 {
-    public function testVisit()
+    public function testVisit(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -49,8 +49,8 @@ class DeletedUserSessionTest extends ValueObjectVisitorBaseTest
         self::assertSame([$cookie], $this->getResponseMock()->headers->getCookies());
     }
 
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): DeletedUserSession
     {
-        return new ValueObjectVisitor\DeletedUserSession();
+        return new DeletedUserSession();
     }
 }

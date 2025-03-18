@@ -24,7 +24,7 @@ class CreatedObjectState extends RestObjectState
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\CreatedObjectState $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         parent::visit($visitor, $generator, $data->objectState);
         $visitor->setHeader(

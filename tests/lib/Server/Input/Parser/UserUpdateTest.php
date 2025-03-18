@@ -18,13 +18,14 @@ use Ibexa\Core\Repository\Values\Content\ContentUpdateStruct;
 use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\UserUpdate;
 use Ibexa\Rest\Server\Values\RestUserUpdateStruct;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class UserUpdateTest extends BaseTest
 {
     /**
      * Tests the UserUpdate parser.
      */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'mainLanguageCode' => 'eng-US',
@@ -114,7 +115,7 @@ class UserUpdateTest extends BaseTest
     /**
      * Test UserUpdate parser throwing exception on missing Section href.
      */
-    public function testParseExceptionOnMissingSectionHref()
+    public function testParseExceptionOnMissingSectionHref(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'_href\' attribute for the Section element in UserUpdate.');
@@ -143,7 +144,7 @@ class UserUpdateTest extends BaseTest
     /**
      * Test UserUpdate parser throwing exception on invalid fields data.
      */
-    public function testParseExceptionOnInvalidFields()
+    public function testParseExceptionOnInvalidFields(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid \'fields\' element for UserUpdate.');
@@ -167,7 +168,7 @@ class UserUpdateTest extends BaseTest
     /**
      * Test UserUpdate parser throwing exception on missing field definition identifier.
      */
-    public function testParseExceptionOnMissingFieldDefinitionIdentifier()
+    public function testParseExceptionOnMissingFieldDefinitionIdentifier(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'fieldDefinitionIdentifier\' element in field data for UserUpdate.');
@@ -197,7 +198,7 @@ class UserUpdateTest extends BaseTest
     /**
      * Test UserUpdate parser throwing exception on missing field value.
      */
-    public function testParseExceptionOnMissingFieldValue()
+    public function testParseExceptionOnMissingFieldValue(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'fieldValue\' element for the \'first_name\' identifier in UserUpdate.');
@@ -229,7 +230,7 @@ class UserUpdateTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\UserUpdate
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): UserUpdate
     {
         return new UserUpdate(
             $this->getUserServiceMock(),
@@ -244,7 +245,7 @@ class UserUpdateTest extends BaseTest
      *
      * @return \Ibexa\Rest\Input\FieldTypeParser ;
      */
-    private function getFieldTypeParserMock()
+    private function getFieldTypeParserMock(): MockObject
     {
         $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
             ->setMethods([])
@@ -271,7 +272,7 @@ class UserUpdateTest extends BaseTest
      *
      * @return \Ibexa\Contracts\Core\Repository\UserService
      */
-    protected function getUserServiceMock()
+    protected function getUserServiceMock(): MockObject
     {
         $userServiceMock = $this->createMock(UserService::class);
 
@@ -289,7 +290,7 @@ class UserUpdateTest extends BaseTest
      *
      * @return \Ibexa\Contracts\Core\Repository\ContentService
      */
-    protected function getContentServiceMock()
+    protected function getContentServiceMock(): MockObject
     {
         $contentServiceMock = $this->createMock(ContentService::class);
 
@@ -308,7 +309,7 @@ class UserUpdateTest extends BaseTest
         return $contentServiceMock;
     }
 
-    public function getParseHrefExpectationsMap()
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/user/users/14', 'userId', 14],

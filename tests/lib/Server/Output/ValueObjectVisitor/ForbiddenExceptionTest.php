@@ -7,7 +7,7 @@
 
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Rest\Server\Exceptions;
+use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 class ForbiddenExceptionTest extends ExceptionTest
@@ -17,7 +17,7 @@ class ForbiddenExceptionTest extends ExceptionTest
      *
      * @return int
      */
-    protected function getExpectedStatusCode()
+    protected function getExpectedStatusCode(): int
     {
         return 403;
     }
@@ -27,7 +27,7 @@ class ForbiddenExceptionTest extends ExceptionTest
      *
      * @return string
      */
-    protected function getExpectedMessage()
+    protected function getExpectedMessage(): string
     {
         return 'Forbidden';
     }
@@ -37,9 +37,9 @@ class ForbiddenExceptionTest extends ExceptionTest
      *
      * @return \Exception
      */
-    protected function getException()
+    protected function getException(): ForbiddenException
     {
-        return new Exceptions\ForbiddenException('Test');
+        return new ForbiddenException('Test');
     }
 
     /**
@@ -47,7 +47,7 @@ class ForbiddenExceptionTest extends ExceptionTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ForbiddenException
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\ForbiddenException
     {
         return new ValueObjectVisitor\ForbiddenException();
     }

@@ -21,10 +21,10 @@ class MediaProcessorTest extends BinaryInputProcessorTest
         'TYPE_HTML5_AUDIO',
     ];
 
-    public function fieldSettingsHashes()
+    public function fieldSettingsHashes(): array
     {
         return array_map(
-            static function ($constantName) {
+            static function ($constantName): array {
                 return [
                     ['mediaType' => $constantName],
                     ['mediaType' => constant("Ibexa\\Core\\FieldType\\Media\\Type::{$constantName}")],
@@ -39,7 +39,7 @@ class MediaProcessorTest extends BinaryInputProcessorTest
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
+    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -54,7 +54,7 @@ class MediaProcessorTest extends BinaryInputProcessorTest
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)
+    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -67,7 +67,7 @@ class MediaProcessorTest extends BinaryInputProcessorTest
     /**
      * @return \Ibexa\Rest\FieldTypeProcessor\MediaProcessor
      */
-    protected function getProcessor()
+    protected function getProcessor(): MediaProcessor
     {
         return new MediaProcessor($this->getTempDir());
     }

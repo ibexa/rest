@@ -8,9 +8,10 @@
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\User\User;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\UserSession;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class UserSessionTest extends ValueObjectVisitorBaseTest
 {
@@ -76,7 +77,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsSessionElement($result)
+    public function testResultContainsSessionElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -98,7 +99,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsSessionAttributes($result)
+    public function testResultContainsSessionAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -121,7 +122,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsNameValueElement($result)
+    public function testResultContainsNameValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -141,7 +142,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsIdentifierValueElement($result)
+    public function testResultContainsIdentifierValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -161,7 +162,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsCsrfTokenValueElement($result)
+    public function testResultContainsCsrfTokenValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -174,7 +175,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    protected function getUserMock()
+    protected function getUserMock(): MockObject
     {
         $user = $this->createMock(User::class);
         $user->expects(self::any())
@@ -192,7 +193,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsUserElement($result)
+    public function testResultContainsUserElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -211,7 +212,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsUserAttributes($result)
+    public function testResultContainsUserAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -232,8 +233,8 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UserSession
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): UserSession
     {
-        return new ValueObjectVisitor\UserSession();
+        return new UserSession();
     }
 }

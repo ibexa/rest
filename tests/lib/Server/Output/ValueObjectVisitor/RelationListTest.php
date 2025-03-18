@@ -58,7 +58,7 @@ class RelationListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsRelationsElement($result)
+    public function testResultContainsRelationsElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -77,7 +77,7 @@ class RelationListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsRelationsAttributes($result)
+    public function testResultContainsRelationsAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -96,7 +96,7 @@ class RelationListTest extends ValueObjectVisitorBaseTest
     /**
      * Test if RelationList visitor visits the children.
      */
-    public function testRelationListVisitsChildren()
+    public function testRelationListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -128,7 +128,7 @@ class RelationListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RelationList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\RelationList
     {
         return new ValueObjectVisitor\RelationList();
     }

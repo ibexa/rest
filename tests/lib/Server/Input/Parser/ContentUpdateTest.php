@@ -10,6 +10,7 @@ namespace Ibexa\Tests\Rest\Server\Input\Parser;
 use DateTime;
 use Ibexa\Contracts\Rest\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
+use Ibexa\Rest\Server\Input\Parser\ContentUpdate;
 use Ibexa\Rest\Server\Input\Parser\ContentUpdate as ContentUpdateParser;
 use Ibexa\Rest\Values\RestContentMetadataUpdateStruct;
 
@@ -45,7 +46,7 @@ class ContentUpdateTest extends BaseTest
      *
      * @depends testParseValid
      */
-    public function testParserResultOwner(RestContentMetadataUpdateStruct $result)
+    public function testParserResultOwner(RestContentMetadataUpdateStruct $result): void
     {
         self::assertEquals(
             '42',
@@ -58,7 +59,7 @@ class ContentUpdateTest extends BaseTest
      *
      * @dataProvider providerForTestParseFailureInvalidHref
      */
-    public function testParseFailureInvalidHref($element, $exceptionMessage)
+    public function testParseFailureInvalidHref($element, $exceptionMessage): void
     {
         $inputArray = $this->getValidInputData();
         $inputArray[$element]['_href'] = '/invalid/section/uri';
@@ -82,7 +83,7 @@ class ContentUpdateTest extends BaseTest
         }
     }
 
-    public function providerForTestParseFailureInvalidHref()
+    public function providerForTestParseFailureInvalidHref(): array
     {
         return [
             ['Section', 'Invalid format for the <Section> reference in <ContentUpdate>.'],
@@ -96,7 +97,7 @@ class ContentUpdateTest extends BaseTest
      *
      * @dataProvider providerForTestParseFailureInvalidDate
      */
-    public function testParseFailureInvalidDate($element, $exceptionMessage)
+    public function testParseFailureInvalidDate($element, $exceptionMessage): void
     {
         $inputArray = $this->getValidInputData();
         $inputArray[$element] = 42;
@@ -120,7 +121,7 @@ class ContentUpdateTest extends BaseTest
         }
     }
 
-    public function providerForTestParseFailureInvalidDate()
+    public function providerForTestParseFailureInvalidDate(): array
     {
         return [
             ['publishDate', 'Invalid format for <publishDate> in <ContentUpdate>'],
@@ -133,7 +134,7 @@ class ContentUpdateTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\ContentUpdate
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): ContentUpdate
     {
         return new ContentUpdateParser();
     }
@@ -143,7 +144,7 @@ class ContentUpdateTest extends BaseTest
      *
      * @return \Ibexa\Rest\Values\RestContentMetadataUpdateStruct
      */
-    protected function getContentUpdateStruct()
+    protected function getContentUpdateStruct(): RestContentMetadataUpdateStruct
     {
         return new RestContentMetadataUpdateStruct(
             [
@@ -164,7 +165,7 @@ class ContentUpdateTest extends BaseTest
      *
      * @return array
      */
-    protected function getValidInputData()
+    protected function getValidInputData(): array
     {
         return [
             'mainLanguageCode' => 'eng-GB',
@@ -178,7 +179,7 @@ class ContentUpdateTest extends BaseTest
         ];
     }
 
-    public function getParseHrefExpectationsMap()
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/content/sections/23', 'sectionId', 23],

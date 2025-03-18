@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Core\Repository\LocationService;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId as ParentLocationIdCriterion;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
@@ -20,10 +21,8 @@ class ParentLocationRemoteId extends BaseParser
 {
     /**
      * Location service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
      */
-    protected $locationService;
+    protected LocationService $locationService;
 
     public function __construct(LocationService $locationService)
     {
@@ -40,7 +39,7 @@ class ParentLocationRemoteId extends BaseParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ParentLocationId
     {
         if (!array_key_exists('ParentLocationRemoteIdCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <ParentLocationRemoteIdCriterion> format');

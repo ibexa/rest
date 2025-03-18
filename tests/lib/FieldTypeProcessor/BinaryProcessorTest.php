@@ -16,7 +16,7 @@ class BinaryProcessorTest extends BinaryInputProcessorTest
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\BinaryProcessor::postProcessValueHash
      */
-    public function testPostProcessValueHash()
+    public function testPostProcessValueHash(): void
     {
         $uri = '/var/ibexa_demo_site/storage/original/application/815b3aa9.pdf';
         $processor = $this->getProcessor();
@@ -42,7 +42,7 @@ class BinaryProcessorTest extends BinaryInputProcessorTest
      *
      * @return \Ibexa\Rest\FieldTypeProcessor\BinaryProcessor
      */
-    protected function getProcessor()
+    protected function getProcessor(): BinaryProcessor
     {
         return new BinaryProcessor(
             $this->getTempDir(),

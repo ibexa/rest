@@ -23,7 +23,7 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
      *
      * @return \DOMDocument
      */
-    public function testVisit()
+    public function testVisit(): \DOMDocument
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -74,7 +74,7 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testUserRefListHrefCorrect(\DOMDocument $dom)
+    public function testUserRefListHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserRefList[@href="/some/path"]');
     }
@@ -84,7 +84,7 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testUserRefListMediaTypeCorrect(\DOMDocument $dom)
+    public function testUserRefListMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserRefList[@media-type="application/vnd.ibexa.api.UserRefList+xml"]');
     }
@@ -94,7 +94,7 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testUserHrefCorrect(\DOMDocument $dom)
+    public function testUserHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserRefList/User[@href="/user/users/14"]');
     }
@@ -104,7 +104,7 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testUserMediaTypeCorrect(\DOMDocument $dom)
+    public function testUserMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserRefList/User[@media-type="application/vnd.ibexa.api.User+xml"]');
     }
@@ -114,7 +114,7 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UserRefList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\UserRefList
     {
         return new ValueObjectVisitor\UserRefList();
     }

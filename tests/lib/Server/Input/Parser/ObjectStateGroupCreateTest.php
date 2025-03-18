@@ -11,13 +11,14 @@ use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroupCreateStr
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\ObjectStateService;
 use Ibexa\Rest\Server\Input\Parser\ObjectStateGroupCreate;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ObjectStateGroupCreateTest extends BaseTest
 {
     /**
      * Tests the ObjectStateGroupCreate parser.
      */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'identifier' => 'test-group',
@@ -77,7 +78,7 @@ class ObjectStateGroupCreateTest extends BaseTest
     /**
      * Test ObjectStateGroupCreate parser throwing exception on missing identifier.
      */
-    public function testParseExceptionOnMissingIdentifier()
+    public function testParseExceptionOnMissingIdentifier(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'identifier\' attribute for ObjectStateGroupCreate.');
@@ -108,7 +109,7 @@ class ObjectStateGroupCreateTest extends BaseTest
     /**
      * Test ObjectStateGroupCreate parser throwing exception on missing defaultLanguageCode.
      */
-    public function testParseExceptionOnMissingDefaultLanguageCode()
+    public function testParseExceptionOnMissingDefaultLanguageCode(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'defaultLanguageCode\' attribute for ObjectStateGroupCreate.');
@@ -139,7 +140,7 @@ class ObjectStateGroupCreateTest extends BaseTest
     /**
      * Test ObjectStateGroupCreate parser throwing exception on missing names.
      */
-    public function testParseExceptionOnMissingNames()
+    public function testParseExceptionOnMissingNames(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing or invalid \'names\' element for ObjectStateGroupCreate.');
@@ -163,7 +164,7 @@ class ObjectStateGroupCreateTest extends BaseTest
     /**
      * Test ObjectStateGroupCreate parser throwing exception on invalid names structure.
      */
-    public function testParseExceptionOnInvalidNames()
+    public function testParseExceptionOnInvalidNames(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing or invalid \'names\' element for ObjectStateGroupCreate.');
@@ -190,7 +191,7 @@ class ObjectStateGroupCreateTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\ObjectStateGroupCreate
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): ObjectStateGroupCreate
     {
         return new ObjectStateGroupCreate(
             $this->getObjectStateServiceMock(),
@@ -203,7 +204,7 @@ class ObjectStateGroupCreateTest extends BaseTest
      *
      * @return \Ibexa\Contracts\Core\Repository\ObjectStateService
      */
-    protected function getObjectStateServiceMock()
+    protected function getObjectStateServiceMock(): MockObject
     {
         $objectStateServiceMock = $this->createMock(ObjectStateService::class);
 

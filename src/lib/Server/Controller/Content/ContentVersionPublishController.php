@@ -9,7 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\NoContent;
 
 class ContentVersionPublishController extends RestController
 {
@@ -23,7 +23,7 @@ class ContentVersionPublishController extends RestController
      *
      * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function publishVersion($contentId, $versionNumber)
+    public function publishVersion(int $contentId, ?int $versionNumber): NoContent
     {
         $versionInfo = $this->repository->getContentService()->loadVersionInfo(
             $this->repository->getContentService()->loadContentInfo($contentId),
@@ -38,6 +38,6 @@ class ContentVersionPublishController extends RestController
             $versionInfo
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 }

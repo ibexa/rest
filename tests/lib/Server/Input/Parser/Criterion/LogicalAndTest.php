@@ -11,6 +11,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content;
 use Ibexa\Contracts\Rest\Exceptions\Parser as ParserException;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Server\Input\Parser;
+use Ibexa\Rest\Server\Input\Parser\Criterion\LogicalAnd;
 use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -38,7 +39,7 @@ class LogicalAndTest extends BaseTest
      * </AND>
      * ```
      */
-    public function testParseLogicalAnd()
+    public function testParseLogicalAnd(): void
     {
         $logicalAndParsedFromXml = [
             'AND' => [
@@ -71,7 +72,7 @@ class LogicalAndTest extends BaseTest
         self::assertCount(3, (array)$result->criteria);
     }
 
-    public function testThrowsExceptionOnInvalidAndStatement()
+    public function testThrowsExceptionOnInvalidAndStatement(): void
     {
         $this->expectException(ParserException::class);
         $this->internalGetParser()->parse(['AND' => 'Should be an array'], new ParsingDispatcher(
@@ -80,10 +81,10 @@ class LogicalAndTest extends BaseTest
     }
 
     /**
-     * @return Parser\Criterion\LogicalAnd
+     * @return \Ibexa\Rest\Server\Input\Parser\Criterion\LogicalAnd
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): LogicalAnd
     {
-        return new Parser\Criterion\LogicalAnd();
+        return new LogicalAnd();
     }
 }

@@ -15,6 +15,7 @@ use Ibexa\Contracts\Rest\FieldTypeProcessor;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Rest\FieldTypeProcessorRegistry;
 use Ibexa\Rest\Output\FieldTypeSerializer;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -22,15 +23,15 @@ use PHPUnit\Framework\TestCase;
  */
 class FieldTypeSerializerTest extends TestCase
 {
-    protected $fieldTypeServiceMock;
+    protected ?MockObject $fieldTypeServiceMock = null;
 
-    protected $fieldTypeProcessorRegistryMock;
+    protected ?MockObject $fieldTypeProcessorRegistryMock = null;
 
-    protected $fieldTypeProcessorMock;
+    protected ?MockObject $fieldTypeProcessorMock = null;
 
-    protected $contentTypeMock;
+    protected ?MockObject $contentTypeMock = null;
 
-    protected $fieldTypeMock;
+    protected ?MockObject $fieldTypeMock = null;
 
     protected $generatorMock;
 
@@ -43,7 +44,7 @@ class FieldTypeSerializerTest extends TestCase
      */
     public function testSerializeContentFieldValue(
         APIFieldType $fieldType,
-        $hashValue
+        array $hashValue
     ): void {
         $serializer = $this->getFieldTypeSerializer();
 
@@ -303,7 +304,7 @@ class FieldTypeSerializerTest extends TestCase
      */
     private function createFieldMock(
         string $fieldTypeIdentifier,
-        $value
+        string $value
     ): Field {
         $fieldMock = $this->createMock(Field::class);
         $fieldMock
@@ -322,8 +323,8 @@ class FieldTypeSerializerTest extends TestCase
      * @param mixed $hashElementValue
      */
     private function mockGeneratorGenerateFieldTypeHash(
-        $hashElementName,
-        $hashElementValue
+        string $hashElementName,
+        array $hashElementValue
     ): Generator {
         $generator = $this->createMock(Generator::class);
         $generator
@@ -341,8 +342,8 @@ class FieldTypeSerializerTest extends TestCase
      * @param mixed $hashValue
      */
     private function createFieldTypeMock(
-        $value,
-        $hashValue
+        string $value,
+        array $hashValue
     ): APIFieldType {
         $fieldTypeMock = $this->createMock(APIFieldType::class);
         $fieldTypeMock

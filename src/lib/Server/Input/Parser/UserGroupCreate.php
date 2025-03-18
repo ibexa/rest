@@ -21,24 +21,18 @@ class UserGroupCreate extends BaseParser
 {
     /**
      * User service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\UserService
      */
-    protected $userService;
+    protected UserService $userService;
 
     /**
      * ContentType service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
      */
-    protected $contentTypeService;
+    protected ContentTypeService $contentTypeService;
 
     /**
      * FieldType parser.
-     *
-     * @var \Ibexa\Rest\Input\FieldTypeParser
      */
-    protected $fieldTypeParser;
+    protected FieldTypeParser $fieldTypeParser;
 
     /**
      * Construct.

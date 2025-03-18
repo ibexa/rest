@@ -50,7 +50,7 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsObjectStateGroupListElement($result)
+    public function testResultContainsObjectStateGroupListElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -69,7 +69,7 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsObjectStateGroupListAttributes($result)
+    public function testResultContainsObjectStateGroupListAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -88,7 +88,7 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
     /**
      * Test if ObjectStateGroupList visitor visits the children.
      */
-    public function testObjectStateGroupListVisitsChildren()
+    public function testObjectStateGroupListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -118,7 +118,7 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateGroupList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\ObjectStateGroupList
     {
         return new ValueObjectVisitor\ObjectStateGroupList();
     }

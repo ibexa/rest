@@ -26,7 +26,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
      *
      * @var \Ibexa\Contracts\Rest\Output\Visitor
      */
-    protected $visitorMock;
+    protected ?MockObject $visitorMock = null;
 
     /**
      * Output generator.
@@ -38,18 +38,16 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     /**
      * @var \Symfony\Component\Routing\RouterInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    private $routerMock;
+    private ?MockObject $routerMock = null;
 
     /**
      * @var \Symfony\Component\Routing\RouterInterface|\PHPUnit\Framework\MockObject\MockObject
      */
-    private $templatedRouterMock;
+    private ?MockObject $templatedRouterMock = null;
 
-    /** @var int */
-    private $routerCallIndex = 0;
+    private int $routerCallIndex = 0;
 
-    /** @var int */
-    private $templatedRouterCallIndex = 0;
+    private int $templatedRouterCallIndex = 0;
 
     private UriParserInterface&MockObject $uriParser;
 

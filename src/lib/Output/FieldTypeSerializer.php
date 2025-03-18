@@ -20,15 +20,10 @@ class FieldTypeSerializer
 {
     /**
      * FieldTypeService.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\FieldTypeService
      */
-    protected $fieldTypeService;
+    protected FieldTypeService $fieldTypeService;
 
-    /**
-     * @var \Ibexa\Rest\FieldTypeProcessorRegistry
-     */
-    protected $fieldTypeProcessorRegistry;
+    protected FieldTypeProcessorRegistry $fieldTypeProcessorRegistry;
 
     /**
      * @param \Ibexa\Contracts\Core\Repository\FieldTypeService $fieldTypeService
@@ -62,7 +57,7 @@ class FieldTypeSerializer
      * @param string $fieldTypeIdentifier
      * @param mixed $defaultValue
      */
-    public function serializeFieldDefaultValue(Generator $generator, $fieldTypeIdentifier, $defaultValue)
+    public function serializeFieldDefaultValue(Generator $generator, $fieldTypeIdentifier, $defaultValue): void
     {
         $this->serializeValue(
             'defaultValue',
@@ -80,7 +75,7 @@ class FieldTypeSerializer
      * @param string $fieldTypeIdentifier
      * @param mixed $settings
      */
-    public function serializeFieldSettings(Generator $generator, $fieldTypeIdentifier, $settings)
+    public function serializeFieldSettings(Generator $generator, $fieldTypeIdentifier, $settings): void
     {
         $fieldType = $this->fieldTypeService->getFieldType($fieldTypeIdentifier);
         $hash = $fieldType->fieldSettingsToHash($settings);
@@ -100,7 +95,7 @@ class FieldTypeSerializer
      * @param string $fieldTypeIdentifier
      * @param mixed $validatorConfiguration
      */
-    public function serializeValidatorConfiguration(Generator $generator, $fieldTypeIdentifier, $validatorConfiguration)
+    public function serializeValidatorConfiguration(Generator $generator, $fieldTypeIdentifier, $validatorConfiguration): void
     {
         $fieldType = $this->fieldTypeService->getFieldType($fieldTypeIdentifier);
         $hash = $fieldType->validatorConfigurationToHash($validatorConfiguration);
@@ -120,7 +115,7 @@ class FieldTypeSerializer
      *
      * @return \Ibexa\Contracts\Core\Repository\FieldType
      */
-    protected function getFieldType($fieldTypeIdentifier)
+    protected function getFieldType(string $fieldTypeIdentifier): FieldType
     {
         return $this->fieldTypeService->getFieldType(
             $fieldTypeIdentifier
@@ -156,7 +151,7 @@ class FieldTypeSerializer
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param mixed $hash
      */
-    protected function serializeHash($elementName, Generator $generator, $hash)
+    protected function serializeHash(string $elementName, Generator $generator, $hash)
     {
         $generator->generateFieldTypeHash($elementName, $hash);
     }

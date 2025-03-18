@@ -18,7 +18,7 @@ class MessageTest extends TestCase
     /**
      * Tests creating the message with default headers.
      */
-    public function testCreateMessageDefaultHeaders()
+    public function testCreateMessageDefaultHeaders(): void
     {
         $message = new Message();
 
@@ -28,7 +28,7 @@ class MessageTest extends TestCase
     /**
      * Tests creating the message with default body.
      */
-    public function testCreateMessageDefaultBody()
+    public function testCreateMessageDefaultBody(): void
     {
         $message = new Message();
 
@@ -38,7 +38,7 @@ class MessageTest extends TestCase
     /**
      * Tests creating message with headers set through constructor.
      */
-    public function testCreateMessageConstructorHeaders()
+    public function testCreateMessageConstructorHeaders(): void
     {
         $message = new Message(
             $headers = [
@@ -52,7 +52,7 @@ class MessageTest extends TestCase
     /**
      * Tests creating message with body set through constructor.
      */
-    public function testCreateMessageConstructorBody()
+    public function testCreateMessageConstructorBody(): void
     {
         $message = new Message(
             [],

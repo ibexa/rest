@@ -36,7 +36,7 @@ class RestExecutedView extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\RestExecutedView $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startObjectElement('View');
         $visitor->setHeader('Content-Type', $generator->getMediaType('View'));

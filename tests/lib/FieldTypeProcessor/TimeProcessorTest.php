@@ -17,10 +17,10 @@ class TimeProcessorTest extends TestCase
         'DEFAULT_CURRENT_TIME',
     ];
 
-    public function fieldSettingsHashes()
+    public function fieldSettingsHashes(): array
     {
         return array_map(
-            static function ($constantName) {
+            static function ($constantName): array {
                 return [
                     ['defaultType' => $constantName],
                     ['defaultType' => constant("Ibexa\\Core\\FieldType\\Time\\Type::{$constantName}")],
@@ -35,7 +35,7 @@ class TimeProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
+    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -50,7 +50,7 @@ class TimeProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)
+    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -63,7 +63,7 @@ class TimeProcessorTest extends TestCase
     /**
      * @return \Ibexa\Rest\FieldTypeProcessor\TimeProcessor
      */
-    protected function getProcessor()
+    protected function getProcessor(): TimeProcessor
     {
         return new TimeProcessor();
     }

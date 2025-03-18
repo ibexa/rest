@@ -44,7 +44,7 @@ class Json extends Handler
      *
      * @return string
      */
-    private function jsonDecodeErrorMessage($jsonErrorCode)
+    private function jsonDecodeErrorMessage(int $jsonErrorCode): string
     {
         if (function_exists('json_last_error_msg')) {
             return json_last_error_msg();

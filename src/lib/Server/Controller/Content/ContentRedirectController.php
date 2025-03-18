@@ -12,7 +12,7 @@ use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\TemporaryRedirect;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -49,7 +49,7 @@ class ContentRedirectController extends RestController
      *
      * @return \Ibexa\Rest\Server\Values\TemporaryRedirect
      */
-    public function redirectContent(Request $request)
+    public function redirectContent(Request $request): TemporaryRedirect
     {
         if (!$request->query->has('remoteId')) {
             throw new BadRequestException("'remoteId' parameter is required.");
@@ -59,7 +59,7 @@ class ContentRedirectController extends RestController
             $request->query->getString('remoteId')
         );
 
-        return new Values\TemporaryRedirect(
+        return new TemporaryRedirect(
             $this->router->generate(
                 'ibexa.rest.load_content',
                 [

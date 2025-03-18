@@ -18,7 +18,7 @@ class FieldTest extends BaseTest
     /**
      * Tests the Field parser.
      */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'Field' => [
@@ -40,7 +40,7 @@ class FieldTest extends BaseTest
     /**
      * Test Field parser throwing exception on missing sort clause.
      */
-    public function testParseExceptionOnMissingSortClause()
+    public function testParseExceptionOnMissingSortClause(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('The <Field> Sort Clause doesn\'t exist in the input structure');
@@ -55,7 +55,7 @@ class FieldTest extends BaseTest
     /**
      * Test Field parser throwing exception on invalid direction format.
      */
-    public function testParseExceptionOnInvalidDirectionFormat()
+    public function testParseExceptionOnInvalidDirectionFormat(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid direction format in <Field> sort clause');
@@ -75,7 +75,7 @@ class FieldTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\SortClause\Field
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): FieldParser
     {
         return new FieldParser();
     }

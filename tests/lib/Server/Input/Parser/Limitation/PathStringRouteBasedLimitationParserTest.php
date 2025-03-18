@@ -12,7 +12,7 @@ use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
 
 class PathStringRouteBasedLimitationParserTest extends BaseTest
 {
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             '_identifier' => 'Subtree',
@@ -36,12 +36,12 @@ class PathStringRouteBasedLimitationParserTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\Limitation\RouteBasedLimitationParser
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): PathStringRouteBasedLimitationParser
     {
         return new PathStringRouteBasedLimitationParser('pathString', 'stdClass');
     }
 
-    public function getParseHrefExpectationsMap()
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/content/locations/1/2/3/4/', 'pathString', '1/2/3/4/'],

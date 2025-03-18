@@ -22,7 +22,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      *
      * @return \DOMDocument
      */
-    public function testVisit()
+    public function testVisit(): \DOMDocument
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -107,7 +107,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testContentTypeGroupRefListHrefCorrect(\DOMDocument $dom)
+    public function testContentTypeGroupRefListHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList[@href="/content/types/42/groups"]');
     }
@@ -117,7 +117,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testContentTypeGroupRefListMediaTypeCorrect(\DOMDocument $dom)
+    public function testContentTypeGroupRefListMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList[@media-type="application/vnd.ibexa.api.ContentTypeGroupRefList+xml"]');
     }
@@ -127,7 +127,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testFirstContentTypeGroupRefHrefCorrect(\DOMDocument $dom)
+    public function testFirstContentTypeGroupRefHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[1][@href="/content/typegroups/1"]');
     }
@@ -137,7 +137,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testFirstContentTypeGroupRefMediaTypeCorrect(\DOMDocument $dom)
+    public function testFirstContentTypeGroupRefMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[1][@media-type="application/vnd.ibexa.api.ContentTypeGroup+xml"]');
     }
@@ -147,7 +147,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testFirstContentTypeGroupRefUnlinkHrefCorrect(\DOMDocument $dom)
+    public function testFirstContentTypeGroupRefUnlinkHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[1]/unlink[@href="/content/types/42/groups/1"]');
     }
@@ -157,7 +157,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testFirstContentTypeGroupRefUnlinkMethodCorrect(\DOMDocument $dom)
+    public function testFirstContentTypeGroupRefUnlinkMethodCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[1]/unlink[@method="DELETE"]');
     }
@@ -167,7 +167,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testSecondContentTypeGroupRefHrefCorrect(\DOMDocument $dom)
+    public function testSecondContentTypeGroupRefHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[2][@href="/content/typegroups/2"]');
     }
@@ -177,7 +177,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testSecondContentTypeGroupRefMediaTypeCorrect(\DOMDocument $dom)
+    public function testSecondContentTypeGroupRefMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[2][@media-type="application/vnd.ibexa.api.ContentTypeGroup+xml"]');
     }
@@ -187,7 +187,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testSecondContentTypeGroupRefUnlinkHrefCorrect(\DOMDocument $dom)
+    public function testSecondContentTypeGroupRefUnlinkHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[2]/unlink[@href="/content/types/42/groups/2"]');
     }
@@ -197,7 +197,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testSecondContentTypeGroupRefUnlinkMethodCorrect(\DOMDocument $dom)
+    public function testSecondContentTypeGroupRefUnlinkMethodCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[2]/unlink[@method="DELETE"]');
     }
@@ -207,7 +207,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroupRefList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\ContentTypeGroupRefList
     {
         return new ValueObjectVisitor\ContentTypeGroupRefList();
     }

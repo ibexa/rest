@@ -18,10 +18,10 @@ class DateAndTimeProcessorTest extends TestCase
         'DEFAULT_CURRENT_DATE_ADJUSTED',
     ];
 
-    public function fieldSettingsHashes()
+    public function fieldSettingsHashes(): array
     {
         return array_map(
-            static function ($constantName) {
+            static function ($constantName): array {
                 return [
                     ['defaultType' => $constantName],
                     ['defaultType' => constant("Ibexa\\Core\\FieldType\\DateAndTime\\Type::{$constantName}")],
@@ -36,7 +36,7 @@ class DateAndTimeProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
+    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -51,7 +51,7 @@ class DateAndTimeProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)
+    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -64,7 +64,7 @@ class DateAndTimeProcessorTest extends TestCase
     /**
      * @return \Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor
      */
-    protected function getProcessor()
+    protected function getProcessor(): DateAndTimeProcessor
     {
         return new DateAndTimeProcessor();
     }

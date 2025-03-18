@@ -24,7 +24,7 @@ class CreatedRole extends Role
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\CreatedRole $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         parent::visit($visitor, $generator, $data->role);
         $visitor->setHeader(

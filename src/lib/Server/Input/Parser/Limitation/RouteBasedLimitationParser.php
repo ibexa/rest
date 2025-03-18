@@ -94,7 +94,7 @@ class RouteBasedLimitationParser extends BaseParser
      *
      * @return false|mixed
      */
-    protected function parseIdFromHref($limitationValue)
+    protected function parseIdFromHref(array $limitationValue): string
     {
         return $this->uriParser->getAttributeFromUri(
             $limitationValue['_href'],

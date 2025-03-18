@@ -27,7 +27,7 @@ class LanguageCode extends BaseParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LanguageCode
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): LanguageCodeCriterion
     {
         if (!array_key_exists('LanguageCodeCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <LanguageCodeCriterion> format');

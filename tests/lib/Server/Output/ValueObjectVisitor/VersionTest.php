@@ -15,10 +15,11 @@ use Ibexa\Rest\Output\FieldTypeSerializer;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\Version;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class VersionTest extends ValueObjectVisitorBaseTest
 {
-    protected $fieldTypeSerializerMock;
+    protected MockObject $fieldTypeSerializerMock;
 
     public function setUp(): void
     {
@@ -102,7 +103,7 @@ class VersionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsVersionChildren($result)
+    public function testResultContainsVersionChildren($result): void
     {
         $this->assertXMLTag(
             [
@@ -123,7 +124,7 @@ class VersionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultVersionAttributes($result)
+    public function testResultVersionAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -144,7 +145,7 @@ class VersionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsFieldsChildren($result)
+    public function testResultContainsFieldsChildren($result): void
     {
         $this->assertXMLTag(
             [
@@ -165,7 +166,7 @@ class VersionTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Version
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\Version
     {
         return new ValueObjectVisitor\Version($this->fieldTypeSerializerMock);
     }

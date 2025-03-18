@@ -11,13 +11,14 @@ use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateUpdateStruct;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\ObjectStateService;
 use Ibexa\Rest\Server\Input\Parser\ObjectStateUpdate;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ObjectStateUpdateTest extends BaseTest
 {
     /**
      * Tests the ObjectStateUpdate parser.
      */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'identifier' => 'test-state',
@@ -77,7 +78,7 @@ class ObjectStateUpdateTest extends BaseTest
     /**
      * Test ObjectStateUpdate parser throwing exception on invalid names structure.
      */
-    public function testParseExceptionOnInvalidNames()
+    public function testParseExceptionOnInvalidNames(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing or invalid \'names\' element for ObjectStateUpdate.');
@@ -104,7 +105,7 @@ class ObjectStateUpdateTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\ObjectStateUpdate
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): ObjectStateUpdate
     {
         return new ObjectStateUpdate(
             $this->getObjectStateServiceMock(),
@@ -117,7 +118,7 @@ class ObjectStateUpdateTest extends BaseTest
      *
      * @return \Ibexa\Contracts\Core\Repository\ObjectStateService
      */
-    protected function getObjectStateServiceMock()
+    protected function getObjectStateServiceMock(): MockObject
     {
         $objectStateServiceMock = $this->createMock(ObjectStateService::class);
 

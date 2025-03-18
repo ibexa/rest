@@ -158,7 +158,7 @@ class SectionUpdateController extends RestController
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\SectionUpdateStruct
      */
-    protected function mapToUpdateStruct(SectionCreateStruct $createStruct)
+    protected function mapToUpdateStruct(SectionCreateStruct $createStruct): SectionUpdateStruct
     {
         return new SectionUpdateStruct(
             [

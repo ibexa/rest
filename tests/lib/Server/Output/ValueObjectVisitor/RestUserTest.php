@@ -132,7 +132,7 @@ class RestUserTest extends BaseContentValueObjectVisitorTestCase
     /**
      * @depends testVisitWithoutEmbeddedVersion
      */
-    public function testUserTypeMediaTypeCorrect(DOMDocument $dom)
+    public function testUserTypeMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/User/ContentType[@media-type="application/vnd.ibexa.api.ContentType+xml"]');
     }

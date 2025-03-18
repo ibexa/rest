@@ -18,7 +18,7 @@ use Ibexa\Contracts\Rest\Output\Visitor;
  */
 class Options extends ValueObjectVisitor
 {
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $visitor->setHeader('Allow', implode(',', $data->allowedMethods));
         $visitor->setHeader('Content-Length', 0);

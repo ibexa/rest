@@ -21,7 +21,7 @@ class JsonTest extends GeneratorTest
 {
     protected $generator;
 
-    public function testGeneratorDocument()
+    public function testGeneratorDocument(): void
     {
         $generator = $this->getGenerator();
 
@@ -33,7 +33,7 @@ class JsonTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorElement()
+    public function testGeneratorElement(): void
     {
         $generator = $this->getGenerator();
 
@@ -48,7 +48,7 @@ class JsonTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorElementMediaTypeOverwrite()
+    public function testGeneratorElementMediaTypeOverwrite(): void
     {
         $generator = $this->getGenerator();
 
@@ -63,7 +63,7 @@ class JsonTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorStackedElement()
+    public function testGeneratorStackedElement(): void
     {
         $generator = $this->getGenerator();
 
@@ -82,7 +82,7 @@ class JsonTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorAttribute()
+    public function testGeneratorAttribute(): void
     {
         $generator = $this->getGenerator();
 
@@ -100,7 +100,7 @@ class JsonTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorStartEndAttribute()
+    public function testGeneratorStartEndAttribute(): void
     {
         $generator = $this->getGenerator();
 
@@ -119,7 +119,7 @@ class JsonTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorMultipleAttributes()
+    public function testGeneratorMultipleAttributes(): void
     {
         $generator = $this->getGenerator();
 
@@ -138,7 +138,7 @@ class JsonTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorValueElement()
+    public function testGeneratorValueElement(): void
     {
         $generator = $this->getGenerator();
 
@@ -156,7 +156,7 @@ class JsonTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorStartEndValueElement()
+    public function testGeneratorStartEndValueElement(): void
     {
         $generator = $this->getGenerator();
 
@@ -175,7 +175,7 @@ class JsonTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorElementList()
+    public function testGeneratorElementList(): void
     {
         $generator = $this->getGenerator();
 
@@ -201,7 +201,7 @@ class JsonTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorHashElement()
+    public function testGeneratorHashElement(): void
     {
         $generator = $this->getGenerator();
 
@@ -220,7 +220,7 @@ class JsonTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorValueList()
+    public function testGeneratorValueList(): void
     {
         $generator = $this->getGenerator();
 
@@ -250,7 +250,7 @@ class JsonTest extends GeneratorTest
         );
     }
 
-    public function testGetMediaType()
+    public function testGetMediaType(): void
     {
         $generator = $this->getGenerator();
 
@@ -260,7 +260,7 @@ class JsonTest extends GeneratorTest
         );
     }
 
-    public function testGeneratorMultipleElements()
+    public function testGeneratorMultipleElements(): void
     {
         $this->expectException(OutputGeneratorException::class);
 
@@ -274,7 +274,7 @@ class JsonTest extends GeneratorTest
         $generator->startObjectElement('element');
     }
 
-    public function testGeneratorMultipleStackedElements()
+    public function testGeneratorMultipleStackedElements(): void
     {
         $this->expectException(OutputGeneratorException::class);
 
@@ -290,7 +290,7 @@ class JsonTest extends GeneratorTest
         $generator->startObjectElement('stacked');
     }
 
-    public function testSerializeBool()
+    public function testSerializeBool(): void
     {
         $generator = $this->getGenerator();
 

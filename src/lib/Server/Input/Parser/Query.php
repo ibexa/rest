@@ -103,7 +103,7 @@ abstract class Query extends CriterionParser
      *
      * @return array
      */
-    private function processSortClauses(array $sortClausesArray, ParsingDispatcher $parsingDispatcher)
+    private function processSortClauses(array $sortClausesArray, ParsingDispatcher $parsingDispatcher): array
     {
         $sortClauses = [];
         foreach ($sortClausesArray as $sortClauseName => $sortClauseData) {

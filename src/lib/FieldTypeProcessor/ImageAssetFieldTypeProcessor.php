@@ -15,17 +15,15 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ImageAssetFieldTypeProcessor extends FieldTypeProcessor
 {
-    /** @var \Symfony\Component\Routing\RouterInterface */
-    private $router;
+    private RouterInterface $router;
 
-    /** @var \Ibexa\Contracts\Core\Repository\ContentService */
-    private $contentService;
+    private ContentService $contentService;
 
     /** @var string[] */
-    private $configMappings;
+    private array $configMappings;
 
     /** @var string[] */
-    private $variations;
+    private array $variations;
 
     public function __construct(
         RouterInterface $router,

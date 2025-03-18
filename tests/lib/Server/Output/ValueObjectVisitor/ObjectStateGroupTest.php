@@ -8,7 +8,7 @@
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\ObjectState;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateGroup;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ObjectStateGroupTest extends ValueObjectVisitorBaseTest
@@ -74,7 +74,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsObjectStateGroupElement($result)
+    public function testResultContainsObjectStateGroupElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -96,7 +96,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsObjectStateGroupAttributes($result)
+    public function testResultContainsObjectStateGroupAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -119,7 +119,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsIdValueElement($result)
+    public function testResultContainsIdValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -139,7 +139,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsIdentifierValueElement($result)
+    public function testResultContainsIdentifierValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -159,7 +159,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsDefaultLanguageCodeValueElement($result)
+    public function testResultContainsDefaultLanguageCodeValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -179,7 +179,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsLanguageCodesValueElement($result)
+    public function testResultContainsLanguageCodesValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -199,7 +199,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsNamesElement($result)
+    public function testResultContainsNamesElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -221,7 +221,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsDescriptionsElement($result)
+    public function testResultContainsDescriptionsElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -241,8 +241,8 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateGroup
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ObjectStateGroup
     {
-        return new ValueObjectVisitor\ObjectStateGroup();
+        return new ObjectStateGroup();
     }
 }

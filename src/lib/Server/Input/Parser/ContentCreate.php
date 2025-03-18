@@ -24,38 +24,28 @@ class ContentCreate extends BaseParser
 {
     /**
      * Content service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
      */
-    protected $contentService;
+    protected ContentService $contentService;
 
     /**
      * ContentType service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
      */
-    protected $contentTypeService;
+    protected ContentTypeService $contentTypeService;
 
     /**
      * FieldType parser.
-     *
-     * @var \Ibexa\Rest\Input\FieldTypeParser
      */
-    protected $fieldTypeParser;
+    protected FieldTypeParser $fieldTypeParser;
 
     /**
      * LocationCreate parser.
-     *
-     * @var \Ibexa\Rest\Server\Input\Parser\LocationCreate
      */
-    protected $locationCreateParser;
+    protected LocationCreate $locationCreateParser;
 
     /**
      * Parser tools.
-     *
-     * @var \Ibexa\Rest\Input\ParserTools
      */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     /**
      * Construct.
@@ -88,7 +78,7 @@ class ContentCreate extends BaseParser
      *
      * @return \Ibexa\Rest\Server\Values\RestContentCreateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestContentCreateStruct
     {
         if (!array_key_exists('LocationCreate', $data) || !is_array($data['LocationCreate'])) {
             throw new Exceptions\Parser("Missing or invalid 'LocationCreate' element for ContentCreate.");

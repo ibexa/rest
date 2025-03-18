@@ -9,6 +9,7 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class NotFoundExceptionTest extends ExceptionTest
 {
@@ -17,7 +18,7 @@ class NotFoundExceptionTest extends ExceptionTest
      *
      * @return int
      */
-    protected function getExpectedStatusCode()
+    protected function getExpectedStatusCode(): int
     {
         return 404;
     }
@@ -27,7 +28,7 @@ class NotFoundExceptionTest extends ExceptionTest
      *
      * @return string
      */
-    protected function getExpectedMessage()
+    protected function getExpectedMessage(): string
     {
         return 'Not Found';
     }
@@ -37,7 +38,7 @@ class NotFoundExceptionTest extends ExceptionTest
      *
      * @return \Exception
      */
-    protected function getException()
+    protected function getException(): MockObject
     {
         return $this->getMockForAbstractClass(NotFoundException::class);
     }
@@ -47,7 +48,7 @@ class NotFoundExceptionTest extends ExceptionTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\NotFoundException
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\NotFoundException
     {
         return new ValueObjectVisitor\NotFoundException();
     }

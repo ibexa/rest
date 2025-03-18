@@ -10,7 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\NoContent;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
@@ -54,12 +54,12 @@ class ContentDeleteController extends RestController
      *
      * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteContent($contentId)
+    public function deleteContent(int $contentId): NoContent
     {
         $this->repository->getContentService()->deleteContent(
             $this->repository->getContentService()->loadContentInfo($contentId)
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 }

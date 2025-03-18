@@ -19,10 +19,8 @@ class SectionInput extends BaseParser
 {
     /**
      * Section service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\SectionService
      */
-    protected $sectionService;
+    protected SectionService $sectionService;
 
     /**
      * Construct.

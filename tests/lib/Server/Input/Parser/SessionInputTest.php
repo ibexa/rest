@@ -16,7 +16,7 @@ class SessionInputTest extends BaseTest
     /**
      * Tests the SessionInput parser.
      */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'login' => 'Login Foo',
@@ -36,7 +36,7 @@ class SessionInputTest extends BaseTest
     /**
      * Test SessionInput parser throwing exception on missing password.
      */
-    public function testParseExceptionOnMissingIdentifier()
+    public function testParseExceptionOnMissingIdentifier(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'password\' attribute for SessionInput.');
@@ -51,7 +51,7 @@ class SessionInputTest extends BaseTest
     /**
      * Test SessionInput parser throwing exception on missing login.
      */
-    public function testParseExceptionOnMissingName()
+    public function testParseExceptionOnMissingName(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'login\' attribute for SessionInput.');
@@ -68,7 +68,7 @@ class SessionInputTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\SessionInput
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): SessionInput
     {
         return new SessionInput();
     }

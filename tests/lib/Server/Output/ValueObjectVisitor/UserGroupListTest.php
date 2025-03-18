@@ -52,7 +52,7 @@ class UserGroupListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsUserGroupListElement($result)
+    public function testResultContainsUserGroupListElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -71,7 +71,7 @@ class UserGroupListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsUserGroupListAttributes($result)
+    public function testResultContainsUserGroupListAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -90,7 +90,7 @@ class UserGroupListTest extends ValueObjectVisitorBaseTest
     /**
      * Test if UserGroupList visitor visits the children.
      */
-    public function testUserGroupListVisitsChildren()
+    public function testUserGroupListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -141,7 +141,7 @@ class UserGroupListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UserGroupList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\UserGroupList
     {
         return new ValueObjectVisitor\UserGroupList();
     }

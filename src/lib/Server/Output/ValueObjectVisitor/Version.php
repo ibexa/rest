@@ -20,10 +20,7 @@ use Ibexa\Rest\Server\Values\Version as VersionValue;
  */
 class Version extends ValueObjectVisitor
 {
-    /**
-     * @var \Ibexa\Rest\Output\FieldTypeSerializer
-     */
-    protected $fieldTypeSerializer;
+    protected FieldTypeSerializer $fieldTypeSerializer;
 
     /**
      * @param \Ibexa\Rest\Output\FieldTypeSerializer $fieldTypeSerializer
@@ -40,7 +37,7 @@ class Version extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\Version $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $content */
         $content = $data->content;

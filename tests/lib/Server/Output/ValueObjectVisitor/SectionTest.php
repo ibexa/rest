@@ -8,7 +8,7 @@
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\Section;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class SectionTest extends ValueObjectVisitorBaseTest
@@ -59,7 +59,7 @@ class SectionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsSectionElement($result)
+    public function testResultContainsSectionElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -82,7 +82,7 @@ class SectionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsSectionAttributes($result)
+    public function testResultContainsSectionAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -105,7 +105,7 @@ class SectionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsSectionIdValueElement($result)
+    public function testResultContainsSectionIdValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -125,7 +125,7 @@ class SectionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsIdentifierValueElement($result)
+    public function testResultContainsIdentifierValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -145,7 +145,7 @@ class SectionTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsNameValueElement($result)
+    public function testResultContainsNameValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -163,8 +163,8 @@ class SectionTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Section
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): Section
     {
-        return new ValueObjectVisitor\Section();
+        return new Section();
     }
 }
