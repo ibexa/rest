@@ -32,7 +32,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
     public function __invoke(array $context = []): OpenApi
     {
         $openApi = ($this->decorated)($context);
-        $openApi = $openApi->withInfo((new Info('Ibexa DXP REST API', Ibexa::VERSION, 'TODO: Description')));
+        $openApi = $openApi->withInfo((new Info('Ibexa DXP REST API', Ibexa::VERSION)));
         $openApi = $this->addSchemas($openApi);
 
         $this->insertExampleFilesContent($openApi);
