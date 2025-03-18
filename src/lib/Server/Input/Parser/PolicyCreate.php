@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\RoleService;
+use Ibexa\Contracts\Core\Repository\Values\User\PolicyCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -18,41 +19,17 @@ use Ibexa\Rest\Input\ParserTools;
  */
 class PolicyCreate extends BaseParser
 {
-    /**
-     * Role service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\RoleService
-     */
-    protected $roleService;
+    protected RoleService $roleService;
 
-    /**
-     * Parser tools.
-     *
-     * @var \Ibexa\Rest\Input\ParserTools
-     */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\RoleService $roleService
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
-     */
     public function __construct(RoleService $roleService, ParserTools $parserTools)
     {
         $this->roleService = $roleService;
         $this->parserTools = $parserTools;
     }
 
-    /**
-     * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\PolicyCreateStruct
-     */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): PolicyCreateStruct
     {
         if (!array_key_exists('module', $data)) {
             throw new Exceptions\Parser("Missing 'module' attribute for PolicyCreate.");

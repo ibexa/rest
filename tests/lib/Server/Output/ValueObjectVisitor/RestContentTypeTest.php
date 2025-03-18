@@ -19,10 +19,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
  */
 class RestContentTypeTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * @return \DOMDocument
-     */
-    public function testVisitDefinedType()
+    public function testVisitDefinedType(): \DOMDocument
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -69,7 +66,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -77,7 +74,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
         return $dom;
     }
 
-    protected function getBasicContentType()
+    protected function getBasicContentType(): RestContentType
     {
         return new RestContentType(
             new Values\ContentType\ContentType(
@@ -110,281 +107,222 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testContentTypeHref(\DOMDocument $dom)
+    public function testContentTypeHref(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType[@href="/content/types/contentTypeId"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testContentTypeMediaType(\DOMDocument $dom)
+    public function testContentTypeMediaType(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType[@media-type="application/vnd.ibexa.api.ContentType+xml"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testId(\DOMDocument $dom)
+    public function testId(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/id[text()="contentTypeId"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testStatus(\DOMDocument $dom)
+    public function testStatus(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/status[text()="DEFINED"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testIdentifier(\DOMDocument $dom)
+    public function testIdentifier(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/identifier[text()="contentTypeIdentifier"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testFirstName(\DOMDocument $dom)
+    public function testFirstName(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/names/value[@languageCode="eng-US" and text()="Sindelfingen"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testSecondName(\DOMDocument $dom)
+    public function testSecondName(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/names/value[@languageCode="eng-GB" and text()="Bielefeld"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testFirstDescription(\DOMDocument $dom)
+    public function testFirstDescription(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/descriptions/value[@languageCode="eng-GB" and text()="Sindelfingen"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testSecondDescription(\DOMDocument $dom)
+    public function testSecondDescription(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/descriptions/value[@languageCode="eng-US" and text()="Bielefeld"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testCreationDate(\DOMDocument $dom)
+    public function testCreationDate(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/creationDate[text()="2012-09-06T19:30:00+02:00"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testModificationDate(\DOMDocument $dom)
+    public function testModificationDate(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/modificationDate[text()="2012-09-06T19:32:00+02:00"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testCreatorHref(\DOMDocument $dom)
+    public function testCreatorHref(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/Creator[@href="/user/users/creatorId"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testCreatorMediaType(\DOMDocument $dom)
+    public function testCreatorMediaType(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/Creator[@media-type="application/vnd.ibexa.api.User+xml"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testModifierHref(\DOMDocument $dom)
+    public function testModifierHref(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/Modifier[@href="/user/users/modifierId"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testModifierMediaType(\DOMDocument $dom)
+    public function testModifierMediaType(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/Modifier[@media-type="application/vnd.ibexa.api.User+xml"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testDraftHref(\DOMDocument $dom)
+    public function testDraftHref(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/Draft[@href="/content/types/contentTypeId/draft"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testDraftType(\DOMDocument $dom)
+    public function testDraftType(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/Draft[@media-type="application/vnd.ibexa.api.ContentType+xml"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testGroupsHref(\DOMDocument $dom)
+    public function testGroupsHref(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/Groups[@href="/content/types/contentTypeId/groups"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testGroupsType(\DOMDocument $dom)
+    public function testGroupsType(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/Groups[@media-type="application/vnd.ibexa.api.ContentTypeGroupRefList+xml"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testRemoteId(\DOMDocument $dom)
+    public function testRemoteId(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/remoteId[text()="remoteId"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testUrlAliasSchema(\DOMDocument $dom)
+    public function testUrlAliasSchema(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/urlAliasSchema[text()="urlAliasSchema"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testNameSchema(\DOMDocument $dom)
+    public function testNameSchema(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/nameSchema[text()="nameSchema"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testIsContainer(\DOMDocument $dom)
+    public function testIsContainer(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/isContainer[text()="true"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testMainLanguageCode(\DOMDocument $dom)
+    public function testMainLanguageCode(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/mainLanguageCode[text()="eng-US"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testDefaultAlwaysAvailable(\DOMDocument $dom)
+    public function testDefaultAlwaysAvailable(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/defaultAlwaysAvailable[text()="false"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testDefaultSortField(\DOMDocument $dom)
+    public function testDefaultSortField(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/defaultSortField[text()="SECTION"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
-    public function testDefaultSortOrder(\DOMDocument $dom)
+    public function testDefaultSortOrder(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentType/defaultSortOrder[text()="DESC"]');
     }
 
-    /**
-     * Get the RestContentType visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestContentType
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\RestContentType
     {
         return new ValueObjectVisitor\RestContentType();
     }

@@ -14,7 +14,7 @@ class SectionTest extends RESTFunctionalTestCase
     /**
      * Covers GET /content/sections.
      */
-    public function testListSections()
+    public function testListSections(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/content/sections')
@@ -60,7 +60,7 @@ XML;
      * @depends testCreateSection
      * Covers PATCH /content/sections/{sectionId}
      */
-    public function testUpdateSection($sectionHref)
+    public function testUpdateSection(string $sectionHref): void
     {
         $xml = <<< XML
 <SectionInput>
@@ -85,7 +85,7 @@ XML;
      *
      * @depends testCreateSection
      */
-    public function testLoadSection($sectionHref)
+    public function testLoadSection(string $sectionHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $sectionHref)
@@ -98,7 +98,7 @@ XML;
      * @depends testCreateSection
      * Covers GET /content/sections?identifier={sectionIdentifier}
      */
-    public function testLoadSectionByIdentifier($sectionHref)
+    public function testLoadSectionByIdentifier($sectionHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/content/sections?identifier=testUpdateSection')
@@ -111,7 +111,7 @@ XML;
      * @depends testCreateSection
      * Covers DELETE /content/sections/{sectionId}
      */
-    public function testDeleteSection($sectionHref)
+    public function testDeleteSection(string $sectionHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $sectionHref)

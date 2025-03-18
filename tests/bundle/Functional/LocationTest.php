@@ -53,7 +53,7 @@ XML;
      * @depends testCreateLocation
      * Covers GET /content/locations?remoteId=<locationRemoteId>
      */
-    public function testRedirectLocationByRemoteId($locationHref)
+    public function testRedirectLocationByRemoteId($locationHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/content/locations?remoteId=' . $this->addTestSuffix('testCreateLocation'))
@@ -67,7 +67,7 @@ XML;
      * @depends testCreateLocation
      * Covers GET /content/locations?id=<locationId>
      */
-    public function testRedirectLocationById($locationHref)
+    public function testRedirectLocationById($locationHref): void
     {
         $hrefParts = explode('/', $locationHref);
         $id = array_pop($hrefParts);
@@ -83,7 +83,7 @@ XML;
      * @depends testCreateLocation
      * Covers GET /content/locations?urlAlias=<Path/To-Content>
      */
-    public function testRedirectLocationByURLAlias($locationHref)
+    public function testRedirectLocationByURLAlias($locationHref): void
     {
         $testUrlAlias = 'firstPart/secondPart/testUrlAlias';
         $this->createUrlAlias($locationHref, $testUrlAlias);
@@ -100,7 +100,7 @@ XML;
      * @depends testCreateLocation
      * Covers GET /content/locations/{locationPath}
      */
-    public function testLoadLocation($locationHref)
+    public function testLoadLocation(string $locationHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $locationHref)
@@ -115,7 +115,7 @@ XML;
      *
      * @return string the created location's href
      */
-    public function testCopySubtree($locationHref)
+    public function testCopySubtree(string $locationHref)
     {
         $request = $this->createHttpRequest(
             'COPY',
@@ -139,7 +139,7 @@ XML;
      *
      * @depends testCopySubtree
      */
-    public function testMoveSubtree($locationHref): string
+    public function testMoveSubtree(string $locationHref): string
     {
         $request = $this->createHttpRequest(
             'MOVE',
@@ -161,7 +161,7 @@ XML;
      * @depends testCreateLocation
      * Covers GET /content/objects/{contentId}/locations
      */
-    public function testLoadLocationsForContent($contentHref)
+    public function testLoadLocationsForContent($contentHref): void
     {
     }
 
@@ -169,7 +169,7 @@ XML;
      * @depends testCreateLocation
      * Covers SWAP /content/locations/{locationPath}
      */
-    public function testSwapLocation($locationHref)
+    public function testSwapLocation($locationHref): void
     {
         self::markTestSkipped('@todo Implement');
 
@@ -186,7 +186,7 @@ XML;
      * @depends testCreateLocation
      * Covers GET /content/locations/{locationPath}/children
      */
-    public function testLoadLocationChildren($locationHref)
+    public function testLoadLocationChildren($locationHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$locationHref/children", '', 'LocationList+json')
@@ -201,7 +201,7 @@ XML;
      *
      * @depends testCreateLocation
      */
-    public function testUpdateLocation($locationHref)
+    public function testUpdateLocation(string $locationHref): void
     {
         $body = <<< XML
 <LocationUpdate>
@@ -227,7 +227,7 @@ XML;
      * @depends testCreateLocation
      * Covers DELETE /content/locations/{path}
      */
-    public function testDeleteSubtree($locationHref)
+    public function testDeleteSubtree(string $locationHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $locationHref)

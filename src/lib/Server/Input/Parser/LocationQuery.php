@@ -15,7 +15,7 @@ use Ibexa\Rest\Server\Input\Parser\Query as QueryParser;
  */
 class LocationQuery extends QueryParser
 {
-    protected function buildQuery()
+    protected function buildQuery(): LocationQueryValueObject
     {
         return new LocationQueryValueObject();
     }

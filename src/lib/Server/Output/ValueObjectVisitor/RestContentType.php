@@ -24,7 +24,7 @@ class RestContentType extends RestContentTypeBase
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\RestContentType $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $contentType = $data->contentType;
 

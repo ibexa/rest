@@ -18,13 +18,11 @@ use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Ibexa\Core\Repository\Values\User\UserGroupCreateStruct;
 use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\UserGroupCreate;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class UserGroupCreateTest extends BaseTest
 {
-    /**
-     * Tests the UserGroupCreate parser.
-     */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'ContentType' => [
@@ -55,7 +53,7 @@ class UserGroupCreateTest extends BaseTest
         );
 
         self::assertInstanceOf(
-            \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType::class,
+            ContentType::class,
             $result->contentType,
             'contentType not created correctly.'
         );
@@ -93,10 +91,7 @@ class UserGroupCreateTest extends BaseTest
         }
     }
 
-    /**
-     * Test UserGroupCreate parser throwing exception on invalid ContentType.
-     */
-    public function testParseExceptionOnInvalidContentType()
+    public function testParseExceptionOnInvalidContentType(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'_href\' attribute for the ContentType element in UserGroupCreate.');
@@ -121,10 +116,7 @@ class UserGroupCreateTest extends BaseTest
         $userGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserGroupCreate parser throwing exception on missing mainLanguageCode.
-     */
-    public function testParseExceptionOnMissingMainLanguageCode()
+    public function testParseExceptionOnMissingMainLanguageCode(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'mainLanguageCode\' element for UserGroupCreate.');
@@ -150,10 +142,7 @@ class UserGroupCreateTest extends BaseTest
         $userGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserGroupCreate parser throwing exception on invalid Section.
-     */
-    public function testParseExceptionOnInvalidSection()
+    public function testParseExceptionOnInvalidSection(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'_href\' attribute for the Section element in UserGroupCreate.');
@@ -178,10 +167,7 @@ class UserGroupCreateTest extends BaseTest
         $userGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserGroupCreate parser throwing exception on invalid fields data.
-     */
-    public function testParseExceptionOnInvalidFields()
+    public function testParseExceptionOnInvalidFields(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing or invalid \'fields\' element for UserGroupCreate.');
@@ -200,10 +186,7 @@ class UserGroupCreateTest extends BaseTest
         $userGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserGroupCreate parser throwing exception on missing field definition identifier.
-     */
-    public function testParseExceptionOnMissingFieldDefinitionIdentifier()
+    public function testParseExceptionOnMissingFieldDefinitionIdentifier(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'fieldDefinitionIdentifier\' element in field data for UserGroupCreate.');
@@ -233,10 +216,7 @@ class UserGroupCreateTest extends BaseTest
         $userGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserGroupCreate parser throwing exception on invalid field definition identifier.
-     */
-    public function testParseExceptionOnInvalidFieldDefinitionIdentifier()
+    public function testParseExceptionOnInvalidFieldDefinitionIdentifier(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('\'unknown\' is an invalid Field definition identifier for the \'some_class\' content type in UserGroupCreate.');
@@ -263,10 +243,7 @@ class UserGroupCreateTest extends BaseTest
         $userGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserGroupCreate parser throwing exception on missing field value.
-     */
-    public function testParseExceptionOnMissingFieldValue()
+    public function testParseExceptionOnMissingFieldValue(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'fieldValue\' element for the \'name\' identifier in UserGroupCreate.');
@@ -292,12 +269,7 @@ class UserGroupCreateTest extends BaseTest
         $userGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the UserGroupCreate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\UserGroupCreate
-     */
-    protected function internalGetParser()
+    protected function internalGetParser(): UserGroupCreate
     {
         return new UserGroupCreate(
             $this->getUserServiceMock(),
@@ -306,12 +278,7 @@ class UserGroupCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the field type parser mock object.
-     *
-     * @return \Ibexa\Rest\Input\FieldTypeParser ;
-     */
-    private function getFieldTypeParserMock()
+    private function getFieldTypeParserMock(): FieldTypeParser & MockObject
     {
         $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
             ->disableOriginalConstructor()
@@ -333,12 +300,7 @@ class UserGroupCreateTest extends BaseTest
         return $fieldTypeParserMock;
     }
 
-    /**
-     * Get the user service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\UserService
-     */
-    protected function getUserServiceMock()
+    protected function getUserServiceMock(): UserService & MockObject
     {
         $userServiceMock = $this->createMock(UserService::class);
 
@@ -352,21 +314,16 @@ class UserGroupCreateTest extends BaseTest
             ->willReturn(
                 new UserGroupCreateStruct(
                     [
-                            'contentType' => $contentType,
-                            'mainLanguageCode' => 'eng-US',
-                        ]
+                        'contentType' => $contentType,
+                        'mainLanguageCode' => 'eng-US',
+                    ]
                 )
             );
 
         return $userServiceMock;
     }
 
-    /**
-     * Get the content type service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService
-     */
-    protected function getContentTypeServiceMock()
+    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
@@ -378,12 +335,7 @@ class UserGroupCreateTest extends BaseTest
         return $contentTypeServiceMock;
     }
 
-    /**
-     * Get the content type used in UserGroupCreate parser.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
-     */
-    protected function getContentType()
+    protected function getContentType(): ContentType
     {
         return new ContentType(
             [
@@ -402,7 +354,7 @@ class UserGroupCreateTest extends BaseTest
         );
     }
 
-    public function getParseHrefExpectationsMap()
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/content/types/3', 'contentTypeId', 3],

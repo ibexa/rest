@@ -8,6 +8,7 @@
 namespace Ibexa\Tests\Bundle\Rest\Routing;
 
 use Ibexa\Bundle\Rest\Routing\OptionsLoader;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\RouteCollection;
 
@@ -16,13 +17,12 @@ use Symfony\Component\Routing\RouteCollection;
  */
 class OptionsLoaderTest extends TestCase
 {
+    private OptionsLoader\RouteCollectionMapper & MockObject $routeCollectionMapperMock;
+
     /**
-     * @param string $type
-     * @param bool $expected
-     *
      * @dataProvider getResourceType
      */
-    public function testSupportsResourceType($type, $expected)
+    public function testSupportsResourceType(string $type, bool $expected): void
     {
         self::assertEquals(
             $expected,
@@ -30,7 +30,10 @@ class OptionsLoaderTest extends TestCase
         );
     }
 
-    public function getResourceType()
+    /**
+     * @return array<array{string, bool}>
+     */
+    public function getResourceType(): array
     {
         return [
             ['rest_options', true],
@@ -38,7 +41,7 @@ class OptionsLoaderTest extends TestCase
         ];
     }
 
-    public function testLoad()
+    public function testLoad(): void
     {
         $optionsRouteCollection = new RouteCollection();
 
@@ -55,10 +58,8 @@ class OptionsLoaderTest extends TestCase
 
     /**
      * Returns a partially mocked OptionsLoader, with the import method mocked.
-     *
-     * @return \Ibexa\Bundle\Rest\Routing\OptionsLoader|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getOptionsLoader()
+    protected function getOptionsLoader(): OptionsLoader & MockObject
     {
         $mock = $this->getMockBuilder(OptionsLoader::class)
             ->setConstructorArgs([$this->getRouteCollectionMapperMock()])
@@ -73,10 +74,7 @@ class OptionsLoaderTest extends TestCase
         return $mock;
     }
 
-    /**
-     * @return \PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getRouteCollectionMapperMock()
+    protected function getRouteCollectionMapperMock(): OptionsLoader\RouteCollectionMapper & MockObject
     {
         if (!isset($this->routeCollectionMapperMock)) {
             $this->routeCollectionMapperMock = $this->createMock(OptionsLoader\RouteCollectionMapper::class);

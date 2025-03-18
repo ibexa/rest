@@ -15,10 +15,7 @@ use Ibexa\Rest\Server\Values\RoleAssignment;
 
 class RoleAssignInputTest extends BaseTest
 {
-    /**
-     * Tests the RoleAssignInput parser.
-     */
-    public function testParse()
+    public function testParse(): void
     {
         $limitation = [
             '_identifier' => 'Section',
@@ -60,10 +57,7 @@ class RoleAssignInputTest extends BaseTest
         );
     }
 
-    /**
-     * Test RoleAssignInput parser throwing exception on missing Role.
-     */
-    public function testParseExceptionOnMissingRole()
+    public function testParseExceptionOnMissingRole(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'Role\' element for RoleAssignInput.');
@@ -90,10 +84,7 @@ class RoleAssignInputTest extends BaseTest
         $roleAssignInput->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test RoleAssignInput parser throwing exception on invalid Role.
-     */
-    public function testParseExceptionOnInvalidRole()
+    public function testParseExceptionOnInvalidRole(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid \'Role\' element for RoleAssignInput.');
@@ -121,10 +112,7 @@ class RoleAssignInputTest extends BaseTest
         $roleAssignInput->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test Limitation parser throwing exception on missing identifier.
-     */
-    public function testParseExceptionOnMissingLimitationIdentifier()
+    public function testParseExceptionOnMissingLimitationIdentifier(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'_identifier\' attribute for Limitation.');
@@ -153,19 +141,14 @@ class RoleAssignInputTest extends BaseTest
         $roleAssignInput->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the role assign input parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\RoleAssignInput
-     */
-    protected function internalGetParser()
+    protected function internalGetParser(): RoleAssignInput
     {
         return new RoleAssignInput(
             $this->getParserTools()
         );
     }
 
-    public function getParseHrefExpectationsMap()
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/user/roles/42', 'roleId', 42],

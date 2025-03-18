@@ -11,6 +11,8 @@ use ApiPlatform\Metadata\Get;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\RoleService;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\User\Policy;
+use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Contracts\Core\Repository\Values\User\RoleCreateStruct;
 use Ibexa\Contracts\Core\Repository\Values\User\RoleUpdateStruct;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -39,7 +41,7 @@ class RoleBaseController extends RestController
      * This is needed because the RoleService addPolicy() and addPolicyByRoleDraft() methods return the role,
      * not the policy.
      */
-    protected function getLastAddedPolicy(\Ibexa\Contracts\Core\Repository\Values\User\Role $role): \Ibexa\Contracts\Core\Repository\Values\User\Policy
+    protected function getLastAddedPolicy(Role $role): Policy
     {
         $policiesIterable = $role->getPolicies();
         $policies = [];
@@ -66,7 +68,7 @@ class RoleBaseController extends RestController
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\User\RoleUpdateStruct
      */
-    protected function mapToUpdateStruct(RoleCreateStruct $createStruct)
+    protected function mapToUpdateStruct(RoleCreateStruct $createStruct): RoleUpdateStruct
     {
         return new RoleUpdateStruct(
             [

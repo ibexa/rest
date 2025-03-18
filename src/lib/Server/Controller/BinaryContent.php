@@ -21,11 +21,9 @@ use Ibexa\Rest\Server\Values\CachedValue;
  */
 class BinaryContent extends RestController
 {
-    /** @var \Ibexa\Contracts\Core\Variation\VariationHandler */
-    protected $imageVariationHandler;
+    protected VariationHandler $imageVariationHandler;
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
-    private $configResolver;
+    private ConfigResolverInterface $configResolver;
 
     public function __construct(
         VariationHandler $imageVariationHandler,
@@ -107,7 +105,7 @@ class BinaryContent extends RestController
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException If the imageId format is invalid
      */
-    private function parseImageId($imageId)
+    private function parseImageId($imageId): array
     {
         $idArray = explode('-', $imageId);
         $idArray = array_map('intval', $idArray);

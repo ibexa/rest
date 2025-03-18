@@ -14,12 +14,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class URLWildcardListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the URLWildcardList visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -42,19 +37,15 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains UrlWildcardList element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsUrlWildcardListElement($result)
+    public function testResultContainsUrlWildcardListElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -67,13 +58,9 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains UrlWildcardList element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsUrlWildcardListAttributes($result)
+    public function testResultContainsUrlWildcardListAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -89,10 +76,7 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Test if URLWildcardList visitor visits the children.
-     */
-    public function testURLWildcardListVisitsChildren()
+    public function testURLWildcardListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -117,12 +101,7 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the URLWildcardList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcardList
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\URLWildcardList
     {
         return new ValueObjectVisitor\URLWildcardList();
     }

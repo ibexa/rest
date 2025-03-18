@@ -14,14 +14,12 @@ use Ibexa\Core\Repository\ContentTypeService;
 use Ibexa\Core\Repository\Values\ContentType\ContentTypeCreateStruct;
 use Ibexa\Rest\Server\Input\Parser\ContentTypeCreate;
 use Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ContentTypeCreateTest extends BaseTest
 {
-    /**
-     * Tests the ContentTypeCreate parser.
-     */
-    public function testParse()
-    {
+        public function testParse(): void
+        {
         $inputArray = $this->getInputArray();
 
         $contentTypeCreate = $this->getParser();
@@ -118,10 +116,7 @@ class ContentTypeCreateTest extends BaseTest
         }
     }
 
-    /**
-     * Test ContentTypeCreate parser throwing exception on missing identifier.
-     */
-    public function testParseExceptionOnMissingIdentifier()
+    public function testParseExceptionOnMissingIdentifier(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'identifier\' element for ContentTypeCreate.');
@@ -132,10 +127,7 @@ class ContentTypeCreateTest extends BaseTest
         $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentTypeCreate parser throwing exception on missing mainLanguageCode.
-     */
-    public function testParseExceptionOnMissingMainLanguageCode()
+    public function testParseExceptionOnMissingMainLanguageCode(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'mainLanguageCode\' element for ContentTypeCreate.');
@@ -146,10 +138,7 @@ class ContentTypeCreateTest extends BaseTest
         $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentTypeCreate parser throwing exception on invalid names.
-     */
-    public function testParseExceptionOnInvalidNames()
+    public function testParseExceptionOnInvalidNames(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid \'names\' element for ContentTypeCreate.');
@@ -160,10 +149,7 @@ class ContentTypeCreateTest extends BaseTest
         $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentTypeCreate parser throwing exception on invalid descriptions.
-     */
-    public function testParseExceptionOnInvalidDescriptions()
+    public function testParseExceptionOnInvalidDescriptions(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid \'descriptions\' element for ContentTypeCreate.');
@@ -174,10 +160,7 @@ class ContentTypeCreateTest extends BaseTest
         $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentTypeCreate parser throwing exception on invalid User.
-     */
-    public function testParseExceptionOnInvalidUser()
+    public function testParseExceptionOnInvalidUser(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'_href\' attribute for the User element in ContentTypeCreate.');
@@ -188,10 +171,7 @@ class ContentTypeCreateTest extends BaseTest
         $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentTypeCreate parser throwing exception on invalid FieldDefinitions.
-     */
-    public function testParseExceptionOnInvalidFieldDefinitions()
+    public function testParseExceptionOnInvalidFieldDefinitions(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid \'FieldDefinitions\' element for ContentTypeCreate.');
@@ -202,10 +182,7 @@ class ContentTypeCreateTest extends BaseTest
         $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentTypeCreate parser throwing exception on invalid FieldDefinitions.
-     */
-    public function testParseExceptionOnMissingFieldDefinitions()
+    public function testParseExceptionOnMissingFieldDefinitions(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('ContentTypeCreate should provide at least one Field definition.');
@@ -218,10 +195,7 @@ class ContentTypeCreateTest extends BaseTest
         $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentTypeCreate parser throwing exception on invalid FieldDefinitions.
-     */
-    public function testParseExceptionOnInvalidFieldDefinition()
+    public function testParseExceptionOnInvalidFieldDefinition(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid \'FieldDefinition\' element for ContentTypeCreate.');
@@ -232,12 +206,7 @@ class ContentTypeCreateTest extends BaseTest
         $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the ContentTypeCreate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\ContentTypeCreate
-     */
-    protected function internalGetParser()
+    protected function internalGetParser(): ContentTypeCreate
     {
         return new ContentTypeCreate(
             $this->getContentTypeServiceMock(),
@@ -246,12 +215,7 @@ class ContentTypeCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Returns the FieldDefinitionCreate parser mock object.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate
-     */
-    private function getFieldDefinitionCreateParserMock()
+    private function getFieldDefinitionCreateParserMock(): FieldDefinitionCreate & MockObject
     {
         $fieldDefinitionCreateParserMock = $this->createMock(FieldDefinitionCreate::class);
 
@@ -263,12 +227,7 @@ class ContentTypeCreateTest extends BaseTest
         return $fieldDefinitionCreateParserMock;
     }
 
-    /**
-     * Get the content type service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService
-     */
-    protected function getContentTypeServiceMock()
+    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
@@ -291,7 +250,7 @@ class ContentTypeCreateTest extends BaseTest
      *
      * @return array
      */
-    protected function getInputArray()
+    protected function getInputArray(): array
     {
         return [
             'identifier' => 'new_content_type',
@@ -323,8 +282,6 @@ class ContentTypeCreateTest extends BaseTest
             'User' => [
                 '_href' => '/user/users/14',
             ],
-
-            // mocked
             'FieldDefinitions' => [
                 'FieldDefinition' => [
                     [],
@@ -334,7 +291,7 @@ class ContentTypeCreateTest extends BaseTest
         ];
     }
 
-    public function getParseHrefExpectationsMap()
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/user/users/14', 'userId', 14],

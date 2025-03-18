@@ -17,9 +17,10 @@ use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\FieldDefinitionUpdate;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
- * @todo Test with fieldSettings and validatorConfiguration when specified
+ * @todo Test with fieldSettings and validatorConfiguration when specifiedś
  */
 final class FieldDefinitionUpdateTest extends BaseTest
 {
@@ -144,7 +145,7 @@ final class FieldDefinitionUpdateTest extends BaseTest
         );
     }
 
-    protected function getFieldTypeParserMock(): FieldTypeParser
+    protected function getFieldTypeParserMock(): FieldTypeParser&MockObject
     {
         $fieldTypeParserMock = $this->createMock(FieldTypeParser::class);
 
@@ -170,7 +171,7 @@ final class FieldDefinitionUpdateTest extends BaseTest
         return $fieldTypeParserMock;
     }
 
-    protected function getContentTypeServiceMock(): ContentTypeService
+    protected function getContentTypeServiceMock(): ContentTypeService&MockObject
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 

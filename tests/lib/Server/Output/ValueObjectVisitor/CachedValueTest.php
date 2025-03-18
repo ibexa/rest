@@ -11,6 +11,7 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\CachedValue;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 use stdClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -36,7 +37,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
         $this->request->headers->set('X-User-Hash', 'blabla');
     }
 
-    public function testVisit()
+    public function testVisit(): void
     {
         $responseMock = $this->getResponseMock();
         $responseMock->expects(self::once())->method('setPublic');
@@ -46,10 +47,10 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
     }
 
-    public function testVisitLocationCache()
+    public function testVisitLocationCache(): void
     {
         $responseMock = $this->getResponseMock();
         $responseMock->expects(self::once())->method('setPublic');
@@ -59,10 +60,10 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
         $result = $this->visit(new CachedValue(new stdClass(), ['locationId' => 'testLocationId']));
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
     }
 
-    public function testVisitNoUserHash()
+    public function testVisitNoUserHash(): void
     {
         $this->request->headers->remove('X-User-Hash');
 
@@ -74,10 +75,10 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
     }
 
-    public function testVisitNoRequest()
+    public function testVisitNoRequest(): void
     {
         $this->request = null;
 
@@ -88,10 +89,10 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
     }
 
-    public function testVisitViewCacheDisabled()
+    public function testVisitViewCacheDisabled(): void
     {
         // disable caching globally
         $this->options = array_merge($this->defaultOptions, ['content.view_cache' => false]);
@@ -100,10 +101,10 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
     }
 
-    public function testVisitCacheTTLCacheDisabled()
+    public function testVisitCacheTTLCacheDisabled(): void
     {
         // disable caching globally
         $this->options = array_merge($this->defaultOptions, ['content.ttl_cache' => false]);
@@ -115,10 +116,10 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
     }
 
-    protected function visit($value)
+    protected function visit($value): string
     {
         $this->getVisitorMock()->expects(self::once())->method('visitValueObject')->with($value->value);
 
@@ -136,12 +137,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
         return $generator->endDocument(null);
     }
 
-    /**
-     * Must return an instance of the tested visitor object.
-     *
-     * @return \Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\CachedValue
     {
         $visitor = new ValueObjectVisitor\CachedValue(
             $this->getConfigProviderMock()
@@ -155,10 +151,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
         return $visitor;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getConfigProviderMock()
+    protected function getConfigProviderMock(): ConfigResolverInterface & MockObject
     {
         $options = $this->options ?: $this->defaultOptions;
 
@@ -167,7 +160,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
             ->expects(self::any())
             ->method('hasParameter')
             ->willReturnCallback(
-                static function ($parameterName) use ($options) {
+                static function ($parameterName) use ($options): bool {
                     return isset($options[$parameterName]);
                 }
             );

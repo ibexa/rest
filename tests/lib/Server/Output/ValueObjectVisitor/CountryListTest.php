@@ -13,12 +13,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class CountryListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the CountryListList visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): \DOMDocument
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -50,7 +45,7 @@ class CountryListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
 
@@ -64,7 +59,7 @@ class CountryListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testCountryListMediaType(\DOMDocument $dom)
+    public function testCountryListMediaType(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/CountryList/Country[1][@media-type="application/vnd.ibexa.api.Country+xml"]');
         $this->assertXPath($dom, '/CountryList/Country[2][@media-type="application/vnd.ibexa.api.Country+xml"]');
@@ -75,7 +70,7 @@ class CountryListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testCountryListId(\DOMDocument $dom)
+    public function testCountryListId(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/CountryList/Country[1][@id="VA"]');
         $this->assertXPath($dom, '/CountryList/Country[2][@id="HM"]');
@@ -86,7 +81,7 @@ class CountryListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testCountryListName(\DOMDocument $dom)
+    public function testCountryListName(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/CountryList/Country[1]/name[text()="Holy See (Vatican City State)"]');
         $this->assertXPath($dom, '/CountryList/Country[2]/name[text()="Heard Island and McDonald Islands"]');
@@ -97,7 +92,7 @@ class CountryListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testCountryListAlpha2(\DOMDocument $dom)
+    public function testCountryListAlpha2(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/CountryList/Country[1]/Alpha2[text()="VA"]');
         $this->assertXPath($dom, '/CountryList/Country[2]/Alpha2[text()="HM"]');
@@ -108,7 +103,7 @@ class CountryListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testCountryListAlpha3(\DOMDocument $dom)
+    public function testCountryListAlpha3(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/CountryList/Country[1]/Alpha3[text()="VAT"]');
         $this->assertXPath($dom, '/CountryList/Country[2]/Alpha3[text()="HMD"]');
@@ -119,7 +114,7 @@ class CountryListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testCountryListIDC(\DOMDocument $dom)
+    public function testCountryListIDC(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/CountryList/Country[1]/IDC[text()="3906"]');
         $this->assertXPath($dom, '/CountryList/Country[2]/IDC[text()="672"]');
@@ -130,7 +125,7 @@ class CountryListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\CountryList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\CountryList
     {
         return new ValueObjectVisitor\CountryList();
     }

@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class InputHandlerPassTest extends TestCase
 {
-    public function testProcess()
+    public function testProcess(): void
     {
         $visitorDefinition = new Definition();
         $visitorDefinition->addTag('ibexa.rest.input.handler', ['format' => 'test']);

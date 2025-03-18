@@ -25,7 +25,7 @@ class Policy extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param Policy|\Ibexa\Contracts\Core\Repository\Values\User\PolicyDraft $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startObjectElement('Policy');
         $visitor->setHeader('Content-Type', $generator->getMediaType($data instanceof PolicyDraft ? 'PolicyDraft' : 'Policy'));

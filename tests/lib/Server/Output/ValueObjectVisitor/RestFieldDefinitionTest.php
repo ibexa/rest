@@ -12,10 +12,11 @@ use Ibexa\Rest\Output\FieldTypeSerializer;
 use Ibexa\Rest\Server;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
 {
-    protected $fieldTypeSerializerMock;
+    protected FieldTypeSerializer & MockObject $fieldTypeSerializerMock;
 
     public function setUp(): void
     {
@@ -70,7 +71,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -175,9 +176,6 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
         $this->assertXPath($dom, $xpath);
     }
 
-    /**
-     * Get the Content visitor.
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\RestFieldDefinition
     {
         return new ValueObjectVisitor\RestFieldDefinition($this->fieldTypeSerializerMock);

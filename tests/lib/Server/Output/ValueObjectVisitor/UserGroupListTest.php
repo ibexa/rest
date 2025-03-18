@@ -18,12 +18,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class UserGroupListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the UserGroupList visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -40,19 +35,15 @@ class UserGroupListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains UserGroupList element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsUserGroupListElement($result)
+    public function testResultContainsUserGroupListElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -65,13 +56,9 @@ class UserGroupListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains UserGroupList element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsUserGroupListAttributes($result)
+    public function testResultContainsUserGroupListAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -87,10 +74,7 @@ class UserGroupListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Test if UserGroupList visitor visits the children.
-     */
-    public function testUserGroupListVisitsChildren()
+    public function testUserGroupListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -136,12 +120,7 @@ class UserGroupListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the UserGroupList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UserGroupList
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\UserGroupList
     {
         return new ValueObjectVisitor\UserGroupList();
     }

@@ -7,33 +7,19 @@
 
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
-use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Server\Input\Parser\Criterion;
 
 /**
  * Parser for LogicalOperator Criterion.
  */
-class LogicalOperator extends Criterion
+abstract class LogicalOperator extends Criterion
 {
-    /**
-     * Parses input structure to a Criterion object.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalOperator
-     */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
-        throw new \Exception('@todo implement');
-    }
-
     /**
      * @param array $criteriaByType
      *
      * @return array
      */
-    protected function getFlattenedCriteriaData(array $criteriaByType)
+    protected function getFlattenedCriteriaData(array $criteriaByType): array
     {
         $criteria = [];
         foreach ($criteriaByType as $type => $criterion) {
@@ -59,7 +45,7 @@ class LogicalOperator extends Criterion
      *
      * @return bool
      */
-    protected function isZeroBasedArray(array $value)
+    protected function isZeroBasedArray(array $value): bool
     {
         reset($value);
 

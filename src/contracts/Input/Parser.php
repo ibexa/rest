@@ -16,8 +16,6 @@ abstract class Parser
      * Parse input structure.
      *
      * @param array<mixed> $data
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject|object
      */
-    abstract public function parse(array $data, ParsingDispatcher $parsingDispatcher);
+    abstract public function parse(array $data, ParsingDispatcher $parsingDispatcher): mixed;
 }

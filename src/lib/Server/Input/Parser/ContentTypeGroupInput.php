@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Input\Parser;
 
 use DateTime;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroupCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -21,15 +22,10 @@ class ContentTypeGroupInput extends BaseParser
 {
     /**
      * ContentType service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
      */
-    protected $contentTypeService;
+    protected ContentTypeService $contentTypeService;
 
-    /**
-     * @var \Ibexa\Rest\Input\ParserTools
-     */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     /**
      * Construct.
@@ -43,15 +39,7 @@ class ContentTypeGroupInput extends BaseParser
         $this->parserTools = $parserTools;
     }
 
-    /**
-     * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroupCreateStruct
-     */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentTypeGroupCreateStruct
     {
         // Since ContentTypeGroupInput is used both for creating and updating ContentTypeGroup and identifier is not
         // required when updating ContentTypeGroup, we need to rely on PAPI to throw the exception on missing

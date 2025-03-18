@@ -13,8 +13,6 @@ use Ibexa\Rest\Output\Generator\Xml;
 use Ibexa\Tests\Rest\Output\GeneratorTest;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-require_once __DIR__ . '/../GeneratorTest.php';
-
 /**
  * Xml generator test class.
  */

@@ -11,12 +11,7 @@ use Ibexa\Rest\Server\Values;
 
 class UserSessionCreatedTest extends UserSessionTest
 {
-    /**
-     * Test the Session visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -61,7 +56,7 @@ class UserSessionCreatedTest extends UserSessionTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }

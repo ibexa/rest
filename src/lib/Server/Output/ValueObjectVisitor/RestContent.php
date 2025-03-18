@@ -20,8 +20,7 @@ use Ibexa\Rest\Server\Values\Version as VersionValue;
  */
 class RestContent extends ValueObjectVisitor
 {
-    /** @var \Ibexa\Core\Helper\TranslationHelper */
-    private $translationHelper;
+    private TranslationHelper $translationHelper;
 
     public function __construct(TranslationHelper $translationHelper)
     {
@@ -35,7 +34,7 @@ class RestContent extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\RestContent $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $restContent = $data;
         $contentInfo = $restContent->contentInfo;
@@ -202,7 +201,7 @@ class RestContent extends ValueObjectVisitor
      *
      * @return string
      */
-    protected function getStatusString($status)
+    protected function getStatusString($status): string
     {
         switch ($status) {
             case ContentInfo::STATUS_DRAFT:

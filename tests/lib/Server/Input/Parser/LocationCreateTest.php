@@ -12,13 +12,11 @@ use Ibexa\Contracts\Core\Repository\Values\Content\LocationCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\LocationService;
 use Ibexa\Rest\Server\Input\Parser\LocationCreate;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class LocationCreateTest extends BaseTest
 {
-    /**
-     * Tests the LocationCreate parser.
-     */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'ParentLocation' => [
@@ -76,10 +74,7 @@ class LocationCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Test LocationCreate parser throwing exception on missing ParentLocation.
-     */
-    public function testParseExceptionOnMissingParentLocation()
+    public function testParseExceptionOnMissingParentLocation(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing or invalid \'ParentLocation\' element for LocationCreate.');
@@ -95,10 +90,7 @@ class LocationCreateTest extends BaseTest
         $locationCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test LocationCreate parser throwing exception on missing _href attribute for ParentLocation.
-     */
-    public function testParseExceptionOnMissingHrefAttribute()
+    public function testParseExceptionOnMissingHrefAttribute(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'_href\' attribute for the ParentLocation element in LocationCreate.');
@@ -115,10 +107,7 @@ class LocationCreateTest extends BaseTest
         $locationCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test LocationCreate parser throwing exception on missing sort field.
-     */
-    public function testParseExceptionOnMissingSortField()
+    public function testParseExceptionOnMissingSortField(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'sortField\' element for LocationCreate.');
@@ -136,10 +125,7 @@ class LocationCreateTest extends BaseTest
         $locationCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test LocationCreate parser throwing exception on missing sort order.
-     */
-    public function testParseExceptionOnMissingSortOrder()
+    public function testParseExceptionOnMissingSortOrder(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'sortOrder\' element for LocationCreate.');
@@ -157,12 +143,7 @@ class LocationCreateTest extends BaseTest
         $locationCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the LocationCreateStruct parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\LocationCreate
-     */
-    protected function internalGetParser()
+    protected function internalGetParser(): LocationCreate
     {
         return new LocationCreate(
             $this->getLocationServiceMock(),
@@ -170,12 +151,7 @@ class LocationCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the location service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\LocationService
-     */
-    protected function getLocationServiceMock()
+    protected function getLocationServiceMock(): LocationService & MockObject
     {
         $locationServiceMock = $this->createMock(LocationService::class);
 
@@ -189,7 +165,7 @@ class LocationCreateTest extends BaseTest
         return $locationServiceMock;
     }
 
-    public function getParseHrefExpectationsMap()
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/content/locations/1/2/42', 'locationPath', '1/2/42'],

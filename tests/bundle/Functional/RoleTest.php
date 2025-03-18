@@ -16,7 +16,7 @@ class RoleTest extends RESTFunctionalTestCase
      *
      * @return string The created role draft href
      */
-    public function testCreateRoleWithDraft()
+    public function testCreateRoleWithDraft(): string
     {
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -52,7 +52,7 @@ XML;
     /**
      * Covers GET /user/roles.
      */
-    public function testListRoles()
+    public function testListRoles(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/user/roles')
@@ -65,7 +65,7 @@ XML;
      * @depends testPublishRoleDraft
      * Covers GET /user/roles/{roleId}
      */
-    public function testLoadRole($roleHref)
+    public function testLoadRole(string $roleHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $roleHref)
@@ -80,7 +80,7 @@ XML;
      *
      * @return string The created role draft href
      */
-    public function testCreateRoleDraft($roleHref)
+    public function testCreateRoleDraft(string $roleHref): string
     {
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -117,7 +117,7 @@ XML;
      * @depends testCreateRoleDraft
      * Covers GET /user/roles/{roleId}/draft
      */
-    public function testLoadRoleDraft($roleDraftHref)
+    public function testLoadRoleDraft(string $roleDraftHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $roleDraftHref)
@@ -130,7 +130,7 @@ XML;
      * @depends testPublishRoleDraft
      * Covers PATCH /user/roles/{roleId}
      */
-    public function testUpdateRole($roleHref)
+    public function testUpdateRole(string $roleHref): void
     {
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -156,7 +156,7 @@ XML;
      * @depends testCreateRoleDraft
      * Covers PATCH /user/roles/{roleId}/draft
      */
-    public function testUpdateRoleDraft($roleDraftHref)
+    public function testUpdateRoleDraft(string $roleDraftHref): void
     {
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -272,7 +272,7 @@ XML;
      *
      * @depends testAddPolicy
      */
-    public function testLoadPolicy($policyHref)
+    public function testLoadPolicy(string $policyHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $policyHref)
@@ -286,7 +286,7 @@ XML;
      *
      * @depends testPublishRoleDraft
      */
-    public function testLoadPolicies($roleHref)
+    public function testLoadPolicies($roleHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$roleHref/policies")
@@ -300,7 +300,7 @@ XML;
      *
      * @depends testAddPolicy
      */
-    public function testUpdatePolicy($policyHref)
+    public function testUpdatePolicy(string $policyHref)
     {
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -334,7 +334,7 @@ XML;
      *
      * @depends testAddPolicyByRoleDraft
      */
-    public function testUpdatePolicyByRoleDraft($policyHref)
+    public function testUpdatePolicyByRoleDraft(string $policyHref): void
     {
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -430,7 +430,10 @@ XML;
         return $roleAssignmentArray['RoleAssignmentList']['RoleAssignment'][0]['_href'];
     }
 
-    public function provideLimitations()
+    /**
+     * @return array<array<array{identifier: string, href: string}>>
+     */
+    public function provideLimitations(): array
     {
         return [
             [['identifier' => 'Section', 'href' => '/api/ibexa/v2/content/sections/1']],
@@ -443,7 +446,7 @@ XML;
      *
      * @depends testAssignRoleToUser
      */
-    public function testLoadRoleAssignmentForUser($roleAssignmentHref)
+    public function testLoadRoleAssignmentForUser(string $roleAssignmentHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $roleAssignmentHref)
@@ -457,7 +460,7 @@ XML;
      *
      * @depends testAssignRoleToUser
      */
-    public function testUnassignRoleFromUser($roleAssignmentHref)
+    public function testUnassignRoleFromUser(string $roleAssignmentHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $roleAssignmentHref)
@@ -507,7 +510,7 @@ XML;
      *
      * @depends testAssignRoleToUserGroup
      */
-    public function testLoadRoleAssignmentForUserGroup($roleAssignmentHref)
+    public function testLoadRoleAssignmentForUserGroup(string $roleAssignmentHref): void
     {
         $response = $this->sendHttpRequest(
             $request = $this->createHttpRequest('GET', $roleAssignmentHref)
@@ -522,7 +525,7 @@ XML;
      *
      * @depends testAssignRoleToUserGroup
      */
-    public function testUnassignRoleFromUserGroup($roleAssignmentHref)
+    public function testUnassignRoleFromUserGroup(string $roleAssignmentHref): void
     {
         $response = $this->sendHttpRequest(
             $request = $this->createHttpRequest('DELETE', $roleAssignmentHref)
@@ -535,7 +538,7 @@ XML;
     /**
      * Covers GET /user/users/{userId}/roles.
      */
-    public function testLoadRoleAssignmentsForUser()
+    public function testLoadRoleAssignmentsForUser(): void
     {
         $response = $this->sendHttpRequest(
             $request = $this->createHttpRequest('GET', '/api/ibexa/v2/user/users/10/roles')
@@ -547,7 +550,7 @@ XML;
     /**
      * Covers GET /user/groups/{groupPath}/roles.
      */
-    public function testLoadRoleAssignmentsForUserGroup()
+    public function testLoadRoleAssignmentsForUserGroup(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/user/groups/1/5/44/roles')
@@ -559,7 +562,7 @@ XML;
     /**
      * Covers GET /user/policies?userId={userId}.
      */
-    public function testListPoliciesForUser()
+    public function testListPoliciesForUser(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/user/policies?userId=10')
@@ -573,7 +576,7 @@ XML;
      *
      * @depends testUpdatePolicy
      */
-    public function testDeletePolicy($policyHref)
+    public function testDeletePolicy(string $policyHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $policyHref)
@@ -587,7 +590,7 @@ XML;
      *
      * @depends testAddPolicyByRoleDraft
      */
-    public function testRemovePolicyByRoleDraft($policyHref)
+    public function testRemovePolicyByRoleDraft(string $policyHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $policyHref)
@@ -601,7 +604,7 @@ XML;
      *
      * @depends testPublishRoleDraft
      */
-    public function testDeletePolicies($roleHref)
+    public function testDeletePolicies($roleHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', "$roleHref/policies")
@@ -615,7 +618,7 @@ XML;
      *
      * @depends testPublishRoleDraft
      */
-    public function testDeleteRole($roleHref)
+    public function testDeleteRole(string $roleHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $roleHref)
@@ -629,7 +632,7 @@ XML;
      *
      * @depends testCreateRoleDraft
      */
-    public function testPublishRoleDraft($roleDraftHref)
+    public function testPublishRoleDraft(string $roleDraftHref)
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('PUBLISH', $roleDraftHref)
@@ -653,7 +656,7 @@ XML;
      *
      * @depends testCreateRoleDraft
      */
-    public function testDeleteRoleDraft($roleDraftHref)
+    public function testDeleteRoleDraft($roleDraftHref): void
     {
         // we need to create a role draft first since we published the previous one in testPublishRoleDraft
         $roleHref = $this->testCreateRoleDraft($this->roleDraftHrefToRoleHref($roleDraftHref));
@@ -672,7 +675,7 @@ XML;
      *
      * @return string Role href
      */
-    private function roleDraftHrefToRoleHref($roleDraftHref)
+    private function roleDraftHrefToRoleHref($roleDraftHref): string
     {
         return str_replace('/draft', '', $roleDraftHref);
     }
@@ -684,7 +687,7 @@ XML;
      *
      * @return string The href of the published role
      */
-    private function createAndPublishRole($identifier)
+    private function createAndPublishRole(string $identifier)
     {
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>

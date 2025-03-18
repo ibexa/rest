@@ -15,12 +15,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RoleListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the RoleList visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -37,19 +32,15 @@ class RoleListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains RoleList element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsRoleListElement($result)
+    public function testResultContainsRoleListElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -62,13 +53,9 @@ class RoleListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains RoleList element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsRoleListAttributes($result)
+    public function testResultContainsRoleListAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -84,10 +71,7 @@ class RoleListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Test if RoleList visitor visits the children.
-     */
-    public function testRoleListVisitsChildren()
+    public function testRoleListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -113,12 +97,7 @@ class RoleListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the RoleList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RoleList
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\RoleList
     {
         return new ValueObjectVisitor\RoleList();
     }

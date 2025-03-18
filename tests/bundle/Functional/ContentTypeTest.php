@@ -46,7 +46,7 @@ XML;
      *
      * @return string the updated content type href
      */
-    public function testUpdateContentTypeGroup($contentTypeGroupHref)
+    public function testUpdateContentTypeGroup(string $contentTypeGroupHref): string
     {
         $body = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -139,7 +139,7 @@ XML;
      *
      * @param string $contentTypeGroupHref
      */
-    public function testListContentTypesForGroup($contentTypeGroupHref)
+    public function testListContentTypesForGroup($contentTypeGroupHref): void
     {
         $response = $this->sendHttpRequest(
             $request = $this->createHttpRequest('GET', "$contentTypeGroupHref/types")
@@ -151,7 +151,7 @@ XML;
     /**
      * Covers GET /content/typegroups.
      */
-    public function testLoadContentTypeGroupList()
+    public function testLoadContentTypeGroupList(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/content/typegroups')
@@ -165,7 +165,7 @@ XML;
      * @depends testUpdateContentTypeGroup
      * Covers GET /content/typegroups?identifier=<contentTypeGroupIdentifier>
      */
-    public function testLoadContentTypeGroupListWithIdentifier()
+    public function testLoadContentTypeGroupListWithIdentifier(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/content/typegroups?identifier=testUpdateContentTypeGroup')
@@ -180,7 +180,7 @@ XML;
      *
      * @param string $contentTypeGroupHref
      */
-    public function testLoadContentTypeGroup($contentTypeGroupHref)
+    public function testLoadContentTypeGroup(string $contentTypeGroupHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $contentTypeGroupHref)
@@ -195,7 +195,7 @@ XML;
      *
      * @param string $contentTypeGroupHref
      */
-    public function testLoadContentTypeGroupNotFound($contentTypeGroupHref)
+    public function testLoadContentTypeGroupNotFound($contentTypeGroupHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "{$contentTypeGroupHref}1234")
@@ -208,7 +208,7 @@ XML;
      * @depends testCreateContentType
      * Covers GET /content/types/<contentTypeId>
      */
-    public function testLoadContentType($contentTypeHref)
+    public function testLoadContentType(string $contentTypeHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $contentTypeHref)
@@ -221,7 +221,7 @@ XML;
      * @depends testCreateContentType
      * Covers GET /content/types/<contentTypeId>
      */
-    public function testLoadContentTypeNotFound($contentTypeHref)
+    public function testLoadContentTypeNotFound($contentTypeHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "{$contentTypeHref}1234")
@@ -234,7 +234,7 @@ XML;
      * @depends testCreateContentType
      * Covers GET /content/types
      */
-    public function testListContentTypes()
+    public function testListContentTypes(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/content/types')
@@ -247,7 +247,7 @@ XML;
      * @depends testCreateContentType
      * Covers GET /content/types?identifier=<contentTypeIdentifier>
      */
-    public function testListContentTypesByIdentifier()
+    public function testListContentTypesByIdentifier(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/content/types?identifier=tCreate')
@@ -261,7 +261,7 @@ XML;
      * @depends testCreateContentType
      * Covers GET /content/types?remoteid=<contentTypeRemoteId>
      */
-    public function testListContentTypesByRemoteId()
+    public function testListContentTypesByRemoteId(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/content/types?remoteId=testCreateContentType')
@@ -277,7 +277,7 @@ XML;
      *
      * @return string The copied content type href
      */
-    public function testCopyContentType($sourceContentTypeHref)
+    public function testCopyContentType(string $sourceContentTypeHref)
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('COPY', $sourceContentTypeHref, '', 'ContentType+json')
@@ -301,7 +301,7 @@ XML;
      *
      * @return string the created content type draft href
      */
-    public function testCreateContentTypeDraft($contentTypeHref)
+    public function testCreateContentTypeDraft(string $contentTypeHref)
     {
         $content = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -334,7 +334,7 @@ XML;
      * @depends testCreateContentTypeDraft
      * Covers GET /content/types/<contentTypeId>/draft
      */
-    public function testLoadContentTypeDraft($contentTypeDraftHref)
+    public function testLoadContentTypeDraft(string $contentTypeDraftHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $contentTypeDraftHref)
@@ -347,7 +347,7 @@ XML;
      * @depends testCreateContentTypeDraft
      * Covers PATCH /content/types/<contentTypeId>/draft
      */
-    public function testUpdateContentTypeDraft($contentTypeDraftHref)
+    public function testUpdateContentTypeDraft(string $contentTypeDraftHref): void
     {
         $content = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -439,7 +439,7 @@ XML;
      *
      * @throws \Psr\Http\Client\ClientException
      */
-    public function testLoadContentTypeFieldDefinition(string $fieldDefinitionHref)
+    public function testLoadContentTypeFieldDefinition(string $fieldDefinitionHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $fieldDefinitionHref)
@@ -477,7 +477,7 @@ XML;
      *
      * @todo the spec says PUT...
      */
-    public function testUpdateContentTypeDraftFieldDefinition($fieldDefinitionHref)
+    public function testUpdateContentTypeDraftFieldDefinition(string $fieldDefinitionHref): void
     {
         $body = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -509,7 +509,7 @@ XML;
      *
      * @param string $fieldDefinitionHref
      */
-    public function deleteContentTypeDraftFieldDefinition(string $fieldDefinitionHref)
+    public function deleteContentTypeDraftFieldDefinition(string $fieldDefinitionHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $fieldDefinitionHref)
@@ -523,7 +523,7 @@ XML;
      *
      * @depends testCreateContentTypeDraft
      */
-    public function testDeleteContentTypeDraft($contentTypeDraftHref)
+    public function testDeleteContentTypeDraft(string $contentTypeDraftHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $contentTypeDraftHref)
@@ -536,7 +536,7 @@ XML;
      * @depends testCreateContentType
      * Covers PUBLISH /content/types/<contentTypeId>/draft
      */
-    public function testPublishContentTypeDraft($contentTypeHref)
+    public function testPublishContentTypeDraft($contentTypeHref): void
     {
         // we need to create a content type draft first since we deleted the previous one in testDeleteContentTypeDraft
         $contentTypeDraftHref = $this->testCreateContentTypeDraft($contentTypeHref);
@@ -552,7 +552,7 @@ XML;
      * @depends testCreateContentType
      * Covers GET /content/types/<contentTypeId>/groups
      */
-    public function testLoadGroupsOfContentType($contentTypeHref)
+    public function testLoadGroupsOfContentType($contentTypeHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$contentTypeHref/groups", '', 'ContentTypeGroupRefList+json')
@@ -581,7 +581,7 @@ XML;
      * @depends testLinkContentTypeToGroup
      * Covers DELETE /content/types/{contentTypeId}/groups/{contentTypeGroupId}
      */
-    public function testUnlinkContentTypeFromGroup($contentTypeHref)
+    public function testUnlinkContentTypeFromGroup($contentTypeHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', "$contentTypeHref/groups/1")
@@ -593,7 +593,7 @@ XML;
     /**
      * @depends testCreateContentType
      */
-    public function testDeleteContentType($contentTypeHref)
+    public function testDeleteContentType(string $contentTypeHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $contentTypeHref)
@@ -606,7 +606,7 @@ XML;
      * @depends testCreateContentTypeGroup
      * Covers DELETE /content/typegroups/<contentTypeGroupId>
      */
-    public function testDeleteContentTypeGroupNotEmpty($contentTypeGroupHref)
+    public function testDeleteContentTypeGroupNotEmpty(string $contentTypeGroupHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $contentTypeGroupHref)

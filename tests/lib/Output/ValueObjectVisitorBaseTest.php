@@ -7,9 +7,11 @@
 
 namespace Ibexa\Tests\Rest\Output;
 
+use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
 use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Ibexa\Rest\Output\Generator;
+use Ibexa\Rest\Output\Generator\Xml;
 use Ibexa\Tests\Rest\AssertXmlTagTrait;
 use Ibexa\Tests\Rest\Server;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -21,44 +23,23 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
 {
     use AssertXmlTagTrait;
 
-    /**
-     * Visitor mock.
-     *
-     * @var \Ibexa\Contracts\Rest\Output\Visitor
-     */
-    protected $visitorMock;
+    protected (Visitor & MockObject)|null $visitorMock = null;
 
-    /**
-     * Output generator.
-     *
-     * @var \Ibexa\Rest\Output\Generator\Xml|null
-     */
-    protected $generator;
+    protected (Response & MockObject)|null $responseMock = null;
 
-    /**
-     * @var \Symfony\Component\Routing\RouterInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $routerMock;
+    protected Xml|null $generator;
 
-    /**
-     * @var \Symfony\Component\Routing\RouterInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $templatedRouterMock;
+    private (RouterInterface & MockObject)|null $routerMock = null;
 
-    /** @var int */
-    private $routerCallIndex = 0;
+    private (RouterInterface & MockObject)|null $templatedRouterMock = null;
 
-    /** @var int */
-    private $templatedRouterCallIndex = 0;
+    private int $routerCallIndex = 0;
+
+    private int $templatedRouterCallIndex = 0;
 
     private UriParserInterface&MockObject $uriParser;
 
-    /**
-     * Gets the visitor mock.
-     *
-     * @return \Ibexa\Contracts\Rest\Output\Visitor|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getVisitorMock()
+    protected function getVisitorMock(): Visitor & MockObject
     {
         if (!isset($this->visitorMock)) {
             $this->visitorMock = $this->createMock(Visitor::class);
@@ -72,10 +53,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
         return $this->visitorMock;
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getResponseMock()
+    protected function getResponseMock(): Response & MockObject
     {
         if (!isset($this->responseMock)) {
             $this->responseMock = $this->getMockBuilder(Response::class)
@@ -85,12 +63,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
         return $this->responseMock;
     }
 
-    /**
-     * Gets the output generator.
-     *
-     * @return \Ibexa\Rest\Output\Generator\Xml
-     */
-    protected function getGenerator()
+    protected function getGenerator(): Xml
     {
         if (!isset($this->generator)) {
             $this->generator = new Generator\Xml(
@@ -138,7 +111,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
         return $visitor;
     }
 
-    protected function getUriParser(): UriParserInterface&MockObject
+    protected function getUriParser(): UriParserInterface & MockObject
     {
         if (!isset($this->uriParser)) {
             $this->uriParser = $this->createMock(UriParserInterface::class);
@@ -147,10 +120,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
         return $this->uriParser;
     }
 
-    /**
-     * @return \Symfony\Component\Routing\RouterInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getRouterMock()
+    protected function getRouterMock(): RouterInterface & MockObject
     {
         if (!isset($this->routerMock)) {
             $this->routerMock = $this->createMock(RouterInterface::class);
@@ -165,7 +135,6 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     protected function resetRouterMock()
     {
         $this->routerMock = null;
-        $this->routerMockCallIndex = 0;
     }
 
     /**
@@ -202,11 +171,9 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     /**
      * Adds an expectation to the templatedRouterMock. Expectations must be added sequentially.
      *
-     * @param string $routeName
-     * @param array $arguments
-     * @param string $returnValue
+     * @param array<string, string> $arguments
      */
-    protected function addTemplatedRouteExpectation($routeName, $arguments, $returnValue)
+    protected function addTemplatedRouteExpectation(string $routeName, array $arguments, string $returnValue): void
     {
         $this->getTemplatedRouterMock()
             ->expects(self::at($this->templatedRouterCallIndex++))
@@ -218,10 +185,5 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
             ->willReturn($returnValue);
     }
 
-    /**
-     * Must return an instance of the tested visitor object.
-     *
-     * @return \Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-     */
-    abstract protected function internalGetVisitor();
+    abstract protected function internalGetVisitor(): ValueObjectVisitor;
 }

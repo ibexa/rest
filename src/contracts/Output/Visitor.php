@@ -67,7 +67,7 @@ class Visitor
      *
      * @param int $statusCode
      */
-    public function setStatus($statusCode)
+    public function setStatus(int $statusCode): void
     {
         if ($this->statusCode === null) {
             $this->statusCode = $statusCode;

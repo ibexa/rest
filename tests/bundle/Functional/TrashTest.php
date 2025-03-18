@@ -22,7 +22,7 @@ class TrashTest extends RESTFunctionalTestCase
     /**
      * Covers GET /content/trash.
      */
-    public function testLoadTrashItems()
+    public function testLoadTrashItems(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/content/trash')
@@ -35,7 +35,7 @@ class TrashTest extends RESTFunctionalTestCase
      * @depends testCreateTrashItem
      * Covers GET /content/trash/{trashItemId}
      */
-    public function testLoadTrashItem($trashItemHref)
+    public function testLoadTrashItem(string $trashItemHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $trashItemHref)
@@ -49,7 +49,7 @@ class TrashTest extends RESTFunctionalTestCase
      *
      * @depends testCreateTrashItem
      */
-    public function testDeleteTrashItem($trashItemId)
+    public function testDeleteTrashItem($trashItemId): void
     {
         // we create a new one, since restore also needs the feature
         $trashItemHref = $this->createTrashItem($trashItemId);
@@ -66,7 +66,7 @@ class TrashTest extends RESTFunctionalTestCase
      *
      * @depends testCreateTrashItem
      */
-    public function testRestoreTrashItem($trashItemId)
+    public function testRestoreTrashItem(string $trashItemId): void
     {
         self::markTestSkipped('@todo fixme');
 
@@ -81,7 +81,7 @@ class TrashTest extends RESTFunctionalTestCase
     /**
      * Covers MOVE /content/trash/{trashItemId} Destination:/content/locations/{locationPath}.
      */
-    public function testRestoreTrashItemWithDestination()
+    public function testRestoreTrashItemWithDestination(): void
     {
         $trashItemHref = $this->createTrashItem('testRestoreTrashItemWithDestination');
 
@@ -102,7 +102,7 @@ class TrashTest extends RESTFunctionalTestCase
     /**
      * Covers DELETE /content/trash.
      */
-    public function testEmptyTrash()
+    public function testEmptyTrash(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', '/api/ibexa/v2/content/trash')
@@ -114,7 +114,7 @@ class TrashTest extends RESTFunctionalTestCase
     /**
      * Tests that deleting a trashed item will fail.
      */
-    public function testDeleteTrashedItemFailsWith404()
+    public function testDeleteTrashedItemFailsWith404(): void
     {
         self::markTestSkipped('Makes the DB inconsistent');
 
@@ -170,7 +170,7 @@ class TrashTest extends RESTFunctionalTestCase
      *
      * @return string the trashed item href
      */
-    private function createTrashItem($id)
+    private function createTrashItem(string $id): string
     {
         $folder = $this->createFolder($id, '/api/ibexa/v2/content/locations/1/2');
         $folderLocations = $this->getContentLocations($folder['_href']);
