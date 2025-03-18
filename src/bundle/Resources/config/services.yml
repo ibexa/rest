@@ -176,6 +176,8 @@ services:
 
     Ibexa\Rest\Server\Controller\Views:
         parent: Ibexa\Rest\Server\Controller
+        autowire: true
+        autoconfigure: true
         arguments:
             - '@ibexa.api.service.search'
         tags: [controller.service_arguments]
