@@ -29,7 +29,7 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
      *
      * {@inheritDoc}
      */
-    public function normalize($object, ?string $format = null, array $context = []): array|NativeArrayObject
+    public function normalize($object, ?string $format = null, array $context = []): array|\ArrayObject
     {
         $vars = get_object_vars($object);
 
