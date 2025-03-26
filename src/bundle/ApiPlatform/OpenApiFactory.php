@@ -9,10 +9,12 @@ declare(strict_types=1);
 namespace Ibexa\Bundle\Rest\ApiPlatform;
 
 use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
+use ApiPlatform\OpenApi\Model\Info;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
 use ApiPlatform\OpenApi\OpenApi;
 use ArrayObject;
+use Ibexa\Contracts\Core\Ibexa;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 final readonly class OpenApiFactory implements OpenApiFactoryInterface
@@ -30,6 +32,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
     public function __invoke(array $context = []): OpenApi
     {
         $openApi = ($this->decorated)($context);
+        $openApi = $openApi->withInfo((new Info('Ibexa DXP REST API', Ibexa::VERSION)));
         $openApi = $this->addSchemas($openApi);
 
         $this->insertExampleFilesContent($openApi);
