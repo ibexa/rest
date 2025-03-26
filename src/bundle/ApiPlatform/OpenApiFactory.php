@@ -12,6 +12,7 @@ use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
 use ApiPlatform\OpenApi\Model\Info;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
+use ApiPlatform\OpenApi\Model\Tag;
 use ApiPlatform\OpenApi\OpenApi;
 use ArrayObject;
 use Ibexa\Contracts\Core\Ibexa;
@@ -34,6 +35,12 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         $openApi = ($this->decorated)($context);
         $openApi = $openApi->withInfo((new Info('Ibexa DXP REST API', Ibexa::VERSION)));
         $openApi = $this->addSchemas($openApi);
+
+        $tags = $openApi->getTags();
+        usort($tags, function (Tag $a, Tag $b): int {
+            return strcmp($a->getName(), $b->getName());
+        });
+        $openApi = $openApi->withTags($tags);
 
         $this->insertExampleFilesContent($openApi);
 
