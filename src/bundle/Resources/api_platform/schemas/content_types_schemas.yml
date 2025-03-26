@@ -53,20 +53,16 @@ schemas:
                         format: date-time
                     Creator:
                         description: Creator User of the content type.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     Modifier:
                         description: Modifier User of the content type.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     Groups:
                         description: Group User of the content type.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     Draft:
                         description: Draft of the content type.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     remoteId:
                         description: Unique remote ID of the content type.
                         type: string
@@ -145,14 +141,11 @@ schemas:
             defaultAlwaysAvailable:
                 type: boolean
             names:
-                type:
-                    $ref: "#/components/schemas/ValueObject"
+                $ref: "#/components/schemas/ValueObject"
             descriptions:
-                type:
-                    $ref: "#/components/schemas/ValueObject"
+                $ref: "#/components/schemas/ValueObject"
             FieldDefinition:
-                type:
-                    $ref: "#/components/schemas/FieldDefinition"
+                $ref: "#/components/schemas/FieldDefinition"
             creatorId:
                 description: If set, this value overrides the current user as creator.
             creationDate:
@@ -245,11 +238,9 @@ schemas:
                     defaultAlwaysAvailable:
                         type: [ string, boolean ]
                     names:
-                        type:
-                            $ref: "#/components/schemas/ValueObject"
+                        $ref: "#/components/schemas/ValueObject"
                     descriptions:
-                        type:
-                            $ref: "#/components/schemas/ValueObject"
+                        $ref: "#/components/schemas/ValueObject"
                     modifierId:
                         description: If set, this value overrides the current user as creator.
                     modificationDate:
@@ -335,20 +326,16 @@ schemas:
                         format: date-time
                     Creator:
                         description: Creator User of the content type.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     Modifier:
                         description: Modifier User of the content type.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     Groups:
                         description: Group User of the content type.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     Draft:
                         description: Draft of the content type.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     remoteId:
                         description: Unique remote ID of the content type.
                         type: string
@@ -492,10 +479,9 @@ schemas:
                         description: Settings for the Field definition supported by the field type.
                     validatorConfiguration:
                         description: Validator configuration of this Field definition supported by the field type.
-                        type:
-                            oneOf:
-                                - StringLengthValidatorWrapper
-                                - array
+                        oneOf:
+                            - StringLengthValidatorWrapper
+                            - array
     FieldDefinitionWrapper:
         type: object
         required:
@@ -504,8 +490,7 @@ schemas:
             FieldDefinition:
                 $ref: "#/components/schemas/FieldDefinition"
     FieldDefinitionCreate:
-        type:
-            $ref: "#/components/schemas/BaseObject"
+        $ref: "#/components/schemas/BaseObject"
     FieldDefinitionCreateWrapper:
         type: object
         required:
@@ -514,8 +499,7 @@ schemas:
             FieldDefinitionCreate:
                 $ref: "#/components/schemas/FieldDefinitionCreate"
     FieldDefinitionUpdate:
-        type:
-            $ref: "#/components/schemas/BaseObject"
+        $ref: "#/components/schemas/BaseObject"
     FieldDefinitionUpdateWrapper:
         type: object
         required:

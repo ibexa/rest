@@ -29,16 +29,13 @@ schemas:
                         format: date-time
                     Creator:
                         description: Creator User ID.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     Modifier:
                         description: Modifier User ID.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
                     ContentTypes:
                         description: Content types.
-                        type:
-                            $ref: "#/components/schemas/BaseObject"
+                        $ref: "#/components/schemas/BaseObject"
     ContentTypeGroupWrapper:
         type: object
         required:
@@ -81,8 +78,7 @@ schemas:
                     - ContentTypeGroupRef
                 properties:
                     ContentTypeGroupRef:
-                        type:
-                            $ref: "#/components/schemas/ContentTypeGroupRef"
+                        $ref: "#/components/schemas/ContentTypeGroupRef"
     ContentTypeGroupList:
         allOf:
             -   $ref: "#/components/schemas/BaseObject"
