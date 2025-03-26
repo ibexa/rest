@@ -673,12 +673,6 @@ parameters:
 			path: src/lib/Server/Controller/Trash/TrashItemListController.php
 
 		-
-			message: '#^Parameter \#1 \$urlWildcards of class Ibexa\\Rest\\Server\\Values\\URLWildcardList constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\URLWildcard\>, list\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\UrlWildcard\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Controller/URLWildcard/URLWildcardListController.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\AbstractDestinationLocationParser\:\:parse\(\) has Ibexa\\Contracts\\Rest\\Exceptions\\Parser in PHPDoc @throws tag but it''s not thrown\.$#'
 			identifier: throws.unusedType
 			count: 1
