@@ -19,9 +19,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/user/groups/{path}/subgroups',
-    name: 'Load subgroups',
     openapi: new Model\Operation(
-        summary: 'Returns a list of the subgroups.',
+        summary: 'Load subgroups',
+        description: 'Returns a list of the subgroups.',
         tags: [
             'User Group',
         ],

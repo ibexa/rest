@@ -19,9 +19,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/user/users/{userId}/groups',
-    name: 'Load Groups of User',
     openapi: new Model\Operation(
-        summary: 'Returns a list of User Groups the User belongs to. The returned list includes the resources for unassigning a User Group if the User is in multiple groups.',
+        summary: 'Load Groups of User',
+        description: 'Returns a list of User Groups the User belongs to. The returned list includes the resources for unassigning a User Group if the User is in multiple groups.',
         tags: [
             'User',
         ],

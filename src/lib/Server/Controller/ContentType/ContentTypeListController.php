@@ -22,10 +22,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/types',
-    name: 'List content types',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Returns a list of content types.',
+        summary: 'List content types',
+        description: 'Returns a list of content types.',
         tags: [
             'Type',
         ],

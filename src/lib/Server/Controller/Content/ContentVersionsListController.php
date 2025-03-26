@@ -17,10 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/objects/{contentId}/versions',
-    name: 'List versions',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Returns a list of all versions of the content item. This method does not include fields and relations in the version elements of the response.',
+        summary: 'List versions',
+        description: 'Returns a list of all versions of the content item. This method does not include fields and relations in the version elements of the response.',
         tags: [
             'Objects',
         ],

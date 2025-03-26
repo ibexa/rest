@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Head(
     uriTemplate: '/user/users',
-    name: 'Verify Users',
     openapi: new Model\Operation(
-        summary: 'Verifies if there are Users matching given filter.',
+        summary: 'Verify Users',
+        description: 'Verifies if there are Users matching given filter.',
         tags: [
             'User',
         ],

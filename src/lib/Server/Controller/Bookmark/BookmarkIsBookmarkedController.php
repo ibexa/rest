@@ -20,9 +20,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Head(
     uriTemplate: '/bookmark/{locationId}',
-    name: 'Check if Location is bookmarked',
     openapi: new Model\Operation(
-        summary: 'Checks if the given Location is bookmarked by the current user.',
+        summary: 'Check if Location is bookmarked',
+        description: 'Checks if the given Location is bookmarked by the current user.',
         tags: [
             'Bookmark',
         ],

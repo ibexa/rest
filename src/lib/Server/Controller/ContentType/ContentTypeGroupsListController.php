@@ -18,9 +18,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/typegroups',
-    name: 'Get content type groups',
     openapi: new Model\Operation(
-        summary: 'Returns a list of all content type groups. If an identifier is provided, loads the content type group for this identifier.',
+        summary: 'Get content type groups',
+        description: 'Returns a list of all content type groups. If an identifier is provided, loads the content type group for this identifier.',
         tags: [
             'Type Groups',
         ],

@@ -17,10 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Patch(
     uriTemplate: '/user/roles/{id}/draft',
-    name: 'Update Role draft',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Updates a Role draft. PATCH or POST with header X-HTTP-Method-Override PATCH.',
+        summary: 'Update Role draft',
+        description: 'Updates a Role draft. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [
             'User Role',
         ],

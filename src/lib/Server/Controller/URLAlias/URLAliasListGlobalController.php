@@ -18,10 +18,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/urlaliases',
-    name: 'List global URL aliases',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Returns the list of global URL aliases.',
+        summary: 'List global URL aliases',
+        description: 'Returns the list of global URL aliases.',
         tags: [
             'Url Alias',
         ],

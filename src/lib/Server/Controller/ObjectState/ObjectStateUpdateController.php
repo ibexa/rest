@@ -23,10 +23,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Patch(
     uriTemplate: '/content/objectstategroups/{objectStateGroupId}/objectstates/{objectStateId}',
-    name: 'Update Object state',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Updates an Object state. PATCH or POST with header X-HTTP-Method-Override PATCH.',
+        summary: 'Update Object state',
+        description: 'Updates an Object state. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [
             'Object State Groups',
         ],

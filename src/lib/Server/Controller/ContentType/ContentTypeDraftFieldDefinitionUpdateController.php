@@ -23,10 +23,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Patch(
     uriTemplate: '/content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}',
-    name: 'Update content type Draft Field definition',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Updates the attributes of a Field definition.',
+        summary: 'Update content type Draft Field definition',
+        description: 'Updates the attributes of a Field definition.',
         tags: [
             'Type',
         ],

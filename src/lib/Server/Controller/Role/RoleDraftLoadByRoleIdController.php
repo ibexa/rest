@@ -14,9 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/user/roles/{id}/draft',
-    name: 'Load Role draft',
     openapi: new Model\Operation(
-        summary: 'Loads a Role draft by original Role ID.',
+        summary: 'Load Role draft',
+        description: 'Loads a Role draft by original Role ID.',
         tags: [
             'User Role',
         ],

@@ -19,10 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/locations/{path}/urlaliases',
-    name: 'List URL aliases for Location',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Returns the list of URL aliases for a Location.',
+        summary: 'List URL aliases for Location',
+        description: 'Returns the list of URL aliases for a Location.',
         tags: [
             'Location',
         ],

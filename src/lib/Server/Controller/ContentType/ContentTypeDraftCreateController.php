@@ -24,10 +24,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/content/types/{contentTypeId}',
-    name: 'Create Draft',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates a draft and updates it with the given data.',
+        summary: 'Create Draft',
+        description: 'Creates a draft and updates it with the given data.',
         tags: [
             'Type',
         ],
