@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/urlaliases/{urlAliasId}',
-    name: 'Get URL alias',
     openapi: new Model\Operation(
-        summary: 'Returns the URL alias with the given ID.',
+        summary: 'Get URL alias',
+        description: 'Returns the URL alias with the given ID.',
         tags: [
             'Url Alias',
         ],

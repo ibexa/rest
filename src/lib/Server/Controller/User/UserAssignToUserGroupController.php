@@ -20,10 +20,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/user/users/{userId}/groups',
-    name: 'Assign User Group',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Assigns the User to a User Group.',
+        summary: 'Assign User Group',
+        description: 'Assigns the User to a User Group.',
         tags: [
             'User',
         ],

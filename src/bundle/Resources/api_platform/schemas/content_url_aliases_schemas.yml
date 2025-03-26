@@ -66,8 +66,7 @@ schemas:
             _type:
                 type: string
             location:
-                type:
-                    $ref: "#/components/schemas/Href"
+                $ref: "#/components/schemas/Href"
             resource:
                 type: string
             languageCode:

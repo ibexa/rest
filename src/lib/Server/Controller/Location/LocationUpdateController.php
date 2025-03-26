@@ -17,10 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Patch(
     uriTemplate: '/content/locations/{path}',
-    name: 'Update Location',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Updates the Location. This method can also be used to hide/reveal a Location via the hidden field in the LocationUpdate. PATCH or POST with header X-HTTP-Method-Override PATCH.',
+        summary: 'Update Location',
+        description: 'Updates the Location. This method can also be used to hide/reveal a Location via the hidden field in the LocationUpdate. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [
             'Location',
         ],

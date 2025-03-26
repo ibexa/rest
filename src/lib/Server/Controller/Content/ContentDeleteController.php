@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/content/objects/{contentId}',
-    name: 'Delete Content',
     openapi: new Model\Operation(
-        summary: 'Deletes content item. If content item has multiple Locations, all of them will be deleted via delete a subtree.',
+        summary: 'Delete Content',
+        description: 'Deletes content item. If content item has multiple Locations, all of them will be deleted via delete a subtree.',
         tags: [
             'Objects',
         ],

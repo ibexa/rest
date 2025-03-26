@@ -23,10 +23,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/content/urlaliases',
-    name: 'Create URL alias',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates a URL alias.',
+        summary: 'Create URL alias',
+        description: 'Creates a URL alias.',
         tags: [
             'Url Alias',
         ],

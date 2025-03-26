@@ -673,36 +673,6 @@ parameters:
 			path: src/lib/Server/Controller/Trash/TrashItemListController.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Views\:\:getView\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Controller/Views.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Views\:\:listView\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Controller/Views.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Views\:\:loadViewResults\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Controller/Views.php
-
-		-
-			message: '#^PHPDoc tag @return has invalid value \(\\Ibexa\\Contracts\\Core\\Repository\\Exceptions\\NotImplementedException;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 120 on line 4$#'
-			identifier: phpDoc.parseError
-			count: 2
-			path: src/lib/Server/Controller/Views.php
-
-		-
-			message: '#^PHPDoc tag @return has invalid value \(\\Ibexa\\Contracts\\Core\\Repository\\Exceptions\\NotImplementedException;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 128 on line 4$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/lib/Server/Controller/Views.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\AbstractDestinationLocationParser\:\:parse\(\) has Ibexa\\Contracts\\Rest\\Exceptions\\Parser in PHPDoc @throws tag but it''s not thrown\.$#'
 			identifier: throws.unusedType
 			count: 1
@@ -2629,7 +2599,7 @@ parameters:
 			path: tests/bundle/EventListener/CsrfListenerTest.php
 
 		-
-			message: '#^Parameter \#2 \$method of function method_exists expects string, array\<int\|string, int\|string\>\|int\|string given\.$#'
+			message: '#^Parameter \#2 \$method of function method_exists expects string, int\|list\<int\|string\>\|string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/bundle/EventListener/EventListenerTest.php
@@ -8077,13 +8047,13 @@ parameters:
 			path: tests/lib/Server/Output/ValueObjectVisitor/OptionsTest.php
 
 		-
-			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\<Ibexa\\Contracts\\Rest\\Output\\Visitor\>\:\:willReturnMap\(\) invoked with 2 parameters, 1 required\.$#'
+			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:willReturnMap\(\) invoked with 2 parameters, 1 required\.$#'
 			identifier: arguments.count
 			count: 1
 			path: tests/lib/Server/Output/ValueObjectVisitor/OptionsTest.php
 
 		-
-			message: '#^Parameter \#1 \$valueMap of method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\<Ibexa\\Contracts\\Rest\\Output\\Visitor\>\:\:willReturnMap\(\) expects array\<int, array\<int, mixed\>\>, array\<int, string\> given\.$#'
+			message: '#^Parameter \#1 \$valueMap of method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:willReturnMap\(\) expects array\<int, array\<int, mixed\>\>, array\<int, string\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: tests/lib/Server/Output/ValueObjectVisitor/OptionsTest.php

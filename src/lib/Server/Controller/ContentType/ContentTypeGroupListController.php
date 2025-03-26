@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/types/{contentTypeId}/groups',
-    name: 'Get groups of content type',
     openapi: new Model\Operation(
-        summary: 'Returns the content type group to which content type belongs to.',
+        summary: 'Get groups of content type',
+        description: 'Returns the content type group to which content type belongs to.',
         tags: [
             'Type',
         ],

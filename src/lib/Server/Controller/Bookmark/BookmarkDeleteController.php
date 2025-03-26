@@ -22,9 +22,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/bookmark/{locationId}',
-    name: 'Delete bookmark',
     openapi: new Model\Operation(
-        summary: 'Deletes the given Location from bookmarks of the current user.',
+        summary: 'Delete bookmark',
+        description: 'Deletes the given Location from bookmarks of the current user.',
         tags: [
             'Bookmark',
         ],

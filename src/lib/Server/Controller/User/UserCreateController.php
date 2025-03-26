@@ -22,10 +22,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/user/groups/{path}/users',
-    name: 'Create User',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates a new User in the given Group.',
+        summary: 'Create User',
+        description: 'Creates a new User in the given Group.',
         tags: [
             'User Group',
         ],

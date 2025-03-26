@@ -17,10 +17,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/user/sessions/{sessionId}/refresh',
-    name: 'Refresh session (deprecated)',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Get the session\'s User information. Deprecated as of Ibexa DXP 4.6, use GET /user/sessions/current instead.',
+        summary: 'Refresh session (deprecated)',
+        description: 'Get the session\'s User information. Deprecated as of Ibexa DXP 4.6, use GET /user/sessions/current instead.',
         tags: [
             'User Session',
         ],

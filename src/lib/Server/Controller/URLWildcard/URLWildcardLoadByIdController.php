@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/urlwildcards/{wildcardId}',
-    name: 'Get URL wildcard',
     openapi: new Model\Operation(
-        summary: 'Returns the URL wildcard with the given ID.',
+        summary: 'Get URL wildcard',
+        description: 'Returns the URL wildcard with the given ID.',
         tags: [
             'Url Wildcard',
         ],

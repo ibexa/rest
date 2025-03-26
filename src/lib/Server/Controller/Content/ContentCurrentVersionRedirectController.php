@@ -15,9 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/objects/{contentId}/currentversion',
-    name: 'Get current version',
     openapi: new Model\Operation(
-        summary: 'Redirects to the current version of the content item.',
+        summary: 'Get current version',
+        description: 'Redirects to the current version of the content item.',
         tags: [
             'Objects',
         ],

@@ -16,10 +16,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/content/objects/{contentId}/hide',
-    name: 'Hide content item',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Makes or keep the content item invisible',
+        summary: 'Hide content item',
+        description: 'Makes or keep the content item invisible',
         tags: [
             'Objects',
         ],

@@ -22,10 +22,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/content/urlwildcards',
-    name: 'Create URL wildcard',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates a new URL wildcard.',
+        summary: 'Create URL wildcard',
+        description: 'Creates a new URL wildcard.',
         tags: [
             'Url Wildcard',
         ],

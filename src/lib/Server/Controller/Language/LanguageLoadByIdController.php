@@ -18,9 +18,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/languages/{code}',
-    name: 'Get language',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        summary: 'Get language',
         tags: [
             'Language',
         ],

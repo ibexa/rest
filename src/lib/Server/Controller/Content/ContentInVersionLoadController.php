@@ -20,9 +20,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}',
-    name: 'Load version',
     openapi: new Model\Operation(
-        summary: 'Loads a specific version of a content item. This method returns Fields and relations.',
+        summary: 'Load version',
+        description: 'Loads a specific version of a content item. This method returns Fields and relations.',
         tags: [
             'Objects',
         ],

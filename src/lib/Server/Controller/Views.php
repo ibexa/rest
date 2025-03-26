@@ -23,10 +23,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/views',
-    name: 'Search content',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Executes a query and returns a View including the results.
+        summary: 'Search content',
+        description: 'Executes a query and returns a View including the results.
 View input reflects the criteria model of the public PHP API.
 Refer to [Search Criteria Reference](/en/latest/search/criteria_reference/search_criteria_reference/)',
         tags: [
@@ -90,10 +90,7 @@ Refer to [Search Criteria Reference](/en/latest/search/criteria_reference/search
  */
 class Views extends Controller
 {
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\SearchService
-     */
-    private $searchService;
+    private SearchService $searchService;
 
     public function __construct(SearchService $searchService)
     {
@@ -102,10 +99,8 @@ class Views extends Controller
 
     /**
      * Creates and executes a content view.
-     *
-     * @return \Ibexa\Rest\Server\Values\RestExecutedView
      */
-    public function createView(Request $request)
+    public function createView(Request $request): Values\RestExecutedView
     {
         /** @var \Ibexa\Rest\Server\Values\RestViewInput $viewInput */
         $viewInput = $this->inputDispatcher->parse(
@@ -143,30 +138,24 @@ class Views extends Controller
 
     /**
      * List content views.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException;
      */
-    public function listView()
+    public function listView(): NotImplementedException
     {
         return new NotImplementedException('ezpublish_rest.controller.content:listView');
     }
 
     /**
      * Get a content view.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException;
      */
-    public function getView()
+    public function getView(): NotImplementedException
     {
         return new NotImplementedException('ezpublish_rest.controller.content:getView');
     }
 
     /**
      * Get a content view results.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException;
      */
-    public function loadViewResults()
+    public function loadViewResults(): NotImplementedException
     {
         return new NotImplementedException('ezpublish_rest.controller.content:loadViewResults');
     }

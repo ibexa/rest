@@ -16,10 +16,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
     uriTemplate: '/content/objects/{contentId}/relations',
-    name: 'Load Relations of content item',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Redirects to the Relations of the current version.',
+        summary: 'Load Relations of content item',
+        description: 'Redirects to the Relations of the current version.',
         tags: [
             'Objects',
         ],

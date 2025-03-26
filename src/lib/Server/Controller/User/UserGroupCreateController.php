@@ -19,10 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/user/groups/subgroups',
-    name: 'Create a top level User Group',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates a top level User Group under the root. To create a child group under a parent group use \'/user/groups/{path}/subgroups\'.',
+        summary: 'Create a top level User Group',
+        description: 'Creates a top level User Group under the root. To create a child group under a parent group use \'/user/groups/{path}/subgroups\'.',
         tags: [
             'User Group',
         ],
@@ -91,10 +91,10 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 #[Post(
     uriTemplate: '/user/groups/{path}/subgroups',
-    name: 'Create User Group',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates a new User Group under the given parent. To create a top level group use \'/user/groups/subgroups\'.',
+        summary: 'Create User Group',
+        description: 'Creates a new User Group under the given parent. To create a top level group use \'/user/groups/subgroups\'.',
         tags: [
             'User Group',
         ],

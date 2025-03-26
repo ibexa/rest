@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/content/trash/{trashItemid}',
-    name: 'Delete Trash item',
     openapi: new Model\Operation(
-        summary: 'Deletes the provided item from Trash.',
+        summary: 'Delete Trash item',
+        description: 'Deletes the provided item from Trash.',
         tags: [
             'Trash',
         ],

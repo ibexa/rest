@@ -16,10 +16,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/content/objects/{contentId}/reveal',
-    name: 'Reveal content item',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Makes or keep the content item visible',
+        summary: 'Reveal content item',
+        description: 'Makes or keep the content item visible',
         tags: [
             'Objects',
         ],

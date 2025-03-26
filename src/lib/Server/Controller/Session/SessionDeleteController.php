@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/user/sessions/{sessionId}',
-    name: 'Delete session (logout a User)',
     openapi: new Model\Operation(
-        summary: 'The user session is removed i.e. the user is logged out.',
+        summary: 'Delete session (logout a User)',
+        description: 'The user session is removed i.e. the user is logged out.',
         tags: [
             'User Session',
         ],

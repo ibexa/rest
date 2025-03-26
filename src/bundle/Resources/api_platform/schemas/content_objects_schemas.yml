@@ -34,31 +34,25 @@ schemas:
               type: integer
             ContentType:
               description: Content type.
-              type:
-                $ref: "#/components/schemas/BaseObject"
+              $ref: "#/components/schemas/BaseObject"
             Name:
               description: Name of the domain object in a given language.
               type: string
             Versions:
               description: Returns the VersionInfo for this version.
-              type:
-                $ref: "#/components/schemas/BaseObject"
+              $ref: "#/components/schemas/BaseObject"
             CurrentVersion:
               description: Current version.
-              type:
-                $ref: "#/components/schemas/BaseObject"
+              $ref: "#/components/schemas/BaseObject"
             Section:
               description: The Section to which the content item is assigned to.
-              type:
-                $ref: "#/components/schemas/BaseObject"
+              $ref: "#/components/schemas/BaseObject"
             Locations:
               description: Location of the content item.
-              type:
-                $ref: "#/components/schemas/BaseObject"
+              $ref: "#/components/schemas/BaseObject"
             Owner:
               description: The owner of the content item.
-              type:
-                $ref: "#/components/schemas/BaseObject"
+              $ref: "#/components/schemas/BaseObject"
             lastModificationDate:
               description: Content item modification date.
               type: string
@@ -81,8 +75,7 @@ schemas:
               type: string
             ObjectStates:
               description: Object states.
-              type:
-                $ref: "#/components/schemas/BaseObject"
+              $ref: "#/components/schemas/BaseObject"
     ContentWrapper:
       type: object
       required:
@@ -101,14 +94,12 @@ schemas:
       properties:
         ContentType:
           description: The content type for which the new content item is created.
-          type:
-            oneOf:
-              - "#/components/schemas/Content"
-              - "#/components/schemas/Href"
+          oneOf:
+            - "#/components/schemas/Content"
+            - "#/components/schemas/Href"
         Section:
           description: The Section the content item is assigned to. If not set the Section of the parent is used or a default Section.
-          type:
-            $ref: "#/components/schemas/Href"
+          $ref: "#/components/schemas/Href"
         User:
           description: The owner of the content. If not given the current authenticated User is set as owner.
           type: integer
@@ -157,14 +148,11 @@ schemas:
         mainLanguageCode:
           type: string
         Section:
-          type:
-            $ref: "#/components/schemas/Section"
+          $ref: "#/components/schemas/Section"
         MainLocation:
-          type:
-            $ref: "#/components/schemas/Location"
+          $ref: "#/components/schemas/Location"
         Owner:
-          type:
-            $ref: "#/components/schemas/User"
+          $ref: "#/components/schemas/User"
         alwaysAvailable:
           type: boolean
         remoteId:
@@ -179,8 +167,7 @@ schemas:
           properties:
             Content:
               description: Content ID matcher class.
-              type:
-                $ref: "#/components/schemas/Content"
+              $ref: "#/components/schemas/Content"
     ContentInfoWrapper:
       type: object
       required:
@@ -290,8 +277,7 @@ schemas:
           format: date-time
         Creator:
           description: Creator of the version, in the search API this is referred to as the modifier of the published content.
-          type:
-            $ref: "#/components/schemas/BaseObject"
+          $ref: "#/components/schemas/BaseObject"
         creationDate:
           description: Content creation date.
           type: string
@@ -306,12 +292,10 @@ schemas:
           description: Translation information.
         names:
           description: Names.
-          type:
-            $ref: "#/components/schemas/ValueArray"
+          $ref: "#/components/schemas/ValueArray"
         Content:
           description: Represents a content item in a specific version.
-          type:
-            $ref: "#/components/schemas/BaseObject"
+          $ref: "#/components/schemas/BaseObject"
     Version:
       allOf:
         - $ref: "#/components/schemas/BaseObject"
@@ -407,11 +391,9 @@ schemas:
       properties:
         Version:
           description: Returns the VersionInfo for this version.
-          type:
-            $ref: "#/components/schemas/BaseObject"
+          $ref: "#/components/schemas/BaseObject"
         VersionInfo:
-          type:
-            $ref: "#/components/schemas/VersionInfo"
+          $ref: "#/components/schemas/VersionInfo"
     VersionTranslationInfo:
       description: Translation information.
       type: object
@@ -445,12 +427,10 @@ schemas:
           properties:
             SourceContent:
               description: The content of the source content of the relation.
-              type:
-                $ref: "#/components/schemas/Ref"
+              $ref: "#/components/schemas/Ref"
             DestinationContent:
               description: The content of the destination content of the relation.
-              type:
-                $ref: "#/components/schemas/Ref"
+              $ref: "#/components/schemas/Ref"
             RelationType:
               description: "The relation type bitmask. Relations: Relation::COMMON = 1, Relation::EMBED = 2, Relation::LINK = 4, Relation::FIELD = 8, Relation::ASSET = 16"
               type: string
@@ -467,8 +447,7 @@ schemas:
         - Destination
       properties:
         Destination:
-          type:
-            $ref: "#/components/schemas/Href"
+          $ref: "#/components/schemas/Href"
     RelationCreateWrapper:
       type: object
       required:

@@ -24,10 +24,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
     uriTemplate: '/content/objectstategroups/{objectStateGroupId}/objectstates',
-    name: 'Create Object state',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'Creates a new Object state.',
+        summary: 'Create Object state',
+        description: 'Creates a new Object state.',
         tags: [
             'Object State Groups',
         ],

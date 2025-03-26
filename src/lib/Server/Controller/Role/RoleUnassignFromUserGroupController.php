@@ -15,10 +15,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
     uriTemplate: '/user/groups/{path}/roles/{roleId}',
-    name: 'Unassign Role from User Group',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
-        summary: 'The given Role is removed from the User or User Group.',
+        summary: 'Unassign Role from User Group',
+        description: 'The given Role is removed from the User or User Group.',
         tags: [
             'User Group',
         ],
