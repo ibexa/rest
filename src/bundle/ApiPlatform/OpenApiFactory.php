@@ -105,7 +105,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
                 $exampleFilePath = $this->kernel->locateResource($responseContent['x-ibexa-example-file']);
                 $exampleFileContent = file_get_contents($exampleFilePath);
                 if ('json' === array_slice(explode('.', pathinfo($exampleFilePath, PATHINFO_FILENAME)), -1, 1)[0]) {
-                    $newContent[$mediaType]['example'] = json_decode($exampleFileContent, true);
+                    $newContent[$mediaType]['example'] = json_decode($exampleFileContent ?: '', true);
                 } else {
                     $newContent[$mediaType]['example'] = $exampleFileContent;
                 }
