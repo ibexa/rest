@@ -15,7 +15,7 @@ use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
 
 class UserMetadataTest extends BaseTest
 {
-    public function testParseProvider()
+    public function testParseProvider(): array
     {
         return [
             [
@@ -38,7 +38,7 @@ class UserMetadataTest extends BaseTest
      *
      * @dataProvider testParseProvider
      */
-    public function testParse($data, $expected)
+    public function testParse(array $data, UserMetadataCriterion $expected): void
     {
         $userMetadata = $this->getParser();
         $result = $userMetadata->parse($data, $this->getParsingDispatcherMock());
@@ -53,7 +53,7 @@ class UserMetadataTest extends BaseTest
     /**
      * Test UserMetadata parser throwing exception on invalid UserMetadataCriterion format.
      */
-    public function testParseExceptionOnInvalidCriterionFormat()
+    public function testParseExceptionOnInvalidCriterionFormat(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid <UserMetadataCriterion> format');
@@ -68,7 +68,7 @@ class UserMetadataTest extends BaseTest
     /**
      * Test UserMetadata parser throwing exception on invalid target format.
      */
-    public function testParseExceptionOnInvalidTargetFormat()
+    public function testParseExceptionOnInvalidTargetFormat(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid <Target> format');
@@ -86,7 +86,7 @@ class UserMetadataTest extends BaseTest
     /**
      * Test UserMetadata parser throwing exception on invalid value format.
      */
-    public function testParseExceptionOnInvalidValueFormat()
+    public function testParseExceptionOnInvalidValueFormat(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid <Value> format');
@@ -104,7 +104,7 @@ class UserMetadataTest extends BaseTest
     /**
      * Test UserMetadata parser throwing exception on wrong type of value format.
      */
-    public function testParseExceptionOnWrongValueType()
+    public function testParseExceptionOnWrongValueType(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid <Value> format');
@@ -124,7 +124,7 @@ class UserMetadataTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\Criterion\UserMetadata
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): UserMetadata
     {
         return new UserMetadata();
     }

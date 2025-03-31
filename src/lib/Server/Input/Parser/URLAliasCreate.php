@@ -19,10 +19,8 @@ class URLAliasCreate extends BaseParser
 {
     /**
      * Parser tools.
-     *
-     * @var \Ibexa\Rest\Input\ParserTools
      */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     /**
      * Construct.
@@ -42,7 +40,7 @@ class URLAliasCreate extends BaseParser
      *
      * @return array
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): array
     {
         if (!array_key_exists('_type', $data)) {
             throw new Exceptions\Parser("Missing '_type' value for URLAliasCreate.");

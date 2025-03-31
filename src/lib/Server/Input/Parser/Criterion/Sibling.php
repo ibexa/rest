@@ -16,8 +16,7 @@ use Ibexa\Rest\Input\BaseParser;
 
 class Sibling extends BaseParser
 {
-    /** @var \Ibexa\Contracts\Core\Repository\LocationService */
-    private $locationService;
+    private LocationService $locationService;
 
     public function __construct(LocationService $locationService)
     {

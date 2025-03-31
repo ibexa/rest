@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Values\User\RoleDraft;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -84,7 +85,7 @@ class RoleDraftLoadByRoleIdController extends RoleBaseController
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\User\RoleDraft
      */
-    public function loadRoleDraft($roleId)
+    public function loadRoleDraft(int $roleId): RoleDraft
     {
         try {
             // First try to load the draft for given role.

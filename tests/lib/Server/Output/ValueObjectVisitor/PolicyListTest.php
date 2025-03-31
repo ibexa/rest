@@ -49,7 +49,7 @@ class PolicyListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsPolicyListElement($result)
+    public function testResultContainsPolicyListElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -68,7 +68,7 @@ class PolicyListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsPolicyListAttributes($result)
+    public function testResultContainsPolicyListAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -87,7 +87,7 @@ class PolicyListTest extends ValueObjectVisitorBaseTest
     /**
      * Test if PolicyList visitor visits the children.
      */
-    public function testPolicyListVisitsChildren()
+    public function testPolicyListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -118,7 +118,7 @@ class PolicyListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\PolicyList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\PolicyList
     {
         return new ValueObjectVisitor\PolicyList();
     }

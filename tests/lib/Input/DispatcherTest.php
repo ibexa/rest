@@ -12,6 +12,7 @@ use Ibexa\Contracts\Rest\Input\Handler;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\Dispatcher;
 use Ibexa\Rest\Message;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,12 +20,12 @@ use PHPUnit\Framework\TestCase;
  */
 class DispatcherTest extends TestCase
 {
-    protected function getParsingDispatcherMock()
+    protected function getParsingDispatcherMock(): MockObject
     {
         return $this->createMock(ParsingDispatcher::class);
     }
 
-    public function testParseMissingContentType()
+    public function testParseMissingContentType(): void
     {
         $this->expectException(Parser::class);
 
@@ -36,7 +37,7 @@ class DispatcherTest extends TestCase
         $dispatcher->parse($message);
     }
 
-    public function testParseInvalidContentType()
+    public function testParseInvalidContentType(): void
     {
         $this->expectException(Parser::class);
 
@@ -52,7 +53,7 @@ class DispatcherTest extends TestCase
         $dispatcher->parse($message);
     }
 
-    public function testParseMissingFormatHandler()
+    public function testParseMissingFormatHandler(): void
     {
         $this->expectException(Parser::class);
 
@@ -68,7 +69,7 @@ class DispatcherTest extends TestCase
         $dispatcher->parse($message);
     }
 
-    public function testParse()
+    public function testParse(): void
     {
         $message = new Message(
             [
@@ -103,7 +104,7 @@ class DispatcherTest extends TestCase
      * @todo This is a test for a feature that needs refactoring. There must be
      * a sensible way to submit the called URL to the parser.
      */
-    public function testParseSpecialUrlHeader()
+    public function testParseSpecialUrlHeader(): void
     {
         $message = new Message(
             [
@@ -141,7 +142,7 @@ class DispatcherTest extends TestCase
         );
     }
 
-    public function testParseMediaTypeCharset()
+    public function testParseMediaTypeCharset(): void
     {
         $message = new Message(
             [

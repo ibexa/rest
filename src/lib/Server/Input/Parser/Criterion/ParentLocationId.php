@@ -27,7 +27,7 @@ class ParentLocationId extends BaseParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ParentLocationIdCriterion
     {
         if (!array_key_exists('ParentLocationIdCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <ParentLocationIdCriterion> format');

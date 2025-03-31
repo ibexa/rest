@@ -12,10 +12,11 @@ use Ibexa\Rest\Output\FieldTypeSerializer;
 use Ibexa\Rest\Server;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
 {
-    protected $fieldTypeSerializerMock;
+    protected MockObject $fieldTypeSerializerMock;
 
     public function setUp(): void
     {

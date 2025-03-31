@@ -7,7 +7,7 @@
 
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\InvalidArgumentException;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 class InvalidArgumentExceptionTest extends ExceptionTest
@@ -17,7 +17,7 @@ class InvalidArgumentExceptionTest extends ExceptionTest
      *
      * @return int
      */
-    protected function getExpectedStatusCode()
+    protected function getExpectedStatusCode(): int
     {
         return 406;
     }
@@ -27,7 +27,7 @@ class InvalidArgumentExceptionTest extends ExceptionTest
      *
      * @return string
      */
-    protected function getExpectedMessage()
+    protected function getExpectedMessage(): string
     {
         return 'Not Acceptable';
     }
@@ -37,9 +37,9 @@ class InvalidArgumentExceptionTest extends ExceptionTest
      *
      * @return \Exception
      */
-    protected function getException()
+    protected function getException(): InvalidArgumentException
     {
-        return new Exceptions\InvalidArgumentException('Test');
+        return new InvalidArgumentException('Test');
     }
 
     /**
@@ -47,7 +47,7 @@ class InvalidArgumentExceptionTest extends ExceptionTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\InvalidArgumentException
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\InvalidArgumentException
     {
         return new ValueObjectVisitor\InvalidArgumentException();
     }

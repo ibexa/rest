@@ -59,15 +59,9 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class BookmarkCreateController extends RestController
 {
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\BookmarkService
-     */
-    protected $bookmarkService;
+    protected BookmarkService $bookmarkService;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
-     */
-    protected $locationService;
+    protected LocationService $locationService;
 
     /**
      * Bookmark constructor.

@@ -9,6 +9,7 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class BadStateExceptionTest extends ExceptionTest
 {
@@ -17,7 +18,7 @@ class BadStateExceptionTest extends ExceptionTest
      *
      * @return int
      */
-    protected function getExpectedStatusCode()
+    protected function getExpectedStatusCode(): int
     {
         return 409;
     }
@@ -27,7 +28,7 @@ class BadStateExceptionTest extends ExceptionTest
      *
      * @return string
      */
-    protected function getExpectedMessage()
+    protected function getExpectedMessage(): string
     {
         return 'Conflict';
     }
@@ -37,7 +38,7 @@ class BadStateExceptionTest extends ExceptionTest
      *
      * @return \Exception
      */
-    protected function getException()
+    protected function getException(): MockObject
     {
         return $this->getMockForAbstractClass(BadStateException::class);
     }
@@ -47,7 +48,7 @@ class BadStateExceptionTest extends ExceptionTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\BadStateException
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\BadStateException
     {
         return new ValueObjectVisitor\BadStateException();
     }

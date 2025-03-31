@@ -27,7 +27,7 @@ class ContentTypeId extends BaseParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeId
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentTypeIdCriterion
     {
         if (!array_key_exists('ContentTypeIdCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <ContentTypeIdCriterion> format');

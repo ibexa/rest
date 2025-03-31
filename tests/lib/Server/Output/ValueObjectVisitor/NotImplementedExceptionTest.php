@@ -17,7 +17,7 @@ class NotImplementedExceptionTest extends ExceptionTest
      *
      * @return int
      */
-    protected function getExpectedStatusCode()
+    protected function getExpectedStatusCode(): int
     {
         return 501;
     }
@@ -27,7 +27,7 @@ class NotImplementedExceptionTest extends ExceptionTest
      *
      * @return string
      */
-    protected function getExpectedMessage()
+    protected function getExpectedMessage(): string
     {
         return 'Not Implemented';
     }
@@ -37,7 +37,7 @@ class NotImplementedExceptionTest extends ExceptionTest
      *
      * @return \Exception
      */
-    protected function getException()
+    protected function getException(): NotImplementedException
     {
         return new NotImplementedException('Test');
     }
@@ -47,7 +47,7 @@ class NotImplementedExceptionTest extends ExceptionTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\NotImplementedException
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\NotImplementedException
     {
         return new ValueObjectVisitor\NotImplementedException();
     }

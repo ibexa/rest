@@ -14,7 +14,7 @@ use RuntimeException;
 
 class ParserToolsTest extends TestCase
 {
-    public function testIsEmbeddedObjectReturnsTrue()
+    public function testIsEmbeddedObjectReturnsTrue(): void
     {
         $parserTools = $this->getParserTools();
 
@@ -29,7 +29,7 @@ class ParserToolsTest extends TestCase
         );
     }
 
-    public function testIsEmbeddedObjectReturnsFalse()
+    public function testIsEmbeddedObjectReturnsFalse(): void
     {
         $parserTools = $this->getParserTools();
 
@@ -43,7 +43,7 @@ class ParserToolsTest extends TestCase
         );
     }
 
-    public function testParseObjectElementEmbedded()
+    public function testParseObjectElementEmbedded(): void
     {
         $parserTools = $this->getParserTools();
 
@@ -67,7 +67,7 @@ class ParserToolsTest extends TestCase
         );
     }
 
-    public function testParseObjectElementNotEmbedded()
+    public function testParseObjectElementNotEmbedded(): void
     {
         $parserTools = $this->getParserTools();
 
@@ -87,7 +87,7 @@ class ParserToolsTest extends TestCase
         );
     }
 
-    public function testNormalParseBooleanValue()
+    public function testNormalParseBooleanValue(): void
     {
         $tools = $this->getParserTools();
 
@@ -97,14 +97,14 @@ class ParserToolsTest extends TestCase
         self::assertFalse($tools->parseBooleanValue(false));
     }
 
-    public function testUnexpectedValueParseBooleanValue()
+    public function testUnexpectedValueParseBooleanValue(): void
     {
         $this->expectException(RuntimeException::class);
 
         $this->getParserTools()->parseBooleanValue('whatever but not a boolean');
     }
 
-    protected function getParserTools()
+    protected function getParserTools(): ParserTools
     {
         return new ParserTools();
     }

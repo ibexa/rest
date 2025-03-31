@@ -23,7 +23,7 @@ class LogicalOperator extends Criterion
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalOperator
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): never
     {
         throw new \Exception('@todo implement');
     }
@@ -33,7 +33,7 @@ class LogicalOperator extends Criterion
      *
      * @return array
      */
-    protected function getFlattenedCriteriaData(array $criteriaByType)
+    protected function getFlattenedCriteriaData(array $criteriaByType): array
     {
         $criteria = [];
         foreach ($criteriaByType as $type => $criterion) {
@@ -59,7 +59,7 @@ class LogicalOperator extends Criterion
      *
      * @return bool
      */
-    protected function isZeroBasedArray(array $value)
+    protected function isZeroBasedArray(array $value): bool
     {
         reset($value);
 

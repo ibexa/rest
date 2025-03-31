@@ -17,7 +17,7 @@ class BadRequestException extends Exception
      *
      * @return int
      */
-    protected function getStatus()
+    protected function getStatus(): int
     {
         return 400;
     }

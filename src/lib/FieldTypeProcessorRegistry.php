@@ -19,7 +19,7 @@ class FieldTypeProcessorRegistry
      *
      * @var \Ibexa\Contracts\Rest\FieldTypeProcessor[]
      */
-    private $processors = [];
+    private array $processors = [];
 
     /**
      * @param \Ibexa\Contracts\Rest\FieldTypeProcessor[] $processors
@@ -37,7 +37,7 @@ class FieldTypeProcessorRegistry
      * @param string $fieldTypeIdentifier
      * @param \Ibexa\Contracts\Rest\FieldTypeProcessor $processor
      */
-    public function registerProcessor($fieldTypeIdentifier, FieldTypeProcessor $processor)
+    public function registerProcessor($fieldTypeIdentifier, FieldTypeProcessor $processor): void
     {
         $this->processors[$fieldTypeIdentifier] = $processor;
     }
@@ -49,7 +49,7 @@ class FieldTypeProcessorRegistry
      *
      * @return bool
      */
-    public function hasProcessor($fieldTypeIdentifier)
+    public function hasProcessor($fieldTypeIdentifier): bool
     {
         return isset($this->processors[$fieldTypeIdentifier]);
     }

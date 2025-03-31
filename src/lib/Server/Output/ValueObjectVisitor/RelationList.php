@@ -24,7 +24,7 @@ class RelationList extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\RelationList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startObjectElement('Relations', 'RelationList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('RelationList'));

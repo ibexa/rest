@@ -26,7 +26,7 @@ class ContentObjectStates extends BaseParser
      *
      * @return \Ibexa\Rest\Values\RestObjectState[]
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): array
     {
         // @todo XSD says that no ObjectState elements is valid,
         // but we should at least have one if setting new states to content?

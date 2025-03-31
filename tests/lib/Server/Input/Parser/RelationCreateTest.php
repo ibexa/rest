@@ -15,7 +15,7 @@ class RelationCreateTest extends BaseTest
     /**
      * Tests the RelationCreate parser.
      */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'Destination' => [
@@ -36,7 +36,7 @@ class RelationCreateTest extends BaseTest
     /**
      * Test RelationCreate parser throwing exception on missing Destination.
      */
-    public function testParseExceptionOnMissingDestination()
+    public function testParseExceptionOnMissingDestination(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing or invalid \'Destination\' element for RelationCreate.');
@@ -49,7 +49,7 @@ class RelationCreateTest extends BaseTest
     /**
      * Test RelationCreate parser throwing exception on missing Destination href.
      */
-    public function testParseExceptionOnMissingDestinationHref()
+    public function testParseExceptionOnMissingDestinationHref(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'_href\' attribute for the Destination element in RelationCreate.');
@@ -66,7 +66,7 @@ class RelationCreateTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\RelationCreate
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): RelationCreate
     {
         $parser = new RelationCreate();
         $parser->setUriParser($this->getUriParserMock());
@@ -74,7 +74,7 @@ class RelationCreateTest extends BaseTest
         return $parser;
     }
 
-    public function getParseHrefExpectationsMap()
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/content/objects/42', 'contentId', 42],

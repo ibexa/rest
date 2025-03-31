@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\View;
 use Ibexa\Contracts\Rest\Output\Visitor as OutputVisitor;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Dispatcher for various visitors depending on the mime-type accept header.
@@ -30,7 +31,7 @@ class AcceptHeaderVisitorDispatcher
      * @param string $regexp
      * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
      */
-    public function addVisitor($regexp, OutputVisitor $visitor)
+    public function addVisitor($regexp, OutputVisitor $visitor): void
     {
         $this->mapping[$regexp] = $visitor;
     }
@@ -45,7 +46,7 @@ class AcceptHeaderVisitorDispatcher
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function dispatch(Request $request, $result)
+    public function dispatch(Request $request, $result): Response
     {
         foreach ($request->getAcceptableContentTypes() as $mimeType) {
             /** @var \Ibexa\Contracts\Rest\Output\Visitor $visitor */

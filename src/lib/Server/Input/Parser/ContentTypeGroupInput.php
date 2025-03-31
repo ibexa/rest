@@ -21,15 +21,10 @@ class ContentTypeGroupInput extends BaseParser
 {
     /**
      * ContentType service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
      */
-    protected $contentTypeService;
+    protected ContentTypeService $contentTypeService;
 
-    /**
-     * @var \Ibexa\Rest\Input\ParserTools
-     */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     /**
      * Construct.

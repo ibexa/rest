@@ -25,7 +25,7 @@ abstract class GeneratorTest extends TestCase
      */
     abstract protected function getGenerator();
 
-    public function testInvalidDocumentStart()
+    public function testInvalidDocumentStart(): void
     {
         $this->expectException(OutputGeneratorException::class);
 
@@ -35,7 +35,7 @@ abstract class GeneratorTest extends TestCase
         $generator->startDocument('test');
     }
 
-    public function testValidDocumentStartAfterReset()
+    public function testValidDocumentStartAfterReset(): void
     {
         $generator = $this->getGenerator();
 
@@ -46,7 +46,7 @@ abstract class GeneratorTest extends TestCase
         self::assertNotNull($generator->endDocument('test'));
     }
 
-    public function testInvalidDocumentNameEnd()
+    public function testInvalidDocumentNameEnd(): void
     {
         $this->expectException(OutputGeneratorException::class);
 
@@ -56,7 +56,7 @@ abstract class GeneratorTest extends TestCase
         $generator->endDocument('invalid');
     }
 
-    public function testInvalidOuterElementStart()
+    public function testInvalidOuterElementStart(): void
     {
         $this->expectException(OutputGeneratorException::class);
 
@@ -65,7 +65,7 @@ abstract class GeneratorTest extends TestCase
         $generator->startObjectElement('element');
     }
 
-    public function testInvalidElementEnd()
+    public function testInvalidElementEnd(): void
     {
         $this->expectException(OutputGeneratorException::class);
 
@@ -76,7 +76,7 @@ abstract class GeneratorTest extends TestCase
         $generator->endObjectElement('invalid');
     }
 
-    public function testInvalidDocumentEnd()
+    public function testInvalidDocumentEnd(): void
     {
         $this->expectException(OutputGeneratorException::class);
 
@@ -87,7 +87,7 @@ abstract class GeneratorTest extends TestCase
         $generator->endDocument('test');
     }
 
-    public function testInvalidAttributeOuterStart()
+    public function testInvalidAttributeOuterStart(): void
     {
         $this->expectException(OutputGeneratorException::class);
 
@@ -96,7 +96,7 @@ abstract class GeneratorTest extends TestCase
         $generator->startAttribute('attribute', 'value');
     }
 
-    public function testInvalidAttributeDocumentStart()
+    public function testInvalidAttributeDocumentStart(): void
     {
         $this->expectException(OutputGeneratorException::class);
 
@@ -106,7 +106,7 @@ abstract class GeneratorTest extends TestCase
         $generator->startAttribute('attribute', 'value');
     }
 
-    public function testInvalidAttributeListStart()
+    public function testInvalidAttributeListStart(): void
     {
         $this->expectException(OutputGeneratorException::class);
 
@@ -118,7 +118,7 @@ abstract class GeneratorTest extends TestCase
         $generator->startAttribute('attribute', 'value');
     }
 
-    public function testInvalidValueElementOuterStart()
+    public function testInvalidValueElementOuterStart(): void
     {
         $this->expectException(OutputGeneratorException::class);
 
@@ -127,7 +127,7 @@ abstract class GeneratorTest extends TestCase
         $generator->startValueElement('element', 'value');
     }
 
-    public function testInvalidValueElementDocumentStart()
+    public function testInvalidValueElementDocumentStart(): void
     {
         $this->expectException(OutputGeneratorException::class);
 
@@ -137,7 +137,7 @@ abstract class GeneratorTest extends TestCase
         $generator->startValueElement('element', 'value');
     }
 
-    public function testInvalidListOuterStart()
+    public function testInvalidListOuterStart(): void
     {
         $this->expectException(OutputGeneratorException::class);
 
@@ -146,7 +146,7 @@ abstract class GeneratorTest extends TestCase
         $generator->startList('list');
     }
 
-    public function testInvalidListDocumentStart()
+    public function testInvalidListDocumentStart(): void
     {
         $this->expectException(OutputGeneratorException::class);
 
@@ -156,7 +156,7 @@ abstract class GeneratorTest extends TestCase
         $generator->startList('list');
     }
 
-    public function testInvalidListListStart()
+    public function testInvalidListListStart(): void
     {
         $this->expectException(OutputGeneratorException::class);
 
@@ -168,7 +168,7 @@ abstract class GeneratorTest extends TestCase
         $generator->startList('attribute', 'value');
     }
 
-    public function testEmptyDocument()
+    public function testEmptyDocument(): void
     {
         $generator = $this->getGenerator();
 
@@ -177,7 +177,7 @@ abstract class GeneratorTest extends TestCase
         self::assertTrue($generator->isEmpty());
     }
 
-    public function testNonEmptyDocument()
+    public function testNonEmptyDocument(): void
     {
         $generator = $this->getGenerator();
 
@@ -195,7 +195,7 @@ abstract class GeneratorTest extends TestCase
      * @phpstan-param scalar|null $elementValue
      * @phpstan-param array<string, scalar|null> $attributes
      */
-    public function testStartValueElementWithAttributes($elementValue, array $attributes): void
+    public function testStartValueElementWithAttributes(string|bool|int|float|null $elementValue, array $attributes): void
     {
         $generator = $this->getGenerator();
         $generator->startDocument('test');

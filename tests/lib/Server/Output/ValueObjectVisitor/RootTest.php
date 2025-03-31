@@ -8,13 +8,13 @@
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\Root;
 use Ibexa\Rest\Server\Service\ExpressionRouterRootResourceBuilder;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RootTest extends ValueObjectVisitorBaseTest
 {
-    protected function getRootResourceBuilder()
+    protected function getRootResourceBuilder(): ExpressionRouterRootResourceBuilder
     {
         $resourceConfig = [
             'Router' => [
@@ -82,7 +82,7 @@ class RootTest extends ValueObjectVisitorBaseTest
     /**
      * @depends testVisit
      */
-    public function testResultContainsRootElement($result)
+    public function testResultContainsRootElement($result): void
     {
         $this->assertXMLTag(
             ['tag' => 'Root'],
@@ -99,7 +99,7 @@ class RootTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsRootAttributes($result)
+    public function testResultContainsRootAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -117,7 +117,7 @@ class RootTest extends ValueObjectVisitorBaseTest
     /**
      * @depends testVisit
      */
-    public function testResultContainsRouterTag($result)
+    public function testResultContainsRouterTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -132,7 +132,7 @@ class RootTest extends ValueObjectVisitorBaseTest
     /**
      * @depends testVisit
      */
-    public function testResultContainsRouterWithAttributes($result)
+    public function testResultContainsRouterWithAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -150,7 +150,7 @@ class RootTest extends ValueObjectVisitorBaseTest
     /**
      * @depends testVisit
      */
-    public function testResultContainsTemplateRouterTag($result)
+    public function testResultContainsTemplateRouterTag($result): void
     {
         $this->assertXMLTag(
             [
@@ -165,7 +165,7 @@ class RootTest extends ValueObjectVisitorBaseTest
     /**
      * @depends testVisit
      */
-    public function testResultContainsTemplateRouterWithAttributes($result)
+    public function testResultContainsTemplateRouterWithAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -185,8 +185,8 @@ class RootTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Root
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): Root
     {
-        return new ValueObjectVisitor\Root();
+        return new Root();
     }
 }

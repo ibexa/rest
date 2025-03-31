@@ -48,7 +48,7 @@ class SectionListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsSectionListElement($result)
+    public function testResultContainsSectionListElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -67,7 +67,7 @@ class SectionListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsSectionListAttributes($result)
+    public function testResultContainsSectionListAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -86,7 +86,7 @@ class SectionListTest extends ValueObjectVisitorBaseTest
     /**
      * Test if SectionList visitor visits the children.
      */
-    public function testSectionListVisitsChildren()
+    public function testSectionListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -117,7 +117,7 @@ class SectionListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\SectionList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\SectionList
     {
         return new ValueObjectVisitor\SectionList();
     }

@@ -137,7 +137,7 @@ class UserBaseController extends RestController
      *
      * @return \Ibexa\Rest\Server\Values\RestUser[]
      */
-    public function loadUsersAssignedToRole($roleId): array
+    public function loadUsersAssignedToRole(int $roleId): array
     {
         $role = $this->roleService->loadRole($roleId);
         $roleAssignments = $this->roleService->getRoleAssignments($role);

@@ -49,7 +49,7 @@ class RoleListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsRoleListElement($result)
+    public function testResultContainsRoleListElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -68,7 +68,7 @@ class RoleListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsRoleListAttributes($result)
+    public function testResultContainsRoleListAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -87,7 +87,7 @@ class RoleListTest extends ValueObjectVisitorBaseTest
     /**
      * Test if RoleList visitor visits the children.
      */
-    public function testRoleListVisitsChildren()
+    public function testRoleListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -118,7 +118,7 @@ class RoleListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RoleList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\RoleList
     {
         return new ValueObjectVisitor\RoleList();
     }
