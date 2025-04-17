@@ -30,7 +30,7 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'OK - verifies if there are Users matching the given filter.',
             ],
             Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - there are no visibile Users matching the filter.',
+                'description' => 'Error - there are no visible Users matching the filter.',
             ],
         ],
     ),
