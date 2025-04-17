@@ -13,21 +13,8 @@ use Ibexa\Rest\Server\Input\Parser\Criterion;
 /**
  * Parser for LogicalOperator Criterion.
  */
-class LogicalOperator extends Criterion
+abstract class LogicalOperator extends Criterion
 {
-    /**
-     * Parses input structure to a Criterion object.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalOperator
-     */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): never
-    {
-        throw new \Exception('@todo implement');
-    }
-
     /**
      * @param array $criteriaByType
      *

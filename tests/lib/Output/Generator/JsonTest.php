@@ -12,8 +12,6 @@ use Ibexa\Rest\Output\Generator\Json;
 use Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator;
 use Ibexa\Tests\Rest\Output\GeneratorTest;
 
-require_once __DIR__ . '/../GeneratorTest.php';
-
 /**
  * Json output generator test class.
  */

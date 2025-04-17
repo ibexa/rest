@@ -56,7 +56,7 @@ class Location extends ValueObjectVisitor
             'href',
             $this->router->generate(
                 'ibexa.rest.load_location',
-                ['locationPath' => trim($location->pathString, '/')]
+                ['locationPath' => trim($location->getPathString(), '/')]
             )
         );
         $generator->endAttribute('href');
@@ -80,7 +80,7 @@ class Location extends ValueObjectVisitor
         $generator->endValueElement('invisible');
 
         $generator->startObjectElement('ParentLocation', 'Location');
-        if (trim($location->pathString, '/') !== '1') {
+        if (trim($location->getPathString(), '/') !== '1') {
             $generator->startAttribute(
                 'href',
                 $this->router->generate(
@@ -112,7 +112,7 @@ class Location extends ValueObjectVisitor
             $this->router->generate(
                 'ibexa.rest.load_location_children',
                 [
-                    'locationPath' => trim($location->pathString, '/'),
+                    'locationPath' => trim($location->getPathString(), '/'),
                 ]
             )
         );
@@ -138,7 +138,7 @@ class Location extends ValueObjectVisitor
             'href',
             $this->router->generate(
                 'ibexa.rest.list_location_url_aliases',
-                ['locationPath' => trim($location->pathString, '/')]
+                ['locationPath' => trim($location->getPathString(), '/')]
             )
         );
         $generator->endAttribute('href');

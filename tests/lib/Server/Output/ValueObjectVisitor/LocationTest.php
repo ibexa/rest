@@ -58,6 +58,7 @@ final class LocationTest extends ValueObjectVisitorBaseTest
         $location = new Location([
             'id' => $locationId,
             'path' => ['1', '25', '42'],
+            'pathString' => '/1/25/42',
             'priority' => 1,
             'sortField' => ApiLocation::SORT_FIELD_DEPTH,
             'sortOrder' => ApiLocation::SORT_ORDER_ASC,

@@ -17,6 +17,8 @@ use Symfony\Component\Routing\RouteCollection;
  */
 class OptionsLoaderTest extends TestCase
 {
+    private OptionsLoader\RouteCollectionMapper & MockObject $routeCollectionMapperMock;
+
     /**
      * @param string $type
      * @param bool $expected
@@ -56,10 +58,8 @@ class OptionsLoaderTest extends TestCase
 
     /**
      * Returns a partially mocked OptionsLoader, with the import method mocked.
-     *
-     * @return \Ibexa\Bundle\Rest\Routing\OptionsLoader|\PHPUnit\Framework\MockObject\MockObject
      */
-    protected function getOptionsLoader(): MockObject
+    protected function getOptionsLoader(): OptionsLoader & MockObject
     {
         $mock = $this->getMockBuilder(OptionsLoader::class)
             ->setConstructorArgs([$this->getRouteCollectionMapperMock()])
@@ -74,10 +74,7 @@ class OptionsLoaderTest extends TestCase
         return $mock;
     }
 
-    /**
-     * @return \PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getRouteCollectionMapperMock()
+    protected function getRouteCollectionMapperMock(): OptionsLoader\RouteCollectionMapper & MockObject
     {
         if (!isset($this->routeCollectionMapperMock)) {
             $this->routeCollectionMapperMock = $this->createMock(OptionsLoader\RouteCollectionMapper::class);

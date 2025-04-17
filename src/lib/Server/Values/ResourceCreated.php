@@ -11,7 +11,9 @@ use Ibexa\Rest\Value as RestValue;
 
 class ResourceCreated extends RestValue
 {
-    public function __construct($redirectUri)
+    public string $redirectUri;
+
+    public function __construct(string $redirectUri)
     {
         $this->redirectUri = $redirectUri;
     }
