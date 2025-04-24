@@ -18,16 +18,18 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
+    public const string PRESERVE_EMPTY_OBJECTS = 'preserve_empty_objects';
+
     use NormalizerAwareTrait;
 
     /**
      * @param array<mixed> $context
      *
-     * @return array<mixed>
+     * @return array<mixed>|\ArrayObject
      *
      * {@inheritDoc}
      */
-    public function normalize($object, ?string $format = null, array $context = []): array
+    public function normalize($object, ?string $format = null, array $context = []): array|\ArrayObject
     {
         $vars = get_object_vars($object);
 
@@ -57,6 +59,12 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
                     : $this->normalizer->normalize($value, $format, $context)
                 ;
             }
+        }
+
+        $preserveEmptyObjects = $context[self::PRESERVE_EMPTY_OBJECTS] ?? false;
+
+        if ($preserveEmptyObjects && $data === []) {
+            return new NativeArrayObject();
         }
 
         return $data;
