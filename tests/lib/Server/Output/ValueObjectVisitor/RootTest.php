@@ -53,12 +53,7 @@ class RootTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Test the Role visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -74,7 +69,7 @@ class RootTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
@@ -82,7 +77,7 @@ class RootTest extends ValueObjectVisitorBaseTest
     /**
      * @depends testVisit
      */
-    public function testResultContainsRootElement($result): void
+    public function testResultContainsRootElement(string $result): void
     {
         $this->assertXMLTag(
             ['tag' => 'Root'],
@@ -93,13 +88,9 @@ class RootTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Role element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsRootAttributes($result): void
+    public function testResultContainsRootAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -117,7 +108,7 @@ class RootTest extends ValueObjectVisitorBaseTest
     /**
      * @depends testVisit
      */
-    public function testResultContainsRouterTag($result): void
+    public function testResultContainsRouterTag(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -180,11 +171,6 @@ class RootTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the Role visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Root
-     */
     protected function internalGetVisitor(): Root
     {
         return new Root();

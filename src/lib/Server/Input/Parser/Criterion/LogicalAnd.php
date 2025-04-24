@@ -7,7 +7,6 @@
 
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
-use Ibexa\Contracts\Core\Repository\Values;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalAnd as LogicalAndCriterion;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;

@@ -16,11 +16,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
 {
     /**
-     * Test the ContentTypeGroupRefList visitor.
-     *
      * @todo coverage test with one group (can't be deleted)
-     *
-     * @return \DOMDocument
      */
     public function testVisit(): \DOMDocument
     {
@@ -94,7 +90,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -103,8 +99,6 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testContentTypeGroupRefListHrefCorrect(\DOMDocument $dom): void
@@ -113,8 +107,6 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testContentTypeGroupRefListMediaTypeCorrect(\DOMDocument $dom): void
@@ -123,8 +115,6 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testFirstContentTypeGroupRefHrefCorrect(\DOMDocument $dom): void
@@ -133,8 +123,6 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testFirstContentTypeGroupRefMediaTypeCorrect(\DOMDocument $dom): void
@@ -143,8 +131,6 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testFirstContentTypeGroupRefUnlinkHrefCorrect(\DOMDocument $dom): void
@@ -153,8 +139,6 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testFirstContentTypeGroupRefUnlinkMethodCorrect(\DOMDocument $dom): void
@@ -163,8 +147,6 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testSecondContentTypeGroupRefHrefCorrect(\DOMDocument $dom): void
@@ -173,8 +155,6 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testSecondContentTypeGroupRefMediaTypeCorrect(\DOMDocument $dom): void
@@ -183,8 +163,6 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testSecondContentTypeGroupRefUnlinkHrefCorrect(\DOMDocument $dom): void
@@ -193,8 +171,6 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testSecondContentTypeGroupRefUnlinkMethodCorrect(\DOMDocument $dom): void
@@ -202,11 +178,6 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[2]/unlink[@method="DELETE"]');
     }
 
-    /**
-     * Get the ContentTypeGroupRefList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroupRefList
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\ContentTypeGroupRefList
     {
         return new ValueObjectVisitor\ContentTypeGroupRefList();

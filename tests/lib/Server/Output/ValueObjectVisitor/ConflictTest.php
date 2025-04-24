@@ -13,11 +13,6 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ConflictTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the Conflict visitor.
-     *
-     * @return string
-     */
     public function testVisit(): void
     {
         $visitor = $this->getVisitor();
@@ -40,11 +35,6 @@ class ConflictTest extends ValueObjectVisitorBaseTest
         self::assertTrue($generator->isEmpty());
     }
 
-    /**
-     * Get the Conflict visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Conflict
-     */
     protected function internalGetVisitor(): Conflict
     {
         return new Conflict();

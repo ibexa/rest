@@ -16,12 +16,7 @@ use Symfony\Component\Translation\Translator;
 
 class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the ContentFieldValidationException visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -38,19 +33,15 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains ErrorMessage element and description.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsErrorDescription($result): void
+    public function testResultContainsErrorDescription(string $result): void
     {
         self::assertXMLTag(
             [
@@ -63,13 +54,9 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ErrorMessage element and details.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsErrorDetails($result): void
+    public function testResultContainsErrorDetails(string $result): void
     {
         self::assertXMLTag(
             [
@@ -88,41 +75,21 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get expected status code.
-     *
-     * @return int
-     */
     protected function getExpectedStatusCode(): int
     {
         return 400;
     }
 
-    /**
-     * Get expected message.
-     *
-     * @return string
-     */
     protected function getExpectedMessage(): string
     {
         return 'Bad Request';
     }
 
-    /**
-     * Get expected description.
-     *
-     * @return string
-     */
     protected function getExpectedDescription(): string
     {
         return 'Content fields did not validate';
     }
 
-    /**
-     * Gets the exception.
-     *
-     * @return \Exception
-     */
     protected function getException(): ContentFieldValidationException
     {
         return new ContentFieldValidationException(
@@ -147,11 +114,6 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Gets the exception visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentFieldValidationException
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\ContentFieldValidationException
     {
         return new ValueObjectVisitor\ContentFieldValidationException(false, new Translator('eng-GB'));

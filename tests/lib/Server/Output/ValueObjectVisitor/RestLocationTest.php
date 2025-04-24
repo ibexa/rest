@@ -100,19 +100,15 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains Location element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsLocationElement($result): void
+    public function testResultContainsLocationElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -125,13 +121,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Location element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsLocationAttributes($result): void
+    public function testResultContainsLocationAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -148,13 +140,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ContentInfo element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsContentInfoElement($result): void
+    public function testResultContainsContentInfoElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -167,13 +155,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Location element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsContentInfoAttributes($result): void
+    public function testResultContainsContentInfoAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -190,13 +174,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains id value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsIdValueElement($result): void
+    public function testResultContainsIdValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -210,13 +190,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains priority value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsPriorityValueElement($result): void
+    public function testResultContainsPriorityValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -230,13 +206,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains hidden value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsHiddenValueElement($result): void
+    public function testResultContainsHiddenValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -250,13 +222,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains invisible value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsInvisibleValueElement($result): void
+    public function testResultContainsInvisibleValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -270,13 +238,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains explicitlyHidden value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsExplicitlyHiddenValueElement($result): void
+    public function testResultContainsExplicitlyHiddenValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -289,13 +253,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains remoteId value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsRemoteIdValueElement($result): void
+    public function testResultContainsRemoteIdValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -309,13 +269,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Children element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsChildrenElement($result): void
+    public function testResultContainsChildrenElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -328,13 +284,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Children element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsChildrenAttributes($result): void
+    public function testResultContainsChildrenAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -351,13 +303,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ParentLocation element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsParentLocationElement($result): void
+    public function testResultContainsParentLocationElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -370,13 +318,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ParentLocation element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsParentLocationAttributes($result): void
+    public function testResultContainsParentLocationAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -393,13 +337,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Content element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsContentElement($result): void
+    public function testResultContainsContentElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -412,13 +352,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Content element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsContentAttributes($result): void
+    public function testResultContainsContentAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -435,13 +371,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains pathString value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsPathStringValueElement($result): void
+    public function testResultContainsPathStringValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -455,13 +387,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains depth value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsDepthValueElement($result): void
+    public function testResultContainsDepthValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -475,13 +403,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains sortField value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsSortFieldValueElement($result): void
+    public function testResultContainsSortFieldValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -495,13 +419,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains sortOrder value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsSortOrderValueElement($result): void
+    public function testResultContainsSortOrderValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -515,13 +435,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains childCount value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsChildCountValueElement($result): void
+    public function testResultContainsChildCountValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -535,13 +451,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Content element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsUrlAliasesTag($result): void
+    public function testResultContainsUrlAliasesTag(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -554,13 +466,9 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Content element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsUrlAliasesTagAttributes($result): void
+    public function testResultContainsUrlAliasesTagAttributes(string $result): void
     {
         $this->assertXMLTag(
             [

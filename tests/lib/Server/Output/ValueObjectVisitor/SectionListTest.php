@@ -14,12 +14,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class SectionListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the SectionList visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -36,19 +31,15 @@ class SectionListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains SectionList element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsSectionListElement($result): void
+    public function testResultContainsSectionListElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -61,13 +52,9 @@ class SectionListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains SectionList element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsSectionListAttributes($result): void
+    public function testResultContainsSectionListAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -83,9 +70,6 @@ class SectionListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Test if SectionList visitor visits the children.
-     */
     public function testSectionListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
@@ -112,11 +96,6 @@ class SectionListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the SectionList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\SectionList
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\SectionList
     {
         return new ValueObjectVisitor\SectionList();

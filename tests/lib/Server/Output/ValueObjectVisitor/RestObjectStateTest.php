@@ -14,12 +14,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RestObjectStateTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the RestObjectState visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -66,19 +61,15 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains ObjectState element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsObjectStateElement($result): void
+    public function testResultContainsObjectStateElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -94,13 +85,9 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ObjectState element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsObjectStateAttributes($result): void
+    public function testResultContainsObjectStateAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -117,13 +104,9 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ObjectStateGroup element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsObjectStateGroupElement($result): void
+    public function testResultContainsObjectStateGroupElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -136,13 +119,9 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ObjectStateGroup element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsObjectStateGroupAttributes($result): void
+    public function testResultContainsObjectStateGroupAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -159,13 +138,9 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains id value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsIdValueElement($result): void
+    public function testResultContainsIdValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -179,13 +154,9 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains identifier value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsIdentifierValueElement($result): void
+    public function testResultContainsIdentifierValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -199,13 +170,9 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains priority value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsPriorityValueElement($result): void
+    public function testResultContainsPriorityValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -219,13 +186,9 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains defaultLanguageCode value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsDefaultLanguageCodeValueElement($result): void
+    public function testResultContainsDefaultLanguageCodeValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -239,13 +202,9 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains languageCodes value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsLanguageCodesValueElement($result): void
+    public function testResultContainsLanguageCodesValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -259,13 +218,9 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains names element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsNamesElement($result): void
+    public function testResultContainsNamesElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -281,13 +236,9 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains descriptions element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsDescriptionsElement($result): void
+    public function testResultContainsDescriptionsElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -302,11 +253,6 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the ObjectState visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestObjectState
-     */
     protected function internalGetVisitor(): RestObjectState
     {
         return new RestObjectState();

@@ -13,12 +13,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class URLAliasTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the URLAlias visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -53,19 +48,15 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains UrlAlias element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsUrlAliasElement($result): void
+    public function testResultContainsUrlAliasElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -82,13 +73,9 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains UrlAlias element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsUrlAliasAttributes($result): void
+    public function testResultContainsUrlAliasAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -107,13 +94,9 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains url value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsUrlValueElement($result): void
+    public function testResultContainsUrlValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -127,13 +110,9 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains path value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsPathValueElement($result): void
+    public function testResultContainsPathValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -147,13 +126,9 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains languageCodes value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsLanguageCodesValueElement($result): void
+    public function testResultContainsLanguageCodesValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -167,13 +142,9 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains alwaysAvailable value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsAlwaysAvailableValueElement($result): void
+    public function testResultContainsAlwaysAvailableValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -187,13 +158,9 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains isHistory value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsIsHistoryValueElement($result): void
+    public function testResultContainsIsHistoryValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -207,13 +174,9 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains forward value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsForwardValueElement($result): void
+    public function testResultContainsForwardValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -227,13 +190,9 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains custom value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsCustomValueElement($result): void
+    public function testResultContainsCustomValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -246,11 +205,6 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the URLAlias visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAlias
-     */
     protected function internalGetVisitor(): URLAlias
     {
         return new URLAlias();

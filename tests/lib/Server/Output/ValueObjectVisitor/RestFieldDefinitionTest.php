@@ -16,7 +16,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
 {
-    protected MockObject $fieldTypeSerializerMock;
+    protected FieldTypeSerializer & MockObject $fieldTypeSerializerMock;
 
     public function setUp(): void
     {
@@ -71,7 +71,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -176,9 +176,6 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
         $this->assertXPath($dom, $xpath);
     }
 
-    /**
-     * Get the Content visitor.
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\RestFieldDefinition
     {
         return new ValueObjectVisitor\RestFieldDefinition($this->fieldTypeSerializerMock);

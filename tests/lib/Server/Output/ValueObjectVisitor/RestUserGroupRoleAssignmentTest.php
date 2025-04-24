@@ -14,12 +14,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RestUserGroupRoleAssignmentTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the RestUserGroupRoleAssignment visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -62,19 +57,15 @@ class RestUserGroupRoleAssignmentTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains RoleAssignment element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsRoleAssignmentElement($result): void
+    public function testResultContainsRoleAssignmentElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -90,13 +81,9 @@ class RestUserGroupRoleAssignmentTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains RoleAssignment element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsRoleAssignmentAttributes($result): void
+    public function testResultContainsRoleAssignmentAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -113,13 +100,9 @@ class RestUserGroupRoleAssignmentTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Role element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsRoleElement($result): void
+    public function testResultContainsRoleElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -132,13 +115,9 @@ class RestUserGroupRoleAssignmentTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Role element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsRoleAttributes($result): void
+    public function testResultContainsRoleAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -154,11 +133,6 @@ class RestUserGroupRoleAssignmentTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the RestUserGroupRoleAssignment visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserGroupRoleAssignment
-     */
     protected function internalGetVisitor(): RestUserGroupRoleAssignment
     {
         return new RestUserGroupRoleAssignment();

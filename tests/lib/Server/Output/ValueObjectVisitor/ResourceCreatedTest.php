@@ -13,11 +13,6 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ResourceCreatedTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the ResourceCreated visitor.
-     *
-     * @return string
-     */
     public function testVisit(): void
     {
         $visitor = $this->getVisitor();
@@ -45,11 +40,6 @@ class ResourceCreatedTest extends ValueObjectVisitorBaseTest
         self::assertTrue($generator->isEmpty());
     }
 
-    /**
-     * Get the ResourceCreated visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ResourceCreated
-     */
     protected function internalGetVisitor(): ResourceCreated
     {
         return new ResourceCreated();

@@ -13,11 +13,6 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ImageVariationTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the ImageVariation visitor.
-     *
-     * @return string
-     */
     public function testVisit(): \DOMDocument
     {
         $visitor = $this->getVisitor();
@@ -55,7 +50,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -64,8 +59,6 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testContentImageVariationContentTagExists(\DOMDocument $dom): void
@@ -74,8 +67,6 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testContentImageVariationTagHrefAttribute(\DOMDocument $dom): void
@@ -84,8 +75,6 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testContentImageVariationTagMediaTypeAttribute(\DOMDocument $dom): void
@@ -94,8 +83,6 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testUriTagExists(\DOMDocument $dom): void
@@ -104,8 +91,6 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testUriTagValue(\DOMDocument $dom): void
@@ -114,8 +99,6 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testContentTypeTagExists(\DOMDocument $dom): void
@@ -124,8 +107,6 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testContentTypeTagValue(\DOMDocument $dom): void
@@ -134,8 +115,6 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testWidthTagExists(\DOMDocument $dom): void
@@ -144,8 +123,6 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testWidthTagValue(\DOMDocument $dom): void
@@ -154,8 +131,6 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testHeightTagExists(\DOMDocument $dom): void
@@ -164,8 +139,6 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testHeightTagValue(\DOMDocument $dom): void
@@ -174,8 +147,6 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testFileSizeTagExists(\DOMDocument $dom): void
@@ -184,8 +155,6 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testFileSizeTagValue(\DOMDocument $dom): void
@@ -193,9 +162,6 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
         $this->assertXPath($dom, '/ContentImageVariation/fileSize[text()="12345"]');
     }
 
-    /**
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ImageVariation
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\ImageVariation
     {
         return new ValueObjectVisitor\ImageVariation();

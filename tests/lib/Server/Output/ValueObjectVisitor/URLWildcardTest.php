@@ -13,12 +13,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class URLWildcardTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the URLWildcard visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -48,19 +43,15 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains UrlWildcard element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsUrlWildcardElement($result): void
+    public function testResultContainsUrlWildcardElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -77,13 +68,9 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains UrlWildcard element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsUrlWildcardAttributes($result): void
+    public function testResultContainsUrlWildcardAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -101,13 +88,9 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains sourceUrl value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsSourceUrlValueElement($result): void
+    public function testResultContainsSourceUrlValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -121,13 +104,9 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains destinationUrl value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsDestinationUrlValueElement($result): void
+    public function testResultContainsDestinationUrlValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -141,13 +120,9 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains forward value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsForwardValueElement($result): void
+    public function testResultContainsForwardValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -160,11 +135,6 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the URLWildcard visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcard
-     */
     protected function internalGetVisitor(): URLWildcard
     {
         return new URLWildcard();

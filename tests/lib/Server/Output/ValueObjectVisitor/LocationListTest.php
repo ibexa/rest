@@ -36,19 +36,15 @@ class LocationListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains LocationList element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsLocationListElement($result): void
+    public function testResultContainsLocationListElement(string $result): void
     {
         $this->assertXMLTag(
             [

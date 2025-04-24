@@ -14,12 +14,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the ObjectStateGroupList visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -38,19 +33,15 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains ObjectStateGroupList element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsObjectStateGroupListElement($result): void
+    public function testResultContainsObjectStateGroupListElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -63,13 +54,9 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ObjectStateGroupList element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsObjectStateGroupListAttributes($result): void
+    public function testResultContainsObjectStateGroupListAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -113,11 +100,6 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the ObjectStateGroupList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateGroupList
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\ObjectStateGroupList
     {
         return new ValueObjectVisitor\ObjectStateGroupList();

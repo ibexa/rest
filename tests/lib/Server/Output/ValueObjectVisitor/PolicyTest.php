@@ -16,10 +16,8 @@ class PolicyTest extends ValueObjectVisitorBaseTest
 {
     /**
      * Test the Policy visitor.
-     *
-     * @return string
      */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -55,19 +53,15 @@ class PolicyTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains Policy element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsPolicyElement($result): void
+    public function testResultContainsPolicyElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -84,13 +78,9 @@ class PolicyTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Policy element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsPolicyAttributes($result): void
+    public function testResultContainsPolicyAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -107,13 +97,9 @@ class PolicyTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains id value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsIdValueElement($result): void
+    public function testResultContainsIdValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -127,13 +113,9 @@ class PolicyTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains module value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsModuleValueElement($result): void
+    public function testResultContainsModuleValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -147,13 +129,9 @@ class PolicyTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains function value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsFunctionValueElement($result): void
+    public function testResultContainsFunctionValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -167,13 +145,9 @@ class PolicyTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains limitations element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsLimitationsElement($result): void
+    public function testResultContainsLimitationsElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -186,13 +160,9 @@ class PolicyTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains limitations attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsLimitationsAttributes($result): void
+    public function testResultContainsLimitationsAttributes(string $result): void
     {
         $this->assertXMLTag(
             [

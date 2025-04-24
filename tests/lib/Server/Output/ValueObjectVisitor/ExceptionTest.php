@@ -23,11 +23,6 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
     /** @var \Symfony\Contracts\Translation\TranslatorInterface|\PHPUnit\Framework\MockObject\MockObject */
     private ?MockObject $translatorMock = null;
 
-    /**
-     * Test the Exception visitor.
-     *
-     * @return string
-     */
     public function testVisit(): string
     {
         $visitor = $this->getVisitor();
@@ -35,7 +30,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
 
         $result = $this->generateDocument($generator, $visitor);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
@@ -55,19 +50,15 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
 
         $result = $this->generateDocument($generator, $visitor);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains ErrorMessage element and error code.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsErrorCode($result): void
+    public function testResultContainsErrorCode(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -83,13 +74,9 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ErrorMessage element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsErrorMessage($result): void
+    public function testResultContainsErrorMessage(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -105,13 +92,9 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ErrorMessage element and description.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsErrorDescription($result): void
+    public function testResultContainsErrorDescription(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -141,13 +124,9 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if ErrorMessage element contains required attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsExceptionAttributes($result): void
+    public function testResultContainsExceptionAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -162,11 +141,9 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ErrorMessage element.
-     *
      * @depends testVisit
      */
-    public function testResultContainsPreviousError($result): void
+    public function testResultContainsPreviousError(string $result): void
     {
         $dom = new DOMDocument();
         $dom->loadXml($result);
@@ -177,57 +154,32 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get expected status code.
-     *
-     * @return int
-     */
     protected function getExpectedStatusCode(): int
     {
         return 500;
     }
 
-    /**
-     * Get expected message.
-     *
-     * @return string
-     */
     protected function getExpectedMessage(): string
     {
         return 'Internal Server Error';
     }
 
-    /**
-     * Gets the exception.
-     *
-     * @return \Exception
-     */
     protected function getException(): \Exception
     {
         return new \Exception('Test');
     }
 
-    /**
-     * Gets the exception visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Exception
-     */
     protected function internalGetVisitor(): ExceptionValueObjectVisitor
     {
         return new ExceptionValueObjectVisitor(true, $this->getTranslatorMock());
     }
 
-    /**
-     * Gets the exception visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Exception
-     */
     protected function internalGetNonDebugVisitor(): ExceptionValueObjectVisitor
     {
         return new ExceptionValueObjectVisitor(false, $this->getTranslatorMock());
     }
 
-    protected function getTranslatorMock(): TranslatorInterface
+    protected function getTranslatorMock(): TranslatorInterface & MockObject
     {
         if (!isset($this->translatorMock)) {
             $this->translatorMock = $this->getMockBuilder(TranslatorInterface::class)

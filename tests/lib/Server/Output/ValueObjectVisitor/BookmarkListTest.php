@@ -18,9 +18,6 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class BookmarkListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * @var \Ibexa\Rest\Server\Values\BookmarkList
-     */
     private BookmarkList $data;
 
     protected function setUp(): void
@@ -47,7 +44,7 @@ class BookmarkListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }

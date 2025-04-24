@@ -13,12 +13,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ContentObjectStatesTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the ContentObjectStates visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -36,19 +31,15 @@ class ContentObjectStatesTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains ContentObjectStates element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsContentObjectStatesElement($result): void
+    public function testResultContainsContentObjectStatesElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -61,13 +52,9 @@ class ContentObjectStatesTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ContentObjectStates element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsContentObjectStatesAttributes($result): void
+    public function testResultContainsContentObjectStatesAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -82,11 +69,6 @@ class ContentObjectStatesTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the ContentObjectStates visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentObjectStates
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\ContentObjectStates
     {
         return new ValueObjectVisitor\ContentObjectStates();

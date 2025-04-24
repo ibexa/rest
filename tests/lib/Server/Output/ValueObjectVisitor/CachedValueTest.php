@@ -137,11 +137,6 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
         return $generator->endDocument(null);
     }
 
-    /**
-     * Must return an instance of the tested visitor object.
-     *
-     * @return \Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\CachedValue
     {
         $visitor = new ValueObjectVisitor\CachedValue(
@@ -156,10 +151,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
         return $visitor;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getConfigProviderMock(): MockObject
+    protected function getConfigProviderMock(): ConfigResolverInterface & MockObject
     {
         $options = $this->options ?: $this->defaultOptions;
 

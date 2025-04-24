@@ -18,9 +18,6 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
  */
 class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * @return \DOMDocument
-     */
     public function testVisitFieldDefinitionList(): \DOMDocument
     {
         $visitor = $this->getVisitor();
@@ -48,7 +45,7 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -77,6 +74,9 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
         );
     }
 
+    /**
+     * @return array<int, array<string>>
+     */
     public function provideXpathAssertions(): array
     {
         return [
@@ -90,9 +90,6 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param string $xpath
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitFieldDefinitionList
      *
      * @dataProvider provideXpathAssertions
@@ -102,11 +99,6 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
         $this->assertXPath($dom, $xpath);
     }
 
-    /**
-     * Get the Content visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\FieldDefinitionList
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\FieldDefinitionList
     {
         return new ValueObjectVisitor\FieldDefinitionList();

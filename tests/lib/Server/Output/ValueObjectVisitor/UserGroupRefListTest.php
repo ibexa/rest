@@ -18,11 +18,6 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class UserGroupRefListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the UserGroupRefList visitor.
-     *
-     * @return \DOMDocument
-     */
     public function testVisit(): \DOMDocument
     {
         $visitor = $this->getVisitor();
@@ -93,7 +88,7 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -102,8 +97,6 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testUserGroupRefListHrefCorrect(\DOMDocument $dom): void
@@ -112,8 +105,6 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testUserGroupRefListMediaTypeCorrect(\DOMDocument $dom): void
@@ -122,8 +113,6 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testFirstUserGroupHrefCorrect(\DOMDocument $dom): void
@@ -132,8 +121,6 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testFirstUserGroupMediaTypeCorrect(\DOMDocument $dom): void
@@ -142,8 +129,6 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testFirstUserGroupUnassignHrefCorrect(\DOMDocument $dom): void
@@ -152,8 +137,6 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testFirstUserGroupUnassignMethodCorrect(\DOMDocument $dom): void
@@ -162,8 +145,6 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testSecondUserGroupHrefCorrect(\DOMDocument $dom): void
@@ -172,8 +153,6 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testSecondUserGroupMediaTypeCorrect(\DOMDocument $dom): void
@@ -182,8 +161,6 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testSecondUserGroupUnassignHrefCorrect(\DOMDocument $dom): void
@@ -192,8 +169,6 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testSecondUserGroupUnassignMethodCorrect(\DOMDocument $dom): void
@@ -201,11 +176,6 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
         $this->assertXPath($dom, '/UserGroupRefList/UserGroup[2]/unassign[@method="DELETE"]');
     }
 
-    /**
-     * Get the UserGroupRefList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UserGroupRefList
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\UserGroupRefList
     {
         return new ValueObjectVisitor\UserGroupRefList();

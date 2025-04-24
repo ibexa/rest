@@ -17,10 +17,8 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
 {
     /**
      * Test the Session visitor.
-     *
-     * @return string
      */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -65,19 +63,15 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains Session element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsSessionElement($result): void
+    public function testResultContainsSessionElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -93,13 +87,9 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Session element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsSessionAttributes($result): void
+    public function testResultContainsSessionAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -116,13 +106,9 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains name value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsNameValueElement($result): void
+    public function testResultContainsNameValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -136,13 +122,9 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains identifier value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsIdentifierValueElement($result): void
+    public function testResultContainsIdentifierValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -156,13 +138,9 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains csrf-token value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsCsrfTokenValueElement($result): void
+    public function testResultContainsCsrfTokenValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -175,7 +153,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    protected function getUserMock(): MockObject
+    protected function getUserMock(): User & MockObject
     {
         $user = $this->createMock(User::class);
         $user->expects(self::any())
@@ -187,13 +165,9 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains User element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsUserElement($result): void
+    public function testResultContainsUserElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -206,13 +180,9 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains User element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsUserAttributes($result): void
+    public function testResultContainsUserAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -228,11 +198,6 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the Session visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UserSession
-     */
     protected function internalGetVisitor(): UserSession
     {
         return new UserSession();

@@ -37,6 +37,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     private int $templatedRouterCallIndex = 0;
 
     private UriParserInterface&MockObject $uriParser;
+
     private int $routerMockCallIndex;
 
     protected function getVisitorMock(): Visitor & MockObject
@@ -188,10 +189,5 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
             ->willReturn($returnValue);
     }
 
-    /**
-     * Must return an instance of the tested visitor object.
-     *
-     * @return \Ibexa\Contracts\Rest\Output\ValueObjectVisitor
-     */
-    abstract protected function internalGetVisitor();
+    abstract protected function internalGetVisitor(): \Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 }

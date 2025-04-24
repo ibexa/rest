@@ -43,7 +43,7 @@ abstract class GeneratorTest extends TestCase
         $generator->reset();
         $generator->startDocument('test');
 
-        self::assertNotNull($generator->endDocument('test'));
+        self::assertNotEmpty($generator->endDocument('test'));
     }
 
     public function testInvalidDocumentNameEnd(): void

@@ -91,7 +91,7 @@ final class LocationTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $this->assertXMLTag(
             [

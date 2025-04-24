@@ -93,7 +93,7 @@ class RestLocationRootNodeTest extends RestLocationTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }

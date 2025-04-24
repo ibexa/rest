@@ -12,41 +12,21 @@ use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 class ForbiddenExceptionTest extends ExceptionTest
 {
-    /**
-     * Get expected status code.
-     *
-     * @return int
-     */
     protected function getExpectedStatusCode(): int
     {
         return 403;
     }
 
-    /**
-     * Get expected message.
-     *
-     * @return string
-     */
     protected function getExpectedMessage(): string
     {
         return 'Forbidden';
     }
 
-    /**
-     * Gets the exception.
-     *
-     * @return \Exception
-     */
     protected function getException(): ForbiddenException
     {
         return new ForbiddenException('Test');
     }
 
-    /**
-     * Gets the exception visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ForbiddenException
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\ForbiddenException
     {
         return new ValueObjectVisitor\ForbiddenException();

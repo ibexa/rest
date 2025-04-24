@@ -14,11 +14,6 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class URLAliasRefListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the URLAliasRefList visitor.
-     *
-     * @return \DOMDocument
-     */
     public function testVisit(): \DOMDocument
     {
         $visitor = $this->getVisitor();
@@ -51,7 +46,7 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -60,8 +55,6 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testUrlAliasRefListHrefCorrect(\DOMDocument $dom): void
@@ -70,8 +63,6 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testUrlAliasRefListMediaTypeCorrect(\DOMDocument $dom): void
@@ -80,8 +71,6 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testUrlAliasHrefCorrect(\DOMDocument $dom): void
@@ -90,8 +79,6 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testUrlAliasMediaTypeCorrect(\DOMDocument $dom): void
@@ -99,11 +86,6 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
         $this->assertXPath($dom, '/UrlAliasRefList/UrlAlias[@media-type="application/vnd.ibexa.api.UrlAlias+xml"]');
     }
 
-    /**
-     * Get the URLAliasRefList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAliasRefList
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\URLAliasRefList
     {
         return new ValueObjectVisitor\URLAliasRefList();

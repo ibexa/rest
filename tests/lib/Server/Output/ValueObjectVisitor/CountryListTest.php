@@ -13,11 +13,6 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class CountryListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the CountryListList visitor.
-     *
-     * @return string
-     */
     public function testVisit(): \DOMDocument
     {
         $visitor = $this->getVisitor();
@@ -50,7 +45,7 @@ class CountryListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
 

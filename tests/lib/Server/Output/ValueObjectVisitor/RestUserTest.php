@@ -62,7 +62,7 @@ class RestUserTest extends BaseContentValueObjectVisitorTestCase
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new DOMDocument();
         $dom->loadXml($result);

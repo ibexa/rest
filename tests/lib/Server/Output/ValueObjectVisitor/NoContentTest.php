@@ -13,11 +13,6 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class NoContentTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the NoContent visitor.
-     *
-     * @return string
-     */
     public function testVisit(): void
     {
         $visitor = $this->getVisitor();
@@ -40,11 +35,6 @@ class NoContentTest extends ValueObjectVisitorBaseTest
         self::assertTrue($generator->isEmpty());
     }
 
-    /**
-     * Get the NoContent visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\NoContent
-     */
     protected function internalGetVisitor(): NoContent
     {
         return new NoContent();

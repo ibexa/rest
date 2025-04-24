@@ -15,12 +15,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the RoleAssignmentList visitor.
-     *
-     * @return string
-     */
-    public function testVisitUserRoleAssignmentList()
+    public function testVisitUserRoleAssignmentList(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -43,19 +38,15 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains RoleAssignmentList element.
-     *
-     * @param string $result
-     *
      * @depends testVisitUserRoleAssignmentList
      */
-    public function testResultContainsRoleListElement($result): void
+    public function testResultContainsRoleListElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -68,13 +59,9 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains RoleAssignmentList element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisitUserRoleAssignmentList
      */
-    public function testResultContainsUserRoleAssignmentListAttributes($result): void
+    public function testResultContainsUserRoleAssignmentListAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -90,9 +77,6 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Test if RoleAssignmentList visitor visits the children.
-     */
     public function testRoleAssignmentListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
@@ -119,12 +103,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Test the RoleAssignmentList visitor.
-     *
-     * @return string
-     */
-    public function testVisitGroupRoleAssignmentList()
+    public function testVisitGroupRoleAssignmentList(): string
     {
         $this->resetRouterMock();
 
@@ -149,19 +128,15 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains RoleAssignmentList element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisitGroupRoleAssignmentList
      */
-    public function testResultContainsGroupRoleAssignmentListAttributes($result): void
+    public function testResultContainsGroupRoleAssignmentListAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -177,11 +152,6 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the RoleAssignmentList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RoleAssignmentList
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\RoleAssignmentList
     {
         return new ValueObjectVisitor\RoleAssignmentList();

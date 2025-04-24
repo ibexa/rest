@@ -19,19 +19,14 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class VersionTest extends ValueObjectVisitorBaseTest
 {
-    protected MockObject $fieldTypeSerializerMock;
+    protected FieldTypeSerializer&MockObject $fieldTypeSerializerMock;
 
     public function setUp(): void
     {
         $this->fieldTypeSerializerMock = $this->createMock(FieldTypeSerializer::class);
     }
 
-    /**
-     * Test the Version visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -93,17 +88,15 @@ class VersionTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsVersionChildren($result): void
+    public function testResultContainsVersionChildren(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -120,11 +113,9 @@ class VersionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultVersionAttributes($result): void
+    public function testResultVersionAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -141,11 +132,9 @@ class VersionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsFieldsChildren($result): void
+    public function testResultContainsFieldsChildren(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -161,11 +150,6 @@ class VersionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the Version visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Version
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\Version
     {
         return new ValueObjectVisitor\Version($this->fieldTypeSerializerMock);

@@ -15,12 +15,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class VersionListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the VersionList visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -52,19 +47,15 @@ class VersionListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains VersionList element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsVersionListElement($result): void
+    public function testResultContainsVersionListElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -77,13 +68,9 @@ class VersionListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains VersionList element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsVersionListAttributes($result): void
+    public function testResultContainsVersionListAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -99,9 +86,6 @@ class VersionListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Test if VersionList visitor visits the children.
-     */
     public function testVersionListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
@@ -146,11 +130,6 @@ class VersionListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the VersionList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionList
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\VersionList
     {
         return new ValueObjectVisitor\VersionList();

@@ -19,9 +19,6 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
  */
 class RestContentTypeTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * @return \DOMDocument
-     */
     public function testVisitDefinedType(): \DOMDocument
     {
         $visitor = $this->getVisitor();
@@ -69,7 +66,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -110,8 +107,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testContentTypeHref(\DOMDocument $dom): void
@@ -120,8 +115,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testContentTypeMediaType(\DOMDocument $dom): void
@@ -130,8 +123,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testId(\DOMDocument $dom): void
@@ -140,8 +131,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testStatus(\DOMDocument $dom): void
@@ -150,8 +139,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testIdentifier(\DOMDocument $dom): void
@@ -160,8 +147,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testFirstName(\DOMDocument $dom): void
@@ -170,8 +155,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testSecondName(\DOMDocument $dom): void
@@ -180,8 +163,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testFirstDescription(\DOMDocument $dom): void
@@ -190,8 +171,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testSecondDescription(\DOMDocument $dom): void
@@ -200,8 +179,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testCreationDate(\DOMDocument $dom): void
@@ -210,8 +187,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testModificationDate(\DOMDocument $dom): void
@@ -220,8 +195,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testCreatorHref(\DOMDocument $dom): void
@@ -230,8 +203,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testCreatorMediaType(\DOMDocument $dom): void
@@ -240,8 +211,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testModifierHref(\DOMDocument $dom): void
@@ -250,8 +219,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testModifierMediaType(\DOMDocument $dom): void
@@ -260,8 +227,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testDraftHref(\DOMDocument $dom): void
@@ -270,8 +235,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testDraftType(\DOMDocument $dom): void
@@ -280,8 +243,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testGroupsHref(\DOMDocument $dom): void
@@ -290,8 +251,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testGroupsType(\DOMDocument $dom): void
@@ -300,8 +259,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testRemoteId(\DOMDocument $dom): void
@@ -310,8 +267,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testUrlAliasSchema(\DOMDocument $dom): void
@@ -320,8 +275,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testNameSchema(\DOMDocument $dom): void
@@ -330,8 +283,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testIsContainer(\DOMDocument $dom): void
@@ -340,8 +291,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testMainLanguageCode(\DOMDocument $dom): void
@@ -350,8 +299,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testDefaultAlwaysAvailable(\DOMDocument $dom): void
@@ -360,8 +307,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testDefaultSortField(\DOMDocument $dom): void
@@ -370,8 +315,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitDefinedType
      */
     public function testDefaultSortOrder(\DOMDocument $dom): void
@@ -379,11 +322,6 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
         $this->assertXPath($dom, '/ContentType/defaultSortOrder[text()="DESC"]');
     }
 
-    /**
-     * Get the RestContentType visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestContentType
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\RestContentType
     {
         return new ValueObjectVisitor\RestContentType();

@@ -15,12 +15,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the ContentTypeGroupList visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -39,19 +34,15 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains ContentTypeGroupList element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsContentTypeGroupListElement($result): void
+    public function testResultContainsContentTypeGroupListElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -64,13 +55,9 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ContentTypeGroupList element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsContentTypeGroupListAttributes($result): void
+    public function testResultContainsContentTypeGroupListAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -86,9 +73,6 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Test if ContentTypeGroupList visitor visits the children.
-     */
     public function testContentTypeGroupListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
@@ -114,11 +98,6 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the ContentTypeGroupList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroupList
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\ContentTypeGroupList
     {
         return new ValueObjectVisitor\ContentTypeGroupList();

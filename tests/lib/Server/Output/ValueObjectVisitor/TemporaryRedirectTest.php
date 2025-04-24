@@ -13,11 +13,6 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class TemporaryRedirectTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the TemporaryRedirect visitor.
-     *
-     * @return string
-     */
     public function testVisit(): void
     {
         $visitor = $this->getVisitor();
@@ -43,11 +38,6 @@ class TemporaryRedirectTest extends ValueObjectVisitorBaseTest
         self::assertTrue($generator->isEmpty());
     }
 
-    /**
-     * Get the TemporaryRedirect visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\TemporaryRedirect
-     */
     protected function internalGetVisitor(): TemporaryRedirect
     {
         return new TemporaryRedirect();

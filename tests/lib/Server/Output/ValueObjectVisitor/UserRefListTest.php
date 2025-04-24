@@ -18,11 +18,6 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class UserRefListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the UserRefList visitor.
-     *
-     * @return \DOMDocument
-     */
     public function testVisit(): \DOMDocument
     {
         $visitor = $this->getVisitor();
@@ -61,7 +56,7 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -70,8 +65,6 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testUserRefListHrefCorrect(\DOMDocument $dom): void
@@ -80,8 +73,6 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testUserRefListMediaTypeCorrect(\DOMDocument $dom): void
@@ -90,8 +81,6 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testUserHrefCorrect(\DOMDocument $dom): void
@@ -100,8 +89,6 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
     public function testUserMediaTypeCorrect(\DOMDocument $dom): void
@@ -109,11 +96,6 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
         $this->assertXPath($dom, '/UserRefList/User[@media-type="application/vnd.ibexa.api.User+xml"]');
     }
 
-    /**
-     * Get the UserRefList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UserRefList
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\UserRefList
     {
         return new ValueObjectVisitor\UserRefList();

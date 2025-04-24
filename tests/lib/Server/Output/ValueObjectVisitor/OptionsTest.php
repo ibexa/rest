@@ -15,8 +15,6 @@ class OptionsTest extends ValueObjectVisitorBaseTest
 {
     /**
      * Test the NoContent visitor.
-     *
-     * @return string
      */
     public function testVisit(): void
     {
@@ -33,23 +31,18 @@ class OptionsTest extends ValueObjectVisitorBaseTest
 
         $this->getVisitorMock()->expects(self::exactly(2))
             ->method('setHeader')
-            ->willReturnMap(
+            ->willReturnMap([
                 ['Allow', 'GET,POST'],
-                ['Content-Length', 0]
-            );
+                ['Content-Length', 0],
+            ]);
 
         $visitor->visit(
             $this->getVisitorMock(),
             $generator,
             $noContent
         );
-    }
+         }
 
-    /**
-     * Get the NoContent visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\NoContent
-     */
     protected function internalGetVisitor(): Options
     {
         return new Options();
