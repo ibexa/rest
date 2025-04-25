@@ -7,6 +7,7 @@
 
 namespace Ibexa\Tests\Rest\Server\Input\Parser\Limitation;
 
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation;
 use Ibexa\Rest\Server\Input\Parser\Limitation\PathStringRouteBasedLimitationParser;
 use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
 
@@ -25,7 +26,7 @@ class PathStringRouteBasedLimitationParserTest extends BaseTest
 
         $result = $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
 
-        self::assertInstanceOf('stdClass', $result);
+        self::assertInstanceOf(Limitation::class, $result);
         self::assertObjectHasAttribute('limitationValues', $result);
         self::assertArrayHasKey(0, $result->limitationValues);
         self::assertEquals('/1/2/3/4/', $result->limitationValues[0]);
@@ -33,7 +34,14 @@ class PathStringRouteBasedLimitationParserTest extends BaseTest
 
     protected function internalGetParser(): PathStringRouteBasedLimitationParser
     {
-        return new PathStringRouteBasedLimitationParser('pathString', 'stdClass');
+        return new PathStringRouteBasedLimitationParser('pathString', get_class(
+            new class() extends Limitation {
+                public function getIdentifier(): string
+                {
+                    return 'identifier';
+                }
+            }
+        ));
     }
 
     public function getParseHrefExpectationsMap(): array

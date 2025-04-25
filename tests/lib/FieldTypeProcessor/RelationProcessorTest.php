@@ -80,7 +80,7 @@ class RelationProcessorTest extends TestCase
         $serviceLocationMock
             ->method('loadLocation')
             ->with('42')
-            ->willReturn(new Location(['path' => ['1', '25', '42']]));
+            ->willReturn(new Location(['path' => ['1', '25', '42'], 'pathString' => '1/25/42']));
 
         $routerMock = $this->createMock(RouterInterface::class);
         $processor->setRouter($routerMock);
