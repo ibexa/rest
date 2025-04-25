@@ -1687,12 +1687,6 @@ parameters:
 			path: tests/bundle/EventListener/CsrfListenerTest.php
 
 		-
-			message: '#^Parameter \#2 \$method of function method_exists expects string, int\|list\<int\|string\>\|string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/bundle/EventListener/EventListenerTest.php
-
-		-
 			message: '#^Parameter \#1 \$string of function base64_encode expects string, string\|false given\.$#'
 			identifier: argument.type
 			count: 1
@@ -3185,54 +3179,6 @@ parameters:
 			identifier: arguments.count
 			count: 2
 			path: tests/lib/Server/Output/ValueObjectVisitor/ObjectStateListTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Server\\Output\\ValueObjectVisitor\\ObjectStateListTest\:\:testObjectStateListVisitsChildren\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/ObjectStateListTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Server\\Output\\ValueObjectVisitor\\ObjectStateListTest\:\:testResultContainsObjectStateListAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/ObjectStateListTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Server\\Output\\ValueObjectVisitor\\ObjectStateListTest\:\:testResultContainsObjectStateListElement\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/ObjectStateListTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Server\\Output\\ValueObjectVisitor\\OptionsTest\:\:internalGetVisitor\(\) should return Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\NoContent but returns Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Options\.$#'
-			identifier: return.type
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/OptionsTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Server\\Output\\ValueObjectVisitor\\OptionsTest\:\:testVisit\(\) should return string but return statement is missing\.$#'
-			identifier: return.missing
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/OptionsTest.php
-
-		-
-			message: '#^Method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:willReturnMap\(\) invoked with 2 parameters, 1 required\.$#'
-			identifier: arguments.count
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/OptionsTest.php
-
-		-
-			message: '#^Parameter \#1 \$valueMap of method PHPUnit\\Framework\\MockObject\\Builder\\InvocationMocker\:\:willReturnMap\(\) expects array\<int, array\<int, mixed\>\>, array\<int, string\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/OptionsTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Server\\Output\\ValueObjectVisitor\\PermanentRedirectTest\:\:testVisit\(\) should return string but return statement is missing\.$#'
-			identifier: return.missing
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/PermanentRedirectTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:assertXMLTag\(\) invoked with 4 parameters, 2\-3 required\.$#'
