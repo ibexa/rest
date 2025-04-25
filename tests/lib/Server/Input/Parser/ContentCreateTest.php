@@ -23,9 +23,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ContentCreateTest extends BaseTest
 {
-    /**
-     * Tests the ContentCreate parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -127,9 +124,6 @@ class ContentCreateTest extends BaseTest
         }
     }
 
-    /**
-     * Test ContentCreate parser throwing exception on missing LocationCreate.
-     */
     public function testParseExceptionOnMissingLocationCreate(): void
     {
         $this->expectException(Parser::class);
@@ -165,9 +159,6 @@ class ContentCreateTest extends BaseTest
         $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentCreate parser throwing exception on missing ContentType.
-     */
     public function testParseExceptionOnMissingContentType(): void
     {
         $this->expectException(Parser::class);
@@ -201,9 +192,6 @@ class ContentCreateTest extends BaseTest
         $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentCreate parser throwing exception on invalid ContentType.
-     */
     public function testParseExceptionOnInvalidContentType(): void
     {
         $this->expectException(Parser::class);
@@ -238,9 +226,6 @@ class ContentCreateTest extends BaseTest
         $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentCreate parser throwing exception on missing mainLanguageCode.
-     */
     public function testParseExceptionOnMissingMainLanguageCode(): void
     {
         $this->expectException(Parser::class);
@@ -276,9 +261,6 @@ class ContentCreateTest extends BaseTest
         $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentCreate parser throwing exception on invalid Section.
-     */
     public function testParseExceptionOnInvalidSection(): void
     {
         $this->expectException(Parser::class);
@@ -313,9 +295,6 @@ class ContentCreateTest extends BaseTest
         $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentCreate parser throwing exception on invalid User.
-     */
     public function testParseExceptionOnInvalidUser(): void
     {
         $this->expectException(Parser::class);
@@ -350,9 +329,6 @@ class ContentCreateTest extends BaseTest
         $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentCreate parser throwing exception on invalid fields data.
-     */
     public function testParseExceptionOnInvalidFields(): void
     {
         $this->expectException(Parser::class);
@@ -377,9 +353,6 @@ class ContentCreateTest extends BaseTest
         $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentCreate parser throwing exception on missing field definition identifier.
-     */
     public function testParseExceptionOnMissingFieldDefinitionIdentifier(): void
     {
         $this->expectException(Parser::class);
@@ -415,9 +388,6 @@ class ContentCreateTest extends BaseTest
         $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentCreate parser throwing exception on invalid field definition identifier.
-     */
     public function testParseExceptionOnInvalidFieldDefinitionIdentifier(): void
     {
         $this->expectException(Parser::class);
@@ -454,9 +424,6 @@ class ContentCreateTest extends BaseTest
         $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentCreate parser throwing exception on missing field value.
-     */
     public function testParseExceptionOnMissingFieldValue(): void
     {
         $this->expectException(Parser::class);
@@ -492,11 +459,6 @@ class ContentCreateTest extends BaseTest
         $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the ContentCreate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\ContentCreate
-     */
     protected function internalGetParser(): ContentCreate
     {
         return new ContentCreate(
@@ -508,12 +470,7 @@ class ContentCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the field type parser mock object.
-     *
-     * @return \Ibexa\Rest\Input\FieldTypeParser ;
-     */
-    private function getFieldTypeParserMock(): MockObject
+    private function getFieldTypeParserMock(): FieldTypeParser & MockObject
     {
         $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
             ->disableOriginalConstructor()
@@ -535,12 +492,7 @@ class ContentCreateTest extends BaseTest
         return $fieldTypeParserMock;
     }
 
-    /**
-     * Returns the LocationCreate parser mock object.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\LocationCreate
-     */
-    private function getLocationCreateParserMock(): MockObject
+    private function getLocationCreateParserMock(): LocationCreate & MockObject
     {
         $locationCreateParserMock = $this->createMock(LocationCreate::class);
 
@@ -552,12 +504,7 @@ class ContentCreateTest extends BaseTest
         return $locationCreateParserMock;
     }
 
-    /**
-     * Get the content service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ContentService
-     */
-    protected function getContentServiceMock(): MockObject
+    protected function getContentServiceMock(): ContentService & MockObject
     {
         $contentServiceMock = $this->createMock(ContentService::class);
 
@@ -571,21 +518,16 @@ class ContentCreateTest extends BaseTest
             ->willReturn(
                 new ContentCreateStruct(
                     [
-                            'contentType' => $contentType,
-                            'mainLanguageCode' => 'eng-US',
-                        ]
+                        'contentType' => $contentType,
+                        'mainLanguageCode' => 'eng-US',
+                    ]
                 )
             );
 
         return $contentServiceMock;
     }
 
-    /**
-     * Get the content type service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService
-     */
-    protected function getContentTypeServiceMock(): MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
@@ -606,11 +548,6 @@ class ContentCreateTest extends BaseTest
         ];
     }
 
-    /**
-     * Get the content type used in ContentCreate parser.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
-     */
     protected function getContentType(): ContentType
     {
         return new ContentType(

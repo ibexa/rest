@@ -67,7 +67,7 @@ class LogicalOrTest extends BaseTest
             ],
         ];
 
-        $criterionMock = $this->createMock(Content\Query\Criterion::class, [], [], '', false);
+        $criterionMock = $this->createMock(Content\Query\Criterion::class);
 
         $parserMock = $this->createMock(\Ibexa\Contracts\Rest\Input\Parser::class);
         $parserMock->method('parse')->willReturn($criterionMock);
@@ -80,8 +80,7 @@ class LogicalOrTest extends BaseTest
             ]
         ));
 
-        self::assertInstanceOf(Content\Query\Criterion\LogicalOr::class, $result);
-        self::assertCount(4, (array)$result->criteria);
+        self::assertCount(4, $result->criteria);
     }
 
     public function testThrowsExceptionOnInvalidAndStatement(): void
@@ -92,9 +91,6 @@ class LogicalOrTest extends BaseTest
         ));
     }
 
-    /**
-     * @return \Ibexa\Rest\Server\Input\Parser\Criterion\LogicalOr
-     */
     protected function internalGetParser(): LogicalOr
     {
         return new LogicalOr();

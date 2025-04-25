@@ -16,9 +16,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class PolicyUpdateTest extends BaseTest
 {
-    /**
-     * Tests the PolicyUpdate parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -82,9 +79,6 @@ class PolicyUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Test PolicyUpdate parser throwing exception on missing identifier.
-     */
     public function testParseExceptionOnMissingLimitationIdentifier(): void
     {
         $this->expectException(Parser::class);
@@ -115,9 +109,6 @@ class PolicyUpdateTest extends BaseTest
         $policyUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test PolicyUpdate parser throwing exception on missing values.
-     */
     public function testParseExceptionOnMissingLimitationValues(): void
     {
         $this->expectException(Parser::class);
@@ -136,11 +127,6 @@ class PolicyUpdateTest extends BaseTest
         $policyUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the PolicyUpdateStruct parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\PolicyUpdate
-     */
     protected function internalGetParser(): PolicyUpdate
     {
         return new PolicyUpdate(
@@ -149,12 +135,7 @@ class PolicyUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the role service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\RoleService
-     */
-    protected function getRoleServiceMock(): MockObject
+    protected function getRoleServiceMock(): RoleService & MockObject
     {
         $roleServiceMock = $this->createMock(RoleService::class);
 

@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Input\Parser;
 
 use Exception;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -50,16 +51,9 @@ class FieldDefinitionCreate extends BaseParser
     }
 
     /**
-     * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser If an error is found while parsing
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionCreateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): FieldDefinitionCreateStruct
     {
         if (!array_key_exists('identifier', $data)) {
             throw new Exceptions\Parser("Missing 'identifier' element for FieldDefinitionCreate.");

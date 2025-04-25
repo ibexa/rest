@@ -15,11 +15,15 @@ use Symfony\Component\Routing\RouterInterface;
 
 class RelationListProcessorTest extends TestCase
 {
-    protected $constants = [
+    /** @var string[] */
+    protected array $constants = [
         'SELECTION_BROWSE',
         'SELECTION_DROPDOWN',
     ];
 
+    /**
+     * @return array<array{array{selectionMethod: string}, array{selectionMethod: mixed}}>
+     */
     public function fieldSettingsHashes(): array
     {
         return array_map(

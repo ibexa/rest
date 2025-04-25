@@ -21,8 +21,7 @@ final class SiblingTest extends BaseTest
     private const EXAMPLE_LOCATION_ID = 54;
     private const EXAMPLE_PARENT_LOCATION_ID = 2;
 
-    /** @var \Ibexa\Contracts\Core\Repository\LocationService */
-    private MockObject $locationService;
+    private LocationService & MockObject $locationService;
 
     protected function setUp(): void
     {

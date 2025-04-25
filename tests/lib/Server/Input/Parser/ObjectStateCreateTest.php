@@ -15,9 +15,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ObjectStateCreateTest extends BaseTest
 {
-    /**
-     * Tests the ObjectStateCreate parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -82,9 +79,6 @@ class ObjectStateCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Test ObjectStateCreate parser throwing exception on missing identifier.
-     */
     public function testParseExceptionOnMissingIdentifier(): void
     {
         $this->expectException(Parser::class);
@@ -114,9 +108,6 @@ class ObjectStateCreateTest extends BaseTest
         $objectStateCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ObjectStateCreate parser throwing exception on missing priority.
-     */
     public function testParseExceptionOnMissingPriority(): void
     {
         $this->expectException(Parser::class);
@@ -146,9 +137,6 @@ class ObjectStateCreateTest extends BaseTest
         $objectStateCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ObjectStateCreate parser throwing exception on missing defaultLanguageCode.
-     */
     public function testParseExceptionOnMissingDefaultLanguageCode(): void
     {
         $this->expectException(Parser::class);
@@ -178,9 +166,6 @@ class ObjectStateCreateTest extends BaseTest
         $objectStateCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ObjectStateCreate parser throwing exception on missing names.
-     */
     public function testParseExceptionOnMissingNames(): void
     {
         $this->expectException(Parser::class);
@@ -203,9 +188,6 @@ class ObjectStateCreateTest extends BaseTest
         $objectStateCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ObjectStateCreate parser throwing exception on invalid names structure.
-     */
     public function testParseExceptionOnInvalidNames(): void
     {
         $this->expectException(Parser::class);
@@ -229,11 +211,6 @@ class ObjectStateCreateTest extends BaseTest
         $objectStateCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the ObjectStateCreate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\ObjectStateCreate
-     */
     protected function internalGetParser(): ObjectStateCreate
     {
         return new ObjectStateCreate(
@@ -242,12 +219,7 @@ class ObjectStateCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the object state service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ObjectStateService
-     */
-    protected function getObjectStateServiceMock(): MockObject
+    protected function getObjectStateServiceMock(): ObjectStateService&MockObject
     {
         $objectStateServiceMock = $this->createMock(ObjectStateService::class);
 

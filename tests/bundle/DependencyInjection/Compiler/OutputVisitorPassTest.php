@@ -101,6 +101,9 @@ class OutputVisitorPassTest extends AbstractCompilerPassTestCase
         }
     }
 
+    /**
+     * @return array<string>
+     */
     protected function getVisitorsInRegistrationOrder(): array
     {
         $calls = $this->container->getDefinition(AcceptHeaderVisitorDispatcher::class)->getMethodCalls();

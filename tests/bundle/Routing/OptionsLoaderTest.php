@@ -20,9 +20,6 @@ class OptionsLoaderTest extends TestCase
     private OptionsLoader\RouteCollectionMapper & MockObject $routeCollectionMapperMock;
 
     /**
-     * @param string $type
-     * @param bool $expected
-     *
      * @dataProvider getResourceType
      */
     public function testSupportsResourceType(string $type, bool $expected): void
@@ -33,6 +30,9 @@ class OptionsLoaderTest extends TestCase
         );
     }
 
+    /**
+     * @return array<array{string, bool}>
+     */
     public function getResourceType(): array
     {
         return [

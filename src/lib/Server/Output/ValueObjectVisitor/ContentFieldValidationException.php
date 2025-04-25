@@ -61,7 +61,7 @@ class ContentFieldValidationException extends BadRequestException
                     $translation = $validationError->getTranslatableMessage();
                     $generator->valueElement(
                         'message',
-                        $this->translator->trans(
+                        $this->translator?->trans(
                             /** @Ignore */
                             $this->translationToString($translation),
                             $translation->values,

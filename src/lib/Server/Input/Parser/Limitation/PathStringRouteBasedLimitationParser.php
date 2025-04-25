@@ -25,9 +25,7 @@ class PathStringRouteBasedLimitationParser extends RouteBasedLimitationParser
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser if the '_href' attribute doesn't end with a slash, since 6.4
      *
-     * @param $limitationValue
-     *
-     * @return false|mixed
+     * @param array{_href: string} $limitationValue
      */
     protected function parseIdFromHref($limitationValue): string
     {

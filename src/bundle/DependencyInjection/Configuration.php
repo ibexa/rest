@@ -8,7 +8,7 @@
 namespace Ibexa\Bundle\Rest\DependencyInjection;
 
 use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\Configuration as SiteAccessConfiguration;
-use Symfony\Component\Config\Definition\Builder\NodeDefinition;
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
 class Configuration extends SiteAccessConfiguration
@@ -31,7 +31,7 @@ class Configuration extends SiteAccessConfiguration
         return $treeBuilder;
     }
 
-    private function addRestRootResourcesSection(NodeDefinition $rootNode): void
+    private function addRestRootResourcesSection(ArrayNodeDefinition $rootNode): void
     {
         $systemNode = $this->generateScopeBaseNode($rootNode);
         $systemNode

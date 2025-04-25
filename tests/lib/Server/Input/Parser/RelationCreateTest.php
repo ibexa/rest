@@ -12,9 +12,6 @@ use Ibexa\Rest\Server\Input\Parser\RelationCreate;
 
 class RelationCreateTest extends BaseTest
 {
-    /**
-     * Tests the RelationCreate parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -33,9 +30,6 @@ class RelationCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Test RelationCreate parser throwing exception on missing Destination.
-     */
     public function testParseExceptionOnMissingDestination(): void
     {
         $this->expectException(Parser::class);
@@ -46,9 +40,6 @@ class RelationCreateTest extends BaseTest
         $relationCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test RelationCreate parser throwing exception on missing Destination href.
-     */
     public function testParseExceptionOnMissingDestinationHref(): void
     {
         $this->expectException(Parser::class);
@@ -61,11 +52,6 @@ class RelationCreateTest extends BaseTest
         $relationCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the RelationCreate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\RelationCreate
-     */
     protected function internalGetParser(): RelationCreate
     {
         $parser = new RelationCreate();

@@ -12,11 +12,17 @@ use PHPUnit\Framework\TestCase;
 
 class AuthorProcessorTest extends TestCase
 {
-    protected $constants = [
+    /**
+     * @var string[]
+     */
+    protected array $constants = [
         'DEFAULT_VALUE_EMPTY',
         'DEFAULT_CURRENT_USER',
     ];
 
+    /**
+     * @return array<array{array{defaultAuthor: mixed}, array{defaultAuthor: mixed}}>
+     */
     public function fieldSettingsHashes(): array
     {
         return array_map(

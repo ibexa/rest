@@ -14,11 +14,7 @@ use Ibexa\Rest\Server\Values\PublishedRole;
 class RoleDraftPublishController extends RoleBaseController
 {
     /**
-     * Publishes a role draft.
-     *
-     * @param mixed $roleId Original role ID, or ID of the role draft itself
-     *
-     * @return \Ibexa\Rest\Server\Values\PublishedRole
+     * @param int $roleId Original role ID, or ID of the role draft itself
      */
     public function publishRoleDraft(int $roleId): PublishedRole
     {

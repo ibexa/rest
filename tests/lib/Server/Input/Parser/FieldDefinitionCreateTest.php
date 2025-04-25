@@ -19,9 +19,6 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 class FieldDefinitionCreateTest extends BaseTest
 {
-    /**
-     * Tests the FieldDefinitionCreate parser.
-     */
     public function testParse(): void
     {
         $inputArray = $this->getInputArray();
@@ -115,9 +112,6 @@ class FieldDefinitionCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Test FieldDefinitionCreate parser throwing exception on missing identifier.
-     */
     public function testParseExceptionOnMissingIdentifier(): void
     {
         $this->expectException(Parser::class);
@@ -129,9 +123,6 @@ class FieldDefinitionCreateTest extends BaseTest
         $fieldDefinitionCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test FieldDefinitionCreate parser throwing exception on missing fieldType.
-     */
     public function testParseExceptionOnMissingFieldType(): void
     {
         $this->expectException(Parser::class);
@@ -143,9 +134,6 @@ class FieldDefinitionCreateTest extends BaseTest
         $fieldDefinitionCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test FieldDefinitionCreate parser throwing exception on invalid names.
-     */
     public function testParseExceptionOnInvalidNames(): void
     {
         $this->expectException(Parser::class);
@@ -157,9 +145,6 @@ class FieldDefinitionCreateTest extends BaseTest
         $fieldDefinitionCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test FieldDefinitionCreate parser throwing exception on invalid descriptions.
-     */
     public function testParseExceptionOnInvalidDescriptions(): void
     {
         $this->expectException(Parser::class);
@@ -171,11 +156,6 @@ class FieldDefinitionCreateTest extends BaseTest
         $fieldDefinitionCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the FieldDefinitionCreate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate
-     */
     protected function internalGetParser(): FieldDefinitionCreate
     {
         return new FieldDefinitionCreate(
@@ -185,12 +165,7 @@ class FieldDefinitionCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the FieldTypeParser mock object.
-     *
-     * @return \Ibexa\Rest\Input\FieldTypeParser
-     */
-    protected function getFieldTypeParserMock(): MockObject
+    protected function getFieldTypeParserMock(): FieldTypeParser&MockObject
     {
         $fieldTypeParserMock = $this->createMock(FieldTypeParser::class);
 
@@ -216,12 +191,7 @@ class FieldDefinitionCreateTest extends BaseTest
         return $fieldTypeParserMock;
     }
 
-    /**
-     * Get the content type service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService
-     */
-    protected function getContentTypeServiceMock(): MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService&MockObject
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
@@ -240,11 +210,6 @@ class FieldDefinitionCreateTest extends BaseTest
         return $contentTypeServiceMock;
     }
 
-    /**
-     * Returns the array under test.
-     *
-     * @return array
-     */
     protected function getInputArray(): array
     {
         return [

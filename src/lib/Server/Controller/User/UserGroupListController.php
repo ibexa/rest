@@ -103,7 +103,7 @@ final class UserGroupListController extends UserBaseController
                 ),
             ];
         } elseif ($request->query->has('roleId')) {
-            $restUserGroups = $this->loadUserGroupsAssignedToRole($request->query->get('roleId'));
+            $restUserGroups = $this->loadUserGroupsAssignedToRole((int) $request->query->get('roleId'));
         } elseif ($request->query->has('remoteId')) {
             $restUserGroups = [
                 $this->loadUserGroupByRemoteId($request),
@@ -145,10 +145,6 @@ final class UserGroupListController extends UserBaseController
     }
 
     /**
-     * Loads a list of user groups assigned to role.
-     *
-     * @param mixed $roleId
-     *
      * @return \Ibexa\Rest\Server\Values\RestUserGroup[]
      */
     public function loadUserGroupsAssignedToRole(int $roleId): array

@@ -79,11 +79,7 @@ use Symfony\Component\HttpFoundation\Response;
 class RoleDraftLoadByRoleIdController extends RoleBaseController
 {
     /**
-     * Loads a role draft.
-     *
-     * @param mixed $roleId Original role ID, or ID of the role draft itself
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\RoleDraft
+     * @param int $roleId Original role ID, or ID of the role draft itself
      */
     public function loadRoleDraft(int $roleId): RoleDraft
     {

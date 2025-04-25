@@ -14,9 +14,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class RoleInputTest extends BaseTest
 {
-    /**
-     * Tests the RoleInput parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -72,11 +69,6 @@ class RoleInputTest extends BaseTest
         */
     }
 
-    /**
-     * Returns the role input parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\RoleInput
-     */
     protected function internalGetParser(): RoleInput
     {
         return new RoleInput(
@@ -85,12 +77,7 @@ class RoleInputTest extends BaseTest
         );
     }
 
-    /**
-     * Get the role service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\RoleService
-     */
-    protected function getRoleServiceMock(): MockObject
+    protected function getRoleServiceMock(): RoleService&MockObject
     {
         $roleServiceMock = $this->createMock(RoleService::class);
 

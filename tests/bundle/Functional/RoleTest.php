@@ -430,6 +430,9 @@ XML;
         return $roleAssignmentArray['RoleAssignmentList']['RoleAssignment'][0]['_href'];
     }
 
+    /**
+     * @return array<array<array{identifier: string, href: string}>>
+     */
     public function provideLimitations(): array
     {
         return [

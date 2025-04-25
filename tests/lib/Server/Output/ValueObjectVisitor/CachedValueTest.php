@@ -47,7 +47,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
     }
 
     public function testVisitLocationCache(): void
@@ -60,7 +60,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
         $result = $this->visit(new CachedValue(new stdClass(), ['locationId' => 'testLocationId']));
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
     }
 
     public function testVisitNoUserHash(): void
@@ -75,7 +75,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
     }
 
     public function testVisitNoRequest(): void
@@ -89,7 +89,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
     }
 
     public function testVisitViewCacheDisabled(): void
@@ -101,7 +101,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
     }
 
     public function testVisitCacheTTLCacheDisabled(): void
@@ -116,7 +116,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
     }
 
     protected function visit($value): string

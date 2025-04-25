@@ -43,14 +43,8 @@ class FieldTypeParser
     /**
      * Parses the given $value for the field $fieldDefIdentifier in the content
      * identified by $contentInfoId.
-     *
-     * @param string $contentInfoId
-     * @param string $fieldDefIdentifier
-     * @param mixed $value
-     *
-     * @return mixed
      */
-    public function parseFieldValue(int $contentInfoId, $fieldDefIdentifier, $value)
+    public function parseFieldValue(int $contentInfoId, string $fieldDefIdentifier, mixed $value): mixed
     {
         $contentInfo = $this->contentService->loadContentInfo($contentInfoId);
         $contentType = $this->contentTypeService->loadContentType($contentInfo->contentTypeId);
@@ -63,13 +57,8 @@ class FieldTypeParser
     /**
      * Parses the given $value using the FieldType identified by
      * $fieldTypeIdentifier.
-     *
-     * @param mixed $fieldTypeIdentifier
-     * @param mixed $value
-     *
-     * @return mixed
      */
-    public function parseValue($fieldTypeIdentifier, $value)
+    public function parseValue(string $fieldTypeIdentifier, mixed $value): mixed
     {
         if ($this->fieldTypeProcessorRegistry->hasProcessor($fieldTypeIdentifier)) {
             $fieldTypeProcessor = $this->fieldTypeProcessorRegistry->getProcessor($fieldTypeIdentifier);
@@ -90,7 +79,7 @@ class FieldTypeParser
      *
      * @return mixed
      */
-    public function parseFieldSettings($fieldTypeIdentifier, $settingsHash)
+    public function parseFieldSettings(string $fieldTypeIdentifier, mixed $settingsHash): mixed
     {
         if ($this->fieldTypeProcessorRegistry->hasProcessor($fieldTypeIdentifier)) {
             $fieldTypeProcessor = $this->fieldTypeProcessorRegistry->getProcessor($fieldTypeIdentifier);

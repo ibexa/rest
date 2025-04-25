@@ -106,11 +106,7 @@ class LocationCreateController extends LocationBaseController
     /**
      * Creates a new location for object with id $contentId.
      *
-     * @param mixed $contentId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedLocation
      */
     public function createLocation(int $contentId, Request $request): CreatedLocation
     {

@@ -13,21 +13,22 @@ use Ibexa\Tests\Rest\Output\Generator\FieldTypeHashGeneratorBaseTest;
 
 class FieldTypeHashGeneratorTest extends FieldTypeHashGeneratorBaseTest
 {
-    /**
-     * Initializes the field type hash generator.
-     */
     protected function initializeFieldTypeHashGenerator(): FieldTypeHashGenerator
     {
         return new FieldTypeHashGenerator($this->getNormalizer(), $this->getLogger());
     }
 
-    /**
-     * Initializes the generator.
-     */
     protected function initializeGenerator(): Json
     {
+        $fieldTypeGenerator = $this->getFieldTypeHashGenerator();
+
+        self::assertInstanceOf(
+            FieldTypeHashGenerator::class,
+            $fieldTypeGenerator
+        );
+
         return new Json(
-            $this->getFieldTypeHashGenerator()
+            $fieldTypeGenerator
         );
     }
 }

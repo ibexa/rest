@@ -59,13 +59,6 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class ContentCurrentVersionRedirectController extends RestController
 {
-    /**
-     * Loads a specific version of a given content object.
-     *
-     * @param mixed $contentId
-     *
-     * @return \Ibexa\Rest\Server\Values\TemporaryRedirect
-     */
     public function redirectCurrentVersion(int $contentId): TemporaryRedirect
     {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);

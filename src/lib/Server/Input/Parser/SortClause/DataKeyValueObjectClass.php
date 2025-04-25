@@ -42,15 +42,7 @@ class DataKeyValueObjectClass extends BaseParser
         $this->valueObjectClass = $valueObjectClass;
     }
 
-    /**
-     * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject
-     */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): object
     {
         if (!class_exists($this->valueObjectClass)) {
             throw new Exceptions\Parser("Value object class <{$this->valueObjectClass}> is not defined");

@@ -51,7 +51,7 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
      */
     public function mapToContentHref($contentId)
     {
-        return $this->router->generate('ibexa.rest.load_content', ['contentId' => $contentId]);
+        return $this->router?->generate('ibexa.rest.load_content', ['contentId' => $contentId]) ?? '';
     }
 
     /**
@@ -62,14 +62,18 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
     public function mapToLocationHref(int $locationId)
     {
         try {
-            $location = $this->locationService->loadLocation($locationId);
+            $location = $this->locationService?->loadLocation($locationId);
         } catch (UnauthorizedException | NotFoundException $e) {
             return '';
         }
 
-        return $this->router->generate('ibexa.rest.load_location', [
-            'locationPath' => implode('/', $location->path),
-        ]);
+        if ($location === null) {
+            return '';
+        }
+
+        return $this->router?->generate('ibexa.rest.load_location', [
+            'locationPath' => $location->getPathString(),
+        ]) ?? '';
     }
 
     public function preProcessFieldSettingsHash($incomingSettingsHash)

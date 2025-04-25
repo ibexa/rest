@@ -29,6 +29,14 @@ final class Head extends HttpOperation
      * @param array<string, mixed>|null $requirements
      * @param array<string, mixed>|null $schemes
      * @param array<string, mixed>|null $validationContext
+     * @param array{
+     *      class?: string|null,
+     *      name?: string,
+     *  }|null $input
+     * @param array{
+     *      class?: string|null,
+     *      name?: string,
+     *  }|null $output
      */
     public function __construct(
         ?string $uriTemplate = null,
@@ -99,8 +107,8 @@ final class Head extends HttpOperation
         ?bool $forceEager = null,
         ?int $priority = null,
         ?string $name = null,
-        ?int $provider = null,
-        ?string $processor = null,
+        $provider = null,
+        $processor = null,
         ?OptionsInterface $stateOptions = null,
         array|Parameters|null $parameters = null,
         array $extraProperties = [],

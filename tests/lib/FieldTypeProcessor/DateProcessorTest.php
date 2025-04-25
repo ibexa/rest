@@ -12,11 +12,15 @@ use PHPUnit\Framework\TestCase;
 
 class DateProcessorTest extends TestCase
 {
-    protected $constants = [
+    /** @var string[] */
+    protected array $constants = [
         'DEFAULT_EMPTY',
         'DEFAULT_CURRENT_DATE',
     ];
 
+    /**
+     * @return array<array{array{defaultType: mixed}, array{defaultType: mixed}}>
+     */
     public function fieldSettingsHashes(): array
     {
         return array_map(

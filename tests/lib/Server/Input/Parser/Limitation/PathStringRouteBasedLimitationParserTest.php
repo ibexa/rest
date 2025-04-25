@@ -31,11 +31,6 @@ class PathStringRouteBasedLimitationParserTest extends BaseTest
         self::assertEquals('/1/2/3/4/', $result->limitationValues[0]);
     }
 
-    /**
-     * Must return the tested parser object.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\Limitation\RouteBasedLimitationParser
-     */
     protected function internalGetParser(): PathStringRouteBasedLimitationParser
     {
         return new PathStringRouteBasedLimitationParser('pathString', 'stdClass');

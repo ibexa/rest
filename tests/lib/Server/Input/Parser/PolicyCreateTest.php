@@ -16,9 +16,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class PolicyCreateTest extends BaseTest
 {
-    /**
-     * Tests the PolicyCreate parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -96,9 +93,6 @@ class PolicyCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Test PolicyCreate parser throwing exception on missing module.
-     */
     public function testParseExceptionOnMissingModule(): void
     {
         $this->expectException(Parser::class);
@@ -131,9 +125,6 @@ class PolicyCreateTest extends BaseTest
         $policyCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test PolicyCreate parser throwing exception on missing function.
-     */
     public function testParseExceptionOnMissingFunction(): void
     {
         $this->expectException(Parser::class);
@@ -166,9 +157,6 @@ class PolicyCreateTest extends BaseTest
         $policyCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test PolicyCreate parser throwing exception on missing identifier.
-     */
     public function testParseExceptionOnMissingLimitationIdentifier(): void
     {
         $this->expectException(Parser::class);
@@ -201,9 +189,6 @@ class PolicyCreateTest extends BaseTest
         $policyCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test PolicyCreate parser throwing exception on missing values.
-     */
     public function testParseExceptionOnMissingLimitationValues(): void
     {
         $this->expectException(Parser::class);
@@ -224,11 +209,6 @@ class PolicyCreateTest extends BaseTest
         $policyCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the PolicyCreateStruct parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\PolicyCreate
-     */
     protected function internalGetParser(): PolicyCreate
     {
         return new PolicyCreate(
@@ -237,12 +217,7 @@ class PolicyCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the role service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\RoleService
-     */
-    protected function getRoleServiceMock(): MockObject
+    protected function getRoleServiceMock(): RoleService & MockObject
     {
         $roleServiceMock = $this->createMock(RoleService::class);
 

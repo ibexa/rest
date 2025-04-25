@@ -25,9 +25,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class UserGroupUpdateTest extends BaseTest
 {
-    /**
-     * Tests the UserGroupUpdate parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -95,9 +92,6 @@ class UserGroupUpdateTest extends BaseTest
         }
     }
 
-    /**
-     * Test UserGroupUpdate parser throwing exception on missing Section href.
-     */
     public function testParseExceptionOnMissingSectionHref(): void
     {
         $this->expectException(Parser::class);
@@ -121,9 +115,6 @@ class UserGroupUpdateTest extends BaseTest
         $userGroupUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserGroupUpdate parser throwing exception on invalid fields data.
-     */
     public function testParseExceptionOnInvalidFields(): void
     {
         $this->expectException(Parser::class);
@@ -142,9 +133,6 @@ class UserGroupUpdateTest extends BaseTest
         $userGroupUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserGroupUpdate parser throwing exception on missing field definition identifier.
-     */
     public function testParseExceptionOnMissingFieldDefinitionIdentifier(): void
     {
         $this->expectException(Parser::class);
@@ -169,9 +157,6 @@ class UserGroupUpdateTest extends BaseTest
         $userGroupUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserGroupUpdate parser throwing exception on missing field value.
-     */
     public function testParseExceptionOnMissingFieldValue(): void
     {
         $this->expectException(Parser::class);
@@ -196,11 +181,6 @@ class UserGroupUpdateTest extends BaseTest
         $userGroupUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the UserGroupUpdate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\UserGroupUpdate
-     */
     protected function internalGetParser(): UserGroupUpdate
     {
         return new UserGroupUpdate(
@@ -211,12 +191,7 @@ class UserGroupUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the field type parser mock object.
-     *
-     * @return \Ibexa\Rest\Input\FieldTypeParser ;
-     */
-    private function getFieldTypeParserMock(): MockObject
+    private function getFieldTypeParserMock(): FieldTypeParser & MockObject
     {
         $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
             ->disableOriginalConstructor()
@@ -238,12 +213,7 @@ class UserGroupUpdateTest extends BaseTest
         return $fieldTypeParserMock;
     }
 
-    /**
-     * Get the user service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\UserService
-     */
-    protected function getUserServiceMock(): MockObject
+    protected function getUserServiceMock(): UserService & MockObject
     {
         $userServiceMock = $this->createMock(UserService::class);
 
@@ -256,12 +226,7 @@ class UserGroupUpdateTest extends BaseTest
         return $userServiceMock;
     }
 
-    /**
-     * Get the location service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\LocationService
-     */
-    protected function getLocationServiceMock(): MockObject
+    protected function getLocationServiceMock(): LocationService & MockObject
     {
         $userServiceMock = $this->createMock(LocationService::class);
 
@@ -283,12 +248,7 @@ class UserGroupUpdateTest extends BaseTest
         return $userServiceMock;
     }
 
-    /**
-     * Get the content service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ContentService
-     */
-    protected function getContentServiceMock(): MockObject
+    protected function getContentServiceMock(): ContentService & MockObject
     {
         $contentServiceMock = $this->createMock(ContentService::class);
 
@@ -307,6 +267,9 @@ class UserGroupUpdateTest extends BaseTest
         return $contentServiceMock;
     }
 
+    /**
+     * @return array<int, array<int, int|string>>
+     */
     public function getParseHrefExpectationsMap(): array
     {
         return [

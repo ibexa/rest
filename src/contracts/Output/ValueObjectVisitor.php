@@ -94,9 +94,7 @@ abstract class ValueObjectVisitor
     /**
      * Visits a list of translated elements.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param array $translatedElements
-     * @param mixed $listName
      */
     protected function visitTranslatedList(Generator $generator, array $translatedElements, string $listName)
     {

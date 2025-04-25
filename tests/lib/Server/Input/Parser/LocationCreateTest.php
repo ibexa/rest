@@ -16,9 +16,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class LocationCreateTest extends BaseTest
 {
-    /**
-     * Tests the LocationCreate parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -77,9 +74,6 @@ class LocationCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Test LocationCreate parser throwing exception on missing ParentLocation.
-     */
     public function testParseExceptionOnMissingParentLocation(): void
     {
         $this->expectException(Parser::class);
@@ -96,9 +90,6 @@ class LocationCreateTest extends BaseTest
         $locationCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test LocationCreate parser throwing exception on missing _href attribute for ParentLocation.
-     */
     public function testParseExceptionOnMissingHrefAttribute(): void
     {
         $this->expectException(Parser::class);
@@ -116,9 +107,6 @@ class LocationCreateTest extends BaseTest
         $locationCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test LocationCreate parser throwing exception on missing sort field.
-     */
     public function testParseExceptionOnMissingSortField(): void
     {
         $this->expectException(Parser::class);
@@ -137,9 +125,6 @@ class LocationCreateTest extends BaseTest
         $locationCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test LocationCreate parser throwing exception on missing sort order.
-     */
     public function testParseExceptionOnMissingSortOrder(): void
     {
         $this->expectException(Parser::class);
@@ -158,11 +143,6 @@ class LocationCreateTest extends BaseTest
         $locationCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the LocationCreateStruct parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\LocationCreate
-     */
     protected function internalGetParser(): LocationCreate
     {
         return new LocationCreate(
@@ -171,12 +151,7 @@ class LocationCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the location service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\LocationService
-     */
-    protected function getLocationServiceMock(): MockObject
+    protected function getLocationServiceMock(): LocationService & MockObject
     {
         $locationServiceMock = $this->createMock(LocationService::class);
 

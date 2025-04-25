@@ -15,9 +15,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ContentTypeGroupInputTest extends BaseTest
 {
-    /**
-     * Tests the ContentTypeGroupInput parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -56,9 +53,6 @@ class ContentTypeGroupInputTest extends BaseTest
         );
     }
 
-    /**
-     * Test ContentTypeGroupInput parser throwing exception on invalid User.
-     */
     public function testParseExceptionOnInvalidUser(): void
     {
         $this->expectException(Parser::class);
@@ -73,11 +67,6 @@ class ContentTypeGroupInputTest extends BaseTest
         $contentTypeGroupInput->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the content type group input parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\ContentTypeGroupInput
-     */
     protected function internalGetParser(): ContentTypeGroupInput
     {
         return new ContentTypeGroupInput(
@@ -86,12 +75,7 @@ class ContentTypeGroupInputTest extends BaseTest
         );
     }
 
-    /**
-     * Get the content type service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService
-     */
-    protected function getContentTypeServiceMock(): MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
@@ -105,6 +89,9 @@ class ContentTypeGroupInputTest extends BaseTest
         return $contentTypeServiceMock;
     }
 
+    /**
+     * @return array<array{0: string, 1: string, 2: int}>
+     */
     public function getParseHrefExpectationsMap(): array
     {
         return [

@@ -16,9 +16,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ContentTypeUpdateTest extends BaseTest
 {
-    /**
-     * Tests the ContentTypeUpdate parser.
-     */
     public function testParse(): void
     {
         $inputArray = $this->getInputArray();
@@ -109,9 +106,6 @@ class ContentTypeUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Test ContentTypeUpdate parser throwing exception on invalid names.
-     */
     public function testParseExceptionOnInvalidNames(): void
     {
         $this->expectException(Parser::class);
@@ -123,9 +117,6 @@ class ContentTypeUpdateTest extends BaseTest
         $contentTypeUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentTypeUpdate parser throwing exception on invalid descriptions.
-     */
     public function testParseExceptionOnInvalidDescriptions(): void
     {
         $this->expectException(Parser::class);
@@ -137,9 +128,6 @@ class ContentTypeUpdateTest extends BaseTest
         $contentTypeUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentTypeUpdate parser throwing exception on invalid User.
-     */
     public function testParseExceptionOnInvalidUser(): void
     {
         $this->expectException(Parser::class);
@@ -151,11 +139,6 @@ class ContentTypeUpdateTest extends BaseTest
         $contentTypeUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the ContentTypeUpdate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\ContentTypeUpdate
-     */
     protected function internalGetParser(): ContentTypeUpdate
     {
         return new ContentTypeUpdate(
@@ -164,12 +147,7 @@ class ContentTypeUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the content type service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService
-     */
-    protected function getContentTypeServiceMock(): MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService&MockObject
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
@@ -181,8 +159,6 @@ class ContentTypeUpdateTest extends BaseTest
     }
 
     /**
-     * Returns the array under test.
-     *
      * @return array
      */
     protected function getInputArray(): array

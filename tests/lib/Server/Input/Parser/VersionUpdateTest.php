@@ -18,9 +18,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class VersionUpdateTest extends BaseTest
 {
-    /**
-     * Tests the VersionUpdate parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -60,9 +57,6 @@ class VersionUpdateTest extends BaseTest
         }
     }
 
-    /**
-     * Test VersionUpdate parser throwing exception on invalid fields data.
-     */
     public function testParseExceptionOnInvalidFields(): void
     {
         $this->expectException(Parser::class);
@@ -77,9 +71,6 @@ class VersionUpdateTest extends BaseTest
         $VersionUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test VersionUpdate parser throwing exception on missing field definition identifier.
-     */
     public function testParseExceptionOnMissingFieldDefinitionIdentifier(): void
     {
         $this->expectException(Parser::class);
@@ -100,9 +91,6 @@ class VersionUpdateTest extends BaseTest
         $VersionUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test VersionUpdate parser throwing exception on missing field value.
-     */
     public function testParseExceptionOnMissingFieldValue(): void
     {
         $this->expectException(Parser::class);
@@ -123,11 +111,6 @@ class VersionUpdateTest extends BaseTest
         $VersionUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the VersionUpdate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\VersionUpdate
-     */
     protected function internalGetParser(): VersionUpdate
     {
         return new VersionUpdate(
@@ -136,12 +119,7 @@ class VersionUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the field type parser mock object.
-     *
-     * @return \Ibexa\Rest\Input\FieldTypeParser ;
-     */
-    private function getFieldTypeParserMock(): MockObject
+    private function getFieldTypeParserMock(): FieldTypeParser & MockObject
     {
         $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
             ->setMethods([])
@@ -163,12 +141,7 @@ class VersionUpdateTest extends BaseTest
         return $fieldTypeParserMock;
     }
 
-    /**
-     * Get the Content service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ContentService
-     */
-    protected function getContentServiceMock(): MockObject
+    protected function getContentServiceMock(): ContentService & MockObject
     {
         $contentServiceMock = $this->createMock(ContentService::class);
 
@@ -181,6 +154,9 @@ class VersionUpdateTest extends BaseTest
         return $contentServiceMock;
     }
 
+    /**
+     * @return array<int, array<int, int|string>>
+     */
     public function getParseHrefExpectationsMap(): array
     {
         return [

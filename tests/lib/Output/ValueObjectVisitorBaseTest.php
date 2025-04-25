@@ -7,6 +7,7 @@
 
 namespace Ibexa\Tests\Rest\Output;
 
+use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
 use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Ibexa\Rest\Output\Generator;
@@ -37,8 +38,6 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     private int $templatedRouterCallIndex = 0;
 
     private UriParserInterface&MockObject $uriParser;
-
-    private int $routerMockCallIndex;
 
     protected function getVisitorMock(): Visitor & MockObject
     {
@@ -136,7 +135,6 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     protected function resetRouterMock()
     {
         $this->routerMock = null;
-        $this->routerMockCallIndex = 0;
     }
 
     /**
@@ -173,11 +171,9 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     /**
      * Adds an expectation to the templatedRouterMock. Expectations must be added sequentially.
      *
-     * @param string $routeName
-     * @param array $arguments
-     * @param string $returnValue
+     * @param array<string, string> $arguments
      */
-    protected function addTemplatedRouteExpectation($routeName, $arguments, $returnValue)
+    protected function addTemplatedRouteExpectation(string $routeName, array $arguments, string $returnValue): void
     {
         $this->getTemplatedRouterMock()
             ->expects(self::at($this->templatedRouterCallIndex++))
@@ -189,5 +185,5 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
             ->willReturn($returnValue);
     }
 
-    abstract protected function internalGetVisitor(): \Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
+    abstract protected function internalGetVisitor(): ValueObjectVisitor;
 }

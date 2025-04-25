@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
  */
 class DispatcherTest extends TestCase
 {
-    protected function getParsingDispatcherMock(): MockObject
+    protected function getParsingDispatcherMock(): ParsingDispatcher & MockObject
     {
         return $this->createMock(ParsingDispatcher::class);
     }

@@ -15,11 +15,8 @@ class SortClauseTest extends RESTFunctionalTestCase
     /**
      * @dataProvider sortingClauseDataProvider
      *
-     * @param array $foldersNameToCreate
-     * @param string $sortClauseXML
-     * @param array $foldersInExpectedOrder
-     *
-     * @throws \Psr\Http\Client\ClientException
+     * @param string[] $foldersNameToCreate
+     * @param string[] $foldersInExpectedOrder
      */
     public function testFieldSortClause(array $foldersNameToCreate, string $sortClauseXML, array $foldersInExpectedOrder): void
     {
@@ -98,6 +95,9 @@ XML;
         }
     }
 
+    /**
+     * @return array<array{array<string>, string, array<string>}>
+     */
     public function sortingClauseDataProvider(): array
     {
         return [

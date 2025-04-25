@@ -7,6 +7,9 @@
 
 namespace Ibexa\Tests\Rest\Output\Generator;
 
+use Ibexa\Contracts\Rest\Output\Generator;
+use Ibexa\Rest\Output\Generator\AbstractFieldTypeHashGenerator;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
@@ -14,16 +17,15 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 abstract class FieldTypeHashGeneratorBaseTest extends TestCase
 {
-    private $generator;
+    private Generator $generator;
 
-    private $fieldTypeHashGenerator;
+    private AbstractFieldTypeHashGenerator $fieldTypeHashGenerator;
 
-    /** @var \Symfony\Component\Serializer\Normalizer\NormalizerInterface&\PHPUnit\Framework\MockObject\MockObject */
-    private NormalizerInterface $normalizer;
+    private NormalizerInterface & MockObject $normalizer;
 
-    /** @var \Psr\Log\LoggerInterface&\PHPUnit\Framework\MockObject\MockObject */
-    private LoggerInterface $logger;
+    private LoggerInterface & MockObject $logger;
 
+    /** @var array{0: string|false, 1: string|false} */
     private array $iniPrecisions;
 
     /**
@@ -45,25 +47,14 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
      */
     abstract protected function initializeFieldTypeHashGenerator();
 
-    /**
-     * Initializes the generator.
-     *
-     * @return \Ibexa\Contracts\Rest\Output\Generator
-     */
-    abstract protected function initializeGenerator();
+    abstract protected function initializeGenerator(): Generator;
 
-    /**
-     * @return \Symfony\Component\Serializer\Normalizer\NormalizerInterface&\PHPUnit\Framework\MockObject\MockObject
-     */
-    final protected function getNormalizer(): NormalizerInterface
+    final protected function getNormalizer(): MockObject & NormalizerInterface
     {
         return $this->normalizer ??= $this->createMock(NormalizerInterface::class);
     }
 
-    /**
-     * @return \Psr\Log\LoggerInterface&\PHPUnit\Framework\MockObject\MockObject
-     */
-    final protected function getLogger(): LoggerInterface
+    final protected function getLogger(): MockObject & LoggerInterface
     {
         return $this->logger ??= $this->createMock(LoggerInterface::class);
     }
@@ -256,7 +247,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
         $this->assertSerializationSame(__FUNCTION__);
     }
 
-    protected function getFieldTypeHashGenerator()
+    protected function getFieldTypeHashGenerator(): AbstractFieldTypeHashGenerator
     {
         if (!isset($this->fieldTypeHashGenerator)) {
             $this->fieldTypeHashGenerator = $this->initializeFieldTypeHashGenerator();

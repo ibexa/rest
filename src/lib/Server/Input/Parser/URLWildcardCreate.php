@@ -35,10 +35,7 @@ class URLWildcardCreate extends BaseParser
     /**
      * Parse input structure.
      *
-     * @param array $data
      * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return array
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): array
     {

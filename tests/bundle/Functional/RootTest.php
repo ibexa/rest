@@ -986,6 +986,9 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
+    /**
+     * @return array<array<string>>
+     */
     public function getRandomUriSet(): array
     {
         return [

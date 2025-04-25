@@ -15,6 +15,9 @@ use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
 
 class UserMetadataTest extends BaseTest
 {
+    /**
+     * @return array<array{0: array{UserMetadataCriterion: array{Target: string, Value: string|int|array<int>}}, 1: \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\UserMetadata}>
+     */
     public function testParseProvider(): array
     {
         return [
@@ -34,7 +37,7 @@ class UserMetadataTest extends BaseTest
     }
 
     /**
-     * Tests the UserMetadata parser.
+     * @param array<array{0: array{UserMetadataCriterion: array{Target: string, Value: string|int|array<int>}}, 1: \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\UserMetadata}> $data
      *
      * @dataProvider testParseProvider
      */
@@ -50,9 +53,6 @@ class UserMetadataTest extends BaseTest
         );
     }
 
-    /**
-     * Test UserMetadata parser throwing exception on invalid UserMetadataCriterion format.
-     */
     public function testParseExceptionOnInvalidCriterionFormat(): void
     {
         $this->expectException(Parser::class);
@@ -65,9 +65,6 @@ class UserMetadataTest extends BaseTest
         $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserMetadata parser throwing exception on invalid target format.
-     */
     public function testParseExceptionOnInvalidTargetFormat(): void
     {
         $this->expectException(Parser::class);
@@ -83,9 +80,6 @@ class UserMetadataTest extends BaseTest
         $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserMetadata parser throwing exception on invalid value format.
-     */
     public function testParseExceptionOnInvalidValueFormat(): void
     {
         $this->expectException(Parser::class);
@@ -101,9 +95,6 @@ class UserMetadataTest extends BaseTest
         $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserMetadata parser throwing exception on wrong type of value format.
-     */
     public function testParseExceptionOnWrongValueType(): void
     {
         $this->expectException(Parser::class);
@@ -119,11 +110,6 @@ class UserMetadataTest extends BaseTest
         $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the UserMetadata criterion parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\Criterion\UserMetadata
-     */
     protected function internalGetParser(): UserMetadata
     {
         return new UserMetadata();

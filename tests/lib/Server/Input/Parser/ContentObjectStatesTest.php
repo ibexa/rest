@@ -7,14 +7,10 @@
 
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
-use Ibexa\Rest\Input\Parser;
 use Ibexa\Rest\Input\Parser\ContentObjectStates;
 
 class ContentObjectStatesTest extends BaseTest
 {
-    /**
-     * Tests the ContentObjectStates parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -60,9 +56,6 @@ class ContentObjectStatesTest extends BaseTest
         );
     }
 
-    /**
-     * Test ContentObjectStates parser throwing exception on missing href.
-     */
     public function testParseExceptionOnMissingHref(): void
     {
         $this->expectException('Ibexa\\Contracts\\Rest\\Exceptions\\Parser');
@@ -88,11 +81,6 @@ class ContentObjectStatesTest extends BaseTest
         ];
     }
 
-    /**
-     * Gets the ContentObjectStates parser.
-     *
-     * @return \Ibexa\Rest\Input\Parser\ContentObjectStates ;
-     */
     protected function internalGetParser(): ContentObjectStates
     {
         return new ContentObjectStates();

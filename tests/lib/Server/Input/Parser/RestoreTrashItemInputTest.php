@@ -42,9 +42,14 @@ final class RestoreTrashItemInputTest extends BaseTest
 
         $result = $moveLocationParser->parse($inputArray, $this->getParsingDispatcherMock());
 
+        self::assertInstanceOf(
+            Location::class,
+            $result,
+        );
+
         self::assertEquals(
             $this->getMockedLocation()->getId(),
-            $result->id,
+            $result->getId(),
         );
 
         self::assertEquals(

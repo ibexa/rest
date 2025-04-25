@@ -23,22 +23,22 @@ use PHPUnit\Framework\TestCase;
  */
 class FieldTypeSerializerTest extends TestCase
 {
-    protected ?MockObject $fieldTypeServiceMock = null;
+    protected (MockObject&FieldTypeService)|null $fieldTypeServiceMock = null;
 
-    protected ?MockObject $fieldTypeProcessorRegistryMock = null;
+    protected (MockObject&FieldTypeProcessorRegistry)|null $fieldTypeProcessorRegistryMock = null;
 
-    protected ?MockObject $fieldTypeProcessorMock = null;
+    protected (MockObject&FieldTypeProcessor)|null $fieldTypeProcessorMock = null;
 
-    protected ?MockObject $contentTypeMock = null;
+    protected (MockObject&APIContentType)|null $contentTypeMock = null;
 
-    protected ?MockObject $fieldTypeMock = null;
+    protected (MockObject&APIFieldType)|null $fieldTypeMock = null;
 
-    protected $generatorMock;
+    protected (MockObject&Generator)|null $generatorMock = null;
 
     /**
      * @dataProvider provideDataWithFieldValueToSerialize
      *
-     * @param mixed $hashValue
+     * @param array<int> $hashValue
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
@@ -299,9 +299,6 @@ class FieldTypeSerializerTest extends TestCase
         return $this->fieldTypeMock;
     }
 
-    /**
-     * @param mixed $value
-     */
     private function createFieldMock(
         string $fieldTypeIdentifier,
         string $value
@@ -319,8 +316,7 @@ class FieldTypeSerializerTest extends TestCase
     }
 
     /**
-     * @param mixed $hashElementName
-     * @param mixed $hashElementValue
+     * @param array<int|string, int|string> $hashElementValue
      */
     private function mockGeneratorGenerateFieldTypeHash(
         string $hashElementName,
@@ -338,8 +334,7 @@ class FieldTypeSerializerTest extends TestCase
     }
 
     /**
-     * @param mixed $value
-     * @param mixed $hashValue
+     * @param int[] $hashValue
      */
     private function createFieldTypeMock(
         string $value,

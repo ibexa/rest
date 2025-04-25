@@ -15,9 +15,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ObjectStateGroupUpdateTest extends BaseTest
 {
-    /**
-     * Tests the ObjectStateGroupUpdate parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -75,9 +72,6 @@ class ObjectStateGroupUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Test ObjectStateGroupUpdate parser throwing exception on invalid names structure.
-     */
     public function testParseExceptionOnInvalidNames(): void
     {
         $this->expectException(Parser::class);
@@ -100,11 +94,6 @@ class ObjectStateGroupUpdateTest extends BaseTest
         $objectStateGroupUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the ObjectStateGroupUpdate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\ObjectStateGroupUpdate
-     */
     protected function internalGetParser(): ObjectStateGroupUpdate
     {
         return new ObjectStateGroupUpdate(
@@ -113,12 +102,7 @@ class ObjectStateGroupUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the object state service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ObjectStateService
-     */
-    protected function getObjectStateServiceMock(): MockObject
+    protected function getObjectStateServiceMock(): ObjectStateService & MockObject
     {
         $objectStateServiceMock = $this->createMock(ObjectStateService::class);
 

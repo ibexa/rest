@@ -142,9 +142,6 @@ class QueryParserTest extends BaseTest
         self::assertEquals($expectedQuery, $result);
     }
 
-    /**
-     * Returns the session input parser.
-     */
     protected function internalGetParser(): ContentQuery
     {
         return new QueryParser();

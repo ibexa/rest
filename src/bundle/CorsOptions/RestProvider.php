@@ -22,9 +22,6 @@ class RestProvider implements ProviderInterface
 {
     protected RequestMatcherInterface $requestMatcher;
 
-    /**
-     * @param \Symfony\Component\Routing\Matcher\RequestMatcherInterface $requestMatcher
-     */
     public function __construct(RequestMatcherInterface $requestMatcher)
     {
         $this->requestMatcher = $requestMatcher;
@@ -33,9 +30,7 @@ class RestProvider implements ProviderInterface
     /**
      * Returns allowed CORS methods for a REST route.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return array
+     * @return array{allow_methods?: string[]}
      */
     public function getOptions(Request $request): array
     {
@@ -47,6 +42,9 @@ class RestProvider implements ProviderInterface
         return $return;
     }
 
+    /**
+     * @return string[]
+     */
     protected function getAllowedMethods(string $uri): array
     {
         try {

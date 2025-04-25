@@ -25,19 +25,19 @@ use PHPUnit\Framework\TestCase;
  */
 class FieldTypeParserTest extends TestCase
 {
-    protected MockObject $contentServiceMock;
+    protected ContentService & MockObject $contentServiceMock;
 
-    protected MockObject $contentTypeServiceMock;
+    protected ContentTypeService & MockObject $contentTypeServiceMock;
 
-    protected MockObject $fieldTypeServiceMock;
+    protected FieldTypeService & MockObject $fieldTypeServiceMock;
 
-    protected MockObject $contentTypeMock;
+    protected ContentType & MockObject $contentTypeMock;
 
-    protected MockObject $fieldTypeMock;
+    protected FieldType & MockObject $fieldTypeMock;
 
-    protected MockObject $fieldTypeProcessorRegistryMock;
+    protected FieldTypeProcessorRegistry & MockObject $fieldTypeProcessorRegistryMock;
 
-    protected MockObject $fieldTypeProcessorMock;
+    protected FieldTypeProcessor & MockObject $fieldTypeProcessorMock;
 
     public function setUp(): void
     {
@@ -107,7 +107,7 @@ class FieldTypeParserTest extends TestCase
         self::assertEquals(
             ['foo', 'bar'],
             $fieldTypeParser->parseFieldValue(
-                '23',
+                23,
                 'my-field-definition',
                 [1, 2, 3]
             )

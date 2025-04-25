@@ -11,19 +11,8 @@ use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 
-/**
- * Parser for RelationCreate.
- */
 class RelationCreate extends BaseParser
 {
-    /**
-     * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return mixed
-     */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): string
     {
         if (!array_key_exists('Destination', $data) || !is_array($data['Destination'])) {

@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\RoleService;
+use Ibexa\Contracts\Core\Repository\Values\User\PolicyUpdateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -40,15 +41,7 @@ class PolicyUpdate extends BaseParser
         $this->parserTools = $parserTools;
     }
 
-    /**
-     * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\PolicyUpdateStruct
-     */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): PolicyUpdateStruct
     {
         $policyUpdate = $this->roleService->newPolicyUpdateStruct();
 

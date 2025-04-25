@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -43,15 +44,12 @@ abstract class EventListenerTest extends TestCase
         // Check that referenced methods exist
         foreach ($supportedEvents as $method) {
             self::assertTrue(
-                method_exists($eventListener, is_array($method) ? $method[0] : $method)
+                method_exists($eventListener, is_array($method) ? (is_array($method[0]) ? $method[0][0] : (string)$method[0]) : $method)
             );
         }
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\ParameterBag&\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getRequestAttributesMock(): ParameterBag
+    protected function getRequestAttributesMock(): MockObject & ParameterBag
     {
         $requestAttributesMock = $this->createMock(ParameterBag::class);
 

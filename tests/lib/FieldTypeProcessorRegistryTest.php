@@ -86,12 +86,7 @@ class FieldTypeProcessorRegistryTest extends BaseTest
         );
     }
 
-    /**
-     * Get FieldTypeProcessor mock object.
-     *
-     * @return \Ibexa\Contracts\Rest\FieldTypeProcessor
-     */
-    protected function getAProcessorMock(): MockObject
+    protected function getAProcessorMock(): FieldTypeProcessor & MockObject
     {
         return $this->createMock(FieldTypeProcessor::class);
     }

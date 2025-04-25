@@ -15,9 +15,6 @@ use Ibexa\Rest\Server\Values\RoleAssignment;
 
 class RoleAssignInputTest extends BaseTest
 {
-    /**
-     * Tests the RoleAssignInput parser.
-     */
     public function testParse(): void
     {
         $limitation = [
@@ -60,9 +57,6 @@ class RoleAssignInputTest extends BaseTest
         );
     }
 
-    /**
-     * Test RoleAssignInput parser throwing exception on missing Role.
-     */
     public function testParseExceptionOnMissingRole(): void
     {
         $this->expectException(Parser::class);
@@ -90,9 +84,6 @@ class RoleAssignInputTest extends BaseTest
         $roleAssignInput->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test RoleAssignInput parser throwing exception on invalid Role.
-     */
     public function testParseExceptionOnInvalidRole(): void
     {
         $this->expectException(Parser::class);
@@ -121,9 +112,6 @@ class RoleAssignInputTest extends BaseTest
         $roleAssignInput->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test Limitation parser throwing exception on missing identifier.
-     */
     public function testParseExceptionOnMissingLimitationIdentifier(): void
     {
         $this->expectException(Parser::class);
@@ -153,11 +141,6 @@ class RoleAssignInputTest extends BaseTest
         $roleAssignInput->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the role assign input parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\RoleAssignInput
-     */
     protected function internalGetParser(): RoleAssignInput
     {
         return new RoleAssignInput(

@@ -22,9 +22,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class UserCreateTest extends BaseTest
 {
-    /**
-     * Tests the UserCreate parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -98,9 +95,6 @@ class UserCreateTest extends BaseTest
         }
     }
 
-    /**
-     * Test UserCreate parser throwing exception on invalid ContentType.
-     */
     public function testParseExceptionOnInvalidContentType(): void
     {
         $this->expectException(Parser::class);
@@ -130,9 +124,6 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on missing mainLanguageCode.
-     */
     public function testParseExceptionOnMissingMainLanguageCode(): void
     {
         $this->expectException(Parser::class);
@@ -163,9 +154,6 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on missing login.
-     */
     public function testParseExceptionOnMissingLogin(): void
     {
         $this->expectException(Parser::class);
@@ -196,9 +184,6 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on missing email.
-     */
     public function testParseExceptionOnMissingEmail(): void
     {
         $this->expectException(Parser::class);
@@ -229,9 +214,6 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on missing password.
-     */
     public function testParseExceptionOnMissingPassword(): void
     {
         $this->expectException(Parser::class);
@@ -262,9 +244,6 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on invalid Section.
-     */
     public function testParseExceptionOnInvalidSection(): void
     {
         $this->expectException('Ibexa\\Contracts\\Rest\\Exceptions\\Parser');
@@ -294,9 +273,6 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on invalid fields data.
-     */
     public function testParseExceptionOnInvalidFields(): void
     {
         $this->expectException(Parser::class);
@@ -320,9 +296,6 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on missing field definition identifier.
-     */
     public function testParseExceptionOnMissingFieldDefinitionIdentifier(): void
     {
         $this->expectException(Parser::class);
@@ -357,9 +330,6 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on invalid field definition identifier.
-     */
     public function testParseExceptionOnInvalidFieldDefinitionIdentifier(): void
     {
         $this->expectException(Parser::class);
@@ -391,9 +361,6 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on missing field value.
-     */
     public function testParseExceptionOnMissingFieldValue(): void
     {
         $this->expectException(Parser::class);
@@ -424,11 +391,6 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the UserCreate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\UserCreate
-     */
     protected function internalGetParser(): UserCreate
     {
         return new UserCreate(
@@ -439,12 +401,7 @@ class UserCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the field type parser mock object.
-     *
-     * @return \Ibexa\Rest\Input\FieldTypeParser ;
-     */
-    private function getFieldTypeParserMock(): MockObject
+    private function getFieldTypeParserMock(): FieldTypeParser & MockObject
     {
         $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
             ->setMethods([])
@@ -466,12 +423,7 @@ class UserCreateTest extends BaseTest
         return $fieldTypeParserMock;
     }
 
-    /**
-     * Get the user service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\UserService
-     */
-    protected function getUserServiceMock(): MockObject
+    protected function getUserServiceMock(): UserService & MockObject
     {
         $userServiceMock = $this->createMock(UserService::class);
 
@@ -497,12 +449,7 @@ class UserCreateTest extends BaseTest
         return $userServiceMock;
     }
 
-    /**
-     * Get the content type service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService
-     */
-    protected function getContentTypeServiceMock(): MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
@@ -514,11 +461,6 @@ class UserCreateTest extends BaseTest
         return $contentTypeServiceMock;
     }
 
-    /**
-     * Get the content type used in UserCreate parser.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
-     */
     protected function getContentType(): ContentType
     {
         return new ContentType(

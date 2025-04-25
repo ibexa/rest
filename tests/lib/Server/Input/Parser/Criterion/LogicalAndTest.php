@@ -55,7 +55,7 @@ class LogicalAndTest extends BaseTest
             ],
         ];
 
-        $criterionMock = $this->createMock(Content\Query\Criterion::class, [], [], '', false);
+        $criterionMock = $this->createMock(Content\Query\Criterion::class);
 
         $parserMock = $this->createMock(\Ibexa\Contracts\Rest\Input\Parser::class);
         $parserMock->method('parse')->willReturn($criterionMock);
@@ -68,8 +68,7 @@ class LogicalAndTest extends BaseTest
             ]
         ));
 
-        self::assertInstanceOf(Content\Query\Criterion\LogicalAnd::class, $result);
-        self::assertCount(3, (array)$result->criteria);
+        self::assertCount(3, $result->criteria);
     }
 
     public function testThrowsExceptionOnInvalidAndStatement(): void
@@ -80,9 +79,6 @@ class LogicalAndTest extends BaseTest
         ));
     }
 
-    /**
-     * @return \Ibexa\Rest\Server\Input\Parser\Criterion\LogicalAnd
-     */
     protected function internalGetParser(): LogicalAnd
     {
         return new LogicalAnd();

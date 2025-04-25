@@ -17,11 +17,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class LocationUpdateTest extends BaseTest
 {
-    /**
-     * Tests the LocationUpdate parser.
-     */
-    public function testParse(): void
-    {
+        public function testParse(): void
+        {
         $inputArray = [
             'priority' => 0,
             'remoteId' => 'remote-id',
@@ -75,11 +72,8 @@ class LocationUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Test LocationUpdate parser with missing sort field.
-     */
-    public function testParseWithMissingSortField(): void
-    {
+        public function testParseWithMissingSortField(): void
+        {
         $inputArray = [
             'priority' => 0,
             'remoteId' => 'remote-id',
@@ -133,11 +127,6 @@ class LocationUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Returns the LocationUpdateStruct parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\LocationUpdate
-     */
     protected function internalGetParser(): LocationUpdate
     {
         return new LocationUpdate(
@@ -146,12 +135,7 @@ class LocationUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the location service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\LocationService
-     */
-    protected function getLocationServiceMock(): MockObject
+    protected function getLocationServiceMock(): LocationService & MockObject
     {
         $locationServiceMock = $this->createMock(LocationService::class);
 

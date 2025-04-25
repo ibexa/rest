@@ -14,14 +14,7 @@ use Ibexa\Rest\Server\Values\NoContent;
 class ContentVersionPublishController extends RestController
 {
     /**
-     * The content version is published.
-     *
-     * @param mixed $contentId
-     * @param mixed $versionNumber
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException if version $versionNumber isn't a draft
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
     public function publishVersion(int $contentId, ?int $versionNumber): NoContent
     {

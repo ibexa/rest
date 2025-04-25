@@ -55,11 +55,6 @@ class ImageProcessorTest extends BinaryInputProcessorTest
         );
     }
 
-    /**
-     * Returns the processor under test.
-     *
-     * @return \Ibexa\Rest\FieldTypeProcessor\ImageProcessor
-     */
     protected function getProcessor(): ImageProcessor
     {
         return new ImageProcessor(
@@ -78,6 +73,9 @@ class ImageProcessorTest extends BinaryInputProcessorTest
         return $this->router;
     }
 
+    /**
+     * @return array<string>
+     */
     protected function getVariations(): array
     {
         return ['small', 'medium', 'large'];

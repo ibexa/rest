@@ -48,13 +48,6 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class ContentCurrentVersionRelationsRedirectController extends RestController
 {
-    /**
-     * Redirects to the relations of the current version.
-     *
-     * @param mixed $contentId
-     *
-     * @return \Ibexa\Rest\Server\Values\TemporaryRedirect
-     */
     public function redirectCurrentVersionRelations(int $contentId): TemporaryRedirect
     {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);

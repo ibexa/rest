@@ -12,7 +12,6 @@ use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use RuntimeException;
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\HttpClient\CurlHttpClient;
 use Symfony\Component\HttpClient\Psr18Client;
@@ -26,9 +25,6 @@ class TestCase extends BaseTestCase
         'COPY' => 'POST',
     ];
 
-    /**
-     * @var \Psr\Http\Client\ClientInterface
-     */
     private Psr18Client $httpClient;
 
     /**
@@ -102,23 +98,12 @@ class TestCase extends BaseTestCase
         }
     }
 
-    /**
-     * Instantiate Browser object.
-     */
     public function createBrowser(): HttpBrowser
     {
-        if ($this->httpClient === null) {
-            throw new RuntimeException('Unable to create browser - test is not initialized');
-        }
-
         return new HttpBrowser(new CurlHttpClient());
     }
 
     /**
-     * @param \Psr\Http\Message\RequestInterface $request
-     *
-     * @return \Psr\Http\Message\ResponseInterface
-     *
      * @throws \Psr\Http\Client\ClientExceptionInterface
      */
     public function sendHttpRequest(RequestInterface $request): ResponseInterface

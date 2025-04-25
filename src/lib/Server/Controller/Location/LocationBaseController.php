@@ -60,15 +60,11 @@ class LocationBaseController extends RestController
 
     /**
      * Extracts and returns an item id from a path, e.g. /1/2/58 => 58.
-     *
-     * @param string $path
-     *
-     * @return mixed
      */
-    protected function extractLocationIdFromPath($path): string
+    protected function extractLocationIdFromPath(string $path): int
     {
         $pathParts = explode('/', $path);
 
-        return array_pop($pathParts);
+        return (int) array_pop($pathParts);
     }
 }

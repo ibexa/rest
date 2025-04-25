@@ -28,12 +28,6 @@ class VersionUpdate extends BaseParser
      */
     protected FieldTypeParser $fieldTypeParser;
 
-    /**
-     * Construct from content service.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\ContentService $contentService
-     * @param \Ibexa\Rest\Input\FieldTypeParser $fieldTypeParser
-     */
     public function __construct(ContentService $contentService, FieldTypeParser $fieldTypeParser)
     {
         $this->contentService = $contentService;
@@ -41,14 +35,11 @@ class VersionUpdate extends BaseParser
     }
 
     /**
-     * Parse input structure.
-     *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\ContentUpdateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): mixed
     {
         $contentUpdateStruct = $this->contentService->newContentUpdateStruct();
 
@@ -78,7 +69,7 @@ class VersionUpdate extends BaseParser
                 }
 
                 $fieldValue = $this->fieldTypeParser->parseFieldValue(
-                    $contentId,
+                    (int)$contentId,
                     $fieldData['fieldDefinitionIdentifier'],
                     $fieldData['fieldValue']
                 );

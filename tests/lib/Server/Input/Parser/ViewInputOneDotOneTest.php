@@ -15,9 +15,6 @@ use Ibexa\Rest\Server\Values\RestViewInput;
 
 class ViewInputOneDotOneTest extends BaseTest
 {
-    /**
-     * Tests the ViewInput parser.
-     */
     public function testParseContentQuery(): void
     {
         $inputArray = [
@@ -42,9 +39,6 @@ class ViewInputOneDotOneTest extends BaseTest
         self::assertEquals($expectedViewInput, $result, 'RestViewInput not created correctly.');
     }
 
-    /**
-     * Tests the ViewInput parser.
-     */
     public function testParseLocationQuery(): void
     {
         $inputArray = [
@@ -83,11 +77,6 @@ class ViewInputOneDotOneTest extends BaseTest
         $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the session input parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\ViewInput
-     */
     protected function internalGetParser(): ViewInputOneDotOne
     {
         return new ViewInputOneDotOne();

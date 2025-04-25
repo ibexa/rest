@@ -15,9 +15,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ObjectStateGroupCreateTest extends BaseTest
 {
-    /**
-     * Tests the ObjectStateGroupCreate parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -75,9 +72,6 @@ class ObjectStateGroupCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Test ObjectStateGroupCreate parser throwing exception on missing identifier.
-     */
     public function testParseExceptionOnMissingIdentifier(): void
     {
         $this->expectException(Parser::class);
@@ -106,9 +100,6 @@ class ObjectStateGroupCreateTest extends BaseTest
         $objectStateGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ObjectStateGroupCreate parser throwing exception on missing defaultLanguageCode.
-     */
     public function testParseExceptionOnMissingDefaultLanguageCode(): void
     {
         $this->expectException(Parser::class);
@@ -137,9 +128,6 @@ class ObjectStateGroupCreateTest extends BaseTest
         $objectStateGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ObjectStateGroupCreate parser throwing exception on missing names.
-     */
     public function testParseExceptionOnMissingNames(): void
     {
         $this->expectException(Parser::class);
@@ -161,9 +149,6 @@ class ObjectStateGroupCreateTest extends BaseTest
         $objectStateGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ObjectStateGroupCreate parser throwing exception on invalid names structure.
-     */
     public function testParseExceptionOnInvalidNames(): void
     {
         $this->expectException(Parser::class);
@@ -186,11 +171,6 @@ class ObjectStateGroupCreateTest extends BaseTest
         $objectStateGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the ObjectStateGroupCreate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\ObjectStateGroupCreate
-     */
     protected function internalGetParser(): ObjectStateGroupCreate
     {
         return new ObjectStateGroupCreate(
@@ -199,12 +179,7 @@ class ObjectStateGroupCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the object state service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ObjectStateService
-     */
-    protected function getObjectStateServiceMock(): MockObject
+    protected function getObjectStateServiceMock(): ObjectStateService&MockObject
     {
         $objectStateServiceMock = $this->createMock(ObjectStateService::class);
 

@@ -13,9 +13,6 @@ use Ibexa\Rest\Server\Values\RestViewInput;
 
 class ViewInputTest extends BaseTest
 {
-    /**
-     * Tests the ViewInput parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -54,11 +51,6 @@ class ViewInputTest extends BaseTest
         $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the session input parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\ViewInput
-     */
     protected function internalGetParser(): ViewInput
     {
         return new ViewInput();

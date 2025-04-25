@@ -59,14 +59,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ContentVersionDeleteController extends RestController
 {
     /**
-     * The version is deleted.
-     *
-     * @param mixed $contentId
-     * @param mixed $versionNumber
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
     public function deleteContentVersion(int $contentId, ?int $versionNumber): NoContent
     {

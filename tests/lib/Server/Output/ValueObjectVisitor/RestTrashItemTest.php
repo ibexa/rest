@@ -93,7 +93,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
     /**
      * @depends testVisit
      */
-    public function testResultContainsTrashItemElement($result): void
+    public function testResultContainsTrashItemElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -111,7 +111,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
     /**
      * @depends testVisit
      */
-    public function testResultContainsTrashItemAttributes($result): void
+    public function testResultContainsTrashItemAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -130,7 +130,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
     /**
      * @depends testVisit
      */
-    public function testResultContainsContentInfoElement($result): void
+    public function testResultContainsContentInfoElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -145,7 +145,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
     /**
      * @depends testVisit
      */
-    public function testResultContainsContentInfoAttributes($result): void
+    public function testResultContainsContentInfoAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -164,7 +164,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
     /**
      * @depends testVisit
      */
-    public function testResultContainsIdValueElement($result): void
+    public function testResultContainsIdValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -179,7 +179,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
     /**
      * @depends testVisit
      */
-    public function testResultContainsPriorityValueElement($result): void
+    public function testResultContainsPriorityValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -194,7 +194,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
     /**
      * @depends testVisit
      */
-    public function testResultContainsHiddenValueElement($result): void
+    public function testResultContainsHiddenValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -363,7 +363,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
     /**
      * @depends testVisit
      */
-    public function testResultContainsSortOrderValueElement($result): void
+    public function testResultContainsSortOrderValueElement(string $result): void
     {
         $this->assertXMLTag(
             [

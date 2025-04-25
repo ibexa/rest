@@ -13,9 +13,6 @@ use Ibexa\Rest\Server\Values\SessionInput as SessionInputValue;
 
 class SessionInputTest extends BaseTest
 {
-    /**
-     * Tests the SessionInput parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -33,9 +30,6 @@ class SessionInputTest extends BaseTest
         );
     }
 
-    /**
-     * Test SessionInput parser throwing exception on missing password.
-     */
     public function testParseExceptionOnMissingIdentifier(): void
     {
         $this->expectException(Parser::class);
@@ -48,9 +42,6 @@ class SessionInputTest extends BaseTest
         $sessionInput->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test SessionInput parser throwing exception on missing login.
-     */
     public function testParseExceptionOnMissingName(): void
     {
         $this->expectException(Parser::class);
@@ -63,11 +54,6 @@ class SessionInputTest extends BaseTest
         $sessionInput->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the session input parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\SessionInput
-     */
     protected function internalGetParser(): SessionInput
     {
         return new SessionInput();

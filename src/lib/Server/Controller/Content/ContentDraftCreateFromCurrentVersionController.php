@@ -86,13 +86,7 @@ class ContentDraftCreateFromCurrentVersionController extends RestController
     }
 
     /**
-     * The system creates a new draft version as a copy from the current version.
-     *
-     * @param mixed $contentId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException if the current version is already a draft
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedVersion
      */
     public function createDraftFromCurrentVersion(int $contentId): CreatedVersion
     {

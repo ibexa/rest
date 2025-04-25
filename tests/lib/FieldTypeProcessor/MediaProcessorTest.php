@@ -11,7 +11,10 @@ use Ibexa\Rest\FieldTypeProcessor\MediaProcessor;
 
 class MediaProcessorTest extends BinaryInputProcessorTest
 {
-    protected $constants = [
+    /**
+     * @var string[]
+     */
+    protected array $constants = [
         'TYPE_FLASH',
         'TYPE_QUICKTIME',
         'TYPE_REALPLAYER',
@@ -21,6 +24,9 @@ class MediaProcessorTest extends BinaryInputProcessorTest
         'TYPE_HTML5_AUDIO',
     ];
 
+    /**
+     * @return array<array{array{mediaType: string}, array{mediaType: mixed}}>
+     */
     public function fieldSettingsHashes(): array
     {
         return array_map(

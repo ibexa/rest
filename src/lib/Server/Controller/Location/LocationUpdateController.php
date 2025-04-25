@@ -105,14 +105,7 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class LocationUpdateController extends LocationBaseController
 {
-    /**
-     * Updates a location.
-     *
-     * @param string $locationPath
-     *
-     * @return \Ibexa\Rest\Server\Values\RestLocation
-     */
-    public function updateLocation($locationPath, Request $request): RestLocation
+    public function updateLocation(string $locationPath, Request $request): RestLocation
     {
         $locationUpdate = $this->inputDispatcher->parse(
             new Message(

@@ -49,10 +49,6 @@ class ContentDeleteController extends RestController
     /**
      * The content is deleted. If the content has locations (which is required in 4.x)
      * on delete all locations assigned the content object are deleted via delete subtree.
-     *
-     * @param mixed $contentId
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
     public function deleteContent(int $contentId): NoContent
     {

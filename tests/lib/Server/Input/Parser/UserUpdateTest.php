@@ -22,9 +22,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class UserUpdateTest extends BaseTest
 {
-    /**
-     * Tests the UserUpdate parser.
-     */
     public function testParse(): void
     {
         $inputArray = [
@@ -112,9 +109,6 @@ class UserUpdateTest extends BaseTest
         }
     }
 
-    /**
-     * Test UserUpdate parser throwing exception on missing Section href.
-     */
     public function testParseExceptionOnMissingSectionHref(): void
     {
         $this->expectException(Parser::class);
@@ -141,9 +135,6 @@ class UserUpdateTest extends BaseTest
         $userUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserUpdate parser throwing exception on invalid fields data.
-     */
     public function testParseExceptionOnInvalidFields(): void
     {
         $this->expectException(Parser::class);
@@ -165,9 +156,6 @@ class UserUpdateTest extends BaseTest
         $userUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserUpdate parser throwing exception on missing field definition identifier.
-     */
     public function testParseExceptionOnMissingFieldDefinitionIdentifier(): void
     {
         $this->expectException(Parser::class);
@@ -195,9 +183,6 @@ class UserUpdateTest extends BaseTest
         $userUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserUpdate parser throwing exception on missing field value.
-     */
     public function testParseExceptionOnMissingFieldValue(): void
     {
         $this->expectException(Parser::class);
@@ -225,11 +210,6 @@ class UserUpdateTest extends BaseTest
         $userUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the UserUpdate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\UserUpdate
-     */
     protected function internalGetParser(): UserUpdate
     {
         return new UserUpdate(
@@ -240,12 +220,7 @@ class UserUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the field type parser mock object.
-     *
-     * @return \Ibexa\Rest\Input\FieldTypeParser ;
-     */
-    private function getFieldTypeParserMock(): MockObject
+    private function getFieldTypeParserMock(): FieldTypeParser & MockObject
     {
         $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
             ->setMethods([])
@@ -267,12 +242,7 @@ class UserUpdateTest extends BaseTest
         return $fieldTypeParserMock;
     }
 
-    /**
-     * Get the user service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\UserService
-     */
-    protected function getUserServiceMock(): MockObject
+    protected function getUserServiceMock(): UserService & MockObject
     {
         $userServiceMock = $this->createMock(UserService::class);
 
@@ -285,12 +255,7 @@ class UserUpdateTest extends BaseTest
         return $userServiceMock;
     }
 
-    /**
-     * Get the Content service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ContentService
-     */
-    protected function getContentServiceMock(): MockObject
+    protected function getContentServiceMock(): ContentService & MockObject
     {
         $contentServiceMock = $this->createMock(ContentService::class);
 
@@ -309,6 +274,9 @@ class UserUpdateTest extends BaseTest
         return $contentServiceMock;
     }
 
+    /**
+     * @return array<int, array<int, int|string>>
+     */
     public function getParseHrefExpectationsMap(): array
     {
         return [

@@ -21,34 +21,14 @@ use Ibexa\Rest\Server\Values\RestUserUpdateStruct;
  */
 class UserUpdate extends BaseParser
 {
-    /**
-     * User service.
-     */
     protected UserService $userService;
 
-    /**
-     * Content service.
-     */
     protected ContentService $contentService;
 
-    /**
-     * FieldType parser.
-     */
     protected FieldTypeParser $fieldTypeParser;
 
-    /**
-     * Parser tools.
-     */
     protected ParserTools $parserTools;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\UserService $userService
-     * @param \Ibexa\Contracts\Core\Repository\ContentService $contentService
-     * @param \Ibexa\Rest\Input\FieldTypeParser $fieldTypeParser
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
-     */
     public function __construct(UserService $userService, ContentService $contentService, FieldTypeParser $fieldTypeParser, ParserTools $parserTools)
     {
         $this->userService = $userService;
@@ -58,10 +38,7 @@ class UserUpdate extends BaseParser
     }
 
     /**
-     * Parse input structure.
-     *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
      *
      * @return \Ibexa\Rest\Server\Values\RestUserUpdateStruct
      */
@@ -116,7 +93,7 @@ class UserUpdate extends BaseParser
                     throw new Exceptions\Parser("Missing 'fieldValue' element for the '{$fieldData['fieldDefinitionIdentifier']}' identifier in UserUpdate.");
                 }
 
-                $fieldValue = $this->fieldTypeParser->parseFieldValue($userId, $fieldData['fieldDefinitionIdentifier'], $fieldData['fieldValue']);
+                $fieldValue = $this->fieldTypeParser->parseFieldValue((int)$userId, $fieldData['fieldDefinitionIdentifier'], $fieldData['fieldValue']);
 
                 $languageCode = null;
                 if (array_key_exists('languageCode', $fieldData)) {

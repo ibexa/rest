@@ -655,15 +655,6 @@ XML;
         }
     }
 
-    /**
-     * Publish another Version with new Translation.
-     *
-     * @param string $restContentVersionHref
-     * @param string $languageCode
-     * @param string $languageName
-     *
-     * @return string
-     */
     private function createVersionTranslation(string $restContentVersionHref, string $languageCode, string $languageName): void
     {
         // @todo Implement EZP-21171 to check if Language exists and add it

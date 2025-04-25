@@ -114,11 +114,7 @@ use Symfony\Component\HttpFoundation\Response;
 class RoleDraftUpdateController extends RoleBaseController
 {
     /**
-     * Updates a role draft.
-     *
-     * @param mixed $roleId Original role ID, or ID of the role draft itself
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\RoleDraft
+     * @param int $roleId Original role ID, or ID of the role draft itself
      */
     public function updateRoleDraft(int $roleId, Request $request): RoleDraft
     {

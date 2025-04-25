@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Input\Parser;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Query as ContentQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion as CriterionValue;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\CriterionInterface;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
@@ -18,16 +19,9 @@ use Ibexa\Rest\Server\Input\Parser\Criterion as CriterionParser;
 abstract class Query extends CriterionParser
 {
     /**
-     * Parses input structure to a Query.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentQuery
     {
         $query = $this->buildQuery();
 
@@ -73,10 +67,8 @@ abstract class Query extends CriterionParser
 
     /**
      * Builds and returns the Query (Location or Content object).
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query
      */
-    abstract protected function buildQuery();
+    abstract protected function buildQuery(): ContentQuery;
 
     /**
      * @param array $criteriaArray

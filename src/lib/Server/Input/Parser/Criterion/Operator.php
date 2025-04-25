@@ -15,14 +15,6 @@ use Ibexa\Rest\Input\BaseParser;
  */
 class Operator extends BaseParser
 {
-    /**
-     * Parses input structure to a Criterion object.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator
-     */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): never
     {
         throw new \Exception('@todo implement');

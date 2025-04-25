@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ObjectStateService;
+use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -37,15 +38,7 @@ class ObjectStateCreate extends BaseParser
         $this->parserTools = $parserTools;
     }
 
-    /**
-     * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateCreateStruct
-     */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ObjectStateCreateStruct
     {
         if (!array_key_exists('identifier', $data)) {
             throw new Exceptions\Parser("Missing 'identifier' attribute for ObjectStateCreate.");
