@@ -25,7 +25,7 @@ final class ArrayListNormalizer implements NormalizerInterface, NormalizerAwareI
      *
      * {@inheritDoc}
      */
-    public function normalize($object, ?string $format = null, array $context = []): array
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         $data = [];
         foreach ($object as $key => $value) {
@@ -46,8 +46,15 @@ final class ArrayListNormalizer implements NormalizerInterface, NormalizerAwareI
         return $data;
     }
 
-    public function supportsNormalization($data, ?string $format = null): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof ArrayList;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            ArrayList::class => true,
+        ];
     }
 }
