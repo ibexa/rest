@@ -16,7 +16,6 @@ use Symfony\Component\Config\Loader\Loader;
  */
 class OptionsLoader extends Loader
 {
-    /** @var RouteCollectionMapperMapper */
     protected $routeCollectionMapper;
 
     public function __construct(RouteCollectionMapper $mapper)
@@ -30,12 +29,12 @@ class OptionsLoader extends Loader
      *
      * @return \Symfony\Component\Routing\RouteCollection
      */
-    public function load(mixed $resource, $type = null)
+    public function load(mixed $resource, ?string $type = null): mixed
     {
         return $this->routeCollectionMapper->mapCollection($this->import($resource));
     }
 
-    public function supports(mixed $resource, $type = null): bool
+    public function supports(mixed $resource, ?string $type = null): bool
     {
         return $type === 'rest_options';
     }
