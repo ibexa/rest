@@ -32,12 +32,18 @@ use Symfony\Component\HttpFoundation\Response;
                 description: 'Content -	If set, all information for the content item including the embedded current version is returned in XML or JSON format. ContentInfo - If set, all information for the content item (excluding the current version) is returned in XML or JSON format.',
                 schema: [
                     'type' => 'string',
+                    'enum' => [
+                        'application/vnd.ibexa.api.Content+xml',
+                        'application/vnd.ibexa.api.Content+json',
+                        'application/vnd.ibexa.api.ContentInfo+xml',
+                        'application/vnd.ibexa.api.ContentInfo+json',
+                    ],
                 ],
             ),
             new Model\Parameter(
                 name: 'If-None-Match',
                 in: 'header',
-                required: true,
+                required: false,
                 description: 'If the provided ETag matches the current ETag then a "304 Not Modified" is returned. The ETag changes if the meta data has changed, this happens also if there is a new published version.',
                 schema: [
                     'type' => 'string',
@@ -48,7 +54,7 @@ use Symfony\Component\HttpFoundation\Response;
                 in: 'path',
                 required: true,
                 schema: [
-                    'type' => 'string',
+                    'type' => 'integer',
                 ],
             ),
         ],
