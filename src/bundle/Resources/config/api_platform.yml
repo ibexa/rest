@@ -22,6 +22,7 @@ services:
             - '@.inner'
             - '@Ibexa\Bundle\Rest\ApiPlatform\SchemasCollectionFactory'
             - '@Symfony\Component\HttpKernel\KernelInterface'
+            - '%ibexa.rest.path_prefix%'
 
     ibexa.api_platform.openapi.factory:
         parent: api_platform.openapi.factory
