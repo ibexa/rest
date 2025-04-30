@@ -29,7 +29,10 @@ use Symfony\Component\HttpFoundation\Response;
                 name: 'Accept',
                 in: 'header',
                 required: true,
-                description: 'Content -	If set, all information for the content item including the embedded current version is returned in XML or JSON format. ContentInfo - If set, all information for the content item (excluding the current version) is returned in XML or JSON format.',
+                description: "
+* Content -	If set, all information for the content item including the embedded current version is returned in XML or JSON format.
+* ContentInfo - If set, all information for the content item (excluding the current version) is returned in XML or JSON format.
+                ",
                 schema: [
                     'type' => 'string',
                     'enum' => [
