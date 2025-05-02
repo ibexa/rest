@@ -7,6 +7,7 @@
 
 namespace Ibexa\Tests\Rest\Output\Generator;
 
+use ArrayObject;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Rest\Output\Generator\AbstractFieldTypeHashGenerator;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -213,7 +214,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
 
     public function testGenerateObjectUsingNormalizer(): void
     {
-        $object = (object)[];
+        $object = new ArrayObject();
         $this->getNormalizer()
             ->expects(self::once())
             ->method('normalize')
