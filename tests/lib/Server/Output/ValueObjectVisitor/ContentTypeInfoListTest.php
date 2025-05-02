@@ -98,12 +98,12 @@ class ContentTypeInfoListTest extends ValueObjectVisitorBaseTest
             [
                 new ContentType\ContentType(
                     [
-                        'fieldDefinitions' => [],
+                        'fieldDefinitions' => new ContentType\FieldDefinitionCollection(),
                     ]
                 ),
                 new ContentType\ContentType(
                     [
-                        'fieldDefinitions' => [],
+                        'fieldDefinitions' => new ContentType\FieldDefinitionCollection(),
                     ]
                 ),
             ],

@@ -99,7 +99,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
                     'descriptions' => ['eng-GB' => 'Sindelfingen', 'eng-US' => 'Bielefeld'],
 
                     // "Mock"
-                    'fieldDefinitions' => [],
+                    'fieldDefinitions' => new Values\ContentType\FieldDefinitionCollection(),
                 ]
             ),
             []
