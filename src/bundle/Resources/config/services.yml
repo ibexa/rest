@@ -22,7 +22,6 @@ services:
     Ibexa\Bundle\Rest\Routing\OptionsLoader:
         arguments:
             - '@Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper'
-            - '@Ibexa\Bundle\Core\Routing\DefaultRouter'
         tags:
             - { name: routing.loader }
 
