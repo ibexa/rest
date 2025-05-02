@@ -43,7 +43,6 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     {
         if (!isset($this->visitorMock)) {
             $this->visitorMock = $this->createMock(Visitor::class);
-
             $this->visitorMock
                 ->expects(self::any())
                 ->method('getResponse')

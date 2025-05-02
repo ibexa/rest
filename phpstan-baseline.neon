@@ -19,30 +19,6 @@ parameters:
 			path: src/bundle/EventListener/UserCheckRequestListener.php
 
 		-
-			message: '#^Call to method mapCollection\(\) on an unknown class Ibexa\\Bundle\\Rest\\Routing\\RouteCollectionMapperMapper\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/bundle/Routing/OptionsLoader.php
-
-		-
-			message: '#^Method Ibexa\\Bundle\\Rest\\Routing\\OptionsLoader\:\:supports\(\) has parameter \$type with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/bundle/Routing/OptionsLoader.php
-
-		-
-			message: '#^Property Ibexa\\Bundle\\Rest\\Routing\\OptionsLoader\:\:\$routeCollectionMapper \(Ibexa\\Bundle\\Rest\\Routing\\RouteCollectionMapperMapper\) does not accept Ibexa\\Bundle\\Rest\\Routing\\OptionsLoader\\RouteCollectionMapper\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/bundle/Routing/OptionsLoader.php
-
-		-
-			message: '#^Property Ibexa\\Bundle\\Rest\\Routing\\OptionsLoader\:\:\$routeCollectionMapper has unknown class Ibexa\\Bundle\\Rest\\Routing\\RouteCollectionMapperMapper as its type\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/bundle/Routing/OptionsLoader.php
-
-		-
 			message: '#^Method Ibexa\\Contracts\\Rest\\Event\\BeforeParseEvent\:\:__construct\(\) has parameter \$data with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -199,8 +175,8 @@ parameters:
 			path: src/contracts/Output/ValueObjectVisitor.php
 
 		-
-			message: '#^Method Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface\:\:supportsNormalization\(\) invoked with 3 parameters, 1\-2 required\.$#'
-			identifier: arguments.count
+			message: '#^Instanceof between Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface and Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
 			count: 1
 			path: src/contracts/Output/VisitorAdapterNormalizer.php
 
@@ -2905,6 +2881,12 @@ parameters:
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
 		-
+			message: '#^Cannot call method expects\(\) on null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
+
+		-
 			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:addRouteExpectation\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
@@ -2929,8 +2911,32 @@ parameters:
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
 		-
+			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:getResponseMock\(\) should return PHPUnit\\Framework\\MockObject\\MockObject&Symfony\\Component\\HttpFoundation\\Response but returns \(PHPUnit\\Framework\\MockObject\\MockObject&Symfony\\Component\\HttpFoundation\\Response\)\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:getRouterMock\(\) should return PHPUnit\\Framework\\MockObject\\MockObject&Symfony\\Component\\Routing\\RouterInterface but returns \(PHPUnit\\Framework\\MockObject\\MockObject&Symfony\\Component\\Routing\\RouterInterface\)\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:getTemplatedRouterMock\(\) should return PHPUnit\\Framework\\MockObject\\MockObject&Symfony\\Component\\Routing\\RouterInterface but returns \(PHPUnit\\Framework\\MockObject\\MockObject&Symfony\\Component\\Routing\\RouterInterface\)\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
+
+		-
 			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:getVisitor\(\) has no return type specified\.$#'
 			identifier: missingType.return
+			count: 1
+			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:getVisitorMock\(\) should return Ibexa\\Contracts\\Rest\\Output\\Visitor&PHPUnit\\Framework\\MockObject\\MockObject but returns \(Ibexa\\Contracts\\Rest\\Output\\Visitor&PHPUnit\\Framework\\MockObject\\MockObject\)\|null\.$#'
+			identifier: return.type
 			count: 1
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
