@@ -7,7 +7,7 @@
 
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Contracts\Core\Repository\Values\Content\Relation as RelationValue;
+use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
@@ -92,19 +92,19 @@ class RestRelation extends ValueObjectVisitor
     {
         $relationTypeList = [];
 
-        if (RelationValue::COMMON & $relationType) {
+        if (RelationType::COMMON->value & $relationType) {
             $relationTypeList[] = 'COMMON';
         }
-        if (RelationValue::EMBED & $relationType) {
+        if (RelationType::EMBED->value & $relationType) {
             $relationTypeList[] = 'EMBED';
         }
-        if (RelationValue::LINK & $relationType) {
+        if (RelationType::LINK->value & $relationType) {
             $relationTypeList[] = 'LINK';
         }
-        if (RelationValue::FIELD & $relationType) {
+        if (RelationType::FIELD->value & $relationType) {
             $relationTypeList[] = 'ATTRIBUTE';
         }
-        if (RelationValue::ASSET & $relationType) {
+        if (RelationType::ASSET->value & $relationType) {
             $relationTypeList[] = 'ASSET';
         }
 
