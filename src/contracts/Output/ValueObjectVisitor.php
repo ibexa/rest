@@ -41,12 +41,12 @@ abstract class ValueObjectVisitor
     /**
      * @param \Symfony\Component\Routing\RouterInterface $router
      */
-    public function setRouter(RouterInterface $router)
+    public function setRouter(RouterInterface $router): void
     {
         $this->router = $router;
     }
 
-    public function setTemplateRouter(RouterInterface $templateRouter)
+    public function setTemplateRouter(RouterInterface $templateRouter): void
     {
         $this->templateRouter = $templateRouter;
     }
@@ -94,11 +94,9 @@ abstract class ValueObjectVisitor
     /**
      * Visits a list of translated elements.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param array $translatedElements
-     * @param mixed $listName
      */
-    protected function visitTranslatedList(Generator $generator, array $translatedElements, $listName)
+    protected function visitTranslatedList(Generator $generator, array $translatedElements, string $listName)
     {
         $generator->startHashElement($listName);
         $generator->startList('value');

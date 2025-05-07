@@ -35,14 +35,11 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class ExpressionRouterRootResourceBuilder implements RootResourceBuilderInterface
 {
-    /** @var \Symfony\Component\Routing\RouterInterface */
-    protected $router;
+    protected RouterInterface $router;
 
-    /** @var \Symfony\Component\Routing\RouterInterface */
-    protected $templateRouter;
+    protected RouterInterface $templateRouter;
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
-    protected $configResolver;
+    protected ConfigResolverInterface $configResolver;
 
     public function __construct(RouterInterface $router, RouterInterface $templateRouter, ConfigResolverInterface $configResolver)
     {

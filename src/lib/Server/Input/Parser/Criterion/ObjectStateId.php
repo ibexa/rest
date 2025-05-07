@@ -27,7 +27,7 @@ class ObjectStateId extends BaseParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ObjectStateId
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ObjectStateIdCriterion
     {
         if (!array_key_exists('ObjectStateIdCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <ObjectStateIdCriterion> format');

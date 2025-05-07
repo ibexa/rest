@@ -11,13 +11,11 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroupCreateStr
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\ContentTypeService;
 use Ibexa\Rest\Server\Input\Parser\ContentTypeGroupInput;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ContentTypeGroupInputTest extends BaseTest
 {
-    /**
-     * Tests the ContentTypeGroupInput parser.
-     */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'identifier' => 'Identifier Bar',
@@ -55,10 +53,7 @@ class ContentTypeGroupInputTest extends BaseTest
         );
     }
 
-    /**
-     * Test ContentTypeGroupInput parser throwing exception on invalid User.
-     */
-    public function testParseExceptionOnInvalidUser()
+    public function testParseExceptionOnInvalidUser(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'_href\' attribute for the User element in ContentTypeGroupInput.');
@@ -72,12 +67,7 @@ class ContentTypeGroupInputTest extends BaseTest
         $contentTypeGroupInput->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the content type group input parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\ContentTypeGroupInput
-     */
-    protected function internalGetParser()
+    protected function internalGetParser(): ContentTypeGroupInput
     {
         return new ContentTypeGroupInput(
             $this->getContentTypeServiceMock(),
@@ -85,12 +75,7 @@ class ContentTypeGroupInputTest extends BaseTest
         );
     }
 
-    /**
-     * Get the content type service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService
-     */
-    protected function getContentTypeServiceMock()
+    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
@@ -104,7 +89,10 @@ class ContentTypeGroupInputTest extends BaseTest
         return $contentTypeServiceMock;
     }
 
-    public function getParseHrefExpectationsMap()
+    /**
+     * @return array<array{0: string, 1: string, 2: int}>
+     */
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/user/users/14', 'userId', 14],

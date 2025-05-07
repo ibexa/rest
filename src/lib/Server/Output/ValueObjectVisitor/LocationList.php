@@ -23,7 +23,7 @@ class LocationList extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\LocationList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startObjectElement('LocationList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('LocationList'));

@@ -15,7 +15,7 @@ use Ibexa\Rest\Server\Input\Parser\Query as QueryParser;
  */
 class ContentQuery extends QueryParser
 {
-    protected function buildQuery()
+    protected function buildQuery(): Query
     {
         return new Query();
     }

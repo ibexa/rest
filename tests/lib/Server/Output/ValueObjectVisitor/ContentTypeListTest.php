@@ -37,7 +37,7 @@ class ContentTypeListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
@@ -49,7 +49,7 @@ class ContentTypeListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsContentTypeListElement($result)
+    public function testResultContainsContentTypeListElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -68,7 +68,7 @@ class ContentTypeListTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsContentTypeListAttributes($result)
+    public function testResultContainsContentTypeListAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -87,7 +87,7 @@ class ContentTypeListTest extends ValueObjectVisitorBaseTest
     /**
      * Test if ContentTypeList visitor visits the children.
      */
-    public function testContentTypeListVisitsChildren()
+    public function testContentTypeListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -126,7 +126,7 @@ class ContentTypeListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\ContentTypeList
     {
         return new ValueObjectVisitor\ContentTypeList();
     }

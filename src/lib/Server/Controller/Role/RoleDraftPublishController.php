@@ -9,17 +9,14 @@ namespace Ibexa\Rest\Server\Controller\Role;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\PublishedRole;
 
 class RoleDraftPublishController extends RoleBaseController
 {
     /**
-     * Publishes a role draft.
-     *
-     * @param mixed $roleId Original role ID, or ID of the role draft itself
-     *
-     * @return \Ibexa\Rest\Server\Values\PublishedRole
+     * @param int $roleId Original role ID, or ID of the role draft itself
      */
-    public function publishRoleDraft($roleId)
+    public function publishRoleDraft(int $roleId): PublishedRole
     {
         try {
             // First try to load the draft for given role.
@@ -34,6 +31,6 @@ class RoleDraftPublishController extends RoleBaseController
 
         $role = $this->roleService->loadRoleByIdentifier($roleDraft->identifier);
 
-        return new Values\PublishedRole(['role' => new Values\RestRole($role)]);
+        return new PublishedRole(['role' => new Values\RestRole($role)]);
     }
 }

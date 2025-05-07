@@ -10,7 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\TemporaryRedirect;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -59,18 +59,11 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class ContentCurrentVersionRedirectController extends RestController
 {
-    /**
-     * Loads a specific version of a given content object.
-     *
-     * @param mixed $contentId
-     *
-     * @return \Ibexa\Rest\Server\Values\TemporaryRedirect
-     */
-    public function redirectCurrentVersion($contentId)
+    public function redirectCurrentVersion(int $contentId): TemporaryRedirect
     {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
 
-        return new Values\TemporaryRedirect(
+        return new TemporaryRedirect(
             $this->router->generate(
                 'ibexa.rest.load_content_in_version',
                 [

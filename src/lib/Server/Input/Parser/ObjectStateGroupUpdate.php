@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ObjectStateService;
+use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroupUpdateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -20,15 +21,10 @@ class ObjectStateGroupUpdate extends BaseParser
 {
     /**
      * Object state service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\ObjectStateService
      */
-    protected $objectStateService;
+    protected ObjectStateService $objectStateService;
 
-    /**
-     * @var \Ibexa\Rest\Input\ParserTools
-     */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     /**
      * Construct.
@@ -42,15 +38,7 @@ class ObjectStateGroupUpdate extends BaseParser
         $this->parserTools = $parserTools;
     }
 
-    /**
-     * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroupUpdateStruct
-     */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ObjectStateGroupUpdateStruct
     {
         $objectStateGroupUpdateStruct = $this->objectStateService->newObjectStateGroupUpdateStruct();
 

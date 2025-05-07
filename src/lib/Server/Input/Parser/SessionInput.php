@@ -25,7 +25,7 @@ class SessionInput extends BaseParser
      *
      * @return \Ibexa\Rest\Server\Values\SessionInput
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): SessionInputValue
     {
         $sessionInput = new SessionInputValue();
 

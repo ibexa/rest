@@ -20,15 +20,9 @@ class Factory
 {
     use RequestStackAware;
 
-    /**
-     * @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface
-     */
-    protected $configResolver;
+    protected ConfigResolverInterface $configResolver;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Repository
-     */
-    protected $repository;
+    protected Repository $repository;
 
     /**
      * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
@@ -40,7 +34,7 @@ class Factory
         $this->repository = $repository;
     }
 
-    public function getBinaryFileFieldTypeProcessor()
+    public function getBinaryFileFieldTypeProcessor(): BinaryProcessor
     {
         $request = $this->getCurrentRequest();
         $hostPrefix = isset($request) ? rtrim($request->getUriForPath('/'), '/') : '';
@@ -48,7 +42,7 @@ class Factory
         return new BinaryProcessor(sys_get_temp_dir(), $hostPrefix);
     }
 
-    public function getMediaFieldTypeProcessor()
+    public function getMediaFieldTypeProcessor(): MediaProcessor
     {
         return new MediaProcessor(sys_get_temp_dir());
     }
@@ -60,7 +54,7 @@ class Factory
      *
      * @return \Ibexa\Rest\FieldTypeProcessor\ImageProcessor
      */
-    public function getImageFieldTypeProcessor(RouterInterface $router)
+    public function getImageFieldTypeProcessor(RouterInterface $router): ImageProcessor
     {
         $variationsIdentifiers = array_keys($this->configResolver->getParameter('image_variations'));
         sort($variationsIdentifiers);

@@ -18,7 +18,7 @@ class ImageProcessorTest extends BinaryInputProcessorTest
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\ImageProcessor::postProcessValueHash
      */
-    public function testPostProcessValueHash()
+    public function testPostProcessValueHash(): void
     {
         $processor = $this->getProcessor();
 
@@ -55,12 +55,7 @@ class ImageProcessorTest extends BinaryInputProcessorTest
         );
     }
 
-    /**
-     * Returns the processor under test.
-     *
-     * @return \Ibexa\Rest\FieldTypeProcessor\ImageProcessor
-     */
-    protected function getProcessor()
+    protected function getProcessor(): ImageProcessor
     {
         return new ImageProcessor(
             $this->getTempDir(),
@@ -78,7 +73,10 @@ class ImageProcessorTest extends BinaryInputProcessorTest
         return $this->router;
     }
 
-    protected function getVariations()
+    /**
+     * @return array<string>
+     */
+    protected function getVariations(): array
     {
         return ['small', 'medium', 'large'];
     }

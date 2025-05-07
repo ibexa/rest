@@ -17,7 +17,7 @@ class FieldTypeProcessorPass implements CompilerPassInterface
 {
     private const FIELD_TYPE_PROCESSOR_SERVICE_TAG = 'ibexa.rest.field_type.processor';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition(FieldTypeProcessorRegistry::class)) {
             return;

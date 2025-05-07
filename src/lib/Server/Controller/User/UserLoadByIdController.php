@@ -100,7 +100,7 @@ final class UserLoadByIdController extends UserBaseController
             // TODO: Hack for special case to allow current logged in user to load him/here self (but not relations)
             if ($user->id == $this->permissionResolver->getCurrentUserReference()->getUserId()) {
                 $userMainLocation = $this->repository->sudo(
-                    function () use ($userContentInfo) {
+                    function () use ($userContentInfo): \Ibexa\Contracts\Core\Repository\Values\Content\Location {
                         return $this->locationService->loadLocation($userContentInfo->mainLocationId);
                     }
                 );

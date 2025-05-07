@@ -41,9 +41,14 @@ abstract class AbstractDestinationLocationInputTest extends BaseTest
 
         $result = $moveLocationParser->parse($inputArray, $this->getParsingDispatcherMock());
 
+        self::assertInstanceOf(
+            Location::class,
+            $result
+        );
+
         self::assertEquals(
-            $this->getMockedLocation()->id,
-            $result->id,
+            $this->getMockedLocation()->getId(),
+            $result->getId(),
         );
 
         self::assertEquals(

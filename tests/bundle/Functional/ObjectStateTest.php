@@ -99,7 +99,7 @@ XML;
      *
      * @depends testCreateObjectStateGroup
      */
-    public function testLoadObjectStateGroup($objectStateGroupHref)
+    public function testLoadObjectStateGroup(string $objectStateGroupHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $objectStateGroupHref)
@@ -113,7 +113,7 @@ XML;
      *
      * @depends testCreateObjectState
      */
-    public function testLoadObjectState($objectStateHref)
+    public function testLoadObjectState(string $objectStateHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', $objectStateHref)
@@ -125,7 +125,7 @@ XML;
     /**
      * Covers GET /content/objectstategroups.
      */
-    public function testLoadObjectStateGroups()
+    public function testLoadObjectStateGroups(): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/content/objectstategroups')
@@ -139,7 +139,7 @@ XML;
      *
      * @depends testCreateObjectStateGroup
      */
-    public function testLoadObjectStates($objectStateGroupHref)
+    public function testLoadObjectStates($objectStateGroupHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$objectStateGroupHref/objectstates")
@@ -186,7 +186,7 @@ XML;
      *
      * @depends testSetObjectStatesForContent
      */
-    public function testGetObjectStatesForContent($contentHref)
+    public function testGetObjectStatesForContent($contentHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$contentHref/objectstates")
@@ -200,7 +200,7 @@ XML;
      *
      * @depends testCreateObjectState
      */
-    public function testUpdateObjectState($objectStateHref)
+    public function testUpdateObjectState(string $objectStateHref): void
     {
         $body = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -232,7 +232,7 @@ XML;
      *
      * @depends testCreateObjectStateGroup
      */
-    public function testUpdateObjectStateGroup($objectStateGroupHref)
+    public function testUpdateObjectStateGroup(string $objectStateGroupHref): void
     {
         $body = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -264,7 +264,7 @@ XML;
      *
      * @depends testCreateObjectState
      */
-    public function testDeleteObjectState($objectStateHref)
+    public function testDeleteObjectState(string $objectStateHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $objectStateHref)
@@ -278,7 +278,7 @@ XML;
      *
      * @depends testCreateObjectStateGroup
      */
-    public function testDeleteObjectStateGroup($objectStateGroupHref)
+    public function testDeleteObjectStateGroup(string $objectStateGroupHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('DELETE', $objectStateGroupHref)

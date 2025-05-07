@@ -23,7 +23,7 @@ class UserGroupList extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\UserGroupList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startObjectElement('UserGroupList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('UserGroupList'));

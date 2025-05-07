@@ -23,7 +23,7 @@ class SectionList extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\SectionList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startObjectElement('SectionList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('SectionList'));

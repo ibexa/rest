@@ -22,7 +22,7 @@ class CreatedContent extends RestContent
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\CreatedContent $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         parent::visit($visitor, $generator, $data->content);
         $visitor->setHeader(

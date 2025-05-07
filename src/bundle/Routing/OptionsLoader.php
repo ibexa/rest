@@ -9,6 +9,7 @@ namespace Ibexa\Bundle\Rest\Routing;
 
 use Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper;
 use Symfony\Component\Config\Loader\Loader;
+use Symfony\Component\Routing\RouteCollection;
 
 /**
  * Goes through all REST routes, and registers new routes for all routes
@@ -16,26 +17,23 @@ use Symfony\Component\Config\Loader\Loader;
  */
 class OptionsLoader extends Loader
 {
-    /** @var RouteCollectionMapperMapper */
-    protected $routeCollectionMapper;
+    protected RouteCollectionMapper $routeCollectionMapper;
 
-    public function __construct(RouteCollectionMapper $mapper)
-    {
+    public function __construct(
+        RouteCollectionMapper $mapper,
+        ?string $env = null,
+    ) {
+        parent::__construct($env);
+
         $this->routeCollectionMapper = $mapper;
     }
 
-    /**
-     * @param mixed $resource
-     * @param string $type
-     *
-     * @return \Symfony\Component\Routing\RouteCollection
-     */
-    public function load(mixed $resource, $type = null)
+    public function load(mixed $resource, ?string $type = null): RouteCollection
     {
         return $this->routeCollectionMapper->mapCollection($this->import($resource));
     }
 
-    public function supports(mixed $resource, $type = null): bool
+    public function supports(mixed $resource, ?string $type = null): bool
     {
         return $type === 'rest_options';
     }

@@ -17,7 +17,7 @@ class ImageVariation extends ValueObjectVisitor
     /**
      * @param \Ibexa\Contracts\Core\Variation\Values\ImageVariation $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $visitor->setHeader('Content-Type', $generator->getMediaType('ContentImageVariation'));
         $generator->startObjectElement('ContentImageVariation');

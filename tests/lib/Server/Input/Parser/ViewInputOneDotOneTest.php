@@ -15,10 +15,7 @@ use Ibexa\Rest\Server\Values\RestViewInput;
 
 class ViewInputOneDotOneTest extends BaseTest
 {
-    /**
-     * Tests the ViewInput parser.
-     */
-    public function testParseContentQuery()
+    public function testParseContentQuery(): void
     {
         $inputArray = [
             'identifier' => 'Query identifier',
@@ -42,10 +39,7 @@ class ViewInputOneDotOneTest extends BaseTest
         self::assertEquals($expectedViewInput, $result, 'RestViewInput not created correctly.');
     }
 
-    /**
-     * Tests the ViewInput parser.
-     */
-    public function testParseLocationQuery()
+    public function testParseLocationQuery(): void
     {
         $inputArray = [
             'identifier' => 'Query identifier',
@@ -69,26 +63,21 @@ class ViewInputOneDotOneTest extends BaseTest
         self::assertEquals($expectedViewInput, $result, 'RestViewInput not created correctly.');
     }
 
-    public function testThrowsExceptionOnMissingIdentifier()
+    public function testThrowsExceptionOnMissingIdentifier(): void
     {
         $this->expectException(Parser::class);
         $inputArray = ['Query' => []];
         $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    public function testThrowsExceptionOnMissingQuery()
+    public function testThrowsExceptionOnMissingQuery(): void
     {
         $this->expectException(Parser::class);
         $inputArray = ['identifier' => 'foo'];
         $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the session input parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\ViewInput
-     */
-    protected function internalGetParser()
+    protected function internalGetParser(): ViewInputOneDotOne
     {
         return new ViewInputOneDotOne();
     }

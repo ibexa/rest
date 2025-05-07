@@ -15,12 +15,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RelationListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the RelationList visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -46,19 +41,15 @@ class RelationListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains Relations element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsRelationsElement($result)
+    public function testResultContainsRelationsElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -71,13 +62,9 @@ class RelationListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Relations element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsRelationsAttributes($result)
+    public function testResultContainsRelationsAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -93,10 +80,7 @@ class RelationListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Test if RelationList visitor visits the children.
-     */
-    public function testRelationListVisitsChildren()
+    public function testRelationListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -123,12 +107,7 @@ class RelationListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the RelationList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RelationList
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\RelationList
     {
         return new ValueObjectVisitor\RelationList();
     }

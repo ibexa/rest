@@ -33,10 +33,7 @@ class Dispatcher
      */
     protected $handlers = [];
 
-    /**
-     * @var \Ibexa\Contracts\Rest\Input\ParsingDispatcher
-     */
-    protected $parsingDispatcher;
+    protected ParsingDispatcher $parsingDispatcher;
 
     /**
      * Construct from optional parsers array.
@@ -58,7 +55,7 @@ class Dispatcher
      * @param string $type
      * @param \Ibexa\Contracts\Rest\Input\Handler $handler
      */
-    public function addHandler($type, Handler $handler)
+    public function addHandler($type, Handler $handler): void
     {
         $this->handlers[$type] = $handler;
     }
@@ -102,7 +99,7 @@ class Dispatcher
         $rawArray = $this->handlers[$format]->convert($message->body);
 
         // Only 1 XML root node
-        $rootNodeArray = reset($rawArray);
+        $rootNodeArray = reset($rawArray) ?: [];
 
         // @todo: This needs to be refactored in order to make the called URL
         // available to parsers in the server in a sane way
@@ -116,7 +113,10 @@ class Dispatcher
         return $this->parsingDispatcher->parse($rootNodeArray, $media);
     }
 
-    private function parseParameters($mediaTypePart)
+    /**
+     * @return string[]
+     */
+    private function parseParameters(string $mediaTypePart): array
     {
         $parameters = [];
         foreach (explode(';', $mediaTypePart) as $parameterString) {

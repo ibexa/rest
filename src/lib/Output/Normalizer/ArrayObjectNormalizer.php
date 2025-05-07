@@ -20,7 +20,7 @@ final class ArrayObjectNormalizer implements NormalizerInterface
      *
      * {@inheritDoc}
      */
-    public function normalize($object, ?string $format = null, array $context = []): array
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         $data = get_object_vars($object);
 
@@ -31,8 +31,15 @@ final class ArrayObjectNormalizer implements NormalizerInterface
         return $data;
     }
 
-    public function supportsNormalization($data, ?string $format = null): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof ArrayObject;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            ArrayObject::class => true,
+        ];
     }
 }

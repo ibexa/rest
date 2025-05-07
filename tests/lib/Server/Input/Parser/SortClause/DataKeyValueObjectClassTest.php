@@ -18,7 +18,7 @@ class DataKeyValueObjectClassTest extends BaseTest
     /**
      * Tests the DataKeyValueObjectClass parser.
      */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'DatePublished' => Query::SORT_ASC,
@@ -37,7 +37,7 @@ class DataKeyValueObjectClassTest extends BaseTest
     /**
      * Test DataKeyValueObjectClass parser throwing exception on missing sort clause.
      */
-    public function testParseExceptionOnMissingSortClause()
+    public function testParseExceptionOnMissingSortClause(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('The <DatePublished> Sort Clause doesn\'t exist in the input structure');
@@ -52,7 +52,7 @@ class DataKeyValueObjectClassTest extends BaseTest
     /**
      * Test DataKeyValueObjectClass parser throwing exception on invalid direction format.
      */
-    public function testParseExceptionOnInvalidDirectionFormat()
+    public function testParseExceptionOnInvalidDirectionFormat(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid direction format in the <DatePublished> Sort Clause');
@@ -67,7 +67,7 @@ class DataKeyValueObjectClassTest extends BaseTest
     /**
      * Test DataKeyValueObjectClass parser throwing exception on nonexisting value object class.
      */
-    public function testParseExceptionOnNonexistingValueObjectClass()
+    public function testParseExceptionOnNonexistingValueObjectClass(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Value object class <eC\Pubish\APl\Repudiatory\BadValues\Discontent\Queezy\SantaClause\ThisClassIsExistentiallyChallenged> is not defined');
@@ -87,7 +87,7 @@ class DataKeyValueObjectClassTest extends BaseTest
      *
      * @return \Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
      */
-    protected function internalGetParser()
+    protected function internalGetParser(): DataKeyValueObjectClass
     {
         return new DataKeyValueObjectClass(
             'DatePublished',

@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Input\Parser\Limitation;
 
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Core\Repository\Values;
@@ -50,15 +51,7 @@ class RouteBasedLimitationParser extends BaseParser
         $this->limitationClass = $limitationClass;
     }
 
-    /**
-     * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject
-     */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): Limitation
     {
         if (!array_key_exists('_identifier', $data)) {
             throw new Exceptions\Parser("Missing '_identifier' attribute for Limitation.");
@@ -90,11 +83,9 @@ class RouteBasedLimitationParser extends BaseParser
     }
 
     /**
-     * @param $limitationValue
-     *
-     * @return false|mixed
+     * @param array{_href: string} $limitationValue
      */
-    protected function parseIdFromHref($limitationValue)
+    protected function parseIdFromHref(array $limitationValue): string
     {
         return $this->uriParser->getAttributeFromUri(
             $limitationValue['_href'],

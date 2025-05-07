@@ -12,13 +12,11 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeUpdateStruct;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\ContentTypeService;
 use Ibexa\Rest\Server\Input\Parser\ContentTypeUpdate;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ContentTypeUpdateTest extends BaseTest
 {
-    /**
-     * Tests the ContentTypeUpdate parser.
-     */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = $this->getInputArray();
 
@@ -108,10 +106,7 @@ class ContentTypeUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Test ContentTypeUpdate parser throwing exception on invalid names.
-     */
-    public function testParseExceptionOnInvalidNames()
+    public function testParseExceptionOnInvalidNames(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid \'names\' element for ContentTypeUpdate.');
@@ -122,10 +117,7 @@ class ContentTypeUpdateTest extends BaseTest
         $contentTypeUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentTypeUpdate parser throwing exception on invalid descriptions.
-     */
-    public function testParseExceptionOnInvalidDescriptions()
+    public function testParseExceptionOnInvalidDescriptions(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid \'descriptions\' element for ContentTypeUpdate.');
@@ -136,10 +128,7 @@ class ContentTypeUpdateTest extends BaseTest
         $contentTypeUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test ContentTypeUpdate parser throwing exception on invalid User.
-     */
-    public function testParseExceptionOnInvalidUser()
+    public function testParseExceptionOnInvalidUser(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'_href\' attribute for the User element in ContentTypeUpdate.');
@@ -150,12 +139,7 @@ class ContentTypeUpdateTest extends BaseTest
         $contentTypeUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the ContentTypeUpdate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\ContentTypeUpdate
-     */
-    protected function internalGetParser()
+    protected function internalGetParser(): ContentTypeUpdate
     {
         return new ContentTypeUpdate(
             $this->getContentTypeServiceMock(),
@@ -163,12 +147,7 @@ class ContentTypeUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the content type service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService
-     */
-    protected function getContentTypeServiceMock()
+    protected function getContentTypeServiceMock(): ContentTypeService&MockObject
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
@@ -180,11 +159,9 @@ class ContentTypeUpdateTest extends BaseTest
     }
 
     /**
-     * Returns the array under test.
-     *
      * @return array
      */
-    protected function getInputArray()
+    protected function getInputArray(): array
     {
         return [
             'identifier' => 'updated_content_type',
@@ -219,7 +196,7 @@ class ContentTypeUpdateTest extends BaseTest
         ];
     }
 
-    public function getParseHrefExpectationsMap()
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/user/users/14', 'userId', 14],

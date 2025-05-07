@@ -19,10 +19,7 @@ use Ibexa\Rest\Output\FieldTypeSerializer;
  */
 class RestFieldDefinition extends RestContentTypeBase
 {
-    /**
-     * @var \Ibexa\Rest\Output\FieldTypeSerializer
-     */
-    protected $fieldTypeSerializer;
+    protected FieldTypeSerializer $fieldTypeSerializer;
 
     /**
      * @param \Ibexa\Rest\Output\FieldTypeSerializer $fieldTypeSerializer
@@ -39,7 +36,7 @@ class RestFieldDefinition extends RestContentTypeBase
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\RestFieldDefinition $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $restFieldDefinition = $data;
         $fieldDefinition = $restFieldDefinition->fieldDefinition;

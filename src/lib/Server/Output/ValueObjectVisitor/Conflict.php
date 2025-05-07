@@ -16,7 +16,7 @@ use Ibexa\Contracts\Rest\Output\Visitor;
  */
 class Conflict extends ValueObjectVisitor
 {
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $visitor->setStatus(409);
     }

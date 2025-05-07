@@ -14,12 +14,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class URLAliasRefListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the URLAliasRefList visitor.
-     *
-     * @return \DOMDocument
-     */
-    public function testVisit()
+    public function testVisit(): \DOMDocument
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -51,7 +46,7 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -60,51 +55,38 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testUrlAliasRefListHrefCorrect(\DOMDocument $dom)
+    public function testUrlAliasRefListHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UrlAliasRefList[@href="/some/path"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testUrlAliasRefListMediaTypeCorrect(\DOMDocument $dom)
+    public function testUrlAliasRefListMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UrlAliasRefList[@media-type="application/vnd.ibexa.api.UrlAliasRefList+xml"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testUrlAliasHrefCorrect(\DOMDocument $dom)
+    public function testUrlAliasHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UrlAliasRefList/UrlAlias[@href="/content/urlaliases/some-id"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testUrlAliasMediaTypeCorrect(\DOMDocument $dom)
+    public function testUrlAliasMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UrlAliasRefList/UrlAlias[@media-type="application/vnd.ibexa.api.UrlAlias+xml"]');
     }
 
-    /**
-     * Get the URLAliasRefList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAliasRefList
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\URLAliasRefList
     {
         return new ValueObjectVisitor\URLAliasRefList();
     }

@@ -8,17 +8,12 @@
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\Section;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class SectionTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the Section visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -47,19 +42,15 @@ class SectionTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains Section element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsSectionElement($result)
+    public function testResultContainsSectionElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -76,13 +67,9 @@ class SectionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Section element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsSectionAttributes($result)
+    public function testResultContainsSectionAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -99,13 +86,9 @@ class SectionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains sectionId value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsSectionIdValueElement($result)
+    public function testResultContainsSectionIdValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -119,13 +102,9 @@ class SectionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains identifier value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsIdentifierValueElement($result)
+    public function testResultContainsIdentifierValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -139,13 +118,9 @@ class SectionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains name value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsNameValueElement($result)
+    public function testResultContainsNameValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -158,13 +133,8 @@ class SectionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the Section visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Section
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): Section
     {
-        return new ValueObjectVisitor\Section();
+        return new Section();
     }
 }

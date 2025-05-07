@@ -13,12 +13,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ImageVariationTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the ImageVariation visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): \DOMDocument
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -55,7 +50,7 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -64,139 +59,110 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testContentImageVariationContentTagExists(\DOMDocument $dom)
+    public function testContentImageVariationContentTagExists(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testContentImageVariationTagHrefAttribute(\DOMDocument $dom)
+    public function testContentImageVariationTagHrefAttribute(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation[@href="/content/binary/images/123-456789/variations/test"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testContentImageVariationTagMediaTypeAttribute(\DOMDocument $dom)
+    public function testContentImageVariationTagMediaTypeAttribute(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation[@media-type="application/vnd.ibexa.api.ContentImageVariation+xml"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testUriTagExists(\DOMDocument $dom)
+    public function testUriTagExists(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/uri');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testUriTagValue(\DOMDocument $dom)
+    public function testUriTagValue(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/uri[text()="/path/to/image/123/456789/variation.png"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testContentTypeTagExists(\DOMDocument $dom)
+    public function testContentTypeTagExists(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/contentType');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testContentTypeTagValue(\DOMDocument $dom)
+    public function testContentTypeTagValue(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/contentType[text()="image/png"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testWidthTagExists(\DOMDocument $dom)
+    public function testWidthTagExists(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/width');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testWidthTagValue(\DOMDocument $dom)
+    public function testWidthTagValue(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/width[text()="600"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testHeightTagExists(\DOMDocument $dom)
+    public function testHeightTagExists(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/height');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testHeightTagValue(\DOMDocument $dom)
+    public function testHeightTagValue(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/height[text()="400"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testFileSizeTagExists(\DOMDocument $dom)
+    public function testFileSizeTagExists(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/fileSize');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testFileSizeTagValue(\DOMDocument $dom)
+    public function testFileSizeTagValue(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/fileSize[text()="12345"]');
     }
 
-    /**
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ImageVariation
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\ImageVariation
     {
         return new ValueObjectVisitor\ImageVariation();
     }

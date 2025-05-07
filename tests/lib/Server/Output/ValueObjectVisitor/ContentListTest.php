@@ -15,12 +15,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ContentListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the ContentList visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -43,19 +38,15 @@ class ContentListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains ContentList element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsContentListElement($result)
+    public function testResultContainsContentListElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -68,13 +59,9 @@ class ContentListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ContentList element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsContentListAttributes($result)
+    public function testResultContainsContentListAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -90,10 +77,7 @@ class ContentListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Test if ContentList visitor visits the children.
-     */
-    public function testContentListVisitsChildren()
+    public function testContentListVisitsChildren(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -122,10 +106,6 @@ class ContentListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ContentList element attributes.
-     *
-     * @param string $result
-     *
      * @depends testContentListVisitsChildren
      */
     public function testResultContainsTotalCountAttributes(string $result): void
@@ -148,7 +128,7 @@ class ContentListTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentList
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\ContentList
     {
         return new ValueObjectVisitor\ContentList();
     }
