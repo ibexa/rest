@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
+use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
@@ -95,7 +96,7 @@ class ContentVersionRelationDeleteController extends RestController
 
         foreach ($versionRelations as $relation) {
             if ($relation->id == $relationId) {
-                if ($relation->type !== Relation::COMMON) {
+                if ($relation->type !== RelationType::COMMON->value) {
                     throw new ForbiddenException('Relation is not of type COMMON');
                 }
 
