@@ -16,20 +16,14 @@ use Symfony\Component\Routing\RouterInterface;
 
 abstract class BaseRelationProcessor extends FieldTypeProcessor
 {
-    /**
-     * @var \Symfony\Component\Routing\RouterInterface
-     */
-    private $router;
+    private ?RouterInterface $router = null;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
-     */
-    private $locationService;
+    private ?LocationService $locationService = null;
 
     /**
      * @param \Symfony\Component\Routing\RouterInterface $router
      */
-    public function setRouter(RouterInterface $router)
+    public function setRouter(RouterInterface $router): void
     {
         $this->router = $router;
     }
@@ -37,7 +31,7 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
     /**
      * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
      */
-    public function setLocationService(LocationService $locationService)
+    public function setLocationService(LocationService $locationService): void
     {
         $this->locationService = $locationService;
     }
@@ -57,7 +51,7 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
      */
     public function mapToContentHref($contentId)
     {
-        return $this->router->generate('ibexa.rest.load_content', ['contentId' => $contentId]);
+        return $this->router?->generate('ibexa.rest.load_content', ['contentId' => $contentId]) ?? '';
     }
 
     /**
@@ -65,17 +59,21 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
      *
      * @return string
      */
-    public function mapToLocationHref($locationId)
+    public function mapToLocationHref(int $locationId)
     {
         try {
-            $location = $this->locationService->loadLocation($locationId);
+            $location = $this->locationService?->loadLocation($locationId);
         } catch (UnauthorizedException | NotFoundException $e) {
             return '';
         }
 
-        return $this->router->generate('ibexa.rest.load_location', [
-            'locationPath' => implode('/', $location->path),
-        ]);
+        if ($location === null) {
+            return '';
+        }
+
+        return $this->router?->generate('ibexa.rest.load_location', [
+            'locationPath' => $location->getPathString(),
+        ]) ?? '';
     }
 
     public function preProcessFieldSettingsHash($incomingSettingsHash)

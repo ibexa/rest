@@ -93,7 +93,7 @@ class RestLocationRootNodeTest extends RestLocationTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
@@ -105,7 +105,7 @@ class RestLocationRootNodeTest extends RestLocationTest
      *
      * @depends testVisit
      */
-    public function testResultContainsIdValueElement($result)
+    public function testResultContainsIdValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -125,7 +125,7 @@ class RestLocationRootNodeTest extends RestLocationTest
      *
      * @depends testVisit
      */
-    public function testResultContainsParentLocationElement($result)
+    public function testResultContainsParentLocationElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -144,7 +144,7 @@ class RestLocationRootNodeTest extends RestLocationTest
      *
      * @depends testVisit
      */
-    public function testResultContainsParentLocationAttributes($result)
+    public function testResultContainsParentLocationAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -164,7 +164,7 @@ class RestLocationRootNodeTest extends RestLocationTest
      *
      * @depends testVisit
      */
-    public function testResultContainsLocationAttributes($result)
+    public function testResultContainsLocationAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -187,7 +187,7 @@ class RestLocationRootNodeTest extends RestLocationTest
      *
      * @depends testVisit
      */
-    public function testResultContainsChildrenAttributes($result)
+    public function testResultContainsChildrenAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -210,7 +210,7 @@ class RestLocationRootNodeTest extends RestLocationTest
      *
      * @depends testVisit
      */
-    public function testResultContainsPathStringValueElement($result)
+    public function testResultContainsPathStringValueElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -230,7 +230,7 @@ class RestLocationRootNodeTest extends RestLocationTest
      *
      * @depends testVisit
      */
-    public function testResultContainsUrlAliasesTagAttributes($result)
+    public function testResultContainsUrlAliasesTagAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -251,7 +251,7 @@ class RestLocationRootNodeTest extends RestLocationTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestLocation
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\RestLocation
     {
         return new ValueObjectVisitor\RestLocation();
     }

@@ -19,10 +19,8 @@ class URLWildcardCreate extends BaseParser
 {
     /**
      * Parser tools.
-     *
-     * @var \Ibexa\Rest\Input\ParserTools
      */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     /**
      * Construct.
@@ -37,12 +35,9 @@ class URLWildcardCreate extends BaseParser
     /**
      * Parse input structure.
      *
-     * @param array $data
      * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return array
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): array
     {
         if (!array_key_exists('sourceUrl', $data)) {
             throw new Exceptions\Parser("Missing 'sourceUrl' value for URLWildcardCreate.");

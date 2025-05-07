@@ -11,13 +11,11 @@ use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroupUpdateStr
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\ObjectStateService;
 use Ibexa\Rest\Server\Input\Parser\ObjectStateGroupUpdate;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class ObjectStateGroupUpdateTest extends BaseTest
 {
-    /**
-     * Tests the ObjectStateGroupUpdate parser.
-     */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'identifier' => 'test-group',
@@ -74,10 +72,7 @@ class ObjectStateGroupUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Test ObjectStateGroupUpdate parser throwing exception on invalid names structure.
-     */
-    public function testParseExceptionOnInvalidNames()
+    public function testParseExceptionOnInvalidNames(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing or invalid \'names\' element for ObjectStateGroupUpdate.');
@@ -99,12 +94,7 @@ class ObjectStateGroupUpdateTest extends BaseTest
         $objectStateGroupUpdate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the ObjectStateGroupUpdate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\ObjectStateGroupUpdate
-     */
-    protected function internalGetParser()
+    protected function internalGetParser(): ObjectStateGroupUpdate
     {
         return new ObjectStateGroupUpdate(
             $this->getObjectStateServiceMock(),
@@ -112,12 +102,7 @@ class ObjectStateGroupUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the object state service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ObjectStateService
-     */
-    protected function getObjectStateServiceMock()
+    protected function getObjectStateServiceMock(): ObjectStateService & MockObject
     {
         $objectStateServiceMock = $this->createMock(ObjectStateService::class);
 

@@ -27,7 +27,7 @@ class LocationId extends BaseParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LocationId
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): LocationIdCriterion
     {
         if (!array_key_exists('LocationIdCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <LocationIdCriterion> format');

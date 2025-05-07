@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\SectionService;
+use Ibexa\Contracts\Core\Repository\Values\Content\SectionCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -19,10 +20,8 @@ class SectionInput extends BaseParser
 {
     /**
      * Section service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\SectionService
      */
-    protected $sectionService;
+    protected SectionService $sectionService;
 
     /**
      * Construct.
@@ -34,15 +33,7 @@ class SectionInput extends BaseParser
         $this->sectionService = $sectionService;
     }
 
-    /**
-     * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\SectionCreateStruct
-     */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): SectionCreateStruct
     {
         $sectionCreate = $this->sectionService->newSectionCreateStruct();
 

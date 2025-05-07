@@ -24,7 +24,7 @@ class ContentFieldValidationException extends BadRequestException
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Exceptions\ContentFieldValidationException $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startObjectElement('ErrorMessage');
 
@@ -61,7 +61,7 @@ class ContentFieldValidationException extends BadRequestException
                     $translation = $validationError->getTranslatableMessage();
                     $generator->valueElement(
                         'message',
-                        $this->translator->trans(
+                        $this->translator?->trans(
                             /** @Ignore */
                             $this->translationToString($translation),
                             $translation->values,

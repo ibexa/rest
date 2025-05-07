@@ -15,10 +15,7 @@ use Ibexa\Rest\Value as RestValue;
  */
 class VersionTranslationInfo extends RestValue
 {
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo
-     */
-    private $versionInfo;
+    private VersionInfo $versionInfo;
 
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $versionInfo

@@ -18,12 +18,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class UserListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the UserList visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -40,19 +35,15 @@ class UserListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains UserList element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsUserListElement($result)
+    public function testResultContainsUserListElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -65,13 +56,9 @@ class UserListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains UserList element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsUserListAttributes($result)
+    public function testResultContainsUserListAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -87,10 +74,7 @@ class UserListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Test if UserList visitor visits the children.
-     */
-    public function testUserListVisitsChildren()
+    public function testUserListVisitsChildren(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -136,12 +120,7 @@ class UserListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the UserList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UserList
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\UserList
     {
         return new ValueObjectVisitor\UserList();
     }

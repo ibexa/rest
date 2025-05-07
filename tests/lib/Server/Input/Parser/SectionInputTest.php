@@ -11,13 +11,11 @@ use Ibexa\Contracts\Core\Repository\Values\Content\SectionCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\SectionService;
 use Ibexa\Rest\Server\Input\Parser\SectionInput;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class SectionInputTest extends BaseTest
 {
-    /**
-     * Tests the SectionInput parser.
-     */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'name' => 'Name Foo',
@@ -34,10 +32,7 @@ class SectionInputTest extends BaseTest
         );
     }
 
-    /**
-     * Test SectionInput parser throwing exception on missing identifier.
-     */
-    public function testParseExceptionOnMissingIdentifier()
+    public function testParseExceptionOnMissingIdentifier(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'identifier\' attribute for SectionInput.');
@@ -49,10 +44,7 @@ class SectionInputTest extends BaseTest
         $sectionInput->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test SectionInput parser throwing exception on missing name.
-     */
-    public function testParseExceptionOnMissingName()
+    public function testParseExceptionOnMissingName(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'name\' attribute for SectionInput.');
@@ -64,24 +56,14 @@ class SectionInputTest extends BaseTest
         $sectionInput->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the section input parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\SectionInput
-     */
-    protected function internalGetParser()
+    protected function internalGetParser(): SectionInput
     {
         return new SectionInput(
             $this->getSectionServiceMock()
         );
     }
 
-    /**
-     * Get the section service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\SectionService
-     */
-    protected function getSectionServiceMock()
+    protected function getSectionServiceMock(): SectionService & MockObject
     {
         $sectionServiceMock = $this->createMock(SectionService::class);
 

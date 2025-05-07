@@ -21,7 +21,7 @@ class MapperTest extends TestCase
         $this->mapper = new Mapper();
     }
 
-    public function testGetOptionsRouteName()
+    public function testGetOptionsRouteName(): void
     {
         $route = new Route('/route/{id}');
 
@@ -31,7 +31,7 @@ class MapperTest extends TestCase
         );
     }
 
-    public function testMergeMethodsDefault()
+    public function testMergeMethodsDefault(): void
     {
         $optionsRoute = new Route('', ['allowedMethods' => 'PUT,DELETE']);
         $restRoute = new Route('', [], [], [], '', [], ['GET', 'POST']);
@@ -47,7 +47,7 @@ class MapperTest extends TestCase
         );
     }
 
-    public function testMapRoute()
+    public function testMapRoute(): void
     {
         $restRoute = new Route(
             '/route/one/{id}',

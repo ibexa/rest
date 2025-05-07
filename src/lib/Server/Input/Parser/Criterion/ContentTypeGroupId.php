@@ -27,7 +27,7 @@ class ContentTypeGroupId extends BaseParser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeGroupId
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentTypeGroupIdCriterion
     {
         if (!array_key_exists('ContentTypeGroupIdCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <ContentTypeGroupIdCriterion> format');

@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Input;
 
 use Ibexa\Contracts\Core\Repository\Values;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\ContentTypeLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\LanguageLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\LocationLimitation;
@@ -35,11 +36,8 @@ class ParserTools
      * Parses the given $objectElement, if it contains embedded data.
      *
      * @param array $objectElement
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return mixed
      */
-    public function parseObjectElement(array $objectElement, ParsingDispatcher $parsingDispatcher)
+    public function parseObjectElement(array $objectElement, ParsingDispatcher $parsingDispatcher): string
     {
         if ($this->isEmbeddedObject($objectElement)) {
             $parsingDispatcher->parse(
@@ -56,10 +54,8 @@ class ParserTools
      * a reference.
      *
      * @param array $objectElement
-     *
-     * @return bool
      */
-    public function isEmbeddedObject(array $objectElement)
+    public function isEmbeddedObject(array $objectElement): bool
     {
         foreach ($objectElement as $childKey => $childValue) {
             $childKeyIndicator = substr($childKey, 0, 1);
@@ -78,7 +74,7 @@ class ParserTools
      *
      * @return array
      */
-    public function parseTranslatableList(array $listElement)
+    public function parseTranslatableList(array $listElement): array
     {
         $listItems = [];
         foreach ($listElement['value'] as $valueRow) {
@@ -90,16 +86,10 @@ class ParserTools
         return $listItems;
     }
 
-    /**
-     * Parses a boolean from $value.
-     *
-     * @param string|bool $value
-     *
-     * @return bool
-     *
+    /***
      * @throws \RuntimeException if the value can not be transformed to a boolean
      */
-    public function parseBooleanValue($value)
+    public function parseBooleanValue(string|bool $value): bool
     {
         if (is_bool($value)) {
             return $value;
@@ -116,12 +106,8 @@ class ParserTools
 
     /**
      * Parses the content types status from $contentTypeStatus.
-     *
-     * @param string $contentTypeStatus
-     *
-     * @return int
      */
-    public function parseStatus($contentTypeStatus)
+    public function parseStatus(string $contentTypeStatus): int
     {
         switch (strtoupper($contentTypeStatus)) {
             case 'DEFINED':
@@ -132,17 +118,13 @@ class ParserTools
                 return Values\ContentType\ContentType::STATUS_MODIFIED;
         }
 
-        throw new \RuntimeException("Unknown content type status '{$contentTypeStatus}.'");
+        throw new RuntimeException("Unknown content type status '{$contentTypeStatus}.'");
     }
 
     /**
      * Parses the default sort field from the given $defaultSortFieldString.
-     *
-     * @param string $defaultSortFieldString
-     *
-     * @return int
      */
-    public function parseDefaultSortField($defaultSortFieldString)
+    public function parseDefaultSortField(string $defaultSortFieldString): int
     {
         switch ($defaultSortFieldString) {
             case 'PATH':
@@ -169,17 +151,13 @@ class ParserTools
                 return Values\Content\Location::SORT_FIELD_CONTENTOBJECT_ID;
         }
 
-        throw new \RuntimeException("Unknown default sort Field: '{$defaultSortFieldString}'.");
+        throw new RuntimeException("Unknown default sort Field: '{$defaultSortFieldString}'.");
     }
 
     /**
      * Parses the default sort order from the given $defaultSortOrderString.
-     *
-     * @param string $defaultSortOrderString
-     *
-     * @return int
      */
-    public function parseDefaultSortOrder($defaultSortOrderString)
+    public function parseDefaultSortOrder(string $defaultSortOrderString): int
     {
         switch (strtoupper($defaultSortOrderString)) {
             case 'ASC':
@@ -188,17 +166,15 @@ class ParserTools
                 return Values\Content\Location::SORT_ORDER_DESC;
         }
 
-        throw new \RuntimeException("Unknown default sort order: '{$defaultSortOrderString}'.");
+        throw new RuntimeException("Unknown default sort order: '{$defaultSortOrderString}'.");
     }
 
     /**
      * Parses the input structure to Limitation object.
      *
      * @param array $limitation
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\Limitation
      */
-    public function parseLimitation(array $limitation)
+    public function parseLimitation(array $limitation): Limitation
     {
         if (!array_key_exists('_identifier', $limitation)) {
             throw new Exceptions\Parser("Missing '_identifier' attribute for Limitation.");
@@ -227,54 +203,50 @@ class ParserTools
     /**
      * Instantiates Limitation object based on identifier.
      *
-     * @param string $identifier
-     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\Limitation
      *
      * @todo Use dependency injection system
      */
-    protected function getLimitationByIdentifier($identifier)
+    protected function getLimitationByIdentifier(string $identifier): Limitation
     {
         switch ($identifier) {
-            case Values\User\Limitation::CONTENTTYPE:
+            case Limitation::CONTENTTYPE:
                 return new ContentTypeLimitation();
 
-            case Values\User\Limitation::LANGUAGE:
+            case Limitation::LANGUAGE:
                 return new LanguageLimitation();
 
-            case Values\User\Limitation::LOCATION:
+            case Limitation::LOCATION:
                 return new LocationLimitation();
 
-            case Values\User\Limitation::OWNER:
+            case Limitation::OWNER:
                 return new OwnerLimitation();
 
-            case Values\User\Limitation::PARENTOWNER:
+            case Limitation::PARENTOWNER:
                 return new ParentOwnerLimitation();
 
-            case Values\User\Limitation::PARENTCONTENTTYPE:
+            case Limitation::PARENTCONTENTTYPE:
                 return new ParentContentTypeLimitation();
 
-            case Values\User\Limitation::PARENTDEPTH:
+            case Limitation::PARENTDEPTH:
                 return new ParentDepthLimitation();
 
-            case Values\User\Limitation::SECTION:
+            case Limitation::SECTION:
                 return new SectionLimitation();
 
-            case Values\User\Limitation::SITEACCESS:
-                return new SiteaccessLimitation();
+            case Limitation::SITEACCESS:
+                return new SiteAccessLimitation();
 
-            case Values\User\Limitation::STATE:
+            case Limitation::STATE:
                 return new ObjectStateLimitation();
 
-            case Values\User\Limitation::SUBTREE:
+            case Limitation::SUBTREE:
                 return new SubtreeLimitation();
 
-            case Values\User\Limitation::USERGROUP:
+            case Limitation::USERGROUP:
                 return new UserGroupLimitation();
 
-            case Values\User\Limitation::PARENTUSERGROUP:
+            case Limitation::PARENTUSERGROUP:
                 return new ParentUserGroupLimitation();
 
             default:

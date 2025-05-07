@@ -15,22 +15,18 @@ use Ibexa\Rest\Output\FieldTypeSerializer;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\Version;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class VersionTest extends ValueObjectVisitorBaseTest
 {
-    protected $fieldTypeSerializerMock;
+    protected FieldTypeSerializer&MockObject $fieldTypeSerializerMock;
 
     public function setUp(): void
     {
         $this->fieldTypeSerializerMock = $this->createMock(FieldTypeSerializer::class);
     }
 
-    /**
-     * Test the Version visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -92,17 +88,15 @@ class VersionTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsVersionChildren($result)
+    public function testResultContainsVersionChildren(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -119,11 +113,9 @@ class VersionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultVersionAttributes($result)
+    public function testResultVersionAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -140,11 +132,9 @@ class VersionTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsFieldsChildren($result)
+    public function testResultContainsFieldsChildren(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -160,12 +150,7 @@ class VersionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the Version visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Version
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\Version
     {
         return new ValueObjectVisitor\Version($this->fieldTypeSerializerMock);
     }

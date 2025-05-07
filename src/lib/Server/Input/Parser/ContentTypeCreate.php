@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Input\Parser;
 
 use DateTime;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -21,24 +22,18 @@ class ContentTypeCreate extends BaseParser
 {
     /**
      * ContentType service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
      */
-    protected $contentTypeService;
+    protected ContentTypeService $contentTypeService;
 
     /**
      * FieldDefinitionCreate parser.
-     *
-     * @var \Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate
      */
-    protected $fieldDefinitionCreateParser;
+    protected FieldDefinitionCreate $fieldDefinitionCreateParser;
 
     /**
      * Parser tools.
-     *
-     * @var \Ibexa\Rest\Input\ParserTools
      */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     /**
      * Construct.
@@ -57,15 +52,7 @@ class ContentTypeCreate extends BaseParser
         $this->parserTools = $parserTools;
     }
 
-    /**
-     * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeCreateStruct
-     */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentTypeCreateStruct
     {
         if (!array_key_exists('identifier', $data)) {
             throw new Exceptions\Parser("Missing 'identifier' element for ContentTypeCreate.");

@@ -9,20 +9,14 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Core\Repository\Values\Content;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionInfo;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class VersionInfoTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * @var \DateTime
-     */
-    protected $creationDate;
+    protected \DateTime $creationDate;
 
-    /**
-     * @var \DateTime
-     */
-    protected $modificationDate;
+    protected \DateTime $modificationDate;
 
     public function setUp(): void
     {
@@ -30,12 +24,7 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
         $this->modificationDate = new \DateTime('2012-08-31 23:42 Europe/Berlin');
     }
 
-    /**
-     * Test the VersionInfo visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -80,17 +69,15 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsVersionInfoChildren($result)
+    public function testResultContainsVersionInfoChildren(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -107,11 +94,9 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testVersionInfoIdElement($result)
+    public function testVersionInfoIdElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -125,11 +110,9 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testVersionInfoVersionNoElement($result)
+    public function testVersionInfoVersionNoElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -143,11 +126,9 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testVersionInfoStatusElement($result)
+    public function testVersionInfoStatusElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -161,11 +142,9 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testVersionInfoCreationDateElement($result)
+    public function testVersionInfoCreationDateElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -179,11 +158,9 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testVersionInfoModificationDateElement($result)
+    public function testVersionInfoModificationDateElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -197,11 +174,9 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testVersionInfoInitialLanguageCodeElement($result)
+    public function testVersionInfoInitialLanguageCodeElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -215,11 +190,9 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testVersionInfoLanguageCodesElement($result)
+    public function testVersionInfoLanguageCodesElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -233,11 +206,9 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testVersionInfoNamesElement($result)
+    public function testVersionInfoNamesElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -254,11 +225,9 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testVersionInfoContentElement($result)
+    public function testVersionInfoContentElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -274,13 +243,8 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the VersionInfo visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionInfo
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): VersionInfo
     {
-        return new ValueObjectVisitor\VersionInfo();
+        return new VersionInfo();
     }
 }

@@ -12,15 +12,21 @@ use PHPUnit\Framework\TestCase;
 
 class AuthorProcessorTest extends TestCase
 {
-    protected $constants = [
+    /**
+     * @var string[]
+     */
+    protected array $constants = [
         'DEFAULT_VALUE_EMPTY',
         'DEFAULT_CURRENT_USER',
     ];
 
-    public function fieldSettingsHashes()
+    /**
+     * @return array<array{array{defaultAuthor: mixed}, array{defaultAuthor: mixed}}>
+     */
+    public function fieldSettingsHashes(): array
     {
         return array_map(
-            static function ($constantName) {
+            static function ($constantName): array {
                 return [
                     ['defaultAuthor' => $constantName],
                     ['defaultAuthor' => constant("Ibexa\\Core\\FieldType\\Author\\Type::{$constantName}")],
@@ -35,7 +41,7 @@ class AuthorProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
+    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -50,7 +56,7 @@ class AuthorProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)
+    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -63,7 +69,7 @@ class AuthorProcessorTest extends TestCase
     /**
      * @return \Ibexa\Rest\FieldTypeProcessor\AuthorProcessor
      */
-    protected function getProcessor()
+    protected function getProcessor(): AuthorProcessor
     {
         return new AuthorProcessor();
     }

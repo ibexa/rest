@@ -7,18 +7,13 @@
 
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\NoContent;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class NoContentTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the NoContent visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -40,13 +35,8 @@ class NoContentTest extends ValueObjectVisitorBaseTest
         self::assertTrue($generator->isEmpty());
     }
 
-    /**
-     * Get the NoContent visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\NoContent
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): NoContent
     {
-        return new ValueObjectVisitor\NoContent();
+        return new NoContent();
     }
 }

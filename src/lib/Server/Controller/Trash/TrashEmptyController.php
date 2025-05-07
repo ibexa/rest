@@ -13,7 +13,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\TrashService;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\NoContent;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
@@ -50,10 +50,10 @@ class TrashEmptyController extends RestController
      *
      * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function emptyTrash()
+    public function emptyTrash(): NoContent
     {
         $this->trashService->emptyTrash();
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 }

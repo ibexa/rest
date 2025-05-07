@@ -12,16 +12,22 @@ use PHPUnit\Framework\TestCase;
 
 class DateAndTimeProcessorTest extends TestCase
 {
-    protected $constants = [
+    /**
+     * @var array<string>
+     */
+    protected array $constants = [
         'DEFAULT_EMPTY',
         'DEFAULT_CURRENT_DATE',
         'DEFAULT_CURRENT_DATE_ADJUSTED',
     ];
 
-    public function fieldSettingsHashes()
+    /**
+     * @return array<array{array{defaultType: mixed}, array{defaultType: mixed}}>
+     */
+    public function fieldSettingsHashes(): array
     {
         return array_map(
-            static function ($constantName) {
+            static function ($constantName): array {
                 return [
                     ['defaultType' => $constantName],
                     ['defaultType' => constant("Ibexa\\Core\\FieldType\\DateAndTime\\Type::{$constantName}")],
@@ -36,7 +42,7 @@ class DateAndTimeProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
+    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -51,7 +57,7 @@ class DateAndTimeProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)
+    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -64,7 +70,7 @@ class DateAndTimeProcessorTest extends TestCase
     /**
      * @return \Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor
      */
-    protected function getProcessor()
+    protected function getProcessor(): DateAndTimeProcessor
     {
         return new DateAndTimeProcessor();
     }

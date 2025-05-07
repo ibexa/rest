@@ -13,14 +13,12 @@ use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\LocationService;
 use Ibexa\Rest\Server\Input\Parser\LocationUpdate;
 use Ibexa\Rest\Server\Values\RestLocationUpdateStruct;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class LocationUpdateTest extends BaseTest
 {
-    /**
-     * Tests the LocationUpdate parser.
-     */
-    public function testParse()
-    {
+        public function testParse(): void
+        {
         $inputArray = [
             'priority' => 0,
             'remoteId' => 'remote-id',
@@ -74,11 +72,8 @@ class LocationUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Test LocationUpdate parser with missing sort field.
-     */
-    public function testParseWithMissingSortField()
-    {
+        public function testParseWithMissingSortField(): void
+        {
         $inputArray = [
             'priority' => 0,
             'remoteId' => 'remote-id',
@@ -106,7 +101,7 @@ class LocationUpdateTest extends BaseTest
     /**
      * Test LocationUpdate parser with missing sort order.
      */
-    public function testParseWithMissingSortOrder()
+    public function testParseWithMissingSortOrder(): void
     {
         $inputArray = [
             'priority' => 0,
@@ -132,12 +127,7 @@ class LocationUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Returns the LocationUpdateStruct parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\LocationUpdate
-     */
-    protected function internalGetParser()
+    protected function internalGetParser(): LocationUpdate
     {
         return new LocationUpdate(
             $this->getLocationServiceMock(),
@@ -145,12 +135,7 @@ class LocationUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the location service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\LocationService
-     */
-    protected function getLocationServiceMock()
+    protected function getLocationServiceMock(): LocationService & MockObject
     {
         $locationServiceMock = $this->createMock(LocationService::class);
 

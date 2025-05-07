@@ -372,12 +372,6 @@ services:
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.LogicalNot }
 
-    Ibexa\Rest\Server\Input\Parser\Criterion\LogicalOperator:
-        parent: Ibexa\Rest\Server\Common\Parser
-        class: Ibexa\Rest\Server\Input\Parser\Criterion\LogicalOperator
-        tags:
-            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.LogicalOperator }
-
     Ibexa\Rest\Server\Input\Parser\Criterion\LogicalOr:
         parent: Ibexa\Rest\Server\Common\Parser
         class: Ibexa\Rest\Server\Input\Parser\Criterion\LogicalOr

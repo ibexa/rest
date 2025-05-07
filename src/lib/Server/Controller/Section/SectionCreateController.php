@@ -15,7 +15,7 @@ use Ibexa\Contracts\Core\Repository\SectionService;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedSection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -100,7 +100,7 @@ class SectionCreateController extends RestController
      *
      * @return \Ibexa\Rest\Server\Values\CreatedSection
      */
-    public function createSection(Request $request)
+    public function createSection(Request $request): CreatedSection
     {
         try {
             $createdSection = $this->sectionService->createSection(
@@ -115,7 +115,7 @@ class SectionCreateController extends RestController
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
-        return new Values\CreatedSection(
+        return new CreatedSection(
             [
                 'section' => $createdSection,
             ]

@@ -13,6 +13,7 @@ use Ibexa\Contracts\Core\Repository\TrashService;
 use Ibexa\Contracts\Core\Repository\URLAliasService;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\LocationList;
 use Symfony\Component\HttpFoundation\Request;
 
 class LocationBaseController extends RestController
@@ -42,9 +43,9 @@ class LocationBaseController extends RestController
      *
      * @todo remove, or use in loadLocation with filter
      */
-    public function loadLocationByRemoteId(Request $request): \Ibexa\Rest\Server\Values\LocationList
+    public function loadLocationByRemoteId(Request $request): LocationList
     {
-        return new Values\LocationList(
+        return new LocationList(
             [
                 new Values\RestLocation(
                     $location = $this->locationService->loadLocationByRemoteId(
@@ -59,15 +60,11 @@ class LocationBaseController extends RestController
 
     /**
      * Extracts and returns an item id from a path, e.g. /1/2/58 => 58.
-     *
-     * @param string $path
-     *
-     * @return mixed
      */
-    protected function extractLocationIdFromPath($path)
+    protected function extractLocationIdFromPath(string $path): int
     {
         $pathParts = explode('/', $path);
 
-        return array_pop($pathParts);
+        return (int) array_pop($pathParts);
     }
 }

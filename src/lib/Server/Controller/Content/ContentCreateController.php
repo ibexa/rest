@@ -18,6 +18,7 @@ use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Exceptions\ContentFieldValidationException as RESTContentFieldValidationException;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedContent;
 use Ibexa\Rest\Server\Values\RestContentCreateStruct;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -154,7 +155,7 @@ class ContentCreateController extends RestController
      *
      * @return \Ibexa\Rest\Server\Values\CreatedContent
      */
-    protected function doCreateContent(Request $request, RestContentCreateStruct $contentCreate)
+    protected function doCreateContent(Request $request, RestContentCreateStruct $contentCreate): CreatedContent
     {
         try {
             $contentCreateStruct = $contentCreate->contentCreateStruct;
@@ -182,7 +183,7 @@ class ContentCreateController extends RestController
             $relations = iterator_to_array($this->relationListFacade->getRelations($contentValue->getVersionInfo()));
         }
 
-        return new Values\CreatedContent(
+        return new CreatedContent(
             [
                 'content' => new Values\RestContent(
                     $content->contentInfo,

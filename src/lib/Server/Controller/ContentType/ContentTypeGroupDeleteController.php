@@ -12,7 +12,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\NoContent;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
@@ -59,15 +59,9 @@ class ContentTypeGroupDeleteController extends RestController
     }
 
     /**
-     * The given content type group is deleted.
-     *
-     * @param mixed $contentTypeGroupId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
      */
-    public function deleteContentTypeGroup($contentTypeGroupId)
+    public function deleteContentTypeGroup(int $contentTypeGroupId): NoContent
     {
         $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId);
 
@@ -78,6 +72,6 @@ class ContentTypeGroupDeleteController extends RestController
 
         $this->contentTypeService->deleteContentTypeGroup($contentTypeGroup);
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 }

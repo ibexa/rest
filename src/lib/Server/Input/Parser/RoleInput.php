@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\RoleService;
+use Ibexa\Contracts\Core\Repository\Values\User\RoleCreateStruct;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 use Ibexa\Rest\Input\ParserTools;
@@ -19,15 +20,10 @@ class RoleInput extends BaseParser
 {
     /**
      * Role service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\RoleService
      */
-    protected $roleService;
+    protected RoleService $roleService;
 
-    /**
-     * @var \Ibexa\Rest\Input\ParserTools
-     */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     /**
      * Construct.
@@ -41,15 +37,7 @@ class RoleInput extends BaseParser
         $this->parserTools = $parserTools;
     }
 
-    /**
-     * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\RoleCreateStruct
-     */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): RoleCreateStruct
     {
         // Since RoleInput is used both for creating and updating role and identifier is not
         // required when updating role, we need to rely on PAPI to throw the exception on missing

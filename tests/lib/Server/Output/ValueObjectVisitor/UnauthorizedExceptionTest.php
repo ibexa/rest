@@ -12,42 +12,22 @@ use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 class UnauthorizedExceptionTest extends ExceptionTest
 {
-    /**
-     * Get expected status code.
-     *
-     * @return int
-     */
-    protected function getExpectedStatusCode()
+    protected function getExpectedStatusCode(): int
     {
         return 401;
     }
 
-    /**
-     * Get expected message.
-     *
-     * @return string
-     */
-    protected function getExpectedMessage()
+    protected function getExpectedMessage(): string
     {
         return 'Unauthorized';
     }
 
-    /**
-     * Gets the exception.
-     *
-     * @return \Exception
-     */
-    protected function getException()
+    protected function getException(): \Exception
     {
         return $this->getMockForAbstractClass(UnauthorizedException::class);
     }
 
-    /**
-     * Gets the exception visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UnauthorizedException
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\Exception
     {
         return new ValueObjectVisitor\UnauthorizedException();
     }

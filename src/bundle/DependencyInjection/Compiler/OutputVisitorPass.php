@@ -24,7 +24,7 @@ class OutputVisitorPass implements CompilerPassInterface
 {
     public const OUTPUT_VISITOR_SERVICE_TAG = 'ibexa.rest.output.visitor';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition(AcceptHeaderVisitorDispatcher::class)) {
             return;

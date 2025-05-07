@@ -15,15 +15,19 @@ use Symfony\Component\Routing\RouterInterface;
 
 class RelationListProcessorTest extends TestCase
 {
-    protected $constants = [
+    /** @var string[] */
+    protected array $constants = [
         'SELECTION_BROWSE',
         'SELECTION_DROPDOWN',
     ];
 
-    public function fieldSettingsHashes()
+    /**
+     * @return array<array{array{selectionMethod: string}, array{selectionMethod: mixed}}>
+     */
+    public function fieldSettingsHashes(): array
     {
         return array_map(
-            static function ($constantName) {
+            static function ($constantName): array {
                 return [
                     ['selectionMethod' => $constantName],
                     ['selectionMethod' => constant("Ibexa\\Core\\FieldType\\RelationList\\Type::{$constantName}")],
@@ -38,7 +42,7 @@ class RelationListProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
+    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -53,7 +57,7 @@ class RelationListProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)
+    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -63,7 +67,7 @@ class RelationListProcessorTest extends TestCase
         );
     }
 
-    public function testpostProcessFieldSettingsHashLocation()
+    public function testpostProcessFieldSettingsHashLocation(): void
     {
         $processor = $this->getProcessor();
 
@@ -73,7 +77,7 @@ class RelationListProcessorTest extends TestCase
         $serviceLocationMock
             ->method('loadLocation')
             ->with('42')
-            ->willReturn(new Location(['path' => ['1', '25', '42']]));
+            ->willReturn(new Location(['path' => ['1', '25', '42'], 'pathString' => '1/25/42']));
 
         $routerMock = $this->createMock(RouterInterface::class);
         $processor->setRouter($routerMock);
@@ -97,7 +101,7 @@ class RelationListProcessorTest extends TestCase
         self::assertEquals(['selectionDefaultLocation' => null], $hash);
     }
 
-    public function testPostProcessValueHash()
+    public function testPostProcessValueHash(): void
     {
         $processor = $this->getProcessor();
 
@@ -124,7 +128,7 @@ class RelationListProcessorTest extends TestCase
     /**
      * @return \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor
      */
-    protected function getProcessor()
+    protected function getProcessor(): RelationListProcessor
     {
         return new RelationListProcessor();
     }

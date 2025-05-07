@@ -24,7 +24,7 @@ class ContentTypeGroup extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startObjectElement('ContentTypeGroup');
         $this->visitContentTypeGroupAttributes($visitor, $generator, $data);

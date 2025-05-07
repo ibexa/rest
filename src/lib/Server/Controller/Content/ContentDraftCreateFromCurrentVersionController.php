@@ -14,6 +14,7 @@ use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedVersion;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
@@ -85,15 +86,9 @@ class ContentDraftCreateFromCurrentVersionController extends RestController
     }
 
     /**
-     * The system creates a new draft version as a copy from the current version.
-     *
-     * @param mixed $contentId
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException if the current version is already a draft
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedVersion
      */
-    public function createDraftFromCurrentVersion($contentId)
+    public function createDraftFromCurrentVersion(int $contentId): CreatedVersion
     {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
         $contentType = $this->repository->getContentTypeService()->loadContentType($contentInfo->contentTypeId);
@@ -107,7 +102,7 @@ class ContentDraftCreateFromCurrentVersionController extends RestController
 
         $contentDraft = $this->repository->getContentService()->createContentDraft($contentInfo);
 
-        return new Values\CreatedVersion(
+        return new CreatedVersion(
             [
                 'version' => new Values\Version(
                     $contentDraft,

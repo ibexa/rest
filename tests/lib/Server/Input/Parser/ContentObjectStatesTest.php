@@ -7,14 +7,11 @@
 
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
-use Ibexa\Rest\Input\Parser;
+use Ibexa\Rest\Input\Parser\ContentObjectStates;
 
 class ContentObjectStatesTest extends BaseTest
 {
-    /**
-     * Tests the ContentObjectStates parser.
-     */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'ObjectState' => [
@@ -59,10 +56,7 @@ class ContentObjectStatesTest extends BaseTest
         );
     }
 
-    /**
-     * Test ContentObjectStates parser throwing exception on missing href.
-     */
-    public function testParseExceptionOnMissingHref()
+    public function testParseExceptionOnMissingHref(): void
     {
         $this->expectException('Ibexa\\Contracts\\Rest\\Exceptions\\Parser');
         $this->expectExceptionMessage('Missing \'_href\' attribute for ObjectState.');
@@ -79,7 +73,7 @@ class ContentObjectStatesTest extends BaseTest
         $objectState->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    public function getParseHrefExpectationsMap()
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/content/objectstategroups/42/objectstates/21', 'objectStateId', 21],
@@ -87,13 +81,8 @@ class ContentObjectStatesTest extends BaseTest
         ];
     }
 
-    /**
-     * Gets the ContentObjectStates parser.
-     *
-     * @return \Ibexa\Rest\Input\Parser\ContentObjectStates ;
-     */
-    protected function internalGetParser()
+    protected function internalGetParser(): ContentObjectStates
     {
-        return new Parser\ContentObjectStates();
+        return new ContentObjectStates();
     }
 }

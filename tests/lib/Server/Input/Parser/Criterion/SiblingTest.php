@@ -14,14 +14,14 @@ use Ibexa\Contracts\Rest\Exceptions\Parser as ParserExpcetion;
 use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\Server\Input\Parser\Criterion\Sibling as SiblingParser;
 use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 final class SiblingTest extends BaseTest
 {
     private const EXAMPLE_LOCATION_ID = 54;
     private const EXAMPLE_PARENT_LOCATION_ID = 2;
 
-    /** @var \Ibexa\Contracts\Core\Repository\LocationService */
-    private $locationService;
+    private LocationService & MockObject $locationService;
 
     protected function setUp(): void
     {

@@ -77,7 +77,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
@@ -89,7 +89,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsRelationElement($result)
+    public function testResultContainsRelationElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -112,7 +112,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsRelationAttributes($result)
+    public function testResultContainsRelationAttributes($result): void
     {
         $this->assertXMLTag(
             [
@@ -133,7 +133,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsSourceContentElement($result)
+    public function testResultContainsSourceContentElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -154,7 +154,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsDestinationContentElement($result)
+    public function testResultContainsDestinationContentElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -175,7 +175,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsSourceFieldDefinitionIdentifierElement($result)
+    public function testResultContainsSourceFieldDefinitionIdentifierElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -193,7 +193,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
      *
      * @depends testVisit
      */
-    public function testResultContainsRelationTypeElement($result)
+    public function testResultContainsRelationTypeElement($result): void
     {
         $this->assertXMLTag(
             [
@@ -211,7 +211,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
      *
      * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestRelation
      */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\RestRelation
     {
         return new ValueObjectVisitor\RestRelation();
     }

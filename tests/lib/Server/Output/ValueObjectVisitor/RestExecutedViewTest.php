@@ -25,12 +25,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
 {
     private const EXAMPLE_LOCATION_ID = 54;
 
-    /**
-     * Test the RestExecutedView visitor.
-     *
-     * @return \DOMDocument
-     */
-    public function testVisit()
+    public function testVisit(): \DOMDocument
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -69,7 +64,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -77,7 +72,10 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         return $dom;
     }
 
-    public function provideXpathAssertions()
+    /**
+     * @return array<array<string>>
+     */
+    public function provideXpathAssertions(): array
     {
         return [
             ['/View'],
@@ -96,24 +94,16 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param string $xpath
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      *
      * @dataProvider provideXpathAssertions
      */
-    public function testGeneratedXml($xpath, \DOMDocument $dom)
+    public function testGeneratedXml(string $xpath, \DOMDocument $dom): void
     {
         $this->assertXPath($dom, $xpath);
     }
 
-    /**
-     * Get the Relation visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestExecutedView
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\RestExecutedView
     {
         return new ValueObjectVisitor\RestExecutedView(
             $this->getLocationServiceMock(),
@@ -121,15 +111,12 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\LocationService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    public function getLocationServiceMock()
+    public function getLocationServiceMock(): LocationService & MockObject
     {
         return $this->createMock(LocationService::class);
     }
 
-    private function getRelationListFacadeMock(): ContentService\RelationListFacadeInterface&MockObject
+    private function getRelationListFacadeMock(): ContentService\RelationListFacadeInterface & MockObject
     {
         $relationListFacade = $this->createMock(ContentService\RelationListFacadeInterface::class);
         $relationListFacade->method('getRelations')->willReturnCallback(
@@ -139,18 +126,12 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         return $relationListFacade;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService|\PHPUnit\Framework\MockObject\MockObject
-     */
-    public function getContentTypeServiceMock()
+    public function getContentTypeServiceMock(): ContentTypeService & MockObject
     {
         return $this->createMock(ContentTypeService::class);
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit
-     */
-    protected function buildContentSearchHit()
+    protected function buildContentSearchHit(): SearchHit
     {
         return new SearchHit([
             'score' => 0.123,
@@ -166,10 +147,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         ]);
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit
-     */
-    protected function buildLocationSearchHit()
+    protected function buildLocationSearchHit(): SearchHit
     {
         return new SearchHit([
             'score' => 0.234,

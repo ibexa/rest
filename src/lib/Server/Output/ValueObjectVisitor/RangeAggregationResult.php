@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation\Range;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\AggregationResult\RangeAggregationResultEntry;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
@@ -43,18 +44,11 @@ final class RangeAggregationResult extends ValueObjectVisitor
         $generator->endObjectElement('RangeAggregationResultEntry');
     }
 
-    /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation\Range $key
-     */
-    private function visitKey(Visitor $visitor, Generator $generator, $key): void
+    private function visitKey(Visitor $visitor, Generator $generator, Range $key): void
     {
-        if (is_object($key)) {
-            $generator->startHashElement('key');
-            $visitor->visitValueObject($key);
-            $generator->endHashElement('key');
-        } else {
-            $generator->valueElement('key', $key);
-        }
+        $generator->startHashElement('key');
+        $visitor->visitValueObject($key);
+        $generator->endHashElement('key');
     }
 
     private function visitCount(Visitor $visitor, Generator $generator, int $count): void

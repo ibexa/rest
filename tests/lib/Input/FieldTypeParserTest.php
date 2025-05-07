@@ -17,6 +17,7 @@ use Ibexa\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Rest\FieldTypeProcessorRegistry;
 use Ibexa\Rest\Input\FieldTypeParser;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -24,19 +25,19 @@ use PHPUnit\Framework\TestCase;
  */
 class FieldTypeParserTest extends TestCase
 {
-    protected $contentServiceMock;
+    protected ContentService & MockObject $contentServiceMock;
 
-    protected $contentTypeServiceMock;
+    protected ContentTypeService & MockObject $contentTypeServiceMock;
 
-    protected $fieldTypeServiceMock;
+    protected FieldTypeService & MockObject $fieldTypeServiceMock;
 
-    protected $contentTypeMock;
+    protected ContentType & MockObject $contentTypeMock;
 
-    protected $fieldTypeMock;
+    protected FieldType & MockObject $fieldTypeMock;
 
-    protected $fieldTypeProcessorRegistryMock;
+    protected FieldTypeProcessorRegistry & MockObject $fieldTypeProcessorRegistryMock;
 
-    protected $fieldTypeProcessorMock;
+    protected FieldTypeProcessor & MockObject $fieldTypeProcessorMock;
 
     public function setUp(): void
     {
@@ -49,7 +50,7 @@ class FieldTypeParserTest extends TestCase
         $this->fieldTypeProcessorMock = $this->createMock(FieldTypeProcessor::class);
     }
 
-    public function testParseFieldValue()
+    public function testParseFieldValue(): void
     {
         $fieldTypeParser = $this->getFieldTypeParser();
 
@@ -106,14 +107,14 @@ class FieldTypeParserTest extends TestCase
         self::assertEquals(
             ['foo', 'bar'],
             $fieldTypeParser->parseFieldValue(
-                '23',
+                23,
                 'my-field-definition',
                 [1, 2, 3]
             )
         );
     }
 
-    public function testParseValue()
+    public function testParseValue(): void
     {
         $fieldTypeParser = $this->getFieldTypeParser();
 
@@ -147,7 +148,7 @@ class FieldTypeParserTest extends TestCase
         );
     }
 
-    public function testParseValueWithPreProcessing()
+    public function testParseValueWithPreProcessing(): void
     {
         $fieldTypeParser = $this->getFieldTypeParser();
 
@@ -196,7 +197,7 @@ class FieldTypeParserTest extends TestCase
         );
     }
 
-    public function testParseFieldSettings()
+    public function testParseFieldSettings(): void
     {
         $fieldTypeParser = $this->getFieldTypeParser();
 
@@ -225,7 +226,7 @@ class FieldTypeParserTest extends TestCase
         );
     }
 
-    public function testParseFieldSettingsWithPreProcessing()
+    public function testParseFieldSettingsWithPreProcessing(): void
     {
         $fieldTypeParser = $this->getFieldTypeParser();
 
@@ -274,7 +275,7 @@ class FieldTypeParserTest extends TestCase
         );
     }
 
-    public function testParseValidatorConfiguration()
+    public function testParseValidatorConfiguration(): void
     {
         $fieldTypeParser = $this->getFieldTypeParser();
 
@@ -303,7 +304,7 @@ class FieldTypeParserTest extends TestCase
         );
     }
 
-    public function testParseValidatorConfigurationWithPreProcessing()
+    public function testParseValidatorConfigurationWithPreProcessing(): void
     {
         $fieldTypeParser = $this->getFieldTypeParser();
 
@@ -352,7 +353,7 @@ class FieldTypeParserTest extends TestCase
         );
     }
 
-    protected function getFieldTypeParser()
+    protected function getFieldTypeParser(): FieldTypeParser
     {
         return new FieldTypeParser(
             $this->contentServiceMock,

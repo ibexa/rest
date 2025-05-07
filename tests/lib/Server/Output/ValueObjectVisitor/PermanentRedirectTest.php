@@ -7,18 +7,13 @@
 
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\PermanentRedirect;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class PermanentRedirectTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the PermanentRedirect visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): void
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -43,13 +38,8 @@ class PermanentRedirectTest extends ValueObjectVisitorBaseTest
         self::assertTrue($generator->isEmpty());
     }
 
-    /**
-     * Get the PermanentRedirect visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\PermanentRedirect
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): PermanentRedirect
     {
-        return new ValueObjectVisitor\PermanentRedirect();
+        return new PermanentRedirect();
     }
 }

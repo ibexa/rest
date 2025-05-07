@@ -16,7 +16,7 @@ use PHPUnit\Framework\TestCase;
  */
 class JsonTest extends TestCase
 {
-    public function testConvertInvalidJson()
+    public function testConvertInvalidJson(): void
     {
         $this->expectException(Parser::class);
 
@@ -27,7 +27,7 @@ class JsonTest extends TestCase
     /**
      * Tests conversion of array to JSON.
      */
-    public function testConvertJson()
+    public function testConvertJson(): void
     {
         $handler = $this->getHandler();
 
@@ -39,7 +39,7 @@ class JsonTest extends TestCase
         );
     }
 
-    public function testConvertFieldValue()
+    public function testConvertFieldValue(): void
     {
         $handler = $this->getHandler();
 
@@ -66,7 +66,7 @@ class JsonTest extends TestCase
         );
     }
 
-    protected function getHandler()
+    protected function getHandler(): Json
     {
         return new Json();
     }

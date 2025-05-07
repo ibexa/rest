@@ -11,7 +11,7 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Message;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RestLocation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -105,14 +105,7 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class LocationUpdateController extends LocationBaseController
 {
-    /**
-     * Updates a location.
-     *
-     * @param string $locationPath
-     *
-     * @return \Ibexa\Rest\Server\Values\RestLocation
-     */
-    public function updateLocation($locationPath, Request $request)
+    public function updateLocation(string $locationPath, Request $request): RestLocation
     {
         $locationUpdate = $this->inputDispatcher->parse(
             new Message(
@@ -133,7 +126,7 @@ class LocationUpdateController extends LocationBaseController
             $this->locationService->unhideLocation($location);
         }
 
-        return new Values\RestLocation(
+        return new RestLocation(
             $location = $this->locationService->updateLocation($location, $locationUpdate->locationUpdateStruct),
             $this->locationService->getLocationChildCount($location)
         );

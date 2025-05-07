@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\LocationService;
+use Ibexa\Contracts\Core\Repository\Values\Content\LocationCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -20,17 +21,13 @@ class LocationCreate extends BaseParser
 {
     /**
      * Location service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
      */
-    protected $locationService;
+    protected LocationService $locationService;
 
     /**
      * Parser tools.
-     *
-     * @var \Ibexa\Rest\Input\ParserTools
      */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     /**
      * Construct.
@@ -44,15 +41,7 @@ class LocationCreate extends BaseParser
         $this->parserTools = $parserTools;
     }
 
-    /**
-     * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\LocationCreateStruct
-     */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): LocationCreateStruct
     {
         if (!array_key_exists('ParentLocation', $data) || !is_array($data['ParentLocation'])) {
             throw new Exceptions\Parser("Missing or invalid 'ParentLocation' element for LocationCreate.");

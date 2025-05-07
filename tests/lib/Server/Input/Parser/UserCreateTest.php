@@ -18,13 +18,11 @@ use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Ibexa\Core\Repository\Values\User\UserCreateStruct;
 use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\UserCreate;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class UserCreateTest extends BaseTest
 {
-    /**
-     * Tests the UserCreate parser.
-     */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'ContentType' => [
@@ -97,10 +95,7 @@ class UserCreateTest extends BaseTest
         }
     }
 
-    /**
-     * Test UserCreate parser throwing exception on invalid ContentType.
-     */
-    public function testParseExceptionOnInvalidContentType()
+    public function testParseExceptionOnInvalidContentType(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'_href\' attribute for the ContentType element in UserCreate.');
@@ -129,10 +124,7 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on missing mainLanguageCode.
-     */
-    public function testParseExceptionOnMissingMainLanguageCode()
+    public function testParseExceptionOnMissingMainLanguageCode(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'mainLanguageCode\' element for UserCreate.');
@@ -162,10 +154,7 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on missing login.
-     */
-    public function testParseExceptionOnMissingLogin()
+    public function testParseExceptionOnMissingLogin(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'login\' element for UserCreate.');
@@ -195,10 +184,7 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on missing email.
-     */
-    public function testParseExceptionOnMissingEmail()
+    public function testParseExceptionOnMissingEmail(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'email\' element for UserCreate.');
@@ -228,10 +214,7 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on missing password.
-     */
-    public function testParseExceptionOnMissingPassword()
+    public function testParseExceptionOnMissingPassword(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'password\' element for UserCreate.');
@@ -261,10 +244,7 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on invalid Section.
-     */
-    public function testParseExceptionOnInvalidSection()
+    public function testParseExceptionOnInvalidSection(): void
     {
         $this->expectException('Ibexa\\Contracts\\Rest\\Exceptions\\Parser');
         $this->expectExceptionMessage('Missing \'_href\' attribute for the Section element in UserCreate.');
@@ -293,10 +273,7 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on invalid fields data.
-     */
-    public function testParseExceptionOnInvalidFields()
+    public function testParseExceptionOnInvalidFields(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing or invalid \'fields\' element for UserCreate.');
@@ -319,10 +296,7 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on missing field definition identifier.
-     */
-    public function testParseExceptionOnMissingFieldDefinitionIdentifier()
+    public function testParseExceptionOnMissingFieldDefinitionIdentifier(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'fieldDefinitionIdentifier\' element in field data for UserCreate.');
@@ -356,10 +330,7 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on invalid field definition identifier.
-     */
-    public function testParseExceptionOnInvalidFieldDefinitionIdentifier()
+    public function testParseExceptionOnInvalidFieldDefinitionIdentifier(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('\'unknown\' is an invalid Field definition identifier for the \'some_class\' content type in UserCreate.');
@@ -390,10 +361,7 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test UserCreate parser throwing exception on missing field value.
-     */
-    public function testParseExceptionOnMissingFieldValue()
+    public function testParseExceptionOnMissingFieldValue(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'fieldValue\' element for the \'name\' identifier in UserCreate.');
@@ -423,12 +391,7 @@ class UserCreateTest extends BaseTest
         $userCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the UserCreate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\UserCreate
-     */
-    protected function internalGetParser()
+    protected function internalGetParser(): UserCreate
     {
         return new UserCreate(
             $this->getUserServiceMock(),
@@ -438,12 +401,7 @@ class UserCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the field type parser mock object.
-     *
-     * @return \Ibexa\Rest\Input\FieldTypeParser ;
-     */
-    private function getFieldTypeParserMock()
+    private function getFieldTypeParserMock(): FieldTypeParser & MockObject
     {
         $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
             ->setMethods([])
@@ -465,12 +423,7 @@ class UserCreateTest extends BaseTest
         return $fieldTypeParserMock;
     }
 
-    /**
-     * Get the user service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\UserService
-     */
-    protected function getUserServiceMock()
+    protected function getUserServiceMock(): UserService & MockObject
     {
         $userServiceMock = $this->createMock(UserService::class);
 
@@ -496,12 +449,7 @@ class UserCreateTest extends BaseTest
         return $userServiceMock;
     }
 
-    /**
-     * Get the content type service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\ContentTypeService
-     */
-    protected function getContentTypeServiceMock()
+    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
@@ -513,12 +461,7 @@ class UserCreateTest extends BaseTest
         return $contentTypeServiceMock;
     }
 
-    /**
-     * Get the content type used in UserCreate parser.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
-     */
-    protected function getContentType()
+    protected function getContentType(): ContentType
     {
         return new ContentType(
             [
@@ -537,7 +480,7 @@ class UserCreateTest extends BaseTest
         );
     }
 
-    public function getParseHrefExpectationsMap()
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/content/types/4', 'contentTypeId', 4],

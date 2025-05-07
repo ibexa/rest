@@ -12,13 +12,11 @@ use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\RoleService;
 use Ibexa\Core\Repository\Values\User\PolicyCreateStruct;
 use Ibexa\Rest\Server\Input\Parser\PolicyCreate;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class PolicyCreateTest extends BaseTest
 {
-    /**
-     * Tests the PolicyCreate parser.
-     */
-    public function testParse()
+    public function testParse(): void
     {
         $inputArray = [
             'module' => 'content',
@@ -95,10 +93,7 @@ class PolicyCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Test PolicyCreate parser throwing exception on missing module.
-     */
-    public function testParseExceptionOnMissingModule()
+    public function testParseExceptionOnMissingModule(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'module\' attribute for PolicyCreate.');
@@ -130,10 +125,7 @@ class PolicyCreateTest extends BaseTest
         $policyCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test PolicyCreate parser throwing exception on missing function.
-     */
-    public function testParseExceptionOnMissingFunction()
+    public function testParseExceptionOnMissingFunction(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'function\' attribute for PolicyCreate.');
@@ -165,10 +157,7 @@ class PolicyCreateTest extends BaseTest
         $policyCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test PolicyCreate parser throwing exception on missing identifier.
-     */
-    public function testParseExceptionOnMissingLimitationIdentifier()
+    public function testParseExceptionOnMissingLimitationIdentifier(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Missing \'_identifier\' attribute for Limitation.');
@@ -200,10 +189,7 @@ class PolicyCreateTest extends BaseTest
         $policyCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Test PolicyCreate parser throwing exception on missing values.
-     */
-    public function testParseExceptionOnMissingLimitationValues()
+    public function testParseExceptionOnMissingLimitationValues(): void
     {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage('Invalid format for Limitation value in Limitation.');
@@ -223,12 +209,7 @@ class PolicyCreateTest extends BaseTest
         $policyCreate->parse($inputArray, $this->getParsingDispatcherMock());
     }
 
-    /**
-     * Returns the PolicyCreateStruct parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\PolicyCreate
-     */
-    protected function internalGetParser()
+    protected function internalGetParser(): PolicyCreate
     {
         return new PolicyCreate(
             $this->getRoleServiceMock(),
@@ -236,12 +217,7 @@ class PolicyCreateTest extends BaseTest
         );
     }
 
-    /**
-     * Get the role service mock object.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\RoleService
-     */
-    protected function getRoleServiceMock()
+    protected function getRoleServiceMock(): RoleService & MockObject
     {
         $roleServiceMock = $this->createMock(RoleService::class);
 

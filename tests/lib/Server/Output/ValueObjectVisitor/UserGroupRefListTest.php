@@ -18,12 +18,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class UserGroupRefListTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the UserGroupRefList visitor.
-     *
-     * @return \DOMDocument
-     */
-    public function testVisit()
+    public function testVisit(): \DOMDocument
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -93,7 +88,7 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         $dom = new \DOMDocument();
         $dom->loadXml($result);
@@ -102,111 +97,86 @@ class UserGroupRefListTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testUserGroupRefListHrefCorrect(\DOMDocument $dom)
+    public function testUserGroupRefListHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroupRefList[@href="/some/path"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testUserGroupRefListMediaTypeCorrect(\DOMDocument $dom)
+    public function testUserGroupRefListMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroupRefList[@media-type="application/vnd.ibexa.api.UserGroupRefList+xml"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testFirstUserGroupHrefCorrect(\DOMDocument $dom)
+    public function testFirstUserGroupHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroupRefList/UserGroup[1][@href="/user/groups/1/5/14"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testFirstUserGroupMediaTypeCorrect(\DOMDocument $dom)
+    public function testFirstUserGroupMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroupRefList/UserGroup[1][@media-type="application/vnd.ibexa.api.UserGroup+xml"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testFirstUserGroupUnassignHrefCorrect(\DOMDocument $dom)
+    public function testFirstUserGroupUnassignHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroupRefList/UserGroup[1]/unassign[@href="/user/users/14/groups/14"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testFirstUserGroupUnassignMethodCorrect(\DOMDocument $dom)
+    public function testFirstUserGroupUnassignMethodCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroupRefList/UserGroup[1]/unassign[@method="DELETE"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testSecondUserGroupHrefCorrect(\DOMDocument $dom)
+    public function testSecondUserGroupHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroupRefList/UserGroup[2][@href="/user/groups/1/5/13"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testSecondUserGroupMediaTypeCorrect(\DOMDocument $dom)
+    public function testSecondUserGroupMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroupRefList/UserGroup[2][@media-type="application/vnd.ibexa.api.UserGroup+xml"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testSecondUserGroupUnassignHrefCorrect(\DOMDocument $dom)
+    public function testSecondUserGroupUnassignHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroupRefList/UserGroup[2]/unassign[@href="/user/users/14/groups/13"]');
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisit
      */
-    public function testSecondUserGroupUnassignMethodCorrect(\DOMDocument $dom)
+    public function testSecondUserGroupUnassignMethodCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroupRefList/UserGroup[2]/unassign[@method="DELETE"]');
     }
 
-    /**
-     * Get the UserGroupRefList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UserGroupRefList
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ValueObjectVisitor\UserGroupRefList
     {
         return new ValueObjectVisitor\UserGroupRefList();
     }

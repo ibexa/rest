@@ -22,7 +22,7 @@ class InputParserPass implements CompilerPassInterface
 {
     public const INPUT_PARSER_SERVICE_TAG = 'ibexa.rest.input.parser';
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition(ParsingDispatcher::class)) {
             return;

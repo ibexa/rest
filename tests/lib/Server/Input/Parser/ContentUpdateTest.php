@@ -10,17 +10,13 @@ namespace Ibexa\Tests\Rest\Server\Input\Parser;
 use DateTime;
 use Ibexa\Contracts\Rest\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
+use Ibexa\Rest\Server\Input\Parser\ContentUpdate;
 use Ibexa\Rest\Server\Input\Parser\ContentUpdate as ContentUpdateParser;
 use Ibexa\Rest\Values\RestContentMetadataUpdateStruct;
 
 class ContentUpdateTest extends BaseTest
 {
-    /**
-     * Tests the ContentUpdate parser.
-     *
-     * @return \Ibexa\Rest\Values\RestContentMetadataUpdateStruct
-     */
-    public function testParseValid()
+    public function testParseValid(): RestContentMetadataUpdateStruct
     {
         $inputArray = $this->getValidInputData();
 
@@ -28,6 +24,11 @@ class ContentUpdateTest extends BaseTest
         $result = $contentUpdateParser->parse(
             $inputArray,
             $this->getParsingDispatcherMock()
+        );
+
+        self::assertInstanceOf(
+            RestContentMetadataUpdateStruct::class,
+            $result,
         );
 
         self::assertEquals(
@@ -39,13 +40,9 @@ class ContentUpdateTest extends BaseTest
     }
 
     /**
-     * Test for valid owner ID value in result.
-     *
-     * @param \Ibexa\Rest\Values\RestContentMetadataUpdateStruct $result
-     *
      * @depends testParseValid
      */
-    public function testParserResultOwner(RestContentMetadataUpdateStruct $result)
+    public function testParserResultOwner(RestContentMetadataUpdateStruct $result): void
     {
         self::assertEquals(
             '42',
@@ -54,11 +51,9 @@ class ContentUpdateTest extends BaseTest
     }
 
     /**
-     * Tests that invalid _href attribute throw the appropriate exception.
-     *
      * @dataProvider providerForTestParseFailureInvalidHref
      */
-    public function testParseFailureInvalidHref($element, $exceptionMessage)
+    public function testParseFailureInvalidHref($element, $exceptionMessage): void
     {
         $inputArray = $this->getValidInputData();
         $inputArray[$element]['_href'] = '/invalid/section/uri';
@@ -82,7 +77,10 @@ class ContentUpdateTest extends BaseTest
         }
     }
 
-    public function providerForTestParseFailureInvalidHref()
+    /**
+     * @return array<array{0: string, 1: string}>
+     */
+    public function providerForTestParseFailureInvalidHref(): array
     {
         return [
             ['Section', 'Invalid format for the <Section> reference in <ContentUpdate>.'],
@@ -92,11 +90,9 @@ class ContentUpdateTest extends BaseTest
     }
 
     /**
-     * Tests that invalid dates will fail at parsing.
-     *
      * @dataProvider providerForTestParseFailureInvalidDate
      */
-    public function testParseFailureInvalidDate($element, $exceptionMessage)
+    public function testParseFailureInvalidDate($element, $exceptionMessage): void
     {
         $inputArray = $this->getValidInputData();
         $inputArray[$element] = 42;
@@ -120,7 +116,10 @@ class ContentUpdateTest extends BaseTest
         }
     }
 
-    public function providerForTestParseFailureInvalidDate()
+    /**
+     * @return array<array{0: string, 1: string}>
+     */
+    public function providerForTestParseFailureInvalidDate(): array
     {
         return [
             ['publishDate', 'Invalid format for <publishDate> in <ContentUpdate>'],
@@ -128,22 +127,12 @@ class ContentUpdateTest extends BaseTest
         ];
     }
 
-    /**
-     * Returns the ContentUpdate parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\ContentUpdate
-     */
-    protected function internalGetParser()
+    protected function internalGetParser(): ContentUpdate
     {
         return new ContentUpdateParser();
     }
 
-    /**
-     * Returns a valid RestContentMetadataUpdateStruct that matches the structure from getValidInputData().
-     *
-     * @return \Ibexa\Rest\Values\RestContentMetadataUpdateStruct
-     */
-    protected function getContentUpdateStruct()
+    protected function getContentUpdateStruct(): RestContentMetadataUpdateStruct
     {
         return new RestContentMetadataUpdateStruct(
             [
@@ -159,12 +148,7 @@ class ContentUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * Returns an array of valid input data for the parser.
-     *
-     * @return array
-     */
-    protected function getValidInputData()
+    protected function getValidInputData(): array
     {
         return [
             'mainLanguageCode' => 'eng-GB',
@@ -178,7 +162,7 @@ class ContentUpdateTest extends BaseTest
         ];
     }
 
-    public function getParseHrefExpectationsMap()
+    public function getParseHrefExpectationsMap(): array
     {
         return [
             ['/content/sections/23', 'sectionId', 23],

@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\User\UserCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -22,31 +23,23 @@ class UserCreate extends BaseParser
 {
     /**
      * User service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\UserService
      */
-    protected $userService;
+    protected UserService $userService;
 
     /**
      * ContentType service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
      */
-    protected $contentTypeService;
+    protected ContentTypeService $contentTypeService;
 
     /**
      * FieldType parser.
-     *
-     * @var \Ibexa\Rest\Input\FieldTypeParser
      */
-    protected $fieldTypeParser;
+    protected FieldTypeParser $fieldTypeParser;
 
     /**
      * Parser tools.
-     *
-     * @var \Ibexa\Rest\Input\ParserTools
      */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     /**
      * Construct.
@@ -64,15 +57,7 @@ class UserCreate extends BaseParser
         $this->parserTools = $parserTools;
     }
 
-    /**
-     * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\UserCreateStruct
-     */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): UserCreateStruct
     {
         $contentType = null;
         if (array_key_exists('ContentType', $data) && is_array($data['ContentType'])) {

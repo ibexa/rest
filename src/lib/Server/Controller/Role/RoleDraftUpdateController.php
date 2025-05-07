@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Values\User\RoleDraft;
 use Ibexa\Rest\Message;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -113,13 +114,9 @@ use Symfony\Component\HttpFoundation\Response;
 class RoleDraftUpdateController extends RoleBaseController
 {
     /**
-     * Updates a role draft.
-     *
-     * @param mixed $roleId Original role ID, or ID of the role draft itself
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\RoleDraft
+     * @param int $roleId Original role ID, or ID of the role draft itself
      */
-    public function updateRoleDraft($roleId, Request $request)
+    public function updateRoleDraft(int $roleId, Request $request): RoleDraft
     {
         $createStruct = $this->inputDispatcher->parse(
             new Message(

@@ -20,17 +20,13 @@ class LocationUpdate extends BaseParser
 {
     /**
      * Location service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
      */
-    protected $locationService;
+    protected LocationService $locationService;
 
     /**
      * Parser tools.
-     *
-     * @var \Ibexa\Rest\Input\ParserTools
      */
-    protected $parserTools;
+    protected ParserTools $parserTools;
 
     /**
      * Construct.
@@ -52,7 +48,7 @@ class LocationUpdate extends BaseParser
      *
      * @return \Ibexa\Rest\Server\Values\RestLocationUpdateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestLocationUpdateStruct
     {
         $locationUpdateStruct = $this->locationService->newLocationUpdateStruct();
 

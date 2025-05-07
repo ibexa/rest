@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\User\UserGroupCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -21,24 +22,18 @@ class UserGroupCreate extends BaseParser
 {
     /**
      * User service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\UserService
      */
-    protected $userService;
+    protected UserService $userService;
 
     /**
      * ContentType service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
      */
-    protected $contentTypeService;
+    protected ContentTypeService $contentTypeService;
 
     /**
      * FieldType parser.
-     *
-     * @var \Ibexa\Rest\Input\FieldTypeParser
      */
-    protected $fieldTypeParser;
+    protected FieldTypeParser $fieldTypeParser;
 
     /**
      * Construct.
@@ -54,15 +49,7 @@ class UserGroupCreate extends BaseParser
         $this->fieldTypeParser = $fieldTypeParser;
     }
 
-    /**
-     * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\UserGroupCreateStruct
-     */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): UserGroupCreateStruct
     {
         $contentType = null;
         if (array_key_exists('ContentType', $data) && is_array($data['ContentType'])) {

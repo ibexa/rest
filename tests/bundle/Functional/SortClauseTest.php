@@ -15,13 +15,10 @@ class SortClauseTest extends RESTFunctionalTestCase
     /**
      * @dataProvider sortingClauseDataProvider
      *
-     * @param array $foldersNameToCreate
-     * @param string $sortClauseXML
-     * @param array $foldersInExpectedOrder
-     *
-     * @throws \Psr\Http\Client\ClientException
+     * @param string[] $foldersNameToCreate
+     * @param string[] $foldersInExpectedOrder
      */
-    public function testFieldSortClause(array $foldersNameToCreate, string $sortClauseXML, array $foldersInExpectedOrder)
+    public function testFieldSortClause(array $foldersNameToCreate, string $sortClauseXML, array $foldersInExpectedOrder): void
     {
         $string = $this->addTestSuffix(__FUNCTION__);
         $mainTestFolderContent = $this->createFolder($string, '/api/ibexa/v2/content/locations/1/2');
@@ -98,7 +95,10 @@ XML;
         }
     }
 
-    public function sortingClauseDataProvider()
+    /**
+     * @return array<array{array<string>, string, array<string>}>
+     */
+    public function sortingClauseDataProvider(): array
     {
         return [
             [

@@ -18,24 +18,13 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 abstract class BaseTest extends ParentBaseTest
 {
-    /**
-     * @var \Ibexa\Contracts\Rest\Input\ParsingDispatcher|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $parsingDispatcherMock;
+    protected ParsingDispatcher & MockObject $parsingDispatcherMock;
 
-    protected UriParserInterface&MockObject $uriParserMock;
+    protected UriParserInterface & MockObject $uriParserMock;
 
-    /**
-     * @var \Ibexa\Rest\Input\ParserTools
-     */
-    protected $parserTools;
+    protected Input\ParserTools $parserTools;
 
-    /**
-     * Get the parsing dispatcher.
-     *
-     * @return \Ibexa\Contracts\Rest\Input\ParsingDispatcher
-     */
-    protected function getParsingDispatcherMock()
+    protected function getParsingDispatcherMock(): ParsingDispatcher & MockObject
     {
         if (!isset($this->parsingDispatcherMock)) {
             $this->parsingDispatcherMock = $this->createMock(ParsingDispatcher::class);
@@ -57,12 +46,12 @@ abstract class BaseTest extends ParentBaseTest
         return [];
     }
 
-    protected function getUriParserMock(): UriParserInterface&MockObject
+    protected function getUriParserMock(): UriParserInterface & MockObject
     {
         if (!isset($this->uriParserMock)) {
             $that = &$this;
 
-            $callback = static function ($href, $attribute) use ($that) {
+            $callback = static function ($href, $attribute) use ($that): ?string {
                 foreach ($that->getParseHrefExpectationsMap() as $map) {
                     if ($map[0] == $href && $map[1] == $attribute) {
                         if ($map[2] instanceof \Exception) {
@@ -87,12 +76,7 @@ abstract class BaseTest extends ParentBaseTest
         return $this->uriParserMock;
     }
 
-    /**
-     * Get the parser tools.
-     *
-     * @return \Ibexa\Rest\Input\ParserTools
-     */
-    protected function getParserTools()
+    protected function getParserTools(): Input\ParserTools
     {
         if (!isset($this->parserTools)) {
             $this->parserTools = new Input\ParserTools();
@@ -101,7 +85,7 @@ abstract class BaseTest extends ParentBaseTest
         return $this->parserTools;
     }
 
-    protected function getParser()
+    protected function getParser(): Input\BaseParser
     {
         $parser = $this->internalGetParser();
         $parser->setUriParser($this->getUriParserMock());
@@ -111,8 +95,6 @@ abstract class BaseTest extends ParentBaseTest
 
     /**
      * Must return the tested parser object.
-     *
-     * @return \Ibexa\Rest\Input\BaseParser
      */
-    abstract protected function internalGetParser();
+    abstract protected function internalGetParser(): Input\BaseParser;
 }

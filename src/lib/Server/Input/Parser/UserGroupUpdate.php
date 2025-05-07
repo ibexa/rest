@@ -23,31 +23,23 @@ class UserGroupUpdate extends BaseParser
 {
     /**
      * User service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\UserService
      */
-    protected $userService;
+    protected UserService $userService;
 
     /**
      * Content service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
      */
-    protected $contentService;
+    protected ContentService $contentService;
 
     /**
      * Location service.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
      */
-    protected $locationService;
+    protected LocationService $locationService;
 
     /**
      * FieldType parser.
-     *
-     * @var \Ibexa\Rest\Input\FieldTypeParser
      */
-    protected $fieldTypeParser;
+    protected FieldTypeParser $fieldTypeParser;
 
     /**
      * Construct.
@@ -73,7 +65,7 @@ class UserGroupUpdate extends BaseParser
      *
      * @return \Ibexa\Rest\Server\Values\RestUserGroupUpdateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
+    public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestUserGroupUpdateStruct
     {
         $parsedData = [];
 

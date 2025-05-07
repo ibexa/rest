@@ -15,6 +15,7 @@ use Ibexa\Contracts\Rest\FieldTypeProcessor;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Rest\FieldTypeProcessorRegistry;
 use Ibexa\Rest\Output\FieldTypeSerializer;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -22,28 +23,28 @@ use PHPUnit\Framework\TestCase;
  */
 class FieldTypeSerializerTest extends TestCase
 {
-    protected $fieldTypeServiceMock;
+    protected (MockObject&FieldTypeService)|null $fieldTypeServiceMock = null;
 
-    protected $fieldTypeProcessorRegistryMock;
+    protected (MockObject&FieldTypeProcessorRegistry)|null $fieldTypeProcessorRegistryMock = null;
 
-    protected $fieldTypeProcessorMock;
+    protected (MockObject&FieldTypeProcessor)|null $fieldTypeProcessorMock = null;
 
-    protected $contentTypeMock;
+    protected (MockObject&APIContentType)|null $contentTypeMock = null;
 
-    protected $fieldTypeMock;
+    protected (MockObject&APIFieldType)|null $fieldTypeMock = null;
 
-    protected $generatorMock;
+    protected (MockObject&Generator)|null $generatorMock = null;
 
     /**
      * @dataProvider provideDataWithFieldValueToSerialize
      *
-     * @param mixed $hashValue
+     * @param array<int> $hashValue
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function testSerializeContentFieldValue(
         APIFieldType $fieldType,
-        $hashValue
+        array $hashValue
     ): void {
         $serializer = $this->getFieldTypeSerializer();
 
@@ -298,12 +299,9 @@ class FieldTypeSerializerTest extends TestCase
         return $this->fieldTypeMock;
     }
 
-    /**
-     * @param mixed $value
-     */
     private function createFieldMock(
         string $fieldTypeIdentifier,
-        $value
+        string $value
     ): Field {
         $fieldMock = $this->createMock(Field::class);
         $fieldMock
@@ -318,12 +316,11 @@ class FieldTypeSerializerTest extends TestCase
     }
 
     /**
-     * @param mixed $hashElementName
-     * @param mixed $hashElementValue
+     * @param array<int|string, int|string> $hashElementValue
      */
     private function mockGeneratorGenerateFieldTypeHash(
-        $hashElementName,
-        $hashElementValue
+        string $hashElementName,
+        array $hashElementValue
     ): Generator {
         $generator = $this->createMock(Generator::class);
         $generator
@@ -337,12 +334,11 @@ class FieldTypeSerializerTest extends TestCase
     }
 
     /**
-     * @param mixed $value
-     * @param mixed $hashValue
+     * @param int[] $hashValue
      */
     private function createFieldTypeMock(
-        $value,
-        $hashValue
+        string $value,
+        array $hashValue
     ): APIFieldType {
         $fieldTypeMock = $this->createMock(APIFieldType::class);
         $fieldTypeMock

@@ -23,7 +23,7 @@ class UserRefList extends ValueObjectVisitor
      * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\UserRefList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
+    public function visit(Visitor $visitor, Generator $generator, $data): void
     {
         $generator->startObjectElement('UserRefList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('UserRefList'));

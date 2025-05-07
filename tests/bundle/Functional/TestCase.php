@@ -12,7 +12,6 @@ use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use RuntimeException;
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\HttpClient\CurlHttpClient;
 use Symfony\Component\HttpClient\Psr18Client;
@@ -26,10 +25,7 @@ class TestCase extends BaseTestCase
         'COPY' => 'POST',
     ];
 
-    /**
-     * @var \Psr\Http\Client\ClientInterface
-     */
-    private $httpClient;
+    private Psr18Client $httpClient;
 
     /**
      * @var string
@@ -51,10 +47,7 @@ class TestCase extends BaseTestCase
 
     protected static $testSuffix;
 
-    /**
-     * @var array
-     */
-    private $headers = [];
+    private array $headers = [];
 
     /**
      * The username to use for login.
@@ -79,10 +72,8 @@ class TestCase extends BaseTestCase
 
     /**
      * List of REST contentId (/content/objects/12345) created by tests.
-     *
-     * @var array
      */
-    private static $createdContent = [];
+    private static array $createdContent = [];
 
     protected function setUp(): void
     {
@@ -107,23 +98,12 @@ class TestCase extends BaseTestCase
         }
     }
 
-    /**
-     * Instantiate Browser object.
-     */
     public function createBrowser(): HttpBrowser
     {
-        if ($this->httpClient === null) {
-            throw new RuntimeException('Unable to create browser - test is not initialized');
-        }
-
         return new HttpBrowser(new CurlHttpClient());
     }
 
     /**
-     * @param \Psr\Http\Message\RequestInterface $request
-     *
-     * @return \Psr\Http\Message\ResponseInterface
-     *
      * @throws \Psr\Http\Client\ClientExceptionInterface
      */
     public function sendHttpRequest(RequestInterface $request): ResponseInterface
@@ -151,7 +131,7 @@ class TestCase extends BaseTestCase
      *
      * @return string
      */
-    protected function getBaseURI()
+    protected function getBaseURI(): string
     {
         return "{$this->httpScheme}://{$this->httpHost}";
     }
@@ -218,7 +198,7 @@ class TestCase extends BaseTestCase
         }
     }
 
-    private function getHttpResponseCodeErrorMessage($errorMessage)
+    private function getHttpResponseCodeErrorMessage($errorMessage): string
     {
         $errorMessageString = <<< EOF
 Server error message ({$errorMessage->errorCode}): {$errorMessage->errorMessage}
@@ -246,12 +226,12 @@ EOF;
         }
     }
 
-    protected function generateMediaTypeString($typeString)
+    protected function generateMediaTypeString($typeString): string
     {
         return "application/vnd.ibexa.api.$typeString";
     }
 
-    protected function getMediaFromTypeString($typeString)
+    protected function getMediaFromTypeString(string $typeString): string
     {
         $prefix = 'application/vnd.ibexa.api.';
         self::assertStringStartsWith(
@@ -263,10 +243,10 @@ EOF;
         return substr($typeString, strlen($prefix));
     }
 
-    protected function addCreatedElement($href)
+    protected function addCreatedElement(string $href)
     {
         $testCase = $this;
-        self::$createdContent[$href] = static function () use ($href, $testCase) {
+        self::$createdContent[$href] = static function () use ($href, $testCase): void {
             $testCase->sendHttpRequest(
                 $testCase->createHttpRequest('DELETE', $href)
             );
@@ -278,7 +258,7 @@ EOF;
         self::clearCreatedElement(self::$createdContent);
     }
 
-    private static function clearCreatedElement(array $contentArray)
+    private static function clearCreatedElement(array $contentArray): void
     {
         foreach (array_reverse($contentArray) as $href => $callback) {
             $callback();
@@ -334,7 +314,7 @@ XML;
      *
      * @return array Content key of the Content struct array
      */
-    protected function createContent($xml)
+    protected function createContent(string $xml)
     {
         $request = $this->createHttpRequest(
             'POST',
@@ -380,7 +360,7 @@ XML;
         return $folderLocations;
     }
 
-    protected function addTestSuffix($string)
+    protected function addTestSuffix(string $string): string
     {
         if (!isset(self::$testSuffix)) {
             /** @noinspection NonSecureUniqidUsageInspection */
@@ -411,7 +391,7 @@ XML;
      *
      * @return \Psr\Http\Message\RequestInterface
      */
-    protected function createAuthenticationHttpRequest(string $login, string $password, array $extraHeaders = [])
+    protected function createAuthenticationHttpRequest(string $login, string $password, array $extraHeaders = []): RequestInterface
     {
         return $this->createHttpRequest(
             'POST',

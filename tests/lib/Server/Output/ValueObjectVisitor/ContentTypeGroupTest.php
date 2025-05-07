@@ -8,17 +8,12 @@
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\ContentType;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroup;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
 {
-    /**
-     * Test the ContentTypeGroup visitor.
-     *
-     * @return string
-     */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -81,19 +76,15 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertNotNull($result);
+        self::assertNotEmpty($result);
 
         return $result;
     }
 
     /**
-     * Test if result contains ContentTypeGroup element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsContentTypeGroupElement($result)
+    public function testResultContainsContentTypeGroupElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -109,13 +100,9 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ContentTypeGroup element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsContentTypeGroupAttributes($result)
+    public function testResultContainsContentTypeGroupAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -132,13 +119,9 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains id value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsIdValueElement($result)
+    public function testResultContainsIdValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -152,13 +135,9 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains identifier value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsIdentifierValueElement($result)
+    public function testResultContainsIdentifierValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -172,13 +151,9 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains created value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsCreatedValueElement($result)
+    public function testResultContainsCreatedValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -192,13 +167,9 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains modified value element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsModifiedValueElement($result)
+    public function testResultContainsModifiedValueElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -212,13 +183,9 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Creator element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsCreatorElement($result)
+    public function testResultContainsCreatorElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -231,13 +198,9 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Creator element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsCreatorAttributes($result)
+    public function testResultContainsCreatorAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -254,13 +217,9 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Modifier element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsModifierElement($result)
+    public function testResultContainsModifierElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -273,13 +232,9 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains Modifier element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsModifierAttributes($result)
+    public function testResultContainsModifierAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -296,13 +251,9 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ContentTypes element.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsContentTypesElement($result)
+    public function testResultContainsContentTypesElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -315,13 +266,9 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * Test if result contains ContentTypes element attributes.
-     *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsContentTypesAttributes($result)
+    public function testResultContainsContentTypesAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -337,13 +284,8 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * Get the ContentTypeGroup visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroup
-     */
-    protected function internalGetVisitor()
+    protected function internalGetVisitor(): ContentTypeGroup
     {
-        return new ValueObjectVisitor\ContentTypeGroup();
+        return new ContentTypeGroup();
     }
 }

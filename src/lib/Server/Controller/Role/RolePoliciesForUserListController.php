@@ -10,7 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\PolicyList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -65,7 +65,7 @@ class RolePoliciesForUserListController extends RoleBaseController
      *
      * @return \Ibexa\Rest\Server\Values\PolicyList
      */
-    public function listPoliciesForUser(Request $request)
+    public function listPoliciesForUser(Request $request): PolicyList
     {
         $user = $this->userService->loadUser((int)$request->query->get('userId'));
         $roleAssignments = $this->roleService->getRoleAssignmentsForUser($user, true);
@@ -80,7 +80,7 @@ class RolePoliciesForUserListController extends RoleBaseController
             $policies[] = $policiesArray;
         }
 
-        return new Values\PolicyList(
+        return new PolicyList(
             !empty($policies) ? array_merge(...$policies) : [],
             $request->getPathInfo()
         );

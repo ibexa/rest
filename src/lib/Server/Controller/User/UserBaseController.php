@@ -78,7 +78,7 @@ class UserBaseController extends RestController
         try {
             if ($request->query->has('roleId')) {
                 $restUsers = $this->loadUsersAssignedToRole(
-                    $this->uriParser->getAttributeFromUri($request->query->getString('roleId'), 'roleId')
+                    (int) $this->uriParser->getAttributeFromUri($request->query->getString('roleId'), 'roleId')
                 );
             } elseif ($request->query->has('remoteId')) {
                 $restUsers = [
@@ -131,13 +131,9 @@ class UserBaseController extends RestController
     }
 
     /**
-     * Loads a list of users assigned to role.
-     *
-     * @param mixed $roleId
-     *
      * @return \Ibexa\Rest\Server\Values\RestUser[]
      */
-    public function loadUsersAssignedToRole($roleId): array
+    public function loadUsersAssignedToRole(int $roleId): array
     {
         $role = $this->roleService->loadRole($roleId);
         $roleAssignments = $this->roleService->getRoleAssignments($role);
