@@ -170,4 +170,11 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
             $format,
         );
     }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            'object' => false,
+        ];
+    }
 }

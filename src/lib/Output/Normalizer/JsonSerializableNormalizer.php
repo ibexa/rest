@@ -22,15 +22,22 @@ final class JsonSerializableNormalizer implements NormalizerInterface, Normalize
      *
      * {@inheritDoc}
      */
-    public function normalize($object, ?string $format = null, array $context = []): string
+    public function normalize(mixed $object, ?string $format = null, array $context = []): string
     {
         assert($object instanceof JsonSerializable);
 
         return $object->jsonSerialize();
     }
 
-    public function supportsNormalization($data, ?string $format = null): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof JsonSerializable;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            JsonSerializable::class => true,
+        ];
     }
 }

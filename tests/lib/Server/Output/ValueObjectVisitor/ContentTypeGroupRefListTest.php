@@ -9,6 +9,7 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Core\Repository\Values\ContentType\ContentTypeGroup;
+use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\ContentTypeGroupRefList;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
@@ -29,7 +30,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
             new ContentType(
                 [
                     'id' => 42,
-                    'fieldDefinitions' => [],
+                    'fieldDefinitions' => new FieldDefinitionCollection(),
                 ]
             ),
             [

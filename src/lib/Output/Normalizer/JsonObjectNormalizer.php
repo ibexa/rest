@@ -29,7 +29,7 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
      *
      * {@inheritDoc}
      */
-    public function normalize($object, ?string $format = null, array $context = []): array|\ArrayObject
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array|\ArrayObject
     {
         $vars = get_object_vars($object);
 
@@ -70,8 +70,15 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
         return $data;
     }
 
-    public function supportsNormalization($data, ?string $format = null): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof JsonObject;
+    }
+
+    public function getSupportedTypes(?string $format): array
+    {
+        return [
+            JsonObject::class => true,
+        ];
     }
 }
