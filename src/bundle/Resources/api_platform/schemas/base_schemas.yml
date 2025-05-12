@@ -107,7 +107,7 @@ schemas:
                       type: string
                   "#text":
                       description: Translation contents.
-                      type: [string, 'null']
+                      oneOf: [string, 'null']
     KeyValue:
         description: Key-value structure
         type: object
