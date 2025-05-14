@@ -73,7 +73,6 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
         );
     }
 
-
     /**
      * @param array<mixed> $context
      *
