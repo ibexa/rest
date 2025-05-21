@@ -533,10 +533,10 @@ schemas:
         properties:
             maxStringLength:
                 description: Maximum length of strings.
-                type: [ integer, null ]
+                type: [ integer, 'null' ]
             minStringLength:
                 description: Minimum length of strings.
-                type: [ integer, null ]
+                type: [ integer, 'null' ]
     StringLengthValidatorWrapper:
         type: object
         required:
