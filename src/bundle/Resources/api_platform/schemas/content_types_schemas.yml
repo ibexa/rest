@@ -480,8 +480,9 @@ schemas:
                     validatorConfiguration:
                         description: Validator configuration of this Field definition supported by the field type.
                         oneOf:
-                            - StringLengthValidatorWrapper
-                            - array
+                            - $ref: "#/components/schemas/StringLengthValidator"
+                            - $ref: "#/components/schemas/StringLengthValidatorWrapper"
+                            - type: array
     FieldDefinitionWrapper:
         type: object
         required:
