@@ -175,12 +175,6 @@ parameters:
 			path: src/contracts/Output/ValueObjectVisitor.php
 
 		-
-			message: '#^Instanceof between Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface and Symfony\\Component\\Serializer\\Normalizer\\NormalizerInterface will always evaluate to true\.$#'
-			identifier: instanceof.alwaysTrue
-			count: 1
-			path: src/contracts/Output/VisitorAdapterNormalizer.php
-
-		-
 			message: '#^Cannot access property \$id on Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Field\|null\.$#'
 			identifier: property.nonObject
 			count: 1

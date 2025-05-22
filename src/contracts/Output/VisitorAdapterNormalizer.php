@@ -46,7 +46,7 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
             return $this->visitValueObject($object, $eligibleVisitor, $format, $context);
         }
 
-        return $this->normalizer->normalize($object, $format, $context);
+        return $this->normalizer->normalize($object, $format, $context + [self::CALLED_CONTEXT => true]);
     }
 
     /**
@@ -64,16 +64,6 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
 
         if ($eligibleVisitor instanceof ValueObjectVisitor) {
             return true;
-        }
-
-        if (!$this->normalizer instanceof NormalizerInterface) {
-            throw new LogicException(
-                sprintf(
-                    'Normalizer "%s" must be an instance of "%s".',
-                    $this->normalizer::class,
-                    NormalizerInterface::class,
-                ),
-            );
         }
 
         return $this->normalizer->supportsNormalization(
