@@ -188,7 +188,8 @@ schemas:
         - mainLocationId
         - name
       properties:
-        ownerId: {}
+        ownerId:
+          type: []
         publishedDate:
           type: string
           format: date-time
@@ -201,7 +202,8 @@ schemas:
           type: boolean
         remoteId:
           type: string
-        mainLocationId: {}
+        mainLocationId:
+          type: []
         name:
           type: string
     ContentCreateContentType:
