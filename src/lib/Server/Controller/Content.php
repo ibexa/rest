@@ -557,7 +557,7 @@ class Content extends RestController
 
         return new Values\TemporaryRedirect(
             $this->router->generate(
-                'ibexa.rest.redirect_current_version_relations',
+                'ibexa.rest.load_version_relations',
                 [
                     'contentId' => $contentId,
                     'versionNumber' => $contentInfo->currentVersionNo,
