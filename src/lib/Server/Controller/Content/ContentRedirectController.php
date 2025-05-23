@@ -41,7 +41,8 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Temporary redirect to `GET /content/objects/{contentId}` equivalent.',
                 'headers' => [
                     'Location' => [
-                        'description' => 'Contains the prefixed `/content/objects/{contentId}` absolute path of the content item.'
+                        'description' => 'Contains the prefixed `/content/objects/{contentId}` absolute path of the content item.',
+                        'schema' => ['type' => 'string'],
                     ],
                 ],
             ],
