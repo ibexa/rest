@@ -266,7 +266,7 @@ services:
         arguments:
             - "@router"
         tags:
-            - { name: ibexa.rest.field_type.processor, alias: ezimageasset }
+            - { name: ibexa.rest.field_type.processor, alias: ibexa_image_asset }
 
     Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor:
         tags:
