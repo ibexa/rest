@@ -2,7 +2,7 @@
 <FieldDefinition media-type="application/vnd.ibexa.api.FieldDefinition+xml" href="/api/ibexa/v2/content/types/2/fieldDefinitions/195">
     <id>195</id>
     <identifier>image</identifier>
-    <fieldType>ezimageasset</fieldType>
+    <fieldType>ibexa_image_asset</fieldType>
     <fieldGroup>content</fieldGroup>
     <position>7</position>
     <isTranslatable>false</isTranslatable>

@@ -83,21 +83,21 @@
                                 "id": 342,
                                 "fieldDefinitionIdentifier": "first_name",
                                 "languageCode": "eng-GB",
-                                "fieldTypeIdentifier": "ezstring",
+                                "fieldTypeIdentifier": "ibexa_string",
                                 "fieldValue": "Jose"
                             },
                             {
                                 "id": 343,
                                 "fieldDefinitionIdentifier": "last_name",
                                 "languageCode": "eng-GB",
-                                "fieldTypeIdentifier": "ezstring",
+                                "fieldTypeIdentifier": "ibexa_string",
                                 "fieldValue": "Vargas"
                             },
                             {
                                 "id": 344,
                                 "fieldDefinitionIdentifier": "user_account",
                                 "languageCode": "eng-GB",
-                                "fieldTypeIdentifier": "ezuser",
+                                "fieldTypeIdentifier": "ibexa_user",
                                 "fieldValue": {
                                     "hasStoredLogin": true,
                                     "contentId": 79,
@@ -113,14 +113,14 @@
                                 "id": 345,
                                 "fieldDefinitionIdentifier": "signature",
                                 "languageCode": "eng-GB",
-                                "fieldTypeIdentifier": "eztext",
+                                "fieldTypeIdentifier": "ibexa_text",
                                 "fieldValue": null
                             },
                             {
                                 "id": 346,
                                 "fieldDefinitionIdentifier": "image",
                                 "languageCode": "eng-GB",
-                                "fieldTypeIdentifier": "ezimage",
+                                "fieldTypeIdentifier": "ibexa_image",
                                 "fieldValue": null
                             }
                         ]

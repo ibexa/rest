@@ -59,21 +59,21 @@
                             "id": 488,
                             "fieldDefinitionIdentifier": "title",
                             "languageCode": "eng-GB",
-                            "fieldTypeIdentifier": "ezstring",
+                            "fieldTypeIdentifier": "ibexa_string",
                             "fieldValue": "draft article"
                         },
                         {
                             "id": 489,
                             "fieldDefinitionIdentifier": "short_title",
                             "languageCode": "eng-GB",
-                            "fieldTypeIdentifier": "ezstring",
+                            "fieldTypeIdentifier": "ibexa_string",
                             "fieldValue": null
                         },
                         {
                             "id": 490,
                             "fieldDefinitionIdentifier": "author",
                             "languageCode": "eng-GB",
-                            "fieldTypeIdentifier": "ezauthor",
+                            "fieldTypeIdentifier": "ibexa_author",
                             "fieldValue": []
                         },
                         {
@@ -100,14 +100,14 @@
                             "id": 493,
                             "fieldDefinitionIdentifier": "enable_comments",
                             "languageCode": "eng-GB",
-                            "fieldTypeIdentifier": "ezboolean",
+                            "fieldTypeIdentifier": "ibexa_boolean",
                             "fieldValue": false
                         },
                         {
                             "id": 494,
                             "fieldDefinitionIdentifier": "image",
                             "languageCode": "eng-GB",
-                            "fieldTypeIdentifier": "ezobjectrelation",
+                            "fieldTypeIdentifier": "ibexa_object_relation",
                             "fieldValue": {
                                 "destinationContentId": null
                             }

@@ -192,7 +192,7 @@ final class FieldDefinitionUpdateTest extends BaseTest
                                     new FieldDefinition(
                                         [
                                             'id' => 24,
-                                            'fieldTypeIdentifier' => 'ezstring',
+                                            'fieldTypeIdentifier' => 'ibexa_string',
                                             'identifier' => 'foo',
                                         ]
                                     ),

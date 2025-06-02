@@ -30,14 +30,14 @@
                     <id>249</id>
                     <fieldDefinitionIdentifier>name</fieldDefinitionIdentifier>
                     <languageCode>eng-GB</languageCode>
-                    <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+                    <fieldTypeIdentifier>ibexa_string</fieldTypeIdentifier>
                     <fieldValue>Forms</fieldValue>
                 </field>
                 <field>
                     <id>250</id>
                     <fieldDefinitionIdentifier>short_name</fieldDefinitionIdentifier>
                     <languageCode>eng-GB</languageCode>
-                    <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+                    <fieldTypeIdentifier>ibexa_string</fieldTypeIdentifier>
                     <fieldValue/>
                 </field>
                 <field>

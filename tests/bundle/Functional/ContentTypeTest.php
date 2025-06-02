@@ -97,7 +97,7 @@ XML;
   <FieldDefinitions>
     <FieldDefinition>
       <identifier>title</identifier>
-      <fieldType>ezstring</fieldType>
+      <fieldType>ibexa_string</fieldType>
       <fieldGroup>content</fieldGroup>
       <position>1</position>
       <isTranslatable>true</isTranslatable>
@@ -383,7 +383,7 @@ XML;
 <?xml version="1.0" encoding="UTF-8"?>
 <FieldDefinition>
       <identifier>secondtext</identifier>
-      <fieldType>ezstring</fieldType>
+      <fieldType>ibexa_string</fieldType>
       <fieldGroup>content</fieldGroup>
       <position>1</position>
       <isTranslatable>true</isTranslatable>

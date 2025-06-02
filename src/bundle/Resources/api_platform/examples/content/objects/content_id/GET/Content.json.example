@@ -59,14 +59,14 @@
                             "id": 249,
                             "fieldDefinitionIdentifier": "name",
                             "languageCode": "eng-GB",
-                            "fieldTypeIdentifier": "ezstring",
+                            "fieldTypeIdentifier": "ibexa_string",
                             "fieldValue": "Forms"
                         },
                         {
                             "id": 250,
                             "fieldDefinitionIdentifier": "short_name",
                             "languageCode": "eng-GB",
-                            "fieldTypeIdentifier": "ezstring",
+                            "fieldTypeIdentifier": "ibexa_string",
                             "fieldValue": null
                         },
                         {

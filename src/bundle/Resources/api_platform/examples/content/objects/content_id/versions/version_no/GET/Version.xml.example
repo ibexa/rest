@@ -24,14 +24,14 @@
             <id>477</id>
             <fieldDefinitionIdentifier>name</fieldDefinitionIdentifier>
             <languageCode>eng-GB</languageCode>
-            <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+            <fieldTypeIdentifier>ibexa_string</fieldTypeIdentifier>
             <fieldValue>Features</fieldValue>
         </field>
         <field>
             <id>478</id>
             <fieldDefinitionIdentifier>short_name</fieldDefinitionIdentifier>
             <languageCode>eng-GB</languageCode>
-            <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+            <fieldTypeIdentifier>ibexa_string</fieldTypeIdentifier>
             <fieldValue/>
         </field>
         <field>

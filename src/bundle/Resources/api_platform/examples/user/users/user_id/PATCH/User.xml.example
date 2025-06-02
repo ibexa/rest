@@ -37,21 +37,21 @@
                 <id>342</id>
                 <fieldDefinitionIdentifier>first_name</fieldDefinitionIdentifier>
                 <languageCode>eng-GB</languageCode>
-                <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+                <fieldTypeIdentifier>ibexa_string</fieldTypeIdentifier>
                 <fieldValue>Jose</fieldValue>
             </field>
             <field>
                 <id>343</id>
                 <fieldDefinitionIdentifier>last_name</fieldDefinitionIdentifier>
                 <languageCode>eng-GB</languageCode>
-                <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+                <fieldTypeIdentifier>ibexa_string</fieldTypeIdentifier>
                 <fieldValue>Vargas</fieldValue>
             </field>
             <field>
                 <id>344</id>
                 <fieldDefinitionIdentifier>user_account</fieldDefinitionIdentifier>
                 <languageCode>eng-GB</languageCode>
-                <fieldTypeIdentifier>ezuser</fieldTypeIdentifier>
+                <fieldTypeIdentifier>ibexa_user</fieldTypeIdentifier>
                 <fieldValue>
                     <value key="hasStoredLogin">true</value>
                     <value key="contentId">79</value>
@@ -67,14 +67,14 @@
                 <id>345</id>
                 <fieldDefinitionIdentifier>signature</fieldDefinitionIdentifier>
                 <languageCode>eng-GB</languageCode>
-                <fieldTypeIdentifier>eztext</fieldTypeIdentifier>
+                <fieldTypeIdentifier>ibexa_text</fieldTypeIdentifier>
                 <fieldValue/>
             </field>
             <field>
                 <id>346</id>
                 <fieldDefinitionIdentifier>image</fieldDefinitionIdentifier>
                 <languageCode>eng-GB</languageCode>
-                <fieldTypeIdentifier>ezimage</fieldTypeIdentifier>
+                <fieldTypeIdentifier>ibexa_image</fieldTypeIdentifier>
                 <fieldValue/>
             </field>
         </Fields>

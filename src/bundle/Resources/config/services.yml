@@ -89,7 +89,7 @@ services:
     Ibexa\Rest\Server\Controller\BinaryContent:
         parent: Ibexa\Rest\Server\Controller
         arguments:
-            - '@ibexa.field_type.ezimage.variation_service'
+            - '@ibexa.field_type.ibexa_image.variation_service'
             - '@ibexa.config.resolver'
         tags: [controller.service_arguments]
 
@@ -259,7 +259,7 @@ services:
         arguments:
             - "@router"
         tags:
-            - { name: ibexa.rest.field_type.processor, alias: ezimage }
+            - { name: ibexa.rest.field_type.processor, alias: ibexa_image }
 
     Ibexa\Rest\FieldTypeProcessor\ImageAssetFieldTypeProcessor:
         factory: ['@Ibexa\Bundle\Rest\ApiLoader\Factory', getImageAssetFieldTypeProcessor]
@@ -270,53 +270,53 @@ services:
 
     Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor:
         tags:
-            - { name: ibexa.rest.field_type.processor, alias: ezdatetime }
+            - { name: ibexa.rest.field_type.processor, alias: ibexa_datetime }
 
     Ibexa\Rest\FieldTypeProcessor\DateProcessor:
         tags:
-            - { name: ibexa.rest.field_type.processor, alias: ezdate }
+            - { name: ibexa.rest.field_type.processor, alias: ibexa_date }
 
     Ibexa\Rest\FieldTypeProcessor\MediaProcessor:
         factory: ['@Ibexa\Bundle\Rest\ApiLoader\Factory', getMediaFieldTypeProcessor]
         tags:
-            - { name: ibexa.rest.field_type.processor, alias: ezmedia }
+            - { name: ibexa.rest.field_type.processor, alias: ibexa_media }
 
     Ibexa\Rest\FieldTypeProcessor\RelationListProcessor:
         tags:
-            - { name: ibexa.rest.field_type.processor, alias: ezobjectrelationlist }
+            - { name: ibexa.rest.field_type.processor, alias: ibexa_object_relation_list }
         calls:
             - [setRouter, ["@router"]]
             - [setLocationService, ['@ibexa.api.service.location']]
 
     Ibexa\Rest\FieldTypeProcessor\RelationProcessor:
         tags:
-            - { name: ibexa.rest.field_type.processor, alias: ezobjectrelation }
+            - { name: ibexa.rest.field_type.processor, alias: ibexa_object_relation }
         calls:
             - [setRouter, ["@router"]]
             - [setLocationService, ['@ibexa.api.service.location']]
 
     Ibexa\Rest\FieldTypeProcessor\TimeProcessor:
         tags:
-            - { name: ibexa.rest.field_type.processor, alias: eztime }
+            - { name: ibexa.rest.field_type.processor, alias: ibexa_time }
 
     Ibexa\Rest\FieldTypeProcessor\BinaryProcessor:
         factory: ['@Ibexa\Bundle\Rest\ApiLoader\Factory', getBinaryFileFieldTypeProcessor]
         arguments:
             - '@ibexa.core.io.default_url_decorator'
         tags:
-            - { name: ibexa.rest.field_type.processor, alias: ezbinaryfile }
+            - { name: ibexa.rest.field_type.processor, alias: ibexa_binaryfile }
 
     Ibexa\Rest\FieldTypeProcessor\FloatProcessor:
         tags:
-            - { name: ibexa.rest.field_type.processor, alias: ezfloat }
+            - { name: ibexa.rest.field_type.processor, alias: ibexa_float }
 
     Ibexa\Rest\FieldTypeProcessor\StringProcessor:
         tags:
-            - { name: ibexa.rest.field_type.processor, alias: ezstring }
+            - { name: ibexa.rest.field_type.processor, alias: ibexa_string }
 
     Ibexa\Rest\FieldTypeProcessor\UserProcessor:
         tags:
-            - { name: ibexa.rest.field_type.processor, alias: ezuser }
+            - { name: ibexa.rest.field_type.processor, alias: ibexa_user }
 
     ### OUTPUT
 

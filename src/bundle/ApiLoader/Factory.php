@@ -48,7 +48,7 @@ class Factory
     }
 
     /**
-     * Factory for ezpublish_rest.field_type_processor.ezimage.
+     * Factory for ezpublish_rest.field_type_processor.ibexa_image.
      *
      * @param \Symfony\Component\Routing\RouterInterface $router
      *

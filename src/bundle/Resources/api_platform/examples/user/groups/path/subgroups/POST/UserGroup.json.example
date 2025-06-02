@@ -75,14 +75,14 @@
                         "id": 384,
                         "fieldDefinitionIdentifier": "name",
                         "languageCode": "eng-GB",
-                        "fieldTypeIdentifier": "ezstring",
+                        "fieldTypeIdentifier": "ibexa_string",
                         "fieldValue": "UserGroup2"
                     },
                     {
                         "id": 385,
                         "fieldDefinitionIdentifier": "description",
                         "languageCode": "eng-GB",
-                        "fieldTypeIdentifier": "ezstring",
+                        "fieldTypeIdentifier": "ibexa_string",
                         "fieldValue": "This is the description of the user group"
                     }
                 ]

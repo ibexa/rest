@@ -36,14 +36,14 @@
                 <id>24</id>
                 <fieldDefinitionIdentifier>name</fieldDefinitionIdentifier>
                 <languageCode>eng-GB</languageCode>
-                <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+                <fieldTypeIdentifier>ibexa_string</fieldTypeIdentifier>
                 <fieldValue>Administrator users</fieldValue>
             </field>
             <field>
                 <id>25</id>
                 <fieldDefinitionIdentifier>description</fieldDefinitionIdentifier>
                 <languageCode>eng-GB</languageCode>
-                <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+                <fieldTypeIdentifier>ibexa_string</fieldTypeIdentifier>
                 <fieldValue/>
             </field>
         </Fields>

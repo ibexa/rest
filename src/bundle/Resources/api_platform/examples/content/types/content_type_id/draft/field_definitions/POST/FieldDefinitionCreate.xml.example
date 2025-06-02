@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FieldDefinitionCreate>
     <identifier>name</identifier>
-    <fieldType>ezstring</fieldType>
+    <fieldType>ibexa_string</fieldType>
     <isRequired>true</isRequired>
     <validatorConfiguration>
     <value key="StringLengthValidator">

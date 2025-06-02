@@ -75,14 +75,14 @@
                         "id": 24,
                         "fieldDefinitionIdentifier": "name",
                         "languageCode": "eng-GB",
-                        "fieldTypeIdentifier": "ezstring",
+                        "fieldTypeIdentifier": "ibexa_string",
                         "fieldValue": "Administrator users"
                     },
                     {
                         "id": 25,
                         "fieldDefinitionIdentifier": "description",
                         "languageCode": "eng-GB",
-                        "fieldTypeIdentifier": "ezstring",
+                        "fieldTypeIdentifier": "ibexa_string",
                         "fieldValue": null
                     }
                 ]

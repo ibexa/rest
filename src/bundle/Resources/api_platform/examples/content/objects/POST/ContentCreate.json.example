@@ -23,7 +23,7 @@
         {
           "fieldDefinitionIdentifier": "title",
           "languageCode": "eng-GB",
-          "fieldTypeIdentifier": "ezstring",
+          "fieldTypeIdentifier": "ibexa_string",
           "fieldValue": "draft article"
         },
         {

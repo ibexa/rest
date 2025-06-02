@@ -159,7 +159,7 @@ JSON;
   <FieldDefinitions>
     <FieldDefinition>
       <identifier>title</identifier>
-      <fieldType>ezstring</fieldType>
+      <fieldType>ibexa_string</fieldType>
       <fieldGroup>content</fieldGroup>
       <position>1</position>
       <isTranslatable>true</isTranslatable>
@@ -434,7 +434,7 @@ JSON,
   <FieldDefinitions>
     <FieldDefinition>
       <identifier>title</identifier>
-      <fieldType>ezurl</fieldType>
+      <fieldType>ibexa_url</fieldType>
       <fieldGroup>content</fieldGroup>
       <position>1</position>
       <isTranslatable>true</isTranslatable>

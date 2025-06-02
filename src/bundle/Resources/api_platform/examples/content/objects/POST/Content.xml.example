@@ -30,21 +30,21 @@
                     <id>481</id>
                     <fieldDefinitionIdentifier>title</fieldDefinitionIdentifier>
                     <languageCode>eng-GB</languageCode>
-                    <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+                    <fieldTypeIdentifier>ibexa_string</fieldTypeIdentifier>
                     <fieldValue>draft article</fieldValue>
                 </field>
                 <field>
                     <id>482</id>
                     <fieldDefinitionIdentifier>short_title</fieldDefinitionIdentifier>
                     <languageCode>eng-GB</languageCode>
-                    <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+                    <fieldTypeIdentifier>ibexa_string</fieldTypeIdentifier>
                     <fieldValue/>
                 </field>
                 <field>
                     <id>483</id>
                     <fieldDefinitionIdentifier>author</fieldDefinitionIdentifier>
                     <languageCode>eng-GB</languageCode>
-                    <fieldTypeIdentifier>ezauthor</fieldTypeIdentifier>
+                    <fieldTypeIdentifier>ibexa_author</fieldTypeIdentifier>
                     <fieldValue/>
                 </field>
                 <field>
@@ -79,14 +79,14 @@
                     <id>486</id>
                     <fieldDefinitionIdentifier>enable_comments</fieldDefinitionIdentifier>
                     <languageCode>eng-GB</languageCode>
-                    <fieldTypeIdentifier>ezboolean</fieldTypeIdentifier>
+                    <fieldTypeIdentifier>ibexa_boolean</fieldTypeIdentifier>
                     <fieldValue>false</fieldValue>
                 </field>
                 <field>
                     <id>487</id>
                     <fieldDefinitionIdentifier>image</fieldDefinitionIdentifier>
                     <languageCode>eng-GB</languageCode>
-                    <fieldTypeIdentifier>ezobjectrelation</fieldTypeIdentifier>
+                    <fieldTypeIdentifier>ibexa_object_relation</fieldTypeIdentifier>
                     <fieldValue>
                         <value key="destinationContentId"/>
                     </fieldValue>

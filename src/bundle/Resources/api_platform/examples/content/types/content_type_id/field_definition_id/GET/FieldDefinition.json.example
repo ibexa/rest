@@ -4,7 +4,7 @@
         "_href": "/api/ibexa/v2/content/types/2/fieldDefinitions/195",
         "id": 195,
         "identifier": "image",
-        "fieldType": "ezimageasset",
+        "fieldType": "ibexa_image_asset",
         "fieldGroup": "content",
         "position": 7,
         "isTranslatable": false,

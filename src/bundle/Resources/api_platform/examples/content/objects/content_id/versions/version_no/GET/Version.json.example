@@ -41,14 +41,14 @@
                     "id": 477,
                     "fieldDefinitionIdentifier": "name",
                     "languageCode": "eng-GB",
-                    "fieldTypeIdentifier": "ezstring",
+                    "fieldTypeIdentifier": "ibexa_string",
                     "fieldValue": "Features"
                 },
                 {
                     "id": 478,
                     "fieldDefinitionIdentifier": "short_name",
                     "languageCode": "eng-GB",
-                    "fieldTypeIdentifier": "ezstring",
+                    "fieldTypeIdentifier": "ibexa_string",
                     "fieldValue": null
                 },
                 {
