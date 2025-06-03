@@ -176,7 +176,7 @@ JSON;
     </FieldDefinition>
     <FieldDefinition>
       <identifier>tags</identifier>
-      <fieldType>ezkeyword</fieldType>
+      <fieldType>ibexa_keyword</fieldType>
       <fieldGroup>content</fieldGroup>
       <position>2</position>
       <isTranslatable>true</isTranslatable>
