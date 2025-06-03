@@ -798,7 +798,7 @@
    <FieldDefinition media-type="application/vnd.ibexa.api.FieldDefinition+xml" href="/api/ibexa/v2/content/types/43/fieldDefinitions/189">
     <id>189</id>
     <identifier>form</identifier>
-    <fieldType>ezform</fieldType>
+    <fieldType>ibexa_form</fieldType>
     <fieldGroup>content</fieldGroup>
     <position>2</position>
     <isTranslatable>true</isTranslatable>

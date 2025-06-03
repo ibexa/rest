@@ -1225,7 +1225,7 @@
                             "_href": "/api/ibexa/v2/content/types/43/fieldDefinitions/189",
                             "id": 189,
                             "identifier": "form",
-                            "fieldType": "ezform",
+                            "fieldType": "ibexa_form",
                             "fieldGroup": "content",
                             "position": 2,
                             "isTranslatable": true,
