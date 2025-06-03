@@ -446,7 +446,7 @@
             <FieldDefinition media-type="application/vnd.ibexa.api.FieldDefinition+xml" href="/api/ibexa/v2/content/types/42/fieldDefinitions/187">
                 <id>187</id>
                 <identifier>page</identifier>
-                <fieldType>ezlandingpage</fieldType>
+                <fieldType>ibexa_landing_page</fieldType>
                 <fieldGroup>content</fieldGroup>
                 <position>30</position>
                 <isTranslatable>true</isTranslatable>

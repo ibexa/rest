@@ -1348,7 +1348,7 @@
                             "_href": "/api/ibexa/v2/content/types/42/fieldDefinitions/187",
                             "id": 187,
                             "identifier": "page",
-                            "fieldType": "ezlandingpage",
+                            "fieldType": "ibexa_landing_page",
                             "fieldGroup": "content",
                             "position": 30,
                             "isTranslatable": true,
