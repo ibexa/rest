@@ -51,7 +51,7 @@
                     <id>484</id>
                     <fieldDefinitionIdentifier>intro</fieldDefinitionIdentifier>
                     <languageCode>eng-GB</languageCode>
-                    <fieldTypeIdentifier>ezrichtext</fieldTypeIdentifier>
+                    <fieldTypeIdentifier>ibexa_richtext</fieldTypeIdentifier>
                     <fieldValue>
                         <value key="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;section xmlns=&quot;http://docbook.org/ns/docbook&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; xmlns:ezxhtml=&quot;http://ibexa.co/xmlns/dxp/docbook/xhtml&quot; xmlns:ezcustom=&quot;http://ibexa.co/xmlns/dxp/docbook/custom&quot; version=&quot;5.0-variant ezpublish-1.0&quot;&gt;&lt;para&gt;draft draft&lt;/para&gt;&lt;/section&gt;
@@ -65,7 +65,7 @@
                     <id>485</id>
                     <fieldDefinitionIdentifier>body</fieldDefinitionIdentifier>
                     <languageCode>eng-GB</languageCode>
-                    <fieldTypeIdentifier>ezrichtext</fieldTypeIdentifier>
+                    <fieldTypeIdentifier>ibexa_richtext</fieldTypeIdentifier>
                     <fieldValue>
                         <value key="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;section xmlns=&quot;http://docbook.org/ns/docbook&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; xmlns:ezxhtml=&quot;http://ibexa.co/xmlns/dxp/docbook/xhtml&quot; xmlns:ezcustom=&quot;http://ibexa.co/xmlns/dxp/docbook/custom&quot; version=&quot;5.0-variant ezpublish-1.0&quot;&gt;&lt;para&gt;draft draft draft&lt;/para&gt;&lt;/section&gt;

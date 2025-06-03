@@ -90,7 +90,7 @@
             <FieldDefinition media-type="application/vnd.ibexa.api.FieldDefinition+xml" href="/api/ibexa/v2/content/types/2/fieldDefinitions/120">
                 <id>120</id>
                 <identifier>intro</identifier>
-                <fieldType>ezrichtext</fieldType>
+                <fieldType>ibexa_richtext</fieldType>
                 <fieldGroup></fieldGroup>
                 <position>4</position>
                 <isTranslatable>true</isTranslatable>
@@ -115,7 +115,7 @@
             <FieldDefinition media-type="application/vnd.ibexa.api.FieldDefinition+xml" href="/api/ibexa/v2/content/types/2/fieldDefinitions/121">
                 <id>121</id>
                 <identifier>body</identifier>
-                <fieldType>ezrichtext</fieldType>
+                <fieldType>ibexa_richtext</fieldType>
                 <fieldGroup></fieldGroup>
                 <position>5</position>
                 <isTranslatable>true</isTranslatable>

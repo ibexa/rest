@@ -29,7 +29,7 @@
         {
           "fieldDefinitionIdentifier": "intro",
           "languageCode": "eng-GB",
-          "fieldTypeIdentifier": "ezrichtext",
+          "fieldTypeIdentifier": "ibexa_richtext",
           "fieldValue":
            {
                 "xml": "<section xmlns=\"http://ibexa.co/namespaces/ezpublish5/xhtml5/edit\"><p>draft draft</p></section>"
@@ -38,7 +38,7 @@
         {
           "fieldDefinitionIdentifier": "body",
           "languageCode": "eng-GB",
-          "fieldTypeIdentifier": "ezrichtext",
+          "fieldTypeIdentifier": "ibexa_richtext",
           "fieldValue": {
                 "xml": "<section xmlns=\"http://ibexa.co/namespaces/ezpublish5/xhtml5/edit\"><p>draft draft draft </p></section>"
             }

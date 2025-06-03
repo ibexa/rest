@@ -38,7 +38,7 @@
             <id>479</id>
             <fieldDefinitionIdentifier>short_description</fieldDefinitionIdentifier>
             <languageCode>eng-GB</languageCode>
-            <fieldTypeIdentifier>ezrichtext</fieldTypeIdentifier>
+            <fieldTypeIdentifier>ibexa_richtext</fieldTypeIdentifier>
             <fieldValue>
                 <value key="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;section xmlns=&quot;http://docbook.org/ns/docbook&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; version=&quot;5.0-variant ezpublish-1.0&quot;/&gt;
@@ -52,7 +52,7 @@
             <id>480</id>
             <fieldDefinitionIdentifier>description</fieldDefinitionIdentifier>
             <languageCode>eng-GB</languageCode>
-            <fieldTypeIdentifier>ezrichtext</fieldTypeIdentifier>
+            <fieldTypeIdentifier>ibexa_richtext</fieldTypeIdentifier>
             <fieldValue>
                 <value key="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;section xmlns=&quot;http://docbook.org/ns/docbook&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot; version=&quot;5.0-variant ezpublish-1.0&quot;/&gt;

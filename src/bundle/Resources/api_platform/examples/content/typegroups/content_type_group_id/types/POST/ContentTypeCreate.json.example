@@ -56,7 +56,7 @@
         },
         {
           "identifier": "summary",
-          "fieldType": "ezrichtext",
+          "fieldType": "ibexa_richtext",
           "fieldGroup": "content",
           "position": 2,
           "isTranslatable": true,

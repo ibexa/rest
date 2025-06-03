@@ -80,7 +80,7 @@
                             "id": 491,
                             "fieldDefinitionIdentifier": "intro",
                             "languageCode": "eng-GB",
-                            "fieldTypeIdentifier": "ezrichtext",
+                            "fieldTypeIdentifier": "ibexa_richtext",
                             "fieldValue": {
                                 "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<section xmlns=\"http://docbook.org/ns/docbook\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:ezxhtml=\"http://ibexa.co/xmlns/dxp/docbook/xhtml\" xmlns:ezcustom=\"http://ibexa.co/xmlns/dxp/docbook/custom\" version=\"5.0-variant ezpublish-1.0\"><para>draft draft</para></section>\n",
                                 "xhtml5edit": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<section xmlns=\"http://ibexa.co/namespaces/ezpublish5/xhtml5/edit\"><p>draft draft</p></section>\n"
@@ -90,7 +90,7 @@
                             "id": 492,
                             "fieldDefinitionIdentifier": "body",
                             "languageCode": "eng-GB",
-                            "fieldTypeIdentifier": "ezrichtext",
+                            "fieldTypeIdentifier": "ibexa_richtext",
                             "fieldValue": {
                                 "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<section xmlns=\"http://docbook.org/ns/docbook\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:ezxhtml=\"http://ibexa.co/xmlns/dxp/docbook/xhtml\" xmlns:ezcustom=\"http://ibexa.co/xmlns/dxp/docbook/custom\" version=\"5.0-variant ezpublish-1.0\"><para>draft draft draft</para></section>\n",
                                 "xhtml5edit": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<section xmlns=\"http://ibexa.co/namespaces/ezpublish5/xhtml5/edit\"><p>draft draft draft</p></section>\n"
