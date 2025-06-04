@@ -50,6 +50,7 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
         $loader->load('security.yml');
         $loader->load('default_settings.yml');
         $loader->load('serializer.yaml');
+        $loader->load('twig.yaml');
 
         $processor = new ConfigurationProcessor($container, 'ibexa.site_access.config');
         $processor->mapConfigArray('rest_root_resources', $mergedConfig);

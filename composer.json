@@ -44,6 +44,7 @@
         "symfony/security-bundle": "^7.2",
         "symfony/security-csrf": "^7.2",
         "symfony/yaml": "^7.2",
+        "twig/twig": "^3.0",
         "webmozart/assert": "^1.11"
     },
     "require-dev": {
