@@ -486,7 +486,7 @@ class ContentCreateTest extends BaseTest
 
         $fieldTypeParserMock->expects(self::any())
             ->method('parseValue')
-            ->with('ezstring', [])
+            ->with('ibexa_string', [])
             ->willReturn('foo');
 
         return $fieldTypeParserMock;
@@ -559,14 +559,14 @@ class ContentCreateTest extends BaseTest
                         [
                             'id' => 42,
                             'identifier' => 'subject',
-                            'fieldTypeIdentifier' => 'ezstring',
+                            'fieldTypeIdentifier' => 'ibexa_string',
                         ]
                     ),
                     new FieldDefinition(
                         [
                             'id' => 43,
                             'identifier' => 'author',
-                            'fieldTypeIdentifier' => 'ezstring',
+                            'fieldTypeIdentifier' => 'ibexa_string',
                         ]
                     ),
                 ]),

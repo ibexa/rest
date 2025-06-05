@@ -52,16 +52,16 @@ class VersionTest extends ValueObjectVisitorBaseTest
                             [
                                 'id' => 1,
                                 'languageCode' => 'eng-US',
-                                'fieldDefIdentifier' => 'ezauthor',
-                                'fieldTypeIdentifier' => 'ezauthor',
+                                'fieldDefIdentifier' => 'ibexa_author',
+                                'fieldTypeIdentifier' => 'ibexa_author',
                             ]
                         ),
                         new Field(
                             [
                                 'id' => 2,
                                 'languageCode' => 'eng-US',
-                                'fieldDefIdentifier' => 'ezimage',
-                                'fieldTypeIdentifier' => 'ezauthor',
+                                'fieldDefIdentifier' => 'ibexa_image',
+                                'fieldTypeIdentifier' => 'ibexa_author',
                             ]
                         ),
                     ],

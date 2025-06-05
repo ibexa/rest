@@ -59,21 +59,21 @@
                             "id": 249,
                             "fieldDefinitionIdentifier": "name",
                             "languageCode": "eng-GB",
-                            "fieldTypeIdentifier": "ezstring",
+                            "fieldTypeIdentifier": "ibexa_string",
                             "fieldValue": "Forms"
                         },
                         {
                             "id": 250,
                             "fieldDefinitionIdentifier": "short_name",
                             "languageCode": "eng-GB",
-                            "fieldTypeIdentifier": "ezstring",
+                            "fieldTypeIdentifier": "ibexa_string",
                             "fieldValue": null
                         },
                         {
                             "id": 251,
                             "fieldDefinitionIdentifier": "short_description",
                             "languageCode": "eng-GB",
-                            "fieldTypeIdentifier": "ezrichtext",
+                            "fieldTypeIdentifier": "ibexa_richtext",
                             "fieldValue": {
                                 "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<section xmlns=\"http://docbook.org/ns/docbook\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"5.0-variant ezpublish-1.0\"/>\n",
                                 "xhtml5edit": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<section xmlns=\"http://ibexa.co/namespaces/ezpublish5/xhtml5/edit\"/>\n"
@@ -83,7 +83,7 @@
                             "id": 252,
                             "fieldDefinitionIdentifier": "description",
                             "languageCode": "eng-GB",
-                            "fieldTypeIdentifier": "ezrichtext",
+                            "fieldTypeIdentifier": "ibexa_richtext",
                             "fieldValue": {
                                 "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<section xmlns=\"http://docbook.org/ns/docbook\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" version=\"5.0-variant ezpublish-1.0\"/>\n",
                                 "xhtml5edit": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<section xmlns=\"http://ibexa.co/namespaces/ezpublish5/xhtml5/edit\"/>\n"

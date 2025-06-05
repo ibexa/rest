@@ -75,7 +75,7 @@ class BinaryContent extends RestController
                 throw new Exceptions\NotFoundException("There is no image connected with field {$fieldId}");
             }
             $content = $this->repository->getContentService()->loadContent((int) $value->destinationContentId);
-            $mappings = $this->configResolver->getParameter('fieldtypes.ezimageasset.mappings');
+            $mappings = $this->configResolver->getParameter('fieldtypes.ibexa_image_asset.mappings');
             $field = $content->getField($mappings['content_field_identifier']);
         }
 

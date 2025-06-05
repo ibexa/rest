@@ -25,7 +25,7 @@
         <FieldDefinition media-type="application/vnd.ibexa.api.FieldDefinition+xml" href="/api/ibexa/v2/content/types/2/fieldDefinitions/1">
             <id>1</id>
             <identifier>title</identifier>
-            <fieldType>ezstring</fieldType>
+            <fieldType>ibexa_string</fieldType>
             <fieldGroup></fieldGroup>
             <position>1</position>
             <isTranslatable>true</isTranslatable>
@@ -47,7 +47,7 @@
         <FieldDefinition media-type="application/vnd.ibexa.api.FieldDefinition+xml" href="/api/ibexa/v2/content/types/2/fieldDefinitions/152">
             <id>152</id>
             <identifier>short_title</identifier>
-            <fieldType>ezstring</fieldType>
+            <fieldType>ibexa_string</fieldType>
             <fieldGroup></fieldGroup>
             <position>2</position>
             <isTranslatable>true</isTranslatable>
@@ -69,7 +69,7 @@
         <FieldDefinition media-type="application/vnd.ibexa.api.FieldDefinition+xml" href="/api/ibexa/v2/content/types/2/fieldDefinitions/153">
             <id>153</id>
             <identifier>author</identifier>
-            <fieldType>ezauthor</fieldType>
+            <fieldType>ibexa_author</fieldType>
             <fieldGroup></fieldGroup>
             <position>3</position>
             <isTranslatable>true</isTranslatable>
@@ -89,7 +89,7 @@
         <FieldDefinition media-type="application/vnd.ibexa.api.FieldDefinition+xml" href="/api/ibexa/v2/content/types/2/fieldDefinitions/120">
             <id>120</id>
             <identifier>intro</identifier>
-            <fieldType>ezrichtext</fieldType>
+            <fieldType>ibexa_richtext</fieldType>
             <fieldGroup></fieldGroup>
             <position>4</position>
             <isTranslatable>true</isTranslatable>
@@ -114,7 +114,7 @@
         <FieldDefinition media-type="application/vnd.ibexa.api.FieldDefinition+xml" href="/api/ibexa/v2/content/types/2/fieldDefinitions/121">
             <id>121</id>
             <identifier>body</identifier>
-            <fieldType>ezrichtext</fieldType>
+            <fieldType>ibexa_richtext</fieldType>
             <fieldGroup></fieldGroup>
             <position>5</position>
             <isTranslatable>true</isTranslatable>
@@ -139,7 +139,7 @@
         <FieldDefinition media-type="application/vnd.ibexa.api.FieldDefinition+xml" href="/api/ibexa/v2/content/types/2/fieldDefinitions/123">
             <id>123</id>
             <identifier>enable_comments</identifier>
-            <fieldType>ezboolean</fieldType>
+            <fieldType>ibexa_boolean</fieldType>
             <fieldGroup></fieldGroup>
             <position>6</position>
             <isTranslatable>false</isTranslatable>
@@ -157,7 +157,7 @@
         <FieldDefinition media-type="application/vnd.ibexa.api.FieldDefinition+xml" href="/api/ibexa/v2/content/types/2/fieldDefinitions/154">
             <id>154</id>
             <identifier>image</identifier>
-            <fieldType>ezobjectrelation</fieldType>
+            <fieldType>ibexa_object_relation</fieldType>
             <fieldGroup></fieldGroup>
             <position>7</position>
             <isTranslatable>true</isTranslatable>

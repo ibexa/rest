@@ -294,7 +294,7 @@ class UserGroupCreateTest extends BaseTest
 
         $fieldTypeParserMock->expects(self::any())
             ->method('parseValue')
-            ->with('ezstring', [])
+            ->with('ibexa_string', [])
             ->willReturn('foo');
 
         return $fieldTypeParserMock;
@@ -346,7 +346,7 @@ class UserGroupCreateTest extends BaseTest
                         [
                             'id' => 42,
                             'identifier' => 'name',
-                            'fieldTypeIdentifier' => 'ezstring',
+                            'fieldTypeIdentifier' => 'ibexa_string',
                         ]
                     ),
                 ]),

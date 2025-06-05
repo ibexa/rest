@@ -36,14 +36,14 @@
                 <id>380</id>
                 <fieldDefinitionIdentifier>name</fieldDefinitionIdentifier>
                 <languageCode>eng-GB</languageCode>
-                <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+                <fieldTypeIdentifier>ibexa_string</fieldTypeIdentifier>
                 <fieldValue>UserGroup2</fieldValue>
             </field>
             <field>
                 <id>381</id>
                 <fieldDefinitionIdentifier>description</fieldDefinitionIdentifier>
                 <languageCode>eng-GB</languageCode>
-                <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+                <fieldTypeIdentifier>ibexa_string</fieldTypeIdentifier>
                 <fieldValue>This is the description of the user group</fieldValue>
             </field>
         </Fields>

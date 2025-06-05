@@ -29,7 +29,7 @@
       "FieldDefinition": [
         {
           "identifier": "title",
-          "fieldType": "ezstring",
+          "fieldType": "ibexa_string",
           "fieldGroup": "content",
           "position": 1,
           "isTranslatable": true,
@@ -56,7 +56,7 @@
         },
         {
           "identifier": "summary",
-          "fieldType": "ezrichtext",
+          "fieldType": "ibexa_richtext",
           "fieldGroup": "content",
           "position": 2,
           "isTranslatable": true,

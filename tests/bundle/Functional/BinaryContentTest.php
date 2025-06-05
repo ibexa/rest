@@ -187,7 +187,7 @@ XML;
   <FieldDefinitions>
     <FieldDefinition>
       <identifier>title</identifier>
-      <fieldType>ezstring</fieldType>
+      <fieldType>ibexa_string</fieldType>
       <fieldGroup>content</fieldGroup>
       <position>1</position>
       <isTranslatable>true</isTranslatable>
@@ -204,7 +204,7 @@ XML;
     </FieldDefinition>
     <FieldDefinition>
       <identifier>image_asset</identifier>
-      <fieldType>ezimageasset</fieldType>
+      <fieldType>ibexa_image_asset</fieldType>
       <fieldGroup>content</fieldGroup>
       <position>2</position>
       <isTranslatable>true</isTranslatable>

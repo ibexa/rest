@@ -38,21 +38,21 @@
                     <id>28</id>
                     <fieldDefinitionIdentifier>first_name</fieldDefinitionIdentifier>
                     <languageCode>eng-GB</languageCode>
-                    <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+                    <fieldTypeIdentifier>ibexa_string</fieldTypeIdentifier>
                     <fieldValue>Administrator</fieldValue>
                 </field>
                 <field>
                     <id>29</id>
                     <fieldDefinitionIdentifier>last_name</fieldDefinitionIdentifier>
                     <languageCode>eng-GB</languageCode>
-                    <fieldTypeIdentifier>ezstring</fieldTypeIdentifier>
+                    <fieldTypeIdentifier>ibexa_string</fieldTypeIdentifier>
                     <fieldValue>User</fieldValue>
                 </field>
                 <field>
                     <id>30</id>
                     <fieldDefinitionIdentifier>user_account</fieldDefinitionIdentifier>
                     <languageCode>eng-GB</languageCode>
-                    <fieldTypeIdentifier>ezuser</fieldTypeIdentifier>
+                    <fieldTypeIdentifier>ibexa_user</fieldTypeIdentifier>
                     <fieldValue>
                         <value key="hasStoredLogin">true</value>
                         <value key="contentId">14</value>
@@ -66,14 +66,14 @@
                     <id>178</id>
                     <fieldDefinitionIdentifier>signature</fieldDefinitionIdentifier>
                     <languageCode>eng-GB</languageCode>
-                    <fieldTypeIdentifier>eztext</fieldTypeIdentifier>
+                    <fieldTypeIdentifier>ibexa_text</fieldTypeIdentifier>
                     <fieldValue/>
                 </field>
                 <field>
                     <id>180</id>
                     <fieldDefinitionIdentifier>image</fieldDefinitionIdentifier>
                     <languageCode>eng-GB</languageCode>
-                    <fieldTypeIdentifier>ezimage</fieldTypeIdentifier>
+                    <fieldTypeIdentifier>ibexa_image</fieldTypeIdentifier>
                     <fieldValue/>
                 </field>
             </Fields>

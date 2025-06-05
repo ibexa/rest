@@ -93,7 +93,7 @@
                                     "id": 186,
                                     "fieldDefinitionIdentifier": "name",
                                     "languageCode": "eng-GB",
-                                    "fieldTypeIdentifier": "ezstring",
+                                    "fieldTypeIdentifier": "ibexa_string",
                                     "fieldValue": "Home"
                                 }
                             ]

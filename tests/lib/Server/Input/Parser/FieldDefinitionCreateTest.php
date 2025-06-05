@@ -39,7 +39,7 @@ class FieldDefinitionCreateTest extends BaseTest
         );
 
         self::assertEquals(
-            'ezstring',
+            'ibexa_string',
             $result->fieldTypeIdentifier,
             'fieldTypeIdentifier not created correctly'
         );
@@ -197,12 +197,12 @@ class FieldDefinitionCreateTest extends BaseTest
 
         $contentTypeServiceMock->expects(self::any())
             ->method('newFieldDefinitionCreateStruct')
-            ->with(self::equalTo('title'), self::equalTo('ezstring'))
+            ->with(self::equalTo('title'), self::equalTo('ibexa_string'))
             ->willReturn(
                 new FieldDefinitionCreateStruct(
                     [
                             'identifier' => 'title',
-                            'fieldTypeIdentifier' => 'ezstring',
+                            'fieldTypeIdentifier' => 'ibexa_string',
                         ]
                 )
             );
@@ -214,7 +214,7 @@ class FieldDefinitionCreateTest extends BaseTest
     {
         return [
             'identifier' => 'title',
-            'fieldType' => 'ezstring',
+            'fieldType' => 'ibexa_string',
             'fieldGroup' => 'content',
             'position' => '1',
             'isTranslatable' => 'true',
@@ -238,7 +238,7 @@ class FieldDefinitionCreateTest extends BaseTest
                     ],
                 ],
             ],
-            // Note that ezstring does not support settings, but that is irrelevant for the test
+            // Note that ibexa_string does not support settings, but that is irrelevant for the test
             'fieldSettings' => [
                 'textRows' => 24,
             ],

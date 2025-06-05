@@ -48,7 +48,7 @@ class Factory
     }
 
     /**
-     * Factory for ezpublish_rest.field_type_processor.ezimage.
+     * Factory for ezpublish_rest.field_type_processor.ibexa_image.
      *
      * @param \Symfony\Component\Routing\RouterInterface $router
      *
@@ -80,7 +80,7 @@ class Factory
         return new ImageAssetFieldTypeProcessor(
             $router,
             $this->repository->getContentService(),
-            $this->configResolver->getParameter('fieldtypes.ezimageasset.mappings'),
+            $this->configResolver->getParameter('fieldtypes.ibexa_image_asset.mappings'),
             $variationsIdentifiers
         );
     }

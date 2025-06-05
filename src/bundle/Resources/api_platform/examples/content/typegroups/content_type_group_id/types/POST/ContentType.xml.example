@@ -27,7 +27,7 @@
         <FieldDefinition media-type="application/vnd.ibexa.api.FieldDefinition+xml" href="/api/ibexa/v2/content/types/20/draft/fieldDefinitions/223">
             <id>223</id>
             <identifier>title</identifier>
-            <fieldType>ezstring</fieldType>
+            <fieldType>ibexa_string</fieldType>
             <fieldGroup>content</fieldGroup>
             <position>1</position>
             <isTranslatable>true</isTranslatable>
