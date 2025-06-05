@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Ibexa\Bundle\Rest\Twig\SecurityExtension:
+        arguments:
+            $csrfTokenIntention: '%ibexa.rest.csrf_token_intention%'
+        tags:
+            - { name: twig.extension }
