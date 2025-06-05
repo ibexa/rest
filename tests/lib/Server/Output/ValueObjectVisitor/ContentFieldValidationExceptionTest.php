@@ -95,20 +95,24 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
         return new ContentFieldValidationException(
             new CoreContentFieldValidationException([
                 1 => [
-                    'eng-GB' => new ValidationError(
-                        "Value for required field definition '%identifier%' with language '%languageCode%' is empty",
-                        null,
-                        ['%identifier%' => 'name', '%languageCode%' => 'eng-GB'],
-                        'empty'
-                    ),
+                    'eng-GB' => [
+                        new ValidationError(
+                            "Value for required field definition '%identifier%' with language '%languageCode%' is empty",
+                            null,
+                            ['%identifier%' => 'name', '%languageCode%' => 'eng-GB'],
+                            'empty'
+                        ),
+                    ],
                 ],
                 2 => [
-                    'eng-GB' => new ValidationError(
-                        'The value must be a valid email address.',
-                        null,
-                        [],
-                        'email'
-                    ),
+                    'eng-GB' => [
+                        new ValidationError(
+                            'The value must be a valid email address.',
+                            null,
+                            [],
+                            'email'
+                        ),
+                    ],
                 ],
             ])
         );
