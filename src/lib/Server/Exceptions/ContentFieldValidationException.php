@@ -19,9 +19,9 @@ class ContentFieldValidationException extends BadRequestException
      *
      * @see \Ibexa\Core\Base\Exceptions\ContentFieldValidationException
      *
-     * @var \Ibexa\Core\FieldType\ValidationError[]
+     * @var array<int, array<string, \Ibexa\Contracts\Core\FieldType\ValidationError[]>>
      */
-    protected $errors;
+    protected array $errors;
 
     public function __construct(APIContentFieldValidationException $e)
     {
@@ -33,9 +33,9 @@ class ContentFieldValidationException extends BadRequestException
     /**
      * Returns an array of field validation error messages.
      *
-     * @return \Ibexa\Core\FieldType\ValidationError[]
+     * @return array<int, array<string, \Ibexa\Contracts\Core\FieldType\ValidationError[]>>
      */
-    public function getFieldErrors()
+    public function getFieldErrors(): array
     {
         return $this->errors;
     }
