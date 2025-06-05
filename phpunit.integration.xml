@@ -7,7 +7,7 @@
     <php>
         <env name="KERNEL_CLASS" value="Ibexa\Tests\Integration\Rest\IbexaTestKernel" />
         <env name="SEARCH_ENGINE" value="legacy" />
-        <env name="DATABASE_URL" value="sqlite://i@i/var/test.db" />
+        <env name="DATABASE_URL" value="sqlite://i@i/test.db" />
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[self]=4&amp;max[direct]=0&amp;verbose=0"/>
     </php>
     <testsuites>
