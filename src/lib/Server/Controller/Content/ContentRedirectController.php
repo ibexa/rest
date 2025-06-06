@@ -26,18 +26,33 @@ use Symfony\Component\HttpFoundation\Response;
             'Objects',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'remoteId',
+                description: 'Remote ID of the content item.',
+                in: 'query',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
         ],
         responses: [
             Response::HTTP_TEMPORARY_REDIRECT => [
-                'description' => 'Temporary redirect.',
+                'description' => 'Temporary redirect to `GET /content/objects/{contentId}` equivalent.',
+                'headers' => [
+                    'Location' => [
+                        'description' => 'Contains the prefixed `/content/objects/{contentId}` absolute path of the content item.',
+                        'schema' => ['type' => 'string'],
+                    ],
+                ],
+            ],
+            Response::HTTP_BAD_REQUEST => [
+                'description' => 'Error - the required `remoteId` query parameter is missing.',
             ],
             Response::HTTP_NOT_FOUND => [
                 'description' => 'Error - the content with the given remote ID does not exist.',
             ],
         ],
-        requestBody: new Model\RequestBody(
-            content: new \ArrayObject(),
-        ),
     ),
 )]
 class ContentRedirectController extends RestController
