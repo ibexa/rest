@@ -91,7 +91,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
             ),
             new Values\ContentType\FieldDefinition(
                 [
-                    'id' => 'fieldDefinitionId_23',
+                    'id' => 23,
                     'fieldSettings' => ['setting' => 'foo'],
                     'validatorConfiguration' => ['validator' => 'bar'],
                     'identifier' => 'title',

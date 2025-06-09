@@ -65,10 +65,10 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
             ),
             [
                 new Values\ContentType\FieldDefinition(
-                    ['id' => 'fieldDefinitionId_1']
+                    ['id' => 1]
                 ),
                 new Values\ContentType\FieldDefinition(
-                    ['id' => 'fieldDefinitionId_2']
+                    ['id' => 2]
                 ),
             ]
         );
