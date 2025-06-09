@@ -30,7 +30,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
 
     public function testVisitRestFieldDefinitionWithPath(): \DOMDocument
     {
-        return $this->generateDomDocument('/content/types/contentTypeId/fieldDefinition/title');
+        return $this->generateDomDocument('/content/types/123/fieldDefinition/title');
     }
 
     protected function generateDomDocument(?string $path = null): \DOMDocument
@@ -114,7 +114,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
     public function provideXpathAssertions(): array
     {
         $xpathAssertions = $this->getXpathAssertions();
-        $xpathAssertions[] = '/FieldDefinition[@href="/content/types/contentTypeId/fieldDefinitions/fieldDefinitionId_23"]';
+        $xpathAssertions[] = '/FieldDefinition[@href="/content/types/123/fieldDefinitions/23"]';
 
         return $this->prepareXPathAssertions($xpathAssertions);
     }
@@ -122,7 +122,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
     public function provideXpathAssertionsPath(): array
     {
         $xpathAssertions = $this->getXpathAssertions();
-        $xpathAssertions[] = '/FieldDefinition[@href="/content/types/contentTypeId/fieldDefinition/title"]';
+        $xpathAssertions[] = '/FieldDefinition[@href="/content/types/123/fieldDefinition/title"]';
 
         return $this->prepareXPathAssertions($xpathAssertions);
     }
@@ -141,7 +141,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
     {
         return [
             '/FieldDefinition[@media-type="application/vnd.ibexa.api.FieldDefinition+xml"]',
-            '/FieldDefinition/id[text()="fieldDefinitionId_23"]',
+            '/FieldDefinition/id[text()="23"]',
             '/FieldDefinition/identifier[text()="title"]',
             '/FieldDefinition/fieldType[text()="my-field-type"]',
             '/FieldDefinition/fieldGroup[text()="abstract-field-group"]',
