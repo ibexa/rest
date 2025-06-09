@@ -11,7 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException as APINotFoundException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RoleList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -64,7 +64,7 @@ class RoleListController extends RoleBaseController
     /**
      * Loads list of roles.
      */
-    public function listRoles(Request $request): \Ibexa\Rest\Server\Values\RoleList
+    public function listRoles(Request $request): RoleList
     {
         $roles = [];
         if ($request->query->has('identifier')) {
@@ -90,6 +90,6 @@ class RoleListController extends RoleBaseController
             );
         }
 
-        return new Values\RoleList($roles, $request->getPathInfo());
+        return new RoleList($roles, $request->getPathInfo());
     }
 }

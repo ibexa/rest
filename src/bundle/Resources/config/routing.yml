@@ -367,7 +367,7 @@ ibexa.rest.delete_object_state:
 
 ibexa.rest.get_object_states_for_content:
     path: /content/objects/{contentId}/objectstates
-    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStatesForContnetListController::getObjectStatesForContent
+    controller: Ibexa\Rest\Server\Controller\ObjectState\ObjectStatesForContentListController::getObjectStatesForContent
     methods: [GET]
     requirements:
         contentId: \d+
@@ -788,7 +788,7 @@ ibexa.rest.delete_url_wildcard:
 
 ibexa.rest.list_policies_for_user:
     path: /user/policies
-    controller: Ibexa\Rest\Server\Controller\Role::listPoliciesForUser
+    controller: Ibexa\Rest\Server\Controller\Role\RolePoliciesForUserListController::listPoliciesForUser
     methods: [GET]
 
 # Roles

@@ -7,7 +7,6 @@
 
 namespace Ibexa\Rest\Server\Controller\Role;
 
-use ApiPlatform\Metadata\Get;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\RoleService;
 use Ibexa\Contracts\Core\Repository\UserService;

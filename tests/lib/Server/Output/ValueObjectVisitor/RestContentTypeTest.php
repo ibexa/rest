@@ -79,13 +79,13 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
         return new RestContentType(
             new Values\ContentType\ContentType(
                 [
-                    'id' => 'contentTypeId',
+                    'id' => 123,
                     'status' => Values\ContentType\ContentType::STATUS_DEFINED,
                     'identifier' => 'contentTypeIdentifier',
                     'creationDate' => new \DateTime('2012-09-06 19:30 Europe/Berlin'),
                     'modificationDate' => new \DateTime('2012-09-06 19:32 Europe/Berlin'),
-                    'creatorId' => 'creatorId',
-                    'modifierId' => 'modifierId',
+                    'creatorId' => 123,
+                    'modifierId' => 34,
                     'remoteId' => 'remoteId',
                     'urlAliasSchema' => 'urlAliasSchema',
                     'nameSchema' => 'nameSchema',
@@ -111,7 +111,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testContentTypeHref(\DOMDocument $dom): void
     {
-        $this->assertXPath($dom, '/ContentType[@href="/content/types/contentTypeId"]');
+        $this->assertXPath($dom, '/ContentType[@href="/content/types/123"]');
     }
 
     /**
@@ -127,7 +127,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testId(\DOMDocument $dom): void
     {
-        $this->assertXPath($dom, '/ContentType/id[text()="contentTypeId"]');
+        $this->assertXPath($dom, '/ContentType/id[text()="123"]');
     }
 
     /**
@@ -199,7 +199,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testCreatorHref(\DOMDocument $dom): void
     {
-        $this->assertXPath($dom, '/ContentType/Creator[@href="/user/users/creatorId"]');
+        $this->assertXPath($dom, '/ContentType/Creator[@href="/user/users/123"]');
     }
 
     /**
@@ -215,7 +215,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testModifierHref(\DOMDocument $dom): void
     {
-        $this->assertXPath($dom, '/ContentType/Modifier[@href="/user/users/modifierId"]');
+        $this->assertXPath($dom, '/ContentType/Modifier[@href="/user/users/34"]');
     }
 
     /**
@@ -231,7 +231,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testDraftHref(\DOMDocument $dom): void
     {
-        $this->assertXPath($dom, '/ContentType/Draft[@href="/content/types/contentTypeId/draft"]');
+        $this->assertXPath($dom, '/ContentType/Draft[@href="/content/types/123/draft"]');
     }
 
     /**
@@ -247,7 +247,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
      */
     public function testGroupsHref(\DOMDocument $dom): void
     {
-        $this->assertXPath($dom, '/ContentType/Groups[@href="/content/types/contentTypeId/groups"]');
+        $this->assertXPath($dom, '/ContentType/Groups[@href="/content/types/123/groups"]');
     }
 
     /**

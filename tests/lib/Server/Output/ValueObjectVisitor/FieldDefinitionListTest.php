@@ -58,17 +58,17 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
         return new FieldDefinitionList(
             new Values\ContentType\ContentType(
                 [
-                    'id' => 'contentTypeId',
+                    'id' => 12,
                     'status' => Values\ContentType\ContentType::STATUS_DEFINED,
                     'fieldDefinitions' => new Values\ContentType\FieldDefinitionCollection(),
                 ]
             ),
             [
                 new Values\ContentType\FieldDefinition(
-                    ['id' => 'fieldDefinitionId_1']
+                    ['id' => 1]
                 ),
                 new Values\ContentType\FieldDefinition(
-                    ['id' => 'fieldDefinitionId_2']
+                    ['id' => 2]
                 ),
             ]
         );
@@ -81,7 +81,7 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
     {
         return [
             [
-                '/FieldDefinitions[@href="/content/types/contentTypeId/fieldDefinitions"]',
+                '/FieldDefinitions[@href="/content/types/12/fieldDefinitions"]',
             ],
             [
                 '/FieldDefinitions[@media-type="application/vnd.ibexa.api.FieldDefinitionList+xml"]',
