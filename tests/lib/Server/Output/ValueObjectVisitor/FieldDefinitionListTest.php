@@ -58,7 +58,7 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
         return new FieldDefinitionList(
             new Values\ContentType\ContentType(
                 [
-                    'id' => 'contentTypeId',
+                    'id' => 12,
                     'status' => Values\ContentType\ContentType::STATUS_DEFINED,
                     'fieldDefinitions' => new Values\ContentType\FieldDefinitionCollection(),
                 ]

@@ -84,7 +84,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
         return new Server\Values\RestFieldDefinition(
             new Values\ContentType\ContentType(
                 [
-                    'id' => 'contentTypeId',
+                    'id' => 123,
                     'status' => Values\ContentType\ContentType::STATUS_DEFINED,
                     'fieldDefinitions' => new Values\ContentType\FieldDefinitionCollection(),
                 ]

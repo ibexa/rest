@@ -79,7 +79,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTest
         return new RestContentType(
             new Values\ContentType\ContentType(
                 [
-                    'id' => 'contentTypeId',
+                    'id' => 123,
                     'status' => Values\ContentType\ContentType::STATUS_DEFINED,
                     'identifier' => 'contentTypeIdentifier',
                     'creationDate' => new \DateTime('2012-09-06 19:30 Europe/Berlin'),
