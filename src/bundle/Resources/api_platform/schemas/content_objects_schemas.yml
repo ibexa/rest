@@ -95,8 +95,8 @@ schemas:
         ContentType:
           description: The content type for which the new content item is created.
           oneOf:
-            - "#/components/schemas/Content"
-            - "#/components/schemas/Href"
+            - $ref: "#/components/schemas/Content"
+            - $ref: "#/components/schemas/Href"
         Section:
           description: The Section the content item is assigned to. If not set the Section of the parent is used or a default Section.
           $ref: "#/components/schemas/Href"
@@ -188,7 +188,8 @@ schemas:
         - mainLocationId
         - name
       properties:
-        ownerId: {}
+        ownerId:
+          type: []
         publishedDate:
           type: string
           format: date-time
@@ -201,7 +202,8 @@ schemas:
           type: boolean
         remoteId:
           type: string
-        mainLocationId: {}
+        mainLocationId:
+          type: []
         name:
           type: string
     ContentCreateContentType:
