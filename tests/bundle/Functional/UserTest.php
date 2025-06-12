@@ -70,6 +70,51 @@ XML;
     }
 
     /**
+     * Covers POST /user/groups/subgroups (user group creation under root subtree).
+     */
+    public function testCreateRootUserGroup(): void
+    {
+        $text = $this->addTestSuffix(__FUNCTION__);
+        $xml = <<< XML
+<?xml version="1.0" encoding="UTF-8"?>
+<UserGroupCreate>
+  <mainLanguageCode>eng-GB</mainLanguageCode>
+  <remoteId>{$text}</remoteId>
+  <fields>
+    <field>
+      <fieldDefinitionIdentifier>name</fieldDefinitionIdentifier>
+      <languageCode>eng-GB</languageCode>
+      <fieldValue>{$text}</fieldValue>
+    </field>
+    <field>
+      <fieldDefinitionIdentifier>description</fieldDefinitionIdentifier>
+      <languageCode>eng-GB</languageCode>
+      <fieldValue>Description of {$text}</fieldValue>
+    </field>
+  </fields>
+</UserGroupCreate>
+XML;
+        $request = $this->createHttpRequest(
+            'POST',
+            '/api/ibexa/v2/user/groups/subgroups',
+            'UserGroupCreate+xml',
+            'UserGroup+json',
+            $xml
+        );
+        $response = $this->sendHttpRequest($request);
+
+        self::assertHttpResponseCodeEquals($response, 201);
+        self::assertHttpResponseHasHeader($response, self::HEADER_LOCATION);
+
+        $href = $response->getHeader(self::HEADER_LOCATION)[0];
+
+        $trimmedHref = str_replace('/api/ibexa/v2/user/groups/', '', $href);
+        $parts = explode('/', $trimmedHref);
+
+        self::assertSame('1/5', $parts[0] . '/' . $parts[1]);
+    }
+
+    /**
      * @param $userGroupId Covers GET /user/groups/{groupId}
      * @depends testCreateUserGroup
      */
