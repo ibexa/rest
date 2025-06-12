@@ -30,7 +30,7 @@
         "ext-libxml": "*",
         "ext-simplexml": "*",
         "ext-xmlwriter": "*",
-        "ibexa/core": "dev-ibx-9328-users-root-path 4.6.0@dev",
+        "ibexa/core": "dev-ibx-9328-users-root-path as 4.6.0@dev",
         "symfony/http-kernel": "^5.3",
         "symfony/dependency-injection": "^5.3",
         "symfony/routing": "^5.3",
