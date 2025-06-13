@@ -235,6 +235,12 @@ services:
             - { name: kernel.event_subscriber }
             - { name: monolog.logger, channel: request }
 
+    Ibexa\Bundle\Rest\EventListener\XmlUnsupportedMediaTypeSubscriber:
+        arguments:
+            $xmlRegexps: '%ibexa.rest.output.visitor.xml.regexps%'
+        tags:
+            - { name: kernel.event_subscriber }
+
     Ibexa\Rest\Server\Controller\Options:
         parent: Ibexa\Rest\Server\Controller
         tags: [controller.service_arguments]
