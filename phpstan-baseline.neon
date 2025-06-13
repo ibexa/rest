@@ -793,6 +793,12 @@ parameters:
 			path: src/lib/Input/Handler/Json.php
 
 		-
+			message: '#^Argument of an invalid type \(DOMNamedNodeMap&iterable\<DOMAttr\>\)\|null supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: src/lib/Input/Handler/Xml.php
+
+		-
 			message: '#^Cannot assign new offset to array\|string\.$#'
 			identifier: offsetAssign.dimType
 			count: 1
