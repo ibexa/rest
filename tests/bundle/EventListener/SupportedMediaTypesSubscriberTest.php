@@ -98,4 +98,20 @@ final class SupportedMediaTypesSubscriberTest extends TestCase
         $this->expectException(UnsupportedMediaTypeHttpException::class);
         $subscriber->allowOnlySupportedMediaTypes($event);
     }
+
+    public function testThrowsExceptionWhenUnknownMediaTypeIsUsed(): void
+    {
+        $request = new Request();
+        $request->attributes->set('supported_media_types', ['yaml']);
+        $request->headers = new HeaderBag([
+            'Content-Type' => 'application/vnd.ibexa.api.ContentCreate+unknown',
+            'Accept' => 'application/vnd.ibexa.api.ContentCreate+unknown',
+        ]);
+
+        $subscriber = new SupportedMediaTypesSubscriber();
+        $event = new RequestEvent($this->kernel, $request, HttpKernelInterface::MAIN_REQUEST);
+
+        $this->expectException(UnsupportedMediaTypeHttpException::class);
+        $subscriber->allowOnlySupportedMediaTypes($event);
+    }
 }
