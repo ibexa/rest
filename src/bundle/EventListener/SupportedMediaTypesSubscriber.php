@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class SupportedMediaTypesSubscriber implements EventSubscriberInterface
 {
-    private const SUPPORTED_MEDIA_TYPES_PATTERN = '(^application/vnd\.ibexa\.api(\.[A-Za-z]+)+\+%s$)';
+    private const SUPPORTED_MEDIA_TYPES_REGEX = '/(?<=\+)[A-Za-z0-9]+/';
 
     public static function getSubscribedEvents(): array
     {
@@ -35,33 +35,26 @@ final class SupportedMediaTypesSubscriber implements EventSubscriberInterface
         }
 
         $supportedMediaTypes = $request->attributes->get('supported_media_types');
-        $regexps = array_map(
-            static fn (string $mediaType): string => sprintf(
-                self::SUPPORTED_MEDIA_TYPES_PATTERN,
-                strtolower($mediaType)
-            ),
-            $supportedMediaTypes
-        );
+        if (empty($supportedMediaTypes)) {
+            return;
+        }
 
         $contentTypeHeader = $request->headers->get('Content-Type') ?? '';
-        $acceptHeader = $request->headers->get('Accept') ?? '';
 
-        foreach ($regexps as $regexp) {
-            if (
-                preg_match($regexp, $contentTypeHeader) === 1
-                || preg_match($regexp, $acceptHeader) === 1
-            ) {
-                break;
-            }
+        preg_match(self::SUPPORTED_MEDIA_TYPES_REGEX, $contentTypeHeader, $matches);
 
-            throw new UnsupportedMediaTypeHttpException(
-                sprintf(
-                    'Unsupported media type was used. Available ones are: %s',
-                    implode(', ', $supportedMediaTypes)
-                ),
-                null,
-                Response::HTTP_UNSUPPORTED_MEDIA_TYPE
-            );
+        $match = reset($matches);
+        if ($match !== false && in_array($match, $supportedMediaTypes, true)) {
+            return;
         }
+
+        throw new UnsupportedMediaTypeHttpException(
+            sprintf(
+                'Unsupported media type was used. Available ones are: %s',
+                implode(', ', $supportedMediaTypes)
+            ),
+            null,
+            Response::HTTP_UNSUPPORTED_MEDIA_TYPE
+        );
     }
 }
