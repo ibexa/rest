@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
-use Ibexa\Bundle\Rest\EventListener\XmlUnsupportedMediaTypeSubscriber;
+use Ibexa\Bundle\Rest\EventListener\SupportedMediaTypesSubscriber;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,10 +16,8 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\UnsupportedMediaTypeHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-final class XmlUnsupportedMediaTypeSubscriberTest extends TestCase
+final class SupportedMediaTypesSubscriberTest extends TestCase
 {
-    private const XML_REGEXP = '(^application/vnd\.ibexa\.api(\.[A-Za-z]+)+\+xml$)';
-
     /** @var \Symfony\Component\HttpKernel\HttpKernelInterface&\PHPUnit\Framework\MockObject\MockObject */
     private HttpKernelInterface $kernel;
 
@@ -30,76 +28,74 @@ final class XmlUnsupportedMediaTypeSubscriberTest extends TestCase
         $this->kernel = $this->createMock(HttpKernelInterface::class);
     }
 
-    public function testDoesNothingWhenXmlDisabledIsNotTrue(): void
+    public function testDoesNothingWhenSupportedMediaTypesParameterIsNotSet(): void
     {
         $request = new Request();
-        $request->attributes->set('xml_disabled', false);
-
         $event = new RequestEvent($this->kernel, $request, HttpKernelInterface::MAIN_REQUEST);
 
-        $subscriber = new XmlUnsupportedMediaTypeSubscriber([self::XML_REGEXP]);
-        $subscriber->blockXmlUnsupportedMediaType($event);
+        $subscriber = new SupportedMediaTypesSubscriber();
+        $subscriber->allowOnlySupportedMediaTypes($event);
 
         self::expectNotToPerformAssertions();
     }
 
-    public function testDoesNothingWhenNoRegexps(): void
+    public function testDoesNothingWhenSupportedMediaTypesParameterIsEmpty(): void
     {
         $request = new Request();
-        $request->attributes->set('xml_disabled', true);
+        $request->attributes->set('supported_media_types', []);
 
-        $subscriber = new XmlUnsupportedMediaTypeSubscriber([]);
+        $subscriber = new SupportedMediaTypesSubscriber();
         $event = new RequestEvent($this->kernel, $request, HttpKernelInterface::MAIN_REQUEST);
 
-        $subscriber->blockXmlUnsupportedMediaType($event);
+        $subscriber->allowOnlySupportedMediaTypes($event);
 
         self::expectNotToPerformAssertions();
     }
 
-    public function testDoesNothingWhenNoMatch(): void
+    public function testDoesNothingWhenMediaTypeIsSupported(): void
     {
         $request = new Request();
-        $request->attributes->set('xml_disabled', true);
+        $request->attributes->set('supported_media_types', ['json', 'xml']);
         $request->headers = new HeaderBag([
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json',
+            'Content-Type' => 'application/vnd.ibexa.api.ContentCreat+json',
+            'Accept' => 'application/vnd.ibexa.api.ContentCreat+json',
         ]);
 
-        $subscriber = new XmlUnsupportedMediaTypeSubscriber([self::XML_REGEXP]);
+        $subscriber = new SupportedMediaTypesSubscriber();
         $event = new RequestEvent($this->kernel, $request, HttpKernelInterface::MAIN_REQUEST);
 
-        $subscriber->blockXmlUnsupportedMediaType($event);
+        $subscriber->allowOnlySupportedMediaTypes($event);
 
         self::expectNotToPerformAssertions();
     }
 
-    public function testThrowsExceptionWhenContentTypeHeaderMatches(): void
+    public function testThrowsExceptionWhenContentTypeHeaderTypeIsNotSupported(): void
     {
         $request = new Request();
-        $request->attributes->set('xml_disabled', true);
+        $request->attributes->set('supported_media_types', ['json']);
         $request->headers = new HeaderBag([
             'Content-Type' => 'application/vnd.ibexa.api.ContentCreate+xml',
         ]);
 
-        $subscriber = new XmlUnsupportedMediaTypeSubscriber([self::XML_REGEXP]);
+        $subscriber = new SupportedMediaTypesSubscriber();
         $event = new RequestEvent($this->kernel, $request, HttpKernelInterface::MAIN_REQUEST);
 
         $this->expectException(UnsupportedMediaTypeHttpException::class);
-        $subscriber->blockXmlUnsupportedMediaType($event);
+        $subscriber->allowOnlySupportedMediaTypes($event);
     }
 
-    public function testThrowsExceptionWhenAcceptHeaderMatches(): void
+    public function testThrowsExceptionWhenAcceptHeaderTypeIsNotSupported(): void
     {
         $request = new Request();
-        $request->attributes->set('xml_disabled', true);
+        $request->attributes->set('supported_media_types', ['json']);
         $request->headers = new HeaderBag([
             'Accept' => 'application/vnd.ibexa.api.ContentCreate+xml',
         ]);
 
-        $subscriber = new XmlUnsupportedMediaTypeSubscriber([self::XML_REGEXP]);
+        $subscriber = new SupportedMediaTypesSubscriber();
         $event = new RequestEvent($this->kernel, $request, HttpKernelInterface::MAIN_REQUEST);
 
         $this->expectException(UnsupportedMediaTypeHttpException::class);
-        $subscriber->blockXmlUnsupportedMediaType($event);
+        $subscriber->allowOnlySupportedMediaTypes($event);
     }
 }
