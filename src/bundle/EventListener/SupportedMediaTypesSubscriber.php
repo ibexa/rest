@@ -39,12 +39,16 @@ final class SupportedMediaTypesSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $contentTypeHeader = $request->headers->get('Content-Type') ?? '';
+        $acceptHeader = $request->headers->get('Accept') ?? '';
 
-        preg_match(self::SUPPORTED_MEDIA_TYPES_REGEX, $contentTypeHeader, $matches);
+        preg_match(self::SUPPORTED_MEDIA_TYPES_REGEX, $acceptHeader, $matches);
 
         $match = reset($matches);
-        if ($match !== false && in_array($match, $supportedMediaTypes, true)) {
+        if ($match === false) {
+            return;
+        }
+
+        if (in_array($match, $supportedMediaTypes, true)) {
             return;
         }
 

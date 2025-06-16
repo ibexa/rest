@@ -56,7 +56,7 @@ final class SupportedMediaTypesSubscriberTest extends TestCase
         $request = new Request();
         $request->attributes->set('supported_media_types', ['json', 'xml']);
         $request->headers = new HeaderBag([
-            'Content-Type' => 'application/vnd.ibexa.api.ContentCreate+json',
+            'Accept' => 'application/vnd.ibexa.api.ContentCreate+json',
         ]);
 
         $subscriber = new SupportedMediaTypesSubscriber();
@@ -67,12 +67,12 @@ final class SupportedMediaTypesSubscriberTest extends TestCase
         self::expectNotToPerformAssertions();
     }
 
-    public function testThrowsExceptionWhenContentTypeHeaderTypeIsNotSupported(): void
+    public function testThrowsExceptionWhenHeaderTypeIsNotSupported(): void
     {
         $request = new Request();
         $request->attributes->set('supported_media_types', ['json']);
         $request->headers = new HeaderBag([
-            'Content-Type' => 'application/vnd.ibexa.api.ContentCreate+xml',
+            'Accept' => 'application/vnd.ibexa.api.ContentCreate+xml',
         ]);
 
         $subscriber = new SupportedMediaTypesSubscriber();
@@ -87,7 +87,7 @@ final class SupportedMediaTypesSubscriberTest extends TestCase
         $request = new Request();
         $request->attributes->set('supported_media_types', ['yaml']);
         $request->headers = new HeaderBag([
-            'Content-Type' => 'application/vnd.ibexa.api.ContentCreate+unknown',
+            'Accept' => 'application/vnd.ibexa.api.ContentCreate+unknown',
         ]);
 
         $subscriber = new SupportedMediaTypesSubscriber();
@@ -95,5 +95,21 @@ final class SupportedMediaTypesSubscriberTest extends TestCase
 
         $this->expectException(UnsupportedMediaTypeHttpException::class);
         $subscriber->allowOnlySupportedMediaTypes($event);
+    }
+
+    public function testApplicationJsonHeaderIsSupported(): void
+    {
+        $request = new Request();
+        $request->attributes->set('supported_media_types', ['json']);
+        $request->headers = new HeaderBag([
+            'Accept' => 'application/json',
+        ]);
+
+        $subscriber = new SupportedMediaTypesSubscriber();
+        $event = new RequestEvent($this->kernel, $request, HttpKernelInterface::MAIN_REQUEST);
+
+        $subscriber->allowOnlySupportedMediaTypes($event);
+
+        self::expectNotToPerformAssertions();
     }
 }
