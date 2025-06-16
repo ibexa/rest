@@ -235,9 +235,7 @@ services:
             - { name: kernel.event_subscriber }
             - { name: monolog.logger, channel: request }
 
-    Ibexa\Bundle\Rest\EventListener\XmlUnsupportedMediaTypeSubscriber:
-        arguments:
-            $xmlRegexps: '%ibexa.rest.output.visitor.xml.regexps%'
+    Ibexa\Bundle\Rest\EventListener\SupportedMediaTypesSubscriber:
         tags:
             - { name: kernel.event_subscriber }
 
