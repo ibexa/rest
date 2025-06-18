@@ -94,20 +94,18 @@ schemas:
                 items:
                     $ref: "#/components/schemas/Value"
     MultilingualValue:
-        allOf:
-            - $ref: "#/components/schemas/Value"
-            - description: Object that represents a multilingual (translated) value.
-              type: object
-              required:
-                  - _languageCode
-                  - "#text"
-              properties:
-                  _languageCode:
-                      description: Language code.
-                      type: string
-                  "#text":
-                      description: Translation contents.
-                      type: [string, 'null']
+        description: Object that represents a multilingual (translated) value.
+        type: object
+        required:
+            - _languageCode
+            - "#text"
+        properties:
+            _languageCode:
+                description: Language code.
+                type: string
+            "#text":
+                description: Translation contents.
+                type: [string, 'null']
     KeyValue:
         description: Key-value structure
         type: object

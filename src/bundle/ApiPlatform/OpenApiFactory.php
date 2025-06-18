@@ -12,6 +12,7 @@ use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
 use ApiPlatform\OpenApi\Model\Info;
 use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\Response;
+use ApiPlatform\OpenApi\Model\Server;
 use ApiPlatform\OpenApi\OpenApi;
 use ArrayObject;
 use Ibexa\Contracts\Core\Ibexa;
@@ -23,6 +24,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         private OpenApiFactoryInterface $decorated,
         private SchemasCollectionFactory $schemaCollectionFactory,
         private KernelInterface $kernel,
+        private string $prefix,
     ) {
     }
 
@@ -36,6 +38,8 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         $openApi = $this->addSchemas($openApi);
 
         $this->insertExampleFilesContent($openApi);
+
+        $openApi = $openApi->withServers([new Server($this->prefix, 'Current server')]);
 
         return $openApi;
     }
