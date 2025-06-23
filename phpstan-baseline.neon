@@ -2569,13 +2569,13 @@ parameters:
 			path: src/lib/Server/Controller/Views.php
 
 		-
-			message: '#^PHPDoc tag @return has invalid value \(\\Ibexa\\Contracts\\Core\\Repository\\Exceptions\\NotImplementedException;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 123 on line 4$#'
+			message: '#^PHPDoc tag @return has invalid value \(\\Ibexa\\Contracts\\Core\\Repository\\Exceptions\\NotImplementedException;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 120 on line 4$#'
 			identifier: phpDoc.parseError
 			count: 2
 			path: src/lib/Server/Controller/Views.php
 
 		-
-			message: '#^PHPDoc tag @return has invalid value \(\\Ibexa\\Contracts\\Core\\Repository\\Exceptions\\NotImplementedException;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 131 on line 4$#'
+			message: '#^PHPDoc tag @return has invalid value \(\\Ibexa\\Contracts\\Core\\Repository\\Exceptions\\NotImplementedException;\)\: Unexpected token ";", expected TOKEN_HORIZONTAL_WS at offset 128 on line 4$#'
 			identifier: phpDoc.parseError
 			count: 1
 			path: src/lib/Server/Controller/Views.php
@@ -5029,7 +5029,7 @@ parameters:
 			path: tests/bundle/EventListener/EventListenerTest.php
 
 		-
-			message: '#^PHPDoc tag @return has invalid value \(\\PHPUnit\\Framework\\MockObject\\MockObject\|\$class\)\: Unexpected token "\$class", expected type at offset 61 on line 2$#'
+			message: '#^PHPDoc tag @return has invalid value \(\\PHPUnit\\Framework\\MockObject\\MockObject\|\$class\)\: Unexpected token "\$class", expected type at offset 60 on line 2$#'
 			identifier: phpDoc.parseError
 			count: 1
 			path: tests/bundle/EventListener/EventListenerTest.php
