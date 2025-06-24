@@ -128,7 +128,7 @@ class Xml extends Handler
         $current = [];
         $text = '';
 
-        if ($node instanceof \DOMElement) {
+        if ($node instanceof \DOMElement && $node->attributes !== null) {
             foreach ($node->attributes as $name => $attribute) {
                 $current["_{$name}"] = $attribute->value;
             }
