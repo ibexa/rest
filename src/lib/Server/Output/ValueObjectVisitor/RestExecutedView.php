@@ -62,7 +62,10 @@ class RestExecutedView extends ValueObjectVisitor
 
         $generator->startAttribute(
             'href',
-            $this->router->generate('ibexa.rest.views.load', ['viewId' => $data->identifier])
+            $this->router->generate(
+                'ibexa.rest.views.load',
+                ['viewId' => str_replace('/', '', $data->identifier)]
+            )
         );
         $generator->endAttribute('href');
 
@@ -78,7 +81,10 @@ class RestExecutedView extends ValueObjectVisitor
         $generator->startObjectElement('Result', 'ViewResult');
         $generator->startAttribute(
             'href',
-            $this->router->generate('ibexa.rest.views.load.results', ['viewId' => $data->identifier])
+            $this->router->generate(
+                'ibexa.rest.views.load.results',
+                ['viewId' => str_replace('/', '', $data->identifier)]
+            )
         );
         $generator->endAttribute('href');
 
