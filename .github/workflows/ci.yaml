@@ -10,7 +10,7 @@ on:
 jobs:
     cs-fix:
         name: Run code style check
-        runs-on: "ubuntu-22.04"
+        runs-on: "ubuntu-24.04"
         steps:
             - uses: actions/checkout@v4
 
@@ -35,7 +35,7 @@ jobs:
 
     tests:
         name: Unit & integration tests
-        runs-on: "ubuntu-22.04"
+        runs-on: "ubuntu-24.04"
         timeout-minutes: 15
 
         strategy:
