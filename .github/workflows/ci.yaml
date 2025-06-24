@@ -10,9 +10,9 @@ on:
 jobs:
     cs-fix:
         name: Run code style check
-        runs-on: "ubuntu-22.04"
+        runs-on: "ubuntu-24.04"
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
@@ -22,7 +22,7 @@ jobs:
                   extensions: 'pdo_sqlite, gd'
                   tools: cs2pr
 
-            - uses: ramsey/composer-install@v2
+            - uses: ramsey/composer-install@v3
               with:
                   dependency-versions: highest
 
@@ -31,7 +31,7 @@ jobs:
 
     tests:
         name: Unit & integration tests
-        runs-on: "ubuntu-22.04"
+        runs-on: "ubuntu-24.04"
         timeout-minutes: 15
 
         strategy:
@@ -43,7 +43,7 @@ jobs:
                     - '8.2'
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
@@ -53,7 +53,7 @@ jobs:
                   extensions: pdo_sqlite, gd
                   tools: cs2pr
 
-            - uses: ramsey/composer-install@v2
+            - uses: ramsey/composer-install@v3
               with:
                   dependency-versions: highest
 
