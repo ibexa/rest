@@ -15,6 +15,11 @@ jobs:
         runs-on: ubuntu-latest
         timeout-minutes: 15
 
+        strategy:
+            matrix:
+                php:
+                    - '7.4'
+
         steps:
             - uses: actions/checkout@v2
 
@@ -26,7 +31,7 @@ jobs:
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
               with:
-                  php-version: 7.4
+                  php-version: ${{ matrix.php }}
                   coverage: none
 
             - name: Cache dependencies
@@ -41,7 +46,7 @@ jobs:
               run: |
                 curl -L "https://raw.githubusercontent.com/ibexa/ci-scripts/main/bin/${{ env.version }}/prepare_project_edition.sh" > prepare_project_edition.sh
                 chmod +x prepare_project_edition.sh
-                ./prepare_project_edition.sh ${{ env.PROJECT_EDITION }} ${{ env.version }} ${{ env.SETUP }}
+                ./prepare_project_edition.sh ${{ env.PROJECT_EDITION }} ${{ env.version }} ${{ env.SETUP }} "ghcr.io/ibexa/docker/php:${{ matrix.php }}-node18"
 
             - name: Run setup command
               run: |
