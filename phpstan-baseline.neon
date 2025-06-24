@@ -1441,6 +1441,12 @@ parameters:
 			path: src/lib/Server/Controller/Content.php
 
 		-
+			message: '#^Parameter \#1 \$parentLocationId of method Ibexa\\Contracts\\Core\\Repository\\LocationService\:\:newLocationCreateStruct\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
 			message: '#^Parameter \#1 \$remoteId of method Ibexa\\Contracts\\Core\\Repository\\ContentService\:\:loadContentInfoByRemoteId\(\) expects string, string\|null given\.$#'
 			identifier: argument.type
 			count: 1
