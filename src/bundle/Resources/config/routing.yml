@@ -278,12 +278,17 @@ ibexa.rest.views.load:
     defaults:
         _controller: Ibexa\Rest\Server\Controller\Views:getView
     methods: [GET]
+    requirements:
+        viewId: ".+"
 
 ibexa.rest.views.load.results:
     path: /views/{viewId}/results
     defaults:
         _controller: Ibexa\Rest\Server\Controller\Views:loadViewResults
     methods: [GET]
+    requirements:
+        viewId: ".+"
+
 # Object states
 
 
