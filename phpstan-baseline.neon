@@ -2341,12 +2341,6 @@ parameters:
 			path: src/lib/Server/Controller/User.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\User\:\:createUserGroup\(\) has parameter \$groupPath with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Controller/User.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Controller\\User\:\:deleteUser\(\) has parameter \$userId with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1

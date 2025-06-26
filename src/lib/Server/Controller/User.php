@@ -19,6 +19,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Contracts\Core\Repository\Values\User\User as RepositoryUser;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroupRoleAssignment;
 use Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Message;
@@ -103,6 +104,8 @@ class User extends RestController
     /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
     private $permissionResolver;
 
+    private ConfigResolverInterface $configResolver;
+
     public function __construct(
         UserService $userService,
         RoleService $roleService,
@@ -111,7 +114,8 @@ class User extends RestController
         LocationService $locationService,
         SectionService $sectionService,
         Repository $repository,
-        PermissionResolver $permissionResolver
+        PermissionResolver $permissionResolver,
+        ConfigResolverInterface $configResolver
     ) {
         $this->userService = $userService;
         $this->roleService = $roleService;
@@ -121,6 +125,7 @@ class User extends RestController
         $this->sectionService = $sectionService;
         $this->repository = $repository;
         $this->permissionResolver = $permissionResolver;
+        $this->configResolver = $configResolver;
     }
 
     /**
@@ -235,19 +240,37 @@ class User extends RestController
     }
 
     /**
+     * Create a new user group under the root location.
+     *
+     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     */
+    public function createRootUserGroup(Request $request): Values\CreatedUserGroup
+    {
+        $rootPath = $this->configResolver->getParameter('users_group_root_subtree_path');
+
+        return $this->createUserGroup($rootPath, $request);
+    }
+
+    /**
      * Create a new user group under the given parent
      * To create a top level group use /user/groups/1/5/subgroups.
      *
-     * @param $groupPath
+     * @param string $groupPath
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedUserGroup
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function createUserGroup($groupPath, Request $request)
+    public function createUserGroup($groupPath, Request $request): Values\CreatedUserGroup
     {
         $userGroupLocation = $this->locationService->loadLocation(
-            $this->extractLocationIdFromPath($groupPath)
+            (int)$this->extractLocationIdFromPath($groupPath)
         );
 
         $createdUserGroup = $this->userService->createUserGroup(
