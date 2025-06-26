@@ -1034,7 +1034,7 @@ ibexa.rest.load_root_user_group:
 
 ibexa.rest.create_root_user_group:
     path: /user/groups/subgroups
-    controller: Ibexa\Rest\Server\Controller\User\UserGroupCreateController::createUserGroup
+    controller: Ibexa\Rest\Server\Controller\User\UserGroupCreateController::createRootUserGroup
     methods: [POST]
 
 ibexa.rest.load_user_group:

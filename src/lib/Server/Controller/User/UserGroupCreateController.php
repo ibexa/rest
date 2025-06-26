@@ -219,4 +219,20 @@ final class UserGroupCreateController extends UserBaseController
             ]
         );
     }
+
+    /**
+     * Create a new user group under the root location.
+     *
+     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     */
+    public function createRootUserGroup(Request $request): Values\CreatedUserGroup
+    {
+        $rootPath = $this->configResolver->getParameter('users_group_root_subtree_path');
+
+        return $this->createUserGroup($rootPath, $request);
+    }
 }

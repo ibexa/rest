@@ -20,6 +20,7 @@ use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Contracts\Core\Repository\Values\User\User as RepositoryUser;
 use Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment;
+use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
@@ -46,6 +47,8 @@ class UserBaseController extends RestController
 
     protected ContentService\RelationListFacadeInterface $relationListFacade;
 
+    protected ConfigResolverInterface $configResolver;
+
     public function __construct(
         UserService $userService,
         RoleService $roleService,
@@ -55,7 +58,8 @@ class UserBaseController extends RestController
         SectionService $sectionService,
         Repository $repository,
         PermissionResolver $permissionResolver,
-        ContentService\RelationListFacadeInterface $relationListFacade
+        ContentService\RelationListFacadeInterface $relationListFacade,
+        ConfigResolverInterface $configResolver
     ) {
         $this->userService = $userService;
         $this->roleService = $roleService;
@@ -66,6 +70,7 @@ class UserBaseController extends RestController
         $this->repository = $repository;
         $this->permissionResolver = $permissionResolver;
         $this->relationListFacade = $relationListFacade;
+        $this->configResolver = $configResolver;
     }
 
     /**
