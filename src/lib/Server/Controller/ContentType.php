@@ -606,7 +606,7 @@ class ContentType extends RestController
 
         return new Values\FieldDefinitionList(
             $contentTypeDraft,
-            $contentTypeDraft->getFieldDefinitions()
+            $contentTypeDraft->getFieldDefinitions()->toArray(),
         );
     }
 
