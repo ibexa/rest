@@ -49,8 +49,18 @@ abstract class EventListenerTest extends TestCase
 
         // Check that referenced methods exist
         foreach ($supportedEvents as $method) {
+            // Multiple events, or single event with priority
+            if (is_array($method)) {
+                $method = $method[0];
+            }
+
+            // Multiple events with priorities
+            if (is_array($method)) {
+                $method = $method[0];
+            }
+
             self::assertTrue(
-                method_exists($eventListener, is_array($method) ? $method[0] : $method)
+                method_exists($eventListener, $method)
             );
         }
     }
