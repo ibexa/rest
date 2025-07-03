@@ -62,6 +62,7 @@ final class LocationTest extends ValueObjectVisitorBaseTest
             'priority' => 1,
             'sortField' => ApiLocation::SORT_FIELD_DEPTH,
             'sortOrder' => ApiLocation::SORT_ORDER_ASC,
+            'remoteId' => 'cefb8160c6e88d8ea5ae1f31e0c201fc',
             'parentLocationId' => 42,
             'contentInfo' => new ContentInfo([
                 'id' => $contentId,
