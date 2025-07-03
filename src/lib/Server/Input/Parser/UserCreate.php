@@ -57,6 +57,30 @@ class UserCreate extends BaseParser
         $this->parserTools = $parserTools;
     }
 
+    /**
+     * @param array{
+     *     ContentType?: array{_href: string},
+     *     mainLanguageCode: string,
+     *     login: string,
+     *     email: string,
+     *     password: string,
+     *     Section?: array{_href: string},
+     *     remoteId?: string,
+     *     enabled?: bool|string,
+     *     fields: array{
+     *         field: array<
+     *             array{
+     *                 fieldDefinitionIdentifier: string,
+     *                 fieldValue: mixed,
+     *                 languageCode?: string
+     *             }
+     *         >
+     *     }
+     * } $data
+     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): UserCreateStruct
     {
         $contentType = null;
@@ -99,7 +123,7 @@ class UserCreate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the Section element in UserCreate.");
             }
 
-            $userCreateStruct->sectionId = $this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
+            $userCreateStruct->sectionId = (int)$this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
         }
 
         if (array_key_exists('remoteId', $data)) {

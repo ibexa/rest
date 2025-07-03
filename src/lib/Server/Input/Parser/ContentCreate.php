@@ -73,10 +73,29 @@ class ContentCreate extends BaseParser
     /**
      * Parse input structure.
      *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param array{
+     *     LocationCreate: array,
+     *     ContentType: array{_href: string},
+     *     mainLanguageCode: string,
+     *     Section?: array{_href: string},
+     *     alwaysAvailable?: bool|string,
+     *     remoteId?: string,
+     *     modificationDate?: string,
+     *     User?: array{_href: string},
+     *     fields: array{
+     *         field: array<
+     *             array{
+     *                 fieldDefinitionIdentifier: string,
+     *                 fieldValue: mixed,
+     *                 languageCode?: string
+     *             }
+     *         >
+     *     }
+     * } $data
      *
-     * @return \Ibexa\Rest\Server\Values\RestContentCreateStruct
+     * @throws \DateMalformedStringException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestContentCreateStruct
     {
@@ -109,7 +128,7 @@ class ContentCreate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the Section element in ContentCreate.");
             }
 
-            $contentCreateStruct->sectionId = $this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
+            $contentCreateStruct->sectionId = (int)$this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
         }
 
         if (array_key_exists('alwaysAvailable', $data)) {
@@ -129,7 +148,7 @@ class ContentCreate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the User element in ContentCreate.");
             }
 
-            $contentCreateStruct->ownerId = $this->uriParser->getAttributeFromUri($data['User']['_href'], 'userId');
+            $contentCreateStruct->ownerId = (int)$this->uriParser->getAttributeFromUri($data['User']['_href'], 'userId');
         }
 
         if (!array_key_exists('fields', $data) || !is_array($data['fields']) || !is_array($data['fields']['field'])) {

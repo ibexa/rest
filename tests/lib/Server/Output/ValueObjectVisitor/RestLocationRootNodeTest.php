@@ -36,7 +36,7 @@ class RestLocationRootNodeTest extends RestLocationTest
                     'invisible' => true,
                     'explicitlyHidden' => true,
                     'remoteId' => 'remote-id',
-                    'parentLocationId' => null,
+                    'parentLocationId' => 1,
                     'pathString' => '/1',
                     'depth' => 3,
                     'sortField' => Location::SORT_FIELD_PATH,
