@@ -123,7 +123,7 @@ class UserCreate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the Section element in UserCreate.");
             }
 
-            $userCreateStruct->sectionId = $this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
+            $userCreateStruct->sectionId = (int)$this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
         }
 
         if (array_key_exists('remoteId', $data)) {
