@@ -73,8 +73,25 @@ class ContentCreate extends BaseParser
     /**
      * Parse input structure.
      *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param array{
+     *     LocationCreate: array,
+     *     ContentType: array{_href: string},
+     *     mainLanguageCode: string,
+     *     Section?: array{_href: string},
+     *     alwaysAvailable?: bool|string,
+     *     remoteId?: string,
+     *     modificationDate?: string,
+     *     User?: array{_href: string},
+     *     fields: array{
+     *         field: array<
+     *             array{
+     *                 fieldDefinitionIdentifier: string,
+     *                 fieldValue: mixed,
+     *                 languageCode?: string
+     *             }
+     *         >
+     *     }
+     * } $data
      *
      * @return \Ibexa\Rest\Server\Values\RestContentCreateStruct
      */
