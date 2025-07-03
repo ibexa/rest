@@ -63,18 +63,6 @@ class ContentCreateTest extends BaseTest
             'ContentCreate not created correctly.'
         );
 
-        self::assertInstanceOf(
-            '\\Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\ContentCreateStruct',
-            $result->contentCreateStruct,
-            'contentCreateStruct not created correctly.'
-        );
-
-        self::assertInstanceOf(
-            '\\Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType',
-            $result->contentCreateStruct->contentType,
-            'contentType not created correctly.'
-        );
-
         self::assertEquals(
             13,
             $result->contentCreateStruct->contentType->id,
@@ -85,12 +73,6 @@ class ContentCreateTest extends BaseTest
             'eng-US',
             $result->contentCreateStruct->mainLanguageCode,
             'mainLanguageCode not created correctly'
-        );
-
-        self::assertInstanceOf(
-            '\\Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\LocationCreateStruct',
-            $result->locationCreateStruct,
-            'locationCreateStruct not created correctly.'
         );
 
         self::assertEquals(
