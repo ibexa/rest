@@ -445,6 +445,492 @@ parameters:
 			path: src/lib/Server/Controller/BinaryContent.php
 
 		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Bookmark\:\:extractLocationIdFromPath\(\) is unused\.$#'
+			identifier: method.unused
+			count: 1
+			path: src/lib/Server/Controller/Bookmark.php
+
+		-
+			message: '#^Cannot call method get\(\) on Symfony\\Component\\DependencyInjection\\ContainerInterface\|null\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: '#^Cannot call method getCurrentRequest\(\) on object\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: '#^Cannot call method handle\(\) on object\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Content\:\:createView\(\) should return Ibexa\\Rest\\Server\\Values\\RestExecutedView but returns Symfony\\Component\\HttpFoundation\\Response\.$#'
+			identifier: return.type
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Content\:\:loadContent\(\) should return Ibexa\\Rest\\Server\\Values\\RestContent but returns Ibexa\\Rest\\Server\\Values\\CachedValue\.$#'
+			identifier: return.type
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Content\:\:loadContentInVersion\(\) should return Ibexa\\Rest\\Server\\Values\\Version but returns Ibexa\\Rest\\Server\\Values\\CachedValue\.$#'
+			identifier: return.type
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Content\:\:loadVersionRelation\(\) should return Ibexa\\Rest\\Server\\Values\\RestRelation but returns Ibexa\\Rest\\Server\\Values\\CachedValue\.$#'
+			identifier: return.type
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Content\:\:loadVersionRelations\(\) should return Ibexa\\Rest\\Server\\Values\\RelationList but returns Ibexa\\Rest\\Server\\Values\\CachedValue\.$#'
+			identifier: return.type
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: '#^Parameter \#1 \$locationId of method Ibexa\\Contracts\\Core\\Repository\\LocationService\:\:loadLocation\(\) expects int, int\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: '#^Parameter \#1 \$parentLocationId of method Ibexa\\Contracts\\Core\\Repository\\LocationService\:\:newLocationCreateStruct\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: '#^Parameter \#1 \$remoteId of method Ibexa\\Contracts\\Core\\Repository\\ContentService\:\:loadContentInfoByRemoteId\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: '#^Parameter \#1 \$versions of class Ibexa\\Rest\\Server\\Values\\VersionList constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\VersionInfo\>, iterable\<int, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\VersionInfo\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: '#^Parameter \#3 \$relations of class Ibexa\\Rest\\Server\\Values\\Version constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\>, iterable\<int, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\> given\.$#'
+			identifier: argument.type
+			count: 4
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: '#^Parameter \#5 \$relations of class Ibexa\\Rest\\Server\\Values\\RestContent constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\>\|null, iterable\<int, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\>\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/lib/Server/Controller/Content.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:addContentTypeDraftFieldDefinition\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:copyContentType\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:createContentType\(\) has parameter \$contentTypeGroupId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:createContentTypeDraft\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:deleteContentType\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:deleteContentTypeDraft\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:getContentTypeList\(\) should return array\<Ibexa\\Rest\\Server\\Controller\\ContentType\> but returns array\<Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadContentType\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadContentTypeDraft\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadContentTypeDraftFieldDefinition\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadContentTypeDraftFieldDefinition\(\) has parameter \$fieldDefinitionId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadContentTypeDraftFieldDefinitionList\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadContentTypeFieldDefinition\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadContentTypeFieldDefinition\(\) has parameter \$fieldDefinitionId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadContentTypeFieldDefinitionList\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadContentTypeGroup\(\) has parameter \$contentTypeGroupId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadContentTypeGroupList\(\) should return Ibexa\\Rest\\Server\\Values\\ContentTypeGroupList but returns Ibexa\\Rest\\Server\\Values\\TemporaryRedirect\.$#'
+			identifier: return.type
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadGroupsOfContentType\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:publishContentTypeDraft\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:removeContentTypeDraftFieldDefinition\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:removeContentTypeDraftFieldDefinition\(\) has parameter \$fieldDefinitionId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:sortContentTypeList\(\) has parameter \$contentTypes with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:sortContentTypeList\(\) has parameter \$sort with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:unlinkContentTypeFromGroup\(\) has parameter \$contentTypeGroupId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:unlinkContentTypeFromGroup\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:updateContentTypeDraft\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:updateContentTypeDraftFieldDefinition\(\) has parameter \$contentTypeId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:updateContentTypeDraftFieldDefinition\(\) has parameter \$fieldDefinitionId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:updateContentTypeDraftFieldDefinition\(\) should return Ibexa\\Rest\\Server\\Values\\FieldDefinitionList but returns Ibexa\\Rest\\Server\\Values\\RestFieldDefinition\.$#'
+			identifier: return.type
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:updateContentTypeGroup\(\) has parameter \$contentTypeGroupId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Parameter \#1 \$contentTypeGroupId of method Ibexa\\Contracts\\Core\\Repository\\ContentTypeService\:\:loadContentTypeGroup\(\) expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Parameter \#1 \$contentTypeGroupIdentifier of method Ibexa\\Contracts\\Core\\Repository\\ContentTypeService\:\:loadContentTypeGroupByIdentifier\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Parameter \#1 \$contentTypeGroups of class Ibexa\\Rest\\Server\\Values\\ContentTypeGroupList constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentTypeGroup\>, iterable\<Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentTypeGroup\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Parameter \#1 \$contentTypes of class Ibexa\\Rest\\Server\\Values\\ContentTypeInfoList constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType\>, iterable\<Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Parameter \#1 \$contentTypes of class Ibexa\\Rest\\Server\\Values\\ContentTypeList constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType\>, iterable\<Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Parameter \#1 \$href of method Ibexa\\Rest\\RequestParser\:\:parseHref\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Parameter \#1 \$identifier of method Ibexa\\Contracts\\Core\\Repository\\ContentTypeService\:\:loadContentTypeByIdentifier\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Parameter \#1 \$remoteId of method Ibexa\\Contracts\\Core\\Repository\\ContentTypeService\:\:loadContentTypeByRemoteId\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Parameter \#2 \$callback of function usort expects callable\(mixed, mixed\)\: int, Closure\(mixed, mixed\)\: bool given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Parameter \#2 \$default of method Symfony\\Component\\HttpFoundation\\InputBag\<string\>\:\:get\(\) expects string\|null, int given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Parameter \#2 \$offset of function array_slice expects int, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Parameter \#2 \$orderby of method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:sortContentTypeList\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/lib/Server/Controller/ContentType.php
+
+		-
+			message: '#^Parameter \#1 \$wrappedUser of class Ibexa\\Rest\\Server\\Security\\JWTUser constructor expects Symfony\\Component\\Security\\Core\\User\\UserInterface, Symfony\\Component\\Security\\Core\\User\\UserInterface\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/JWT.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Location\:\:loadLocation\(\) should return Ibexa\\Rest\\Server\\Values\\RestLocation but returns Ibexa\\Rest\\Server\\Values\\CachedValue\.$#'
+			identifier: return.type
+			count: 1
+			path: src/lib/Server/Controller/Location.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Location\:\:loadLocationChildren\(\) should return Ibexa\\Rest\\Server\\Values\\LocationList but returns Ibexa\\Rest\\Server\\Values\\CachedValue\.$#'
+			identifier: return.type
+			count: 1
+			path: src/lib/Server/Controller/Location.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Location\:\:loadLocationsForContent\(\) should return Ibexa\\Rest\\Server\\Values\\LocationList but returns Ibexa\\Rest\\Server\\Values\\CachedValue\.$#'
+			identifier: return.type
+			count: 1
+			path: src/lib/Server/Controller/Location.php
+
+		-
+			message: '#^Parameter \#1 \$href of method Ibexa\\Rest\\RequestParser\:\:parseHref\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/lib/Server/Controller/Location.php
+
+		-
+			message: '#^Parameter \#1 \$locationId of method Ibexa\\Contracts\\Core\\Repository\\LocationService\:\:loadLocation\(\) expects int, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/Location.php
+
+		-
+			message: '#^Parameter \#1 \$remoteId of method Ibexa\\Contracts\\Core\\Repository\\LocationService\:\:loadLocationByRemoteId\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/lib/Server/Controller/Location.php
+
+		-
+			message: '#^Parameter \#1 \$url of method Ibexa\\Contracts\\Core\\Repository\\URLAliasService\:\:lookup\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/Location.php
+
+		-
+			message: '#^Parameter \#1 \$url of method Ibexa\\Rest\\RequestParser\:\:parse\(\) expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/Location.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ObjectState\:\:createObjectState\(\) has parameter \$objectStateGroupId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ObjectState.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ObjectState\:\:deleteObjectState\(\) has parameter \$objectStateId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ObjectState.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ObjectState\:\:deleteObjectStateGroup\(\) has parameter \$objectStateGroupId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ObjectState.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ObjectState\:\:getObjectStatesForContent\(\) has parameter \$contentId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ObjectState.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ObjectState\:\:loadObjectState\(\) has parameter \$objectStateGroupId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ObjectState.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ObjectState\:\:loadObjectState\(\) has parameter \$objectStateId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ObjectState.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ObjectState\:\:loadObjectStateGroup\(\) has parameter \$objectStateGroupId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ObjectState.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ObjectState\:\:loadObjectStates\(\) has parameter \$objectStateGroupId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ObjectState.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ObjectState\:\:setObjectStatesForContent\(\) has parameter \$contentId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ObjectState.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ObjectState\:\:updateObjectState\(\) has parameter \$objectStateGroupId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ObjectState.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ObjectState\:\:updateObjectState\(\) has parameter \$objectStateId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ObjectState.php
+
+		-
+			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ObjectState\:\:updateObjectStateGroup\(\) has parameter \$objectStateGroupId with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/lib/Server/Controller/ObjectState.php
+
+		-
+			message: '#^Parameter \#1 \$groups of class Ibexa\\Rest\\Server\\Values\\ObjectStateGroupList constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\ObjectState\\ObjectStateGroup\>, iterable\<Ibexa\\Contracts\\Core\\Repository\\Values\\ObjectState\\ObjectStateGroup\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/ObjectState.php
+
+		-
+			message: '#^Parameter \#1 \$states of class Ibexa\\Rest\\Server\\Values\\ObjectStateList constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\ObjectState\\ObjectState\>, iterable\<Ibexa\\Contracts\\Core\\Repository\\Values\\ObjectState\\ObjectState\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Controller/ObjectState.php
+
+		-
 			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Options\:\:getRouteOptions\(\) has parameter \$allowedMethods with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
