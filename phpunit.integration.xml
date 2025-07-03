@@ -5,6 +5,7 @@
          beStrictAboutTodoAnnotatedTests="true"
          verbose="true">
     <php>
+        <ini name="date.timezone" value="UTC" />
         <env name="KERNEL_CLASS" value="Ibexa\Tests\Integration\Rest\IbexaTestKernel" />
         <env name="SEARCH_ENGINE" value="legacy" />
         <env name="DATABASE_URL" value="sqlite://i@i/test.db" />
