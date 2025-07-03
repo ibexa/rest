@@ -57,6 +57,30 @@ class UserCreate extends BaseParser
         $this->parserTools = $parserTools;
     }
 
+    /**
+     * @param array{
+     *     ContentType?: array{_href: string},
+     *     mainLanguageCode: string,
+     *     login: string,
+     *     email: string,
+     *     password: string,
+     *     Section?: array{_href: string},
+     *     remoteId?: string,
+     *     enabled?: bool|string,
+     *     fields: array{
+     *         field: array<
+     *             array{
+     *                 fieldDefinitionIdentifier: string,
+     *                 fieldValue: mixed,
+     *                 languageCode?: string
+     *             }
+     *         >
+     *     }
+     * } $data
+     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): UserCreateStruct
     {
         $contentType = null;
