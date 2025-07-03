@@ -93,7 +93,9 @@ class ContentCreate extends BaseParser
      *     }
      * } $data
      *
-     * @return \Ibexa\Rest\Server\Values\RestContentCreateStruct
+     * @throws \DateMalformedStringException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestContentCreateStruct
     {
