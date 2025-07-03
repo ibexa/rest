@@ -19,6 +19,7 @@ use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\ContentCreate;
 use Ibexa\Rest\Server\Input\Parser\LocationCreate;
+use Ibexa\Rest\Server\Values\RestContentCreateStruct;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class ContentCreateTest extends BaseTest
@@ -57,7 +58,7 @@ class ContentCreateTest extends BaseTest
         $result = $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
 
         self::assertInstanceOf(
-            '\\Ibexa\\Rest\\Server\\Values\\RestContentCreateStruct',
+            RestContentCreateStruct::class,
             $result,
             'ContentCreate not created correctly.'
         );
