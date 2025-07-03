@@ -118,9 +118,6 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
                 'graphiql' => [
                     'enabled' => false,
                 ],
-                'graphql_playground' => [
-                    'enabled' => false,
-                ],
             ],
             'enable_docs' => $container->getParameter('kernel.debug'),
         ];
