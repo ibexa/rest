@@ -29,6 +29,11 @@ services:
         tags:
             - { name: ibexa.rest.serializer.normalizer, priority: -400 }
 
+    ibexa.rest.serializer.json_serializable_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer
+        tags:
+            - { name: ibexa.rest.serializer.normalizer, priority: -600 }
+
     ibexa.rest.serializer.object_normalizer:
         class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
         tags:
