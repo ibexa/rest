@@ -20,28 +20,12 @@ use Ibexa\Rest\Input\ParserTools;
  */
 class ContentTypeCreate extends BaseParser
 {
-    /**
-     * ContentType service.
-     */
     protected ContentTypeService $contentTypeService;
 
-    /**
-     * FieldDefinitionCreate parser.
-     */
     protected FieldDefinitionCreate $fieldDefinitionCreateParser;
 
-    /**
-     * Parser tools.
-     */
     protected ParserTools $parserTools;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\ContentTypeService $contentTypeService
-     * @param \Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate $fieldDefinitionCreateParser
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
-     */
     public function __construct(
         ContentTypeService $contentTypeService,
         FieldDefinitionCreate $fieldDefinitionCreateParser,

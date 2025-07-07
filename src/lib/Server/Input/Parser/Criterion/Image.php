@@ -17,9 +17,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class Image extends BaseParser
 {
-    public const IMAGE_CRITERION = 'ImageCriterion';
-    public const FIELD_DEF_IDENTIFIER_KEY = 'fieldDefIdentifier';
-    public const MIME_TYPES_KEY = 'mimeTypes';
+    public const string IMAGE_CRITERION = 'ImageCriterion';
+    public const string FIELD_DEF_IDENTIFIER_KEY = 'fieldDefIdentifier';
+    public const string MIME_TYPES_KEY = 'mimeTypes';
 
     private ValidatorInterface $validator;
 
@@ -30,8 +30,6 @@ final class Image extends BaseParser
 
     /**
      * @param array<mixed> $data
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Image
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidCriterionArgumentException

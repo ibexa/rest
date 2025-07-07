@@ -27,7 +27,7 @@ class Root extends RestValue
     /**
      * @return resource[]
      */
-    public function getResources()
+    public function getResources(): array
     {
         return $this->resources;
     }

@@ -24,11 +24,6 @@ class ContentUpdate extends BaseParser
      *
      * @todo use url handler instead of hardcoded URL matching
      *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Rest\Values\RestContentMetadataUpdateStruct
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser if $data is invalid
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestContentMetadataUpdateStruct

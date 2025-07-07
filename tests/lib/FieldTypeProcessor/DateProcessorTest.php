@@ -64,9 +64,6 @@ class DateProcessorTest extends TestCase
         );
     }
 
-    /**
-     * @return \Ibexa\Rest\FieldTypeProcessor\DateProcessor
-     */
     protected function getProcessor(): DateProcessor
     {
         return new DateProcessor();

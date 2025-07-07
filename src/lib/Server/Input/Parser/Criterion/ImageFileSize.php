@@ -17,9 +17,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class ImageFileSize extends BaseParser
 {
-    public const IMAGE_FILE_SIZE_CRITERION = 'ImageFileSizeCriterion';
-    public const FIELD_DEF_IDENTIFIER_KEY = 'fieldDefIdentifier';
-    public const SIZE_KEY = 'size';
+    public const string IMAGE_FILE_SIZE_CRITERION = 'ImageFileSizeCriterion';
+    public const string FIELD_DEF_IDENTIFIER_KEY = 'fieldDefIdentifier';
+    public const string SIZE_KEY = 'size';
 
     private ValidatorInterface $validator;
 

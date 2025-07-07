@@ -17,10 +17,8 @@ class ContentTypeInfoListTest extends ValueObjectVisitorBaseTest
 {
     /**
      * Test the ContentTypeInfoList visitor.
-     *
-     * @return string
      */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -123,8 +121,6 @@ class ContentTypeInfoListTest extends ValueObjectVisitorBaseTest
 
     /**
      * Get the ContentTypeInfoList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeInfoList
      */
     protected function internalGetVisitor(): ValueObjectVisitor\ContentTypeInfoList
     {

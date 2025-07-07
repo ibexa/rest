@@ -13,10 +13,8 @@ class ImageProcessor extends BinaryInputProcessor
 {
     /**
      * Template for image URLs.
-     *
-     * @var string
      */
-    protected $urlTemplate;
+    protected string $urlTemplate;
 
     /**
      * Array of variations identifiers.
@@ -32,18 +30,16 @@ class ImageProcessor extends BinaryInputProcessor
     protected RouterInterface $router;
 
     /**
-     * @param string $temporaryDirectory
-     * @param \Symfony\Component\Routing\RouterInterface $router
      * @param array $variations array of variations identifiers
      */
-    public function __construct($temporaryDirectory, RouterInterface $router, array $variations)
+    public function __construct(string $temporaryDirectory, RouterInterface $router, array $variations)
     {
         parent::__construct($temporaryDirectory);
         $this->router = $router;
         $this->variations = $variations;
     }
 
-    public function preProcessValueHash($incomingValueHash)
+    public function preProcessValueHash(mixed $incomingValueHash): mixed
     {
         if (is_array($incomingValueHash) && array_key_exists('variations', $incomingValueHash)) {
             unset($incomingValueHash['variations']);
@@ -55,7 +51,7 @@ class ImageProcessor extends BinaryInputProcessor
     /**
      * {@inheritdoc}
      */
-    public function postProcessValueHash($outgoingValueHash)
+    public function postProcessValueHash(mixed $outgoingValueHash): mixed
     {
         if (!is_array($outgoingValueHash)) {
             return $outgoingValueHash;
@@ -79,13 +75,8 @@ class ImageProcessor extends BinaryInputProcessor
 
     /**
      * Generates a URL for $path in $variation.
-     *
-     * @param string $path
-     * @param string $variation
-     *
-     * @return string
      */
-    protected function generateUrl($path, $variation): string
+    protected function generateUrl(string $path, string $variation): string
     {
         $fieldId = '';
         $versionNo = '';

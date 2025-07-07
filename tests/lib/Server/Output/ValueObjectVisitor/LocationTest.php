@@ -22,11 +22,11 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 final class LocationTest extends ValueObjectVisitorBaseTest
 {
-    private const MAIN_LOCATION_ID = 78;
+    private const int MAIN_LOCATION_ID = 78;
 
-    private const UNAUTHORIZED_MAIN_LOCATION_ID = 111;
+    private const int UNAUTHORIZED_MAIN_LOCATION_ID = 111;
 
-    private const LOCATION_ID = 55;
+    private const int LOCATION_ID = 55;
 
     private LocationService&MockObject $locationServiceMock;
 

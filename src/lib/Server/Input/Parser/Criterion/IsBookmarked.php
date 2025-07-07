@@ -16,7 +16,7 @@ use Ibexa\Rest\Input\ParserTools;
 
 final class IsBookmarked extends BaseParser
 {
-    public const IS_BOOKMARKED_CRITERION = 'IsBookmarkedCriterion';
+    public const string IS_BOOKMARKED_CRITERION = 'IsBookmarkedCriterion';
 
     private ParserTools $parserTools;
 

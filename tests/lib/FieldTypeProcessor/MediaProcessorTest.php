@@ -60,7 +60,7 @@ class MediaProcessorTest extends BinaryInputProcessorTest
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings): void
+    public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -70,9 +70,6 @@ class MediaProcessorTest extends BinaryInputProcessorTest
         );
     }
 
-    /**
-     * @return \Ibexa\Rest\FieldTypeProcessor\MediaProcessor
-     */
     protected function getProcessor(): MediaProcessor
     {
         return new MediaProcessor($this->getTempDir());

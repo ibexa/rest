@@ -19,11 +19,9 @@ class URLAliasRefList extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\URLAliasRefList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('UrlAliasRefList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('UrlAliasRefList'));

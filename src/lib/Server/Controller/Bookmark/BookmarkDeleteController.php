@@ -17,7 +17,6 @@ use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Rest\Value as RestValue;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
@@ -59,9 +58,6 @@ class BookmarkDeleteController extends RestController
 
     /**
      * Bookmark constructor.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\BookmarkService $bookmarkService
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
      */
     public function __construct(BookmarkService $bookmarkService, LocationService $locationService)
     {
@@ -72,15 +68,11 @@ class BookmarkDeleteController extends RestController
     /**
      * Deletes a given bookmark.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param int $locationId
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     *
-     * @return \Ibexa\Rest\Value
      */
-    public function deleteBookmark(Request $request, int $locationId): RestValue
+    public function deleteBookmark(int $locationId): RestValue
     {
         $location = $this->locationService->loadLocation($locationId);
 

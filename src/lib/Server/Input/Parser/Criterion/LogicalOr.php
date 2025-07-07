@@ -16,14 +16,9 @@ use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
  */
 class LogicalOr extends LogicalOperator
 {
-    /**
-     * @var string
-     */
-    public const TAG_NAME = 'OR';
+    public const string TAG_NAME = 'OR';
 
     /**
-     * @param array $data
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): LogicalOrCriterion

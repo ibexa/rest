@@ -67,9 +67,6 @@ class DateAndTimeProcessorTest extends TestCase
         );
     }
 
-    /**
-     * @return \Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor
-     */
     protected function getProcessor(): DateAndTimeProcessor
     {
         return new DateAndTimeProcessor();

@@ -20,19 +20,17 @@ class URLWildcard extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $visitor->setHeader('Content-Type', $generator->getMediaType('UrlWildcard'));
         $generator->startObjectElement('UrlWildcard');
-        $this->visitURLWildcardAttributes($visitor, $generator, $data);
+        $this->visitURLWildcardAttributes($generator, $data);
         $generator->endObjectElement('UrlWildcard');
     }
 
-    protected function visitURLWildcardAttributes(Visitor $visitor, Generator $generator, URLWildcardValue $data)
+    protected function visitURLWildcardAttributes(Generator $generator, URLWildcardValue $data)
     {
         $generator->startAttribute(
             'href',

@@ -33,13 +33,8 @@ class Mapper
 
     /**
      * Merges the methods from $restRoute into the _method default of $optionsRoute.
-     *
-     * @param \Symfony\Component\Routing\Route $restRoute
-     * @param \Symfony\Component\Routing\Route $optionsRoute
-     *
-     * @return \Symfony\Component\Routing\Route $optionsRoute with the methods from $restRoute in the _methods default
      */
-    public function mergeMethodsDefault(Route $optionsRoute, Route $restRoute)
+    public function mergeMethodsDefault(Route $optionsRoute, Route $restRoute): Route
     {
         $mergedRoute = clone $optionsRoute;
         $mergedRoute->setDefault(

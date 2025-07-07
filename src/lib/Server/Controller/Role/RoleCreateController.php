@@ -98,11 +98,9 @@ use Symfony\Component\HttpFoundation\Response;
 class RoleCreateController extends RoleBaseController
 {
     /**
-     * Create new role.
+     * Creates a new role.
      *
      * Defaults to publishing the role, but you can create a draft instead by setting the POST parameter publish=false
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedRole
      */
     public function createRole(Request $request): CreatedRole
     {

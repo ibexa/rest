@@ -45,7 +45,7 @@ class RelationProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
+    public function testPreProcessFieldSettingsHash(array $inputSettings, array $outputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -60,7 +60,7 @@ class RelationProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings): void
+    public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -164,9 +164,6 @@ class RelationProcessorTest extends TestCase
         ], $hash);
     }
 
-    /**
-     * @return \Ibexa\Rest\FieldTypeProcessor\RelationProcessor
-     */
     protected function getProcessor(): RelationProcessor
     {
         return new RelationProcessor();

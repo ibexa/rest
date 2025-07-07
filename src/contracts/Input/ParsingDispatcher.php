@@ -51,9 +51,6 @@ class ParsingDispatcher
 
     /**
      * Adds another parser for the given content type.
-     *
-     * @param string $mediaType
-     * @param \Ibexa\Contracts\Rest\Input\Parser $parser
      */
     public function addParser(string $mediaType, Parser $parser): void
     {
@@ -96,7 +93,7 @@ class ParsingDispatcher
     /**
      * Parses the given $data according to $mediaType.
      */
-    protected function internalParse(array $data, string $mediaType)
+    protected function internalParse(array $data, string $mediaType): mixed
     {
         list($mediaType, $version) = $this->parseMediaTypeVersion($mediaType);
 

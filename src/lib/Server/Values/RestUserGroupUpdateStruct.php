@@ -15,27 +15,19 @@ use Ibexa\Rest\Value as RestValue;
  */
 class RestUserGroupUpdateStruct extends RestValue
 {
-    /**
-     * UserGroup update struct.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\User\UserGroupUpdateStruct
-     */
-    public $userGroupUpdateStruct;
+    public UserGroupUpdateStruct $userGroupUpdateStruct;
 
     /**
      * If set, section of the UserGroup will be updated.
-     *
-     * @var mixed
      */
-    public $sectionId;
+    public ?int $sectionId;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\UserGroupUpdateStruct $userGroupUpdateStruct
      * @param mixed $sectionId
      */
-    public function __construct(UserGroupUpdateStruct $userGroupUpdateStruct, $sectionId = null)
+    public function __construct(UserGroupUpdateStruct $userGroupUpdateStruct, ?int $sectionId = null)
     {
         $this->userGroupUpdateStruct = $userGroupUpdateStruct;
         $this->sectionId = $sectionId;

@@ -12,12 +12,8 @@ class RelationListProcessor extends BaseRelationProcessor
     /**
      * In addition to the list of destinationContentIds, adds a destinationContentHrefs
      * array, with matching content uris.
-     *
-     * @param array $outgoingValueHash
-     *
-     * @return array
      */
-    public function postProcessValueHash($outgoingValueHash)
+    public function postProcessValueHash(mixed $outgoingValueHash): array
     {
         if (
             !isset($outgoingValueHash['destinationContentIds']) ||
@@ -28,7 +24,7 @@ class RelationListProcessor extends BaseRelationProcessor
         }
 
         $outgoingValueHash['destinationContentHrefs'] = array_map(
-            function ($contentId) {
+            function ($contentId): ?string {
                 return $this->mapToContentHref($contentId);
             },
             $outgoingValueHash['destinationContentIds']
@@ -37,7 +33,7 @@ class RelationListProcessor extends BaseRelationProcessor
         return $outgoingValueHash;
     }
 
-    public function postProcessFieldSettingsHash($outgoingSettingsHash)
+    public function postProcessFieldSettingsHash(mixed $outgoingSettingsHash): mixed
     {
         $outgoingSettingsHash = parent::postProcessFieldSettingsHash($outgoingSettingsHash);
 

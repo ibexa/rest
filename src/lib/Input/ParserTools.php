@@ -34,8 +34,6 @@ class ParserTools
 {
     /**
      * Parses the given $objectElement, if it contains embedded data.
-     *
-     * @param array $objectElement
      */
     public function parseObjectElement(array $objectElement, ParsingDispatcher $parsingDispatcher): string
     {
@@ -52,8 +50,6 @@ class ParserTools
     /**
      * Returns if the given $objectElement has embedded object data or is only
      * a reference.
-     *
-     * @param array $objectElement
      */
     public function isEmbeddedObject(array $objectElement): bool
     {
@@ -69,10 +65,6 @@ class ParserTools
 
     /**
      * Parses a translatable list, like names or descriptions.
-     *
-     * @param array $listElement
-     *
-     * @return array
      */
     public function parseTranslatableList(array $listElement): array
     {
@@ -171,8 +163,6 @@ class ParserTools
 
     /**
      * Parses the input structure to Limitation object.
-     *
-     * @param array $limitation
      */
     public function parseLimitation(array $limitation): Limitation
     {

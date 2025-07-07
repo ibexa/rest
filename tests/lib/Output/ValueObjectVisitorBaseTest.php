@@ -7,6 +7,7 @@
 
 namespace Ibexa\Tests\Rest\Output;
 
+use DOMNode;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
 use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
@@ -23,15 +24,15 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
 {
     use AssertXmlTagTrait;
 
-    protected (Visitor & MockObject)|null $visitorMock = null;
+    protected (Visitor&MockObject)|null $visitorMock = null;
 
-    protected (Response & MockObject)|null $responseMock = null;
+    protected (Response&MockObject)|null $responseMock = null;
 
     protected Xml|null $generator;
 
-    private (RouterInterface & MockObject)|null $routerMock = null;
+    private (RouterInterface&MockObject)|null $routerMock = null;
 
-    private (RouterInterface & MockObject)|null $templatedRouterMock = null;
+    private (RouterInterface&MockObject)|null $templatedRouterMock = null;
 
     private int $routerCallIndex = 0;
 
@@ -39,7 +40,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
 
     private UriParserInterface&MockObject $uriParser;
 
-    protected function getVisitorMock(): Visitor & MockObject
+    protected function getVisitorMock(): Visitor&MockObject
     {
         if (!isset($this->visitorMock)) {
             $this->visitorMock = $this->createMock(Visitor::class);
@@ -52,7 +53,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
         return $this->visitorMock;
     }
 
-    protected function getResponseMock(): Response & MockObject
+    protected function getResponseMock(): Response&MockObject
     {
         if (!isset($this->responseMock)) {
             $this->responseMock = $this->getMockBuilder(Response::class)
@@ -82,11 +83,8 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
      * This method asserts that $xpathExpression results in a non-empty node
      * set in context of $domNode, by wrapping the "boolean()" function around
      * it and evaluating it on the document owning $domNode.
-     *
-     * @param \DOMNode $domNode
-     * @param string $xpathExpression
      */
-    protected function assertXPath(\DOMNode $domNode, $xpathExpression)
+    protected function assertXPath(DOMNode $domNode, string $xpathExpression): void
     {
         $ownerDocument = ($domNode instanceof \DOMDOcument
             ? $domNode
@@ -100,7 +98,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
         );
     }
 
-    protected function getVisitor()
+    protected function getVisitor(): ValueObjectVisitor
     {
         $visitor = $this->internalGetVisitor();
         $visitor->setUriParser($this->getUriParser());
@@ -110,7 +108,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
         return $visitor;
     }
 
-    protected function getUriParser(): UriParserInterface & MockObject
+    protected function getUriParser(): UriParserInterface&MockObject
     {
         if (!isset($this->uriParser)) {
             $this->uriParser = $this->createMock(UriParserInterface::class);
@@ -119,7 +117,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
         return $this->uriParser;
     }
 
-    protected function getRouterMock(): RouterInterface & MockObject
+    protected function getRouterMock(): RouterInterface&MockObject
     {
         if (!isset($this->routerMock)) {
             $this->routerMock = $this->createMock(RouterInterface::class);
@@ -131,19 +129,15 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     /**
      * Resets the router mock and its expected calls index & list.
      */
-    protected function resetRouterMock()
+    protected function resetRouterMock(): void
     {
         $this->routerMock = null;
     }
 
     /**
      * Adds an expectation to the routerMock. Expectations must be added sequentially.
-     *
-     * @param string $routeName
-     * @param array $arguments
-     * @param string $returnValue
      */
-    protected function addRouteExpectation($routeName, $arguments, $returnValue)
+    protected function addRouteExpectation(string $routeName, array $arguments, string $returnValue): void
     {
         $this->getRouterMock()
             ->expects(self::at($this->routerCallIndex++))
@@ -155,10 +149,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
             ->willReturn($returnValue);
     }
 
-    /**
-     * @return \Symfony\Component\Routing\RouterInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function getTemplatedRouterMock()
+    protected function getTemplatedRouterMock(): RouterInterface&MockObject
     {
         if (!isset($this->templatedRouterMock)) {
             $this->templatedRouterMock = $this->createMock(RouterInterface::class);

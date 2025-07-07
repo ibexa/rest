@@ -17,9 +17,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class ImageMimeType extends BaseParser
 {
-    public const IMAGE_MIME_TYPE_CRITERION = 'ImageMimeTypeCriterion';
-    public const FIELD_DEF_IDENTIFIER_KEY = 'fieldDefIdentifier';
-    public const TYPE_KEY = 'type';
+    public const string IMAGE_MIME_TYPE_CRITERION = 'ImageMimeTypeCriterion';
+    public const string FIELD_DEF_IDENTIFIER_KEY = 'fieldDefIdentifier';
+    public const string TYPE_KEY = 'type';
 
     private ValidatorInterface $validator;
 

@@ -72,8 +72,6 @@ class FieldTest extends BaseTest
 
     /**
      * Returns the Field parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\SortClause\Field
      */
     protected function internalGetParser(): FieldParser
     {

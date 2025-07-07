@@ -65,11 +65,6 @@ class ContentTranslationDeleteController extends RestController
      *
      * If any non-published Version contains only the Translation to be deleted, that entire Version will be deleted
      *
-     * @param int $contentId
-     * @param string $languageCode
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
-     *
      * @throws \Exception
      */
     public function deleteContentTranslation(int $contentId, string $languageCode): NoContent

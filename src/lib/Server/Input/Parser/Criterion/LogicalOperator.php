@@ -14,11 +14,6 @@ use Ibexa\Rest\Server\Input\Parser\Criterion;
  */
 abstract class LogicalOperator extends Criterion
 {
-    /**
-     * @param array $criteriaByType
-     *
-     * @return array
-     */
     protected function getFlattenedCriteriaData(array $criteriaByType): array
     {
         $criteria = [];
@@ -40,10 +35,6 @@ abstract class LogicalOperator extends Criterion
 
     /**
      * Checks if the given $value is zero based.
-     *
-     * @param array $value
-     *
-     * @return bool
      */
     protected function isZeroBasedArray(array $value): bool
     {

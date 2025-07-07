@@ -108,8 +108,6 @@ class URLAliasCreateController extends RestController
      * Creates a new URL alias.
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedURLAlias
      */
     public function createURLAlias(Request $request): CreatedURLAlias
     {

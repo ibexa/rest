@@ -16,14 +16,9 @@ use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
  */
 class LogicalAnd extends LogicalOperator
 {
-    /**
-     * @var string
-     */
-    public const TAG_NAME = 'AND';
+    public const string TAG_NAME = 'AND';
 
     /**
-     * @param array $data
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): LogicalAndCriterion

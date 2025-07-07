@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
@@ -16,15 +17,11 @@ class RestExecutedView extends ValueObject
 {
     /**
      * The search results.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult
      */
-    public $searchResults;
+    public SearchResult $searchResults;
 
     /**
      * The view identifier.
-     *
-     * @var mixed
      */
-    public $identifier;
+    public string|int $identifier;
 }

@@ -12,20 +12,16 @@ use Ibexa\Rest\Value as RestValue;
 
 class BookmarkList extends RestValue
 {
-    /**
-     * @var int
-     */
-    public $totalCount = 0;
+    public int $totalCount = 0;
 
     /**
      * @var \Ibexa\Rest\Server\Values\RestLocation[]
      */
-    public $items = [];
+    public array $items = [];
 
     /**
      * BookmarkList constructor.
      *
-     * @param int $totalCount
      * @param \Ibexa\Rest\Server\Values\RestLocation[] $items
      */
     public function __construct(int $totalCount, array $items)

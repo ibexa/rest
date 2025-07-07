@@ -19,19 +19,10 @@ use Ibexa\Rest\Input\ParserTools;
  */
 class ObjectStateGroupUpdate extends BaseParser
 {
-    /**
-     * Object state service.
-     */
     protected ObjectStateService $objectStateService;
 
     protected ParserTools $parserTools;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\ObjectStateService $objectStateService
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
-     */
     public function __construct(ObjectStateService $objectStateService, ParserTools $parserTools)
     {
         $this->objectStateService = $objectStateService;

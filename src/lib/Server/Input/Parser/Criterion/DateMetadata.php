@@ -18,7 +18,7 @@ use Ibexa\Rest\Input\BaseParser;
  */
 class DateMetadata extends BaseParser
 {
-    private const OPERATORS = [
+    private const array OPERATORS = [
         'IN' => Operator::IN,
         'EQ' => Operator::EQ,
         'GT' => Operator::GT,

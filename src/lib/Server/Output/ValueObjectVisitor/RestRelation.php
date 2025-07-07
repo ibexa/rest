@@ -20,11 +20,9 @@ class RestRelation extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\RestRelation $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('Relation');
         $visitor->setHeader('Content-Type', $generator->getMediaType('Relation'));
@@ -82,13 +80,9 @@ class RestRelation extends ValueObjectVisitor
     /**
      * Returns $relationType as a readable string.
      *
-     * @param int $relationType
-     *
      * @throws \Exception
-     *
-     * @return string
      */
-    protected function getRelationTypeString($relationType): string
+    protected function getRelationTypeString(int $relationType): string
     {
         $relationTypeList = [];
 

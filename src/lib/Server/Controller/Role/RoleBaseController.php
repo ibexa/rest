@@ -62,10 +62,6 @@ class RoleBaseController extends RestController
      * Maps a RoleCreateStruct to a RoleUpdateStruct.
      *
      * Needed since both structs are encoded into the same media type on input.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\RoleCreateStruct $createStruct
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\RoleUpdateStruct
      */
     protected function mapToUpdateStruct(RoleCreateStruct $createStruct): RoleUpdateStruct
     {

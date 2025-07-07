@@ -13,7 +13,7 @@ use Psr\Http\Message\ResponseInterface;
 
 final class UserTest extends RESTFunctionalTestCase
 {
-    private const HEADER_LOCATION = 'Location';
+    private const string HEADER_LOCATION = 'Location';
 
     /**
      * Covers GET /user/groups/root.

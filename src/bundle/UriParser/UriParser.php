@@ -27,7 +27,7 @@ final class UriParser implements UriParserInterface
      * @see \Ibexa\Contracts\Rest\UriParser\UriParserInterface::isRestRequest()
      * @see \Ibexa\Contracts\Rest\UriParser\UriParserInterface::hasRestPrefix()
      */
-    public const DEFAULT_REST_PREFIX_PATTERN = '/^\/api\/[a-zA-Z0-9-_]+\/v\d+(\.\d+)?\//';
+    public const string DEFAULT_REST_PREFIX_PATTERN = '/^\/api\/[a-zA-Z0-9-_]+\/v\d+(\.\d+)?\//';
 
     private UrlMatcherInterface $urlMatcher;
 

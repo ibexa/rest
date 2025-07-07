@@ -20,26 +20,20 @@ class URLAlias extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\URLAlias $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('UrlAlias');
         $visitor->setHeader('Content-Type', $generator->getMediaType('UrlAlias'));
-        $this->visitURLAliasAttributes($visitor, $generator, $data);
+        $this->visitURLAliasAttributes($generator, $data);
         $generator->endObjectElement('UrlAlias');
     }
 
     /**
      * Serializes the given $urlAliasType to a string representation.
-     *
-     * @param int $urlAliasType
-     *
-     * @return string
      */
-    protected function serializeType($urlAliasType): string
+    protected function serializeType(int $urlAliasType): string
     {
         switch ($urlAliasType) {
             case URLAliasValue::LOCATION:
@@ -55,7 +49,7 @@ class URLAlias extends ValueObjectVisitor
         throw new \RuntimeException("Unknown URL alias type: '{$urlAliasType}'.");
     }
 
-    protected function visitURLAliasAttributes(Visitor $visitor, Generator $generator, URLAliasValue $data)
+    protected function visitURLAliasAttributes(Generator $generator, URLAliasValue $data): void
     {
         $generator->startAttribute(
             'href',

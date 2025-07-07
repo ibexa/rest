@@ -42,7 +42,7 @@ class RelationListProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
+    public function testPreProcessFieldSettingsHash(array $inputSettings, array $outputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -57,7 +57,7 @@ class RelationListProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings): void
+    public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -125,9 +125,6 @@ class RelationListProcessorTest extends TestCase
         self::assertEquals('/api/ibexa/v2/content/objects/300', $hash['destinationContentHrefs'][1]);
     }
 
-    /**
-     * @return \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor
-     */
     protected function getProcessor(): RelationListProcessor
     {
         return new RelationListProcessor();

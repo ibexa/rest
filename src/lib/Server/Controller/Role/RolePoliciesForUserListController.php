@@ -62,8 +62,6 @@ class RolePoliciesForUserListController extends RoleBaseController
 {
     /**
      * Search all policies which are applied to a given user.
-     *
-     * @return \Ibexa\Rest\Server\Values\PolicyList
      */
     public function listPoliciesForUser(Request $request): PolicyList
     {

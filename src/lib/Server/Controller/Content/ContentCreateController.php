@@ -118,24 +118,15 @@ class ContentCreateController extends RestController
      * does not have to authenticate with the user which created the content
      * object in the source server). The user has to publish the content if
      * it should be visible.
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedContent
      */
-    public function createContent(Request $request)
+    public function createContent(Request $request): CreatedContent
     {
         $contentCreate = $this->parseContentRequest($request);
 
         return $this->doCreateContent($request, $contentCreate);
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return mixed
-     */
-    protected function parseContentRequest(Request $request)
+    protected function parseContentRequest(Request $request): mixed
     {
         return $this->inputDispatcher->parse(
             new Message(
@@ -146,14 +137,9 @@ class ContentCreateController extends RestController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Ibexa\Rest\Server\Values\RestContentCreateStruct $contentCreate
-     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedContent
      */
     protected function doCreateContent(Request $request, RestContentCreateStruct $contentCreate): CreatedContent
     {

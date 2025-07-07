@@ -72,8 +72,6 @@ abstract class AbstractExceptionVisitor extends ValueObjectVisitor
 
     /**
      * @param \Exception $data
-     *
-     * @return void
      */
     public function visit(Visitor $visitor, Generator $generator, $data): void
     {

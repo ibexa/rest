@@ -20,12 +20,7 @@ class ContentId extends BaseParser
     /**
      * Parses input structure to a Criterion object.
      *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentId
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentIdCriterion
     {

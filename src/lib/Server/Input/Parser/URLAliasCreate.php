@@ -17,16 +17,8 @@ use Ibexa\Rest\Input\ParserTools;
  */
 class URLAliasCreate extends BaseParser
 {
-    /**
-     * Parser tools.
-     */
     protected ParserTools $parserTools;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
-     */
     public function __construct(ParserTools $parserTools)
     {
         $this->parserTools = $parserTools;
@@ -34,11 +26,6 @@ class URLAliasCreate extends BaseParser
 
     /**
      * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return array
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): array
     {

@@ -17,11 +17,6 @@ class Field extends BaseParser
 {
     /**
      * Parse input structure for Field sort clause.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Field
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): FieldSortClause
     {
@@ -65,10 +60,6 @@ class Field extends BaseParser
     /**
      * Normalize passed Field Sort Clause data by making both xml and json parameters to have same names (by dropping
      * xml "_" prefix and changing "#text" xml attribute to "direction").
-     *
-     * @param array $data
-     *
-     * @return array
      */
     private function normalizeData(array $data): array
     {

@@ -21,9 +21,6 @@ class ContentObjectStates extends BaseParser
     /**
      * Parse input structure.
      *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
      * @return \Ibexa\Rest\Values\RestObjectState[]
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): array

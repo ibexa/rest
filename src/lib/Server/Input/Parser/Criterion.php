@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion as QueryCriterion;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -29,15 +30,9 @@ abstract class Criterion extends BaseParser
     /**
      * Dispatches parsing of a criterion name + data to its own parser.
      *
-     * @param string $criterionName
-     * @param mixed $criterionData
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion
      */
-    public function dispatchCriterion($criterionName, $criterionData, ParsingDispatcher $parsingDispatcher)
+    public function dispatchCriterion(string $criterionName, mixed $criterionData, ParsingDispatcher $parsingDispatcher): QueryCriterion
     {
         $mediaType = $this->getCriterionMediaType($criterionName);
         try {
@@ -48,9 +43,7 @@ abstract class Criterion extends BaseParser
     }
 
     /**
-     * Dispatches parsing of a aggregation name + data to its own parser.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation
+     * Dispatches parsing of an aggregation name + data to its own parser.
      */
     public function dispatchAggregation(
         string $aggregationName,
@@ -68,15 +61,9 @@ abstract class Criterion extends BaseParser
     /**
      * Dispatches parsing of a sort clause name + direction to its own parser.
      *
-     * @param string $sortClauseName
-     * @param string $direction
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion
      */
-    public function dispatchSortClause($sortClauseName, $direction, ParsingDispatcher $parsingDispatcher)
+    public function dispatchSortClause(string $sortClauseName, string $direction, ParsingDispatcher $parsingDispatcher): QueryCriterion
     {
         $mediaType = $this->getSortClauseMediaType($sortClauseName);
 

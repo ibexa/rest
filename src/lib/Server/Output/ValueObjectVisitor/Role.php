@@ -20,20 +20,18 @@ class Role extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param Role|\Ibexa\Contracts\Core\Repository\Values\User\RoleDraft $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('Role');
         $visitor->setHeader('Content-Type', $generator->getMediaType($data instanceof RoleDraft ? 'RoleDraft' : 'Role'));
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('RoleInput'));
-        $this->visitRoleAttributes($visitor, $generator, $data);
+        $this->visitRoleAttributes($generator, $data);
         $generator->endObjectElement('Role');
     }
 
-    protected function visitRoleAttributes(Visitor $visitor, Generator $generator, $data)
+    protected function visitRoleAttributes(Generator $generator, RoleDraft $data)
     {
         $generator->startAttribute(
             'href',

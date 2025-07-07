@@ -18,7 +18,7 @@ use Symfony\Component\HttpClient\Psr18Client;
 
 class TestCase extends BaseTestCase
 {
-    public const X_HTTP_METHOD_OVERRIDE_MAP = [
+    public const array X_HTTP_METHOD_OVERRIDE_MAP = [
         'PUBLISH' => 'POST',
         'MOVE' => 'POST',
         'PATCH' => 'PATCH',
@@ -27,23 +27,17 @@ class TestCase extends BaseTestCase
 
     private Psr18Client $httpClient;
 
-    /**
-     * @var string
-     */
-    private $httpHost;
+    private string $httpHost;
 
     /**
      * HTTP scheme (http or https).
-     *
-     * @var string
      */
-    private $httpScheme;
+    private string $httpScheme;
 
     /**
-     * @var string
-     * Basic auth login:password
+     * Basic auth login:password.
      */
-    private $httpAuth;
+    private string $httpAuth;
 
     protected static $testSuffix;
 
@@ -51,24 +45,18 @@ class TestCase extends BaseTestCase
 
     /**
      * The username to use for login.
-     *
-     * @var string
      */
-    private $loginUsername;
+    private string $loginUsername;
 
     /**
      * The password to use for login.
-     *
-     * @var string
      */
-    private $loginPassword;
+    private string $loginPassword;
 
     /**
      * If true, a login request is automatically done during setUp().
-     *
-     * @var bool
      */
-    protected $autoLogin = true;
+    protected bool $autoLogin = true;
 
     /**
      * List of REST contentId (/content/objects/12345) created by tests.
@@ -111,25 +99,23 @@ class TestCase extends BaseTestCase
         return $this->httpClient->sendRequest($request);
     }
 
-    protected function getHttpHost()
+    protected function getHttpHost(): string
     {
         return $this->httpHost;
     }
 
-    protected function getLoginUsername()
+    protected function getLoginUsername(): string
     {
         return $this->loginUsername;
     }
 
-    protected function getLoginPassword()
+    protected function getLoginPassword(): string
     {
         return $this->loginPassword;
     }
 
     /**
      * Get base URI for Browser based requests.
-     *
-     * @return string
      */
     protected function getBaseURI(): string
     {
@@ -137,14 +123,7 @@ class TestCase extends BaseTestCase
     }
 
     /**
-     * @param string $method
-     * @param string $uri
-     * @param string $contentType
-     * @param string $acceptType
-     * @param string $body
      * @param array $extraHeaders [key => value] array of extra headers
-     *
-     * @return \Psr\Http\Message\RequestInterface
      */
     public function createHttpRequest(
         string $method,
@@ -175,7 +154,7 @@ class TestCase extends BaseTestCase
         );
     }
 
-    protected function assertHttpResponseCodeEquals(ResponseInterface $response, $expected)
+    protected function assertHttpResponseCodeEquals(ResponseInterface $response, int $expected): void
     {
         $responseCode = $response->getStatusCode();
         try {
@@ -198,7 +177,7 @@ class TestCase extends BaseTestCase
         }
     }
 
-    private function getHttpResponseCodeErrorMessage($errorMessage): string
+    private function getHttpResponseCodeErrorMessage(mixed $errorMessage): string
     {
         $errorMessageString = <<< EOF
 Server error message ({$errorMessage->errorCode}): {$errorMessage->errorMessage}
@@ -217,7 +196,7 @@ EOF;
         return $errorMessageString;
     }
 
-    protected function assertHttpResponseHasHeader(ResponseInterface $response, $header, $expectedValue = null)
+    protected function assertHttpResponseHasHeader(ResponseInterface $response, string $header, $expectedValue = null)
     {
         $headerValue = $response->hasHeader($header) ? $response->getHeader($header)[0] : null;
         self::assertNotNull($headerValue, "Failed asserting that response has a {$header} header");
@@ -226,7 +205,7 @@ EOF;
         }
     }
 
-    protected function generateMediaTypeString($typeString): string
+    protected function generateMediaTypeString(string $typeString): string
     {
         return "application/vnd.ibexa.api.$typeString";
     }
@@ -243,7 +222,7 @@ EOF;
         return substr($typeString, strlen($prefix));
     }
 
-    protected function addCreatedElement(string $href)
+    protected function addCreatedElement(string $href): void
     {
         $testCase = $this;
         self::$createdContent[$href] = static function () use ($href, $testCase): void {
@@ -260,7 +239,7 @@ EOF;
 
     private static function clearCreatedElement(array $contentArray): void
     {
-        foreach (array_reverse($contentArray) as $href => $callback) {
+        foreach (array_reverse($contentArray) as $callback) {
             $callback();
         }
     }
@@ -268,7 +247,6 @@ EOF;
     /**
      * @param string $string The value of the folders name field
      * @param string $parentLocationId The REST resource id of the parent location
-     * @param string|null $remoteId
      *
      * @return array created Content, as an array
      */
@@ -310,11 +288,9 @@ XML;
     }
 
     /**
-     * @param $xml
-     *
      * @return array Content key of the Content struct array
      */
-    protected function createContent(string $xml)
+    protected function createContent(string $xml): array
     {
         $request = $this->createHttpRequest(
             'POST',
@@ -344,12 +320,7 @@ XML;
         return $content['Content'];
     }
 
-    /**
-     * @param string $contentHref
-     *
-     * @return array
-     */
-    protected function getContentLocations($contentHref)
+    protected function getContentLocations(string $contentHref): array
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$contentHref/locations", '', 'LocationList+json')
@@ -385,11 +356,7 @@ XML;
     }
 
     /**
-     * @param string $login
-     * @param string $password
      * @param array $extraHeaders extra [key => value] headers to be passed with the authentication request
-     *
-     * @return \Psr\Http\Message\RequestInterface
      */
     protected function createAuthenticationHttpRequest(string $login, string $password, array $extraHeaders = []): RequestInterface
     {

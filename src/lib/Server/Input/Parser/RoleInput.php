@@ -18,19 +18,10 @@ use Ibexa\Rest\Input\ParserTools;
  */
 class RoleInput extends BaseParser
 {
-    /**
-     * Role service.
-     */
     protected RoleService $roleService;
 
     protected ParserTools $parserTools;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\RoleService $roleService
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
-     */
     public function __construct(RoleService $roleService, ParserTools $parserTools)
     {
         $this->roleService = $roleService;
@@ -49,8 +40,6 @@ class RoleInput extends BaseParser
             $roleIdentifier = $data['identifier'];
         }
 
-        $roleCreateStruct = $this->roleService->newRoleCreateStruct($roleIdentifier);
-
-        return $roleCreateStruct;
+        return $this->roleService->newRoleCreateStruct($roleIdentifier);
     }
 }

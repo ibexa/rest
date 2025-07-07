@@ -39,8 +39,6 @@ class BinaryProcessorTest extends BinaryInputProcessorTest
 
     /**
      * Returns the processor under test.
-     *
-     * @return \Ibexa\Rest\FieldTypeProcessor\BinaryProcessor
      */
     protected function getProcessor(): BinaryProcessor
     {

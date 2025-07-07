@@ -14,7 +14,7 @@ class TrashTest extends RESTFunctionalTestCase
     /**
      * @return string The created trash item href
      */
-    public function testCreateTrashItem()
+    public function testCreateTrashItem(): string
     {
         return $this->createTrashItem('testCreateTrashItem');
     }
@@ -49,7 +49,7 @@ class TrashTest extends RESTFunctionalTestCase
      *
      * @depends testCreateTrashItem
      */
-    public function testDeleteTrashItem($trashItemId): void
+    public function testDeleteTrashItem(string $trashItemId): void
     {
         // we create a new one, since restore also needs the feature
         $trashItemHref = $this->createTrashItem($trashItemId);
@@ -178,11 +178,6 @@ class TrashTest extends RESTFunctionalTestCase
         return $this->sendLocationToTrash($folderLocations['LocationList']['Location'][0]['_href']);
     }
 
-    /**
-     * @param string $contentHref
-     *
-     * @return string
-     */
     private function sendLocationToTrash(string $contentHref): string
     {
         $trashRequest = $this->createHttpRequest(

@@ -13,34 +13,15 @@ namespace Ibexa\Rest;
 class Message
 {
     /**
-     * Response headers.
-     *
-     * @var array
+     * @var array<string, mixed>
      */
-    public $headers;
+    public array $headers;
 
-    /**
-     * Response body.
-     *
-     * @var string
-     */
-    public $body;
+    public string $body;
 
-    /**
-     * HTTP status code.
-     *
-     * @var int
-     */
-    public $statusCode;
+    public int $statusCode;
 
-    /**
-     * Construct from headers and body.
-     *
-     * @param array $headers
-     * @param string $body
-     * @param int $statusCode
-     */
-    public function __construct(array $headers = [], $body = '', $statusCode = 200)
+    public function __construct(array $headers = [], string $body = '', int $statusCode = 200)
     {
         $this->headers = $headers;
         $this->body = $body;

@@ -18,14 +18,8 @@ use Ibexa\Rest\Input\FieldTypeParser;
  */
 class VersionUpdate extends BaseParser
 {
-    /**
-     * Content service.
-     */
     protected ContentService $contentService;
 
-    /**
-     * FieldType parser.
-     */
     protected FieldTypeParser $fieldTypeParser;
 
     public function __construct(ContentService $contentService, FieldTypeParser $fieldTypeParser)
@@ -35,8 +29,6 @@ class VersionUpdate extends BaseParser
     }
 
     /**
-     * @param array $data
-     *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\ContentUpdateStruct
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): mixed

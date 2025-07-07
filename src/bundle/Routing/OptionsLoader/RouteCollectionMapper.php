@@ -25,10 +25,6 @@ class RouteCollectionMapper
 
     /**
      * Iterates over $restRouteCollection, and returns the corresponding RouteCollection of OPTIONS REST routes.
-     *
-     * @param \Symfony\Component\Routing\RouteCollection $restRouteCollection
-     *
-     * @return \Symfony\Component\Routing\RouteCollection
      */
     public function mapCollection(RouteCollection $restRouteCollection): RouteCollection
     {

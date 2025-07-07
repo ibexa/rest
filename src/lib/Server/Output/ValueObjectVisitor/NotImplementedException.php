@@ -14,8 +14,6 @@ class NotImplementedException extends Exception
 {
     /**
      * Returns HTTP status code.
-     *
-     * @return int
      */
     protected function getStatus(): int
     {

@@ -158,9 +158,6 @@ class ContentTypeUpdateTest extends BaseTest
         return $contentTypeServiceMock;
     }
 
-    /**
-     * @return array
-     */
     protected function getInputArray(): array
     {
         return [

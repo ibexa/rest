@@ -15,27 +15,14 @@ use Ibexa\Rest\Value as RestValue;
  */
 class RestLocationUpdateStruct extends RestValue
 {
-    /**
-     * Location update struct.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\LocationUpdateStruct
-     */
-    public $locationUpdateStruct;
+    public LocationUpdateStruct $locationUpdateStruct;
 
     /**
      * If set, the location is hidden ( == true ) or unhidden ( == false ).
-     *
-     * @var bool
      */
-    public $hidden;
+    public ?bool $hidden;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\LocationUpdateStruct $locationUpdateStruct
-     * @param bool $hidden
-     */
-    public function __construct(LocationUpdateStruct $locationUpdateStruct, $hidden = null)
+    public function __construct(LocationUpdateStruct $locationUpdateStruct, ?bool $hidden = null)
     {
         $this->locationUpdateStruct = $locationUpdateStruct;
         $this->hidden = $hidden;

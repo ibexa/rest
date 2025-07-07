@@ -45,11 +45,6 @@ class TrashEmptyController extends RestController
     ) {
     }
 
-    /**
-     * Empties the trash.
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
-     */
     public function emptyTrash(): NoContent
     {
         $this->trashService->emptyTrash();

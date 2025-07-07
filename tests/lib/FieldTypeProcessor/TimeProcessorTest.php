@@ -41,7 +41,7 @@ class TimeProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
+    public function testPreProcessFieldSettingsHash(array $inputSettings, array $outputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -56,7 +56,7 @@ class TimeProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings): void
+    public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
     {
         $processor = $this->getProcessor();
 
@@ -66,9 +66,6 @@ class TimeProcessorTest extends TestCase
         );
     }
 
-    /**
-     * @return \Ibexa\Rest\FieldTypeProcessor\TimeProcessor
-     */
     protected function getProcessor(): TimeProcessor
     {
         return new TimeProcessor();

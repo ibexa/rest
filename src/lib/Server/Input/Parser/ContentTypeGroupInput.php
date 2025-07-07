@@ -20,19 +20,10 @@ use Ibexa\Rest\Input\ParserTools;
  */
 class ContentTypeGroupInput extends BaseParser
 {
-    /**
-     * ContentType service.
-     */
     protected ContentTypeService $contentTypeService;
 
     protected ParserTools $parserTools;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\ContentTypeService $contentTypeService
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
-     */
     public function __construct(ContentTypeService $contentTypeService, ParserTools $parserTools)
     {
         $this->contentTypeService = $contentTypeService;

@@ -14,13 +14,10 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
 
 class SearchViewTest extends SearchViewTestCase
 {
-    /** @var string */
-    protected $contentTypeHref;
+    protected string $contentTypeHref;
 
-    /** @var string[] */
-    protected $contentHrefList;
+    protected array $contentHrefList;
 
-    /** @var string */
     private string $nonSearchableContentHref;
 
     /**
@@ -358,11 +355,7 @@ JSON,
     }
 
     /**
-     * @param string $name
-     * @param string $operator
      * @param string|string[] $value
-     *
-     * @return \DOMElement
      */
     private function buildFieldXml(string $name, string $operator, string|array $value): DOMElement
     {

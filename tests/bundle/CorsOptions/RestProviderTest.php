@@ -22,7 +22,7 @@ class RestProviderTest extends TestCase
      * Return value expectation for RequestMatcher::matchRequest
      * Set to false to expect Router::match() never to be called, or to an exception to have it throw one.
      */
-    protected $matchRequestResult = [];
+    protected array $matchRequestResult = [];
 
     public function testGetOptions(): void
     {
@@ -87,11 +87,9 @@ class RestProviderTest extends TestCase
     }
 
     /**
-     * @param bool $isRestRequest wether or not to set the is_rest_request attribute
-     *
-     * @return \Symfony\Component\HttpFoundation\Request
+     * @param bool $isRestRequest whether or not to set the is_rest_request attribute
      */
-    protected function createRequest($isRestRequest = true): Request
+    protected function createRequest(bool $isRestRequest = true): Request
     {
         $request = new Request();
         if ($isRestRequest) {
@@ -108,10 +106,7 @@ class RestProviderTest extends TestCase
         );
     }
 
-    /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Routing\Matcher\RequestMatcherInterface
-     */
-    protected function getRequestMatcherMock(): MockObject
+    protected function getRequestMatcherMock(): RequestMatcherInterface&MockObject
     {
         $mock = $this->createMock(RequestMatcherInterface::class);
 

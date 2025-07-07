@@ -17,25 +17,20 @@ class RestObjectState extends RestValue
 {
     /**
      * Wrapped object state.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectState
      */
-    public $objectState;
+    public ObjectState $objectState;
 
     /**
      * Group ID to which wrapped state belongs.
-     *
-     * @var mixed
      */
-    public $groupId;
+    public string|int $groupId;
 
     /**
      * Constructor.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectState $objectState
      * @param mixed $groupId
      */
-    public function __construct(ObjectState $objectState, $groupId)
+    public function __construct(ObjectState $objectState, string|int $groupId)
     {
         $this->objectState = $objectState;
         $this->groupId = $groupId;

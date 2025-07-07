@@ -18,22 +18,10 @@ use Ibexa\Rest\Server\Values\RestLocationUpdateStruct;
  */
 class LocationUpdate extends BaseParser
 {
-    /**
-     * Location service.
-     */
     protected LocationService $locationService;
 
-    /**
-     * Parser tools.
-     */
     protected ParserTools $parserTools;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
-     */
     public function __construct(LocationService $locationService, ParserTools $parserTools)
     {
         $this->locationService = $locationService;
@@ -42,11 +30,6 @@ class LocationUpdate extends BaseParser
 
     /**
      * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Rest\Server\Values\RestLocationUpdateStruct
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestLocationUpdateStruct
     {

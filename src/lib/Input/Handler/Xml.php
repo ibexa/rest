@@ -7,6 +7,9 @@
 
 namespace Ibexa\Rest\Input\Handler;
 
+use DOMElement;
+use DOMNode;
+use DOMNodeList;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\Handler;
 
@@ -20,10 +23,8 @@ class Xml extends Handler
      *
      * The key defines the item in which a list is formed. A list is then
      * formed for every value in the value array.
-     *
-     * @var array
      */
-    protected $forceList = [
+    protected array $forceList = [
         'ContentList' => [
             'Content',
         ],
@@ -80,12 +81,8 @@ class Xml extends Handler
 
     /**
      * Converts the given string to an array structure.
-     *
-     * @param string $string
-     *
-     * @return array
      */
-    public function convert($string)
+    public function convert(string $string): array
     {
         $oldXmlErrorHandling = libxml_use_internal_errors(true);
         libxml_clear_errors();
@@ -118,24 +115,20 @@ class Xml extends Handler
 
     /**
      * Converts DOM nodes to array structures.
-     *
-     * @param \DOMNode $node
-     *
-     * @return array
      */
-    protected function convertDom(\DOMNode $node)
+    protected function convertDom(DOMNode $node): ?array
     {
         $isArray = false;
         $current = [];
         $text = '';
 
-        if ($node instanceof \DOMElement && $node->hasAttributes()) {
+        if ($node instanceof DOMElement && $node->hasAttributes()) {
             foreach ($node->attributes as $name => $attribute) {
                 $current["_{$name}"] = $attribute->value;
             }
         }
 
-        $parentTagName = $node instanceof \DOMElement ? $node->tagName : false;
+        $parentTagName = $node instanceof DOMElement ? $node->tagName : false;
         foreach ($node->childNodes as $childNode) {
             switch ($childNode->nodeType) {
                 case XML_ELEMENT_NODE:
@@ -188,12 +181,7 @@ class Xml extends Handler
         return $current;
     }
 
-    /**
-     * @param \DOMElement $domElement
-     *
-     * @return array|string|null
-     */
-    protected function parseFieldTypeHash(\DOMElement $domElement)
+    protected function parseFieldTypeHash(DOMElement $domElement): array|string|null
     {
         $result = $this->parseFieldTypeValues($domElement->childNodes);
 
@@ -207,12 +195,8 @@ class Xml extends Handler
 
     /**
      * Parses a node list of <value> elements.
-     *
-     * @param \DOMNodeList $valueNodes
-     *
-     * @return array|string
      */
-    protected function parseFieldTypeValues(\DOMNodeList $valueNodes)
+    protected function parseFieldTypeValues(DOMNodeList $valueNodes): array|string
     {
         $resultValues = [];
         $resultString = '';
@@ -257,12 +241,8 @@ class Xml extends Handler
 
     /**
      * Attempts to cast the given $stringValue into a sensible scalar type.
-     *
-     * @param string $stringValue
-     *
-     * @return mixed
      */
-    protected function castScalarValue($stringValue)
+    protected function castScalarValue(string $stringValue): mixed
     {
         switch (true) {
             case ctype_digit($stringValue):

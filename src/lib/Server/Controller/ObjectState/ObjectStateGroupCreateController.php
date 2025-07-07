@@ -112,8 +112,6 @@ class ObjectStateGroupCreateController extends RestController
      * Creates a new object state group.
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedObjectStateGroup
      */
     public function createObjectStateGroup(Request $request): CreatedObjectStateGroup
     {

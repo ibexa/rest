@@ -20,47 +20,27 @@ use Ibexa\Rest\Value as RestValue;
  */
 class RestContent extends RestValue
 {
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo
-     */
-    public $contentInfo;
+    public ContentInfo $contentInfo;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Location
-     */
-    public $mainLocation;
+    public Location $mainLocation;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Content
-     */
-    public $currentVersion;
+    public Content $currentVersion;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
-     */
-    public $contentType;
+    public ContentType $contentType;
 
     /**
      * @var \Ibexa\Contracts\Core\Repository\Values\Content\Relation[]
      */
-    public $relations;
+    public array $relations;
 
     /**
      * Path that was used to load this content.
-     *
-     * @var string
      */
-    public $path;
+    public string $path;
 
     /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo $contentInfo
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Location|null $mainLocation
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Content|null $currentVersion
      * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType|null $contentType Can only be null if $currentVersion is
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Relation[]|null $relations Can only be null if $currentVersion is
-     * @param string $path
      */
     public function __construct(
         ContentInfo $contentInfo,
@@ -68,7 +48,7 @@ class RestContent extends RestValue
         Content $currentVersion = null,
         ContentType $contentType = null,
         array $relations = null,
-        $path = null
+        ?string $path = null
     ) {
         $this->contentInfo = $contentInfo;
         $this->mainLocation = $mainLocation;

@@ -18,8 +18,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 final class SiblingTest extends BaseTest
 {
-    private const EXAMPLE_LOCATION_ID = 54;
-    private const EXAMPLE_PARENT_LOCATION_ID = 2;
+    private const int EXAMPLE_LOCATION_ID = 54;
+    private const int EXAMPLE_PARENT_LOCATION_ID = 2;
 
     private LocationService & MockObject $locationService;
 

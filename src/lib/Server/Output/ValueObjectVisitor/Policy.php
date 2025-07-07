@@ -21,20 +21,18 @@ class Policy extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param Policy|\Ibexa\Contracts\Core\Repository\Values\User\PolicyDraft $data
+     * @param \Ibexa\Contracts\Core\Repository\Values\User\PolicyDraft $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('Policy');
         $visitor->setHeader('Content-Type', $generator->getMediaType($data instanceof PolicyDraft ? 'PolicyDraft' : 'Policy'));
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('PolicyUpdate'));
-        $this->visitPolicyAttributes($visitor, $generator, $data);
+        $this->visitPolicyAttributes($generator, $data);
         $generator->endObjectElement('Policy');
     }
 
-    protected function visitPolicyAttributes(Visitor $visitor, Generator $generator, PolicyValue $data)
+    protected function visitPolicyAttributes(Generator $generator, PolicyValue $data): void
     {
         $generator->startAttribute(
             'href',

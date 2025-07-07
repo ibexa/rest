@@ -38,7 +38,6 @@ class Dispatcher
     /**
      * Construct from optional parsers array.
      *
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
      * @param \Ibexa\Contracts\Rest\Input\Handler[] $handlers
      */
     public function __construct(ParsingDispatcher $parsingDispatcher, array $handlers = [])
@@ -51,23 +50,16 @@ class Dispatcher
 
     /**
      * Adds another handler for the given content type.
-     *
-     * @param string $type
-     * @param \Ibexa\Contracts\Rest\Input\Handler $handler
      */
-    public function addHandler($type, Handler $handler): void
+    public function addHandler(string $type, Handler $handler): void
     {
         $this->handlers[$type] = $handler;
     }
 
     /**
      * Parse provided request.
-     *
-     * @param \Ibexa\Rest\Message $message
-     *
-     * @return mixed
      */
-    public function parse(Message $message)
+    public function parse(Message $message): mixed
     {
         if (!isset($message->headers['Content-Type'])) {
             throw new Exceptions\Parser('Missing Content-Type header in message.');

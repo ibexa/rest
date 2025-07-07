@@ -18,7 +18,7 @@ use Ibexa\Rest\Input\BaseParser;
  */
 class Field extends BaseParser
 {
-    public const OPERATORS = [
+    public const array OPERATORS = [
         'IN' => Operator::IN,
         'EQ' => Operator::EQ,
         'GT' => Operator::GT,
@@ -33,12 +33,7 @@ class Field extends BaseParser
     /**
      * Parses input structure to a Criterion object.
      *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Field
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): FieldCriterion
     {
@@ -61,17 +56,13 @@ class Field extends BaseParser
     }
 
     /**
-     * Get operator for the given literal name.
+     * Get an operator for the given literal name.
      *
      * For the full list of supported operators:
      *
      * @see \Ibexa\Rest\Server\Input\Parser\Criterion\Field::OPERATORS
-     *
-     * @param string $operatorName operator literal operator name
-     *
-     * @return string
      */
-    private function getOperator($operatorName): string
+    private function getOperator(string $operatorName): string
     {
         $operatorName = strtoupper($operatorName);
         if (!isset(self::OPERATORS[$operatorName])) {

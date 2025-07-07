@@ -12,5 +12,5 @@ final class RestEvents
     /**
      * The REST_CSRF_TOKEN_VALIDATED event occurs after CSRF token has been validated as correct.
      */
-    public const REST_CSRF_TOKEN_VALIDATED = 'ezpublish.rest.csrf_token_validated';
+    public const string REST_CSRF_TOKEN_VALIDATED = 'ezpublish.rest.csrf_token_validated';
 }

@@ -24,10 +24,6 @@ class Factory
 
     protected Repository $repository;
 
-    /**
-     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
-     * @param \Ibexa\Contracts\Core\Repository\Repository $repository
-     */
     public function __construct(ConfigResolverInterface $configResolver, Repository $repository)
     {
         $this->configResolver = $configResolver;
@@ -49,10 +45,6 @@ class Factory
 
     /**
      * Factory for ezpublish_rest.field_type_processor.ibexa_image.
-     *
-     * @param \Symfony\Component\Routing\RouterInterface $router
-     *
-     * @return \Ibexa\Rest\FieldTypeProcessor\ImageProcessor
      */
     public function getImageFieldTypeProcessor(RouterInterface $router): ImageProcessor
     {

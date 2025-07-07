@@ -21,36 +21,20 @@ use Ibexa\Rest\Input\ParserTools;
  */
 class UserCreate extends BaseParser
 {
-    /**
-     * User service.
-     */
     protected UserService $userService;
 
-    /**
-     * ContentType service.
-     */
     protected ContentTypeService $contentTypeService;
 
-    /**
-     * FieldType parser.
-     */
     protected FieldTypeParser $fieldTypeParser;
 
-    /**
-     * Parser tools.
-     */
     protected ParserTools $parserTools;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\UserService $userService
-     * @param \Ibexa\Contracts\Core\Repository\ContentTypeService $contentTypeService
-     * @param \Ibexa\Rest\Input\FieldTypeParser $fieldTypeParser
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
-     */
-    public function __construct(UserService $userService, ContentTypeService $contentTypeService, FieldTypeParser $fieldTypeParser, ParserTools $parserTools)
-    {
+    public function __construct(
+        UserService $userService,
+        ContentTypeService $contentTypeService,
+        FieldTypeParser $fieldTypeParser,
+        ParserTools $parserTools,
+    ) {
         $this->userService = $userService;
         $this->contentTypeService = $contentTypeService;
         $this->fieldTypeParser = $fieldTypeParser;

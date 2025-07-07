@@ -19,22 +19,10 @@ use Ibexa\Rest\Input\ParserTools;
  */
 class LocationCreate extends BaseParser
 {
-    /**
-     * Location service.
-     */
     protected LocationService $locationService;
 
-    /**
-     * Parser tools.
-     */
     protected ParserTools $parserTools;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
-     */
     public function __construct(LocationService $locationService, ParserTools $parserTools)
     {
         $this->locationService = $locationService;

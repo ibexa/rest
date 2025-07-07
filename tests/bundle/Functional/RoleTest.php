@@ -191,7 +191,7 @@ XML;
      *
      * @return string The created policy href
      */
-    public function testAddPolicy($roleHref)
+    public function testAddPolicy(string $roleHref): string
     {
         // @todo Error in Resource URL in spec @ https://github.com/ezsystems/ezpublish-kernel/blob/master/doc/specifications/rest/REST-API-V2.rst#151213create-policy
         $xml = <<< XML
@@ -233,7 +233,7 @@ XML;
      *
      * @return string The created policy href
      */
-    public function testAddPolicyByRoleDraft($roleDraftHref)
+    public function testAddPolicyByRoleDraft(string $roleDraftHref): string
     {
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -286,7 +286,7 @@ XML;
      *
      * @depends testPublishRoleDraft
      */
-    public function testLoadPolicies($roleHref): void
+    public function testLoadPolicies(string $roleHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$roleHref/policies")
@@ -300,7 +300,7 @@ XML;
      *
      * @depends testAddPolicy
      */
-    public function testUpdatePolicy(string $policyHref)
+    public function testUpdatePolicy(string $policyHref): mixed
     {
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -363,7 +363,7 @@ XML;
      *
      * @todo stop using the anonymous user, this is dangerous...
      */
-    public function testAssignRoleToUser($roleHref)
+    public function testAssignRoleToUser(string $roleHref): string
     {
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -389,16 +389,11 @@ XML;
     }
 
     /**
-     * @covers       \POST /user/users/{userId}/roles
-     *
-     * @param string $roleHref
-     * @param array $limitation
-     *
-     * @return string assigned role href
+     * @covers \POST /user/users/{userId}/roles
      *
      * @dataProvider provideLimitations
      */
-    public function testAssignRoleToUserWithLimitation(array $limitation)
+    public function testAssignRoleToUserWithLimitation(array $limitation): string
     {
         $roleHref = $this->createAndPublishRole('testAssignRoleToUserWithLimitation_' . $limitation['identifier']);
 
@@ -471,11 +466,10 @@ XML;
 
     /**
      * @depends testPublishRoleDraft
-     * Covers POST /user/groups/{groupId}/roles
      *
-     * @return string role assignment href
+     * Covers POST /user/groups/{groupId}/roles
      */
-    public function testAssignRoleToUserGroup($roleHref)
+    public function testAssignRoleToUserGroup(string $roleHref): string
     {
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -632,7 +626,7 @@ XML;
      *
      * @depends testCreateRoleDraft
      */
-    public function testPublishRoleDraft(string $roleDraftHref)
+    public function testPublishRoleDraft(string $roleDraftHref): string
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('PUBLISH', $roleDraftHref)
@@ -656,7 +650,7 @@ XML;
      *
      * @depends testCreateRoleDraft
      */
-    public function testDeleteRoleDraft($roleDraftHref): void
+    public function testDeleteRoleDraft(string $roleDraftHref): void
     {
         // we need to create a role draft first since we published the previous one in testPublishRoleDraft
         $roleHref = $this->testCreateRoleDraft($this->roleDraftHrefToRoleHref($roleDraftHref));
@@ -675,7 +669,7 @@ XML;
      *
      * @return string Role href
      */
-    private function roleDraftHrefToRoleHref($roleDraftHref): string
+    private function roleDraftHrefToRoleHref(string $roleDraftHref): string
     {
         return str_replace('/draft', '', $roleDraftHref);
     }
@@ -683,11 +677,9 @@ XML;
     /**
      * Creates and publishes a role with $identifier.
      *
-     * @param string $identifier
-     *
      * @return string The href of the published role
      */
-    private function createAndPublishRole(string $identifier)
+    private function createAndPublishRole(string $identifier): string
     {
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>

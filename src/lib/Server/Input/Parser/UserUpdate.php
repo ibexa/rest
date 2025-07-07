@@ -37,11 +37,6 @@ class UserUpdate extends BaseParser
         $this->parserTools = $parserTools;
     }
 
-    /**
-     * @param array $data
-     *
-     * @return \Ibexa\Rest\Server\Values\RestUserUpdateStruct
-     */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestUserUpdateStruct
     {
         $parsedData = [];

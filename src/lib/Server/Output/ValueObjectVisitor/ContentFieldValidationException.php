@@ -20,8 +20,6 @@ class ContentFieldValidationException extends BadRequestException
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Exceptions\ContentFieldValidationException $data
      */
     public function visit(Visitor $visitor, Generator $generator, $data): void

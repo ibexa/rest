@@ -84,8 +84,6 @@ class ObjectStateGroupListController extends RestController
 
     /**
      * Returns a list of all object state groups.
-     *
-     * @return \Ibexa\Rest\Server\Values\ObjectStateGroupList
      */
     public function loadObjectStateGroups(): ObjectStateGroupList
     {

@@ -177,8 +177,6 @@ XML;
     /**
      * @depends testUpdateContentTypeGroup
      * Covers GET /content/typegroups/<contentTypeGroupId>
-     *
-     * @param string $contentTypeGroupHref
      */
     public function testLoadContentTypeGroup(string $contentTypeGroupHref): void
     {
@@ -435,8 +433,6 @@ XML;
      * @depends testAddContentTypeDraftFieldDefinition
      * Covers GET /content/types/<contentTypeId>/fieldDefinitions/<fieldDefinitionId>
      *
-     * @param string $fieldDefinitionHref
-     *
      * @throws \Psr\Http\Client\ClientException
      */
     public function testLoadContentTypeFieldDefinition(string $fieldDefinitionHref): void
@@ -506,8 +502,6 @@ XML;
      * Covers DELETE /content/types/<contentTypeId>/draft/fieldDefinitions/<fieldDefinitionId>.
      *
      * @depends testAddContentTypeDraftFieldDefinition
-     *
-     * @param string $fieldDefinitionHref
      */
     public function deleteContentTypeDraftFieldDefinition(string $fieldDefinitionHref): void
     {
@@ -536,7 +530,7 @@ XML;
      * @depends testCreateContentType
      * Covers PUBLISH /content/types/<contentTypeId>/draft
      */
-    public function testPublishContentTypeDraft($contentTypeHref): void
+    public function testPublishContentTypeDraft(string $contentTypeHref): void
     {
         // we need to create a content type draft first since we deleted the previous one in testDeleteContentTypeDraft
         $contentTypeDraftHref = $this->testCreateContentTypeDraft($contentTypeHref);

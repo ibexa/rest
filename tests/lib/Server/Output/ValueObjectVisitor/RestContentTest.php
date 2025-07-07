@@ -19,8 +19,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class RestContentTest extends BaseContentValueObjectVisitorTestCase
 {
-    /** @var \Ibexa\Core\Helper\TranslationHelper|\PHPUnit\Framework\MockObject\MockObject */
-    private MockObject $translationHelper;
+    private MockObject&TranslationHelper $translationHelper;
 
     protected function setUp(): void
     {
@@ -284,8 +283,6 @@ class RestContentTest extends BaseContentValueObjectVisitorTestCase
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithEmbeddedVersion
      */
     public function testContentMediaTypeWithVersionCorrect(DOMDocument $dom): void
@@ -294,8 +291,6 @@ class RestContentTest extends BaseContentValueObjectVisitorTestCase
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithEmbeddedVersion
      */
     public function testEmbeddedCurrentVersionHrefCorrect(DOMDocument $dom): void
@@ -304,8 +299,6 @@ class RestContentTest extends BaseContentValueObjectVisitorTestCase
     }
 
     /**
-     * @param \DOMDocument $dom
-     *
      * @depends testVisitWithEmbeddedVersion
      */
     public function testEmbeddedCurrentVersionMediaTypeCorrect(DOMDocument $dom): void
@@ -313,9 +306,6 @@ class RestContentTest extends BaseContentValueObjectVisitorTestCase
         $this->assertXPath($dom, '/Content/CurrentVersion[@media-type="application/vnd.ibexa.api.Version+xml"]');
     }
 
-    /**
-     * Get the Content visitor.
-     */
     protected function internalGetVisitor(): ValueObjectVisitor\RestContent
     {
         return new ValueObjectVisitor\RestContent(

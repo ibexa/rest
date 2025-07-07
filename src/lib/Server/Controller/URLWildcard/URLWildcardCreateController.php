@@ -103,11 +103,7 @@ class URLWildcardCreateController extends RestController
     }
 
     /**
-     * Creates a new URL wildcard.
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedURLWildcard
      */
     public function createURLWildcard(Request $request): CreatedURLWildcard
     {

@@ -19,22 +19,10 @@ use Ibexa\Rest\Input\ParserTools;
  */
 class PolicyUpdate extends BaseParser
 {
-    /**
-     * Role service.
-     */
     protected RoleService $roleService;
 
-    /**
-     * Parser tools.
-     */
     protected ParserTools $parserTools;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\RoleService $roleService
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
-     */
     public function __construct(RoleService $roleService, ParserTools $parserTools)
     {
         $this->roleService = $roleService;

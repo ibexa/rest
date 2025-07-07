@@ -22,9 +22,6 @@ class Version extends ValueObjectVisitor
 {
     protected FieldTypeSerializer $fieldTypeSerializer;
 
-    /**
-     * @param \Ibexa\Rest\Output\FieldTypeSerializer $fieldTypeSerializer
-     */
     public function __construct(FieldTypeSerializer $fieldTypeSerializer)
     {
         $this->fieldTypeSerializer = $fieldTypeSerializer;
@@ -33,11 +30,9 @@ class Version extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\Version $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $content */
         $content = $data->content;
@@ -48,7 +43,7 @@ class Version extends ValueObjectVisitor
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('VersionUpdate'));
 
         $this->visitVersionAttributes($visitor, $generator, $data);
-        $this->visitThumbnail($visitor, $generator, $content->getThumbnail());
+        $this->visitThumbnail($generator, $content->getThumbnail());
 
         $generator->endObjectElement('Version');
     }
@@ -93,7 +88,6 @@ class Version extends ValueObjectVisitor
     }
 
     private function visitThumbnail(
-        Visitor $visitor,
         Generator $generator,
         ?Thumbnail $thumbnail
     ): void {

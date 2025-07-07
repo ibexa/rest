@@ -14,10 +14,6 @@ abstract class Handler
 {
     /**
      * Converts the given string to an array structure.
-     *
-     * @param string $string
-     *
-     * @return array
      */
-    abstract public function convert($string);
+    abstract public function convert(string $string): array;
 }

@@ -15,27 +15,17 @@ use Ibexa\Rest\Value as RestValue;
  */
 class RestUserRoleAssignment extends RestValue
 {
-    /**
-     * Role assignment.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment
-     */
-    public $roleAssignment;
+    public UserRoleAssignment $roleAssignment;
 
     /**
      * User ID to which the role is assigned.
-     *
-     * @var mixed
      */
-    public $id;
+    public int $id;
 
     /**
      * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment $roleAssignment
-     * @param mixed $id
      */
-    public function __construct(UserRoleAssignment $roleAssignment, $id)
+    public function __construct(UserRoleAssignment $roleAssignment, int $id)
     {
         $this->roleAssignment = $roleAssignment;
         $this->id = $id;

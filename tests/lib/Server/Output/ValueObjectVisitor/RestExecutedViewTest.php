@@ -7,6 +7,7 @@
 
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
+use DOMDocument;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\LocationService;
@@ -23,9 +24,9 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class RestExecutedViewTest extends ValueObjectVisitorBaseTest
 {
-    private const EXAMPLE_LOCATION_ID = 54;
+    private const int EXAMPLE_LOCATION_ID = 54;
 
-    public function testVisit(): \DOMDocument
+    public function testVisit(): DOMDocument
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -66,7 +67,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
 
         self::assertNotEmpty($result);
 
-        $dom = new \DOMDocument();
+        $dom = new DOMDocument();
         $dom->loadXml($result);
 
         return $dom;
@@ -98,7 +99,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
      *
      * @dataProvider provideXpathAssertions
      */
-    public function testGeneratedXml(string $xpath, \DOMDocument $dom): void
+    public function testGeneratedXml(string $xpath, DOMDocument $dom): void
     {
         $this->assertXPath($dom, $xpath);
     }
@@ -111,12 +112,12 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    public function getLocationServiceMock(): LocationService & MockObject
+    public function getLocationServiceMock(): LocationService&MockObject
     {
         return $this->createMock(LocationService::class);
     }
 
-    private function getRelationListFacadeMock(): ContentService\RelationListFacadeInterface & MockObject
+    private function getRelationListFacadeMock(): ContentService\RelationListFacadeInterface&MockObject
     {
         $relationListFacade = $this->createMock(ContentService\RelationListFacadeInterface::class);
         $relationListFacade->method('getRelations')->willReturnCallback(
@@ -126,7 +127,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         return $relationListFacade;
     }
 
-    public function getContentTypeServiceMock(): ContentTypeService & MockObject
+    public function getContentTypeServiceMock(): ContentTypeService&MockObject
     {
         return $this->createMock(ContentTypeService::class);
     }
