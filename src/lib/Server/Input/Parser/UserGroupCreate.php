@@ -93,7 +93,10 @@ class UserGroupCreate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the Section element in UserGroupCreate.");
             }
 
-            $userGroupCreateStruct->sectionId = (int)$this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
+            $userGroupCreateStruct->sectionId = (int)$this->uriParser->getAttributeFromUri(
+                $data['Section']['_href'],
+                'sectionId'
+            );
         }
 
         if (array_key_exists('remoteId', $data)) {
