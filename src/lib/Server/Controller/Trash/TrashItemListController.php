@@ -82,8 +82,8 @@ class TrashItemListController extends RestController
         $limit = $request->query->has('limit') ? (int)$request->query->get('limit') : -1;
 
         $query = new Query();
-        $query->offset = $offset >= 0 ? $offset : null;
-        $query->limit = $limit >= 0 ? $limit : null;
+        $query->offset = max($offset, 0);
+        $query->limit = max($limit, 0);
 
         $trashItems = [];
 

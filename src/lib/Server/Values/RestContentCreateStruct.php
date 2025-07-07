@@ -16,25 +16,15 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class RestContentCreateStruct extends ValueObject
 {
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\ContentCreateStruct
-     */
-    public $contentCreateStruct;
+    public ContentCreateStruct $contentCreateStruct;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\LocationCreateStruct
-     */
-    public $locationCreateStruct;
+    public LocationCreateStruct $locationCreateStruct;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\ContentCreateStruct $contentCreateStruct
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\LocationCreateStruct $locationCreateStruct
-     */
     public function __construct(ContentCreateStruct $contentCreateStruct, LocationCreateStruct $locationCreateStruct)
     {
         $this->contentCreateStruct = $contentCreateStruct;
         $this->locationCreateStruct = $locationCreateStruct;
+
+        parent::__construct();
     }
 }

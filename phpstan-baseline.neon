@@ -475,18 +475,6 @@ parameters:
 			path: src/lib/Server/Controller/Services.php
 
 		-
-			message: '#^Property Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Query\:\:\$limit \(int\) does not accept int\<0, max\>\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/Server/Controller/Trash/TrashItemListController.php
-
-		-
-			message: '#^Property Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Query\:\:\$offset \(int\) does not accept int\<0, max\>\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/Server/Controller/Trash/TrashItemListController.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\AbstractDestinationLocationParser\:\:parse\(\) has Ibexa\\Contracts\\Rest\\Exceptions\\Parser in PHPDoc @throws tag but it''s not thrown\.$#'
 			identifier: throws.unusedType
 			count: 1

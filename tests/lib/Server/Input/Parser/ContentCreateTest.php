@@ -19,6 +19,7 @@ use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\ContentCreate;
 use Ibexa\Rest\Server\Input\Parser\LocationCreate;
+use Ibexa\Rest\Server\Values\RestContentCreateStruct;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class ContentCreateTest extends BaseTest
@@ -57,21 +58,9 @@ class ContentCreateTest extends BaseTest
         $result = $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
 
         self::assertInstanceOf(
-            '\\Ibexa\\Rest\\Server\\Values\\RestContentCreateStruct',
+            RestContentCreateStruct::class,
             $result,
             'ContentCreate not created correctly.'
-        );
-
-        self::assertInstanceOf(
-            '\\Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\ContentCreateStruct',
-            $result->contentCreateStruct,
-            'contentCreateStruct not created correctly.'
-        );
-
-        self::assertInstanceOf(
-            '\\Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType',
-            $result->contentCreateStruct->contentType,
-            'contentType not created correctly.'
         );
 
         self::assertEquals(
@@ -84,12 +73,6 @@ class ContentCreateTest extends BaseTest
             'eng-US',
             $result->contentCreateStruct->mainLanguageCode,
             'mainLanguageCode not created correctly'
-        );
-
-        self::assertInstanceOf(
-            '\\Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\LocationCreateStruct',
-            $result->locationCreateStruct,
-            'locationCreateStruct not created correctly.'
         );
 
         self::assertEquals(

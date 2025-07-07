@@ -49,6 +49,26 @@ class UserGroupCreate extends BaseParser
         $this->fieldTypeParser = $fieldTypeParser;
     }
 
+    /**
+     * @param array{
+     *     ContentType?: array{_href: string},
+     *     mainLanguageCode: string,
+     *     Section?: array{_href: string},
+     *     remoteId?: string,
+     *     fields: array{
+     *         field: array<
+     *             array{
+     *                 fieldDefinitionIdentifier: string,
+     *                 fieldValue: mixed,
+     *                 languageCode?: string
+     *             }
+     *         >
+     *     }
+     * } $data
+     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): UserGroupCreateStruct
     {
         $contentType = null;
@@ -73,7 +93,10 @@ class UserGroupCreate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the Section element in UserGroupCreate.");
             }
 
-            $userGroupCreateStruct->sectionId = $this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
+            $userGroupCreateStruct->sectionId = (int)$this->uriParser->getAttributeFromUri(
+                $data['Section']['_href'],
+                'sectionId'
+            );
         }
 
         if (array_key_exists('remoteId', $data)) {
