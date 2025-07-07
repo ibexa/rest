@@ -19,11 +19,9 @@ class URLWildcardList extends RestValue
      *
      * @var \Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard[]
      */
-    public $urlWildcards;
+    public array $urlWildcards;
 
     /**
-     * Construct.
-     *
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard[] $urlWildcards
      */
     public function __construct(array $urlWildcards)

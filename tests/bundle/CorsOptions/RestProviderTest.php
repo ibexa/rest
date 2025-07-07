@@ -22,7 +22,7 @@ class RestProviderTest extends TestCase
      * Return value expectation for RequestMatcher::matchRequest
      * Set to false to expect Router::match() never to be called, or to an exception to have it throw one.
      */
-    protected array $matchRequestResult = [];
+    protected mixed $matchRequestResult;
 
     public function testGetOptions(): void
     {
@@ -87,7 +87,7 @@ class RestProviderTest extends TestCase
     }
 
     /**
-     * @param bool $isRestRequest whether or not to set the is_rest_request attribute
+     * @param bool $isRestRequest whether to set the is_rest_request attribute
      */
     protected function createRequest(bool $isRestRequest = true): Request
     {

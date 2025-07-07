@@ -17,11 +17,14 @@ class Options extends ValueObject
     /**
      * The methods allowed my the resource.
      *
-     * @var array
+     * @var array<int, string>
      */
-    public $allowedMethods;
+    public array $allowedMethods;
 
-    public function __construct($allowedMethods)
+    /**
+     * @param array<int, string> $allowedMethods
+     */
+    public function __construct(array $allowedMethods)
     {
         $this->allowedMethods = $allowedMethods;
     }

@@ -40,9 +40,6 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
         return $this->router?->generate('ibexa.rest.load_content', ['contentId' => $contentId]) ?? '';
     }
 
-    /**
-     * @return string
-     */
     public function mapToLocationHref(int $locationId): ?string
     {
         try {
@@ -60,7 +57,7 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
         ]) ?? '';
     }
 
-    public function preProcessFieldSettingsHash($incomingSettingsHash)
+    public function preProcessFieldSettingsHash(mixed $incomingSettingsHash): mixed
     {
         if (isset($incomingSettingsHash['selectionMethod'])) {
             switch ($incomingSettingsHash['selectionMethod']) {
@@ -75,7 +72,7 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
         return $incomingSettingsHash;
     }
 
-    public function postProcessFieldSettingsHash($outgoingSettingsHash)
+    public function postProcessFieldSettingsHash(mixed $outgoingSettingsHash): mixed
     {
         if (isset($outgoingSettingsHash['selectionMethod'])) {
             switch ($outgoingSettingsHash['selectionMethod']) {

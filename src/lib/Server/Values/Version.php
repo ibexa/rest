@@ -31,8 +31,6 @@ class Version extends RestValue
     public ?string $path;
 
     /**
-     * Construct.
-     *
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Relation[] $relations
      */
     public function __construct(Content $content, ContentType $contentType, array $relations, ?string $path = null)

@@ -70,7 +70,7 @@ class RestContentTest extends BaseContentValueObjectVisitorTestCase
         );
         $this->addRouteExpectation(
             'ibexa.rest.load_location',
-            ['locationPath' => $locationPath = trim($restContent->mainLocation->pathString, '/')],
+            ['locationPath' => $locationPath = trim((string)$restContent->mainLocation?->pathString, '/')],
             "/content/locations/{$locationPath}"
         );
         $this->addRouteExpectation(

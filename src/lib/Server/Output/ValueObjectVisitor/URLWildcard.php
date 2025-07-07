@@ -30,7 +30,7 @@ class URLWildcard extends ValueObjectVisitor
         $generator->endObjectElement('UrlWildcard');
     }
 
-    protected function visitURLWildcardAttributes(Generator $generator, URLWildcardValue $data)
+    protected function visitURLWildcardAttributes(Generator $generator, URLWildcardValue $data): void
     {
         $generator->startAttribute(
             'href',

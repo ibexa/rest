@@ -15,9 +15,6 @@ use Ibexa\Rest\Value as RestValue;
  */
 class RestTrashItem extends RestValue
 {
-    /**
-     * A trash item.
-     */
     public TrashItem $trashItem;
 
     /**

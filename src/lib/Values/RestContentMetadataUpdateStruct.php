@@ -18,8 +18,6 @@ class RestContentMetadataUpdateStruct extends ContentMetadataUpdateStruct
      * ID of the section to assign.
      *
      * Leave null to not change section assignment.
-     *
-     * @var mixed
      */
-    public $sectionId;
+    public string|int $sectionId;
 }

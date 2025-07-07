@@ -22,12 +22,12 @@ class RestContentType extends RestValue
     /**
      * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[]
      */
-    public array $fieldDefinitions;
+    public ?array $fieldDefinitions;
 
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[] $fieldDefinitions
      */
-    public function __construct(ContentType $contentType, array $fieldDefinitions = null)
+    public function __construct(ContentType $contentType, ?array $fieldDefinitions = null)
     {
         $this->contentType = $contentType;
         $this->fieldDefinitions = $fieldDefinitions;

@@ -14,32 +14,37 @@ class CachedValue extends RestValue
 {
     /**
      * Actual value object.
-     *
-     * @var mixed
      */
-    public $value;
+    public mixed $value;
 
     /**
      * Associative array of cache tags.
      * Example: array( 'locationId' => 59 ).
      *
-     * @var mixed[]
+     * @var array<string, mixed>
      */
-    public $cacheTags;
+    public array $cacheTags;
 
     /**
      * @param mixed $value The value that gets cached
-     * @param array $cacheTags Tags to add to the cache (supported: locationId)
+     * @param array<string, mixed> $cacheTags Tags to add to the cache (supported: locationId)
      *
      * @throw InvalidArgumentException If invalid cache tags are provided
      */
-    public function __construct($value, array $cacheTags = [])
+    public function __construct(mixed $value, array $cacheTags = [])
     {
         $this->value = $value;
         $this->cacheTags = $this->checkCacheTags($cacheTags);
     }
 
-    protected function checkCacheTags($tags)
+    /**
+     * @param array<string, mixed> $tags
+     *
+     * @return array<string, mixed>
+     *
+     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException
+     */
+    protected function checkCacheTags(array $tags): array
     {
         $invalidTags = array_diff(array_keys($tags), ['locationId']);
         if (count($invalidTags) > 0) {

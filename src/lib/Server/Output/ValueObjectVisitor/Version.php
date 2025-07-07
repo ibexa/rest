@@ -48,7 +48,7 @@ class Version extends ValueObjectVisitor
         $generator->endObjectElement('Version');
     }
 
-    protected function visitVersionAttributes(Visitor $visitor, Generator $generator, VersionValue $data)
+    protected function visitVersionAttributes(Visitor $visitor, Generator $generator, VersionValue $data): void
     {
         $content = $data->content;
 

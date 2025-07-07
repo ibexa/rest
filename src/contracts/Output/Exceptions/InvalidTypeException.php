@@ -16,10 +16,8 @@ class InvalidTypeException extends RuntimeException
 {
     /**
      * Construct from invalid data.
-     *
-     * @param mixed $data
      */
-    public function __construct($data)
+    public function __construct(mixed $data)
     {
         parent::__construct(
             'You must provide a ValueObject for visiting, "' . gettype($data) . '" provided.'

@@ -57,7 +57,7 @@ class UserGroupUpdate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the Section element in UserGroupUpdate.");
             }
 
-            $parsedData['sectionId'] = $this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
+            $parsedData['sectionId'] = (int)$this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
         }
 
         if (array_key_exists('remoteId', $data)) {

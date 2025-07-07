@@ -133,7 +133,7 @@ class ObjectStatesForContentUpdateController extends RestController
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      */
-    public function setObjectStatesForContent(int $contentId, Request $request): \Ibexa\Rest\Values\ContentObjectStates
+    public function setObjectStatesForContent(int $contentId, Request $request): ContentObjectStates
     {
         $newObjectStates = $this->inputDispatcher->parse(
             new Message(

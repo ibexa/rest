@@ -13,7 +13,7 @@ use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\ContentTypeGroupRefList;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
@@ -95,7 +95,7 @@ class ContentTypeUnlinkFromGroupController extends RestController
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
      */
-    public function unlinkContentTypeFromGroup(int $contentTypeId, int $contentTypeGroupId): \Ibexa\Rest\Server\Values\ContentTypeGroupRefList
+    public function unlinkContentTypeFromGroup(int $contentTypeId, int $contentTypeGroupId): ContentTypeGroupRefList
     {
         $contentType = $this->contentTypeService->loadContentType($contentTypeId);
         $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId);
@@ -124,7 +124,7 @@ class ContentTypeUnlinkFromGroupController extends RestController
 
         $contentType = $this->contentTypeService->loadContentType($contentTypeId);
 
-        return new Values\ContentTypeGroupRefList(
+        return new ContentTypeGroupRefList(
             $contentType,
             $contentType->getContentTypeGroups()
         );

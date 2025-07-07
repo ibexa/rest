@@ -12,7 +12,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Values\User\PolicyDraft;
 use Ibexa\Contracts\Rest\Exceptions;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\NoContent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -54,7 +54,7 @@ class RolePolicyDeleteController extends RoleBaseController
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
      */
-    public function deletePolicy(int $roleId, int $policyId, Request $request): \Ibexa\Rest\Server\Values\NoContent
+    public function deletePolicy(int $roleId, int $policyId, Request $request): NoContent
     {
         try {
             // First try to treat $roleId as a role draft ID.
@@ -69,7 +69,7 @@ class RolePolicyDeleteController extends RoleBaseController
             if ($policy !== null && $policy instanceof PolicyDraft) {
                 $this->roleService->removePolicyByRoleDraft($roleDraft, $policy);
 
-                return new Values\NoContent();
+                return new NoContent();
             }
         } catch (NotFoundException $e) {
             // Then try to treat $roleId as a role ID.
@@ -88,7 +88,7 @@ class RolePolicyDeleteController extends RoleBaseController
                 $this->roleService->removePolicyByRoleDraft($roleDraft, $policy);
                 $this->roleService->publishRoleDraft($roleDraft);
 
-                return new Values\NoContent();
+                return new NoContent();
             }
         }
 

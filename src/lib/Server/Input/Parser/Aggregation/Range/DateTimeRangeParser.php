@@ -14,7 +14,7 @@ use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 
 final class DateTimeRangeParser extends AbstractRangeParser
 {
-    protected function visitRangeValue(ParsingDispatcher $parsingDispatcher, $value): ?DateTimeInterface
+    protected function visitRangeValue(ParsingDispatcher $parsingDispatcher, ?string $value): ?DateTimeInterface
     {
         if ($value === null) {
             return null;

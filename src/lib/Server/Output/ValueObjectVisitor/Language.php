@@ -18,15 +18,15 @@ final class Language extends ValueObjectVisitor
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Language $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('Language');
         $visitor->setHeader('Content-Type', $generator->getMediaType('Language'));
-        $this->visitLanguageAttributes($visitor, $generator, $data);
+        $this->visitLanguageAttributes($generator, $data);
         $generator->endObjectElement('Language');
     }
 
-    private function visitLanguageAttributes(Visitor $visitor, Generator $generator, LanguageValue $language): void
+    private function visitLanguageAttributes(Generator $generator, LanguageValue $language): void
     {
         $generator->attribute(
             'href',

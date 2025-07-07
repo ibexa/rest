@@ -18,15 +18,10 @@ class RestUserGroupUpdateStruct extends RestValue
     public UserGroupUpdateStruct $userGroupUpdateStruct;
 
     /**
-     * If set, section of the UserGroup will be updated.
+     * If set, a section of a UserGroup will be updated.
      */
     public ?int $sectionId;
 
-    /**
-     * Construct.
-     *
-     * @param mixed $sectionId
-     */
     public function __construct(UserGroupUpdateStruct $userGroupUpdateStruct, ?int $sectionId = null)
     {
         $this->userGroupUpdateStruct = $userGroupUpdateStruct;

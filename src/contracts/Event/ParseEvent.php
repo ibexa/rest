@@ -12,15 +12,14 @@ use Ibexa\Contracts\Core\Repository\Event\AfterEvent;
 
 final class ParseEvent extends AfterEvent
 {
-    /** @var mixed */
-    private $valueObject;
+    private mixed $valueObject;
 
     private array $data;
 
     private string $mediaType;
 
     public function __construct(
-        $valueObject,
+        mixed $valueObject,
         array $data,
         string $mediaType
     ) {
@@ -39,7 +38,7 @@ final class ParseEvent extends AfterEvent
         return $this->mediaType;
     }
 
-    public function getValueObject()
+    public function getValueObject(): mixed
     {
         return $this->valueObject;
     }

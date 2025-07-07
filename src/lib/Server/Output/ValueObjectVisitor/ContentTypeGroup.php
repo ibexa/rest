@@ -29,7 +29,7 @@ class ContentTypeGroup extends ValueObjectVisitor
         $generator->endObjectElement('ContentTypeGroup');
     }
 
-    protected function visitContentTypeGroupAttributes(Visitor $visitor, Generator $generator, ContentTypeGroupValue $data)
+    protected function visitContentTypeGroupAttributes(Visitor $visitor, Generator $generator, ContentTypeGroupValue $data): void
     {
         $visitor->setHeader('Content-Type', $generator->getMediaType('ContentTypeGroup'));
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('ContentTypeGroupInput'));

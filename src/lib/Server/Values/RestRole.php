@@ -12,6 +12,9 @@ use Ibexa\Rest\Value as RestValue;
 
 /**
  * REST Role, as received by /roles/<ID>.
+ *
+ * @property-read int $id
+ * @property-read string $identifier
  */
 class RestRole extends RestValue
 {
@@ -25,10 +28,13 @@ class RestRole extends RestValue
         $this->innerRole = $role;
     }
 
+    public function getInnerRole(): Role
+    {
+        return $this->innerRole;
+    }
+
     /**
      * Magic getter for routing get calls to innerRole.
-     *
-     * @param string $property The name of the property to retrieve
      */
     public function __get(string $property): mixed
     {

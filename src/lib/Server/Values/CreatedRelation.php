@@ -14,10 +14,5 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class CreatedRelation extends ValueObject
 {
-    /**
-     * The created relation.
-     *
-     * @var \Ibexa\Rest\Server\Values\RestRelation
-     */
-    public $relation;
+    public RestRelation $relation;
 }

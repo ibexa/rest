@@ -14,10 +14,5 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class CreatedUser extends ValueObject
 {
-    /**
-     * The created user.
-     *
-     * @var \Ibexa\Rest\Server\Values\RestUser
-     */
-    public $user;
+    public RestUser $user;
 }

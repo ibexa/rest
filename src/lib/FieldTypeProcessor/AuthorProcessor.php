@@ -12,37 +12,25 @@ use Ibexa\Core\FieldType\Author\Type;
 
 class AuthorProcessor extends FieldTypeProcessor
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function preProcessFieldSettingsHash($incomingSettingsHash)
+    public function preProcessFieldSettingsHash(mixed $incomingSettingsHash): mixed
     {
         if (isset($incomingSettingsHash['defaultAuthor'])) {
-            switch ($incomingSettingsHash['defaultAuthor']) {
-                case 'DEFAULT_CURRENT_USER':
-                    $incomingSettingsHash['defaultAuthor'] = Type::DEFAULT_CURRENT_USER;
-                    break;
-                default:
-                    $incomingSettingsHash['defaultAuthor'] = Type::DEFAULT_VALUE_EMPTY;
-            }
+            $incomingSettingsHash['defaultAuthor'] = match ($incomingSettingsHash['defaultAuthor']) {
+                'DEFAULT_CURRENT_USER' => Type::DEFAULT_CURRENT_USER,
+                default => Type::DEFAULT_VALUE_EMPTY,
+            };
         }
 
         return $incomingSettingsHash;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function postProcessFieldSettingsHash($outgoingSettingsHash)
+    public function postProcessFieldSettingsHash(mixed $outgoingSettingsHash): mixed
     {
         if (isset($outgoingSettingsHash['defaultAuthor'])) {
-            switch ($outgoingSettingsHash['defaultAuthor']) {
-                case Type::DEFAULT_CURRENT_USER:
-                    $outgoingSettingsHash['defaultAuthor'] = 'DEFAULT_CURRENT_USER';
-                    break;
-                default:
-                    $outgoingSettingsHash['defaultAuthor'] = 'DEFAULT_VALUE_EMPTY';
-            }
+            $outgoingSettingsHash['defaultAuthor'] = match ($outgoingSettingsHash['defaultAuthor']) {
+                Type::DEFAULT_CURRENT_USER => 'DEFAULT_CURRENT_USER',
+                default => 'DEFAULT_VALUE_EMPTY',
+            };
         }
 
         return $outgoingSettingsHash;

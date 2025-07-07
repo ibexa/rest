@@ -90,12 +90,12 @@ class RestContent extends ValueObjectVisitor
         );
 
         // Embed current version, if available
-        if ($currentVersion !== null) {
+        if ($currentVersion !== null && $contentType !== null) {
             $visitor->visitValueObject(
                 new VersionValue(
                     $currentVersion,
                     $contentType,
-                    $restContent->relations
+                    $restContent->relations ?? [],
                 )
             );
         }
@@ -109,8 +109,8 @@ class RestContent extends ValueObjectVisitor
         );
         $generator->endObjectElement('Section');
 
-        // Main location will not exist if we're visiting the content draft
-        if ($data->mainLocation !== null) {
+        // The main location will not exist if we're visiting the content draft
+        if ($mainLocation !== null) {
             $generator->startObjectElement('MainLocation', 'Location');
             $generator->attribute(
                 'href',

@@ -55,7 +55,7 @@ class CachedValue extends ValueObjectVisitor
         }
     }
 
-    public function getParameter($parameterName, $defaultValue = null)
+    public function getParameter(string $parameterName, mixed $defaultValue = null)
     {
         if ($this->configResolver->hasParameter($parameterName)) {
             return $this->configResolver->getParameter($parameterName);

@@ -18,7 +18,7 @@ final class TermAggregationResult extends ValueObjectVisitor
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Search\AggregationResult\TermAggregationResult $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('TermAggregationResult');
 
@@ -39,14 +39,11 @@ final class TermAggregationResult extends ValueObjectVisitor
     {
         $generator->startObjectElement('TermAggregationResultEntry');
         $this->visitKey($visitor, $generator, $entry->getKey());
-        $this->visitCount($visitor, $generator, $entry->getCount());
+        $this->visitCount($generator, $entry->getCount());
         $generator->endObjectElement('TermAggregationResultEntry');
     }
 
-    /**
-     * @param mixed $key
-     */
-    private function visitKey(Visitor $visitor, Generator $generator, $key): void
+    private function visitKey(Visitor $visitor, Generator $generator, mixed $key): void
     {
         if (is_object($key)) {
             $generator->startHashElement('key');
@@ -57,7 +54,7 @@ final class TermAggregationResult extends ValueObjectVisitor
         }
     }
 
-    private function visitCount(Visitor $visitor, Generator $generator, int $count): void
+    private function visitCount(Generator $generator, int $count): void
     {
         $generator->valueElement('count', $count);
     }

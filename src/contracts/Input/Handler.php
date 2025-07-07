@@ -15,5 +15,5 @@ abstract class Handler
     /**
      * Converts the given string to an array structure.
      */
-    abstract public function convert(string $string): array;
+    abstract public function convert(string $string): array|string|int|bool|float|null;
 }

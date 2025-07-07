@@ -44,7 +44,7 @@ class SessionBaseController extends Controller
     protected function checkCsrfToken(Request $request): void
     {
         if (!$request->headers->has('X-CSRF-Token')) {
-            throw $this->createInvalidCsrfTokenException($request);
+            throw $this->createInvalidCsrfTokenException();
         }
 
         $csrfToken = new CsrfToken(
@@ -53,7 +53,7 @@ class SessionBaseController extends Controller
         );
 
         if (!$this->csrfTokenManager->isTokenValid($csrfToken)) {
-            throw $this->createInvalidCsrfTokenException($request);
+            throw $this->createInvalidCsrfTokenException();
         }
     }
 
@@ -62,7 +62,7 @@ class SessionBaseController extends Controller
         return $this->csrfTokenManager->getToken($this->csrfTokenIntention)->getValue();
     }
 
-    protected function createInvalidCsrfTokenException(Request $request): UnauthorizedException
+    protected function createInvalidCsrfTokenException(): UnauthorizedException
     {
         return new UnauthorizedException('Missing or invalid CSRF token');
     }

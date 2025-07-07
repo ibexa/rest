@@ -16,9 +16,14 @@ use Ibexa\Contracts\Rest\Output\Visitor;
  */
 class SeeOther extends ValueObjectVisitor
 {
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    /**
+     * Visit struct returned by controllers.
+     *
+     * @param \Ibexa\Rest\Server\Values\SeeOther $data
+     */
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $visitor->setStatus(303);
-        $visitor->setHeader('Location', $data->redirectUri);
+        $visitor->setHeader('Location', $data->getRedirectUri());
     }
 }

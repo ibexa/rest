@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Section;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
@@ -14,10 +15,5 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class CreatedSection extends ValueObject
 {
-    /**
-     * The created section.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Section
-     */
-    public $section;
+    public Section $section;
 }

@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class InputParserPass implements CompilerPassInterface
 {
-    public const INPUT_PARSER_SERVICE_TAG = 'ibexa.rest.input.parser';
+    public const string INPUT_PARSER_SERVICE_TAG = 'ibexa.rest.input.parser';
 
     public function process(ContainerBuilder $container): void
     {

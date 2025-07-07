@@ -14,10 +14,5 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class CreatedContentType extends ValueObject
 {
-    /**
-     * The created content type.
-     *
-     * @var \Ibexa\Rest\Server\Values\RestContentType
-     */
-    public $contentType;
+    public RestContentType $contentType;
 }

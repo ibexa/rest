@@ -14,35 +14,13 @@ use Ibexa\Rest\Value as RestValue;
  */
 class Resource extends RestValue
 {
-    /**
-     * Resource name.
-     *
-     * @var string
-     */
-    public $name;
+    public string $name;
 
-    /**
-     * Media Type of the resource.
-     *
-     * @var string
-     */
-    public $mediaType;
+    public string $mediaType;
 
-    /**
-     * href of the resource.
-     *
-     * @var string
-     */
-    public $href;
+    public string $href;
 
-    /**
-     * Resource constructor.
-     *
-     * @param $name
-     * @param $mediaType
-     * @param $href
-     */
-    public function __construct($name, $mediaType, $href)
+    public function __construct(string $name, string $mediaType, string $href)
     {
         $this->name = $name;
         $this->mediaType = $mediaType;

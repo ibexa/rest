@@ -70,9 +70,7 @@ class ParserTools
     {
         $listItems = [];
         foreach ($listElement['value'] as $valueRow) {
-            $listItems[$valueRow['_languageCode']] = isset($valueRow['#text']) ?
-                $valueRow['#text'] :
-                '';
+            $listItems[$valueRow['_languageCode']] = $valueRow['#text'] ?? '';
         }
 
         return $listItems;

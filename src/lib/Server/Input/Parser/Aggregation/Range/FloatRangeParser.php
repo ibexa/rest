@@ -12,7 +12,7 @@ use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 
 final class FloatRangeParser extends AbstractRangeParser
 {
-    protected function visitRangeValue(ParsingDispatcher $parsingDispatcher, $value): ?float
+    protected function visitRangeValue(ParsingDispatcher $parsingDispatcher, ?string $value): ?float
     {
         if ($value === null) {
             return null;

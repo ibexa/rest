@@ -26,7 +26,7 @@ class TimeProcessorTest extends TestCase
     public function fieldSettingsHashes(): array
     {
         return array_map(
-            static function ($constantName): array {
+            static function (string $constantName): array {
                 return [
                     ['defaultType' => $constantName],
                     ['defaultType' => constant("Ibexa\\Core\\FieldType\\Time\\Type::{$constantName}")],
@@ -40,6 +40,9 @@ class TimeProcessorTest extends TestCase
      * @covers \Ibexa\Rest\FieldTypeProcessor\TimeProcessor::preProcessFieldSettingsHash
      *
      * @dataProvider fieldSettingsHashes
+     *
+     * @param array<string, mixed> $inputSettings
+     * @param array<string, mixed> $outputSettings
      */
     public function testPreProcessFieldSettingsHash(array $inputSettings, array $outputSettings): void
     {
@@ -55,6 +58,9 @@ class TimeProcessorTest extends TestCase
      * @covers \Ibexa\Rest\FieldTypeProcessor\TimeProcessor::postProcessFieldSettingsHash
      *
      * @dataProvider fieldSettingsHashes
+     *
+     * @param array<string, mixed> $inputSettings
+     * @param array<string, mixed> $outputSettings
      */
     public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
     {

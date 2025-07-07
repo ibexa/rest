@@ -41,6 +41,9 @@ class RelationListProcessorTest extends TestCase
      * @covers \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::preProcessFieldSettingsHash
      *
      * @dataProvider fieldSettingsHashes
+     *
+     * @param array<string, mixed> $inputSettings
+     * @param array<string, mixed> $outputSettings
      */
     public function testPreProcessFieldSettingsHash(array $inputSettings, array $outputSettings): void
     {
@@ -56,6 +59,9 @@ class RelationListProcessorTest extends TestCase
      * @covers \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::postProcessFieldSettingsHash
      *
      * @dataProvider fieldSettingsHashes
+     *
+     * @param array<string, mixed> $inputSettings
+     * @param array<string, mixed> $outputSettings
      */
     public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
     {
@@ -67,7 +73,7 @@ class RelationListProcessorTest extends TestCase
         );
     }
 
-    public function testpostProcessFieldSettingsHashLocation(): void
+    public function testPostProcessFieldSettingsHashLocation(): void
     {
         $processor = $this->getProcessor();
 

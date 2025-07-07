@@ -19,7 +19,7 @@ final class RangeAggregationResult extends ValueObjectVisitor
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Search\AggregationResult\RangeAggregationResult $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('RangeAggregationResult');
 
@@ -40,7 +40,7 @@ final class RangeAggregationResult extends ValueObjectVisitor
     {
         $generator->startObjectElement('RangeAggregationResultEntry');
         $this->visitKey($visitor, $generator, $entry->getKey());
-        $this->visitCount($visitor, $generator, $entry->getCount());
+        $this->visitCount($generator, $entry->getCount());
         $generator->endObjectElement('RangeAggregationResultEntry');
     }
 
@@ -51,7 +51,7 @@ final class RangeAggregationResult extends ValueObjectVisitor
         $generator->endHashElement('key');
     }
 
-    private function visitCount(Visitor $visitor, Generator $generator, int $count): void
+    private function visitCount(Generator $generator, int $count): void
     {
         $generator->valueElement('count', $count);
     }

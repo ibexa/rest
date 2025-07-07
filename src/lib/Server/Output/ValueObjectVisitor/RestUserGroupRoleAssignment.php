@@ -35,7 +35,7 @@ class RestUserGroupRoleAssignment extends ValueObjectVisitor
             $this->router->generate(
                 'ibexa.rest.load_role_assignment_for_user_group',
                 [
-                    'groupPath' => trim($data->id, '/'),
+                    'groupPath' => trim((string)$data->id, '/'),
                     'roleId' => $role->id,
                 ]
             )

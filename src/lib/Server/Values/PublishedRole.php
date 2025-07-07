@@ -14,8 +14,5 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class PublishedRole extends ValueObject
 {
-    /**
-     * The published role.
-     */
     public RestRole $role;
 }

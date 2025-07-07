@@ -24,11 +24,9 @@ abstract class FieldTypeProcessor
      *
      * @see \Ibexa\Rest\Input\FieldTypeParser
      *
-     * @param mixed $incomingValueHash
-     *
      * @return mixed Pre processed hash
      */
-    public function preProcessValueHash($incomingValueHash)
+    public function preProcessValueHash(mixed $incomingValueHash): mixed
     {
         return $incomingValueHash;
     }

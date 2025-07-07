@@ -82,7 +82,7 @@ class Xml extends Handler
     /**
      * Converts the given string to an array structure.
      */
-    public function convert(string $string): array
+    public function convert(string $string): array|string|int|bool|float|null
     {
         $oldXmlErrorHandling = libxml_use_internal_errors(true);
         libxml_clear_errors();
@@ -116,7 +116,7 @@ class Xml extends Handler
     /**
      * Converts DOM nodes to array structures.
      */
-    protected function convertDom(DOMNode $node): ?array
+    protected function convertDom(DOMNode $node): array|string|int|bool|float|null
     {
         $isArray = false;
         $current = [];
@@ -181,7 +181,7 @@ class Xml extends Handler
         return $current;
     }
 
-    protected function parseFieldTypeHash(DOMElement $domElement): array|string|null
+    protected function parseFieldTypeHash(DOMElement $domElement): array|string|int|bool|float|null
     {
         $result = $this->parseFieldTypeValues($domElement->childNodes);
 
@@ -196,7 +196,7 @@ class Xml extends Handler
     /**
      * Parses a node list of <value> elements.
      */
-    protected function parseFieldTypeValues(DOMNodeList $valueNodes): array|string
+    protected function parseFieldTypeValues(DOMNodeList $valueNodes): array|string|int|bool|float
     {
         $resultValues = [];
         $resultString = '';
@@ -242,7 +242,7 @@ class Xml extends Handler
     /**
      * Attempts to cast the given $stringValue into a sensible scalar type.
      */
-    protected function castScalarValue(string $stringValue): mixed
+    protected function castScalarValue(string $stringValue): string|int|bool|float
     {
         switch (true) {
             case ctype_digit($stringValue):

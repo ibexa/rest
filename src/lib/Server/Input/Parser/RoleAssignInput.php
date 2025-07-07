@@ -42,7 +42,7 @@ class RoleAssignInput extends BaseParser
         }
 
         try {
-            $roleId = $this->uriParser->getAttributeFromUri($data['Role']['_href'], 'roleId');
+            $roleId = (int)$this->uriParser->getAttributeFromUri($data['Role']['_href'], 'roleId');
         } catch (Exceptions\InvalidArgumentException $e) {
             throw new Exceptions\Parser('Invalid format for <Role> reference in <RoleAssignInput>.');
         }

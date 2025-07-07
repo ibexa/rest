@@ -19,22 +19,17 @@ class RoleList extends RestValue
      *
      * @var \Ibexa\Contracts\Core\Repository\Values\User\Role[]
      */
-    public $roles;
+    public array $roles;
 
     /**
      * Path used to load the list of roles.
-     *
-     * @var string
      */
-    public $path;
+    public string $path;
 
     /**
-     * Construct.
-     *
      * @param \Ibexa\Contracts\Core\Repository\Values\User\Role[] $roles
-     * @param string $path
      */
-    public function __construct(array $roles, $path)
+    public function __construct(array $roles, string $path)
     {
         $this->roles = $roles;
         $this->path = $path;

@@ -59,6 +59,9 @@ class MediaProcessorTest extends BinaryInputProcessorTest
      * @covers \Ibexa\Rest\FieldTypeProcessor\MediaProcessor::postProcessFieldSettingsHash
      *
      * @dataProvider fieldSettingsHashes
+     *
+     * @param array<string, mixed> $inputSettings
+     * @param array<string, mixed> $outputSettings
      */
     public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
     {

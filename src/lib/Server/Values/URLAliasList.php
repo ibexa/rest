@@ -19,22 +19,17 @@ class URLAliasList extends RestValue
      *
      * @var \Ibexa\Contracts\Core\Repository\Values\Content\URLAlias[]
      */
-    public $urlAliases;
+    public array $urlAliases;
 
     /**
      * Path used to load the list of URL aliases.
-     *
-     * @var string
      */
-    public $path;
+    public string $path;
 
     /**
-     * Construct.
-     *
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\URLAlias[] $urlAliases
-     * @param string $path
      */
-    public function __construct(array $urlAliases, $path)
+    public function __construct(array $urlAliases, string $path)
     {
         $this->urlAliases = $urlAliases;
         $this->path = $path;

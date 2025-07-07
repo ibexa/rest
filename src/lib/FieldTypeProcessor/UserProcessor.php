@@ -11,7 +11,7 @@ use Ibexa\Contracts\Rest\FieldTypeProcessor;
 
 class UserProcessor extends FieldTypeProcessor
 {
-    public function preProcessValueHash($incomingValueHash)
+    public function preProcessValueHash(mixed $incomingValueHash): mixed
     {
         // For BC with usage in Platform UI 1.x
         if (isset($incomingValueHash['password'])) {
@@ -22,7 +22,7 @@ class UserProcessor extends FieldTypeProcessor
         return $incomingValueHash;
     }
 
-    public function postProcessValueHash($outgoingValueHash)
+    public function postProcessValueHash(mixed $outgoingValueHash): mixed
     {
         unset($outgoingValueHash['passwordHash'], $outgoingValueHash['passwordHashType']);
 

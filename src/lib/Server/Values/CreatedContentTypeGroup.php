@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
@@ -14,10 +15,5 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class CreatedContentTypeGroup extends ValueObject
 {
-    /**
-     * The created content type group.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup
-     */
-    public $contentTypeGroup;
+    public ContentTypeGroup $contentTypeGroup;
 }

@@ -21,7 +21,7 @@ abstract class Criterion extends BaseParser
     /**
      * @var string[]
      */
-    protected static $criterionIdMap = [
+    protected static array $criterionIdMap = [
         'AND' => 'LogicalAnd',
         'OR' => 'LogicalOr',
         'NOT' => 'LogicalNot',

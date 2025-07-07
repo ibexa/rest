@@ -46,7 +46,7 @@ abstract class ValueObjectVisitor
     /**
      * Returns a string representation for the given $boolValue.
      */
-    protected function serializeBool(Generator $generator, bool $boolValue): mixed
+    protected function serializeBool(Generator $generator, ?bool $boolValue): string|bool
     {
         return $generator->serializeBool($boolValue);
     }

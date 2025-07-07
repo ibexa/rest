@@ -19,22 +19,19 @@ class SectionList extends RestValue
      *
      * @var \Ibexa\Contracts\Core\Repository\Values\Content\Section[]
      */
-    public $sections;
+    public array $sections;
 
     /**
      * Path used to load the list of sections.
-     *
-     * @var string
      */
-    public $path;
+    public string $path;
 
     /**
      * Construct.
      *
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Section[] $sections
-     * @param string $path
      */
-    public function __construct(array $sections, $path)
+    public function __construct(array $sections, string $path)
     {
         $this->sections = $sections;
         $this->path = $path;

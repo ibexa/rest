@@ -10,7 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\NoContent;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Delete(
@@ -47,12 +47,12 @@ class RoleDeleteController extends RoleBaseController
     /**
      * Delete a role by ID.
      */
-    public function deleteRole(int $roleId): \Ibexa\Rest\Server\Values\NoContent
+    public function deleteRole(int $roleId): NoContent
     {
         $this->roleService->deleteRole(
             $this->roleService->loadRole($roleId)
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 }

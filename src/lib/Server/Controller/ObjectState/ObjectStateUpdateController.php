@@ -141,7 +141,7 @@ class ObjectStateUpdateController extends RestController
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      */
-    public function updateObjectState(int $objectStateGroupId, int $objectStateId, Request $request): \Ibexa\Rest\Values\RestObjectState
+    public function updateObjectState(int $objectStateGroupId, int $objectStateId, Request $request): RestObjectState
     {
         $updateStruct = $this->inputDispatcher->parse(
             new Message(

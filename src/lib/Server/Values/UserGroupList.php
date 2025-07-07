@@ -19,22 +19,17 @@ class UserGroupList extends RestValue
      *
      * @var \Ibexa\Rest\Server\Values\RestUserGroup[]
      */
-    public $userGroups;
+    public array $userGroups;
 
     /**
      * Path which was used to fetch the list of user groups.
-     *
-     * @var string
      */
-    public $path;
+    public string $path;
 
     /**
-     * Construct.
-     *
      * @param \Ibexa\Rest\Server\Values\RestUserGroup[] $userGroups
-     * @param string $path
      */
-    public function __construct(array $userGroups, $path)
+    public function __construct(array $userGroups, string $path)
     {
         $this->userGroups = $userGroups;
         $this->path = $path;

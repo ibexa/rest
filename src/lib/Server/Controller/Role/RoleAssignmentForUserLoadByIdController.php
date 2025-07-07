@@ -11,7 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Rest\Exceptions;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RestUserRoleAssignment;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -82,7 +82,7 @@ class RoleAssignmentForUserLoadByIdController extends RoleBaseController
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
      */
-    public function loadRoleAssignmentForUser(int $userId, int $roleId, Request $request): \Ibexa\Rest\Server\Values\RestUserRoleAssignment
+    public function loadRoleAssignmentForUser(int $userId, int $roleId, Request $request): RestUserRoleAssignment
     {
         $user = $this->userService->loadUser($userId);
         $roleAssignments = $this->roleService->getRoleAssignmentsForUser($user);
@@ -91,7 +91,7 @@ class RoleAssignmentForUserLoadByIdController extends RoleBaseController
             if ($roleAssignment->getRole()->id == $roleId) {
                 assert($roleAssignment instanceof \Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment);
 
-                return new Values\RestUserRoleAssignment($roleAssignment, $userId);
+                return new RestUserRoleAssignment($roleAssignment, $userId);
             }
         }
 

@@ -21,7 +21,7 @@ class Policy extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\PolicyDraft $data
+     * @param \Ibexa\Contracts\Core\Repository\Values\User\PolicyDraft|\Ibexa\Contracts\Core\Repository\Values\User\Policy} $data
      */
     public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {

@@ -25,11 +25,6 @@ class RestObjectState extends RestValue
      */
     public string|int $groupId;
 
-    /**
-     * Constructor.
-     *
-     * @param mixed $groupId
-     */
     public function __construct(ObjectState $objectState, string|int $groupId)
     {
         $this->objectState = $objectState;

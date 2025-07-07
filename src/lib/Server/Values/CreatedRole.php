@@ -14,10 +14,5 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class CreatedRole extends ValueObject
 {
-    /**
-     * The created role.
-     *
-     * @var \Ibexa\Rest\Server\Values\RestRole
-     */
-    public $role;
+    public RestRole $role;
 }

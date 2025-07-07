@@ -35,6 +35,8 @@ class ViewInputOneDotOneTest extends BaseTest
         $expectedViewInput = new RestViewInput();
         $expectedViewInput->identifier = 'Query identifier';
         $expectedViewInput->query = new Query();
+        $expectedViewInput->languageCode = null;
+        $expectedViewInput->useAlwaysAvailable = null;
 
         self::assertEquals($expectedViewInput, $result, 'RestViewInput not created correctly.');
     }
@@ -59,6 +61,8 @@ class ViewInputOneDotOneTest extends BaseTest
         $expectedViewInput = new RestViewInput();
         $expectedViewInput->identifier = 'Query identifier';
         $expectedViewInput->query = new LocationQuery();
+        $expectedViewInput->languageCode = null;
+        $expectedViewInput->useAlwaysAvailable = null;
 
         self::assertEquals($expectedViewInput, $result, 'RestViewInput not created correctly.');
     }

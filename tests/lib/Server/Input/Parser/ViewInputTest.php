@@ -33,6 +33,8 @@ class ViewInputTest extends BaseTest
         $expectedViewInput = new RestViewInput();
         $expectedViewInput->identifier = 'Query identifier';
         $expectedViewInput->query = new Query();
+        $expectedViewInput->languageCode = null;
+        $expectedViewInput->useAlwaysAvailable = null;
 
         self::assertEquals($expectedViewInput, $result, 'RestViewInput not created correctly.');
     }

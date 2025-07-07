@@ -22,21 +22,21 @@ class RestContent extends RestValue
 {
     public ContentInfo $contentInfo;
 
-    public Location $mainLocation;
+    public ?Location $mainLocation;
 
-    public Content $currentVersion;
+    public ?Content $currentVersion;
 
-    public ContentType $contentType;
+    public ?ContentType $contentType;
 
     /**
      * @var \Ibexa\Contracts\Core\Repository\Values\Content\Relation[]
      */
-    public array $relations;
+    public ?array $relations;
 
     /**
      * Path that was used to load this content.
      */
-    public string $path;
+    public ?string $path;
 
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType|null $contentType Can only be null if $currentVersion is
@@ -44,10 +44,10 @@ class RestContent extends RestValue
      */
     public function __construct(
         ContentInfo $contentInfo,
-        Location $mainLocation = null,
-        Content $currentVersion = null,
-        ContentType $contentType = null,
-        array $relations = null,
+        ?Location $mainLocation = null,
+        ?Content $currentVersion = null,
+        ?ContentType $contentType = null,
+        ?array $relations = null,
         ?string $path = null
     ) {
         $this->contentInfo = $contentInfo;

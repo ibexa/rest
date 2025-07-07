@@ -16,6 +16,7 @@ class SearchViewTest extends SearchViewTestCase
 {
     protected string $contentTypeHref;
 
+    /** @var array<int, string> */
     protected array $contentHrefList;
 
     private string $nonSearchableContentHref;

@@ -16,19 +16,9 @@ use Ibexa\Rest\Value as RestValue;
  */
 class RestFieldDefinition extends RestValue
 {
-    /**
-     * ContentType the field definitions belong to.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
-     */
-    public $contentType;
+    public ContentType $contentType;
 
-    /**
-     * Field definition.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition
-     */
-    public $fieldDefinition;
+    public FieldDefinition $fieldDefinition;
 
     /**
      * Path which is used to fetch the list of field definitions.

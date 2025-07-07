@@ -9,7 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\PolicyList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -71,7 +71,7 @@ class RolePolicyListController extends RoleBaseController
     /**
      * Loads the policies for the role.
      */
-    public function loadPolicies(int $roleId, Request $request): \Ibexa\Rest\Server\Values\PolicyList
+    public function loadPolicies(int $roleId, Request $request): PolicyList
     {
         $loadedRole = $this->roleService->loadRole($roleId);
         $policiesIterable = $loadedRole->getPolicies();
@@ -80,6 +80,6 @@ class RolePolicyListController extends RoleBaseController
             $policies[] = $policy;
         }
 
-        return new Values\PolicyList($policies, $request->getPathInfo());
+        return new PolicyList($policies, $request->getPathInfo());
     }
 }

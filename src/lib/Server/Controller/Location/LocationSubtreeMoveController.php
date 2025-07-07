@@ -11,7 +11,8 @@ use ApiPlatform\Metadata\Get;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\NoContent;
+use Ibexa\Rest\Server\Values\ResourceCreated;
 use Symfony\Component\HttpFoundation\Request;
 
 class LocationSubtreeMoveController extends LocationBaseController
@@ -21,7 +22,7 @@ class LocationSubtreeMoveController extends LocationBaseController
      *
      * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException if the Destination header cannot be parsed as location or trash
      */
-    public function moveSubtree(string $locationPath, Request $request): \Ibexa\Rest\Server\Values\ResourceCreated|\Ibexa\Rest\Server\Values\NoContent
+    public function moveSubtree(string $locationPath, Request $request): ResourceCreated|NoContent
     {
         $locationToMove = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($locationPath)
@@ -41,7 +42,7 @@ class LocationSubtreeMoveController extends LocationBaseController
             // Reload the location to get the new position is subtree
             $locationToMove = $this->locationService->loadLocation($locationToMove->id);
 
-            return new Values\ResourceCreated(
+            return new ResourceCreated(
                 $this->router->generate(
                     'ibexa.rest.load_location',
                     [
@@ -60,7 +61,7 @@ class LocationSubtreeMoveController extends LocationBaseController
                 $trashItem = $this->trashService->trash($locationToMove);
 
                 if (isset($trashItem)) {
-                    return new Values\ResourceCreated(
+                    return new ResourceCreated(
                         $this->router->generate(
                             'ibexa.rest.load_trash_item',
                             ['trashItemId' => $trashItem->id]
@@ -68,7 +69,7 @@ class LocationSubtreeMoveController extends LocationBaseController
                     );
                 } else {
                     // Only a location has been trashed and not the object
-                    return new Values\NoContent();
+                    return new NoContent();
                 }
             } catch (Exceptions\InvalidArgumentException $e) {
                 // If that fails, the Destination header is not formatted right
@@ -83,7 +84,7 @@ class LocationSubtreeMoveController extends LocationBaseController
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function moveLocation(Request $request, string $locationPath): Values\ResourceCreated
+    public function moveLocation(Request $request, string $locationPath): ResourceCreated
     {
         $destinationLocation = $this->inputDispatcher->parse(
             new Message(
@@ -101,7 +102,7 @@ class LocationSubtreeMoveController extends LocationBaseController
         // Reload the location to get a new subtree position
         $locationToMove = $this->locationService->loadLocation($locationToMove->id);
 
-        return new Values\ResourceCreated(
+        return new ResourceCreated(
             $this->router->generate(
                 'ibexa.rest.load_location',
                 [

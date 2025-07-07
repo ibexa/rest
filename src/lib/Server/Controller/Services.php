@@ -51,9 +51,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
     ),
 )]
-/**
- * Services controller.
- */
 class Services extends RestController
 {
     protected array $countriesInfo;

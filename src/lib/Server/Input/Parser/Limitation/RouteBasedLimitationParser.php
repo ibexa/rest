@@ -26,26 +26,16 @@ class RouteBasedLimitationParser extends BaseParser
     /**
      * Name of the route parameter.
      * Example: "sectionId".
-     *
-     * @var string
      */
-    private $limitationRouteParameterName;
+    private string $limitationRouteParameterName;
 
     /**
      * Value object class built by the Parser.
      * Example: "Ibexa\Contracts\Core\Repository\Values\User\Limitation\SectionLimitation".
-     *
-     * @var string
      */
-    private $limitationClass;
+    private string $limitationClass;
 
-    /**
-     * LimitationParser constructor.
-     *
-     * @param string $limitationRouteParameterName
-     * @param string $limitationClass
-     */
-    public function __construct($limitationRouteParameterName, $limitationClass)
+    public function __construct(string $limitationRouteParameterName, string $limitationClass)
     {
         $this->limitationRouteParameterName = $limitationRouteParameterName;
         $this->limitationClass = $limitationClass;
@@ -74,10 +64,7 @@ class RouteBasedLimitationParser extends BaseParser
         return $limitationObject;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\Limitation
-     */
-    protected function buildLimitation()
+    protected function buildLimitation(): Limitation
     {
         return new $this->limitationClass();
     }

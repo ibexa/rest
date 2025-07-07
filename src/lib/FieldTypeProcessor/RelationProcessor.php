@@ -11,12 +11,8 @@ class RelationProcessor extends BaseRelationProcessor
 {
     /**
      * In addition to the destinationContentId, adds a destinationContentHref entry.
-     *
-     * @param array $outgoingValueHash
-     *
-     * @return array
      */
-    public function postProcessValueHash($outgoingValueHash)
+    public function postProcessValueHash(mixed $outgoingValueHash): mixed
     {
         if (!isset($outgoingValueHash['destinationContentId']) || !$this->canMapContentHref()) {
             return $outgoingValueHash;
@@ -29,7 +25,7 @@ class RelationProcessor extends BaseRelationProcessor
         return $outgoingValueHash;
     }
 
-    public function postProcessFieldSettingsHash($outgoingSettingsHash)
+    public function postProcessFieldSettingsHash(mixed $outgoingSettingsHash): mixed
     {
         $outgoingSettingsHash = parent::postProcessFieldSettingsHash($outgoingSettingsHash);
 

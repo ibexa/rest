@@ -20,12 +20,9 @@ class RestUserRoleAssignment extends RestValue
     /**
      * User ID to which the role is assigned.
      */
-    public int $id;
+    public int|string $id;
 
-    /**
-     * Construct.
-     */
-    public function __construct(UserRoleAssignment $roleAssignment, int $id)
+    public function __construct(UserRoleAssignment $roleAssignment, int|string $id)
     {
         $this->roleAssignment = $roleAssignment;
         $this->id = $id;

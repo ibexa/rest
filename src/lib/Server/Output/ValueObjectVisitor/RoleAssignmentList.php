@@ -38,9 +38,9 @@ class RoleAssignmentList extends ValueObjectVisitor
         $generator->startList('RoleAssignment');
         foreach ($data->roleAssignments as $roleAssignment) {
             $visitor->visitValueObject(
-                $data->isGroupAssignment ?
-                    new Values\RestUserGroupRoleAssignment($roleAssignment, $data->id) :
-                    new Values\RestUserRoleAssignment($roleAssignment, $data->id)
+                $data->isGroupAssignment
+                    ? new Values\RestUserGroupRoleAssignment($roleAssignment, $data->id)
+                    : new Values\RestUserRoleAssignment($roleAssignment, $data->id)
             );
         }
         $generator->endList('RoleAssignment');

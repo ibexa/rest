@@ -105,7 +105,7 @@ class BinaryContent extends RestController
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException If the imageId format is invalid
      */
-    private function parseImageId($imageId): array
+    private function parseImageId(string $imageId): array
     {
         $idArray = explode('-', $imageId);
         $idArray = array_map('intval', $idArray);

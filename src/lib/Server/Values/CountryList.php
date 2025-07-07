@@ -17,11 +17,8 @@ class CountryList extends RestValue
     /**
      * @var \Ibexa\Core\Repository\Values\ContentType\Countries[]
      */
-    public $countries;
+    public array $countries;
 
-    /**
-     * Construct.
-     */
     public function __construct(array $countries)
     {
         $this->countries = $countries;

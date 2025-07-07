@@ -11,8 +11,15 @@ use Ibexa\Rest\Value as RestValue;
 
 class SeeOther extends RestValue
 {
-    public function __construct($redirectUri)
+    private string $redirectUri;
+
+    public function __construct(string $redirectUri)
     {
         $this->redirectUri = $redirectUri;
+    }
+
+    public function getRedirectUri(): string
+    {
+        return $this->redirectUri;
     }
 }

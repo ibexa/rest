@@ -21,7 +21,7 @@ final class AuthorizationHeaderRESTRequestMatcher implements RequestMatcherInter
     private const string DEFAULT_HEADER_NAME = 'Authorization';
 
     public function __construct(
-        private ?string $headerName = null,
+        private readonly ?string $headerName = null,
     ) {
     }
 

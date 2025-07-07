@@ -11,19 +11,9 @@ use Ibexa\Rest\Value as RestValue;
 
 class TemporaryRedirect extends RestValue
 {
-    /**
-     * Redirect URI.
-     *
-     * @var string
-     */
-    public $redirectUri;
+    public string $redirectUri;
 
-    /**
-     * Construct.
-     *
-     * @param string $redirectUri
-     */
-    public function __construct($redirectUri)
+    public function __construct(string $redirectUri)
     {
         $this->redirectUri = $redirectUri;
     }

@@ -15,42 +15,29 @@ use Ibexa\Rest\Value as RestValue;
 class RelationList extends RestValue
 {
     /**
-     * Relations.
-     *
      * @var \Ibexa\Contracts\Core\Repository\Values\Content\Relation[]
      */
-    public $relations;
+    public array $relations;
 
     /**
      * Content ID to which this relation belongs to.
-     *
-     * @var mixed
      */
-    public $contentId;
+    public int $contentId;
 
     /**
      * Version number to which this relation belongs to.
-     *
-     * @var mixed
      */
-    public $versionNo;
+    public int $versionNo;
 
     /**
      * Path used to load the list of relations.
-     *
-     * @var string
      */
-    public $path;
+    public ?string $path;
 
     /**
-     * Construct.
-     *
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Relation[] $relations
-     * @param mixed $contentId
-     * @param mixed $versionNo
-     * @param string $path
      */
-    public function __construct(array $relations, $contentId, $versionNo, $path = null)
+    public function __construct(array $relations, int $contentId, int $versionNo, ?string $path = null)
     {
         $this->relations = $relations;
         $this->contentId = $contentId;

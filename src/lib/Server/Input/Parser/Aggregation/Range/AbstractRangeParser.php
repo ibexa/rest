@@ -31,5 +31,5 @@ abstract class AbstractRangeParser extends BaseParser
         );
     }
 
-    abstract protected function visitRangeValue(ParsingDispatcher $parsingDispatcher, $value);
+    abstract protected function visitRangeValue(ParsingDispatcher $parsingDispatcher, ?string $value);
 }

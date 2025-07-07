@@ -47,7 +47,7 @@ class Location extends ValueObjectVisitor
         Visitor $visitor,
         Generator $generator,
         Content\Location $location
-    ) {
+    ): void {
         $generator->startAttribute(
             'href',
             $this->router->generate(

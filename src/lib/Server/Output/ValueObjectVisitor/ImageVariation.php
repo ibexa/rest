@@ -17,15 +17,15 @@ class ImageVariation extends ValueObjectVisitor
     /**
      * @param \Ibexa\Contracts\Core\Variation\Values\ImageVariation $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $visitor->setHeader('Content-Type', $generator->getMediaType('ContentImageVariation'));
         $generator->startObjectElement('ContentImageVariation');
-        $this->visitImageVariationAttributes($visitor, $generator, $data);
+        $this->visitImageVariationAttributes($generator, $data);
         $generator->endObjectElement('ContentImageVariation');
     }
 
-    protected function visitImageVariationAttributes(Visitor $visitor, Generator $generator, ImageVariationValue $data)
+    protected function visitImageVariationAttributes(Generator $generator, ImageVariationValue $data): void
     {
         $generator->startAttribute(
             'href',

@@ -11,6 +11,8 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Controller as RestController;
+use Ibexa\Rest\Server\Service\RootResourceBuilderInterface;
+use Ibexa\Rest\Values\Root as RestRoot;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -57,22 +59,17 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class Root extends RestController
 {
-    /**
-     * @var \Ibexa\Rest\Server\Service\RootResourceBuilderInterface
-     */
-    private $rootResourceBuilder;
+    private RootResourceBuilderInterface $rootResourceBuilder;
 
-    public function __construct($rootResourceBuilder)
+    public function __construct(RootResourceBuilderInterface $rootResourceBuilder)
     {
         $this->rootResourceBuilder = $rootResourceBuilder;
     }
 
     /**
      * List the root resources of the Ibexa installation.
-     *
-     * @return \Ibexa\Rest\Values\Root
      */
-    public function loadRootResource()
+    public function loadRootResource(): RestRoot
     {
         return $this->rootResourceBuilder->buildRootResource();
     }

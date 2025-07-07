@@ -8,16 +8,12 @@
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
+use Ibexa\Rest\Values\RestObjectState;
 
 /**
  * Struct representing a freshly created object state.
  */
 class CreatedObjectState extends ValueObject
 {
-    /**
-     * The created object state.
-     *
-     * @var \Ibexa\Rest\Values\RestObjectState
-     */
-    public $objectState;
+    public RestObjectState $objectState;
 }

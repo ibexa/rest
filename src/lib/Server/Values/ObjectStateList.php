@@ -19,22 +19,17 @@ class ObjectStateList extends RestValue
      *
      * @var \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectState[]
      */
-    public $states;
+    public array $states;
 
     /**
      * ID of the group that the states belong to.
-     *
-     * @var mixed
      */
-    public $groupId;
+    public int|string $groupId;
 
     /**
-     * Construct.
-     *
      * @param \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectState[] $states
-     * @param mixed $groupId
      */
-    public function __construct(array $states, $groupId)
+    public function __construct(array $states, int|string $groupId)
     {
         $this->states = $states;
         $this->groupId = $groupId;
