@@ -8,7 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion as QueryCriterion;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\CriterionInterface;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -32,8 +32,11 @@ abstract class Criterion extends BaseParser
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
      */
-    public function dispatchCriterion(string $criterionName, mixed $criterionData, ParsingDispatcher $parsingDispatcher): QueryCriterion
-    {
+    public function dispatchCriterion(
+        string $criterionName,
+        mixed $criterionData,
+        ParsingDispatcher $parsingDispatcher
+    ): CriterionInterface {
         $mediaType = $this->getCriterionMediaType($criterionName);
         try {
             return $parsingDispatcher->parse([$criterionName => $criterionData], $mediaType);
@@ -63,14 +66,17 @@ abstract class Criterion extends BaseParser
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
      */
-    public function dispatchSortClause(string $sortClauseName, string $direction, ParsingDispatcher $parsingDispatcher): QueryCriterion
-    {
+    public function dispatchSortClause(
+        string $sortClauseName,
+        string $direction,
+        ParsingDispatcher $parsingDispatcher
+    ): CriterionInterface {
         $mediaType = $this->getSortClauseMediaType($sortClauseName);
 
         return $parsingDispatcher->parse([$sortClauseName => $direction], $mediaType);
     }
 
-    protected function getCriterionMediaType($criterionName)
+    protected function getCriterionMediaType(string $criterionName): string
     {
         $criterionName = str_replace('Criterion', '', $criterionName);
         if (isset(self::$criterionIdMap[$criterionName])) {
@@ -80,7 +86,7 @@ abstract class Criterion extends BaseParser
         return 'application/vnd.ibexa.api.internal.criterion.' . $criterionName;
     }
 
-    protected function getSortClauseMediaType(string $sortClauseName)
+    protected function getSortClauseMediaType(string $sortClauseName): string
     {
         return 'application/vnd.ibexa.api.internal.sortclause.' . $sortClauseName;
     }
