@@ -8,29 +8,22 @@
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
+use Ibexa\Contracts\Core\Repository\Values\User\RoleDraft;
 use Ibexa\Rest\Value as RestValue;
 
 /**
  * REST Role, as received by /roles/<ID>.
- *
- * @property-read int $id
- * @property-read string $identifier
  */
 class RestRole extends RestValue
 {
     /**
      * Holds internal role object.
      */
-    protected Role $innerRole;
+    public Role|RoleDraft $innerRole;
 
-    public function __construct(Role $role)
+    public function __construct(Role|RoleDraft $role)
     {
         $this->innerRole = $role;
-    }
-
-    public function getInnerRole(): Role
-    {
-        return $this->innerRole;
     }
 
     /**

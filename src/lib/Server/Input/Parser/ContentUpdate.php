@@ -32,7 +32,7 @@ class ContentUpdate extends BaseParser
 
         if (array_key_exists('Section', $data) && is_array($data['Section']) && isset($data['Section']['_href'])) {
             try {
-                $parsedData['sectionId'] = $this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
+                $parsedData['sectionId'] = (int)$this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
             } catch (Exceptions\InvalidArgumentException $e) {
                 throw new Exceptions\Parser('Invalid format for the <Section> reference in <ContentUpdate>.');
             }

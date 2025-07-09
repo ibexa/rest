@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
+use Ibexa\Contracts\Core\Repository\Values\User\Role as ApiRole;
 use Ibexa\Contracts\Core\Repository\Values\User\RoleDraft;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
@@ -21,23 +22,21 @@ class Role extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Rest\Server\Values\RestRole $data
+     * @param ApiRole|\Ibexa\Contracts\Core\Repository\Values\User\RoleDraft $data
      */
     public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('Role');
         $visitor->setHeader(
             'Content-Type',
-            $generator->getMediaType(
-            $data->getInnerRole() instanceof RoleDraft ? 'RoleDraft' : 'Role'
-        ),
+            $generator->getMediaType($data instanceof RoleDraft ? 'RoleDraft' : 'Role'),
         );
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('RoleInput'));
         $this->visitRoleAttributes($generator, $data);
         $generator->endObjectElement('Role');
     }
 
-    protected function visitRoleAttributes(Generator $generator, RestRole $data)
+    protected function visitRoleAttributes(Generator $generator, ApiRole|RoleDraft $data): void
     {
         $generator->startAttribute(
             'href',

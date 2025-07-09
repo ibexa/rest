@@ -841,7 +841,7 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/CreatedRelation.php
 
 		-
-			message: '#^Parameter \#3 \$data \(Ibexa\\Rest\\Server\\Values\\CreatedRole\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\CreatedRole\:\:visit\(\) should be compatible with parameter \$data \(Ibexa\\Rest\\Server\\Values\\RestRole\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\:\:visit\(\)$#'
+			message: '#^Parameter \#3 \$data \(Ibexa\\Rest\\Server\\Values\\CreatedRole\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\CreatedRole\:\:visit\(\) should be compatible with parameter \$data \(Ibexa\\Contracts\\Core\\Repository\\Values\\User\\Role\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\:\:visit\(\)$#'
 			identifier: method.childParameterType
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/CreatedRole.php
@@ -901,7 +901,7 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/Policy.php
 
 		-
-			message: '#^Parameter \#3 \$data \(Ibexa\\Rest\\Server\\Values\\PublishedRole\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\PublishedRole\:\:visit\(\) should be compatible with parameter \$data \(Ibexa\\Rest\\Server\\Values\\RestRole\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\:\:visit\(\)$#'
+			message: '#^Parameter \#3 \$data \(Ibexa\\Rest\\Server\\Values\\PublishedRole\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\PublishedRole\:\:visit\(\) should be compatible with parameter \$data \(Ibexa\\Contracts\\Core\\Repository\\Values\\User\\Role\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\:\:visit\(\)$#'
 			identifier: method.childParameterType
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/PublishedRole.php
@@ -941,12 +941,6 @@ parameters:
 			identifier: property.notFound
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/RestUser.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\:\:visitRoleAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Role.php
 
 		-
 			message: '#^Parameter \#1 \$roleAssignment of class Ibexa\\Rest\\Server\\Values\\RestUserGroupRoleAssignment constructor expects Ibexa\\Contracts\\Core\\Repository\\Values\\User\\UserGroupRoleAssignment, Ibexa\\Contracts\\Core\\Repository\\Values\\User\\RoleAssignment given\.$#'

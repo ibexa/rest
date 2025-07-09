@@ -15,8 +15,6 @@ use Ibexa\Rest\Value as RestValue;
 class RoleList extends RestValue
 {
     /**
-     * Roles.
-     *
      * @var \Ibexa\Contracts\Core\Repository\Values\User\Role[]
      */
     public array $roles;

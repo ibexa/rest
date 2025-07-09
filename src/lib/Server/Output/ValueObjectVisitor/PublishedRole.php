@@ -24,12 +24,12 @@ class PublishedRole extends Role
      */
     public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
-        parent::visit($visitor, $generator, $data->role);
+        parent::visit($visitor, $generator, $data->role->innerRole);
         $visitor->setHeader(
             'Location',
             $this->router->generate(
                 'ibexa.rest.load_role',
-                ['roleId' => $data->role->id]
+                ['roleId' => $data->role->innerRole->id]
             )
         );
         $visitor->setStatus(204);
