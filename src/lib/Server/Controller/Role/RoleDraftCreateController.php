@@ -91,8 +91,6 @@ class RoleDraftCreateController extends RoleBaseController
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     *
-     * @since 6.2
      */
     public function createRoleDraft(int $roleId): Values\CreatedRole
     {

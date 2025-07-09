@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values\CountryList;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -53,16 +54,15 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class Services extends RestController
 {
-    protected array $countriesInfo;
-
-    public function __construct(array $countriesInfo)
-    {
-        $this->countriesInfo = $countriesInfo;
+    /**
+     * @param array<string, array{Name: string, Alpha2: string, Alpha3: string, IDC: string}> $countriesInfo
+     */
+    public function __construct(
+        #[Autowire(param: 'ibexa.field_type.country.data')]
+        private readonly array $countriesInfo
+    ) {
     }
 
-    /**
-     * Loads Country List.
-     */
     public function loadCountryList(): CountryList
     {
         return new CountryList($this->countriesInfo);

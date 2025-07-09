@@ -38,16 +38,16 @@ class BinaryContent extends RestController
      * Returns data about the image variation $variationIdentifier of image field $fieldId.
      * Will generate the alias if it hasn't been generated yet.
      *
-     * @param mixed $imageId A custom ID that identifies the image field.
+     * @param string $imageId A custom ID that identifies the image field.
      *                        Until v6.9, the format is {contentId}-{fieldId}.
      *                        since v6.9, the format is {contentId}-{fieldId}-{versionNumber}.
      *                        If the version number isn't specified, the default one is used.
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Contracts\Core\Variation\Values\Variation
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function getImageVariation(mixed $imageId, string $variationIdentifier): Variation|CachedValue
+    public function getImageVariation(string $imageId, string $variationIdentifier): Variation|CachedValue
     {
         [$contentId, $fieldId, $versionNumber] = $this->parseImageId($imageId);
         $content = $this->repository->getContentService()->loadContent($contentId, null, $versionNumber);

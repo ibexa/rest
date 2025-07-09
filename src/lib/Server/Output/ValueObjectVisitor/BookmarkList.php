@@ -16,7 +16,7 @@ use Ibexa\Rest\Server\Values\BookmarkList as BookmarkListValue;
 class BookmarkList extends ValueObjectVisitor
 {
     /**
-     * {@inheritdoc}
+     * @param \Ibexa\Rest\Server\Values\BookmarkList $data
      */
     public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {

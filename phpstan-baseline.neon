@@ -325,18 +325,6 @@ parameters:
 			path: src/lib/Server/Controller/BinaryContent.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Services\:\:__construct\(\) has parameter \$countriesInfo with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Controller/Services.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Controller\\Services\:\:\$countriesInfo type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Controller/Services.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\AbstractDestinationLocationParser\:\:parse\(\) has Ibexa\\Contracts\\Rest\\Exceptions\\Parser in PHPDoc @throws tag but it''s not thrown\.$#'
 			identifier: throws.unusedType
 			count: 1
@@ -691,18 +679,6 @@ parameters:
 			path: src/lib/Server/Input/Parser/UserGroupUpdate.php
 
 		-
-			message: '#^PHPDoc tag @var above a method has no effect\.$#'
-			identifier: varTag.misplaced
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Author.php
-
-		-
-			message: '#^PHPDoc tag @var does not specify variable name\.$#'
-			identifier: varTag.noVariable
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Author.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\CachedValue\:\:getParameter\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
@@ -731,30 +707,6 @@ parameters:
 			identifier: property.protected
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentFieldValidationException.php
-
-		-
-			message: '#^Access to offset ''Alpha2'' on an unknown class Ibexa\\Core\\Repository\\Values\\ContentType\\Countries\.$#'
-			identifier: class.notFound
-			count: 2
-			path: src/lib/Server/Output/ValueObjectVisitor/CountryList.php
-
-		-
-			message: '#^Access to offset ''Alpha3'' on an unknown class Ibexa\\Core\\Repository\\Values\\ContentType\\Countries\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/CountryList.php
-
-		-
-			message: '#^Access to offset ''IDC'' on an unknown class Ibexa\\Core\\Repository\\Values\\ContentType\\Countries\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/CountryList.php
-
-		-
-			message: '#^Access to offset ''Name'' on an unknown class Ibexa\\Core\\Repository\\Values\\ContentType\\Countries\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/CountryList.php
 
 		-
 			message: '#^Parameter \#3 \$data \(Ibexa\\Rest\\Server\\Values\\CreatedContent\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\CreatedContent\:\:visit\(\) should be compatible with parameter \$data \(Ibexa\\Rest\\Server\\Values\\RestContent\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\RestContent\:\:visit\(\)$#'
@@ -859,12 +811,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/DeletedUserSession.php
 
 		-
-			message: '#^PHPDoc tag @param has invalid value \(\\Ibexa\\Contracts\\Core\\Repository\\Values\\User\\PolicyDraft\|\\Ibexa\\Contracts\\Core\\Repository\\Values\\User\\Policy\} \$data\)\: Unexpected token "\}", expected variable at offset 178 on line 4$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Policy.php
-
-		-
 			message: '#^Parameter \#3 \$data \(Ibexa\\Rest\\Server\\Values\\PublishedRole\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\PublishedRole\:\:visit\(\) should be compatible with parameter \$data \(Ibexa\\Contracts\\Core\\Repository\\Values\\User\\Role\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\:\:visit\(\)$#'
 			identifier: method.childParameterType
 			count: 1
@@ -935,18 +881,6 @@ parameters:
 			identifier: property.notFound
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/VersionInfo.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Values\\CountryList\:\:__construct\(\) has parameter \$countries with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Values/CountryList.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Values\\CountryList\:\:\$countries has unknown class Ibexa\\Core\\Repository\\Values\\ContentType\\Countries as its type\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/lib/Server/Values/CountryList.php
 
 		-
 			message: '#^Property Ibexa\\Rest\\Server\\View\\AcceptHeaderVisitorDispatcher\:\:\$mapping type has no value type specified in iterable type array\.$#'

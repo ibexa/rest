@@ -29,7 +29,7 @@ class CountryList extends ValueObjectVisitor
 
         $generator->startList('Country');
 
-        foreach ($data->countries as $country) {
+        foreach ($data->getCountries() as $country) {
             $generator->startObjectElement('Country', 'Country');
 
             $generator->startAttribute('id', $country['Alpha2']);
