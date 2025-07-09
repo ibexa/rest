@@ -553,30 +553,6 @@ parameters:
 			path: src/lib/Server/Input/Parser/Criterion.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\:\:getCriterionMediaType\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\:\:getCriterionMediaType\(\) has parameter \$criterionName with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\:\:getSortClauseMediaType\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion.php
-
-		-
-			message: '#^Possibly invalid array key type \(list\<string\>\|string\)\.$#'
-			identifier: offsetAccess.invalidOffset
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion.php
-
-		-
 			message: '#^Parameter \#1 \$value of class Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Query\\Criterion\\ContentId constructor expects array\<int\>\|int, list\<string\> given\.$#'
 			identifier: argument.type
 			count: 1
