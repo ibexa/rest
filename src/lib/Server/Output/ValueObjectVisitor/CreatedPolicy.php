@@ -29,8 +29,8 @@ class CreatedPolicy extends AbstractPolicy
         $visitor->setHeader(
             'Content-Type',
             $generator->getMediaType(
-            $data->policy instanceof PolicyDraft ? 'PolicyDraft' : 'Policy'
-        ),
+                $data->policy instanceof PolicyDraft ? 'PolicyDraft' : 'Policy'
+            ),
         );
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('PolicyUpdate'));
         $this->visitPolicyAttributes($generator, $data->policy);
