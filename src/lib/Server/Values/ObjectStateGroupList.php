@@ -19,11 +19,9 @@ class ObjectStateGroupList extends RestValue
      *
      * @var \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup[]
      */
-    public $groups;
+    public array $groups;
 
     /**
-     * Construct.
-     *
      * @param \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup[] $groups
      */
     public function __construct(array $groups)

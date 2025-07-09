@@ -22,40 +22,16 @@ use Ibexa\Rest\Server\Values\RestContentCreateStruct;
  */
 class ContentCreate extends BaseParser
 {
-    /**
-     * Content service.
-     */
     protected ContentService $contentService;
 
-    /**
-     * ContentType service.
-     */
     protected ContentTypeService $contentTypeService;
 
-    /**
-     * FieldType parser.
-     */
     protected FieldTypeParser $fieldTypeParser;
 
-    /**
-     * LocationCreate parser.
-     */
     protected LocationCreate $locationCreateParser;
 
-    /**
-     * Parser tools.
-     */
     protected ParserTools $parserTools;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\ContentService $contentService
-     * @param \Ibexa\Contracts\Core\Repository\ContentTypeService $contentTypeService
-     * @param \Ibexa\Rest\Input\FieldTypeParser $fieldTypeParser
-     * @param \Ibexa\Rest\Server\Input\Parser\LocationCreate $locationCreateParser
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
-     */
     public function __construct(
         ContentService $contentService,
         ContentTypeService $contentTypeService,

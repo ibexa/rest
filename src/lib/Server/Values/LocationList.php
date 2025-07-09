@@ -19,22 +19,17 @@ class LocationList extends RestValue
      *
      * @var \Ibexa\Rest\Server\Values\RestLocation[]
      */
-    public $locations;
+    public array $locations;
 
     /**
      * Path used to load this list of locations.
-     *
-     * @var string
      */
-    public $path;
+    public string $path;
 
     /**
-     * Construct.
-     *
      * @param \Ibexa\Rest\Server\Values\RestLocation[] $locations
-     * @param string $path
      */
-    public function __construct(array $locations, $path)
+    public function __construct(array $locations, string $path)
     {
         $this->locations = $locations;
         $this->path = $path;

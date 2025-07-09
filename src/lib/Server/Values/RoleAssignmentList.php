@@ -19,30 +19,22 @@ class RoleAssignmentList extends RestValue
      *
      * @var \Ibexa\Contracts\Core\Repository\Values\User\RoleAssignment[]
      */
-    public $roleAssignments;
+    public array $roleAssignments;
 
     /**
      * User or user group ID to which the roles are assigned.
-     *
-     * @var mixed
      */
-    public $id;
+    public int|string $id;
 
     /**
      * Indicator if the role assignment is for user group.
-     *
-     * @var bool
      */
-    public $isGroupAssignment;
+    public bool $isGroupAssignment;
 
     /**
-     * Construct.
-     *
      * @param \Ibexa\Contracts\Core\Repository\Values\User\RoleAssignment[] $roleAssignments
-     * @param mixed $id
-     * @param bool $isGroupAssignment
      */
-    public function __construct(array $roleAssignments, $id, $isGroupAssignment = false)
+    public function __construct(array $roleAssignments, string|int $id, bool $isGroupAssignment = false)
     {
         $this->roleAssignments = $roleAssignments;
         $this->id = $id;

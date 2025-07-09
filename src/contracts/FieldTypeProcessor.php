@@ -24,11 +24,9 @@ abstract class FieldTypeProcessor
      *
      * @see \Ibexa\Rest\Input\FieldTypeParser
      *
-     * @param mixed $incomingValueHash
-     *
      * @return mixed Pre processed hash
      */
-    public function preProcessValueHash($incomingValueHash)
+    public function preProcessValueHash(mixed $incomingValueHash): mixed
     {
         return $incomingValueHash;
     }
@@ -45,11 +43,9 @@ abstract class FieldTypeProcessor
      *
      * @see \Ibexa\Rest\Output\FieldTypeSerializer
      *
-     * @param mixed $outgoingValueHash
-     *
      * @return mixed Post processed hash
      */
-    public function postProcessValueHash($outgoingValueHash)
+    public function postProcessValueHash(mixed $outgoingValueHash): mixed
     {
         return $outgoingValueHash;
     }
@@ -66,11 +62,9 @@ abstract class FieldTypeProcessor
      *
      * @see \Ibexa\Rest\Input\FieldTypeParser
      *
-     * @param mixed $incomingSettingsHash
-     *
-     * @return mixed Pre processed hash
+     * @return mixed Preprocessed hash
      */
-    public function preProcessFieldSettingsHash($incomingSettingsHash)
+    public function preProcessFieldSettingsHash(mixed $incomingSettingsHash): mixed
     {
         return $incomingSettingsHash;
     }
@@ -87,11 +81,9 @@ abstract class FieldTypeProcessor
      *
      * @see \Ibexa\Rest\Output\FieldTypeSerializer
      *
-     * @param mixed $outgoingSettingsHash
-     *
      * @return mixed Post processed hash
      */
-    public function postProcessFieldSettingsHash($outgoingSettingsHash)
+    public function postProcessFieldSettingsHash(mixed $outgoingSettingsHash): mixed
     {
         return $outgoingSettingsHash;
     }
@@ -108,11 +100,9 @@ abstract class FieldTypeProcessor
      *
      * @see \Ibexa\Rest\Input\FieldTypeParser
      *
-     * @param mixed $incomingValidatorConfigurationHash
-     *
-     * @return mixed Pre processed hash
+     * @return mixed Preprocessed hash
      */
-    public function preProcessValidatorConfigurationHash($incomingValidatorConfigurationHash)
+    public function preProcessValidatorConfigurationHash(mixed $incomingValidatorConfigurationHash): mixed
     {
         return $incomingValidatorConfigurationHash;
     }
@@ -129,11 +119,9 @@ abstract class FieldTypeProcessor
      *
      * @see \Ibexa\Rest\Output\FieldTypeSerializer
      *
-     * @param mixed $outgoingValidatorConfigurationHash
-     *
      * @return mixed Post processed hash
      */
-    public function postProcessValidatorConfigurationHash($outgoingValidatorConfigurationHash)
+    public function postProcessValidatorConfigurationHash(mixed $outgoingValidatorConfigurationHash): mixed
     {
         return $outgoingValidatorConfigurationHash;
     }

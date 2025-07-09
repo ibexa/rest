@@ -17,22 +17,15 @@ class FieldDefinitionList extends RestValue
 {
     /**
      * ContentType the field definitions belong to.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
      */
-    public $contentType;
+    public ContentType $contentType;
 
     /**
-     * Field definitions.
-     *
      * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[]
      */
-    public $fieldDefinitions;
+    public array $fieldDefinitions;
 
     /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType
      * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[] $fieldDefinitions
      */
     public function __construct(ContentType $contentType, array $fieldDefinitions)

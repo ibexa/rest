@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\User\Policy;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
@@ -16,8 +17,6 @@ class CreatedPolicy extends ValueObject
 {
     /**
      * The created policy.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\User\Policy
      */
-    public $policy;
+    public Policy $policy;
 }

@@ -66,9 +66,6 @@ class AuthorProcessorTest extends TestCase
         );
     }
 
-    /**
-     * @return \Ibexa\Rest\FieldTypeProcessor\AuthorProcessor
-     */
     protected function getProcessor(): AuthorProcessor
     {
         return new AuthorProcessor();

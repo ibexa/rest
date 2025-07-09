@@ -58,7 +58,7 @@ class Xml extends Generator
     }
 
     #[\Override]
-    public function serializeBool(mixed $boolValue): string
+    public function serializeBool(bool|string|null $boolValue): string
     {
         return $boolValue ? 'true' : 'false';
     }

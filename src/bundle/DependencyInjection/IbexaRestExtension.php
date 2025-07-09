@@ -27,7 +27,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 class IbexaRestExtension extends ConfigurableExtension implements PrependExtensionInterface
 {
-    public const EXTENSION_NAME = 'ibexa_rest';
+    public const string EXTENSION_NAME = 'ibexa_rest';
 
     public function getAlias(): string
     {

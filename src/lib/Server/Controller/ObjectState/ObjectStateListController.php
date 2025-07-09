@@ -14,7 +14,7 @@ use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ObjectStateService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\ObjectStateList;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -93,7 +93,7 @@ class ObjectStateListController extends RestController
     /**
      * Returns a list of all object states of the given group.
      */
-    public function loadObjectStates(int $objectStateGroupId): \Ibexa\Rest\Server\Values\ObjectStateList
+    public function loadObjectStates(int $objectStateGroupId): ObjectStateList
     {
         $objectStateGroup = $this->objectStateService->loadObjectStateGroup($objectStateGroupId);
 
@@ -103,7 +103,7 @@ class ObjectStateListController extends RestController
             $objectStates[] = $objectState;
         }
 
-        return new Values\ObjectStateList(
+        return new ObjectStateList(
             $objectStates,
             $objectStateGroup->id
         );

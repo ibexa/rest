@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
@@ -14,10 +15,5 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class CreatedObjectStateGroup extends ValueObject
 {
-    /**
-     * The created object state group.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup
-     */
-    public $objectStateGroup;
+    public ObjectStateGroup $objectStateGroup;
 }

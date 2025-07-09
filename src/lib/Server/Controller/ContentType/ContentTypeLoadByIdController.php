@@ -12,7 +12,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RestContentType;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -90,11 +90,11 @@ class ContentTypeLoadByIdController extends RestController
     /**
      * Loads a content type.
      */
-    public function loadContentType(int $contentTypeId): \Ibexa\Rest\Server\Values\RestContentType
+    public function loadContentType(int $contentTypeId): RestContentType
     {
         $contentType = $this->contentTypeService->loadContentType($contentTypeId, Language::ALL);
 
-        return new Values\RestContentType(
+        return new RestContentType(
             $contentType,
             $contentType->getFieldDefinitions()->toArray()
         );

@@ -17,7 +17,6 @@ use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Values;
 use JMS\TranslationBundle\Annotation\Ignore;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Post(
@@ -88,15 +87,12 @@ class RoleDraftCreateController extends RoleBaseController
     /**
      * Creates a new RoleDraft for an existing Role.
      *
-     * @since 6.2
-     *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException if the Role already has a Role Draft that will need to be removed first,
-     *                                                                  or if the authenticated user is not allowed to create a role
-     * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException if a policy limitation in the $roleCreateStruct is not valid
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedRole
+     * @throws \Ibexa\Core\Base\Exceptions\ForbiddenException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function createRoleDraft(int $roleId, Request $request): Values\CreatedRole
+    public function createRoleDraft(int $roleId): Values\CreatedRole
     {
         try {
             $roleDraft = $this->roleService->createRoleDraft(

@@ -9,6 +9,7 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\User;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\Role;
+use Ibexa\Rest\Server\Values\RestRole;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RoleTest extends ValueObjectVisitorBaseTest
@@ -44,7 +45,7 @@ class RoleTest extends ValueObjectVisitorBaseTest
         $visitor->visit(
             $this->getVisitorMock(),
             $generator,
-            $role
+            new RestRole($role),
         );
 
         $result = $generator->endDocument(null);

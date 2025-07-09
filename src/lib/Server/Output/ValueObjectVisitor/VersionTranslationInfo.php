@@ -20,11 +20,9 @@ class VersionTranslationInfo extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\VersionTranslationInfo $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $versionInfo = $data->getVersionInfo();
         if (empty($versionInfo->languageCodes)) {
@@ -32,12 +30,14 @@ class VersionTranslationInfo extends ValueObjectVisitor
         }
 
         $generator->startObjectElement('VersionTranslationInfo');
-        $this->visitVersionTranslationInfoAttributes($visitor, $generator, $data);
+        $this->visitVersionTranslationInfoAttributes($generator, $data);
         $generator->endObjectElement('VersionTranslationInfo');
     }
 
-    protected function visitVersionTranslationInfoAttributes(Visitor $visitor, Generator $generator, VersionTranslationInfoValue $versionTranslationInfo)
-    {
+    protected function visitVersionTranslationInfoAttributes(
+        Generator $generator,
+        VersionTranslationInfoValue $versionTranslationInfo
+    ): void {
         $versionInfo = $versionTranslationInfo->getVersionInfo();
 
         // single language-independent conditions for deleting Translation

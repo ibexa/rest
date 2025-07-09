@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
@@ -14,10 +15,5 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class CreatedURLWildcard extends ValueObject
 {
-    /**
-     * The created URL wildcard.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard
-     */
-    public $urlWildcard;
+    public URLWildcard $urlWildcard;
 }

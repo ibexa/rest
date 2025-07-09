@@ -12,10 +12,7 @@ use Ibexa\Core\FieldType\Date\Type;
 
 class DateProcessor extends FieldTypeProcessor
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function preProcessFieldSettingsHash($incomingSettingsHash)
+    public function preProcessFieldSettingsHash(mixed $incomingSettingsHash): mixed
     {
         if (isset($incomingSettingsHash['defaultType'])) {
             switch ($incomingSettingsHash['defaultType']) {
@@ -30,10 +27,7 @@ class DateProcessor extends FieldTypeProcessor
         return $incomingSettingsHash;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function postProcessFieldSettingsHash($outgoingSettingsHash)
+    public function postProcessFieldSettingsHash(mixed $outgoingSettingsHash): mixed
     {
         if (isset($outgoingSettingsHash['defaultType'])) {
             switch ($outgoingSettingsHash['defaultType']) {

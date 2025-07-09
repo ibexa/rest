@@ -136,12 +136,8 @@ XML;
 
     /**
      * @depends testPublishContent
-     *
-     * @param string $restContentHref
-     *
-     * @return string ContentVersion REST ID
      */
-    public function testCreateDraftFromVersion(string $restContentHref)
+    public function testCreateDraftFromVersion(string $restContentHref): string
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('COPY', "{$restContentHref}/versions/1")
@@ -159,8 +155,6 @@ XML;
      *
      * @covers \Ibexa\Rest\Server\Controller\Content::redirectCurrentVersion
      *
-     * @param string $restContentHref
-     *
      * @throws \Psr\Http\Client\ClientException
      */
     public function testRedirectCurrentVersion(string $restContentHref): void
@@ -177,8 +171,6 @@ XML;
     /**
      * @depends testCreateDraftFromVersion
      * Covers GET /content/objects/<contentId>/versions/<versionNumber>
-     *
-     * @param string $restContentVersionHref
      */
     public function testLoadContentVersion(string $restContentVersionHref): void
     {
@@ -198,7 +190,7 @@ XML;
      *
      * @return string the copied content href
      */
-    public function testCopyContent($restContentHref)
+    public function testCopyContent(string $restContentHref): string
     {
         $testContent = $this->loadContent($restContentHref);
 
@@ -450,8 +442,6 @@ XML;
      * Covers DELETE /content/objects/<contentId>/versions/<versionNo>/translations/<languageCode>.
      *
      * @depends testCreateDraftFromVersion
-     *
-     * @param string $restContentVersionHref
      */
     public function testDeleteTranslationFromDraft(string $restContentVersionHref): void
     {
@@ -483,10 +473,8 @@ XML;
      * Covers GET /content/objects/<contentId>/versions
      *
      * @depends testCreateDraftFromVersion
-     *
-     * @param string $restContentVersionHref
      */
-    public function testLoadContentVersionsProvidesDeleteTranslationFromDraftResourceLink($restContentVersionHref): void
+    public function testLoadContentVersionsProvidesDeleteTranslationFromDraftResourceLink(string $restContentVersionHref): void
     {
         $translationToDelete = 'pol-PL';
         // create Version Draft containing pol-PL Translation
@@ -621,10 +609,8 @@ XML;
      * Covers DELETE /content/objects/<contentId>/translations/<languageCode>.
      *
      * @depends testDeleteTranslation
-     *
-     * @param string $restContentHref
      */
-    public function testDeleteTranslationOfContentWithSingleTranslationVersion($restContentHref): void
+    public function testDeleteTranslationOfContentWithSingleTranslationVersion(string $restContentHref): void
     {
         // create draft independent from other tests
         $restContentVersionHref = $this->createDraftFromVersion("$restContentHref/versions/1");
@@ -688,12 +674,9 @@ XML;
      * Iterate through Version Items returned by REST view for ContentType: VersionList+json
      * and return first VersionInfo data matching given status.
      *
-     * @param array $versionList
      * @param string $status uppercase string representation of Version status
-     *
-     * @return array
      */
-    private function getVersionInfoFromJSONVersionListByStatus(array $versionList, string $status)
+    private function getVersionInfoFromJSONVersionListByStatus(array $versionList, string $status): array
     {
         foreach ($versionList['VersionItem'] as $versionItem) {
             if ($versionItem['VersionInfo']['status'] === $status) {
@@ -706,8 +689,6 @@ XML;
 
     /**
      * Assert that Version REST Response contains proper fields.
-     *
-     * @param \Psr\Http\Message\ResponseInterface $response
      */
     private function assertVersionResponseContainsExpectedFields(ResponseInterface $response): void
     {

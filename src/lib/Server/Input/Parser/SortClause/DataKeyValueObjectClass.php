@@ -17,26 +17,16 @@ class DataKeyValueObjectClass extends BaseParser
     /**
      * Data key, corresponding to the $valueObjectClass class.
      * Example: 'DatePublished'.
-     *
-     * @var string
      */
-    protected $dataKey;
+    protected string $dataKey;
 
     /**
      * Value object class, corresponding to the $dataKey.
      * Example: 'Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished'.
-     *
-     * @var string
      */
-    protected $valueObjectClass;
+    protected string $valueObjectClass;
 
-    /**
-     * DataKeyValueObjectClass constructor.
-     *
-     * @param string $dataKey
-     * @param string $valueObjectClass
-     */
-    public function __construct($dataKey, $valueObjectClass)
+    public function __construct(string $dataKey, string $valueObjectClass)
     {
         $this->dataKey = $dataKey;
         $this->valueObjectClass = $valueObjectClass;

@@ -19,28 +19,15 @@ abstract class ValueObjectVisitor
 {
     protected UriParserInterface $uriParser;
 
-    /**
-     * @var \Symfony\Component\Routing\RouterInterface
-     */
-    protected $router;
+    protected RouterInterface $router;
 
-    /**
-     * @var \Symfony\Component\Routing\RouterInterface
-     */
-    protected $templateRouter;
+    protected RouterInterface $templateRouter;
 
     /**
      * Visit struct returned by controllers.
-     *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param mixed $data
      */
-    abstract public function visit(Visitor $visitor, Generator $generator, $data);
+    abstract public function visit(Visitor $visitor, Generator $generator, mixed $data);
 
-    /**
-     * @param \Symfony\Component\Routing\RouterInterface $router
-     */
     public function setRouter(RouterInterface $router): void
     {
         $this->router = $router;
@@ -58,45 +45,32 @@ abstract class ValueObjectVisitor
 
     /**
      * Returns a string representation for the given $boolValue.
-     *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param bool $boolValue
-     *
-     * @return mixed
      */
-    protected function serializeBool(Generator $generator, $boolValue)
+    protected function serializeBool(Generator $generator, ?bool $boolValue): string|bool
     {
         return $generator->serializeBool($boolValue);
     }
 
     /**
      * Visits the given list of $names.
-     *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param array $names
      */
-    protected function visitNamesList(Generator $generator, array $names)
+    protected function visitNamesList(Generator $generator, array $names): void
     {
         $this->visitTranslatedList($generator, $names, 'names');
     }
 
     /**
      * Visits the given list of $descriptions.
-     *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param array $descriptions
      */
-    protected function visitDescriptionsList(Generator $generator, array $descriptions)
+    protected function visitDescriptionsList(Generator $generator, array $descriptions): void
     {
         $this->visitTranslatedList($generator, $descriptions, 'descriptions');
     }
 
     /**
      * Visits a list of translated elements.
-     *
-     * @param array $translatedElements
      */
-    protected function visitTranslatedList(Generator $generator, array $translatedElements, string $listName)
+    protected function visitTranslatedList(Generator $generator, array $translatedElements, string $listName): void
     {
         $generator->startHashElement($listName);
         $generator->startList('value');
@@ -110,11 +84,8 @@ abstract class ValueObjectVisitor
 
     /**
      * Visits a limitation.
-     *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\Limitation $limitation
      */
-    protected function visitLimitation(Generator $generator, Limitation $limitation)
+    protected function visitLimitation(Generator $generator, Limitation $limitation): void
     {
         $generator->startHashElement('limitation');
 
@@ -139,12 +110,8 @@ abstract class ValueObjectVisitor
 
     /**
      * Serializes the given $sortField to a string representation.
-     *
-     * @param int $sortField
-     *
-     * @return string
      */
-    protected function serializeSortField($sortField)
+    protected function serializeSortField(int $sortField): string
     {
         switch ($sortField) {
             case Location::SORT_FIELD_PATH:
@@ -176,12 +143,8 @@ abstract class ValueObjectVisitor
 
     /**
      * Serializes the given $sortOrder to a string representation.
-     *
-     * @param int $sortOrder
-     *
-     * @return string
      */
-    protected function serializeSortOrder($sortOrder)
+    protected function serializeSortOrder(int $sortOrder): string
     {
         switch ($sortOrder) {
             case Location::SORT_ORDER_ASC:

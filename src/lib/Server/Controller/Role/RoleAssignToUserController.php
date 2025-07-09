@@ -13,7 +13,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions\LimitationValidationException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RoleAssignmentList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -101,7 +101,7 @@ class RoleAssignToUserController extends RoleBaseController
     /**
      * Assigns role to user.
      */
-    public function assignRoleToUser(int $userId, Request $request): \Ibexa\Rest\Server\Values\RoleAssignmentList
+    public function assignRoleToUser(int $userId, Request $request): RoleAssignmentList
     {
         $roleAssignment = $this->inputDispatcher->parse(
             new Message(
@@ -125,6 +125,6 @@ class RoleAssignToUserController extends RoleBaseController
             $roleAssignments[] = $roleAssignment;
         }
 
-        return new Values\RoleAssignmentList($roleAssignments, $user->id);
+        return new RoleAssignmentList($roleAssignments, $user->id);
     }
 }

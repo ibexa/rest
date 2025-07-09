@@ -20,11 +20,9 @@ class ContentFieldValidationException extends BadRequestException
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Exceptions\ContentFieldValidationException $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('ErrorMessage');
 
@@ -91,10 +89,8 @@ class ContentFieldValidationException extends BadRequestException
      * Convert a Translation object to a string, detecting singular/plural as needed.
      *
      * @param \Ibexa\Contracts\Core\Repository\Values\Translation $translation The Translation object
-     *
-     * @return string
      */
-    private function translationToString(Translation $translation)
+    private function translationToString(Translation $translation): string
     {
         $values = $translation->values;
         if ($translation instanceof Translation\Plural) {

@@ -17,12 +17,8 @@ class Options extends RestController
 {
     /**
      * Lists the verbs available for a resource.
-     *
-     * @param $allowedMethods string comma separated list of supported methods. Depends on the matched OPTIONS route.
-     *
-     * @return Values\Options
      */
-    public function getRouteOptions($allowedMethods): Values\Options
+    public function getRouteOptions(string $allowedMethods): Values\Options
     {
         return new Values\Options(explode(',', $allowedMethods));
     }

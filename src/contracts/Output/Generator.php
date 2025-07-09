@@ -427,7 +427,7 @@ abstract class Generator
     /**
      * Serializes a boolean value.
      */
-    abstract public function serializeBool(mixed $boolValue): bool|string;
+    abstract public function serializeBool(bool|string|null $boolValue): bool|string;
 
     abstract protected function getData(): Data\DataObjectInterface;
 

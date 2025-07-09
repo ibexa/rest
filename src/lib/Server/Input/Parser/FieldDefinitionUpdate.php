@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionUpdateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
@@ -20,27 +21,12 @@ use Ibexa\Rest\Input\ParserTools;
  */
 class FieldDefinitionUpdate extends BaseParser
 {
-    /**
-     * ContentType service.
-     */
     protected ContentTypeService $contentTypeService;
 
-    /**
-     * FieldType parser.
-     */
     protected FieldTypeParser $fieldTypeParser;
 
-    /**
-     * Parser tools.
-     */
     protected ParserTools $parserTools;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\ContentTypeService $contentTypeService
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
-     */
     public function __construct(ContentTypeService $contentTypeService, FieldTypeParser $fieldTypeParser, ParserTools $parserTools)
     {
         $this->contentTypeService = $contentTypeService;
@@ -141,12 +127,8 @@ class FieldDefinitionUpdate extends BaseParser
      * @see \Ibexa\Rest\Server\Controller\ContentType::updateFieldDefinition
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     *
-     * @param array $data
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition
      */
-    protected function getFieldDefinition(array $data)
+    protected function getFieldDefinition(array $data): FieldDefinition
     {
         $contentTypeId = $this->uriParser->getAttributeFromUri($data['__url'], 'contentTypeId');
         $fieldDefinitionId = $this->uriParser->getAttributeFromUri($data['__url'], 'fieldDefinitionId');

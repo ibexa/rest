@@ -11,10 +11,7 @@ use Ibexa\Contracts\Rest\FieldTypeProcessor;
 
 class FloatProcessor extends FieldTypeProcessor
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function preProcessValueHash($incomingValueHash)
+    public function preProcessValueHash(mixed $incomingValueHash): mixed
     {
         if (is_numeric($incomingValueHash)) {
             $incomingValueHash = (float)$incomingValueHash;

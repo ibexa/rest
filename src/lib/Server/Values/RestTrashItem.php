@@ -15,25 +15,14 @@ use Ibexa\Rest\Value as RestValue;
  */
 class RestTrashItem extends RestValue
 {
-    /**
-     * A trash item.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\TrashItem
-     */
-    public $trashItem;
+    public TrashItem $trashItem;
 
     /**
      * Number of children of the trash item.
-     *
-     * @var int
      */
-    public $childCount;
+    public int $childCount;
 
-    /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\TrashItem $trashItem
-     * @param int $childCount
-     */
-    public function __construct(TrashItem $trashItem, $childCount)
+    public function __construct(TrashItem $trashItem, int $childCount)
     {
         $this->trashItem = $trashItem;
         $this->childCount = $childCount;

@@ -31,14 +31,13 @@ class Dispatcher
      *
      * @var \Ibexa\Contracts\Rest\Input\Handler[]
      */
-    protected $handlers = [];
+    protected array $handlers = [];
 
     protected ParsingDispatcher $parsingDispatcher;
 
     /**
      * Construct from optional parsers array.
      *
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
      * @param \Ibexa\Contracts\Rest\Input\Handler[] $handlers
      */
     public function __construct(ParsingDispatcher $parsingDispatcher, array $handlers = [])
@@ -51,23 +50,16 @@ class Dispatcher
 
     /**
      * Adds another handler for the given content type.
-     *
-     * @param string $type
-     * @param \Ibexa\Contracts\Rest\Input\Handler $handler
      */
-    public function addHandler($type, Handler $handler): void
+    public function addHandler(string $type, Handler $handler): void
     {
         $this->handlers[$type] = $handler;
     }
 
     /**
      * Parse provided request.
-     *
-     * @param \Ibexa\Rest\Message $message
-     *
-     * @return mixed
      */
-    public function parse(Message $message)
+    public function parse(Message $message): mixed
     {
         if (!isset($message->headers['Content-Type'])) {
             throw new Exceptions\Parser('Missing Content-Type header in message.');
@@ -99,7 +91,7 @@ class Dispatcher
         $rawArray = $this->handlers[$format]->convert($message->body);
 
         // Only 1 XML root node
-        $rootNodeArray = reset($rawArray) ?: [];
+        $rootNodeArray = is_array($rawArray) ? reset($rawArray) : [];
 
         // @todo: This needs to be refactored in order to make the called URL
         // available to parsers in the server in a sane way

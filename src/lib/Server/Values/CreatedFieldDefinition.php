@@ -14,10 +14,5 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class CreatedFieldDefinition extends ValueObject
 {
-    /**
-     * The created field definition.
-     *
-     * @var \Ibexa\Rest\Server\Values\RestFieldDefinition
-     */
-    public $fieldDefinition;
+    public RestFieldDefinition $fieldDefinition;
 }

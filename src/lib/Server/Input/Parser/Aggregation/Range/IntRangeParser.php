@@ -12,7 +12,7 @@ use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 
 final class IntRangeParser extends AbstractRangeParser
 {
-    protected function visitRangeValue(ParsingDispatcher $parsingDispatcher, $value): ?int
+    protected function visitRangeValue(ParsingDispatcher $parsingDispatcher, ?string $value): ?int
     {
         if ($value === null) {
             return null;

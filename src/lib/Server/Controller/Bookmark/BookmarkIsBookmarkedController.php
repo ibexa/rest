@@ -15,7 +15,6 @@ use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Head(
@@ -57,9 +56,6 @@ class BookmarkIsBookmarkedController extends RestController
 
     /**
      * Bookmark constructor.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\BookmarkService $bookmarkService
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
      */
     public function __construct(BookmarkService $bookmarkService, LocationService $locationService)
     {
@@ -68,17 +64,13 @@ class BookmarkIsBookmarkedController extends RestController
     }
 
     /**
-     * Checks if given location is bookmarked.
+     * Checks if a given location is bookmarked.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param int $locationId
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     *
-     * @return \Ibexa\Rest\Server\Values\OK
      */
-    public function isBookmarked(Request $request, int $locationId): Values\OK
+    public function isBookmarked(int $locationId): Values\OK
     {
         $location = $this->locationService->loadLocation($locationId);
 

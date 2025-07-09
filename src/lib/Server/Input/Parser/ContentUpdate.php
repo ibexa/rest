@@ -24,11 +24,6 @@ class ContentUpdate extends BaseParser
      *
      * @todo use url handler instead of hardcoded URL matching
      *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Rest\Values\RestContentMetadataUpdateStruct
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser if $data is invalid
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestContentMetadataUpdateStruct
@@ -37,7 +32,7 @@ class ContentUpdate extends BaseParser
 
         if (array_key_exists('Section', $data) && is_array($data['Section']) && isset($data['Section']['_href'])) {
             try {
-                $parsedData['sectionId'] = $this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
+                $parsedData['sectionId'] = (int)$this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
             } catch (Exceptions\InvalidArgumentException $e) {
                 throw new Exceptions\Parser('Invalid format for the <Section> reference in <ContentUpdate>.');
             }

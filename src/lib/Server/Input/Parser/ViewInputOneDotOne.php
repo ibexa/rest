@@ -20,12 +20,7 @@ class ViewInputOneDotOne extends CriterionParser
     /**
      * Parses input structure to a RestViewInput struct.
      *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
-     *
-     * @return \Ibexa\Rest\Server\Values\RestViewInput
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestViewInput
     {

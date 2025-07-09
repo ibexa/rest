@@ -105,8 +105,6 @@ class RolePolicyCreateController extends RoleBaseController
      * Adds a policy to role.
      *
      * @param int $roleId ID of a role draft
-     *
-     * @return \Ibexa\Rest\Server\Values\CreatedPolicy
      */
     public function addPolicy(int $roleId, Request $request): CreatedPolicy
     {

@@ -24,13 +24,10 @@ class Exception extends AbstractExceptionVisitor
 
     /**
      * Construct from debug flag.
-     *
-     * @param bool $debug
-     * @param \Symfony\Contracts\Translation\TranslatorInterface|null $translator
      */
-    public function __construct($debug = false, ?TranslatorInterface $translator = null)
+    public function __construct(bool $debug = false, ?TranslatorInterface $translator = null)
     {
-        $this->debug = (bool)$debug;
+        $this->debug = $debug;
         $this->translator = $translator;
     }
 

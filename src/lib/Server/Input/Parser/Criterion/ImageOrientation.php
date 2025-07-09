@@ -17,9 +17,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class ImageOrientation extends BaseParser
 {
-    public const IMAGE_ORIENTATION_CRITERION = 'ImageOrientationCriterion';
-    public const FIELD_DEF_IDENTIFIER_KEY = 'fieldDefIdentifier';
-    public const ORIENTATION_KEY = 'orientation';
+    public const string IMAGE_ORIENTATION_CRITERION = 'ImageOrientationCriterion';
+    public const string FIELD_DEF_IDENTIFIER_KEY = 'fieldDefIdentifier';
+    public const string ORIENTATION_KEY = 'orientation';
 
     private ValidatorInterface $validator;
 

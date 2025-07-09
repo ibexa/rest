@@ -10,7 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RoleAssignmentList;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -69,7 +69,7 @@ class RoleAssignmentForUserGroupListController extends RoleBaseController
     /**
      * Loads role assignments for user group.
      */
-    public function loadRoleAssignmentsForUserGroup(string $groupPath): \Ibexa\Rest\Server\Values\RoleAssignmentList
+    public function loadRoleAssignmentsForUserGroup(string $groupPath): RoleAssignmentList
     {
         $groupLocationParts = explode('/', $groupPath);
         $groupLocation = $this->locationService->loadLocation((int)array_pop($groupLocationParts));
@@ -81,6 +81,6 @@ class RoleAssignmentForUserGroupListController extends RoleBaseController
             $roleAssignments[] = $roleAssignment;
         }
 
-        return new Values\RoleAssignmentList($roleAssignments, $groupPath, true);
+        return new RoleAssignmentList($roleAssignments, $groupPath, true);
     }
 }

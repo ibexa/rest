@@ -71,9 +71,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class SessionCheckController extends SessionBaseController
 {
-    /**
-     * @return \Ibexa\Rest\Server\Values\UserSession|\Symfony\Component\HttpFoundation\Response
-     */
     public function checkSessionAction(Request $request): Response|UserSession
     {
         $session = $request->getSession();

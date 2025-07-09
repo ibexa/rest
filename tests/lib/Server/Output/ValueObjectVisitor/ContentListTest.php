@@ -125,8 +125,6 @@ class ContentListTest extends ValueObjectVisitorBaseTest
 
     /**
      * Get the ContentList visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentList
      */
     protected function internalGetVisitor(): ValueObjectVisitor\ContentList
     {

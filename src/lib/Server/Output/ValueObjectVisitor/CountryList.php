@@ -19,11 +19,9 @@ class CountryList extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\CountryList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('CountryList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('CountryList'));
@@ -31,7 +29,7 @@ class CountryList extends ValueObjectVisitor
 
         $generator->startList('Country');
 
-        foreach ($data->countries as $country) {
+        foreach ($data->getCountries() as $country) {
             $generator->startObjectElement('Country', 'Country');
 
             $generator->startAttribute('id', $country['Alpha2']);

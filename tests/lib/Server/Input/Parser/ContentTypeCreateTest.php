@@ -247,8 +247,6 @@ class ContentTypeCreateTest extends BaseTest
 
     /**
      * Returns the array under test.
-     *
-     * @return array
      */
     protected function getInputArray(): array
     {

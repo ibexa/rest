@@ -33,23 +33,16 @@ class FieldTypeProcessorRegistry
 
     /**
      * Registers $processor for $fieldTypeIdentifier.
-     *
-     * @param string $fieldTypeIdentifier
-     * @param \Ibexa\Contracts\Rest\FieldTypeProcessor $processor
      */
-    public function registerProcessor($fieldTypeIdentifier, FieldTypeProcessor $processor): void
+    public function registerProcessor(string $fieldTypeIdentifier, FieldTypeProcessor $processor): void
     {
         $this->processors[$fieldTypeIdentifier] = $processor;
     }
 
     /**
      * Returns if a processor is registered for $fieldTypeIdentifier.
-     *
-     * @param string $fieldTypeIdentifier
-     *
-     * @return bool
      */
-    public function hasProcessor($fieldTypeIdentifier): bool
+    public function hasProcessor(string $fieldTypeIdentifier): bool
     {
         return isset($this->processors[$fieldTypeIdentifier]);
     }
@@ -57,13 +50,9 @@ class FieldTypeProcessorRegistry
     /**
      * Returns the processor for $fieldTypeIdentifier.
      *
-     * @param string $fieldTypeIdentifier
-     *
      * @throws \RuntimeException if not processor is registered for $fieldTypeIdentifier
-     *
-     * @return \Ibexa\Contracts\Rest\FieldTypeProcessor
      */
-    public function getProcessor($fieldTypeIdentifier)
+    public function getProcessor(string $fieldTypeIdentifier): FieldTypeProcessor
     {
         if (!$this->hasProcessor($fieldTypeIdentifier)) {
             throw new \RuntimeException(

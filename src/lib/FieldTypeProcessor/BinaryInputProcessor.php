@@ -11,23 +11,14 @@ use Ibexa\Contracts\Rest\FieldTypeProcessor;
 
 abstract class BinaryInputProcessor extends FieldTypeProcessor
 {
-    /**
-     * @var string
-     */
-    protected $temporaryDirectory;
+    protected string $temporaryDirectory;
 
-    /**
-     * @param string $temporaryDirectory
-     */
-    public function __construct($temporaryDirectory)
+    public function __construct(string $temporaryDirectory)
     {
         $this->temporaryDirectory = $temporaryDirectory;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function preProcessValueHash($incomingValueHash)
+    public function preProcessValueHash(mixed $incomingValueHash): mixed
     {
         if (isset($incomingValueHash['data'])) {
             $tempFile = tempnam($this->temporaryDirectory, 'eZ_REST_BinaryFile');

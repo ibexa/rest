@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
+use Ibexa\Contracts\Core\Repository\Values\User\RoleDraft;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -18,49 +19,33 @@ class RestRole extends RestValue
     /**
      * Holds internal role object.
      */
-    protected Role $innerRole;
+    public Role|RoleDraft $innerRole;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\Role $role
-     */
-    public function __construct(Role $role)
+    public function __construct(Role|RoleDraft $role)
     {
         $this->innerRole = $role;
     }
 
     /**
      * Magic getter for routing get calls to innerRole.
-     *
-     * @param string $property The name of the property to retrieve
-     *
-     * @return mixed
      */
-    public function __get($property)
+    public function __get(string $property): mixed
     {
         return $this->innerRole->$property;
     }
 
     /**
      * Magic set for routing set calls to innerRole.
-     *
-     * @param string $property
-     * @param mixed $propertyValue
      */
-    public function __set($property, $propertyValue)
+    public function __set(string $property, mixed $propertyValue): void
     {
         $this->innerRole->$property = $propertyValue;
     }
 
     /**
      * Magic isset for routing isset calls to innerRole.
-     *
-     * @param string $property
-     *
-     * @return bool
      */
-    public function __isset($property)
+    public function __isset(string $property): bool
     {
         return $this->innerRole->__isset($property);
     }

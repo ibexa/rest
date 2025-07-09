@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -79,7 +80,7 @@ class RoleLoadByIdController extends RoleBaseController
     /**
      * Loads role.
      */
-    public function loadRole(int $roleId): \Ibexa\Contracts\Core\Repository\Values\User\Role
+    public function loadRole(int $roleId): Role
     {
         return $this->roleService->loadRole($roleId);
     }

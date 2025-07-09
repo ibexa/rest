@@ -15,11 +15,9 @@ use RuntimeException;
 class OutputGeneratorException extends RuntimeException
 {
     /**
-     * Construct from error message.
-     *
-     * @param string $message
+     * Construct from an error message.
      */
-    public function __construct($message)
+    public function __construct(string $message)
     {
         parent::__construct(
             'Output visiting failed: ' . $message

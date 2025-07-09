@@ -19,22 +19,19 @@ class PolicyList extends RestValue
      *
      * @var \Ibexa\Contracts\Core\Repository\Values\User\Policy[]
      */
-    public $policies;
+    public array $policies;
 
     /**
      * Path which was used to fetch the list of policies.
-     *
-     * @var string
      */
-    public $path;
+    public string $path;
 
     /**
      * Construct.
      *
      * @param \Ibexa\Contracts\Core\Repository\Values\User\Policy[] $policies
-     * @param string $path
      */
-    public function __construct(array $policies, $path)
+    public function __construct(array $policies, string $path)
     {
         $this->policies = $policies;
         $this->path = $path;

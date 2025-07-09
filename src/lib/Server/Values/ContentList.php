@@ -15,24 +15,19 @@ use Ibexa\Rest\Value as RestValue;
 class ContentList extends RestValue
 {
     /**
-     * Contents.
-     *
      * @var \Ibexa\Rest\Server\Values\RestContent[]
      */
-    public $contents;
+    public array $contents;
 
     /**
      * Total items list count.
-     *
-     * @var int
      */
-    public $totalCount;
+    public int $totalCount;
 
     /**
      * Construct.
      *
      * @param \Ibexa\Rest\Server\Values\RestContent[] $contents
-     * @param int $totalCount
      */
     public function __construct(array $contents, int $totalCount)
     {

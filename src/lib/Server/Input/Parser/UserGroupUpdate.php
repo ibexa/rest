@@ -21,36 +21,20 @@ use Ibexa\Rest\Server\Values\RestUserGroupUpdateStruct;
  */
 class UserGroupUpdate extends BaseParser
 {
-    /**
-     * User service.
-     */
     protected UserService $userService;
 
-    /**
-     * Content service.
-     */
     protected ContentService $contentService;
 
-    /**
-     * Location service.
-     */
     protected LocationService $locationService;
 
-    /**
-     * FieldType parser.
-     */
     protected FieldTypeParser $fieldTypeParser;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\UserService $userService
-     * @param \Ibexa\Contracts\Core\Repository\ContentService $contentService
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
-     * @param \Ibexa\Rest\Input\FieldTypeParser $fieldTypeParser
-     */
-    public function __construct(UserService $userService, ContentService $contentService, LocationService $locationService, FieldTypeParser $fieldTypeParser)
-    {
+    public function __construct(
+        UserService $userService,
+        ContentService $contentService,
+        LocationService $locationService,
+        FieldTypeParser $fieldTypeParser,
+    ) {
         $this->userService = $userService;
         $this->contentService = $contentService;
         $this->locationService = $locationService;
@@ -59,11 +43,6 @@ class UserGroupUpdate extends BaseParser
 
     /**
      * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Rest\Server\Values\RestUserGroupUpdateStruct
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestUserGroupUpdateStruct
     {
@@ -78,7 +57,7 @@ class UserGroupUpdate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the Section element in UserGroupUpdate.");
             }
 
-            $parsedData['sectionId'] = $this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
+            $parsedData['sectionId'] = (int)$this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
         }
 
         if (array_key_exists('remoteId', $data)) {

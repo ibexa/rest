@@ -20,18 +20,16 @@ class PublishedRole extends Role
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\PublishedRole $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
-        parent::visit($visitor, $generator, $data->role);
+        parent::visit($visitor, $generator, $data->role->innerRole);
         $visitor->setHeader(
             'Location',
             $this->router->generate(
                 'ibexa.rest.load_role',
-                ['roleId' => $data->role->id]
+                ['roleId' => $data->role->innerRole->id]
             )
         );
         $visitor->setStatus(204);

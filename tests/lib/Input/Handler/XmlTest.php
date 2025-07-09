@@ -38,7 +38,7 @@ class XmlTest extends TestCase
         $fixtures = [];
         foreach (glob(__DIR__ . '/_fixtures/*.xml') as $xmlFile) {
             $fixtures[] = [
-                file_get_contents($xmlFile),
+                (string)file_get_contents($xmlFile),
                 is_file($xmlFile . '.php') ? include $xmlFile . '.php' : null,
             ];
         }
@@ -49,7 +49,7 @@ class XmlTest extends TestCase
     /**
      * @dataProvider getXmlFixtures
      */
-    public function testConvertXml($xml, $expectation): void
+    public function testConvertXml(string $xml, mixed $expectation): void
     {
         $handler = new Xml();
 

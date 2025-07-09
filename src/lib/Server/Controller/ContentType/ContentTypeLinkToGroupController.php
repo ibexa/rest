@@ -15,7 +15,7 @@ use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\ContentTypeGroupRefList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -94,7 +94,7 @@ class ContentTypeLinkToGroupController extends RestController
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
      */
-    public function linkContentTypeToGroup(int $contentTypeId, Request $request): \Ibexa\Rest\Server\Values\ContentTypeGroupRefList
+    public function linkContentTypeToGroup(int $contentTypeId, Request $request): ContentTypeGroupRefList
     {
         $contentType = $this->contentTypeService->loadContentType($contentTypeId);
 
@@ -130,7 +130,7 @@ class ContentTypeLinkToGroupController extends RestController
 
         $existingContentTypeGroups[] = $contentTypeGroup;
 
-        return new Values\ContentTypeGroupRefList(
+        return new ContentTypeGroupRefList(
             $contentType,
             $existingContentTypeGroups
         );

@@ -18,38 +18,20 @@ use Ibexa\Rest\Value as RestValue;
  */
 class RestUserGroup extends RestValue
 {
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Content
-     */
-    public $content;
+    public Content $content;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
-     */
-    public $contentType;
+    public ContentType $contentType;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo
-     */
-    public $contentInfo;
+    public ContentInfo $contentInfo;
 
     /**
      * @var \Ibexa\Contracts\Core\Repository\Values\Content\Relation[]
      */
-    public $relations;
+    public array $relations;
+
+    public Location $mainLocation;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Location
-     */
-    public $mainLocation;
-
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Content $content
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo $contentInfo
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Location $mainLocation
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Relation[] $relations
      */
     public function __construct(

@@ -9,23 +9,10 @@ namespace Ibexa\Rest\Values;
 
 use Ibexa\Rest\Value as RestValue;
 
-/**
- * ContentObjectStates view model.
- */
 class ContentObjectStates extends RestValue
 {
-    /**
-     * Object states.
-     *
-     * @var array
-     */
-    public $states;
+    public array $states;
 
-    /**
-     * Construct.
-     *
-     * @param array $states
-     */
     public function __construct(array $states)
     {
         $this->states = $states;

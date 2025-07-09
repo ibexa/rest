@@ -16,8 +16,6 @@ class NoVisitorFoundException extends RuntimeException
 {
     /**
      * Construct from tested classes.
-     *
-     * @param array $classes
      */
     public function __construct(array $classes)
     {

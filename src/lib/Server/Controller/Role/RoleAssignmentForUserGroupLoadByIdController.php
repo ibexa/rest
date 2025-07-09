@@ -11,7 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Rest\Exceptions;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RestUserGroupRoleAssignment;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -82,7 +82,7 @@ class RoleAssignmentForUserGroupLoadByIdController extends RoleBaseController
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
      */
-    public function loadRoleAssignmentForUserGroup(string $groupPath, int $roleId, Request $request): \Ibexa\Rest\Server\Values\RestUserGroupRoleAssignment
+    public function loadRoleAssignmentForUserGroup(string $groupPath, int $roleId, Request $request): RestUserGroupRoleAssignment
     {
         $groupLocationParts = explode('/', $groupPath);
         $groupLocation = $this->locationService->loadLocation((int)array_pop($groupLocationParts));
@@ -91,7 +91,7 @@ class RoleAssignmentForUserGroupLoadByIdController extends RoleBaseController
         $roleAssignments = $this->roleService->getRoleAssignmentsForUserGroup($userGroup);
         foreach ($roleAssignments as $roleAssignment) {
             if ($roleAssignment->getRole()->id == $roleId) {
-                return new Values\RestUserGroupRoleAssignment($roleAssignment, $groupPath);
+                return new RestUserGroupRoleAssignment($roleAssignment, $groupPath);
             }
         }
 

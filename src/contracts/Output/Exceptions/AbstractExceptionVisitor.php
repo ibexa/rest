@@ -7,6 +7,7 @@
 
 namespace Ibexa\Contracts\Rest\Output\Exceptions;
 
+use Exception;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
@@ -22,7 +23,7 @@ abstract class AbstractExceptionVisitor extends ValueObjectVisitor
      *
      * @var array<int, string>
      */
-    protected static $httpStatusCodes = [
+    protected static array $httpStatusCodes = [
         400 => 'Bad Request',
         401 => 'Unauthorized',
         402 => 'Payment Required',
@@ -62,20 +63,16 @@ abstract class AbstractExceptionVisitor extends ValueObjectVisitor
 
     /**
      * Returns HTTP status code.
-     *
-     * @return int
      */
-    protected function getStatus()
+    protected function getStatus(): int
     {
         return 500;
     }
 
     /**
      * @param \Exception $data
-     *
-     * @return void
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('ErrorMessage');
 
@@ -105,7 +102,7 @@ abstract class AbstractExceptionVisitor extends ValueObjectVisitor
         $generator->endObjectElement('ErrorMessage');
     }
 
-    protected function generateErrorCode(Generator $generator, Visitor $visitor, \Exception $e): int
+    protected function generateErrorCode(Generator $generator, Visitor $visitor, Exception $e): int
     {
         $statusCode = $this->getStatus();
         $visitor->setStatus($statusCode);
@@ -115,12 +112,12 @@ abstract class AbstractExceptionVisitor extends ValueObjectVisitor
         return $statusCode;
     }
 
-    protected function getErrorMessage(\Exception $data, int $statusCode): string
+    protected function getErrorMessage(Exception $data, int $statusCode): string
     {
         return static::$httpStatusCodes[$statusCode] ?? static::$httpStatusCodes[500];
     }
 
-    protected function getErrorDescription(\Exception $data, int $statusCode): string
+    protected function getErrorDescription(Exception $data, int $statusCode): string
     {
         $translator = $this->getTranslator();
         if ($statusCode < 500 || $this->canDisplayExceptionMessage()) {

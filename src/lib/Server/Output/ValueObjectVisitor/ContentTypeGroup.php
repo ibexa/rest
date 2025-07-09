@@ -20,18 +20,16 @@ class ContentTypeGroup extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('ContentTypeGroup');
         $this->visitContentTypeGroupAttributes($visitor, $generator, $data);
         $generator->endObjectElement('ContentTypeGroup');
     }
 
-    protected function visitContentTypeGroupAttributes(Visitor $visitor, Generator $generator, ContentTypeGroupValue $data)
+    protected function visitContentTypeGroupAttributes(Visitor $visitor, Generator $generator, ContentTypeGroupValue $data): void
     {
         $visitor->setHeader('Content-Type', $generator->getMediaType('ContentTypeGroup'));
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('ContentTypeGroupInput'));

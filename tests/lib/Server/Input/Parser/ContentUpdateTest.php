@@ -53,7 +53,7 @@ class ContentUpdateTest extends BaseTest
     /**
      * @dataProvider providerForTestParseFailureInvalidHref
      */
-    public function testParseFailureInvalidHref($element, $exceptionMessage): void
+    public function testParseFailureInvalidHref(string $element, string $exceptionMessage): void
     {
         $inputArray = $this->getValidInputData();
         $inputArray[$element]['_href'] = '/invalid/section/uri';
@@ -92,7 +92,7 @@ class ContentUpdateTest extends BaseTest
     /**
      * @dataProvider providerForTestParseFailureInvalidDate
      */
-    public function testParseFailureInvalidDate($element, $exceptionMessage): void
+    public function testParseFailureInvalidDate(string $element, string $exceptionMessage): void
     {
         $inputArray = $this->getValidInputData();
         $inputArray[$element] = 42;

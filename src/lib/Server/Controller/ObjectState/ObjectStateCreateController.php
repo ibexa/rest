@@ -16,7 +16,7 @@ use Ibexa\Contracts\Core\Repository\ObjectStateService;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedObjectState;
 use Ibexa\Rest\Values\RestObjectState;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
@@ -122,7 +122,7 @@ class ObjectStateCreateController extends RestController
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      */
-    public function createObjectState(int $objectStateGroupId, Request $request): \Ibexa\Rest\Server\Values\CreatedObjectState
+    public function createObjectState(int $objectStateGroupId, Request $request): CreatedObjectState
     {
         $objectStateGroup = $this->objectStateService->loadObjectStateGroup($objectStateGroupId);
 
@@ -140,7 +140,7 @@ class ObjectStateCreateController extends RestController
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
-        return new Values\CreatedObjectState(
+        return new CreatedObjectState(
             [
                 'objectState' => new RestObjectState(
                     $createdObjectState,

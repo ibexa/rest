@@ -14,10 +14,5 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class CreatedLocation extends ValueObject
 {
-    /**
-     * The created location.
-     *
-     * @var \Ibexa\Rest\Server\Values\RestLocation
-     */
-    public $restLocation;
+    public RestLocation $restLocation;
 }

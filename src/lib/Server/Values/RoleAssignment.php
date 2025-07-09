@@ -15,27 +15,11 @@ use Ibexa\Rest\Value as RestValue;
  */
 class RoleAssignment extends RestValue
 {
-    /**
-     * Role ID.
-     *
-     * @var mixed
-     */
-    public $roleId;
+    public int $roleId;
 
-    /**
-     * Role limitation.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation
-     */
-    public $limitation;
+    public ?RoleLimitation $limitation;
 
-    /**
-     * Construct.
-     *
-     * @param mixed $roleId
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation $limitation
-     */
-    public function __construct($roleId, RoleLimitation $limitation = null)
+    public function __construct(int $roleId, RoleLimitation $limitation = null)
     {
         $this->roleId = $roleId;
         $this->limitation = $limitation;

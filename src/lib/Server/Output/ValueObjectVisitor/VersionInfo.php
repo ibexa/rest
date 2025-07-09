@@ -23,11 +23,9 @@ class VersionInfo extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startHashElement('VersionInfo');
         $this->visitVersionInfoAttributes($visitor, $generator, $data);
@@ -36,12 +34,8 @@ class VersionInfo extends ValueObjectVisitor
 
     /**
      * Maps the given version $status to a representative string.
-     *
-     * @param int $status
-     *
-     * @return string
      */
-    protected function getStatusString($status): string
+    protected function getStatusString(int $status): string
     {
         switch ($status) {
             case Values\Content\VersionInfo::STATUS_DRAFT:
@@ -57,7 +51,7 @@ class VersionInfo extends ValueObjectVisitor
         throw new RuntimeException('Undefined version status: ' . $status);
     }
 
-    protected function visitVersionInfoAttributes(Visitor $visitor, Generator $generator, VersionInfoValue $versionInfo)
+    protected function visitVersionInfoAttributes(Visitor $visitor, Generator $generator, VersionInfoValue $versionInfo): void
     {
         $generator->startValueElement('id', $versionInfo->id);
         $generator->endValueElement('id');

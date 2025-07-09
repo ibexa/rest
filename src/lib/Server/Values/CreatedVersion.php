@@ -14,10 +14,5 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class CreatedVersion extends ValueObject
 {
-    /**
-     * The created version.
-     *
-     * @var \Ibexa\Rest\Server\Values\Version
-     */
-    public $version;
+    public Version $version;
 }

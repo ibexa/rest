@@ -75,12 +75,6 @@ class ContentDraftTranslationDeleteController extends RestController
     /**
      * Remove the given Translation from the given Version Draft.
      *
-     * @param int $contentId
-     * @param int $versionNumber
-     * @param string $languageCode
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
-     *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      */
     public function deleteTranslationFromDraft(int $contentId, ?int $versionNumber, string $languageCode): NoContent

@@ -86,8 +86,6 @@ class ContentTypeListController extends RestController
 
     /**
      * Returns a list of content types.
-     *
-     * @return \Ibexa\Rest\Server\Values\ContentTypeList|\Ibexa\Rest\Server\Values\ContentTypeInfoList
      */
     public function listContentTypes(Request $request): ContentTypeInfoList|ContentTypeList
     {

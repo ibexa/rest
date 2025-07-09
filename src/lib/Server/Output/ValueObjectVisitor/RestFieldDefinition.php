@@ -21,9 +21,6 @@ class RestFieldDefinition extends RestContentTypeBase
 {
     protected FieldTypeSerializer $fieldTypeSerializer;
 
-    /**
-     * @param \Ibexa\Rest\Output\FieldTypeSerializer $fieldTypeSerializer
-     */
     public function __construct(FieldTypeSerializer $fieldTypeSerializer)
     {
         $this->fieldTypeSerializer = $fieldTypeSerializer;
@@ -32,11 +29,9 @@ class RestFieldDefinition extends RestContentTypeBase
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\RestFieldDefinition $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $restFieldDefinition = $data;
         $fieldDefinition = $restFieldDefinition->fieldDefinition;

@@ -70,9 +70,6 @@ class BookmarkListController extends RestController
 
     /**
      * Bookmark constructor.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\BookmarkService $bookmarkService
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
      */
     public function __construct(BookmarkService $bookmarkService, LocationService $locationService)
     {
@@ -83,11 +80,7 @@ class BookmarkListController extends RestController
     /**
      * List bookmarked locations.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     *
-     * @return \Ibexa\Rest\Value
      */
     public function loadBookmarks(Request $request): RestValue
     {

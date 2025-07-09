@@ -20,46 +20,27 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
 
     private ?LocationService $locationService = null;
 
-    /**
-     * @param \Symfony\Component\Routing\RouterInterface $router
-     */
     public function setRouter(RouterInterface $router): void
     {
         $this->router = $router;
     }
 
-    /**
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
-     */
     public function setLocationService(LocationService $locationService): void
     {
         $this->locationService = $locationService;
     }
 
-    /**
-     * @return bool
-     */
-    public function canMapContentHref()
+    public function canMapContentHref(): bool
     {
         return isset($this->router);
     }
 
-    /**
-     * @param  int $contentId
-     *
-     * @return string
-     */
-    public function mapToContentHref($contentId)
+    public function mapToContentHref(int $contentId): ?string
     {
         return $this->router?->generate('ibexa.rest.load_content', ['contentId' => $contentId]) ?? '';
     }
 
-    /**
-     * @param  int $locationId
-     *
-     * @return string
-     */
-    public function mapToLocationHref(int $locationId)
+    public function mapToLocationHref(int $locationId): ?string
     {
         try {
             $location = $this->locationService?->loadLocation($locationId);
@@ -76,7 +57,7 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
         ]) ?? '';
     }
 
-    public function preProcessFieldSettingsHash($incomingSettingsHash)
+    public function preProcessFieldSettingsHash(mixed $incomingSettingsHash): mixed
     {
         if (isset($incomingSettingsHash['selectionMethod'])) {
             switch ($incomingSettingsHash['selectionMethod']) {
@@ -91,7 +72,7 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
         return $incomingSettingsHash;
     }
 
-    public function postProcessFieldSettingsHash($outgoingSettingsHash)
+    public function postProcessFieldSettingsHash(mixed $outgoingSettingsHash): mixed
     {
         if (isset($outgoingSettingsHash['selectionMethod'])) {
             switch ($outgoingSettingsHash['selectionMethod']) {

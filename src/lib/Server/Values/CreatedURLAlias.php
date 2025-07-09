@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\URLAlias;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
@@ -14,10 +15,5 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class CreatedURLAlias extends ValueObject
 {
-    /**
-     * The created URL alias.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\URLAlias
-     */
-    public $urlAlias;
+    public URLAlias $urlAlias;
 }

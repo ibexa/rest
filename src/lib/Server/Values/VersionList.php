@@ -15,26 +15,19 @@ use Ibexa\Rest\Value as RestValue;
 class VersionList extends RestValue
 {
     /**
-     * Versions.
-     *
      * @var \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo[]
      */
-    public $versions;
+    public array $versions;
 
     /**
      * Path used to retrieve this version list.
-     *
-     * @var string
      */
-    public $path;
+    public string $path;
 
     /**
-     * Construct.
-     *
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo[] $versions
-     * @param string $path
      */
-    public function __construct(array $versions, $path)
+    public function __construct(array $versions, string $path)
     {
         $this->versions = $versions;
         $this->path = $path;

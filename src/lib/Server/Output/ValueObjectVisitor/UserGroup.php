@@ -25,7 +25,7 @@ final class UserGroup extends ValueObjectVisitor implements DelegateValueObjectV
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\User\UserGroup $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $visitor->visitValueObject(
             new RestUserGroup(

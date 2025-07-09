@@ -10,28 +10,19 @@ namespace Ibexa\Rest\FieldTypeProcessor;
 class BinaryProcessor extends BinaryInputProcessor
 {
     /**
-     * Host prefix for uris, without a leading /.
+     * Host prefix for uris, without a leading '/'.
      *
      * @todo Refactor such transformation with a service that receives the request and has the host
-     *
-     * @var string
      */
-    protected $hostPrefix;
+    protected string $hostPrefix;
 
-    /**
-     * @param string $temporaryDirectory
-     * @param string $hostPrefix
-     */
-    public function __construct($temporaryDirectory, $hostPrefix)
+    public function __construct(string $temporaryDirectory, string $hostPrefix)
     {
         parent::__construct($temporaryDirectory);
         $this->hostPrefix = $hostPrefix;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function postProcessValueHash($outgoingValueHash)
+    public function postProcessValueHash(mixed $outgoingValueHash): mixed
     {
         if (!is_array($outgoingValueHash)) {
             return $outgoingValueHash;
@@ -49,10 +40,8 @@ class BinaryProcessor extends BinaryInputProcessor
      * Generates a URL for $path.
      *
      * @param string $path absolute url
-     *
-     * @return string
      */
-    protected function generateUrl($path)
+    protected function generateUrl(string $path): string
     {
         $url = $path;
         if ($this->hostPrefix) {

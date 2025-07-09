@@ -18,13 +18,9 @@ class Json extends Handler
     /**
      * Converts the given string to an array structure.
      *
-     * @throw Ibexa\Contracts\Rest\Exceptions\Parser
-     *
-     * @param string $string
-     *
-     * @return array
+     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
      */
-    public function convert($string)
+    public function convert(string $string): array
     {
         $json = json_decode($string, true);
         if (JSON_ERROR_NONE !== ($jsonErrorCode = json_last_error())) {
@@ -39,10 +35,6 @@ class Json extends Handler
 
     /**
      * Returns the error message associated with the $jsonErrorCode.
-     *
-     * @param $jsonErrorCode
-     *
-     * @return string
      */
     private function jsonDecodeErrorMessage(int $jsonErrorCode): string
     {

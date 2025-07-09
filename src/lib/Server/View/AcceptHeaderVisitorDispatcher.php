@@ -20,18 +20,13 @@ class AcceptHeaderVisitorDispatcher
     /**
      * Mapping of regular expressions matching the mime type accept headers to
      * view handlers.
-     *
-     * @var array
      */
-    protected $mapping = [];
+    protected array $mapping = [];
 
     /**
      * Adds view handler.
-     *
-     * @param string $regexp
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
      */
-    public function addVisitor($regexp, OutputVisitor $visitor): void
+    public function addVisitor(string $regexp, OutputVisitor $visitor): void
     {
         $this->mapping[$regexp] = $visitor;
     }
@@ -39,14 +34,9 @@ class AcceptHeaderVisitorDispatcher
     /**
      * Dispatches a visitable result to the mapped visitor.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param mixed $result
-     *
      * @throws \RuntimeException
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function dispatch(Request $request, $result): Response
+    public function dispatch(Request $request, mixed $result): Response
     {
         foreach ($request->getAcceptableContentTypes() as $mimeType) {
             /** @var \Ibexa\Contracts\Rest\Output\Visitor $visitor */

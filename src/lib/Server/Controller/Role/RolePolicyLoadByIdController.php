@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\Values\User\Policy;
 use Ibexa\Contracts\Rest\Exceptions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -78,16 +79,11 @@ use Symfony\Component\HttpFoundation\Response;
 class RolePolicyLoadByIdController extends RoleBaseController
 {
     /**
-     * Loads a policy.
-     *
-     * @param $roleId
-     * @param $policyId
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\Policy
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function loadPolicy(int $roleId, int $policyId, Request $request)
+    public function loadPolicy(int $roleId, int $policyId, Request $request): Policy
     {
         $loadedRole = $this->roleService->loadRole($roleId);
         foreach ($loadedRole->getPolicies() as $policy) {

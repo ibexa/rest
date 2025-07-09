@@ -11,10 +11,7 @@ use Ibexa\Core\FieldType\Media\Type;
 
 class MediaProcessor extends BinaryInputProcessor
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function preProcessFieldSettingsHash($incomingSettingsHash)
+    public function preProcessFieldSettingsHash(mixed $incomingSettingsHash): mixed
     {
         if (isset($incomingSettingsHash['mediaType'])) {
             switch ($incomingSettingsHash['mediaType']) {
@@ -44,10 +41,7 @@ class MediaProcessor extends BinaryInputProcessor
         return $incomingSettingsHash;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function postProcessFieldSettingsHash($outgoingSettingsHash)
+    public function postProcessFieldSettingsHash(mixed $outgoingSettingsHash): mixed
     {
         if (isset($outgoingSettingsHash['mediaType'])) {
             switch ($outgoingSettingsHash['mediaType']) {

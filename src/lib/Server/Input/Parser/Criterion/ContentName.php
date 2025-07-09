@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class ContentName extends BaseParser
 {
-    public const CONTENT_NAME_CRITERION = 'ContentNameCriterion';
+    public const string CONTENT_NAME_CRITERION = 'ContentNameCriterion';
 
     private ValidatorInterface $validator;
 

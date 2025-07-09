@@ -85,7 +85,7 @@ class Json extends Generator
     }
 
     #[\Override]
-    public function serializeBool(mixed $boolValue): bool
+    public function serializeBool(bool|string|null $boolValue): bool
     {
         return (bool)$boolValue;
     }

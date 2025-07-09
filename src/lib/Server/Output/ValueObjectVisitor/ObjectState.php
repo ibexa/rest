@@ -19,7 +19,7 @@ final class ObjectState extends ValueObjectVisitor implements DelegateValueObjec
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectState $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $visitor->visitValueObject(
             new RestObjectState(

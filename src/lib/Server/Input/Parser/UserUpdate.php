@@ -37,11 +37,6 @@ class UserUpdate extends BaseParser
         $this->parserTools = $parserTools;
     }
 
-    /**
-     * @param array $data
-     *
-     * @return \Ibexa\Rest\Server\Values\RestUserUpdateStruct
-     */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestUserUpdateStruct
     {
         $parsedData = [];
@@ -69,7 +64,7 @@ class UserUpdate extends BaseParser
                 throw new Exceptions\Parser("Missing '_href' attribute for the Section element in UserUpdate.");
             }
 
-            $parsedData['sectionId'] = $this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
+            $parsedData['sectionId'] = (int)$this->uriParser->getAttributeFromUri($data['Section']['_href'], 'sectionId');
         }
 
         if (array_key_exists('remoteId', $data)) {

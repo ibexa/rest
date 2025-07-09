@@ -14,10 +14,5 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
  */
 class CreatedUserGroup extends ValueObject
 {
-    /**
-     * The created user group.
-     *
-     * @var \Ibexa\Rest\Server\Values\RestUserGroup
-     */
-    public $userGroup;
+    public RestUserGroup $userGroup;
 }

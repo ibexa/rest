@@ -65,9 +65,6 @@ class BookmarkCreateController extends RestController
 
     /**
      * Bookmark constructor.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\BookmarkService $bookmarkService
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
      */
     public function __construct(BookmarkService $bookmarkService, LocationService $locationService)
     {

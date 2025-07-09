@@ -153,10 +153,6 @@ class SectionUpdateController extends RestController
      * Maps a SectionCreateStruct to a SectionUpdateStruct.
      *
      * Needed since both structs are encoded into the same media type on input.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\SectionCreateStruct $createStruct
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\SectionUpdateStruct
      */
     protected function mapToUpdateStruct(SectionCreateStruct $createStruct): SectionUpdateStruct
     {

@@ -70,9 +70,6 @@ abstract class Query extends CriterionParser
      */
     abstract protected function buildQuery(): ContentQuery;
 
-    /**
-     * @param array $criteriaArray
-     */
     private function processCriteriaArray(array $criteriaArray, ParsingDispatcher $parsingDispatcher): ?CriterionInterface
     {
         if (count($criteriaArray) === 0) {
@@ -89,11 +86,6 @@ abstract class Query extends CriterionParser
 
     /**
      * Handles SortClause data.
-     *
-     * @param array $sortClausesArray
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return array
      */
     private function processSortClauses(array $sortClausesArray, ParsingDispatcher $parsingDispatcher): array
     {

@@ -29,17 +29,13 @@ class Location extends ValueObjectVisitor
 
     /**
      * Visit struct returned by controllers.
-     *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Location $location
      */
-    public function visit(Visitor $visitor, Generator $generator, $location): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('Location');
         $visitor->setHeader('Content-Type', $generator->getMediaType('Location'));
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('LocationUpdate'));
-        $this->visitLocationAttributes($visitor, $generator, $location);
+        $this->visitLocationAttributes($visitor, $generator, $data);
         $generator->endObjectElement('Location');
     }
 
@@ -51,7 +47,7 @@ class Location extends ValueObjectVisitor
         Visitor $visitor,
         Generator $generator,
         Content\Location $location
-    ) {
+    ): void {
         $generator->startAttribute(
             'href',
             $this->router->generate(

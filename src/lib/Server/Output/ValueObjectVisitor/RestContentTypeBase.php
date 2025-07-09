@@ -18,12 +18,8 @@ abstract class RestContentTypeBase extends ValueObjectVisitor
     /**
      * Returns a suffix for the URL type to generate on basis of the given
      * $contentTypeStatus.
-     *
-     * @param int $contentTypeStatus
-     *
-     * @return string
      */
-    protected function getUrlTypeSuffix($contentTypeStatus)
+    protected function getUrlTypeSuffix(int $contentTypeStatus): string
     {
         switch ($contentTypeStatus) {
             case Values\ContentType\ContentType::STATUS_DRAFT:
@@ -38,12 +34,8 @@ abstract class RestContentTypeBase extends ValueObjectVisitor
 
     /**
      * Serializes the given $contentTypeStatus to a string representation.
-     *
-     * @param int $contentTypeStatus
-     *
-     * @return string
      */
-    protected function serializeStatus($contentTypeStatus)
+    protected function serializeStatus(int $contentTypeStatus): string
     {
         switch ($contentTypeStatus) {
             case Values\ContentType\ContentType::STATUS_DEFINED:

@@ -22,12 +22,6 @@ class FieldTypeParser
 
     protected FieldTypeProcessorRegistry $fieldTypeProcessorRegistry;
 
-    /**
-     * @param \Ibexa\Contracts\Core\Repository\ContentService $contentService
-     * @param \Ibexa\Contracts\Core\Repository\ContentTypeService $contentTypeService
-     * @param \Ibexa\Contracts\Core\Repository\FieldTypeService $fieldTypeService
-     * @param \Ibexa\Rest\FieldTypeProcessorRegistry $fieldTypeProcessorRegistry
-     */
     public function __construct(
         ContentService $contentService,
         ContentTypeService $contentTypeService,
@@ -73,11 +67,6 @@ class FieldTypeParser
     /**
      * Parses the given $settingsHash using the FieldType identified by
      * $fieldTypeIdentifier.
-     *
-     * @param string $fieldTypeIdentifier
-     * @param mixed $settingsHash
-     *
-     * @return mixed
      */
     public function parseFieldSettings(string $fieldTypeIdentifier, mixed $settingsHash): mixed
     {
@@ -95,12 +84,9 @@ class FieldTypeParser
      * Parses the given $configurationHash using the FieldType identified by
      * $fieldTypeIdentifier.
      *
-     * @param string $fieldTypeIdentifier
-     * @param mixed $configurationHash
-     *
-     * @return mixed
+     * @param array<mixed> $configurationHash
      */
-    public function parseValidatorConfiguration($fieldTypeIdentifier, $configurationHash)
+    public function parseValidatorConfiguration(string $fieldTypeIdentifier, array $configurationHash): mixed
     {
         if ($this->fieldTypeProcessorRegistry->hasProcessor($fieldTypeIdentifier)) {
             $fieldTypeProcessor = $this->fieldTypeProcessorRegistry->getProcessor($fieldTypeIdentifier);

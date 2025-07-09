@@ -17,7 +17,7 @@ final class Range extends ValueObjectVisitor
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation\Range $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('Range');
         $generator->valueElement('from', $data->getFrom());

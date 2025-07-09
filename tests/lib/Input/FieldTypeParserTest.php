@@ -67,7 +67,7 @@ class FieldTypeParserTest extends TestCase
             ->with('42')
             ->willReturnCallback(
                 // Avoid PHPUnit cloning
-                static function () use ($contentTypeMock) {
+                static function () use ($contentTypeMock): ContentType&MockObject {
                     return $contentTypeMock;
                 }
             );
@@ -94,7 +94,7 @@ class FieldTypeParserTest extends TestCase
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
                 // Avoid PHPUnit cloning
-                static function () use ($fieldTypeMock) {
+                static function () use ($fieldTypeMock): FieldType&MockObject {
                     return $fieldTypeMock;
                 }
             );
@@ -129,7 +129,7 @@ class FieldTypeParserTest extends TestCase
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
                 // Avoid PHPUnit cloning
-                static function () use ($fieldTypeMock) {
+                static function () use ($fieldTypeMock): FieldType&MockObject {
                     return $fieldTypeMock;
                 }
             );
@@ -162,7 +162,7 @@ class FieldTypeParserTest extends TestCase
             ->method('getProcessor')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
-                static function () use ($processor) {
+                static function () use ($processor): FieldTypeProcessor&MockObject {
                     return $processor;
                 }
             );
@@ -178,7 +178,7 @@ class FieldTypeParserTest extends TestCase
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
                 // Avoid PHPUnit cloning
-                static function () use ($fieldTypeMock) {
+                static function () use ($fieldTypeMock): FieldType&MockObject {
                     return $fieldTypeMock;
                 }
             );
@@ -207,7 +207,7 @@ class FieldTypeParserTest extends TestCase
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
                 // Avoid PHPUnit cloning
-                static function () use ($fieldTypeMock) {
+                static function () use ($fieldTypeMock): FieldType&MockObject {
                     return $fieldTypeMock;
                 }
             );
@@ -240,7 +240,7 @@ class FieldTypeParserTest extends TestCase
             ->method('getProcessor')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
-                static function () use ($processor) {
+                static function () use ($processor): FieldTypeProcessor&MockObject {
                     return $processor;
                 }
             );
@@ -256,7 +256,7 @@ class FieldTypeParserTest extends TestCase
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
                 // Avoid PHPUnit cloning
-                static function () use ($fieldTypeMock) {
+                static function () use ($fieldTypeMock): FieldType&MockObject {
                     return $fieldTypeMock;
                 }
             );
@@ -285,7 +285,7 @@ class FieldTypeParserTest extends TestCase
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
                 // Avoid PHPUnit cloning
-                static function () use ($fieldTypeMock) {
+                static function () use ($fieldTypeMock): FieldType&MockObject {
                     return $fieldTypeMock;
                 }
             );
@@ -318,7 +318,7 @@ class FieldTypeParserTest extends TestCase
             ->method('getProcessor')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
-                static function () use ($processor) {
+                static function () use ($processor): FieldTypeProcessor&MockObject {
                     return $processor;
                 }
             );
@@ -334,7 +334,7 @@ class FieldTypeParserTest extends TestCase
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
                 // Avoid PHPUnit cloning
-                static function () use ($fieldTypeMock) {
+                static function () use ($fieldTypeMock): FieldType&MockObject {
                     return $fieldTypeMock;
                 }
             );

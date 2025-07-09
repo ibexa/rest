@@ -20,12 +20,7 @@ class FullText extends BaseParser
     /**
      * Parses input structure to a FullText criterion.
      *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\FullText
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): FullTextCriterion
     {

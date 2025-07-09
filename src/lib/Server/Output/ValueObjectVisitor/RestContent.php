@@ -30,11 +30,9 @@ class RestContent extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\RestContent $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $restContent = $data;
         $contentInfo = $restContent->contentInfo;
@@ -92,12 +90,12 @@ class RestContent extends ValueObjectVisitor
         );
 
         // Embed current version, if available
-        if ($currentVersion !== null) {
+        if ($currentVersion !== null && $contentType !== null) {
             $visitor->visitValueObject(
                 new VersionValue(
                     $currentVersion,
                     $contentType,
-                    $restContent->relations
+                    $restContent->relations ?? [],
                 )
             );
         }
@@ -111,8 +109,8 @@ class RestContent extends ValueObjectVisitor
         );
         $generator->endObjectElement('Section');
 
-        // Main location will not exist if we're visiting the content draft
-        if ($data->mainLocation !== null) {
+        // The main location will not exist if we're visiting the content draft
+        if ($mainLocation !== null) {
             $generator->startObjectElement('MainLocation', 'Location');
             $generator->attribute(
                 'href',
@@ -195,13 +193,9 @@ class RestContent extends ValueObjectVisitor
     /**
      * Maps the given content $status to a representative string.
      *
-     * @param int $status
-     *
      * @throws \Ibexa\Core\Base\Exceptions\BadStateException
-     *
-     * @return string
      */
-    protected function getStatusString($status): string
+    protected function getStatusString(int $status): string
     {
         switch ($status) {
             case ContentInfo::STATUS_DRAFT:

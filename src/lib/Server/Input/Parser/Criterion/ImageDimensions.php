@@ -17,10 +17,10 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class ImageDimensions extends BaseParser
 {
-    public const IMAGE_DIMENSIONS_CRITERION = 'ImageDimensionsCriterion';
-    public const FIELD_DEF_IDENTIFIER_KEY = 'fieldDefIdentifier';
-    public const WIDTH_KEY = 'width';
-    public const HEIGHT_KEY = 'height';
+    public const string IMAGE_DIMENSIONS_CRITERION = 'ImageDimensionsCriterion';
+    public const string FIELD_DEF_IDENTIFIER_KEY = 'fieldDefIdentifier';
+    public const string WIDTH_KEY = 'width';
+    public const string HEIGHT_KEY = 'height';
 
     private ValidatorInterface $validator;
 

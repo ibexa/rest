@@ -15,26 +15,19 @@ use Ibexa\Rest\Value as RestValue;
 class UserList extends RestValue
 {
     /**
-     * Users.
-     *
      * @var \Ibexa\Rest\Server\Values\RestUser[]
      */
-    public $users;
+    public array $users;
 
     /**
      * Path which was used to fetch the list of users.
-     *
-     * @var string
      */
-    public $path;
+    public string $path;
 
     /**
-     * Construct.
-     *
      * @param \Ibexa\Rest\Server\Values\RestUser[] $users
-     * @param string $path
      */
-    public function __construct(array $users, $path)
+    public function __construct(array $users, string $path)
     {
         $this->users = $users;
         $this->path = $path;

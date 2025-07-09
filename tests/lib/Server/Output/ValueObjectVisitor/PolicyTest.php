@@ -176,8 +176,6 @@ class PolicyTest extends ValueObjectVisitorBaseTest
 
     /**
      * Get the Policy visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Policy
      */
     protected function internalGetVisitor(): Policy
     {

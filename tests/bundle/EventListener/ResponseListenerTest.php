@@ -11,6 +11,7 @@ namespace Ibexa\Tests\Bundle\Rest\EventListener;
 use Exception;
 use Ibexa\Bundle\Rest\EventListener\ResponseListener;
 use Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher;
+use PHPUnit\Framework\MockObject\MockObject;
 use stdClass;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,8 +26,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class ResponseListenerTest extends EventListenerTest
 {
-    /** @var \Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher&\PHPUnit\Framework\MockObject\MockObject */
-    protected AcceptHeaderVisitorDispatcher $visitorDispatcherMock;
+    protected AcceptHeaderVisitorDispatcher&MockObject $visitorDispatcherMock;
 
     protected stdClass $eventValue;
 
@@ -36,8 +36,7 @@ final class ResponseListenerTest extends EventListenerTest
 
     protected EventDispatcherInterface $event;
 
-    /** @var \Symfony\Component\HttpKernel\KernelInterface&\PHPUnit\Framework\MockObject\MockObject */
-    protected KernelInterface $kernelMock;
+    protected KernelInterface&MockObject $kernelMock;
 
     public function setUp(): void
     {
@@ -123,10 +122,7 @@ final class ResponseListenerTest extends EventListenerTest
         self::assertEquals($this->response, $event->getResponse());
     }
 
-    /**
-     * @return \Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher&\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function getVisitorDispatcherMock(): AcceptHeaderVisitorDispatcher
+    private function getVisitorDispatcherMock(): AcceptHeaderVisitorDispatcher&MockObject
     {
         if (!isset($this->visitorDispatcherMock)) {
             $this->visitorDispatcherMock = $this->createMock(AcceptHeaderVisitorDispatcher::class);
@@ -152,10 +148,7 @@ final class ResponseListenerTest extends EventListenerTest
         );
     }
 
-    /**
-     * @return \PHPUnit\Framework\MockObject\MockObject&\Symfony\Component\HttpKernel\KernelInterface
-     */
-    protected function getKernelMock(): KernelInterface
+    protected function getKernelMock(): KernelInterface&MockObject
     {
         return $this->createMock(KernelInterface::class);
     }
@@ -170,10 +163,7 @@ final class ResponseListenerTest extends EventListenerTest
         );
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request&\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function getRequestMock(): Request
+    private function getRequestMock(): Request&MockObject
     {
         $request = $this->createMock(Request::class);
         $request->attributes = $this->getRequestAttributesMock();

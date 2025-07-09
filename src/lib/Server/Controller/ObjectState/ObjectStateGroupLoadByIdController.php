@@ -12,6 +12,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ObjectStateService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
+use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup;
 use Ibexa\Rest\Server\Controller as RestController;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -93,7 +94,7 @@ class ObjectStateGroupLoadByIdController extends RestController
     /**
      * Loads an object state group.
      */
-    public function loadObjectStateGroup(int $objectStateGroupId): \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup
+    public function loadObjectStateGroup(int $objectStateGroupId): ObjectStateGroup
     {
         return $this->objectStateService->loadObjectStateGroup($objectStateGroupId, Language::ALL);
     }

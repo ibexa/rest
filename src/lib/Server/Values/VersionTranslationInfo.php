@@ -17,18 +17,12 @@ class VersionTranslationInfo extends RestValue
 {
     private VersionInfo $versionInfo;
 
-    /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $versionInfo
-     */
     public function __construct(VersionInfo $versionInfo)
     {
         $this->versionInfo = $versionInfo;
     }
 
-    /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo
-     */
-    public function getVersionInfo()
+    public function getVersionInfo(): VersionInfo
     {
         return $this->versionInfo;
     }

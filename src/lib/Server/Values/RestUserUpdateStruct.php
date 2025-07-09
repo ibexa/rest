@@ -15,27 +15,14 @@ use Ibexa\Rest\Value as RestValue;
  */
 class RestUserUpdateStruct extends RestValue
 {
-    /**
-     * User update struct.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\User\UserUpdateStruct
-     */
-    public $userUpdateStruct;
+    public UserUpdateStruct $userUpdateStruct;
 
     /**
      * If set, section of the User will be updated.
-     *
-     * @var mixed
      */
-    public $sectionId;
+    public ?int $sectionId;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\UserUpdateStruct $userUpdateStruct
-     * @param mixed $sectionId
-     */
-    public function __construct(UserUpdateStruct $userUpdateStruct, $sectionId = null)
+    public function __construct(UserUpdateStruct $userUpdateStruct, ?int $sectionId = null)
     {
         $this->userUpdateStruct = $userUpdateStruct;
         $this->sectionId = $sectionId;

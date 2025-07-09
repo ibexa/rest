@@ -102,7 +102,7 @@ class ObjectStateLoadByIdController extends RestController
     /**
      * Loads an object state.
      */
-    public function loadObjectState(int $objectStateGroupId, int $objectStateId): \Ibexa\Rest\Values\RestObjectState
+    public function loadObjectState(int $objectStateGroupId, int $objectStateId): RestObjectState
     {
         return new RestObjectState(
             $this->objectStateService->loadObjectState($objectStateId, Language::ALL),

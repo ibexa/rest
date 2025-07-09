@@ -8,6 +8,8 @@
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\CriterionInterface;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -20,7 +22,7 @@ abstract class Criterion extends BaseParser
     /**
      * @var string[]
      */
-    protected static $criterionIdMap = [
+    protected static array $criterionIdMap = [
         'AND' => 'LogicalAnd',
         'OR' => 'LogicalOr',
         'NOT' => 'LogicalNot',
@@ -29,16 +31,13 @@ abstract class Criterion extends BaseParser
     /**
      * Dispatches parsing of a criterion name + data to its own parser.
      *
-     * @param string $criterionName
-     * @param mixed $criterionData
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion
      */
-    public function dispatchCriterion($criterionName, $criterionData, ParsingDispatcher $parsingDispatcher)
-    {
+    public function dispatchCriterion(
+        string $criterionName,
+        mixed $criterionData,
+        ParsingDispatcher $parsingDispatcher
+    ): CriterionInterface {
         $mediaType = $this->getCriterionMediaType($criterionName);
         try {
             return $parsingDispatcher->parse([$criterionName => $criterionData], $mediaType);
@@ -48,9 +47,7 @@ abstract class Criterion extends BaseParser
     }
 
     /**
-     * Dispatches parsing of a aggregation name + data to its own parser.
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation
+     * Dispatches parsing of an aggregation name + data to its own parser.
      */
     public function dispatchAggregation(
         string $aggregationName,
@@ -68,22 +65,21 @@ abstract class Criterion extends BaseParser
     /**
      * Dispatches parsing of a sort clause name + direction to its own parser.
      *
-     * @param string $sortClauseName
-     * @param string $direction
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param array<string, string>|string $direction
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
-     *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion
      */
-    public function dispatchSortClause($sortClauseName, $direction, ParsingDispatcher $parsingDispatcher)
-    {
+    public function dispatchSortClause(
+        string $sortClauseName,
+        array|string $direction,
+        ParsingDispatcher $parsingDispatcher
+    ): SortClause {
         $mediaType = $this->getSortClauseMediaType($sortClauseName);
 
         return $parsingDispatcher->parse([$sortClauseName => $direction], $mediaType);
     }
 
-    protected function getCriterionMediaType($criterionName)
+    protected function getCriterionMediaType(string $criterionName): string
     {
         $criterionName = str_replace('Criterion', '', $criterionName);
         if (isset(self::$criterionIdMap[$criterionName])) {
@@ -93,7 +89,7 @@ abstract class Criterion extends BaseParser
         return 'application/vnd.ibexa.api.internal.criterion.' . $criterionName;
     }
 
-    protected function getSortClauseMediaType(string $sortClauseName)
+    protected function getSortClauseMediaType(string $sortClauseName): string
     {
         return 'application/vnd.ibexa.api.internal.sortclause.' . $sortClauseName;
     }

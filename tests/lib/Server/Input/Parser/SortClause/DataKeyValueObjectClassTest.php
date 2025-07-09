@@ -84,8 +84,6 @@ class DataKeyValueObjectClassTest extends BaseTest
 
     /**
      * Returns the DataKeyValueObjectClass parser.
-     *
-     * @return \Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
      */
     protected function internalGetParser(): DataKeyValueObjectClass
     {

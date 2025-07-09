@@ -10,7 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RoleAssignmentList;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -69,7 +69,7 @@ class RoleAssignmentForUserListController extends RoleBaseController
     /**
      * Loads role assignments for user.
      */
-    public function loadRoleAssignmentsForUser(int $userId): \Ibexa\Rest\Server\Values\RoleAssignmentList
+    public function loadRoleAssignmentsForUser(int $userId): RoleAssignmentList
     {
         $user = $this->userService->loadUser($userId);
 
@@ -79,6 +79,6 @@ class RoleAssignmentForUserListController extends RoleBaseController
             $roleAssignments[] = $roleAssignment;
         }
 
-        return new Values\RoleAssignmentList($roleAssignments, $user->id);
+        return new RoleAssignmentList($roleAssignments, $user->id);
     }
 }

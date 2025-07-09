@@ -23,11 +23,6 @@ class RoleAssignInput extends BaseParser
      */
     protected ParserTools $parserTools;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
-     */
     public function __construct(ParserTools $parserTools)
     {
         $this->parserTools = $parserTools;
@@ -35,11 +30,6 @@ class RoleAssignInput extends BaseParser
 
     /**
      * Parse input structure.
-     *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
-     * @return \Ibexa\Rest\Server\Values\RoleAssignment
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): RoleAssignment
     {
@@ -52,7 +42,7 @@ class RoleAssignInput extends BaseParser
         }
 
         try {
-            $roleId = $this->uriParser->getAttributeFromUri($data['Role']['_href'], 'roleId');
+            $roleId = (int)$this->uriParser->getAttributeFromUri($data['Role']['_href'], 'roleId');
         } catch (Exceptions\InvalidArgumentException $e) {
             throw new Exceptions\Parser('Invalid format for <Role> reference in <RoleAssignInput>.');
         }

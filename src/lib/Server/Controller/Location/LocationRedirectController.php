@@ -10,7 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Location;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\TemporaryRedirect;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -65,7 +65,7 @@ class LocationRedirectController extends LocationBaseController
      *
      * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
      */
-    public function redirectLocation(Request $request): \Ibexa\Rest\Server\Values\TemporaryRedirect
+    public function redirectLocation(Request $request): TemporaryRedirect
     {
         if ($request->query->has('id')) {
             $location = $this->locationService->loadLocation($request->query->getInt('id'));
@@ -78,7 +78,7 @@ class LocationRedirectController extends LocationBaseController
             throw new BadRequestException("At least one of 'id', 'remoteId' or 'urlAlias' parameters is required.");
         }
 
-        return new Values\TemporaryRedirect(
+        return new TemporaryRedirect(
             $this->router->generate(
                 'ibexa.rest.load_location',
                 [

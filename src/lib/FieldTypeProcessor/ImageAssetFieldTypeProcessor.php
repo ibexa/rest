@@ -37,7 +37,7 @@ class ImageAssetFieldTypeProcessor extends FieldTypeProcessor
         $this->configMappings = $configMappings;
     }
 
-    public function postProcessValueHash($outgoingValueHash)
+    public function postProcessValueHash(mixed $outgoingValueHash): mixed
     {
         if (!\is_array($outgoingValueHash)) {
             return $outgoingValueHash;

@@ -64,8 +64,6 @@ class Visitor
      * Sets the given status code in the corresponding header.
      *
      * Note that headers are generally not overwritten!
-     *
-     * @param int $statusCode
      */
     public function setStatus(int $statusCode): void
     {

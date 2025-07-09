@@ -19,7 +19,7 @@ class ContentTypeGroupList extends RestValue
      *
      * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup[]
      */
-    public $contentTypeGroups;
+    public array $contentTypeGroups;
 
     /**
      * Construct.

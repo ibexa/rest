@@ -73,8 +73,6 @@ class TrashItemListController extends RestController
 
     /**
      * Returns a list of all trash items.
-     *
-     * @return \Ibexa\Rest\Server\Values\Trash
      */
     public function loadTrashItems(Request $request): Trash
     {

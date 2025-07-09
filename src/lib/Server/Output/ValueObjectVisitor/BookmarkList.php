@@ -16,9 +16,9 @@ use Ibexa\Rest\Server\Values\BookmarkList as BookmarkListValue;
 class BookmarkList extends ValueObjectVisitor
 {
     /**
-     * {@inheritdoc}
+     * @param \Ibexa\Rest\Server\Values\BookmarkList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $generator->startObjectElement('BookmarkList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('BookmarkList'));

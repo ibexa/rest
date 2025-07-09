@@ -12,6 +12,7 @@ use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions\LimitationValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Values\User\Policy;
 use Ibexa\Contracts\Core\Repository\Values\User\PolicyDraft;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Message;
@@ -119,7 +120,7 @@ class RolePolicyUpdateController extends RoleBaseController
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
      */
-    public function updatePolicy(int $roleId, int $policyId, Request $request): \Ibexa\Contracts\Core\Repository\Values\User\Policy
+    public function updatePolicy(int $roleId, int $policyId, Request $request): Policy
     {
         $updateStruct = $this->inputDispatcher->parse(
             new Message(

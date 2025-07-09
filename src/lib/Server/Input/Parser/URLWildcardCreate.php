@@ -17,16 +17,8 @@ use Ibexa\Rest\Input\ParserTools;
  */
 class URLWildcardCreate extends BaseParser
 {
-    /**
-     * Parser tools.
-     */
     protected ParserTools $parserTools;
 
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
-     */
     public function __construct(ParserTools $parserTools)
     {
         $this->parserTools = $parserTools;
@@ -34,8 +26,6 @@ class URLWildcardCreate extends BaseParser
 
     /**
      * Parse input structure.
-     *
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): array
     {

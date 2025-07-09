@@ -15,25 +15,14 @@ use Ibexa\Rest\Value as RestValue;
  */
 class RestLocation extends RestValue
 {
-    /**
-     * A location.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Location
-     */
-    public $location;
+    public Location $location;
 
     /**
      * Number of children of the location.
-     *
-     * @var int
      */
-    public $childCount;
+    public int $childCount;
 
-    /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Location $location
-     * @param int $childCount
-     */
-    public function __construct(Location $location, $childCount)
+    public function __construct(Location $location, int $childCount)
     {
         $this->location = $location;
         $this->childCount = $childCount;

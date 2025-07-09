@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class OutputVisitorPass implements CompilerPassInterface
 {
-    public const OUTPUT_VISITOR_SERVICE_TAG = 'ibexa.rest.output.visitor';
+    public const string OUTPUT_VISITOR_SERVICE_TAG = 'ibexa.rest.output.visitor';
 
     public function process(ContainerBuilder $container): void
     {

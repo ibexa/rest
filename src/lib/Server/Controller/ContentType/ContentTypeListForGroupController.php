@@ -13,7 +13,8 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Controller as RestController;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\ContentTypeInfoList;
+use Ibexa\Rest\Server\Values\ContentTypeList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -93,7 +94,7 @@ class ContentTypeListForGroupController extends RestController
     /**
      * Returns a list of content types of the group.
      */
-    public function listContentTypesForGroup(int $contentTypeGroupId, Request $request): \Ibexa\Rest\Server\Values\ContentTypeList|\Ibexa\Rest\Server\Values\ContentTypeInfoList
+    public function listContentTypesForGroup(int $contentTypeGroupId, Request $request): ContentTypeList|ContentTypeInfoList
     {
         $contentTypesIterable = $this->contentTypeService->loadContentTypes(
             $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId, Language::ALL),
@@ -105,9 +106,9 @@ class ContentTypeListForGroupController extends RestController
         }
 
         if ($this->getMediaType($request) === 'application/vnd.ibexa.api.contenttypelist') {
-            return new Values\ContentTypeList($contentTypes, $request->getPathInfo());
+            return new ContentTypeList($contentTypes, $request->getPathInfo());
         }
 
-        return new Values\ContentTypeInfoList($contentTypes, $request->getPathInfo());
+        return new ContentTypeInfoList($contentTypes, $request->getPathInfo());
     }
 }

@@ -15,15 +15,18 @@ use Ibexa\Rest\Value as RestValue;
 class CountryList extends RestValue
 {
     /**
-     * @var \Ibexa\Core\Repository\Values\ContentType\Countries[]
+     * @param array<string, array{Name: string, Alpha2: string, Alpha3: string, IDC: string}> $countries
      */
-    public $countries;
+    public function __construct(
+        private readonly array $countries
+    ) {
+    }
 
     /**
-     * Construct.
+     * @return array<string, array{Name: string, Alpha2: string, Alpha3: string, IDC: string}>
      */
-    public function __construct(array $countries)
+    public function getCountries(): array
     {
-        $this->countries = $countries;
+        return $this->countries;
     }
 }

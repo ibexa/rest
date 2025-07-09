@@ -17,10 +17,8 @@ class TrashTest extends ValueObjectVisitorBaseTest
 {
     /**
      * Test the Trash visitor.
-     *
-     * @return string
      */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -45,11 +43,9 @@ class TrashTest extends ValueObjectVisitorBaseTest
     /**
      * Test if result contains Trash element.
      *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsTrashElement($result): void
+    public function testResultContainsTrashElement(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -64,11 +60,9 @@ class TrashTest extends ValueObjectVisitorBaseTest
     /**
      * Test if result contains Trash element attributes.
      *
-     * @param string $result
-     *
      * @depends testVisit
      */
-    public function testResultContainsTrashAttributes($result): void
+    public function testResultContainsTrashAttributes(string $result): void
     {
         $this->assertXMLTag(
             [
@@ -123,8 +117,6 @@ class TrashTest extends ValueObjectVisitorBaseTest
 
     /**
      * Get the Trash visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Trash
      */
     protected function internalGetVisitor(): ValueObjectVisitor\Trash
     {

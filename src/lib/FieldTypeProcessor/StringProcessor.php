@@ -11,10 +11,7 @@ use Ibexa\Contracts\Rest\FieldTypeProcessor;
 
 class StringProcessor extends FieldTypeProcessor
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function preProcessValueHash($incomingValueHash): string
+    public function preProcessValueHash(mixed $incomingValueHash): string
     {
         return (string) $incomingValueHash;
     }

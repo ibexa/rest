@@ -14,7 +14,7 @@ final class LanguageTest extends RESTFunctionalTestCase
 {
     use ResourceAssertionsTrait;
 
-    private const SNAPSHOT_DIR = __DIR__ . '/_snapshot';
+    private const string SNAPSHOT_DIR = __DIR__ . '/_snapshot';
 
     public function testLanguageListJson(): void
     {

@@ -45,14 +45,7 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class LocationSubtreeDeleteController extends LocationBaseController
 {
-    /**
-     * Deletes a location.
-     *
-     * @param string $locationPath
-     *
-     * @return \Ibexa\Rest\Server\Values\NoContent
-     */
-    public function deleteSubtree($locationPath): NoContent
+    public function deleteSubtree(string $locationPath): NoContent
     {
         $location = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($locationPath)

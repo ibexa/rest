@@ -20,11 +20,9 @@ class UserSession extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
      * @param \Ibexa\Rest\Server\Values\UserSession $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
+    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
     {
         $status = $data->created ? 201 : 200;
         $visitor->setStatus($status);
@@ -34,11 +32,11 @@ class UserSession extends ValueObjectVisitor
         $visitor->setHeader('Accept-Patch', false);
 
         $generator->startObjectElement('Session');
-        $this->visitUserSessionAttributes($visitor, $generator, $data);
+        $this->visitUserSessionAttributes($generator, $data);
         $generator->endObjectElement('Session');
     }
 
-    protected function visitUserSessionAttributes(Visitor $visitor, Generator $generator, UserSessionValue $data)
+    protected function visitUserSessionAttributes(Generator $generator, UserSessionValue $data): void
     {
         $sessionHref = $this->router->generate('ibexa.rest.delete_session', ['sessionId' => $data->sessionId]);
 

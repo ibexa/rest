@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -15,24 +16,14 @@ use Ibexa\Rest\Value as RestValue;
  */
 class ContentTypeGroupRefList extends RestValue
 {
-    /**
-     * Content type.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
-     */
-    public $contentType;
+    public ContentType $contentType;
 
     /**
-     * Content type groups of the content type.
-     *
      * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup[]
      */
-    public $contentTypeGroups;
+    public array $contentTypeGroups;
 
     /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType
      * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup[] $contentTypeGroups
      */
     public function __construct(ContentType $contentType, array $contentTypeGroups)

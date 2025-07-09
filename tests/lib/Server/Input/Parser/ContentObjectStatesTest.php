@@ -37,12 +37,6 @@ class ContentObjectStatesTest extends BaseTest
             'ObjectState not created correctly.'
         );
 
-        self::assertInstanceOf(
-            '\\Ibexa\\Contracts\\Core\\Repository\\Values\\ObjectState\\ObjectState',
-            $result[0]->objectState,
-            'Inner ObjectState not created correctly.'
-        );
-
         self::assertEquals(
             21,
             $result[0]->objectState->id,

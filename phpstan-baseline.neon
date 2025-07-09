@@ -31,20 +31,8 @@ parameters:
 			path: src/contracts/Event/BeforeParseEvent.php
 
 		-
-			message: '#^Method Ibexa\\Contracts\\Rest\\Event\\BeforeParseEvent\:\:getValueObject\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/contracts/Event/BeforeParseEvent.php
-
-		-
 			message: '#^Method Ibexa\\Contracts\\Rest\\Event\\BeforeParseEvent\:\:setData\(\) has parameter \$data with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/contracts/Event/BeforeParseEvent.php
-
-		-
-			message: '#^Method Ibexa\\Contracts\\Rest\\Event\\BeforeParseEvent\:\:setValueObject\(\) has parameter \$valueObject with no type specified\.$#'
-			identifier: missingType.parameter
 			count: 1
 			path: src/contracts/Event/BeforeParseEvent.php
 
@@ -61,20 +49,8 @@ parameters:
 			path: src/contracts/Event/ParseEvent.php
 
 		-
-			message: '#^Method Ibexa\\Contracts\\Rest\\Event\\ParseEvent\:\:__construct\(\) has parameter \$valueObject with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/contracts/Event/ParseEvent.php
-
-		-
 			message: '#^Method Ibexa\\Contracts\\Rest\\Event\\ParseEvent\:\:getData\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/contracts/Event/ParseEvent.php
-
-		-
-			message: '#^Method Ibexa\\Contracts\\Rest\\Event\\ParseEvent\:\:getValueObject\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: src/contracts/Event/ParseEvent.php
 
@@ -93,12 +69,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Contracts\\Rest\\Input\\ParsingDispatcher\:\:__construct\(\) has parameter \$parsers with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/contracts/Input/ParsingDispatcher.php
-
-		-
-			message: '#^Method Ibexa\\Contracts\\Rest\\Input\\ParsingDispatcher\:\:internalParse\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: src/contracts/Input/ParsingDispatcher.php
 
@@ -133,38 +103,14 @@ parameters:
 			path: src/contracts/Output/ValueObjectVisitor.php
 
 		-
-			message: '#^Method Ibexa\\Contracts\\Rest\\Output\\ValueObjectVisitor\:\:visitDescriptionsList\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/contracts/Output/ValueObjectVisitor.php
-
-		-
 			message: '#^Method Ibexa\\Contracts\\Rest\\Output\\ValueObjectVisitor\:\:visitDescriptionsList\(\) has parameter \$descriptions with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/contracts/Output/ValueObjectVisitor.php
 
 		-
-			message: '#^Method Ibexa\\Contracts\\Rest\\Output\\ValueObjectVisitor\:\:visitLimitation\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/contracts/Output/ValueObjectVisitor.php
-
-		-
-			message: '#^Method Ibexa\\Contracts\\Rest\\Output\\ValueObjectVisitor\:\:visitNamesList\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/contracts/Output/ValueObjectVisitor.php
-
-		-
 			message: '#^Method Ibexa\\Contracts\\Rest\\Output\\ValueObjectVisitor\:\:visitNamesList\(\) has parameter \$names with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/contracts/Output/ValueObjectVisitor.php
-
-		-
-			message: '#^Method Ibexa\\Contracts\\Rest\\Output\\ValueObjectVisitor\:\:visitTranslatedList\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: src/contracts/Output/ValueObjectVisitor.php
 
@@ -199,28 +145,10 @@ parameters:
 			path: src/lib/FieldTypeProcessor/ImageProcessor.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\FieldTypeProcessor\\RelationListProcessor\:\:postProcessValueHash\(\) has parameter \$outgoingValueHash with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/FieldTypeProcessor/RelationListProcessor.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\FieldTypeProcessor\\RelationListProcessor\:\:postProcessValueHash\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/lib/FieldTypeProcessor/RelationListProcessor.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\FieldTypeProcessor\\RelationProcessor\:\:postProcessValueHash\(\) has parameter \$outgoingValueHash with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/FieldTypeProcessor/RelationProcessor.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\FieldTypeProcessor\\RelationProcessor\:\:postProcessValueHash\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/FieldTypeProcessor/RelationProcessor.php
 
 		-
 			message: '#^Cannot call method getFieldTypeIdentifier\(\) on Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\FieldDefinition\|null\.$#'
@@ -265,8 +193,8 @@ parameters:
 			path: src/lib/Input/Handler/Xml.php
 
 		-
-			message: '#^Cannot assign new offset to array\|string\.$#'
-			identifier: offsetAssign.dimType
+			message: '#^Cannot access an offset on array\|bool\|float\|int\|string\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
 
@@ -279,18 +207,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:convertDom\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:convertDom\(\) should return array but returns array\<array\|string\|null\>\|string\.$#'
-			identifier: return.type
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:convertDom\(\) should return array but returns null\.$#'
-			identifier: return.type
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
 
@@ -313,22 +229,10 @@ parameters:
 			path: src/lib/Input/Handler/Xml.php
 
 		-
-			message: '#^Property Ibexa\\Rest\\Input\\Handler\\Xml\:\:\$fieldTypeHashElements has no type specified\.$#'
-			identifier: missingType.property
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
 			message: '#^Property Ibexa\\Rest\\Input\\Handler\\Xml\:\:\$forceList type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Input\\Parser\\ContentObjectStates\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Input/Parser/ContentObjectStates.php
 
 		-
 			message: '#^Method Ibexa\\Rest\\Input\\ParserTools\:\:isEmbeddedObject\(\) has parameter \$objectElement with no value type specified in iterable type array\.$#'
@@ -367,24 +271,6 @@ parameters:
 			path: src/lib/Message.php
 
 		-
-			message: '#^Property Ibexa\\Rest\\Message\:\:\$headers type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Message.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Output\\FieldTypeSerializer\:\:serializeHash\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Output/FieldTypeSerializer.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Output\\FieldTypeSerializer\:\:serializeValue\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Output/FieldTypeSerializer.php
-
-		-
 			message: '#^Access to an undefined property Ibexa\\Rest\\Output\\Generator\\Json\\JsonObject\:\:\$\#text\.$#'
 			identifier: property.notFound
 			count: 1
@@ -415,12 +301,6 @@ parameters:
 			path: src/lib/Security/Authenticator/RestAuthenticator.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\BinaryContent\:\:getImageVariation\(\) should return Ibexa\\Contracts\\Core\\Variation\\Values\\Variation but returns Ibexa\\Rest\\Server\\Values\\CachedValue\.$#'
-			identifier: return.type
-			count: 1
-			path: src/lib/Server/Controller/BinaryContent.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Controller\\BinaryContent\:\:parseImageId\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -443,36 +323,6 @@ parameters:
 			identifier: variable.undefined
 			count: 2
 			path: src/lib/Server/Controller/BinaryContent.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Options\:\:getRouteOptions\(\) has parameter \$allowedMethods with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Controller/Options.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Root\:\:__construct\(\) has parameter \$rootResourceBuilder with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Controller/Root.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Root\:\:loadRootResource\(\) should return Ibexa\\Rest\\Values\\Root but returns array\|Ibexa\\Rest\\Values\\Root\.$#'
-			identifier: return.type
-			count: 1
-			path: src/lib/Server/Controller/Root.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Services\:\:__construct\(\) has parameter \$countriesInfo with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Controller/Services.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Controller\\Services\:\:\$countriesInfo type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Controller/Services.php
 
 		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\AbstractDestinationLocationParser\:\:parse\(\) has Ibexa\\Contracts\\Rest\\Exceptions\\Parser in PHPDoc @throws tag but it''s not thrown\.$#'
@@ -625,30 +475,6 @@ parameters:
 			path: src/lib/Server/Input/Parser/Aggregation/Range/AbstractRangeParser.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Aggregation\\Range\\AbstractRangeParser\:\:visitRangeValue\(\) has parameter \$value with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Input/Parser/Aggregation/Range/AbstractRangeParser.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Aggregation\\Range\\DateTimeRangeParser\:\:visitRangeValue\(\) has parameter \$value with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Input/Parser/Aggregation/Range/DateTimeRangeParser.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Aggregation\\Range\\FloatRangeParser\:\:visitRangeValue\(\) has parameter \$value with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Input/Parser/Aggregation/Range/FloatRangeParser.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Aggregation\\Range\\IntRangeParser\:\:visitRangeValue\(\) has parameter \$value with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Input/Parser/Aggregation/Range/IntRangeParser.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Aggregation\\RawRangeAggregationParser\:\:parseAggregation\(\) has parameter \$data with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -697,52 +523,10 @@ parameters:
 			path: src/lib/Server/Input/Parser/ContentCreate.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\ContentUpdate\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/ContentUpdate.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\:\:dispatchAggregation\(\) has parameter \$aggregationData with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\:\:getCriterionMediaType\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\:\:getCriterionMediaType\(\) has parameter \$criterionName with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\:\:getSortClauseMediaType\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion.php
-
-		-
-			message: '#^Possibly invalid array key type \(list\<string\>\|string\)\.$#'
-			identifier: offsetAccess.invalidOffset
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\Ancestor\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/Ancestor.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\ContentId\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/ContentId.php
 
 		-
 			message: '#^Parameter \#1 \$value of class Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Query\\Criterion\\ContentId constructor expects array\<int\>\|int, list\<string\> given\.$#'
@@ -751,76 +535,10 @@ parameters:
 			path: src/lib/Server/Input/Parser/Criterion/ContentId.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\ContentRemoteId\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/ContentRemoteId.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\ContentTypeGroupId\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/ContentTypeGroupId.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\ContentTypeId\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/ContentTypeId.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\ContentTypeIdentifier\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/ContentTypeIdentifier.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\Field\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/Field.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\FullText\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/FullText.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\LanguageCode\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/LanguageCode.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\LocationId\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/LocationId.php
-
-		-
 			message: '#^Parameter \#1 \$value of class Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Query\\Criterion\\LocationId constructor expects array\<int\>\|int, list\<string\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion/LocationId.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\LocationRemoteId\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/LocationRemoteId.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\LogicalAnd\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/LogicalAnd.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\LogicalNot\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/LogicalNot.php
 
 		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\LogicalOperator\:\:getFlattenedCriteriaData\(\) has parameter \$criteriaByType with no value type specified in iterable type array\.$#'
@@ -841,52 +559,16 @@ parameters:
 			path: src/lib/Server/Input/Parser/Criterion/LogicalOperator.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\LogicalOr\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/LogicalOr.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\ObjectStateId\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/ObjectStateId.php
-
-		-
 			message: '#^Parameter \#1 \$value of class Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Query\\Criterion\\ObjectStateId constructor expects array\<int\>\|int, list\<string\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion/ObjectStateId.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\ParentLocationId\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/ParentLocationId.php
-
-		-
 			message: '#^Parameter \#1 \$value of class Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Query\\Criterion\\ParentLocationId constructor expects array\<int\>\|int, list\<string\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion/ParentLocationId.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\ParentLocationRemoteId\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/ParentLocationRemoteId.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\SectionId\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/SectionId.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\Subtree\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/Subtree.php
 
 		-
 			message: '#^Parameter \#1 \$value of class Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Query\\Criterion\\UserId constructor expects array\<int\>\|int, list\<string\> given\.$#'
@@ -899,12 +581,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion/UserMetadata.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\Visibility\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/Visibility.php
 
 		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\FieldDefinitionUpdate\:\:getFieldDefinition\(\) has parameter \$data with no value type specified in iterable type array\.$#'
@@ -929,12 +605,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Input/Parser/LocationCreate.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\LocationUpdate\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/LocationUpdate.php
 
 		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Query\:\:processCriteriaArray\(\) has parameter \$criteriaArray with no value type specified in iterable type array\.$#'
@@ -967,18 +637,6 @@ parameters:
 			path: src/lib/Server/Input/Parser/RestoreTrashItemInput.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\RoleAssignInput\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/RoleAssignInput.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\SessionInput\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/SessionInput.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\SortClause\\Field\:\:normalizeData\(\) has parameter \$data with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -989,18 +647,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/lib/Server/Input/Parser/SortClause/Field.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\SortClause\\Field\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/SortClause/Field.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\URLAliasCreate\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/URLAliasCreate.php
 
 		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\URLAliasCreate\:\:parse\(\) return type has no value type specified in iterable type array\.$#'
@@ -1027,68 +673,14 @@ parameters:
 			path: src/lib/Server/Input/Parser/UserGroupCreate.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\UserGroupUpdate\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/UserGroupUpdate.php
-
-		-
 			message: '#^Parameter \#1 \$locationId of method Ibexa\\Contracts\\Core\\Repository\\LocationService\:\:loadLocation\(\) expects int, string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Input/Parser/UserGroupUpdate.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\UserUpdate\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/UserUpdate.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\VersionUpdate\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/VersionUpdate.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\ViewInput\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/ViewInput.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\ViewInputOneDotOne\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/ViewInputOneDotOne.php
-
-		-
-			message: '#^PHPDoc tag @var above a method has no effect\.$#'
-			identifier: varTag.misplaced
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Author.php
-
-		-
-			message: '#^PHPDoc tag @var does not specify variable name\.$#'
-			identifier: varTag.noVariable
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Author.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\CachedValue\:\:getParameter\(\) has no return type specified\.$#'
 			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/CachedValue.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\CachedValue\:\:getParameter\(\) has parameter \$defaultValue with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/CachedValue.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\CachedValue\:\:getParameter\(\) has parameter \$parameterName with no type specified\.$#'
-			identifier: missingType.parameter
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/CachedValue.php
 
@@ -1115,36 +707,6 @@ parameters:
 			identifier: property.protected
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/ContentFieldValidationException.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\ContentTypeGroup\:\:visitContentTypeGroupAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ContentTypeGroup.php
-
-		-
-			message: '#^Access to offset ''Alpha2'' on an unknown class Ibexa\\Core\\Repository\\Values\\ContentType\\Countries\.$#'
-			identifier: class.notFound
-			count: 2
-			path: src/lib/Server/Output/ValueObjectVisitor/CountryList.php
-
-		-
-			message: '#^Access to offset ''Alpha3'' on an unknown class Ibexa\\Core\\Repository\\Values\\ContentType\\Countries\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/CountryList.php
-
-		-
-			message: '#^Access to offset ''IDC'' on an unknown class Ibexa\\Core\\Repository\\Values\\ContentType\\Countries\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/CountryList.php
-
-		-
-			message: '#^Access to offset ''Name'' on an unknown class Ibexa\\Core\\Repository\\Values\\ContentType\\Countries\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/CountryList.php
 
 		-
 			message: '#^Parameter \#3 \$data \(Ibexa\\Rest\\Server\\Values\\CreatedContent\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\CreatedContent\:\:visit\(\) should be compatible with parameter \$data \(Ibexa\\Rest\\Server\\Values\\RestContent\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\RestContent\:\:visit\(\)$#'
@@ -1189,38 +751,14 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/CreatedObjectStateGroup.php
 
 		-
-			message: '#^Parameter \#3 \$data \(Ibexa\\Rest\\Server\\Values\\CreatedPolicy\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\CreatedPolicy\:\:visit\(\) should be compatible with parameter \$data \(Ibexa\\Contracts\\Core\\Repository\\Values\\User\\PolicyDraft\|Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Policy\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Policy\:\:visit\(\)$#'
-			identifier: method.childParameterType
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/CreatedPolicy.php
-
-		-
-			message: '#^Parameter \#3 \$data of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Policy\:\:visit\(\) expects Ibexa\\Contracts\\Core\\Repository\\Values\\User\\PolicyDraft\|Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Policy, Ibexa\\Contracts\\Core\\Repository\\Values\\User\\Policy given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/CreatedPolicy.php
-
-		-
 			message: '#^Parameter \#3 \$data \(Ibexa\\Rest\\Server\\Values\\CreatedRelation\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\CreatedRelation\:\:visit\(\) should be compatible with parameter \$data \(Ibexa\\Rest\\Server\\Values\\RestRelation\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\RestRelation\:\:visit\(\)$#'
 			identifier: method.childParameterType
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/CreatedRelation.php
 
 		-
-			message: '#^Access to an undefined property Ibexa\\Rest\\Server\\Values\\RestRole\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/CreatedRole.php
-
-		-
-			message: '#^Parameter \#3 \$data \(Ibexa\\Rest\\Server\\Values\\CreatedRole\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\CreatedRole\:\:visit\(\) should be compatible with parameter \$data \(Ibexa\\Contracts\\Core\\Repository\\Values\\User\\RoleDraft\|Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\:\:visit\(\)$#'
+			message: '#^Parameter \#3 \$data \(Ibexa\\Rest\\Server\\Values\\CreatedRole\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\CreatedRole\:\:visit\(\) should be compatible with parameter \$data \(Ibexa\\Contracts\\Core\\Repository\\Values\\User\\Role\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\:\:visit\(\)$#'
 			identifier: method.childParameterType
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/CreatedRole.php
-
-		-
-			message: '#^Parameter \#3 \$data of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\:\:visit\(\) expects Ibexa\\Contracts\\Core\\Repository\\Values\\User\\RoleDraft\|Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role, Ibexa\\Rest\\Server\\Values\\RestRole given\.$#'
-			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/CreatedRole.php
 
@@ -1273,62 +811,14 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/DeletedUserSession.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\ImageVariation\:\:visitImageVariationAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ImageVariation.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Location\:\:visitLocationAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Location.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\ObjectStateGroup\:\:visitObjectStateGroupAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/ObjectStateGroup.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Policy\:\:visitPolicyAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Policy.php
-
-		-
-			message: '#^Parameter \#3 \$data of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Policy\:\:visitPolicyAttributes\(\) expects Ibexa\\Contracts\\Core\\Repository\\Values\\User\\Policy, Ibexa\\Contracts\\Core\\Repository\\Values\\User\\PolicyDraft\|Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Policy given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Policy.php
-
-		-
-			message: '#^Access to an undefined property Ibexa\\Rest\\Server\\Values\\RestRole\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/PublishedRole.php
-
-		-
-			message: '#^Parameter \#3 \$data \(Ibexa\\Rest\\Server\\Values\\PublishedRole\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\PublishedRole\:\:visit\(\) should be compatible with parameter \$data \(Ibexa\\Contracts\\Core\\Repository\\Values\\User\\RoleDraft\|Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\:\:visit\(\)$#'
+			message: '#^Parameter \#3 \$data \(Ibexa\\Rest\\Server\\Values\\PublishedRole\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\PublishedRole\:\:visit\(\) should be compatible with parameter \$data \(Ibexa\\Contracts\\Core\\Repository\\Values\\User\\Role\) of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\:\:visit\(\)$#'
 			identifier: method.childParameterType
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/PublishedRole.php
-
-		-
-			message: '#^Parameter \#3 \$data of method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\:\:visit\(\) expects Ibexa\\Contracts\\Core\\Repository\\Values\\User\\RoleDraft\|Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role, Ibexa\\Rest\\Server\\Values\\RestRole given\.$#'
-			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/PublishedRole.php
 
 		-
 			message: '#^Parameter \#2 \$whatIsWrong of class Ibexa\\Core\\Base\\Exceptions\\BadStateException constructor expects string, int given\.$#'
 			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/RestContent.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Values\\RestContent\:\:\$path \(string\) on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.property
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/RestContent.php
 
@@ -1363,18 +853,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/RestUser.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\:\:visitRoleAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Role.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Role\:\:visitRoleAttributes\(\) has parameter \$data with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Role.php
-
-		-
 			message: '#^Parameter \#1 \$roleAssignment of class Ibexa\\Rest\\Server\\Values\\RestUserGroupRoleAssignment constructor expects Ibexa\\Contracts\\Core\\Repository\\Values\\User\\UserGroupRoleAssignment, Ibexa\\Contracts\\Core\\Repository\\Values\\User\\RoleAssignment given\.$#'
 			identifier: argument.type
 			count: 1
@@ -1385,24 +863,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/RoleAssignmentList.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Section\:\:visitSectionAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Section.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\URLAlias\:\:visitURLAliasAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/URLAlias.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\URLWildcard\:\:visitURLWildcardAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/URLWildcard.php
 
 		-
 			message: '#^Parameter \#4 \$mainLocation of class Ibexa\\Rest\\Server\\Values\\RestUser constructor expects Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Location, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Location\|null given\.$#'
@@ -1417,160 +877,10 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/UserGroup.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\UserSession\:\:visitUserSessionAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/UserSession.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Version\:\:visitVersionAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Version.php
-
-		-
 			message: '#^Access to an undefined property Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\VersionInfo\:\:\$names\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/VersionInfo.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\VersionInfo\:\:visitVersionInfoAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/VersionInfo.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\VersionTranslationInfo\:\:visitVersionTranslationInfoAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/VersionTranslationInfo.php
-
-		-
-			message: '#^PHPDoc tag @return with type array\|Ibexa\\Rest\\Values\\Root is not subtype of native type Ibexa\\Rest\\Values\\Root\.$#'
-			identifier: return.phpDocType
-			count: 1
-			path: src/lib/Server/Service/ExpressionRouterRootResourceBuilder.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Service\\RootResourceBuilderInterface\:\:buildRootResource\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Service/RootResourceBuilderInterface.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Values\\CachedValue\:\:__construct\(\) has parameter \$cacheTags with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Values/CachedValue.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Values\\CachedValue\:\:checkCacheTags\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Values/CachedValue.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Values\\CachedValue\:\:checkCacheTags\(\) has parameter \$tags with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Values/CachedValue.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Values\\CountryList\:\:__construct\(\) has parameter \$countries with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Values/CountryList.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Values\\CountryList\:\:\$countries has unknown class Ibexa\\Core\\Repository\\Values\\ContentType\\Countries as its type\.$#'
-			identifier: class.notFound
-			count: 1
-			path: src/lib/Server/Values/CountryList.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Values\\Options\:\:__construct\(\) has parameter \$allowedMethods with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Values/Options.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Values\\Options\:\:\$allowedMethods type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Values/Options.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Values\\RelationList\:\:\$path \(string\) does not accept string\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/Server/Values/RelationList.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Values\\RestContent\:\:\$contentType \(Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType\) does not accept Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/Server/Values/RestContent.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Values\\RestContent\:\:\$currentVersion \(Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Content\) does not accept Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Content\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/Server/Values/RestContent.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Values\\RestContent\:\:\$mainLocation \(Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Location\) does not accept Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Location\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/Server/Values/RestContent.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Values\\RestContent\:\:\$path \(string\) does not accept string\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/Server/Values/RestContent.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Values\\RestContent\:\:\$relations \(array\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\>\) does not accept array\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\>\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/Server/Values/RestContent.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Values\\RestContentType\:\:\$fieldDefinitions \(array\<Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\FieldDefinition\>\) does not accept array\<Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\FieldDefinition\>\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/Server/Values/RestContentType.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Values\\RestLocationUpdateStruct\:\:\$hidden \(bool\) does not accept bool\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/Server/Values/RestLocationUpdateStruct.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Values\\RoleAssignment\:\:\$limitation \(Ibexa\\Contracts\\Core\\Repository\\Values\\User\\Limitation\\RoleLimitation\) does not accept Ibexa\\Contracts\\Core\\Repository\\Values\\User\\Limitation\\RoleLimitation\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/Server/Values/RoleAssignment.php
-
-		-
-			message: '#^Access to an undefined property Ibexa\\Rest\\Server\\Values\\SeeOther\:\:\$redirectUri\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/lib/Server/Values/SeeOther.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Values\\SeeOther\:\:__construct\(\) has parameter \$redirectUri with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Values/SeeOther.php
-
-		-
-			message: '#^Property Ibexa\\Rest\\Server\\Values\\Version\:\:\$path \(string\) does not accept string\|null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: src/lib/Server/Values/Version.php
 
 		-
 			message: '#^Property Ibexa\\Rest\\Server\\View\\AcceptHeaderVisitorDispatcher\:\:\$mapping type has no value type specified in iterable type array\.$#'
@@ -1591,24 +901,6 @@ parameters:
 			path: src/lib/Values/ContentObjectStates.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Values\\Resource\:\:__construct\(\) has parameter \$href with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Values/Resource.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Values\\Resource\:\:__construct\(\) has parameter \$mediaType with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Values/Resource.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Values\\Resource\:\:__construct\(\) has parameter \$name with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Values/Resource.php
-
-		-
 			message: '#^Class Ibexa\\Rest\\Values\\Resource referenced with incorrect case\: Ibexa\\Rest\\Values\\resource\.$#'
 			identifier: class.nameCase
 			count: 2
@@ -1619,12 +911,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/lib/Values/Root.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\Bundle\\Rest\\CorsOptions\\RestProviderTest\:\:\$matchRequestResult has no type specified\.$#'
-			identifier: missingType.property
-			count: 1
-			path: tests/bundle/CorsOptions/RestProviderTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\DependencyInjection\\Compiler\\FieldTypeProcessorPassTest\:\:dataProviderForProcess\(\) return type has no value type specified in iterable type iterable\.$#'
@@ -1677,12 +963,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\ContentTest\:\:loadContent\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/bundle/Functional/ContentTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\ContentTest\:\:testCopyContent\(\) has parameter \$restContentHref with no type specified\.$#'
-			identifier: missingType.parameter
 			count: 1
 			path: tests/bundle/Functional/ContentTest.php
 
@@ -1789,12 +1069,6 @@ parameters:
 			path: tests/bundle/Functional/ContentTypeTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\ContentTypeTest\:\:testPublishContentTypeDraft\(\) has parameter \$contentTypeHref with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/ContentTypeTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\ContentTypeTest\:\:testUnlinkContentTypeFromGroup\(\) has parameter \$contentTypeHref with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
@@ -1873,30 +1147,6 @@ parameters:
 			path: tests/bundle/Functional/ObjectStateTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\RoleTest\:\:testAddPolicy\(\) has parameter \$roleHref with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/RoleTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\RoleTest\:\:testAddPolicyByRoleDraft\(\) has parameter \$roleDraftHref with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/RoleTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\RoleTest\:\:testAssignRoleToUser\(\) has parameter \$roleHref with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/RoleTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\RoleTest\:\:testAssignRoleToUserGroup\(\) has parameter \$roleHref with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/RoleTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\RoleTest\:\:testAssignRoleToUserWithLimitation\(\) has parameter \$limitation with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -1905,36 +1155,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\RoleTest\:\:testDeletePolicies\(\) has parameter \$roleHref with no type specified\.$#'
 			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/RoleTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\RoleTest\:\:testDeleteRoleDraft\(\) has parameter \$roleDraftHref with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/RoleTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\RoleTest\:\:testLoadPolicies\(\) has parameter \$roleHref with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/RoleTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\RoleTest\:\:testPublishRoleDraft\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/RoleTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\RoleTest\:\:testUpdatePolicy\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/RoleTest.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$roleHref$#'
-			identifier: parameter.notFound
 			count: 1
 			path: tests/bundle/Functional/RoleTest.php
 
@@ -2407,24 +1627,6 @@ parameters:
 			path: tests/bundle/Functional/TestCase.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\TestCase\:\:addCreatedElement\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/TestCase.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\TestCase\:\:assertHttpResponseCodeEquals\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/TestCase.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\TestCase\:\:assertHttpResponseCodeEquals\(\) has parameter \$expected with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/TestCase.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\TestCase\:\:assertHttpResponseHasHeader\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
@@ -2432,12 +1634,6 @@ parameters:
 
 		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\TestCase\:\:assertHttpResponseHasHeader\(\) has parameter \$expectedValue with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/TestCase.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\TestCase\:\:assertHttpResponseHasHeader\(\) has parameter \$header with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
 			path: tests/bundle/Functional/TestCase.php
@@ -2473,38 +1669,8 @@ parameters:
 			path: tests/bundle/Functional/TestCase.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\TestCase\:\:generateMediaTypeString\(\) has parameter \$typeString with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/TestCase.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\TestCase\:\:getContentLocations\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/bundle/Functional/TestCase.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\TestCase\:\:getHttpHost\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/TestCase.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\TestCase\:\:getHttpResponseCodeErrorMessage\(\) has parameter \$errorMessage with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/TestCase.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\TestCase\:\:getLoginPassword\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/TestCase.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\TestCase\:\:getLoginUsername\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/bundle/Functional/TestCase.php
 
@@ -2525,12 +1691,6 @@ parameters:
 			identifier: missingType.property
 			count: 1
 			path: tests/bundle/Functional/TestCase.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\TrashTest\:\:testDeleteTrashItem\(\) has parameter \$trashItemId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/TrashTest.php
 
 		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'
@@ -2671,18 +1831,6 @@ parameters:
 			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\MediaProcessorTest\:\:testPostProcessFieldSettingsHash\(\) has parameter \$inputSettings with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldTypeProcessor/MediaProcessorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\MediaProcessorTest\:\:testPostProcessFieldSettingsHash\(\) has parameter \$outputSettings with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldTypeProcessor/MediaProcessorTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\MediaProcessorTest\:\:testPreProcessFieldSettingsHash\(\) has parameter \$inputSettings with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
@@ -2695,124 +1843,10 @@ parameters:
 			path: tests/lib/FieldTypeProcessor/MediaProcessorTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\RelationListProcessorTest\:\:testPostProcessFieldSettingsHash\(\) has parameter \$inputSettings with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldTypeProcessor/RelationListProcessorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\RelationListProcessorTest\:\:testPostProcessFieldSettingsHash\(\) has parameter \$outputSettings with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldTypeProcessor/RelationListProcessorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\RelationListProcessorTest\:\:testPreProcessFieldSettingsHash\(\) has parameter \$inputSettings with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldTypeProcessor/RelationListProcessorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\RelationListProcessorTest\:\:testPreProcessFieldSettingsHash\(\) has parameter \$outputSettings with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldTypeProcessor/RelationListProcessorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\RelationProcessorTest\:\:testPostProcessFieldSettingsHash\(\) has parameter \$inputSettings with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldTypeProcessor/RelationProcessorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\RelationProcessorTest\:\:testPostProcessFieldSettingsHash\(\) has parameter \$outputSettings with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldTypeProcessor/RelationProcessorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\RelationProcessorTest\:\:testPreProcessFieldSettingsHash\(\) has parameter \$inputSettings with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldTypeProcessor/RelationProcessorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\RelationProcessorTest\:\:testPreProcessFieldSettingsHash\(\) has parameter \$outputSettings with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldTypeProcessor/RelationProcessorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\TimeProcessorTest\:\:testPostProcessFieldSettingsHash\(\) has parameter \$inputSettings with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldTypeProcessor/TimeProcessorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\TimeProcessorTest\:\:testPostProcessFieldSettingsHash\(\) has parameter \$outputSettings with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldTypeProcessor/TimeProcessorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\TimeProcessorTest\:\:testPreProcessFieldSettingsHash\(\) has parameter \$inputSettings with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldTypeProcessor/TimeProcessorTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\TimeProcessorTest\:\:testPreProcessFieldSettingsHash\(\) has parameter \$outputSettings with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/FieldTypeProcessor/TimeProcessorTest.php
-
-		-
 			message: '#^Argument of an invalid type list\<string\>\|false supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1
 			path: tests/lib/Input/Handler/XmlTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Input\\Handler\\XmlTest\:\:testConvertXml\(\) has parameter \$expectation with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/Input/Handler/XmlTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Input\\Handler\\XmlTest\:\:testConvertXml\(\) has parameter \$xml with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/Input/Handler/XmlTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Output\\FieldTypeSerializerTest\:\:getContentTypeMock\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/Output/FieldTypeSerializerTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Output\\FieldTypeSerializerTest\:\:getFieldTypeMock\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/Output/FieldTypeSerializerTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Output\\FieldTypeSerializerTest\:\:getFieldTypeProcessorMock\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/Output/FieldTypeSerializerTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Output\\FieldTypeSerializerTest\:\:getFieldTypeProcessorRegistryMock\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/Output/FieldTypeSerializerTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Output\\FieldTypeSerializerTest\:\:getFieldTypeServiceMock\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/Output/FieldTypeSerializerTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\Rest\\Output\\Generator\\FieldTypeHashGeneratorBaseTest\:\:getGenerator\(\) has no return type specified\.$#'
@@ -2857,12 +1891,6 @@ parameters:
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:addRouteExpectation\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:addRouteExpectation\(\) has parameter \$arguments with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -2871,24 +1899,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:assertXMLTag\(\) has parameter \$matcher with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:assertXPath\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:getVisitor\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:resetRouterMock\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
@@ -2949,30 +1959,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Tests\\Rest\\Server\\Input\\Parser\\ContentUpdateTest\:\:getValidInputData\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: tests/lib/Server/Input/Parser/ContentUpdateTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Server\\Input\\Parser\\ContentUpdateTest\:\:testParseFailureInvalidDate\(\) has parameter \$element with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/Server/Input/Parser/ContentUpdateTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Server\\Input\\Parser\\ContentUpdateTest\:\:testParseFailureInvalidDate\(\) has parameter \$exceptionMessage with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/Server/Input/Parser/ContentUpdateTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Server\\Input\\Parser\\ContentUpdateTest\:\:testParseFailureInvalidHref\(\) has parameter \$element with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/lib/Server/Input/Parser/ContentUpdateTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Rest\\Server\\Input\\Parser\\ContentUpdateTest\:\:testParseFailureInvalidHref\(\) has parameter \$exceptionMessage with no type specified\.$#'
-			identifier: missingType.parameter
 			count: 1
 			path: tests/lib/Server/Input/Parser/ContentUpdateTest.php
 

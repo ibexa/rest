@@ -17,12 +17,11 @@ final class BeforeParseEvent extends BeforeEvent
 
     private string $mediaType;
 
-    /** @var mixed|null */
-    private $valueObject = null;
+    private mixed $valueObject = null;
 
     public function __construct(
         array $data,
-        string $mediaType
+        string $mediaType,
     ) {
         $this->data = $data;
         $this->mediaType = $mediaType;
@@ -48,7 +47,7 @@ final class BeforeParseEvent extends BeforeEvent
         $this->mediaType = $mediaType;
     }
 
-    public function getValueObject()
+    public function getValueObject(): mixed
     {
         if (!$this->hasValueObject()) {
             throw new UnexpectedValueException('Return value is not set. Check hasValueObject() or set it using setValueObject() before you call the getter.');
@@ -57,7 +56,7 @@ final class BeforeParseEvent extends BeforeEvent
         return $this->valueObject;
     }
 
-    public function setValueObject($valueObject): void
+    public function setValueObject(mixed $valueObject): void
     {
         $this->valueObject = $valueObject;
     }

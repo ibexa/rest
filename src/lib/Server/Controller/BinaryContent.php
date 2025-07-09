@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidVariationException;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Contracts\Core\Variation\Values\Variation;
 use Ibexa\Contracts\Core\Variation\VariationHandler;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Core\FieldType\Image\Value as ImageValue;
@@ -37,17 +38,16 @@ class BinaryContent extends RestController
      * Returns data about the image variation $variationIdentifier of image field $fieldId.
      * Will generate the alias if it hasn't been generated yet.
      *
-     * @param mixed  $imageId A custom ID that identifies the image field.
+     * @param string $imageId A custom ID that identifies the image field.
      *                        Until v6.9, the format is {contentId}-{fieldId}.
      *                        since v6.9, the format is {contentId}-{fieldId}-{versionNumber}.
      *                        If the version number isn't specified, the default one is used.
-     * @param string $variationIdentifier
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     *
-     * @return \Ibexa\Contracts\Core\Variation\Values\Variation
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function getImageVariation($imageId, $variationIdentifier)
+    public function getImageVariation(string $imageId, string $variationIdentifier): Variation|CachedValue
     {
         [$contentId, $fieldId, $versionNumber] = $this->parseImageId($imageId);
         $content = $this->repository->getContentService()->loadContent($contentId, null, $versionNumber);
@@ -105,7 +105,7 @@ class BinaryContent extends RestController
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException If the imageId format is invalid
      */
-    private function parseImageId($imageId): array
+    private function parseImageId(string $imageId): array
     {
         $idArray = explode('-', $imageId);
         $idArray = array_map('intval', $idArray);

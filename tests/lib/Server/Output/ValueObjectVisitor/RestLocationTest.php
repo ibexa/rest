@@ -18,10 +18,8 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
 {
     /**
      * Test the Location visitor.
-     *
-     * @return string
      */
-    public function testVisit()
+    public function testVisit(): string
     {
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -486,8 +484,6 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
 
     /**
      * Get the Location visitor.
-     *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestLocation
      */
     protected function internalGetVisitor(): ValueObjectVisitor\RestLocation
     {

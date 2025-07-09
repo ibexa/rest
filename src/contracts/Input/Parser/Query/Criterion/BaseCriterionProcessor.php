@@ -18,8 +18,8 @@ use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
  */
 abstract class BaseCriterionProcessor implements CriterionProcessorInterface
 {
-    private const CRITERION_SUFFIX = 'Criterion';
-    private const LOGICAL_OPERATOR_CRITERION_MAP = [
+    private const string CRITERION_SUFFIX = 'Criterion';
+    private const array LOGICAL_OPERATOR_CRITERION_MAP = [
         'AND' => 'LogicalAnd',
         'OR' => 'LogicalOr',
         'NOT' => 'LogicalNot',

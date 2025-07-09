@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -14,27 +15,11 @@ use Ibexa\Rest\Value as RestValue;
  */
 class RestViewInput extends RestValue
 {
-    /**
-     * The search query.
-     *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Query
-     */
-    public $query;
+    public Query $query;
 
-    /**
-     * View identifier.
-     *
-     * @var string
-     */
-    public $identifier;
+    public string $identifier;
 
-    /**
-     * @var string|null
-     */
-    public $languageCode;
+    public ?string $languageCode;
 
-    /**
-     * @var bool|null
-     */
-    public $useAlwaysAvailable;
+    public ?bool $useAlwaysAvailable;
 }

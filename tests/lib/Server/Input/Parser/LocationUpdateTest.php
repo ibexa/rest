@@ -17,8 +17,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class LocationUpdateTest extends BaseTest
 {
-        public function testParse(): void
-        {
+    public function testParse(): void
+    {
         $inputArray = [
             'priority' => 0,
             'remoteId' => 'remote-id',
@@ -33,12 +33,6 @@ class LocationUpdateTest extends BaseTest
         self::assertInstanceOf(
             RestLocationUpdateStruct::class,
             $result,
-            'LocationUpdateStruct not created correctly.'
-        );
-
-        self::assertInstanceOf(
-            LocationUpdateStruct::class,
-            $result->locationUpdateStruct,
             'LocationUpdateStruct not created correctly.'
         );
 
@@ -72,8 +66,8 @@ class LocationUpdateTest extends BaseTest
         );
     }
 
-        public function testParseWithMissingSortField(): void
-        {
+    public function testParseWithMissingSortField(): void
+    {
         $inputArray = [
             'priority' => 0,
             'remoteId' => 'remote-id',
@@ -86,11 +80,6 @@ class LocationUpdateTest extends BaseTest
         self::assertInstanceOf(
             RestLocationUpdateStruct::class,
             $result
-        );
-
-        self::assertInstanceOf(
-            LocationUpdateStruct::class,
-            $result->locationUpdateStruct
         );
 
         self::assertNull(
@@ -115,11 +104,6 @@ class LocationUpdateTest extends BaseTest
         self::assertInstanceOf(
             RestLocationUpdateStruct::class,
             $result
-        );
-
-        self::assertInstanceOf(
-            LocationUpdateStruct::class,
-            $result->locationUpdateStruct
         );
 
         self::assertNull(
