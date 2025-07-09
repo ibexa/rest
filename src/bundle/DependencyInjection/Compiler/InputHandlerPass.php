@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class InputHandlerPass implements CompilerPassInterface
 {
-    public const INPUT_HANDLER_SERVICE_TAG = 'ibexa.rest.input.handler';
+    public const string INPUT_HANDLER_SERVICE_TAG = 'ibexa.rest.input.handler';
 
     public function process(ContainerBuilder $container): void
     {

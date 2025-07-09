@@ -7,12 +7,9 @@
 
 namespace Ibexa\Rest\Server\Service;
 
+use Ibexa\Rest\Values\Root;
+
 interface RootResourceBuilderInterface
 {
-    /**
-     * Build root resource.
-     *
-     * @return array|\Ibexa\Rest\Values\Root
-     */
-    public function buildRootResource();
+    public function buildRootResource(): Root;
 }

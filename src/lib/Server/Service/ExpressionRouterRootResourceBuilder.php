@@ -50,8 +50,6 @@ class ExpressionRouterRootResourceBuilder implements RootResourceBuilderInterfac
 
     /**
      * Build root resource.
-     *
-     * @return array|\Ibexa\Rest\Values\Root
      */
     public function buildRootResource(): Root
     {

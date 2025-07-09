@@ -84,12 +84,9 @@ class FieldTypeParser
      * Parses the given $configurationHash using the FieldType identified by
      * $fieldTypeIdentifier.
      *
-     * @param string $fieldTypeIdentifier
-     * @param mixed $configurationHash
-     *
-     * @return mixed
+     * @param array<mixed> $configurationHash
      */
-    public function parseValidatorConfiguration($fieldTypeIdentifier, $configurationHash)
+    public function parseValidatorConfiguration(string $fieldTypeIdentifier, array $configurationHash): mixed
     {
         if ($this->fieldTypeProcessorRegistry->hasProcessor($fieldTypeIdentifier)) {
             $fieldTypeProcessor = $this->fieldTypeProcessorRegistry->getProcessor($fieldTypeIdentifier);

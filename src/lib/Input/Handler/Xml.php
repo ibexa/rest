@@ -72,7 +72,10 @@ class Xml extends Handler
         ],
     ];
 
-    protected $fieldTypeHashElements = [
+    /**
+     * @var list<string>
+     */
+    protected array $fieldTypeHashElements = [
         'fieldValue',
         'defaultValue',
         'fieldSettings',

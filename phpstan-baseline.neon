@@ -229,12 +229,6 @@ parameters:
 			path: src/lib/Input/Handler/Xml.php
 
 		-
-			message: '#^Property Ibexa\\Rest\\Input\\Handler\\Xml\:\:\$fieldTypeHashElements has no type specified\.$#'
-			identifier: missingType.property
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
 			message: '#^Property Ibexa\\Rest\\Input\\Handler\\Xml\:\:\$forceList type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -329,12 +323,6 @@ parameters:
 			identifier: variable.undefined
 			count: 2
 			path: src/lib/Server/Controller/BinaryContent.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Root\:\:loadRootResource\(\) should return Ibexa\\Rest\\Values\\Root but returns array\|Ibexa\\Rest\\Values\\Root\.$#'
-			identifier: return.type
-			count: 1
-			path: src/lib/Server/Controller/Root.php
 
 		-
 			message: '#^Method Ibexa\\Rest\\Server\\Controller\\Services\:\:__construct\(\) has parameter \$countriesInfo with no value type specified in iterable type array\.$#'
@@ -931,12 +919,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/RoleAssignmentList.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\Section\:\:visitSectionAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Section.php
-
-		-
 			message: '#^Parameter \#4 \$mainLocation of class Ibexa\\Rest\\Server\\Values\\RestUser constructor expects Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Location, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Location\|null given\.$#'
 			identifier: argument.type
 			count: 1
@@ -949,28 +931,10 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/UserGroup.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\UserSession\:\:visitUserSessionAttributes\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/UserSession.php
-
-		-
 			message: '#^Access to an undefined property Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\VersionInfo\:\:\$names\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/VersionInfo.php
-
-		-
-			message: '#^PHPDoc tag @return with type array\|Ibexa\\Rest\\Values\\Root is not subtype of native type Ibexa\\Rest\\Values\\Root\.$#'
-			identifier: return.phpDocType
-			count: 1
-			path: src/lib/Server/Service/ExpressionRouterRootResourceBuilder.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Service\\RootResourceBuilderInterface\:\:buildRootResource\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Service/RootResourceBuilderInterface.php
 
 		-
 			message: '#^Method Ibexa\\Rest\\Server\\Values\\CountryList\:\:__construct\(\) has parameter \$countries with no value type specified in iterable type array\.$#'

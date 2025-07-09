@@ -31,7 +31,7 @@ class Section extends ValueObjectVisitor
         $generator->endObjectElement('Section');
     }
 
-    protected function visitSectionAttributes(Generator $generator, SectionValue $data)
+    protected function visitSectionAttributes(Generator $generator, SectionValue $data): void
     {
         $generator->startAttribute(
             'href',

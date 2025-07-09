@@ -36,7 +36,7 @@ class UserSession extends ValueObjectVisitor
         $generator->endObjectElement('Session');
     }
 
-    protected function visitUserSessionAttributes(Generator $generator, UserSessionValue $data)
+    protected function visitUserSessionAttributes(Generator $generator, UserSessionValue $data): void
     {
         $sessionHref = $this->router->generate('ibexa.rest.delete_session', ['sessionId' => $data->sessionId]);
 
