@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\CriterionInterface;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -64,13 +65,15 @@ abstract class Criterion extends BaseParser
     /**
      * Dispatches parsing of a sort clause name + direction to its own parser.
      *
+     * @param array<string, string>|string $direction
+     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
      */
     public function dispatchSortClause(
         string $sortClauseName,
-        string $direction,
+        array|string $direction,
         ParsingDispatcher $parsingDispatcher
-    ): CriterionInterface {
+    ): SortClause {
         $mediaType = $this->getSortClauseMediaType($sortClauseName);
 
         return $parsingDispatcher->parse([$sortClauseName => $direction], $mediaType);
