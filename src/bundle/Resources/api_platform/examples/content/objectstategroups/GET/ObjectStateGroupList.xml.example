@@ -2,7 +2,7 @@
 <ObjectStateGroupList media-type="application/vnd.ibexa.api.ObjectStateGroupList+xml" href="/api/ibexa/v2/content/objectstategroups">
     <ObjectStateGroup media-type="application/vnd.ibexa.api.ObjectStateGroup+xml" href="/api/ibexa/v2/content/objectstategroups/2">
         <id>2</id>
-        <identifier>ez_lock</identifier>
+        <identifier>ibexa_lock</identifier>
         <defaultLanguageCode>eng-GB</defaultLanguageCode>
         <languageCodes>eng-GB</languageCodes>
         <ObjectStates media-type="application/vnd.ibexa.api.ObjectStateList+xml" href="/api/ibexa/v2/content/objectstategroups/2/objectstates"/>

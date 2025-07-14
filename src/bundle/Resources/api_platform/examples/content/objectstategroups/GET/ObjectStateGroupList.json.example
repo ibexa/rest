@@ -7,7 +7,7 @@
                 "_media-type": "application/vnd.ibexa.api.ObjectStateGroup+json",
                 "_href": "/api/ibexa/v2/content/objectstategroups/2",
                 "id": 2,
-                "identifier": "ez_lock",
+                "identifier": "ibexa_lock",
                 "defaultLanguageCode": "eng-GB",
                 "languageCodes": "eng-GB",
                 "ObjectStates": {
