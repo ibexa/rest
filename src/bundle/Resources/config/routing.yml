@@ -1167,11 +1167,15 @@ ibexa.rest.load_url_alias:
     path: /content/urlaliases/{urlAliasId}
     controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasLoadByIdController::loadURLAlias
     methods: [GET]
+    requirements:
+        urlAliasId: \d+-[a-f0-9]{32}
 
 ibexa.rest.delete_url_alias:
     path: /content/urlaliases/{urlAliasId}
     controller: Ibexa\Rest\Server\Controller\URLAlias\URLAliasDeleteController::deleteURLAlias
     methods: [DELETE]
+    requirements:
+        urlAliasId: \d+-[a-f0-9]{32}
 
 # Services
 

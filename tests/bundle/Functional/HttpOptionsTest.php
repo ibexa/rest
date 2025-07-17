@@ -135,7 +135,7 @@ class HttpOptionsTest extends TestCase
             ['/user/sessions/sess_123/refresh', ['POST']],
             ['/content/urlaliases', ['GET', 'POST']],
             ['/content/locations/1/2/urlaliases', ['GET']],
-            ['/content/urlaliases/12', ['GET', 'DELETE']],
+            ['/content/urlaliases/12-7ade12329f398e8e9ed984f2db6be2c4', ['GET', 'DELETE']],
             ['/services/countries', ['GET']],
         ];
     }
