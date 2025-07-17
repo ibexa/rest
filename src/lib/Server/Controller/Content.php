@@ -270,7 +270,7 @@ class Content extends RestController
         $parentLocationParts = explode('/', $destination);
         $copiedContent = $this->repository->getContentService()->copyContent(
             $this->repository->getContentService()->loadContentInfo($contentId),
-            $this->repository->getLocationService()->newLocationCreateStruct(array_pop($parentLocationParts))
+            $this->repository->getLocationService()->newLocationCreateStruct((int)array_pop($parentLocationParts))
         );
 
         return new Values\ResourceCreated(
