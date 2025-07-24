@@ -793,12 +793,6 @@ parameters:
 			path: src/lib/Input/Handler/Json.php
 
 		-
-			message: '#^Cannot assign new offset to array\|string\.$#'
-			identifier: offsetAssign.dimType
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:convert\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -811,7 +805,7 @@ parameters:
 			path: src/lib/Input/Handler/Xml.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:convertDom\(\) should return array but returns array\<array\|string\|null\>\|string\.$#'
+			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:convertDom\(\) should return array but returns array\|string\.$#'
 			identifier: return.type
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
@@ -3087,6 +3081,12 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\FacetBuilder\\FieldParser\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
+			count: 1
+			path: src/lib/Server/Input/Parser/FacetBuilder/FieldParser.php
+
+		-
+			message: '#^Parameter \#1 \$properties of class Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Query\\FacetBuilder\\FieldFacetBuilder constructor expects array\<string, mixed\>, hasOffsetValue\(string, int\) given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Input/Parser/FacetBuilder/FieldParser.php
 
@@ -7187,6 +7187,12 @@ parameters:
 			identifier: missingType.return
 			count: 1
 			path: tests/bundle/Functional/SessionTest.php
+
+		-
+			message: '#^Argument of an invalid type array\<SimpleXMLElement\>\|null supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: tests/bundle/Functional/SortClauseTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\SortClauseTest\:\:sortingClauseDataProvider\(\) has no return type specified\.$#'
