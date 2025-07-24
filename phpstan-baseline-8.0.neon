@@ -1,71 +1,91 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Access to an undefined property DOMNode\\:\\:\\$data\\.$#"
+			message: '#^Access to an undefined property DOMNode\:\:\$data\.$#'
+			identifier: property.notFound
 			count: 2
 			path: src/lib/Input/Handler/Xml.php
 
 		-
-			message: "#^Access to an undefined property DOMNode\\:\\:\\$tagName\\.$#"
+			message: '#^Access to an undefined property DOMNode\:\:\$tagName\.$#'
+			identifier: property.notFound
 			count: 2
 			path: src/lib/Input/Handler/Xml.php
 
 		-
-			message: "#^Access to an undefined property DOMNode\\:\\:\\$wholeText\\.$#"
+			message: '#^Access to an undefined property DOMNode\:\:\$wholeText\.$#'
+			identifier: property.notFound
 			count: 2
 			path: src/lib/Input/Handler/Xml.php
 
 		-
-			message: "#^Call to an undefined method DOMNode\\:\\:getAttribute\\(\\)\\.$#"
+			message: '#^Call to an undefined method DOMNode\:\:getAttribute\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
 
 		-
-			message: "#^Call to an undefined method DOMNode\\:\\:hasAttribute\\(\\)\\.$#"
+			message: '#^Call to an undefined method DOMNode\:\:hasAttribute\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
 
 		-
-			message: "#^Parameter \\#1 \\$domElement of method Ibexa\\\\Rest\\\\Input\\\\Handler\\\\Xml\\:\\:parseFieldTypeHash\\(\\) expects DOMElement, DOMNode given\\.$#"
+			message: '#^Parameter \#1 \$domElement of method Ibexa\\Rest\\Input\\Handler\\Xml\:\:parseFieldTypeHash\(\) expects DOMElement, DOMNode given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
 
 		-
-			message: "#^Parameter \\#1 \\$array of function array_slice expects array, iterable\\<int, Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\Content\\\\Relation\\> given\\.$#"
+			message: '#^Strict comparison using \!\=\= between DOMNamedNodeMap and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/lib/Input/Handler/Xml.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_slice expects array, iterable\<int, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\> given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Controller/Content.php
 
 		-
-			message: "#^Parameter \\#2 \\$string of function explode expects string, string\\|null given\\.$#"
+			message: '#^Parameter \#2 \$string of function explode expects string, string\|null given\.$#'
+			identifier: argument.type
 			count: 4
 			path: src/lib/Server/Controller/Content.php
 
 		-
-			message: "#^Parameter \\#2 \\.\\.\\.\\$arrays of function array_merge expects array, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\ContentType\\\\ContentType\\> given\\.$#"
+			message: '#^Parameter \#2 \.\.\.\$arrays of function array_merge expects array, iterable\<Ibexa\\Contracts\\Core\\Repository\\Values\\ContentType\\ContentType\> given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
-			message: "#^Parameter \\#1 \\$array of function array_slice expects array, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\Role\\> given\\.$#"
+			message: '#^Parameter \#1 \$array of function array_slice expects array, iterable\<Ibexa\\Contracts\\Core\\Repository\\Values\\User\\Role\> given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Controller/Role.php
 
 		-
-			message: "#^Parameter \\#1 \\.\\.\\.\\$arrays of function array_merge expects array, iterable\\<Ibexa\\\\Contracts\\\\Core\\\\Repository\\\\Values\\\\User\\\\Policy\\> given\\.$#"
+			message: '#^Parameter \#1 \.\.\.\$arrays of function array_merge expects array, iterable\<Ibexa\\Contracts\\Core\\Repository\\Values\\User\\Policy\> given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Controller/Role.php
 
 		-
-			message: "#^Parameter \\#2 \\$error_level of function trigger_error expects int, string given\\.$#"
+			message: '#^Parameter \#2 \$error_level of function trigger_error expects int, string given\.$#'
+			identifier: argument.type
 			count: 4
 			path: src/lib/Server/Controller/User.php
 
 		-
-			message: "#^Parameter \\#1 \\$message of method Psr\\\\Log\\\\LoggerInterface\\:\\:error\\(\\) expects string\\|Stringable, Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null given\\.$#"
+			message: '#^Parameter \#1 \$message of method Psr\\Log\\LoggerInterface\:\:error\(\) expects string, Symfony\\Component\\Security\\Core\\User\\UserInterface\|null given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Security/RestAuthenticator.php
 
 		-
-			message: "#^Parameter \\#1 \\$string of function base64_encode expects string, string\\|false given\\.$#"
+			message: '#^Parameter \#1 \$string of function base64_encode expects string, string\|false given\.$#'
+			identifier: argument.type
 			count: 1
 			path: tests/bundle/Functional/BinaryContentTest.php
