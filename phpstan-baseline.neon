@@ -841,12 +841,6 @@ parameters:
 			path: src/lib/Input/Handler/Xml.php
 
 		-
-			message: '#^Strict comparison using \!\=\= between DOMNamedNodeMap and null will always evaluate to true\.$#'
-			identifier: notIdentical.alwaysTrue
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Input\\Parser\\ContentObjectStates\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
