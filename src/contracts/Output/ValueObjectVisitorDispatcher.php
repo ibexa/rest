@@ -75,8 +75,8 @@ class ValueObjectVisitorDispatcher
             }
         } while ($className = get_parent_class($className));
 
-        $className = class_implements($data);
-        foreach ($className as $interface) {
+        $interfaces = class_implements($data);
+        foreach ($interfaces as $interface) {
             if (isset($this->visitors[$interface])) {
                 return $this->visitors[$interface]->visit($this->outputVisitor, $this->outputGenerator, $data);
             }
