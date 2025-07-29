@@ -79,6 +79,22 @@ class ValueObjectVisitorDispatcherTest extends TestCase
         $dispatcher->visit($data);
     }
 
+    public function testVisitInterface(): void
+    {
+        $data = new ValueObject();
+
+        $valueObjectVisitor = $this->getValueObjectVisitorMock();
+        $valueObjectVisitor
+            ->expects(self::once())
+            ->method('visit')
+            ->with($this->getOutputVisitorMock(), $this->getOutputGeneratorMock(), $data);
+
+        $dispatcher = $this->getValueObjectDispatcher();
+        $dispatcher->addVisitor(ValueObjectInterface::class, $valueObjectVisitor);
+
+        $dispatcher->visit($data);
+    }
+
     public function testVisitValueObjectSecondRuleParentMatch()
     {
         $data = new ValueObject();

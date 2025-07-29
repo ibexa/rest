@@ -6,13 +6,9 @@
  */
 namespace Ibexa\Tests\Rest\Output;
 
-use stdClass;
-
 /**
- * Test dummy class.
+ * Test dummy interface.
  */
-class ValueObject extends stdClass implements ValueObjectInterface
+interface ValueObjectInterface
 {
 }
-
-class_alias(ValueObject::class, 'EzSystems\EzPlatformRest\Tests\Output\ValueObject');
