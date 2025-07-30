@@ -33,6 +33,13 @@ final class ValueObjectVisitorResolver implements ValueObjectVisitorResolverInte
             }
         } while ($className = get_parent_class($className));
 
+        $interfaces = class_implements($object);
+        foreach ($interfaces as $interface) {
+            if (isset($this->visitors[$interface])) {
+                return $this->visitors[$interface];
+            }
+        }
+
         if ($object instanceof Throwable) {
             throw $object;
         }
