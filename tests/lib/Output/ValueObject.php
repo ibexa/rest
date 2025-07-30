@@ -11,7 +11,7 @@ use stdClass;
 /**
  * Test dummy class.
  */
-class ValueObject extends stdClass
+class ValueObject extends stdClass implements ValueObjectInterface
 {
 }
 

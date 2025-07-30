@@ -75,6 +75,13 @@ class ValueObjectVisitorDispatcher
             }
         } while ($className = get_parent_class($className));
 
+        $interfaces = class_implements($data);
+        foreach ($interfaces as $interface) {
+            if (isset($this->visitors[$interface])) {
+                return $this->visitors[$interface]->visit($this->outputVisitor, $this->outputGenerator, $data);
+            }
+        }
+
         throw new Exceptions\NoVisitorFoundException($checkedClassNames);
     }
 }
