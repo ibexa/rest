@@ -328,9 +328,7 @@ XML;
 
         self::assertHttpResponseCodeEquals($response, 307);
 
-        // @todo Fix, see EZP-21059. Meanwhile, the test is skipped if it fails as expected
-        // self::assertHttpResponseHasHeader( $response, 'Location', "$restContentHref/versions/1/relations" );
-        self::assertHttpResponseHasHeader($response, 'Location', "$restContentHref/relations?versionNumber=1");
+        self::assertHttpResponseHasHeader($response, 'Location', "$restContentHref/versions/1/relations");
         self::markTestIncomplete('@todo Fix issue EZP-21059');
     }
 
