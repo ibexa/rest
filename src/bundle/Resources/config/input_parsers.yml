@@ -62,6 +62,19 @@ services:
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.ContentTypeUpdate }
 
+    Ibexa\Rest\Server\Input\Parser\ContentType\RestViewInput:
+        parent: Ibexa\Rest\Server\Common\Parser
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.ContentTypeViewInput }
+
+    Ibexa\Rest\Server\Input\Parser\ContentType\Query\ContentTypeQuery:
+        parent: Ibexa\Rest\Server\Common\Parser
+        arguments:
+            $criterionProcessor: '@Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\CriterionProcessor'
+            $sortClauseProcessor: '@Ibexa\Rest\Server\Input\Parser\ContentType\SortClause\SortClauseProcessor'
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.ContentTypeQuery }
+
     Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate:
         parent: Ibexa\Rest\Server\Common\Parser
         class: Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate

@@ -4,6 +4,8 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
+
 namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
@@ -21,7 +23,6 @@ use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
-use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -902,6 +903,24 @@ class ContentType extends RestController
         return new Values\ContentTypeGroupRefList(
             $contentType,
             $contentType->getContentTypeGroups()
+        );
+    }
+
+    public function createView(Request $request): Values\ContentTypeList
+    {
+        /** @var \Ibexa\Rest\Server\Values\ContentTypeRestViewInput $viewInput */
+        $viewInput = $this->inputDispatcher->parse(
+            new Message(
+                ['Content-Type' => $request->headers->get('Content-Type')],
+                $request->getContent()
+            )
+        );
+
+        $contentTypes = $this->contentTypeService->findContentTypes($viewInput->query);
+
+        return new Values\ContentTypeList(
+            $contentTypes->getContentTypes(),
+            '',
         );
     }
 

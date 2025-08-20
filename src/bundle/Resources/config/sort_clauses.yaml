@@ -1,0 +1,24 @@
+services:
+    Ibexa\Rest\Server\Input\Parser\ContentType\SortClause\ContentTypeSortClausesRegistry:
+        arguments:
+            - !tagged_iterator ibexa.rest.content_type.sort_clause
+
+    ibexa.rest.input.parser.internal.sortclause.id:
+        parent: Ibexa\Rest\Server\Common\Parser
+        class: Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
+        arguments:
+            $dataKey: 'Id'
+            $valueObjectClass: 'Ibexa\Contracts\Core\Repository\Values\ContentType\Query\SortClause\Id'
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.sortclause.Id }
+            - { name: ibexa.rest.content_type.sort_clause }
+
+    ibexa.rest.input.parser.internal.sortclause.identifier:
+        parent: Ibexa\Rest\Server\Common\Parser
+        class: Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
+        arguments:
+            $dataKey: 'Identifier'
+            $valueObjectClass: 'Ibexa\Contracts\Core\Repository\Values\ContentType\Query\SortClause\Identifier'
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.sortclause.Identifier }
+            - { name: ibexa.rest.content_type.sort_clause }
