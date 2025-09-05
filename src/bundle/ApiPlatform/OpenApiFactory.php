@@ -15,6 +15,7 @@ use ApiPlatform\OpenApi\Model\Response;
 use ApiPlatform\OpenApi\Model\Server;
 use ApiPlatform\OpenApi\OpenApi;
 use ArrayObject;
+use Ibexa\Bundle\Rest\ApiPlatform\EditionBadge\EditionBadgeFactoryInterface;
 use Ibexa\Contracts\Core\Ibexa;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -24,12 +25,15 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         private OpenApiFactoryInterface $decorated,
         private SchemasCollectionFactory $schemaCollectionFactory,
         private KernelInterface $kernel,
+        private EditionBadgeFactoryInterface $editionBadgeFactory,
         private string $prefix,
     ) {
     }
 
     /**
      * @param array<string, mixed> $context
+     *
+     * @throws \JsonException
      */
     public function __invoke(array $context = []): OpenApi
     {
@@ -37,11 +41,9 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         $openApi = $openApi->withInfo((new Info('Ibexa DXP REST API', Ibexa::VERSION)));
         $openApi = $this->addSchemas($openApi);
 
-        $this->insertExampleFilesContent($openApi);
+        $this->processPaths($openApi);
 
-        $openApi = $openApi->withServers([new Server($this->prefix, 'Current server')]);
-
-        return $openApi;
+        return $openApi->withServers([new Server($this->prefix, 'Current server')]);
     }
 
     private function addSchemas(OpenApi $openApi): OpenApi
@@ -55,7 +57,10 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         return $openApi->withComponents($components);
     }
 
-    private function insertExampleFilesContent(OpenApi $openApi): void
+    /**
+     * @throws \JsonException
+     */
+    private function processPaths(OpenApi $openApi): void
     {
         $paths = $openApi->getPaths();
 
@@ -78,7 +83,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
                     continue;
                 }
 
-                $newOperation = $this->processOperationResponses($operation);
+                $newOperation = $this->processOperations($operation);
                 if ($newOperation !== $operation) {
                     $newPathItem = $newPathItem->$setter($newOperation);
                 }
@@ -90,7 +95,35 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         }
     }
 
-    private function processOperationResponses(Operation $operation): Operation
+    /**
+     * @throws \JsonException
+     */
+    private function processOperations(Operation $operation): Operation
+    {
+        $newOperation = $operation;
+        $newOperation = $this->insertIbexaResponseExample($newOperation);
+
+        return $this->insertIbexaEditionBadges($newOperation);
+    }
+
+    private function insertIbexaEditionBadges(Operation $operation): Operation
+    {
+        if (isset($operation->getExtensionProperties()['x-badges'])) {
+            return $operation;
+        }
+
+        $badges = $this->editionBadgeFactory->getBadgesForOperation($operation);
+        if (!empty($badges)) {
+            $operation = $operation->withExtensionProperty('x-badges', $badges);
+        }
+
+        return $operation;
+    }
+
+    /**
+     * @throws \JsonException
+     */
+    private function insertIbexaResponseExample(Operation $operation): Operation
     {
         $newOperation = $operation;
 
