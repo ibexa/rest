@@ -1,3 +1,6 @@
+imports:
+    - { resource: api_platform/badges.yaml }
+
 services:
     ibexa.api_platform.action.entrypoint:
         parent: api_platform.action.entrypoint
