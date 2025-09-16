@@ -17,6 +17,8 @@ abstract class Handler
      * @param string $string
      *
      * @return array<mixed>|string|int|bool|float|null
+     *
+     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
      */
     abstract public function convert($string);
 }
