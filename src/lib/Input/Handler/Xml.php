@@ -77,13 +77,6 @@ class Xml extends Handler
         'validatorConfiguration',
     ];
 
-    /**
-     * Converts the given string to an array structure.
-     *
-     * @param string $string
-     *
-     * @return array
-     */
     public function convert($string)
     {
         $oldXmlErrorHandling = libxml_use_internal_errors(true);
@@ -118,9 +111,7 @@ class Xml extends Handler
     /**
      * Converts DOM nodes to array structures.
      *
-     * @param \DOMNode $node
-     *
-     * @return array
+     * @return array<mixed>|string|null
      */
     protected function convertDom(\DOMNode $node)
     {

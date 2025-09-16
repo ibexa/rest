@@ -16,7 +16,7 @@ abstract class Handler
      *
      * @param string $string
      *
-     * @return array
+     * @return array<mixed>|string|int|bool|float|null
      */
     abstract public function convert($string);
 }
