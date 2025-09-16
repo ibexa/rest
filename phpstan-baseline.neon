@@ -319,12 +319,6 @@ parameters:
 			path: src/contracts/Event/ParseEvent.php
 
 		-
-			message: '#^Method Ibexa\\Contracts\\Rest\\Input\\Handler\:\:convert\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/contracts/Input/Handler.php
-
-		-
 			message: '#^Method Ibexa\\Contracts\\Rest\\Input\\ParsingDispatcher\:\:__construct\(\) has parameter \$parsers with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -781,40 +775,10 @@ parameters:
 			path: src/lib/Input/FieldTypeParser.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Json\:\:convert\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Input/Handler/Json.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Json\:\:jsonDecodeErrorMessage\(\) has parameter \$jsonErrorCode with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
 			path: src/lib/Input/Handler/Json.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:convert\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:convertDom\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:convertDom\(\) should return array but returns array\|string\.$#'
-			identifier: return.type
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:convertDom\(\) should return array but returns null\.$#'
-			identifier: return.type
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
 
 		-
 			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:parseFieldTypeHash\(\) return type has no value type specified in iterable type array\.$#'
@@ -1438,24 +1402,6 @@ parameters:
 			message: '#^Parameter \#1 \$remoteId of method Ibexa\\Contracts\\Core\\Repository\\ContentService\:\:loadContentInfoByRemoteId\(\) expects string, string\|null given\.$#'
 			identifier: argument.type
 			count: 1
-			path: src/lib/Server/Controller/Content.php
-
-		-
-			message: '#^Parameter \#1 \$versions of class Ibexa\\Rest\\Server\\Values\\VersionList constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\VersionInfo\>, iterable\<int, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\VersionInfo\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Controller/Content.php
-
-		-
-			message: '#^Parameter \#3 \$relations of class Ibexa\\Rest\\Server\\Values\\Version constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\>, iterable\<int, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\> given\.$#'
-			identifier: argument.type
-			count: 4
-			path: src/lib/Server/Controller/Content.php
-
-		-
-			message: '#^Parameter \#5 \$relations of class Ibexa\\Rest\\Server\\Values\\RestContent constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\>\|null, iterable\<int, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\>\|null given\.$#'
-			identifier: argument.type
-			count: 2
 			path: src/lib/Server/Controller/Content.php
 
 		-
@@ -2515,18 +2461,6 @@ parameters:
 			path: src/lib/Server/Controller/User.php
 
 		-
-			message: '#^Parameter \#5 \$relations of class Ibexa\\Rest\\Server\\Values\\RestUser constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\>, iterable\<int, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\> given\.$#'
-			identifier: argument.type
-			count: 5
-			path: src/lib/Server/Controller/User.php
-
-		-
-			message: '#^Parameter \#5 \$relations of class Ibexa\\Rest\\Server\\Values\\RestUserGroup constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\>, iterable\<int, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\> given\.$#'
-			identifier: argument.type
-			count: 10
-			path: src/lib/Server/Controller/User.php
-
-		-
 			message: '#^Property Ibexa\\Rest\\Server\\Controller\\User\:\:\$csrfTokenStorage is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
@@ -2835,12 +2769,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\:\:getSortClauseMediaType\(\) has parameter \$sortClauseName with no type specified\.$#'
 			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion.php
-
-		-
-			message: '#^Possibly invalid array key type \(list\<string\>\|string\)\.$#'
-			identifier: offsetAccess.invalidOffset
 			count: 1
 			path: src/lib/Server/Input/Parser/Criterion.php
 
@@ -3859,12 +3787,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/Location.php
 
 		-
-			message: '#^Parameter \#5 \$relations of class Ibexa\\Rest\\Server\\Values\\RestContent constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\>\|null, iterable\<int, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Location.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Output\\ValueObjectVisitor\\LocationList\:\:visit\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
@@ -4046,12 +3968,6 @@ parameters:
 
 		-
 			message: '#^Parameter \#2 \$value of method Ibexa\\Contracts\\Rest\\Output\\Generator\:\:startAttribute\(\) expects string, float given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/RestExecutedView.php
-
-		-
-			message: '#^Parameter \#5 \$relations of class Ibexa\\Rest\\Server\\Values\\RestContent constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\>\|null, iterable\<int, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/RestExecutedView.php
@@ -4291,19 +4207,7 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/User.php
 
 		-
-			message: '#^Parameter \#5 \$relations of class Ibexa\\Rest\\Server\\Values\\RestUser constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\>, iterable\<int, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/User.php
-
-		-
 			message: '#^Parameter \#4 \$mainLocation of class Ibexa\\Rest\\Server\\Values\\RestUserGroup constructor expects Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Location, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Location\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/UserGroup.php
-
-		-
-			message: '#^Parameter \#5 \$relations of class Ibexa\\Rest\\Server\\Values\\RestUserGroup constructor expects array\<Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\>, iterable\<int, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/UserGroup.php
