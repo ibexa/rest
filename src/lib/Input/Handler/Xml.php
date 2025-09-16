@@ -131,7 +131,7 @@ class Xml extends Handler
                 case XML_ELEMENT_NODE:
                     $tagName = $childNode->tagName;
 
-                    if (in_array($tagName, $this->fieldTypeHashElements)) {
+                    if (in_array($tagName, $this->fieldTypeHashElements, true)) {
                         $current[$tagName] = $this->parseFieldTypeHash($childNode);
                     } elseif (!isset($current[$tagName])) {
                         if (isset($this->forceList[$parentTagName]) &&
@@ -149,7 +149,7 @@ class Xml extends Handler
                             $this->convertDom($childNode),
                         ];
                         $isArray = true;
-                    } else {
+                    } elseif (!is_string($current[$tagName])) {
                         $current[$tagName][] = $this->convertDom($childNode);
                     }
 
