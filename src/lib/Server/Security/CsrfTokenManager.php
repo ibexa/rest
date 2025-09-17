@@ -25,9 +25,9 @@ class CsrfTokenManager extends BaseCsrfTokenManager
     private $namespace;
 
     public function __construct(
-        TokenGeneratorInterface $generator = null,
-        TokenStorageInterface $storage = null,
-        RequestStack $requestStack = null
+        ?TokenGeneratorInterface $generator = null,
+        ?TokenStorageInterface $storage = null,
+        ?RequestStack $requestStack = null
     ) {
         $this->storage = $storage ?: new NativeSessionTokenStorage();
         $this->namespace = $this->resolveNamespace($requestStack);
@@ -54,7 +54,7 @@ class CsrfTokenManager extends BaseCsrfTokenManager
      *
      * @return string
      */
-    private function resolveNamespace(RequestStack $requestStack = null)
+    private function resolveNamespace(?RequestStack $requestStack = null)
     {
         if ($requestStack !== null && ($request = $requestStack->getMainRequest())) {
             return $request->isSecure() ? 'https-' : '';

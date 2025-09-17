@@ -16,23 +16,15 @@ use Ibexa\Rest\Value as RestValue;
  */
 class RestContentType extends RestValue
 {
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
-     */
-    public $contentType;
+    public ContentType $contentType;
+
+    /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[]|null */
+    public ?array $fieldDefinitions;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[]
+     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[]|null $fieldDefinitions
      */
-    public $fieldDefinitions;
-
-    /**
-     * Construct.
-     *
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $contentType
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[] $fieldDefinitions
-     */
-    public function __construct(ContentType $contentType, array $fieldDefinitions = null)
+    public function __construct(ContentType $contentType, ?array $fieldDefinitions = null)
     {
         $this->contentType = $contentType;
         $this->fieldDefinitions = $fieldDefinitions;
