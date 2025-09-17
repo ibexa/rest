@@ -18,9 +18,7 @@ class RestContentType extends RestValue
 {
     public ContentType $contentType;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[]|null
-     */
+    /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[]|null */
     public ?array $fieldDefinitions;
 
     /**

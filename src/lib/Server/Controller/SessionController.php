@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Csrf\CsrfToken;
-use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 class SessionController extends Controller
 {
@@ -31,7 +30,6 @@ class SessionController extends Controller
 
     private PermissionResolver $permissionResolver;
 
-    /** @var \Ibexa\Contracts\Core\Repository\UserService */
     private UserService $userService;
 
     public function __construct(
