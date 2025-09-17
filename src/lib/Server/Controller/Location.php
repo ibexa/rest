@@ -83,12 +83,12 @@ class Location extends RestController
     public function redirectLocation(Request $request)
     {
         if ($request->query->has('id')) {
-            $location = $this->locationService->loadLocation($request->query->get('id'));
+            $location = $this->locationService->loadLocation($request->query->getInt('id'));
         } elseif ($request->query->has('remoteId')) {
             $location = $this->locationService->loadLocationByRemoteId($request->query->get('remoteId'));
         } elseif ($request->query->has('urlAlias')) {
             $urlAlias = $this->urlAliasService->lookup($request->query->get('urlAlias'));
-            $location = $this->locationService->loadLocation($urlAlias->destination);
+            $location = $this->locationService->loadLocation((int)$urlAlias->destination);
         } else {
             throw new BadRequestException("At least one of 'id', 'remoteId' or 'urlAlias' parameters is required.");
         }
