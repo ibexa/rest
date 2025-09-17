@@ -15,11 +15,6 @@ use Ibexa\Contracts\Rest\Input\Handler;
  */
 class Json extends Handler
 {
-    /**
-     * Converts the given string to an array structure.
-     *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
-     */
     public function convert(string $string): array
     {
         $json = json_decode($string, true);

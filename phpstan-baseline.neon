@@ -61,12 +61,6 @@ parameters:
 			path: src/contracts/Event/ParseEvent.php
 
 		-
-			message: '#^Method Ibexa\\Contracts\\Rest\\Input\\Handler\:\:convert\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/contracts/Input/Handler.php
-
-		-
 			message: '#^Method Ibexa\\Contracts\\Rest\\Input\\ParsingDispatcher\:\:__construct\(\) has parameter \$parsers with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -189,18 +183,6 @@ parameters:
 		-
 			message: '#^Call to an undefined method DOMNode\:\:hasAttribute\(\)\.$#'
 			identifier: method.notFound
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:convert\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:convertDom\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
 

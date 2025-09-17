@@ -82,9 +82,6 @@ class Xml extends Handler
         'validatorConfiguration',
     ];
 
-    /**
-     * Converts the given string to an array structure.
-     */
     public function convert(string $string): array|string|int|bool|float|null
     {
         $oldXmlErrorHandling = libxml_use_internal_errors(true);
@@ -118,6 +115,8 @@ class Xml extends Handler
 
     /**
      * Converts DOM nodes to array structures.
+     *
+     * @return array<mixed>|string|int|bool|float|null
      */
     protected function convertDom(DOMNode $node): array|string|int|bool|float|null
     {
@@ -137,7 +136,7 @@ class Xml extends Handler
                 case XML_ELEMENT_NODE:
                     $tagName = $childNode->tagName;
 
-                    if (in_array($tagName, $this->fieldTypeHashElements)) {
+                    if (in_array($tagName, $this->fieldTypeHashElements, true)) {
                         $current[$tagName] = $this->parseFieldTypeHash($childNode);
                     } elseif (!isset($current[$tagName])) {
                         if (isset($this->forceList[$parentTagName]) &&
@@ -155,7 +154,7 @@ class Xml extends Handler
                             $this->convertDom($childNode),
                         ];
                         $isArray = true;
-                    } else {
+                    } elseif (is_array($current[$tagName])) {
                         $current[$tagName][] = $this->convertDom($childNode);
                     }
 

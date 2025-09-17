@@ -14,6 +14,10 @@ abstract class Handler
 {
     /**
      * Converts the given string to an array structure.
+     *
+     * @return array<mixed>|string|int|bool|float|null
+     *
+     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
      */
     abstract public function convert(string $string): array|string|int|bool|float|null;
 }
