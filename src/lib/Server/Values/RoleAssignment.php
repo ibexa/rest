@@ -24,7 +24,7 @@ class RoleAssignment extends RestValue
     /**
      * Role limitation.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation
+     * @var \Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation|null
      */
     public $limitation;
 
@@ -32,9 +32,9 @@ class RoleAssignment extends RestValue
      * Construct.
      *
      * @param mixed $roleId
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation $limitation
+     * @param \Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation|null $limitation
      */
-    public function __construct($roleId, RoleLimitation $limitation = null)
+    public function __construct($roleId, ?RoleLimitation $limitation = null)
     {
         $this->roleId = $roleId;
         $this->limitation = $limitation;

@@ -26,7 +26,7 @@ class SessionController extends Controller
     /** @var \Ibexa\Core\MVC\Symfony\Security\Authentication\AuthenticatorInterface|null */
     private $authenticator;
 
-    /** @var \Ibexa\Rest\Server\Security\CsrfTokenManager */
+    /** @var \Ibexa\Rest\Server\Security\CsrfTokenManager|null */
     private $csrfTokenManager;
 
     /** @var string */
@@ -38,7 +38,7 @@ class SessionController extends Controller
     /** @var \Ibexa\Contracts\Core\Repository\UserService */
     private $userService;
 
-    /** @var \Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface */
+    /** @var \Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface|null */
     private $csrfTokenStorage;
 
     public function __construct(
@@ -46,8 +46,8 @@ class SessionController extends Controller
         PermissionResolver $permissionResolver,
         UserService $userService,
         ?AuthenticatorInterface $authenticator = null,
-        CsrfTokenManager $csrfTokenManager = null,
-        TokenStorageInterface $csrfTokenStorage = null
+        ?CsrfTokenManager $csrfTokenManager = null,
+        ?TokenStorageInterface $csrfTokenStorage = null
     ) {
         $this->authenticator = $authenticator;
         $this->csrfTokenIntention = $tokenIntention;

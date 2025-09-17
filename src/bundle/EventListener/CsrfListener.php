@@ -56,7 +56,7 @@ class CsrfListener implements EventSubscriberInterface
         EventDispatcherInterface $eventDispatcher,
         $csrfEnabled,
         $csrfTokenIntention,
-        CsrfTokenManagerInterface $csrfTokenManager = null
+        ?CsrfTokenManagerInterface $csrfTokenManager = null
     ) {
         $this->eventDispatcher = $eventDispatcher;
         $this->csrfEnabled = $csrfEnabled;
@@ -167,6 +167,10 @@ class CsrfListener implements EventSubscriberInterface
      */
     protected function checkCsrfToken(Request $request)
     {
+        if ($this->csrfTokenManager === null) {
+            return false;
+        }
+
         if (!$request->headers->has(self::CSRF_TOKEN_HEADER)) {
             return false;
         }
