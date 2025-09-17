@@ -63,10 +63,10 @@ class RestContent extends RestValue
      */
     public function __construct(
         ContentInfo $contentInfo,
-        Location $mainLocation = null,
-        Content $currentVersion = null,
-        ContentType $contentType = null,
-        array $relations = null,
+        ?Location $mainLocation = null,
+        ?Content $currentVersion = null,
+        ?ContentType $contentType = null,
+        ?array $relations = null,
         $path = null
     ) {
         $this->contentInfo = $contentInfo;

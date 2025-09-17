@@ -75,7 +75,7 @@ class RestAuthenticator implements AuthenticatorInterface
         $providerKey,
         EventDispatcherInterface $dispatcher,
         ConfigResolverInterface $configResolver,
-        LoggerInterface $logger = null
+        ?LoggerInterface $logger = null
     ) {
         $this->tokenStorage = $tokenStorage;
         $this->authenticationManager = $authenticationManager;
@@ -169,7 +169,7 @@ class RestAuthenticator implements AuthenticatorInterface
      *
      * @return bool
      */
-    private function isUserConflict(IbexaUser $user, TokenInterface $previousToken = null)
+    private function isUserConflict(IbexaUser $user, ?TokenInterface $previousToken = null)
     {
         if ($previousToken === null || !$previousToken instanceof UsernamePasswordToken) {
             return false;
