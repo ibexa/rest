@@ -37,7 +37,7 @@ class SessionController extends Controller
         PermissionResolver $permissionResolver,
         UserService $userService,
         ?AuthenticatorInterface $authenticator = null,
-        ?CsrfTokenManager $csrfTokenManager = null,
+        ?CsrfTokenManager $csrfTokenManager = null
     ) {
         $this->authenticator = $authenticator;
         $this->csrfTokenIntention = $tokenIntention;
