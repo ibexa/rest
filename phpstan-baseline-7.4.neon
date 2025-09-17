@@ -25,12 +25,6 @@ parameters:
 			path: src/lib/Input/Handler/Xml.php
 
 		-
-			message: '#^Parameter \#1 \$input of function array_slice expects array, iterable\<int, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Relation\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Controller/Content.php
-
-		-
 			message: '#^Parameter \#2 \$str of function explode expects string, string\|null given\.$#'
 			identifier: argument.type
 			count: 4

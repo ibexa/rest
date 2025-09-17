@@ -82,7 +82,7 @@ class Xml extends Handler
      *
      * @param string $string
      *
-     * @return array
+     * @return array<array|string|null>|string|null
      */
     public function convert($string)
     {
@@ -120,7 +120,7 @@ class Xml extends Handler
      *
      * @param \DOMNode $node
      *
-     * @return array
+     * @return array<array|string|null>|string|null
      */
     protected function convertDom(\DOMNode $node)
     {
