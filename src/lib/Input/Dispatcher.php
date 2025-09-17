@@ -101,7 +101,7 @@ class Dispatcher
         $rawArray = $this->handlers[$format]->convert($message->body);
 
         // Only 1 XML root node
-        $rootNodeArray = reset($rawArray);
+        $rootNodeArray = is_array($rawArray) ? reset($rawArray) : [];
 
         // @todo: This needs to be refactored in order to make the called URL
         // available to parsers in the server in a sane way
