@@ -73,7 +73,7 @@ class LocationRedirectController extends LocationBaseController
             $location = $this->locationService->loadLocationByRemoteId($request->query->getString('remoteId'));
         } elseif ($request->query->has('urlAlias')) {
             $urlAlias = $this->urlAliasService->lookup($request->query->getString('urlAlias'));
-            $location = $this->locationService->loadLocation($urlAlias->destination);
+            $location = $this->locationService->loadLocation((int)$urlAlias->destination);
         } else {
             throw new BadRequestException("At least one of 'id', 'remoteId' or 'urlAlias' parameters is required.");
         }
