@@ -30,6 +30,11 @@ final readonly class EditionBadgesProcessor implements EditionBadgesProcessorInt
      */
     public function process(array $tagToEditionMappingConfig): void
     {
+        if (!$this->container->hasParameter(self::BADGES_CONFIG_PARAMETER_NAME)) {
+            // API platform config wasn't loaded because of the missing api_platform extension
+            return;
+        }
+
         /** @phpstan-var TBadgesConfig $config */
         $config = $this->container->getParameter(self::BADGES_CONFIG_PARAMETER_NAME);
         $editions = array_keys($config);
