@@ -20,11 +20,6 @@ use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 use Symfony\Component\Yaml\Yaml;
 
-/**
- * This is the class that loads and manages your bundle configuration.
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
- */
 class IbexaRestExtension extends ConfigurableExtension implements PrependExtensionInterface
 {
     public const string EXTENSION_NAME = 'ibexa_rest';
@@ -54,6 +49,10 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
 
         $processor = new ConfigurationProcessor($container, 'ibexa.site_access.config');
         $processor->mapConfigArray('rest_root_resources', $mergedConfig);
+
+        if (!empty($mergedConfig['badges'])) {
+            (new EditionBadgesProcessor($container))->process($mergedConfig['badges']);
+        }
     }
 
     public function prepend(ContainerBuilder $container): void
