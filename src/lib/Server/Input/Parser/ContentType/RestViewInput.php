@@ -8,33 +8,54 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Input\Parser\ContentType;
 
-use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
+use Ibexa\Rest\Server\Exceptions\ValidationFailedException;
 use Ibexa\Rest\Server\Input\Parser\Criterion as CriterionParser;
+use Ibexa\Rest\Server\Validation\Builder\Input\Parser\Criterion\ContentTypeRestViewInputValidatorBuilder;
 use Ibexa\Rest\Server\Values\ContentTypeRestViewInput;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class RestViewInput extends CriterionParser
 {
-    private const VIEW_INPUT_IDENTIFIER = 'ContentTypeQuery';
+    public const VIEW_INPUT_IDENTIFIER = 'ContentTypeQuery';
+
+    public const IDENTIFIER = 'identifier';
+
+    private ValidatorInterface $validator;
+
+    public function __construct(ValidatorInterface $validator)
+    {
+        $this->validator = $validator;
+    }
 
     public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentTypeRestViewInput
     {
         $restViewInput = new ContentTypeRestViewInput();
         $restViewInput->languageCode = $data['languageCode'] ?? null;
 
-        $viewInputIdentifier = self::VIEW_INPUT_IDENTIFIER;
-        if (!array_key_exists($viewInputIdentifier, $data)) {
-            throw new Exceptions\Parser('Missing ' . $viewInputIdentifier . ' attribute for <ViewInput>.');
-        }
+        $this->validateInputArray($data);
 
-        if (!is_array($data[$viewInputIdentifier])) {
-            throw new Exceptions\Parser($viewInputIdentifier . ' attribute for <ViewInput> contains invalid data.');
-        }
-
-        $queryData = $data[$viewInputIdentifier];
-        $queryMediaType = 'application/vnd.ibexa.api.internal.' . $viewInputIdentifier;
+        $queryData = $data[self::VIEW_INPUT_IDENTIFIER];
+        $queryMediaType = 'application/vnd.ibexa.api.internal.' . self::VIEW_INPUT_IDENTIFIER;
         $restViewInput->query = $parsingDispatcher->parse($queryData, $queryMediaType);
 
         return $restViewInput;
+    }
+
+    /**
+     * @param array<mixed> $data
+     */
+    private function validateInputArray(array $data): void
+    {
+        $validatorBuilder = new ContentTypeRestViewInputValidatorBuilder($this->validator);
+        $validatorBuilder->validateInputArray($data);
+        $violations = $validatorBuilder->build()->getViolations();
+
+        if ($violations->count() > 0) {
+            throw new ValidationFailedException(
+                self::VIEW_INPUT_IDENTIFIER,
+                $violations
+            );
+        }
     }
 }

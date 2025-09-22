@@ -64,6 +64,8 @@ services:
 
     Ibexa\Rest\Server\Input\Parser\ContentType\RestViewInput:
         parent: Ibexa\Rest\Server\Common\Parser
+        arguments:
+            $validator: '@validator'
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.ContentTypeViewInput }
 
