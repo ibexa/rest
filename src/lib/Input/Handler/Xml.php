@@ -8,6 +8,7 @@ namespace Ibexa\Rest\Input\Handler;
 
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\Handler;
+use InvalidArgumentException;
 
 /**
  * Input format handler base class.
@@ -150,6 +151,9 @@ class Xml extends Handler
                         ];
                         $isArray = true;
                     } elseif (!is_string($current[$tagName])) {
+                        if (!is_array($current[$tagName])) {
+                            throw new InvalidArgumentException('Current tag name is not an array as expected.');
+                        }
                         $current[$tagName][] = $this->convertDom($childNode);
                     }
 

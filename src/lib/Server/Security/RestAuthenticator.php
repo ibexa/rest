@@ -128,7 +128,7 @@ class RestAuthenticator implements AuthenticatorInterface
         $user = $token->getUser();
         if (!$user instanceof IbexaUser) {
             if ($this->logger) {
-                $this->logger->error('REST: Authenticated user must be Ibexa\\Core\\MVC\\Symfony\\Security\\User, got ' . is_string($user) ? $user : get_class($user));
+                $this->logger->error('REST: Authenticated user must be Ibexa\\Core\\MVC\\Symfony\\Security\\User, got ' . (is_string($user) ? $user : get_class($user)));
             }
 
             $e = new InvalidUserTypeException('Authenticated user is not an Ibexa User.');

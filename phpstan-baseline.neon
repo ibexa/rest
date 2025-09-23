@@ -775,24 +775,6 @@ parameters:
 			path: src/lib/Input/Handler/Json.php
 
 		-
-			message: '#^Cannot assign new offset to array\|string\.$#'
-			identifier: offsetAssign.dimType
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:convert\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:convertDom\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:parseFieldTypeHash\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -4383,12 +4365,6 @@ parameters:
 		-
 			message: '#^Property Ibexa\\Rest\\Server\\Security\\RestAuthenticator\:\:\$logger \(Psr\\Log\\LoggerInterface\) does not accept Psr\\Log\\LoggerInterface\|null\.$#'
 			identifier: assign.propertyType
-			count: 1
-			path: src/lib/Server/Security/RestAuthenticator.php
-
-		-
-			message: '#^Ternary operator condition is always true\.$#'
-			identifier: ternary.alwaysTrue
 			count: 1
 			path: src/lib/Server/Security/RestAuthenticator.php
 
