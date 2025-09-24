@@ -1,3 +1,6 @@
+imports:
+    - { resource: api_platform/badges.yaml }
+
 services:
     ibexa.api_platform.action.entrypoint:
         parent: api_platform.action.entrypoint
@@ -19,10 +22,11 @@ services:
         class: Ibexa\Bundle\Rest\ApiPlatform\OpenApiFactory
         decorates: ibexa.api_platform.openapi.factory
         arguments:
-            - '@.inner'
-            - '@Ibexa\Bundle\Rest\ApiPlatform\SchemasCollectionFactory'
-            - '@Symfony\Component\HttpKernel\KernelInterface'
-            - '%ibexa.rest.path_prefix%'
+            $decorated: '@.inner'
+            $schemaCollectionFactory: '@Ibexa\Bundle\Rest\ApiPlatform\SchemasCollectionFactory'
+            $kernel: '@Symfony\Component\HttpKernel\KernelInterface'
+            $prefix: '%ibexa.rest.path_prefix%'
+            $editionBadgeFactory: '@Ibexa\Bundle\Rest\ApiPlatform\EditionBadge\EditionBadgeFactoryInterface'
 
     ibexa.api_platform.openapi.factory:
         parent: api_platform.openapi.factory
