@@ -75,7 +75,7 @@ class RestAuthenticator implements AuthenticatorInterface
         $providerKey,
         EventDispatcherInterface $dispatcher,
         ConfigResolverInterface $configResolver,
-        LoggerInterface $logger = null
+        ?LoggerInterface $logger = null
     ) {
         $this->tokenStorage = $tokenStorage;
         $this->authenticationManager = $authenticationManager;
@@ -128,7 +128,7 @@ class RestAuthenticator implements AuthenticatorInterface
         $user = $token->getUser();
         if (!$user instanceof IbexaUser) {
             if ($this->logger) {
-                $this->logger->error('REST: Authenticated user must be Ibexa\\Core\\MVC\\Symfony\\Security\\User, got ' . is_string($user) ? $user : get_class($user));
+                $this->logger->error('REST: Authenticated user must be Ibexa\\Core\\MVC\\Symfony\\Security\\User, got ' . (is_string($user) ? $user : get_class($user)));
             }
 
             $e = new InvalidUserTypeException('Authenticated user is not an Ibexa User.');
@@ -169,7 +169,7 @@ class RestAuthenticator implements AuthenticatorInterface
      *
      * @return bool
      */
-    private function isUserConflict(IbexaUser $user, TokenInterface $previousToken = null)
+    private function isUserConflict(IbexaUser $user, ?TokenInterface $previousToken = null)
     {
         if ($previousToken === null || !$previousToken instanceof UsernamePasswordToken) {
             return false;

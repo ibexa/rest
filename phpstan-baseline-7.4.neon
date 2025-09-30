@@ -55,12 +55,6 @@ parameters:
 			path: src/lib/Server/Controller/User.php
 
 		-
-			message: '#^Parameter \#1 \$message of method Psr\\Log\\LoggerInterface\:\:error\(\) expects string, Symfony\\Component\\Security\\Core\\User\\UserInterface\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Security/RestAuthenticator.php
-
-		-
 			message: '#^Parameter \#1 \$str of function base64_encode expects string, string\|false given\.$#'
 			identifier: argument.type
 			count: 1
