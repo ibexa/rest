@@ -19,13 +19,11 @@ class RestContentType extends RestValue
 {
     public ContentType $contentType;
 
-    /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[]
-     */
+    /** @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[]|null */
     public ?array $fieldDefinitions;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[] $fieldDefinitions
+     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[]|null $fieldDefinitions
      */
     public function __construct(ContentType $contentType, ?array $fieldDefinitions = null)
     {
