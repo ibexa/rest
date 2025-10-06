@@ -365,7 +365,7 @@ class ContentType extends RestController
     /**
      * Creates a draft and updates it with the given data.
      *
-     * @param $contentTypeId
+     * @param int|string $contentTypeId
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      *
@@ -373,7 +373,7 @@ class ContentType extends RestController
      */
     public function createContentTypeDraft($contentTypeId, Request $request)
     {
-        $contentType = $this->contentTypeService->loadContentType($contentTypeId);
+        $contentType = $this->contentTypeService->loadContentType((int)$contentTypeId);
 
         try {
             $contentTypeDraft = $this->contentTypeService->createContentTypeDraft(
