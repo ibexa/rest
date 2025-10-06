@@ -279,7 +279,7 @@ class ContentType extends RestController
     /**
      * Creates a new content type draft in the given content type group.
      *
-     * @param $contentTypeGroupId
+     * @param int|string $contentTypeGroupId
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
@@ -288,7 +288,7 @@ class ContentType extends RestController
      */
     public function createContentType($contentTypeGroupId, Request $request)
     {
-        $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId);
+        $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup((int)$contentTypeGroupId);
         $publish = ($request->query->has('publish') && $request->query->get('publish') === 'true');
 
         try {
