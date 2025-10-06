@@ -107,14 +107,14 @@ class ContentType extends RestController
     /**
      * Returns a list of content types of the group.
      *
-     * @param string $contentTypeGroupId
+     * @param int|string $contentTypeGroupId
      *
      * @return \Ibexa\Rest\Server\Values\ContentTypeList|\Ibexa\Rest\Server\Values\ContentTypeInfoList
      */
     public function listContentTypesForGroup($contentTypeGroupId, Request $request)
     {
         $contentTypes = $this->contentTypeService->loadContentTypes(
-            $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId, Language::ALL),
+            $this->contentTypeService->loadContentTypeGroup((int)$contentTypeGroupId, Language::ALL),
             Language::ALL
         );
 
@@ -136,7 +136,7 @@ class ContentType extends RestController
      */
     public function deleteContentTypeGroup($contentTypeGroupId)
     {
-        $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId);
+        $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup((int)$contentTypeGroupId);
 
         $contentTypes = $this->contentTypeService->loadContentTypes($contentTypeGroup);
         if (!empty($contentTypes)) {
@@ -184,7 +184,7 @@ class ContentType extends RestController
      */
     public function loadContentTypeGroup($contentTypeGroupId)
     {
-        return $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId, Language::ALL);
+        return $this->contentTypeService->loadContentTypeGroup((int)$contentTypeGroupId, Language::ALL);
     }
 
     /**
@@ -196,7 +196,7 @@ class ContentType extends RestController
      */
     public function loadContentType($contentTypeId)
     {
-        $contentType = $this->contentTypeService->loadContentType($contentTypeId, Language::ALL);
+        $contentType = $this->contentTypeService->loadContentType((int)$contentTypeId, Language::ALL);
 
         return new Values\RestContentType(
             $contentType,

@@ -1567,12 +1567,6 @@ parameters:
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
-			message: '#^Parameter \#1 \$contentTypeGroupId of method Ibexa\\Contracts\\Core\\Repository\\ContentTypeService\:\:loadContentTypeGroup\(\) expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Controller/ContentType.php
-
-		-
 			message: '#^Parameter \#1 \$contentTypeGroupIdentifier of method Ibexa\\Contracts\\Core\\Repository\\ContentTypeService\:\:loadContentTypeGroupByIdentifier\(\) expects string, string\|null given\.$#'
 			identifier: argument.type
 			count: 1
