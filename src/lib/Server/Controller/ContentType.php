@@ -623,7 +623,7 @@ class ContentType extends RestController
      */
     public function loadContentTypeDraftFieldDefinition($contentTypeId, $fieldDefinitionId, Request $request)
     {
-        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
+        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft((int)$contentTypeId);
 
         foreach ($contentTypeDraft->getFieldDefinitions() as $fieldDefinition) {
             if ($fieldDefinition->id == $fieldDefinitionId) {
@@ -650,7 +650,7 @@ class ContentType extends RestController
      */
     public function updateContentTypeDraftFieldDefinition($contentTypeId, $fieldDefinitionId, Request $request)
     {
-        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
+        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft((int)$contentTypeId);
         $fieldDefinitionUpdate = $this->inputDispatcher->parse(
             new Message(
                 [
@@ -683,7 +683,7 @@ class ContentType extends RestController
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
-        $updatedDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
+        $updatedDraft = $this->contentTypeService->loadContentTypeDraft((int)$contentTypeId);
         foreach ($updatedDraft->getFieldDefinitions() as $fieldDef) {
             if ($fieldDef->id == $fieldDefinitionId) {
                 return new Values\RestFieldDefinition($updatedDraft, $fieldDef);
