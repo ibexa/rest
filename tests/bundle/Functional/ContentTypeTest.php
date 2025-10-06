@@ -10,36 +10,6 @@ use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 
 class ContentTypeTest extends RESTFunctionalTestCase
 {
-    public function testCreateView(): void
-    {
-        $body = <<< XML
-<?xml version="1.0" encoding="UTF-8"?>
-<ViewInput>
-  <identifier>ContentTypeView</identifier>
-  <ContentTypeQuery>
-    <Query>
-         <ContentTypeIdentifierCriterion>folder</ContentTypeIdentifierCriterion>
-    </Query>
-    <limit>10</limit>
-    <offset>0</offset>
-  </ContentTypeQuery>
-</ViewInput>
-XML;
-        $request = $this->createHttpRequest(
-            'POST',
-            '/api/ibexa/v2/content/types/view',
-            'ContentTypeViewInput+xml',
-            'ContentTypeView+json',
-            $body
-        );
-
-        $response = $this->sendHttpRequest($request);
-        $responseData = json_decode($response->getBody(), true);
-
-        self::assertArrayHasKey('ContentTypeList', $responseData);
-        self::assertSame('folder', $responseData['ContentTypeList']['ContentType'][0]['identifier']);
-    }
-
     /**
      * Covers POST /content/typegroups.
      */
@@ -153,7 +123,7 @@ XML;
         );
         $response = $this->sendHttpRequest($request);
 
-        self::assertHttpResponseCodeEquals($response, 200);
+        self::assertHttpResponseCodeEquals($response, 201);
         self::assertHttpResponseHasHeader($response, 'Location');
 
         $this->addCreatedElement($response->getHeader('Location')[0]);
@@ -641,6 +611,36 @@ XML;
         );
 
         self::assertHttpResponseCodeEquals($response, 403);
+    }
+
+    public function testCreateView(): void
+    {
+        $body = <<< XML
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewInput>
+  <identifier>ContentTypeView</identifier>
+  <ContentTypeQuery>
+    <Query>
+         <ContentTypeIdentifierCriterion>folder</ContentTypeIdentifierCriterion>
+    </Query>
+    <limit>10</limit>
+    <offset>0</offset>
+  </ContentTypeQuery>
+</ViewInput>
+XML;
+        $request = $this->createHttpRequest(
+            'POST',
+            '/api/ibexa/v2/content/types/view',
+            'ContentTypeViewInput+xml',
+            'ContentTypeView+json',
+            $body
+        );
+
+        $response = $this->sendHttpRequest($request);
+        $responseData = json_decode($response->getBody(), true);
+
+        self::assertArrayHasKey('ContentTypeList', $responseData);
+        self::assertSame('folder', $responseData['ContentTypeList']['ContentType'][0]['identifier']);
     }
 }
 
