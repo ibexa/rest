@@ -1411,12 +1411,6 @@ parameters:
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:createContentType\(\) has parameter \$contentTypeGroupId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Controller/ContentType.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:createContentTypeDraft\(\) has parameter \$contentTypeId with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
