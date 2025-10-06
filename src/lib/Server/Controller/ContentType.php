@@ -77,7 +77,7 @@ class ContentType extends RestController
     /**
      * Updates a content type group.
      *
-     * @param $contentTypeGroupId
+     * @param int|string $contentTypeGroupId
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      *
@@ -94,11 +94,11 @@ class ContentType extends RestController
 
         try {
             $this->contentTypeService->updateContentTypeGroup(
-                $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId),
+                $this->contentTypeService->loadContentTypeGroup((int)$contentTypeGroupId),
                 $this->mapToGroupUpdateStruct($createStruct)
             );
 
-            return $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId, Language::ALL);
+            return $this->contentTypeService->loadContentTypeGroup((int)$contentTypeGroupId, Language::ALL);
         } catch (InvalidArgumentException $e) {
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
