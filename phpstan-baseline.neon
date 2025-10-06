@@ -1399,18 +1399,6 @@ parameters:
 			path: src/lib/Server/Controller/Content.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:addContentTypeDraftFieldDefinition\(\) has parameter \$contentTypeId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Controller/ContentType.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:copyContentType\(\) has parameter \$contentTypeId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Controller/ContentType.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:createContentTypeDraft\(\) has parameter \$contentTypeId with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
@@ -1441,12 +1429,6 @@ parameters:
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadContentTypeDraft\(\) has parameter \$contentTypeId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Controller/ContentType.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadContentTypeDraftFieldDefinition\(\) has parameter \$contentTypeId with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
@@ -1465,19 +1447,7 @@ parameters:
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadContentTypeFieldDefinition\(\) has parameter \$contentTypeId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Controller/ContentType.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadContentTypeFieldDefinition\(\) has parameter \$fieldDefinitionId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Controller/ContentType.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:loadContentTypeFieldDefinitionList\(\) has parameter \$contentTypeId with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
 			path: src/lib/Server/Controller/ContentType.php
@@ -1538,12 +1508,6 @@ parameters:
 
 		-
 			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:unlinkContentTypeFromGroup\(\) has parameter \$contentTypeId with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: src/lib/Server/Controller/ContentType.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:updateContentTypeDraft\(\) has parameter \$contentTypeId with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
 			path: src/lib/Server/Controller/ContentType.php
