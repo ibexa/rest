@@ -151,12 +151,6 @@ parameters:
 			path: src/lib/Input/FieldTypeParser.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Json\:\:convert\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Input/Handler/Json.php
-
-		-
 			message: '#^Access to an undefined property DOMNode\:\:\$data\.$#'
 			identifier: property.notFound
 			count: 2

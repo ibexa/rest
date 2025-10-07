@@ -608,4 +608,34 @@ XML;
 
         self::assertHttpResponseCodeEquals($response, 403);
     }
+
+    public function testCreateView(): void
+    {
+        $body = <<< XML
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewInput>
+  <identifier>ContentTypeView</identifier>
+  <ContentTypeQuery>
+    <Query>
+         <ContentTypeIdentifierCriterion>folder</ContentTypeIdentifierCriterion>
+    </Query>
+    <limit>10</limit>
+    <offset>0</offset>
+  </ContentTypeQuery>
+</ViewInput>
+XML;
+        $request = $this->createHttpRequest(
+            'POST',
+            '/api/ibexa/v2/content/types/view',
+            'ContentTypeViewInput+xml',
+            'ContentTypeView+json',
+            $body
+        );
+
+        $response = $this->sendHttpRequest($request);
+        $responseData = json_decode($response->getBody(), true);
+
+        self::assertArrayHasKey('ContentTypeList', $responseData);
+        self::assertSame('folder', $responseData['ContentTypeList']['ContentType'][0]['identifier']);
+    }
 }

@@ -29,10 +29,6 @@ jobs:
             - name: Run code style check
               run: composer run-script check-cs -- --format=checkstyle | cs2pr
 
-    rector:
-        name: Run rector
-        uses: ibexa/gh-workflows/.github/workflows/rector.yml@main
-
     tests:
         name: Unit & integration tests
         runs-on: "ubuntu-24.04"

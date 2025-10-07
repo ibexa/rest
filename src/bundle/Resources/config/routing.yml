@@ -575,6 +575,13 @@ ibexa.rest.list_content_types:
     controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeListController::listContentTypes
     methods: [GET]
 
+ibexa.rest.content_types.view:
+    path: /content/types/view
+    methods: [ POST ]
+    controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeCreateViewController::createView
+    options:
+        expose: true
+
 ibexa.rest.copy_content_type:
     path: /content/types/{contentTypeId}
     controller: Ibexa\Rest\Server\Controller\ContentType\ContentTypeCopyController::copyContentType

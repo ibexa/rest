@@ -1,0 +1,20 @@
+{
+    "ViewInput": {
+        "identifier": "ContentTypeView",
+        "ContentTypeQuery": {
+            "limit": "10",
+            "offset": "1",
+            "Query": {
+                "ContentTypeIdCriterion": [1,2],
+                "ContentTypeIdentifierCriterion": "folder",
+                "IsSystemCriterion": true,
+                "ContentTypeGroupIdCriterion": 1,
+                "ContainsFieldDefinitionIdCriterion": 2
+            },
+            "SortClauses": {
+                "Identifier": "descending",
+                "Id": "ascending"
+            }
+        }
+    }
+}
