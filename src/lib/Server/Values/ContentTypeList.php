@@ -14,26 +14,19 @@ use Ibexa\Rest\Value as RestValue;
 class ContentTypeList extends RestValue
 {
     /**
-     * Content types.
-     *
      * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType[]
      */
-    public $contentTypes;
+    public array $contentTypes;
 
     /**
      * Path which was used to fetch the list of content types.
-     *
-     * @var string
      */
-    public $path;
+    public string $path;
 
     /**
-     * Construct.
-     *
      * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType[] $contentTypes
-     * @param string $path
      */
-    public function __construct(array $contentTypes, $path)
+    public function __construct(array $contentTypes, string $path)
     {
         $this->contentTypes = $contentTypes;
         $this->path = $path;

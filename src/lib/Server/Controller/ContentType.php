@@ -21,7 +21,6 @@ use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
-use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -76,7 +75,7 @@ class ContentType extends RestController
     /**
      * Updates a content type group.
      *
-     * @param $contentTypeGroupId
+     * @param int|string $contentTypeGroupId
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      *
@@ -93,11 +92,11 @@ class ContentType extends RestController
 
         try {
             $this->contentTypeService->updateContentTypeGroup(
-                $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId),
+                $this->contentTypeService->loadContentTypeGroup((int)$contentTypeGroupId),
                 $this->mapToGroupUpdateStruct($createStruct)
             );
 
-            return $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId, Language::ALL);
+            return $this->contentTypeService->loadContentTypeGroup((int)$contentTypeGroupId, Language::ALL);
         } catch (InvalidArgumentException $e) {
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
@@ -106,14 +105,14 @@ class ContentType extends RestController
     /**
      * Returns a list of content types of the group.
      *
-     * @param string $contentTypeGroupId
+     * @param int|string $contentTypeGroupId
      *
      * @return \Ibexa\Rest\Server\Values\ContentTypeList|\Ibexa\Rest\Server\Values\ContentTypeInfoList
      */
     public function listContentTypesForGroup($contentTypeGroupId, Request $request)
     {
         $contentTypes = $this->contentTypeService->loadContentTypes(
-            $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId, Language::ALL),
+            $this->contentTypeService->loadContentTypeGroup((int)$contentTypeGroupId, Language::ALL),
             Language::ALL
         );
 
@@ -135,7 +134,7 @@ class ContentType extends RestController
      */
     public function deleteContentTypeGroup($contentTypeGroupId)
     {
-        $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId);
+        $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup((int)$contentTypeGroupId);
 
         $contentTypes = $this->contentTypeService->loadContentTypes($contentTypeGroup);
         if (!empty($contentTypes)) {
@@ -183,7 +182,7 @@ class ContentType extends RestController
      */
     public function loadContentTypeGroup($contentTypeGroupId)
     {
-        return $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId, Language::ALL);
+        return $this->contentTypeService->loadContentTypeGroup((int)$contentTypeGroupId, Language::ALL);
     }
 
     /**
@@ -195,7 +194,7 @@ class ContentType extends RestController
      */
     public function loadContentType($contentTypeId)
     {
-        $contentType = $this->contentTypeService->loadContentType($contentTypeId, Language::ALL);
+        $contentType = $this->contentTypeService->loadContentType((int)$contentTypeId, Language::ALL);
 
         return new Values\RestContentType(
             $contentType,
@@ -278,7 +277,7 @@ class ContentType extends RestController
     /**
      * Creates a new content type draft in the given content type group.
      *
-     * @param $contentTypeGroupId
+     * @param int|string $contentTypeGroupId
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
@@ -287,7 +286,7 @@ class ContentType extends RestController
      */
     public function createContentType($contentTypeGroupId, Request $request)
     {
-        $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId);
+        $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup((int)$contentTypeGroupId);
         $publish = ($request->query->has('publish') && $request->query->get('publish') === 'true');
 
         try {
@@ -343,14 +342,14 @@ class ContentType extends RestController
      * Copies a content type. The identifier of the copy is changed to
      * copy_of_<originalBaseIdentifier>_<newTypeId> and a new remoteId is generated.
      *
-     * @param $contentTypeId
+     * @param int|string $contentTypeId
      *
      * @return \Ibexa\Rest\Server\Values\ResourceCreated
      */
     public function copyContentType($contentTypeId)
     {
         $copiedContentType = $this->contentTypeService->copyContentType(
-            $this->contentTypeService->loadContentType($contentTypeId)
+            $this->contentTypeService->loadContentType((int)$contentTypeId)
         );
 
         return new Values\ResourceCreated(
@@ -364,7 +363,7 @@ class ContentType extends RestController
     /**
      * Creates a draft and updates it with the given data.
      *
-     * @param $contentTypeId
+     * @param int|string $contentTypeId
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      *
@@ -372,7 +371,7 @@ class ContentType extends RestController
      */
     public function createContentTypeDraft($contentTypeId, Request $request)
     {
-        $contentType = $this->contentTypeService->loadContentType($contentTypeId);
+        $contentType = $this->contentTypeService->loadContentType((int)$contentTypeId);
 
         try {
             $contentTypeDraft = $this->contentTypeService->createContentTypeDraft(
@@ -415,13 +414,13 @@ class ContentType extends RestController
     /**
      * Loads a content type draft.
      *
-     * @param $contentTypeId
+     * @param int|string $contentTypeId
      *
      * @return \Ibexa\Rest\Server\Values\RestContentType
      */
     public function loadContentTypeDraft($contentTypeId)
     {
-        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
+        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft((int)$contentTypeId);
 
         return new Values\RestContentType(
             $contentTypeDraft,
@@ -432,7 +431,7 @@ class ContentType extends RestController
     /**
      * Updates meta data of a draft. This method does not handle field definitions.
      *
-     * @param $contentTypeId
+     * @param int|string $contentTypeId
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      *
@@ -440,7 +439,7 @@ class ContentType extends RestController
      */
     public function updateContentTypeDraft($contentTypeId, Request $request)
     {
-        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
+        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft((int)$contentTypeId);
         $contentTypeUpdateStruct = $this->inputDispatcher->parse(
             new Message(
                 [
@@ -470,7 +469,7 @@ class ContentType extends RestController
     /**
      * Creates a new field definition for the given content type draft.
      *
-     * @param $contentTypeId
+     * @param int|string $contentTypeId
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
@@ -479,7 +478,7 @@ class ContentType extends RestController
      */
     public function addContentTypeDraftFieldDefinition($contentTypeId, Request $request)
     {
-        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
+        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft((int) $contentTypeId);
         $fieldDefinitionCreate = $this->inputDispatcher->parse(
             new Message(
                 [
@@ -502,7 +501,7 @@ class ContentType extends RestController
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
-        $updatedDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
+        $updatedDraft = $this->contentTypeService->loadContentTypeDraft((int)$contentTypeId);
         foreach ($updatedDraft->getFieldDefinitions() as $fieldDefinition) {
             if ($fieldDefinition->identifier == $fieldDefinitionCreate->identifier) {
                 return new Values\CreatedFieldDefinition(
@@ -519,7 +518,7 @@ class ContentType extends RestController
     /**
      * Loads field definitions for a given content type.
      *
-     * @param $contentTypeId
+     * @param int|string $contentTypeId
      *
      * @return \Ibexa\Rest\Server\Values\FieldDefinitionList
      *
@@ -527,7 +526,7 @@ class ContentType extends RestController
      */
     public function loadContentTypeFieldDefinitionList($contentTypeId)
     {
-        $contentType = $this->contentTypeService->loadContentType($contentTypeId, Language::ALL);
+        $contentType = $this->contentTypeService->loadContentType((int)$contentTypeId, Language::ALL);
 
         return new Values\FieldDefinitionList(
             $contentType,
@@ -538,7 +537,7 @@ class ContentType extends RestController
     /**
      * Returns the field definition given by id.
      *
-     * @param $contentTypeId
+     * @param int|string $contentTypeId
      * @param $fieldDefinitionId
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
@@ -547,7 +546,7 @@ class ContentType extends RestController
      */
     public function loadContentTypeFieldDefinition($contentTypeId, $fieldDefinitionId, Request $request)
     {
-        $contentType = $this->contentTypeService->loadContentType($contentTypeId, Language::ALL);
+        $contentType = $this->contentTypeService->loadContentType((int)$contentTypeId, Language::ALL);
 
         foreach ($contentType->getFieldDefinitions() as $fieldDefinition) {
             if ($fieldDefinition->id == $fieldDefinitionId) {
@@ -622,7 +621,7 @@ class ContentType extends RestController
      */
     public function loadContentTypeDraftFieldDefinition($contentTypeId, $fieldDefinitionId, Request $request)
     {
-        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
+        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft((int)$contentTypeId);
 
         foreach ($contentTypeDraft->getFieldDefinitions() as $fieldDefinition) {
             if ($fieldDefinition->id == $fieldDefinitionId) {
@@ -649,7 +648,7 @@ class ContentType extends RestController
      */
     public function updateContentTypeDraftFieldDefinition($contentTypeId, $fieldDefinitionId, Request $request)
     {
-        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
+        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft((int)$contentTypeId);
         $fieldDefinitionUpdate = $this->inputDispatcher->parse(
             new Message(
                 [
@@ -682,7 +681,7 @@ class ContentType extends RestController
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
-        $updatedDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
+        $updatedDraft = $this->contentTypeService->loadContentTypeDraft((int)$contentTypeId);
         foreach ($updatedDraft->getFieldDefinitions() as $fieldDef) {
             if ($fieldDef->id == $fieldDefinitionId) {
                 return new Values\RestFieldDefinition($updatedDraft, $fieldDef);
@@ -695,7 +694,7 @@ class ContentType extends RestController
     /**
      * Deletes a field definition from a content type draft.
      *
-     * @param $contentTypeId
+     * @param int|string $contentTypeId
      * @param $fieldDefinitionId
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
@@ -704,7 +703,7 @@ class ContentType extends RestController
      */
     public function removeContentTypeDraftFieldDefinition($contentTypeId, $fieldDefinitionId, Request $request)
     {
-        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
+        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft((int)$contentTypeId);
 
         $fieldDefinition = null;
         foreach ($contentTypeDraft->getFieldDefinitions() as $fieldDef) {
@@ -728,7 +727,7 @@ class ContentType extends RestController
     /**
      * Publishes a content type draft.
      *
-     * @param $contentTypeId
+     * @param int|string $contentTypeId
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      *
@@ -736,7 +735,7 @@ class ContentType extends RestController
      */
     public function publishContentTypeDraft($contentTypeId)
     {
-        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
+        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft((int)$contentTypeId);
 
         $fieldDefinitions = $contentTypeDraft->getFieldDefinitions();
         if (empty($fieldDefinitions)) {
@@ -756,7 +755,7 @@ class ContentType extends RestController
     /**
      * The given content type is deleted.
      *
-     * @param $contentTypeId
+     * @param int|string $contentTypeId
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      *
@@ -764,7 +763,7 @@ class ContentType extends RestController
      */
     public function deleteContentType($contentTypeId)
     {
-        $contentType = $this->contentTypeService->loadContentType($contentTypeId);
+        $contentType = $this->contentTypeService->loadContentType((int)$contentTypeId);
 
         try {
             $this->contentTypeService->deleteContentType($contentType);
@@ -778,13 +777,13 @@ class ContentType extends RestController
     /**
      * The given content type draft is deleted.
      *
-     * @param $contentTypeId
+     * @param int|string $contentTypeId
      *
      * @return \Ibexa\Rest\Server\Values\NoContent
      */
     public function deleteContentTypeDraft($contentTypeId)
     {
-        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
+        $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft((int)$contentTypeId);
         $this->contentTypeService->deleteContentType($contentTypeDraft);
 
         return new Values\NoContent();
@@ -793,13 +792,13 @@ class ContentType extends RestController
     /**
      * Returns the content type groups the content type belongs to.
      *
-     * @param $contentTypeId
+     * @param int|string $contentTypeId
      *
      * @return \Ibexa\Rest\Server\Values\ContentTypeGroupRefList
      */
     public function loadGroupsOfContentType($contentTypeId)
     {
-        $contentType = $this->contentTypeService->loadContentType($contentTypeId, Language::ALL);
+        $contentType = $this->contentTypeService->loadContentType((int)$contentTypeId, Language::ALL);
 
         return new Values\ContentTypeGroupRefList(
             $contentType,
@@ -819,7 +818,7 @@ class ContentType extends RestController
      */
     public function linkContentTypeToGroup($contentTypeId, Request $request)
     {
-        $contentType = $this->contentTypeService->loadContentType($contentTypeId);
+        $contentType = $this->contentTypeService->loadContentType((int)$contentTypeId);
 
         try {
             $contentTypeGroupId = $this->requestParser->parseHref(
@@ -831,7 +830,7 @@ class ContentType extends RestController
             throw new BadRequestException($e->getMessage());
         }
 
-        $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId);
+        $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup((int)$contentTypeGroupId);
 
         $existingContentTypeGroups = $contentType->getContentTypeGroups();
         $contentTypeInGroup = false;
@@ -862,8 +861,8 @@ class ContentType extends RestController
     /**
      * Removes the given group from the content type and returns the updated group list.
      *
-     * @param $contentTypeId
-     * @param $contentTypeGroupId
+     * @param int|string $contentTypeId
+     * @param int|string $contentTypeGroupId
      *
      * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
      * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
@@ -872,8 +871,8 @@ class ContentType extends RestController
      */
     public function unlinkContentTypeFromGroup($contentTypeId, $contentTypeGroupId)
     {
-        $contentType = $this->contentTypeService->loadContentType($contentTypeId);
-        $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId);
+        $contentType = $this->contentTypeService->loadContentType((int)$contentTypeId);
+        $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup((int)$contentTypeGroupId);
 
         $existingContentTypeGroups = $contentType->getContentTypeGroups();
         $contentTypeInGroup = false;
@@ -897,11 +896,29 @@ class ContentType extends RestController
             $contentTypeGroup
         );
 
-        $contentType = $this->contentTypeService->loadContentType($contentTypeId);
+        $contentType = $this->contentTypeService->loadContentType((int)$contentTypeId);
 
         return new Values\ContentTypeGroupRefList(
             $contentType,
             $contentType->getContentTypeGroups()
+        );
+    }
+
+    public function createView(Request $request): Values\ContentTypeList
+    {
+        /** @var \Ibexa\Rest\Server\Values\ContentTypeRestViewInput $viewInput */
+        $viewInput = $this->inputDispatcher->parse(
+            new Message(
+                ['Content-Type' => $request->headers->get('Content-Type')],
+                $request->getContent()
+            )
+        );
+
+        $contentTypes = $this->contentTypeService->findContentTypes($viewInput->query);
+
+        return new Values\ContentTypeList(
+            $contentTypes->getContentTypes(),
+            '',
         );
     }
 
