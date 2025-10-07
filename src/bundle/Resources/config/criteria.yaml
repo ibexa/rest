@@ -1,14 +1,14 @@
 services:
+    _instanceof:
+        Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\ContentTypeCriterionInterface:
+            tags:
+                - 'ibexa.rest.content_type.criterion'
+
     Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\CriterionProcessor:
         parent: Ibexa\Contracts\Rest\Input\Parser\Query\Criterion\BaseCriterionProcessor
 
     Ibexa\Rest\Server\Input\Parser\ContentType\SortClause\SortClauseProcessor:
         parent: Ibexa\Contracts\Rest\Input\Parser\Query\SortClause\BaseSortClauseProcessor
-
-    _instanceof:
-        Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\ContentTypeCriterionInterface:
-            tags:
-                - 'ibexa.rest.content_type.criterion'
 
     Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\ContentTypeCriteriaRegistry:
         arguments:
