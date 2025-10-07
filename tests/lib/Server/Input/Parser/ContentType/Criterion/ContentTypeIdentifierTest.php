@@ -37,7 +37,6 @@ final class ContentTypeIdentifierTest extends TestCase
     /**
      * @dataProvider provideForTestInvalidInput
      *
-     * @phpstan-param string $exceptionMessage
      * @phpstan-param array{
      *     array<string, string>
      * } $input

@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @internal
  */
-final class FromGetQueryContentTypeQueryBuilder implements ContentTypeQueryBuilderInterface
+final class GetBasedQueryContentTypeQueryBuilder implements ContentTypeQueryBuilderInterface
 {
     private const CONTENT_TYPE_QUERY_MEDIA_TYPE = 'application/vnd.ibexa.api.internal.ContentTypeQuery';
 

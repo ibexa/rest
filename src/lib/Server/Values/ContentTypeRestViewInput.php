@@ -11,7 +11,7 @@ namespace Ibexa\Rest\Server\Values;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\Query\ContentTypeQuery;
 use Ibexa\Rest\Value as RestValue;
 
-class ContentTypeRestViewInput extends RestValue
+final class ContentTypeRestViewInput extends RestValue
 {
     public ContentTypeQuery $query;
 
