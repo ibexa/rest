@@ -27,7 +27,7 @@ final class CriterionProcessor extends BaseCriterionProcessor
 {
     protected function getMediaTypePrefix(): string
     {
-        return 'application/vnd.ibexa.api.internal.criterion';
+        return 'application/vnd.ibexa.api.internal.criterion.content_type';
     }
 
     protected function getParserInvalidCriterionMessage(string $criterionName): string

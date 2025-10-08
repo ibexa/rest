@@ -17,24 +17,24 @@ services:
     Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\ContentTypeId:
         parent: Ibexa\Rest\Server\Common\Parser
         tags:
-            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.ContentTypeId }
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.content_type.ContentTypeId }
 
     Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\ContentTypeIdentifier:
         parent: Ibexa\Rest\Server\Common\Parser
         tags:
-            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.ContentTypeIdentifier }
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.content_type.ContentTypeIdentifier }
 
     Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\IsSystem:
         parent: Ibexa\Rest\Server\Common\Parser
         tags:
-            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.IsSystem }
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.content_type.IsSystem }
 
     Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\ContentTypeGroupId:
         parent: Ibexa\Rest\Server\Common\Parser
         tags:
-            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.ContentTypeGroupId }
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.content_type.ContentTypeGroupId }
 
     Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\ContainsFieldDefinitionId:
         parent: Ibexa\Rest\Server\Common\Parser
         tags:
-            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.ContainsFieldDefinitionId }
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.content_type.ContainsFieldDefinitionId }
