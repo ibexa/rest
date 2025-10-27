@@ -75,8 +75,8 @@ final class VisitorTest extends TestCase
     /**
      * @dataProvider provideForTestEncoderContextShouldBeRemoved
      *
-     * @param ArrayObject|array<mixed> $content
-     * @param ArrayObject|array<mixed> $expectedEncoderData
+     * @param \ArrayObject|array<mixed> $content
+     * @param \ArrayObject|array<mixed> $expectedEncoderData
      */
     public function testEncoderContextShouldBeRemoved(
         array|ArrayObject $content,

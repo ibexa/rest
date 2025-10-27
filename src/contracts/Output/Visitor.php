@@ -118,9 +118,9 @@ class Visitor
     }
 
     /**
-     * @param array<mixed>|bool|string|int|float|ArrayObject|null $data
+     * @param array<mixed>|bool|string|int|float|\ArrayObject|null $data
      *
-     * @return array<mixed>|bool|string|int|float|ArrayObject|null
+     * @return array<mixed>|bool|string|int|float|\ArrayObject|null
      */
     private function removeEncodeContext(
         array|bool|string|int|float|null|ArrayObject $data,
