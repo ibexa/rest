@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Rest\Output;
 
+use ArrayObject;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolverInterface;
 use Ibexa\Contracts\Rest\Output\Visitor;
@@ -69,6 +70,69 @@ final class VisitorTest extends TestCase
             new Response($content, Response::HTTP_OK, []),
             $this->visitor->visit($data),
         );
+    }
+
+    /**
+     * @dataProvider provideForTestEncoderContextShouldBeRemoved
+     *
+     * @param ArrayObject|array<mixed> $content
+     * @param ArrayObject|array<mixed> $expectedEncoderData
+     */
+    public function testEncoderContextShouldBeRemoved(
+        array|ArrayObject $content,
+        array|ArrayObject $expectedEncoderData,
+    ): void {
+        $data = new stdClass();
+
+        $this->normalizer
+            ->expects(self::once())
+            ->method('normalize')
+            ->with($data, 'json', ['visitor' => $this->visitor])
+            ->willReturn($content);
+
+        $this->encoder
+            ->expects(self::once())
+            ->method('encode')
+            ->with($expectedEncoderData, 'json', ['foo'])
+            ->willReturn('foo');
+
+        self::assertEquals(
+            new Response('foo', Response::HTTP_OK, []),
+            $this->visitor->visit($data),
+        );
+    }
+
+    /**
+     * @return iterable<array{array<mixed>|ArrayObject, array<mixed>|ArrayObject}>
+     */
+    public static function provideForTestEncoderContextShouldBeRemoved(): iterable
+    {
+        $data = [
+            'ENCODER_CONTEXT' => ['foo'],
+            'some_object_with_embedded_encode_context' => [
+                'ENCODER_CONTEXT' => ['foo'],
+                'some_object_property' => [
+                    'ENCODER_CONTEXT' => ['foo'],
+                    'some_property' => [
+                        'foo' => 'bar',
+                    ],
+                ],
+            ],
+        ];
+
+        $expectedEncoderData = [
+            'some_object_with_embedded_encode_context' => [
+                'some_object_property' => [
+                    'some_property' => [
+                        'foo' => 'bar',
+                    ],
+                ],
+            ],
+        ];
+
+        yield [$data, $expectedEncoderData];
+
+        yield [new ArrayObject($data), new ArrayObject($expectedEncoderData)];
     }
 
     public function testVisitEmptyDocument(): void
