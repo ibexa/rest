@@ -151,31 +151,55 @@ parameters:
 			path: src/lib/Input/FieldTypeParser.php
 
 		-
+			message: '#^Access to an undefined property DOMNameSpaceNode\|DOMNode\:\:\$childNodes\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/lib/Input/Handler/Xml.php
+
+		-
+			message: '#^Access to an undefined property DOMNameSpaceNode\|DOMNode\:\:\$data\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/lib/Input/Handler/Xml.php
+
+		-
+			message: '#^Access to an undefined property DOMNameSpaceNode\|DOMNode\:\:\$tagName\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/lib/Input/Handler/Xml.php
+
+		-
+			message: '#^Access to an undefined property DOMNameSpaceNode\|DOMNode\:\:\$wholeText\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/lib/Input/Handler/Xml.php
+
+		-
 			message: '#^Access to an undefined property DOMNode\:\:\$data\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/lib/Input/Handler/Xml.php
 
 		-
 			message: '#^Access to an undefined property DOMNode\:\:\$tagName\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/lib/Input/Handler/Xml.php
 
 		-
 			message: '#^Access to an undefined property DOMNode\:\:\$wholeText\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: src/lib/Input/Handler/Xml.php
 
 		-
-			message: '#^Call to an undefined method DOMNode\:\:getAttribute\(\)\.$#'
+			message: '#^Call to an undefined method DOMNameSpaceNode\|DOMNode\:\:getAttribute\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
 
 		-
-			message: '#^Call to an undefined method DOMNode\:\:hasAttribute\(\)\.$#'
+			message: '#^Call to an undefined method DOMNameSpaceNode\|DOMNode\:\:hasAttribute\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
@@ -293,12 +317,6 @@ parameters:
 			identifier: variable.undefined
 			count: 2
 			path: src/lib/Server/Controller/BinaryContent.php
-
-		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\AbstractDestinationLocationParser\:\:parse\(\) has Ibexa\\Contracts\\Rest\\Exceptions\\Parser in PHPDoc @throws tag but it''s not thrown\.$#'
-			identifier: throws.unusedType
-			count: 1
-			path: src/lib/Server/Input/Parser/AbstractDestinationLocationParser.php
 
 		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Aggregation\\AbstractRangeAggregationParser\:\:dispatchRanges\(\) has parameter \$data with no value type specified in iterable type array\.$#'
@@ -1135,7 +1153,7 @@ parameters:
 			path: tests/bundle/Functional/RoleTest.php
 
 		-
-			message: '#^Cannot access property \$length on DOMNodeList\<DOMNode\>\|false\.$#'
+			message: '#^Cannot access property \$length on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
 			identifier: property.nonObject
 			count: 1
 			path: tests/bundle/Functional/RootTest.php
@@ -1567,19 +1585,19 @@ parameters:
 			path: tests/bundle/Functional/SectionTest.php
 
 		-
-			message: '#^Cannot access property \$length on DOMNodeList\<DOMNode\>\|false\.$#'
+			message: '#^Cannot access property \$length on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
 			identifier: property.nonObject
 			count: 1
 			path: tests/bundle/Functional/SessionTest.php
 
 		-
-			message: '#^Cannot access property \$nodeValue on DOMNode\|null\.$#'
+			message: '#^Cannot access property \$nodeValue on DOMNameSpaceNode\|DOMNode\|null\.$#'
 			identifier: property.nonObject
 			count: 1
 			path: tests/bundle/Functional/SessionTest.php
 
 		-
-			message: '#^Cannot call method item\(\) on DOMNodeList\<DOMNode\>\|false\.$#'
+			message: '#^Cannot call method item\(\) on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
 			identifier: method.nonObject
 			count: 1
 			path: tests/bundle/Functional/SessionTest.php
@@ -1861,7 +1879,7 @@ parameters:
 			path: tests/lib/Output/GeneratorTest.php
 
 		-
-			message: '#^Cannot access property \$length on DOMNodeList\<DOMNode\>\|false\.$#'
+			message: '#^Cannot access property \$length on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
 			identifier: property.nonObject
 			count: 1
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
@@ -1993,7 +2011,7 @@ parameters:
 			path: tests/lib/Server/Input/Parser/UserGroupCreateTest.php
 
 		-
-			message: '#^Cannot access property \$length on DOMNodeList\<DOMNode\>\|false\.$#'
+			message: '#^Cannot access property \$length on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
 			identifier: property.nonObject
 			count: 1
 			path: tests/lib/Server/Output/ValueObjectVisitor/BookmarkListTest.php
@@ -2059,13 +2077,13 @@ parameters:
 			path: tests/lib/Server/Output/ValueObjectVisitor/ContentTypeListTest.php
 
 		-
-			message: '#^Cannot access property \$textContent on DOMNode\|null\.$#'
+			message: '#^Cannot access property \$textContent on DOMNameSpaceNode\|DOMNode\|null\.$#'
 			identifier: property.nonObject
 			count: 1
 			path: tests/lib/Server/Output/ValueObjectVisitor/ExceptionTest.php
 
 		-
-			message: '#^Cannot call method item\(\) on DOMNodeList\<DOMNode\>\|false\.$#'
+			message: '#^Cannot call method item\(\) on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
 			identifier: method.nonObject
 			count: 1
 			path: tests/lib/Server/Output/ValueObjectVisitor/ExceptionTest.php
