@@ -46,6 +46,15 @@ use Symfony\Component\HttpFoundation\Response;
                     'type' => 'string',
                 ],
             ),
+            new Model\Parameter(
+                name: 'group',
+                in: 'query',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+                description: 'Destination content type group URI; for example with content type group 4: `?group=/api/ibexa/v2/content/typegroups/4`',
+            ),
         ],
         responses: [
             Response::HTTP_OK => [
