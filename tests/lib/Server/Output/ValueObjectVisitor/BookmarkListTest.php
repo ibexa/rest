@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use DOMDocument;
+use DOMNodeList;
 use DOMXPath;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
@@ -90,8 +91,10 @@ class BookmarkListTest extends ValueObjectVisitorBaseTest
         $document = new DOMDocument();
         $document->loadXML($result);
         $xpath = new DOMXPath($document);
+        $queryResult = $xpath->query($query);
 
-        self::assertEquals(count($this->data->items), $xpath->query($query)->length);
+        self::assertInstanceOf(DOMNodeList::class, $queryResult);
+        self::assertEquals(count($this->data->items), $queryResult->length);
     }
 
     /**

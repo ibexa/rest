@@ -13,6 +13,7 @@ use DOMNodeList;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\Handler;
 use InvalidArgumentException;
+use RuntimeException;
 
 /**
  * Input format handler base class.
@@ -135,6 +136,10 @@ class Xml extends Handler
         foreach ($node->childNodes as $childNode) {
             switch ($childNode->nodeType) {
                 case XML_ELEMENT_NODE:
+                    if (!$childNode instanceof DOMElement) {
+                        break;
+                    }
+
                     $tagName = $childNode->tagName;
 
                     if (in_array($tagName, $this->fieldTypeHashElements, true)) {
@@ -165,10 +170,18 @@ class Xml extends Handler
                     break;
 
                 case XML_TEXT_NODE:
+                    if (!$childNode instanceof DOMText) {
+                        break;
+                    }
+
                     $text .= $childNode->wholeText;
                     break;
 
                 case XML_CDATA_SECTION_NODE:
+                    if (!$childNode instanceof DOMCharacterData) {
+                        break;
+                    }
+
                     $text .= $childNode->data;
                     break;
             }
@@ -210,8 +223,12 @@ class Xml extends Handler
         foreach ($valueNodes as $valueNode) {
             switch ($valueNode->nodeType) {
                 case XML_ELEMENT_NODE:
+                    if (!$valueNode instanceof DOMElement) {
+                        break;
+                    }
+
                     if ($valueNode->tagName !== 'value') {
-                        throw new \RuntimeException(
+                        throw new RuntimeException(
                             sprintf(
                                 'Invalid value tag: <%s>.',
                                 $valueNode->tagName
@@ -228,10 +245,18 @@ class Xml extends Handler
                     break;
 
                 case XML_TEXT_NODE:
+                    if (!$valueNode instanceof DOMText) {
+                        break;
+                    }
+
                     $resultString .= $valueNode->wholeText;
                     break;
 
                 case XML_CDATA_SECTION_NODE:
+                    if (!$valueNode instanceof DOMCharacterData) {
+                        break;
+                    }
+
                     $resultString .= $valueNode->data;
                     break;
             }
