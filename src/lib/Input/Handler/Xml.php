@@ -7,9 +7,11 @@
 
 namespace Ibexa\Rest\Input\Handler;
 
+use DOMCharacterData;
 use DOMElement;
 use DOMNode;
 use DOMNodeList;
+use DOMText;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\Handler;
 use InvalidArgumentException;
