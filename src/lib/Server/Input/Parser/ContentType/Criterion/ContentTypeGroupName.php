@@ -15,7 +15,7 @@ use Ibexa\Rest\Input\BaseParser;
 
 final class ContentTypeGroupName extends BaseParser implements ContentTypeCriterionInterface
 {
-    private const GROUP_NAME = 'ContentTypeGroupNameCriterion';
+    private const string GROUP_NAME = 'ContentTypeGroupNameCriterion';
 
     /**
      * @param array<mixed> $data
