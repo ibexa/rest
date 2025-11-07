@@ -6,9 +6,13 @@
  */
 namespace Ibexa\Rest\Input\Handler;
 
+use DOMCharacterData;
+use DOMElement;
+use DOMText;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\Handler;
 use InvalidArgumentException;
+use RuntimeException;
 
 /**
  * Input format handler base class.
@@ -120,17 +124,17 @@ class Xml extends Handler
         $current = [];
         $text = '';
 
-        if ($node instanceof \DOMElement && $node->attributes !== null) {
+        if ($node instanceof DOMElement && $node->attributes !== null) {
             foreach ($node->attributes as $name => $attribute) {
                 $current["_{$name}"] = $attribute->value;
             }
         }
 
-        $parentTagName = $node instanceof \DOMElement ? $node->tagName : false;
+        $parentTagName = $node instanceof DOMElement ? $node->tagName : false;
         foreach ($node->childNodes as $childNode) {
             switch ($childNode->nodeType) {
                 case XML_ELEMENT_NODE:
-                    if (!$childNode instanceof \DOMElement) {
+                    if (!$childNode instanceof DOMElement) {
                         break;
                     }
 
@@ -164,7 +168,7 @@ class Xml extends Handler
                     break;
 
                 case XML_TEXT_NODE:
-                    if (!$childNode instanceof \DOMText) {
+                    if (!$childNode instanceof DOMText) {
                         break;
                     }
 
@@ -172,7 +176,7 @@ class Xml extends Handler
                     break;
 
                 case XML_CDATA_SECTION_NODE:
-                    if (!$childNode instanceof \DOMCharacterData) {
+                    if (!$childNode instanceof DOMCharacterData) {
                         break;
                     }
 
@@ -195,11 +199,11 @@ class Xml extends Handler
     }
 
     /**
-     * @param \DOMElement $domElement
+     * @param DOMElement $domElement
      *
      * @return array|string|null
      */
-    protected function parseFieldTypeHash(\DOMElement $domElement)
+    protected function parseFieldTypeHash(DOMElement $domElement)
     {
         $result = $this->parseFieldTypeValues($domElement->childNodes);
 
@@ -226,12 +230,12 @@ class Xml extends Handler
         foreach ($valueNodes as $valueNode) {
             switch ($valueNode->nodeType) {
                 case XML_ELEMENT_NODE:
-                    if (!$valueNode instanceof \DOMElement) {
+                    if (!$valueNode instanceof DOMElement) {
                         break;
                     }
 
                     if ($valueNode->tagName !== 'value') {
-                        throw new \RuntimeException(
+                        throw new RuntimeException(
                             sprintf(
                                 'Invalid value tag: <%s>.',
                                 $valueNode->tagName
@@ -248,7 +252,7 @@ class Xml extends Handler
                     break;
 
                 case XML_TEXT_NODE:
-                    if (!$valueNode instanceof \DOMText) {
+                    if (!$valueNode instanceof DOMText) {
                         break;
                     }
 
@@ -256,7 +260,7 @@ class Xml extends Handler
                     break;
 
                 case XML_CDATA_SECTION_NODE:
-                    if (!$valueNode instanceof \DOMCharacterData) {
+                    if (!$valueNode instanceof DOMCharacterData) {
                         break;
                     }
 
