@@ -26,9 +26,9 @@ final class ContentTypeGroupNameTest extends TestCase
     public function testValidInput(): void
     {
         self::assertEquals(
-            new ContentTypeGroupNameCriterion([1, 5]),
+            new ContentTypeGroupNameCriterion(['Media', 'content']),
             $this->parser->parse(
-                ['ContentTypeGroupNameCriterion' => [1, 5]],
+                ['ContentTypeGroupNameCriterion' => ['Media', 'content']],
                 $this->createMock(ParsingDispatcher::class)
             )
         );
