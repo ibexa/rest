@@ -9,6 +9,8 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use DOMDocument;
+use DOMNode;
+use DOMNodeList;
 use DOMXPath;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -111,8 +113,11 @@ final class SessionTest extends TestCase
         $xpath = new DOMXPath($domDocument);
 
         $csrfDomElements = $xpath->query("//input[@name='_csrf_token']/@value");
+        self::assertInstanceOf(DOMNodeList::class, $csrfDomElements);
         self::assertGreaterThan(0, $csrfDomElements->length);
-        $csrfTokenValue = $csrfDomElements->item(0)->nodeValue;
+        $item = $csrfDomElements->item(0);
+        self::assertInstanceOf(DOMNode::class, $item);
+        $csrfTokenValue = $item->nodeValue;
 
         $browser->followRedirects(false);
         $browser->submitForm(

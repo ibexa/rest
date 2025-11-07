@@ -151,60 +151,6 @@ parameters:
 			path: src/lib/Input/FieldTypeParser.php
 
 		-
-			message: '#^Access to an undefined property DOMNameSpaceNode\|DOMNode\:\:\$childNodes\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Access to an undefined property DOMNameSpaceNode\|DOMNode\:\:\$data\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Access to an undefined property DOMNameSpaceNode\|DOMNode\:\:\$tagName\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Access to an undefined property DOMNameSpaceNode\|DOMNode\:\:\$wholeText\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Access to an undefined property DOMNode\:\:\$data\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Access to an undefined property DOMNode\:\:\$tagName\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Access to an undefined property DOMNode\:\:\$wholeText\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Call to an undefined method DOMNameSpaceNode\|DOMNode\:\:getAttribute\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Call to an undefined method DOMNameSpaceNode\|DOMNode\:\:hasAttribute\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:parseFieldTypeHash\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -213,12 +159,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Rest\\Input\\Handler\\Xml\:\:parseFieldTypeValues\(\) return type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Input/Handler/Xml.php
-
-		-
-			message: '#^Parameter \#1 \$domElement of method Ibexa\\Rest\\Input\\Handler\\Xml\:\:parseFieldTypeHash\(\) expects DOMElement, DOMNode given\.$#'
-			identifier: argument.type
 			count: 1
 			path: src/lib/Input/Handler/Xml.php
 
@@ -1153,12 +1093,6 @@ parameters:
 			path: tests/bundle/Functional/RoleTest.php
 
 		-
-			message: '#^Cannot access property \$length on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: tests/bundle/Functional/RootTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\RootTest\:\:assertXMLTag\(\) has parameter \$matcher with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -1585,24 +1519,6 @@ parameters:
 			path: tests/bundle/Functional/SectionTest.php
 
 		-
-			message: '#^Cannot access property \$length on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: tests/bundle/Functional/SessionTest.php
-
-		-
-			message: '#^Cannot access property \$nodeValue on DOMNameSpaceNode\|DOMNode\|null\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: tests/bundle/Functional/SessionTest.php
-
-		-
-			message: '#^Cannot call method item\(\) on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: tests/bundle/Functional/SessionTest.php
-
-		-
 			message: '#^Argument of an invalid type array\<SimpleXMLElement\>\|null supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1
@@ -1879,12 +1795,6 @@ parameters:
 			path: tests/lib/Output/GeneratorTest.php
 
 		-
-			message: '#^Cannot access property \$length on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:addRouteExpectation\(\) has parameter \$arguments with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -2011,12 +1921,6 @@ parameters:
 			path: tests/lib/Server/Input/Parser/UserGroupCreateTest.php
 
 		-
-			message: '#^Cannot access property \$length on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/BookmarkListTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Rest\\Server\\Output\\ValueObjectVisitor\\CachedValueTest\:\:visit\(\) has parameter \$value with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
@@ -2075,18 +1979,6 @@ parameters:
 			identifier: arguments.count
 			count: 2
 			path: tests/lib/Server/Output/ValueObjectVisitor/ContentTypeListTest.php
-
-		-
-			message: '#^Cannot access property \$textContent on DOMNameSpaceNode\|DOMNode\|null\.$#'
-			identifier: property.nonObject
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/ExceptionTest.php
-
-		-
-			message: '#^Cannot call method item\(\) on DOMNodeList\<DOMNameSpaceNode\|DOMNode\>\|false\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: tests/lib/Server/Output/ValueObjectVisitor/ExceptionTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:assertXMLTag\(\) invoked with 4 parameters, 2\-3 required\.$#'
