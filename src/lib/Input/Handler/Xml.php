@@ -199,7 +199,7 @@ class Xml extends Handler
     }
 
     /**
-     * @param DOMElement $domElement
+     * @param \DOMElement $domElement
      *
      * @return array|string|null
      */
