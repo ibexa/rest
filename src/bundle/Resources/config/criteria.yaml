@@ -34,6 +34,11 @@ services:
         tags:
             - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.content_type.ContentTypeGroupId }
 
+    Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\ContentTypeGroupName:
+        parent: Ibexa\Rest\Server\Common\Parser
+        tags:
+            - { name: ibexa.rest.input.parser, mediaType: application/vnd.ibexa.api.internal.criterion.content_type.ContentTypeGroupName }
+
     Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\ContainsFieldDefinitionId:
         parent: Ibexa\Rest\Server\Common\Parser
         tags:
