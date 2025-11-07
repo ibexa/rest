@@ -651,7 +651,7 @@ XML;
   <identifier>ContentTypeView</identifier>
   <ContentTypeQuery>
     <Query>
-         <ContentTypeGroupName>media</ContentTypeGroupName>
+         <ContentTypeGroupNameCriterion>media</ContentTypeGroupNameCriterion>
     </Query>
     <limit>10</limit>
     <offset>0</offset>
