@@ -117,6 +117,12 @@ ibexa.rest.load_content_versions:
     requirements:
         contentId: \d+
 
+ibexa.rest.load_version_info_list_by_content_ids:
+    path: /content/objects/version-info-list
+    defaults:
+        _controller: Ibexa\Rest\Server\Controller\Content:loadVersionInfoListByContentIds
+    methods: [GET]
+
 ibexa.rest.load_version_relations:
     path: /content/objects/{contentId}/versions/{versionNumber}/relations
     defaults:
