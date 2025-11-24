@@ -333,6 +333,32 @@ class Content extends RestController
     }
 
     /**
+     * Returns a list of version info for multiple content IDs.
+     *
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     */
+    public function loadVersionInfoListByContentIds(Request $request): Values\VersionList
+    {
+        $contentIds = $request->query->all('content_ids');
+
+        if (empty($contentIds)) {
+            throw new BadRequestException("'content_ids' parameter is required and must contain at least one ID.");
+        }
+
+        $contentService = $this->repository->getContentService();
+        $contentInfos = $contentService->loadContentInfoList($contentIds);
+
+        $versionInfoList = $contentService->loadVersionInfoListByContentInfo($contentInfos);
+
+        return new Values\VersionList(
+            array_values($versionInfoList),
+            $request->getPathInfo()
+        );
+    }
+
+    /**
      * The version is deleted.
      *
      * @param mixed $contentId
