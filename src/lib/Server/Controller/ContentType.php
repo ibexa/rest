@@ -168,8 +168,10 @@ class ContentType extends RestController
             );
         }
 
+        $includeSystem = $request->query->getBoolean('includeSystem', false);
+
         return new Values\ContentTypeGroupList(
-            $this->contentTypeService->loadContentTypeGroups(Language::ALL)
+            $this->contentTypeService->loadContentTypeGroups(Language::ALL, $includeSystem)
         );
     }
 
