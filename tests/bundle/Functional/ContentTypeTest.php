@@ -177,7 +177,7 @@ XML;
 
         $identifiers = $this->getContentTypeGroupIdentifiers($response);
 
-        self::assertNotContains('users', $identifiers);
+        self::assertNotContains('system', $identifiers);
     }
 
     /**
@@ -197,7 +197,7 @@ XML;
 
         $identifiers = $this->getContentTypeGroupIdentifiers($response);
 
-        self::assertContains('users', $identifiers);
+        self::assertContains('system', $identifiers);
     }
 
     /**
