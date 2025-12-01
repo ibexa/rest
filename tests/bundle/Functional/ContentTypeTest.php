@@ -7,6 +7,7 @@
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use Psr\Http\Message\ResponseInterface;
 
 class ContentTypeTest extends RESTFunctionalTestCase
 {
@@ -157,6 +158,46 @@ XML;
         self::assertHttpResponseCodeEquals($response, 200);
 
         // @todo test data
+    }
+
+    /**
+     * Covers GET /content/typegroups without includeSystem param (defaults to false).
+     */
+    public function testLoadContentTypeGroupListExcludesSystemByDefault(): void
+    {
+        $response = $this->sendHttpRequest(
+            $this->createHttpRequest(
+                'GET',
+                '/api/ibexa/v2/content/typegroups',
+                '',
+                'ContentTypeGroupList+json'
+            )
+        );
+        self::assertHttpResponseCodeEquals($response, 200);
+
+        $identifiers = $this->getContentTypeGroupIdentifiers($response);
+
+        self::assertNotContains('users', $identifiers);
+    }
+
+    /**
+     * Covers GET /content/typegroups?includeSystem=true.
+     */
+    public function testLoadContentTypeGroupListIncludesSystemGroups(): void
+    {
+        $response = $this->sendHttpRequest(
+            $this->createHttpRequest(
+                'GET',
+                '/api/ibexa/v2/content/typegroups?includeSystem=true',
+                '',
+                'ContentTypeGroupList+json'
+            )
+        );
+        self::assertHttpResponseCodeEquals($response, 200);
+
+        $identifiers = $this->getContentTypeGroupIdentifiers($response);
+
+        self::assertContains('users', $identifiers);
     }
 
     /**
@@ -671,6 +712,27 @@ XML;
 
         self::assertArrayHasKey('ContentTypeList', $responseData);
         self::assertSame('image', $responseData['ContentTypeList']['ContentType'][0]['identifier']);
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getContentTypeGroupIdentifiers(ResponseInterface $response): array
+    {
+        $responseData = json_decode($response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+        self::assertArrayHasKey('ContentTypeGroupList', $responseData);
+
+        $groupList = $responseData['ContentTypeGroupList']['ContentTypeGroup'] ?? [];
+        if (isset($groupList['_href'])) {
+            $groupList = [$groupList];
+        }
+
+        return array_map(
+            static function (array $group): string {
+                return strtolower($group['identifier'] ?? '');
+            },
+            $groupList
+        );
     }
 }
 
