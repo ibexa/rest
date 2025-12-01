@@ -24,6 +24,7 @@ class ContentTypeGroupInputTest extends BaseTest
                 '_href' => '/user/users/14',
             ],
             'modificationDate' => '2012-12-31T12:00:00',
+            'isSystem' => true,
         ];
 
         $contentTypeGroupInput = $this->getParser();
@@ -51,6 +52,11 @@ class ContentTypeGroupInputTest extends BaseTest
             new \DateTime('2012-12-31T12:00:00'),
             $result->creationDate,
             'ContentTypeGroupCreateStruct creationDate property not created correctly.'
+        );
+
+        $this->assertTrue(
+            $result->isSystem,
+            'ContentTypeGroupCreateStruct isSystem property not created correctly.'
         );
     }
 
