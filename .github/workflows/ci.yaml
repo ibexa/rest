@@ -11,6 +11,15 @@ jobs:
     cs-fix:
         name: Run code style check
         runs-on: "ubuntu-24.04"
+
+        strategy:
+            fail-fast: false
+            matrix:
+                php:
+                    - '7.4'
+                    - '8.0'
+                    - '8.2'
+
         steps:
             -   uses: actions/checkout@v4
 
