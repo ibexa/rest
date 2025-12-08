@@ -68,6 +68,10 @@ class ContentTypeGroupInput extends BaseParser
             $contentTypeGroupCreateStruct->creationDate = new DateTime($data['modificationDate']);
         }
 
+        if (array_key_exists('isSystem', $data)) {
+            $contentTypeGroupCreateStruct->isSystem = $this->parserTools->parseBooleanValue($data['isSystem']);
+        }
+
         // @todo mainLanguageCode, names, descriptions?
 
         if (array_key_exists('User', $data) && is_array($data['User'])) {

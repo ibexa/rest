@@ -7,6 +7,7 @@
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use Psr\Http\Message\ResponseInterface;
 
 class ContentTypeTest extends RESTFunctionalTestCase
 {
@@ -160,6 +161,50 @@ XML;
     }
 
     /**
+     * Covers GET /content/typegroups without includeSystem param (defaults to false).
+     */
+    public function testLoadContentTypeGroupListExcludesSystemByDefault(): void
+    {
+        $systemIdentifier = $this->createSystemContentTypeGroup();
+
+        $response = $this->sendHttpRequest(
+            $this->createHttpRequest(
+                'GET',
+                '/api/ibexa/v2/content/typegroups',
+                '',
+                'ContentTypeGroupList+json'
+            )
+        );
+        self::assertHttpResponseCodeEquals($response, 200);
+
+        $identifiers = $this->getContentTypeGroupIdentifiers($response);
+
+        self::assertNotContains($systemIdentifier, $identifiers);
+    }
+
+    /**
+     * Covers GET /content/typegroups?includeSystem=true.
+     */
+    public function testLoadContentTypeGroupListIncludesSystemGroups(): void
+    {
+        $systemIdentifier = $this->createSystemContentTypeGroup();
+
+        $response = $this->sendHttpRequest(
+            $this->createHttpRequest(
+                'GET',
+                '/api/ibexa/v2/content/typegroups?includeSystem=true',
+                '',
+                'ContentTypeGroupList+json'
+            )
+        );
+        self::assertHttpResponseCodeEquals($response, 200);
+
+        $identifiers = $this->getContentTypeGroupIdentifiers($response);
+
+        self::assertContains($systemIdentifier, $identifiers);
+    }
+
+    /**
      * @depends testUpdateContentTypeGroup
      * Covers GET /content/typegroups?identifier=<contentTypeGroupIdentifier>
      */
@@ -170,6 +215,25 @@ XML;
         );
         // @todo Check if list filtered by identifier is supposed to send a 307
         self::assertHttpResponseCodeEquals($response, 307);
+    }
+
+    public function testCreateSystemContentTypeGroup(): void
+    {
+        $identifier = $this->createSystemContentTypeGroup();
+
+        $response = $this->sendHttpRequest(
+            $this->createHttpRequest(
+                'GET',
+                '/api/ibexa/v2/content/typegroups?includeSystem=true',
+                '',
+                'ContentTypeGroupList+json'
+            )
+        );
+        self::assertHttpResponseCodeEquals($response, 200);
+
+        $identifiers = $this->getContentTypeGroupIdentifiers($response);
+
+        self::assertContains($identifier, $identifiers);
     }
 
     /**
@@ -671,6 +735,55 @@ XML;
 
         self::assertArrayHasKey('ContentTypeList', $responseData);
         self::assertSame('image', $responseData['ContentTypeList']['ContentType'][0]['identifier']);
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getContentTypeGroupIdentifiers(ResponseInterface $response): array
+    {
+        $responseData = json_decode($response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+        self::assertArrayHasKey('ContentTypeGroupList', $responseData);
+
+        $groupList = $responseData['ContentTypeGroupList']['ContentTypeGroup'] ?? [];
+        if (isset($groupList['_href'])) {
+            $groupList = [$groupList];
+        }
+
+        return array_map(
+            static function (array $group): string {
+                return strtolower($group['identifier'] ?? '');
+            },
+            $groupList
+        );
+    }
+
+    private function createSystemContentTypeGroup(): string
+    {
+        $identifier = $this->addTestSuffix('system_group_' . uniqid());
+        $body = <<< XML
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentTypeGroupInput>
+  <identifier>{$identifier}</identifier>
+  <isSystem>true</isSystem>
+</ContentTypeGroupInput>
+XML;
+
+        $request = $this->createHttpRequest(
+            'POST',
+            '/api/ibexa/v2/content/typegroups',
+            'ContentTypeGroupInput+xml',
+            'ContentTypeGroup+json',
+            $body
+        );
+
+        $response = $this->sendHttpRequest($request);
+        self::assertHttpResponseCodeEquals($response, 201);
+        self::assertHttpResponseHasHeader($response, 'Location');
+
+        $this->addCreatedElement($response->getHeader('Location')[0]);
+
+        return $identifier;
     }
 }
 
