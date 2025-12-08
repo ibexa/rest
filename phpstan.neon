@@ -13,6 +13,3 @@ parameters:
     ignoreErrors:
         -
             identifier: missingType.generics
-        -
-            message: '#^Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\:\:arrayNode\(\)\.$#'
-            identifier: method.notFound
