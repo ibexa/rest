@@ -7,13 +7,16 @@
 
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
-class ViewTest extends TestCase
+final class ViewTest extends TestCase
 {
     /**
      * Covers POST /views.
+     *
+     * @dataProvider provideAcceptHeaders
      */
-    public function testViewRequestWithOrStatement(): void
-    {
+    public function testViewRequestWithOrStatement(
+        string $acceptHeader
+    ): void {
         $fooRemoteId = md5('View test content foo');
         $barRemoteId = md5('View test content bar');
         $this->createFolder('View test content foo', '/api/ibexa/v2/content/locations/1/2', $fooRemoteId);
@@ -39,7 +42,7 @@ XML;
             'POST',
             '/api/ibexa/v2/views',
             'ViewInput+xml',
-            'View+json',
+            $acceptHeader,
             $body
         );
         $response = $this->sendHttpRequest($request);
@@ -51,10 +54,11 @@ XML;
     /**
      * Covers POST /views.
      *
-     * @depends testViewRequestWithOrStatement
+     * @dataProvider provideAcceptHeaders
      */
-    public function testViewRequestWithAndStatement(): void
-    {
+    public function testViewRequestWithAndStatement(
+        string $acceptHeader
+    ): void {
         $fooRemoteId = md5('View test content foo');
         $barRemoteId = md5('View test content bar');
 
@@ -81,12 +85,22 @@ XML;
             'POST',
             '/api/ibexa/v2/views',
             'ViewInput+xml',
-            'View+json',
+            $acceptHeader,
             $body
         );
         $response = $this->sendHttpRequest($request);
         $responseData = json_decode($response->getBody(), true);
 
         self::assertEquals(1, $responseData['View']['Result']['count']);
+    }
+
+    /**
+     * @return iterable<array{string}>
+     */
+    public static function provideAcceptHeaders(): iterable
+    {
+        yield ['View+json'];
+
+        yield ['View+json;version=1.1'];
     }
 }
