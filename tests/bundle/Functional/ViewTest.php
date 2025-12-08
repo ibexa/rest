@@ -17,8 +17,8 @@ final class ViewTest extends TestCase
     public function testViewRequestWithOrStatement(
         string $acceptHeader
     ): void {
-        $fooRemoteId = md5('View test content foo');
-        $barRemoteId = md5('View test content bar');
+        $fooRemoteId = md5('View test content foo' . $acceptHeader);
+        $barRemoteId = md5('View test content bar' . $acceptHeader);
         $this->createFolder('View test content foo', '/api/ibexa/v2/content/locations/1/2', $fooRemoteId);
         $this->createFolder('View test content bar', '/api/ibexa/v2/content/locations/1/2', $barRemoteId);
 
@@ -55,12 +55,14 @@ XML;
      * Covers POST /views.
      *
      * @dataProvider provideAcceptHeaders
+     *
+     * @depends testViewRequestWithOrStatement
      */
     public function testViewRequestWithAndStatement(
         string $acceptHeader
     ): void {
-        $fooRemoteId = md5('View test content foo');
-        $barRemoteId = md5('View test content bar');
+        $fooRemoteId = md5('View test content foo' . $acceptHeader);
+        $barRemoteId = md5('View test content bar' . $acceptHeader);
 
         $body = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
