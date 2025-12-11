@@ -1015,48 +1015,6 @@ parameters:
 			path: tests/bundle/Functional/ContentTypeTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\LocationTest\:\:testCreateLocation\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/LocationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\LocationTest\:\:testLoadLocationChildren\(\) has parameter \$locationHref with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/LocationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\LocationTest\:\:testLoadLocationsForContent\(\) has parameter \$contentHref with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/LocationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\LocationTest\:\:testRedirectLocationById\(\) has parameter \$locationHref with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/LocationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\LocationTest\:\:testRedirectLocationByRemoteId\(\) has parameter \$locationHref with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/LocationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\LocationTest\:\:testRedirectLocationByURLAlias\(\) has parameter \$locationHref with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/LocationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\LocationTest\:\:testSwapLocation\(\) has parameter \$locationHref with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/LocationTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\ObjectStateTest\:\:testCreateObjectState\(\) has parameter \$objectStateGroupHref with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
@@ -1613,30 +1571,6 @@ parameters:
 			identifier: deadCode.unreachable
 			count: 2
 			path: tests/bundle/Functional/TrashTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\UrlAliasTest\:\:testCreateGlobalUrlAlias\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/UrlAliasTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\UrlAliasTest\:\:testCreateUrlAlias\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/UrlAliasTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\UrlAliasTest\:\:testCreateUrlAlias\(\) has parameter \$locationHref with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/UrlAliasTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\UrlAliasTest\:\:testListLocationURLAliases\(\) has parameter \$contentLocationHref with no type specified\.$#'
-			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/UrlAliasTest.php
 
 		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'

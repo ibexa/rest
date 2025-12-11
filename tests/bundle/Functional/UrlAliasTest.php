@@ -4,19 +4,20 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 
-class UrlAliasTest extends RESTFunctionalTestCase
+final class UrlAliasTest extends RESTFunctionalTestCase
 {
     /**
      * Covers nothing. Creates a folder for other tests.
      *
      * @return string The folder's main location href
      */
-    public function testCreateFolder()
+    public function testCreateFolder(): string
     {
         $folderArray = $this->createFolder('UrlAliasTest_testCreateFolder', '/api/ibexa/v2/content/locations/1/2');
         $folderLocations = $this->getContentLocations($folderArray['_href']);
@@ -39,10 +40,8 @@ class UrlAliasTest extends RESTFunctionalTestCase
     /**
      * @depends testCreateFolder
      * Covers POST /content/urlaliases
-     *
-     * @returns string The created url alias href
      */
-    public function testCreateUrlAlias($locationHref)
+    public function testCreateUrlAlias(string $locationHref): string
     {
         $text = $this->addTestSuffix(__FUNCTION__);
         $xml = <<< XML
@@ -77,10 +76,8 @@ XML;
 
     /**
      * Covers POST /content/urlaliases.
-     *
-     * @returns string The created url alias href
      */
-    public function testCreateGlobalUrlAlias()
+    public function testCreateGlobalUrlAlias(): string
     {
         $text = $this->addTestSuffix(__FUNCTION__);
         $xml = <<< XML
@@ -140,7 +137,7 @@ XML;
         self::markTestSkipped('@todo fixme');
 
         $response = $this->sendHttpRequest(
-            $request = $this->createHttpRequest('DELETE', $urlAliasHref)
+            $this->createHttpRequest('DELETE', $urlAliasHref)
         );
 
         // @todo will fail because of EZP-21082
@@ -154,7 +151,7 @@ XML;
      * @depends testCreateFolder
      * Covers GET /content/locations/{locationPath}/urlaliases
      */
-    public function testListLocationURLAliases($contentLocationHref): void
+    public function testListLocationURLAliases(string $contentLocationHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$contentLocationHref/urlaliases")

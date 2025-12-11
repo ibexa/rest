@@ -502,6 +502,15 @@ ibexa.rest.create_location:
     requirements:
         contentId: \d+
 
+ibexa.rest.load_location_by_url_alias:
+    path: /content/locations/{languageCode}/{urlAlias}
+    controller: Ibexa\Rest\Server\Controller\Location\LocationByUrlAliasController::loadLocationByUrlAlias
+    methods: [GET]
+    requirements:
+        url: .+
+    options:
+        expose: true
+
 # Content types
 
 ibexa.rest.content_type.publish_draft:

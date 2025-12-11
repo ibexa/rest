@@ -4,19 +4,20 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 
-class LocationTest extends RESTFunctionalTestCase
+final class LocationTest extends RESTFunctionalTestCase
 {
     /**
      * Covers POST /content/objects/{contentId}/locations.
      *
      * @returns string location href
      */
-    public function testCreateLocation()
+    public function testCreateLocation(): string
     {
         $content = $this->createFolder('testCreateLocation', '/api/ibexa/v2/content/locations/1/2');
         $contentHref = $content['_href'];
@@ -53,7 +54,7 @@ XML;
      * @depends testCreateLocation
      * Covers GET /content/locations?remoteId=<locationRemoteId>
      */
-    public function testRedirectLocationByRemoteId($locationHref): void
+    public function testRedirectLocationByRemoteId(string $locationHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', '/api/ibexa/v2/content/locations?remoteId=' . $this->addTestSuffix('testCreateLocation'))
@@ -67,7 +68,7 @@ XML;
      * @depends testCreateLocation
      * Covers GET /content/locations?id=<locationId>
      */
-    public function testRedirectLocationById($locationHref): void
+    public function testRedirectLocationById(string $locationHref): void
     {
         $hrefParts = explode('/', $locationHref);
         $id = array_pop($hrefParts);
@@ -83,7 +84,7 @@ XML;
      * @depends testCreateLocation
      * Covers GET /content/locations?urlAlias=<Path/To-Content>
      */
-    public function testRedirectLocationByURLAlias($locationHref): void
+    public function testRedirectLocationByURLAlias(string $locationHref): void
     {
         $testUrlAlias = 'firstPart/secondPart/testUrlAlias';
         $this->createUrlAlias($locationHref, $testUrlAlias);
@@ -115,7 +116,7 @@ XML;
      *
      * @return string the created location's href
      */
-    public function testCopySubtree(string $locationHref)
+    public function testCopySubtree(string $locationHref): string
     {
         $request = $this->createHttpRequest(
             'COPY',
@@ -161,15 +162,33 @@ XML;
      * @depends testCreateLocation
      * Covers GET /content/objects/{contentId}/locations
      */
-    public function testLoadLocationsForContent($contentHref): void
+    public function testLoadLocationsForContent(string $contentHref): void
     {
+    }
+
+    /**
+     * @depends testCreateLocation
+     *
+     * Covers GET /content/locations/{languageCode}/{urlAlias}
+     */
+    public function testLoadLocationByUrlAlias(string $locationHref): void
+    {
+        $response = $this->sendHttpRequest(
+            $this->createHttpRequest(
+                'GET',
+                '/api/ibexa/v2/content/locations/eng-GB/Media/testCreateLocation'
+            )
+        );
+
+        self::assertHttpResponseCodeEquals($response, 200);
+        self::assertHttpResponseHasHeader($response, 'Location', $locationHref);
     }
 
     /**
      * @depends testCreateLocation
      * Covers SWAP /content/locations/{locationPath}
      */
-    public function testSwapLocation($locationHref): void
+    public function testSwapLocation(string $locationHref): void
     {
         self::markTestSkipped('@todo Implement');
 
@@ -186,7 +205,7 @@ XML;
      * @depends testCreateLocation
      * Covers GET /content/locations/{locationPath}/children
      */
-    public function testLoadLocationChildren($locationHref): void
+    public function testLoadLocationChildren(string $locationHref): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "$locationHref/children", '', 'LocationList+json')
