@@ -11,6 +11,7 @@ namespace Ibexa\Bundle\Rest\ApiPlatform;
 use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
 use ApiPlatform\OpenApi\Model\Info;
 use ApiPlatform\OpenApi\Model\Operation;
+use ApiPlatform\OpenApi\Model\RequestBody;
 use ApiPlatform\OpenApi\Model\Response;
 use ApiPlatform\OpenApi\Model\Server;
 use ApiPlatform\OpenApi\OpenApi;
@@ -101,6 +102,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
     private function processOperations(Operation $operation): Operation
     {
         $newOperation = $operation;
+        $newOperation = $this->insertIbexaRequestExample($newOperation);
         $newOperation = $this->insertIbexaResponseExample($newOperation);
 
         return $this->insertIbexaEditionBadges($newOperation);
@@ -115,6 +117,60 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         $badges = $this->editionBadgeFactory->getBadgesForOperation($operation);
         if (!empty($badges)) {
             $operation = $operation->withExtensionProperty('x-badges', $badges);
+        }
+
+        return $operation;
+    }
+
+    private function insertIbexaRequestExample(Operation $operation): Operation
+    {
+        $requestBody = $operation->getRequestBody();
+
+        if ($requestBody === null) {
+            return $operation;
+        }
+
+        $content = $requestBody->getContent();
+
+        if ($content === null) {
+            return $operation;
+        }
+
+        /** @var ArrayObject<string, mixed> $newContent */
+        $newContent = new ArrayObject();
+        $hasChanges = false;
+
+        foreach ($content as $mediaType => $requestContent) {
+            if (!array_key_exists('x-ibexa-example-file', $requestContent)) {
+                $newContent[$mediaType] = $requestContent;
+                continue;
+            }
+
+            $exampleFilePath = $this->kernel->locateResource($requestContent['x-ibexa-example-file']);
+            $exampleFileContent = file_get_contents($exampleFilePath);
+
+            if ($exampleFileContent === false) {
+                throw new \RuntimeException("Failed to read example file: {$exampleFilePath}");
+            }
+
+            $isJson = $this->isJson($exampleFilePath);
+
+            $newRequestContent = $requestContent;
+            $newRequestContent['example'] = $isJson ? json_decode($exampleFileContent, true, 512, JSON_THROW_ON_ERROR) : $exampleFileContent;
+            unset($newRequestContent['x-ibexa-example-file']);
+
+            $newContent[$mediaType] = $newRequestContent;
+            $hasChanges = true;
+        }
+
+        if ($hasChanges) {
+            $newRequestBody = new RequestBody(
+                $requestBody->getDescription(),
+                $newContent,
+                $requestBody->getRequired()
+            );
+
+            return $operation->withRequestBody($newRequestBody);
         }
 
         return $operation;
@@ -141,7 +197,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
 
                 $exampleFilePath = $this->kernel->locateResource($responseContent['x-ibexa-example-file']);
                 $exampleFileContent = file_get_contents($exampleFilePath);
-                $isJson = 'json' === array_slice(explode('.', pathinfo($exampleFilePath, PATHINFO_FILENAME)), -1, 1)[0];
+                $isJson = $this->isJson($exampleFilePath);
                 $newContent[$mediaType]['example'] = $isJson ? json_decode($exampleFileContent ?: '', true, 512, JSON_THROW_ON_ERROR) : $exampleFileContent;
                 unset($newContent[$mediaType]['x-ibexa-example-file']);
             }
@@ -155,5 +211,10 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         }
 
         return $newOperation;
+    }
+
+    private function isJson(string $filePath): bool
+    {
+        return 'json' === array_slice(explode('.', pathinfo($filePath, PATHINFO_FILENAME)), -1, 1)[0];
     }
 }
