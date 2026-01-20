@@ -157,7 +157,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
 
             $newRequestContent = $requestContent;
             $newRequestContent['example'] = $isJson === true
-                ? json_decode($exampleFileContent, true, 512, JSON_THROW_ON_ERROR)
+                ? $this->parseJsonFile($exampleFileContent, $exampleFilePath)
                 : $exampleFileContent;
             unset($newRequestContent['x-ibexa-example-file']);
 
@@ -200,7 +200,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
                 $exampleFilePath = $this->kernel->locateResource($responseContent['x-ibexa-example-file']);
                 $exampleFileContent = file_get_contents($exampleFilePath);
                 $isJson = $this->isJson($exampleFilePath);
-                $newContent[$mediaType]['example'] = $isJson ? json_decode($exampleFileContent ?: '', true, 512, JSON_THROW_ON_ERROR) : $exampleFileContent;
+                $newContent[$mediaType]['example'] = $isJson === true ? $this->parseJsonFile($exampleFileContent ?: '', $exampleFilePath) : $exampleFileContent;
                 unset($newContent[$mediaType]['x-ibexa-example-file']);
             }
 
@@ -218,5 +218,14 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
     private function isJson(string $filePath): bool
     {
         return 'json' === array_slice(explode('.', pathinfo($filePath, PATHINFO_FILENAME)), -1, 1)[0];
+    }
+
+    private function parseJsonFile(string $fileContent, string $filePath): array
+    {
+        try {
+            return json_decode($fileContent, true, 512, JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
+            throw new \RuntimeException("Failed to parse JSON example file: {$filePath}", 0, $e);
+        }
     }
 }
