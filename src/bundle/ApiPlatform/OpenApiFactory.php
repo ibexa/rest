@@ -156,7 +156,9 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
             $isJson = $this->isJson($exampleFilePath);
 
             $newRequestContent = $requestContent;
-            $newRequestContent['example'] = $isJson ? json_decode($exampleFileContent, true, 512, JSON_THROW_ON_ERROR) : $exampleFileContent;
+            $newRequestContent['example'] = $isJson === true
+                ? json_decode($exampleFileContent, true, 512, JSON_THROW_ON_ERROR)
+                : $exampleFileContent;
             unset($newRequestContent['x-ibexa-example-file']);
 
             $newContent[$mediaType] = $newRequestContent;

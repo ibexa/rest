@@ -28,15 +28,14 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 final class OpenApiFactoryTest extends TestCase
 {
-    private const EXAMPLE_REQUEST_FILE = __DIR__ . '/Fixtures/examples/test-request.json.example';
-    private const EXAMPLE_REQUEST_XML_FILE = __DIR__ . '/Fixtures/examples/test-request.xml.example';
-    private const EXAMPLE_RESPONSE_JSON_FILE = __DIR__ . '/Fixtures/examples/test-response.json.example';
-    private const EXAMPLE_RESPONSE_XML_FILE = __DIR__ . '/Fixtures/examples/test-response.xml.example';
+    private const string EXAMPLE_REQUEST_FILE = __DIR__ . '/Fixtures/examples/test-request.json.example';
+    private const string EXAMPLE_REQUEST_XML_FILE = __DIR__ . '/Fixtures/examples/test-request.xml.example';
+    private const string EXAMPLE_RESPONSE_JSON_FILE = __DIR__ . '/Fixtures/examples/test-response.json.example';
+    private const string EXAMPLE_RESPONSE_XML_FILE = __DIR__ . '/Fixtures/examples/test-response.xml.example';
 
     private OpenApiFactory $factory;
 
-    /** @var \ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface&\PHPUnit\Framework\MockObject\MockObject */
-    private OpenApiFactoryInterface $decoratedFactory;
+    private OpenApiFactoryInterface&MockObject $decoratedFactory;
 
     private KernelInterface $kernel;
 
@@ -360,7 +359,7 @@ final class OpenApiFactoryTest extends TestCase
 
         $kernelMock
             ->method('locateResource')
-            ->willReturnCallback(static function (string $path) {
+            ->willReturnCallback(static function (string $path): string {
                 return match ($path) {
                     '@TestBundle/examples/request.json' => self::EXAMPLE_REQUEST_FILE,
                     '@TestBundle/examples/request.xml' => self::EXAMPLE_REQUEST_XML_FILE,
@@ -393,7 +392,7 @@ final class OpenApiFactoryTest extends TestCase
 
         $kernelMock
             ->method('locateResource')
-            ->willReturnCallback(static function (string $path) use ($resourceMap) {
+            ->willReturnCallback(static function (string $path) use ($resourceMap): string {
                 if (isset($resourceMap[$path])) {
                     return $resourceMap[$path];
                 }
