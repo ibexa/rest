@@ -335,8 +335,9 @@ final class OpenApiFactoryTest extends TestCase
                 ->method('__invoke')
                 ->willReturn($openApi);
 
-            // Then: JsonException is thrown for invalid JSON
-            $this->expectException(\JsonException::class);
+            // Then: RuntimeException is thrown for invalid JSON
+            $this->expectException(\RuntimeException::class);
+            $this->expectExceptionMessage("Failed to parse JSON example file: {$invalidJsonFile}");
 
             // When: Factory processes the OpenAPI spec
             $factory([]);

@@ -220,6 +220,9 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         return 'json' === array_slice(explode('.', pathinfo($filePath, PATHINFO_FILENAME)), -1, 1)[0];
     }
 
+    /** 
+     * @return array<string, mixed>
+     */
     private function parseJsonFile(string $fileContent, string $filePath): array
     {
         try {
