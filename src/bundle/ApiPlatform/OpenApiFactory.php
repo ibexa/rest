@@ -165,7 +165,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
             $hasChanges = true;
         }
 
-        if ($hasChanges) {
+        if ($hasChanges === true) {
             $newRequestBody = new RequestBody(
                 $requestBody->getDescription(),
                 $newContent,
