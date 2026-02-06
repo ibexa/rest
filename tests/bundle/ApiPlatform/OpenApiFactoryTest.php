@@ -33,6 +33,10 @@ final class OpenApiFactoryTest extends TestCase
     private const string EXAMPLE_RESPONSE_JSON_FILE = __DIR__ . '/Fixtures/examples/test-response.json.example';
     private const string EXAMPLE_RESPONSE_XML_FILE = __DIR__ . '/Fixtures/examples/test-response.xml.example';
 
+    private const string SCHEMA_LOGIN_REQUEST = '#/components/schemas/LoginRequest';
+    private const string EXAMPLE_REQUEST_JSON_PATH = '@TestBundle/examples/request.json';
+    private const string EXAMPLE_REQUEST_XML_PATH = '@TestBundle/examples/request.xml';
+
     private OpenApiFactory $factory;
 
     private OpenApiFactoryInterface&MockObject $decoratedFactory;
@@ -58,51 +62,17 @@ final class OpenApiFactoryTest extends TestCase
     public function testInjectsJsonRequestExampleFromFile(): void
     {
         // Given: An operation with x-ibexa-example-file in request body
-        $requestBody = new RequestBody(
-            description: 'Login request',
-            content: new ArrayObject([
-                'application/json' => [
-                    'schema' => ['$ref' => '#/components/schemas/LoginRequest'],
-                    'x-ibexa-example-file' => '@TestBundle/examples/request.json',
-                ],
-            ])
-        );
+        $requestBodyContent = [
+            'application/json' => [
+                'schema' => ['$ref' => self::SCHEMA_LOGIN_REQUEST],
+                'x-ibexa-example-file' => self::EXAMPLE_REQUEST_JSON_PATH,
+            ],
+        ];
 
-        $operation = new Operation(
-            requestBody: $requestBody,
-            responses: [
-                '200' => ['description' => 'Success'],
-            ]
-        );
-
-        $paths = new Paths();
-        $paths->addPath('/test', new PathItem(post: $operation));
-
-        $openApi = new OpenApi(
-            info: new Info(title: 'Test API', version: '1.0'),
-            servers: [],
-            paths: $paths
-        );
-
-        $this->decoratedFactory
-            ->expects(self::once())
-            ->method('__invoke')
-            ->willReturn($openApi);
-
-        // When: Factory processes the OpenAPI spec
-        $result = ($this->factory)([]);
+        $result = $this->processOpenApiWithRequestBody($requestBodyContent, $this->factory);
 
         // Then: The request example is injected from file
-        $processedPath = $result->getPaths()->getPath('/test');
-        self::assertNotNull($processedPath);
-        $processedOperation = $processedPath->getPost();
-        self::assertNotNull($processedOperation);
-        $processedRequestBody = $processedOperation->getRequestBody();
-
-        self::assertNotNull($processedRequestBody);
-        $content = $processedRequestBody->getContent();
-        self::assertNotNull($content);
-
+        $content = $this->getProcessedRequestBodyContent($result);
         $jsonContent = $content['application/json'];
 
         // Example should be injected
@@ -119,51 +89,17 @@ final class OpenApiFactoryTest extends TestCase
     public function testInjectsXmlRequestExampleFromFile(): void
     {
         // Given: An operation with XML request example
-        $requestBody = new RequestBody(
-            description: 'Login request',
-            content: new ArrayObject([
-                'application/xml' => [
-                    'schema' => ['$ref' => '#/components/schemas/LoginRequest'],
-                    'x-ibexa-example-file' => '@TestBundle/examples/request.xml',
-                ],
-            ])
-        );
+        $requestBodyContent = [
+            'application/xml' => [
+                'schema' => ['$ref' => self::SCHEMA_LOGIN_REQUEST],
+                'x-ibexa-example-file' => self::EXAMPLE_REQUEST_XML_PATH,
+            ],
+        ];
 
-        $operation = new Operation(
-            requestBody: $requestBody,
-            responses: [
-                '200' => ['description' => 'Success'],
-            ]
-        );
-
-        $paths = new Paths();
-        $paths->addPath('/test', new PathItem(post: $operation));
-
-        $openApi = new OpenApi(
-            info: new Info(title: 'Test API', version: '1.0'),
-            servers: [],
-            paths: $paths
-        );
-
-        $this->decoratedFactory
-            ->expects(self::once())
-            ->method('__invoke')
-            ->willReturn($openApi);
-
-        // When: Factory processes the OpenAPI spec
-        $result = ($this->factory)([]);
+        $result = $this->processOpenApiWithRequestBody($requestBodyContent, $this->factory);
 
         // Then: The XML request example is injected as string
-        $processedPath = $result->getPaths()->getPath('/test');
-        self::assertNotNull($processedPath);
-        $processedOperation = $processedPath->getPost();
-        self::assertNotNull($processedOperation);
-        $processedRequestBody = $processedOperation->getRequestBody();
-
-        self::assertNotNull($processedRequestBody);
-        $content = $processedRequestBody->getContent();
-        self::assertNotNull($content);
-
+        $content = $this->getProcessedRequestBodyContent($result);
         $xmlContent = $content['application/xml'];
 
         // Example should be injected as string
@@ -179,50 +115,21 @@ final class OpenApiFactoryTest extends TestCase
     public function testInjectsMultipleMediaTypeRequestExamples(): void
     {
         // Given: An operation with both JSON and XML request examples
-        $requestBody = new RequestBody(
-            description: 'Login request',
-            content: new ArrayObject([
-                'application/json' => [
-                    'schema' => ['$ref' => '#/components/schemas/LoginRequest'],
-                    'x-ibexa-example-file' => '@TestBundle/examples/request.json',
-                ],
-                'application/xml' => [
-                    'schema' => ['$ref' => '#/components/schemas/LoginRequest'],
-                    'x-ibexa-example-file' => '@TestBundle/examples/request.xml',
-                ],
-            ])
-        );
+        $requestBodyContent = [
+            'application/json' => [
+                'schema' => ['$ref' => self::SCHEMA_LOGIN_REQUEST],
+                'x-ibexa-example-file' => self::EXAMPLE_REQUEST_JSON_PATH,
+            ],
+            'application/xml' => [
+                'schema' => ['$ref' => self::SCHEMA_LOGIN_REQUEST],
+                'x-ibexa-example-file' => self::EXAMPLE_REQUEST_XML_PATH,
+            ],
+        ];
 
-        $operation = new Operation(
-            requestBody: $requestBody,
-            responses: [
-                '200' => ['description' => 'Success'],
-            ]
-        );
-
-        $paths = new Paths();
-        $paths->addPath('/test', new PathItem(post: $operation));
-
-        $openApi = new OpenApi(
-            info: new Info(title: 'Test API', version: '1.0'),
-            servers: [],
-            paths: $paths
-        );
-
-        $this->decoratedFactory
-            ->expects(self::once())
-            ->method('__invoke')
-            ->willReturn($openApi);
-
-        // When: Factory processes the OpenAPI spec
-        $result = ($this->factory)([]);
+        $result = $this->processOpenApiWithRequestBody($requestBodyContent, $this->factory);
 
         // Then: Both examples are injected correctly
-        $processedRequestBody = $result->getPaths()->getPath('/test')?->getPost()?->getRequestBody();
-
-        self::assertNotNull($processedRequestBody);
-        $content = $processedRequestBody->getContent();
-        self::assertNotNull($content);
+        $content = $this->getProcessedRequestBodyContent($result);
 
         // Verify JSON example
         $jsonContent = $content['application/json'];
@@ -244,43 +151,19 @@ final class OpenApiFactoryTest extends TestCase
     public function testThrowsExceptionWhenRequestExampleFileNotFound(): void
     {
         // Given: An operation with invalid request example file path
-        $requestBody = new RequestBody(
-            description: 'Login request',
-            content: new ArrayObject([
-                'application/json' => [
-                    'schema' => ['$ref' => '#/components/schemas/LoginRequest'],
-                    'x-ibexa-example-file' => '@TestBundle/examples/non-existent.json',
-                ],
-            ])
-        );
-
-        $operation = new Operation(
-            requestBody: $requestBody,
-            responses: [
-                '200' => ['description' => 'Success'],
-            ]
-        );
-
-        $paths = new Paths();
-        $paths->addPath('/test', new PathItem(post: $operation));
-
-        $openApi = new OpenApi(
-            info: new Info(title: 'Test API', version: '1.0'),
-            servers: [],
-            paths: $paths
-        );
-
-        $this->decoratedFactory
-            ->expects(self::once())
-            ->method('__invoke')
-            ->willReturn($openApi);
+        $requestBodyContent = [
+            'application/json' => [
+                'schema' => ['$ref' => self::SCHEMA_LOGIN_REQUEST],
+                'x-ibexa-example-file' => '@TestBundle/examples/non-existent.json',
+            ],
+        ];
 
         // Then: Exception is thrown for non-existent file
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Unknown resource: @TestBundle/examples/non-existent.json');
 
         // When: Factory processes the OpenAPI spec
-        ($this->factory)([]);
+        $this->processOpenApiWithRequestBody($requestBodyContent, $this->factory);
     }
 
     public function testThrowsExceptionWhenRequestExampleJsonIsInvalid(): void
@@ -303,50 +186,77 @@ final class OpenApiFactoryTest extends TestCase
                 '/api/ibexa/v2'
             );
 
-            // Given: An operation with invalid JSON example file
-            $requestBody = new RequestBody(
-                description: 'Login request',
-                content: new ArrayObject([
-                    'application/json' => [
-                        'schema' => ['$ref' => '#/components/schemas/LoginRequest'],
-                        'x-ibexa-example-file' => '@TestBundle/examples/invalid.json',
-                    ],
-                ])
-            );
-
-            $operation = new Operation(
-                requestBody: $requestBody,
-                responses: [
-                    '200' => ['description' => 'Success'],
-                ]
-            );
-
-            $paths = new Paths();
-            $paths->addPath('/test', new PathItem(post: $operation));
-
-            $openApi = new OpenApi(
-                info: new Info(title: 'Test API', version: '1.0'),
-                servers: [],
-                paths: $paths
-            );
-
-            $this->decoratedFactory
-                ->expects(self::once())
-                ->method('__invoke')
-                ->willReturn($openApi);
+            $requestBodyContent = [
+                'application/json' => [
+                    'schema' => ['$ref' => self::SCHEMA_LOGIN_REQUEST],
+                    'x-ibexa-example-file' => '@TestBundle/examples/invalid.json',
+                ],
+            ];
 
             // Then: RuntimeException is thrown for invalid JSON
             $this->expectException(\RuntimeException::class);
             $this->expectExceptionMessage("Failed to parse JSON example file: {$invalidJsonFile}");
 
             // When: Factory processes the OpenAPI spec
-            $factory([]);
+            $this->processOpenApiWithRequestBody($requestBodyContent, $factory);
         } finally {
             // Cleanup
             if (file_exists($invalidJsonFile)) {
                 unlink($invalidJsonFile);
             }
         }
+    }
+
+    /**
+     * @param array<string, array<string, mixed>> $content
+     */
+    private function processOpenApiWithRequestBody(array $content, OpenApiFactory $factory): OpenApi
+    {
+        $requestBody = new RequestBody(
+            description: 'Login request',
+            content: new ArrayObject($content)
+        );
+
+        $operation = new Operation(
+            requestBody: $requestBody,
+            responses: [
+                '200' => ['description' => 'Success'],
+            ]
+        );
+
+        $paths = new Paths();
+        $paths->addPath('/test', new PathItem(post: $operation));
+
+        $openApi = new OpenApi(
+            info: new Info(title: 'Test API', version: '1.0'),
+            servers: [],
+            paths: $paths
+        );
+
+        $this->decoratedFactory
+            ->expects(self::once())
+            ->method('__invoke')
+            ->willReturn($openApi);
+
+        return ($factory)([]);
+    }
+
+    /**
+     * @return ArrayObject<string, mixed>
+     */
+    private function getProcessedRequestBodyContent(OpenApi $result): ArrayObject
+    {
+        $processedPath = $result->getPaths()->getPath('/test');
+        self::assertNotNull($processedPath);
+        $processedOperation = $processedPath->getPost();
+        self::assertNotNull($processedOperation);
+        $processedRequestBody = $processedOperation->getRequestBody();
+
+        self::assertNotNull($processedRequestBody);
+        $content = $processedRequestBody->getContent();
+        self::assertNotNull($content);
+
+        return $content;
     }
 
     private function getDecoratedFactoryMock(): OpenApiFactoryInterface&MockObject
@@ -362,8 +272,8 @@ final class OpenApiFactoryTest extends TestCase
             ->method('locateResource')
             ->willReturnCallback(static function (string $path): string {
                 return match ($path) {
-                    '@TestBundle/examples/request.json' => self::EXAMPLE_REQUEST_FILE,
-                    '@TestBundle/examples/request.xml' => self::EXAMPLE_REQUEST_XML_FILE,
+                    self::EXAMPLE_REQUEST_JSON_PATH => self::EXAMPLE_REQUEST_FILE,
+                    self::EXAMPLE_REQUEST_XML_PATH => self::EXAMPLE_REQUEST_XML_FILE,
                     '@TestBundle/examples/response.json' => self::EXAMPLE_RESPONSE_JSON_FILE,
                     '@TestBundle/examples/response.xml' => self::EXAMPLE_RESPONSE_XML_FILE,
                     default => throw new \InvalidArgumentException("Unknown resource: $path"),
