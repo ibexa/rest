@@ -147,18 +147,10 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
             }
 
             $exampleFilePath = $this->kernel->locateResource($requestContent['x-ibexa-example-file']);
-            $exampleFileContent = file_get_contents($exampleFilePath);
-
-            if ($exampleFileContent === false) {
-                throw new \RuntimeException("Failed to read example file: {$exampleFilePath}");
-            }
-
-            $isJson = $this->isJson($exampleFilePath);
+            $example = $this->loadExampleFromFile($exampleFilePath);
 
             $newRequestContent = $requestContent;
-            $newRequestContent['example'] = $isJson === true
-                ? $this->parseJsonFile($exampleFileContent, $exampleFilePath)
-                : $exampleFileContent;
+            $newRequestContent['example'] = $example;
             unset($newRequestContent['x-ibexa-example-file']);
 
             $newContent[$mediaType] = $newRequestContent;
@@ -198,9 +190,8 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
                 }
 
                 $exampleFilePath = $this->kernel->locateResource($responseContent['x-ibexa-example-file']);
-                $exampleFileContent = file_get_contents($exampleFilePath);
-                $isJson = $this->isJson($exampleFilePath);
-                $newContent[$mediaType]['example'] = $isJson === true ? $this->parseJsonFile($exampleFileContent ?: '', $exampleFilePath) : $exampleFileContent;
+                $example = $this->loadExampleFromFile($exampleFilePath);
+                $newContent[$mediaType]['example'] = $example;
                 unset($newContent[$mediaType]['x-ibexa-example-file']);
             }
 
@@ -213,6 +204,24 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         }
 
         return $newOperation;
+    }
+
+    /**
+     * @return array<string, mixed>|string
+     *
+     * @throws \JsonException
+     */
+    private function loadExampleFromFile(string $filePath): array|string
+    {
+        $fileContent = file_get_contents($filePath);
+
+        if ($fileContent === false) {
+            throw new \RuntimeException("Failed to read example file: {$filePath}");
+        }
+
+        return $this->isJson($filePath)
+            ? $this->parseJsonFile($fileContent, $filePath)
+            : $fileContent;
     }
 
     private function isJson(string $filePath): bool
