@@ -15,8 +15,6 @@ use Ibexa\Rest\Value as RestValue;
 class ContentTypeList extends RestValue
 {
     /**
-     * Content types.
-     *
      * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType[]
      */
     public array $contentTypes;

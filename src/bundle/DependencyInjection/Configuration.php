@@ -24,6 +24,15 @@ class Configuration extends SiteAccessConfiguration
                     ->defaultValue('%kernel.debug%')
                     ->info('Throw exceptions for missing normalizers.')
                 ->end()
+                ->arrayNode('badges')
+                    ->info('Mapping of REST endpoint tag to Ibexa edition, used to render badges in the REST API documentation.')
+                    ->arrayPrototype()
+                        ->children()
+                            ->stringNode('tag')->isRequired()->end()
+                            ->arrayNode('editions')->isRequired()->stringPrototype()->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end();
 
         $this->addRestRootResourcesSection($rootNode);

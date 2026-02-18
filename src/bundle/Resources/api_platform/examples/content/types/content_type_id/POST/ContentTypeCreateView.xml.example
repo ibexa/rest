@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewInput>
+    <identifier>ContentTypeView</identifier>
+    <ContentTypeQuery>
+        <limit>10</limit>
+        <offset>1</offset>
+        <Query>
+            <ContentTypeIdCriterion>1</ContentTypeIdCriterion>
+            <ContentTypeIdCriterion>2</ContentTypeIdCriterion>
+            <ContentTypeIdentifierCriterion>folder</ContentTypeIdentifierCriterion>
+            <IsSystemCriterion>true</IsSystemCriterion>
+            <ContentTypeGroupIdCriterion>1</ContentTypeGroupIdCriterion>
+            <ContainsFieldDefinitionIdCriterion>2</ContainsFieldDefinitionIdCriterion>
+        </Query>
+        <SortClauses>
+            <Identifier>descending</Identifier>
+            <Id>ascending</Id>
+        </SortClauses>
+    </ContentTypeQuery>
+</ViewInput>

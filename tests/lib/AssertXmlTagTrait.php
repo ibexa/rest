@@ -8,6 +8,7 @@
 namespace Ibexa\Tests\Rest;
 
 use DOMDocument;
+use DOMNodeList;
 use DOMXPath;
 
 /**
@@ -50,7 +51,9 @@ trait AssertXmlTagTrait
         $document = new DOMDocument();
         $document->loadXML($actualXml);
         $xpath = new DOMXPath($document);
+        $queryResult = $xpath->query($query);
+        self::assertInstanceOf(DomNodeList::class, $queryResult);
 
-        self::assertGreaterThanOrEqual(1, $xpath->query($query)->length, $message);
+        self::assertGreaterThanOrEqual(1, $queryResult->length, $message);
     }
 }

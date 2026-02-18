@@ -400,6 +400,77 @@ schemas:
         properties:
             ContentTypeList:
                 $ref: "#/components/schemas/ContentTypeInfoList"
+    ContentTypeQuery:
+        description: This class represents a content type query.
+        type: object
+        properties:
+            limit:
+                description: The maximum number of results to return.
+                type: integer
+            offset:
+                description: The offset to start returning results from.
+                type: integer
+            Query:
+                description: An array of filters to apply to the query.
+                type: object
+                properties:
+                    ContentTypeIdCriterion:
+                        oneOf:
+                            - type: array
+                              items:
+                                  type: integer
+                            - type: integer
+                    ContentTypeIdentifierCriterion:
+                        oneOf:
+                            - type: array
+                              items:
+                                  type: string
+                            - type: string
+                    IsSystemCriterion:
+                        type: boolean
+                    ContentTypeGroupIdCriterion:
+                        oneOf:
+                            - type: array
+                              items:
+                                  type: integer
+                            - type: integer
+                    ContainsFieldDefinitionIdCriterion:
+                        oneOf:
+                            - type: array
+                              items:
+                                  type: integer
+                            - type: integer
+            SortClauses:
+                description: An array of sort clauses to apply to the query.
+                type: object
+                properties:
+                    Id:
+                        type: string
+                        enum: [ ascending, descending ]
+                    Identifier:
+                        type: string
+                        enum: [ ascending, descending ]
+    ContentTypeViewInput:
+        description: This class represents a content type view input.
+        xml:
+            name: ViewInput
+        type: object
+        required:
+            - identifier
+            - ContentTypeQuery
+        properties:
+            identifier:
+                description: The identifier of a view.
+                type: string
+            ContentTypeQuery:
+                $ref: "#/components/schemas/ContentTypeQuery"
+    ContentTypeViewInputWrapper:
+        type: object
+        required:
+            - ViewInput
+        properties:
+            ViewInput:
+                $ref: "#/components/schemas/ContentTypeViewInput"
     Field:
         description: This class represents a field of a content item.
         type: object

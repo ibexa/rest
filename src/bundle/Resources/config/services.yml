@@ -1,11 +1,11 @@
 parameters:
     ibexa.rest.output.visitor.json.regexps:
-        - '(^application/vnd\.ibexa\.api(\.[A-Za-z]+)+\+json$)'
-        - '(^application/json$)'
+        - '(^application/vnd\.ibexa\.api(\.[A-Za-z]+)+\+json)'
+        - '(^application/json)'
     ibexa.rest.output.visitor.xml.regexps:
-        - '(^application/vnd\.ibexa\.api(\.[A-Za-z]+)+\+xml$)'
-        - '(^application/xml$)'
-        - '(^.*/.*$)'
+        - '(^application/vnd\.ibexa\.api(\.[A-Za-z]+)+\+xml)'
+        - '(^application/xml)'
+        - '(^.*/.*)'
     ibexa.rest.path_prefix.pattern: !php/const \Ibexa\Bundle\Rest\UriParser\UriParser::DEFAULT_REST_PREFIX_PATTERN
 
 services:
@@ -242,6 +242,10 @@ services:
         tags:
             - { name: kernel.event_subscriber }
             - { name: monolog.logger, channel: request }
+
+    Ibexa\Bundle\Rest\EventListener\SupportedMediaTypesSubscriber:
+        tags:
+            - { name: kernel.event_subscriber }
 
     Ibexa\Rest\Server\Controller\Options:
         parent: Ibexa\Rest\Server\Controller

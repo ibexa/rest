@@ -1,0 +1,29 @@
+parameters:
+    ibexa.rest.edition_badges.badges.config:
+        experience:
+            name: 'Experience'
+            color: '#D3822B'
+        commerce:
+            name: 'Commerce'
+            color: '#A32768'
+            position: after
+        lts-update:
+            name: 'LTS Update'
+            color: '#5DA7C0'
+            position: after
+
+    ibexa.rest.edition_badges.badges.tag_editions.map: []
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Ibexa\Bundle\Rest\ApiPlatform\EditionBadge\EditionBadgeFactoryInterface:
+        alias: Ibexa\Bundle\Rest\ApiPlatform\EditionBadge\EditionBadgeFactory
+
+    Ibexa\Bundle\Rest\ApiPlatform\EditionBadge\EditionBadgeFactory:
+        arguments:
+            $badgesConfig: '%ibexa.rest.edition_badges.badges.config%'
+            $tagToEditionMap: '%ibexa.rest.edition_badges.badges.tag_editions.map%'

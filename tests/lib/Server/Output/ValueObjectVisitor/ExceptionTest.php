@@ -8,6 +8,8 @@
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use DOMDocument;
+use DOMNode;
+use DOMNodeList;
 use DOMXPath;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Rest\Output\Generator\Xml;
@@ -118,8 +120,11 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
         $xpath = new DOMXPath($document);
 
         $nodeList = $xpath->query('//ErrorMessage/errorDescription');
+        self::assertInstanceOf(DOMNodeList::class, $nodeList);
+
         $errorDescriptionNode = $nodeList->item(0);
 
+        self::assertInstanceOf(DOMNode::class, $errorDescriptionNode);
         self::assertEquals(self::NON_VERBOSE_ERROR_DESCRIPTION, $errorDescriptionNode->textContent);
     }
 

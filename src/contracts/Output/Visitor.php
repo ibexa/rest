@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Contracts\Rest\Output;
 
+use ArrayObject;
 use Error;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\EncoderInterface;
@@ -90,6 +91,8 @@ class Visitor
             unset($normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT]);
         }
 
+        $normalizedData = $this->removeEncodeContext($normalizedData);
+
         //@todo Needs refactoring!
         // A hackish solution to enable outer visitors to disable setting
         // of certain headers in inner visitors, for example Accept-Patch header
@@ -112,6 +115,29 @@ class Visitor
         $this->statusCode = null;
 
         return $response;
+    }
+
+    /**
+     * @param array<mixed>|bool|string|int|float|\ArrayObject|null $data
+     *
+     * @return array<mixed>|bool|string|int|float|\ArrayObject|null
+     */
+    private function removeEncodeContext(
+        array|bool|string|int|float|null|ArrayObject $data,
+    ): array|bool|string|int|float|null|ArrayObject {
+        if (is_array($data) || $data instanceof ArrayObject) {
+            foreach ($data as $key => $value) {
+                if ($key === VisitorAdapterNormalizer::ENCODER_CONTEXT) {
+                    unset($data[$key]);
+
+                    continue;
+                }
+
+                $data[$key] = $this->removeEncodeContext($value);
+            }
+        }
+
+        return $data;
     }
 
     /**
