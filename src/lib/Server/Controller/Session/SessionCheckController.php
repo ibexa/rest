@@ -26,17 +26,8 @@ use Symfony\Component\HttpFoundation\Response;
             new Model\Parameter(
                 name: 'Cookie',
                 in: 'header',
-                required: true,
+                required: false,
                 description: 'Only needed for session\'s checking {sessionName}={sessionID}.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the session is returned in XML or JSON format.',
                 schema: [
                     'type' => 'string',
                 ],
