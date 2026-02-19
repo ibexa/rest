@@ -242,7 +242,7 @@ class ContentType extends RestController
             $orderby = $request->query->get('orderby');
             $this->sortContentTypeList($contentTypes, $orderby, $sort);
         }
-        $offset = $request->query->get('offset', 0);
+        $offset = $request->query->getInt('offset');
         $return->contentTypes = array_slice($contentTypes, $offset, $limit);
 
         return $return;

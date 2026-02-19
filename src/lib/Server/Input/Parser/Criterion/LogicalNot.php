@@ -19,16 +19,13 @@ class LogicalNot extends CriterionParser
     /**
      * Parses input structure to a Criterion object.
      *
-     * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot
      */
     public function parse(array $data, ParsingDispatcher $parsingDispatcher)
     {
-        if (!array_key_exists('NOT', $data) && !is_array($data['NOT'])) {
+        if (!array_key_exists('NOT', $data) || !is_array($data['NOT'])) {
             throw new Exceptions\Parser('Invalid <NOT> format');
         }
 
@@ -37,7 +34,7 @@ class LogicalNot extends CriterionParser
         }
         $criterionName = key($data['NOT']);
         $criterionData = current($data['NOT']);
-        $criteria = $this->dispatchCriterion($criterionName, $criterionData, $parsingDispatcher);
+        $criteria = $this->dispatchCriterion((string)$criterionName, $criterionData, $parsingDispatcher);
 
         return new LogicalNotCriterion($criteria);
     }
