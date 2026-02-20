@@ -469,12 +469,6 @@ parameters:
 			path: src/lib/Server/Input/Parser/Criterion/LocationId.php
 
 		-
-			message: '#^Offset ''NOT'' does not exist on array\<mixed, mixed\>\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/LogicalNot.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\LogicalOperator\:\:getFlattenedCriteriaData\(\) has parameter \$criteriaByType with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
