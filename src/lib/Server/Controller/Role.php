@@ -145,8 +145,6 @@ class Role extends RestController
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         } catch (LimitationValidationException $e) {
             throw new BadRequestException($e->getMessage());
-        } catch (Exceptions\Parser $e) {
-            throw new BadRequestException($e->getMessage());
         }
 
         return new Values\CreatedRole(['role' => new Values\RestRole($roleDraft)]);

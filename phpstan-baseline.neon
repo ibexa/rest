@@ -1531,18 +1531,6 @@ parameters:
 			path: src/lib/Server/Controller/ContentType.php
 
 		-
-			message: '#^Parameter \#2 \$default of method Symfony\\Component\\HttpFoundation\\InputBag\<string\>\:\:get\(\) expects string\|null, int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Controller/ContentType.php
-
-		-
-			message: '#^Parameter \#2 \$offset of function array_slice expects int, string given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Controller/ContentType.php
-
-		-
 			message: '#^Parameter \#2 \$orderby of method Ibexa\\Rest\\Server\\Controller\\ContentType\:\:sortContentTypeList\(\) expects string, string\|null given\.$#'
 			identifier: argument.type
 			count: 1
@@ -1696,12 +1684,6 @@ parameters:
 			message: '#^Access to an undefined property Ibexa\\Contracts\\Core\\Repository\\Values\\User\\Policy\:\:\$originalId\.$#'
 			identifier: property.notFound
 			count: 2
-			path: src/lib/Server/Controller/Role.php
-
-		-
-			message: '#^Dead catch \- Ibexa\\Contracts\\Rest\\Exceptions\\Parser is never thrown in the try block\.$#'
-			identifier: catch.neverThrown
-			count: 1
 			path: src/lib/Server/Controller/Role.php
 
 		-
@@ -2117,12 +2099,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/lib/Server/Controller/URLWildcard.php
-
-		-
-			message: '#^Dead catch \- Ibexa\\Contracts\\Core\\Repository\\Exceptions\\NotFoundException is never thrown in the try block\.$#'
-			identifier: catch.neverThrown
-			count: 1
-			path: src/lib/Server/Controller/User.php
 
 		-
 			message: '#^Method Ibexa\\Rest\\Server\\Controller\\User\:\:assignUserToUserGroup\(\) has parameter \$userId with no type specified\.$#'
@@ -2731,12 +2707,6 @@ parameters:
 			path: src/lib/Server/Input/Parser/Criterion/LogicalAnd.php
 
 		-
-			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\LogicalNot\:\:parse\(\) has parameter \$data with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/lib/Server/Input/Parser/Criterion/LogicalNot.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Criterion\\LogicalOperator\:\:getFlattenedCriteriaData\(\) has parameter \$criteriaByType with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -3183,12 +3153,6 @@ parameters:
 		-
 			message: '#^PHPDoc tag @var above a method has no effect\.$#'
 			identifier: varTag.misplaced
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/Author.php
-
-		-
-			message: '#^PHPDoc tag @var does not specify variable name\.$#'
-			identifier: varTag.noVariable
 			count: 1
 			path: src/lib/Server/Output/ValueObjectVisitor/Author.php
 

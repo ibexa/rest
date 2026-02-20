@@ -19,9 +19,8 @@ jobs:
             matrix:
                 php:
                     - '7.4'
-
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
 
             - name: Set project version
               run: |

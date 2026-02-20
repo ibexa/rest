@@ -983,7 +983,7 @@ class User extends RestController
 
         try {
             $this->userService->assignUserToUserGroup($user, $userGroup);
-        } catch (ApiExceptions\NotFoundException $e) {
+        } catch (ApiExceptions\UnauthorizedException $e) {
             throw new Exceptions\ForbiddenException($e->getMessage());
         }
 
