@@ -3751,12 +3751,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/RestContent.php
 
 		-
-			message: '#^Parameter \#2 \$whatIsWrong of class Ibexa\\Core\\Base\\Exceptions\\BadStateException constructor expects string, int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/RestContent.php
-
-		-
 			message: '#^Property Ibexa\\Rest\\Server\\Values\\RestContent\:\:\$path \(string\) on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.property
 			count: 1
