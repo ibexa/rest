@@ -745,12 +745,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/PublishedRole.php
 
 		-
-			message: '#^Parameter \#2 \$whatIsWrong of class Ibexa\\Core\\Base\\Exceptions\\BadStateException constructor expects string, int given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/RestContent.php
-
-		-
 			message: '#^Access to an undefined property Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Content\:\:\$valueObject\.$#'
 			identifier: property.notFound
 			count: 4
