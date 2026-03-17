@@ -805,6 +805,24 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/VersionInfo.php
 
 		-
+			message: '#^Parameter \#1 \$fields of class Symfony\\Component\\Validator\\Constraints\\Collection constructor expects array\<string, list\<Symfony\\Component\\Validator\\Constraint\>\|Symfony\\Component\\Validator\\Constraint\>\|null, array\{fields\: array\<string, Symfony\\Component\\Validator\\Constraint\>\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Validation/Builder/Input/Parser/BaseInputParserCollectionValidatorBuilder.php
+
+		-
+			message: '#^Parameter \#1 \$constraints of class Symfony\\Component\\Validator\\Constraints\\AtLeastOneOf constructor expects array\<Symfony\\Component\\Validator\\Constraint\>\|null, array\<string, array\<int, Symfony\\Component\\Validator\\Constraints\\All\|Symfony\\Component\\Validator\\Constraints\\Type\>\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Validation/Builder/Input/Parser/Criterion/BaseImageCriterionValidatorBuilder.php
+
+		-
+			message: '#^Parameter \#1 \$fields of class Symfony\\Component\\Validator\\Constraints\\Collection constructor expects array\<string, list\<Symfony\\Component\\Validator\\Constraint\>\|Symfony\\Component\\Validator\\Constraint\>\|null, array\{fields\: array\{min\: Symfony\\Component\\Validator\\Constraints\\Optional, max\: Symfony\\Component\\Validator\\Constraints\\Optional\}\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/lib/Server/Validation/Builder/Input/Parser/Criterion/BaseImageCriterionValidatorBuilder.php
+
+		-
 			message: '#^Property Ibexa\\Rest\\Server\\View\\AcceptHeaderVisitorDispatcher\:\:\$mapping type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
