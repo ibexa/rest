@@ -25,17 +25,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
         tags: [
             'User',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the User is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
                 'description' => 'OK - the User with the given ID.',

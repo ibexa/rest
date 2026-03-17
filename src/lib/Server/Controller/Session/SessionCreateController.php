@@ -31,27 +31,9 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the session is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The SessionInput schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'Cookie',
                 in: 'header',
-                required: true,
+                required: false,
                 description: 'Only needed for session\'s checking {sessionName}={sessionID}.',
                 schema: [
                     'type' => 'string',
@@ -60,7 +42,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
             new Model\Parameter(
                 name: 'X-CSRF-Token',
                 in: 'header',
-                required: true,
+                required: false,
                 description: 'Only needed for session\'s checking. The {csrfToken} needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
