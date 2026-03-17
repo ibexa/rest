@@ -226,7 +226,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
 
     private function isJson(string $filePath): bool
     {
-        return 'json' === array_slice(explode('.', pathinfo($filePath, PATHINFO_FILENAME)), -1, 1)[0];
+        return in_array('json', explode('.', pathinfo($filePath, PATHINFO_FILENAME));
     }
 
     /**
