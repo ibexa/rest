@@ -102,6 +102,10 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
             $this->buildContext($context, $format),
         );
 
+        if ($format === 'json') {
+            return $normalizedData;
+        }
+
         return $normalizedData + [self::ENCODER_CONTEXT => $generator->getEncoderContext(get_object_vars($data))];
     }
 
