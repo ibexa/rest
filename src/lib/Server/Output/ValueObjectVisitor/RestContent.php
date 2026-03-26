@@ -208,6 +208,6 @@ class RestContent extends ValueObjectVisitor
                 return 'TRASHED';
         }
 
-        throw new CoreBadStateException('status', $status);
+        throw new CoreBadStateException('status', (string) $status);
     }
 }

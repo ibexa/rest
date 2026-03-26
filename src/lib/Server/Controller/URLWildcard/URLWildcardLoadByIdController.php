@@ -78,7 +78,7 @@ class URLWildcardLoadByIdController extends RestController
     /**
      * Returns the URL wildcard with the given id.
      */
-    public function loadURLWildcard(int $urlWildcardId): UrlWildcard
+    public function loadURLWildcard(int $urlWildcardId): URLWildcard
     {
         return $this->urlWildcardService->load($urlWildcardId);
     }
