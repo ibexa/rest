@@ -24,15 +24,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the URL wildcard is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'wildcardId',
                 in: 'path',
                 required: true,
@@ -45,17 +36,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns the URL wildcard.',
                 'content' => [
-                    'application/vnd.ibexa.api.UrlWildcard+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UrlWildcard',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/wildcard_id/GET/UrlWildcard.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UrlWildcard+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlWildcardWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/wildcard_id/GET/UrlWildcard.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UrlWildcard+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UrlWildcard',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/wildcard_id/GET/UrlWildcard.xml.example',
                     ],
                 ],
             ],

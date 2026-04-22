@@ -27,15 +27,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the link list of User Groups is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'userId',
                 in: 'path',
                 required: true,
@@ -46,18 +37,19 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the link list of User Groups is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.UserGroupRefList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserGroupRefList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/POST/UserGroupRefList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UserGroupRefList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroupRefListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/group_id/UserGroupRefList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UserGroupRefList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserGroupRefList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/POST/UserGroupRefList.xml.example',
                     ],
                 ],
             ],

@@ -24,15 +24,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the content type is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'contentTypeId',
                 in: 'path',
                 required: true,
@@ -45,17 +36,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns the content type.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentType+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentType',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PUBLISH/ContentType.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ContentType+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/GET/ContentType.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentType+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentType',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PUBLISH/ContentType.xml.example',
                     ],
                 ],
             ],

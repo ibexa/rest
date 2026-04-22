@@ -24,32 +24,21 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'Type Groups',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the content type group list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
                 'description' => 'OK - returns a list of content type groups.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentTypeGroupList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentTypeGroupList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/GET/ContentTypeGroupList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ContentTypeGroupList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeGroupListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/GET/ContentTypeGroupList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeGroupList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroupList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/GET/ContentTypeGroupList.xml.example',
                     ],
                 ],
             ],

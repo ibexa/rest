@@ -26,15 +26,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the updated version is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'contentId',
                 in: 'path',
                 required: true,
@@ -55,17 +46,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_CREATED => [
                 'description' => 'Created.',
                 'content' => [
-                    'application/vnd.ibexa.api.Version+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Version',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/GET/Version.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Version+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/VersionWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/GET/Version.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Version+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Version',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/GET/Version.xml.example',
                     ],
                 ],
             ],
@@ -77,6 +68,7 @@ use Symfony\Component\HttpFoundation\Response;
             ],
         ],
         requestBody: new Model\RequestBody(
+            description: 'No payload required',
             content: new \ArrayObject(),
         ),
     ),

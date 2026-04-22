@@ -20,29 +20,13 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}',
     openapi: new Model\Operation(
         summary: 'Load content',
-        description: 'Loads the content item for the given ID. Depending on the Accept header the current version is embedded (i.e. the current published version or if it does not exist, the draft of the authenticated user).',
+        description: 'Loads the content item for the given ID. Depending on the Accept header the current version is embedded (i.e. the current published version or if it does not exist, the draft of the authenticated user).
+* Content -	If set, all information for the content item including the embedded current version is returned in XML or JSON format.
+* ContentInfo - If set, all information for the content item (excluding the current version) is returned in XML or JSON format.',
         tags: [
             'Objects',
         ],
         parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: '
-* Content -	If set, all information for the content item including the embedded current version is returned in XML or JSON format.
-* ContentInfo - If set, all information for the content item (excluding the current version) is returned in XML or JSON format.
-                ',
-                schema: [
-                    'type' => 'string',
-                    'enum' => [
-                        'application/vnd.ibexa.api.Content+xml',
-                        'application/vnd.ibexa.api.Content+json',
-                        'application/vnd.ibexa.api.ContentInfo+xml',
-                        'application/vnd.ibexa.api.ContentInfo+json',
-                    ],
-                ],
-            ),
             new Model\Parameter(
                 name: 'If-None-Match',
                 in: 'header',
@@ -63,27 +47,28 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'OK - returns the Content or ContentInfo in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Content+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Content',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/GET/Content.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Content+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/GET/Content.json.example',
                     ],
-                    'application/vnd.ibexa.api.ContentInfo+xml' => [
+                    'application/vnd.ibexa.api.Content+xml' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/ContentInfo',
+                            '$ref' => '#/components/schemas/Content',
                         ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/GET/Content.xml.example',
                     ],
                     'application/vnd.ibexa.api.ContentInfo+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentInfoWrapper',
+                        ],
+                    ],
+                    'application/vnd.ibexa.api.ContentInfo+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentInfo',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/PATCH/ContentInfo.xml.example',
                     ],

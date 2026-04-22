@@ -25,32 +25,21 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'Url Alias',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the URL alias list contains only references and is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
                 'description' => 'OK - returns the list of URL aliases.',
                 'content' => [
-                    'application/vnd.ibexa.api.UrlAliasRefList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UrlAliasRefList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/GET/UrlAliasRefList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UrlAliasRefList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlAliasRefListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/GET/UrlAliasRefList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UrlAliasRefList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UrlAliasRefList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/GET/UrlAliasRefList.xml.example',
                     ],
                 ],
             ],

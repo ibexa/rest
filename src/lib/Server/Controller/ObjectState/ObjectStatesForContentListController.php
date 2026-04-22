@@ -29,18 +29,9 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the Object states are returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'If-None-Match',
                 in: 'header',
-                required: true,
+                required: false,
                 description: 'ETag',
                 schema: [
                     'type' => 'string',
@@ -59,12 +50,12 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns the Object state.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentObjectStates+xml' => [
+                    'application/vnd.ibexa.api.ContentObjectStates+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentObjectStates',
                         ],
                     ],
-                    'application/vnd.ibexa.api.ContentObjectStates+json' => [
+                    'application/vnd.ibexa.api.ContentObjectStates+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentObjectStates',
                         ],

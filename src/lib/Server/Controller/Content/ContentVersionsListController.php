@@ -26,15 +26,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the version list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'contentId',
                 in: 'path',
                 required: true,
@@ -45,18 +36,19 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the version list is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.VersionList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/VersionList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/GET/VersionList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.VersionList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/VersionListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/GET/VersionList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.VersionList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/VersionList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/GET/VersionList.xml.example',
                     ],
                 ],
             ],

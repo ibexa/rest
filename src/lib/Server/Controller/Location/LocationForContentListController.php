@@ -23,18 +23,9 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the Location list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'If-None-Match',
                 in: 'header',
-                required: true,
+                required: false,
                 description: 'ETag',
                 schema: [
                     'type' => 'string',
@@ -51,18 +42,19 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the Location list is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.LocationList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/LocationList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/GET/LocationList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.LocationList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LocationListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/GET/LocationList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.LocationList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/LocationList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/GET/LocationList.xml.example',
                     ],
                 ],
             ],

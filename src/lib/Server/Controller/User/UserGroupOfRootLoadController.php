@@ -23,8 +23,6 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'User Group',
         ],
-        parameters: [
-        ],
         responses: [
             Response::HTTP_MOVED_PERMANENTLY => [
                 'description' => 'Moved permanently.',

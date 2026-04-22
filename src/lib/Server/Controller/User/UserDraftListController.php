@@ -28,15 +28,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the version list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'userId',
                 in: 'path',
                 required: true,
@@ -49,14 +40,14 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - List the draft versions',
                 'content' => [
-                    'application/vnd.ibexa.api.VersionList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/VersionList',
-                        ],
-                    ],
                     'application/vnd.ibexa.api.VersionList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/VersionListWrapper',
+                        ],
+                    ],
+                    'application/vnd.ibexa.api.VersionList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/VersionList',
                         ],
                     ],
                 ],

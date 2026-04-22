@@ -24,34 +24,9 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'User Token',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the token is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The SessionInput schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         requestBody: new Model\RequestBody(
+            description: 'The credentials in JWTInput JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.JWTInput+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/JWTInput',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/token/jwt/POST/JWTInput.xml.example',
-                ],
                 'application/vnd.ibexa.api.JWTInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/JWTInputWrapper',
@@ -62,13 +37,8 @@ use Symfony\Component\HttpFoundation\Response;
         ),
         responses: [
             Response::HTTP_OK => [
+                'description' => 'OK - returns the JWT in JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.JWT+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/JWT',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/token/jwt/POST/JWT.xml.example',
-                    ],
                     'application/vnd.ibexa.api.JWT+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/JWTWrapper',

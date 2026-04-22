@@ -27,18 +27,9 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the User is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'If-None-Match',
                 in: 'header',
-                required: true,
+                required: false,
                 description: 'ETag',
                 schema: [
                     'type' => 'string',
@@ -57,17 +48,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - the User with the given ID.',
                 'content' => [
-                    'application/vnd.ibexa.api.User+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.xml.example',
-                    ],
                     'application/vnd.ibexa.api.User+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.json.example',
+                    ],
+                    'application/vnd.ibexa.api.User+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.xml.example',
                     ],
                 ],
             ],

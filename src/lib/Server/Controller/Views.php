@@ -32,50 +32,31 @@ Refer to [Search Criteria Reference](/en/latest/search/criteria_reference/search
         tags: [
             'Views',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'The view in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The view input in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         requestBody: new Model\RequestBody(
+            description: 'The view input in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.ViewInput+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/ViewInput',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/views/POST/ViewInput.xml.example',
-                ],
                 'application/vnd.ibexa.api.ViewInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ViewInputWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/views/POST/ViewInput.json.example',
                 ],
+                'application/vnd.ibexa.api.ViewInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ViewInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/views/POST/ViewInput.xml.example',
+                ],
             ]),
         ),
         responses: [
             Response::HTTP_OK => [
+                'description' => 'The view in XML or JSON format.',
                 'content' => [
                     'application/vnd.ibexa.api.View+xml; version=1.1' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/View',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/views/POST/View.xml.v11.example',
                     ],
                 ],
             ],

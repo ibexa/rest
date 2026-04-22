@@ -31,27 +31,9 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the session is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The SessionInput schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'Cookie',
                 in: 'header',
-                required: true,
+                required: false,
                 description: 'Only needed for session\'s checking {sessionName}={sessionID}.',
                 schema: [
                     'type' => 'string',
@@ -60,7 +42,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
             new Model\Parameter(
                 name: 'X-CSRF-Token',
                 in: 'header',
-                required: true,
+                required: false,
                 description: 'Only needed for session\'s checking. The {csrfToken} needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
@@ -68,18 +50,19 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The session input in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.SessionInput+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/SessionInput',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/SessionInput.xml.example',
-                ],
                 'application/vnd.ibexa.api.SessionInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/SessionInputWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/SessionInput.json.example',
+                ],
+                'application/vnd.ibexa.api.SessionInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/SessionInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/SessionInput.xml.example',
                 ],
             ]),
         ),
@@ -87,34 +70,34 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
             Response::HTTP_OK => [
                 'description' => 'Session already exists.',
                 'content' => [
-                    'application/vnd.ibexa.api.Session+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Session',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Session+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/SessionWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Session+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Session',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
                     ],
                 ],
             ],
             Response::HTTP_CREATED => [
                 'description' => 'Session is created.',
                 'content' => [
-                    'application/vnd.ibexa.api.Session+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Session',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Session+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/SessionWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Session+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Session',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
                     ],
                 ],
             ],

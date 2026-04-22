@@ -44,14 +44,6 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ),
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'sessionId',
                 in: 'path',
                 required: true,
@@ -62,18 +54,19 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'OK - returns the Session in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Session+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Session',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Session+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/SessionWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Session+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Session',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
                     ],
                 ],
             ],
@@ -82,6 +75,7 @@ use Symfony\Component\HttpFoundation\Response;
             ],
         ],
         requestBody: new Model\RequestBody(
+            description: 'No payload required',
             content: new \ArrayObject(),
         ),
     ),

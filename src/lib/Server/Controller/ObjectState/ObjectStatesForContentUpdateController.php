@@ -31,24 +31,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the updated Object state is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The content item Object states input schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'If-Match',
                 in: 'header',
                 required: true,
@@ -67,18 +49,19 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The content item Object states input schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.ContentObjectStates+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/ContentObjectStates',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.response.xml.example',
-                ],
                 'application/vnd.ibexa.api.ContentObjectStates+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentObjectStatesWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/GET/ContentObjectStates.json.example',
+                ],
+                'application/vnd.ibexa.api.ContentObjectStates+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentObjectStates',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.response.xml.example',
                 ],
             ]),
         ),
@@ -86,17 +69,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_NO_CONTENT => [
                 'description' => 'OK - Object state updated.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentObjectStates+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentObjectStates',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.response.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ContentObjectStates+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentObjectStatesWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/GET/ContentObjectStates.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentObjectStates+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentObjectStates',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.response.xml.example',
                     ],
                 ],
             ],

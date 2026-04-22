@@ -29,24 +29,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the updated Policy is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'If set, the updated Policy is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'id',
                 in: 'path',
                 required: true,
@@ -56,34 +38,36 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'If set, the updated Policy is returned in XML or JSON format.',
             content: new \ArrayObject([
+                'application/vnd.ibexa.api.PolicyCreate+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/PolicyCreateWrapper',
+                    ],
+                ],
                 'application/vnd.ibexa.api.PolicyCreate+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/PolicyCreate',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/POST/PolicyCreate.xml.example',
                 ],
-                'application/vnd.ibexa.api.PolicyCreate+json' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/PolicyCreateWrapper',
-                    ],
-                ],
             ]),
         ),
         responses: [
             Response::HTTP_CREATED => [
+                'description' => 'If set, the updated Policy is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Policy+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Policy',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/PATCH/Policy.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Policy+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/PolicyWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/GET/Policy.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Policy+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Policy',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/PATCH/Policy.xml.example',
                     ],
                 ],
             ],

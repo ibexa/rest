@@ -25,32 +25,21 @@ use Symfony\Component\Security\Core\User\UserInterface;
         tags: [
             'User',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the User is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
                 'description' => 'OK - the User with the given ID.',
                 'content' => [
-                    'application/vnd.ibexa.api.User+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.xml.example',
-                    ],
                     'application/vnd.ibexa.api.User+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.json.example',
+                    ],
+                    'application/vnd.ibexa.api.User+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.xml.example',
                     ],
                 ],
             ],

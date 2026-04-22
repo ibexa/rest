@@ -37,24 +37,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the new content type or draft is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The content type Create schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'contentTypeGroupId',
                 in: 'path',
                 required: true,
@@ -64,18 +46,19 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The content type Create schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.ContentTypeCreate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/ContentTypeCreate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/types/POST/ContentTypeCreate.xml.example',
-                ],
                 'application/vnd.ibexa.api.ContentTypeCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeCreateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/types/POST/ContentTypeCreate.json.example',
+                ],
+                'application/vnd.ibexa.api.ContentTypeCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentTypeCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/types/POST/ContentTypeCreate.xml.example',
                 ],
             ]),
         ),
@@ -83,16 +66,16 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_CREATED => [
                 'description' => 'Content type created.',
                 'content' => [
+                    'application/vnd.ibexa.api.ContentType+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeWrapper',
+                        ],
+                    ],
                     'application/vnd.ibexa.api.ContentType+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentType',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PUBLISH/ContentType.xml.example',
-                    ],
-                    'application/vnd.ibexa.api.ContentType+json' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentTypeWrapper',
-                        ],
                     ],
                 ],
             ],

@@ -32,24 +32,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the updated version is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The RelationCreate schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'contentId',
                 in: 'path',
                 required: true,
@@ -67,35 +49,37 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The RelationCreate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.RelationCreate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/RelationCreate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/relations/POST/RelationCreate.xml.example',
-                ],
                 'application/vnd.ibexa.api.RelationCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/RelationCreateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/relations/POST/RelationCreate.json.example',
                 ],
+                'application/vnd.ibexa.api.RelationCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/RelationCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/relations/POST/RelationCreate.xml.example',
+                ],
             ]),
         ),
         responses: [
             Response::HTTP_CREATED => [
+                'description' => 'If set, the updated version is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Relation+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Relation',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/relations/relation_id/GET/Relation.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Relation+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RelationWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/relations/POST/Relation.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Relation+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Relation',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/relations/relation_id/GET/Relation.xml.example',
                     ],
                 ],
             ],

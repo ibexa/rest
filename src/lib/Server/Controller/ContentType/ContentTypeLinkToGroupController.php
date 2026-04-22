@@ -30,15 +30,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the updated content type group list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'contentTypeId',
                 in: 'path',
                 required: true,
@@ -46,21 +37,31 @@ use Symfony\Component\HttpFoundation\Response;
                     'type' => 'string',
                 ],
             ),
+            new Model\Parameter(
+                name: 'group',
+                in: 'query',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+                description: 'Destination content type group URI; for example with content type group 4: `?group=/api/ibexa/v2/content/typegroups/4`',
+            ),
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the updated content type group list is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentTypeGroupRefList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentTypeGroupRefList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/id/DELETE/ContentTypeGroupRefList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ContentTypeGroupRefList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeGroupRefListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/id/DELETE/ContentTypeGroupRefList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeGroupRefList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroupRefList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/id/DELETE/ContentTypeGroupRefList.xml.example',
                     ],
                 ],
             ],
@@ -75,6 +76,7 @@ use Symfony\Component\HttpFoundation\Response;
             ],
         ],
         requestBody: new Model\RequestBody(
+            description: 'No payload required',
             content: new \ArrayObject(),
         ),
     ),

@@ -26,24 +26,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the new user is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The RoleInput schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'If-Match',
                 in: 'header',
                 required: true,
@@ -62,18 +44,19 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The RoleInput schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.RoleInput+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/RoleInput',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/RoleInput.xml.example',
-                ],
                 'application/vnd.ibexa.api.RoleInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/RoleInputWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/RoleInput.json.example',
+                ],
+                'application/vnd.ibexa.api.RoleInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/RoleInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/RoleInput.xml.example',
                 ],
             ]),
         ),
@@ -81,17 +64,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - Role updated',
                 'content' => [
-                    'application/vnd.ibexa.api.Role+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Role',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Role+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Role+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Role',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.xml.example',
                     ],
                 ],
             ],

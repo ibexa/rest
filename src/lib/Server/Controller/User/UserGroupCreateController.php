@@ -26,39 +26,20 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'User Group',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the new User Group is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The UserGroupCreate schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         requestBody: new Model\RequestBody(
+            description: 'The UserGroupCreate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.UserGroupCreate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/UserGroupCreate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroupCreate.xml.example',
-                ],
                 'application/vnd.ibexa.api.UserGroupCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UserGroupCreateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroupCreate.json.example',
+                ],
+                'application/vnd.ibexa.api.UserGroupCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/UserGroupCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroupCreate.xml.example',
                 ],
             ]),
         ),
@@ -66,17 +47,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_CREATED => [
                 'description' => 'Created - the User Group has been created',
                 'content' => [
-                    'application/vnd.ibexa.api.UserGroup+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserGroup',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UserGroup+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroupWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UserGroup+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserGroup',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.xml.example',
                     ],
                 ],
             ],
@@ -100,24 +81,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the new User Group is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The UserGroupCreate schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'path',
                 in: 'path',
                 required: true,
@@ -127,35 +90,37 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The UserGroupCreate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.UserGroupCreate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/UserGroupCreate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroupCreate.xml.example',
-                ],
                 'application/vnd.ibexa.api.UserGroupCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UserGroupCreateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroupCreate.json.example',
                 ],
+                'application/vnd.ibexa.api.UserGroupCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/UserGroupCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroupCreate.xml.example',
+                ],
             ]),
         ),
         responses: [
             Response::HTTP_CREATED => [
+                'description' => 'If set, the new User Group is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.UserGroup+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserGroup',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UserGroup+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroupWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UserGroup+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserGroup',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.xml.example',
                     ],
                 ],
             ],

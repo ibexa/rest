@@ -35,24 +35,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the new Field definition is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The Field Definition Create schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'contentTypeId',
                 in: 'path',
                 required: true,
@@ -62,17 +44,18 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The Field Definition Create schema encoded in XML or JSON format.',
             content: new \ArrayObject([
+                'application/vnd.ibexa.api.FieldDefinitionCreate+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/FieldDefinitionCreateWrapper',
+                    ],
+                ],
                 'application/vnd.ibexa.api.FieldDefinitionCreate+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/FieldDefinitionCreate',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/field_definitions/POST/FieldDefinitionCreate.xml.example',
-                ],
-                'application/vnd.ibexa.api.FieldDefinitionCreate+json' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/FieldDefinitionCreateWrapper',
-                    ],
                 ],
             ]),
         ),
@@ -80,17 +63,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_CREATED => [
                 'description' => 'Field definition created.',
                 'content' => [
-                    'application/vnd.ibexa.api.FieldDefinition+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/FieldDefinition',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/field_definition_id/GET/FieldDefinition.xml.example',
-                    ],
                     'application/vnd.ibexa.api.FieldDefinition+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/FieldDefinitionWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/field_definition_id/GET/FieldDefinition.json.example',
+                    ],
+                    'application/vnd.ibexa.api.FieldDefinition+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinition',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/field_definition_id/GET/FieldDefinition.xml.example',
                     ],
                 ],
             ],

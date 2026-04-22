@@ -27,15 +27,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'UserList - If set, the User list returned in XML or JSON format. UserRefList - If set, the link list of Users returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'path',
                 in: 'path',
                 required: true,
@@ -48,27 +39,27 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - the Users of the Group with the given ID.',
                 'content' => [
-                    'application/vnd.ibexa.api.UserList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserList',
-                        ],
-                    ],
                     'application/vnd.ibexa.api.UserList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserList',
                         ],
                     ],
-                    'application/vnd.ibexa.api.UserRefList+xml' => [
+                    'application/vnd.ibexa.api.UserList+xml' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/UserRefList',
+                            '$ref' => '#/components/schemas/UserList',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/GET/UserRefList.xml.example',
                     ],
                     'application/vnd.ibexa.api.UserRefList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserRefListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/id/users/GET/UserRefList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UserRefList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserRefList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/GET/UserRefList.xml.example',
                     ],
                 ],
             ],
