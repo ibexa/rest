@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
             'User Token',
         ],
         requestBody: new Model\RequestBody(
-            description: 'The JWT token input in JSON format.',
+            description: 'The credentials in JWTInput JSON format.',
             content: new \ArrayObject([
                 'application/vnd.ibexa.api.JWTInput+json' => [
                     'schema' => [
