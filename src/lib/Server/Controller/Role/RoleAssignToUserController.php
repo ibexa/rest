@@ -28,24 +28,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the updated Role assignment list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The RoleAssignInput schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'userId',
                 in: 'path',
                 required: true,
@@ -55,6 +37,7 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The RoleAssignInput schema encoded in XML or JSON format.',
             content: new \ArrayObject([
                 'application/vnd.ibexa.api.RoleAssignInput+xml' => [
                     'schema' => [
@@ -72,6 +55,7 @@ use Symfony\Component\HttpFoundation\Response;
         ),
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the updated Role assignment list is returned in XML or JSON format.',
                 'content' => [
                     'application/vnd.ibexa.api.RoleAssignmentList+xml' => [
                         'schema' => [

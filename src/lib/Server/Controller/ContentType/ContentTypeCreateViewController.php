@@ -27,27 +27,8 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'Type',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'The view in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The view input in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         requestBody: new Model\RequestBody(
+            description: 'The view input in XML or JSON format.',
             content: new \ArrayObject([
                 'application/vnd.ibexa.api.ContentTypeViewInput+xml' => [
                     'schema' => [
@@ -59,12 +40,9 @@ use Symfony\Component\HttpFoundation\Response;
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeViewInputWrapper',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeCreateView.xml.example',
-                ],
-            ]),
-        ),
-        responses: [
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeCreateView.json.example',
             Response::HTTP_OK => [
+                'description' => 'The view in XML or JSON format.',
                 'content' => [
                     'application/vnd.ibexa.api.ContentTypeList+xml' => [
                         'schema' => [

@@ -32,27 +32,8 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'Objects',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'Content - If set, all information for the content item including the embedded current version is returned in XML or JSON format. ContentInfo - If set, all information for the content item (excluding the current version) is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The ContentCreate schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         requestBody: new Model\RequestBody(
+            description: 'The ContentCreate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
                 'application/vnd.ibexa.api.ContentCreate+xml' => [
                     'schema' => [
@@ -70,6 +51,7 @@ use Symfony\Component\HttpFoundation\Response;
         ),
         responses: [
             Response::HTTP_CREATED => [
+                'description' => 'Content - If set, all information for the content item including the embedded current version is returned in XML or JSON format. ContentInfo - If set, all information for the content item (excluding the current version) is returned in XML or JSON format.',
                 'content' => [
                     'application/vnd.ibexa.api.Content+xml' => [
                         'schema' => [

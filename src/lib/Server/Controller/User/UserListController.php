@@ -20,17 +20,6 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'User',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'UserList - If set, the User list is returned in XML or JSON format. UserRefList - If set, the link list of Users is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
                 'description' => 'OK - Loads Users either for a given remote ID or Role.',

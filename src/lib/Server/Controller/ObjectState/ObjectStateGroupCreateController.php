@@ -30,27 +30,8 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'Object State Groups',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the new Object state group is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The Object state group input schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         requestBody: new Model\RequestBody(
+            description: 'The Object state group input schema encoded in XML or JSON format.',
             content: new \ArrayObject([
                 'application/vnd.ibexa.api.ObjectStateGroupCreate+xml' => [
                     'schema' => [

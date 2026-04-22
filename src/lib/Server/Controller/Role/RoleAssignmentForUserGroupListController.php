@@ -24,15 +24,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the Role assignment list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'path',
                 in: 'path',
                 required: true,
@@ -43,6 +34,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the Role assignment list is returned in XML or JSON format.',
                 'content' => [
                     'application/vnd.ibexa.api.RoleAssignmentList+xml' => [
                         'schema' => [

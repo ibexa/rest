@@ -28,19 +28,9 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'User Group',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'UserGroupList - If set, the User Group List is returned in XML or JSON format. UserGroupRefList - If set, the link list of User Group is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'UserGroupList - If set, the User Group List is returned in XML or JSON format. UserGroupRefList - If set, the link list of User Group is returned in XML or JSON format.',
                 'content' => [
                     'application/vnd.ibexa.api.UserGroupList+xml' => [
                         'schema' => [

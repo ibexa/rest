@@ -25,17 +25,6 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'Url Alias',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the URL alias list contains only references and is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
                 'description' => 'OK - returns the list of URL aliases.',

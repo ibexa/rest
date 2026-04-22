@@ -33,28 +33,10 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the updated version is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'If-match',
                 in: 'header',
                 required: true,
                 description: 'Performs the patch only if the specified ETag is the current one.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The VersionUpdate schema encoded in XML or JSON format.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -77,6 +59,7 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The VersionUpdate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
                 'application/vnd.ibexa.api.VersionUpdate+xml' => [
                     'schema' => [
@@ -93,6 +76,7 @@ use Symfony\Component\HttpFoundation\Response;
         ),
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the updated version is returned in XML or JSON format.',
                 'content' => [
                     'application/vnd.ibexa.api.Version+xml' => [
                         'schema' => [

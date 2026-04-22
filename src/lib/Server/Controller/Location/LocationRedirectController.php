@@ -22,16 +22,6 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'Location',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
                 'content' => [

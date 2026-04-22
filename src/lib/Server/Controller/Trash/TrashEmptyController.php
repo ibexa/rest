@@ -25,8 +25,6 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'Trash',
         ],
-        parameters: [
-        ],
         responses: [
             Response::HTTP_NO_CONTENT => [
                 'description' => 'No Content - Trash emptied.',

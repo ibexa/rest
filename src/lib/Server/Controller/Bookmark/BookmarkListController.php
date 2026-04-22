@@ -28,19 +28,9 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'Bookmark',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the list is returned in XML or JSON format.',
                 'content' => [
                     'application/vnd.ibexa.api.BookmarkList+xml' => [
                         'schema' => [

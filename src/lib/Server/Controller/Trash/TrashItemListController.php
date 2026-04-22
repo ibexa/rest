@@ -28,17 +28,6 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'Trash',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the Trash item list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
                 'description' => 'OK - returns the list of items in the Trash.',

@@ -29,15 +29,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the link list of User Groups is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'userId',
                 in: 'path',
                 required: true,
@@ -48,6 +39,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the link list of User Groups is returned in XML or JSON format.',
                 'content' => [
                     'application/vnd.ibexa.api.UserGroupRefList+xml' => [
                         'schema' => [
@@ -74,6 +66,7 @@ use Symfony\Component\HttpFoundation\Response;
             ],
         ],
         requestBody: new Model\RequestBody(
+            description: 'No payload required',
             content: new \ArrayObject(),
         ),
     ),

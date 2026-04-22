@@ -30,17 +30,8 @@ use Symfony\Component\HttpFoundation\Response;
             new Model\Parameter(
                 name: 'If-None-Match',
                 in: 'header',
-                required: true,
+                required: false,
                 description: 'Only return the version if the given ETag is the not current one, otherwise a 304 is returned.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the version list is returned in XML or JSON format.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -64,6 +55,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the version list is returned in XML or JSON format.',
                 'content' => [
                     'application/vnd.ibexa.api.Version+xml' => [
                         'schema' => [
@@ -80,7 +72,7 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ],
             Response::HTTP_NOT_MODIFIED => [
-                'description' => 'Error - the ETag does not match the current one.',
+                'description' => 'Not Modified - the ETag matches the current one.',
             ],
             Response::HTTP_UNAUTHORIZED => [
                 'description' => 'Error - the user is not authorized to read this content item.',

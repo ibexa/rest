@@ -44,14 +44,6 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ),
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'sessionId',
                 in: 'path',
                 required: true,
@@ -82,6 +74,7 @@ use Symfony\Component\HttpFoundation\Response;
             ],
         ],
         requestBody: new Model\RequestBody(
+            description: 'No payload required',
             content: new \ArrayObject(),
         ),
     ),

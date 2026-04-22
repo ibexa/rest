@@ -50,6 +50,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The session input in XML or JSON format.',
             content: new \ArrayObject([
                 'application/vnd.ibexa.api.SessionInput+xml' => [
                     'schema' => [

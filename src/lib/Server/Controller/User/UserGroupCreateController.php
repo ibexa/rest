@@ -26,27 +26,8 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'User Group',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the new User Group is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The UserGroupCreate schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         requestBody: new Model\RequestBody(
+            description: 'The UserGroupCreate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
                 'application/vnd.ibexa.api.UserGroupCreate+xml' => [
                     'schema' => [
@@ -100,24 +81,6 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the new User Group is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The UserGroupCreate schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'path',
                 in: 'path',
                 required: true,
@@ -127,6 +90,7 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The UserGroupCreate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
                 'application/vnd.ibexa.api.UserGroupCreate+xml' => [
                     'schema' => [
@@ -144,6 +108,7 @@ use Symfony\Component\HttpFoundation\Response;
         ),
         responses: [
             Response::HTTP_CREATED => [
+                'description' => 'If set, the new User Group is returned in XML or JSON format.',
                 'content' => [
                     'application/vnd.ibexa.api.UserGroup+xml' => [
                         'schema' => [

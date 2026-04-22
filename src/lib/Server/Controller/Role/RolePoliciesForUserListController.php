@@ -23,17 +23,6 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'User Policy',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the Policy list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
                 'description' => 'OK - Policies which are applied to a given User.',

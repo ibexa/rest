@@ -24,17 +24,6 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'Url Wildcard',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the URL wildcard is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
                 'description' => 'OK - returns a list of URL wildcards.',
