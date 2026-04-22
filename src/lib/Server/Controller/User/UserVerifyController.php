@@ -23,8 +23,6 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'User',
         ],
-        parameters: [
-        ],
         responses: [
             Response::HTTP_OK => [
                 'description' => 'OK - verifies if there are Users matching the given filter.',

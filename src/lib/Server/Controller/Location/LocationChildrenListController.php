@@ -35,16 +35,16 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'If set, the new Location list is returned in XML or JSON format.',
                 'content' => [
+                    'application/vnd.ibexa.api.LocationList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/LocationListWrapper',
+                        ],
+                    ],
                     'application/vnd.ibexa.api.LocationList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LocationList',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/GET/LocationList.xml.example',
-                    ],
-                    'application/vnd.ibexa.api.LocationList+json' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/LocationListWrapper',
-                        ],
                     ],
                 ],
             ],

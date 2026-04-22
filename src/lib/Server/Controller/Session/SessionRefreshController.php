@@ -54,18 +54,19 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'OK - returns the Session in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Session+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Session',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Session+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/SessionWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Session+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Session',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
                     ],
                 ],
             ],

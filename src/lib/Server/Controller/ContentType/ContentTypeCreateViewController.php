@@ -30,31 +30,35 @@ use Symfony\Component\HttpFoundation\Response;
         requestBody: new Model\RequestBody(
             description: 'The view input in XML or JSON format.',
             content: new \ArrayObject([
+                'application/vnd.ibexa.api.ContentTypeViewInput+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentTypeViewInputWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeCreateView.json.example',
+                ],
                 'application/vnd.ibexa.api.ContentTypeViewInput+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeViewInput',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeCreateView.xml.example',
                 ],
-                'application/vnd.ibexa.api.ContentTypeViewInput+json' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/ContentTypeViewInputWrapper',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeCreateView.json.example',
+            ]),
+        ),
+        responses: [
             Response::HTTP_OK => [
                 'description' => 'The view in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentTypeList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentTypeInfoList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ContentTypeList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeInfoListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeInfoList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.xml.example',
                     ],
                 ],
             ],

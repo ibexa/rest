@@ -33,17 +33,17 @@ use Symfony\Component\HttpFoundation\Response;
         requestBody: new Model\RequestBody(
             description: 'The URL alias input schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.UrlAliasCreate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/UrlAliasCreate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/POST/UrlAliasCreate.xml.example',
-                ],
                 'application/vnd.ibexa.api.UrlAliasCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UrlAliasCreateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/POST/UrlAliasCreate.json.example',
+                ],
+                'application/vnd.ibexa.api.UrlAliasCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/UrlAliasCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/POST/UrlAliasCreate.xml.example',
                 ],
             ]),
         ),
@@ -51,17 +51,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_CREATED => [
                 'description' => 'URL alias created.',
                 'content' => [
-                    'application/vnd.ibexa.api.UrlAlias+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UrlAlias',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/url_alias_id/GET/UrlAlias.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UrlAlias+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlAliasWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/url_alias_id/GET/UrlAlias.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UrlAlias+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UrlAlias',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/url_alias_id/GET/UrlAlias.xml.example',
                     ],
                 ],
             ],

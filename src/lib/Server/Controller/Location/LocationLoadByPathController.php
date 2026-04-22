@@ -44,17 +44,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'If set, the new Location is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Location+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Location',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Location+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LocationWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Location+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Location',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.xml.example',
                     ],
                 ],
             ],

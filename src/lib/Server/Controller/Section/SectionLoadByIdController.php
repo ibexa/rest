@@ -45,17 +45,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'If set, the Section is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Section+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Section',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/section_id/PATCH/Section.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Section+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/SectionWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/section_id/PATCH/Section.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Section+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Section',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/section_id/PATCH/Section.xml.example',
                     ],
                 ],
             ],

@@ -37,14 +37,14 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - return a list of Field definitions.',
                 'content' => [
-                    'application/vnd.ibexa.api.FieldDefinitionList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/FieldDefinitions',
-                        ],
-                    ],
                     'application/vnd.ibexa.api.FieldDefinitionList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/FieldDefinitionsWrapper',
+                        ],
+                    ],
+                    'application/vnd.ibexa.api.FieldDefinitionList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinitions',
                         ],
                     ],
                 ],

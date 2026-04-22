@@ -34,26 +34,26 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns a list of content types.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentTypeInfoList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentTypeInfoList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ContentTypeInfoList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeInfoListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.json.example',
                     ],
-                    'application/vnd.ibexa.api.ContentTypeList+xml' => [
+                    'application/vnd.ibexa.api.ContentTypeInfoList+xml' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/ContentTypeList',
+                            '$ref' => '#/components/schemas/ContentTypeInfoList',
                         ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.xml.example',
                     ],
                     'application/vnd.ibexa.api.ContentTypeList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeListWrapper',
+                        ],
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeList',
                         ],
                     ],
                 ],

@@ -35,17 +35,17 @@ use Symfony\Component\HttpFoundation\Response;
         requestBody: new Model\RequestBody(
             description: 'The ContentCreate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.ContentCreate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/ContentCreate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/POST/ContentCreate.xml.example',
-                ],
                 'application/vnd.ibexa.api.ContentCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentCreateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/POST/ContentCreate.json.example',
+                ],
+                'application/vnd.ibexa.api.ContentCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/POST/ContentCreate.xml.example',
                 ],
             ]),
         ),
@@ -53,17 +53,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_CREATED => [
                 'description' => 'Content - If set, all information for the content item including the embedded current version is returned in XML or JSON format. ContentInfo - If set, all information for the content item (excluding the current version) is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Content+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Content',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/GET/Content.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Content+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/GET/Content.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Content+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Content',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/GET/Content.xml.example',
                     ],
                     'application/vnd.ibexa.api.ContentInfo+xml' => [
                         'schema' => [

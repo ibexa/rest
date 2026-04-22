@@ -43,17 +43,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - Role for the given ID.',
                 'content' => [
-                    'application/vnd.ibexa.api.Role+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Role',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Role+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Role+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Role',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.xml.example',
                     ],
                 ],
             ],

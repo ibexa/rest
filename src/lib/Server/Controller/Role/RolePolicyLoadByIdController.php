@@ -45,17 +45,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'If set, the Policy is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Policy+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Policy',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/PATCH/Policy.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Policy+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/PolicyWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/GET/Policy.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Policy+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Policy',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/PATCH/Policy.xml.example',
                     ],
                 ],
             ],

@@ -46,17 +46,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns the content type group.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentTypeGroup+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentTypeList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ContentTypeGroup+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeGroup+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.xml.example',
                     ],
                 ],
             ],

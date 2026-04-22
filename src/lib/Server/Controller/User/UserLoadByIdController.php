@@ -48,17 +48,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - the User with the given ID.',
                 'content' => [
-                    'application/vnd.ibexa.api.User+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.xml.example',
-                    ],
                     'application/vnd.ibexa.api.User+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.json.example',
+                    ],
+                    'application/vnd.ibexa.api.User+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.xml.example',
                     ],
                 ],
             ],

@@ -41,17 +41,17 @@ use Symfony\Component\HttpFoundation\Response;
         requestBody: new Model\RequestBody(
             description: 'The LocationCreate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.LocationCreate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/LocationCreate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/LocationCreate.xml.example',
-                ],
                 'application/vnd.ibexa.api.LocationCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/LocationCreateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/LocationCreate.json.example',
+                ],
+                'application/vnd.ibexa.api.LocationCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/LocationCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/LocationCreate.xml.example',
                 ],
             ]),
         ),
@@ -59,17 +59,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_CREATED => [
                 'description' => 'If set, the new Location is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Location+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Location',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Location+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LocationWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Location+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Location',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.xml.example',
                     ],
                 ],
             ],

@@ -37,17 +37,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns the URL alias.',
                 'content' => [
-                    'application/vnd.ibexa.api.UrlAlias+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UrlAlias',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/url_alias_id/GET/UrlAlias.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UrlAlias+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlAliasWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/url_alias_id/GET/UrlAlias.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UrlAlias+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UrlAlias',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/url_alias_id/GET/UrlAlias.xml.example',
                     ],
                 ],
             ],

@@ -27,17 +27,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'If set, the list is return in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Root+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Root',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/GET/Root.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Root+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RootWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/GET/Root.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Root+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Root',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/GET/Root.xml.example',
                     ],
                 ],
             ],

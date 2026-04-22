@@ -47,29 +47,30 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'OK - returns the Content or ContentInfo in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Content+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Content',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/GET/Content.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Content+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/GET/Content.json.example',
                     ],
-                    'application/vnd.ibexa.api.ContentInfo+xml' => [
+                    'application/vnd.ibexa.api.Content+xml' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/ContentInfo',
+                            '$ref' => '#/components/schemas/Content',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/PATCH/ContentInfo.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/GET/Content.xml.example',
                     ],
                     'application/vnd.ibexa.api.ContentInfo+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentInfoWrapper',
                         ],
+                    ],
+                    'application/vnd.ibexa.api.ContentInfo+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentInfo',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/PATCH/ContentInfo.xml.example',
                     ],
                 ],
             ],

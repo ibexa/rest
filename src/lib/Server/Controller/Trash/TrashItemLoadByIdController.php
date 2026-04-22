@@ -37,17 +37,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'If set, the item in Trash is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.TrashItem+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/TrashItem',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/trash/trash_itemid/GET/TrashItem.xml.example',
-                    ],
                     'application/vnd.ibexa.api.TrashItem+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/TrashItemWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/trash/trash_itemid/GET/TrashItem.json.example',
+                    ],
+                    'application/vnd.ibexa.api.TrashItem+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/TrashItem',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/trash/trash_itemid/GET/TrashItem.xml.example',
                     ],
                 ],
             ],

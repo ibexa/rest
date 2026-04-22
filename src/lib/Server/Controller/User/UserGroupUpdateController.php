@@ -47,17 +47,17 @@ use Symfony\Component\HttpFoundation\Response;
         requestBody: new Model\RequestBody(
             description: 'The UserGroupUpdate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.UserGroupUpdate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/UserGroupUpdate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/PATCH/UserGroupUpdate.xml.example',
-                ],
                 'application/vnd.ibexa.api.UserGroupUpdate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UserGroupUpdateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/PATCH/UserGroupUpdate.json.example',
+                ],
+                'application/vnd.ibexa.api.UserGroupUpdate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/UserGroupUpdate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/PATCH/UserGroupUpdate.xml.example',
                 ],
             ]),
         ),
@@ -65,17 +65,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - updated User Group.',
                 'content' => [
-                    'application/vnd.ibexa.api.UserGroup+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserGroup',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UserGroup+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroupWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UserGroup+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserGroup',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.xml.example',
                     ],
                 ],
             ],

@@ -42,17 +42,17 @@ use Symfony\Component\HttpFoundation\Response;
         requestBody: new Model\RequestBody(
             description: 'The UserCreate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.UserCreate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/UserCreate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/users/POST/UserCreate.xml.example',
-                ],
                 'application/vnd.ibexa.api.UserCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UserCreateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/users/POST/UserCreate.json.example',
+                ],
+                'application/vnd.ibexa.api.UserCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/UserCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/users/POST/UserCreate.xml.example',
                 ],
             ]),
         ),
@@ -60,17 +60,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_CREATED => [
                 'description' => 'If set, the new User is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.User+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/User',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/PATCH/User.xml.example',
-                    ],
                     'application/vnd.ibexa.api.User+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/PATCH/User.json.example',
+                    ],
+                    'application/vnd.ibexa.api.User+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/User',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/PATCH/User.xml.example',
                     ],
                 ],
             ],

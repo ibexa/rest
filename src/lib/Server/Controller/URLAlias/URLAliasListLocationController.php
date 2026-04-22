@@ -40,16 +40,16 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns the list of URL aliases.',
                 'content' => [
+                    'application/vnd.ibexa.api.UrlAliasRefList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UrlAliasRefListWrapper',
+                        ],
+                    ],
                     'application/vnd.ibexa.api.UrlAliasRefList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlAliasRefList',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/GET/UrlAliasRefList.xml.example',
-                    ],
-                    'application/vnd.ibexa.api.UrlAliasRefList+json' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UrlAliasRefListWrapper',
-                        ],
                     ],
                 ],
             ],

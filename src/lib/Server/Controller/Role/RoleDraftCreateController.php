@@ -42,17 +42,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_CREATED => [
                 'description' => 'If set, the new user is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.RoleDraft+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/RoleDraft',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/POST/RoleDraft.xml.example',
-                    ],
                     'application/vnd.ibexa.api.RoleDraft+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleDraftWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.json.example',
+                    ],
+                    'application/vnd.ibexa.api.RoleDraft+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleDraft',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/POST/RoleDraft.xml.example',
                     ],
                 ],
             ],

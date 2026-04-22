@@ -39,17 +39,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'If set, the link list of User Groups is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.UserGroupRefList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserGroupRefList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/POST/UserGroupRefList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UserGroupRefList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroupRefListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/group_id/UserGroupRefList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UserGroupRefList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserGroupRefList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/POST/UserGroupRefList.xml.example',
                     ],
                 ],
             ],

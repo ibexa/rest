@@ -44,17 +44,17 @@ use Symfony\Component\HttpFoundation\Response;
         requestBody: new Model\RequestBody(
             description: 'The content type update schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.ContentTypeUpdate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/ContentTypeUpdate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeUpdate.xml.example',
-                ],
                 'application/vnd.ibexa.api.ContentTypeUpdate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeUpdateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeUpdate.json.example',
+                ],
+                'application/vnd.ibexa.api.ContentTypeUpdate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentTypeUpdate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeUpdate.xml.example',
                 ],
             ]),
         ),
@@ -62,17 +62,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'Draft metadata updated.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentTypeInfo+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentTypeInfo',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PATCH/ContentTypeInfo.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ContentTypeInfo+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeInfoWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PATCH/ContentTypeInfo.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeInfo+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeInfo',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PATCH/ContentTypeInfo.xml.example',
                     ],
                 ],
             ],

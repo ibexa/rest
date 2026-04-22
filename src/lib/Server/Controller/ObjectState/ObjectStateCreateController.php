@@ -44,17 +44,17 @@ use Symfony\Component\HttpFoundation\Response;
         requestBody: new Model\RequestBody(
             description: 'The Object state input schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.ObjectStateCreate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/ObjectStateCreate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/object_state_group_id/objectstates/POST/ObjectStateCreate.xml.example',
-                ],
                 'application/vnd.ibexa.api.ObjectStateCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ObjectStateCreateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/object_state_group_id/objectstates/POST/ObjectStateCreate.json.example',
+                ],
+                'application/vnd.ibexa.api.ObjectStateCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ObjectStateCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/object_state_group_id/objectstates/POST/ObjectStateCreate.xml.example',
                 ],
             ]),
         ),
@@ -62,17 +62,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_CREATED => [
                 'description' => 'Object state created.',
                 'content' => [
-                    'application/vnd.ibexa.api.ObjectState+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ObjectState',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/object_state_group_id/objectstates/object_state_id/PATCH/ObjectState.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ObjectState+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ObjectStateWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/object_state_group_id/objectstates/object_state_id/PATCH/ObjectState.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ObjectState+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ObjectState',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/object_state_group_id/objectstates/object_state_id/PATCH/ObjectState.xml.example',
                     ],
                 ],
             ],

@@ -32,17 +32,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'If set, the list is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.BookmarkList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/BookmarkList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/bookmark/GET/BookmarkList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.BookmarkList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/BookmarkListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/bookmark/GET/BookmarkList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.BookmarkList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/BookmarkList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/bookmark/GET/BookmarkList.xml.example',
                     ],
                 ],
             ],

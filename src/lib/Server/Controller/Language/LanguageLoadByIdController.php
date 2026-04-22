@@ -38,17 +38,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'If set, the language is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Language+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Language',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/languages/code/GET/Language.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Language+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LanguageWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/languages/code/GET/Language.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Language+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Language',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/languages/code/GET/Language.xml.example',
                     ],
                 ],
             ],

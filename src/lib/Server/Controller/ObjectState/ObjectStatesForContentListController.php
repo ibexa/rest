@@ -50,12 +50,12 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns the Object state.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentObjectStates+xml' => [
+                    'application/vnd.ibexa.api.ContentObjectStates+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentObjectStates',
                         ],
                     ],
-                    'application/vnd.ibexa.api.ContentObjectStates+json' => [
+                    'application/vnd.ibexa.api.ContentObjectStates+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentObjectStates',
                         ],

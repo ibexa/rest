@@ -40,14 +40,14 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - List the draft versions',
                 'content' => [
-                    'application/vnd.ibexa.api.VersionList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/VersionList',
-                        ],
-                    ],
                     'application/vnd.ibexa.api.VersionList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/VersionListWrapper',
+                        ],
+                    ],
+                    'application/vnd.ibexa.api.VersionList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/VersionList',
                         ],
                     ],
                 ],

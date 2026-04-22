@@ -32,29 +32,29 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'UserGroupList - If set, the User Group List is returned in XML or JSON format. UserGroupRefList - If set, the link list of User Group is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.UserGroupList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserGroupList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/GET/UserGroupList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UserGroupList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroupListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/GET/UserGroupList.json.example',
                     ],
-                    'application/vnd.ibexa.api.UserGroupRefList+xml' => [
+                    'application/vnd.ibexa.api.UserGroupList+xml' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/UserGroupRefList',
+                            '$ref' => '#/components/schemas/UserGroupList',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/POST/UserGroupRefList.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/GET/UserGroupList.xml.example',
                     ],
                     'application/vnd.ibexa.api.UserGroupRefList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroupRefListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/group_id/UserGroupRefList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UserGroupRefList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserGroupRefList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/POST/UserGroupRefList.xml.example',
                     ],
                 ],
             ],

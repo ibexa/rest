@@ -32,17 +32,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns the list of items in the Trash.',
                 'content' => [
-                    'application/vnd.ibexa.api.Trash+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Trash',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/trash/GET/Trash.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Trash+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/TrashWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/trash/GET/Trash.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Trash+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Trash',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/trash/GET/Trash.xml.example',
                     ],
                 ],
             ],

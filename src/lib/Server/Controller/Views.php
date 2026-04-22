@@ -35,17 +35,17 @@ Refer to [Search Criteria Reference](/en/latest/search/criteria_reference/search
         requestBody: new Model\RequestBody(
             description: 'The view input in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.ViewInput+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/ViewInput',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/views/POST/ViewInput.xml.example',
-                ],
                 'application/vnd.ibexa.api.ViewInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ViewInputWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/views/POST/ViewInput.json.example',
+                ],
+                'application/vnd.ibexa.api.ViewInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ViewInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/views/POST/ViewInput.xml.example',
                 ],
             ]),
         ),

@@ -47,17 +47,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - loads User Groups.',
                 'content' => [
-                    'application/vnd.ibexa.api.UserGroup+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserGroup',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UserGroup+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroupWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UserGroup+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserGroup',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.xml.example',
                     ],
                 ],
             ],

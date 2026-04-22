@@ -24,28 +24,28 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - Loads Users either for a given remote ID or Role.',
                 'content' => [
-                    'application/vnd.ibexa.api.UserList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UserList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.json.example',
                     ],
-                    'application/vnd.ibexa.api.UserRefList+xml' => [
+                    'application/vnd.ibexa.api.UserList+xml' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/UserRefList',
+                            '$ref' => '#/components/schemas/UserList',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/GET/UserRefList.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.xml.example',
                     ],
                     'application/vnd.ibexa.api.UserRefList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserRefListWrapper',
                         ],
+                    ],
+                    'application/vnd.ibexa.api.UserRefList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserRefList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/GET/UserRefList.xml.example',
                     ],
                 ],
             ],

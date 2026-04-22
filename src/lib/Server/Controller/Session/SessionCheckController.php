@@ -37,17 +37,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'User is currently logged in and has a valid session.',
                 'content' => [
-                    'application/vnd.ibexa.api.Session+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Session',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Session+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/SessionWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Session+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Session',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
                     ],
                 ],
             ],

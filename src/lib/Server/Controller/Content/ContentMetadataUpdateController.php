@@ -49,14 +49,14 @@ use Symfony\Component\HttpFoundation\Response;
         requestBody: new Model\RequestBody(
             description: 'The ContentUpdate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.ContentUpdate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/ContentInfo',
-                    ],
-                ],
                 'application/vnd.ibexa.api.ContentUpdate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentInfoWrapper',
+                    ],
+                ],
+                'application/vnd.ibexa.api.ContentUpdate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentInfo',
                     ],
                 ],
             ]),
@@ -65,14 +65,14 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'If set, all information for the content item (excluding the current version) is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentInfo+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentInfo',
-                        ],
-                    ],
                     'application/vnd.ibexa.api.ContentInfo+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentInfoWrapper',
+                        ],
+                    ],
+                    'application/vnd.ibexa.api.ContentInfo+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentInfo',
                         ],
                     ],
                 ],

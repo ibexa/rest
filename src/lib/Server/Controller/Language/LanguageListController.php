@@ -30,17 +30,17 @@ use Traversable;
             Response::HTTP_OK => [
                 'description' => 'If set, the list is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.LanguageList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/LanguageList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/languages/GET/LanguageList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.LanguageList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LanguageListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/languages/GET/LanguageList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.LanguageList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/LanguageList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/languages/GET/LanguageList.xml.example',
                     ],
                 ],
             ],

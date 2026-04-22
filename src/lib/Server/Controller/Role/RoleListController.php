@@ -28,17 +28,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - list of all Roles.',
                 'content' => [
-                    'application/vnd.ibexa.api.RoleList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/RoleList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/GET/RoleList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.RoleList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/GET/RoleList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.RoleList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/GET/RoleList.xml.example',
                     ],
                 ],
             ],

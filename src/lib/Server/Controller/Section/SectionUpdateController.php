@@ -52,17 +52,17 @@ use Symfony\Component\HttpFoundation\Response;
         requestBody: new Model\RequestBody(
             description: 'The Section input schema encoded in XML or JSON.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.SectionInput+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/SectionInput',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/POST/SectionInput.xml.example',
-                ],
                 'application/vnd.ibexa.api.SectionInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/SectionInputWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/POST/SectionInput.json.example',
+                ],
+                'application/vnd.ibexa.api.SectionInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/SectionInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/POST/SectionInput.xml.example',
                 ],
             ]),
         ),
@@ -70,17 +70,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - Section updated.',
                 'content' => [
-                    'application/vnd.ibexa.api.Section+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Section',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/section_id/PATCH/Section.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Section+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/SectionWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/section_id/PATCH/Section.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Section+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Section',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/section_id/PATCH/Section.xml.example',
                     ],
                 ],
             ],

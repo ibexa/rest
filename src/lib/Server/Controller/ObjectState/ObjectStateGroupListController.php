@@ -41,17 +41,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns a list of Object state groups.',
                 'content' => [
-                    'application/vnd.ibexa.api.ObjectStateGroupList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ObjectStateGroupList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/GET/ObjectStateGroupList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ObjectStateGroupList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ObjectStateGroupListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/GET/ObjectStateGroupList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ObjectStateGroupList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ObjectStateGroupList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/GET/ObjectStateGroupList.xml.example',
                     ],
                 ],
             ],
