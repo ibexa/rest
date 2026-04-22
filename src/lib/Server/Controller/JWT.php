@@ -37,6 +37,7 @@ use Symfony\Component\HttpFoundation\Response;
         ),
         responses: [
             Response::HTTP_OK => [
+                'description' => 'OK - returns the JWT in JSON format.',
                 'content' => [
                     'application/vnd.ibexa.api.JWT+json' => [
                         'schema' => [
