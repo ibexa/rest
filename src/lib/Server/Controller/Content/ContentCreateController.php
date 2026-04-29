@@ -32,6 +32,17 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'Objects',
         ],
+        parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The {csrfToken} needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
         requestBody: new Model\RequestBody(
             description: 'The ContentCreate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
@@ -65,11 +76,17 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/GET/Content.xml.example',
                     ],
-                    'application/vnd.ibexa.api.ContentInfo+xml' => [
+                    'application/vnd.ibexa.api.ContentInfo+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentInfoWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/PATCH/ContentInfo.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/POST/ContentInfo.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentInfo+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentInfo',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/POST/ContentInfo.xml.example',
                     ],
                 ],
             ],
