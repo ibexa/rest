@@ -32,6 +32,17 @@ Refer to [Search Criteria Reference](/en/latest/search/criteria_reference/search
         tags: [
             'Views',
         ],
+        parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
         requestBody: new Model\RequestBody(
             description: 'The view input in XML or JSON format.',
             content: new \ArrayObject([

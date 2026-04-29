@@ -26,6 +26,17 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'User Group',
         ],
+        parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
         requestBody: new Model\RequestBody(
             description: 'The UserGroupCreate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
@@ -80,6 +91,15 @@ use Symfony\Component\HttpFoundation\Response;
             'User Group',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
             new Model\Parameter(
                 name: 'path',
                 in: 'path',

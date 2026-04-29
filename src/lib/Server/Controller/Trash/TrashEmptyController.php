@@ -25,6 +25,17 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'Trash',
         ],
+        parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
         responses: [
             Response::HTTP_NO_CONTENT => [
                 'description' => 'No Content - Trash emptied.',

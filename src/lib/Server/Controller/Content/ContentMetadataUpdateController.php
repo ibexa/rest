@@ -32,7 +32,7 @@ use Symfony\Component\HttpFoundation\Response;
                 name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'The {csrfToken} needed on all unsafe HTTP methods with session.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],

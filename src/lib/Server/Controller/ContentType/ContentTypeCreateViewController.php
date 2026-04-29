@@ -27,6 +27,17 @@ use Symfony\Component\HttpFoundation\Response;
         tags: [
             'Type',
         ],
+        parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+        ],
         requestBody: new Model\RequestBody(
             description: 'The view input in XML or JSON format.',
             content: new \ArrayObject([

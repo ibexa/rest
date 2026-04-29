@@ -43,7 +43,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
                 name: 'X-CSRF-Token',
                 in: 'header',
                 required: false,
-                description: 'Only needed for session\'s checking. The {csrfToken} needed on all unsafe HTTP methods with session.',
+                description: 'Only needed for session\'s checking. The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
