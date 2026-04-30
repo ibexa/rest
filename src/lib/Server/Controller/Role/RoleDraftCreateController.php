@@ -55,7 +55,7 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleDraftWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/POST/RoleDraft.json.example',
                     ],
                     'application/vnd.ibexa.api.RoleDraft+xml' => [
                         'schema' => [

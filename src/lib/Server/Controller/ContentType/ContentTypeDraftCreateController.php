@@ -75,13 +75,13 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeInfoWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PATCH/ContentTypeInfo.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeInfo.json.example',
                     ],
                     'application/vnd.ibexa.api.ContentTypeInfo+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeInfo',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PATCH/ContentTypeInfo.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeInfo.xml.example',
                     ],
                 ],
             ],

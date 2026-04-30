@@ -88,7 +88,7 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/Relation',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/relations/relation_id/GET/Relation.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/relations/POST/Relation.xml.example',
                     ],
                 ],
             ],

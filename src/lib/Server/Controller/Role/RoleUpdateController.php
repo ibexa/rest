@@ -59,13 +59,13 @@ use Symfony\Component\HttpFoundation\Response;
                     'schema' => [
                         '$ref' => '#/components/schemas/RoleInputWrapper',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/RoleInput.json.example',
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/PATCH/RoleInput.json.example',
                 ],
                 'application/vnd.ibexa.api.RoleInput+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/RoleInput',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/RoleInput.xml.example',
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/PATCH/RoleInput.xml.example',
                 ],
             ]),
         ),
@@ -77,13 +77,13 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/PATCH/Role.json.example',
                     ],
                     'application/vnd.ibexa.api.Role+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/Role',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/PATCH/Role.xml.example',
                     ],
                 ],
             ],

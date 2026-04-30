@@ -65,13 +65,13 @@ use Symfony\Component\HttpFoundation\Response;
                     'schema' => [
                         '$ref' => '#/components/schemas/SectionInputWrapper',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/POST/SectionInput.json.example',
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/section_id/PATCH/SectionInput.json.example',
                 ],
                 'application/vnd.ibexa.api.SectionInput+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/SectionInput',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/POST/SectionInput.xml.example',
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/section_id/PATCH/SectionInput.xml.example',
                 ],
             ]),
         ),

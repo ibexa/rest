@@ -65,7 +65,7 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeGroupWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/PATCH/ContentTypeGroup.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/POST/ContentTypeGroup.json.example',
                     ],
                     'application/vnd.ibexa.api.ContentTypeGroup+xml' => [
                         'schema' => [

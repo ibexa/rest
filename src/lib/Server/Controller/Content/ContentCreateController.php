@@ -68,13 +68,13 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/GET/Content.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/POST/Content.json.example',
                     ],
                     'application/vnd.ibexa.api.Content+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/Content',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/GET/Content.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/POST/Content.xml.example',
                     ],
                     'application/vnd.ibexa.api.ContentInfo+json' => [
                         'schema' => [

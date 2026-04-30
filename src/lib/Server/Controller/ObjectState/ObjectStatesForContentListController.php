@@ -54,11 +54,13 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentObjectStates',
                         ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/GET/ContentObjectStates.json.example',
                     ],
                     'application/vnd.ibexa.api.ContentObjectStates+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentObjectStates',
                         ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/GET/ContentObjectStates.xml.example',
                     ],
                 ],
             ],

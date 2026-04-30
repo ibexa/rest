@@ -28,13 +28,13 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/UserListWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/GET/UserList.json.example',
                     ],
                     'application/vnd.ibexa.api.UserList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserList',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/GET/UserList.xml.example',
                     ],
                     'application/vnd.ibexa.api.UserRefList+json' => [
                         'schema' => [

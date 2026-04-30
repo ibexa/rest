@@ -50,13 +50,13 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleAssignmentWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/role_id/GET/RoleAssignment.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/roles/role_id/GET/RoleAssignment.json.example',
                     ],
                     'application/vnd.ibexa.api.RoleAssignment+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleAssignment',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/role_id/GET/RoleAssignment.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/roles/role_id/GET/RoleAssignment.xml.example',
                     ],
                 ],
             ],

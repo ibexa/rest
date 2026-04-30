@@ -67,13 +67,13 @@ use Symfony\Component\HttpFoundation\Response;
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeGroupInputWrapper',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/POST/ContentTypeGroupInput.json.example',
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/PATCH/ContentTypeGroupInput.json.example',
                 ],
                 'application/vnd.ibexa.api.ContentTypeGroupInput+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeGroupInput',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/POST/ContentTypeGroupInput.xml.example',
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/PATCH/ContentTypeGroupInput.xml.example',
                 ],
             ]),
         ),
@@ -91,7 +91,7 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeGroup',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/POST/ContentTypeGroup.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/PATCH/ContentTypeGroup.xml.example',
                     ],
                 ],
             ],

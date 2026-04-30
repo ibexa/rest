@@ -65,13 +65,13 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlWildcardWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/wildcard_id/GET/UrlWildcard.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/POST/UrlWildcard.json.example',
                     ],
                     'application/vnd.ibexa.api.UrlWildcard+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlWildcard',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/wildcard_id/GET/UrlWildcard.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/POST/UrlWildcard.xml.example',
                     ],
                 ],
             ],

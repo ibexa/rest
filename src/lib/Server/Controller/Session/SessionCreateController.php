@@ -74,7 +74,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
                         'schema' => [
                             '$ref' => '#/components/schemas/SessionWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.json.example',
                     ],
                     'application/vnd.ibexa.api.Session+xml' => [
                         'schema' => [
@@ -91,7 +91,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
                         'schema' => [
                             '$ref' => '#/components/schemas/SessionWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.json.example',
                     ],
                     'application/vnd.ibexa.api.Session+xml' => [
                         'schema' => [

@@ -57,13 +57,13 @@ use Symfony\Component\HttpFoundation\Response;
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeUpdateWrapper',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeUpdate.json.example',
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PATCH/ContentTypeUpdate.json.example',
                 ],
                 'application/vnd.ibexa.api.ContentTypeUpdate+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeUpdate',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeUpdate.xml.example',
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PATCH/ContentTypeUpdate.xml.example',
                 ],
             ]),
         ),

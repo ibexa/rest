@@ -64,13 +64,13 @@ use Symfony\Component\HttpFoundation\Response;
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentObjectStatesWrapper',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/GET/ContentObjectStates.json.example',
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.request.json.example',
                 ],
                 'application/vnd.ibexa.api.ContentObjectStates+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentObjectStates',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.response.xml.example',
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.request.xml.example',
                 ],
             ]),
         ),
@@ -82,7 +82,7 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentObjectStatesWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/GET/ContentObjectStates.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.response.json.example',
                     ],
                     'application/vnd.ibexa.api.ContentObjectStates+xml' => [
                         'schema' => [

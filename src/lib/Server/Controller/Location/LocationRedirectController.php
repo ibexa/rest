@@ -30,13 +30,13 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/LocationWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/locations/GET/LocationList.json.example',
                     ],
                     'application/vnd.ibexa.api.LocationList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/Location',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/locations/GET/LocationList.xml.example',
                     ],
                 ],
             ],

@@ -31,13 +31,13 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/PolicyListWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/GET/PolicyList.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/policies/GET/PolicyList.json.example',
                     ],
                     'application/vnd.ibexa.api.PolicyList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/PolicyList',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/GET/PolicyList.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/policies/GET/PolicyList.xml.example',
                     ],
                 ],
             ],

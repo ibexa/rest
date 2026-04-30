@@ -73,13 +73,13 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/UserWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/PATCH/User.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/users/POST/User.json.example',
                     ],
                     'application/vnd.ibexa.api.User+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/User',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/PATCH/User.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/users/POST/User.xml.example',
                     ],
                 ],
             ],
