@@ -55,13 +55,13 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroupRefListWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/group_id/UserGroupRefList.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/id/subgroups/GET/UserGroupRefList.json.example',
                     ],
                     'application/vnd.ibexa.api.UserGroupRefList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroupRefList',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/POST/UserGroupRefList.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/id/subgroups/GET/UserGroupRefList.xml.example',
                     ],
                 ],
             ],
