@@ -68,6 +68,7 @@ Refer to [Search Criteria Reference](/en/latest/search/criteria_reference/search
                         'schema' => [
                             '$ref' => '#/components/schemas/View',
                         ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/views/POST/View.xml.v11.example',
                     ],
                 ],
             ],
