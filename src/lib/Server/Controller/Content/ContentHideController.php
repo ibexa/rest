@@ -43,6 +43,10 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ),
         ],
+        requestBody: new Model\RequestBody(
+            description: 'No payload required',
+            content: new \ArrayObject(),
+        ),
         responses: [
             Response::HTTP_NO_CONTENT => [
                 'description' => 'OK - Object item is hidden.',
@@ -54,10 +58,6 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - The content item was not found.',
             ],
         ],
-        requestBody: new Model\RequestBody(
-            description: 'No payload required',
-            content: new \ArrayObject(),
-        ),
     ),
 )]
 class ContentHideController extends RestController

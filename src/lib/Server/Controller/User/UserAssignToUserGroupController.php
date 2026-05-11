@@ -47,6 +47,10 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ),
         ],
+        requestBody: new Model\RequestBody(
+            description: 'No payload required',
+            content: new \ArrayObject(),
+        ),
         responses: [
             Response::HTTP_OK => [
                 'description' => 'If set, the link list of User Groups is returned in XML or JSON format.',
@@ -75,10 +79,6 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - the User does not exist.',
             ],
         ],
-        requestBody: new Model\RequestBody(
-            description: 'No payload required',
-            content: new \ArrayObject(),
-        ),
     ),
 )]
 final class UserAssignToUserGroupController extends UserBaseController

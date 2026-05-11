@@ -57,6 +57,10 @@ use Symfony\Component\HttpFoundation\Response;
                 description: 'Destination content type group URI; for example with content type group 4: `?group=/api/ibexa/v2/content/typegroups/4`',
             ),
         ],
+        requestBody: new Model\RequestBody(
+            description: 'No payload required',
+            content: new \ArrayObject(),
+        ),
         responses: [
             Response::HTTP_OK => [
                 'description' => 'If set, the updated content type group list is returned in XML or JSON format.',
@@ -85,10 +89,6 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - The content type is already assigned to the group.',
             ],
         ],
-        requestBody: new Model\RequestBody(
-            description: 'No payload required',
-            content: new \ArrayObject(),
-        ),
     ),
 )]
 class ContentTypeLinkToGroupController extends RestController

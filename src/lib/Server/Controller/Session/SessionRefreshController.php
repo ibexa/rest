@@ -53,6 +53,10 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ),
         ],
+        requestBody: new Model\RequestBody(
+            description: 'No payload required',
+            content: new \ArrayObject(),
+        ),
         responses: [
             Response::HTTP_OK => [
                 'description' => 'OK - returns the Session in XML or JSON format.',
@@ -75,10 +79,6 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - the session does not exist.',
             ],
         ],
-        requestBody: new Model\RequestBody(
-            description: 'No payload required',
-            content: new \ArrayObject(),
-        ),
     ),
 )]
 /**

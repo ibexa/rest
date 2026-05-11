@@ -48,6 +48,10 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ),
         ],
+        requestBody: new Model\RequestBody(
+            description: 'No payload required',
+            content: new \ArrayObject(),
+        ),
         responses: [
             Response::HTTP_CREATED => [
                 'description' => 'If set, the new user is returned in XML or JSON format.',
@@ -70,10 +74,6 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - the user is not authorized to create a Role or a Role draft',
             ],
         ],
-        requestBody: new Model\RequestBody(
-            description: 'No payload required',
-            content: new \ArrayObject(),
-        ),
     ),
 )]
 class RoleDraftCreateController extends RoleBaseController
