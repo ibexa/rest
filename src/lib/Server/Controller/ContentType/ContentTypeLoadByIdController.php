@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/types/{contentTypeId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_content_type',
         summary: 'Get content type',
         description: 'Returns the content type with the provided ID.',
         tags: [

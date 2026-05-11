@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/user/users/{userId}/groups/{groupId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.unassign_user_from_user_group',
         summary: 'Unassign User Group',
         description: 'Unassigns the User from a User Group.',
         tags: [

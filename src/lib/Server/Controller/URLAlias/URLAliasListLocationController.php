@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/locations/{path}/urlaliases',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.list_location_url_aliases',
         summary: 'List URL aliases for Location',
         description: 'Returns the list of URL aliases for a Location.',
         tags: [

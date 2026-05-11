@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/users/{userId}/roles/{roleId}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.unassign_role_from_user',
         summary: 'Unassign Role from User',
         description: 'The given Role is removed from the user.',
         tags: [

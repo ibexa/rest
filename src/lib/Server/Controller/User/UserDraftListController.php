@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/users/{userId}/drafts',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_user_drafts',
         summary: 'Load user drafts',
         description: 'Loads user\'s drafts',
         tags: [

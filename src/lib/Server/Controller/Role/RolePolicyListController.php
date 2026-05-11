@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/user/roles/{id}/policies',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_policies',
         summary: 'Load Policies',
         description: 'Loads Policies for the given Role.',
         tags: [

@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/objectstates',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.get_object_states_for_content',
         summary: 'Get Object states of content item',
         description: 'Returns the Object states of a content item',
         tags: [

@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/groups/{path}/users',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_user',
         summary: 'Create User',
         description: 'Creates a new User in the given Group.',
         tags: [

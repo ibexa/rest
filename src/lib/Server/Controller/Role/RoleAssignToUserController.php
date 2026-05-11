@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/users/{userId}/roles',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.assign_role_to_user',
         summary: 'Assign Role to User',
         description: 'Assigns a Role to a user.',
         tags: [

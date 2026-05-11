@@ -28,6 +28,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/roles',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_role',
         summary: 'Create Role or Role draft',
         description: 'Creates a new Role or Role draft.',
         tags: [

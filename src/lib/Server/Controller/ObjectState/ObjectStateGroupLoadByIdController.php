@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/objectstategroups/{objectStateGroupId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_object_state_group',
         summary: 'Get Object state group',
         description: 'Returns the Object state group with the provided ID.',
         tags: [

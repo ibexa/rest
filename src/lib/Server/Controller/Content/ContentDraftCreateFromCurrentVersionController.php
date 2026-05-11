@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/currentversion',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.content.create_draft_from_current_version',
         summary: 'Create a draft from current version',
         description: 'The system creates a new draft as a copy of the current version. COPY or POST with header X-HTTP-Method-Override COPY.',
         tags: [

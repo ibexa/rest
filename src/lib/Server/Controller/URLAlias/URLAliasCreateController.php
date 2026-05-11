@@ -25,6 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/urlaliases',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_url_alias',
         summary: 'Create URL alias',
         description: 'Creates a URL alias.',
         tags: [

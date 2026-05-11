@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/locations',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_location',
         summary: 'Create new Location for content item',
         description: 'Creates a new Location for the given content item.',
         tags: [

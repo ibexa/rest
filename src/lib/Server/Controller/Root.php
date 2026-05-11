@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_root_resource',
         summary: 'List of root resources',
         description: 'Lists the root resources of the Ibexa Platform installation.',
         tags: [

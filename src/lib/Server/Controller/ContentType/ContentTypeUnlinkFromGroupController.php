@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/types/{contentTypeId}/groups/{id}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.unlink_content_type_from_group',
         summary: 'Unlink group from content type',
         description: 'Removes the given group from the content type and returns the updated group list.',
         tags: [

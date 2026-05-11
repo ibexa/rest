@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/trash/{trashItemid}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_trash_item',
         summary: 'Get Trash item',
         description: 'Returns the item in Trash with the provided ID.',
         tags: [

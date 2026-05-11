@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/types/{contentTypeId}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_content_type_draft',
         summary: 'Create Draft',
         description: 'Creates a draft and updates it with the given data.',
         tags: [

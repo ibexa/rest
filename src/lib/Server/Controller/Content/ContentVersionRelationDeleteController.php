@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}/relations/{relationId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.remove_relation',
         summary: 'Delete Relation',
         description: 'Deletes a Relation of the given draft.',
         tags: [

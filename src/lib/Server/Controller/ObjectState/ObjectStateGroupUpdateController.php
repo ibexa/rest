@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objectstategroups/{objectStateGroupId}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.update_object_state_group',
         summary: 'Update Object state group',
         description: 'Updates an Object state group. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [

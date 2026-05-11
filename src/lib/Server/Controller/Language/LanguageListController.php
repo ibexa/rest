@@ -21,6 +21,7 @@ use Traversable;
     uriTemplate: '/languages',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.languages.list',
         summary: 'Language list',
         description: 'Lists languages',
         tags: [

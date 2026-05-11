@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/trash/{trashItemid}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_trash_item',
         summary: 'Delete Trash item',
         description: 'Deletes the provided item from Trash.',
         tags: [

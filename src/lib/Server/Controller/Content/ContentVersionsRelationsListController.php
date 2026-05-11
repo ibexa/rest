@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}/relations',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_version_relations',
         summary: 'Load Relations of content item version',
         description: 'Loads the Relations of the given version.',
         tags: [

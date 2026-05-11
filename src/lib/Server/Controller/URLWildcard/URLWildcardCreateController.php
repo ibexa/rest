@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/urlwildcards',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_url_wildcard',
         summary: 'Create URL wildcard',
         description: 'Creates a new URL wildcard.',
         tags: [

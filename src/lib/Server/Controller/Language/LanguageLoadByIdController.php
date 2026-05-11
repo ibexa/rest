@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/languages/{code}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.languages.view',
         summary: 'Get language',
         tags: [
             'Language',

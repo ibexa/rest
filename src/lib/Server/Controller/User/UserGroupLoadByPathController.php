@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/user/groups/{path}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_user_group',
         summary: 'Load User Group',
         description: 'Loads User Groups for the given {path}.',
         tags: [

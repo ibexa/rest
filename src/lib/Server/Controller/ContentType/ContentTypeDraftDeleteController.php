@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/types/{contentTypeId}/draft',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_content_type_draft',
         summary: 'Delete content type draft',
         description: 'Deletes the provided content type draft.',
         tags: [

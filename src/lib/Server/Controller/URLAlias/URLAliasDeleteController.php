@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/urlaliases/{urlAliasId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_url_alias',
         summary: 'Delete URL alias',
         description: 'Deletes the provided URL alias.',
         tags: [

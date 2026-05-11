@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/locations/{path}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_location',
         summary: 'Load Location',
         description: 'Loads the Location for the given path e.g. \'/content/locations/1/2/61\'.',
         tags: [

@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/urlwildcards/{wildcardId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_url_wildcard',
         summary: 'Get URL wildcard',
         description: 'Returns the URL wildcard with the given ID.',
         tags: [

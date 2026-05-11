@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/versions',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_content_versions',
         summary: 'List versions',
         description: 'Returns a list of all versions of the content item. This method does not include fields and relations in the version elements of the response.',
         tags: [

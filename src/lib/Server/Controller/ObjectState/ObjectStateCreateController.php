@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objectstategroups/{objectStateGroupId}/objectstates',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_object_state',
         summary: 'Create Object state',
         description: 'Creates a new Object state.',
         tags: [

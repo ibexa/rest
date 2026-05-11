@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/bookmark/{locationId}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_bookmark',
         summary: 'Create bookmark',
         description: 'Add given Location to bookmarks of the current user.',
         tags: [

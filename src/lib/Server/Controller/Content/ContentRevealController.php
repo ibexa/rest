@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/reveal',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.reveal_content',
         summary: 'Reveal content item',
         description: 'Makes or keep the content item visible',
         tags: [

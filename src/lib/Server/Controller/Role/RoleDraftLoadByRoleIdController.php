@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/user/roles/{id}/draft',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_role_draft',
         summary: 'Load Role draft',
         description: 'Loads a Role draft by original Role ID.',
         tags: [

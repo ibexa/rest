@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_content_in_version',
         summary: 'Load version',
         description: 'Loads a specific version of a content item. This method returns Fields and relations.',
         tags: [

@@ -30,6 +30,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/typegroups/{contentTypeGroupId}/types',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_content_type',
         summary: 'Create content type',
         description: 'Creates a new content type draft in the given content type group.',
         tags: [

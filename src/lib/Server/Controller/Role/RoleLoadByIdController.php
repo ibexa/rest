@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/user/roles/{id}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_role',
         summary: 'Load Role',
         description: 'Loads a Role for the given ID.',
         tags: [

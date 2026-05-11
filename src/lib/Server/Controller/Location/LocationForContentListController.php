@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/objects/{contentId}/locations',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_locations_for_content',
         summary: 'Get Locations for content item',
         description: 'Loads all Locations for the given content item.',
         tags: [

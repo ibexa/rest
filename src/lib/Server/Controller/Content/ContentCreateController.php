@@ -27,6 +27,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_content',
         summary: 'Create content item',
         description: 'Creates a draft assigned to the authenticated user. If a different user ID is given in the input, the draft is assigned to the given user but this action requires special permissions for the authenticated user (this is useful for content staging where the transfer process does not have to authenticate with the user who created the content item in the source server). The user needs to publish the content item if it should be visible.',
         tags: [

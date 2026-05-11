@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/roles/{id}/draft',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.update_role_draft',
         summary: 'Update Role draft',
         description: 'Updates a Role draft. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [

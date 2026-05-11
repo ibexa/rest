@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/types/{contentTypeId}/fieldDefinitions/{fieldDefinitionId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_content_type_field_definition',
         summary: 'Get Field definition',
         description: 'Returns the Field definition by the given ID.',
         tags: [

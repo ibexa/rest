@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/urlwildcards/{wildcardId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_url_wildcard',
         summary: 'Delete URL wildcard',
         description: 'Deletes the given URL wildcard.',
         tags: [

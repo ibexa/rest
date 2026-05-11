@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/typegroups/{contentTypeGroupId}/types',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.list_content_types_for_group',
         summary: 'List content types for group',
         description: 'Returns a list of content types in the provided group.',
         tags: [

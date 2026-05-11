@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_content_version',
         summary: 'Delete content version',
         description: 'Deletes the content version.',
         tags: [

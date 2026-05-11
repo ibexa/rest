@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/types/{contentTypeId}/draft/fieldDefinitions',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_content_type_draft_field_definition_list',
         summary: 'Get Draft Field definition list',
         description: 'Returns all Field definitions of the provided content type Draft.',
         tags: [

@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/objects/{contentId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_content',
         summary: 'Load content',
         description: 'Loads the content item for the given ID. Depending on the Accept header the current version is embedded (i.e. the current published version or if it does not exist, the draft of the authenticated user).
 * Content -	If set, all information for the content item including the embedded current version is returned in XML or JSON format.

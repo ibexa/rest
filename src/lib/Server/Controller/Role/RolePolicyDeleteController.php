@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/user/roles/{roleId}/policies/{policyId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_policy',
         summary: 'Delete Policy',
         description: 'Deletes given Policy.',
         tags: [

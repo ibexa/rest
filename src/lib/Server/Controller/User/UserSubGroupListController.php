@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/user/groups/{path}/subgroups',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_sub_user_groups',
         summary: 'Load subgroups',
         description: 'Returns a list of the subgroups.',
         tags: [

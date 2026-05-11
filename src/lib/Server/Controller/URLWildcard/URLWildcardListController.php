@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/urlwildcards',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.list_url_wildcards',
         summary: 'List URL wildcards',
         description: 'Returns a list of URL wildcards.',
         tags: [

@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.update_content_metadata',
         summary: 'Update content',
         description: 'This method updates the content metadata which is independent from a version. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [

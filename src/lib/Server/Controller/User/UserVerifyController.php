@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Head(
     uriTemplate: '/user/users',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.verify_users',
         summary: 'Verify Users',
         description: 'Verifies if there are Users matching given filter.',
         tags: [

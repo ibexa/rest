@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/types/{contentTypeId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_content_type',
         summary: 'Delete content type',
         description: 'Deletes the provided content type.',
         tags: [

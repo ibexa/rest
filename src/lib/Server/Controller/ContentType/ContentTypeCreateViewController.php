@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/types/view',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.content_types.view',
         summary: 'Filter content types',
         description: 'Executes a query and returns a View including the results. The View input reflects the criteria model of the public PHP API.',
         tags: [

@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/groups/root',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_root_user_group',
         summary: 'Get root User Group',
         description: 'Redirects to the root User Group.',
         tags: [

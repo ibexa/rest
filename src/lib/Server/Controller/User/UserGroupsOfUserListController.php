@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/user/users/{userId}/groups',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_user_groups_of_user',
         summary: 'Load Groups of User',
         description: 'Returns a list of User Groups the User belongs to. The returned list includes the resources for unassigning a User Group if the User is in multiple groups.',
         tags: [

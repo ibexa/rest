@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/roles/{roleId}/policies/{policyId}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.update_policy',
         summary: 'Update Policy',
         description: 'Updates a Policy. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [

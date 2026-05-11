@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/types/{contentTypeId}/draft',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.update_content_type_draft',
         summary: 'Update content type draft',
         description: 'Updates metadata of a draft. This method does not handle Field definitions. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [

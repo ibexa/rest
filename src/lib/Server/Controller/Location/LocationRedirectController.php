@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/locations',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.redirect_location',
         summary: 'Load Locations by id/remoteId/urlAlias',
         description: 'Loads the Location for a given ID (x), remote ID or URL alias.',
         tags: [

@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.update_version',
         summary: 'Update version',
         description: 'A specific draft is updated. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [

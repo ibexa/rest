@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/locations/{path}/children',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_location_children',
         summary: 'Get child Locations.',
         description: 'Loads all child Locations for the given parent Location.',
         tags: [

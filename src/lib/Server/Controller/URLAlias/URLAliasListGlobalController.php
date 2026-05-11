@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/urlaliases',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.list_global_url_aliases',
         summary: 'List global URL aliases',
         description: 'Returns the list of global URL aliases.',
         tags: [

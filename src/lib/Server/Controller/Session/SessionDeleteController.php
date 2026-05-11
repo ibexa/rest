@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/user/sessions/{sessionId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_session',
         summary: 'Delete session (logout a User)',
         description: 'The user session is removed i.e. the user is logged out.',
         tags: [

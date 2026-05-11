@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/user/sessions/current',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.check_session',
         summary: 'Get current session',
         description: 'Get current user session, if any.',
         tags: [

@@ -25,6 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/views',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.views.create',
         summary: 'Search content',
         description: 'Executes a query and returns a View including the results.
 View input reflects the criteria model of the public PHP API.

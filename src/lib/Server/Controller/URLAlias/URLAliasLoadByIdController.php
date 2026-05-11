@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/urlaliases/{urlAliasId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_url_alias',
         summary: 'Get URL alias',
         description: 'Returns the URL alias with the given ID.',
         tags: [

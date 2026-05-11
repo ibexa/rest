@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/bookmark/{locationId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_bookmark',
         summary: 'Delete bookmark',
         description: 'Deletes the given Location from bookmarks of the current user.',
         tags: [

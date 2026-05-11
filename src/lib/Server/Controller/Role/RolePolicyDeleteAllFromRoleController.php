@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/roles/{id}/policies',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_policies',
         summary: 'Delete Policies',
         description: 'All Policies of the given Role are deleted.',
         tags: [

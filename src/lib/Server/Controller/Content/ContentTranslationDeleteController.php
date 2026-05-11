@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/objects/{contentId}/translations/{languageCode}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_content_translation',
         summary: 'Delete translation (permanently)',
         description: 'Permanently deletes a translation from all versions of a content item.',
         tags: [

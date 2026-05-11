@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/objects/{contentId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_content',
         summary: 'Delete Content',
         description: 'Deletes content item. If content item has multiple Locations, all of them will be deleted via delete a subtree.',
         tags: [

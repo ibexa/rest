@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/services/countries',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_country_list',
         summary: 'Countries list',
         description: 'Gives access to an ISO-3166 formatted list of world countries. It is useful when presenting a country options list from any application.',
         tags: [

@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objectstategroups/{objectStateGroupId}/objectstates',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_object_states',
         summary: 'List Object states',
         description: 'Returns a list of all Object states of the given group.',
         tags: [

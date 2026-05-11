@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/typegroups',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_content_type_group_list',
         summary: 'Get content type groups',
         description: 'Returns a list of all content type groups. If an identifier is provided, loads the content type group for this identifier.',
         tags: [

@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/sections/{sectionId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_section',
         summary: 'Get Section',
         description: 'Returns the Section by given Section ID.',
         tags: [

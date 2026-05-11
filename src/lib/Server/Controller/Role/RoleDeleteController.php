@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/roles/{id}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_role',
         summary: 'Delete Role',
         description: 'The given Role and all assignments to Users or User Groups are deleted.',
         tags: [

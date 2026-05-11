@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/sections/{sectionId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_section',
         summary: 'Delete Section',
         description: 'The given Section is deleted.',
         tags: [

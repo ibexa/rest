@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/groups/{path}/roles',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_role_assignments_for_user_group',
         summary: 'Load Roles for User Group',
         description: 'Returns a list of all Roles assigned to the given User Group.',
         tags: [

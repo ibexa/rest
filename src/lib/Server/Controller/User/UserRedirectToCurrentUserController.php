@@ -20,6 +20,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
     uriTemplate: '/user/current',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.current_user',
         summary: 'Load current User',
         description: 'Loads the current user.',
         tags: [

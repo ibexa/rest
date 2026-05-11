@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/objects/{contentId}/currentversion',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.redirect_current_version',
         summary: 'Get current version',
         description: 'Redirects to the current version of the content item.',
         tags: [

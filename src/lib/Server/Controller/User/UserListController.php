@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/user/users',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_users',
         summary: 'List Users',
         description: 'Load Users either for a given remote ID or Role.',
         tags: [

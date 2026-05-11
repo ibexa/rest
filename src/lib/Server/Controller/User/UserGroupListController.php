@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/groups',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_user_groups',
         summary: 'Load User Groups',
         description: 'Loads User Groups for either an an ID or a remote ID or a Role.',
         tags: [

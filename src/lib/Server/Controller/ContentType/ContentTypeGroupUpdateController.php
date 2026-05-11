@@ -27,6 +27,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/typegroups/{contentTypeGroupId}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.update_content_type_group',
         summary: 'Update content type group',
         description: 'Updates a content type group. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [

@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/hide',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.hide_content',
         summary: 'Hide content item',
         description: 'Makes or keep the content item invisible',
         tags: [

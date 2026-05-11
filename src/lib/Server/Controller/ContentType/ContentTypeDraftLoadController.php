@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/types/{contentTypeId}/draft',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_content_type_draft',
         summary: 'Get content type draft',
         description: 'Returns the draft of the content type with the provided ID.',
         tags: [

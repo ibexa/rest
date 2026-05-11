@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Head(
     uriTemplate: '/bookmark/{locationId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.is_bookmarked.head',
         summary: 'Check if Location is bookmarked',
         description: 'Checks if the given Location is bookmarked by the current user.',
         tags: [

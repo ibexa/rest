@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/objectstategroups/{objectStateGroupId}/objectstates/{objectStateId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_object_state',
         summary: 'Delete Object state',
         description: 'Deletes provided Object state.',
         tags: [

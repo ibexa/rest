@@ -25,6 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/sections/{sectionId}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.update_section',
         summary: 'Update a Section',
         description: 'Updates a Section. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [

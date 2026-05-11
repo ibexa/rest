@@ -25,6 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}/relations',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_relation',
         summary: 'Create new Relation',
         description: 'Creates a new Relation of type COMMON for the given draft.',
         tags: [

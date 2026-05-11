@@ -28,6 +28,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/types/{contentTypeId}/draft/fieldDefinitions',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.add_content_type_draft_field_definition',
         summary: 'Add content type Draft Field definition',
         description: 'Creates a new Field definition for the given content type.',
         tags: [

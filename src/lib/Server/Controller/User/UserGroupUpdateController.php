@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/groups/{path}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.update_user_group',
         summary: 'Update User Group',
         description: 'Updates a User Group. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [

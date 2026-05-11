@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/bookmark',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_bookmarks',
         summary: 'List of bookmarks',
         description: 'Lists bookmarked Locations for the current user.',
         tags: [

@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/user/users/{userId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_user',
         summary: 'Load User',
         description: 'Loads User with the given ID.',
         tags: [
