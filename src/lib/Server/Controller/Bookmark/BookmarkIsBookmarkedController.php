@@ -31,7 +31,7 @@ use Symfony\Component\HttpFoundation\Response;
                 in: 'path',
                 required: true,
                 schema: [
-                    'type' => 'string',
+                    'type' => 'integer',
                 ],
             ),
         ],
@@ -43,7 +43,7 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - the user is not authorized for the given Location.',
             ],
             Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the given Location does not exist / is not bookmarked.',
+                'description' => 'Error - the given Location is not bookmarked or does not exist.',
             ],
         ],
     ),
