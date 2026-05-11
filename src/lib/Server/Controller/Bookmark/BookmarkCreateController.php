@@ -48,6 +48,10 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ),
         ],
+        requestBody: new Model\RequestBody(
+            description: 'No payload required',
+            content: new \ArrayObject(),
+        ),
         responses: [
             Response::HTTP_CREATED => [
                 'description' => 'Created.',
@@ -62,10 +66,6 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - Location is already bookmarked.',
             ],
         ],
-        requestBody: new Model\RequestBody(
-            description: 'No payload required',
-            content: new \ArrayObject(),
-        ),
     ),
 )]
 class BookmarkCreateController extends RestController
