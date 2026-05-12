@@ -17,35 +17,27 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/locations',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.redirect_location',
         summary: 'Load Locations by id/remoteId/urlAlias',
         description: 'Loads the Location for a given ID (x), remote ID or URL alias.',
         tags: [
             'Location',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'OK - returns the LocationList in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.LocationList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Location',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.xml.example',
-                    ],
                     'application/vnd.ibexa.api.LocationList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LocationWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/locations/GET/LocationList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.LocationList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Location',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/locations/GET/LocationList.xml.example',
                     ],
                 ],
             ],
