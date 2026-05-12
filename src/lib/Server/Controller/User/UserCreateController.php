@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/groups/{path}/users',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_user',
         summary: 'Create User',
         description: 'Creates a new User in the given Group.',
         tags: [
@@ -31,19 +32,10 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the new User is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The UserCreate schema encoded in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -58,35 +50,37 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The UserCreate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.UserCreate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/UserCreate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/users/POST/UserCreate.xml.example',
-                ],
                 'application/vnd.ibexa.api.UserCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UserCreateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/users/POST/UserCreate.json.example',
                 ],
+                'application/vnd.ibexa.api.UserCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/UserCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/users/POST/UserCreate.xml.example',
+                ],
             ]),
         ),
         responses: [
             Response::HTTP_CREATED => [
+                'description' => 'If set, the new User is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.User+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/User',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/PATCH/User.xml.example',
-                    ],
                     'application/vnd.ibexa.api.User+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/PATCH/User.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/users/POST/User.json.example',
+                    ],
+                    'application/vnd.ibexa.api.User+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/User',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/users/POST/User.xml.example',
                     ],
                 ],
             ],

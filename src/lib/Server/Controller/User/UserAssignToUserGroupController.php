@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/users/{userId}/groups',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.assign_user_to_user_group',
         summary: 'Assign User Group',
         description: 'Assigns the User to a User Group.',
         tags: [
@@ -29,10 +30,10 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the link list of User Groups is returned in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -46,20 +47,25 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ),
         ],
+        requestBody: new Model\RequestBody(
+            description: 'No payload required',
+            content: new \ArrayObject(),
+        ),
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the link list of User Groups is returned in XML or JSON format.',
                 'content' => [
+                    'application/vnd.ibexa.api.UserGroupRefList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserGroupRefListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/POST/UserGroupRefList.json.example',
+                    ],
                     'application/vnd.ibexa.api.UserGroupRefList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroupRefList',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/POST/UserGroupRefList.xml.example',
-                    ],
-                    'application/vnd.ibexa.api.UserGroupRefList+json' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserGroupRefListWrapper',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/group_id/UserGroupRefList.json.example',
                     ],
                 ],
             ],
@@ -73,9 +79,6 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - the User does not exist.',
             ],
         ],
-        requestBody: new Model\RequestBody(
-            content: new \ArrayObject(),
-        ),
     ),
 )]
 final class UserAssignToUserGroupController extends UserBaseController
