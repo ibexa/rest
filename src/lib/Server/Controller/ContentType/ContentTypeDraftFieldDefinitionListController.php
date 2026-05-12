@@ -17,21 +17,13 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/types/{contentTypeId}/draft/fieldDefinitions',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_content_type_draft_field_definition_list',
         summary: 'Get Draft Field definition list',
         description: 'Returns all Field definitions of the provided content type Draft.',
         tags: [
             'Type',
         ],
         parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the Field definitions are returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
             new Model\Parameter(
                 name: 'contentTypeId',
                 in: 'path',
@@ -45,14 +37,14 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - return a list of Field definitions.',
                 'content' => [
-                    'application/vnd.ibexa.api.FieldDefinitionList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/FieldDefinitions',
-                        ],
-                    ],
                     'application/vnd.ibexa.api.FieldDefinitionList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/FieldDefinitionsWrapper',
+                        ],
+                    ],
+                    'application/vnd.ibexa.api.FieldDefinitionList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinitions',
                         ],
                     ],
                 ],

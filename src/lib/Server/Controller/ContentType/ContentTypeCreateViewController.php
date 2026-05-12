@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/types/view',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.content_types.view',
         summary: 'Filter content types',
         description: 'Executes a query and returns a View including the results. The View input reflects the criteria model of the public PHP API.',
         tags: [
@@ -29,35 +30,27 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'The view in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The view input in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The view input in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.ContentTypeViewInput+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/ContentTypeViewInput',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeCreateView.xml.example',
-                ],
                 'application/vnd.ibexa.api.ContentTypeViewInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeViewInputWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeCreateView.json.example',
+                ],
+                'application/vnd.ibexa.api.ContentTypeViewInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentTypeViewInput',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/POST/ContentTypeCreateView.xml.example',
                 ],
@@ -65,18 +58,19 @@ use Symfony\Component\HttpFoundation\Response;
         ),
         responses: [
             Response::HTTP_OK => [
+                'description' => 'The view in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentTypeList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentTypeInfoList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ContentTypeList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeInfoListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeInfoList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.xml.example',
                     ],
                 ],
             ],
