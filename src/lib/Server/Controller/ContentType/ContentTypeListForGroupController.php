@@ -22,21 +22,13 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/typegroups/{contentTypeGroupId}/types',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.list_content_types_for_group',
         summary: 'List content types for group',
         description: 'Returns a list of content types in the provided group.',
         tags: [
             'Type Groups',
         ],
         parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the list of content type info objects or content types (including Field definitions) is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
             new Model\Parameter(
                 name: 'contentTypeGroupId',
                 in: 'path',
@@ -50,15 +42,21 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns a list on content types.',
                 'content' => [
+                    'application/vnd.ibexa.api.ContentTypeInfoList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeInfoListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/types/GET/ContentTypeInfoList.json.example',
+                    ],
                     'application/vnd.ibexa.api.ContentTypeInfoList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeInfoList',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/types/GET/ContentTypeInfoList.xml.example',
                     ],
-                    'application/vnd.ibexa.api.ContentTypeInfoList+json' => [
+                    'application/vnd.ibexa.api.ContentTypeList+json' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/ContentTypeInfoListWrapper',
+                            '$ref' => '#/components/schemas/ContentTypeListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.json.example',
                     ],
@@ -66,13 +64,7 @@ use Symfony\Component\HttpFoundation\Response;
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeList',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.xml.example',
-                    ],
-                    'application/vnd.ibexa.api.ContentTypeList+json' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentTypeListWrapper',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/types/GET/ContentTypeList.xml.example',
                     ],
                 ],
             ],

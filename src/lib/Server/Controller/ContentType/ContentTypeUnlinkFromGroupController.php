@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/types/{contentTypeId}/groups/{id}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.unlink_content_type_from_group',
         summary: 'Unlink group from content type',
         description: 'Removes the given group from the content type and returns the updated group list.',
         tags: [
@@ -26,10 +27,10 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the updated content type group list is returned in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -53,18 +54,19 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the updated content type group list is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentTypeGroupRefList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentTypeGroupRefList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/id/DELETE/ContentTypeGroupRefList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ContentTypeGroupRefList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeGroupRefListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/id/DELETE/ContentTypeGroupRefList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeGroupRefList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroupRefList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/id/DELETE/ContentTypeGroupRefList.xml.example',
                     ],
                 ],
             ],

@@ -20,21 +20,13 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/types/{contentTypeId}/fieldDefinitions/{fieldDefinitionId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_content_type_field_definition',
         summary: 'Get Field definition',
         description: 'Returns the Field definition by the given ID.',
         tags: [
             'Type',
         ],
         parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the Field definition is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
             new Model\Parameter(
                 name: 'contentTypeId',
                 in: 'path',
@@ -56,17 +48,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns the Field definition.',
                 'content' => [
-                    'application/vnd.ibexa.api.FieldDefinition+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/FieldDefinition',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/field_definition_id/GET/FieldDefinition.xml.example',
-                    ],
                     'application/vnd.ibexa.api.FieldDefinition+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/FieldDefinitionWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/field_definition_id/GET/FieldDefinition.json.example',
+                    ],
+                    'application/vnd.ibexa.api.FieldDefinition+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/FieldDefinition',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/field_definition_id/GET/FieldDefinition.xml.example',
                     ],
                 ],
             ],

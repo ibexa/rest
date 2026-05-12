@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/types/{contentTypeId}/groups',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.link_content_type_to_group',
         summary: 'Link group to content type',
         description: 'Links a content type group to the content type and returns the updated group list.',
         tags: [
@@ -30,10 +31,10 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the updated content type group list is returned in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -46,21 +47,35 @@ use Symfony\Component\HttpFoundation\Response;
                     'type' => 'string',
                 ],
             ),
+            new Model\Parameter(
+                name: 'group',
+                in: 'query',
+                required: true,
+                schema: [
+                    'type' => 'string',
+                ],
+                description: 'Destination content type group URI; for example with content type group 4: `?group=/api/ibexa/v2/content/typegroups/4`',
+            ),
         ],
+        requestBody: new Model\RequestBody(
+            description: 'No payload required',
+            content: new \ArrayObject(),
+        ),
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the updated content type group list is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentTypeGroupRefList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentTypeGroupRefList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/id/DELETE/ContentTypeGroupRefList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ContentTypeGroupRefList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeGroupRefListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/id/DELETE/ContentTypeGroupRefList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeGroupRefList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeGroupRefList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/POST/ContentTypeGroupRefList.xml.example',
                     ],
                 ],
             ],
@@ -74,9 +89,6 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - The content type is already assigned to the group.',
             ],
         ],
-        requestBody: new Model\RequestBody(
-            content: new \ArrayObject(),
-        ),
     ),
 )]
 class ContentTypeLinkToGroupController extends RestController

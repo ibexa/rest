@@ -20,12 +20,22 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/types/{contentTypeId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_content_type',
         summary: 'Delete content type',
         description: 'Deletes the provided content type.',
         tags: [
             'Type',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
             new Model\Parameter(
                 name: 'contentTypeId',
                 in: 'path',
