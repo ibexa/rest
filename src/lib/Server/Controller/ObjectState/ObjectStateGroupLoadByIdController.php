@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/objectstategroups/{objectStateGroupId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_object_state_group',
         summary: 'Get Object state group',
         description: 'Returns the Object state group with the provided ID.',
         tags: [
@@ -26,18 +27,9 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the Object state group is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'If-None-Match',
                 in: 'header',
-                required: true,
+                required: false,
                 description: 'ETag',
                 schema: [
                     'type' => 'string',
@@ -56,17 +48,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns the Object state group.',
                 'content' => [
-                    'application/vnd.ibexa.api.ObjectStateGroup+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ObjectStateGroup',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/object_state_group_id/PATCH/ObjectStateGroup.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ObjectStateGroup+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ObjectStateGroupWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/object_state_group_id/PATCH/ObjectStateGroup.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/object_state_group_id/GET/ObjectStateGroup.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ObjectStateGroup+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ObjectStateGroup',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/object_state_group_id/GET/ObjectStateGroup.xml.example',
                     ],
                 ],
             ],
