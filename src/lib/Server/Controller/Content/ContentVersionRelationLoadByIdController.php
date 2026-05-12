@@ -19,21 +19,13 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}/relations/{relationId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_version_relation',
         summary: 'Load Relation',
         description: 'Loads a Relation for the given content item.',
         tags: [
             'Objects',
         ],
         parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the Relation is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
             new Model\Parameter(
                 name: 'contentId',
                 in: 'path',
@@ -63,17 +55,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - loads a Relation for the given content item.',
                 'content' => [
-                    'application/vnd.ibexa.api.Relation+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Relation',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/relations/relation_id/GET/Relation.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Relation+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RelationWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/relations/POST/Relation.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Relation+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Relation',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/relations/relation_id/GET/Relation.xml.example',
                     ],
                 ],
             ],

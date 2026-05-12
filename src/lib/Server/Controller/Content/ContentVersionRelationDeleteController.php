@@ -22,12 +22,22 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}/relations/{relationId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.remove_relation',
         summary: 'Delete Relation',
         description: 'Deletes a Relation of the given draft.',
         tags: [
             'Objects',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
             new Model\Parameter(
                 name: 'contentId',
                 in: 'path',

@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.update_content_metadata',
         summary: 'Update content',
         description: 'This method updates the content metadata which is independent from a version. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [
@@ -29,10 +30,10 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, all information for the content item (excluding the current version) is returned in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -47,15 +48,6 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ),
             new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The ContentUpdate schema encoded in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'contentId',
                 in: 'path',
                 required: true,
@@ -65,31 +57,33 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The ContentUpdate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.ContentUpdate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/ContentInfo',
-                    ],
-                ],
                 'application/vnd.ibexa.api.ContentUpdate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentInfoWrapper',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/PATCH/ContentInfo.xml.example',
+                ],
+                'application/vnd.ibexa.api.ContentUpdate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentInfo',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/PATCH/ContentUpdate.xml.example',
                 ],
             ]),
         ),
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, all information for the content item (excluding the current version) is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentInfo+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentInfo',
-                        ],
-                    ],
                     'application/vnd.ibexa.api.ContentInfo+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentInfoWrapper',
+                        ],
+                    ],
+                    'application/vnd.ibexa.api.ContentInfo+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentInfo',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/PATCH/ContentInfo.xml.example',
                     ],
