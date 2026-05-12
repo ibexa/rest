@@ -19,12 +19,22 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/user/roles/{roleId}/policies/{policyId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_policy',
         summary: 'Delete Policy',
         description: 'Deletes given Policy.',
         tags: [
             'User Role',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
             new Model\Parameter(
                 name: 'policyId',
                 in: 'path',
