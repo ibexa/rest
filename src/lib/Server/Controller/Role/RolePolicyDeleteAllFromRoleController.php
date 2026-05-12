@@ -17,12 +17,22 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/roles/{id}/policies',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_policies',
         summary: 'Delete Policies',
         description: 'All Policies of the given Role are deleted.',
         tags: [
             'User Role',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
             new Model\Parameter(
                 name: 'id',
                 in: 'path',

@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/users/{userId}/roles',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.assign_role_to_user',
         summary: 'Assign Role to User',
         description: 'Assigns a Role to a user.',
         tags: [
@@ -28,19 +29,10 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the updated Role assignment list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The RoleAssignInput schema encoded in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -55,35 +47,37 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The RoleAssignInput schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.RoleAssignInput+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/RoleAssignInput',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/POST/RoleAssignInput.xml.example',
-                ],
                 'application/vnd.ibexa.api.RoleAssignInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/RoleAssignInputWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/POST/RoleAssignInput.json.example',
                 ],
+                'application/vnd.ibexa.api.RoleAssignInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/RoleAssignInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/POST/RoleAssignInput.xml.example',
+                ],
             ]),
         ),
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the updated Role assignment list is returned in XML or JSON format.',
                 'content' => [
+                    'application/vnd.ibexa.api.RoleAssignmentList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleAssignmentListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/POST/RoleAssignmentList.json.example',
+                    ],
                     'application/vnd.ibexa.api.RoleAssignmentList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleAssignmentList',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/POST/RoleAssignmentList.xml.example',
-                    ],
-                    'application/vnd.ibexa.api.RoleAssignmentList+json' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/RoleAssignmentListWrapper',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/role_id/DELETE/RoleAssignmentList.json.example',
                     ],
                 ],
             ],

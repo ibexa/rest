@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/user/roles/{roleId}/policies/{policyId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_policy',
         summary: 'Load Policy',
         description: 'Loads a Policy for the given module and function.',
         tags: [
@@ -24,18 +25,9 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the Policy is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'If-None-Match',
                 in: 'header',
-                required: true,
+                required: false,
                 description: 'ETag',
                 schema: [
                     'type' => 'string',
@@ -52,18 +44,19 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the Policy is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Policy+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Policy',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/PATCH/Policy.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Policy+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/PolicyWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/GET/Policy.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Policy+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Policy',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/GET/Policy.xml.example',
                     ],
                 ],
             ],
