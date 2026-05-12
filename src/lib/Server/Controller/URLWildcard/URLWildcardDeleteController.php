@@ -17,12 +17,22 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/urlwildcards/{wildcardId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_url_wildcard',
         summary: 'Delete URL wildcard',
         description: 'Deletes the given URL wildcard.',
         tags: [
             'Url Wildcard',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
             new Model\Parameter(
                 name: 'wildcardId',
                 in: 'path',
