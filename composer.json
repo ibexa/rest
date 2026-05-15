@@ -44,7 +44,7 @@
         "symfony/security-csrf": "^7.4",
         "symfony/yaml": "^7.4",
         "twig/twig": "^3.0",
-        "webmozart/assert": "^1.11"
+        "webmozart/assert": "^2.3"
     },
     "require-dev": {
         "ibexa/code-style": "~2.0.0",
