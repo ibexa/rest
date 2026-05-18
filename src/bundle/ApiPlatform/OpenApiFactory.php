@@ -198,7 +198,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
             if ($newContent !== $response['content']) {
                 $newOperation = $newOperation->withResponse(
                     $responseCode,
-                    new Response((string)$responseCode, new ArrayObject($newContent)),
+                    new Response($response['description'] ?? (string)$responseCode, new ArrayObject($newContent)),
                 );
             }
         }
