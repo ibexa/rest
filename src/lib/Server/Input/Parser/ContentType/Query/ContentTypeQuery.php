@@ -14,7 +14,6 @@ use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\Parser\Query\Criterion\CriterionProcessorInterface;
 use Ibexa\Contracts\Rest\Input\Parser\Query\SortClause\SortClauseProcessorInterface;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
-use function Ibexa\PolyfillPhp82\iterator_to_array;
 use Ibexa\Rest\Input\BaseParser;
 
 /**
