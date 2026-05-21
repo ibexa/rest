@@ -18,44 +18,49 @@ jobs:
         strategy:
             matrix:
                 include:
-                    - php: '7.4'
-                      node: 18
-                    - php: '8.3'
-                      node: 22
+                    -   php: '7.4'
+                        node: 18
+                    -   php: '8.3'
+                        node: 22
         steps:
-            - uses: actions/checkout@v6
+            -   uses: actions/checkout@v6
 
-            - name: Set project version
-              run: |
-                version=$(jq -r '.extra | ."branch-alias" | ."dev-main"' < composer.json)
-                echo "version=$version" >> $GITHUB_ENV
+            -   name: Set project version
+                run: |
+                    version=$(jq -r '.extra | ."branch-alias" | ."dev-main"' < composer.json)
+                    echo "version=$version" >> $GITHUB_ENV
 
-            - name: Setup PHP Action
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: ${{ matrix.php }}
-                  coverage: none
+            -   name: Setup PHP Action
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    coverage: none
 
-            - name: Cache dependencies
-              uses: actions/cache@v4
-              with:
-                  path: ${{ env.COMPOSER_CACHE_DIR }}
-                  key: ${{ env.PROJECT_EDITION }}-${{ env.version }}-${{ github.sha }}
-                  restore-keys: |
-                    ${{ env.PROJECT_EDITION }}-${{ env.version }}
+            -   name: Ignore unsolvable advisories for PHP versions past EOL
+                uses: ibexa/gh-workflows/actions/composer-audit-ignore@main
+                with:
+                    php-version: '${{ matrix.php }}'
 
-            - name: Set up whole project using the tested dependency
-              run: |
-                curl -L "https://raw.githubusercontent.com/ibexa/ci-scripts/main/bin/${{ env.version }}/prepare_project_edition.sh" > prepare_project_edition.sh
-                chmod +x prepare_project_edition.sh
-                ./prepare_project_edition.sh ${{ env.PROJECT_EDITION }} ${{ env.version }} ${{ env.SETUP }} "ghcr.io/ibexa/docker/php:${{ matrix.php }}-node${{ matrix.node }}"
+            -   name: Cache dependencies
+                uses: actions/cache@v4
+                with:
+                    path: ${{ env.COMPOSER_CACHE_DIR }}
+                    key: ${{ env.PROJECT_EDITION }}-${{ env.version }}-${{ github.sha }}
+                    restore-keys: |
+                        ${{ env.PROJECT_EDITION }}-${{ env.version }}
 
-            - name: Run setup command
-              run: |
-                cd "$HOME/build/project"
-                docker compose --env-file=.env exec -T --user www-data app sh -c "APP_ENV=behat php bin/console ibexa:behat:create-language 'pol-PL' 'Polish (polski)'"
+            -   name: Set up whole project using the tested dependency
+                run: |
+                    curl -L "https://raw.githubusercontent.com/ibexa/ci-scripts/main/bin/${{ env.version }}/prepare_project_edition.sh" > prepare_project_edition.sh
+                    chmod +x prepare_project_edition.sh
+                    ./prepare_project_edition.sh ${{ env.PROJECT_EDITION }} ${{ env.version }} ${{ env.SETUP }} "ghcr.io/ibexa/docker/php:${{ matrix.php }}-node${{ matrix.node }}"
 
-            - name: Run tests
-              run: |
-                cd "$HOME/build/project"
-                docker compose --env-file=.env exec -T --user www-data app sh -c "cd vendor/ibexa/rest && composer update && composer test-functional"
+            -   name: Run setup command
+                run: |
+                    cd "$HOME/build/project"
+                    docker compose --env-file=.env exec -T --user www-data app sh -c "APP_ENV=behat php bin/console ibexa:behat:create-language 'pol-PL' 'Polish (polski)'"
+
+            -   name: Run tests
+                run: |
+                    cd "$HOME/build/project"
+                    docker compose --env-file=.env exec -T --user www-data app sh -c "cd vendor/ibexa/rest && composer update && composer test-functional"
