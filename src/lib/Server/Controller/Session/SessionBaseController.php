@@ -93,6 +93,8 @@ class SessionBaseController extends Controller
         $response->setStatusCode(Response::HTTP_NOT_FOUND);
         $requestSession->clear();
 
+        $this->securityTokenStorage->setToken(null);
+
         return $response;
     }
 }
