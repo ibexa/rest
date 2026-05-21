@@ -212,6 +212,8 @@ class RestAuthenticator implements AuthenticatorInterface
             $handler->logout($request, $response, $token);
         }
 
+        $this->tokenStorage->setToken(null);
+
         return $response;
     }
 }
