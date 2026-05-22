@@ -142,6 +142,55 @@ final class SessionTest extends TestCase
         $this->assertHttpResponseCodeEquals($response, 201);
     }
 
+    public function testDeletedSessionCookieCannotReauthenticate(): void
+    {
+        $session = $this->login();
+
+        // Logged-in server-side session check
+        $currentSessionRequest = $this->createHttpRequest(
+            'GET',
+            '/api/ibexa/v2/user/sessions/current',
+            '',
+            'Session+json',
+            '',
+            [
+                'Cookie' => sprintf('%s=%s', $session->name, $session->identifier),
+                'X-CSRF-Token' => $session->csrfToken,
+            ]
+        );
+        $currentSessionResponse = $this->sendHttpRequest($currentSessionRequest);
+        self::assertHttpResponseCodeEquals($currentSessionResponse, 200);
+        $authenticatedData = json_decode($currentSessionResponse->getBody()->getContents(), true, JSON_THROW_ON_ERROR);
+        $authenticatedUserHref = $authenticatedData['Session']['User']['_href'];
+
+        // Logout
+        $deleteResponse = $this->sendHttpRequest($this->createDeleteRequest($session));
+        self::assertHttpResponseCodeEquals($deleteResponse, 204);
+
+        // Re-use the old cookie — the server-side session must no longer be authenticated as the original user
+        $reusedResponse = $this->sendHttpRequest(
+            $this->createHttpRequest(
+                'GET',
+                '/api/ibexa/v2/user/sessions/current',
+                '',
+                'Session+json',
+                '',
+                ['Cookie' => sprintf('%s=%s', $session->name, $session->identifier)]
+            )
+        );
+
+        $reusedData = json_decode($reusedResponse->getBody()->getContents(), true, JSON_THROW_ON_ERROR);
+        self::assertNotEquals(
+            $authenticatedUserHref,
+            $reusedData['Session']['User']['_href'],
+            'Old session cookie must not re-authenticate as the original user after logout'
+        );
+        self::assertEquals(
+            '/api/ibexa/v2/user/users/10',
+            $reusedData['Session']['User']['_href']
+        );
+    }
+
     public function testDeleteSessionExpired(): void
     {
         $session = $this->login();
