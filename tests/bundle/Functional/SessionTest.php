@@ -160,7 +160,7 @@ final class SessionTest extends TestCase
         );
         $currentSessionResponse = $this->sendHttpRequest($currentSessionRequest);
         self::assertHttpResponseCodeEquals($currentSessionResponse, 200);
-        $authenticatedData = json_decode($currentSessionResponse->getBody()->getContents(), true, JSON_THROW_ON_ERROR);
+        $authenticatedData = json_decode($currentSessionResponse->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
         $authenticatedUserHref = $authenticatedData['Session']['User']['_href'];
 
         // Logout
@@ -179,7 +179,7 @@ final class SessionTest extends TestCase
             )
         );
 
-        $reusedData = json_decode($reusedResponse->getBody()->getContents(), true, JSON_THROW_ON_ERROR);
+        $reusedData = json_decode($reusedResponse->getBody()->getContents(), true, 512, JSON_THROW_ON_ERROR);
         self::assertNotEquals(
             $authenticatedUserHref,
             $reusedData['Session']['User']['_href'],
@@ -244,7 +244,7 @@ final class SessionTest extends TestCase
         $this->assertHttpResponseCodeEquals($response, 200);
 
         $contents = $response->getBody()->getContents();
-        $data = json_decode($contents, true, JSON_THROW_ON_ERROR);
+        $data = json_decode($contents, true, 512, JSON_THROW_ON_ERROR);
         self::assertArrayHasKey('Session', $data);
     }
 
