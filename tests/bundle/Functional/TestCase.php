@@ -352,7 +352,7 @@ XML;
         $response = $this->sendHttpRequest($request);
         self::assertHttpResponseCodeEquals($response, 201);
 
-        return json_decode($response->getBody()->getContents(), false, JSON_THROW_ON_ERROR)->Session;
+        return json_decode($response->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR)->Session;
     }
 
     /**
