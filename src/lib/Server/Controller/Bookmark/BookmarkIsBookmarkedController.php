@@ -10,7 +10,6 @@ namespace Ibexa\Rest\Server\Controller\Bookmark;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
-use Ibexa\Bundle\Rest\ApiPlatform\Get;
 use Ibexa\Bundle\Rest\ApiPlatform\Head;
 use Ibexa\Contracts\Core\Repository\BookmarkService;
 use Ibexa\Contracts\Core\Repository\LocationService;
