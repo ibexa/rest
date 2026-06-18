@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/objectstates',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.get_object_states_for_content',
         summary: 'Get Object states of content item',
         description: 'Returns the Object states of a content item',
         tags: [
@@ -29,18 +30,9 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the Object states are returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'If-None-Match',
                 in: 'header',
-                required: true,
+                required: false,
                 description: 'ETag',
                 schema: [
                     'type' => 'string',
@@ -59,15 +51,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns the Object state.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentObjectStates+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentObjectStates',
-                        ],
-                    ],
                     'application/vnd.ibexa.api.ContentObjectStates+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentObjectStates',
                         ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/GET/ContentObjectStates.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentObjectStates+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentObjectStates',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/GET/ContentObjectStates.xml.example',
                     ],
                 ],
             ],

@@ -16,21 +16,13 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/locations/{path}/children',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_location_children',
         summary: 'Get child Locations.',
         description: 'Loads all child Locations for the given parent Location.',
         tags: [
             'Location',
         ],
         parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the new Location list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
             new Model\Parameter(
                 name: 'path',
                 in: 'path',
@@ -42,17 +34,18 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the new Location list is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.LocationList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/LocationList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/GET/LocationList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.LocationList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LocationListWrapper',
                         ],
+                    ],
+                    'application/vnd.ibexa.api.LocationList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/LocationList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/locations/path/children/GET/LocationList.xml.example',
                     ],
                 ],
             ],
