@@ -17,12 +17,22 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/sections/{sectionId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_section',
         summary: 'Delete Section',
         description: 'The given Section is deleted.',
         tags: [
             'Section',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
             new Model\Parameter(
                 name: 'sectionId',
                 in: 'path',
