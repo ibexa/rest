@@ -18,12 +18,22 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/typegroups/{contentTypeGroupId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_content_type_group',
         summary: 'Delete content type group',
         description: 'Deletes the provided content type group.',
         tags: [
             'Type Groups',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
             new Model\Parameter(
                 name: 'contentTypeGroupId',
                 in: 'path',

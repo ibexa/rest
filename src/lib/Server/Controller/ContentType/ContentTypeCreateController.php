@@ -30,6 +30,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/typegroups/{contentTypeGroupId}/types',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_content_type',
         summary: 'Create content type',
         description: 'Creates a new content type draft in the given content type group.',
         tags: [
@@ -37,19 +38,10 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the new content type or draft is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The content type Create schema encoded in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -64,18 +56,19 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The content type Create schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.ContentTypeCreate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/ContentTypeCreate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/types/POST/ContentTypeCreate.xml.example',
-                ],
                 'application/vnd.ibexa.api.ContentTypeCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeCreateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/types/POST/ContentTypeCreate.json.example',
+                ],
+                'application/vnd.ibexa.api.ContentTypeCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentTypeCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/types/POST/ContentTypeCreate.xml.example',
                 ],
             ]),
         ),
@@ -83,16 +76,16 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_CREATED => [
                 'description' => 'Content type created.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentType+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentType',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PUBLISH/ContentType.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ContentType+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeWrapper',
                         ],
+                    ],
+                    'application/vnd.ibexa.api.ContentType+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentType',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/types/POST/ContentType.xml.example',
                     ],
                 ],
             ],
