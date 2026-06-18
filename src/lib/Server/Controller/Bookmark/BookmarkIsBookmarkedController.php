@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Controller\Bookmark;
 
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Bundle\Rest\ApiPlatform\Get;
 use Ibexa\Bundle\Rest\ApiPlatform\Head;
