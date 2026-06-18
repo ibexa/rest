@@ -422,7 +422,7 @@ services:
         arguments:
             $parsingDispatcher: '@Ibexa\Contracts\Rest\Input\ParsingDispatcher'
 
-    Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolverInterface: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitor'
+    Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolverInterface: '@Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver'
 
     Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolver: ~
 

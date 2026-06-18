@@ -34,6 +34,8 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
     /**
      * @param array<string, mixed> $context
      *
+     * @return array<mixed>|bool|string|int|float|\ArrayObject<int|string, mixed>|null
+     *
      * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
     public function normalize(mixed $object, ?string $format = null, array $context = []): array|bool|string|int|float|null|\ArrayObject
