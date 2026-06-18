@@ -28,6 +28,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/roles',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_role',
         summary: 'Create Role or Role draft',
         description: 'Creates a new Role or Role draft.',
         tags: [
@@ -35,54 +36,47 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the new user is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The RoleInput schema encoded in XML or JSON.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The RoleInput schema encoded in XML or JSON.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.RoleInput+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/RoleInput',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/RoleInput.xml.example',
-                ],
                 'application/vnd.ibexa.api.RoleInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/RoleInputWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/RoleInput.json.example',
                 ],
+                'application/vnd.ibexa.api.RoleInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/RoleInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/RoleInput.xml.example',
+                ],
             ]),
         ),
         responses: [
             Response::HTTP_CREATED => [
+                'description' => 'If set, the new user is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Role+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Role',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Role+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/Role.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Role+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Role',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/Role.xml.example',
                     ],
                 ],
             ],

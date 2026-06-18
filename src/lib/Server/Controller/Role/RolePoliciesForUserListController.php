@@ -18,37 +18,27 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/policies',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.list_policies_for_user',
         summary: 'List Policies for User',
         description: 'Search all Policies which are applied to a given User.',
         tags: [
             'User Policy',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the Policy list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
                 'description' => 'OK - Policies which are applied to a given User.',
                 'content' => [
-                    'application/vnd.ibexa.api.PolicyList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/PolicyList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/GET/PolicyList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.PolicyList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/PolicyListWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/GET/PolicyList.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/policies/GET/PolicyList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.PolicyList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/PolicyList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/policies/GET/PolicyList.xml.example',
                     ],
                 ],
             ],
