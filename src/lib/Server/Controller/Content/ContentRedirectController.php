@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.redirect_content',
         summary: 'Load content by remote ID',
         description: 'Loads content item for a given remote ID.',
         tags: [

@@ -1,0 +1,43 @@
+{
+  "Content": {
+    "_media-type": "application/vnd.ibexa.api.ContentInfo+json",
+    "_href": "/api/ibexa/v2/content/objects/77",
+    "_remoteId": "89e9b86c673b1c1de6781bb94488b18c",
+    "_id": 77,
+    "ContentType": {
+      "_media-type": "application/vnd.ibexa.api.ContentType+json",
+      "_href": "/api/ibexa/v2/content/types/2"
+    },
+    "Name": "draft article",
+    "TranslatedName": "draft article",
+    "Versions": {
+      "_media-type": "application/vnd.ibexa.api.VersionList+json",
+      "_href": "/api/ibexa/v2/content/objects/77/versions"
+    },
+    "CurrentVersion": {
+      "_media-type": "application/vnd.ibexa.api.Version+json",
+      "_href": "/api/ibexa/v2/content/objects/77/currentversion"
+    },
+    "Section": {
+      "_media-type": "application/vnd.ibexa.api.Section+json",
+      "_href": "/api/ibexa/v2/content/sections/1"
+    },
+    "Locations": {
+      "_media-type": "application/vnd.ibexa.api.LocationList+json",
+      "_href": "/api/ibexa/v2/content/objects/77/locations"
+    },
+    "Owner": {
+      "_media-type": "application/vnd.ibexa.api.User+json",
+      "_href": "/api/ibexa/v2/user/users/14"
+    },
+    "mainLanguageCode": "eng-GB",
+    "currentVersionNo": 1,
+    "alwaysAvailable": true,
+    "isHidden": false,
+    "status": "DRAFT",
+    "ObjectStates": {
+      "_media-type": "application/vnd.ibexa.api.ContentObjectStates+json",
+      "_href": "/api/ibexa/v2/content/objects/77/objectstates"
+    }
+  }
+}

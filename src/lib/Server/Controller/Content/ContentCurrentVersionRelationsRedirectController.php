@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/relations',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.redirect_current_version_relations',
         summary: 'Load Relations of content item',
         description: 'Redirects to the Relations of the current version.',
         tags: [
