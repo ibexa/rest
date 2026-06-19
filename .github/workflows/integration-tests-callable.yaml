@@ -30,11 +30,20 @@ jobs:
                     version=$(jq -r '.extra | ."branch-alias" | ."dev-main"' < composer.json)
                     echo "version=$version" >> $GITHUB_ENV
 
+            -   name: Generate token
+                id: generate_token
+                uses: actions/create-github-app-token@v3
+                with:
+                    client-id: ${{ secrets.AUTOMATION_CLIENT_ID }}
+                    private-key: ${{ secrets.AUTOMATION_CLIENT_SECRET }}
+                    owner: ${{ github.repository_owner }}
+
             -   name: Setup PHP Action
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php }}
                     coverage: none
+                    github-token: ${{ steps.generate_token.outputs.token }}
 
             -   name: Ignore unsolvable advisories for PHP versions past EOL
                 uses: ibexa/gh-workflows/actions/composer-audit-ignore@main
@@ -48,14 +57,6 @@ jobs:
                     key: ${{ env.PROJECT_EDITION }}-${{ env.version }}-${{ github.sha }}
                     restore-keys: |
                         ${{ env.PROJECT_EDITION }}-${{ env.version }}
-
-            -   name: Generate token
-                id: generate_token
-                uses: actions/create-github-app-token@v3
-                with:
-                    client-id: ${{ secrets.AUTOMATION_CLIENT_ID }}
-                    private-key: ${{ secrets.AUTOMATION_CLIENT_SECRET }}
-                    owner: ${{ github.repository_owner }}
 
             -   name: Add composer key for GitHub App
                 if: ${{ steps.generate_token.outputs.token != '' }}
