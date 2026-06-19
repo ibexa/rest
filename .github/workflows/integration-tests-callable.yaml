@@ -49,6 +49,21 @@ jobs:
                     restore-keys: |
                         ${{ env.PROJECT_EDITION }}-${{ env.version }}
 
+            -   name: Generate token
+                id: generate_token
+                uses: actions/create-github-app-token@v3
+                with:
+                    client-id: ${{ secrets.AUTOMATION_CLIENT_ID }}
+                    private-key: ${{ secrets.AUTOMATION_CLIENT_SECRET }}
+                    owner: ${{ github.repository_owner }}
+
+            -   name: Add composer key for GitHub App
+                if: ${{ steps.generate_token.outputs.token != '' }}
+                run: |
+                    composer config github-oauth.github.com $GITHUB_TOKEN
+                env:
+                    GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+
             -   name: Set up whole project using the tested dependency
                 run: |
                     curl -L "https://raw.githubusercontent.com/ibexa/ci-scripts/main/bin/${{ env.version }}/prepare_project_edition.sh" > prepare_project_edition.sh
