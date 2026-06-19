@@ -16,7 +16,7 @@ jobs:
                 php:
                     - '8.1'
         steps:
-            -   uses: actions/checkout@v6
+            -   uses: actions/checkout@v7
 
             -   uses: ibexa/gh-workflows/actions/composer-install@main
                 with:
@@ -42,7 +42,7 @@ jobs:
                     - '8.4'
 
         steps:
-            -   uses: actions/checkout@v6
+            -   uses: actions/checkout@v7
 
             -   uses: ibexa/gh-workflows/actions/composer-install@main
                 with:
