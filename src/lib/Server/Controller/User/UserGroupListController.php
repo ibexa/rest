@@ -109,7 +109,8 @@ final class UserGroupListController extends UserBaseController
     public function loadUserGroups(Request $request): RestValue
     {
         $restUserGroups = [];
-        if ($request->query->has('id') && is_int($id = $request->query->get('id'))) {
+        if ($request->query->has('id') && is_numeric($request->query->get('id'))) {
+            $id = (int) $request->query->get('id');
             $userGroup = $this->userService->loadUserGroup($id, Language::ALL);
             $userGroupContentInfo = $userGroup->getVersionInfo()->getContentInfo();
 
