@@ -25,9 +25,42 @@ use Symfony\Component\HttpFoundation\Response;
     openapi: new Model\Operation(
         operationId: 'ibexa.rest.load_user_groups',
         summary: 'Load User Groups',
-        description: 'Loads User Groups for either an an ID or a remote ID or a Role.',
+        description: 'Loads User Groups for either an ID, a remote ID, or a Role ID.',
         tags: [
             'User Group',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'id',
+                in: 'query',
+                description: 'Content ID of the User Group to load.',
+                required: false,
+                schema: [
+                    'type' => 'integer',
+                    'description' => 'Numeral ID of the User Group',
+                    'example' => '12',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'roleId',
+                in: 'query',
+                description: 'Role ID of the User Groups to load.',
+                required: false,
+                schema: [
+                    'type' => 'integer',
+                    'description' => 'Numeral ID of the Role',
+                    'example' => '2',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'remoteId',
+                in: 'query',
+                description: 'Remote ID of the User Group to load.',
+                required: false,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
         ],
         responses: [
             Response::HTTP_OK => [
@@ -61,6 +94,9 @@ use Symfony\Component\HttpFoundation\Response;
             ],
             Response::HTTP_UNAUTHORIZED => [
                 'description' => 'Error - the user has no permission to read User Groups.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the remoteId doesn\'t match an existing User Group, the roleId doesn\'t match an existing Role.',
             ],
         ],
     ),
