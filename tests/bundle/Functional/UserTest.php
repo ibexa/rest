@@ -331,6 +331,21 @@ XML;
     }
 
     /**
+     * Covers GET /user/groups?id={userGroupContentID}.
+     */
+    public function testLoadUserGroupById(): void
+    {
+        $groupId = 12; // "Administrator users"
+        $response = $this->sendHttpRequest(
+            $this->createHttpRequest('GET', "/api/ibexa/v2/user/groups?id=$groupId")
+        );
+
+        self::assertHttpResponseCodeEquals($response, 200);
+        // 1/5/13 = "Administrator users"
+        self::assertStringContainsString('<UserGroup media-type="application/vnd.ibexa.api.UserGroup+xml" href="/api/ibexa/v2/user/groups/1/5/13"/>', $response->getBody()->getContents());
+    }
+
+    /**
      * @depends testCreateUserGroup
      *
      * Covers GET /user/groups?remoteId={groupRemoteId}
@@ -356,7 +371,7 @@ XML;
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
-        // 1/5/13 = Administrator users
+        // 1/5/13 = "Administrator users"
         self::assertStringContainsString('<UserGroup media-type="application/vnd.ibexa.api.UserGroup+xml" href="/api/ibexa/v2/user/groups/1/5/13"/>', $response->getBody()->getContents());
     }
 
