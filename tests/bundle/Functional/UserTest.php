@@ -306,7 +306,7 @@ XML;
     }
 
     /**
-     * Covers GET /user/users?roleId={roleId}
+     * Covers GET /user/users?roleId={roleId}.
      */
     public function testLoadUserByRoleId(): void
     {
@@ -346,7 +346,7 @@ XML;
     }
 
     /**
-     * Covers GET /user/groups?roleId={roleId}
+     * Covers GET /user/groups?roleId={roleId}.
      */
     public function testLoadUserGroupsByRoleId(): void
     {
@@ -356,7 +356,8 @@ XML;
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
-        self::assertStringContainsString('Administrator users', $response->getBody()->getContents());
+        // 1/5/13 = Administrator users
+        self::assertStringContainsString('<UserGroup media-type="application/vnd.ibexa.api.UserGroup+xml" href="/api/ibexa/v2/user/groups/1/5/13"/>', $response->getBody()->getContents());
     }
 
     /**
