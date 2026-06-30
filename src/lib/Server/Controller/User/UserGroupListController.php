@@ -96,7 +96,7 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - the user has no permission to read User Groups.',
             ],
             Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the remoteId doesn\'t match an existing User Group, the roleId doesn\'t match an existing Role.',
+                'description' => 'Error - the id or remoteId doesn\'t match an existing User Group, or the roleId doesn\'t match an existing Role.',
             ],
         ],
     ),
