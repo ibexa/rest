@@ -306,6 +306,19 @@ XML;
     }
 
     /**
+     * Covers GET /user/users?roleId={roleId}
+     */
+    public function testLoadUserByRoleId(): void
+    {
+        $roleId = '/api/ibexa/v2/user/roles/2'; // "Administrator"
+        $response = $this->sendHttpRequest(
+            $this->createHttpRequest('GET', "/api/ibexa/v2/user/users?roleId=$roleId")
+        );
+
+        self::assertHttpResponseCodeEquals($response, 404); // Mustn't be 406
+    }
+
+    /**
      * Covers GET /user/groups.
      */
     public function testLoadUserGroups(): void
@@ -330,6 +343,20 @@ XML;
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
+    }
+
+    /**
+     * Covers GET /user/groups?roleId={roleId}
+     */
+    public function testLoadUserGroupsByRoleId(): void
+    {
+        $roleId = 2; // "Administrator"
+        $response = $this->sendHttpRequest(
+            $this->createHttpRequest('GET', "/api/ibexa/v2/user/groups?roleId=$roleId")
+        );
+
+        self::assertHttpResponseCodeEquals($response, 200);
+        self::assertStringContainsString('Administrator users', $response->getBody()->getContents());
     }
 
     /**
