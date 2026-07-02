@@ -110,7 +110,7 @@ final class UserGroupListController extends UserBaseController
     {
         $restUserGroups = [];
         if ($request->query->has('id') && is_numeric($request->query->get('id'))) {
-            $id = (int) $request->query->get('id');
+            $id = $request->query->getInt('id');
             $userGroup = $this->userService->loadUserGroup($id, Language::ALL);
             $userGroupContentInfo = $userGroup->getVersionInfo()->getContentInfo();
 
@@ -131,7 +131,8 @@ final class UserGroupListController extends UserBaseController
                 ),
             ];
         } elseif ($request->query->has('roleId')) {
-            $restUserGroups = $this->loadUserGroupsAssignedToRole((int) $request->query->get('roleId'));
+            $roleId = is_numeric($request->query->get('roleId')) ? $request->query->getInt('roleId') : (int)$this->uriParser->getAttributeFromUri($request->query->getString('roleId'), 'roleId');
+            $restUserGroups = $this->loadUserGroupsAssignedToRole($roleId);
         } elseif ($request->query->has('remoteId')) {
             $restUserGroups = [
                 $this->loadUserGroupByRemoteId($request),

@@ -306,16 +306,30 @@ XML;
     }
 
     /**
-     * Covers GET /user/users?roleId={roleId}.
+     * @dataProvider provideDataForTestLoadUsersByRoleId
+     *
+     * Covers GET /user/users?roleId={roleId}
      */
-    public function testLoadUserByRoleId(): void
+    public function testLoadUsersByRoleId($roleId, $expectedCode, $expectedContent): void
     {
-        $roleId = '/api/ibexa/v2/user/roles/2'; // "Administrator"
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "/api/ibexa/v2/user/users?roleId=$roleId")
         );
 
-        self::assertHttpResponseCodeEquals($response, 404); // Mustn't be 406
+        self::assertHttpResponseCodeEquals($response, 404); // Mustn't be 406 Not Acceptable
+        if (null !== $expectedContent) {
+            self::assertStringContainsString($expectedContent, $response->getBody()->getContents());
+        }
+    }
+
+    /**
+     * @return iterable{string, array{0: int|string, 1: int, 2: string|null}}
+     */
+    public function provideDataForTestLoadUsersByRoleId(): iterable
+    {
+        yield 'Administrator by ID' => [2, 404, null];
+        yield 'Administrator by Href' => ['/api/ibexa/v2/user/roles/2', 404, null];
+        yield 'Not Acceptable' => ['/api/ibexa/v2/something/wrong', 406, '"None of the routers in the chain matched url \'/api/ibexa/v2/something/wrong\'"'];
     }
 
     /**
@@ -361,18 +375,30 @@ XML;
     }
 
     /**
-     * Covers GET /user/groups?roleId={roleId}.
+     * @dataProvider provideDataForTestLoadGroupsByRoleId
+     *
+     * Covers GET /user/groups?roleId={roleId}
      */
-    public function testLoadUserGroupsByRoleId(): void
+    public function testLoadUserGroupsByRoleId($roleId, $expectedCode, $expectedContent): void
     {
-        $roleId = 2; // "Administrator"
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "/api/ibexa/v2/user/groups?roleId=$roleId")
         );
 
-        self::assertHttpResponseCodeEquals($response, 200);
-        // 1/5/13 = "Administrator users"
-        self::assertStringContainsString('<UserGroup media-type="application/vnd.ibexa.api.UserGroup+xml" href="/api/ibexa/v2/user/groups/1/5/13"/>', $response->getBody()->getContents());
+        self::assertHttpResponseCodeEquals($response, $expectedCode);
+        if (null !== $expectedContent) {
+            self::assertStringContainsString($expectedContent, $response->getBody()->getContents());
+        }
+    }
+
+    /**
+     * @return iterable{string, array{0: int|string, 1: int, 2: string|null}}
+     */
+    public function provideDataForTestLoadGroupsByRoleId()
+    {
+        yield 'Administrator by ID' => [2, 200, '<UserGroup media-type="application/vnd.ibexa.api.UserGroup+xml" href="/api/ibexa/v2/user/groups/1/5/13"/>'];
+        yield 'Administrator by Href' => ['/api/ibexa/v2/user/roles/2', 200, '<UserGroup media-type="application/vnd.ibexa.api.UserGroup+xml" href="/api/ibexa/v2/user/groups/1/5/13"/>'];
+        yield 'Not Acceptable' => ['/api/ibexa/v2/something/wrong', 406, '"None of the routers in the chain matched url \'/api/ibexa/v2/something/wrong\'"'];
     }
 
     /**
