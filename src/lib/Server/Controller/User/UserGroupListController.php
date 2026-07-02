@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
     openapi: new Model\Operation(
         operationId: 'ibexa.rest.load_user_groups',
         summary: 'Load User Groups',
-        description: 'Loads User Groups for either an ID, a remote ID, or a Role ID.',
+        description: 'Loads User Groups for either an ID, a remote ID, or a Role ID. Filters can\'t be combined.',
         tags: [
             'User Group',
         ],
@@ -44,13 +44,22 @@ use Symfony\Component\HttpFoundation\Response;
             new Model\Parameter(
                 name: 'roleId',
                 in: 'query',
-                description: 'Role ID of the User Groups to load.',
+                description: 'Role ID or Role Href of the User Groups to load.',
                 required: false,
                 schema: [
-                    'type' => 'integer',
-                    'description' => 'Numeral ID of the Role',
-                    'example' => '2',
+                    'type' => ['integer', 'string'],
+                    'description' => 'Role ID or Role Href',
                 ],
+                examples: new \ArrayObject([
+                    'id' => [
+                        'value' => 2,
+                        'summary' => 'Role ID',
+                    ],
+                    'href' => [
+                        'value' => '/api/ibexa/v2/user/roles/2',
+                        'summary' => 'Role Href',
+                    ],
+                ]),
             ),
             new Model\Parameter(
                 name: 'remoteId',

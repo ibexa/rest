@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
     openapi: new Model\Operation(
         operationId: 'ibexa.rest.load_users',
         summary: 'List Users',
-        description: 'Load Users either for a given role ID, remote ID, login, or email. To use one of the available filter is mandatory.',
+        description: 'Load Users either for a given role ID, remote ID, login, or email. To use one of the available filter is mandatory. Filters can\'t be combined.',
         tags: [
             'User',
         ],
@@ -28,10 +28,19 @@ use Symfony\Component\HttpFoundation\Response;
                 description: 'Role directly assigned to the Users to load. (If the role is assigned to a user group, its users won\'t be returned. See GET /user/groups roleId filter.)',
                 required: false,
                 schema: [
-                    'type' => 'string',
-                    'description' => 'Reference path to the Role',
-                    'example' => '/api/ibexa/v2/user/roles/2',
+                    'type' => ['integer', 'string'],
+                    'description' => 'Role ID or Role Href',
                 ],
+                examples: new \ArrayObject([
+                    'id' => [
+                        'value' => 2,
+                        'summary' => 'Role ID',
+                    ],
+                    'href' => [
+                        'value' => '/api/ibexa/v2/user/roles/2',
+                        'summary' => 'Role Href',
+                    ],
+                ]),
             ),
             new Model\Parameter(
                 name: 'remoteId',
