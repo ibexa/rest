@@ -316,7 +316,7 @@ XML;
             $this->createHttpRequest('GET', "/api/ibexa/v2/user/users?roleId=$roleId")
         );
 
-        self::assertHttpResponseCodeEquals($response, 404); // Mustn't be 406 Not Acceptable
+        self::assertHttpResponseCodeEquals($response, $expectedCode);
         if (null !== $expectedContent) {
             self::assertStringContainsString($expectedContent, $response->getBody()->getContents());
         }
