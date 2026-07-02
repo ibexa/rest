@@ -310,7 +310,7 @@ XML;
      *
      * Covers GET /user/users?roleId={roleId}
      */
-    public function testLoadUsersByRoleId($roleId, $expectedCode, $expectedContent): void
+    public function testLoadUsersByRoleId(int|string $roleId, int $expectedCode, ?string $expectedContent): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "/api/ibexa/v2/user/users?roleId=$roleId")
@@ -323,13 +323,13 @@ XML;
     }
 
     /**
-     * @return iterable{string, array{0: int|string, 1: int, 2: string|null}}
+     * @return iterable<string, array{0: int|string, 1: int, 2: string|null}>
      */
     public function provideDataForTestLoadUsersByRoleId(): iterable
     {
         yield 'Administrator by ID' => [2, 404, null];
         yield 'Administrator by Href' => ['/api/ibexa/v2/user/roles/2', 404, null];
-        yield 'Not Acceptable' => ['/api/ibexa/v2/something/wrong', 406, '"None of the routers in the chain matched url \'/api/ibexa/v2/something/wrong\'"'];
+        yield 'Not Acceptable' => ['/api/ibexa/v2/something/wrong', 406, "None of the routers in the chain matched url '/api/ibexa/v2/something/wrong'"];
     }
 
     /**
@@ -379,7 +379,7 @@ XML;
      *
      * Covers GET /user/groups?roleId={roleId}
      */
-    public function testLoadUserGroupsByRoleId($roleId, $expectedCode, $expectedContent): void
+    public function testLoadUserGroupsByRoleId(int|string $roleId, int $expectedCode, ?string $expectedContent): void
     {
         $response = $this->sendHttpRequest(
             $this->createHttpRequest('GET', "/api/ibexa/v2/user/groups?roleId=$roleId")
@@ -392,13 +392,13 @@ XML;
     }
 
     /**
-     * @return iterable{string, array{0: int|string, 1: int, 2: string|null}}
+     * @return iterable<string, array{0: int|string, 1: int, 2: string|null}>
      */
-    public function provideDataForTestLoadGroupsByRoleId()
+    public function provideDataForTestLoadGroupsByRoleId(): iterable
     {
         yield 'Administrator by ID' => [2, 200, '<UserGroup media-type="application/vnd.ibexa.api.UserGroup+xml" href="/api/ibexa/v2/user/groups/1/5/13"/>'];
         yield 'Administrator by Href' => ['/api/ibexa/v2/user/roles/2', 200, '<UserGroup media-type="application/vnd.ibexa.api.UserGroup+xml" href="/api/ibexa/v2/user/groups/1/5/13"/>'];
-        yield 'Not Acceptable' => ['/api/ibexa/v2/something/wrong', 406, '"None of the routers in the chain matched url \'/api/ibexa/v2/something/wrong\'"'];
+        yield 'Not Acceptable' => ['/api/ibexa/v2/something/wrong', 406, "None of the routers in the chain matched url '/api/ibexa/v2/something/wrong'"];
     }
 
     /**
