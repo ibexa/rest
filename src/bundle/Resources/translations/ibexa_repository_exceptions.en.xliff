@@ -6,11 +6,6 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="18a38f6c46cc84d27fa3d24cbd09aee62125be8d" resname="Cannot publish an empty content type draft">
-        <source>Cannot publish an empty content type draft</source>
-        <target state="new">Cannot publish an empty content type draft</target>
-        <note>key: Cannot publish an empty content type draft</note>
-      </trans-unit>
       <trans-unit id="8bfebd32a3304d378cf1219c4b25b1044d9dde34" resname="Cannot unlink the content type from its only remaining group">
         <source>Cannot unlink the content type from its only remaining group</source>
         <target state="new">Cannot unlink the content type from its only remaining group</target>
