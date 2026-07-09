@@ -18,12 +18,22 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/objectstategroups/{objectStateGroupId}/objectstates/{objectStateId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_object_state',
         summary: 'Delete Object state',
         description: 'Deletes provided Object state.',
         tags: [
             'Object State Groups',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
             new Model\Parameter(
                 name: 'objectStateGroupId',
                 in: 'path',
