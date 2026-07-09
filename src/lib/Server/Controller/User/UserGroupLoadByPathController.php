@@ -41,6 +41,8 @@ use Symfony\Component\HttpFoundation\Response;
                 required: true,
                 schema: [
                     'type' => 'string',
+                    'description' => 'The Location path to the user\'s group.',
+                    'example' => '1/5/13',
                 ],
             ),
         ],

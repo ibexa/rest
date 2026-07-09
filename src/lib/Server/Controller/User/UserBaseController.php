@@ -82,9 +82,8 @@ class UserBaseController extends RestController
 
         try {
             if ($request->query->has('roleId')) {
-                $restUsers = $this->loadUsersAssignedToRole(
-                    (int) $this->uriParser->getAttributeFromUri($request->query->getString('roleId'), 'roleId')
-                );
+                $roleId = is_numeric($request->query->get('roleId')) ? $request->query->getInt('roleId') : (int)$this->uriParser->getAttributeFromUri($request->query->getString('roleId'), 'roleId');
+                $restUsers = $this->loadUsersAssignedToRole($roleId);
             } elseif ($request->query->has('remoteId')) {
                 $restUsers = [
                     $this->buildRestUserObject(

@@ -25,9 +25,51 @@ use Symfony\Component\HttpFoundation\Response;
     openapi: new Model\Operation(
         operationId: 'ibexa.rest.load_user_groups',
         summary: 'Load User Groups',
-        description: 'Loads User Groups for either an an ID or a remote ID or a Role.',
+        description: 'Loads User Groups for either an ID, a remote ID, or a Role ID. Filters can\'t be combined.',
         tags: [
             'User Group',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'id',
+                in: 'query',
+                description: 'Content ID of the User Group to load.',
+                required: false,
+                schema: [
+                    'type' => 'integer',
+                    'description' => 'Numeral ID of the User Group',
+                    'example' => '12',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'roleId',
+                in: 'query',
+                description: 'Role ID or Role Href of the User Groups to load.',
+                required: false,
+                schema: [
+                    'type' => ['integer', 'string'],
+                    'description' => 'Role ID or Role Href',
+                ],
+                examples: new \ArrayObject([
+                    'id' => [
+                        'value' => 2,
+                        'summary' => 'Role ID',
+                    ],
+                    'href' => [
+                        'value' => '/api/ibexa/v2/user/roles/2',
+                        'summary' => 'Role Href',
+                    ],
+                ]),
+            ),
+            new Model\Parameter(
+                name: 'remoteId',
+                in: 'query',
+                description: 'Remote ID of the User Group to load.',
+                required: false,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
         ],
         responses: [
             Response::HTTP_OK => [
@@ -62,6 +104,9 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_UNAUTHORIZED => [
                 'description' => 'Error - the user has no permission to read User Groups.',
             ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the id or remoteId doesn\'t match an existing User Group, or the roleId doesn\'t match an existing Role.',
+            ],
         ],
     ),
 )]
@@ -73,7 +118,8 @@ final class UserGroupListController extends UserBaseController
     public function loadUserGroups(Request $request): RestValue
     {
         $restUserGroups = [];
-        if ($request->query->has('id') && is_int($id = $request->query->get('id'))) {
+        if ($request->query->has('id') && is_numeric($request->query->get('id'))) {
+            $id = $request->query->getInt('id');
             $userGroup = $this->userService->loadUserGroup($id, Language::ALL);
             $userGroupContentInfo = $userGroup->getVersionInfo()->getContentInfo();
 
@@ -94,7 +140,8 @@ final class UserGroupListController extends UserBaseController
                 ),
             ];
         } elseif ($request->query->has('roleId')) {
-            $restUserGroups = $this->loadUserGroupsAssignedToRole((int) $request->query->get('roleId'));
+            $roleId = is_numeric($request->query->get('roleId')) ? $request->query->getInt('roleId') : (int)$this->uriParser->getAttributeFromUri($request->query->getString('roleId'), 'roleId');
+            $restUserGroups = $this->loadUserGroupsAssignedToRole($roleId);
         } elseif ($request->query->has('remoteId')) {
             $restUserGroups = [
                 $this->loadUserGroupByRemoteId($request),

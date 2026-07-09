@@ -17,9 +17,60 @@ use Symfony\Component\HttpFoundation\Response;
     openapi: new Model\Operation(
         operationId: 'ibexa.rest.load_users',
         summary: 'List Users',
-        description: 'Load Users either for a given remote ID or Role.',
+        description: 'Load Users either for a given role ID, remote ID, login, or email. To use one of the available filter is mandatory. Filters can\'t be combined.',
         tags: [
             'User',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'roleId',
+                in: 'query',
+                description: 'Role directly assigned to the Users to load. (If the role is assigned to a user group, its users won\'t be returned. See GET /user/groups roleId filter.)',
+                required: false,
+                schema: [
+                    'type' => ['integer', 'string'],
+                    'description' => 'Role ID or Role Href',
+                ],
+                examples: new \ArrayObject([
+                    'id' => [
+                        'value' => 2,
+                        'summary' => 'Role ID',
+                    ],
+                    'href' => [
+                        'value' => '/api/ibexa/v2/user/roles/2',
+                        'summary' => 'Role Href',
+                    ],
+                ]),
+            ),
+            new Model\Parameter(
+                name: 'remoteId',
+                in: 'query',
+                description: 'Remote ID of the User to load.',
+                required: false,
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'login',
+                in: 'query',
+                description: 'Username of the User to load.',
+                required: false,
+                schema: [
+                    'type' => 'string',
+                    'example' => 'admin',
+                ],
+            ),
+            new Model\Parameter(
+                name: 'email',
+                in: 'query',
+                description: 'Email address of the User to load.',
+                required: false,
+                schema: [
+                    'type' => 'string',
+                    'example' => 'admin@link.invalid',
+                ],
+            ),
         ],
         responses: [
             Response::HTTP_OK => [
@@ -51,7 +102,10 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ],
             Response::HTTP_NOT_FOUND => [
-                'description' => 'If there are no visible Users matching the filter.',
+                'description' => 'If there are no visible Users matching the filter or the filter is missing.',
+            ],
+            Response::HTTP_NOT_ACCEPTABLE => [
+                'description' => 'The filter value is not acceptable.',
             ],
         ],
     ),
