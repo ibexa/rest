@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/urlwildcards',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_url_wildcard',
         summary: 'Create URL wildcard',
         description: 'Creates a new URL wildcard.',
         tags: [
@@ -31,37 +32,29 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the new URL wildcard is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The URL Wildcard input schema encoded in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The URL Wildcard input schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.UrlWildcardCreate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/UrlWildcardCreate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/POST/UrlWildcardCreate.xml.example',
-                ],
                 'application/vnd.ibexa.api.UrlWildcardCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UrlWildcardCreateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/POST/UrlWildcardCreate.json.example',
+                ],
+                'application/vnd.ibexa.api.UrlWildcardCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/UrlWildcardCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/POST/UrlWildcardCreate.xml.example',
                 ],
             ]),
         ),
@@ -69,17 +62,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_CREATED => [
                 'description' => 'URL wildcard created.',
                 'content' => [
-                    'application/vnd.ibexa.api.UrlWildcard+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UrlWildcard',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/wildcard_id/GET/UrlWildcard.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UrlWildcard+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlWildcardWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/wildcard_id/GET/UrlWildcard.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/POST/UrlWildcard.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UrlWildcard+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UrlWildcard',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/POST/UrlWildcard.xml.example',
                     ],
                 ],
             ],

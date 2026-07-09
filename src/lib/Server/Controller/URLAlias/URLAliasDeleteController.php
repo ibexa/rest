@@ -18,12 +18,22 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/urlaliases/{urlAliasId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_url_alias',
         summary: 'Delete URL alias',
         description: 'Deletes the provided URL alias.',
         tags: [
             'Url Alias',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
             new Model\Parameter(
                 name: 'urlAliasId',
                 in: 'path',

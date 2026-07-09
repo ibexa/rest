@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Controller\Bookmark;
 
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Bundle\Rest\ApiPlatform\Head;
 use Ibexa\Contracts\Core\Repository\BookmarkService;
@@ -20,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Head(
     uriTemplate: '/bookmark/{locationId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.is_bookmarked.head',
         summary: 'Check if Location is bookmarked',
         description: 'Checks if the given Location is bookmarked by the current user.',
         tags: [
@@ -31,19 +33,51 @@ use Symfony\Component\HttpFoundation\Response;
                 in: 'path',
                 required: true,
                 schema: [
-                    'type' => 'string',
+                    'type' => 'integer',
                 ],
             ),
         ],
         responses: [
             Response::HTTP_OK => [
-                'description' => 'OK - bookmarked.',
+                'description' => 'OK - the given Location is bookmarked.',
             ],
             Response::HTTP_UNAUTHORIZED => [
                 'description' => 'Error - the user is not authorized for the given Location.',
             ],
             Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the given Location does not exist / is not bookmarked.',
+                'description' => 'Error - the given Location is not bookmarked or does not exist.',
+            ],
+        ],
+    ),
+)]
+#[Get(
+    uriTemplate: '/bookmark/{locationId}',
+    openapi: new Model\Operation(
+        operationId: 'ibexa.rest.is_bookmarked.get',
+        summary: 'Check if Location is bookmarked',
+        description: 'Checks if the given Location is bookmarked by the current user.',
+        tags: [
+            'Bookmark',
+        ],
+        parameters: [
+            new Model\Parameter(
+                name: 'locationId',
+                in: 'path',
+                required: true,
+                schema: [
+                    'type' => 'integer',
+                ],
+            ),
+        ],
+        responses: [
+            Response::HTTP_OK => [
+                'description' => 'OK - the given Location is bookmarked.',
+            ],
+            Response::HTTP_UNAUTHORIZED => [
+                'description' => 'Error - the user is not authorized for the given Location.',
+            ],
+            Response::HTTP_NOT_FOUND => [
+                'description' => 'Error - the given Location is not bookmarked or does not exist.',
             ],
         ],
     ),
