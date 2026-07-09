@@ -18,21 +18,13 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/urlaliases/{urlAliasId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_url_alias',
         summary: 'Get URL alias',
         description: 'Returns the URL alias with the given ID.',
         tags: [
             'Url Alias',
         ],
         parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the URL alias is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
             new Model\Parameter(
                 name: 'urlAliasId',
                 in: 'path',
@@ -46,17 +38,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns the URL alias.',
                 'content' => [
-                    'application/vnd.ibexa.api.UrlAlias+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UrlAlias',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/url_alias_id/GET/UrlAlias.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UrlAlias+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlAliasWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/url_alias_id/GET/UrlAlias.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UrlAlias+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UrlAlias',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/url_alias_id/GET/UrlAlias.xml.example',
                     ],
                 ],
             ],

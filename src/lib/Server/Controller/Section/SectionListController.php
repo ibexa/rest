@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/sections',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.list_sections',
         summary: 'Get Sections',
         description: 'Returns a list of all Sections.',
         tags: [
@@ -28,18 +29,9 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the Section list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'If-None-Match',
                 in: 'header',
-                required: true,
+                required: false,
                 description: 'ETag',
                 schema: [
                     'type' => 'string',
@@ -48,18 +40,19 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the Section list is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.SectionList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/SectionList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/GET/SectionList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.SectionList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/SectionListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/GET/SectionList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.SectionList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/SectionList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/GET/SectionList.xml.example',
                     ],
                 ],
             ],

@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.update_version',
         summary: 'Update version',
         description: 'A specific draft is updated. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [
@@ -33,10 +34,10 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the updated version is returned in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -46,15 +47,6 @@ use Symfony\Component\HttpFoundation\Response;
                 in: 'header',
                 required: true,
                 description: 'Performs the patch only if the specified ETag is the current one.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The VersionUpdate schema encoded in XML or JSON format.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -77,34 +69,36 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The VersionUpdate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
+                'application/vnd.ibexa.api.VersionUpdate+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/VersionUpdateWrapper',
+                    ],
+                ],
                 'application/vnd.ibexa.api.VersionUpdate+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/VersionUpdate',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/PATCH/VersionUpdate.xml.example',
                 ],
-                'application/vnd.ibexa.api.VersionUpdate+json' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/VersionUpdateWrapper',
-                    ],
-                ],
             ]),
         ),
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the updated version is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Version+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Version',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/GET/Version.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Version+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/VersionWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/GET/Version.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Version+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Version',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/PATCH/Version.xml.example',
                     ],
                 ],
             ],

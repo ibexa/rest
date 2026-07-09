@@ -25,6 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/urlaliases',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_url_alias',
         summary: 'Create URL alias',
         description: 'Creates a URL alias.',
         tags: [
@@ -32,37 +33,29 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the created URL alias is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The URL alias input schema encoded in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The URL alias input schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.UrlAliasCreate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/UrlAliasCreate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/POST/UrlAliasCreate.xml.example',
-                ],
                 'application/vnd.ibexa.api.UrlAliasCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UrlAliasCreateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/POST/UrlAliasCreate.json.example',
+                ],
+                'application/vnd.ibexa.api.UrlAliasCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/UrlAliasCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/POST/UrlAliasCreate.xml.example',
                 ],
             ]),
         ),
@@ -70,17 +63,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_CREATED => [
                 'description' => 'URL alias created.',
                 'content' => [
-                    'application/vnd.ibexa.api.UrlAlias+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UrlAlias',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/url_alias_id/GET/UrlAlias.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UrlAlias+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlAliasWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/url_alias_id/GET/UrlAlias.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/POST/UrlAlias.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UrlAlias+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UrlAlias',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/POST/UrlAlias.xml.example',
                     ],
                 ],
             ],

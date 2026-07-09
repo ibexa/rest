@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/locations',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_location',
         summary: 'Create new Location for content item',
         description: 'Creates a new Location for the given content item.',
         tags: [
@@ -30,19 +31,10 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the new Location is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The LocationCreate schema encoded in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -57,35 +49,37 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The LocationCreate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.LocationCreate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/LocationCreate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/LocationCreate.xml.example',
-                ],
                 'application/vnd.ibexa.api.LocationCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/LocationCreateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/LocationCreate.json.example',
                 ],
+                'application/vnd.ibexa.api.LocationCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/LocationCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/LocationCreate.xml.example',
+                ],
             ]),
         ),
         responses: [
             Response::HTTP_CREATED => [
+                'description' => 'If set, the new Location is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Location+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Location',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Location+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LocationWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Location+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Location',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/locations/POST/Location.xml.example',
                     ],
                 ],
             ],
