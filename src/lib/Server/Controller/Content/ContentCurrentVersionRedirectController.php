@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/content/objects/{contentId}/currentversion',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.redirect_current_version',
         summary: 'Get current version',
         description: 'Redirects to the current version of the content item.',
         tags: [
@@ -33,18 +34,19 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'OK - returns the Version in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Version+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Version',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/GET/Version.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Version+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/VersionWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/GET/Version.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/currentversion/GET/Version.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Version+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Version',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/currentversion/GET/Version.xml.example',
                     ],
                 ],
             ],

@@ -25,6 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/views',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.views.create',
         summary: 'Search content',
         description: 'Executes a query and returns a View including the results.
 View input reflects the criteria model of the public PHP API.
@@ -34,42 +35,35 @@ Refer to [Search Criteria Reference](/en/latest/search/criteria_reference/search
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'The view in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The view input in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The view input in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.ViewInput+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/ViewInput',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/views/POST/ViewInput.xml.example',
-                ],
                 'application/vnd.ibexa.api.ViewInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ViewInputWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/views/POST/ViewInput.json.example',
                 ],
+                'application/vnd.ibexa.api.ViewInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ViewInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/views/POST/ViewInput.xml.example',
+                ],
             ]),
         ),
         responses: [
             Response::HTTP_OK => [
+                'description' => 'The view in XML or JSON format.',
                 'content' => [
                     'application/vnd.ibexa.api.View+xml; version=1.1' => [
                         'schema' => [

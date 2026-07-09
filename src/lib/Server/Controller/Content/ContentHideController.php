@@ -18,12 +18,22 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/hide',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.hide_content',
         summary: 'Hide content item',
         description: 'Makes or keep the content item invisible',
         tags: [
             'Objects',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
             new Model\Parameter(
                 name: 'contentId',
                 in: 'path',
@@ -33,6 +43,10 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ),
         ],
+        requestBody: new Model\RequestBody(
+            description: 'No payload required',
+            content: new \ArrayObject(),
+        ),
         responses: [
             Response::HTTP_NO_CONTENT => [
                 'description' => 'OK - Object item is hidden.',
@@ -44,9 +58,6 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - The content item was not found.',
             ],
         ],
-        requestBody: new Model\RequestBody(
-            content: new \ArrayObject(),
-        ),
     ),
 )]
 class ContentHideController extends RestController

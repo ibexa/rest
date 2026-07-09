@@ -16,12 +16,22 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/objects/{contentId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_content',
         summary: 'Delete Content',
         description: 'Deletes content item. If content item has multiple Locations, all of them will be deleted via delete a subtree.',
         tags: [
             'Objects',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
             new Model\Parameter(
                 name: 'contentId',
                 in: 'path',

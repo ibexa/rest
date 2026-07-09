@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.content.create_draft_from_version',
         summary: 'Create a draft from a version',
         description: 'The system creates a new draft as a copy of the given version. COPY or POST with header X-HTTP-Method-Override COPY.',
         tags: [
@@ -26,10 +27,10 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the updated version is returned in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -51,21 +52,25 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ),
         ],
+        requestBody: new Model\RequestBody(
+            description: 'No payload required',
+            content: new \ArrayObject(),
+        ),
         responses: [
             Response::HTTP_CREATED => [
                 'description' => 'Created.',
                 'content' => [
-                    'application/vnd.ibexa.api.Version+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Version',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/GET/Version.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Version+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/VersionWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/GET/Version.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Version+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Version',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/GET/Version.xml.example',
                     ],
                 ],
             ],
@@ -76,9 +81,6 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - the content item was not found.',
             ],
         ],
-        requestBody: new Model\RequestBody(
-            content: new \ArrayObject(),
-        ),
     ),
 )]
 class ContentDraftCreateFromVersionController extends RestController
