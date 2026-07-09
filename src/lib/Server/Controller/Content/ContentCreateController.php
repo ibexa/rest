@@ -27,6 +27,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_content',
         summary: 'Create content item',
         description: 'Creates a draft assigned to the authenticated user. If a different user ID is given in the input, the draft is assigned to the given user but this action requires special permissions for the authenticated user (this is useful for content staging where the transfer process does not have to authenticate with the user who created the content item in the source server). The user needs to publish the content item if it should be visible.',
         tags: [
@@ -34,60 +35,59 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'Content - If set, all information for the content item including the embedded current version is returned in XML or JSON format. ContentInfo - If set, all information for the content item (excluding the current version) is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The ContentCreate schema encoded in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The ContentCreate schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.ContentCreate+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/ContentCreate',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/POST/ContentCreate.xml.example',
-                ],
                 'application/vnd.ibexa.api.ContentCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentCreateWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/POST/ContentCreate.json.example',
                 ],
+                'application/vnd.ibexa.api.ContentCreate+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentCreate',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/POST/ContentCreate.xml.example',
+                ],
             ]),
         ),
         responses: [
             Response::HTTP_CREATED => [
+                'description' => 'Content - If set, all information for the content item including the embedded current version is returned in XML or JSON format. ContentInfo - If set, all information for the content item (excluding the current version) is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Content+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Content',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/GET/Content.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Content+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/GET/Content.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/POST/Content.json.example',
                     ],
-                    'application/vnd.ibexa.api.ContentInfo+xml' => [
+                    'application/vnd.ibexa.api.Content+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Content',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/POST/Content.xml.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentInfo+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentInfoWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/PATCH/ContentInfo.xml.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/POST/ContentInfo.json.example',
+                    ],
+                    'application/vnd.ibexa.api.ContentInfo+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentInfo',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/POST/ContentInfo.xml.example',
                     ],
                 ],
             ],

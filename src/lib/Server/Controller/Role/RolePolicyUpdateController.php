@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/roles/{roleId}/policies/{policyId}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.update_policy',
         summary: 'Update Policy',
         description: 'Updates a Policy. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [
@@ -31,19 +32,10 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the updated Policy is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'If set, the updated Policy is returned in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -67,34 +59,36 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'If set, the updated Policy is returned in XML or JSON format.',
             content: new \ArrayObject([
+                'application/vnd.ibexa.api.PolicyUpdate+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/PolicyUpdateWrapper',
+                    ],
+                ],
                 'application/vnd.ibexa.api.PolicyUpdate+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/PolicyUpdate',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/PATCH/PolicyUpdate.xml.example',
                 ],
-                'application/vnd.ibexa.api.PolicyUpdate+json' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/PolicyUpdateWrapper',
-                    ],
-                ],
             ]),
         ),
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the updated Policy is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Policy+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Policy',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/PATCH/Policy.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Policy+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/PolicyWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/GET/Policy.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Policy+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Policy',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/PATCH/Policy.xml.example',
                     ],
                 ],
             ],

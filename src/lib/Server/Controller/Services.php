@@ -17,35 +17,26 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/services/countries',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_country_list',
         summary: 'Countries list',
         description: 'Gives access to an ISO-3166 formatted list of world countries. It is useful when presenting a country options list from any application.',
         tags: [
             'Services',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the country list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the country list is returned in XML or JSON format.',
                 'content' => [
+                    'application/vnd.ibexa.api.CountriesList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/CountryListWrapper',
+                        ],
+                    ],
                     'application/vnd.ibexa.api.CountriesList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/CountryList',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/services/countries/GET/CountriesList.xml.example',
-                    ],
-                    'application/vnd.ibexa.api.CountriesList+json' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/CountryListWrapper',
-                        ],
                     ],
                 ],
             ],

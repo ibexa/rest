@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/roles/{id}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_role_draft',
         summary: 'Create Role Draft',
         description: 'Creates a new Role draft from an existing Role.',
         tags: [
@@ -30,19 +31,10 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the new user is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The RoleInput schema encoded in XML or JSON.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -56,20 +48,25 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ),
         ],
+        requestBody: new Model\RequestBody(
+            description: 'No payload required',
+            content: new \ArrayObject(),
+        ),
         responses: [
             Response::HTTP_CREATED => [
+                'description' => 'If set, the new user is returned in XML or JSON format.',
                 'content' => [
+                    'application/vnd.ibexa.api.RoleDraft+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleDraftWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/POST/RoleDraft.json.example',
+                    ],
                     'application/vnd.ibexa.api.RoleDraft+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleDraft',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/POST/RoleDraft.xml.example',
-                    ],
-                    'application/vnd.ibexa.api.RoleDraft+json' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/RoleDraftWrapper',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.json.example',
                     ],
                 ],
             ],
@@ -77,9 +74,6 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - the user is not authorized to create a Role or a Role draft',
             ],
         ],
-        requestBody: new Model\RequestBody(
-            content: new \ArrayObject(),
-        ),
     ),
 )]
 class RoleDraftCreateController extends RoleBaseController

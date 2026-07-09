@@ -20,12 +20,22 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/trash',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.empty_trash',
         summary: 'Empty Trash',
         description: 'Empties the Trash.',
         tags: [
             'Trash',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
         ],
         responses: [
             Response::HTTP_NO_CONTENT => [

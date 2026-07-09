@@ -17,12 +17,22 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/content/objects/{contentId}/versions/{versionNo}/translations/{languageCode}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_translation_from_draft',
         summary: 'Delete translation from version draft',
         description: 'Removes a translation from a version draft.',
         tags: [
             'Objects',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
             new Model\Parameter(
                 name: 'contentId',
                 in: 'path',

@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/objects/{contentId}/objectstates',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.set_object_states_for_content',
         summary: 'Set Object states of content item',
         description: 'Updates Object states of a content item. An Object state in the input overrides the state of the Object state group. PATCH or POST with header X-HTTP-Method-Override PATCH.',
         tags: [
@@ -31,19 +32,10 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the updated Object state is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The content item Object states input schema encoded in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -67,18 +59,19 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The content item Object states input schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.ContentObjectStates+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/ContentObjectStates',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.response.xml.example',
-                ],
                 'application/vnd.ibexa.api.ContentObjectStates+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentObjectStatesWrapper',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/GET/ContentObjectStates.json.example',
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.request.json.example',
+                ],
+                'application/vnd.ibexa.api.ContentObjectStates+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/ContentObjectStates',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.request.xml.example',
                 ],
             ]),
         ),
@@ -86,17 +79,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_NO_CONTENT => [
                 'description' => 'OK - Object state updated.',
                 'content' => [
+                    'application/vnd.ibexa.api.ContentObjectStates+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentObjectStatesWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.response.json.example',
+                    ],
                     'application/vnd.ibexa.api.ContentObjectStates+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentObjectStates',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.response.xml.example',
-                    ],
-                    'application/vnd.ibexa.api.ContentObjectStates+json' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentObjectStatesWrapper',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/GET/ContentObjectStates.json.example',
                     ],
                 ],
             ],

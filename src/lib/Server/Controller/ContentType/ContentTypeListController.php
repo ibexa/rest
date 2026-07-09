@@ -25,46 +25,36 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/types',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.list_content_types',
         summary: 'List content types',
         description: 'Returns a list of content types.',
         tags: [
             'Type',
         ],
-        parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the list of content type info objects or content types (including Field definitions) is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-        ],
         responses: [
             Response::HTTP_OK => [
                 'description' => 'OK - returns a list of content types.',
                 'content' => [
-                    'application/vnd.ibexa.api.ContentTypeInfoList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/ContentTypeInfoList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.ContentTypeInfoList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeInfoListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.json.example',
                     ],
-                    'application/vnd.ibexa.api.ContentTypeList+xml' => [
+                    'application/vnd.ibexa.api.ContentTypeInfoList+xml' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/ContentTypeList',
+                            '$ref' => '#/components/schemas/ContentTypeInfoList',
                         ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/GET/ContentTypeInfoList.xml.example',
                     ],
                     'application/vnd.ibexa.api.ContentTypeList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeListWrapper',
+                        ],
+                    ],
+                    'application/vnd.ibexa.api.ContentTypeList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/ContentTypeList',
                         ],
                     ],
                 ],

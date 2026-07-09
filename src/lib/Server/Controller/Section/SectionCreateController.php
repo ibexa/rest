@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/sections',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_section',
         summary: 'Create new Section',
         description: 'Creates a new Section.',
         tags: [
@@ -30,54 +31,47 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the new Section is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Content-Type',
-                in: 'header',
-                required: true,
-                description: 'The Section input schema encoded in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
             ),
         ],
         requestBody: new Model\RequestBody(
+            description: 'The Section input schema encoded in XML or JSON format.',
             content: new \ArrayObject([
-                'application/vnd.ibexa.api.SectionInput+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/SectionInput',
-                    ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/POST/SectionInput.xml.example',
-                ],
                 'application/vnd.ibexa.api.SectionInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/SectionInputWrapper',
                     ],
                     'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/POST/SectionInput.json.example',
                 ],
+                'application/vnd.ibexa.api.SectionInput+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/SectionInput',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/POST/SectionInput.xml.example',
+                ],
             ]),
         ),
         responses: [
             Response::HTTP_CREATED => [
+                'description' => 'If set, the new Section is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Section+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Section',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/section_id/PATCH/Section.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Section+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/SectionWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/section_id/PATCH/Section.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/POST/Section.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Section+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Section',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/POST/Section.xml.example',
                     ],
                 ],
             ],
