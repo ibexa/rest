@@ -19,21 +19,13 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/groups/{path}/roles/{roleId}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_role_assignment_for_user_group',
         summary: 'Load User Group Role Assignment',
         description: 'Returns a Role assignment of the given User Group.',
         tags: [
             'User Group',
         ],
         parameters: [
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the Role assignment list is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
             new Model\Parameter(
                 name: 'path',
                 in: 'path',
@@ -55,17 +47,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - returns a Role assignment of the given User Group.',
                 'content' => [
-                    'application/vnd.ibexa.api.RoleAssignment+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/RoleAssignment',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/role_id/GET/RoleAssignment.xml.example',
-                    ],
                     'application/vnd.ibexa.api.RoleAssignment+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleAssignmentWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/role_id/GET/RoleAssignment.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/roles/role_id/GET/RoleAssignment.json.example',
+                    ],
+                    'application/vnd.ibexa.api.RoleAssignment+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/RoleAssignment',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/roles/role_id/GET/RoleAssignment.xml.example',
                     ],
                 ],
             ],
