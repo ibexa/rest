@@ -21,12 +21,22 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/content/types/{contentTypeId}/draft/fieldDefinitions/{fieldDefinitionId}',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.remove_content_type_draft_field_definition',
         summary: 'Delete content type Draft Field definition',
         description: 'Deletes the provided Field definition.',
         tags: [
             'Type',
         ],
         parameters: [
+            new Model\Parameter(
+                name: 'X-CSRF-Token',
+                in: 'header',
+                required: true,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
+                schema: [
+                    'type' => 'string',
+                ],
+            ),
             new Model\Parameter(
                 name: 'contentTypeId',
                 in: 'path',
