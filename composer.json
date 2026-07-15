@@ -46,7 +46,6 @@
         "lexik/jwt-authentication-bundle": "^2.8"
     },
     "require-dev": {
-        "ibexa/ci-scripts": "^0.2@dev",
         "ibexa/doctrine-schema": "~4.6.x-dev",
         "ibexa/code-style": "^1.0",
         "ibexa/test-core": "^0.1.x-dev",
