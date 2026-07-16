@@ -7,7 +7,7 @@ env:
     PHP_INI_ENV_memory_limit: 512M
     COMPOSER_CACHE_DIR: ~/.composer/cache
     PROJECT_EDITION: oss
-    SETUP: "doc/docker/base-dev.yml:doc/docker/selenium.yml"
+    SETUP: "doc/docker/base-dev.yml"
     WEB_HOST: web
 
 jobs:
@@ -19,35 +19,46 @@ jobs:
             matrix:
                 include:
                     -   php: '7.4'
-                        node: 18
+                        node: 20
                     -   php: '8.3'
                         node: 22
         steps:
-            -   uses: actions/checkout@v6
+            -   uses: actions/checkout@v7
 
             -   name: Set project version
                 run: |
                     version=$(jq -r '.extra | ."branch-alias" | ."dev-main"' < composer.json)
                     echo "version=$version" >> $GITHUB_ENV
 
+            -   name: Generate token
+                id: generate_token
+                uses: actions/create-github-app-token@v3
+                with:
+                    client-id: ${{ secrets.AUTOMATION_CLIENT_ID }}
+                    private-key: ${{ secrets.AUTOMATION_CLIENT_SECRET }}
+                    owner: ${{ github.repository_owner }}
+
             -   name: Setup PHP Action
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php }}
                     coverage: none
-
-            -   name: Ignore unsolvable advisories for PHP versions past EOL
-                uses: ibexa/gh-workflows/actions/composer-audit-ignore@main
-                with:
-                    php-version: '${{ matrix.php }}'
+                    github-token: ${{ steps.generate_token.outputs.token }}
 
             -   name: Cache dependencies
-                uses: actions/cache@v4
+                uses: actions/cache@v6
                 with:
                     path: ${{ env.COMPOSER_CACHE_DIR }}
                     key: ${{ env.PROJECT_EDITION }}-${{ env.version }}-${{ github.sha }}
                     restore-keys: |
                         ${{ env.PROJECT_EDITION }}-${{ env.version }}
+
+            -   name: Add composer key for GitHub App
+                if: ${{ steps.generate_token.outputs.token != '' }}
+                run: |
+                    composer config github-oauth.github.com $GITHUB_TOKEN
+                env:
+                    GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
 
             -   name: Set up whole project using the tested dependency
                 run: |
@@ -60,7 +71,20 @@ jobs:
                     cd "$HOME/build/project"
                     docker compose --env-file=.env exec -T --user www-data app sh -c "APP_ENV=behat php bin/console ibexa:behat:create-language 'pol-PL' 'Polish (polski)'"
 
-            -   name: Run tests
+            -   name: Configure composer inside vendor/ibexa/rest
                 run: |
                     cd "$HOME/build/project"
-                    docker compose --env-file=.env exec -T --user www-data app sh -c "cd vendor/ibexa/rest && composer update && composer test-functional"
+                    docker compose --env-file=.env exec -T --user www-data app sh -c "
+                        cd vendor/ibexa/rest &&
+                        curl -fsSLO https://raw.githubusercontent.com/ibexa/ci-scripts/main/bin/_common/configure_composer_audit_ignores.sh &&
+                        bash configure_composer_audit_ignores.sh &&
+                        composer update
+                    "
+
+            -   name: Run tests inside vendor/ibexa/rest against configured instance
+                run: |
+                    cd "$HOME/build/project"
+                    docker compose --env-file=.env exec -T --user www-data -e EZP_TEST_REST_HOST=$WEB_HOST app sh -c "
+                        cd vendor/ibexa/rest &&
+                        composer test-functional
+                    "
