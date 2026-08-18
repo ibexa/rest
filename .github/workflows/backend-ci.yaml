@@ -12,7 +12,7 @@ jobs:
         name: Run code style check
         runs-on: "ubuntu-24.04"
         steps:
-            - uses: actions/checkout@v6
+            - uses: actions/checkout@v7
 
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
@@ -42,7 +42,7 @@ jobs:
                     - '8.4'
 
         steps:
-            - uses: actions/checkout@v6
+            - uses: actions/checkout@v7
 
             - name: Setup PHP Action
               uses: shivammathur/setup-php@v2
@@ -70,3 +70,4 @@ jobs:
     functional-tests:
         name: "REST functional tests"
         uses: ./.github/workflows/integration-tests-callable.yaml
+        secrets: inherit
