@@ -10,6 +10,7 @@ namespace Ibexa\Tests\Integration\Rest;
 
 use Hautelook\TemplatedUriBundle\HautelookTemplatedUriBundle;
 use Ibexa\Bundle\Rest\IbexaRestBundle;
+use Ibexa\Bundle\Test\Core\IbexaTestCoreBundle;
 use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Ibexa\Contracts\Test\Core\IbexaTestKernel as CoreIbexaTestKernel;
 use Ibexa\Rest\Server\Controller\Root as RestRootController;
@@ -22,6 +23,8 @@ final class IbexaTestKernel extends CoreIbexaTestKernel
     public function registerBundles(): iterable
     {
         yield from parent::registerBundles();
+
+        yield new IbexaTestCoreBundle();
 
         yield new HautelookTemplatedUriBundle();
         yield new IbexaRestBundle();
