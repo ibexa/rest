@@ -6,17 +6,14 @@
  */
 declare(strict_types=1);
 
-use Ibexa\Tests\Integration\Rest\IbexaTestKernel;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Ibexa\Contracts\Test\Core\Bootstrapper\Bootstrapper;
+use Ibexa\Contracts\Test\Core\Bootstrapper\DatabaseSchemaHook;
+use Ibexa\Contracts\Test\Core\Bootstrapper\FixtureHook;
 
 chdir(dirname(__DIR__, 2));
 
-$kernel = new IbexaTestKernel('test', true);
-$kernel->boot();
-
-$application = new Application($kernel);
-$application->setAutoExit(false);
-
-// Skipping database initialization until really needed by integration tests
-
-$kernel->shutdown();
+(new Bootstrapper())->bootstrap(null, [
+    Bootstrapper::class => [Bootstrapper::OPTION_PREPARE_DATABASE => false],
+    DatabaseSchemaHook::class => [DatabaseSchemaHook::OPTION_LOAD_SCHEMA => false],
+    FixtureHook::class => [FixtureHook::OPTION_LOAD_FIXTURES => false],
+]);
