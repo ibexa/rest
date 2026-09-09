@@ -401,11 +401,19 @@ services:
         tags:
             - { name: ibexa.rest.input.handler, format: xml }
 
-    Ibexa\Bundle\Core\Routing\DefaultRouter:
-        class: Ibexa\Bundle\Core\Routing\DefaultRouter
+    # Templated (RFC 6570) URI router. It is wrapped in the SiteAccess-aware router decorator, like router.default.
+    ibexa.rest.templated_router.inner:
         parent: hautelook.router.template
         calls:
             - [ setOption, [ strict_requirements, ~ ] ]
+
+    Ibexa\Bundle\Core\Routing\DefaultRouter:
+        class: Ibexa\Bundle\Core\Routing\DefaultRouter
+        arguments:
+            $innerRouter: '@ibexa.rest.templated_router.inner'
+            $siteAccessRouter: '@Ibexa\Core\MVC\Symfony\SiteAccess\Router'
+            $nonSiteAccessAwareRoutes: '%ibexa.default_router.non_site_access_aware_routes%'
+            $logger: '@?logger'
 
     Ibexa\Bundle\Rest\Routing\ExpressionLanguage\ContentTypeHeaderMatcherExpressionFunction:
         arguments:
