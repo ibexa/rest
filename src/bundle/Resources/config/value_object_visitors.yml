@@ -3,7 +3,7 @@ services:
         calls:
             - [ setUriParser, [ '@Ibexa\Contracts\Rest\UriParser\UriParserInterface' ] ]
             - [ setRouter, [ "@router" ] ]
-            - [ setTemplateRouter, [ '@Ibexa\Bundle\Core\Routing\DefaultRouter'] ]
+            - [ setTemplateRouter, [ '@ibexa.rest.templated_router' ] ]
 
     # Errors
     ibexa.rest.output.value_object_visitor.InvalidArgumentException:
