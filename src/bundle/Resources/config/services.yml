@@ -63,7 +63,7 @@ services:
             - [setRequestStack, ["@request_stack"]]
 
     Ibexa\Rest\Server\Service\ExpressionRouterRootResourceBuilder:
-         arguments: ["@router", '@Ibexa\Bundle\Core\Routing\DefaultRouter', '@ibexa.config.resolver']
+         arguments: ["@router", '@ibexa.rest.templated_router', '@ibexa.config.resolver']
 
     Ibexa\Rest\Server\Controller:
         autowire: true
@@ -401,11 +401,28 @@ services:
         tags:
             - { name: ibexa.rest.input.handler, format: xml }
 
-    Ibexa\Bundle\Core\Routing\DefaultRouter:
-        class: Ibexa\Bundle\Core\Routing\DefaultRouter
+    # Templated (RFC 6570) URI router. It is wrapped in the SiteAccess-aware router decorator, like router.default.
+    ibexa.rest.templated_router.inner:
         parent: hautelook.router.template
         calls:
             - [ setOption, [ strict_requirements, ~ ] ]
+
+    ibexa.rest.templated_router:
+        class: Ibexa\Bundle\Core\Routing\DefaultRouter
+        arguments:
+            $innerRouter: '@ibexa.rest.templated_router.inner'
+            $siteAccessRouter: '@Ibexa\Core\MVC\Symfony\SiteAccess\Router'
+            $nonSiteAccessAwareRoutes: '%ibexa.default_router.non_site_access_aware_routes%'
+            $logger: '@?logger'
+
+    # BC alias: the templated router used to be registered under core's class name, which also captured
+    # autowiring of Ibexa\Bundle\Core\Routing\DefaultRouter. Inject ibexa.rest.templated_router explicitly instead.
+    Ibexa\Bundle\Core\Routing\DefaultRouter:
+        alias: ibexa.rest.templated_router
+        deprecated:
+            package: ibexa/rest
+            version: '6.0'
+            message: 'The "%alias_id%" service alias is deprecated, use "ibexa.rest.templated_router" instead.'
 
     Ibexa\Bundle\Rest\Routing\ExpressionLanguage\ContentTypeHeaderMatcherExpressionFunction:
         arguments:
