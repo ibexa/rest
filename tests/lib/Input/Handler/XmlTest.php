@@ -9,6 +9,7 @@ namespace Ibexa\Tests\Rest\Input\Handler;
 
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Rest\Input\Handler\Xml;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -46,9 +47,7 @@ class XmlTest extends TestCase
         return $fixtures;
     }
 
-    /**
-     * @dataProvider getXmlFixtures
-     */
+    #[DataProvider('getXmlFixtures')]
     public function testConvertXml(string $xml, mixed $expectation): void
     {
         $handler = new Xml();

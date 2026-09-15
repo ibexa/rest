@@ -10,9 +10,10 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Core\Repository\Values\Content\URLAlias;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\URLAliasRefList;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class URLAliasRefListTest extends ValueObjectVisitorBaseTest
+class URLAliasRefListTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): \DOMDocument
     {
@@ -54,33 +55,25 @@ class URLAliasRefListTest extends ValueObjectVisitorBaseTest
         return $dom;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testUrlAliasRefListHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UrlAliasRefList[@href="/some/path"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testUrlAliasRefListMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UrlAliasRefList[@media-type="application/vnd.ibexa.api.UrlAliasRefList+xml"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testUrlAliasHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UrlAliasRefList/UrlAlias[@href="/content/urlaliases/some-id"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testUrlAliasMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UrlAliasRefList/UrlAlias[@media-type="application/vnd.ibexa.api.UrlAlias+xml"]');

@@ -11,9 +11,9 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\DatePublished;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass;
-use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
+use Ibexa\Tests\Rest\Server\Input\Parser\BaseTestCase;
 
-class DataKeyValueObjectClassTest extends BaseTest
+class DataKeyValueObjectClassTest extends BaseTestCase
 {
     /**
      * Tests the DataKeyValueObjectClass parser.

@@ -7,13 +7,15 @@
 
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
+
 final class ViewTest extends TestCase
 {
     /**
      * Covers POST /views.
-     *
-     * @dataProvider provideAcceptHeaders
      */
+    #[DataProvider('provideAcceptHeaders')]
     public function testViewRequestWithOrStatement(
         string $acceptHeader
     ): void {
@@ -53,11 +55,9 @@ XML;
 
     /**
      * Covers POST /views.
-     *
-     * @dataProvider provideAcceptHeaders
-     *
-     * @depends testViewRequestWithOrStatement
      */
+    #[Depends('testViewRequestWithOrStatement')]
+    #[DataProvider('provideAcceptHeaders')]
     public function testViewRequestWithAndStatement(
         string $acceptHeader
     ): void {

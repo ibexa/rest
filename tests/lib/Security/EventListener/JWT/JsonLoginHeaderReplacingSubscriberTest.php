@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Rest\Security\EventListener\JWT;
 
 use Ibexa\Rest\Security\EventListener\JWT\JsonLoginHeaderReplacingSubscriber;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,9 +35,7 @@ final class JsonLoginHeaderReplacingSubscriberTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider dataProviderForTestReplacingJsonHeader
-     */
+    #[DataProvider('dataProviderForTestReplacingJsonHeader')]
     public function testReplacingJsonHeader(
         string $headerToReplace,
         string $expectedHeader,
@@ -56,7 +55,7 @@ final class JsonLoginHeaderReplacingSubscriberTest extends TestCase
     /**
      * @return iterable<string, array{string, string}>
      */
-    public function dataProviderForTestReplacingJsonHeader(): iterable
+    public static function dataProviderForTestReplacingJsonHeader(): iterable
     {
         yield 'replacing REST header to the required one' => [
             'application/vnd.ibexa.api.JWTInput+json',

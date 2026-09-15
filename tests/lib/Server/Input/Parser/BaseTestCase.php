@@ -10,13 +10,13 @@ namespace Ibexa\Tests\Rest\Server\Input\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Ibexa\Rest\Input;
-use Ibexa\Tests\Rest\Server\BaseTest as ParentBaseTest;
+use Ibexa\Tests\Rest\Server\BaseTestCase as ParentBaseTest;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Base test for input parsers.
  */
-abstract class BaseTest extends ParentBaseTest
+abstract class BaseTestCase extends ParentBaseTest
 {
     protected ParsingDispatcher & MockObject $parsingDispatcherMock;
 

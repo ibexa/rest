@@ -8,6 +8,7 @@
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
 class ObjectStateTest extends RESTFunctionalTestCase
 {
@@ -55,9 +56,8 @@ XML;
      * Covers POST /content/objectstategroups/{objectStateGroupId}/objectstates.
      *
      * @return string Object state href
-     *
-     * @depends testCreateObjectStateGroup
      */
+    #[Depends('testCreateObjectStateGroup')]
     public function testCreateObjectState($objectStateGroupHref)
     {
         $body = <<< XML
@@ -96,9 +96,8 @@ XML;
 
     /**
      * Covers GET /content/objectstategroups/{objectStateGroupId}.
-     *
-     * @depends testCreateObjectStateGroup
      */
+    #[Depends('testCreateObjectStateGroup')]
     public function testLoadObjectStateGroup(string $objectStateGroupHref): void
     {
         $response = $this->sendHttpRequest(
@@ -110,9 +109,8 @@ XML;
 
     /**
      * Covers GET /content/objectstategroups/{objectStateGroupId}/objectstates/{objectStateId}.
-     *
-     * @depends testCreateObjectState
      */
+    #[Depends('testCreateObjectState')]
     public function testLoadObjectState(string $objectStateHref): void
     {
         $response = $this->sendHttpRequest(
@@ -136,9 +134,8 @@ XML;
 
     /**
      * Covers GET /content/objectstategroups/{objectStateGroupId}/objectstates.
-     *
-     * @depends testCreateObjectStateGroup
      */
+    #[Depends('testCreateObjectStateGroup')]
     public function testLoadObjectStates($objectStateGroupHref): void
     {
         $response = $this->sendHttpRequest(
@@ -151,10 +148,10 @@ XML;
     /**
      * Covers PATCH /content/objects/{contentId}/objectstates.
      *
-     * @depends testCreateObjectState
      *
      * @return string The created folder content href
      */
+    #[Depends('testCreateObjectState')]
     public function testSetObjectStatesForContent($objectStateHref)
     {
         $folder = $this->createFolder(__FUNCTION__, '/api/ibexa/v2/content/locations/1/2');
@@ -183,9 +180,8 @@ XML;
 
     /**
      * Covers GET /content/objects/{contentId}/objectstates.
-     *
-     * @depends testSetObjectStatesForContent
      */
+    #[Depends('testSetObjectStatesForContent')]
     public function testGetObjectStatesForContent($contentHref): void
     {
         $response = $this->sendHttpRequest(
@@ -197,9 +193,8 @@ XML;
 
     /**
      * Covers PATCH /content/objectstategroups/{objectStateGroupId}/objectstates/{objectStateId}.
-     *
-     * @depends testCreateObjectState
      */
+    #[Depends('testCreateObjectState')]
     public function testUpdateObjectState(string $objectStateHref): void
     {
         $body = <<< XML
@@ -229,9 +224,8 @@ XML;
 
     /**
      * Covers PATCH /content/objectstategroups/{objectStateGroupId}.
-     *
-     * @depends testCreateObjectStateGroup
      */
+    #[Depends('testCreateObjectStateGroup')]
     public function testUpdateObjectStateGroup(string $objectStateGroupHref): void
     {
         $body = <<< XML
@@ -261,9 +255,8 @@ XML;
 
     /**
      * Covers DELETE.
-     *
-     * @depends testCreateObjectState
      */
+    #[Depends('testCreateObjectState')]
     public function testDeleteObjectState(string $objectStateHref): void
     {
         $response = $this->sendHttpRequest(
@@ -275,9 +268,8 @@ XML;
 
     /**
      * Covers DELETE /content/objectstategroups/{objectStateGroupId}.
-     *
-     * @depends testCreateObjectStateGroup
      */
+    #[Depends('testCreateObjectStateGroup')]
     public function testDeleteObjectStateGroup(string $objectStateGroupHref): void
     {
         $response = $this->sendHttpRequest(

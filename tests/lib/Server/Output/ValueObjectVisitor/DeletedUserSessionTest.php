@@ -9,11 +9,11 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\DeletedUserSession;
 use Ibexa\Rest\Server\Values;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 
-class DeletedUserSessionTest extends ValueObjectVisitorBaseTest
+class DeletedUserSessionTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): void
     {

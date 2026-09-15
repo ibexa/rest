@@ -11,9 +11,10 @@ use Ibexa\Contracts\Core\Repository\Values\User\Policy;
 use Ibexa\Core\Repository\Values\User;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\PolicyList;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class PolicyListTest extends ValueObjectVisitorBaseTest
+class PolicyListTest extends ValueObjectVisitorBaseTestCase
 {
     /**
      * Test the PolicyList visitor.
@@ -42,9 +43,8 @@ class PolicyListTest extends ValueObjectVisitorBaseTest
 
     /**
      * Test if result contains PolicyList element.
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsPolicyListElement(string $result): void
     {
         $this->assertXMLTag(
@@ -59,9 +59,8 @@ class PolicyListTest extends ValueObjectVisitorBaseTest
 
     /**
      * Test if result contains PolicyList element attributes.
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsPolicyListAttributes(string $result): void
     {
         $this->assertXMLTag(

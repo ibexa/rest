@@ -12,6 +12,7 @@ use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestContent;
 use Ibexa\Rest\Server\Values\RestLocation;
+use PHPUnit\Framework\Attributes\Depends;
 
 class RestLocationRootNodeTest extends RestLocationTest
 {
@@ -98,9 +99,8 @@ class RestLocationRootNodeTest extends RestLocationTest
 
     /**
      * Test if result contains id value element.
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsIdValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -116,9 +116,8 @@ class RestLocationRootNodeTest extends RestLocationTest
 
     /**
      * Test if result contains ParentLocation element.
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsParentLocationElement(string $result): void
     {
         $this->assertXMLTag(
@@ -133,9 +132,8 @@ class RestLocationRootNodeTest extends RestLocationTest
 
     /**
      * Test if result contains ParentLocation element attributes.
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsParentLocationAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -151,9 +149,8 @@ class RestLocationRootNodeTest extends RestLocationTest
 
     /**
      * Test if result contains Location element attributes.
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsLocationAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -172,9 +169,8 @@ class RestLocationRootNodeTest extends RestLocationTest
 
     /**
      * Test if result contains Children element attributes.
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsChildrenAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -193,9 +189,8 @@ class RestLocationRootNodeTest extends RestLocationTest
 
     /**
      * Test if result contains pathString value element.
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsPathStringValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -211,9 +206,8 @@ class RestLocationRootNodeTest extends RestLocationTest
 
     /**
      * Test if result contains Content element attributes.
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsUrlAliasesTagAttributes(string $result): void
     {
         $this->assertXMLTag(

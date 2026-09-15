@@ -13,9 +13,10 @@ use DOMDocument;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-abstract class BaseContentValueObjectVisitorTestCase extends ValueObjectVisitorBaseTest
+abstract class BaseContentValueObjectVisitorTestCase extends ValueObjectVisitorBaseTestCase
 {
     abstract public function testVisitWithoutEmbeddedVersion(): DOMDocument;
 
@@ -45,113 +46,85 @@ abstract class BaseContentValueObjectVisitorTestCase extends ValueObjectVisitorB
         );
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testNameCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, sprintf('/%s/name[text()="Sindelfingen"]', $this->getXPathFirstElementName()));
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testVersionsHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, sprintf('/%s/Versions[@href="/content/objects/22/versions"]', $this->getXPathFirstElementName()));
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testVersionsMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, sprintf('/%s/Versions[@media-type="application/vnd.ibexa.api.VersionList+xml"]', $this->getXPathFirstElementName()));
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testSectionHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, sprintf('/%s/Section[@href="/content/sections/23"]', $this->getXPathFirstElementName()));
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testSectionMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, sprintf('/%s/Section[@media-type="application/vnd.ibexa.api.Section+xml"]', $this->getXPathFirstElementName()));
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testMainLocationHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, sprintf('/%s/MainLocation[@href="/content/locations/1/2/23"]', $this->getXPathFirstElementName()));
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testMainLocationMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, sprintf('/%s/MainLocation[@media-type="application/vnd.ibexa.api.Location+xml"]', $this->getXPathFirstElementName()));
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testLocationsHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, sprintf('/%s/Locations[@href="/content/objects/22/locations"]', $this->getXPathFirstElementName()));
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testLocationsMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, sprintf('/%s/Locations[@media-type="application/vnd.ibexa.api.LocationList+xml"]', $this->getXPathFirstElementName()));
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testOwnerHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, sprintf('/%s/Owner[@href="/user/users/24"]', $this->getXPathFirstElementName()));
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testOwnerMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, sprintf('/%s/Owner[@media-type="application/vnd.ibexa.api.User+xml"]', $this->getXPathFirstElementName()));
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testLastModificationDateCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, sprintf('/%s/lastModificationDate[text()="2012-09-05T15:27:00+02:00"]', $this->getXPathFirstElementName()));
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testMainLanguageCodeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, sprintf('/%s/mainLanguageCode[text()="eng-US"]', $this->getXPathFirstElementName()));
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testAlwaysAvailableCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, sprintf('/%s/alwaysAvailable[text()="true"]', $this->getXPathFirstElementName()));

@@ -14,13 +14,12 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Field as ApiField;
 use Ibexa\Rest\FieldTypeProcessorRegistry;
 use Ibexa\Rest\Output\FieldTypeSerializer;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\Field;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 
-/**
- * @covers \Ibexa\Rest\Server\Output\ValueObjectVisitor\Field
- */
-final class FieldTest extends ValueObjectVisitorBaseTest
+#[CoversClass(\Ibexa\Rest\Server\Output\ValueObjectVisitor\Field::class)]
+final class FieldTest extends ValueObjectVisitorBaseTestCase
 {
     private FieldTypeService & MockObject $fieldTypeService;
 

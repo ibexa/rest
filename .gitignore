@@ -3,4 +3,6 @@
 .php-cs-fixer.cache
 composer.lock
 /.phpunit.result.cache
+/.phpunit.cache/
 /var
+/test.db

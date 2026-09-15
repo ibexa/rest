@@ -8,8 +8,11 @@
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\Depends;
 use Psr\Http\Message\ResponseInterface;
 
+#[CoversMethod(\Ibexa\Rest\Server\Controller\Content\ContentCurrentVersionRedirectController::class, 'redirectCurrentVersion')]
 class ContentTest extends RESTFunctionalTestCase
 {
     /**
@@ -66,11 +69,10 @@ XML;
     }
 
     /**
-     * @depends testCreateContent
-     * Covers PUBLISH /content/objects/<contentId>/versions/<versionNumber>
-     *
      * @return string REST content ID
+     * Covers PUBLISH /content/objects/<contentId>/versions/<versionNumber>
      */
+    #[Depends('testCreateContent')]
     public function testPublishContent($restContentHref)
     {
         $response = $this->sendHttpRequest(
@@ -82,9 +84,9 @@ XML;
     }
 
     /**
-     * @depends testPublishContent
-     * Covers GET /content/objects?remoteId=<remoteId>
+     * Covers GET /content/objects?remoteId=<remoteId>.
      */
+    #[Depends('testPublishContent')]
     public function testRedirectContent($restContentHref): void
     {
         $response = $this->sendHttpRequest(
@@ -95,9 +97,7 @@ XML;
         self::assertEquals($response->getHeader('Location')[0], $restContentHref);
     }
 
-    /**
-     * @depends testPublishContent
-     */
+    #[Depends('testPublishContent')]
     public function testLoadContent(string $restContentHref): void
     {
         $response = $this->sendHttpRequest(
@@ -108,9 +108,7 @@ XML;
         // @todo test data a bit ?
     }
 
-    /**
-     * @depends testPublishContent
-     */
+    #[Depends('testPublishContent')]
     public function testUpdateContentMetadata(string $restContentHref): void
     {
         $string = $this->addTestSuffix(__FUNCTION__);
@@ -134,9 +132,7 @@ XML;
         // @todo test data
     }
 
-    /**
-     * @depends testPublishContent
-     */
+    #[Depends('testPublishContent')]
     public function testCreateDraftFromVersion(string $restContentHref): string
     {
         $response = $this->sendHttpRequest(
@@ -150,13 +146,10 @@ XML;
     }
 
     /**
-     * @depends testPublishContent
-     * Covers GET /content/objects/<contentId>/currentversion
-     *
-     * @covers \Ibexa\Rest\Server\Controller\Content::redirectCurrentVersion
-     *
      * @throws \Psr\Http\Client\ClientException
+     * Covers GET /content/objects/<contentId>/currentversion
      */
+    #[Depends('testPublishContent')]
     public function testRedirectCurrentVersion(string $restContentHref): void
     {
         $response = $this->sendHttpRequest(
@@ -169,9 +162,9 @@ XML;
     }
 
     /**
-     * @depends testCreateDraftFromVersion
-     * Covers GET /content/objects/<contentId>/versions/<versionNumber>
+     * Covers GET /content/objects/<contentId>/versions/<versionNumber>.
      */
+    #[Depends('testCreateDraftFromVersion')]
     public function testLoadContentVersion(string $restContentVersionHref): void
     {
         $response = $this->sendHttpRequest(
@@ -186,10 +179,10 @@ XML;
     /**
      * Covers COPY /content/objects/<contentId>.
      *
-     * @depends testPublishContent
      *
      * @return string the copied content href
      */
+    #[Depends('testPublishContent')]
     public function testCopyContent(string $restContentHref): string
     {
         $testContent = $this->loadContent($restContentHref);
@@ -217,9 +210,8 @@ XML;
 
     /**
      * Covers POST /content/objects/<contentId>.
-     *
-     * @depends testPublishContent
      */
+    #[Depends('testPublishContent')]
     public function testCopy(string $restContentHref): void
     {
         $request = $this->createHttpRequest(
@@ -240,9 +232,8 @@ XML;
 
     /**
      * Covers DELETE /content/objects/<versionNumber>.
-     *
-     * @depends testCopyContent
      */
+    #[Depends('testCopyContent')]
     public function testDeleteContent(string $restContentHref): void
     {
         self::markTestSkipped("Fails as the content created by copyContent isn't found");
@@ -254,9 +245,9 @@ XML;
     }
 
     /**
-     * @depends testPublishContent
-     * Covers GET /content/objects/<contentId>/versions
+     * Covers GET /content/objects/<contentId>/versions.
      */
+    #[Depends('testPublishContent')]
     public function testLoadContentVersions($restContentHref): void
     {
         $response = $this->sendHttpRequest(
@@ -267,13 +258,12 @@ XML;
     }
 
     /**
-     * @depends testPublishContent
-     *
      * @param string $restContentHref /content/objects/<contentId>
      * Covers COPY /content/objects/<contentId>/currentversion
      *
      * @return string the ID of the created version (/content/objects/<contentId>/versions/<versionNumber>
      */
+    #[Depends('testPublishContent')]
     public function testCreateDraftFromCurrentVersion($restContentHref)
     {
         $response = $this->sendHttpRequest(
@@ -287,11 +277,10 @@ XML;
     }
 
     /**
-     * @depends testCreateDraftFromCurrentVersion
-     *
      * @param string $restContentVersionHref /api/ibexa/v2/content/objects/<contentId>/versions>/<versionNumber>
      * Covers DELETE /api/ibexa/v2/content/objects/<contentId>/versions>/<versionNumber>
      */
+    #[Depends('testCreateDraftFromCurrentVersion')]
     public function testDeleteContentVersion(string $restContentVersionHref): void
     {
         $response = $this->sendHttpRequest(
@@ -302,11 +291,10 @@ XML;
     }
 
     /**
-     * @depends testCreateDraftFromVersion
-     * Covers PATCH /content/objects/<contentId>/versions>/<versionNumber>
-     *
      * @param string $restContentVersionHref /content/objects/<contentId>/versions>/<versionNumber>
+     * Covers PATCH /content/objects/<contentId>/versions>/<versionNumber>
      */
+    #[Depends('testCreateDraftFromVersion')]
     public function testUpdateVersion(string $restContentVersionHref): void
     {
         $xml = <<< XML
@@ -334,9 +322,9 @@ XML;
     }
 
     /**
-     * @depends testPublishContent
-     * Covers GET /content/objects/<contentId>/relations
+     * Covers GET /content/objects/<contentId>/relations.
      */
+    #[Depends('testPublishContent')]
     public function testRedirectCurrentVersionRelations($restContentHref): void
     {
         $response = $this->sendHttpRequest(
@@ -349,9 +337,9 @@ XML;
     }
 
     /**
-     * @depends testCreateDraftFromVersion
-     * Covers GET /content/objects/<contentId>/versions/<versionNumber>/relations
+     * Covers GET /content/objects/<contentId>/versions/<versionNumber>/relations.
      */
+    #[Depends('testCreateDraftFromVersion')]
     public function testLoadVersionRelations($restContentVersionHref): void
     {
         $response = $this->sendHttpRequest(
@@ -362,11 +350,10 @@ XML;
     }
 
     /**
-     * @depends testCreateDraftFromVersion
-     * Covers POST /content/objects/<contentId>/versions/<versionNumber>/relations
-     *
      * @return string created relation HREF (/content/objects/<contentId>/versions/<versionNumber>/relations/<relationId>
+     * Covers POST /content/objects/<contentId>/versions/<versionNumber>/relations
      */
+    #[Depends('testCreateDraftFromVersion')]
     public function testCreateRelation($restContentVersionHref)
     {
         $content = <<< XML
@@ -393,9 +380,9 @@ XML;
     }
 
     /**
-     * @depends testCreateRelation
-     * Covers GET /content/objects/<contentId>/versions/<versionNo>/relations/<relationId>
+     * Covers GET /content/objects/<contentId>/versions/<versionNo>/relations/<relationId>.
      */
+    #[Depends('testCreateRelation')]
     public function testLoadVersionRelation(string $restContentRelationHref): void
     {
         $response = $this->sendHttpRequest(
@@ -437,9 +424,8 @@ XML;
 
     /**
      * Covers DELETE /content/objects/<contentId>/versions/<versionNo>/translations/<languageCode>.
-     *
-     * @depends testCreateDraftFromVersion
      */
+    #[Depends('testCreateDraftFromVersion')]
     public function testDeleteTranslationFromDraft(string $restContentVersionHref): void
     {
         // create pol-PL Translation
@@ -468,9 +454,8 @@ XML;
      *
      * Covers DELETE /content/objects/<contentId>/versions/<versionNo>/translations/<languageCode>.
      * Covers GET /content/objects/<contentId>/versions
-     *
-     * @depends testCreateDraftFromVersion
      */
+    #[Depends('testCreateDraftFromVersion')]
     public function testLoadContentVersionsProvidesDeleteTranslationFromDraftResourceLink(string $restContentVersionHref): void
     {
         $translationToDelete = 'pol-PL';
@@ -604,9 +589,8 @@ XML;
      * Test that deleting content which has Version(s) with single Translation being deleted is supported.
      *
      * Covers DELETE /content/objects/<contentId>/translations/<languageCode>.
-     *
-     * @depends testDeleteTranslation
      */
+    #[Depends('testDeleteTranslation')]
     public function testDeleteTranslationOfContentWithSingleTranslationVersion(string $restContentHref): void
     {
         // create draft independent from other tests

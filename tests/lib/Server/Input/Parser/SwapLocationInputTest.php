@@ -12,7 +12,7 @@ use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Rest\Server\Input\Parser\SwapLocationInput;
 use Symfony\Component\Validator\Validation;
 
-final class SwapLocationInputTest extends AbstractDestinationLocationInputTest
+final class SwapLocationInputTest extends AbstractDestinationLocationInputTestCase
 {
     private const string PARSER = 'SwapLocationInput';
 

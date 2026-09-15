@@ -11,9 +11,10 @@ use Ibexa\Core\Repository\Values\Content;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RelationList;
 use Ibexa\Rest\Server\Values\RestRelation;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class RelationListTest extends ValueObjectVisitorBaseTest
+class RelationListTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -46,9 +47,7 @@ class RelationListTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsRelationsElement(string $result): void
     {
         $this->assertXMLTag(
@@ -61,9 +60,7 @@ class RelationListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsRelationsAttributes(string $result): void
     {
         $this->assertXMLTag(

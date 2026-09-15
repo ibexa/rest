@@ -14,7 +14,7 @@ use Ibexa\Core\Repository\ContentTypeService;
 use Ibexa\Rest\Server\Input\Parser\ContentTypeUpdate;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class ContentTypeUpdateTest extends BaseTest
+class ContentTypeUpdateTest extends BaseTestCase
 {
     public function testParse(): void
     {

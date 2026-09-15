@@ -10,12 +10,12 @@ namespace Ibexa\Tests\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\Exceptions\OutputGeneratorException;
 use Ibexa\Rest\Output\Generator\Json;
 use Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator;
-use Ibexa\Tests\Rest\Output\GeneratorTest;
+use Ibexa\Tests\Rest\Output\GeneratorTestCase;
 
 /**
  * Json output generator test class.
  */
-class JsonTest extends GeneratorTest
+class JsonTest extends GeneratorTestCase
 {
     protected $generator;
 
@@ -301,7 +301,7 @@ class JsonTest extends GeneratorTest
     {
         if (!isset($this->generator)) {
             $this->generator = new Json(
-                $this->createMock(FieldTypeHashGenerator::class)
+                $this->createStub(FieldTypeHashGenerator::class)
             );
         }
 

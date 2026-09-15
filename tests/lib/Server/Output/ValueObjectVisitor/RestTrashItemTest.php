@@ -12,9 +12,10 @@ use Ibexa\Core\Repository\Values\Content\TrashItem;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestContent;
 use Ibexa\Rest\Server\Values\RestTrashItem;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class RestTrashItemTest extends ValueObjectVisitorBaseTest
+class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -90,9 +91,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsTrashItemElement(string $result): void
     {
         $this->assertXMLTag(
@@ -108,9 +107,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsTrashItemAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -127,9 +124,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentInfoElement(string $result): void
     {
         $this->assertXMLTag(
@@ -142,9 +137,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentInfoAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -161,9 +154,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsIdValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -176,9 +167,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsPriorityValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -191,9 +180,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsHiddenValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -206,9 +193,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsInvisibleValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -221,9 +206,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsRemoteIdValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -236,9 +219,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsParentLocationElement(string $result): void
     {
         $this->assertXMLTag(
@@ -250,9 +231,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsParentLocationAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -268,9 +247,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsPathStringValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -283,9 +260,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsDepthValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -298,9 +273,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsChildCountValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -313,9 +286,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentElement(string $result): void
     {
         $this->assertXMLTag(
@@ -327,9 +298,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -345,9 +314,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsSortFieldValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -360,9 +327,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsSortOrderValueElement(string $result): void
     {
         $this->assertXMLTag(

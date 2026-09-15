@@ -9,9 +9,9 @@ namespace Ibexa\Tests\Rest\Output\Generator\Xml;
 
 use Ibexa\Rest\Output\Generator\Xml;
 use Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator;
-use Ibexa\Tests\Rest\Output\Generator\FieldTypeHashGeneratorBaseTest;
+use Ibexa\Tests\Rest\Output\Generator\FieldTypeHashGeneratorBaseTestCase;
 
-final class FieldTypeHashGeneratorTest extends FieldTypeHashGeneratorBaseTest
+final class FieldTypeHashGeneratorTest extends FieldTypeHashGeneratorBaseTestCase
 {
     protected function initializeFieldTypeHashGenerator(): FieldTypeHashGenerator
     {

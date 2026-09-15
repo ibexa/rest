@@ -11,9 +11,10 @@ use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Core\Repository\Values\Content;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestRelation;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class RestRelationTest extends ValueObjectVisitorBaseTest
+class RestRelationTest extends ValueObjectVisitorBaseTestCase
 {
     /**
      * Test the RestRelation visitor.
@@ -82,9 +83,8 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
 
     /**
      * Test if result contains Relation element.
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsRelationElement(string $result): void
     {
         $this->assertXMLTag(
@@ -103,9 +103,8 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
 
     /**
      * Test if result contains Relation element attributes.
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsRelationAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -122,9 +121,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsSourceContentElement(string $result): void
     {
         $this->assertXMLTag(
@@ -141,9 +138,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsDestinationContentElement(string $result): void
     {
         $this->assertXMLTag(
@@ -160,9 +155,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsSourceFieldDefinitionIdentifierElement(string $result): void
     {
         $this->assertXMLTag(
@@ -176,9 +169,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsRelationTypeElement(string $result): void
     {
         $this->assertXMLTag(

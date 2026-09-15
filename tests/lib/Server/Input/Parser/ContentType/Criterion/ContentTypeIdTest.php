@@ -12,6 +12,7 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\Query\Criterion\ContentTy
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\ContentTypeId;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class ContentTypeIdTest extends TestCase
@@ -29,18 +30,17 @@ final class ContentTypeIdTest extends TestCase
             new ContentTypeIdCriterion([1, 5]),
             $this->parser->parse(
                 ['ContentTypeIdCriterion' => [1, 5]],
-                $this->createMock(ParsingDispatcher::class)
+                $this->createStub(ParsingDispatcher::class)
             )
         );
     }
 
     /**
-     * @dataProvider provideForTestInvalidInput
-     *
      * @phpstan-param array{
      *     array<string, string>
      * } $input
      */
+    #[DataProvider('provideForTestInvalidInput')]
     public function testInvalidInput(string $exceptionMessage, array $input): void
     {
         $this->expectException(Parser::class);
@@ -48,7 +48,7 @@ final class ContentTypeIdTest extends TestCase
 
         $this->parser->parse(
             $input,
-            $this->createMock(ParsingDispatcher::class)
+            $this->createStub(ParsingDispatcher::class)
         );
     }
 
@@ -60,7 +60,7 @@ final class ContentTypeIdTest extends TestCase
      *     },
      * >
      */
-    public function provideForTestInvalidInput(): iterable
+    public static function provideForTestInvalidInput(): iterable
     {
         yield [
             'Invalid <ContentTypeIdCriterion>',

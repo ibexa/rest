@@ -11,7 +11,7 @@ use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Rest\Server\Input\Parser\SessionInput;
 use Ibexa\Rest\Server\Values\SessionInput as SessionInputValue;
 
-class SessionInputTest extends BaseTest
+class SessionInputTest extends BaseTestCase
 {
     public function testParse(): void
     {

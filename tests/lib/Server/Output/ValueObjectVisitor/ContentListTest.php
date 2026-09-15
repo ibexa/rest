@@ -11,9 +11,10 @@ use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\ContentList;
 use Ibexa\Rest\Server\Values\RestContent;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class ContentListTest extends ValueObjectVisitorBaseTest
+class ContentListTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -43,9 +44,7 @@ class ContentListTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentListElement(string $result): void
     {
         $this->assertXMLTag(
@@ -58,9 +57,7 @@ class ContentListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentListAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -105,9 +102,7 @@ class ContentListTest extends ValueObjectVisitorBaseTest
         return $generator->endDocument(null);
     }
 
-    /**
-     * @depends testContentListVisitsChildren
-     */
+    #[Depends('testContentListVisitsChildren')]
     public function testResultContainsTotalCountAttributes(string $result): void
     {
         $this->assertXMLTag(

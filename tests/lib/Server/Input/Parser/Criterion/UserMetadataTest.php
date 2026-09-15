@@ -11,14 +11,15 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\UserMetadata as UserMetadataCriterion;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Rest\Server\Input\Parser\Criterion\UserMetadata;
-use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
+use Ibexa\Tests\Rest\Server\Input\Parser\BaseTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
-class UserMetadataTest extends BaseTest
+class UserMetadataTest extends BaseTestCase
 {
     /**
      * @return array<array{0: array{UserMetadataCriterion: array{Target: string, Value: string|int|array<int>}}, 1: \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\UserMetadata}>
      */
-    public function testParseProvider(): array
+    public static function provideParseData(): array
     {
         return [
             [
@@ -38,9 +39,8 @@ class UserMetadataTest extends BaseTest
 
     /**
      * @param array<array{0: array{UserMetadataCriterion: array{Target: string, Value: string|int|array<int>}}, 1: \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\UserMetadata}> $data
-     *
-     * @dataProvider testParseProvider
      */
+    #[DataProvider('provideParseData')]
     public function testParse(array $data, UserMetadataCriterion $expected): void
     {
         $userMetadata = $this->getParser();

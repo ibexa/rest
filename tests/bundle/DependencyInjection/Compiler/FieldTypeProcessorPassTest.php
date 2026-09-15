@@ -9,6 +9,7 @@ namespace Ibexa\Tests\Bundle\Rest\DependencyInjection\Compiler;
 
 use Ibexa\Bundle\Rest\DependencyInjection\Compiler\FieldTypeProcessorPass;
 use Ibexa\Rest\FieldTypeProcessorRegistry;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -16,9 +17,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class FieldTypeProcessorPassTest extends TestCase
 {
-    /**
-     * @dataProvider dataProviderForProcess
-     */
+    #[DataProvider('dataProviderForProcess')]
     public function testProcess(string $tag): void
     {
         $processorDefinition = new Definition();
@@ -42,7 +41,7 @@ class FieldTypeProcessorPassTest extends TestCase
         self::assertEquals('ezpublish_rest.field_type_processor.test', $dispatcherMethodCalls[0][1][1]->__toString(), "Failed asserting that Referenced service is 'ezpublish_rest.output.value_object_visitor.test'");
     }
 
-    public function dataProviderForProcess(): iterable
+    public static function dataProviderForProcess(): iterable
     {
         yield ['ibexa.rest.field_type.processor'];
     }

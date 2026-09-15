@@ -11,9 +11,10 @@ use Ibexa\Core\Repository\Values\Content;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestTrashItem;
 use Ibexa\Rest\Server\Values\Trash;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class TrashTest extends ValueObjectVisitorBaseTest
+class TrashTest extends ValueObjectVisitorBaseTestCase
 {
     /**
      * Test the Trash visitor.
@@ -42,9 +43,8 @@ class TrashTest extends ValueObjectVisitorBaseTest
 
     /**
      * Test if result contains Trash element.
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsTrashElement(string $result): void
     {
         $this->assertXMLTag(
@@ -59,9 +59,8 @@ class TrashTest extends ValueObjectVisitorBaseTest
 
     /**
      * Test if result contains Trash element attributes.
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsTrashAttributes(string $result): void
     {
         $this->assertXMLTag(

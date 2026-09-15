@@ -15,6 +15,7 @@ use Ibexa\Contracts\Rest\FieldTypeProcessor;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Rest\FieldTypeProcessorRegistry;
 use Ibexa\Rest\Output\FieldTypeSerializer;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -36,17 +37,16 @@ class FieldTypeSerializerTest extends TestCase
     protected (MockObject&Generator)|null $generatorMock = null;
 
     /**
-     * @dataProvider provideDataWithFieldValueToSerialize
-     *
      * @param array<int> $hashValue
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
+    #[DataProvider('provideDataWithFieldValueToSerialize')]
     public function testSerializeContentFieldValue(
-        APIFieldType $fieldType,
         array $hashValue
     ): void {
         $serializer = $this->getFieldTypeSerializer();
+        $fieldType = $this->createFieldTypeMock('my-field-value', $hashValue);
 
         $this->mockFieldTypeServiceGetFieldType(
             'myFancyFieldType',
@@ -64,20 +64,12 @@ class FieldTypeSerializerTest extends TestCase
 
     /**
      * @return iterable<array{
-     *     APIFieldType,
      *     array<int>,
      * }>
      */
-    public function provideDataWithFieldValueToSerialize(): iterable
+    public static function provideDataWithFieldValueToSerialize(): iterable
     {
-        $hash = [23, 42];
-        yield [
-            $this->createFieldTypeMock(
-                'my-field-value',
-                $hash
-            ),
-            $hash,
-        ];
+        yield [[23, 42]];
     }
 
     public function testSerializeFieldDefaultValue(): void

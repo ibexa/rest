@@ -9,9 +9,9 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\Conflict;
 use Ibexa\Rest\Server\Values;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
 
-class ConflictTest extends ValueObjectVisitorBaseTest
+class ConflictTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): void
     {

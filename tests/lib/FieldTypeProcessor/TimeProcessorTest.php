@@ -8,14 +8,18 @@
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Rest\FieldTypeProcessor\TimeProcessor;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\TimeProcessor::class, 'preProcessFieldSettingsHash')]
+#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\TimeProcessor::class, 'postProcessFieldSettingsHash')]
 class TimeProcessorTest extends TestCase
 {
     /**
      * @var array<string>
      */
-    protected array $constants = [
+    protected static array $constants = [
         'DEFAULT_EMPTY',
         'DEFAULT_CURRENT_TIME',
     ];
@@ -23,7 +27,7 @@ class TimeProcessorTest extends TestCase
     /**
      * @return array<array{array{defaultType: mixed}, array{defaultType: mixed}}>
      */
-    public function fieldSettingsHashes(): array
+    public static function fieldSettingsHashes(): array
     {
         return array_map(
             static function (string $constantName): array {
@@ -32,18 +36,15 @@ class TimeProcessorTest extends TestCase
                     ['defaultType' => constant("Ibexa\\Core\\FieldType\\Time\\Type::{$constantName}")],
                 ];
             },
-            $this->constants
+            self::$constants
         );
     }
 
     /**
-     * @covers \Ibexa\Rest\FieldTypeProcessor\TimeProcessor::preProcessFieldSettingsHash
-     *
-     * @dataProvider fieldSettingsHashes
-     *
      * @param array<string, mixed> $inputSettings
      * @param array<string, mixed> $outputSettings
      */
+    #[DataProvider('fieldSettingsHashes')]
     public function testPreProcessFieldSettingsHash(array $inputSettings, array $outputSettings): void
     {
         $processor = $this->getProcessor();
@@ -55,13 +56,10 @@ class TimeProcessorTest extends TestCase
     }
 
     /**
-     * @covers \Ibexa\Rest\FieldTypeProcessor\TimeProcessor::postProcessFieldSettingsHash
-     *
-     * @dataProvider fieldSettingsHashes
-     *
      * @param array<string, mixed> $inputSettings
      * @param array<string, mixed> $outputSettings
      */
+    #[DataProvider('fieldSettingsHashes')]
     public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
     {
         $processor = $this->getProcessor();

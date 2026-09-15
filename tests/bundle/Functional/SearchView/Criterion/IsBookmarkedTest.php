@@ -28,17 +28,17 @@ final class IsBookmarkedTest extends SearchCriterionTestCase
      *     },
      * >
      */
-    public function getCriteriaPayloads(): iterable
+    public static function getCriteriaPayloads(): iterable
     {
         yield 'Bookmarked locations' => [
             'json',
-            $this->buildJsonCriterionQuery('"IsBookmarkedCriterion": true'),
+            self::buildJsonCriterionQuery('"IsBookmarkedCriterion": true'),
             1,
         ];
 
         yield 'Not bookmarked locations' => [
             'json',
-            $this->buildJsonCriterionQuery('"IsBookmarkedCriterion": false'),
+            self::buildJsonCriterionQuery('"IsBookmarkedCriterion": false'),
             15, // <- This can differ between DXP versions.
         ];
     }

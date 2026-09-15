@@ -10,6 +10,7 @@ namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
 use Ibexa\Bundle\Rest\EventListener\CsrfListener;
 use Ibexa\Contracts\Rest\Exceptions\UnauthorizedException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -20,13 +21,13 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-final class CsrfListenerTest extends EventListenerTest
+final class CsrfListenerTest extends EventListenerTestCase
 {
     public const string VALID_TOKEN = 'valid';
     public const string INVALID_TOKEN = 'invalid';
     public const string INTENTION = 'rest';
 
-    public function provideExpectedSubscribedEventTypes(): array
+    public static function provideExpectedSubscribedEventTypes(): array
     {
         return [
             [[KernelEvents::REQUEST]],
@@ -36,7 +37,7 @@ final class CsrfListenerTest extends EventListenerTest
     public function testIsNotRestRequest(): void
     {
         $listener = $this->getEventListener();
-        $request = $this->createMock(Request::class);
+        $request = $this->createStub(Request::class);
         $request->attributes = new ParameterBag();
 
         $listener->onKernelRequest(
@@ -46,7 +47,7 @@ final class CsrfListenerTest extends EventListenerTest
 
     public function testCsrfDisabled(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createStub(Request::class);
         $request->attributes = new ParameterBag([
             'is_rest_request' => true,
         ]);
@@ -74,9 +75,8 @@ final class CsrfListenerTest extends EventListenerTest
 
     /**
      * Tests that method CSRF check don't apply to are indeed ignored.
-     *
-     * @dataProvider getIgnoredRequestMethods
      */
+    #[DataProvider('getIgnoredRequestMethods')]
     public function testIgnoredRequestMethods(string $ignoredMethod): void
     {
         $request = $this->createMock(Request::class);
@@ -100,7 +100,7 @@ final class CsrfListenerTest extends EventListenerTest
     /**
      * @return array<array<string>>
      */
-    public function getIgnoredRequestMethods(): array
+    public static function getIgnoredRequestMethods(): array
     {
         return [
             ['GET'],
@@ -130,7 +130,7 @@ final class CsrfListenerTest extends EventListenerTest
 
     public function testSkipCsrfProtection(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createStub(Request::class);
         $request->attributes = $this->getRequestAttributesMock();
         $request->headers = $this->getRequestHeadersMock();
 

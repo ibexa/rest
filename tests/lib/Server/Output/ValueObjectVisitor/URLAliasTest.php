@@ -9,9 +9,10 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\URLAlias;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class URLAliasTest extends ValueObjectVisitorBaseTest
+class URLAliasTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -53,9 +54,7 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsUrlAliasElement(string $result): void
     {
         $this->assertXMLTag(
@@ -72,9 +71,7 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsUrlAliasAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -93,9 +90,7 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsUrlValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -109,9 +104,7 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsPathValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -125,9 +118,7 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsLanguageCodesValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -141,9 +132,7 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsAlwaysAvailableValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -157,9 +146,7 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsIsHistoryValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -173,9 +160,7 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsForwardValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -189,9 +174,7 @@ class URLAliasTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsCustomValueElement(string $result): void
     {
         $this->assertXMLTag(

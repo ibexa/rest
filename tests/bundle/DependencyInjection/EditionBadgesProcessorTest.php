@@ -9,17 +9,18 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\Rest\DependencyInjection;
 
 use Ibexa\Bundle\Rest\DependencyInjection\EditionBadgesProcessor;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\LogicException;
 
 /**
- * @covers \Ibexa\Bundle\Rest\DependencyInjection\EditionBadgesProcessor
- *
  * @phpstan-import-type TTagToEditionMappingConfig from \Ibexa\Bundle\Rest\DependencyInjection\EditionBadgesProcessorInterface
  * @phpstan-import-type TTagToEditionMap from \Ibexa\Bundle\Rest\ApiPlatform\EditionBadge\EditionBadgeFactory
  */
+#[CoversClass(\Ibexa\Bundle\Rest\DependencyInjection\EditionBadgesProcessor::class)]
 final class EditionBadgesProcessorTest extends TestCase
 {
     public const array BADGES_CONFIG = [
@@ -84,11 +85,10 @@ final class EditionBadgesProcessorTest extends TestCase
     }
 
     /**
-     * @dataProvider getDataForTestProcess
-     *
      * @phpstan-param TTagToEditionMappingConfig $tagToEditionMappingConfig
      * @phpstan-param TTagToEditionMap $expectedTagToEditionMap
      */
+    #[DataProvider('getDataForTestProcess')]
     public function testProcess(array $tagToEditionMappingConfig, array $expectedTagToEditionMap): void
     {
         $processor = new EditionBadgesProcessor($this->containerBuilder);

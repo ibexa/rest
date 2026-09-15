@@ -9,9 +9,10 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\ContentType;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroup;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
+class ContentTypeGroupTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -81,9 +82,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentTypeGroupElement(string $result): void
     {
         $this->assertXMLTag(
@@ -99,9 +98,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentTypeGroupAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -118,9 +115,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsIdValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -134,9 +129,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsIdentifierValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -150,9 +143,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsCreatedValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -166,9 +157,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsModifiedValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -182,9 +171,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsCreatorElement(string $result): void
     {
         $this->assertXMLTag(
@@ -197,9 +184,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsCreatorAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -216,9 +201,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsModifierElement(string $result): void
     {
         $this->assertXMLTag(
@@ -231,9 +214,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsModifierAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -250,9 +231,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentTypesElement(string $result): void
     {
         $this->assertXMLTag(
@@ -265,9 +244,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentTypesAttributes(string $result): void
     {
         $this->assertXMLTag(

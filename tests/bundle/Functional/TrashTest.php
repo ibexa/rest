@@ -8,6 +8,7 @@
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
 class TrashTest extends RESTFunctionalTestCase
 {
@@ -32,9 +33,9 @@ class TrashTest extends RESTFunctionalTestCase
     }
 
     /**
-     * @depends testCreateTrashItem
-     * Covers GET /content/trash/{trashItemId}
+     * Covers GET /content/trash/{trashItemId}.
      */
+    #[Depends('testCreateTrashItem')]
     public function testLoadTrashItem(string $trashItemHref): void
     {
         $response = $this->sendHttpRequest(
@@ -46,9 +47,8 @@ class TrashTest extends RESTFunctionalTestCase
 
     /**
      * Covers DELETE /content/trash/{trashItemId}.
-     *
-     * @depends testCreateTrashItem
      */
+    #[Depends('testCreateTrashItem')]
     public function testDeleteTrashItem(string $trashItemId): void
     {
         // we create a new one, since restore also needs the feature
@@ -63,9 +63,8 @@ class TrashTest extends RESTFunctionalTestCase
 
     /**
      * Covers MOVE /content/trash/{trashItemId}.
-     *
-     * @depends testCreateTrashItem
      */
+    #[Depends('testCreateTrashItem')]
     public function testRestoreTrashItem(string $trashItemId): void
     {
         self::markTestSkipped('@todo fixme');

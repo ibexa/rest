@@ -9,9 +9,10 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Rest\Output\ValueObjectVisitor;
 use Ibexa\Rest\Values\ContentObjectStates;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class ContentObjectStatesTest extends ValueObjectVisitorBaseTest
+class ContentObjectStatesTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -36,9 +37,7 @@ class ContentObjectStatesTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentObjectStatesElement(string $result): void
     {
         $this->assertXMLTag(
@@ -51,9 +50,7 @@ class ContentObjectStatesTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentObjectStatesAttributes(string $result): void
     {
         $this->assertXMLTag(

@@ -17,7 +17,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 /**
  * @todo Test with fieldSettings and validatorConfiguration when specified
  */
-class FieldDefinitionCreateTest extends BaseTest
+class FieldDefinitionCreateTest extends BaseTestCase
 {
     public function testParse(): void
     {

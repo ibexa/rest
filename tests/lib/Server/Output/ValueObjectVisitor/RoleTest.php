@@ -10,9 +10,10 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Core\Repository\Values\User;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\Role;
 use Ibexa\Rest\Server\Values\RestRole;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class RoleTest extends ValueObjectVisitorBaseTest
+class RoleTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -55,9 +56,7 @@ class RoleTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsRoleElement(string $result): void
     {
         $this->assertXMLTag(
@@ -73,9 +72,7 @@ class RoleTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsRoleAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -92,9 +89,7 @@ class RoleTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsIdentifierValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -108,9 +103,7 @@ class RoleTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsMainLanguageCodeValueElement(string $result): void
     {
         self::markTestSkipped('@todo uncomment when support for multilingual names and descriptions is added EZP-24776');
@@ -125,9 +118,7 @@ class RoleTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsNamesElement(string $result): void
     {
         self::markTestSkipped('@todo uncomment when support for multilingual names and descriptions is added EZP-24776');
@@ -144,9 +135,7 @@ class RoleTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsDescriptionsElement(string $result): void
     {
         self::markTestSkipped('@todo uncomment when support for multilingual names and descriptions is added EZP-24776');
@@ -163,9 +152,7 @@ class RoleTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsPoliciesElement(string $result): void
     {
         $this->assertXMLTag(
@@ -178,9 +165,7 @@ class RoleTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsPoliciesAttributes(string $result): void
     {
         $this->assertXMLTag(

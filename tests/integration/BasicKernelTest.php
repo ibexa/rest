@@ -11,10 +11,9 @@ namespace Ibexa\Tests\Integration\Rest;
 use Ibexa\Contracts\Core\Repository\Repository;
 use Ibexa\Contracts\Test\Core\IbexaKernelTestCase;
 use Ibexa\Rest\Server\Controller\Root as RestRootController;
+use PHPUnit\Framework\Attributes\CoversNothing;
 
-/**
- * @coversNothing
- */
+#[CoversNothing]
 final class BasicKernelTest extends IbexaKernelTestCase
 {
     protected function setUp(): void

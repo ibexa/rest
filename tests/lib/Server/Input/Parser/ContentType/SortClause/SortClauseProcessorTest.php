@@ -16,6 +16,7 @@ use Ibexa\Contracts\Rest\Input\Parser\Query\SortClause\SortClauseProcessorInterf
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Server\Input\Parser\ContentType\SortClause\SortClauseProcessor;
 use Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -35,11 +36,10 @@ final class SortClauseProcessorTest extends TestCase
     }
 
     /**
-     * @dataProvider provideForTestProcessSortClauses
-     *
      * @param array<string, mixed> $inputClauses
      * @param array<\Ibexa\Contracts\Core\Repository\Values\ContentType\Query\SortClause> $expectedOutput
      */
+    #[DataProvider('provideForTestProcessSortClauses')]
     public function testProcessSortClauses(
         array $inputClauses,
         array $expectedOutput
@@ -66,7 +66,7 @@ final class SortClauseProcessorTest extends TestCase
      *     },
      * >
      */
-    public function provideForTestProcessSortClauses(): iterable
+    public static function provideForTestProcessSortClauses(): iterable
     {
         yield 'Input containing properly formatted clauses' => [
             [
@@ -83,7 +83,7 @@ final class SortClauseProcessorTest extends TestCase
     private function getParsingDispatcher(): ParsingDispatcher
     {
         return new ParsingDispatcher(
-            $this->createMock(EventDispatcherInterface::class),
+            $this->createStub(EventDispatcherInterface::class),
             [
                 'application/vnd.ibexa.api.internal.sortclause.Id' => new DataKeyValueObjectClass(
                     'Id',

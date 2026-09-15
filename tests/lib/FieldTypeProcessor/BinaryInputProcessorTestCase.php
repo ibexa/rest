@@ -7,9 +7,11 @@
 
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-abstract class BinaryInputProcessorTest extends TestCase
+#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\BinaryInputProcessor::class, 'preProcessValueHash')]
+abstract class BinaryInputProcessorTestCase extends TestCase
 {
     private $tempDir;
 
@@ -49,9 +51,6 @@ abstract class BinaryInputProcessorTest extends TestCase
         return $this->tempDir;
     }
 
-    /**
-     * @covers \Ibexa\Rest\FieldTypeProcessor\BinaryInputProcessor::preProcessValueHash
-     */
     public function testPreProcessValueHashMissingKey(): void
     {
         $processor = $this->getProcessor();
@@ -63,9 +62,6 @@ abstract class BinaryInputProcessorTest extends TestCase
         self::assertEquals($inputHash, $outputHash);
     }
 
-    /**
-     * @covers \Ibexa\Rest\FieldTypeProcessor\BinaryInputProcessor::preProcessValueHash
-     */
     public function testPreProcessValueHash(): void
     {
         $processor = $this->getProcessor();

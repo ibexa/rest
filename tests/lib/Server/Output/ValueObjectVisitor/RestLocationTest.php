@@ -12,9 +12,10 @@ use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestContent;
 use Ibexa\Rest\Server\Values\RestLocation;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class RestLocationTest extends ValueObjectVisitorBaseTest
+class RestLocationTest extends ValueObjectVisitorBaseTestCase
 {
     /**
      * Test the Location visitor.
@@ -103,9 +104,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsLocationElement(string $result): void
     {
         $this->assertXMLTag(
@@ -118,9 +117,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsLocationAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -137,9 +134,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentInfoElement(string $result): void
     {
         $this->assertXMLTag(
@@ -152,9 +147,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentInfoAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -171,9 +164,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsIdValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -187,9 +178,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsPriorityValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -203,9 +192,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsHiddenValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -219,9 +206,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsInvisibleValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -235,9 +220,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsExplicitlyHiddenValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -250,9 +233,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsRemoteIdValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -266,9 +247,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsChildrenElement(string $result): void
     {
         $this->assertXMLTag(
@@ -281,9 +260,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsChildrenAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -300,9 +277,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsParentLocationElement(string $result): void
     {
         $this->assertXMLTag(
@@ -315,9 +290,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsParentLocationAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -334,9 +307,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentElement(string $result): void
     {
         $this->assertXMLTag(
@@ -349,9 +320,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -368,9 +337,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsPathStringValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -384,9 +351,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsDepthValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -400,9 +365,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsSortFieldValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -416,9 +379,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsSortOrderValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -432,9 +393,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsChildCountValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -448,9 +407,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsUrlAliasesTag(string $result): void
     {
         $this->assertXMLTag(
@@ -463,9 +420,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsUrlAliasesTagAttributes(string $result): void
     {
         $this->assertXMLTag(

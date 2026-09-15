@@ -16,7 +16,7 @@ use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\VersionUpdate;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class VersionUpdateTest extends BaseTest
+class VersionUpdateTest extends BaseTestCase
 {
     public function testParse(): void
     {
@@ -122,13 +122,12 @@ class VersionUpdateTest extends BaseTest
     private function getFieldTypeParserMock(): FieldTypeParser & MockObject
     {
         $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
-            ->setMethods([])
             ->disableOriginalConstructor()
             ->setConstructorArgs(
                 [
                     $this->getContentServiceMock(),
-                    $this->createMock(ContentTypeService::class),
-                    $this->createMock(FieldTypeService::class),
+                    $this->createStub(ContentTypeService::class),
+                    $this->createStub(FieldTypeService::class),
                 ]
             )
             ->getMock();

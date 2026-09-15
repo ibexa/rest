@@ -10,9 +10,10 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Core\Repository\Values\ObjectState\ObjectStateGroup;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\ObjectStateGroupList;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
+class ObjectStateGroupListTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -38,9 +39,7 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsObjectStateGroupListElement(string $result): void
     {
         $this->assertXMLTag(
@@ -53,9 +52,7 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsObjectStateGroupListAttributes(string $result): void
     {
         $this->assertXMLTag(

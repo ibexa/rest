@@ -14,7 +14,7 @@ use Ibexa\Core\Repository\LocationService;
 use Ibexa\Rest\Server\Input\Parser\LocationCreate;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class LocationCreateTest extends BaseTest
+class LocationCreateTest extends BaseTestCase
 {
     public function testParse(): void
     {

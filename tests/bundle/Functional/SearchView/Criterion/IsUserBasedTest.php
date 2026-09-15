@@ -12,17 +12,17 @@ use Ibexa\Tests\Bundle\Rest\Functional\SearchView\SearchCriterionTestCase;
 
 final class IsUserBasedTest extends SearchCriterionTestCase
 {
-    public function getCriteriaPayloads(): iterable
+    public static function getCriteriaPayloads(): iterable
     {
         return [
             'is user based' => [
                 'json',
-                $this->buildJsonCriterionQuery('"IsUserBasedCriterion": true'),
+                self::buildJsonCriterionQuery('"IsUserBasedCriterion": true'),
                 2,
             ],
             'is not user based' => [
                 'json',
-                $this->buildJsonCriterionQuery('"IsUserBasedCriterion": false'),
+                self::buildJsonCriterionQuery('"IsUserBasedCriterion": false'),
                 14,
             ],
         ];

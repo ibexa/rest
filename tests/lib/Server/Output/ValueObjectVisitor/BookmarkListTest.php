@@ -15,18 +15,19 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\BookmarkList;
 use Ibexa\Rest\Server\Values\RestLocation;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class BookmarkListTest extends ValueObjectVisitorBaseTest
+class BookmarkListTest extends ValueObjectVisitorBaseTestCase
 {
     private BookmarkList $data;
 
     protected function setUp(): void
     {
         $this->data = new BookmarkList(10, [
-            new RestLocation($this->createMock(Location::class), 0),
-            new RestLocation($this->createMock(Location::class), 0),
-            new RestLocation($this->createMock(Location::class), 0),
+            new RestLocation($this->createStub(Location::class), 0),
+            new RestLocation($this->createStub(Location::class), 0),
+            new RestLocation($this->createStub(Location::class), 0),
         ]);
     }
 
@@ -50,9 +51,7 @@ class BookmarkListTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsBookmarkListElement(string $result): void
     {
         $this->assertXMLTag(
@@ -67,9 +66,7 @@ class BookmarkListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsCountElement(string $result): void
     {
         $this->assertXMLTag(
@@ -81,9 +78,7 @@ class BookmarkListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsBookmarkElement(string $result): void
     {
         $query = "//BookmarkList/Bookmark[@media-type='application/vnd.ibexa.api.Bookmark+xml']";

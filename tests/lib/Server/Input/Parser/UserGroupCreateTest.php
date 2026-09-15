@@ -20,7 +20,7 @@ use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\UserGroupCreate;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class UserGroupCreateTest extends BaseTest
+class UserGroupCreateTest extends BaseTestCase
 {
     public function testParse(): void
     {
@@ -282,12 +282,11 @@ class UserGroupCreateTest extends BaseTest
     {
         $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
             ->setConstructorArgs(
                 [
-                    $this->createMock(ContentService::class),
+                    $this->createStub(ContentService::class),
                     $this->getContentTypeServiceMock(),
-                    $this->createMock(FieldTypeService::class),
+                    $this->createStub(FieldTypeService::class),
                 ]
             )
             ->getMock();

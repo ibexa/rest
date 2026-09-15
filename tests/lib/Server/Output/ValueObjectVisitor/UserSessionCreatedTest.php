@@ -30,9 +30,14 @@ class UserSessionCreatedTest extends UserSessionTest
             ->method('setStatus')
             ->with(self::equalTo(201));
 
-        $this->getVisitorMock()->expects(self::at(1))
+        $setHeaderMatcher = self::exactly(2);
+        $this->getVisitorMock()->expects($setHeaderMatcher)
             ->method('setHeader')
-            ->with(self::equalTo('Content-Type'), self::equalTo('application/vnd.ibexa.api.Session+xml'));
+            ->willReturnCallback(static function (...$parameters) use ($setHeaderMatcher): void {
+                if ($setHeaderMatcher->numberOfInvocations() === 1) {
+                    self::assertSame(['Content-Type', 'application/vnd.ibexa.api.Session+xml'], $parameters);
+                }
+            });
 
         $this->addRouteExpectation(
             'ibexa.rest.delete_session',

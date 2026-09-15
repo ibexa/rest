@@ -11,9 +11,10 @@ use Ibexa\Core\Repository\Values\ContentType;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\ContentTypeInfoList;
 use Ibexa\Rest\Server\Values\RestContentType;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class ContentTypeInfoListTest extends ValueObjectVisitorBaseTest
+class ContentTypeInfoListTest extends ValueObjectVisitorBaseTestCase
 {
     /**
      * Test the ContentTypeInfoList visitor.
@@ -44,9 +45,8 @@ class ContentTypeInfoListTest extends ValueObjectVisitorBaseTest
      * Test if result contains ContentTypeInfoList element.
      *
      * @param string $result
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsContentTypeInfoListElement($result): void
     {
         $this->assertXMLTag(
@@ -63,9 +63,8 @@ class ContentTypeInfoListTest extends ValueObjectVisitorBaseTest
      * Test if result contains ContentTypeInfoList element attributes.
      *
      * @param string $result
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsContentTypeInfoListAttributes($result): void
     {
         $this->assertXMLTag(

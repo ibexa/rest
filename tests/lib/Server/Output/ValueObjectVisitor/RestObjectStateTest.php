@@ -10,9 +10,10 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Core\Repository\Values\ObjectState\ObjectState;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\RestObjectState;
 use Ibexa\Rest\Values;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class RestObjectStateTest extends ValueObjectVisitorBaseTest
+class RestObjectStateTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -66,9 +67,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsObjectStateElement(string $result): void
     {
         $this->assertXMLTag(
@@ -84,9 +83,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsObjectStateAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -103,9 +100,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsObjectStateGroupElement(string $result): void
     {
         $this->assertXMLTag(
@@ -118,9 +113,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsObjectStateGroupAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -137,9 +130,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsIdValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -153,9 +144,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsIdentifierValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -169,9 +158,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsPriorityValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -185,9 +172,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsDefaultLanguageCodeValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -201,9 +186,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsLanguageCodesValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -217,9 +200,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsNamesElement(string $result): void
     {
         $this->assertXMLTag(
@@ -235,9 +216,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsDescriptionsElement(string $result): void
     {
         $this->assertXMLTag(

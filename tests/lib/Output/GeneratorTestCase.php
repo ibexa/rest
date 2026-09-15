@@ -8,12 +8,13 @@
 namespace Ibexa\Tests\Rest\Output;
 
 use Ibexa\Contracts\Rest\Output\Exceptions\OutputGeneratorException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Output generator test class.
  */
-abstract class GeneratorTest extends TestCase
+abstract class GeneratorTestCase extends TestCase
 {
     /**
      * @var \Ibexa\Contracts\Rest\Output\Generator
@@ -190,11 +191,10 @@ abstract class GeneratorTest extends TestCase
     abstract protected function assertSnapshot(string $snapshotName, string $generatedContent): void;
 
     /**
-     * @dataProvider getDataForTestStartValueElementWithAttributes
-     *
      * @phpstan-param scalar|null $elementValue
      * @phpstan-param array<string, scalar|null> $attributes
      */
+    #[DataProvider('getDataForTestStartValueElementWithAttributes')]
     public function testStartValueElementWithAttributes(string|bool|int|float|null $elementValue, array $attributes): void
     {
         $generator = $this->getGenerator();
@@ -214,7 +214,7 @@ abstract class GeneratorTest extends TestCase
     /**
      * @return iterable<string, array{scalar|null, array<string, scalar|null>}>
      */
-    public function getDataForTestStartValueElementWithAttributes(): iterable
+    public static function getDataForTestStartValueElementWithAttributes(): iterable
     {
         // data set name corresponds to the file names located in
         // ./tests/lib/Output/Generator/_fixtures/testStartValueElementWithAttributes

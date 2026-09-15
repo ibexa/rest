@@ -8,6 +8,7 @@
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
 class UrlAliasTest extends RESTFunctionalTestCase
 {
@@ -37,11 +38,10 @@ class UrlAliasTest extends RESTFunctionalTestCase
     }
 
     /**
-     * @depends testCreateFolder
-     * Covers POST /content/urlaliases
-     *
      * @returns string The created url alias href
+     * Covers POST /content/urlaliases
      */
+    #[Depends('testCreateFolder')]
     public function testCreateUrlAlias($locationHref)
     {
         $text = $this->addTestSuffix(__FUNCTION__);
@@ -114,9 +114,9 @@ XML;
     }
 
     /**
-     * @depends testCreateUrlAlias
-     * Covers GET /content/urlaliases/{urlAliasId}
+     * Covers GET /content/urlaliases/{urlAliasId}.
      */
+    #[Depends('testCreateUrlAlias')]
     public function testLoadURLAlias(string $urlAliasHref): void
     {
         self::markTestSkipped('@todo fixme');
@@ -132,9 +132,9 @@ XML;
     }
 
     /**
-     * @depends testCreateUrlAlias
-     * Covers DELETE /content/urlaliases/{urlAliasId}
+     * Covers DELETE /content/urlaliases/{urlAliasId}.
      */
+    #[Depends('testCreateUrlAlias')]
     public function testDeleteURLAlias(string $urlAliasHref): void
     {
         self::markTestSkipped('@todo fixme');
@@ -151,9 +151,9 @@ XML;
     }
 
     /**
-     * @depends testCreateFolder
-     * Covers GET /content/locations/{locationPath}/urlaliases
+     * Covers GET /content/locations/{locationPath}/urlaliases.
      */
+    #[Depends('testCreateFolder')]
     public function testListLocationURLAliases($contentLocationHref): void
     {
         $response = $this->sendHttpRequest(

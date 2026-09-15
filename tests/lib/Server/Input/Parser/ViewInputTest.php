@@ -11,7 +11,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Rest\Server\Input\Parser\ViewInput;
 use Ibexa\Rest\Server\Values\RestViewInput;
 
-class ViewInputTest extends BaseTest
+class ViewInputTest extends BaseTestCase
 {
     public function testParse(): void
     {

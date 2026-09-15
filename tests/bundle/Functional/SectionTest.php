@@ -8,6 +8,7 @@
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
 class SectionTest extends RESTFunctionalTestCase
 {
@@ -56,10 +57,9 @@ XML;
 
     /**
      * @param $sectionHref
-     *
-     * @depends testCreateSection
      * Covers PATCH /content/sections/{sectionId}
      */
+    #[Depends('testCreateSection')]
     public function testUpdateSection(string $sectionHref): void
     {
         $xml = <<< XML
@@ -82,9 +82,8 @@ XML;
 
     /**
      * Covers GET /content/sections/{sectionId}.
-     *
-     * @depends testCreateSection
      */
+    #[Depends('testCreateSection')]
     public function testLoadSection(string $sectionHref): void
     {
         $response = $this->sendHttpRequest(
@@ -95,9 +94,9 @@ XML;
     }
 
     /**
-     * @depends testCreateSection
-     * Covers GET /content/sections?identifier={sectionIdentifier}
+     * Covers GET /content/sections?identifier={sectionIdentifier}.
      */
+    #[Depends('testCreateSection')]
     public function testLoadSectionByIdentifier($sectionHref): void
     {
         $response = $this->sendHttpRequest(
@@ -108,9 +107,9 @@ XML;
     }
 
     /**
-     * @depends testCreateSection
-     * Covers DELETE /content/sections/{sectionId}
+     * Covers DELETE /content/sections/{sectionId}.
      */
+    #[Depends('testCreateSection')]
     public function testDeleteSection(string $sectionHref): void
     {
         $response = $this->sendHttpRequest(

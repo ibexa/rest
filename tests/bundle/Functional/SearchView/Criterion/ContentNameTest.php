@@ -9,10 +9,9 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\Rest\Functional\SearchView\Criterion;
 
 use Ibexa\Tests\Bundle\Rest\Functional\SearchView\SearchCriterionTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-/**
- * @covers \Ibexa\Rest\Server\Input\Parser\Criterion\ContentName
- */
+#[CoversClass(\Ibexa\Rest\Server\Input\Parser\Criterion\ContentName::class)]
 final class ContentNameTest extends SearchCriterionTestCase
 {
     protected function setUp(): void
@@ -30,17 +29,17 @@ final class ContentNameTest extends SearchCriterionTestCase
      *     int,
      * }>
      */
-    public function getCriteriaPayloads(): iterable
+    public static function getCriteriaPayloads(): iterable
     {
         yield 'Return content items that contain "foo" in name' => [
             'json',
-            $this->buildJsonCriterionQuery('"ContentNameCriterion": "foo*"'),
+            self::buildJsonCriterionQuery('"ContentNameCriterion": "foo*"'),
             2,
         ];
 
         yield 'No content items found with article in name' => [
             'json',
-            $this->buildJsonCriterionQuery('"ContentNameCriterion": "*article*"'),
+            self::buildJsonCriterionQuery('"ContentNameCriterion": "*article*"'),
             0,
         ];
     }

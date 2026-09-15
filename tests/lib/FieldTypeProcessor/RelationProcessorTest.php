@@ -11,15 +11,19 @@ use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Core\Base\Exceptions\NotFoundException;
 use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\FieldTypeProcessor\RelationProcessor;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\RouterInterface;
 
+#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\RelationProcessor::class, 'preProcessFieldSettingsHash')]
+#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\RelationProcessor::class, 'postProcessFieldSettingsHash')]
 class RelationProcessorTest extends TestCase
 {
     /**
      * @var array<string>
      */
-    protected array $constants = [
+    protected static array $constants = [
         'SELECTION_BROWSE',
         'SELECTION_DROPDOWN',
     ];
@@ -27,7 +31,7 @@ class RelationProcessorTest extends TestCase
     /**
      * @return array<array{array{selectionMethod: string}, array{selectionMethod: mixed}}>
      */
-    public function fieldSettingsHashes(): array
+    public static function fieldSettingsHashes(): array
     {
         return array_map(
             static function ($constantName): array {
@@ -36,18 +40,15 @@ class RelationProcessorTest extends TestCase
                     ['selectionMethod' => constant("Ibexa\\Core\\FieldType\\Relation\\Type::{$constantName}")],
                 ];
             },
-            $this->constants
+            self::$constants
         );
     }
 
     /**
-     * @covers \Ibexa\Rest\FieldTypeProcessor\RelationProcessor::preProcessFieldSettingsHash
-     *
-     * @dataProvider fieldSettingsHashes
-     *
      * @param array<string, mixed> $inputSettings
      * @param array<string, mixed> $outputSettings
      */
+    #[DataProvider('fieldSettingsHashes')]
     public function testPreProcessFieldSettingsHash(array $inputSettings, array $outputSettings): void
     {
         $processor = $this->getProcessor();
@@ -59,13 +60,10 @@ class RelationProcessorTest extends TestCase
     }
 
     /**
-     * @covers \Ibexa\Rest\FieldTypeProcessor\RelationProcessor::postProcessFieldSettingsHash
-     *
-     * @dataProvider fieldSettingsHashes
-     *
      * @param array<string, mixed> $inputSettings
      * @param array<string, mixed> $outputSettings
      */
+    #[DataProvider('fieldSettingsHashes')]
     public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
     {
         $processor = $this->getProcessor();

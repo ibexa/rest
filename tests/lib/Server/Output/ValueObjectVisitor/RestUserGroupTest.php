@@ -12,6 +12,7 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Core\Repository\Values;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestUserGroup;
+use PHPUnit\Framework\Attributes\Depends;
 
 class RestUserGroupTest extends BaseContentValueObjectVisitorTestCase
 {
@@ -92,113 +93,85 @@ class RestUserGroupTest extends BaseContentValueObjectVisitorTestCase
         );
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUserGroupHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroup[@href="/user/groups/1/2/23"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUserGroupIdCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroup[@id="22"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUserGroupMediaTypeWithoutVersionCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroup[@media-type="application/vnd.ibexa.api.UserGroup+xml"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUserGroupRemoteIdCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroup[@remoteId="abc123"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUserGroupTypeHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroup/ContentType[@href="/content/types/26"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUserGroupTypeMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroup/ContentType[@media-type="application/vnd.ibexa.api.ContentType+xml"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testParentUserGroupHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroup/ParentUserGroup[@href="/user/groups/1/2"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testSubgroupsHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroup/Subgroups[@href="/user/groups/1/2/23/subgroups"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUsersHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroup/Users[@href="/user/groups/1/2/23/users"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testRolesHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroup/Roles[@href="/user/groups/1/2/23/roles"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testParentUserGroupMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroup/ParentUserGroup[@media-type="application/vnd.ibexa.api.UserGroup+xml"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testSubgroupsMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroup/Subgroups[@media-type="application/vnd.ibexa.api.UserGroupList+xml"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUsersMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroup/Users[@media-type="application/vnd.ibexa.api.UserList+xml"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testRolesMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserGroup/Roles[@media-type="application/vnd.ibexa.api.RoleAssignmentList+xml"]');

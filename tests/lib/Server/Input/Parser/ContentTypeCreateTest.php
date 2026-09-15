@@ -16,7 +16,7 @@ use Ibexa\Rest\Server\Input\Parser\ContentTypeCreate;
 use Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class ContentTypeCreateTest extends BaseTest
+class ContentTypeCreateTest extends BaseTestCase
 {
         public function testParse(): void
         {

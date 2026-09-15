@@ -9,13 +9,12 @@ namespace Ibexa\Tests\Bundle\Rest\Routing\OptionsLoader;
 
 use Ibexa\Bundle\Rest\Routing\OptionsLoader\Mapper;
 use Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
-/**
- * @covers \Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper
- */
+#[CoversClass(\Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper::class)]
 class RouteCollectionMapperTest extends TestCase
 {
     /** @var \Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper */

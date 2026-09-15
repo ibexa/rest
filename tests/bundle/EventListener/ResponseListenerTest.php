@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-final class ResponseListenerTest extends EventListenerTest
+final class ResponseListenerTest extends EventListenerTestCase
 {
     protected AcceptHeaderVisitorDispatcher&MockObject $visitorDispatcherMock;
 
@@ -45,7 +45,7 @@ final class ResponseListenerTest extends EventListenerTest
         $this->response = new Response('BODY', Response::HTTP_NOT_ACCEPTABLE, ['foo' => 'bar']);
     }
 
-    public function provideExpectedSubscribedEventTypes(): array
+    public static function provideExpectedSubscribedEventTypes(): array
     {
         return [
             [[KernelEvents::VIEW, KernelEvents::EXCEPTION]],

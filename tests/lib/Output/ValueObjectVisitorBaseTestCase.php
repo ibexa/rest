@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
+abstract class ValueObjectVisitorBaseTestCase extends Server\BaseTestCase
 {
     use AssertXmlTagTrait;
 
@@ -34,9 +34,15 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
 
     private (RouterInterface&MockObject)|null $templatedRouterMock = null;
 
-    private int $routerCallIndex = 0;
+    /** @var array<int, array{string, array<string, mixed>, string}> */
+    private array $routeExpectations = [];
 
-    private int $templatedRouterCallIndex = 0;
+    /** @var array<int, array{string, array<string, mixed>, string}> */
+    private array $templatedRouteExpectations = [];
+
+    private bool $routerMockConfigured = false;
+
+    private bool $templatedRouterMockConfigured = false;
 
     private UriParserInterface&MockObject $uriParser;
 
@@ -68,7 +74,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
         if (!isset($this->generator)) {
             $this->generator = new Generator\Xml(
                 new Generator\Xml\FieldTypeHashGenerator(
-                    $this->createMock(NormalizerInterface::class),
+                    $this->createStub(NormalizerInterface::class),
                 ),
             );
         }
@@ -132,6 +138,8 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     protected function resetRouterMock(): void
     {
         $this->routerMock = null;
+        $this->routeExpectations = [];
+        $this->routerMockConfigured = false;
     }
 
     /**
@@ -139,14 +147,32 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
      */
     protected function addRouteExpectation(string $routeName, array $arguments, string $returnValue): void
     {
+        $this->routeExpectations[] = [$routeName, $arguments, $returnValue];
+
+        if ($this->routerMockConfigured) {
+            return;
+        }
+        $this->routerMockConfigured = true;
+
         $this->getRouterMock()
-            ->expects(self::at($this->routerCallIndex++))
+            ->expects(self::any())
             ->method('generate')
-            ->with(
-                self::equalTo($routeName),
-                self::equalTo($arguments)
-            )
-            ->willReturn($returnValue);
+            ->willReturnCallback(function (string $routeName, array $arguments = []) {
+                static $index = 0;
+                $callIndex = $index++;
+
+                // Calls beyond the registered expectations are not asserted, mirroring the
+                // permissive behaviour of the removed self::at() matcher.
+                if (!array_key_exists($callIndex, $this->routeExpectations)) {
+                    return '';
+                }
+                [$expectedRouteName, $expectedArguments, $returnValue] = $this->routeExpectations[$callIndex];
+
+                self::assertSame($expectedRouteName, $routeName);
+                self::assertEquals($expectedArguments, $arguments);
+
+                return $returnValue;
+            });
     }
 
     protected function getTemplatedRouterMock(): RouterInterface&MockObject
@@ -165,14 +191,32 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
      */
     protected function addTemplatedRouteExpectation(string $routeName, array $arguments, string $returnValue): void
     {
+        $this->templatedRouteExpectations[] = [$routeName, $arguments, $returnValue];
+
+        if ($this->templatedRouterMockConfigured) {
+            return;
+        }
+        $this->templatedRouterMockConfigured = true;
+
         $this->getTemplatedRouterMock()
-            ->expects(self::at($this->templatedRouterCallIndex++))
+            ->expects(self::any())
             ->method('generate')
-            ->with(
-                self::equalTo($routeName),
-                self::equalTo($arguments)
-            )
-            ->willReturn($returnValue);
+            ->willReturnCallback(function (string $routeName, array $arguments = []) {
+                static $index = 0;
+                $callIndex = $index++;
+
+                // Calls beyond the registered expectations are not asserted, mirroring the
+                // permissive behaviour of the removed self::at() matcher.
+                if (!array_key_exists($callIndex, $this->templatedRouteExpectations)) {
+                    return '';
+                }
+                [$expectedRouteName, $expectedArguments, $returnValue] = $this->templatedRouteExpectations[$callIndex];
+
+                self::assertSame($expectedRouteName, $routeName);
+                self::assertEquals($expectedArguments, $arguments);
+
+                return $returnValue;
+            });
     }
 
     abstract protected function internalGetVisitor(): ValueObjectVisitor;

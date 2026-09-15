@@ -12,13 +12,14 @@ use ApiPlatform\OpenApi\Model\Operation;
 use Ibexa\Bundle\Rest\ApiPlatform\EditionBadge\EditionBadgeFactory;
 use Ibexa\Tests\Bundle\Rest\DependencyInjection\EditionBadgesProcessorTest;
 use LogicException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Ibexa\Bundle\Rest\ApiPlatform\EditionBadge\EditionBadgeFactory
- *
  * @phpstan-import-type TBadgeList from \Ibexa\Bundle\Rest\ApiPlatform\EditionBadge\EditionBadgeFactoryInterface
  */
+#[CoversClass(\Ibexa\Bundle\Rest\ApiPlatform\EditionBadge\EditionBadgeFactory::class)]
 final class EditionBadgeFactoryTest extends TestCase
 {
     private const array TAG_TO_EDITION_MAP = [
@@ -38,12 +39,11 @@ final class EditionBadgeFactoryTest extends TestCase
     }
 
     /**
-     * @dataProvider provideOperationBadgeData
-     *
      * @param ?array<string> $tags
      *
      * @phpstan-param TBadgeList $expectedBadges
      */
+    #[DataProvider('provideOperationBadgeData')]
     public function testGetBadgesForOperation(?array $tags, array $expectedBadges): void
     {
         $operation = new Operation(tags: $tags);

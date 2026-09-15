@@ -12,7 +12,7 @@ use Ibexa\Core\Repository\Values\User\RoleCreateStruct;
 use Ibexa\Rest\Server\Input\Parser\RoleInput;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class RoleInputTest extends BaseTest
+class RoleInputTest extends BaseTestCase
 {
     public function testParse(): void
     {

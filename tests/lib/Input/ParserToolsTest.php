@@ -51,7 +51,7 @@ class ParserToolsTest extends TestCase
         $dispatcherMock->expects(self::once())
             ->method('parse')
             ->with(
-                self::isType('array'),
+                self::isArray(),
                 self::equalTo('application/my-type')
             );
 

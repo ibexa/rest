@@ -11,9 +11,10 @@ use Ibexa\Core\Repository\Values\ObjectState\ObjectState;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\ObjectStateList;
 use Ibexa\Rest\Values\RestObjectState;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class ObjectStateListTest extends ValueObjectVisitorBaseTest
+class ObjectStateListTest extends ValueObjectVisitorBaseTestCase
 {
     /**
      * Test the ObjectStateList visitor.
@@ -49,9 +50,8 @@ class ObjectStateListTest extends ValueObjectVisitorBaseTest
 
     /**
      * Test if result contains ObjectStateList element.
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsObjectStateListElement(string $result): void
     {
         $this->assertXMLTag(
@@ -66,9 +66,8 @@ class ObjectStateListTest extends ValueObjectVisitorBaseTest
 
     /**
      * Test if result contains ObjectStateList element attributes.
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsObjectStateListAttributes(string $result): void
     {
         $this->assertXMLTag(

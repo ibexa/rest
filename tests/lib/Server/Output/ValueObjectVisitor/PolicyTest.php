@@ -10,9 +10,10 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\ContentTypeLimitation;
 use Ibexa\Core\Repository\Values\User;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\Policy;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class PolicyTest extends ValueObjectVisitorBaseTest
+class PolicyTest extends ValueObjectVisitorBaseTestCase
 {
     /**
      * Test the Policy visitor.
@@ -58,9 +59,7 @@ class PolicyTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsPolicyElement(string $result): void
     {
         $this->assertXMLTag(
@@ -77,9 +76,7 @@ class PolicyTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsPolicyAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -96,9 +93,7 @@ class PolicyTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsIdValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -112,9 +107,7 @@ class PolicyTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsModuleValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -128,9 +121,7 @@ class PolicyTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsFunctionValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -144,9 +135,7 @@ class PolicyTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsLimitationsElement(string $result): void
     {
         $this->assertXMLTag(
@@ -159,9 +148,7 @@ class PolicyTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsLimitationsAttributes(string $result): void
     {
         $this->assertXMLTag(

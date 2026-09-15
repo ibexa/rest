@@ -15,7 +15,7 @@ use Ibexa\Rest\Server\Input\Parser\AbstractDestinationLocationParser;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-abstract class AbstractDestinationLocationInputTest extends BaseTest
+abstract class AbstractDestinationLocationInputTestCase extends BaseTestCase
 {
     private const int TESTED_LOCATION_ID = 22;
 

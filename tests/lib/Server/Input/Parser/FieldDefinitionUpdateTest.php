@@ -22,7 +22,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 /**
  * @todo Test with fieldSettings and validatorConfiguration when specifiedś
  */
-final class FieldDefinitionUpdateTest extends BaseTest
+final class FieldDefinitionUpdateTest extends BaseTestCase
 {
     public function testParse(): void
     {

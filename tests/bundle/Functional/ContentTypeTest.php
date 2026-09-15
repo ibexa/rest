@@ -8,6 +8,7 @@
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
 class ContentTypeTest extends RESTFunctionalTestCase
 {
@@ -41,11 +42,10 @@ XML;
     }
 
     /**
-     * @depends testCreateContentTypeGroup
-     * Covers PATCH /content/typegroups/<contentTypeGroupId>
-     *
      * @return string the updated content type href
+     * Covers PATCH /content/typegroups/<contentTypeGroupId>
      */
+    #[Depends('testCreateContentTypeGroup')]
     public function testUpdateContentTypeGroup(string $contentTypeGroupHref): string
     {
         $body = <<< XML
@@ -70,13 +70,12 @@ XML;
     }
 
     /**
-     * @depends testCreateContentTypeGroup
-     *
      * @returns string The created content type href
      * Covers POST /content/typegroups/<contentTypeGroupId>/types?publish=true
      *
      * @todo write test with full workflow (draft, edit, publish)
      */
+    #[Depends('testCreateContentTypeGroup')]
     public function testCreateContentType($contentTypeGroupHref)
     {
         $body = <<< XML
@@ -134,11 +133,10 @@ XML;
     }
 
     /**
-     * @depends testCreateContentTypeGroup
-     * Covers GET /content/typegroups/<contentTypeGroupId>
-     *
      * @param string $contentTypeGroupHref
+     * Covers GET /content/typegroups/<contentTypeGroupId>
      */
+    #[Depends('testCreateContentTypeGroup')]
     public function testListContentTypesForGroup($contentTypeGroupHref): void
     {
         $response = $this->sendHttpRequest(
@@ -162,9 +160,9 @@ XML;
     }
 
     /**
-     * @depends testUpdateContentTypeGroup
-     * Covers GET /content/typegroups?identifier=<contentTypeGroupIdentifier>
+     * Covers GET /content/typegroups?identifier=<contentTypeGroupIdentifier>.
      */
+    #[Depends('testUpdateContentTypeGroup')]
     public function testLoadContentTypeGroupListWithIdentifier(): void
     {
         $response = $this->sendHttpRequest(
@@ -175,9 +173,9 @@ XML;
     }
 
     /**
-     * @depends testUpdateContentTypeGroup
-     * Covers GET /content/typegroups/<contentTypeGroupId>
+     * Covers GET /content/typegroups/<contentTypeGroupId>.
      */
+    #[Depends('testUpdateContentTypeGroup')]
     public function testLoadContentTypeGroup(string $contentTypeGroupHref): void
     {
         $response = $this->sendHttpRequest(
@@ -188,11 +186,10 @@ XML;
     }
 
     /**
-     * @depends testUpdateContentTypeGroup
-     * Covers GET /content/typegroups/<contentTypeGroupId>
-     *
      * @param string $contentTypeGroupHref
+     * Covers GET /content/typegroups/<contentTypeGroupId>
      */
+    #[Depends('testUpdateContentTypeGroup')]
     public function testLoadContentTypeGroupNotFound($contentTypeGroupHref): void
     {
         $response = $this->sendHttpRequest(
@@ -203,9 +200,9 @@ XML;
     }
 
     /**
-     * @depends testCreateContentType
-     * Covers GET /content/types/<contentTypeId>
+     * Covers GET /content/types/<contentTypeId>.
      */
+    #[Depends('testCreateContentType')]
     public function testLoadContentType(string $contentTypeHref): void
     {
         $response = $this->sendHttpRequest(
@@ -216,9 +213,9 @@ XML;
     }
 
     /**
-     * @depends testCreateContentType
-     * Covers GET /content/types/<contentTypeId>
+     * Covers GET /content/types/<contentTypeId>.
      */
+    #[Depends('testCreateContentType')]
     public function testLoadContentTypeNotFound($contentTypeHref): void
     {
         $response = $this->sendHttpRequest(
@@ -229,9 +226,9 @@ XML;
     }
 
     /**
-     * @depends testCreateContentType
-     * Covers GET /content/types
+     * Covers GET /content/types.
      */
+    #[Depends('testCreateContentType')]
     public function testListContentTypes(): void
     {
         $response = $this->sendHttpRequest(
@@ -242,9 +239,9 @@ XML;
     }
 
     /**
-     * @depends testCreateContentType
-     * Covers GET /content/types?identifier=<contentTypeIdentifier>
+     * Covers GET /content/types?identifier=<contentTypeIdentifier>.
      */
+    #[Depends('testCreateContentType')]
     public function testListContentTypesByIdentifier(): void
     {
         $response = $this->sendHttpRequest(
@@ -256,9 +253,9 @@ XML;
     }
 
     /**
-     * @depends testCreateContentType
-     * Covers GET /content/types?remoteid=<contentTypeRemoteId>
+     * Covers GET /content/types?remoteid=<contentTypeRemoteId>.
      */
+    #[Depends('testCreateContentType')]
     public function testListContentTypesByRemoteId(): void
     {
         $response = $this->sendHttpRequest(
@@ -270,11 +267,10 @@ XML;
     }
 
     /**
-     * @depends testCreateContentType
-     * Covers COPY /content/types/<contentTypeId>
-     *
      * @return string The copied content type href
+     * Covers COPY /content/types/<contentTypeId>
      */
+    #[Depends('testCreateContentType')]
     public function testCopyContentType(string $sourceContentTypeHref)
     {
         $response = $this->sendHttpRequest(
@@ -295,10 +291,10 @@ XML;
     /**
      * Covers POST /content/type/<contentTypeId>.
      *
-     * @depends testCopyContentType
      *
      * @return string the created content type draft href
      */
+    #[Depends('testCopyContentType')]
     public function testCreateContentTypeDraft(string $contentTypeHref)
     {
         $content = <<< XML
@@ -329,9 +325,9 @@ XML;
     }
 
     /**
-     * @depends testCreateContentTypeDraft
-     * Covers GET /content/types/<contentTypeId>/draft
+     * Covers GET /content/types/<contentTypeId>/draft.
      */
+    #[Depends('testCreateContentTypeDraft')]
     public function testLoadContentTypeDraft(string $contentTypeDraftHref): void
     {
         $response = $this->sendHttpRequest(
@@ -342,9 +338,9 @@ XML;
     }
 
     /**
-     * @depends testCreateContentTypeDraft
-     * Covers PATCH /content/types/<contentTypeId>/draft
+     * Covers PATCH /content/types/<contentTypeId>/draft.
      */
+    #[Depends('testCreateContentTypeDraft')]
     public function testUpdateContentTypeDraft(string $contentTypeDraftHref): void
     {
         $content = <<< XML
@@ -371,10 +367,10 @@ XML;
     /**
      * Covers POST /content/types/<contentTypeId>/draft/fielddefinitions.
      *
-     * @depends testCreateContentTypeDraft
      *
      * @return string The content type draft field definition href
      */
+    #[Depends('testCreateContentTypeDraft')]
     public function testAddContentTypeDraftFieldDefinition($contentTypeDraftHref)
     {
         $body = <<< XML
@@ -411,11 +407,10 @@ XML;
     }
 
     /**
-     * @depends testCreateContentType
-     * Covers GET /content/types/<contentTypeId>/fieldDefinitions
-     *
      * @return string the href of the first field definition in the list
+     * Covers GET /content/types/<contentTypeId>/fieldDefinitions
      */
+    #[Depends('testCreateContentType')]
     public function testContentTypeLoadFieldDefinitionList($contentTypeHref)
     {
         $response = $this->sendHttpRequest(
@@ -430,11 +425,10 @@ XML;
     }
 
     /**
-     * @depends testAddContentTypeDraftFieldDefinition
-     * Covers GET /content/types/<contentTypeId>/fieldDefinitions/<fieldDefinitionId>
-     *
      * @throws \Psr\Http\Client\ClientException
+     * Covers GET /content/types/<contentTypeId>/fieldDefinitions/<fieldDefinitionId>
      */
+    #[Depends('testAddContentTypeDraftFieldDefinition')]
     public function testLoadContentTypeFieldDefinition(string $fieldDefinitionHref): void
     {
         $response = $this->sendHttpRequest(
@@ -447,10 +441,10 @@ XML;
     /**
      * Covers GET /content/types/{contentTypeId}/fieldDefinition/{fieldDefinitionIdentifier}.
      *
-     * @depends testCreateContentType
      *
      * @throws \Psr\Http\Client\ClientException
      */
+    #[Depends('testCreateContentType')]
     public function testLoadContentTypeFieldDefinitionByIdentifier(string $contentTypeHref): void
     {
         $url = sprintf('%s/fieldDefinition/title', $contentTypeHref);
@@ -468,11 +462,10 @@ XML;
     }
 
     /**
-     * @depends testAddContentTypeDraftFieldDefinition
-     * Covers PATCH /content/types/<contentTypeId>/fieldDefinitions/<fieldDefinitionId>
-     *
      * @todo the spec says PUT...
+     * Covers PATCH /content/types/<contentTypeId>/fieldDefinitions/<fieldDefinitionId>
      */
+    #[Depends('testAddContentTypeDraftFieldDefinition')]
     public function testUpdateContentTypeDraftFieldDefinition(string $fieldDefinitionHref): void
     {
         $body = <<< XML
@@ -500,9 +493,8 @@ XML;
 
     /**
      * Covers DELETE /content/types/<contentTypeId>/draft/fieldDefinitions/<fieldDefinitionId>.
-     *
-     * @depends testAddContentTypeDraftFieldDefinition
      */
+    #[Depends('testAddContentTypeDraftFieldDefinition')]
     public function deleteContentTypeDraftFieldDefinition(string $fieldDefinitionHref): void
     {
         $response = $this->sendHttpRequest(
@@ -514,9 +506,8 @@ XML;
 
     /**
      * Covers DELETE /content/types/<contentTypeId>/draft.
-     *
-     * @depends testCreateContentTypeDraft
      */
+    #[Depends('testCreateContentTypeDraft')]
     public function testDeleteContentTypeDraft(string $contentTypeDraftHref): void
     {
         $response = $this->sendHttpRequest(
@@ -527,9 +518,9 @@ XML;
     }
 
     /**
-     * @depends testCreateContentType
-     * Covers PUBLISH /content/types/<contentTypeId>/draft
+     * Covers PUBLISH /content/types/<contentTypeId>/draft.
      */
+    #[Depends('testCreateContentType')]
     public function testPublishContentTypeDraft(string $contentTypeHref): void
     {
         // we need to create a content type draft first since we deleted the previous one in testDeleteContentTypeDraft
@@ -543,9 +534,9 @@ XML;
     }
 
     /**
-     * @depends testCreateContentType
-     * Covers GET /content/types/<contentTypeId>/groups
+     * Covers GET /content/types/<contentTypeId>/groups.
      */
+    #[Depends('testCreateContentType')]
     public function testLoadGroupsOfContentType($contentTypeHref): void
     {
         $response = $this->sendHttpRequest(
@@ -556,11 +547,10 @@ XML;
     }
 
     /**
-     * @depends testCreateContentType
-     * Covers POST /content/types/<contentTypeId>/groups
-     *
      * @return string the content type href
+     * Covers POST /content/types/<contentTypeId>/groups
      */
+    #[Depends('testCreateContentType')]
     public function testLinkContentTypeToGroup($contentTypeHref)
     {
         // @todo Spec example is invalid, missing parameter name
@@ -572,9 +562,9 @@ XML;
     }
 
     /**
-     * @depends testLinkContentTypeToGroup
-     * Covers DELETE /content/types/{contentTypeId}/groups/{contentTypeGroupId}
+     * Covers DELETE /content/types/{contentTypeId}/groups/{contentTypeGroupId}.
      */
+    #[Depends('testLinkContentTypeToGroup')]
     public function testUnlinkContentTypeFromGroup($contentTypeHref): void
     {
         $response = $this->sendHttpRequest(
@@ -584,9 +574,7 @@ XML;
         self::assertHttpResponseCodeEquals($response, 200);
     }
 
-    /**
-     * @depends testCreateContentType
-     */
+    #[Depends('testCreateContentType')]
     public function testDeleteContentType(string $contentTypeHref): void
     {
         $response = $this->sendHttpRequest(
@@ -597,9 +585,9 @@ XML;
     }
 
     /**
-     * @depends testCreateContentTypeGroup
-     * Covers DELETE /content/typegroups/<contentTypeGroupId>
+     * Covers DELETE /content/typegroups/<contentTypeGroupId>.
      */
+    #[Depends('testCreateContentTypeGroup')]
     public function testDeleteContentTypeGroupNotEmpty(string $contentTypeGroupHref): void
     {
         $response = $this->sendHttpRequest(

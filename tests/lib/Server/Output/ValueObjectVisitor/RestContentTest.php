@@ -15,6 +15,7 @@ use Ibexa\Core\Repository\Values;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestContent;
 use Ibexa\Rest\Server\Values\Version;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class RestContentTest extends BaseContentValueObjectVisitorTestCase
@@ -118,105 +119,79 @@ class RestContentTest extends BaseContentValueObjectVisitorTestCase
         );
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testContentHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content[@href="/content/objects/22"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testContentIdCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content[@id="22"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testContentMediaTypeWithoutVersionCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content[@media-type="application/vnd.ibexa.api.ContentInfo+xml"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testContentRemoteIdCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content[@remoteId="abc123"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testContentTypeHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/ContentType[@href="/content/types/26"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testContentTypeMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/ContentType[@media-type="application/vnd.ibexa.api.ContentType+xml"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testNameCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/Name[text()="Sindelfingen"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testTranslatedNameCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/TranslatedName[text()="Sindelfingen (Translated)"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testCurrentVersionHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/CurrentVersion[@href="/content/objects/22/currentversion"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testCurrentVersionMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/CurrentVersion[@media-type="application/vnd.ibexa.api.Version+xml"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testCurrentVersionNoCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/currentVersionNo[text()="5"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testIsHiddenCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/isHidden[text()="true"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testStatusCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/status[text()="PUBLISHED"]');
@@ -282,25 +257,19 @@ class RestContentTest extends BaseContentValueObjectVisitorTestCase
         return $dom;
     }
 
-    /**
-     * @depends testVisitWithEmbeddedVersion
-     */
+    #[Depends('testVisitWithEmbeddedVersion')]
     public function testContentMediaTypeWithVersionCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content[@media-type="application/vnd.ibexa.api.Content+xml"]');
     }
 
-    /**
-     * @depends testVisitWithEmbeddedVersion
-     */
+    #[Depends('testVisitWithEmbeddedVersion')]
     public function testEmbeddedCurrentVersionHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/CurrentVersion[@href="/content/objects/22/currentversion"]');
     }
 
-    /**
-     * @depends testVisitWithEmbeddedVersion
-     */
+    #[Depends('testVisitWithEmbeddedVersion')]
     public function testEmbeddedCurrentVersionMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/Content/CurrentVersion[@media-type="application/vnd.ibexa.api.Version+xml"]');

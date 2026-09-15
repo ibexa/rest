@@ -12,17 +12,17 @@ use Ibexa\Tests\Bundle\Rest\Functional\SearchView\SearchCriterionTestCase;
 
 final class ObjectStateIdentifierTest extends SearchCriterionTestCase
 {
-    public function getCriteriaPayloads(): iterable
+    public static function getCriteriaPayloads(): iterable
     {
         return [
             'identifier with target group' => [
                 'json',
-                $this->buildJsonCriterionQuery('"ObjectStateIdentifierCriterion": {"value": "not_locked", "target": "ibexa_lock"}'),
+                self::buildJsonCriterionQuery('"ObjectStateIdentifierCriterion": {"value": "not_locked", "target": "ibexa_lock"}'),
                 16,
             ],
             'identifier without target group' => [
                 'json',
-                $this->buildJsonCriterionQuery('"ObjectStateIdentifierCriterion": {"value": "not_locked", "target": null}'),
+                self::buildJsonCriterionQuery('"ObjectStateIdentifierCriterion": {"value": "not_locked", "target": null}'),
                 16,
             ],
         ];

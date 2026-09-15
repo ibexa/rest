@@ -15,7 +15,7 @@ use Ibexa\Rest\Server\Input\Parser\LocationUpdate;
 use Ibexa\Rest\Server\Values\RestLocationUpdateStruct;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class LocationUpdateTest extends BaseTest
+class LocationUpdateTest extends BaseTestCase
 {
     public function testParse(): void
     {

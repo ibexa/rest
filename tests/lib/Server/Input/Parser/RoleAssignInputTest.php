@@ -13,7 +13,7 @@ use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Rest\Server\Input\Parser\RoleAssignInput;
 use Ibexa\Rest\Server\Values\RoleAssignment;
 
-class RoleAssignInputTest extends BaseTest
+class RoleAssignInputTest extends BaseTestCase
 {
     public function testParse(): void
     {

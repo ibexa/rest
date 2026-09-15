@@ -9,11 +9,11 @@ namespace Ibexa\Tests\Rest;
 
 use Ibexa\Contracts\Rest\FieldTypeProcessor;
 use Ibexa\Rest\FieldTypeProcessorRegistry;
-use Ibexa\Tests\Rest\Server\BaseTest;
+use Ibexa\Tests\Rest\Server\BaseTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use RuntimeException;
 
-class FieldTypeProcessorRegistryTest extends BaseTest
+class FieldTypeProcessorRegistryTest extends BaseTestCase
 {
     public function testRegisterProcessor(): void
     {

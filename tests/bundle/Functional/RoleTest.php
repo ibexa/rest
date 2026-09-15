@@ -8,6 +8,8 @@
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
 
 class RoleTest extends RESTFunctionalTestCase
 {
@@ -62,9 +64,9 @@ XML;
     }
 
     /**
-     * @depends testPublishRoleDraft
-     * Covers GET /user/roles/{roleId}
+     * Covers GET /user/roles/{roleId}.
      */
+    #[Depends('testPublishRoleDraft')]
     public function testLoadRole(string $roleHref): void
     {
         $response = $this->sendHttpRequest(
@@ -75,11 +77,10 @@ XML;
     }
 
     /**
-     * @depends testPublishRoleDraft
-     * Covers POST /user/roles/{roleId}
-     *
      * @return string The created role draft href
+     * Covers POST /user/roles/{roleId}
      */
+    #[Depends('testPublishRoleDraft')]
     public function testCreateRoleDraft(string $roleHref): string
     {
         $xml = <<< XML
@@ -114,9 +115,9 @@ XML;
     }
 
     /**
-     * @depends testCreateRoleDraft
-     * Covers GET /user/roles/{roleId}/draft
+     * Covers GET /user/roles/{roleId}/draft.
      */
+    #[Depends('testCreateRoleDraft')]
     public function testLoadRoleDraft(string $roleDraftHref): void
     {
         $response = $this->sendHttpRequest(
@@ -127,9 +128,9 @@ XML;
     }
 
     /**
-     * @depends testPublishRoleDraft
-     * Covers PATCH /user/roles/{roleId}
+     * Covers PATCH /user/roles/{roleId}.
      */
+    #[Depends('testPublishRoleDraft')]
     public function testUpdateRole(string $roleHref): void
     {
         $xml = <<< XML
@@ -153,9 +154,9 @@ XML;
     }
 
     /**
-     * @depends testCreateRoleDraft
-     * Covers PATCH /user/roles/{roleId}/draft
+     * Covers PATCH /user/roles/{roleId}/draft.
      */
+    #[Depends('testCreateRoleDraft')]
     public function testUpdateRoleDraft(string $roleDraftHref): void
     {
         $xml = <<< XML
@@ -187,10 +188,10 @@ XML;
     /**
      * Covers POST /user/roles/{roleId}/policies.
      *
-     * @depends testPublishRoleDraft
      *
      * @return string The created policy href
      */
+    #[Depends('testPublishRoleDraft')]
     public function testAddPolicy(string $roleHref): string
     {
         // @todo Error in Resource URL in spec @ https://github.com/ezsystems/ezpublish-kernel/blob/master/doc/specifications/rest/REST-API-V2.rst#151213create-policy
@@ -229,10 +230,10 @@ XML;
     /**
      * Covers POST /user/roles/{roleId}/policies.
      *
-     * @depends testCreateRoleDraft
      *
      * @return string The created policy href
      */
+    #[Depends('testCreateRoleDraft')]
     public function testAddPolicyByRoleDraft(string $roleDraftHref): string
     {
         $xml = <<< XML
@@ -269,9 +270,8 @@ XML;
 
     /**
      * Covers GET /user/roles/{roleId}/policies/{policyId}.
-     *
-     * @depends testAddPolicy
      */
+    #[Depends('testAddPolicy')]
     public function testLoadPolicy(string $policyHref): void
     {
         $response = $this->sendHttpRequest(
@@ -283,9 +283,8 @@ XML;
 
     /**
      * Covers GET /user/roles/{roleId}/policies.
-     *
-     * @depends testPublishRoleDraft
      */
+    #[Depends('testPublishRoleDraft')]
     public function testLoadPolicies(string $roleHref): void
     {
         $response = $this->sendHttpRequest(
@@ -297,9 +296,8 @@ XML;
 
     /**
      * Covers PATCH /user/roles/{roleId}/policies/{policyId}.
-     *
-     * @depends testAddPolicy
      */
+    #[Depends('testAddPolicy')]
     public function testUpdatePolicy(string $policyHref): mixed
     {
         $xml = <<< XML
@@ -331,9 +329,8 @@ XML;
 
     /**
      * Covers PATCH /user/roles/{roleId}/policies/{policyId}.
-     *
-     * @depends testAddPolicyByRoleDraft
      */
+    #[Depends('testAddPolicyByRoleDraft')]
     public function testUpdatePolicyByRoleDraft(string $policyHref): void
     {
         $xml = <<< XML
@@ -356,13 +353,12 @@ XML;
     }
 
     /**
-     * @depends testPublishRoleDraft
-     * Covers POST /user/users/{userId}/roles
-     *
      * @return string assigned role href
      *
      * @todo stop using the anonymous user, this is dangerous...
+     * Covers POST /user/users/{userId}/roles
      */
+    #[Depends('testPublishRoleDraft')]
     public function testAssignRoleToUser(string $roleHref): string
     {
         $xml = <<< XML
@@ -388,11 +384,7 @@ XML;
         return $roleAssignmentArray['RoleAssignmentList']['RoleAssignment'][0]['_href'];
     }
 
-    /**
-     * @covers \POST /user/users/{userId}/roles
-     *
-     * @dataProvider provideLimitations
-     */
+    #[DataProvider('provideLimitations')]
     public function testAssignRoleToUserWithLimitation(array $limitation): string
     {
         $roleHref = $this->createAndPublishRole('testAssignRoleToUserWithLimitation_' . $limitation['identifier']);
@@ -428,7 +420,7 @@ XML;
     /**
      * @return array<array<array{identifier: string, href: string}>>
      */
-    public function provideLimitations(): array
+    public static function provideLimitations(): array
     {
         return [
             [['identifier' => 'Section', 'href' => '/api/ibexa/v2/content/sections/1']],
@@ -438,9 +430,8 @@ XML;
 
     /**
      * Covers GET /user/users/{userId}/roles/{roleId}.
-     *
-     * @depends testAssignRoleToUser
      */
+    #[Depends('testAssignRoleToUser')]
     public function testLoadRoleAssignmentForUser(string $roleAssignmentHref): void
     {
         $response = $this->sendHttpRequest(
@@ -452,9 +443,8 @@ XML;
 
     /**
      * Covers DELETE /user/users/{userId}/roles/{roleId}.
-     *
-     * @depends testAssignRoleToUser
      */
+    #[Depends('testAssignRoleToUser')]
     public function testUnassignRoleFromUser(string $roleAssignmentHref): void
     {
         $response = $this->sendHttpRequest(
@@ -465,10 +455,9 @@ XML;
     }
 
     /**
-     * @depends testPublishRoleDraft
-     *
-     * Covers POST /user/groups/{groupId}/roles
+     * Covers POST /user/groups/{groupId}/roles.
      */
+    #[Depends('testPublishRoleDraft')]
     public function testAssignRoleToUserGroup(string $roleHref): string
     {
         $xml = <<< XML
@@ -501,9 +490,8 @@ XML;
 
     /**
      * Covers GET /user/groups/{groupId}/roles/{roleId}.
-     *
-     * @depends testAssignRoleToUserGroup
      */
+    #[Depends('testAssignRoleToUserGroup')]
     public function testLoadRoleAssignmentForUserGroup(string $roleAssignmentHref): void
     {
         $response = $this->sendHttpRequest(
@@ -516,9 +504,8 @@ XML;
 
     /**
      * Covers DELETE /user/groups/{groupId}/roles/{roleId}.
-     *
-     * @depends testAssignRoleToUserGroup
      */
+    #[Depends('testAssignRoleToUserGroup')]
     public function testUnassignRoleFromUserGroup(string $roleAssignmentHref): void
     {
         $response = $this->sendHttpRequest(
@@ -567,9 +554,8 @@ XML;
 
     /**
      * Covers DELETE /user/roles/{roleId}/policies/{policyId}.
-     *
-     * @depends testUpdatePolicy
      */
+    #[Depends('testUpdatePolicy')]
     public function testDeletePolicy(string $policyHref): void
     {
         $response = $this->sendHttpRequest(
@@ -581,9 +567,8 @@ XML;
 
     /**
      * Covers DELETE /user/roles/{roleId}/policies/{policyId}.
-     *
-     * @depends testAddPolicyByRoleDraft
      */
+    #[Depends('testAddPolicyByRoleDraft')]
     public function testRemovePolicyByRoleDraft(string $policyHref): void
     {
         $response = $this->sendHttpRequest(
@@ -595,9 +580,8 @@ XML;
 
     /**
      * Covers DELETE /user/roles/{roleId}/policies.
-     *
-     * @depends testPublishRoleDraft
      */
+    #[Depends('testPublishRoleDraft')]
     public function testDeletePolicies($roleHref): void
     {
         $response = $this->sendHttpRequest(
@@ -609,9 +593,8 @@ XML;
 
     /**
      * Covers DELETE /user/roles/{roleId}.
-     *
-     * @depends testPublishRoleDraft
      */
+    #[Depends('testPublishRoleDraft')]
     public function testDeleteRole(string $roleHref): void
     {
         $response = $this->sendHttpRequest(
@@ -623,9 +606,8 @@ XML;
 
     /**
      * Covers PUBLISH /user/roles/{roleId}/draft.
-     *
-     * @depends testCreateRoleDraft
      */
+    #[Depends('testCreateRoleDraft')]
     public function testPublishRoleDraft(string $roleDraftHref): string
     {
         $response = $this->sendHttpRequest(
@@ -647,9 +629,8 @@ XML;
 
     /**
      * Covers DELETE /user/roles/{roleId}/draft.
-     *
-     * @depends testCreateRoleDraft
      */
+    #[Depends('testCreateRoleDraft')]
     public function testDeleteRoleDraft(string $roleDraftHref): void
     {
         // we need to create a role draft first since we published the previous one in testPublishRoleDraft

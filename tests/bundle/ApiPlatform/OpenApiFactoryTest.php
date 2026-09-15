@@ -19,13 +19,12 @@ use ArrayObject;
 use Ibexa\Bundle\Rest\ApiPlatform\EditionBadge\EditionBadgeFactoryInterface;
 use Ibexa\Bundle\Rest\ApiPlatform\OpenApiFactory;
 use Ibexa\Bundle\Rest\ApiPlatform\SchemasCollectionFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-/**
- * @covers \Ibexa\Bundle\Rest\ApiPlatform\OpenApiFactory
- */
+#[CoversClass(\Ibexa\Bundle\Rest\ApiPlatform\OpenApiFactory::class)]
 final class OpenApiFactoryTest extends TestCase
 {
     private const string EXAMPLE_REQUEST_FILE = __DIR__ . '/Fixtures/examples/test-request.json.example';

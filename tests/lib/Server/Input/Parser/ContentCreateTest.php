@@ -22,7 +22,7 @@ use Ibexa\Rest\Server\Input\Parser\LocationCreate;
 use Ibexa\Rest\Server\Values\RestContentCreateStruct;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class ContentCreateTest extends BaseTest
+class ContentCreateTest extends BaseTestCase
 {
     public function testParse(): void
     {
@@ -457,12 +457,11 @@ class ContentCreateTest extends BaseTest
     {
         $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
             ->setConstructorArgs(
                 [
                     $this->getContentServiceMock(),
                     $this->getContentTypeServiceMock(),
-                    $this->createMock(FieldTypeService::class),
+                    $this->createStub(FieldTypeService::class),
                 ]
             )
             ->getMock();

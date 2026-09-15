@@ -12,7 +12,7 @@ use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Rest\Server\Input\Parser\MoveUserGroupInput;
 use Symfony\Component\Validator\Validation;
 
-final class MoveUserGroupInputTest extends AbstractDestinationLocationInputTest
+final class MoveUserGroupInputTest extends AbstractDestinationLocationInputTestCase
 {
     private const string PARSER = 'MoveUserGroupInput';
 

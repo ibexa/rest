@@ -12,6 +12,7 @@ use ArrayObject;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolverInterface;
 use Ibexa\Contracts\Rest\Output\Visitor;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -27,18 +28,18 @@ final class VisitorTest extends TestCase
 
     private EncoderInterface&MockObject $encoder;
 
-    private Generator&MockObject $generator;
+    private Generator&\PHPUnit\Framework\MockObject\Stub $generator;
 
-    private ValueObjectVisitorResolverInterface&MockObject $valueObjectVisitorResolver;
+    private ValueObjectVisitorResolverInterface&\PHPUnit\Framework\MockObject\Stub $valueObjectVisitorResolver;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->generator = $this->createMock(Generator::class);
+        $this->generator = $this->createStub(Generator::class);
         $this->normalizer = $this->createMock(NormalizerInterface::class);
         $this->encoder = $this->createMock(EncoderInterface::class);
-        $this->valueObjectVisitorResolver = $this->createMock(ValueObjectVisitorResolverInterface::class);
+        $this->valueObjectVisitorResolver = $this->createStub(ValueObjectVisitorResolverInterface::class);
 
         $this->visitor = new Visitor(
             $this->generator,
@@ -73,11 +74,10 @@ final class VisitorTest extends TestCase
     }
 
     /**
-     * @dataProvider provideForTestEncoderContextShouldBeRemoved
-     *
      * @param \ArrayObject|array<mixed> $content
      * @param \ArrayObject|array<mixed> $expectedEncoderData
      */
+    #[DataProvider('provideForTestEncoderContextShouldBeRemoved')]
     public function testEncoderContextShouldBeRemoved(
         array|ArrayObject $content,
         array|ArrayObject $expectedEncoderData,

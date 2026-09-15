@@ -10,6 +10,7 @@ namespace Ibexa\Tests\Rest\Input;
 
 use Ibexa\Contracts\Rest\Input\MediaTypeParser;
 use Ibexa\Contracts\Rest\Input\MediaTypeParserInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class MediaTypeParserTest extends TestCase
@@ -28,9 +29,7 @@ final class MediaTypeParserTest extends TestCase
         self::assertSame('CopyContentTypeInput', $this->mediaTypeParser->parseContentTypeHeader($header));
     }
 
-    /**
-     * @dataProvider providerForParsingFails
-     */
+    #[DataProvider('providerForParsingFails')]
     public function testParsingFails(string $header): void
     {
         self::assertNull($this->mediaTypeParser->parseContentTypeHeader($header));
@@ -39,7 +38,7 @@ final class MediaTypeParserTest extends TestCase
     /**
      * @return iterable<array<int, string>>
      */
-    public function providerForParsingFails(): iterable
+    public static function providerForParsingFails(): iterable
     {
         yield 'a' => ['application.CopyContentTypeInput+json'];
         yield 'b' => ['application.CopyContentTypeInput'];

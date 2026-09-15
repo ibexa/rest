@@ -8,6 +8,7 @@
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
 class LocationTest extends RESTFunctionalTestCase
 {
@@ -50,9 +51,9 @@ XML;
     }
 
     /**
-     * @depends testCreateLocation
-     * Covers GET /content/locations?remoteId=<locationRemoteId>
+     * Covers GET /content/locations?remoteId=<locationRemoteId>.
      */
+    #[Depends('testCreateLocation')]
     public function testRedirectLocationByRemoteId($locationHref): void
     {
         $response = $this->sendHttpRequest(
@@ -64,9 +65,9 @@ XML;
     }
 
     /**
-     * @depends testCreateLocation
-     * Covers GET /content/locations?id=<locationId>
+     * Covers GET /content/locations?id=<locationId>.
      */
+    #[Depends('testCreateLocation')]
     public function testRedirectLocationById($locationHref): void
     {
         $hrefParts = explode('/', $locationHref);
@@ -80,9 +81,9 @@ XML;
     }
 
     /**
-     * @depends testCreateLocation
-     * Covers GET /content/locations?urlAlias=<Path/To-Content>
+     * Covers GET /content/locations?urlAlias=<Path/To-Content>.
      */
+    #[Depends('testCreateLocation')]
     public function testRedirectLocationByURLAlias($locationHref): void
     {
         $testUrlAlias = 'firstPart/secondPart/testUrlAlias';
@@ -97,9 +98,9 @@ XML;
     }
 
     /**
-     * @depends testCreateLocation
-     * Covers GET /content/locations/{locationPath}
+     * Covers GET /content/locations/{locationPath}.
      */
+    #[Depends('testCreateLocation')]
     public function testLoadLocation(string $locationHref): void
     {
         $response = $this->sendHttpRequest(
@@ -110,11 +111,10 @@ XML;
     }
 
     /**
-     * @depends testCreateLocation
-     * Covers COPY /content/locations/{locationPath}
-     *
      * @return string the created location's href
+     * Covers COPY /content/locations/{locationPath}
      */
+    #[Depends('testCreateLocation')]
     public function testCopySubtree(string $locationHref)
     {
         $request = $this->createHttpRequest(
@@ -136,9 +136,8 @@ XML;
 
     /**
      * Covers MOVE /content/locations/{locationPath}.
-     *
-     * @depends testCopySubtree
      */
+    #[Depends('testCopySubtree')]
     public function testMoveSubtree(string $locationHref): string
     {
         $request = $this->createHttpRequest(
@@ -158,17 +157,17 @@ XML;
     }
 
     /**
-     * @depends testCreateLocation
-     * Covers GET /content/objects/{contentId}/locations
+     * Covers GET /content/objects/{contentId}/locations.
      */
+    #[Depends('testCreateLocation')]
     public function testLoadLocationsForContent($contentHref): void
     {
     }
 
     /**
-     * @depends testCreateLocation
-     * Covers SWAP /content/locations/{locationPath}
+     * Covers SWAP /content/locations/{locationPath}.
      */
+    #[Depends('testCreateLocation')]
     public function testSwapLocation($locationHref): void
     {
         self::markTestSkipped('@todo Implement');
@@ -183,9 +182,9 @@ XML;
     }
 
     /**
-     * @depends testCreateLocation
-     * Covers GET /content/locations/{locationPath}/children
+     * Covers GET /content/locations/{locationPath}/children.
      */
+    #[Depends('testCreateLocation')]
     public function testLoadLocationChildren($locationHref): void
     {
         $response = $this->sendHttpRequest(
@@ -198,9 +197,8 @@ XML;
 
     /**
      * Covers PATCH /content/locations/{locationPath}.
-     *
-     * @depends testCreateLocation
      */
+    #[Depends('testCreateLocation')]
     public function testUpdateLocation(string $locationHref): void
     {
         $body = <<< XML
@@ -224,9 +222,9 @@ XML;
     }
 
     /**
-     * @depends testCreateLocation
-     * Covers DELETE /content/locations/{path}
+     * Covers DELETE /content/locations/{path}.
      */
+    #[Depends('testCreateLocation')]
     public function testDeleteSubtree(string $locationHref): void
     {
         $response = $this->sendHttpRequest(
@@ -265,9 +263,7 @@ XML;
         return $href;
     }
 
-    /**
-     * @depends testMoveSubtree
-     */
+    #[Depends('testMoveSubtree')]
     public function testMoveLocation(string $locationHref): string
     {
         $request = $this->createHttpRequest(
@@ -286,9 +282,7 @@ XML;
         return $locationHref;
     }
 
-    /**
-     * @depends testMoveLocation
-     */
+    #[Depends('testMoveLocation')]
     public function testSwap(string $locationHref): void
     {
         $request = $this->createHttpRequest(
@@ -334,9 +328,7 @@ XML;
         self::assertHttpResponseCodeEquals($response, 204);
     }
 
-    /**
-     * @depends testMoveLocation
-     */
+    #[Depends('testMoveLocation')]
     public function testCopy(string $locationHref): void
     {
         $request = $this->createHttpRequest(

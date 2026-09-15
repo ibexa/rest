@@ -11,6 +11,7 @@ namespace Ibexa\Tests\Bundle\Rest\Functional\SearchView;
 use DOMDocument;
 use DOMElement;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class SearchViewTest extends SearchViewTestCase
 {
@@ -48,10 +49,10 @@ class SearchViewTest extends SearchViewTestCase
     /**
      * Covers POST with ContentQuery Logic on /api/ibexa/v2/views using payload in the XML format.
      *
-     * @dataProvider xmlProvider
      *
      * @throws \Psr\Http\Client\ClientExceptionInterface
      */
+    #[DataProvider('xmlProvider')]
     public function testSimpleXmlContentQuery(string $xmlQueryBody, int $expectedCount): void
     {
         $body = <<< XML
@@ -109,10 +110,10 @@ XML;
     /**
      * Covers POST with LocationQuery Logic on /api/ibexa/v2/views using payload in the JSON format.
      *
-     * @dataProvider jsonProvider
      *
      * @throws \Psr\Http\Client\ClientExceptionInterface
      */
+    #[DataProvider('jsonProvider')]
     public function testSimpleJsonContentQuery(string $jsonQueryBody, int $expectedCount): void
     {
         $body = <<< JSON
@@ -273,44 +274,44 @@ XML;
         );
     }
 
-    public function xmlProvider(): array
+    public static function xmlProvider(): array
     {
-        $fooTag = $this->buildFieldXml('tags', Operator::CONTAINS, 'foo');
-        $barTag = $this->buildFieldXml('tags', Operator::CONTAINS, 'bar');
-        $bazTag = $this->buildFieldXml('tags', Operator::CONTAINS, 'baz');
-        $foobazTag = $this->buildFieldXml('tags', Operator::CONTAINS, 'foobaz');
-        $foobazInTag = $this->buildFieldXml('tags', Operator::IN, ['foobaz']);
-        $bazfooInTag = $this->buildFieldXml('tags', Operator::IN, ['bazfoo']);
-        $fooAndBarInTag = $this->buildFieldXml('tags', Operator::IN, ['foo', 'bar']);
+        $fooTag = self::buildFieldXml('tags', Operator::CONTAINS, 'foo');
+        $barTag = self::buildFieldXml('tags', Operator::CONTAINS, 'bar');
+        $bazTag = self::buildFieldXml('tags', Operator::CONTAINS, 'baz');
+        $foobazTag = self::buildFieldXml('tags', Operator::CONTAINS, 'foobaz');
+        $foobazInTag = self::buildFieldXml('tags', Operator::IN, ['foobaz']);
+        $bazfooInTag = self::buildFieldXml('tags', Operator::IN, ['bazfoo']);
+        $fooAndBarInTag = self::buildFieldXml('tags', Operator::IN, ['foo', 'bar']);
 
         return [
             [
-                $this->getXmlString(
-                    $this->wrapIn('AND', [$fooTag, $barTag])
+                self::getXmlString(
+                    self::wrapIn('AND', [$fooTag, $barTag])
                 ),
                 1,
             ],
             [
-                $this->getXmlString(
-                    $this->wrapIn('OR', [
-                        $this->wrapIn('AND', [$fooTag, $barTag]),
-                        $this->wrapIn('AND', [$bazTag, $foobazTag]),
+                self::getXmlString(
+                    self::wrapIn('OR', [
+                        self::wrapIn('AND', [$fooTag, $barTag]),
+                        self::wrapIn('AND', [$bazTag, $foobazTag]),
                     ])
                 ),
                 2,
             ],
             [
-                $this->getXmlString(
-                    $this->wrapIn('AND', [
-                        $this->wrapIn('NOT', [$fooTag]),
+                self::getXmlString(
+                    self::wrapIn('AND', [
+                        self::wrapIn('NOT', [$fooTag]),
                         $barTag,
                     ])
                 ),
                 1,
             ],
             [
-                $this->getXmlString(
-                    $this->wrapIn('OR', [
+                self::getXmlString(
+                    self::wrapIn('OR', [
                         $foobazInTag,
                         $bazfooInTag,
                     ])
@@ -318,13 +319,13 @@ XML;
                 2,
             ],
             [
-                $this->getXmlString($fooAndBarInTag),
+                self::getXmlString($fooAndBarInTag),
                 2,
             ],
         ];
     }
 
-    public function jsonProvider(): array
+    public static function jsonProvider(): array
     {
         return [
             [
@@ -358,7 +359,7 @@ JSON,
     /**
      * @param string|string[] $value
      */
-    private function buildFieldXml(string $name, string $operator, string|array $value): DOMElement
+    private static function buildFieldXml(string $name, string $operator, string|array $value): DOMElement
     {
         $xml = new DOMDocument();
         $element = $xml->createElement('Field');
@@ -383,7 +384,7 @@ JSON,
         return $element;
     }
 
-    private function wrapIn(string $logicalOperator, array $toWrap): DOMElement
+    private static function wrapIn(string $logicalOperator, array $toWrap): DOMElement
     {
         $xml = new DOMDocument();
         $wrapper = $xml->createElement($logicalOperator);
@@ -397,7 +398,7 @@ JSON,
         return $wrapper;
     }
 
-    private function getXmlString(DOMElement $simpleXMLElement): string
+    private static function getXmlString(DOMElement $simpleXMLElement): string
     {
         return $simpleXMLElement->ownerDocument->saveXML($simpleXMLElement);
     }

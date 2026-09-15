@@ -12,7 +12,7 @@ use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Rest\Server\Input\Parser\CopyContentInput;
 use Symfony\Component\Validator\Validation;
 
-final class CopyContentInputTest extends AbstractDestinationLocationInputTest
+final class CopyContentInputTest extends AbstractDestinationLocationInputTestCase
 {
     private const string PARSER = 'CopyContentInput';
 
