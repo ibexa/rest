@@ -5,6 +5,8 @@
   beStrictAboutTestsThatDoNotTestAnything="false"
   cacheDirectory=".phpunit.cache"
   colors="true"
+  failOnDeprecation="true"
+  displayDetailsOnTestsThatTriggerDeprecations="true"
   >
   <testsuites>
     <testsuite name="Ibexa REST Bundle">
@@ -20,4 +22,11 @@
       <directory>tests/lib/Server</directory>
     </testsuite>
   </testsuites>
+  <source baseline="phpunit.baseline.xml" ignoreIndirectDeprecations="false" ignoreSuppressionOfDeprecations="true">
+    <include>
+      <directory>src/bundle</directory>
+      <directory>src/lib</directory>
+      <directory>src/contracts</directory>
+    </include>
+  </source>
 </phpunit>

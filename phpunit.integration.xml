@@ -1,15 +1,21 @@
 <?xml version="1.0"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd" bootstrap="tests/integration/bootstrap.php" beStrictAboutOutputDuringTests="true" cacheDirectory=".phpunit.cache">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd" bootstrap="tests/integration/bootstrap.php" beStrictAboutOutputDuringTests="true" cacheDirectory=".phpunit.cache" failOnDeprecation="true" displayDetailsOnTestsThatTriggerDeprecations="true">
   <php>
     <ini name="date.timezone" value="UTC"/>
     <env name="KERNEL_CLASS" value="Ibexa\Tests\Integration\Rest\IbexaTestKernel"/>
     <env name="SEARCH_ENGINE" value="legacy"/>
     <env name="DATABASE_URL" value="sqlite://i@i/test.db"/>
-    <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[self]=4&amp;max[direct]=0&amp;verbose=0"/>
   </php>
   <testsuites>
     <testsuite name="integration">
       <directory>tests/integration</directory>
     </testsuite>
   </testsuites>
+  <source baseline="phpunit.integration.baseline.xml" ignoreIndirectDeprecations="false" ignoreSuppressionOfDeprecations="true">
+    <include>
+      <directory>src/bundle</directory>
+      <directory>src/lib</directory>
+      <directory>src/contracts</directory>
+    </include>
+  </source>
 </phpunit>
