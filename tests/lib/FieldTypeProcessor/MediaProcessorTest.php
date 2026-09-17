@@ -8,13 +8,17 @@
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Rest\FieldTypeProcessor\MediaProcessor;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
 
-class MediaProcessorTest extends BinaryInputProcessorTest
+#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\MediaProcessor::class, 'preProcessFieldSettingsHash')]
+#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\MediaProcessor::class, 'postProcessFieldSettingsHash')]
+class MediaProcessorTest extends BinaryInputProcessorTestCase
 {
     /**
      * @var string[]
      */
-    protected array $constants = [
+    protected static array $constants = [
         'TYPE_FLASH',
         'TYPE_QUICKTIME',
         'TYPE_REALPLAYER',
@@ -27,7 +31,7 @@ class MediaProcessorTest extends BinaryInputProcessorTest
     /**
      * @return array<array{array{mediaType: string}, array{mediaType: mixed}}>
      */
-    public function fieldSettingsHashes(): array
+    public static function fieldSettingsHashes(): array
     {
         return array_map(
             static function ($constantName): array {
@@ -36,15 +40,11 @@ class MediaProcessorTest extends BinaryInputProcessorTest
                     ['mediaType' => constant("Ibexa\\Core\\FieldType\\Media\\Type::{$constantName}")],
                 ];
             },
-            $this->constants
+            self::$constants
         );
     }
 
-    /**
-     * @covers \Ibexa\Rest\FieldTypeProcessor\MediaProcessor::preProcessFieldSettingsHash
-     *
-     * @dataProvider fieldSettingsHashes
-     */
+    #[DataProvider('fieldSettingsHashes')]
     public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
     {
         $processor = $this->getProcessor();
@@ -56,13 +56,10 @@ class MediaProcessorTest extends BinaryInputProcessorTest
     }
 
     /**
-     * @covers \Ibexa\Rest\FieldTypeProcessor\MediaProcessor::postProcessFieldSettingsHash
-     *
-     * @dataProvider fieldSettingsHashes
-     *
      * @param array<string, mixed> $inputSettings
      * @param array<string, mixed> $outputSettings
      */
+    #[DataProvider('fieldSettingsHashes')]
     public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
     {
         $processor = $this->getProcessor();

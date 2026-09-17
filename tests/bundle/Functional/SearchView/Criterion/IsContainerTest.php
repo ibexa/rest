@@ -22,17 +22,17 @@ final class IsContainerTest extends SearchCriterionTestCase
      *     },
      * >
      */
-    public function getCriteriaPayloads(): iterable
+    public static function getCriteriaPayloads(): iterable
     {
         return [
             'is container' => [
                 'json',
-                $this->buildJsonCriterionQuery('"IsContainerCriterion": true'),
+                self::buildJsonCriterionQuery('"IsContainerCriterion": true'),
                 14,
             ],
             'is not container' => [
                 'json',
-                $this->buildJsonCriterionQuery('"IsContainerCriterion": false'),
+                self::buildJsonCriterionQuery('"IsContainerCriterion": false'),
                 2,
             ],
         ];

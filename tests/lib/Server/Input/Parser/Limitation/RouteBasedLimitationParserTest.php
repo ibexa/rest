@@ -9,9 +9,9 @@ namespace Ibexa\Tests\Rest\Server\Input\Parser\Limitation;
 
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation;
 use Ibexa\Rest\Server\Input\Parser\Limitation\RouteBasedLimitationParser;
-use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
+use Ibexa\Tests\Rest\Server\Input\Parser\BaseTestCase;
 
-class RouteBasedLimitationParserTest extends BaseTest
+class RouteBasedLimitationParserTest extends BaseTestCase
 {
     public function testParse(): void
     {
@@ -27,7 +27,7 @@ class RouteBasedLimitationParserTest extends BaseTest
         $result = $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
 
         self::assertInstanceOf(Limitation::class, $result);
-        self::assertObjectHasAttribute('limitationValues', $result);
+        self::assertObjectHasProperty('limitationValues', $result);
         self::assertArrayHasKey(0, $result->limitationValues);
         self::assertEquals(42, $result->limitationValues[0]);
     }

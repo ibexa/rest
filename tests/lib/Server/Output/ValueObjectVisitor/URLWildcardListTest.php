@@ -10,9 +10,10 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Core\Repository\Values\Content;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\URLWildcardList;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class URLWildcardListTest extends ValueObjectVisitorBaseTest
+class URLWildcardListTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -42,9 +43,7 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsUrlWildcardListElement(string $result): void
     {
         $this->assertXMLTag(
@@ -57,9 +56,7 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsUrlWildcardListAttributes(string $result): void
     {
         $this->assertXMLTag(

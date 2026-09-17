@@ -10,7 +10,7 @@ namespace Ibexa\Tests\Rest\Server\Input\Parser;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Rest\Server\Input\Parser\RelationCreate;
 
-class RelationCreateTest extends BaseTest
+class RelationCreateTest extends BaseTestCase
 {
     public function testParse(): void
     {

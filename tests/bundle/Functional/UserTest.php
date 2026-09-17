@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 use Psr\Http\Message\ResponseInterface;
 
 final class UserTest extends RESTFunctionalTestCase
@@ -119,9 +120,8 @@ XML;
 
     /**
      * Covers GET /user/groups/{groupId}.
-     *
-     * @depends testCreateUserGroup
      */
+    #[Depends('testCreateUserGroup')]
     public function testLoadUserGroup(string $groupId): void
     {
         $response = $this->sendHttpRequest(
@@ -133,9 +133,8 @@ XML;
 
     /**
      * Covers PATCH /user/groups/{groupPath}.
-     *
-     * @depends testCreateUserGroup
      */
+    #[Depends('testCreateUserGroup')]
     public function testUpdateUserGroup(string $groupHref): void
     {
         $text = $this->addTestSuffix(__FUNCTION__);
@@ -164,12 +163,10 @@ XML;
     }
 
     /**
-     * @depends testCreateUserGroup
-     *
      * Covers POST /user/groups/{groupPath}/users
-     *
-     * returns created user href
+     * returns created user href.
      */
+    #[Depends('testCreateUserGroup')]
     public function testCreateUser(string $userGroupHref): string
     {
         $text = $this->addTestSuffix(__FUNCTION__);
@@ -213,9 +210,7 @@ XML;
         return $href;
     }
 
-    /**
-     * @depends testCreateUser
-     */
+    #[Depends('testCreateUser')]
     public function testLoadUser(string $userHref): void
     {
         $response = $this->sendHttpRequest(
@@ -248,10 +243,9 @@ XML;
     }
 
     /**
-     * @depends testCreateUser
-     *
-     * Covers PATCH /user/users/{userId}
+     * Covers PATCH /user/users/{userId}.
      */
+    #[Depends('testCreateUser')]
     public function testUpdateUser(string $userHref): void
     {
         $xml = <<< XML
@@ -291,10 +285,9 @@ XML;
     }
 
     /**
-     * @depends testCreateUser
-     *
-     * Covers GET /user/users?remoteId={userRemoteId}
+     * Covers GET /user/users?remoteId={userRemoteId}.
      */
+    #[Depends('testCreateUser')]
     public function testLoadUserByRemoteId(): void
     {
         $remoteId = $this->addTestSuffix('testCreateUser');
@@ -318,10 +311,9 @@ XML;
     }
 
     /**
-     * @depends testCreateUserGroup
-     *
-     * Covers GET /user/groups?remoteId={groupRemoteId}
+     * Covers GET /user/groups?remoteId={groupRemoteId}.
      */
+    #[Depends('testCreateUserGroup')]
     public function testLoadUserGroupByRemoteId(): void
     {
         $remoteId = $this->addTestSuffix('testCreateUserGroup');
@@ -334,9 +326,8 @@ XML;
 
     /**
      * Covers GET /user/users/{userId}/drafts.
-     *
-     * @depends testCreateUser
      */
+    #[Depends('testCreateUser')]
     public function testLoadUserDrafts(string $userHref): void
     {
         $response = $this->sendHttpRequest(
@@ -347,10 +338,9 @@ XML;
     }
 
     /**
-     * @depends testCreateUserGroup
-     *
-     * Covers GET /user/groups/{groupPath}/subgroups
+     * Covers GET /user/groups/{groupPath}/subgroups.
      */
+    #[Depends('testCreateUserGroup')]
     public function testLoadSubUserGroups(string $groupHref): void
     {
         $response = $this->sendHttpRequest(
@@ -362,9 +352,8 @@ XML;
 
     /**
      * Covers GET /user/users/{userId}/groups.
-     *
-     * @depends testCreateUser
      */
+    #[Depends('testCreateUser')]
     public function testLoadUserGroupsOfUser(string $userHref): void
     {
         $response = $this->sendHttpRequest(
@@ -376,9 +365,8 @@ XML;
 
     /**
      * Covers GET /user/groups/<groupPath>/users.
-     *
-     * @depends testCreateUserGroup
      */
+    #[Depends('testCreateUserGroup')]
     public function testLoadUsersFromGroup(string $groupHref): void
     {
         $response = $this->sendHttpRequest(
@@ -390,9 +378,8 @@ XML;
 
     /**
      * Covers POST /user/users/{userId}/groups.
-     *
-     * @depends testCreateUser
      */
+    #[Depends('testCreateUser')]
     public function testAssignUserToUserGroup(string $userHref): string
     {
         // /1/5/12 is Members
@@ -407,9 +394,8 @@ XML;
 
     /**
      * Covers DELETE /user/users/{userId}/groups/{groupPath}.
-     *
-     * @depends testAssignUserToUserGroup
      */
+    #[Depends('testAssignUserToUserGroup')]
     public function testUnassignUserFromUserGroup(string $userHref): void
     {
         // /1/5/12 is Members
@@ -422,9 +408,8 @@ XML;
 
     /**
      * Covers MOVE /user/groups/{groupPath}.
-     *
-     * @depends testCreateUserGroup
      */
+    #[Depends('testCreateUserGroup')]
     public function testMoveUserGroup(string $groupHref): ResponseInterface
     {
         $request = $this->createHttpRequest(
@@ -442,9 +427,7 @@ XML;
         return $response;
     }
 
-    /**
-     * @depends testMoveUserGroup
-     */
+    #[Depends('testMoveUserGroup')]
     public function testMoveGroup(ResponseInterface $response): ResponseInterface
     {
         $userGroupHref = $response->getHeader('Location')[0];
@@ -468,9 +451,7 @@ XML;
         return $response;
     }
 
-    /**
-     * @depends testMoveGroup
-     */
+    #[Depends('testMoveGroup')]
     public function testMoveGroupToMissingLocationThrowsForbiddenException(ResponseInterface $response): void
     {
         $userGroupHref = $response->getHeader('Location')[0];
@@ -492,10 +473,9 @@ XML;
     }
 
     /**
-     * @depends testCreateUser
-     *
-     * Covers POST /user/sessions
+     * Covers POST /user/sessions.
      */
+    #[Depends('testCreateUser')]
     public function testCreateSession(): string
     {
         self::markTestSkipped('@todo fixme');
@@ -527,10 +507,9 @@ XML;
     }
 
     /**
-     * @depends testCreateSession
-     *
-     * Covers DELETE /user/sessions/{sessionId}
+     * Covers DELETE /user/sessions/{sessionId}.
      */
+    #[Depends('testCreateSession')]
     public function testDeleteSession(string $sessionHref): void
     {
         self::markTestSkipped('@todo improve. The session can only be deleted if started !');
@@ -543,10 +522,9 @@ XML;
     }
 
     /**
-     * @depends testCreateUser
-     *
-     * Covers DELETE /user/users/{userId}
+     * Covers DELETE /user/users/{userId}.
      */
+    #[Depends('testCreateUser')]
     public function testDeleteUser(string $userHref): void
     {
         $response = $this->sendHttpRequest(
@@ -557,10 +535,9 @@ XML;
     }
 
     /**
-     * @depends testCreateUserGroup
-     *
-     * Covers DELETE /user/users/{userId}
+     * Covers DELETE /user/users/{userId}.
      */
+    #[Depends('testCreateUserGroup')]
     public function testDeleteUserGroup(string $groupHref): void
     {
         $response = $this->sendHttpRequest(

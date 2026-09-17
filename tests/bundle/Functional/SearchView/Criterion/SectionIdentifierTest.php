@@ -12,18 +12,18 @@ use Ibexa\Tests\Bundle\Rest\Functional\SearchView\SearchCriterionTestCase;
 
 final class SectionIdentifierTest extends SearchCriterionTestCase
 {
-    public function getCriteriaPayloads(): iterable
+    public static function getCriteriaPayloads(): iterable
     {
         return [
             'a single Section' => [
                 'json',
-                $this->buildJsonCriterionQuery('"SectionIdentifierCriterion": "users"'),
+                self::buildJsonCriterionQuery('"SectionIdentifierCriterion": "users"'),
                 // 2 users + 5 groups
                 7,
             ],
             'multiple Sections' => [
                 'json',
-                $this->buildJsonCriterionQuery('"SectionIdentifierCriterion": "users,standard"'),
+                self::buildJsonCriterionQuery('"SectionIdentifierCriterion": "users,standard"'),
                 // 2 users + 7 groups + 1 Home Folder
                 10,
             ],

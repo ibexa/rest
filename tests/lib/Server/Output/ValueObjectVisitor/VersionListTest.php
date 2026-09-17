@@ -11,9 +11,10 @@ use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\VersionList;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class VersionListTest extends ValueObjectVisitorBaseTest
+class VersionListTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -52,9 +53,7 @@ class VersionListTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsVersionListElement(string $result): void
     {
         $this->assertXMLTag(
@@ -67,9 +66,7 @@ class VersionListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsVersionListAttributes(string $result): void
     {
         $this->assertXMLTag(

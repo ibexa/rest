@@ -11,11 +11,11 @@ namespace Ibexa\Tests\Integration\Rest\UriParser;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Ibexa\Contracts\Test\Core\IbexaKernelTestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @covers \Ibexa\Contracts\Rest\UriParser\UriParserInterface
- */
+#[CoversClass(\Ibexa\Contracts\Rest\UriParser\UriParserInterface::class)]
 final class UriParserTest extends IbexaKernelTestCase
 {
     private UriParserInterface $uriParser;
@@ -48,10 +48,9 @@ final class UriParserTest extends IbexaKernelTestCase
     }
 
     /**
-     * @dataProvider getDataForTestGetAttributeFromUri
-     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
+    #[DataProvider('getDataForTestGetAttributeFromUri')]
     public function testGetAttributeFromUri(
         string $method,
         string $uri,
@@ -98,10 +97,9 @@ final class UriParserTest extends IbexaKernelTestCase
     }
 
     /**
-     * @dataProvider getDataForTestGetAttributeFromUriThrowsException
-     *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
      */
+    #[DataProvider('getDataForTestGetAttributeFromUriThrowsException')]
     public function testGetAttributeFromUriThrowsException(
         string $method,
         string $uri,
@@ -134,17 +132,13 @@ final class UriParserTest extends IbexaKernelTestCase
         ];
     }
 
-    /**
-     * @dataProvider getDataForTestIsRestRequest
-     */
+    #[DataProvider('getDataForTestIsRestRequest')]
     public function testIsRestRequest(Request $request, bool $isRestRequest): void
     {
         self::assertSame($isRestRequest, $this->uriParser->isRestRequest($request));
     }
 
-    /**
-     * @dataProvider getDataForTestIsRestRequest
-     */
+    #[DataProvider('getDataForTestIsRestRequest')]
     public function testHasRestPrefix(Request $request, bool $hasRestPrefix): void
     {
         self::assertSame($hasRestPrefix, $this->uriParser->hasRestPrefix($request->getPathInfo()));
@@ -168,12 +162,11 @@ final class UriParserTest extends IbexaKernelTestCase
     }
 
     /**
-     * @dataProvider getDataForTestMatchUri
-     *
      * @param array<string, string> $expectedMatch
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\InvalidArgumentException
      */
+    #[DataProvider('getDataForTestMatchUri')]
     public function testMatchUri(string $uri, string $method, array $expectedMatch): void
     {
         $actualMatch = $this->uriParser->matchUri($uri, $method);
@@ -204,10 +197,9 @@ final class UriParserTest extends IbexaKernelTestCase
     }
 
     /**
-     * @dataProvider getInvalidDataForTestMatchUri
-     *
      * @throws \Ibexa\Contracts\Rest\Exceptions\InvalidArgumentException
      */
+    #[DataProvider('getInvalidDataForTestMatchUri')]
     public function testMatchUriThrowsException(string $uri, string $method, string $expectedExceptionMessage): void
     {
         $this->expectException(InvalidArgumentException::class);

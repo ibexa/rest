@@ -12,9 +12,10 @@ use Ibexa\Core\Repository\Values\ContentType\ContentTypeGroup;
 use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\ContentTypeGroupRefList;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
+class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTestCase
 {
     /**
      * @todo coverage test with one group (can't be deleted)
@@ -99,81 +100,61 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
         return $dom;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testContentTypeGroupRefListHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList[@href="/content/types/42/groups"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testContentTypeGroupRefListMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList[@media-type="application/vnd.ibexa.api.ContentTypeGroupRefList+xml"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testFirstContentTypeGroupRefHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[1][@href="/content/typegroups/1"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testFirstContentTypeGroupRefMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[1][@media-type="application/vnd.ibexa.api.ContentTypeGroup+xml"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testFirstContentTypeGroupRefUnlinkHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[1]/unlink[@href="/content/types/42/groups/1"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testFirstContentTypeGroupRefUnlinkMethodCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[1]/unlink[@method="DELETE"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testSecondContentTypeGroupRefHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[2][@href="/content/typegroups/2"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testSecondContentTypeGroupRefMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[2][@media-type="application/vnd.ibexa.api.ContentTypeGroup+xml"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testSecondContentTypeGroupRefUnlinkHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[2]/unlink[@href="/content/types/42/groups/2"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testSecondContentTypeGroupRefUnlinkMethodCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentTypeGroupRefList/ContentTypeGroupRef[2]/unlink[@method="DELETE"]');

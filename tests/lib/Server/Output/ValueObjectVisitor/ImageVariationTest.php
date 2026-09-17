@@ -9,9 +9,10 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Variation\Values\ImageVariation;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class ImageVariationTest extends ValueObjectVisitorBaseTest
+class ImageVariationTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): \DOMDocument
     {
@@ -58,105 +59,79 @@ class ImageVariationTest extends ValueObjectVisitorBaseTest
         return $dom;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testContentImageVariationContentTagExists(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testContentImageVariationTagHrefAttribute(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation[@href="/content/binary/images/123-456789/variations/test"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testContentImageVariationTagMediaTypeAttribute(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation[@media-type="application/vnd.ibexa.api.ContentImageVariation+xml"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testUriTagExists(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/uri');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testUriTagValue(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/uri[text()="/path/to/image/123/456789/variation.png"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testContentTypeTagExists(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/contentType');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testContentTypeTagValue(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/contentType[text()="image/png"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testWidthTagExists(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/width');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testWidthTagValue(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/width[text()="600"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testHeightTagExists(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/height');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testHeightTagValue(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/height[text()="400"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testFileSizeTagExists(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/fileSize');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testFileSizeTagValue(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/ContentImageVariation/fileSize[text()="12345"]');

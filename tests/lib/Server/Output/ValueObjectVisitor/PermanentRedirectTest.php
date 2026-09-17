@@ -9,9 +9,9 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\PermanentRedirect;
 use Ibexa\Rest\Server\Values;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
 
-class PermanentRedirectTest extends ValueObjectVisitorBaseTest
+class PermanentRedirectTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): void
     {

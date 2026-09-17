@@ -10,13 +10,17 @@ namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\FieldTypeProcessor\RelationListProcessor;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\RouterInterface;
 
+#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::class, 'preProcessFieldSettingsHash')]
+#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::class, 'postProcessFieldSettingsHash')]
 class RelationListProcessorTest extends TestCase
 {
     /** @var string[] */
-    protected array $constants = [
+    protected static array $constants = [
         'SELECTION_BROWSE',
         'SELECTION_DROPDOWN',
     ];
@@ -24,7 +28,7 @@ class RelationListProcessorTest extends TestCase
     /**
      * @return array<array{array{selectionMethod: string}, array{selectionMethod: mixed}}>
      */
-    public function fieldSettingsHashes(): array
+    public static function fieldSettingsHashes(): array
     {
         return array_map(
             static function ($constantName): array {
@@ -33,18 +37,15 @@ class RelationListProcessorTest extends TestCase
                     ['selectionMethod' => constant("Ibexa\\Core\\FieldType\\RelationList\\Type::{$constantName}")],
                 ];
             },
-            $this->constants
+            self::$constants
         );
     }
 
     /**
-     * @covers \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::preProcessFieldSettingsHash
-     *
-     * @dataProvider fieldSettingsHashes
-     *
      * @param array<string, mixed> $inputSettings
      * @param array<string, mixed> $outputSettings
      */
+    #[DataProvider('fieldSettingsHashes')]
     public function testPreProcessFieldSettingsHash(array $inputSettings, array $outputSettings): void
     {
         $processor = $this->getProcessor();
@@ -56,13 +57,10 @@ class RelationListProcessorTest extends TestCase
     }
 
     /**
-     * @covers \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::postProcessFieldSettingsHash
-     *
-     * @dataProvider fieldSettingsHashes
-     *
      * @param array<string, mixed> $inputSettings
      * @param array<string, mixed> $outputSettings
      */
+    #[DataProvider('fieldSettingsHashes')]
     public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
     {
         $processor = $this->getProcessor();
@@ -113,17 +111,24 @@ class RelationListProcessorTest extends TestCase
 
         $routerMock = $this->createMock(RouterInterface::class);
         $processor->setRouter($routerMock);
+        $matcher = self::exactly(2);
 
         $routerMock
-            ->expects(self::exactly(2))
-            ->method('generate')
-            ->withConsecutive(
-                ['ibexa.rest.load_content', ['contentId' => 42]],
-                ['ibexa.rest.load_content', ['contentId' => 300]]
-            )->willReturnOnConsecutiveCalls(
-                '/api/ibexa/v2/content/objects/42',
-                '/api/ibexa/v2/content/objects/300'
-            );
+            ->expects($matcher)
+            ->method('generate')->willReturnCallback(function (...$parameters) use ($matcher) {
+            if ($matcher->numberOfInvocations() === 1) {
+                $this->assertSame('ibexa.rest.load_content', $parameters[0]);
+                $this->assertSame(['contentId' => 42], $parameters[1]);
+
+                return '/api/ibexa/v2/content/objects/42';
+            }
+            if ($matcher->numberOfInvocations() === 2) {
+                $this->assertSame('ibexa.rest.load_content', $parameters[0]);
+                $this->assertSame(['contentId' => 300], $parameters[1]);
+
+                return '/api/ibexa/v2/content/objects/300';
+            }
+        });
 
         $hash = $processor->postProcessValueHash(['destinationContentIds' => [42, 300]]);
         self::assertArrayHasKey('destinationContentHrefs', $hash);

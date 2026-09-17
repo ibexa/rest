@@ -10,13 +10,13 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\CachedValue;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use stdClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class CachedValueTest extends ValueObjectVisitorBaseTest
+class CachedValueTest extends ValueObjectVisitorBaseTestCase
 {
     protected $options;
 
@@ -41,9 +41,20 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
     {
         $responseMock = $this->getResponseMock();
         $responseMock->expects(self::once())->method('setPublic');
-        $responseMock->expects(self::at(1))->method('setVary')->with('Accept');
         $responseMock->expects(self::once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
-        $responseMock->expects(self::at(3))->method('setVary')->with('X-User-Hash', false);
+
+        $setVaryMatcher = self::exactly(2);
+        $responseMock->expects($setVaryMatcher)
+            ->method('setVary')
+            ->willReturnCallback(static function (...$parameters) use ($setVaryMatcher, $responseMock) {
+                match ($setVaryMatcher->numberOfInvocations()) {
+                    1 => self::assertSame(['Accept', true], $parameters),
+                    2 => self::assertSame(['X-User-Hash', false], $parameters),
+                    default => self::fail('Unexpected call to setVary().'),
+                };
+
+                return $responseMock;
+            });
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
@@ -54,9 +65,20 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
     {
         $responseMock = $this->getResponseMock();
         $responseMock->expects(self::once())->method('setPublic');
-        $responseMock->expects(self::at(1))->method('setVary')->with('Accept');
         $responseMock->expects(self::once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
-        $responseMock->expects(self::at(3))->method('setVary')->with('X-User-Hash', false);
+
+        $setVaryMatcher = self::exactly(2);
+        $responseMock->expects($setVaryMatcher)
+            ->method('setVary')
+            ->willReturnCallback(static function (...$parameters) use ($setVaryMatcher, $responseMock) {
+                match ($setVaryMatcher->numberOfInvocations()) {
+                    1 => self::assertSame(['Accept', true], $parameters),
+                    2 => self::assertSame(['X-User-Hash', false], $parameters),
+                    default => self::fail('Unexpected call to setVary().'),
+                };
+
+                return $responseMock;
+            });
 
         $result = $this->visit(new CachedValue(new stdClass(), ['locationId' => 'testLocationId']));
 

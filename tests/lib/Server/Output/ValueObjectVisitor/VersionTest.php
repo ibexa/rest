@@ -14,16 +14,16 @@ use Ibexa\Core\Repository\Values;
 use Ibexa\Rest\Output\FieldTypeSerializer;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\Version;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
-use PHPUnit\Framework\MockObject\MockObject;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class VersionTest extends ValueObjectVisitorBaseTest
+class VersionTest extends ValueObjectVisitorBaseTestCase
 {
-    protected FieldTypeSerializer&MockObject $fieldTypeSerializerMock;
+    protected FieldTypeSerializer&\PHPUnit\Framework\MockObject\Stub $fieldTypeSerializerMock;
 
     public function setUp(): void
     {
-        $this->fieldTypeSerializerMock = $this->createMock(FieldTypeSerializer::class);
+        $this->fieldTypeSerializerMock = $this->createStub(FieldTypeSerializer::class);
     }
 
     public function testVisit(): string
@@ -93,9 +93,7 @@ class VersionTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsVersionChildren(string $result): void
     {
         $this->assertXMLTag(
@@ -112,9 +110,7 @@ class VersionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultVersionAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -131,9 +127,7 @@ class VersionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsFieldsChildren(string $result): void
     {
         $this->assertXMLTag(

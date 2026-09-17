@@ -12,22 +12,22 @@ use Ibexa\Tests\Bundle\Rest\Functional\SearchView\SearchCriterionTestCase;
 
 final class UserLoginTest extends SearchCriterionTestCase
 {
-    public function getCriteriaPayloads(): iterable
+    public static function getCriteriaPayloads(): iterable
     {
         return [
             'exact match for multiple user names' => [
                 'json',
-                $this->buildJsonCriterionQuery('"UserLoginCriterion": "admin,anonymous"'),
+                self::buildJsonCriterionQuery('"UserLoginCriterion": "admin,anonymous"'),
                 2,
             ],
             'exact match for single username login' => [
                 'json',
-                $this->buildJsonCriterionQuery('"UserLoginCriterion": "admin"'),
+                self::buildJsonCriterionQuery('"UserLoginCriterion": "admin"'),
                 1,
             ],
             'pattern match' => [
                 'json',
-                $this->buildJsonCriterionQuery('"UserLoginCriterion": "adm*"'),
+                self::buildJsonCriterionQuery('"UserLoginCriterion": "adm*"'),
                 1,
             ],
         ];

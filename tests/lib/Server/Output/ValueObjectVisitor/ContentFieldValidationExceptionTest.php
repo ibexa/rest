@@ -11,10 +11,11 @@ use Ibexa\Core\Base\Exceptions\ContentFieldValidationException as CoreContentFie
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Rest\Server\Exceptions\ContentFieldValidationException;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 use Symfony\Component\Translation\Translator;
 
-class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
+class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -38,9 +39,7 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsErrorDescription(string $result): void
     {
         self::assertXMLTag(
@@ -53,9 +52,7 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsErrorDetails(string $result): void
     {
         self::assertXMLTag(

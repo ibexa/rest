@@ -13,7 +13,7 @@ use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Rest\Server\Input\Parser\ViewInputOneDotOne;
 use Ibexa\Rest\Server\Values\RestViewInput;
 
-class ViewInputOneDotOneTest extends BaseTest
+class ViewInputOneDotOneTest extends BaseTestCase
 {
     public function testParseContentQuery(): void
     {

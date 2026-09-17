@@ -12,6 +12,7 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Core\Repository\Values;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestUser;
+use PHPUnit\Framework\Attributes\Depends;
 
 class RestUserTest extends BaseContentValueObjectVisitorTestCase
 {
@@ -89,81 +90,61 @@ class RestUserTest extends BaseContentValueObjectVisitorTestCase
         );
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUserHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/User[@href="/user/users/22"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUserIdCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/User[@id="22"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUserMediaTypeWithoutVersionCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/User[@media-type="application/vnd.ibexa.api.User+xml"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUserRemoteIdCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/User[@remoteId="abc123"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUserTypeHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/User/ContentType[@href="/content/types/26"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUserTypeMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/User/ContentType[@media-type="application/vnd.ibexa.api.ContentType+xml"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUserGroupsHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/User/UserGroups[@href="/user/users/22/groups"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testUserGroupsMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/User/UserGroups[@media-type="application/vnd.ibexa.api.UserGroupList+xml"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testRolesHrefCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/User/Roles[@href="/user/users/22/roles"]');
     }
 
-    /**
-     * @depends testVisitWithoutEmbeddedVersion
-     */
+    #[Depends('testVisitWithoutEmbeddedVersion')]
     public function testRolesMediaTypeCorrect(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/User/Roles[@media-type="application/vnd.ibexa.api.RoleAssignmentList+xml"]');

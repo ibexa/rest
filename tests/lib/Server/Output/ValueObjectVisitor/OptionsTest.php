@@ -9,9 +9,9 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\Options;
 use Ibexa\Rest\Server\Values;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
 
-class OptionsTest extends ValueObjectVisitorBaseTest
+class OptionsTest extends ValueObjectVisitorBaseTestCase
 {
     /**
      * Test the NoContent visitor.

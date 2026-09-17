@@ -18,14 +18,14 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class SupportedMediaTypesSubscriberTest extends TestCase
 {
-    /** @var \Symfony\Component\HttpKernel\HttpKernelInterface&\PHPUnit\Framework\MockObject\MockObject */
-    private HttpKernelInterface $kernel;
+    /** @var \Symfony\Component\HttpKernel\HttpKernelInterface&\PHPUnit\Framework\MockObject\Stub */
+    private \PHPUnit\Framework\MockObject\Stub $kernel;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->kernel = $this->createMock(HttpKernelInterface::class);
+        $this->kernel = $this->createStub(HttpKernelInterface::class);
     }
 
     public function testDoesNothingWhenSupportedMediaTypesParameterIsNotSet(): void

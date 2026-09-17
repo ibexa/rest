@@ -9,7 +9,7 @@ namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Rest\Input\Parser\ContentObjectStates;
 
-class ContentObjectStatesTest extends BaseTest
+class ContentObjectStatesTest extends BaseTestCase
 {
     public function testParse(): void
     {

@@ -23,7 +23,7 @@ use Ibexa\Rest\Server\Input\Parser\UserGroupUpdate;
 use Ibexa\Rest\Server\Values\RestUserGroupUpdateStruct;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class UserGroupUpdateTest extends BaseTest
+class UserGroupUpdateTest extends BaseTestCase
 {
     public function testParse(): void
     {
@@ -195,12 +195,11 @@ class UserGroupUpdateTest extends BaseTest
     {
         $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
             ->disableOriginalConstructor()
-            ->setMethods([])
             ->setConstructorArgs(
                 [
                     $this->getContentServiceMock(),
-                    $this->createMock(ContentTypeService::class),
-                    $this->createMock(FieldTypeService::class),
+                    $this->createStub(ContentTypeService::class),
+                    $this->createStub(FieldTypeService::class),
                 ]
             )
             ->getMock();

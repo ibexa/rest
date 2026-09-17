@@ -14,6 +14,7 @@ use Ibexa\Rest\Security\EventListener\JWT\AuthenticationSuccessSubscriber;
 use Ibexa\Rest\Server\Exceptions\BadResponseException;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -37,9 +38,7 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider dataProviderForTestOnAuthenticationSuccess
-     */
+    #[DataProvider('dataProviderForTestOnAuthenticationSuccess')]
     public function testOnAuthenticationSuccess(
         UserInterface $user,
         bool $isPermissionResolverInvoked
@@ -67,10 +66,10 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
     /**
      * @return iterable<string, array{\Symfony\Component\Security\Core\User\UserInterface, bool}>
      */
-    public function dataProviderForTestOnAuthenticationSuccess(): iterable
+    public static function dataProviderForTestOnAuthenticationSuccess(): iterable
     {
         yield 'authorizing Ibexa user' => [
-            new User($this->createMock(ApiUser::class)),
+            new User(self::createStub(ApiUser::class)),
             true,
         ];
 
@@ -92,7 +91,7 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
                 'some_other' => 'data',
                 'but_no_token' => 'anywhere',
             ],
-            new User($this->createMock(ApiUser::class)),
+            new User($this->createStub(ApiUser::class)),
             new Response()
         );
 
@@ -111,7 +110,7 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
             [
                 'token' => 'foo',
             ],
-            new User($this->createMock(ApiUser::class)),
+            new User($this->createStub(ApiUser::class)),
             new Response()
         );
 

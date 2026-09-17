@@ -8,6 +8,7 @@
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
 class UrlWildcardTest extends RESTFunctionalTestCase
 {
@@ -59,9 +60,8 @@ XML;
 
     /**
      * @param $urlWildcardHref Covers GET /content/urlwildcards/{urlWildcardId}
-     *
-     * @depends testCreateUrlWildcard
      */
+    #[Depends('testCreateUrlWildcard')]
     public function testLoadUrlWildcard(string $urlWildcardHref): void
     {
         $response = $this->sendHttpRequest(
@@ -73,9 +73,8 @@ XML;
 
     /**
      * @param $urlWildcardHref
-     *
-     * @depends testCreateUrlWildcard
      */
+    #[Depends('testCreateUrlWildcard')]
     public function testDeleteURLWildcard(string $urlWildcardHref): void
     {
         $response = $this->sendHttpRequest(

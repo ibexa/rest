@@ -13,10 +13,10 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Sibling as Si
 use Ibexa\Contracts\Rest\Exceptions\Parser as ParserExpcetion;
 use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\Server\Input\Parser\Criterion\Sibling as SiblingParser;
-use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
+use Ibexa\Tests\Rest\Server\Input\Parser\BaseTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
-final class SiblingTest extends BaseTest
+final class SiblingTest extends BaseTestCase
 {
     private const int EXAMPLE_LOCATION_ID = 54;
     private const int EXAMPLE_PARENT_LOCATION_ID = 2;

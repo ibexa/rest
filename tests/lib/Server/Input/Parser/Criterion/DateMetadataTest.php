@@ -11,11 +11,12 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Input\Parser\Criterion\DateMetadata;
-use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
+use Ibexa\Tests\Rest\Server\Input\Parser\BaseTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
-final class DateMetadataTest extends BaseTest
+final class DateMetadataTest extends BaseTestCase
 {
-    public function testParseProvider(): iterable
+    public static function provideParseData(): iterable
     {
         return [
             [
@@ -57,9 +58,8 @@ final class DateMetadataTest extends BaseTest
      * Tests the DateMetaData parser.
      *
      * @param string[] $data
-     *
-     * @dataProvider testParseProvider
      */
+    #[DataProvider('provideParseData')]
     public function testParse(array $data, DateMetadataCriterion $expected): void
     {
         $dateMetadata = $this->getParser();

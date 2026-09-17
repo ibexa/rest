@@ -16,7 +16,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-abstract class FieldTypeHashGeneratorBaseTest extends TestCase
+abstract class FieldTypeHashGeneratorBaseTestCase extends TestCase
 {
     private Generator $generator;
 

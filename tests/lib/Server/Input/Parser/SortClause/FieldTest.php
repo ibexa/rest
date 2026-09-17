@@ -11,9 +11,9 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Field;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Rest\Server\Input\Parser\SortClause\Field as FieldParser;
-use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
+use Ibexa\Tests\Rest\Server\Input\Parser\BaseTestCase;
 
-class FieldTest extends BaseTest
+class FieldTest extends BaseTestCase
 {
     /**
      * Tests the Field parser.

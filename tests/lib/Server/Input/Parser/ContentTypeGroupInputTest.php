@@ -13,7 +13,7 @@ use Ibexa\Core\Repository\ContentTypeService;
 use Ibexa\Rest\Server\Input\Parser\ContentTypeGroupInput;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class ContentTypeGroupInputTest extends BaseTest
+class ContentTypeGroupInputTest extends BaseTestCase
 {
     public function testParse(): void
     {

@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 /**
  * Test sending OPTIONS header for REST routes.
  */
@@ -16,10 +18,10 @@ class HttpOptionsTest extends TestCase
     /**
      * Covers OPTIONS on selected routes.
      *
-     * @dataProvider providerForTestHttpOptions
      *
      * @param array<string> $expectedMethods
      */
+    #[DataProvider('providerForTestHttpOptions')]
     public function testHttpOptions(
         string $route,
         array $expectedMethods,
@@ -50,7 +52,7 @@ class HttpOptionsTest extends TestCase
      *
      * @return array<array{non-empty-string, array<non-empty-string>}> Data Provider sets
      */
-    public function providerForTestHttpOptions(): array
+    public static function providerForTestHttpOptions(): array
     {
         return [
             ['/', ['GET']],

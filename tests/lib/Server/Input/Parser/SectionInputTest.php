@@ -13,7 +13,7 @@ use Ibexa\Core\Repository\SectionService;
 use Ibexa\Rest\Server\Input\Parser\SectionInput;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class SectionInputTest extends BaseTest
+class SectionInputTest extends BaseTestCase
 {
     public function testParse(): void
     {

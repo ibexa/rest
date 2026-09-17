@@ -10,9 +10,10 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use DOMDocument;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\CountryList;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class CountryListTest extends ValueObjectVisitorBaseTest
+class CountryListTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): DOMDocument
     {
@@ -55,54 +56,42 @@ class CountryListTest extends ValueObjectVisitorBaseTest
         return $dom;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testCountryListMediaType(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/CountryList/Country[1][@media-type="application/vnd.ibexa.api.Country+xml"]');
         $this->assertXPath($dom, '/CountryList/Country[2][@media-type="application/vnd.ibexa.api.Country+xml"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testCountryListId(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/CountryList/Country[1][@id="VA"]');
         $this->assertXPath($dom, '/CountryList/Country[2][@id="HM"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testCountryListName(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/CountryList/Country[1]/name[text()="Holy See (Vatican City State)"]');
         $this->assertXPath($dom, '/CountryList/Country[2]/name[text()="Heard Island and McDonald Islands"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testCountryListAlpha2(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/CountryList/Country[1]/Alpha2[text()="VA"]');
         $this->assertXPath($dom, '/CountryList/Country[2]/Alpha2[text()="HM"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testCountryListAlpha3(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/CountryList/Country[1]/Alpha3[text()="VAT"]');
         $this->assertXPath($dom, '/CountryList/Country[2]/Alpha3[text()="HMD"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testCountryListIDC(DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/CountryList/Country[1]/IDC[text()="3906"]');

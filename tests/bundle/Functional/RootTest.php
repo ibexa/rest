@@ -9,6 +9,8 @@ namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 use Ibexa\Tests\Rest\AssertXmlTagTrait;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
 use Psr\Http\Message\StreamInterface;
 
 class RootTest extends RESTFunctionalTestCase
@@ -51,10 +53,7 @@ class RootTest extends RESTFunctionalTestCase
         self::assertSame('Expectation failed. User changed.', $responseArray['ErrorMessage']['errorDescription']);
     }
 
-    /**
-     * @dataProvider getRandomUriSet
-     * Covers GET /<wrongUri>
-     */
+    #[DataProvider('getRandomUriSet')]
     public function testCatchAll(string $uri): void
     {
         self::markTestSkipped('@todo fixme');
@@ -67,9 +66,7 @@ class RootTest extends RESTFunctionalTestCase
         self::assertEquals('No such route', $responseArray['ErrorMessage']['errorDescription']);
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsRootElement($result): void
     {
         $this->assertXMLTag(
@@ -84,9 +81,8 @@ class RootTest extends RESTFunctionalTestCase
      * Test if result contains Role element attributes.
      *
      * @param string $result
-     *
-     * @depends testLoadRootResource
      */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsRootAttributes($result): void
     {
         $this->assertXMLTag(
@@ -102,9 +98,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsContentTag($result): void
     {
         $this->assertXMLTag(
@@ -117,9 +111,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsContentTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -136,9 +128,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsContentByRemoteIdTag($result): void
     {
         $this->assertXMLTag(
@@ -151,9 +141,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsContentByRemoteIdTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -170,9 +158,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypesTag($result): void
     {
         $this->assertXMLTag(
@@ -185,9 +171,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypesTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -204,9 +188,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypeByIdentifierTag($result): void
     {
         $this->assertXMLTag(
@@ -219,9 +201,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypeByIdentifierTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -238,9 +218,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypeGroupsTag($result): void
     {
         $this->assertXMLTag(
@@ -253,9 +231,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypeGroupsTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -272,9 +248,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypeGroupByIdentifierTag($result): void
     {
         $this->assertXMLTag(
@@ -287,9 +261,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypeGroupByIdentifierTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -306,9 +278,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsUsersTag($result): void
     {
         $this->assertXMLTag(
@@ -321,9 +291,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsUsersTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -340,9 +308,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByRoleIdentifierTag($result): void
     {
         $this->assertXMLTag(
@@ -355,9 +321,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByRoleIdentifierTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -374,9 +338,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByRemoteIdentifierTag($result): void
     {
         $this->assertXMLTag(
@@ -389,9 +351,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByRemoteIdentifierTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -408,9 +368,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByEmailTag($result): void
     {
         $this->assertXMLTag(
@@ -423,9 +381,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByEmailTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -442,9 +398,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByLoginTag($result): void
     {
         $this->assertXMLTag(
@@ -457,9 +411,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByLoginTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -476,9 +428,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsRolesTag($result): void
     {
         $this->assertXMLTag(
@@ -491,9 +441,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsRolesTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -510,9 +458,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsRootLocationTag($result): void
     {
         $this->assertXMLTag(
@@ -525,9 +471,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsRootLocationTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -544,9 +488,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsRootUserGroupTag($result): void
     {
         $this->assertXMLTag(
@@ -559,9 +501,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsRootUserGroupTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -578,9 +518,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsRootMediaFolderTag($result): void
     {
         $this->assertXMLTag(
@@ -593,9 +531,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsRootMediaFolderTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -612,9 +548,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsLocationByRemoteIdTag($result): void
     {
         $this->assertXMLTag(
@@ -627,9 +561,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsLocationByRemoteIdTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -646,9 +578,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsLocationByPathTag($result): void
     {
         $this->assertXMLTag(
@@ -661,9 +591,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsLocationByPathTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -680,9 +608,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsTrashTag($result): void
     {
         $this->assertXMLTag(
@@ -695,9 +621,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsTrashTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -714,9 +638,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsSectionsTag($result): void
     {
         $this->assertXMLTag(
@@ -729,9 +651,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsSectionTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -748,9 +668,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsViewsTag($result): void
     {
         $this->assertXMLTag(
@@ -763,9 +681,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsViewsTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -782,9 +698,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsObjectStateGroupsTag($result): void
     {
         $this->assertXMLTag(
@@ -797,9 +711,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsObjectStateGroupsTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -816,9 +728,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsObjectStatesTag($result): void
     {
         $this->assertXMLTag(
@@ -831,9 +741,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsObjectStatesTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -850,9 +758,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsGlobalUrlAliasesTag($result): void
     {
         $this->assertXMLTag(
@@ -865,9 +771,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsGlobalUrlAliasesTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -884,9 +788,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsUrlWildcardsTag($result): void
     {
         $this->assertXMLTag(
@@ -899,9 +801,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsUrlWildcardsTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -918,9 +818,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsCreateSessionTag($result): void
     {
         $this->assertXMLTag(
@@ -933,9 +831,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsCreateSessionTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -952,9 +848,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsRefreshSessionTag($result): void
     {
         $this->assertXMLTag(
@@ -967,9 +861,7 @@ class RootTest extends RESTFunctionalTestCase
         );
     }
 
-    /**
-     * @depends testLoadRootResource
-     */
+    #[Depends('testLoadRootResource')]
     public function testResultContainsRefreshSessionTagAttributes($result): void
     {
         $this->assertXMLTag(
@@ -989,7 +881,7 @@ class RootTest extends RESTFunctionalTestCase
     /**
      * @return array<array<string>>
      */
-    public function getRandomUriSet(): array
+    public static function getRandomUriSet(): array
     {
         return [
             ['/api/ibexa/v2/randomUri'],

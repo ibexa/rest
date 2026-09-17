@@ -10,7 +10,7 @@ namespace Ibexa\Tests\Rest\Server\Input\Parser;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Rest\Server\Input\Parser\URLWildcardCreate;
 
-class URLWildcardCreateTest extends BaseTest
+class URLWildcardCreateTest extends BaseTestCase
 {
     public function testParse(): void
     {

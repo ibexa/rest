@@ -12,11 +12,11 @@ use Ibexa\Tests\Bundle\Rest\Functional\SearchView\SearchCriterionTestCase;
 
 final class SiblingTest extends SearchCriterionTestCase
 {
-    public function getCriteriaPayloads(): iterable
+    public static function getCriteriaPayloads(): iterable
     {
         yield 'sibling' => [
             'json',
-            $this->buildJsonCriterionQuery('"SiblingCriterion": 2'),
+            self::buildJsonCriterionQuery('"SiblingCriterion": 2'),
             2,
         ];
     }

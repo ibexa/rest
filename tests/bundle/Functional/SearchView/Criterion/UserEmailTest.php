@@ -12,17 +12,17 @@ use Ibexa\Tests\Bundle\Rest\Functional\SearchView\SearchCriterionTestCase;
 
 final class UserEmailTest extends SearchCriterionTestCase
 {
-    public function getCriteriaPayloads(): iterable
+    public static function getCriteriaPayloads(): iterable
     {
         return [
             'exact match' => [
                 'json',
-                $this->buildJsonCriterionQuery('"UserEmailCriterion": "admin@link.invalid"'),
+                self::buildJsonCriterionQuery('"UserEmailCriterion": "admin@link.invalid"'),
                 1,
             ],
             'pattern match' => [
                 'json',
-                $this->buildJsonCriterionQuery('"UserEmailCriterion": "admin@*"'),
+                self::buildJsonCriterionQuery('"UserEmailCriterion": "admin@*"'),
                 1,
             ],
         ];

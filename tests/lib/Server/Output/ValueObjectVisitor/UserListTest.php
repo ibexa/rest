@@ -14,9 +14,10 @@ use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestUser;
 use Ibexa\Rest\Server\Values\UserList;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class UserListTest extends ValueObjectVisitorBaseTest
+class UserListTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -40,9 +41,7 @@ class UserListTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsUserListElement(string $result): void
     {
         $this->assertXMLTag(
@@ -55,9 +54,7 @@ class UserListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsUserListAttributes(string $result): void
     {
         $this->assertXMLTag(

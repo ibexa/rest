@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 use Symfony\Component\HttpFoundation\Response;
 
 final class ImageVariationTest extends RESTFunctionalTestCase
@@ -81,9 +82,7 @@ XML;
         );
     }
 
-    /**
-     * @depends testCreateContent
-     */
+    #[Depends('testCreateContent')]
     public function testPublishContent(string $restContentHref): string
     {
         $response = $this->sendHttpRequest(
@@ -94,9 +93,7 @@ XML;
         return $restContentHref;
     }
 
-    /**
-     * @depends testPublishContent
-     */
+    #[Depends('testPublishContent')]
     public function testGetImageVariation(string $restVersionHref): void
     {
         $imageResponse = $this->sendHttpRequest(

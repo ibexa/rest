@@ -10,9 +10,10 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Core\Repository\Values\Content;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\URLAliasList;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class URLAliasListTest extends ValueObjectVisitorBaseTest
+class URLAliasListTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -36,9 +37,7 @@ class URLAliasListTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsUrlAliasListElement(string $result): void
     {
         $this->assertXMLTag(
@@ -51,9 +50,7 @@ class URLAliasListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsUrlAliasListAttributes(string $result): void
     {
         $this->assertXMLTag(

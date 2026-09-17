@@ -12,6 +12,7 @@ use DOMDocument;
 use DOMNode;
 use DOMNodeList;
 use DOMXPath;
+use PHPUnit\Framework\Attributes\Depends;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use stdClass;
@@ -33,9 +34,7 @@ final class SessionTest extends TestCase
         $this->assertHttpResponseCodeEquals($response, 401);
     }
 
-    /**
-     * @depends testCreateSession
-     */
+    #[Depends('testCreateSession')]
     public function testRefreshSession(stdClass $session): void
     {
         $response = $this->sendHttpRequest($this->createRefreshRequest($session));
@@ -222,9 +221,7 @@ final class SessionTest extends TestCase
         );
     }
 
-    /**
-     * @depends testCreateSession
-     */
+    #[Depends('testCreateSession')]
     public function testCheckSession(): void
     {
         $session = $this->login();
@@ -248,9 +245,7 @@ final class SessionTest extends TestCase
         self::assertArrayHasKey('Session', $data);
     }
 
-    /**
-     * @depends testCreateSession
-     */
+    #[Depends('testCreateSession')]
     public function testCheckSessionWithoutOne(): void
     {
         $request = $this->createHttpRequest(

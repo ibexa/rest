@@ -11,7 +11,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Rest\Server\Input\Parser\ContentQuery;
 use Ibexa\Rest\Server\Input\Parser\ContentQuery as QueryParser;
 
-class QueryParserTest extends BaseTest
+class QueryParserTest extends BaseTestCase
 {
     public function testParseEmptyQuery(): void
     {
@@ -62,16 +62,25 @@ class QueryParserTest extends BaseTest
         ];
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $matcher = self::exactly(2);
         $parsingDispatcher
-            ->expects(self::at(0))
+            ->expects($matcher)
             ->method('parse')
-            ->with(['ContentTypeIdentifierCriterion' => 'article'])
-            ->willReturn(new Query\Criterion\ContentTypeIdentifier('article'));
-        $parsingDispatcher
-            ->expects(self::at(1))
-            ->method('parse')
-            ->with(['ParentLocationIdCriterion' => 762])
-            ->willReturn(new Query\Criterion\ParentLocationId(762));
+            ->willReturnCallback(static function (array $parameters) use ($matcher) {
+                $invocation = $matcher->numberOfInvocations();
+                if ($invocation === 1) {
+                    self::assertSame(['ContentTypeIdentifierCriterion' => 'article'], $parameters);
+
+                    return new Query\Criterion\ContentTypeIdentifier('article');
+                }
+                if ($invocation === 2) {
+                    self::assertSame(['ParentLocationIdCriterion' => 762], $parameters);
+
+                    return new Query\Criterion\ParentLocationId(762);
+                }
+
+                self::fail('Unexpected call to parse().');
+            });
 
         $parser = $this->getParser();
 
@@ -118,16 +127,25 @@ class QueryParserTest extends BaseTest
         ];
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $matcher = self::exactly(2);
         $parsingDispatcher
-            ->expects(self::at(0))
+            ->expects($matcher)
             ->method('parse')
-            ->with(['ContentTypeIdentifierCriterion' => 'article'])
-            ->willReturn(new Query\Criterion\ContentTypeIdentifier('article'));
-        $parsingDispatcher
-            ->expects(self::at(1))
-            ->method('parse')
-            ->with(['ParentLocationIdCriterion' => 762])
-            ->willReturn(new Query\Criterion\ParentLocationId(762));
+            ->willReturnCallback(static function (array $parameters) use ($matcher) {
+                $invocation = $matcher->numberOfInvocations();
+                if ($invocation === 1) {
+                    self::assertSame(['ContentTypeIdentifierCriterion' => 'article'], $parameters);
+
+                    return new Query\Criterion\ContentTypeIdentifier('article');
+                }
+                if ($invocation === 2) {
+                    self::assertSame(['ParentLocationIdCriterion' => 762], $parameters);
+
+                    return new Query\Criterion\ParentLocationId(762);
+                }
+
+                self::fail('Unexpected call to parse().');
+            });
 
         $parser = $this->getParser();
 

@@ -8,16 +8,15 @@
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Rest\FieldTypeProcessor\ImageProcessor;
+use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Routing\RouterInterface;
 
-class ImageProcessorTest extends BinaryInputProcessorTest
+#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\ImageProcessor::class, 'postProcessValueHash')]
+class ImageProcessorTest extends BinaryInputProcessorTestCase
 {
     protected RouterInterface&MockObject $router;
 
-    /**
-     * @covers \Ibexa\Rest\FieldTypeProcessor\ImageProcessor::postProcessValueHash
-     */
     public function testPostProcessValueHash(): void
     {
         $processor = $this->getProcessor();
@@ -27,20 +26,28 @@ class ImageProcessorTest extends BinaryInputProcessorTest
             'imageId' => '223-12345',
         ];
 
-        $routerMock = $this->getRouterMock();
-        foreach ($this->getVariations() as $iteration => $variationIdentifier) {
+        $variations = $this->getVariations();
+        $expectedVariations = [];
+        foreach ($variations as $variationIdentifier) {
             $expectedVariations[$variationIdentifier]['href'] = "/content/binary/images/{$inputHash['imageId']}/variations/{$variationIdentifier}";
-            $routerMock
-                ->expects(self::at($iteration))
-                ->method('generate')
-                ->with(
-                    'ibexa.rest.binary_content.get_image_variation',
-                    ['imageId' => $inputHash['imageId'], 'variationIdentifier' => $variationIdentifier]
-                )
-                ->willReturn(
-                    $expectedVariations[$variationIdentifier]['href']
-                );
         }
+
+        $routerMock = $this->getRouterMock();
+        $matcher = self::exactly(count($variations));
+        $routerMock
+            ->expects($matcher)
+            ->method('generate')
+            ->willReturnCallback(static function (string $route, array $parameters) use ($matcher, $variations, $inputHash, $expectedVariations) {
+                $variationIdentifier = $variations[$matcher->numberOfInvocations() - 1];
+
+                self::assertSame('ibexa.rest.binary_content.get_image_variation', $route);
+                self::assertSame(
+                    ['imageId' => $inputHash['imageId'], 'variationIdentifier' => $variationIdentifier],
+                    $parameters
+                );
+
+                return $expectedVariations[$variationIdentifier]['href'];
+            });
 
         $outputHash = $processor->postProcessValueHash($inputHash);
 

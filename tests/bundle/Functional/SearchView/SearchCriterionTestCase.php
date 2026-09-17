@@ -8,13 +8,13 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\Functional\SearchView;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+
 abstract class SearchCriterionTestCase extends SearchViewTestCase
 {
-    abstract public function getCriteriaPayloads(): iterable;
+    abstract public static function getCriteriaPayloads(): iterable;
 
-    /**
-     * @dataProvider getCriteriaPayloads
-     */
+    #[DataProvider('getCriteriaPayloads')]
     public function testFindContent(string $format, string $body, int $expectedItemCount): void
     {
         self::assertEquals(
@@ -24,7 +24,7 @@ abstract class SearchCriterionTestCase extends SearchViewTestCase
         );
     }
 
-    protected function buildJsonCriterionQuery(string $criterionJsonBody): string
+    protected static function buildJsonCriterionQuery(string $criterionJsonBody): string
     {
         return <<< JSON
             {

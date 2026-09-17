@@ -8,14 +8,18 @@
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Rest\FieldTypeProcessor\AuthorProcessor;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\AuthorProcessor::class, 'preProcessFieldSettingsHash')]
+#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\AuthorProcessor::class, 'postProcessFieldSettingsHash')]
 class AuthorProcessorTest extends TestCase
 {
     /**
      * @var string[]
      */
-    protected array $constants = [
+    protected static array $constants = [
         'DEFAULT_VALUE_EMPTY',
         'DEFAULT_CURRENT_USER',
     ];
@@ -23,7 +27,7 @@ class AuthorProcessorTest extends TestCase
     /**
      * @return array<array{array{defaultAuthor: mixed}, array{defaultAuthor: mixed}}>
      */
-    public function fieldSettingsHashes(): array
+    public static function fieldSettingsHashes(): array
     {
         return array_map(
             static function ($constantName): array {
@@ -32,15 +36,11 @@ class AuthorProcessorTest extends TestCase
                     ['defaultAuthor' => constant("Ibexa\\Core\\FieldType\\Author\\Type::{$constantName}")],
                 ];
             },
-            $this->constants
+            self::$constants
         );
     }
 
-    /**
-     * @covers \Ibexa\Rest\FieldTypeProcessor\AuthorProcessor::preProcessFieldSettingsHash
-     *
-     * @dataProvider fieldSettingsHashes
-     */
+    #[DataProvider('fieldSettingsHashes')]
     public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
     {
         $processor = $this->getProcessor();
@@ -51,11 +51,7 @@ class AuthorProcessorTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Ibexa\Rest\FieldTypeProcessor\AuthorProcessor::postProcessFieldSettingsHash
-     *
-     * @dataProvider fieldSettingsHashes
-     */
+    #[DataProvider('fieldSettingsHashes')]
     public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings): void
     {
         $processor = $this->getProcessor();

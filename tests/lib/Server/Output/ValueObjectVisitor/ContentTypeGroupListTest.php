@@ -11,9 +11,10 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup;
 use Ibexa\Core\Repository\Values\ContentType;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\ContentTypeGroupList;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
+class ContentTypeGroupListTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -39,9 +40,7 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentTypeGroupListElement(string $result): void
     {
         $this->assertXMLTag(
@@ -54,9 +53,7 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsContentTypeGroupListAttributes(string $result): void
     {
         $this->assertXMLTag(

@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 use Symfony\Component\HttpFoundation\Response;
 
 final class BinaryContentTest extends RESTFunctionalTestCase
@@ -75,9 +76,7 @@ XML;
         return $href;
     }
 
-    /**
-     * @depends testCreateContentWithImageData
-     */
+    #[Depends('testCreateContentWithImageData')]
     public function testGetImageVariation(string $hrefToImage): void
     {
         $imageResponse = $this->sendHttpRequest(
@@ -110,9 +109,7 @@ XML;
         $this->assertHttpResponseCodeEquals($variationResponse, Response::HTTP_OK);
     }
 
-    /**
-     * @depends testCreateContentWithImageData
-     */
+    #[Depends('testCreateContentWithImageData')]
     public function testGetImageAssetVariations(string $hrefToImage): void
     {
         $parsedHref = explode('/', $hrefToImage);

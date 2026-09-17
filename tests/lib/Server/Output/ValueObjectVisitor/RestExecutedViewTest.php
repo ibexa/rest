@@ -19,10 +19,12 @@ use Ibexa\Core\Repository\Values\Content as ApiValues;
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestExecutedView;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class RestExecutedViewTest extends ValueObjectVisitorBaseTest
+class RestExecutedViewTest extends ValueObjectVisitorBaseTestCase
 {
     private const int EXAMPLE_LOCATION_ID = 54;
 
@@ -76,7 +78,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     /**
      * @return array<array<string>>
      */
-    public function provideXpathAssertions(): array
+    public static function provideXpathAssertions(): array
     {
         return [
             ['/View'],
@@ -94,11 +96,8 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         ];
     }
 
-    /**
-     * @depends testVisit
-     *
-     * @dataProvider provideXpathAssertions
-     */
+    #[Depends('testVisit')]
+    #[DataProvider('provideXpathAssertions')]
     public function testGeneratedXml(string $xpath, DOMDocument $dom): void
     {
         $this->assertXPath($dom, $xpath);

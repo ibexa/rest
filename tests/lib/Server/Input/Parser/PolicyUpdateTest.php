@@ -14,7 +14,7 @@ use Ibexa\Core\Repository\Values\User\PolicyUpdateStruct;
 use Ibexa\Rest\Server\Input\Parser\PolicyUpdate;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class PolicyUpdateTest extends BaseTest
+class PolicyUpdateTest extends BaseTestCase
 {
     public function testParse(): void
     {

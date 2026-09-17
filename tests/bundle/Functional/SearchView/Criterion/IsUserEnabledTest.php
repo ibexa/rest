@@ -12,17 +12,17 @@ use Ibexa\Tests\Bundle\Rest\Functional\SearchView\SearchCriterionTestCase;
 
 final class IsUserEnabledTest extends SearchCriterionTestCase
 {
-    public function getCriteriaPayloads(): iterable
+    public static function getCriteriaPayloads(): iterable
     {
         return [
             'is user enabled' => [
                 'json',
-                $this->buildJsonCriterionQuery('"IsUserEnabledCriterion": true'),
+                self::buildJsonCriterionQuery('"IsUserEnabledCriterion": true'),
                 2,
             ],
             'is user disabled' => [
                 'json',
-                $this->buildJsonCriterionQuery('"IsUserEnabledCriterion": false'),
+                self::buildJsonCriterionQuery('"IsUserEnabledCriterion": false'),
                 0,
             ],
         ];

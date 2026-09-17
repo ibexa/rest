@@ -9,9 +9,10 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\LocationList;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class LocationListTest extends ValueObjectVisitorBaseTest
+class LocationListTest extends ValueObjectVisitorBaseTestCase
 {
     /**
      * Test the LocationList visitor.
@@ -39,9 +40,7 @@ class LocationListTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsLocationListElement(string $result): void
     {
         $this->assertXMLTag(
@@ -58,9 +57,8 @@ class LocationListTest extends ValueObjectVisitorBaseTest
      * Test if result contains LocationList element attributes.
      *
      * @param string $result
-     *
-     * @depends testVisit
      */
+    #[Depends('testVisit')]
     public function testResultContainsLocationListAttributes($result): void
     {
         $this->assertXMLTag(

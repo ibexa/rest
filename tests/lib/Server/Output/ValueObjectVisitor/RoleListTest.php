@@ -11,9 +11,10 @@ use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Core\Repository\Values\User;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RoleList;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class RoleListTest extends ValueObjectVisitorBaseTest
+class RoleListTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -37,9 +38,7 @@ class RoleListTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsRoleListElement(string $result): void
     {
         $this->assertXMLTag(
@@ -52,9 +51,7 @@ class RoleListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsRoleListAttributes(string $result): void
     {
         $this->assertXMLTag(

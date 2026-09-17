@@ -9,9 +9,9 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\NoContent;
 use Ibexa\Rest\Server\Values;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
 
-class NoContentTest extends ValueObjectVisitorBaseTest
+class NoContentTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): void
     {

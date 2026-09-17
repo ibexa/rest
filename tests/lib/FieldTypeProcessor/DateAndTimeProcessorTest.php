@@ -8,14 +8,18 @@
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor;
+use PHPUnit\Framework\Attributes\CoversMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor::class, 'preProcessFieldSettingsHash')]
+#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor::class, 'postProcessFieldSettingsHash')]
 class DateAndTimeProcessorTest extends TestCase
 {
     /**
      * @var array<string>
      */
-    protected array $constants = [
+    protected static array $constants = [
         'DEFAULT_EMPTY',
         'DEFAULT_CURRENT_DATE',
         'DEFAULT_CURRENT_DATE_ADJUSTED',
@@ -24,7 +28,7 @@ class DateAndTimeProcessorTest extends TestCase
     /**
      * @return array<array{array{defaultType: mixed}, array{defaultType: mixed}}>
      */
-    public function fieldSettingsHashes(): array
+    public static function fieldSettingsHashes(): array
     {
         return array_map(
             static function ($constantName): array {
@@ -33,15 +37,11 @@ class DateAndTimeProcessorTest extends TestCase
                     ['defaultType' => constant("Ibexa\\Core\\FieldType\\DateAndTime\\Type::{$constantName}")],
                 ];
             },
-            $this->constants
+            self::$constants
         );
     }
 
-    /**
-     * @covers \Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor::preProcessFieldSettingsHash
-     *
-     * @dataProvider fieldSettingsHashes
-     */
+    #[DataProvider('fieldSettingsHashes')]
     public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
     {
         $processor = $this->getProcessor();
@@ -52,11 +52,7 @@ class DateAndTimeProcessorTest extends TestCase
         );
     }
 
-    /**
-     * @covers \Ibexa\Rest\FieldTypeProcessor\DateAndTimeProcessor::postProcessFieldSettingsHash
-     *
-     * @dataProvider fieldSettingsHashes
-     */
+    #[DataProvider('fieldSettingsHashes')]
     public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings): void
     {
         $processor = $this->getProcessor();

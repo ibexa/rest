@@ -9,9 +9,10 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcard;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class URLWildcardTest extends ValueObjectVisitorBaseTest
+class URLWildcardTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -48,9 +49,7 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsUrlWildcardElement(string $result): void
     {
         $this->assertXMLTag(
@@ -67,9 +66,7 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsUrlWildcardAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -87,9 +84,7 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsSourceUrlValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -103,9 +98,7 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsDestinationUrlValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -119,9 +112,7 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsForwardValueElement(string $result): void
     {
         $this->assertXMLTag(

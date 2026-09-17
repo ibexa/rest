@@ -17,10 +17,11 @@ use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 
-final class LocationTest extends ValueObjectVisitorBaseTest
+final class LocationTest extends ValueObjectVisitorBaseTestCase
 {
     private const int MAIN_LOCATION_ID = 78;
 
@@ -40,9 +41,7 @@ final class LocationTest extends ValueObjectVisitorBaseTest
         parent::setUp();
     }
 
-    /**
-     * @dataProvider getDataForTestVisitLocationAttributesResolvesMainLocation
-     */
+    #[DataProvider('getDataForTestVisitLocationAttributesResolvesMainLocation')]
     public function testVisitLocationAttributesResolvesMainLocation(
         ?int $mainLocationId,
         int $locationId
@@ -156,7 +155,7 @@ final class LocationTest extends ValueObjectVisitorBaseTest
         }
     }
 
-    public function getDataForTestVisitLocationAttributesResolvesMainLocation(): iterable
+    public static function getDataForTestVisitLocationAttributesResolvesMainLocation(): iterable
     {
         yield 'same' => [self::MAIN_LOCATION_ID, self::MAIN_LOCATION_ID];
 

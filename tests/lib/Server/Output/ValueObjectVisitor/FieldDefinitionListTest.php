@@ -11,12 +11,14 @@ use Ibexa\Core\Repository\Values;
 use Ibexa\Rest\Server;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\FieldDefinitionList;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
 
 /**
  * @todo coverage add unit test for a content type draft
  */
-class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
+class FieldDefinitionListTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisitFieldDefinitionList(): \DOMDocument
     {
@@ -77,7 +79,7 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
     /**
      * @return array<int, array<string>>
      */
-    public function provideXpathAssertions(): array
+    public static function provideXpathAssertions(): array
     {
         return [
             [
@@ -89,11 +91,8 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
         ];
     }
 
-    /**
-     * @depends testVisitFieldDefinitionList
-     *
-     * @dataProvider provideXpathAssertions
-     */
+    #[Depends('testVisitFieldDefinitionList')]
+    #[DataProvider('provideXpathAssertions')]
     public function testGeneratedXml(string $xpath, \DOMDocument $dom): void
     {
         $this->assertXPath($dom, $xpath);

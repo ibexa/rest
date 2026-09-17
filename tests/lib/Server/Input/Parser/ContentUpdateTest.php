@@ -13,8 +13,10 @@ use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Rest\Server\Input\Parser\ContentUpdate;
 use Ibexa\Rest\Server\Input\Parser\ContentUpdate as ContentUpdateParser;
 use Ibexa\Rest\Values\RestContentMetadataUpdateStruct;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
 
-class ContentUpdateTest extends BaseTest
+class ContentUpdateTest extends BaseTestCase
 {
     public function testParseValid(): RestContentMetadataUpdateStruct
     {
@@ -39,9 +41,7 @@ class ContentUpdateTest extends BaseTest
         return $result;
     }
 
-    /**
-     * @depends testParseValid
-     */
+    #[Depends('testParseValid')]
     public function testParserResultOwner(RestContentMetadataUpdateStruct $result): void
     {
         self::assertEquals(
@@ -50,9 +50,7 @@ class ContentUpdateTest extends BaseTest
         );
     }
 
-    /**
-     * @dataProvider providerForTestParseFailureInvalidHref
-     */
+    #[DataProvider('providerForTestParseFailureInvalidHref')]
     public function testParseFailureInvalidHref(string $element, string $exceptionMessage): void
     {
         $inputArray = $this->getValidInputData();
@@ -80,7 +78,7 @@ class ContentUpdateTest extends BaseTest
     /**
      * @return array<array{0: string, 1: string}>
      */
-    public function providerForTestParseFailureInvalidHref(): array
+    public static function providerForTestParseFailureInvalidHref(): array
     {
         return [
             ['Section', 'Invalid format for the <Section> reference in <ContentUpdate>.'],
@@ -89,9 +87,7 @@ class ContentUpdateTest extends BaseTest
         ];
     }
 
-    /**
-     * @dataProvider providerForTestParseFailureInvalidDate
-     */
+    #[DataProvider('providerForTestParseFailureInvalidDate')]
     public function testParseFailureInvalidDate(string $element, string $exceptionMessage): void
     {
         $inputArray = $this->getValidInputData();
@@ -119,7 +115,7 @@ class ContentUpdateTest extends BaseTest
     /**
      * @return array<array{0: string, 1: string}>
      */
-    public function providerForTestParseFailureInvalidDate(): array
+    public static function providerForTestParseFailureInvalidDate(): array
     {
         return [
             ['publishDate', 'Invalid format for <publishDate> in <ContentUpdate>'],

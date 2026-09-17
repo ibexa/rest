@@ -10,10 +10,11 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\UserSession;
 use Ibexa\Rest\Server\Values;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class UserSessionTest extends ValueObjectVisitorBaseTest
+class UserSessionTest extends ValueObjectVisitorBaseTestCase
 {
     /**
      * Test the Session visitor.
@@ -33,13 +34,18 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
             false
         );
 
-        $this->getVisitorMock()->expects(self::at(0))
+        $this->getVisitorMock()->expects(self::once())
             ->method('setStatus')
             ->with(self::equalTo(200));
 
-        $this->getVisitorMock()->expects(self::at(1))
+        $setHeaderMatcher = self::exactly(2);
+        $this->getVisitorMock()->expects($setHeaderMatcher)
             ->method('setHeader')
-            ->with(self::equalTo('Content-Type'), self::equalTo('application/vnd.ibexa.api.Session+xml'));
+            ->willReturnCallback(static function (...$parameters) use ($setHeaderMatcher): void {
+                if ($setHeaderMatcher->numberOfInvocations() === 1) {
+                    self::assertSame(['Content-Type', 'application/vnd.ibexa.api.Session+xml'], $parameters);
+                }
+            });
 
         $this->addRouteExpectation(
             'ibexa.rest.delete_session',
@@ -68,9 +74,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsSessionElement(string $result): void
     {
         $this->assertXMLTag(
@@ -86,9 +90,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsSessionAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -105,9 +107,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsNameValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -121,9 +121,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsIdentifierValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -137,9 +135,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsCsrfTokenValueElement(string $result): void
     {
         $this->assertXMLTag(
@@ -164,9 +160,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
         return $user;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsUserElement(string $result): void
     {
         $this->assertXMLTag(
@@ -179,9 +173,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsUserAttributes(string $result): void
     {
         $this->assertXMLTag(

@@ -16,7 +16,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-final class RestoreTrashItemInputTest extends BaseTest
+final class RestoreTrashItemInputTest extends BaseTestCase
 {
     private const int TESTED_LOCATION_ID = 22;
 

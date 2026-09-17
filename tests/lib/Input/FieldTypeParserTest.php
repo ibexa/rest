@@ -31,13 +31,13 @@ class FieldTypeParserTest extends TestCase
 
     protected FieldTypeService & MockObject $fieldTypeServiceMock;
 
-    protected ContentType & MockObject $contentTypeMock;
+    protected ContentType&MockObject $contentTypeMock;
 
-    protected FieldType & MockObject $fieldTypeMock;
+    protected FieldType&MockObject $fieldTypeMock;
 
     protected FieldTypeProcessorRegistry & MockObject $fieldTypeProcessorRegistryMock;
 
-    protected FieldTypeProcessor & MockObject $fieldTypeProcessorMock;
+    protected FieldTypeProcessor&MockObject $fieldTypeProcessorMock;
 
     public function setUp(): void
     {

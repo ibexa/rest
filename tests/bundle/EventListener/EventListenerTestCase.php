@@ -8,13 +8,14 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-abstract class EventListenerTest extends TestCase
+abstract class EventListenerTestCase extends TestCase
 {
     /** @var \Symfony\Component\HttpFoundation\ParameterBag&\PHPUnit\Framework\MockObject\MockObject */
     protected ParameterBag $requestAttributesMock;
@@ -27,9 +28,8 @@ abstract class EventListenerTest extends TestCase
 
     /**
      * @param array<mixed> $expectedEventTypes
-     *
-     * @dataProvider provideExpectedSubscribedEventTypes
      */
+    #[DataProvider('provideExpectedSubscribedEventTypes')]
     public function testGetSubscribedEvents(array $expectedEventTypes): void
     {
         $eventListener = $this->getEventListener();
@@ -73,5 +73,5 @@ abstract class EventListenerTest extends TestCase
      *
      * @return array<mixed>
      */
-    abstract public function provideExpectedSubscribedEventTypes(): array;
+    abstract public static function provideExpectedSubscribedEventTypes(): array;
 }

@@ -13,7 +13,7 @@ use Ibexa\Core\Repository\ObjectStateService;
 use Ibexa\Rest\Server\Input\Parser\ObjectStateUpdate;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class ObjectStateUpdateTest extends BaseTest
+class ObjectStateUpdateTest extends BaseTestCase
 {
     public function testParse(): void
     {

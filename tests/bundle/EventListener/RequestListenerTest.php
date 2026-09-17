@@ -10,13 +10,14 @@ namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
 use Ibexa\Bundle\Rest\EventListener\RequestListener;
 use Ibexa\Bundle\Rest\UriParser\UriParser;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 
-final class RequestListenerTest extends EventListenerTest
+final class RequestListenerTest extends EventListenerTestCase
 {
     public const string REST_ROUTE = '/api/ibexa/v2/rest-route';
     public const string NON_REST_ROUTE = '/non-rest-route';
@@ -24,7 +25,7 @@ final class RequestListenerTest extends EventListenerTest
     /**
      * @return array<array{array{string}}>
      */
-    public function provideExpectedSubscribedEventTypes(): array
+    public static function provideExpectedSubscribedEventTypes(): array
     {
         return [
             [
@@ -78,9 +79,7 @@ final class RequestListenerTest extends EventListenerTest
         self::assertTrue($request->attributes->get('is_rest_request'));
     }
 
-    /**
-     * @dataProvider getDataForTestOnKernelRequest
-     */
+    #[DataProvider('getDataForTestOnKernelRequest')]
     public function testOnKernelRequest(string $uri, bool $isExpectedRestRequest): void
     {
         $request = $this->performFakeRequest($uri);
@@ -91,14 +90,14 @@ final class RequestListenerTest extends EventListenerTest
     protected function getEventListener(?bool $csrfEnabled = null): RequestListener
     {
         return new RequestListener(
-            new UriParser($this->createMock(UrlMatcherInterface::class))
+            new UriParser($this->createStub(UrlMatcherInterface::class))
         );
     }
 
     protected function performFakeRequest(string $uri, int $type = HttpKernelInterface::MAIN_REQUEST): Request
     {
         $event = new RequestEvent(
-            $this->createMock(HttpKernelInterface::class),
+            $this->createStub(HttpKernelInterface::class),
             Request::create($uri),
             $type
         );

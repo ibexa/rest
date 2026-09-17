@@ -11,10 +11,12 @@ use Ibexa\Core\Repository\Values;
 use Ibexa\Rest\Output\FieldTypeSerializer;
 use Ibexa\Rest\Server;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
+class RestFieldDefinitionTest extends ValueObjectVisitorBaseTestCase
 {
     protected FieldTypeSerializer & MockObject $fieldTypeSerializerMock;
 
@@ -111,23 +113,23 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    public function provideXpathAssertions(): array
+    public static function provideXpathAssertions(): array
     {
-        $xpathAssertions = $this->getXpathAssertions();
+        $xpathAssertions = self::getXpathAssertions();
         $xpathAssertions[] = '/FieldDefinition[@href="/content/types/123/fieldDefinitions/23"]';
 
-        return $this->prepareXPathAssertions($xpathAssertions);
+        return self::prepareXPathAssertions($xpathAssertions);
     }
 
-    public function provideXpathAssertionsPath(): array
+    public static function provideXpathAssertionsPath(): array
     {
-        $xpathAssertions = $this->getXpathAssertions();
+        $xpathAssertions = self::getXpathAssertions();
         $xpathAssertions[] = '/FieldDefinition[@href="/content/types/123/fieldDefinition/title"]';
 
-        return $this->prepareXPathAssertions($xpathAssertions);
+        return self::prepareXPathAssertions($xpathAssertions);
     }
 
-    protected function prepareXPathAssertions(array $xpathAssertions): array
+    protected static function prepareXPathAssertions(array $xpathAssertions): array
     {
         return array_map(
             static function (string $xpath): array {
@@ -137,7 +139,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    protected function getXpathAssertions(): array
+    protected static function getXpathAssertions(): array
     {
         return [
             '/FieldDefinition[@media-type="application/vnd.ibexa.api.FieldDefinition+xml"]',
@@ -156,21 +158,15 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
         ];
     }
 
-    /**
-     * @depends testVisitRestFieldDefinition
-     *
-     * @dataProvider provideXpathAssertions
-     */
+    #[Depends('testVisitRestFieldDefinition')]
+    #[DataProvider('provideXpathAssertions')]
     public function testGeneratedXml(string $xpath, \DOMDocument $dom): void
     {
         $this->assertXPath($dom, $xpath);
     }
 
-    /**
-     * @depends testVisitRestFieldDefinitionWithPath
-     *
-     * @dataProvider provideXpathAssertionsPath
-     */
+    #[Depends('testVisitRestFieldDefinitionWithPath')]
+    #[DataProvider('provideXpathAssertionsPath')]
     public function testGeneratedXmlPath(string $xpath, \DOMDocument $dom): void
     {
         $this->assertXPath($dom, $xpath);

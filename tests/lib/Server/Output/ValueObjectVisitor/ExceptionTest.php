@@ -14,11 +14,12 @@ use DOMXPath;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Rest\Output\Generator\Xml;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\Exception as ExceptionValueObjectVisitor;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class ExceptionTest extends ValueObjectVisitorBaseTest
+class ExceptionTest extends ValueObjectVisitorBaseTestCase
 {
     protected const NON_VERBOSE_ERROR_DESCRIPTION = 'An error has occurred. Please try again later or contact your Administrator.';
 
@@ -57,9 +58,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsErrorCode(string $result): void
     {
         $this->assertXMLTag(
@@ -75,9 +74,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsErrorMessage(string $result): void
     {
         $this->assertXMLTag(
@@ -93,9 +90,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsErrorDescription(string $result): void
     {
         $this->assertXMLTag(
@@ -110,9 +105,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisitNonVerbose
-     */
+    #[Depends('testVisitNonVerbose')]
     public function testNonVerboseErrorDescription(string $result): void
     {
         $document = new DOMDocument();
@@ -128,9 +121,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
         self::assertEquals(self::NON_VERBOSE_ERROR_DESCRIPTION, $errorDescriptionNode->textContent);
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsExceptionAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -145,9 +136,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsPreviousError(string $result): void
     {
         $dom = new DOMDocument();

@@ -8,16 +8,16 @@
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use SimpleXMLElement;
 
 class SortClauseTest extends RESTFunctionalTestCase
 {
     /**
-     * @dataProvider sortingClauseDataProvider
-     *
      * @param string[] $foldersNameToCreate
      * @param string[] $foldersInExpectedOrder
      */
+    #[DataProvider('sortingClauseDataProvider')]
     public function testFieldSortClause(array $foldersNameToCreate, string $sortClauseXML, array $foldersInExpectedOrder): void
     {
         $string = $this->addTestSuffix(__FUNCTION__);
@@ -98,7 +98,7 @@ XML;
     /**
      * @return array<array{array<string>, string, array<string>}>
      */
-    public function sortingClauseDataProvider(): array
+    public static function sortingClauseDataProvider(): array
     {
         return [
             [

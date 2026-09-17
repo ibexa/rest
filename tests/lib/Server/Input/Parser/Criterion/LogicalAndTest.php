@@ -12,10 +12,10 @@ use Ibexa\Contracts\Rest\Exceptions\Parser as ParserException;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Server\Input\Parser;
 use Ibexa\Rest\Server\Input\Parser\Criterion\LogicalAnd;
-use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
+use Ibexa\Tests\Rest\Server\Input\Parser\BaseTestCase;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-class LogicalAndTest extends BaseTest
+class LogicalAndTest extends BaseTestCase
 {
     /**
      * Logical parsing of AND statement.
@@ -55,13 +55,13 @@ class LogicalAndTest extends BaseTest
             ],
         ];
 
-        $criterionMock = $this->createMock(Content\Query\Criterion::class);
+        $criterionMock = $this->createStub(Content\Query\Criterion::class);
 
         $parserMock = $this->createMock(\Ibexa\Contracts\Rest\Input\Parser::class);
         $parserMock->method('parse')->willReturn($criterionMock);
 
         $result = $this->internalGetParser()->parse($logicalAndParsedFromXml, new ParsingDispatcher(
-            $this->createMock(EventDispatcherInterface::class),
+            $this->createStub(EventDispatcherInterface::class),
             [
                 'application/vnd.ibexa.api.internal.criterion.ContentTypeIdentifier' => $parserMock,
                 'application/vnd.ibexa.api.internal.criterion.Field' => $parserMock,
@@ -75,7 +75,7 @@ class LogicalAndTest extends BaseTest
     {
         $this->expectException(ParserException::class);
         $this->internalGetParser()->parse(['AND' => 'Should be an array'], new ParsingDispatcher(
-            $this->createMock(EventDispatcherInterface::class)
+            $this->createStub(EventDispatcherInterface::class)
         ));
     }
 

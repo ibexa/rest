@@ -20,9 +20,9 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\Query\SortClause\Identifi
 use Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\CriterionProcessor;
 use Ibexa\Rest\Server\Input\Parser\ContentType\Query\ContentTypeQuery;
 use Ibexa\Rest\Server\Input\Parser\ContentType\SortClause\SortClauseProcessor;
-use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
+use Ibexa\Tests\Rest\Server\Input\Parser\BaseTestCase;
 
-final class ContentTypeQueryTest extends BaseTest
+final class ContentTypeQueryTest extends BaseTestCase
 {
     public function testParse(): void
     {
@@ -43,35 +43,21 @@ final class ContentTypeQueryTest extends BaseTest
 
         $parsingDispatcherMock = $this->getParsingDispatcherMock();
 
+        $matcher = self::exactly(6);
         $parsingDispatcherMock
-            ->expects(self::at(0))
+            ->expects($matcher)
             ->method('parse')
-            ->willReturn(new ContentTypeId([1, 2]));
-
-        $parsingDispatcherMock
-            ->expects(self::at(1))
-            ->method('parse')
-            ->willReturn(new ContentTypeIdentifier('folder'));
-
-        $parsingDispatcherMock
-            ->expects(self::at(2))
-            ->method('parse')
-            ->willReturn(new IsSystem(true));
-
-        $parsingDispatcherMock
-            ->expects(self::at(3))
-            ->method('parse')
-            ->willReturn(new ContentTypeGroupId(1));
-
-        $parsingDispatcherMock
-            ->expects(self::at(4))
-            ->method('parse')
-            ->willReturn(new ContainsFieldDefinitionId(1));
-
-        $parsingDispatcherMock
-            ->expects(self::at(5))
-            ->method('parse')
-            ->willReturn(new Identifier(SortClause::SORT_DESC));
+            ->willReturnCallback(static function (...$parameters) use ($matcher) {
+                return match ($matcher->numberOfInvocations()) {
+                    1 => new ContentTypeId([1, 2]),
+                    2 => new ContentTypeIdentifier('folder'),
+                    3 => new IsSystem(true),
+                    4 => new ContentTypeGroupId(1),
+                    5 => new ContainsFieldDefinitionId(1),
+                    6 => new Identifier(SortClause::SORT_DESC),
+                    default => self::fail('Unexpected call to parse().'),
+                };
+            });
 
         $result = $this->getParser()->parse($data, $this->getParsingDispatcherMock());
 

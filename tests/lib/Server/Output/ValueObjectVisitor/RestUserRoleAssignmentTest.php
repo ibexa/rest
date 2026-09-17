@@ -10,9 +10,10 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Core\Repository\Values\User;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserRoleAssignment;
 use Ibexa\Rest\Server\Values;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTest
+class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): string
     {
@@ -63,9 +64,7 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsRoleAssignmentElement(string $result): void
     {
         $this->assertXMLTag(
@@ -81,9 +80,7 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsRoleAssignmentAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -100,9 +97,7 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsRoleElement(string $result): void
     {
         $this->assertXMLTag(
@@ -115,9 +110,7 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testResultContainsRoleAttributes(string $result): void
     {
         $this->assertXMLTag(

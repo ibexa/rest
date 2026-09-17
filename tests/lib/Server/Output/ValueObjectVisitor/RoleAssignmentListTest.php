@@ -11,9 +11,10 @@ use Ibexa\Core\Repository\Values\User;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestUserRoleAssignment;
 use Ibexa\Rest\Server\Values\RoleAssignmentList;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
+class RoleAssignmentListTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisitUserRoleAssignmentList(): string
     {
@@ -43,9 +44,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisitUserRoleAssignmentList
-     */
+    #[Depends('testVisitUserRoleAssignmentList')]
     public function testResultContainsRoleListElement(string $result): void
     {
         $this->assertXMLTag(
@@ -58,9 +57,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
         );
     }
 
-    /**
-     * @depends testVisitUserRoleAssignmentList
-     */
+    #[Depends('testVisitUserRoleAssignmentList')]
     public function testResultContainsUserRoleAssignmentListAttributes(string $result): void
     {
         $this->assertXMLTag(
@@ -133,9 +130,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTest
         return $result;
     }
 
-    /**
-     * @depends testVisitGroupRoleAssignmentList
-     */
+    #[Depends('testVisitGroupRoleAssignmentList')]
     public function testResultContainsGroupRoleAssignmentListAttributes(string $result): void
     {
         $this->assertXMLTag(

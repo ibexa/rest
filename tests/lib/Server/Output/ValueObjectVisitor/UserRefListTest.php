@@ -14,9 +14,10 @@ use Ibexa\Core\Repository\Values\User\User;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestUser;
 use Ibexa\Rest\Server\Values\UserRefList;
-use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 
-class UserRefListTest extends ValueObjectVisitorBaseTest
+class UserRefListTest extends ValueObjectVisitorBaseTestCase
 {
     public function testVisit(): \DOMDocument
     {
@@ -64,33 +65,25 @@ class UserRefListTest extends ValueObjectVisitorBaseTest
         return $dom;
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testUserRefListHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserRefList[@href="/some/path"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testUserRefListMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserRefList[@media-type="application/vnd.ibexa.api.UserRefList+xml"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testUserHrefCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserRefList/User[@href="/user/users/14"]');
     }
 
-    /**
-     * @depends testVisit
-     */
+    #[Depends('testVisit')]
     public function testUserMediaTypeCorrect(\DOMDocument $dom): void
     {
         $this->assertXPath($dom, '/UserRefList/User[@media-type="application/vnd.ibexa.api.User+xml"]');

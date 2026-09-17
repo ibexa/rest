@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use PHPUnit\Framework\Attributes\Depends;
 use Symfony\Component\HttpFoundation\Response;
 
 class BookmarkTest extends RESTFunctionalTestCase
@@ -37,10 +38,9 @@ class BookmarkTest extends RESTFunctionalTestCase
     }
 
     /**
-     * @depends testCreateBookmark
-     *
      * @throws \Psr\Http\Client\ClientExceptionInterface
      */
+    #[Depends('testCreateBookmark')]
     public function testCreateBookmarkIfAlreadyExists(int $locationId): void
     {
         $request = $this->createHttpRequest(
@@ -54,10 +54,9 @@ class BookmarkTest extends RESTFunctionalTestCase
     }
 
     /**
-     * @depends testCreateBookmark
-     *
      * @throws \Psr\Http\Client\ClientExceptionInterface
      */
+    #[Depends('testCreateBookmark')]
     public function testIsBookmarked(int $locationId): void
     {
         $request = $this->createHttpRequest(
@@ -71,10 +70,9 @@ class BookmarkTest extends RESTFunctionalTestCase
     }
 
     /**
-     * @depends testDeleteBookmark
-     *
      * @throws \Psr\Http\Client\ClientExceptionInterface
      */
+    #[Depends('testDeleteBookmark')]
     public function testIsBookmarkedReturnsNotFound(int $locationId): void
     {
         $request = $this->createHttpRequest(
@@ -88,10 +86,9 @@ class BookmarkTest extends RESTFunctionalTestCase
     }
 
     /**
-     * @depends testCreateBookmark
-     *
      * @throws \Psr\Http\Client\ClientExceptionInterface
      */
+    #[Depends('testCreateBookmark')]
     public function testDeleteBookmark(int $locationId): int
     {
         $request = $this->createHttpRequest(
@@ -124,10 +121,9 @@ class BookmarkTest extends RESTFunctionalTestCase
     }
 
     /**
-     * @depends testDeleteBookmark
-     *
      * @throws \Psr\Http\Client\ClientExceptionInterface
      */
+    #[Depends('testDeleteBookmark')]
     public function testDeleteBookmarkReturnNotFound(int $locationId): void
     {
         $request = $this->createHttpRequest(
