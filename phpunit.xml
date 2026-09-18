@@ -7,6 +7,8 @@
   colors="true"
   failOnDeprecation="true"
   displayDetailsOnTestsThatTriggerDeprecations="true"
+  failOnWarning="true"
+  failOnNotice="true"
   >
   <testsuites>
     <testsuite name="Ibexa REST Bundle">

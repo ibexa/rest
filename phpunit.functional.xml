@@ -5,6 +5,8 @@
   beStrictAboutTestsThatDoNotTestAnything="false"
   cacheDirectory=".phpunit.cache"
   colors="true"
+  failOnWarning="true"
+  failOnNotice="true"
   >
   <php>
     <env name="EZP_TEST_REST_HOST" value="localhost"/>
