@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<files version="1">
+ <file path="src/lib/Input/Dispatcher.php">
+  <line number="99" hash="e30c0df05baeac9abd828d0eac2e2aea92c78003">
+   <issue><![CDATA[Automatic conversion of false to array is deprecated]]></issue>
+  </line>
+ </file>
+ <file path="vendor/symfony/serializer/Encoder/XmlEncoder.php">
+  <line number="375" hash="5acc6aa1d0acc4b56c7511f064b5bc06ab67b7e7">
+   <issue><![CDATA[DOMElement::setAttribute(): Passing null to parameter #2 ($value) of type string is deprecated]]></issue>
+  </line>
+ </file>
+ <file path="vendor/ibexa/core/src/lib/Repository/Values/ObjectState/ObjectStateGroup.php">
+  <line number="43" hash="46c20ceb34da10cf5e5ad5215b58d86570f0d771">
+   <issue><![CDATA[Ibexa\Core\Repository\Values\ObjectState\ObjectStateGroup::$defaultLanguageCode is deprecated. Use mainLanguageCode]]></issue>
+  </line>
+ </file>
+ <file path="vendor/ibexa/core/src/lib/Repository/Values/ObjectState/ObjectState.php">
+  <line number="59" hash="46c20ceb34da10cf5e5ad5215b58d86570f0d771">
+   <issue><![CDATA[Ibexa\Core\Repository\Values\ObjectState\ObjectState::$defaultLanguageCode is deprecated. Use mainLanguageCode]]></issue>
+  </line>
+ </file>
+</files>
