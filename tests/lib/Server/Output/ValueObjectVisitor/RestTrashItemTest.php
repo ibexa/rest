@@ -94,7 +94,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsTrashItemElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'TrashItem',
                 'children' => [
@@ -102,15 +102,14 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <TrashItem> element.',
-            false
+            'Invalid <TrashItem> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsTrashItemAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'TrashItem',
                 'attributes' => [
@@ -119,28 +118,26 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <TrashItem> attributes.',
-            false
+            'Invalid <TrashItem> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsContentInfoElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentInfo',
             ],
             $result,
-            'Invalid <ContentInfo> element.',
-            false
+            'Invalid <ContentInfo> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsContentInfoAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentInfo',
                 'attributes' => [
@@ -149,15 +146,14 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ContentInfo> attributes.',
-            false
+            'Invalid <ContentInfo> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsIdValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'id',
                 'content' => '42',
@@ -170,7 +166,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsPriorityValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'priority',
                 'content' => '0',
@@ -183,7 +179,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsHiddenValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'hidden',
                 'content' => 'false',
@@ -196,7 +192,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsInvisibleValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'invisible',
                 'content' => 'true',
@@ -209,7 +205,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsRemoteIdValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'remoteId',
                 'content' => 'remote-id',
@@ -222,7 +218,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsParentLocationElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ParentLocation',
             ],
@@ -234,7 +230,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsParentLocationAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ParentLocation',
                 'attributes' => [
@@ -250,7 +246,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsPathStringValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'pathString',
                 'content' => '/1/2/21/42/',
@@ -263,7 +259,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsDepthValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'depth',
                 'content' => '3',
@@ -276,7 +272,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsChildCountValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'childCount',
                 'content' => '0',
@@ -289,7 +285,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsContentElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Content',
             ],
@@ -301,7 +297,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsContentAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Content',
                 'attributes' => [
@@ -317,7 +313,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsSortFieldValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'sortField',
                 'content' => 'NAME',
@@ -330,7 +326,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsSortOrderValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'sortOrder',
                 'content' => 'DESC',

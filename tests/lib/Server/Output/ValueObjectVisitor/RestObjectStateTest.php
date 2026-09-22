@@ -70,7 +70,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsObjectStateElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ObjectState',
                 'children' => [
@@ -78,15 +78,14 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ObjectState> element.',
-            false
+            'Invalid <ObjectState> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsObjectStateAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ObjectState',
                 'attributes' => [
@@ -95,28 +94,26 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ObjectState> attributes.',
-            false
+            'Invalid <ObjectState> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsObjectStateGroupElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ObjectStateGroup',
             ],
             $result,
-            'Invalid <ObjectStateGroup> element.',
-            false
+            'Invalid <ObjectStateGroup> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsObjectStateGroupAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ObjectStateGroup',
                 'attributes' => [
@@ -125,85 +122,79 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ObjectStateGroup> attributes.',
-            false
+            'Invalid <ObjectStateGroup> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsIdValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'id',
                 'content' => '42',
             ],
             $result,
-            'Invalid or non-existing <ObjectState> id value element.',
-            false
+            'Invalid or non-existing <ObjectState> id value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsIdentifierValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'identifier',
                 'content' => 'test-state',
             ],
             $result,
-            'Invalid or non-existing <ObjectState> identifier value element.',
-            false
+            'Invalid or non-existing <ObjectState> identifier value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsPriorityValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'priority',
                 'content' => '0',
             ],
             $result,
-            'Invalid or non-existing <ObjectState> priority value element.',
-            false
+            'Invalid or non-existing <ObjectState> priority value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsDefaultLanguageCodeValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'defaultLanguageCode',
                 'content' => 'eng-GB',
             ],
             $result,
-            'Invalid or non-existing <ObjectState> defaultLanguageCode value element.',
-            false
+            'Invalid or non-existing <ObjectState> defaultLanguageCode value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsLanguageCodesValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'languageCodes',
                 'content' => 'eng-GB,eng-US',
             ],
             $result,
-            'Invalid or non-existing <ObjectState> languageCodes value element.',
-            false
+            'Invalid or non-existing <ObjectState> languageCodes value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsNamesElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'names',
                 'children' => [
@@ -211,15 +202,14 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <names> element.',
-            false
+            'Invalid <names> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsDescriptionsElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'descriptions',
                 'children' => [
@@ -227,8 +217,7 @@ class RestObjectStateTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <descriptions> element.',
-            false
+            'Invalid <descriptions> element.'
         );
     }
 

@@ -407,9 +407,9 @@ class UserCreateTest extends BaseTestCase
             ->disableOriginalConstructor()
             ->setConstructorArgs(
                 [
-                    $this->createStub(ContentService::class),
+                    self::createStub(ContentService::class),
                     $this->getContentTypeServiceMock(),
-                    $this->createStub(FieldTypeService::class),
+                    self::createStub(FieldTypeService::class),
                 ]
             )
             ->getMock();

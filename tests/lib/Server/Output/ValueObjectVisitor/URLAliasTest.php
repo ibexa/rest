@@ -57,7 +57,7 @@ class URLAliasTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsUrlAliasElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'UrlAlias',
                 'children' => [
@@ -66,15 +66,14 @@ class URLAliasTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <UrlAlias> element.',
-            false
+            'Invalid <UrlAlias> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsUrlAliasAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'UrlAlias',
                 'attributes' => [
@@ -85,106 +84,98 @@ class URLAliasTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <UrlAlias> attributes.',
-            false
+            'Invalid <UrlAlias> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsUrlValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'resource',
                 'content' => '/destination/url',
             ],
             $result,
-            'Invalid or non-existing <UrlAlias> url value element.',
-            false
+            'Invalid or non-existing <UrlAlias> url value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsPathValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'path',
                 'content' => '/some/path',
             ],
             $result,
-            'Invalid or non-existing <UrlAlias> path value element.',
-            false
+            'Invalid or non-existing <UrlAlias> path value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsLanguageCodesValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'languageCodes',
                 'content' => 'eng-GB,eng-US',
             ],
             $result,
-            'Invalid or non-existing <UrlAlias> languageCodes value element.',
-            false
+            'Invalid or non-existing <UrlAlias> languageCodes value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsAlwaysAvailableValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'alwaysAvailable',
                 'content' => 'true',
             ],
             $result,
-            'Invalid or non-existing <UrlAlias> alwaysAvailable value element.',
-            false
+            'Invalid or non-existing <UrlAlias> alwaysAvailable value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsIsHistoryValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'isHistory',
                 'content' => 'true',
             ],
             $result,
-            'Invalid or non-existing <UrlAlias> isHistory value element.',
-            false
+            'Invalid or non-existing <UrlAlias> isHistory value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsForwardValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'forward',
                 'content' => 'false',
             ],
             $result,
-            'Invalid or non-existing <UrlAlias> forward value element.',
-            false
+            'Invalid or non-existing <UrlAlias> forward value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsCustomValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'custom',
                 'content' => 'false',
             ],
             $result,
-            'Invalid or non-existing <UrlAlias> custom value element.',
-            false
+            'Invalid or non-existing <UrlAlias> custom value element.'
         );
     }
 

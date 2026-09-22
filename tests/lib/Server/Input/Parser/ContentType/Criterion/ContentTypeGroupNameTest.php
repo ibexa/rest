@@ -30,7 +30,7 @@ final class ContentTypeGroupNameTest extends TestCase
             new ContentTypeGroupNameCriterion(['Media', 'content']),
             $this->parser->parse(
                 ['ContentTypeGroupNameCriterion' => ['Media', 'content']],
-                $this->createStub(ParsingDispatcher::class)
+                self::createStub(ParsingDispatcher::class)
             )
         );
     }
@@ -48,7 +48,7 @@ final class ContentTypeGroupNameTest extends TestCase
 
         $this->parser->parse(
             $input,
-            $this->createStub(ParsingDispatcher::class)
+            self::createStub(ParsingDispatcher::class)
         );
     }
 

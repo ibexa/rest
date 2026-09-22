@@ -46,20 +46,19 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsUrlWildcardListElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'UrlWildcardList',
             ],
             $result,
-            'Invalid <UrlWildcardList> element.',
-            false
+            'Invalid <UrlWildcardList> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsUrlWildcardListAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'UrlWildcardList',
                 'attributes' => [
@@ -68,8 +67,7 @@ class URLWildcardListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <UrlWildcardList> attributes.',
-            false
+            'Invalid <UrlWildcardList> attributes.'
         );
     }
 

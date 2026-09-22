@@ -43,13 +43,12 @@ class LocationListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsLocationListElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'LocationList',
             ],
             $result,
-            'Invalid <LocationList> element.',
-            false
+            'Invalid <LocationList> element.'
         );
     }
 
@@ -61,7 +60,7 @@ class LocationListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsLocationListAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'LocationList',
                 'attributes' => [
@@ -70,8 +69,7 @@ class LocationListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <LocationList> attributes.',
-            false
+            'Invalid <LocationList> attributes.'
         );
     }
 

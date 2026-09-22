@@ -107,20 +107,19 @@ class RestLocationTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsLocationElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Location',
             ],
             $result,
-            'Invalid <Location> element.',
-            false
+            'Invalid <Location> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsLocationAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Location',
                 'attributes' => [
@@ -129,28 +128,26 @@ class RestLocationTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Location> attributes.',
-            false
+            'Invalid <Location> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsContentInfoElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentInfo',
             ],
             $result,
-            'Invalid <ContentInfo> element.',
-            false
+            'Invalid <ContentInfo> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsContentInfoAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentInfo',
                 'attributes' => [
@@ -159,71 +156,66 @@ class RestLocationTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ContentInfo> attributes.',
-            false
+            'Invalid <ContentInfo> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsIdValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'id',
                 'content' => '42',
             ],
             $result,
-            'Invalid or non-existing <Location> id value element.',
-            false
+            'Invalid or non-existing <Location> id value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsPriorityValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'priority',
                 'content' => '0',
             ],
             $result,
-            'Invalid or non-existing <Location> priority value element.',
-            false
+            'Invalid or non-existing <Location> priority value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsHiddenValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'hidden',
                 'content' => 'false',
             ],
             $result,
-            'Invalid or non-existing <Location> hidden value element.',
-            false
+            'Invalid or non-existing <Location> hidden value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsInvisibleValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'invisible',
                 'content' => 'true',
             ],
             $result,
-            'Invalid or non-existing <Location> invisible value element.',
-            false
+            'Invalid or non-existing <Location> invisible value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsExplicitlyHiddenValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'explicitlyHidden',
                 'content' => 'true',
@@ -236,34 +228,32 @@ class RestLocationTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsRemoteIdValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'remoteId',
                 'content' => 'remote-id',
             ],
             $result,
-            'Invalid or non-existing <Location> remoteId value element.',
-            false
+            'Invalid or non-existing <Location> remoteId value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsChildrenElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Children',
             ],
             $result,
-            'Invalid <Children> element.',
-            false
+            'Invalid <Children> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsChildrenAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Children',
                 'attributes' => [
@@ -272,28 +262,26 @@ class RestLocationTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Children> attributes.',
-            false
+            'Invalid <Children> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsParentLocationElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ParentLocation',
             ],
             $result,
-            'Invalid <ParentLocation> element.',
-            false
+            'Invalid <ParentLocation> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsParentLocationAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ParentLocation',
                 'attributes' => [
@@ -302,28 +290,26 @@ class RestLocationTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ParentLocation> attributes.',
-            false
+            'Invalid <ParentLocation> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsContentElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Content',
             ],
             $result,
-            'Invalid <Content> element.',
-            false
+            'Invalid <Content> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsContentAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Content',
                 'attributes' => [
@@ -332,98 +318,91 @@ class RestLocationTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Content> attributes.',
-            false
+            'Invalid <Content> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsPathStringValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'pathString',
                 'content' => '/1/2/21/42/',
             ],
             $result,
-            'Invalid or non-existing <Location> pathString value element.',
-            false
+            'Invalid or non-existing <Location> pathString value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsDepthValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'depth',
                 'content' => '3',
             ],
             $result,
-            'Invalid or non-existing <Location> depth value element.',
-            false
+            'Invalid or non-existing <Location> depth value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsSortFieldValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'sortField',
                 'content' => 'PATH',
             ],
             $result,
-            'Invalid or non-existing <Location> sortField value element.',
-            false
+            'Invalid or non-existing <Location> sortField value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsSortOrderValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'sortOrder',
                 'content' => 'ASC',
             ],
             $result,
-            'Invalid or non-existing <Location> sortOrder value element.',
-            false
+            'Invalid or non-existing <Location> sortOrder value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsChildCountValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'childCount',
                 'content' => '0',
             ],
             $result,
-            'Invalid or non-existing <Location> childCount value element.',
-            false
+            'Invalid or non-existing <Location> childCount value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsUrlAliasesTag(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'UrlAliases',
             ],
             $result,
-            'Invalid <UrlAliases> element.',
-            false
+            'Invalid <UrlAliases> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsUrlAliasesTagAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'UrlAliases',
                 'attributes' => [
@@ -432,8 +411,7 @@ class RestLocationTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <UrlAliases> attributes.',
-            false
+            'Invalid <UrlAliases> attributes.'
         );
     }
 

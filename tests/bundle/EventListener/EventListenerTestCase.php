@@ -34,7 +34,7 @@ abstract class EventListenerTestCase extends TestCase
     {
         $eventListener = $this->getEventListener();
 
-        $supportedEvents = $eventListener->getSubscribedEvents();
+        $supportedEvents = $eventListener::getSubscribedEvents();
         $supportedEventTypes = array_keys($supportedEvents);
         sort($supportedEventTypes);
         sort($expectedEventTypes);

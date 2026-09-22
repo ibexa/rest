@@ -41,20 +41,19 @@ class RoleListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsRoleListElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'RoleList',
             ],
             $result,
-            'Invalid <RoleList> element.',
-            false
+            'Invalid <RoleList> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsRoleListAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'RoleList',
                 'attributes' => [
@@ -63,8 +62,7 @@ class RoleListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <RoleList> attributes.',
-            false
+            'Invalid <RoleList> attributes.'
         );
     }
 

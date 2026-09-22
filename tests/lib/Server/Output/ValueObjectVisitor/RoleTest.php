@@ -59,7 +59,7 @@ class RoleTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsRoleElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Role',
                 'children' => [
@@ -67,15 +67,14 @@ class RoleTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Role> element.',
-            false
+            'Invalid <Role> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsRoleAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Role',
                 'attributes' => [
@@ -84,22 +83,20 @@ class RoleTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Role> attributes.',
-            false
+            'Invalid <Role> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsIdentifierValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'identifier',
                 'content' => 'some-role',
             ],
             $result,
-            'Invalid or non-existing <Role> identifier value element.',
-            false
+            'Invalid or non-existing <Role> identifier value element.'
         );
     }
 
@@ -107,14 +104,13 @@ class RoleTest extends ValueObjectVisitorBaseTestCase
     public function testResultContainsMainLanguageCodeValueElement(string $result): void
     {
         self::markTestSkipped('@todo uncomment when support for multilingual names and descriptions is added EZP-24776');
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'mainLanguageCode',
                 'content' => 'eng-GB',
             ],
             $result,
-            'Invalid or non-existing <Role> mainLanguageCode value element.',
-            false
+            'Invalid or non-existing <Role> mainLanguageCode value element.'
         );
     }
 
@@ -122,7 +118,7 @@ class RoleTest extends ValueObjectVisitorBaseTestCase
     public function testResultContainsNamesElement(string $result): void
     {
         self::markTestSkipped('@todo uncomment when support for multilingual names and descriptions is added EZP-24776');
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'names',
                 'children' => [
@@ -130,8 +126,7 @@ class RoleTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <names> element.',
-            false
+            'Invalid <names> element.'
         );
     }
 
@@ -139,7 +134,7 @@ class RoleTest extends ValueObjectVisitorBaseTestCase
     public function testResultContainsDescriptionsElement(string $result): void
     {
         self::markTestSkipped('@todo uncomment when support for multilingual names and descriptions is added EZP-24776');
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'descriptions',
                 'children' => [
@@ -147,28 +142,26 @@ class RoleTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <descriptions> element.',
-            false
+            'Invalid <descriptions> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsPoliciesElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Policies',
             ],
             $result,
-            'Invalid <Policies> element.',
-            false
+            'Invalid <Policies> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsPoliciesAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Policies',
                 'attributes' => [
@@ -177,8 +170,7 @@ class RoleTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Policies> attributes.',
-            false
+            'Invalid <Policies> attributes.'
         );
     }
 

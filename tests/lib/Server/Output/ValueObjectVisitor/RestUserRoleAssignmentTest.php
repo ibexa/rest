@@ -67,7 +67,7 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsRoleAssignmentElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'RoleAssignment',
                 'children' => [
@@ -75,15 +75,14 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <RoleAssignment> element.',
-            false
+            'Invalid <RoleAssignment> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsRoleAssignmentAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'RoleAssignment',
                 'attributes' => [
@@ -92,28 +91,26 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <RoleAssignment> attributes.',
-            false
+            'Invalid <RoleAssignment> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsRoleElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Role',
             ],
             $result,
-            'Invalid <Role> element.',
-            false
+            'Invalid <Role> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsRoleAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Role',
                 'attributes' => [
@@ -122,8 +119,7 @@ class RestUserRoleAssignmentTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Role> attributes.',
-            false
+            'Invalid <Role> attributes.'
         );
     }
 

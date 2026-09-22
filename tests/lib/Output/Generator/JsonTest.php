@@ -301,7 +301,7 @@ class JsonTest extends GeneratorTestCase
     {
         if (!isset($this->generator)) {
             $this->generator = new Json(
-                $this->createStub(FieldTypeHashGenerator::class)
+                self::createStub(FieldTypeHashGenerator::class)
             );
         }
 

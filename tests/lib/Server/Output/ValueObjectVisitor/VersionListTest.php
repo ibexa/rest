@@ -56,20 +56,19 @@ class VersionListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsVersionListElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'VersionList',
             ],
             $result,
-            'Invalid <VersionList> element.',
-            false
+            'Invalid <VersionList> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsVersionListAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'VersionList',
                 'attributes' => [
@@ -78,8 +77,7 @@ class VersionListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <VersionList> attributes.',
-            false
+            'Invalid <VersionList> attributes.'
         );
     }
 

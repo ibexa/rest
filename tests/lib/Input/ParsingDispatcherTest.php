@@ -22,7 +22,7 @@ class ParsingDispatcherTest extends TestCase
     {
         $this->expectException(\Ibexa\Contracts\Rest\Exceptions\Parser::class);
 
-        $dispatcher = new ParsingDispatcher($this->createStub(EventDispatcherInterface::class));
+        $dispatcher = new ParsingDispatcher(self::createStub(EventDispatcherInterface::class));
 
         $dispatcher->parse([], 'text/unknown');
     }
@@ -30,7 +30,7 @@ class ParsingDispatcherTest extends TestCase
     public function testParse(): void
     {
         $parser = $this->createParserMock();
-        $dispatcher = new ParsingDispatcher($this->createStub(EventDispatcherInterface::class), ['text/html' => $parser]);
+        $dispatcher = new ParsingDispatcher(self::createStub(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
             ->expects(self::once())
@@ -50,7 +50,7 @@ class ParsingDispatcherTest extends TestCase
     public function testParseCharset(): void
     {
         $parser = $this->createParserMock();
-        $dispatcher = new ParsingDispatcher($this->createStub(EventDispatcherInterface::class), ['text/html' => $parser]);
+        $dispatcher = new ParsingDispatcher(self::createStub(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
             ->expects(self::once())
@@ -69,7 +69,7 @@ class ParsingDispatcherTest extends TestCase
         $parserVersionOne = $this->createParserMock();
         $parserVersionTwo = $this->createParserMock();
         $dispatcher = new ParsingDispatcher(
-            $this->createStub(EventDispatcherInterface::class),
+            self::createStub(EventDispatcherInterface::class),
             [
                 'text/html' => $parserVersionOne,
                 'text/html; version=2' => $parserVersionTwo,
@@ -85,7 +85,7 @@ class ParsingDispatcherTest extends TestCase
     public function testParseStripFormat(): void
     {
         $parser = $this->createParserMock();
-        $dispatcher = new ParsingDispatcher($this->createStub(EventDispatcherInterface::class), ['text/html' => $parser]);
+        $dispatcher = new ParsingDispatcher(self::createStub(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
             ->expects(self::once())

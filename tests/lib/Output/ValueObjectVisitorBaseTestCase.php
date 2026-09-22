@@ -74,7 +74,7 @@ abstract class ValueObjectVisitorBaseTestCase extends Server\BaseTestCase
         if (!isset($this->generator)) {
             $this->generator = new Generator\Xml(
                 new Generator\Xml\FieldTypeHashGenerator(
-                    $this->createStub(NormalizerInterface::class),
+                    self::createStub(NormalizerInterface::class),
                 ),
             );
         }

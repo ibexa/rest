@@ -23,7 +23,7 @@ class VersionTest extends ValueObjectVisitorBaseTestCase
 
     public function setUp(): void
     {
-        $this->fieldTypeSerializerMock = $this->createStub(FieldTypeSerializer::class);
+        $this->fieldTypeSerializerMock = self::createStub(FieldTypeSerializer::class);
     }
 
     public function testVisit(): string
@@ -96,7 +96,7 @@ class VersionTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsVersionChildren(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Version',
                 'children' => [
@@ -105,15 +105,14 @@ class VersionTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Version> element.',
-            false
+            'Invalid <Version> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultVersionAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Version',
                 'attributes' => [
@@ -122,15 +121,14 @@ class VersionTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Version> attributes.',
-            false
+            'Invalid <Version> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsFieldsChildren(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Fields',
                 'children' => [
@@ -139,8 +137,7 @@ class VersionTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Fields> element.',
-            false
+            'Invalid <Fields> element.'
         );
     }
 

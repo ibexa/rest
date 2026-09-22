@@ -62,7 +62,7 @@ class PolicyTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsPolicyElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Policy',
                 'children' => [
@@ -71,15 +71,14 @@ class PolicyTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Policy> element.',
-            false
+            'Invalid <Policy> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsPolicyAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Policy',
                 'attributes' => [
@@ -88,76 +87,70 @@ class PolicyTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Policy> attributes.',
-            false
+            'Invalid <Policy> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsIdValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'id',
                 'content' => '42',
             ],
             $result,
-            'Invalid or non-existing <Policy> id value element.',
-            false
+            'Invalid or non-existing <Policy> id value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsModuleValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'module',
                 'content' => 'content',
             ],
             $result,
-            'Invalid or non-existing <Policy> module value element.',
-            false
+            'Invalid or non-existing <Policy> module value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsFunctionValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'function',
                 'content' => 'delete',
             ],
             $result,
-            'Invalid or non-existing <Policy> function value element.',
-            false
+            'Invalid or non-existing <Policy> function value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsLimitationsElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'limitations',
             ],
             $result,
-            'Invalid <limitations> element.',
-            false
+            'Invalid <limitations> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsLimitationsAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'limitations',
             ],
             $result,
-            'Invalid <limitations> attributes.',
-            false
+            'Invalid <limitations> attributes.'
         );
     }
 

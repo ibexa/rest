@@ -30,7 +30,7 @@ final class IsSystemTest extends TestCase
             new IsSystemCriterion(true),
             $this->parser->parse(
                 ['IsSystemCriterion' => true],
-                $this->createStub(ParsingDispatcher::class)
+                self::createStub(ParsingDispatcher::class)
             )
         );
     }
@@ -48,7 +48,7 @@ final class IsSystemTest extends TestCase
 
         $this->parser->parse(
             $input,
-            $this->createStub(ParsingDispatcher::class)
+            self::createStub(ParsingDispatcher::class)
         );
     }
 

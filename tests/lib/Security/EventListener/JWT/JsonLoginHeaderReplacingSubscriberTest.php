@@ -31,7 +31,7 @@ final class JsonLoginHeaderReplacingSubscriberTest extends TestCase
             [
                 KernelEvents::REQUEST => ['replaceJsonLoginHeader', 10],
             ],
-            $this->subscriber->getSubscribedEvents()
+            JsonLoginHeaderReplacingSubscriber::getSubscribedEvents()
         );
     }
 

@@ -24,7 +24,7 @@ final class ArrayListNormalizerTest extends TestCase
         $normalizer->setNormalizer($mockedInnerNormalizer);
         $mockedInnerNormalizer->method('normalize')->willReturnArgument(0);
 
-        $list = new ArrayList('foo', $this->createStub(DataObjectInterface::class));
+        $list = new ArrayList('foo', self::createStub(DataObjectInterface::class));
         $list->append('bar');
 
         $result = $normalizer->normalize($list);
@@ -40,7 +40,7 @@ final class ArrayListNormalizerTest extends TestCase
         $normalizer->setNormalizer($mockedInnerNormalizer);
         $mockedInnerNormalizer->method('normalize')->willReturnArgument(0);
 
-        $list = new ArrayList('test', $this->createStub(DataObjectInterface::class));
+        $list = new ArrayList('test', self::createStub(DataObjectInterface::class));
         $list->append(['foo' => 'bar']);
         $list->append(['foo' => 'zzz']);
 

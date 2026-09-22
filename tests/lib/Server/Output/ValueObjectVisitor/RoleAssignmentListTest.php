@@ -47,20 +47,19 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisitUserRoleAssignmentList')]
     public function testResultContainsRoleListElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'RoleAssignmentList',
             ],
             $result,
-            'Invalid <RoleAssignmentList> element.',
-            false
+            'Invalid <RoleAssignmentList> element.'
         );
     }
 
     #[Depends('testVisitUserRoleAssignmentList')]
     public function testResultContainsUserRoleAssignmentListAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'RoleAssignmentList',
                 'attributes' => [
@@ -69,8 +68,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <RoleAssignmentList> attributes.',
-            false
+            'Invalid <RoleAssignmentList> attributes.'
         );
     }
 
@@ -133,7 +131,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisitGroupRoleAssignmentList')]
     public function testResultContainsGroupRoleAssignmentListAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'RoleAssignmentList',
                 'attributes' => [
@@ -142,8 +140,7 @@ class RoleAssignmentListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <RoleAssignmentList> attributes.',
-            false
+            'Invalid <RoleAssignmentList> attributes.'
         );
     }
 

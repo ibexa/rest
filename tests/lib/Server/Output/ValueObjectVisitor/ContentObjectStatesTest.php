@@ -40,20 +40,19 @@ class ContentObjectStatesTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsContentObjectStatesElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentObjectStates',
             ],
             $result,
-            'Invalid <ContentObjectStates> element.',
-            false
+            'Invalid <ContentObjectStates> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsContentObjectStatesAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentObjectStates',
                 'attributes' => [
@@ -61,8 +60,7 @@ class ContentObjectStatesTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ContentObjectStates> attributes.',
-            false
+            'Invalid <ContentObjectStates> attributes.'
         );
     }
 

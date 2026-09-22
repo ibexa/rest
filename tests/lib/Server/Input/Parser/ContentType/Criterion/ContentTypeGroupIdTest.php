@@ -30,7 +30,7 @@ final class ContentTypeGroupIdTest extends TestCase
             new ContentTypeGroupIdCriterion([1, 5]),
             $this->parser->parse(
                 ['ContentTypeGroupIdCriterion' => [1, 5]],
-                $this->createStub(ParsingDispatcher::class)
+                self::createStub(ParsingDispatcher::class)
             )
         );
     }
@@ -48,7 +48,7 @@ final class ContentTypeGroupIdTest extends TestCase
 
         $this->parser->parse(
             $input,
-            $this->createStub(ParsingDispatcher::class)
+            self::createStub(ParsingDispatcher::class)
         );
     }
 
