@@ -37,7 +37,7 @@ class ImageProcessorTest extends BinaryInputProcessorTestCase
         $routerMock
             ->expects($matcher)
             ->method('generate')
-            ->willReturnCallback(static function (string $route, array $parameters) use ($matcher, $variations, $inputHash, $expectedVariations) {
+            ->willReturnCallback(static function (string $route, array $parameters) use ($matcher, $variations, $inputHash, $expectedVariations): string {
                 $variationIdentifier = $variations[$matcher->numberOfInvocations() - 1];
 
                 self::assertSame('ibexa.rest.binary_content.get_image_variation', $route);

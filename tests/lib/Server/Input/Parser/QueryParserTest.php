@@ -66,7 +66,7 @@ class QueryParserTest extends BaseTestCase
         $parsingDispatcher
             ->expects($matcher)
             ->method('parse')
-            ->willReturnCallback(static function (array $parameters) use ($matcher) {
+            ->willReturnCallback(static function (array $parameters) use ($matcher): Query\Criterion {
                 $invocation = $matcher->numberOfInvocations();
                 if ($invocation === 1) {
                     self::assertSame(['ContentTypeIdentifierCriterion' => 'article'], $parameters);
@@ -131,7 +131,7 @@ class QueryParserTest extends BaseTestCase
         $parsingDispatcher
             ->expects($matcher)
             ->method('parse')
-            ->willReturnCallback(static function (array $parameters) use ($matcher) {
+            ->willReturnCallback(static function (array $parameters) use ($matcher): Query\Criterion {
                 $invocation = $matcher->numberOfInvocations();
                 if ($invocation === 1) {
                     self::assertSame(['ContentTypeIdentifierCriterion' => 'article'], $parameters);

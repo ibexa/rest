@@ -15,6 +15,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use stdClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 
 class CachedValueTest extends ValueObjectVisitorBaseTestCase
 {
@@ -46,7 +47,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
         $setVaryMatcher = self::exactly(2);
         $responseMock->expects($setVaryMatcher)
             ->method('setVary')
-            ->willReturnCallback(static function (...$parameters) use ($setVaryMatcher, $responseMock) {
+            ->willReturnCallback(static function (...$parameters) use ($setVaryMatcher, $responseMock): Response {
                 match ($setVaryMatcher->numberOfInvocations()) {
                     1 => self::assertSame(['Accept', true], $parameters),
                     2 => self::assertSame(['X-User-Hash', false], $parameters),
@@ -70,7 +71,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
         $setVaryMatcher = self::exactly(2);
         $responseMock->expects($setVaryMatcher)
             ->method('setVary')
-            ->willReturnCallback(static function (...$parameters) use ($setVaryMatcher, $responseMock) {
+            ->willReturnCallback(static function (...$parameters) use ($setVaryMatcher, $responseMock): Response {
                 match ($setVaryMatcher->numberOfInvocations()) {
                     1 => self::assertSame(['Accept', true], $parameters),
                     2 => self::assertSame(['X-User-Hash', false], $parameters),
@@ -190,7 +191,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
             ->expects(self::any())
             ->method('getParameter')
             ->willReturnCallback(
-                static function ($parameterName, $defaultValue) use ($options) {
+                static function ($parameterName, $defaultValue) use ($options): mixed {
                     return isset($options[$parameterName]) ? $options[$parameterName] : $defaultValue;
                 }
             );

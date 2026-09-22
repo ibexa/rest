@@ -8,6 +8,7 @@
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use DOMDocument;
+use Generator;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\LocationService;
@@ -120,7 +121,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTestCase
     {
         $relationListFacade = $this->createMock(ContentService\RelationListFacadeInterface::class);
         $relationListFacade->method('getRelations')->willReturnCallback(
-            static fn () => yield
+            static fn (): Generator => yield
         );
 
         return $relationListFacade;

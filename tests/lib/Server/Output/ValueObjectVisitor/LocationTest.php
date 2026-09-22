@@ -7,6 +7,7 @@
 
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
+use Generator;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
@@ -80,7 +81,7 @@ final class LocationTest extends ValueObjectVisitorBaseTestCase
             ->method('getRelations')
             ->with($versionInfo)
             ->willReturnCallback(
-                static fn () => yield
+                static fn (): Generator => yield
             );
 
         $visitor->visit(
