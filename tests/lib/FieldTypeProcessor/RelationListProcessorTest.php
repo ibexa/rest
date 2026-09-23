@@ -115,19 +115,21 @@ class RelationListProcessorTest extends TestCase
 
         $routerMock
             ->expects($matcher)
-            ->method('generate')->willReturnCallback(function (...$parameters) use ($matcher) {
+            ->method('generate')->willReturnCallback(static function (...$parameters) use ($matcher): string {
             if ($matcher->numberOfInvocations() === 1) {
-                $this->assertSame('ibexa.rest.load_content', $parameters[0]);
-                $this->assertSame(['contentId' => 42], $parameters[1]);
+                self::assertSame('ibexa.rest.load_content', $parameters[0]);
+                self::assertSame(['contentId' => 42], $parameters[1]);
 
                 return '/api/ibexa/v2/content/objects/42';
             }
             if ($matcher->numberOfInvocations() === 2) {
-                $this->assertSame('ibexa.rest.load_content', $parameters[0]);
-                $this->assertSame(['contentId' => 300], $parameters[1]);
+                self::assertSame('ibexa.rest.load_content', $parameters[0]);
+                self::assertSame(['contentId' => 300], $parameters[1]);
 
                 return '/api/ibexa/v2/content/objects/300';
             }
+
+            self::fail('Unexpected call to generate().');
         });
 
         $hash = $processor->postProcessValueHash(['destinationContentIds' => [42, 300]]);

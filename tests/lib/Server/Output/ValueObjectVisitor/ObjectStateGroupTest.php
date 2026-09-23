@@ -66,7 +66,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsObjectStateGroupElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ObjectStateGroup',
                 'children' => [
@@ -81,7 +81,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsObjectStateGroupAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ObjectStateGroup',
                 'attributes' => [
@@ -97,7 +97,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsIdValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'id',
                 'content' => '42',
@@ -110,7 +110,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsIdentifierValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'identifier',
                 'content' => 'test-group',
@@ -123,7 +123,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsDefaultLanguageCodeValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'defaultLanguageCode',
                 'content' => 'eng-GB',
@@ -136,7 +136,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsLanguageCodesValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'languageCodes',
                 'content' => 'eng-GB,eng-US',
@@ -149,7 +149,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsNamesElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'names',
                 'children' => [
@@ -164,7 +164,7 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsDescriptionsElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'descriptions',
                 'children' => [

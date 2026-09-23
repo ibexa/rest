@@ -78,7 +78,7 @@ class VersionInfoTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsVersionInfoChildren(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'VersionInfo',
                 'children' => [
@@ -87,113 +87,105 @@ class VersionInfoTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <VersionInfo> element.',
-            false
+            'Invalid <VersionInfo> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testVersionInfoIdElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'id',
                 'content' => '23',
             ],
             $result,
-            'Invalid <id> value.',
-            false
+            'Invalid <id> value.'
         );
     }
 
     #[Depends('testVisit')]
     public function testVersionInfoVersionNoElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'versionNo',
                 'content' => '5',
             ],
             $result,
-            'Invalid <versionNo> value.',
-            false
+            'Invalid <versionNo> value.'
         );
     }
 
     #[Depends('testVisit')]
     public function testVersionInfoStatusElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'status',
                 'content' => 'PUBLISHED',
             ],
             $result,
-            'Invalid <status> value.',
-            false
+            'Invalid <status> value.'
         );
     }
 
     #[Depends('testVisit')]
     public function testVersionInfoCreationDateElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'creationDate',
                 'content' => $this->creationDate->format('c'),
             ],
             $result,
-            'Invalid <creationDate> value.',
-            false
+            'Invalid <creationDate> value.'
         );
     }
 
     #[Depends('testVisit')]
     public function testVersionInfoModificationDateElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'modificationDate',
                 'content' => $this->modificationDate->format('c'),
             ],
             $result,
-            'Invalid <modificationDate> value.',
-            false
+            'Invalid <modificationDate> value.'
         );
     }
 
     #[Depends('testVisit')]
     public function testVersionInfoInitialLanguageCodeElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'initialLanguageCode',
                 'content' => 'eng-US',
             ],
             $result,
-            'Invalid <initialLanguageCode> value.',
-            false
+            'Invalid <initialLanguageCode> value.'
         );
     }
 
     #[Depends('testVisit')]
     public function testVersionInfoLanguageCodesElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'languageCodes',
                 'content' => 'eng-US,ger-DE',
             ],
             $result,
-            'Invalid <languageCodes> value.',
-            false
+            'Invalid <languageCodes> value.'
         );
     }
 
     #[Depends('testVisit')]
     public function testVersionInfoNamesElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'names',
                 'children' => [
@@ -202,15 +194,14 @@ class VersionInfoTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <names> value.',
-            false
+            'Invalid <names> value.'
         );
     }
 
     #[Depends('testVisit')]
     public function testVersionInfoContentElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Content',
                 'attributes' => [
@@ -219,8 +210,7 @@ class VersionInfoTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <initialLanguageCode> value.',
-            false
+            'Invalid <initialLanguageCode> value.'
         );
     }
 

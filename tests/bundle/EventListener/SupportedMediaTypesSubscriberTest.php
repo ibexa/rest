@@ -25,7 +25,7 @@ final class SupportedMediaTypesSubscriberTest extends TestCase
     {
         parent::setUp();
 
-        $this->kernel = $this->createStub(HttpKernelInterface::class);
+        $this->kernel = self::createStub(HttpKernelInterface::class);
     }
 
     public function testDoesNothingWhenSupportedMediaTypesParameterIsNotSet(): void

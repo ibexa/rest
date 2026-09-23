@@ -54,13 +54,12 @@ class ObjectStateListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsObjectStateListElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ObjectStateList',
             ],
             $result,
-            'Invalid <ObjectStateList> element.',
-            false
+            'Invalid <ObjectStateList> element.'
         );
     }
 
@@ -70,7 +69,7 @@ class ObjectStateListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsObjectStateListAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ObjectStateList',
                 'attributes' => [
@@ -79,8 +78,7 @@ class ObjectStateListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ObjectStateList> attributes.',
-            false
+            'Invalid <ObjectStateList> attributes.'
         );
     }
 

@@ -52,7 +52,7 @@ class URLWildcardTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsUrlWildcardElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'UrlWildcard',
                 'children' => [
@@ -61,15 +61,14 @@ class URLWildcardTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <UrlWildcard> element.',
-            false
+            'Invalid <UrlWildcard> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsUrlWildcardAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'UrlWildcard',
                 'attributes' => [
@@ -79,50 +78,46 @@ class URLWildcardTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <UrlWildcard> attributes.',
-            false
+            'Invalid <UrlWildcard> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsSourceUrlValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'sourceUrl',
                 'content' => '/source/url',
             ],
             $result,
-            'Invalid or non-existing <UrlWildcard> sourceUrl value element.',
-            false
+            'Invalid or non-existing <UrlWildcard> sourceUrl value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsDestinationUrlValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'destinationUrl',
                 'content' => '/destination/url',
             ],
             $result,
-            'Invalid or non-existing <UrlWildcard> destinationUrl value element.',
-            false
+            'Invalid or non-existing <UrlWildcard> destinationUrl value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsForwardValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'forward',
                 'content' => 'true',
             ],
             $result,
-            'Invalid or non-existing <UrlWildcard> forward value element.',
-            false
+            'Invalid or non-existing <UrlWildcard> forward value element.'
         );
     }
 

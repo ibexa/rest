@@ -43,20 +43,19 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsContentTypeGroupListElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentTypeGroupList',
             ],
             $result,
-            'Invalid <ContentTypeGroupList> element.',
-            false
+            'Invalid <ContentTypeGroupList> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsContentTypeGroupListAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentTypeGroupList',
                 'attributes' => [
@@ -65,8 +64,7 @@ class ContentTypeGroupListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ContentTypeGroupList> attributes.',
-            false
+            'Invalid <ContentTypeGroupList> attributes.'
         );
     }
 

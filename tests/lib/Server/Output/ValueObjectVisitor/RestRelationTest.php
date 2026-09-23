@@ -87,7 +87,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsRelationElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Relation',
                 'children' => [
@@ -96,8 +96,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Relation> element.',
-            false
+            'Invalid <Relation> element.'
         );
     }
 
@@ -107,7 +106,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsRelationAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Relation',
                 'attributes' => [
@@ -116,15 +115,14 @@ class RestRelationTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Relation> attributes.',
-            false
+            'Invalid <Relation> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsSourceContentElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'SourceContent',
                 'attributes' => [
@@ -133,15 +131,14 @@ class RestRelationTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid or non-existing <Relation> SourceContent element.',
-            false
+            'Invalid or non-existing <Relation> SourceContent element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsDestinationContentElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'DestinationContent',
                 'attributes' => [
@@ -150,36 +147,33 @@ class RestRelationTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid or non-existing <Relation> DestinationContent element.',
-            false
+            'Invalid or non-existing <Relation> DestinationContent element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsSourceFieldDefinitionIdentifierElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'SourceFieldDefinitionIdentifier',
                 'content' => 'relation_field',
             ],
             $result,
-            'Invalid or non-existing <Relation> SourceFieldDefinitionIdentifier value element.',
-            false
+            'Invalid or non-existing <Relation> SourceFieldDefinitionIdentifier value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsRelationTypeElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'RelationType',
                 'content' => 'ATTRIBUTE',
             ],
             $result,
-            'Invalid or non-existing <Relation> RelationType value element.',
-            false
+            'Invalid or non-existing <Relation> RelationType value element.'
         );
     }
 

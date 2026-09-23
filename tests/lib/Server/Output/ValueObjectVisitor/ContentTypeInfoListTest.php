@@ -49,13 +49,12 @@ class ContentTypeInfoListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsContentTypeInfoListElement($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentTypeInfoList',
             ],
             $result,
-            'Invalid <ContentTypeInfoList> element.',
-            false
+            'Invalid <ContentTypeInfoList> element.'
         );
     }
 
@@ -67,7 +66,7 @@ class ContentTypeInfoListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsContentTypeInfoListAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentTypeInfoList',
                 'attributes' => [
@@ -76,8 +75,7 @@ class ContentTypeInfoListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ContentTypeInfoList> attributes.',
-            false
+            'Invalid <ContentTypeInfoList> attributes.'
         );
     }
 

@@ -30,7 +30,7 @@ final class ContentTypeIdentifierTest extends TestCase
             new ContentTypeIdentifierCriterion(['article', 'blog_post']),
             $this->parser->parse(
                 ['ContentTypeIdentifierCriterion' => ['article', 'blog_post']],
-                $this->createStub(ParsingDispatcher::class)
+                self::createStub(ParsingDispatcher::class)
             )
         );
     }
@@ -48,7 +48,7 @@ final class ContentTypeIdentifierTest extends TestCase
 
         $this->parser->parse(
             $input,
-            $this->createStub(ParsingDispatcher::class)
+            self::createStub(ParsingDispatcher::class)
         );
     }
 

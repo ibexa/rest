@@ -15,6 +15,7 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\Query\Criterion\ContentTy
 use Ibexa\Contracts\Core\Repository\Values\ContentType\Query\Criterion\ContentTypeIdentifier;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\Query\Criterion\IsSystem;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\Query\Criterion\LogicalAnd;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\Query\CriterionInterface;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\Query\SortClause;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\Query\SortClause\Identifier;
 use Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\CriterionProcessor;
@@ -47,7 +48,7 @@ final class ContentTypeQueryTest extends BaseTestCase
         $parsingDispatcherMock
             ->expects($matcher)
             ->method('parse')
-            ->willReturnCallback(static function (...$parameters) use ($matcher) {
+            ->willReturnCallback(static function (...$parameters) use ($matcher): CriterionInterface|SortClause {
                 return match ($matcher->numberOfInvocations()) {
                     1 => new ContentTypeId([1, 2]),
                     2 => new ContentTypeIdentifier('folder'),

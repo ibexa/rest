@@ -44,20 +44,19 @@ class UserListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsUserListElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'UserList',
             ],
             $result,
-            'Invalid <UserList> element.',
-            false
+            'Invalid <UserList> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsUserListAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'UserList',
                 'attributes' => [
@@ -66,8 +65,7 @@ class UserListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <UserList> attributes.',
-            false
+            'Invalid <UserList> attributes.'
         );
     }
 

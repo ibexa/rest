@@ -40,20 +40,19 @@ class URLAliasListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsUrlAliasListElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'UrlAliasList',
             ],
             $result,
-            'Invalid <UrlAliasList> element.',
-            false
+            'Invalid <UrlAliasList> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsUrlAliasListAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'UrlAliasList',
                 'attributes' => [
@@ -62,8 +61,7 @@ class URLAliasListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <UrlAliasList> attributes.',
-            false
+            'Invalid <UrlAliasList> attributes.'
         );
     }
 

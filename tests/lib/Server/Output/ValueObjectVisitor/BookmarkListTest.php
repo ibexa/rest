@@ -25,9 +25,9 @@ class BookmarkListTest extends ValueObjectVisitorBaseTestCase
     protected function setUp(): void
     {
         $this->data = new BookmarkList(10, [
-            new RestLocation($this->createStub(Location::class), 0),
-            new RestLocation($this->createStub(Location::class), 0),
-            new RestLocation($this->createStub(Location::class), 0),
+            new RestLocation(self::createStub(Location::class), 0),
+            new RestLocation(self::createStub(Location::class), 0),
+            new RestLocation(self::createStub(Location::class), 0),
         ]);
     }
 
@@ -54,7 +54,7 @@ class BookmarkListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsBookmarkListElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'BookmarkList',
                 'attributes' => [
@@ -69,7 +69,7 @@ class BookmarkListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsCountElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'count',
                 'content' => $this->data->totalCount,

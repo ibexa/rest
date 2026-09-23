@@ -78,18 +78,17 @@ class RootTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsRootElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             ['tag' => 'Root'],
             $result,
-            'Invalid <Root> element.',
-            false
+            'Invalid <Root> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsRootAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Root',
                 'attributes' => [
@@ -97,28 +96,26 @@ class RootTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Root> attributes.',
-            false
+            'Invalid <Root> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsRouterTag(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Router',
             ],
             $result,
-            'Invalid <Router> element.',
-            false
+            'Invalid <Router> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsRouterWithAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'RouterWithAttributes',
                 'attributes' => [
@@ -126,28 +123,26 @@ class RootTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <RouterWithAttributes> element.',
-            false
+            'Invalid <RouterWithAttributes> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsTemplateRouterTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'TemplateRouter',
             ],
             $result,
-            'Invalid <TemplateRouter> element.',
-            false
+            'Invalid <TemplateRouter> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsTemplateRouterWithAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'TemplateRouterWithAttributes',
                 'attributes' => [
@@ -155,8 +150,7 @@ class RootTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <TemplateRouterWithAttributes> element.',
-            false
+            'Invalid <TemplateRouterWithAttributes> element.'
         );
     }
 

@@ -461,7 +461,7 @@ class ContentCreateTest extends BaseTestCase
                 [
                     $this->getContentServiceMock(),
                     $this->getContentTypeServiceMock(),
-                    $this->createStub(FieldTypeService::class),
+                    self::createStub(FieldTypeService::class),
                 ]
             )
             ->getMock();

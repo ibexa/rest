@@ -42,7 +42,7 @@ class ContentTypeIdentifier extends BaseParser
 
         return new ContentTypeIdCriterion(
             array_map(
-                function ($contentTypeIdentifier) {
+                function ($contentTypeIdentifier): int {
                     return $this->contentTypeService->loadContentTypeByIdentifier($contentTypeIdentifier)->id;
                 },
                 $data['ContentTypeIdentifierCriterion']

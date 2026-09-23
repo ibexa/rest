@@ -126,8 +126,8 @@ class VersionUpdateTest extends BaseTestCase
             ->setConstructorArgs(
                 [
                     $this->getContentServiceMock(),
-                    $this->createStub(ContentTypeService::class),
-                    $this->createStub(FieldTypeService::class),
+                    self::createStub(ContentTypeService::class),
+                    self::createStub(FieldTypeService::class),
                 ]
             )
             ->getMock();

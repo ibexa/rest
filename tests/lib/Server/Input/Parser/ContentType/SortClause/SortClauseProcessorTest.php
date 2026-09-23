@@ -83,7 +83,7 @@ final class SortClauseProcessorTest extends TestCase
     private function getParsingDispatcher(): ParsingDispatcher
     {
         return new ParsingDispatcher(
-            $this->createStub(EventDispatcherInterface::class),
+            self::createStub(EventDispatcherInterface::class),
             [
                 'application/vnd.ibexa.api.internal.sortclause.Id' => new DataKeyValueObjectClass(
                     'Id',

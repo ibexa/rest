@@ -61,7 +61,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsErrorCode(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ErrorMessage',
                 'descendant' => [
@@ -77,7 +77,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsErrorMessage(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ErrorMessage',
                 'descendant' => [
@@ -93,7 +93,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsErrorDescription(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ErrorMessage',
                 'descendant' => [
@@ -124,7 +124,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsExceptionAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ErrorMessage',
                 'attributes' => [

@@ -51,7 +51,7 @@ class SectionTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsSectionElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Section',
                 'children' => [
@@ -60,15 +60,14 @@ class SectionTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Section> element.',
-            false
+            'Invalid <Section> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsSectionAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Section',
                 'attributes' => [
@@ -77,50 +76,46 @@ class SectionTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Section> attributes.',
-            false
+            'Invalid <Section> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsSectionIdValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'sectionId',
                 'content' => '23',
             ],
             $result,
-            'Invalid or non-existing <Section> sectionId value element.',
-            false
+            'Invalid or non-existing <Section> sectionId value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsIdentifierValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'identifier',
                 'content' => 'some-section',
             ],
             $result,
-            'Invalid or non-existing <Section> identifier value element.',
-            false
+            'Invalid or non-existing <Section> identifier value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsNameValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'name',
                 'content' => 'Some Section',
             ],
             $result,
-            'Invalid or non-existing <Section> name value element.',
-            false
+            'Invalid or non-existing <Section> name value element.'
         );
     }
 

@@ -47,13 +47,12 @@ class TrashTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsTrashElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Trash',
             ],
             $result,
-            'Invalid <Trash> element.',
-            false
+            'Invalid <Trash> element.'
         );
     }
 
@@ -63,7 +62,7 @@ class TrashTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsTrashAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Trash',
                 'attributes' => [
@@ -72,8 +71,7 @@ class TrashTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Trash> attributes.',
-            false
+            'Invalid <Trash> attributes.'
         );
     }
 

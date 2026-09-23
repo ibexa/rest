@@ -47,20 +47,19 @@ class ContentListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsContentListElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentList',
             ],
             $result,
-            'Invalid <ContentList> element.',
-            false
+            'Invalid <ContentList> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsContentListAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentList',
                 'attributes' => [
@@ -69,8 +68,7 @@ class ContentListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ContentList> attributes.',
-            false
+            'Invalid <ContentList> attributes.'
         );
     }
 
@@ -105,7 +103,7 @@ class ContentListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testContentListVisitsChildren')]
     public function testResultContainsTotalCountAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentList',
                 'attributes' => [
@@ -113,8 +111,7 @@ class ContentListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ContentList> totalCount attribute.',
-            false
+            'Invalid <ContentList> totalCount attribute.'
         );
     }
 

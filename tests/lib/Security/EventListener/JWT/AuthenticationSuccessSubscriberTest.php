@@ -26,15 +26,11 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
 {
     public function testGetSubscribedEvents(): void
     {
-        $subscriber = new AuthenticationSuccessSubscriber(
-            $this->getRequestStackMock()
-        );
-
         self::assertEquals(
             [
                 Events::AUTHENTICATION_SUCCESS => ['onAuthenticationSuccess', 10],
             ],
-            $subscriber->getSubscribedEvents()
+            AuthenticationSuccessSubscriber::getSubscribedEvents()
         );
     }
 
@@ -91,7 +87,7 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
                 'some_other' => 'data',
                 'but_no_token' => 'anywhere',
             ],
-            new User($this->createStub(ApiUser::class)),
+            new User(self::createStub(ApiUser::class)),
             new Response()
         );
 
@@ -110,7 +106,7 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
             [
                 'token' => 'foo',
             ],
-            new User($this->createStub(ApiUser::class)),
+            new User(self::createStub(ApiUser::class)),
             new Response()
         );
 

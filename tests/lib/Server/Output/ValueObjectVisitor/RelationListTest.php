@@ -50,20 +50,19 @@ class RelationListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsRelationsElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Relations',
             ],
             $result,
-            'Invalid <Relations> element.',
-            false
+            'Invalid <Relations> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsRelationsAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Relations',
                 'attributes' => [
@@ -72,8 +71,7 @@ class RelationListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Relations> attributes.',
-            false
+            'Invalid <Relations> attributes.'
         );
     }
 

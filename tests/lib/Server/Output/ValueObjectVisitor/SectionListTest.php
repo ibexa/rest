@@ -40,20 +40,19 @@ class SectionListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsSectionListElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'SectionList',
             ],
             $result,
-            'Invalid <SectionList> element.',
-            false
+            'Invalid <SectionList> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsSectionListAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'SectionList',
                 'attributes' => [
@@ -62,8 +61,7 @@ class SectionListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <SectionList> attributes.',
-            false
+            'Invalid <SectionList> attributes.'
         );
     }
 

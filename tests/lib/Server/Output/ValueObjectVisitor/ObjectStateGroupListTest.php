@@ -42,20 +42,19 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsObjectStateGroupListElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ObjectStateGroupList',
             ],
             $result,
-            'Invalid <ObjectStateGroupList> element.',
-            false
+            'Invalid <ObjectStateGroupList> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsObjectStateGroupListAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ObjectStateGroupList',
                 'attributes' => [
@@ -64,8 +63,7 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ObjectStateGroupList> attributes.',
-            false
+            'Invalid <ObjectStateGroupList> attributes.'
         );
     }
 

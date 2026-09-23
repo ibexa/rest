@@ -7,6 +7,7 @@
 
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
+use Generator;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
@@ -80,7 +81,7 @@ final class LocationTest extends ValueObjectVisitorBaseTestCase
             ->method('getRelations')
             ->with($versionInfo)
             ->willReturnCallback(
-                static fn () => yield
+                static fn (): Generator => yield
             );
 
         $visitor->visit(
@@ -93,7 +94,7 @@ final class LocationTest extends ValueObjectVisitorBaseTestCase
 
         self::assertNotEmpty($result);
 
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'id',
                 'content' => $location->id,
@@ -102,7 +103,7 @@ final class LocationTest extends ValueObjectVisitorBaseTestCase
             'Invalid <id> element.',
         );
 
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'priority',
                 'content' => 1,
@@ -111,7 +112,7 @@ final class LocationTest extends ValueObjectVisitorBaseTestCase
             'Invalid <priority> element.',
         );
 
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'hidden',
                 'content' => 'false',
@@ -120,7 +121,7 @@ final class LocationTest extends ValueObjectVisitorBaseTestCase
             'Invalid <hidden> element.',
         );
 
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'invisible',
                 'content' => 'false',

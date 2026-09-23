@@ -47,13 +47,12 @@ class PolicyListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsPolicyListElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'PolicyList',
             ],
             $result,
-            'Invalid <PolicyList> element.',
-            false
+            'Invalid <PolicyList> element.'
         );
     }
 
@@ -63,7 +62,7 @@ class PolicyListTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsPolicyListAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'PolicyList',
                 'attributes' => [
@@ -72,8 +71,7 @@ class PolicyListTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <PolicyList> attributes.',
-            false
+            'Invalid <PolicyList> attributes.'
         );
     }
 

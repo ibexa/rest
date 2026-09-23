@@ -273,7 +273,7 @@ final class XmlTest extends GeneratorTestCase
     {
         if (!isset($this->generator)) {
             $fieldTypeHashGenerator = new Xml\FieldTypeHashGenerator(
-                $this->createStub(NormalizerInterface::class),
+                self::createStub(NormalizerInterface::class),
             );
             $this->generator = new Xml(
                 $fieldTypeHashGenerator,

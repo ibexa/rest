@@ -36,10 +36,10 @@ final class VisitorTest extends TestCase
     {
         parent::setUp();
 
-        $this->generator = $this->createStub(Generator::class);
+        $this->generator = self::createStub(Generator::class);
         $this->normalizer = $this->createMock(NormalizerInterface::class);
         $this->encoder = $this->createMock(EncoderInterface::class);
-        $this->valueObjectVisitorResolver = $this->createStub(ValueObjectVisitorResolverInterface::class);
+        $this->valueObjectVisitorResolver = self::createStub(ValueObjectVisitorResolverInterface::class);
 
         $this->visitor = new Visitor(
             $this->generator,

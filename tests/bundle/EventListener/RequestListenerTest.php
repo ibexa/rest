@@ -90,14 +90,14 @@ final class RequestListenerTest extends EventListenerTestCase
     protected function getEventListener(?bool $csrfEnabled = null): RequestListener
     {
         return new RequestListener(
-            new UriParser($this->createStub(UrlMatcherInterface::class))
+            new UriParser(self::createStub(UrlMatcherInterface::class))
         );
     }
 
     protected function performFakeRequest(string $uri, int $type = HttpKernelInterface::MAIN_REQUEST): Request
     {
         $event = new RequestEvent(
-            $this->createStub(HttpKernelInterface::class),
+            self::createStub(HttpKernelInterface::class),
             Request::create($uri),
             $type
         );

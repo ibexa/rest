@@ -67,13 +67,13 @@ class LogicalOrTest extends BaseTestCase
             ],
         ];
 
-        $criterionMock = $this->createStub(Content\Query\Criterion::class);
+        $criterionMock = self::createStub(Content\Query\Criterion::class);
 
         $parserMock = $this->createMock(\Ibexa\Contracts\Rest\Input\Parser::class);
         $parserMock->method('parse')->willReturn($criterionMock);
 
         $result = $this->internalGetParser()->parse($logicalOrParsedFromXml, new ParsingDispatcher(
-            $this->createStub(EventDispatcherInterface::class),
+            self::createStub(EventDispatcherInterface::class),
             [
                 'application/vnd.ibexa.api.internal.criterion.ContentTypeIdentifier' => $parserMock,
                 'application/vnd.ibexa.api.internal.criterion.Field' => $parserMock,
@@ -87,7 +87,7 @@ class LogicalOrTest extends BaseTestCase
     {
         $this->expectException(ParserException::class);
         $this->internalGetParser()->parse(['OR' => 'Wrong type'], new ParsingDispatcher(
-            $this->createStub(EventDispatcherInterface::class)
+            self::createStub(EventDispatcherInterface::class)
         ));
     }
 

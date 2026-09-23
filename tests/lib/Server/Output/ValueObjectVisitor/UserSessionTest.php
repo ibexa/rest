@@ -77,7 +77,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsSessionElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Session',
                 'children' => [
@@ -85,15 +85,14 @@ class UserSessionTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Session> element.',
-            false
+            'Invalid <Session> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsSessionAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Session',
                 'attributes' => [
@@ -102,50 +101,46 @@ class UserSessionTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Session> attributes.',
-            false
+            'Invalid <Session> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsNameValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'name',
                 'content' => 'sessionName',
             ],
             $result,
-            'Invalid or non-existing <Session> name value element.',
-            false
+            'Invalid or non-existing <Session> name value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsIdentifierValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'identifier',
                 'content' => 'sessionId',
             ],
             $result,
-            'Invalid or non-existing <Session> identifier value element.',
-            false
+            'Invalid or non-existing <Session> identifier value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsCsrfTokenValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'csrfToken',
                 'content' => 'csrfToken',
             ],
             $result,
-            'Invalid or non-existing <Session> csrf-token value element.',
-            false
+            'Invalid or non-existing <Session> csrf-token value element.'
         );
     }
 
@@ -163,20 +158,19 @@ class UserSessionTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsUserElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'User',
             ],
             $result,
-            'Invalid <User> element.',
-            false
+            'Invalid <User> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsUserAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'User',
                 'attributes' => [
@@ -185,8 +179,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <User> element attributes.',
-            false
+            'Invalid <User> element attributes.'
         );
     }
 

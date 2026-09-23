@@ -74,7 +74,7 @@ abstract class ValueObjectVisitorBaseTestCase extends Server\BaseTestCase
         if (!isset($this->generator)) {
             $this->generator = new Generator\Xml(
                 new Generator\Xml\FieldTypeHashGenerator(
-                    $this->createStub(NormalizerInterface::class),
+                    self::createStub(NormalizerInterface::class),
                 ),
             );
         }
@@ -157,7 +157,7 @@ abstract class ValueObjectVisitorBaseTestCase extends Server\BaseTestCase
         $this->getRouterMock()
             ->expects(self::any())
             ->method('generate')
-            ->willReturnCallback(function (string $routeName, array $arguments = []) {
+            ->willReturnCallback(function (string $routeName, array $arguments = []): string {
                 static $index = 0;
                 $callIndex = $index++;
 
@@ -201,7 +201,7 @@ abstract class ValueObjectVisitorBaseTestCase extends Server\BaseTestCase
         $this->getTemplatedRouterMock()
             ->expects(self::any())
             ->method('generate')
-            ->willReturnCallback(function (string $routeName, array $arguments = []) {
+            ->willReturnCallback(function (string $routeName, array $arguments = []): string {
                 static $index = 0;
                 $callIndex = $index++;
 

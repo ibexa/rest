@@ -37,7 +37,7 @@ final class CsrfListenerTest extends EventListenerTestCase
     public function testIsNotRestRequest(): void
     {
         $listener = $this->getEventListener();
-        $request = $this->createStub(Request::class);
+        $request = self::createStub(Request::class);
         $request->attributes = new ParameterBag();
 
         $listener->onKernelRequest(
@@ -47,7 +47,7 @@ final class CsrfListenerTest extends EventListenerTestCase
 
     public function testCsrfDisabled(): void
     {
-        $request = $this->createStub(Request::class);
+        $request = self::createStub(Request::class);
         $request->attributes = new ParameterBag([
             'is_rest_request' => true,
         ]);
@@ -130,7 +130,7 @@ final class CsrfListenerTest extends EventListenerTestCase
 
     public function testSkipCsrfProtection(): void
     {
-        $request = $this->createStub(Request::class);
+        $request = self::createStub(Request::class);
         $request->attributes = $this->getRequestAttributesMock();
         $request->headers = $this->getRequestHeadersMock();
 

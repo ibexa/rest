@@ -103,14 +103,13 @@ class RestLocationRootNodeTest extends RestLocationTest
     #[Depends('testVisit')]
     public function testResultContainsIdValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'id',
                 'content' => '1',
             ],
             $result,
-            'Invalid or non-existing <Location> id value element.',
-            false
+            'Invalid or non-existing <Location> id value element.'
         );
     }
 
@@ -120,13 +119,12 @@ class RestLocationRootNodeTest extends RestLocationTest
     #[Depends('testVisit')]
     public function testResultContainsParentLocationElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ParentLocation',
             ],
             $result,
-            'Invalid <ParentLocation> element.',
-            false
+            'Invalid <ParentLocation> element.'
         );
     }
 
@@ -136,14 +134,13 @@ class RestLocationRootNodeTest extends RestLocationTest
     #[Depends('testVisit')]
     public function testResultContainsParentLocationAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ParentLocation',
                 'attributes' => [],
             ],
             $result,
-            'Invalid <ParentLocation> attributes.',
-            false
+            'Invalid <ParentLocation> attributes.'
         );
     }
 
@@ -153,7 +150,7 @@ class RestLocationRootNodeTest extends RestLocationTest
     #[Depends('testVisit')]
     public function testResultContainsLocationAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Location',
                 'attributes' => [
@@ -162,8 +159,7 @@ class RestLocationRootNodeTest extends RestLocationTest
                 ],
             ],
             $result,
-            'Invalid <Location> attributes.',
-            false
+            'Invalid <Location> attributes.'
         );
     }
 
@@ -173,7 +169,7 @@ class RestLocationRootNodeTest extends RestLocationTest
     #[Depends('testVisit')]
     public function testResultContainsChildrenAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Children',
                 'attributes' => [
@@ -182,8 +178,7 @@ class RestLocationRootNodeTest extends RestLocationTest
                 ],
             ],
             $result,
-            'Invalid <Children> attributes.',
-            false
+            'Invalid <Children> attributes.'
         );
     }
 
@@ -193,14 +188,13 @@ class RestLocationRootNodeTest extends RestLocationTest
     #[Depends('testVisit')]
     public function testResultContainsPathStringValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'pathString',
                 'content' => '/1',
             ],
             $result,
-            'Invalid or non-existing <Location> pathString value element.',
-            false
+            'Invalid or non-existing <Location> pathString value element.'
         );
     }
 
@@ -210,7 +204,7 @@ class RestLocationRootNodeTest extends RestLocationTest
     #[Depends('testVisit')]
     public function testResultContainsUrlAliasesTagAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'UrlAliases',
                 'attributes' => [
@@ -219,8 +213,7 @@ class RestLocationRootNodeTest extends RestLocationTest
                 ],
             ],
             $result,
-            'Invalid <UrlAliases> attributes.',
-            false
+            'Invalid <UrlAliases> attributes.'
         );
     }
 

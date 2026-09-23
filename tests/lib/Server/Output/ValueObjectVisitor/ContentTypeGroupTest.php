@@ -85,7 +85,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTestCase
     #[Depends('testVisit')]
     public function testResultContainsContentTypeGroupElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentTypeGroup',
                 'children' => [
@@ -93,15 +93,14 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ContentTypeGroup> element.',
-            false
+            'Invalid <ContentTypeGroup> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsContentTypeGroupAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentTypeGroup',
                 'attributes' => [
@@ -110,84 +109,78 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ContentTypeGroup> attributes.',
-            false
+            'Invalid <ContentTypeGroup> attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsIdValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'id',
                 'content' => '42',
             ],
             $result,
-            'Invalid or non-existing <ContentTypeGroup> id value element.',
-            false
+            'Invalid or non-existing <ContentTypeGroup> id value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsIdentifierValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'identifier',
                 'content' => 'some-group',
             ],
             $result,
-            'Invalid or non-existing <ContentTypeGroup> identifier value element.',
-            false
+            'Invalid or non-existing <ContentTypeGroup> identifier value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsCreatedValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'created',
                 'content' => '2012-12-31T19:30:00+01:00',
             ],
             $result,
-            'Invalid or non-existing <ContentTypeGroup> created value element.',
-            false
+            'Invalid or non-existing <ContentTypeGroup> created value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsModifiedValueElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'modified',
                 'content' => '2012-12-31T19:35:00+01:00',
             ],
             $result,
-            'Invalid or non-existing <ContentTypeGroup> modified value element.',
-            false
+            'Invalid or non-existing <ContentTypeGroup> modified value element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsCreatorElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Creator',
             ],
             $result,
-            'Invalid <Creator> element.',
-            false
+            'Invalid <Creator> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsCreatorAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Creator',
                 'attributes' => [
@@ -196,28 +189,26 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Creator> element attributes.',
-            false
+            'Invalid <Creator> element attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsModifierElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Modifier',
             ],
             $result,
-            'Invalid <Modifier> element.',
-            false
+            'Invalid <Modifier> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsModifierAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Modifier',
                 'attributes' => [
@@ -226,28 +217,26 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <Modifier> element attributes.',
-            false
+            'Invalid <Modifier> element attributes.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsContentTypesElement(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentTypes',
             ],
             $result,
-            'Invalid <ContentTypes> element.',
-            false
+            'Invalid <ContentTypes> element.'
         );
     }
 
     #[Depends('testVisit')]
     public function testResultContainsContentTypesAttributes(string $result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'ContentTypes',
                 'attributes' => [
@@ -256,8 +245,7 @@ class ContentTypeGroupTest extends ValueObjectVisitorBaseTestCase
                 ],
             ],
             $result,
-            'Invalid <ContentTypes> attributes.',
-            false
+            'Invalid <ContentTypes> attributes.'
         );
     }
 

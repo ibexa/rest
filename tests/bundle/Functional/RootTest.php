@@ -69,11 +69,10 @@ class RootTest extends RESTFunctionalTestCase
     #[Depends('testLoadRootResource')]
     public function testResultContainsRootElement($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             ['tag' => 'Root'],
             $result,
-            'Invalid <Root> element.',
-            false
+            'Invalid <Root> element.'
         );
     }
 
@@ -85,7 +84,7 @@ class RootTest extends RESTFunctionalTestCase
     #[Depends('testLoadRootResource')]
     public function testResultContainsRootAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'Root',
                 'attributes' => [
@@ -93,28 +92,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <Root> attributes.',
-            false
+            'Invalid <Root> attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsContentTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'content',
             ],
             $result,
-            'Invalid <content> element.',
-            false
+            'Invalid <content> element.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsContentTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'content',
                 'attributes' => [
@@ -123,28 +120,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <content> element.',
-            false
+            'Invalid <content> element.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsContentByRemoteIdTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'contentByRemoteId',
             ],
             $result,
-            'Missing <contentByRemoteId> element.',
-            false
+            'Missing <contentByRemoteId> element.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsContentByRemoteIdTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'contentByRemoteId',
                 'attributes' => [
@@ -153,28 +148,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <contentByRemoteId> tag attributes.',
-            false
+            'Invalid <contentByRemoteId> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypesTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'contentTypes',
             ],
             $result,
-            'Invalid <contentTypes> element.',
-            false
+            'Invalid <contentTypes> element.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypesTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'contentTypes',
                 'attributes' => [
@@ -183,28 +176,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <content> element.',
-            false
+            'Invalid <content> element.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypeByIdentifierTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'contentTypeByIdentifier',
             ],
             $result,
-            'Invalid <contentTypeByIdentifier> element.',
-            false
+            'Invalid <contentTypeByIdentifier> element.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypeByIdentifierTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'contentTypeByIdentifier',
                 'attributes' => [
@@ -213,28 +204,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <contentTypeByIdentifier> tag attributes.',
-            false
+            'Invalid <contentTypeByIdentifier> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypeGroupsTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'contentTypeGroups',
             ],
             $result,
-            'Missing <contentTypeGroups> element.',
-            false
+            'Missing <contentTypeGroups> element.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypeGroupsTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'contentTypeGroups',
                 'attributes' => [
@@ -243,28 +232,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <contentTypeGroups> tag attributes.',
-            false
+            'Invalid <contentTypeGroups> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypeGroupByIdentifierTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'contentTypeGroupByIdentifier',
             ],
             $result,
-            'Missing <ContentTypeGroupByIdentifier> element.',
-            false
+            'Missing <ContentTypeGroupByIdentifier> element.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsContentTypeGroupByIdentifierTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'contentTypeGroupByIdentifier',
                 'attributes' => [
@@ -273,28 +260,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <contentTypeGroupByIdentifier> tag attributes.',
-            false
+            'Invalid <contentTypeGroupByIdentifier> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsUsersTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'users',
             ],
             $result,
-            'Invalid <users> tag.',
-            false
+            'Invalid <users> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsUsersTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'users',
                 'attributes' => [
@@ -303,28 +288,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <users> tag attributes.',
-            false
+            'Invalid <users> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByRoleIdentifierTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'usersByRoleId',
             ],
             $result,
-            'Missing <usersByRoleId> element.',
-            false
+            'Missing <usersByRoleId> element.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByRoleIdentifierTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'usersByRoleId',
                 'attributes' => [
@@ -333,28 +316,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <usersByRoleId> tag attributes.',
-            false
+            'Invalid <usersByRoleId> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByRemoteIdentifierTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'usersByRemoteId',
             ],
             $result,
-            'Missing <usersByRemoteId> element.',
-            false
+            'Missing <usersByRemoteId> element.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByRemoteIdentifierTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'usersByRemoteId',
                 'attributes' => [
@@ -363,28 +344,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <usersByRemoteId> tag attributes.',
-            false
+            'Invalid <usersByRemoteId> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByEmailTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'usersByEmail',
             ],
             $result,
-            'Missing <usersByEmail> element.',
-            false
+            'Missing <usersByEmail> element.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByEmailTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'usersByEmail',
                 'attributes' => [
@@ -393,28 +372,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <usersByEmail> tag attributes.',
-            false
+            'Invalid <usersByEmail> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByLoginTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'usersByLogin',
             ],
             $result,
-            'Missing <usersByLogin> element.',
-            false
+            'Missing <usersByLogin> element.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsUsersByLoginTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'usersByLogin',
                 'attributes' => [
@@ -423,28 +400,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <usersByLogin> tag attributes.',
-            false
+            'Invalid <usersByLogin> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsRolesTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'roles',
             ],
             $result,
-            'Invalid <contentTypes> tag.',
-            false
+            'Invalid <contentTypes> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsRolesTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'roles',
                 'attributes' => [
@@ -453,28 +428,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <roles> tag attributes.',
-            false
+            'Invalid <roles> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsRootLocationTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'rootLocation',
             ],
             $result,
-            'Invalid <rootLocation> tag.',
-            false
+            'Invalid <rootLocation> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsRootLocationTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'rootLocation',
                 'attributes' => [
@@ -483,28 +456,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <rootLocation> tag attributes.',
-            false
+            'Invalid <rootLocation> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsRootUserGroupTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'rootUserGroup',
             ],
             $result,
-            'Invalid <rootUserGroup> tag.',
-            false
+            'Invalid <rootUserGroup> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsRootUserGroupTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'rootUserGroup',
                 'attributes' => [
@@ -513,28 +484,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <rootUserGroup> tag attributes.',
-            false
+            'Invalid <rootUserGroup> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsRootMediaFolderTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'rootMediaFolder',
             ],
             $result,
-            'Invalid <rootMediaFolder> tag.',
-            false
+            'Invalid <rootMediaFolder> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsRootMediaFolderTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'rootMediaFolder',
                 'attributes' => [
@@ -543,28 +512,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <rootMediaFolder> tag attributes.',
-            false
+            'Invalid <rootMediaFolder> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsLocationByRemoteIdTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'locationByRemoteId',
             ],
             $result,
-            'Missing <locationByRemoteId> tag.',
-            false
+            'Missing <locationByRemoteId> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsLocationByRemoteIdTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'locationByRemoteId',
                 'attributes' => [
@@ -573,28 +540,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <locationByRemoteId> tag attributes.',
-            false
+            'Invalid <locationByRemoteId> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsLocationByPathTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'locationByPath',
             ],
             $result,
-            'Missing <locationByPath> tag.',
-            false
+            'Missing <locationByPath> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsLocationByPathTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'locationByPath',
                 'attributes' => [
@@ -603,28 +568,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <locationByPath> tag attributes.',
-            false
+            'Invalid <locationByPath> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsTrashTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'trash',
             ],
             $result,
-            'Invalid <trash> tag.',
-            false
+            'Invalid <trash> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsTrashTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'trash',
                 'attributes' => [
@@ -633,28 +596,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <trash> tag attributes.',
-            false
+            'Invalid <trash> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsSectionsTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'sections',
             ],
             $result,
-            'Invalid <sections> tag.',
-            false
+            'Invalid <sections> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsSectionTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'sections',
                 'attributes' => [
@@ -663,28 +624,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <sections> tag attributes.',
-            false
+            'Invalid <sections> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsViewsTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'views',
             ],
             $result,
-            'Invalid <views> tag.',
-            false
+            'Invalid <views> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsViewsTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'views',
                 'attributes' => [
@@ -693,28 +652,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <views> tag attributes.',
-            false
+            'Invalid <views> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsObjectStateGroupsTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'objectStateGroups',
             ],
             $result,
-            'Missing <objectStateGroups> tag.',
-            false
+            'Missing <objectStateGroups> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsObjectStateGroupsTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'objectStateGroups',
                 'attributes' => [
@@ -723,28 +680,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <objectStateGroups> tag attributes.',
-            false
+            'Invalid <objectStateGroups> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsObjectStatesTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'objectStates',
             ],
             $result,
-            'Missing <objectStates> tag.',
-            false
+            'Missing <objectStates> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsObjectStatesTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'objectStates',
                 'attributes' => [
@@ -753,28 +708,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <objectStates> tag attributes.',
-            false
+            'Invalid <objectStates> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsGlobalUrlAliasesTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'globalUrlAliases',
             ],
             $result,
-            'Missing <globalUrlAliases> tag.',
-            false
+            'Missing <globalUrlAliases> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsGlobalUrlAliasesTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'globalUrlAliases',
                 'attributes' => [
@@ -783,28 +736,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <globalUrlAliases> tag attributes.',
-            false
+            'Invalid <globalUrlAliases> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsUrlWildcardsTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'urlWildcards',
             ],
             $result,
-            'Missing <urlWildcards> tag.',
-            false
+            'Missing <urlWildcards> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsUrlWildcardsTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'urlWildcards',
                 'attributes' => [
@@ -813,28 +764,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <globalUrlAliases> tag attributes.',
-            false
+            'Invalid <globalUrlAliases> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsCreateSessionTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'createSession',
             ],
             $result,
-            'Missing <createSession> tag.',
-            false
+            'Missing <createSession> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsCreateSessionTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'createSession',
                 'attributes' => [
@@ -843,28 +792,26 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <createSession> tag attributes.',
-            false
+            'Invalid <createSession> tag attributes.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsRefreshSessionTag($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'refreshSession',
             ],
             $result,
-            'Missing <refreshSession> tag.',
-            false
+            'Missing <refreshSession> tag.'
         );
     }
 
     #[Depends('testLoadRootResource')]
     public function testResultContainsRefreshSessionTagAttributes($result): void
     {
-        $this->assertXMLTag(
+        self::assertXMLTag(
             [
                 'tag' => 'refreshSession',
                 'attributes' => [
@@ -873,8 +820,7 @@ class RootTest extends RESTFunctionalTestCase
                 ],
             ],
             $result,
-            'Invalid <refreshSession> tag attributes.',
-            false
+            'Invalid <refreshSession> tag attributes.'
         );
     }
 
