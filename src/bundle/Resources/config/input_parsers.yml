@@ -5,6 +5,7 @@ parameters:
 services:
     Ibexa\Rest\Server\Common\Parser:
         abstract: true
+        class: Ibexa\Contracts\Rest\Input\Parser
         calls:
             - [ setUriParser, [ '@Ibexa\Contracts\Rest\UriParser\UriParserInterface' ] ]
 
