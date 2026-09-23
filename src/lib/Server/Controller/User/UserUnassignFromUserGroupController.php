@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Delete(
     uriTemplate: '/user/users/{userId}/groups/{groupId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.unassign_user_from_user_group',
         summary: 'Unassign User Group',
         description: 'Unassigns the User from a User Group.',
         tags: [
@@ -26,10 +27,10 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
+                name: 'X-CSRF-Token',
                 in: 'header',
                 required: true,
-                description: 'If set, the link list of User Groups is returned in XML or JSON format.',
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -53,18 +54,19 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         responses: [
             Response::HTTP_OK => [
+                'description' => 'If set, the link list of User Groups is returned in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.UserGroupRefList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserGroupRefList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/POST/UserGroupRefList.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UserGroupRefList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroupRefListWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/group_id/UserGroupRefList.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UserGroupRefList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserGroupRefList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/group_id/DELETE/UserGroupRefList.xml.example',
                     ],
                 ],
             ],
