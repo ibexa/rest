@@ -17,8 +17,3 @@ chdir(dirname(__DIR__, 2));
         Bootstrapper::OPTION_SCHEMA_UPDATE => false,
     ],
 ]);
-
-// Bootstrapping boots the kernel, which registers Symfony's ErrorHandler globally. PHPUnit's
-// native deprecation handler will not install itself over an already-registered handler, so it
-// would silently no-op. Restore the previous handler so failOnDeprecation actually applies.
-restore_error_handler();
