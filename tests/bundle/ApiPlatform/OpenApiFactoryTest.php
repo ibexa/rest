@@ -207,6 +207,103 @@ final class OpenApiFactoryTest extends TestCase
         }
     }
 
+    public function testInjectsResponseExamplesFromFileIntoResponseObjects(): void
+    {
+        // Given: A response object with JSON and XML examples referenced by file
+        $response = new Response(
+            description: 'Session created.',
+            content: new ArrayObject([
+                'application/json' => [
+                    'schema' => ['$ref' => '#/components/schemas/Session'],
+                    'x-ibexa-example-file' => '@TestBundle/examples/response.json',
+                ],
+                'application/xml' => [
+                    'schema' => ['$ref' => '#/components/schemas/Session'],
+                    'x-ibexa-example-file' => '@TestBundle/examples/response.xml',
+                ],
+            ]),
+            headers: new ArrayObject(['Location' => ['schema' => ['type' => 'string']]]),
+        );
+
+        $result = $this->processOpenApiWithResponse($response);
+
+        // Then: Both examples are injected and the rest of the response is kept
+        $processedResponse = $this->getProcessedResponse($result);
+        self::assertSame('Session created.', $processedResponse->getDescription());
+        self::assertEquals(
+            new ArrayObject(['Location' => ['schema' => ['type' => 'string']]]),
+            $processedResponse->getHeaders(),
+        );
+
+        $content = $processedResponse->getContent();
+        self::assertNotNull($content);
+
+        $jsonContent = $content['application/json'];
+        self::assertSame(['$ref' => '#/components/schemas/Session'], $jsonContent['schema']);
+        self::assertEquals([
+            'token' => 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
+            'user' => ['id' => 14, 'login' => 'admin'],
+        ], $jsonContent['example']);
+        self::assertArrayNotHasKey('x-ibexa-example-file', $jsonContent);
+
+        $xmlContent = $content['application/xml'];
+        self::assertIsString($xmlContent['example']);
+        self::assertStringContainsString('<Session>', $xmlContent['example']);
+        self::assertArrayNotHasKey('x-ibexa-example-file', $xmlContent);
+    }
+
+    public function testKeepsResponseObjectsWithoutExampleFileUnchanged(): void
+    {
+        $response = new Response(
+            description: 'OK - list returned.',
+            content: new ArrayObject([
+                'application/json' => ['schema' => ['$ref' => '#/components/schemas/List']],
+            ]),
+        );
+
+        $result = $this->processOpenApiWithResponse($response);
+
+        self::assertSame($response, $this->getProcessedResponse($result));
+    }
+
+    private function processOpenApiWithResponse(Response $response): OpenApi
+    {
+        $operation = new Operation(
+            responses: [
+                '201' => $response,
+            ]
+        );
+
+        $paths = new Paths();
+        $paths->addPath('/test', new PathItem(post: $operation));
+
+        $openApi = new OpenApi(
+            info: new Info(title: 'Test API', version: '1.0'),
+            servers: [],
+            paths: $paths
+        );
+
+        $this->decoratedFactory
+            ->expects(self::once())
+            ->method('__invoke')
+            ->willReturn($openApi);
+
+        return ($this->factory)([]);
+    }
+
+    private function getProcessedResponse(OpenApi $result): Response
+    {
+        $processedPath = $result->getPaths()->getPath('/test');
+        self::assertNotNull($processedPath);
+        $processedOperation = $processedPath->getPost();
+        self::assertNotNull($processedOperation);
+        $responses = $processedOperation->getResponses();
+        self::assertNotNull($responses);
+        self::assertInstanceOf(Response::class, $responses['201']);
+
+        return $responses['201'];
+    }
+
     /**
      * @param array<string, array<string, mixed>> $content
      */
