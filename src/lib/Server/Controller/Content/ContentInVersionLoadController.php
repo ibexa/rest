@@ -55,9 +55,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the version list is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the version list is returned in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.Version+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/VersionWrapper',
@@ -70,17 +70,11 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/GET/Version.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_NOT_MODIFIED => [
-                'description' => 'Not Modified - the ETag matches the current one.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to read this content item.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the ID or version is not found.',
-            ],
+                ]),
+            ),
+            Response::HTTP_NOT_MODIFIED => new Model\Response(description: 'Not Modified - the ETag matches the current one.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to read this content item.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the ID or version is not found.'),
         ],
     ),
 )]

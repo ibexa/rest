@@ -38,15 +38,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - the given Location is bookmarked.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized for the given Location.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the given Location is not bookmarked or does not exist.',
-            ],
+            Response::HTTP_OK => new Model\Response(description: 'OK - the given Location is bookmarked.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized for the given Location.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the given Location is not bookmarked or does not exist.'),
         ],
     ),
 )]
@@ -70,15 +64,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - the given Location is bookmarked.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized for the given Location.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the given Location is not bookmarked or does not exist.',
-            ],
+            Response::HTTP_OK => new Model\Response(description: 'OK - the given Location is bookmarked.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized for the given Location.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the given Location is not bookmarked or does not exist.'),
         ],
     ),
 )]

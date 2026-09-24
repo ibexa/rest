@@ -85,9 +85,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the updated version is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the updated version is returned in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.Version+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/VersionWrapper',
@@ -100,23 +100,13 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/PATCH/Version.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - the input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to update this version.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - the version is not allowed to change - i.e. version is not a DRAFT.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the content ID or version ID does not exist.',
-            ],
-            Response::HTTP_PRECONDITION_FAILED => [
-                'description' => 'Error - the current ETag does not match with the one provided in the If-Match header.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - the input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to update this version.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - the version is not allowed to change - i.e. version is not a DRAFT.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the content ID or version ID does not exist.'),
+            Response::HTTP_PRECONDITION_FAILED => new Model\Response(description: 'Error - the current ETag does not match with the one provided in the If-Match header.'),
         ],
     ),
 )]

@@ -35,15 +35,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_TEMPORARY_REDIRECT => [
-                'description' => 'Temporary redirect.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to read this content item.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the content item was not found.',
-            ],
+            Response::HTTP_TEMPORARY_REDIRECT => new Model\Response(description: 'Temporary redirect.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to read this content item.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the content item was not found.'),
         ],
     ),
 )]

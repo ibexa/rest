@@ -26,9 +26,9 @@ use Symfony\Component\HttpFoundation\Response;
             'User Role',
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - list of all Roles.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - list of all Roles.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.RoleList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleListWrapper',
@@ -41,11 +41,9 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/GET/RoleList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user has no permission to read Roles.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user has no permission to read Roles.'),
         ],
     ),
 )]

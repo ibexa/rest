@@ -44,9 +44,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns a Role assignment of the given User Group.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns a Role assignment of the given User Group.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.RoleAssignment+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleAssignmentWrapper',
@@ -59,11 +59,9 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/roles/role_id/GET/RoleAssignment.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user has no permission to read Roles.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user has no permission to read Roles.'),
         ],
     ),
 )]

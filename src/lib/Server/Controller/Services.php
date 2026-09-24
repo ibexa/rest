@@ -24,9 +24,9 @@ use Symfony\Component\HttpFoundation\Response;
             'Services',
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the country list is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the country list is returned in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.CountriesList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/CountryListWrapper',
@@ -38,8 +38,8 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/services/countries/GET/CountriesList.xml.example',
                     ],
-                ],
-            ],
+                ]),
+            ),
         ],
     ),
 )]

@@ -33,9 +33,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the Policy list is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the Policy list is returned in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.PolicyList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/PolicyListWrapper',
@@ -48,14 +48,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/GET/PolicyList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user has no permission to read Roles.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the Role does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user has no permission to read Roles.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the Role does not exist.'),
         ],
     ),
 )]

@@ -35,15 +35,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_NO_CONTENT => [
-                'description' => 'No content - the given User Group is deleted.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to delete this content type.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - the User Group is not empty.',
-            ],
+            Response::HTTP_NO_CONTENT => new Model\Response(description: 'No content - the given User Group is deleted.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to delete this content type.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - the User Group is not empty.'),
         ],
     ),
 )]

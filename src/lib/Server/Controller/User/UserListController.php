@@ -32,9 +32,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - Loads Users either for a given remote ID or Role.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - Loads Users either for a given remote ID or Role.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.UserList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserList',
@@ -58,11 +58,9 @@ use Symfony\Component\HttpFoundation\Response;
                             '$ref' => '#/components/schemas/UserRefListWrapper',
                         ],
                     ],
-                ],
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'If there are no visible Users matching the filter.',
-            ],
+                ]),
+            ),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'If there are no visible Users matching the filter.'),
         ],
     ),
 )]

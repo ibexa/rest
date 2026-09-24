@@ -76,9 +76,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_NO_CONTENT => [
-                'description' => 'OK - Object state updated.',
-                'content' => [
+            Response::HTTP_NO_CONTENT => new Model\Response(
+                description: 'OK - Object state updated.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.ContentObjectStates+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentObjectStatesWrapper',
@@ -91,20 +91,12 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/PATCH/ContentObjectStates.response.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - The input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to set an Object state.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - The input contains multiple Object states of the same Object state group.',
-            ],
-            Response::HTTP_PRECONDITION_FAILED => [
-                'description' => 'Error - The current ETag does not match the one provided in the If-Match header.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - The input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to set an Object state.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - The input contains multiple Object states of the same Object state group.'),
+            Response::HTTP_PRECONDITION_FAILED => new Model\Response(description: 'Error - The current ETag does not match the one provided in the If-Match header.'),
         ],
     ),
 )]

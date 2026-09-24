@@ -36,9 +36,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the language is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the language is returned in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.Language+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LanguageWrapper',
@@ -51,8 +51,8 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/languages/code/GET/Language.xml.example',
                     ],
-                ],
-            ],
+                ]),
+            ),
         ],
     ),
 )]

@@ -73,9 +73,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, all information for the content item (excluding the current version) is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, all information for the content item (excluding the current version) is returned in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.ContentInfo+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentInfoWrapper',
@@ -87,23 +87,13 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/PATCH/ContentInfo.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - the input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to update this object.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the content ID does not exist.',
-            ],
-            Response::HTTP_PRECONDITION_FAILED => [
-                'description' => 'Error - the current ETag does not match with the one provided in the If-Match header.',
-            ],
-            Response::HTTP_UNSUPPORTED_MEDIA_TYPE => [
-                'description' => 'Error - the media-type is not one of those specified in headers.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - the input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to update this object.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the content ID does not exist.'),
+            Response::HTTP_PRECONDITION_FAILED => new Model\Response(description: 'Error - the current ETag does not match with the one provided in the If-Match header.'),
+            Response::HTTP_UNSUPPORTED_MEDIA_TYPE => new Model\Response(description: 'Error - the media-type is not one of those specified in headers.'),
         ],
     ),
 )]

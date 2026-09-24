@@ -62,9 +62,9 @@ use Symfony\Component\HttpFoundation\Response;
             content: new \ArrayObject(),
         ),
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the updated content type group list is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the updated content type group list is returned in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.ContentTypeGroupRefList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeGroupRefListWrapper',
@@ -77,17 +77,11 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/POST/ContentTypeGroupRefList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - The input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to add a group.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - The content type is already assigned to the group.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - The input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to add a group.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - The content type is already assigned to the group.'),
         ],
     ),
 )]

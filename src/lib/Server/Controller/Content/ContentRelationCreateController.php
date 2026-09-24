@@ -76,9 +76,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_CREATED => [
-                'description' => 'If set, the updated version is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_CREATED => new Model\Response(
+                description: 'If set, the updated version is returned in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.Relation+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RelationWrapper',
@@ -91,8 +91,8 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/relations/POST/Relation.xml.example',
                     ],
-                ],
-            ],
+                ]),
+            ),
         ],
     ),
 )]

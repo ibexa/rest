@@ -51,9 +51,9 @@ use Symfony\Component\HttpFoundation\Response;
             content: new \ArrayObject(),
         ),
         responses: [
-            Response::HTTP_CREATED => [
-                'description' => 'Created',
-                'content' => [
+            Response::HTTP_CREATED => new Model\Response(
+                description: 'Created',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.Version+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/VersionWrapper',
@@ -66,17 +66,11 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/GET/Version.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to update this content item.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - the current version is already a draft.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the content item was not found.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to update this content item.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - the current version is already a draft.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the content item was not found.'),
         ],
     ),
 )]

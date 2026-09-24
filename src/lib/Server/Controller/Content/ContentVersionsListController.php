@@ -36,9 +36,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the version list is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the version list is returned in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.VersionList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/VersionListWrapper',
@@ -51,11 +51,9 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/GET/VersionList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user has no permission to read the versions.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user has no permission to read the versions.'),
         ],
     ),
 )]

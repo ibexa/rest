@@ -44,15 +44,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_NO_CONTENT => [
-                'description' => 'No Content - Object state group deleted.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to delete an Object state group.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - The Object state group does not exist.',
-            ],
+            Response::HTTP_NO_CONTENT => new Model\Response(description: 'No Content - Object state group deleted.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to delete an Object state group.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - The Object state group does not exist.'),
         ],
     ),
 )]

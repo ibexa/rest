@@ -47,9 +47,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns the Content or ContentInfo in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns the Content or ContentInfo in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.Content+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentWrapper',
@@ -72,14 +72,10 @@ use Symfony\Component\HttpFoundation\Response;
                             '$ref' => '#/components/schemas/ContentInfo',
                         ],
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to read this object. This could also happen if there is no published version yet and another user owns a draft of this content item.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the ID is not found.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to read this object. This could also happen if there is no published version yet and another user owns a draft of this content item.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the ID is not found.'),
         ],
     ),
 )]

@@ -72,9 +72,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - Role draft updated.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - Role draft updated.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.Role+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleWrapper',
@@ -87,20 +87,12 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/PATCH/Role.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - the input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to update the Role.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - there is no draft or Role with the given ID.',
-            ],
-            Response::HTTP_PRECONDITION_FAILED => [
-                'description' => 'Error - the current ETag does not match with the one provided in the If-Match header.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - the input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to update the Role.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - there is no draft or Role with the given ID.'),
+            Response::HTTP_PRECONDITION_FAILED => new Model\Response(description: 'Error - the current ETag does not match with the one provided in the If-Match header.'),
         ],
     ),
 )]

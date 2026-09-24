@@ -24,9 +24,9 @@ use Symfony\Component\HttpFoundation\Response;
             'Location',
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns the LocationList in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns the LocationList in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.LocationList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LocationWrapper',
@@ -39,14 +39,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/locations/GET/LocationList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_TEMPORARY_REDIRECT => [
-                'description' => 'Temporary redirect to the main resource URL.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the Location with the given ID (remote ID or URL  Alias) does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_TEMPORARY_REDIRECT => new Model\Response(description: 'Temporary redirect to the main resource URL.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the Location with the given ID (remote ID or URL  Alias) does not exist.'),
         ],
     ),
 )]

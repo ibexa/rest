@@ -46,9 +46,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - List the draft versions',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - List the draft versions',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.VersionList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/VersionList',
@@ -59,11 +59,9 @@ use Symfony\Component\HttpFoundation\Response;
                             '$ref' => '#/components/schemas/VersionListWrapper',
                         ],
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the current user is not authorized to list the drafts of the given user.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the current user is not authorized to list the drafts of the given user.'),
         ],
     ),
 )]

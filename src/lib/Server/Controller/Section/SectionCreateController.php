@@ -58,9 +58,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_CREATED => [
-                'description' => 'If set, the new Section is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_CREATED => new Model\Response(
+                description: 'If set, the new Section is returned in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.Section+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/SectionWrapper',
@@ -73,8 +73,8 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/POST/Section.xml.example',
                     ],
-                ],
-            ],
+                ]),
+            ),
         ],
     ),
 )]

@@ -53,18 +53,10 @@ use Symfony\Component\HttpFoundation\Response;
             content: new \ArrayObject(),
         ),
         responses: [
-            Response::HTTP_CREATED => [
-                'description' => 'Created.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to given Location.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the given Location does not exist.',
-            ],
-            Response::HTTP_CONFLICT => [
-                'description' => 'Error - Location is already bookmarked.',
-            ],
+            Response::HTTP_CREATED => new Model\Response(description: 'Created.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to given Location.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the given Location does not exist.'),
+            Response::HTTP_CONFLICT => new Model\Response(description: 'Error - Location is already bookmarked.'),
         ],
     ),
 )]

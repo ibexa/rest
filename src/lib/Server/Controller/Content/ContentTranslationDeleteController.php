@@ -50,21 +50,11 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_NO_CONTENT => [
-                'description' => 'No Content',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to delete content item (content/remove policy).',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the content item was not found.',
-            ],
-            Response::HTTP_NOT_ACCEPTABLE => [
-                'description' => 'Error - the given translation does not exist for the content item.',
-            ],
-            Response::HTTP_CONFLICT => [
-                'description' => 'Error - the specified translation is the only one any version has or is the main translation.',
-            ],
+            Response::HTTP_NO_CONTENT => new Model\Response(description: 'No Content'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to delete content item (content/remove policy).'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the content item was not found.'),
+            Response::HTTP_NOT_ACCEPTABLE => new Model\Response(description: 'Error - the given translation does not exist for the content item.'),
+            Response::HTTP_CONFLICT => new Model\Response(description: 'Error - the specified translation is the only one any version has or is the main translation.'),
         ],
     ),
 )]

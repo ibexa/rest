@@ -25,9 +25,9 @@ use Symfony\Component\HttpFoundation\Response;
             'Root',
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the list is return in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the list is return in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.Root+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RootWrapper',
@@ -40,8 +40,8 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/GET/Root.xml.example',
                     ],
-                ],
-            ],
+                ]),
+            ),
         ],
     ),
 )]

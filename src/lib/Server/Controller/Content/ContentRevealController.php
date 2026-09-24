@@ -48,15 +48,9 @@ use Symfony\Component\HttpFoundation\Response;
             content: new \ArrayObject(),
         ),
         responses: [
-            Response::HTTP_NO_CONTENT => [
-                'description' => 'OK - Object item is revealed.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user has no permission to change Object item visibility.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - The content item was not found.',
-            ],
+            Response::HTTP_NO_CONTENT => new Model\Response(description: 'OK - Object item is revealed.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user has no permission to change Object item visibility.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - The content item was not found.'),
         ],
     ),
 )]

@@ -63,9 +63,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_CREATED => [
-                'description' => 'Created - the User Group has been created',
-                'content' => [
+            Response::HTTP_CREATED => new Model\Response(
+                description: 'Created - the User Group has been created',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.UserGroup+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroup',
@@ -78,14 +78,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.json.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - the input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to create this User Group.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - the input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to create this User Group.'),
         ],
     ),
 )]
@@ -143,28 +139,22 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_CREATED => [
-                'content' => [
-                    'application/vnd.ibexa.api.UserGroup+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserGroup',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.xml.example',
+            Response::HTTP_CREATED => new Model\Response(content: new \ArrayObject([
+                'application/vnd.ibexa.api.UserGroup+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/UserGroup',
                     ],
-                    'application/vnd.ibexa.api.UserGroup+json' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserGroupWrapper',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.json.example',
-                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.xml.example',
                 ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - the input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to create this User Group.',
-            ],
+                'application/vnd.ibexa.api.UserGroup+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/UserGroupWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.json.example',
+                ],
+            ])),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - the input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to create this User Group.'),
         ],
     ),
 )]

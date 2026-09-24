@@ -51,18 +51,10 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_NO_CONTENT => [
-                'description' => 'No Content - the version is deleted.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the content item or version were not found.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to delete this version.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - the version is in published state.',
-            ],
+            Response::HTTP_NO_CONTENT => new Model\Response(description: 'No Content - the version is deleted.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the content item or version were not found.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to delete this version.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - the version is in published state.'),
         ],
     ),
 )]

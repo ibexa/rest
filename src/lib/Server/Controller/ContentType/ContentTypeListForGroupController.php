@@ -39,9 +39,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns a list on content types.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns a list on content types.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.ContentTypeInfoList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeInfoListWrapper',
@@ -66,11 +66,9 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/types/GET/ContentTypeList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user has no permission to read the content types.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user has no permission to read the content types.'),
         ],
     ),
 )]

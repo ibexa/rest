@@ -47,31 +47,23 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'content' => [
-                    'application/vnd.ibexa.api.UserGroupRefList+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserGroupRefList',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/POST/UserGroupRefList.xml.example',
+            Response::HTTP_OK => new Model\Response(content: new \ArrayObject([
+                'application/vnd.ibexa.api.UserGroupRefList+xml' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/UserGroupRefList',
                     ],
-                    'application/vnd.ibexa.api.UserGroupRefList+json' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserGroupRefListWrapper',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/group_id/UserGroupRefList.json.example',
-                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/POST/UserGroupRefList.xml.example',
                 ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to assign User Groups.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - the new User Group does not exist or the User is already in this group.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the User does not exist.',
-            ],
+                'application/vnd.ibexa.api.UserGroupRefList+json' => [
+                    'schema' => [
+                        '$ref' => '#/components/schemas/UserGroupRefListWrapper',
+                    ],
+                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/group_id/UserGroupRefList.json.example',
+                ],
+            ])),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to assign User Groups.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - the new User Group does not exist or the User is already in this group.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the User does not exist.'),
         ],
         requestBody: new Model\RequestBody(
             content: new \ArrayObject(),

@@ -35,9 +35,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns the URL alias.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns the URL alias.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.UrlAlias+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlAliasWrapper',
@@ -50,14 +50,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/url_alias_id/GET/UrlAlias.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to read URL aliases.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - The URL alias does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to read URL aliases.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - The URL alias does not exist.'),
         ],
     ),
 )]

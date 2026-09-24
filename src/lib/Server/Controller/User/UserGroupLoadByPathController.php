@@ -53,9 +53,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - loads User Groups.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - loads User Groups.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.UserGroup+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroup',
@@ -68,14 +68,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.json.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user has no permission to read User Groups.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the User Group does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user has no permission to read User Groups.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the User Group does not exist.'),
         ],
     ),
 )]

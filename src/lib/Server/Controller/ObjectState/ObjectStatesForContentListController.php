@@ -48,9 +48,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns the Object state.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns the Object state.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.ContentObjectStates+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentObjectStates',
@@ -63,11 +63,9 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/objectstates/GET/ContentObjectStates.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - The content item does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - The content item does not exist.'),
         ],
     ),
 )]

@@ -41,9 +41,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - Role for the given ID.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - Role for the given ID.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.Role+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleWrapper',
@@ -56,14 +56,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/GET/Role.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user has no permission to read Roles.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the Role does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user has no permission to read Roles.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the Role does not exist.'),
         ],
     ),
 )]

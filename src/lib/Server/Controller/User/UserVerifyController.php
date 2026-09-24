@@ -26,12 +26,8 @@ use Symfony\Component\HttpFoundation\Response;
         parameters: [
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - verifies if there are Users matching the given filter.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - there are no visible Users matching the filter.',
-            ],
+            Response::HTTP_OK => new Model\Response(description: 'OK - verifies if there are Users matching the given filter.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - there are no visible Users matching the filter.'),
         ],
     ),
 )]

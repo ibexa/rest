@@ -48,15 +48,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_NO_CONTENT => [
-                'description' => 'Deleted - no content.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized for the given Location.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the given Location does not exist / is not bookmarked.',
-            ],
+            Response::HTTP_NO_CONTENT => new Model\Response(description: 'Deleted - no content.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized for the given Location.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the given Location does not exist / is not bookmarked.'),
         ],
     ),
 )]

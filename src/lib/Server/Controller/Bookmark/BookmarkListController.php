@@ -30,9 +30,9 @@ use Symfony\Component\HttpFoundation\Response;
             'Bookmark',
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the list is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the list is returned in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.BookmarkList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/BookmarkListWrapper',
@@ -45,11 +45,9 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/bookmark/GET/BookmarkList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to list bookmarks.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to list bookmarks.'),
         ],
     ),
 )]

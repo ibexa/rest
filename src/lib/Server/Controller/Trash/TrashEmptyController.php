@@ -38,12 +38,8 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_NO_CONTENT => [
-                'description' => 'No Content - Trash emptied.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to empty all items from Trash.',
-            ],
+            Response::HTTP_NO_CONTENT => new Model\Response(description: 'No Content - Trash emptied.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to empty all items from Trash.'),
         ],
     ),
 )]

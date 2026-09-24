@@ -36,20 +36,18 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns the JWT in JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns the JWT in JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.JWT+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/JWTWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/token/jwt/POST/JWT.json.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - Unauthorized',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - Unauthorized'),
         ],
     ),
 )]

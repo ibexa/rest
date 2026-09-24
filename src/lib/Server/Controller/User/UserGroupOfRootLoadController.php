@@ -26,9 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
         parameters: [
         ],
         responses: [
-            Response::HTTP_MOVED_PERMANENTLY => [
-                'description' => 'Moved permanently.',
-            ],
+            Response::HTTP_MOVED_PERMANENTLY => new Model\Response(description: 'Moved permanently.'),
         ],
     ),
 )]

@@ -71,9 +71,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the Location is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the Location is returned in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.Location+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LocationWrapper',
@@ -86,14 +86,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/locations/location_id/PATCH/Location.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to update this Location.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the Location with the given ID does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to update this Location.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the Location with the given ID does not exist.'),
         ],
     ),
 )]

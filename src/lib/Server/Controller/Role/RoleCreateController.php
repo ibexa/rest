@@ -63,9 +63,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_CREATED => [
-                'description' => 'If set, the new user is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_CREATED => new Model\Response(
+                description: 'If set, the new user is returned in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.Role+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleWrapper',
@@ -78,14 +78,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/Role.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - the input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to create a Role or a Role draft.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - the input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to create a Role or a Role draft.'),
         ],
     ),
 )]

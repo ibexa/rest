@@ -75,9 +75,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - attributes updated.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - attributes updated.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.FieldDefinition+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/FieldDefinitionWrapper',
@@ -90,17 +90,11 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/field_definitions/field_definition_id/PATCH/FieldDefinition.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - The input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to update the Field definition.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - A Field definition with the given identifier already exists in the given content type.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - The input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to update the Field definition.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - A Field definition with the given identifier already exists in the given content type.'),
         ],
     ),
 )]

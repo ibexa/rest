@@ -39,9 +39,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns a list of Object state groups.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns a list of Object state groups.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.ObjectStateGroupList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ObjectStateGroupListWrapper',
@@ -54,11 +54,9 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/GET/ObjectStateGroupList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user has no permission to read Object state groups.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user has no permission to read Object state groups.'),
         ],
     ),
 )]

@@ -84,9 +84,9 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
             ]),
         ),
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'Session already exists.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'Session already exists.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.Session+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/Session',
@@ -99,11 +99,11 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
                     ],
-                ],
-            ],
-            Response::HTTP_CREATED => [
-                'description' => 'Session is created.',
-                'content' => [
+                ]),
+            ),
+            Response::HTTP_CREATED => new Model\Response(
+                description: 'Session is created.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.Session+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/Session',
@@ -116,17 +116,11 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - the input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the authorization failed.',
-            ],
-            Response::HTTP_CONFLICT => [
-                'description' => 'Error - header contained a session cookie but different user was authorized.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - the input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the authorization failed.'),
+            Response::HTTP_CONFLICT => new Model\Response(description: 'Error - header contained a session cookie but different user was authorized.'),
         ],
     ),
 )]

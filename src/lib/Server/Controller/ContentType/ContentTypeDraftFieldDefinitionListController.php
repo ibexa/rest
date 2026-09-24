@@ -34,9 +34,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - return a list of Field definitions.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - return a list of Field definitions.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.FieldDefinitionList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/FieldDefinitionsWrapper',
@@ -47,11 +47,9 @@ use Symfony\Component\HttpFoundation\Response;
                             '$ref' => '#/components/schemas/FieldDefinitions',
                         ],
                     ],
-                ],
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - The content type draft does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - The content type draft does not exist.'),
         ],
     ),
 )]

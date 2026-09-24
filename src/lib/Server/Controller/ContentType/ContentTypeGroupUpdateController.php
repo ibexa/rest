@@ -79,9 +79,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'Content type group updated.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'Content type group updated.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.ContentTypeGroup+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeGroupWrapper',
@@ -94,20 +94,12 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/content_type_group_id/PATCH/ContentTypeGroup.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - The input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to create this content type group.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - A content type group with the given identifier already exists.',
-            ],
-            Response::HTTP_PRECONDITION_FAILED => [
-                'description' => 'Error - The current ETag does not match the one provided in the If-Match header.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - The input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to create this content type group.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - A content type group with the given identifier already exists.'),
+            Response::HTTP_PRECONDITION_FAILED => new Model\Response(description: 'Error - The current ETag does not match the one provided in the If-Match header.'),
         ],
     ),
 )]

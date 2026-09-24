@@ -70,9 +70,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_CREATED => [
-                'description' => 'Field definition created.',
-                'content' => [
+            Response::HTTP_CREATED => new Model\Response(
+                description: 'Field definition created.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.FieldDefinition+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/FieldDefinitionWrapper',
@@ -85,17 +85,11 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/field_definitions/POST/FieldDefinition.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - The input does not match the input schema definition or validation on the Field definition fails.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to add a Field definition.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - A Field definition with the same identifier already exists in the given content type. The Field definition is of singular type, already existing in the given content type. The Field definition you want to add is of a type that can\'t be added to a content type that already has content instances.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - The input does not match the input schema definition or validation on the Field definition fails.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to add a Field definition.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - A Field definition with the same identifier already exists in the given content type. The Field definition is of singular type, already existing in the given content type. The Field definition you want to add is of a type that can\'t be added to a content type that already has content instances.'),
         ],
     ),
 )]

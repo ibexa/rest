@@ -38,9 +38,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns the list of URL aliases.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns the list of URL aliases.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.UrlAliasRefList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlAliasRefListWrapper',
@@ -52,14 +52,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/locations/path/urlaliases/GET/UrlAliasRefList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - The user has no permission to read URL aliases.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The Location was not found.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - The user has no permission to read URL aliases.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The Location was not found.'),
         ],
     ),
 )]

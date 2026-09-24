@@ -14,6 +14,7 @@ use ApiPlatform\OpenApi\Model\Operation;
 use ApiPlatform\OpenApi\Model\PathItem;
 use ApiPlatform\OpenApi\Model\Paths;
 use ApiPlatform\OpenApi\Model\RequestBody;
+use ApiPlatform\OpenApi\Model\Response;
 use ApiPlatform\OpenApi\OpenApi;
 use ArrayObject;
 use Ibexa\Bundle\Rest\ApiPlatform\EditionBadge\EditionBadgeFactoryInterface;
@@ -219,7 +220,7 @@ final class OpenApiFactoryTest extends TestCase
         $operation = new Operation(
             requestBody: $requestBody,
             responses: [
-                '200' => ['description' => 'Success'],
+                '200' => new Response(description: 'Success'),
             ]
         );
 

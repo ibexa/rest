@@ -64,9 +64,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_CREATED => [
-                'description' => 'If set, the updated Policy is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_CREATED => new Model\Response(
+                description: 'If set, the updated Policy is returned in XML or JSON format.',
+                content: new \ArrayObject([
                     'application/vnd.ibexa.api.Policy+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/PolicyWrapper',
@@ -79,17 +79,11 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/POST/Policy.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - the input does not match the input schema definition or validation of limitation in PolicyCreate fails.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to create the Policy.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the Role does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - the input does not match the input schema definition or validation of limitation in PolicyCreate fails.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to create the Policy.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the Role does not exist.'),
         ],
     ),
 )]
