@@ -2,8 +2,6 @@
 <files version="1">
  <file path="vendor/symfony/deprecation-contracts/function.php">
   <line number="25" hash="c6af5d66288d0667e424978000f29571e4954b81">
-   <issue><![CDATA[Since symfony/dependency-injection 7.4: XML configuration format is deprecated, use YAML or PHP instead.]]></issue>
-   <issue><![CDATA[Since symfony/dependency-injection 7.4: XML configuration format is deprecated, use YAML or PHP instead.]]></issue>
    <issue><![CDATA[Since symfony/framework-bundle 7.3: Not setting the "property_info.with_constructor_extractor" option explicitly is deprecated because its default value will change in version 8.0.]]></issue>
    <issue><![CDATA[Since symfony/dependency-injection 7.4: XML configuration format is deprecated, use YAML or PHP instead.]]></issue>
    <issue><![CDATA[Since symfony/dependency-injection 7.4: XML configuration format is deprecated, use YAML or PHP instead.]]></issue>
@@ -46,7 +44,6 @@
    <issue><![CDATA[Since symfony/dependency-injection 7.4: XML configuration format is deprecated, use YAML or PHP instead.]]></issue>
    <issue><![CDATA[Since symfony/dependency-injection 7.4: XML configuration format is deprecated, use YAML or PHP instead.]]></issue>
    <issue><![CDATA[Since symfony/dependency-injection 7.4: XML configuration format is deprecated, use YAML or PHP instead.]]></issue>
-   <issue><![CDATA[Since symfony/dependency-injection 7.4: Service id "Ibexa\Rest\Server\Common\Parser" looks like a FQCN but no corresponding class or interface exists. To resolve this ambiguity, please rename this service to a non-FQCN (e.g. using dots), or create the missing class or interface.]]></issue>
    <issue><![CDATA[Since symfony/framework-bundle 7.3: Not setting the "property_info.with_constructor_extractor" option explicitly is deprecated because its default value will change in version 8.0.]]></issue>
    <issue><![CDATA[Since symfony/console 7.3: Overriding "Command::getDefaultName()" in "ApiPlatform\Symfony\Bundle\Command\GraphQlExportCommand" is deprecated and will be removed in Symfony 8.0, use the #[AsCommand] attribute instead.]]></issue>
   </line>
