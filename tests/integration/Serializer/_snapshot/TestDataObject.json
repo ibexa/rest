@@ -64,20 +64,20 @@
                                 "_href": "\/api\/ibexa\/v2\/user\/users\/14"
                             },
                             "creationDate": "2007-11-28T16:50:55+00:00",
-                            "initialLanguageCode": "eng-GB",
-                            "languageCodes": "eng-GB",
+                            "initialLanguageCode": "eng-US",
+                            "languageCodes": "eng-US",
                             "VersionTranslationInfo": {
                                 "_media-type": "application\/vnd.ibexa.api.VersionTranslationInfo+json",
                                 "Language": [
                                     {
-                                        "languageCode": "eng-GB"
+                                        "languageCode": "eng-US"
                                     }
                                 ]
                             },
                             "names": {
                                 "value": [
                                     {
-                                        "_languageCode": "eng-GB",
+                                        "_languageCode": "eng-US",
                                         "#text": "Home"
                                     }
                                 ]
@@ -92,7 +92,7 @@
                                 {
                                     "id": 186,
                                     "fieldDefinitionIdentifier": "name",
-                                    "languageCode": "eng-GB",
+                                    "languageCode": "eng-US",
                                     "fieldTypeIdentifier": "ibexa_string",
                                     "fieldValue": "Home"
                                 }
@@ -126,7 +126,7 @@
                 },
                 "lastModificationDate": "2007-11-28T16:51:36+00:00",
                 "publishedDate": "2007-11-19T13:54:46+00:00",
-                "mainLanguageCode": "eng-GB",
+                "mainLanguageCode": "eng-US",
                 "currentVersionNo": 1,
                 "alwaysAvailable": true,
                 "isHidden": false,

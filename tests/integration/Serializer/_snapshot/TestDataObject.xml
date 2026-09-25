@@ -32,15 +32,15 @@
                             <modificationDate>2007-11-28T16:51:36+00:00</modificationDate>
                             <Creator media-type="application/vnd.ibexa.api.User+xml" href="/api/ibexa/v2/user/users/14"/>
                             <creationDate>2007-11-28T16:50:55+00:00</creationDate>
-                            <initialLanguageCode>eng-GB</initialLanguageCode>
-                            <languageCodes>eng-GB</languageCodes>
+                            <initialLanguageCode>eng-US</initialLanguageCode>
+                            <languageCodes>eng-US</languageCodes>
                             <VersionTranslationInfo media-type="application/vnd.ibexa.api.VersionTranslationInfo+xml">
                                 <Language>
-                                    <languageCode>eng-GB</languageCode>
+                                    <languageCode>eng-US</languageCode>
                                 </Language>
                             </VersionTranslationInfo>
                             <names>
-                                <value languageCode="eng-GB">Home</value>
+                                <value languageCode="eng-US">Home</value>
                             </names>
                             <Content media-type="application/vnd.ibexa.api.ContentInfo+xml" href="/api/ibexa/v2/content/objects/57"/>
                         </VersionInfo>
@@ -48,7 +48,7 @@
                             <field>
                                 <id>186</id>
                                 <fieldDefinitionIdentifier>name</fieldDefinitionIdentifier>
-                                <languageCode>eng-GB</languageCode>
+                                <languageCode>eng-US</languageCode>
                                 <fieldTypeIdentifier>ibexa_string</fieldTypeIdentifier>
                                 <fieldValue>Home</fieldValue>
                             </field>
@@ -63,7 +63,7 @@
                 <Owner media-type="application/vnd.ibexa.api.User+xml" href="/api/ibexa/v2/user/users/14"/>
                 <lastModificationDate>2007-11-28T16:51:36+00:00</lastModificationDate>
                 <publishedDate>2007-11-19T13:54:46+00:00</publishedDate>
-                <mainLanguageCode>eng-GB</mainLanguageCode>
+                <mainLanguageCode>eng-US</mainLanguageCode>
                 <currentVersionNo>1</currentVersionNo>
                 <alwaysAvailable>true</alwaysAvailable>
                 <isHidden>false</isHidden>
