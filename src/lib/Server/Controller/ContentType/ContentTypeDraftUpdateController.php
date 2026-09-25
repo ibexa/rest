@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Rest\Message;
@@ -53,7 +54,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The content type update schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.ContentTypeUpdate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeUpdateWrapper',
@@ -69,9 +70,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'Draft metadata updated.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'Draft metadata updated.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.ContentTypeInfo+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeInfoWrapper',
@@ -84,20 +85,12 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/PATCH/ContentTypeInfo.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - The input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to update the draft.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - A content type with the given new identifier already exists.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - There is no draft for this content type.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - The input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to update the draft.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - A content type with the given new identifier already exists.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - There is no draft for this content type.'),
         ],
     ),
 )]

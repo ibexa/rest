@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -52,9 +53,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - loads a Relation for the given content item.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - loads a Relation for the given content item.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Relation+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RelationWrapper',
@@ -67,14 +68,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objects/content_id/versions/version_no/relations/relation_id/GET/Relation.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to read this content item.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the content item with the given ID or the Relation does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to read this content item.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the content item with the given ID or the Relation does not exist.'),
         ],
     ),
 )]

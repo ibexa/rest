@@ -33,18 +33,10 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_NO_CONTENT => [
-                'description' => 'No Content.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to delete this User.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - the user is the same as the authenticated User.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the User does not exist.',
-            ],
+            Response::HTTP_NO_CONTENT => new Model\Response(description: 'No Content.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to delete this User.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - the user is the same as the authenticated User.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the User does not exist.'),
         ],
     ),
 )]

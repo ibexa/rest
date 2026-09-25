@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Session;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Rest\Server\Values\UserSession;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,9 +44,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'User is currently logged in and has a valid session.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'User is currently logged in and has a valid session.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Session+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/Session',
@@ -58,11 +59,9 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
                     ],
-                ],
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'User does not have a valid session, or it has expired.',
-            ],
+                ]),
+            ),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'User does not have a valid session, or it has expired.'),
         ],
     ),
 )]

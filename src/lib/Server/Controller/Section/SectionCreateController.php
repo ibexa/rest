@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Section;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\SectionService;
 use Ibexa\Rest\Message;
@@ -42,7 +43,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The Section input schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.SectionInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/SectionInputWrapper',
@@ -58,9 +59,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_CREATED => [
-                'description' => 'If set, the new Section is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_CREATED => new Model\Response(
+                description: 'If set, the new Section is returned in XML or JSON format.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Section+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/SectionWrapper',
@@ -73,8 +74,8 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/POST/Section.xml.example',
                     ],
-                ],
-            ],
+                ]),
+            ),
         ],
     ),
 )]

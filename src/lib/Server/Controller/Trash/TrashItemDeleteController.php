@@ -44,15 +44,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_NO_CONTENT => [
-                'description' => 'No Content - item deleted.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to delete the provided item.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - The provided item does not exist in Trash.',
-            ],
+            Response::HTTP_NO_CONTENT => new Model\Response(description: 'No Content - item deleted.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to delete the provided item.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - The provided item does not exist in Trash.'),
         ],
     ),
 )]

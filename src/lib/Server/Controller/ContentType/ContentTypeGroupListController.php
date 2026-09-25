@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\ContentType;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -35,9 +36,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the content type group list is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the content type group list is returned in XML or JSON format.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.ContentTypeGroupRefList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeGroupRefListWrapper',
@@ -50,14 +51,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/groups/GET/ContentTypeGroupRefList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to read this content type.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - The content type does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to read this content type.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - The content type does not exist.'),
         ],
     ),
 )]

@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\ObjectState;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\ObjectStateService;
@@ -53,7 +54,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The Object state input schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.ObjectStateCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ObjectStateCreateWrapper',
@@ -69,9 +70,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_CREATED => [
-                'description' => 'Object state created.',
-                'content' => [
+            Response::HTTP_CREATED => new Model\Response(
+                description: 'Object state created.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.ObjectState+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ObjectStateWrapper',
@@ -84,17 +85,11 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/object_state_group_id/objectstates/POST/ObjectState.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - The input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to create an Object state.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - An Object state with the same identifier already exists in the given group.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - The input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to create an Object state.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - An Object state with the same identifier already exists in the given group.'),
         ],
     ),
 )]

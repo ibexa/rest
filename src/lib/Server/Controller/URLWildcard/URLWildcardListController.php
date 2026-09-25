@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\URLWildcard;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\URLWildcardService;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
@@ -26,9 +27,9 @@ use Symfony\Component\HttpFoundation\Response;
             'Url Wildcard',
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns a list of URL wildcards.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns a list of URL wildcards.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UrlWildcardList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlWildcardListWrapper',
@@ -41,11 +42,9 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/GET/UrlWildcardList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user has no permission to read URL wildcards.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user has no permission to read URL wildcards.'),
         ],
     ),
 )]

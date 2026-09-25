@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Section;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\SectionService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Section;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -39,9 +40,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the Section list is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the Section list is returned in XML or JSON format.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.SectionList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/SectionListWrapper',
@@ -54,12 +55,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/sections/GET/SectionList.xml.example',
                     ],
-                ],
-            ],
+                ]),
+            ),
             //Response::HTTP_NOT_FOUND => [],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user has no permission to read the Section.',
-            ],
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user has no permission to read the Section.'),
         ],
     ),
 )]

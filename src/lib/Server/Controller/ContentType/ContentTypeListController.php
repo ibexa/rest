@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\ContentType;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
@@ -32,9 +33,9 @@ use Symfony\Component\HttpFoundation\Response;
             'Type',
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns a list of content types.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns a list of content types.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.ContentTypeInfoList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeInfoListWrapper',
@@ -57,11 +58,9 @@ use Symfony\Component\HttpFoundation\Response;
                             '$ref' => '#/components/schemas/ContentTypeList',
                         ],
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user has no permission to read the content types.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user has no permission to read the content types.'),
         ],
     ),
 )]

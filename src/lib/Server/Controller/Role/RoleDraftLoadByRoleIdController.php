@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Values\User\RoleDraft;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,9 +43,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - Role draft by original Role ID.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - Role draft by original Role ID.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Role+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleWrapper',
@@ -57,14 +58,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/draft/GET/Role.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user has no permission to read Roles.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - there is no draft or Role with the given ID.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user has no permission to read Roles.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - there is no draft or Role with the given ID.'),
         ],
     ),
 )]

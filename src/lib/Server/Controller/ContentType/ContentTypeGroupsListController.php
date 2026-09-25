@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\ContentType;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -26,9 +27,9 @@ use Symfony\Component\HttpFoundation\Response;
             'Type Groups',
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns a list of content type groups.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns a list of content type groups.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.ContentTypeGroupList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeGroupListWrapper',
@@ -41,17 +42,11 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/GET/ContentTypeGroupList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_TEMPORARY_REDIRECT => [
-                'description' => 'Temporary redirect.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user has no permission to read content types.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - The content type group with the given identifier does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_TEMPORARY_REDIRECT => new Model\Response(description: 'Temporary redirect.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user has no permission to read content types.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - The content type group with the given identifier does not exist.'),
         ],
     ),
 )]

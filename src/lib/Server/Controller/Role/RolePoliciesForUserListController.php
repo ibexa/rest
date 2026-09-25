@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Rest\Server\Values\PolicyList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,9 +26,9 @@ use Symfony\Component\HttpFoundation\Response;
             'User Policy',
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - Policies which are applied to a given User.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - Policies which are applied to a given User.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.PolicyList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/PolicyListWrapper',
@@ -40,11 +41,9 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/policies/GET/PolicyList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user has no permission to read Roles.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user has no permission to read Roles.'),
         ],
     ),
 )]

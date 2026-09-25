@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\LimitationValidationException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
@@ -48,7 +49,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The RoleAssignInput schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.RoleAssignInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/RoleAssignInputWrapper',
@@ -64,9 +65,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the updated Role assignment list is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the updated Role assignment list is returned in XML or JSON format.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.RoleAssignmentList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleAssignmentListWrapper',
@@ -79,14 +80,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/roles/POST/RoleAssignmentList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - validation of limitation in RoleAssignInput fails.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to assign this Role.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - validation of limitation in RoleAssignInput fails.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to assign this Role.'),
         ],
     ),
 )]

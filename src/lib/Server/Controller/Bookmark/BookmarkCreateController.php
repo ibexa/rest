@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller\Bookmark;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\BookmarkService;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\LocationService;
@@ -50,21 +51,13 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'No payload required',
-            content: new \ArrayObject(),
+            content: new ArrayObject(),
         ),
         responses: [
-            Response::HTTP_CREATED => [
-                'description' => 'Created.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to given Location.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the given Location does not exist.',
-            ],
-            Response::HTTP_CONFLICT => [
-                'description' => 'Error - Location is already bookmarked.',
-            ],
+            Response::HTTP_CREATED => new Model\Response(description: 'Created.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to given Location.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the given Location does not exist.'),
+            Response::HTTP_CONFLICT => new Model\Response(description: 'Error - Location is already bookmarked.'),
         ],
     ),
 )]

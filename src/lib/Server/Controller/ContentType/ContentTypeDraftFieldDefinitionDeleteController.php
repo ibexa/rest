@@ -55,15 +55,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_NO_CONTENT => [
-                'description' => 'No Content - Field definition deleted.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to delete this content type.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - There is no draft of the content type assigned to the authenticated user.',
-            ],
+            Response::HTTP_NO_CONTENT => new Model\Response(description: 'No Content - Field definition deleted.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to delete this content type.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - There is no draft of the content type assigned to the authenticated user.'),
         ],
     ),
 )]

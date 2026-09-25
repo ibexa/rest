@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\URLWildcard;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\URLWildcardService;
 use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -34,9 +35,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns the URL wildcard.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns the URL wildcard.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UrlWildcard+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlWildcardWrapper',
@@ -49,14 +50,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/wildcard_id/GET/UrlWildcard.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to read URL wildcards.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - The URL wildcard does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to read URL wildcards.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - The URL wildcard does not exist.'),
         ],
     ),
 )]

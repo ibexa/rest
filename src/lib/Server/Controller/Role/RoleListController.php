@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException as APINotFoundException;
 use Ibexa\Rest\Server\Values\RoleList;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,9 +27,9 @@ use Symfony\Component\HttpFoundation\Response;
             'User Role',
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - list of all Roles.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - list of all Roles.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.RoleList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleListWrapper',
@@ -41,11 +42,9 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/GET/RoleList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user has no permission to read Roles.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user has no permission to read Roles.'),
         ],
     ),
 )]

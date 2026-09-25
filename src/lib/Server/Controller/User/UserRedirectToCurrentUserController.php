@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller\User;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
@@ -37,9 +38,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - the User with the given ID.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - the User with the given ID.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.User+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserList',
@@ -52,11 +53,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.json.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user has no permission to read Users. For example, Anonymous user can\'t load oneself.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user has no permission to read Users. For example, Anonymous user can\'t load oneself.'),
         ],
     ),
 )]

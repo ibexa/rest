@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\User;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Server\Values;
@@ -54,9 +55,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - the User with the given ID.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - the User with the given ID.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.User+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserList',
@@ -69,14 +70,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/GET/User.json.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user has no permission to read Users.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the User does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user has no permission to read Users.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the User does not exist.'),
         ],
     ),
 )]

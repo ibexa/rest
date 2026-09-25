@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller\Language;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\LanguageService;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values\LanguageList;
@@ -28,9 +29,9 @@ use Traversable;
             'Language',
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the list is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the list is returned in XML or JSON format.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.LanguageList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LanguageListWrapper',
@@ -43,8 +44,8 @@ use Traversable;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/languages/GET/LanguageList.xml.example',
                     ],
-                ],
-            ],
+                ]),
+            ),
         ],
     ),
 )]

@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\User;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Rest\Value as RestValue;
@@ -45,8 +46,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - list of the User Groups the User belongs to.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UserGroupRefList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroupRefList',
@@ -59,14 +61,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/group_id/UserGroupRefList.json.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user has no permission to read User Groups.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the user does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user has no permission to read User Groups.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the user does not exist.'),
         ],
     ),
 )]

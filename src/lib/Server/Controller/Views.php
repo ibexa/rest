@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException;
 use Ibexa\Contracts\Core\Repository\SearchService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
@@ -46,7 +47,7 @@ Refer to [Search Criteria Reference](/en/latest/search/criteria_reference/search
         ],
         requestBody: new Model\RequestBody(
             description: 'The view input in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.ViewInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ViewInputWrapper',
@@ -62,20 +63,18 @@ Refer to [Search Criteria Reference](/en/latest/search/criteria_reference/search
             ]),
         ),
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'The view in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'The view in XML or JSON format.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.View+xml; version=1.1' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/View',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/views/POST/View.xml.v11.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - the input does not match the input schema definition.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - the input does not match the input schema definition.'),
         ],
     ),
 )]

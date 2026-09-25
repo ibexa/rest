@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\URLAlias;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\URLAliasService;
@@ -44,7 +45,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The URL alias input schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.UrlAliasCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UrlAliasCreateWrapper',
@@ -60,9 +61,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_CREATED => [
-                'description' => 'URL alias created.',
-                'content' => [
+            Response::HTTP_CREATED => new Model\Response(
+                description: 'URL alias created.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UrlAlias+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlAliasWrapper',
@@ -75,17 +76,11 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/POST/UrlAlias.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - The input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to create a URL alias.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - A URL alias with the same identifier already exists.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - The input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to create a URL alias.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - A URL alias with the same identifier already exists.'),
         ],
     ),
 )]

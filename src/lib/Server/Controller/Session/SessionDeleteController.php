@@ -51,12 +51,8 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_NO_CONTENT => [
-                'description' => 'OK - session deleted.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the session does not exist.',
-            ],
+            Response::HTTP_NO_CONTENT => new Model\Response(description: 'OK - session deleted.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the session does not exist.'),
         ],
     ),
 )]

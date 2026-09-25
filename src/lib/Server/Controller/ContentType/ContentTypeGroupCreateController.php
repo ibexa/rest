@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\ContentType;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Rest\Message;
@@ -43,7 +44,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The content type group input schema encoded in XML or JSON.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.ContentTypeGroupInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeGroupInputWrapper',
@@ -59,9 +60,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_CREATED => [
-                'description' => 'Content type group created.',
-                'content' => [
+            Response::HTTP_CREATED => new Model\Response(
+                description: 'Content type group created.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.ContentTypeGroup+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeGroupWrapper',
@@ -74,17 +75,11 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/typegroups/POST/ContentTypeGroup.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - The input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to create this content type group.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - A content type group with the same identifier already exists.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - The input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to create this content type group.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - A content type group with the same identifier already exists.'),
         ],
     ),
 )]

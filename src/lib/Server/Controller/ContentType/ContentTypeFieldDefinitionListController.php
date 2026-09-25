@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\ContentType;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -35,9 +36,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - return a list of Field definitions.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - return a list of Field definitions.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.FieldDefinitionList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/FieldDefinitionsWrapper',
@@ -48,11 +49,9 @@ use Symfony\Component\HttpFoundation\Response;
                             '$ref' => '#/components/schemas/FieldDefinitions',
                         ],
                     ],
-                ],
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - The content type does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - The content type does not exist.'),
         ],
     ),
 )]

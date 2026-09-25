@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\ObjectState;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ObjectStateService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
@@ -53,9 +54,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns the Object state.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns the Object state.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.ObjectState+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ObjectStateWrapper',
@@ -68,14 +69,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/objectstategroups/object_state_group_id/objectstates/object_state_id/GET/ObjectState.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to read this Object state.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - The Object state does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to read this Object state.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - The Object state does not exist.'),
         ],
     ),
 )]

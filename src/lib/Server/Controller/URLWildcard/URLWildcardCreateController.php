@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\URLWildcard;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\URLWildcardService;
 use Ibexa\Rest\Message;
@@ -43,7 +44,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The URL Wildcard input schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.UrlWildcardCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UrlWildcardCreateWrapper',
@@ -59,9 +60,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_CREATED => [
-                'description' => 'URL wildcard created.',
-                'content' => [
+            Response::HTTP_CREATED => new Model\Response(
+                description: 'URL wildcard created.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UrlWildcard+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlWildcardWrapper',
@@ -74,17 +75,11 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlwildcards/POST/UrlWildcard.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - The input does not match the input schema definition.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to create a URL wildcard.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - A URL wildcard with the same identifier already exists.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - The input does not match the input schema definition.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to create a URL wildcard.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - A URL wildcard with the same identifier already exists.'),
         ],
     ),
 )]

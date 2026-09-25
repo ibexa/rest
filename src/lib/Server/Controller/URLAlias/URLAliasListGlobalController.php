@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\URLAlias;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\URLAliasService;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -27,9 +28,9 @@ use Symfony\Component\HttpFoundation\Response;
             'Url Alias',
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns the list of URL aliases.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns the list of URL aliases.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UrlAliasRefList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlAliasRefListWrapper',
@@ -42,11 +43,9 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/urlaliases/GET/UrlAliasRefList.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user has no permission to read URL aliases.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user has no permission to read URL aliases.'),
         ],
     ),
 )]

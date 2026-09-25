@@ -178,14 +178,22 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         $newOperation = $operation;
 
         foreach (($operation->getResponses() ?? []) as $responseCode => $response) {
-            if (!is_array($response) || !array_key_exists('content', $response)) {
+            if ($response instanceof Response) {
+                $content = $response->getContent()?->getArrayCopy();
+            } elseif (is_array($response) && array_key_exists('content', $response)) {
+                $content = $response['content'];
+            } else {
                 continue;
             }
 
-            $newContent = $response['content'];
+            if ($content === null) {
+                continue;
+            }
+
+            $newContent = $content;
 
             foreach ($newContent as $mediaType => $responseContent) {
-                if (!array_key_exists('x-ibexa-example-file', $responseContent)) {
+                if (!is_array($responseContent) || !array_key_exists('x-ibexa-example-file', $responseContent)) {
                     continue;
                 }
 
@@ -195,12 +203,16 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
                 unset($newContent[$mediaType]['x-ibexa-example-file']);
             }
 
-            if ($newContent !== $response['content']) {
-                $newOperation = $newOperation->withResponse(
-                    $responseCode,
-                    new Response($response['description'] ?? (string)$responseCode, new ArrayObject($newContent)),
-                );
+            if ($newContent === $content) {
+                continue;
             }
+
+            $newOperation = $newOperation->withResponse(
+                $responseCode,
+                $response instanceof Response
+                    ? $response->withContent(new ArrayObject($newContent))
+                    : new Response($response['description'] ?? (string)$responseCode, new ArrayObject($newContent)),
+            );
         }
 
         return $newOperation;

@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller\User;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions as ApiExceptions;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Values;
@@ -47,8 +48,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - the User has been assigned to the User Group.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UserGroupRefList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroupRefList',
@@ -61,20 +63,14 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/group_id/UserGroupRefList.json.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to assign User Groups.',
-            ],
-            Response::HTTP_FORBIDDEN => [
-                'description' => 'Error - the new User Group does not exist or the User is already in this group.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the User does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to assign User Groups.'),
+            Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - the new User Group does not exist or the User is already in this group.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the User does not exist.'),
         ],
         requestBody: new Model\RequestBody(
-            content: new \ArrayObject(),
+            content: new ArrayObject(),
         ),
     ),
 )]

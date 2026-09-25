@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\ContentType;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -44,9 +45,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'OK - returns the Field definition.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - returns the Field definition.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.FieldDefinition+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/FieldDefinitionWrapper',
@@ -59,14 +60,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/types/content_type_id/draft/field_definitions/field_definition_id/GET/FieldDefinition.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user is not authorized to read the content type draft.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - The content type or draft does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user is not authorized to read the content type draft.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - The content type or draft does not exist.'),
         ],
     ),
 )]

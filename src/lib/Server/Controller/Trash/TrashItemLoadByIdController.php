@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Trash;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\TrashService;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -35,9 +36,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the item in Trash is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the item in Trash is returned in XML or JSON format.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.TrashItem+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/TrashItemWrapper',
@@ -50,14 +51,10 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/content/trash/trash_itemid/GET/TrashItem.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - The user has no permission to read the item in Trash.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - An item in Trash with the provided ID does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - The user has no permission to read the item in Trash.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - An item in Trash with the provided ID does not exist.'),
         ],
     ),
 )]

@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller\Language;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\LanguageService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language as ApiLanguage;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -36,9 +37,9 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the language is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the language is returned in XML or JSON format.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Language+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LanguageWrapper',
@@ -51,8 +52,8 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/languages/code/GET/Language.xml.example',
                     ],
-                ],
-            ],
+                ]),
+            ),
         ],
     ),
 )]

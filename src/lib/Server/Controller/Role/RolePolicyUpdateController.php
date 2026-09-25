@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\LimitationValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Values\User\Policy;
@@ -60,7 +61,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'If set, the updated Policy is returned in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.PolicyUpdate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/PolicyUpdateWrapper',
@@ -75,9 +76,9 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_OK => [
-                'description' => 'If set, the updated Policy is returned in XML or JSON format.',
-                'content' => [
+            Response::HTTP_OK => new Model\Response(
+                description: 'If set, the updated Policy is returned in XML or JSON format.',
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Policy+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/PolicyWrapper',
@@ -90,20 +91,12 @@ use Symfony\Component\HttpFoundation\Response;
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/id/policies/id/PATCH/Policy.xml.example',
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - the input does not match the input schema definition or validation of limitation in PolicyUpdate fails.',
-            ],
-            Response::HTTP_UNAUTHORIZED => [
-                'description' => 'Error - the user is not authorized to update the Policy.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the Role does not exist.',
-            ],
-            Response::HTTP_PRECONDITION_FAILED => [
-                'description' => 'Error - the current ETag does not match with the one provided in the If-Match header.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - the input does not match the input schema definition or validation of limitation in PolicyUpdate fails.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to update the Policy.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the Role does not exist.'),
+            Response::HTTP_PRECONDITION_FAILED => new Model\Response(description: 'Error - the current ETag does not match with the one provided in the If-Match header.'),
         ],
     ),
 )]

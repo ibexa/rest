@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Values\TemporaryRedirect;
@@ -38,21 +39,17 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_TEMPORARY_REDIRECT => [
-                'description' => 'Temporary redirect to `GET /content/objects/{contentId}` equivalent.',
-                'headers' => [
+            Response::HTTP_TEMPORARY_REDIRECT => new Model\Response(
+                description: 'Temporary redirect to `GET /content/objects/{contentId}` equivalent.',
+                headers: new ArrayObject([
                     'Location' => [
                         'description' => 'Contains the prefixed `/content/objects/{contentId}` absolute path of the content item.',
                         'schema' => ['type' => 'string'],
                     ],
-                ],
-            ],
-            Response::HTTP_BAD_REQUEST => [
-                'description' => 'Error - the required `remoteId` query parameter is missing.',
-            ],
-            Response::HTTP_NOT_FOUND => [
-                'description' => 'Error - the content with the given remote ID does not exist.',
-            ],
+                ]),
+            ),
+            Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - the required `remoteId` query parameter is missing.'),
+            Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the content with the given remote ID does not exist.'),
         ],
     ),
 )]
