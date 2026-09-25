@@ -75,20 +75,23 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_CREATED => new Model\Response(content: new ArrayObject([
-                'application/vnd.ibexa.api.User+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/User',
+            Response::HTTP_CREATED => new Model\Response(
+                description: 'Created - the User has been created.',
+                content: new ArrayObject([
+                    'application/vnd.ibexa.api.User+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/User',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/PATCH/User.xml.example',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/PATCH/User.xml.example',
-                ],
-                'application/vnd.ibexa.api.User+json' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/UserWrapper',
+                    'application/vnd.ibexa.api.User+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/PATCH/User.json.example',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/PATCH/User.json.example',
-                ],
-            ])),
+                ]),
+            ),
             Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - the input does not match the input schema definition.'),
             Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to create this User.'),
             Response::HTTP_FORBIDDEN => new Model\Response(description: 'Error - a User with the same login already exists.'),

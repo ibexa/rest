@@ -41,32 +41,35 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => new Model\Response(content: new ArrayObject([
-                'application/vnd.ibexa.api.UserGroupList+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/UserGroupList',
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - list of User Groups.',
+                content: new ArrayObject([
+                    'application/vnd.ibexa.api.UserGroupList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserGroupList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/GET/UserGroupList.xml.example',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/GET/UserGroupList.xml.example',
-                ],
-                'application/vnd.ibexa.api.UserGroupList+json' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/UserGroupListWrapper',
+                    'application/vnd.ibexa.api.UserGroupList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserGroupListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/GET/UserGroupList.json.example',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/GET/UserGroupList.json.example',
-                ],
-                'application/vnd.ibexa.api.UserGroupRefList+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/UserGroupRefList',
+                    'application/vnd.ibexa.api.UserGroupRefList+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserGroupRefList',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/POST/UserGroupRefList.xml.example',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/POST/UserGroupRefList.xml.example',
-                ],
-                'application/vnd.ibexa.api.UserGroupRefList+json' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/UserGroupRefListWrapper',
+                    'application/vnd.ibexa.api.UserGroupRefList+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserGroupRefListWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/group_id/UserGroupRefList.json.example',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/users/user_id/groups/group_id/UserGroupRefList.json.example',
-                ],
-            ])),
+                ]),
+            ),
             Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user has no permission to read User Groups.'),
         ],
     ),

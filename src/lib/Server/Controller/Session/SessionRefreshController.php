@@ -62,20 +62,23 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => new Model\Response(content: new ArrayObject([
-                'application/vnd.ibexa.api.Session+xml' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/Session',
+            Response::HTTP_OK => new Model\Response(
+                description: 'OK - session refreshed.',
+                content: new ArrayObject([
+                    'application/vnd.ibexa.api.Session+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Session',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
-                ],
-                'application/vnd.ibexa.api.Session+json' => [
-                    'schema' => [
-                        '$ref' => '#/components/schemas/SessionWrapper',
+                    'application/vnd.ibexa.api.Session+json' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/SessionWrapper',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
                     ],
-                    'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
-                ],
-            ])),
+                ]),
+            ),
             Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the session does not exist.'),
         ],
         requestBody: new Model\RequestBody(
