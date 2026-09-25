@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller\User;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions as ApiExceptions;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Values;
@@ -47,7 +48,7 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => new Model\Response(content: new \ArrayObject([
+            Response::HTTP_OK => new Model\Response(content: new ArrayObject([
                 'application/vnd.ibexa.api.UserGroupRefList+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UserGroupRefList',
@@ -66,7 +67,7 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the User does not exist.'),
         ],
         requestBody: new Model\RequestBody(
-            content: new \ArrayObject(),
+            content: new ArrayObject(),
         ),
     ),
 )]

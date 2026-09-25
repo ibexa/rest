@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Values\User\Policy;
 use Ibexa\Contracts\Rest\Exceptions;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,7 +46,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'If set, the Policy is returned in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Policy+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/PolicyWrapper',

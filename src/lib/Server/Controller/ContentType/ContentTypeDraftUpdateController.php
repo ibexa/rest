@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Rest\Message;
@@ -53,7 +54,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The content type update schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.ContentTypeUpdate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeUpdateWrapper',
@@ -71,7 +72,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'Draft metadata updated.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.ContentTypeInfo+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeInfoWrapper',

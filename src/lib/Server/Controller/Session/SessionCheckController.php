@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Session;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Rest\Server\Values\UserSession;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,7 +46,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'User is currently logged in and has a valid session.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Session+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/Session',

@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\ContentType;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -46,7 +47,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - returns the Field definition.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.FieldDefinition+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/FieldDefinitionWrapper',

@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\URLAlias;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\URLAliasService;
@@ -44,7 +45,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The URL alias input schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.UrlAliasCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UrlAliasCreateWrapper',
@@ -62,7 +63,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_CREATED => new Model\Response(
                 description: 'URL alias created.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UrlAlias+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlAliasWrapper',

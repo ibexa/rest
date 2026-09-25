@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\ContentType;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Rest\Message;
@@ -43,7 +44,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The content type group input schema encoded in XML or JSON.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.ContentTypeGroupInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeGroupInputWrapper',
@@ -61,7 +62,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_CREATED => new Model\Response(
                 description: 'Content type group created.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.ContentTypeGroup+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeGroupWrapper',

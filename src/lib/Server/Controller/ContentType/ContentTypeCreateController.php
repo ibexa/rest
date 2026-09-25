@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentTypeFieldDefinitionValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentTypeValidationException;
@@ -57,7 +58,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The content type Create schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.ContentTypeCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeCreateWrapper',
@@ -75,7 +76,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_CREATED => new Model\Response(
                 description: 'Content type created.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.ContentType+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeWrapper',

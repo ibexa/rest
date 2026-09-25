@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -58,7 +59,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The ContentUpdate schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.ContentUpdate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentInfoWrapper',
@@ -75,7 +76,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'If set, all information for the content item (excluding the current version) is returned in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.ContentInfo+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentInfoWrapper',

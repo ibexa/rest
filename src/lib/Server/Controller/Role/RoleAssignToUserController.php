@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\LimitationValidationException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
@@ -48,7 +49,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The RoleAssignInput schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.RoleAssignInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/RoleAssignInputWrapper',
@@ -66,7 +67,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'If set, the updated Role assignment list is returned in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.RoleAssignmentList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleAssignmentListWrapper',

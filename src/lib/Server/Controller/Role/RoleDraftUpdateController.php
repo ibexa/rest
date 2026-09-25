@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Values\User\RoleDraft;
 use Ibexa\Rest\Message;
@@ -56,7 +57,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The RoleInput schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.RoleInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/RoleInputWrapper',
@@ -74,7 +75,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - Role draft updated.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Role+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleWrapper',

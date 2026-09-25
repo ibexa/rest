@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values\TemporaryRedirect;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,7 +36,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - returns the Version in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Version+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/VersionWrapper',

@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException as APINotFoundException;
 use Ibexa\Rest\Server\Values\RoleList;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +29,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - list of all Roles.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.RoleList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleListWrapper',

@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\LimitationValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Values\User\Policy;
@@ -60,7 +61,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'If set, the updated Policy is returned in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.PolicyUpdate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/PolicyUpdateWrapper',
@@ -77,7 +78,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'If set, the updated Policy is returned in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Policy+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/PolicyWrapper',

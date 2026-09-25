@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Location;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,7 +45,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'If set, the new Location is returned in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Location+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LocationWrapper',

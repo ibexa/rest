@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\ContentType;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentTypeFieldDefinitionValidationException;
@@ -55,7 +56,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The Field Definition Create schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.FieldDefinitionCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/FieldDefinitionCreateWrapper',
@@ -72,7 +73,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_CREATED => new Model\Response(
                 description: 'Field definition created.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.FieldDefinition+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/FieldDefinitionWrapper',

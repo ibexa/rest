@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\URLWildcard;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\URLWildcardService;
 use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -36,7 +37,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - returns the URL wildcard.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UrlWildcard+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlWildcardWrapper',

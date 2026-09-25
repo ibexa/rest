@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller\User;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroupRoleAssignment;
 use Ibexa\Rest\Server\Values;
@@ -40,7 +41,7 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => new Model\Response(content: new \ArrayObject([
+            Response::HTTP_OK => new Model\Response(content: new ArrayObject([
                 'application/vnd.ibexa.api.UserGroupList+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UserGroupList',

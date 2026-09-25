@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\LimitationValidationException;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Core\Base\Exceptions\ForbiddenException;
@@ -47,7 +48,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The RoleInput schema encoded in XML or JSON.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.RoleInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/RoleInputWrapper',
@@ -65,7 +66,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_CREATED => new Model\Response(
                 description: 'If set, the new user is returned in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Role+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleWrapper',

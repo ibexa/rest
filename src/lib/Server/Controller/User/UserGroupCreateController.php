@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller\User;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Values;
 use LogicException;
@@ -47,7 +48,7 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.UserGroupCreate+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UserGroupCreate',
@@ -65,7 +66,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_CREATED => new Model\Response(
                 description: 'Created - the User Group has been created',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UserGroup+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroup',
@@ -123,7 +124,7 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.UserGroupCreate+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UserGroupCreate',
@@ -139,7 +140,7 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_CREATED => new Model\Response(content: new \ArrayObject([
+            Response::HTTP_CREATED => new Model\Response(content: new ArrayObject([
                 'application/vnd.ibexa.api.UserGroup+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UserGroup',

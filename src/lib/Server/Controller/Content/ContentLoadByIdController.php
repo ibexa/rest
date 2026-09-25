@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -49,7 +50,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - returns the Content or ContentInfo in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Content+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentWrapper',

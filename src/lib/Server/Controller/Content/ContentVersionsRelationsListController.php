@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
@@ -45,7 +46,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'If set, the Relation is returned in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.RelationList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RelationListWrapper',

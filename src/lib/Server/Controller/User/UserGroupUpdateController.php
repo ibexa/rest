@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller\User;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,7 +64,7 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.UserGroupUpdate+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UserGroupUpdate',
@@ -81,7 +82,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - updated User Group.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UserGroup+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroup',

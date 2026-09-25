@@ -11,6 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotImplementedException;
 use Ibexa\Contracts\Core\Repository\SearchService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
@@ -46,7 +47,7 @@ Refer to [Search Criteria Reference](/en/latest/search/criteria_reference/search
         ],
         requestBody: new Model\RequestBody(
             description: 'The view input in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.ViewInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ViewInputWrapper',
@@ -64,7 +65,7 @@ Refer to [Search Criteria Reference](/en/latest/search/criteria_reference/search
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'The view in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.View+xml; version=1.1' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/View',

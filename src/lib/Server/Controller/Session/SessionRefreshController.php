@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller\Session;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -61,7 +62,7 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         responses: [
-            Response::HTTP_OK => new Model\Response(content: new \ArrayObject([
+            Response::HTTP_OK => new Model\Response(content: new ArrayObject([
                 'application/vnd.ibexa.api.Session+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/Session',
@@ -78,7 +79,7 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_NOT_FOUND => new Model\Response(description: 'Error - the session does not exist.'),
         ],
         requestBody: new Model\RequestBody(
-            content: new \ArrayObject(),
+            content: new ArrayObject(),
         ),
     ),
 )]

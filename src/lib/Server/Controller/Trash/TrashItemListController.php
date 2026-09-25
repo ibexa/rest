@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Trash;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\TrashService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
@@ -32,7 +33,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - returns the list of items in the Trash.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Trash+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/TrashWrapper',

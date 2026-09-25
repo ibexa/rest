@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -54,7 +55,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - loads a Relation for the given content item.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Relation+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RelationWrapper',

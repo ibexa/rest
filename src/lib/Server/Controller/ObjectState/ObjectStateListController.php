@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\ObjectState;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ObjectStateService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
@@ -49,7 +50,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - returns a list of Object states.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.ObjectStateList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ObjectStateListWrapper',

@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Service\RootResourceBuilderInterface;
@@ -27,7 +28,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'If set, the list is return in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Root+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RootWrapper',

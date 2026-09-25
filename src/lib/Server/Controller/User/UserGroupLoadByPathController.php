@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\User;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Values;
@@ -55,7 +56,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - loads User Groups.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UserGroup+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroup',

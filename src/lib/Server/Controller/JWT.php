@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Rest\Server\Controller as RestController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +27,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The credentials in JWTInput JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.JWTInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/JWTInputWrapper',
@@ -38,7 +39,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - returns the JWT in JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.JWT+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/JWTWrapper',

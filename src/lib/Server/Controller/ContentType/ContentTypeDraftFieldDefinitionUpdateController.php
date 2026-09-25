@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\ContentType;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Rest\Exceptions;
@@ -60,7 +61,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The Field definition update schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.FieldDefinitionUpdate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/FieldDefinitionUpdateWrapper',
@@ -77,7 +78,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - attributes updated.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.FieldDefinition+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/FieldDefinitionWrapper',

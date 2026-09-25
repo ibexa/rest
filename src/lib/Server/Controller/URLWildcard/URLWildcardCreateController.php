@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\URLWildcard;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\URLWildcardService;
 use Ibexa\Rest\Message;
@@ -43,7 +44,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The URL Wildcard input schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.UrlWildcardCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UrlWildcardCreateWrapper',
@@ -61,7 +62,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_CREATED => new Model\Response(
                 description: 'URL wildcard created.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UrlWildcard+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlWildcardWrapper',

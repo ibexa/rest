@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Rest\Server\Values\RoleAssignmentList;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -36,7 +37,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'If set, the Role assignment list is returned in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.RoleAssignmentList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RoleAssignmentListWrapper',

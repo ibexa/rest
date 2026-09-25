@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller\Session;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Rest\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Values;
@@ -68,7 +69,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
             ),
         ],
         requestBody: new Model\RequestBody(
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.SessionInput+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/SessionInput',
@@ -86,7 +87,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'Session already exists.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Session+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/Session',
@@ -103,7 +104,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
             ),
             Response::HTTP_CREATED => new Model\Response(
                 description: 'Session is created.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Session+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/Session',

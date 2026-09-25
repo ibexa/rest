@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException;
@@ -70,7 +71,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The VersionUpdate schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.VersionUpdate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/VersionUpdateWrapper',
@@ -87,7 +88,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'If set, the updated version is returned in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Version+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/VersionWrapper',

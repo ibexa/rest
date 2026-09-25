@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,7 +46,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'No payload required',
-            content: new \ArrayObject(),
+            content: new ArrayObject(),
         ),
         responses: [
             Response::HTTP_NO_CONTENT => new Model\Response(description: 'OK - Object item is hidden.'),

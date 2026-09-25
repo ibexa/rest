@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException;
@@ -46,7 +47,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The ContentCreate schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.ContentCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentCreateWrapper',
@@ -64,7 +65,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_CREATED => new Model\Response(
                 description: 'Content - If set, all information for the content item including the embedded current version is returned in XML or JSON format. ContentInfo - If set, all information for the content item (excluding the current version) is returned in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Content+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentWrapper',

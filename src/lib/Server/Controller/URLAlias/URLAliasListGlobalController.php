@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\URLAlias;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\URLAliasService;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -29,7 +30,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - returns the list of URL aliases.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UrlAliasRefList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlAliasRefListWrapper',

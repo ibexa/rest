@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\ObjectState;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\ObjectStateService;
@@ -44,7 +45,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The Object state group input schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.ObjectStateGroupCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ObjectStateGroupCreateWrapper',
@@ -62,7 +63,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_CREATED => new Model\Response(
                 description: 'Object state group created.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.ObjectStateGroup+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ObjectStateGroupWrapper',

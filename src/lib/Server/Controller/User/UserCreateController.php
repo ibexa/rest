@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller\User;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions as ApiExceptions;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
@@ -58,7 +59,7 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.UserCreate+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UserCreate',
@@ -74,7 +75,7 @@ use Symfony\Component\HttpFoundation\Response;
             ]),
         ),
         responses: [
-            Response::HTTP_CREATED => new Model\Response(content: new \ArrayObject([
+            Response::HTTP_CREATED => new Model\Response(content: new ArrayObject([
                 'application/vnd.ibexa.api.User+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/User',

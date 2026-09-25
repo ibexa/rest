@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\URLAlias;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\URLAliasService;
 use Ibexa\Contracts\Core\Repository\Values\Content\URLAlias as ApiUrlAlias;
@@ -37,7 +38,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - returns the URL alias.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UrlAlias+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UrlAliasWrapper',

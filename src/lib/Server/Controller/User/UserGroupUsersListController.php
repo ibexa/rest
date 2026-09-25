@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\User;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Rest\Value as RestValue;
@@ -47,7 +48,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - the Users of the Group with the given ID.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UserList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserList',

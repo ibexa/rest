@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\User;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Symfony\Component\HttpFoundation\Response;
 
 #[Get(
@@ -34,7 +35,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - Loads Users either for a given remote ID or Role.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.UserList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserList',

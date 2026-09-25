@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller\User;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Values\Content\DraftList\ContentDraftListItemInterface;
 use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Rest\Server\Values;
@@ -48,7 +49,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - List the draft versions',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.VersionList+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/VersionList',

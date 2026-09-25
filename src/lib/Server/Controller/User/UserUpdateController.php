@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller\User;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Values;
 use LogicException;
@@ -64,7 +65,7 @@ use Symfony\Component\HttpFoundation\Response;
             ),
         ],
         requestBody: new Model\RequestBody(
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.UserUpdate+xml' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/UserUpdate',
@@ -82,7 +83,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'OK - User updated.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.User+xml' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/User',

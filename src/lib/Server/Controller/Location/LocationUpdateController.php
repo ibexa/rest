@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Location;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Values\RestLocation;
 use Symfony\Component\HttpFoundation\Request;
@@ -55,7 +56,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The LocationUpdate schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.LocationUpdate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/LocationUpdateStructWrapper',
@@ -73,7 +74,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'If set, the Location is returned in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Location+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LocationWrapper',

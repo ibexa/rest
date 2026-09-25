@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Location;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
@@ -50,7 +51,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The LocationCreate schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.LocationCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/LocationCreateWrapper',
@@ -68,7 +69,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_CREATED => new Model\Response(
                 description: 'If set, the new Location is returned in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Location+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/LocationWrapper',

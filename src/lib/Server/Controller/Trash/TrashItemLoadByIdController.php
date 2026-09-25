@@ -9,6 +9,7 @@ namespace Ibexa\Rest\Server\Controller\Trash;
 
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\TrashService;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -37,7 +38,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'If set, the item in Trash is returned in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.TrashItem+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/TrashItemWrapper',

@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
@@ -60,7 +61,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The RelationCreate schema encoded in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.RelationCreate+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/RelationCreateWrapper',
@@ -78,7 +79,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_CREATED => new Model\Response(
                 description: 'If set, the updated version is returned in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.Relation+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/RelationWrapper',

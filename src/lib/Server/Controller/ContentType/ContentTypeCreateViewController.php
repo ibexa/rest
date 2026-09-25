@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Server\Controller\ContentType;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -41,7 +42,7 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         requestBody: new Model\RequestBody(
             description: 'The view input in XML or JSON format.',
-            content: new \ArrayObject([
+            content: new ArrayObject([
                 'application/vnd.ibexa.api.ContentTypeViewInput+json' => [
                     'schema' => [
                         '$ref' => '#/components/schemas/ContentTypeViewInputWrapper',
@@ -59,7 +60,7 @@ use Symfony\Component\HttpFoundation\Response;
         responses: [
             Response::HTTP_OK => new Model\Response(
                 description: 'The view in XML or JSON format.',
-                content: new \ArrayObject([
+                content: new ArrayObject([
                     'application/vnd.ibexa.api.ContentTypeList+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/ContentTypeInfoListWrapper',
