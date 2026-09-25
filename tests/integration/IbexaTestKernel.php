@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Integration\Rest;
 
+use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
 use ApiPlatform\Symfony\Bundle\ApiPlatformBundle;
 use Hautelook\TemplatedUriBundle\HautelookTemplatedUriBundle;
 use Ibexa\Bundle\Rest\IbexaRestBundle;
@@ -18,6 +19,7 @@ use Ibexa\Rest\Server\Controller\Root as RestRootController;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Serializer;
 
 final class IbexaTestKernel extends CoreIbexaTestKernel
@@ -55,6 +57,8 @@ final class IbexaTestKernel extends CoreIbexaTestKernel
     {
         yield from parent::getExposedServicesById();
         yield 'ibexa.rest.serializer' => Serializer::class;
+        yield 'ibexa.api_platform.ibexa_openapi.factory' => OpenApiFactoryInterface::class;
+        yield 'api_platform.openapi.normalizer' => NormalizerInterface::class;
     }
 
     private static function loadRouting(ContainerBuilder $container): void
