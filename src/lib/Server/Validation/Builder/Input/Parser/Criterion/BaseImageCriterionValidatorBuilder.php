@@ -26,8 +26,8 @@ abstract class BaseImageCriterionValidatorBuilder extends BaseInputParserCollect
 
     protected function getStringOrArrayOfStringConstraint(): Constraint
     {
-        return new Assert\AtLeastOneOf([
-            'constraints' => [
+        return new Assert\AtLeastOneOf(
+            constraints: [
                 new Assert\Type('string'),
                 new Assert\All(
                     [
@@ -36,26 +36,24 @@ abstract class BaseImageCriterionValidatorBuilder extends BaseInputParserCollect
                     ]
                 ),
             ],
-        ]);
+        );
     }
 
     protected function getRangeConstraint(): Constraint
     {
         return new Assert\Collection(
-            [
-                'fields' => [
-                    'min' => new Assert\Optional(
-                        [
-                            new Assert\Type('numeric'),
-                        ]
-                    ),
-                    'max' => new Assert\Optional(
-                        [
-                            new Assert\Type('numeric'),
-                        ]
-                    ),
-                ],
-            ]
+            fields: [
+                'min' => new Assert\Optional(
+                    [
+                        new Assert\Type('numeric'),
+                    ]
+                ),
+                'max' => new Assert\Optional(
+                    [
+                        new Assert\Type('numeric'),
+                    ]
+                ),
+            ],
         );
     }
 }

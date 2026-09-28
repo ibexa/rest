@@ -18,9 +18,7 @@ abstract class BaseInputParserCollectionValidatorBuilder extends BaseInputParser
 {
     final protected function buildConstraint(): Constraint
     {
-        return new Assert\Collection(
-            ['fields' => $this->getCollectionConstraints()]
-        );
+        return new Assert\Collection(fields: $this->getCollectionConstraints());
     }
 
     /**
