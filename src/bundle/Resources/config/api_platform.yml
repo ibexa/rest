@@ -8,15 +8,12 @@ services:
             index_0: '@Ibexa\Bundle\Rest\ApiPlatform\ClassNameResourceNameCollectionFactory'
             index_1: '@ibexa.api_platform.state_provider.content_negotiation'
 
+    # Reads through the Swagger UI provider when API Platform registers it,
+    # see \Ibexa\Bundle\Rest\DependencyInjection\Compiler\SwaggerUiProviderPass
     ibexa.api_platform.state_provider.content_negotiation:
         parent: api_platform.state_provider.content_negotiation
         arguments:
-            index_0: '@ibexa.api_platform.swagger_ui.provider'
-
-    ibexa.api_platform.swagger_ui.provider:
-        parent: api_platform.swagger_ui.provider
-        arguments:
-            index_1: '@ibexa.api_platform.ibexa_openapi.factory'
+            index_0: '@api_platform.state_provider.read'
 
     ibexa.api_platform.ibexa_openapi.factory:
         class: Ibexa\Bundle\Rest\ApiPlatform\OpenApiFactory
