@@ -841,12 +841,6 @@ parameters:
 			path: tests/bundle/DependencyInjection/Compiler/FieldTypeProcessorPassTest.php
 
 		-
-			message: '#^Strict comparison using \!\=\= between string and null will always evaluate to true\.$#'
-			identifier: notIdentical.alwaysTrue
-			count: 1
-			path: tests/bundle/EventListener/CsrfListenerTest.php
-
-		-
 			message: '#^Parameter \#1 \$string of function base64_encode expects string, string\|false given\.$#'
 			identifier: argument.type
 			count: 1
