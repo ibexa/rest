@@ -11,7 +11,6 @@ namespace Ibexa\Tests\Bundle\Rest\EventListener;
 use Ibexa\Bundle\Rest\EventListener\CsrfListener;
 use Ibexa\Contracts\Rest\Exceptions\UnauthorizedException;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -188,7 +187,7 @@ final class CsrfListenerTest extends EventListenerTestCase
     }
 
     /**
-     * @return SessionInterface|MockObject
+     * @return \Symfony\Component\HttpFoundation\Session\SessionInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function getSessionMock(bool $isSessionStarted = true): SessionInterface
     {
@@ -203,7 +202,7 @@ final class CsrfListenerTest extends EventListenerTestCase
     }
 
     /**
-     * @return CsrfTokenManagerInterface|MockObject
+     * @return \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function getCsrfProviderMock(): CsrfTokenManagerInterface
     {
@@ -222,7 +221,7 @@ final class CsrfListenerTest extends EventListenerTestCase
     }
 
     /**
-     * @return EventDispatcherInterface&MockObject
+     * @return \Symfony\Component\EventDispatcher\EventDispatcherInterface&\PHPUnit\Framework\MockObject\MockObject
      */
     private function getEventDispatcherMock(): EventDispatcherInterface
     {
