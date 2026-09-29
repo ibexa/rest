@@ -22,16 +22,20 @@ final class OpenApiDocumentTest extends IbexaKernelTestCase
 {
     private const string SCHEMA_REFERENCE_PREFIX = '#/components/schemas/';
 
+    private const string COMPONENT_SCHEMA_LOCATION_PREFIX = '/components/schemas/';
+
     /**
-     * Referenced by `SummaryEntry` (used by ibexa/cart), registered by ibexa/product-catalog,
-     * which this kernel does not install.
+     * Schemas registered by ibexa/product-catalog, which this kernel does not install,
+     * keyed by the component allowed to reference them (`SummaryEntry` is used by ibexa/cart).
      *
-     * @var list<string>
+     * @var array<string, list<string>>
      */
     private const array SCHEMAS_REGISTERED_BY_PRODUCT_CATALOG = [
-        'Product',
-        'RestPriceWrapper',
-        'VatCategory',
+        'SummaryEntry' => [
+            'Product',
+            'RestPriceWrapper',
+            'VatCategory',
+        ],
     ];
 
     protected function setUp(): void
@@ -59,13 +63,27 @@ final class OpenApiDocumentTest extends IbexaKernelTestCase
             $schemaName = substr($reference, strlen(self::SCHEMA_REFERENCE_PREFIX));
             if (
                 !array_key_exists($schemaName, $schemas)
-                && !in_array($schemaName, self::SCHEMAS_REGISTERED_BY_PRODUCT_CATALOG, true)
+                && !$this->isRegisteredByProductCatalog($location, $schemaName)
             ) {
                 $unresolved[] = sprintf('%s: %s', $location, $reference);
             }
         }
 
         self::assertSame([], $unresolved, 'Unresolved references in the OpenAPI document.');
+    }
+
+    private function isRegisteredByProductCatalog(string $location, string $schemaName): bool
+    {
+        foreach (self::SCHEMAS_REGISTERED_BY_PRODUCT_CATALOG as $component => $schemaNames) {
+            if (
+                str_starts_with($location, self::COMPONENT_SCHEMA_LOCATION_PREFIX . $component . '/')
+                && in_array($schemaName, $schemaNames, true)
+            ) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
