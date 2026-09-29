@@ -46,6 +46,7 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 #[Get(
     uriTemplate: '/bookmark/{locationId}',
+    output: false,
     openapi: new Model\Operation(
         operationId: 'ibexa.rest.is_bookmarked.get',
         summary: 'Check if Location is bookmarked',
