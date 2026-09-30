@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/sessions/{sessionId}/refresh',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.refresh_session',
         summary: 'Refresh session (deprecated)',
         description: 'Get the session\'s User information. Deprecated as of Ibexa DXP 4.6, use GET /user/sessions/current instead.',
         tags: [
@@ -37,16 +38,8 @@ use Symfony\Component\HttpFoundation\Response;
             new Model\Parameter(
                 name: 'X-CSRF-Token',
                 in: 'header',
-                required: true,
-                description: 'The {csrfToken} needed on all unsafe HTTP methods with session.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
+                required: false,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
@@ -60,20 +53,25 @@ use Symfony\Component\HttpFoundation\Response;
                 ],
             ),
         ],
+        requestBody: new Model\RequestBody(
+            description: 'No payload required',
+            content: new \ArrayObject(),
+        ),
         responses: [
             Response::HTTP_OK => [
+                'description' => 'OK - returns the Session in XML or JSON format.',
                 'content' => [
-                    'application/vnd.ibexa.api.Session+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/Session',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/POST/Session.xml.example',
-                    ],
                     'application/vnd.ibexa.api.Session+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/SessionWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.json.example',
+                    ],
+                    'application/vnd.ibexa.api.Session+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/Session',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/sessions/session_id/refresh/POST/Session.xml.example',
                     ],
                 ],
             ],
@@ -81,9 +79,6 @@ use Symfony\Component\HttpFoundation\Response;
                 'description' => 'Error - the session does not exist.',
             ],
         ],
-        requestBody: new Model\RequestBody(
-            content: new \ArrayObject(),
-        ),
     ),
 )]
 /**
