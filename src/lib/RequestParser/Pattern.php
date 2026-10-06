@@ -158,13 +158,13 @@ class Pattern implements RequestParser
 
         $url = $this->map[$type];
         preg_match_all(
-            '(' . self::STANDARD_VARIABLE_REGEX . '|' . self::SLASHES_VARIABLE_REGEX . ')',
+            '(\{(?:\&\s*)?([A-Za-z-_]+)\})',
             $url,
             $matches,
             PREG_SET_ORDER
         );
         foreach ($matches as $matchSet) {
-            $variableName = empty($matchSet[1]) ? $matchSet[2] : $matchSet[1];
+            $variableName = $matchSet[1];
             if (!isset($values[$variableName])) {
                 throw new Exceptions\InvalidArgumentException("No value provided for '{$variableName}'.");
             }

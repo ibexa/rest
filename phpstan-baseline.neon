@@ -1255,12 +1255,6 @@ parameters:
 			path: src/lib/RequestParser/Pattern.php
 
 		-
-			message: '#^Offset 2 might not exist on array\{0\: string, 1\?\: non\-empty\-string, 2\?\: non\-empty\-string\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/lib/RequestParser/Pattern.php
-
-		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$type$#'
 			identifier: parameter.notFound
 			count: 1
@@ -1324,12 +1318,6 @@ parameters:
 			message: '#^Parameter \#1 \$field of method Ibexa\\Contracts\\Core\\Variation\\VariationHandler\:\:getVariation\(\) expects Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Field, Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Field\|null given\.$#'
 			identifier: argument.type
 			count: 1
-			path: src/lib/Server/Controller/BinaryContent.php
-
-		-
-			message: '#^Variable \$field might not be defined\.$#'
-			identifier: variable.undefined
-			count: 2
 			path: src/lib/Server/Controller/BinaryContent.php
 
 		-
