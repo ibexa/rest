@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\Routing\OptionsLoader;
 
 use Ibexa\Bundle\Rest\Routing\OptionsLoader\Mapper;
@@ -17,7 +18,7 @@ use Symfony\Component\Routing\RouteCollection;
  */
 class RouteCollectionMapperTest extends TestCase
 {
-    /** @var \Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper */
+    /** @var RouteCollectionMapper */
     protected $collectionMapper;
 
     public function setUp(): void
@@ -66,10 +67,12 @@ class RouteCollectionMapperTest extends TestCase
      * @param string $path
      * @param array $methods
      *
-     * @return \Symfony\Component\Routing\Route
+     * @return Route
      */
-    private function createRoute($path, array $methods)
-    {
+    private function createRoute(
+        $path,
+        array $methods
+    ) {
         return new Route($path, [], [], [], '', [], $methods);
     }
 }

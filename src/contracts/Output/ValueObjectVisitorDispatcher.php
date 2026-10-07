@@ -4,9 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Contracts\Rest\Output;
 
 use Error;
+use Ibexa\Contracts\Rest\Output\Exceptions\InvalidTypeException;
+use Ibexa\Contracts\Rest\Output\Exceptions\NoVisitorFoundException;
 
 /**
  * Dispatches value objects to a visitor depending on the class name.
@@ -19,12 +22,12 @@ class ValueObjectVisitorDispatcher
     private $visitors;
 
     /**
-     * @var \Ibexa\Contracts\Rest\Output\Visitor
+     * @var Visitor
      */
     private $outputVisitor;
 
     /**
-     * @var \Ibexa\Contracts\Rest\Output\Generator
+     * @var Generator
      */
     private $outputGenerator;
 
@@ -40,18 +43,20 @@ class ValueObjectVisitorDispatcher
 
     /**
      * @param string $visitedClassName The FQN of the visited class
-     * @param \Ibexa\Contracts\Rest\Output\ValueObjectVisitor $visitor The visitor object
+     * @param ValueObjectVisitor $visitor The visitor object
      */
-    public function addVisitor($visitedClassName, ValueObjectVisitor $visitor)
-    {
+    public function addVisitor(
+        $visitedClassName,
+        ValueObjectVisitor $visitor
+    ) {
         $this->visitors[$visitedClassName] = $visitor;
     }
 
     /**
      * @param object $data The visited object
      *
-     * @throws \Ibexa\Contracts\Rest\Output\Exceptions\NoVisitorFoundException
-     * @throws \Ibexa\Contracts\Rest\Output\Exceptions\InvalidTypeException
+     * @throws NoVisitorFoundException
+     * @throws InvalidTypeException
      *
      * @return mixed
      */
@@ -63,7 +68,7 @@ class ValueObjectVisitorDispatcher
         }
 
         if (!is_object($data)) {
-            throw new Exceptions\InvalidTypeException($data);
+            throw new InvalidTypeException($data);
         }
         $checkedClassNames = [];
 
@@ -82,7 +87,7 @@ class ValueObjectVisitorDispatcher
             }
         }
 
-        throw new Exceptions\NoVisitorFoundException($checkedClassNames);
+        throw new NoVisitorFoundException($checkedClassNames);
     }
 }
 

@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser\Limitation;
 
 use Ibexa\Rest\Server\Input\Parser\Limitation\PathStringRouteBasedLimitationParser;
+use Ibexa\Rest\Server\Input\Parser\Limitation\RouteBasedLimitationParser;
 use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
 
 class PathStringRouteBasedLimitationParserTest extends BaseTest
@@ -33,7 +35,7 @@ class PathStringRouteBasedLimitationParserTest extends BaseTest
     /**
      * Must return the tested parser object.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\Limitation\RouteBasedLimitationParser
+     * @return RouteBasedLimitationParser
      */
     protected function internalGetParser()
     {

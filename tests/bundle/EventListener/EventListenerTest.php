@@ -4,25 +4,29 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
+use Ibexa\Bundle\Rest\EventListener\CsrfListener;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 abstract class EventListenerTest extends TestCase
 {
-    /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+    /** @var EventDispatcherInterface */
     protected $event;
 
-    /** @var \Symfony\Component\HttpFoundation\Request|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var Request|MockObject */
     protected $requestMock;
 
-    /** @var \Symfony\Component\HttpFoundation\ParameterBag|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var ParameterBag|MockObject */
     protected $requestAttributesMock;
 
-    /** @var \Symfony\Component\HttpFoundation\ParameterBag|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var ParameterBag|MockObject */
     protected $requestHeadersMock;
 
     protected $isRestRequest = true;
@@ -75,7 +79,7 @@ abstract class EventListenerTest extends TestCase
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\ParameterBag|\PHPUnit\Framework\MockObject\MockObject
+     * @return ParameterBag|MockObject
      */
     protected function getRequestAttributesMock()
     {
@@ -97,7 +101,7 @@ abstract class EventListenerTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\Request
+     * @return MockObject|Request
      */
     protected function getRequestMock()
     {
@@ -122,7 +126,7 @@ abstract class EventListenerTest extends TestCase
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\ParameterBag|\PHPUnit\Framework\MockObject\MockObject
+     * @return ParameterBag|MockObject
      */
     protected function getRequestHeadersMock()
     {
@@ -136,7 +140,7 @@ abstract class EventListenerTest extends TestCase
     /**
      * @param bool $csrfEnabled
      *
-     * @return \Ibexa\Bundle\Rest\EventListener\CsrfListener
+     * @return CsrfListener
      */
     abstract protected function getEventListener();
 

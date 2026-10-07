@@ -4,11 +4,14 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Nyholm\Psr7\Request as HttpRequest;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase as BaseTestCase;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
@@ -26,7 +29,7 @@ class TestCase extends BaseTestCase
     ];
 
     /**
-     * @var \Psr\Http\Client\ClientInterface
+     * @var ClientInterface
      */
     private $httpClient;
 
@@ -119,11 +122,11 @@ class TestCase extends BaseTestCase
     }
 
     /**
-     * @param \Psr\Http\Message\RequestInterface $request
+     * @param RequestInterface $request
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      *
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
     public function sendHttpRequest(RequestInterface $request): ResponseInterface
     {
@@ -163,7 +166,7 @@ class TestCase extends BaseTestCase
      * @param string $body
      * @param array $extraHeaders [key => value] array of extra headers
      *
-     * @return \Psr\Http\Message\RequestInterface
+     * @return RequestInterface
      */
     public function createHttpRequest(
         string $method,
@@ -194,8 +197,10 @@ class TestCase extends BaseTestCase
         );
     }
 
-    protected function assertHttpResponseCodeEquals(ResponseInterface $response, $expected)
-    {
+    protected function assertHttpResponseCodeEquals(
+        ResponseInterface $response,
+        $expected
+    ) {
         $responseCode = $response->getStatusCode();
         try {
             self::assertEquals($expected, $responseCode);
@@ -236,8 +241,11 @@ EOF;
         return $errorMessageString;
     }
 
-    protected function assertHttpResponseHasHeader(ResponseInterface $response, $header, $expectedValue = null)
-    {
+    protected function assertHttpResponseHasHeader(
+        ResponseInterface $response,
+        $header,
+        $expectedValue = null
+    ) {
         $headerValue = $response->hasHeader($header) ? $response->getHeader($header)[0] : null;
         self::assertNotNull($headerValue, "Failed asserting that response has a {$header} header");
         if ($expectedValue !== null) {
@@ -408,10 +416,13 @@ XML;
      * @param string $password
      * @param array $extraHeaders extra [key => value] headers to be passed with the authentication request
      *
-     * @return \Psr\Http\Message\RequestInterface
+     * @return RequestInterface
      */
-    protected function createAuthenticationHttpRequest(string $login, string $password, array $extraHeaders = [])
-    {
+    protected function createAuthenticationHttpRequest(
+        string $login,
+        string $password,
+        array $extraHeaders = []
+    ) {
         return $this->createHttpRequest(
             'POST',
             '/api/ibexa/v2/user/sessions',

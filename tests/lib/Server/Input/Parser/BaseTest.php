@@ -4,12 +4,16 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input;
+use Ibexa\Rest\Input\ParserTools;
 use Ibexa\Rest\RequestParser;
+use Ibexa\Rest\Server\Input\Parser\Base;
 use Ibexa\Tests\Rest\Server\BaseTest as ParentBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Base test for input parsers.
@@ -17,24 +21,24 @@ use Ibexa\Tests\Rest\Server\BaseTest as ParentBaseTest;
 abstract class BaseTest extends ParentBaseTest
 {
     /**
-     * @var \Ibexa\Contracts\Rest\Input\ParsingDispatcher|\PHPUnit\Framework\MockObject\MockObject
+     * @var ParsingDispatcher|MockObject
      */
     protected $parsingDispatcherMock;
 
     /**
-     * @var \Ibexa\Rest\RequestParser|\PHPUnit\Framework\MockObject\MockObject
+     * @var RequestParser|MockObject
      */
     protected $requestParserMock;
 
     /**
-     * @var \Ibexa\Rest\Input\ParserTools
+     * @var ParserTools
      */
     protected $parserTools;
 
     /**
      * Get the parsing dispatcher.
      *
-     * @return \Ibexa\Contracts\Rest\Input\ParsingDispatcher
+     * @return ParsingDispatcher
      */
     protected function getParsingDispatcherMock()
     {
@@ -61,14 +65,17 @@ abstract class BaseTest extends ParentBaseTest
     /**
      * Get the Request parser.
      *
-     * @return \Ibexa\Rest\RequestParser|\PHPUnit\Framework\MockObject\MockObject
+     * @return RequestParser|MockObject
      */
     protected function getRequestParserMock()
     {
         if (!isset($this->requestParserMock)) {
             $that = &$this;
 
-            $callback = static function ($href, $attribute) use ($that) {
+            $callback = static function (
+                $href,
+                $attribute
+            ) use ($that) {
                 foreach ($that->getParseHrefExpectationsMap() as $map) {
                     if ($map[0] == $href && $map[1] == $attribute) {
                         if ($map[2] instanceof \Exception) {
@@ -96,12 +103,12 @@ abstract class BaseTest extends ParentBaseTest
     /**
      * Get the parser tools.
      *
-     * @return \Ibexa\Rest\Input\ParserTools
+     * @return ParserTools
      */
     protected function getParserTools()
     {
         if (!isset($this->parserTools)) {
-            $this->parserTools = new Input\ParserTools();
+            $this->parserTools = new ParserTools();
         }
 
         return $this->parserTools;
@@ -118,7 +125,7 @@ abstract class BaseTest extends ParentBaseTest
     /**
      * Must return the tested parser object.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\Base
+     * @return Base
      */
     abstract protected function internalGetParser();
 }

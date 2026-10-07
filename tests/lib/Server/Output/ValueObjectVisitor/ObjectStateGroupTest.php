@@ -4,10 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\ObjectState;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateGroup;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class ObjectStateGroupTest extends ValueObjectVisitorBaseTest
@@ -238,11 +239,11 @@ class ObjectStateGroupTest extends ValueObjectVisitorBaseTest
     /**
      * Get the ObjectStateGroup visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateGroup
+     * @return ObjectStateGroup
      */
     protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\ObjectStateGroup();
+        return new ObjectStateGroup();
     }
 }
 

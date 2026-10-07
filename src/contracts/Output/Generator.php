@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Contracts\Rest\Output;
 
 /**
@@ -99,7 +100,10 @@ abstract class Generator
      * @param string $name
      * @param string $mediaTypeName
      */
-    abstract public function startObjectElement($name, $mediaTypeName = null);
+    abstract public function startObjectElement(
+        $name,
+        $mediaTypeName = null
+    );
 
     /**
      * Check start object element.
@@ -190,8 +194,10 @@ abstract class Generator
      * @param string $name
      * @param mixed $value
      */
-    public function valueElement(string $name, $value): void
-    {
+    public function valueElement(
+        string $name,
+        $value
+    ): void {
         $this->startValueElement($name, $value);
         $this->endValueElement($name);
     }
@@ -200,7 +206,11 @@ abstract class Generator
      * @phpstan-param scalar|null $value
      * @phpstan-param array<string, scalar|null> $attributes
      */
-    abstract public function startValueElement(string $name, $value, array $attributes = []): void;
+    abstract public function startValueElement(
+        string $name,
+        $value,
+        array $attributes = []
+    ): void;
 
     /**
      * Check start value element.
@@ -269,8 +279,10 @@ abstract class Generator
      * @param string $name
      * @param mixed $value
      */
-    public function attribute(string $name, $value): void
-    {
+    public function attribute(
+        string $name,
+        $value
+    ): void {
         $this->startAttribute($name, $value);
         $this->endAttribute($name);
     }
@@ -281,7 +293,10 @@ abstract class Generator
      * @param string $name
      * @param string $value
      */
-    abstract public function startAttribute($name, $value);
+    abstract public function startAttribute(
+        $name,
+        $value
+    );
 
     /**
      * Check start attribute.
@@ -329,8 +344,10 @@ abstract class Generator
      *
      * @return string
      */
-    protected function generateMediaType($name, $type)
-    {
+    protected function generateMediaType(
+        $name,
+        $type
+    ) {
         return "application/vnd.ibexa.api.{$name}+{$type}";
     }
 
@@ -343,8 +360,11 @@ abstract class Generator
      *
      * @return string
      */
-    protected function generateMediaTypeWithVendor($name, $type, $vendor = 'vnd.ibexa.api')
-    {
+    protected function generateMediaTypeWithVendor(
+        $name,
+        $type,
+        $vendor = 'vnd.ibexa.api'
+    ) {
         return "application/{$vendor}.{$name}+{$type}";
     }
 
@@ -356,7 +376,10 @@ abstract class Generator
      * @param string $hashElementName
      * @param mixed $hashValue
      */
-    abstract public function generateFieldTypeHash($hashElementName, $hashValue);
+    abstract public function generateFieldTypeHash(
+        $hashElementName,
+        $hashValue
+    );
 
     /**
      * Check close / end operation.
@@ -365,8 +388,11 @@ abstract class Generator
      * @param mixed $data
      * @param array $validParents
      */
-    protected function checkStart($type, $data, array $validParents)
-    {
+    protected function checkStart(
+        $type,
+        $data,
+        array $validParents
+    ) {
         $lastTag = end($this->stack);
 
         if (!is_array($lastTag)) {
@@ -397,8 +423,10 @@ abstract class Generator
      * @param string $type
      * @param mixed $data
      */
-    protected function checkEnd($type, $data)
-    {
+    protected function checkEnd(
+        $type,
+        $data
+    ) {
         $lastTag = array_pop($this->stack);
 
         if (!is_array($lastTag)) {

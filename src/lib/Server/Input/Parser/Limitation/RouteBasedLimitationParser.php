@@ -4,8 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser\Limitation;
 
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Core\Repository\Values;
@@ -43,8 +46,10 @@ class RouteBasedLimitationParser extends BaseParser
      * @param string $limitationRouteParameterName
      * @param string $limitationClass
      */
-    public function __construct($limitationRouteParameterName, $limitationClass)
-    {
+    public function __construct(
+        $limitationRouteParameterName,
+        $limitationClass
+    ) {
         $this->limitationRouteParameterName = $limitationRouteParameterName;
         $this->limitationClass = $limitationClass;
     }
@@ -53,12 +58,14 @@ class RouteBasedLimitationParser extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject
+     * @return ValueObject
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         if (!array_key_exists('_identifier', $data)) {
             throw new Exceptions\Parser("Missing '_identifier' attribute for Limitation.");
         }
@@ -81,7 +88,7 @@ class RouteBasedLimitationParser extends BaseParser
     }
 
     /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\Limitation
+     * @return Limitation
      */
     protected function buildLimitation()
     {

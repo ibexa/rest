@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
@@ -37,8 +38,10 @@ class UserMetadataTest extends BaseTest
      *
      * @dataProvider testParseProvider
      */
-    public function testParse($data, $expected)
-    {
+    public function testParse(
+        $data,
+        $expected
+    ) {
         $userMetadata = $this->getParser();
         $result = $userMetadata->parse($data, $this->getParsingDispatcherMock());
 
@@ -121,7 +124,7 @@ class UserMetadataTest extends BaseTest
     /**
      * Returns the UserMetadata criterion parser.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\Criterion\UserMetadata
+     * @return UserMetadata
      */
     protected function internalGetParser()
     {

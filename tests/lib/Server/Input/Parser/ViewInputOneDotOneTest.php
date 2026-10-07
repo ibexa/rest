@@ -4,11 +4,13 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
+use Ibexa\Rest\Server\Input\Parser\ViewInput;
 use Ibexa\Rest\Server\Input\Parser\ViewInputOneDotOne;
 use Ibexa\Rest\Server\Values\RestViewInput;
 
@@ -85,7 +87,7 @@ class ViewInputOneDotOneTest extends BaseTest
     /**
      * Returns the session input parser.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\ViewInput
+     * @return ViewInput
      */
     protected function internalGetParser()
     {

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest;
 
 use Ibexa\Contracts\Rest\FieldTypeProcessor;
@@ -16,12 +17,12 @@ class FieldTypeProcessorRegistry
     /**
      * Registered processors.
      *
-     * @var \Ibexa\Contracts\Rest\FieldTypeProcessor[]
+     * @var FieldTypeProcessor[]
      */
     private $processors = [];
 
     /**
-     * @param \Ibexa\Contracts\Rest\FieldTypeProcessor[] $processors
+     * @param FieldTypeProcessor[] $processors
      */
     public function __construct(array $processors = [])
     {
@@ -34,10 +35,12 @@ class FieldTypeProcessorRegistry
      * Registers $processor for $fieldTypeIdentifier.
      *
      * @param string $fieldTypeIdentifier
-     * @param \Ibexa\Contracts\Rest\FieldTypeProcessor $processor
+     * @param FieldTypeProcessor $processor
      */
-    public function registerProcessor($fieldTypeIdentifier, FieldTypeProcessor $processor)
-    {
+    public function registerProcessor(
+        $fieldTypeIdentifier,
+        FieldTypeProcessor $processor
+    ) {
         $this->processors[$fieldTypeIdentifier] = $processor;
     }
 
@@ -60,7 +63,7 @@ class FieldTypeProcessorRegistry
      *
      * @throws \RuntimeException if not processor is registered for $fieldTypeIdentifier
      *
-     * @return \Ibexa\Contracts\Rest\FieldTypeProcessor
+     * @return FieldTypeProcessor
      */
     public function getProcessor($fieldTypeIdentifier)
     {

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output;
 
 use Error;
@@ -13,6 +14,7 @@ use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher;
 use Ibexa\Contracts\Rest\Output\Visitor;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -22,12 +24,12 @@ use stdClass;
 class ValueObjectVisitorDispatcherTest extends TestCase
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Contracts\Rest\Output\Visitor
+     * @var MockObject|Visitor
      */
     private $outputVisitorMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Contracts\Rest\Output\Generator
+     * @var MockObject|Generator
      */
     private $outputGeneratorMock;
 
@@ -127,7 +129,7 @@ class ValueObjectVisitorDispatcherTest extends TestCase
     }
 
     /**
-     * @return \Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher
+     * @return ValueObjectVisitorDispatcher
      */
     private function getValueObjectDispatcher()
     {
@@ -139,7 +141,7 @@ class ValueObjectVisitorDispatcherTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Contracts\Rest\Output\ValueObjectVisitor
+     * @return MockObject|ValueObjectVisitor
      */
     private function getValueObjectVisitorMock()
     {
@@ -147,7 +149,7 @@ class ValueObjectVisitorDispatcherTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Contracts\Rest\Output\Visitor
+     * @return MockObject|Visitor
      */
     private function getOutputVisitorMock()
     {
@@ -159,7 +161,7 @@ class ValueObjectVisitorDispatcherTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Contracts\Rest\Output\Generator
+     * @return MockObject|Generator
      */
     private function getOutputGeneratorMock()
     {

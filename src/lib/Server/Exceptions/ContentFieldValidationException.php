@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Exceptions;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException as APIContentFieldValidationException;
+use Ibexa\Core\FieldType\ValidationError;
 
 /**
  * Exception thrown if one or more content fields did not validate.
@@ -18,7 +20,7 @@ class ContentFieldValidationException extends BadRequestException
      *
      * @see \Ibexa\Core\Base\Exceptions\ContentFieldValidationException
      *
-     * @var \Ibexa\Core\FieldType\ValidationError[]
+     * @var ValidationError[]
      */
     protected $errors;
 
@@ -32,7 +34,7 @@ class ContentFieldValidationException extends BadRequestException
     /**
      * Returns an array of field validation error messages.
      *
-     * @return \Ibexa\Core\FieldType\ValidationError[]
+     * @return ValidationError[]
      */
     public function getFieldErrors()
     {

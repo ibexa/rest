@@ -15,16 +15,17 @@ use Ibexa\Rest\FieldTypeProcessorRegistry;
 use Ibexa\Rest\Output\FieldTypeSerializer;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\Field;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @covers \Ibexa\Rest\Server\Output\ValueObjectVisitor\Field
  */
 final class FieldTest extends ValueObjectVisitorBaseTest
 {
-    /** @var \Ibexa\Contracts\Core\Repository\FieldTypeService&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var FieldTypeService&MockObject */
     private FieldTypeService $fieldTypeService;
 
-    /** @var \Ibexa\Rest\FieldTypeProcessorRegistry&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var FieldTypeProcessorRegistry&MockObject */
     private FieldTypeProcessorRegistry $fieldTypeProcessorRegistry;
 
     protected function setUp(): void

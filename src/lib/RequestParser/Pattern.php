@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\RequestParser;
 
 use Ibexa\Contracts\Rest\Exceptions;
@@ -65,8 +66,10 @@ class Pattern implements RequestParser
      * @param string $type
      * @param string $pattern
      */
-    public function addPattern($type, $pattern)
-    {
+    public function addPattern(
+        $type,
+        $pattern
+    ) {
         $this->map[$type] = $pattern;
         unset($this->compileCache[$type]);
     }
@@ -150,8 +153,10 @@ class Pattern implements RequestParser
      *
      * @return string
      */
-    public function generate($type, array $values = [])
-    {
+    public function generate(
+        $type,
+        array $values = []
+    ) {
         if (!isset($this->map[$type])) {
             throw new Exceptions\InvalidArgumentException("No URL for type '$type' available.");
         }
@@ -180,8 +185,10 @@ class Pattern implements RequestParser
         return $url;
     }
 
-    public function parseHref($href, $attribute)
-    {
+    public function parseHref(
+        $href,
+        $attribute
+    ) {
         $parsingResult = $this->parse($href);
 
         if (!isset($parsingResult[$attribute])) {

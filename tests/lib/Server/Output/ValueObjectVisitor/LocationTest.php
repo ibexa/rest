@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
@@ -17,6 +18,7 @@ use Ibexa\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 final class LocationTest extends ValueObjectVisitorBaseTest
 {
@@ -26,10 +28,10 @@ final class LocationTest extends ValueObjectVisitorBaseTest
 
     private const LOCATION_ID = 55;
 
-    /** @var \Ibexa\Contracts\Core\Repository\LocationService&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var LocationService&MockObject */
     private LocationService $locationServiceMock;
 
-    /** @var \Ibexa\Contracts\Core\Repository\ContentService&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var ContentService&MockObject */
     private ContentService $contentServiceMock;
 
     protected function setUp(): void

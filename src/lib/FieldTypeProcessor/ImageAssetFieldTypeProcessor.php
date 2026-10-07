@@ -15,10 +15,10 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ImageAssetFieldTypeProcessor extends FieldTypeProcessor
 {
-    /** @var \Symfony\Component\Routing\RouterInterface */
+    /** @var RouterInterface */
     private $router;
 
-    /** @var \Ibexa\Contracts\Core\Repository\ContentService */
+    /** @var ContentService */
     private $contentService;
 
     /** @var string[] */

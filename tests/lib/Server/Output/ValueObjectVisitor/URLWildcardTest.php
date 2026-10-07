@@ -4,10 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcard;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class URLWildcardTest extends ValueObjectVisitorBaseTest
@@ -162,11 +163,11 @@ class URLWildcardTest extends ValueObjectVisitorBaseTest
     /**
      * Get the URLWildcard visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\URLWildcard
+     * @return URLWildcard
      */
     protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\URLWildcard();
+        return new URLWildcard();
     }
 }
 

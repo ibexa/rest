@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Image\Orientation as ImageOrientationCriterion;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -31,10 +32,12 @@ final class ImageOrientation extends BaseParser
     /**
      * @param array<mixed> $data
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ImageOrientationCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ImageOrientationCriterion {
         $this->validateInputArray($data);
 
         return new ImageOrientationCriterion(

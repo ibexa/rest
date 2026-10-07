@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Rest\Output\Exceptions\AbstractExceptionVisitor;
@@ -21,17 +22,19 @@ class Exception extends AbstractExceptionVisitor
      */
     protected $debug = false;
 
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface */
+    /** @var TranslatorInterface */
     protected $translator;
 
     /**
      * Construct from debug flag.
      *
      * @param bool $debug
-     * @param \Symfony\Contracts\Translation\TranslatorInterface|null $translator
+     * @param TranslatorInterface|null $translator
      */
-    public function __construct($debug = false, ?TranslatorInterface $translator = null)
-    {
+    public function __construct(
+        $debug = false,
+        ?TranslatorInterface $translator = null
+    ) {
         $this->debug = (bool)$debug;
         $this->translator = $translator;
     }

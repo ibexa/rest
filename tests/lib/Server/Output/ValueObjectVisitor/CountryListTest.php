@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
@@ -127,7 +128,7 @@ class CountryListTest extends ValueObjectVisitorBaseTest
     /**
      * Get the CountryList visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\CountryList
+     * @return ValueObjectVisitor\CountryList
      */
     protected function internalGetVisitor()
     {

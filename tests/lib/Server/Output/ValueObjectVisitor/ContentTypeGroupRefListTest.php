@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
@@ -204,7 +205,7 @@ class ContentTypeGroupRefListTest extends ValueObjectVisitorBaseTest
     /**
      * Get the ContentTypeGroupRefList visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentTypeGroupRefList
+     * @return ValueObjectVisitor\ContentTypeGroupRefList
      */
     protected function internalGetVisitor()
     {

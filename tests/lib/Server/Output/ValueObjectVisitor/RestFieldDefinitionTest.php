@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values;
@@ -156,19 +157,25 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
 
     /**
      * @depends testVisitRestFieldDefinition
+     *
      * @dataProvider provideXpathAssertions
      */
-    public function testGeneratedXml(string $xpath, \DOMDocument $dom): void
-    {
+    public function testGeneratedXml(
+        string $xpath,
+        \DOMDocument $dom
+    ): void {
         $this->assertXPath($dom, $xpath);
     }
 
     /**
      * @depends testVisitRestFieldDefinitionWithPath
+     *
      * @dataProvider provideXpathAssertionsPath
      */
-    public function testGeneratedXmlPath(string $xpath, \DOMDocument $dom): void
-    {
+    public function testGeneratedXmlPath(
+        string $xpath,
+        \DOMDocument $dom
+    ): void {
         $this->assertXPath($dom, $xpath);
     }
 

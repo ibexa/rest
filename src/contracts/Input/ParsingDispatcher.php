@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Contracts\Rest\Input;
 
 use Ibexa\Contracts\Rest\Event\BeforeParseEvent;
@@ -30,7 +31,7 @@ class ParsingDispatcher
      *  )
      * </code>
      *
-     * @var array<string, array<string, \Ibexa\Contracts\Rest\Input\Parser>>
+     * @var array<string, array<string, Parser>>
      */
     protected array $parsers = [];
 
@@ -39,8 +40,10 @@ class ParsingDispatcher
     /**
      * Construct from optional parsers array.
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher, array $parsers = [])
-    {
+    public function __construct(
+        EventDispatcherInterface $eventDispatcher,
+        array $parsers = []
+    ) {
         $this->eventDispatcher = $eventDispatcher;
 
         foreach ($parsers as $mediaType => $parser) {
@@ -52,10 +55,12 @@ class ParsingDispatcher
      * Adds another parser for the given content type.
      *
      * @param string $mediaType
-     * @param \Ibexa\Contracts\Rest\Input\Parser $parser
+     * @param Parser $parser
      */
-    public function addParser(string $mediaType, Parser $parser): void
-    {
+    public function addParser(
+        string $mediaType,
+        Parser $parser
+    ): void {
         [$mediaType, $version] = $this->parseMediaTypeVersion($mediaType);
 
         $this->parsers[$mediaType][$version] = $parser;
@@ -64,8 +69,10 @@ class ParsingDispatcher
     /**
      * Dispatches parsing the given $data according to $mediaType.
      */
-    public function parse(array $data, string $mediaType)
-    {
+    public function parse(
+        array $data,
+        string $mediaType
+    ) {
         $eventData = [
             $data,
             $mediaType,
@@ -95,8 +102,10 @@ class ParsingDispatcher
     /**
      * Parses the given $data according to $mediaType.
      */
-    protected function internalParse(array $data, string $mediaType)
-    {
+    protected function internalParse(
+        array $data,
+        string $mediaType
+    ) {
         list($mediaType, $version) = $this->parseMediaTypeVersion($mediaType);
 
         // Remove encoding type

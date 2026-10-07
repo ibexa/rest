@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest;
 
 use Ibexa\Contracts\Rest\FieldTypeProcessor;
@@ -87,7 +88,7 @@ class FieldTypeProcessorRegistryTest extends BaseTest
     /**
      * Get FieldTypeProcessor mock object.
      *
-     * @return \Ibexa\Contracts\Rest\FieldTypeProcessor
+     * @return FieldTypeProcessor
      */
     protected function getAProcessorMock()
     {

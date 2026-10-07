@@ -4,8 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output\Generator;
 
+use Ibexa\Contracts\Rest\Output\Generator;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
@@ -17,10 +20,10 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
 
     private $fieldTypeHashGenerator;
 
-    /** @var \Symfony\Component\Serializer\Normalizer\NormalizerInterface&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var NormalizerInterface&MockObject */
     private NormalizerInterface $normalizer;
 
-    /** @var \Psr\Log\LoggerInterface&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var LoggerInterface&MockObject */
     private LoggerInterface $logger;
 
     private $iniPrecisions;
@@ -47,12 +50,12 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
     /**
      * Initializes the generator.
      *
-     * @return \Ibexa\Contracts\Rest\Output\Generator
+     * @return Generator
      */
     abstract protected function initializeGenerator();
 
     /**
-     * @return \Symfony\Component\Serializer\Normalizer\NormalizerInterface&\PHPUnit\Framework\MockObject\MockObject
+     * @return NormalizerInterface&MockObject
      */
     final protected function getNormalizer(): NormalizerInterface
     {
@@ -60,7 +63,7 @@ abstract class FieldTypeHashGeneratorBaseTest extends TestCase
     }
 
     /**
-     * @return \Psr\Log\LoggerInterface&\PHPUnit\Framework\MockObject\MockObject
+     * @return LoggerInterface&MockObject
      */
     final protected function getLogger(): LoggerInterface
     {

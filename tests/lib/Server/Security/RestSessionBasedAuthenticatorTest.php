@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Security;
 
 use Ibexa\Contracts\Core\Repository\Values\User\User;
@@ -12,6 +13,7 @@ use Ibexa\Core\MVC\Symfony\Security\User as IbexaUser;
 use Ibexa\Rest\Server\Exceptions\InvalidUserTypeException;
 use Ibexa\Rest\Server\Exceptions\UserConflictException;
 use Ibexa\Rest\Server\Security\RestAuthenticator;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -35,32 +37,32 @@ class RestSessionBasedAuthenticatorTest extends TestCase
     public const PROVIDER_KEY = 'test_key';
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $tokenStorage;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $authenticationManager;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $eventDispatcher;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $configResolver;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $logger;
 
     /**
-     * @var \Ibexa\Rest\Server\Security\RestAuthenticator
+     * @var RestAuthenticator
      */
     private $authenticator;
 
@@ -203,7 +205,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
     /**
      * @param $userId
      *
-     * @return \Ibexa\Core\MVC\Symfony\Security\User
+     * @return IbexaUser
      */
     private function createUser($userId)
     {

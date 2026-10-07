@@ -4,11 +4,13 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use DateTime;
 use Ibexa\Contracts\Rest\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
+use Ibexa\Rest\Server\Input\Parser\ContentUpdate;
 use Ibexa\Rest\Server\Input\Parser\ContentUpdate as ContentUpdateParser;
 use Ibexa\Rest\Values\RestContentMetadataUpdateStruct;
 
@@ -17,7 +19,7 @@ class ContentUpdateTest extends BaseTest
     /**
      * Tests the ContentUpdate parser.
      *
-     * @return \Ibexa\Rest\Values\RestContentMetadataUpdateStruct
+     * @return RestContentMetadataUpdateStruct
      */
     public function testParseValid()
     {
@@ -40,7 +42,7 @@ class ContentUpdateTest extends BaseTest
     /**
      * Test for valid owner ID value in result.
      *
-     * @param \Ibexa\Rest\Values\RestContentMetadataUpdateStruct $result
+     * @param RestContentMetadataUpdateStruct $result
      *
      * @depends testParseValid
      */
@@ -57,8 +59,10 @@ class ContentUpdateTest extends BaseTest
      *
      * @dataProvider providerForTestParseFailureInvalidHref
      */
-    public function testParseFailureInvalidHref($element, $exceptionMessage)
-    {
+    public function testParseFailureInvalidHref(
+        $element,
+        $exceptionMessage
+    ) {
         $inputArray = $this->getValidInputData();
         $inputArray[$element]['_href'] = '/invalid/section/uri';
 
@@ -95,8 +99,10 @@ class ContentUpdateTest extends BaseTest
      *
      * @dataProvider providerForTestParseFailureInvalidDate
      */
-    public function testParseFailureInvalidDate($element, $exceptionMessage)
-    {
+    public function testParseFailureInvalidDate(
+        $element,
+        $exceptionMessage
+    ) {
         $inputArray = $this->getValidInputData();
         $inputArray[$element] = 42;
 
@@ -130,7 +136,7 @@ class ContentUpdateTest extends BaseTest
     /**
      * Returns the ContentUpdate parser.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\ContentUpdate
+     * @return ContentUpdate
      */
     protected function internalGetParser()
     {
@@ -140,7 +146,7 @@ class ContentUpdateTest extends BaseTest
     /**
      * Returns a valid RestContentMetadataUpdateStruct that matches the structure from getValidInputData().
      *
-     * @return \Ibexa\Rest\Values\RestContentMetadataUpdateStruct
+     * @return RestContentMetadataUpdateStruct
      */
     protected function getContentUpdateStruct()
     {

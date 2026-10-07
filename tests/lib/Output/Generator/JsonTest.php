@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output\Generator;
 
 use Ibexa\Contracts\Rest\Output\Exceptions\OutputGeneratorException;
@@ -241,8 +242,10 @@ class JsonTest extends GeneratorTest
         );
     }
 
-    public function assertSnapshot(string $snapshotName, string $generatedContent): void
-    {
+    public function assertSnapshot(
+        string $snapshotName,
+        string $generatedContent
+    ): void {
         self::assertJsonStringEqualsJsonFile(
             sprintf('%s/_fixtures/%s.json', __DIR__, $snapshotName),
             $generatedContent

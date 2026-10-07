@@ -15,8 +15,10 @@ use Ibexa\Rest\Input\BaseParser;
 
 class ObjectStateIdentifier extends BaseParser
 {
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ObjectStateIdentifierCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ObjectStateIdentifierCriterion {
         if (
             !array_key_exists('ObjectStateIdentifierCriterion', $data)
             || !array_key_exists('value', $data['ObjectStateIdentifierCriterion'])

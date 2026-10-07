@@ -4,11 +4,13 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output;
 
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher;
 use Ibexa\Contracts\Rest\Output\Visitor;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\HttpFoundation\Response;
@@ -84,7 +86,7 @@ class VisitorTest extends TestCase
     {
         $data = new stdClass();
 
-        /** @var \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Contracts\Rest\Output\Generator $generatorMock */
+        /** @var MockObject|Generator $generatorMock */
         $generatorMock = $this->getGeneratorMock();
 
         $valueObjectDispatcherMock = $this->getValueObjectDispatcherMock();
@@ -119,7 +121,7 @@ class VisitorTest extends TestCase
     /**
      * @todo This is a test for a feature that needs refactoring.
      *
-     * @see \Ibexa\Contracts\Rest\Output\Visitor::visit
+     * @see Visitor::visit
      */
     public function testSetFilteredHeaders()
     {
@@ -217,7 +219,7 @@ class VisitorTest extends TestCase
     }
 
     /**
-     * @return \Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher|\PHPUnit\Framework\MockObject\MockObject
+     * @return ValueObjectVisitorDispatcher|MockObject
      */
     public function getValueObjectDispatcherMock()
     {

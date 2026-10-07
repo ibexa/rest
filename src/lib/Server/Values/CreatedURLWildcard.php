@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
@@ -16,7 +18,7 @@ class CreatedURLWildcard extends ValueObject
     /**
      * The created URL wildcard.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard
+     * @var URLWildcard
      */
     public $urlWildcard;
 }

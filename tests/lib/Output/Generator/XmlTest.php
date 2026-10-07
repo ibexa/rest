@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output\Generator;
 
 use Ibexa\Rest\Output\Generator\Xml;
@@ -241,8 +242,10 @@ class XmlTest extends GeneratorTest
         );
     }
 
-    public function assertSnapshot(string $snapshotName, string $generatedContent): void
-    {
+    public function assertSnapshot(
+        string $snapshotName,
+        string $generatedContent
+    ): void {
         self::assertXmlStringEqualsXmlFile(
             sprintf('%s/_fixtures/%s.xml', __DIR__, $snapshotName),
             $generatedContent

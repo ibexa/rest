@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Bundle\Rest\Routing\OptionsLoader;
 
 use Symfony\Component\Routing\RouteCollection;
@@ -28,9 +29,9 @@ class RouteCollectionMapper
     /**
      * Iterates over $restRouteCollection, and returns the corresponding RouteCollection of OPTIONS REST routes.
      *
-     * @param \Symfony\Component\Routing\RouteCollection $restRouteCollection
+     * @param RouteCollection $restRouteCollection
      *
-     * @return \Symfony\Component\Routing\RouteCollection
+     * @return RouteCollection
      */
     public function mapCollection(RouteCollection $restRouteCollection)
     {

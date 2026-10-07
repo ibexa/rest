@@ -26,8 +26,10 @@ final class UserCheckRequestListener implements EventSubscriberInterface, Logger
 
     private Security $security;
 
-    public function __construct(PermissionResolver $permissionResolver, Security $security)
-    {
+    public function __construct(
+        PermissionResolver $permissionResolver,
+        Security $security
+    ) {
         $this->permissionResolver = $permissionResolver;
         $this->security = $security;
     }

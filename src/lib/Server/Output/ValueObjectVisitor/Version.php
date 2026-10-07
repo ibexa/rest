@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\Thumbnail;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
@@ -20,12 +22,12 @@ use Ibexa\Rest\Server\Values\Version as VersionValue;
 class Version extends ValueObjectVisitor
 {
     /**
-     * @var \Ibexa\Rest\Output\FieldTypeSerializer
+     * @var FieldTypeSerializer
      */
     protected $fieldTypeSerializer;
 
     /**
-     * @param \Ibexa\Rest\Output\FieldTypeSerializer $fieldTypeSerializer
+     * @param FieldTypeSerializer $fieldTypeSerializer
      */
     public function __construct(FieldTypeSerializer $fieldTypeSerializer)
     {
@@ -35,13 +37,16 @@ class Version extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param \Ibexa\Rest\Server\Values\Version $data
+     * @param Visitor $visitor
+     * @param Generator $generator
+     * @param VersionValue $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
-    {
-        /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $content */
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ) {
+        /** @var Content $content */
         $content = $data->content;
 
         $generator->startObjectElement('Version');
@@ -55,8 +60,11 @@ class Version extends ValueObjectVisitor
         $generator->endObjectElement('Version');
     }
 
-    protected function visitVersionAttributes(Visitor $visitor, Generator $generator, VersionValue $data)
-    {
+    protected function visitVersionAttributes(
+        Visitor $visitor,
+        Generator $generator,
+        VersionValue $data
+    ) {
         $content = $data->content;
 
         $versionInfo = $content->getVersionInfo();

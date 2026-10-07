@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser\SortClause;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
@@ -84,7 +85,7 @@ class DataKeyValueObjectClassTest extends BaseTest
     /**
      * Returns the DataKeyValueObjectClass parser.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass
+     * @return DataKeyValueObjectClass
      */
     protected function internalGetParser()
     {

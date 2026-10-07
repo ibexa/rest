@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentCreateStruct;
@@ -16,23 +17,25 @@ use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 class RestContentCreateStruct extends ValueObject
 {
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\ContentCreateStruct
+     * @var ContentCreateStruct
      */
     public $contentCreateStruct;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\LocationCreateStruct
+     * @var LocationCreateStruct
      */
     public $locationCreateStruct;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\ContentCreateStruct $contentCreateStruct
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\LocationCreateStruct $locationCreateStruct
+     * @param ContentCreateStruct $contentCreateStruct
+     * @param LocationCreateStruct $locationCreateStruct
      */
-    public function __construct(ContentCreateStruct $contentCreateStruct, LocationCreateStruct $locationCreateStruct)
-    {
+    public function __construct(
+        ContentCreateStruct $contentCreateStruct,
+        LocationCreateStruct $locationCreateStruct
+    ) {
         $this->contentCreateStruct = $contentCreateStruct;
         $this->locationCreateStruct = $locationCreateStruct;
     }

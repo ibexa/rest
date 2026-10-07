@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server;
 
 use Ibexa\Contracts\Core\Repository\Repository;
+use Ibexa\Rest\Input\Dispatcher;
 use Ibexa\Rest\Input\Dispatcher as InputDispatcher;
 use Ibexa\Rest\RequestParser;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -19,24 +21,24 @@ abstract class Controller implements ContainerAwareInterface
     use ContainerAwareTrait;
 
     /**
-     * @var \Ibexa\Rest\Input\Dispatcher
+     * @var Dispatcher
      */
     protected $inputDispatcher;
 
     /**
-     * @var \Symfony\Component\Routing\RouterInterface
+     * @var RouterInterface
      */
     protected $router;
 
     /**
-     * @var \Ibexa\Rest\RequestParser
+     * @var RequestParser
      */
     protected $requestParser;
 
     /**
      * Repository.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Repository
+     * @var Repository
      */
     protected $repository;
 

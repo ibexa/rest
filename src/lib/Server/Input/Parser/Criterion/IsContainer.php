@@ -26,8 +26,10 @@ final class IsContainer extends BaseParser
     /**
      * @param array<mixed> $data
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): IsContainerCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): IsContainerCriterion {
         if (!array_key_exists('IsContainerCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <IsContainer> format');
         }

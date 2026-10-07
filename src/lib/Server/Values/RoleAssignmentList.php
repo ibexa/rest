@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\User\RoleAssignment;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -16,7 +18,7 @@ class RoleAssignmentList extends RestValue
     /**
      * Role assignments.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\User\RoleAssignment[]
+     * @var RoleAssignment[]
      */
     public $roleAssignments;
 
@@ -37,12 +39,15 @@ class RoleAssignmentList extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\RoleAssignment[] $roleAssignments
+     * @param RoleAssignment[] $roleAssignments
      * @param mixed $id
      * @param bool $isGroupAssignment
      */
-    public function __construct(array $roleAssignments, $id, $isGroupAssignment = false)
-    {
+    public function __construct(
+        array $roleAssignments,
+        $id,
+        $isGroupAssignment = false
+    ) {
         $this->roleAssignments = $roleAssignments;
         $this->id = $id;
         $this->isGroupAssignment = $isGroupAssignment;

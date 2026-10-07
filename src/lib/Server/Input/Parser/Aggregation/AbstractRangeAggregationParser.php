@@ -9,14 +9,17 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Server\Input\Parser\Aggregation;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation\AbstractRangeAggregation;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation\Range;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 
 abstract class AbstractRangeAggregationParser extends BaseParser
 {
-    final public function parse(array $data, ParsingDispatcher $parsingDispatcher): AbstractRangeAggregation
-    {
+    final public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractRangeAggregation {
         if (!array_key_exists($this->getAggregationName(), $data)) {
             throw new Exceptions\Parser("Invalid <{$this->getAggregationName()}> format");
         }
@@ -43,10 +46,13 @@ abstract class AbstractRangeAggregationParser extends BaseParser
     ): AbstractRangeAggregation;
 
     /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation\Range[]
+     * @return Range[]
      */
-    protected function dispatchRanges(ParsingDispatcher $dispatcher, array $data, string $mediaType): array
-    {
+    protected function dispatchRanges(
+        ParsingDispatcher $dispatcher,
+        array $data,
+        string $mediaType
+    ): array {
         $ranges = [];
         foreach ($data as $rangeData) {
             $ranges[] = $dispatcher->parse($rangeData, $mediaType);

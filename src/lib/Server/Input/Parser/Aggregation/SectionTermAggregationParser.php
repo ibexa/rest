@@ -19,8 +19,10 @@ final class SectionTermAggregationParser extends AbstractTermAggregationParser
         return 'SectionTermAggregation';
     }
 
-    protected function parseAggregation(array $data, ParsingDispatcher $parsingDispatcher): AbstractTermAggregation
-    {
+    protected function parseAggregation(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractTermAggregation {
         return new SectionTermAggregation($data['name']);
     }
 }

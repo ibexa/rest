@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\RoleService;
+use Ibexa\Contracts\Core\Repository\Values\User\RoleCreateStruct;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 use Ibexa\Rest\Input\ParserTools;
@@ -19,23 +21,25 @@ class RoleInput extends BaseParser
     /**
      * Role service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\RoleService
+     * @var RoleService
      */
     protected $roleService;
 
     /**
-     * @var \Ibexa\Rest\Input\ParserTools
+     * @var ParserTools
      */
     protected $parserTools;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\RoleService $roleService
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
+     * @param RoleService $roleService
+     * @param ParserTools $parserTools
      */
-    public function __construct(RoleService $roleService, ParserTools $parserTools)
-    {
+    public function __construct(
+        RoleService $roleService,
+        ParserTools $parserTools
+    ) {
         $this->roleService = $roleService;
         $this->parserTools = $parserTools;
     }
@@ -44,12 +48,14 @@ class RoleInput extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\RoleCreateStruct
+     * @return RoleCreateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         // Since RoleInput is used both for creating and updating role and identifier is not
         // required when updating role, we need to rely on PAPI to throw the exception on missing
         // identifier when creating a role

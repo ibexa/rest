@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
@@ -11,7 +12,9 @@ use Ibexa\Contracts\Core\Repository\URLWildcardService;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedURLWildcard;
+use Ibexa\Rest\Server\Values\NoContent;
+use Ibexa\Rest\Server\Values\URLWildcardList;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -23,14 +26,14 @@ class URLWildcard extends RestController
     /**
      * URLWildcard service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\URLWildcardService
+     * @var URLWildcardService
      */
     protected $urlWildcardService;
 
     /**
      * Construct controller.
      *
-     * @param \Ibexa\Contracts\Core\Repository\URLWildcardService $urlWildcardService
+     * @param URLWildcardService $urlWildcardService
      */
     public function __construct(URLWildcardService $urlWildcardService)
     {
@@ -52,11 +55,11 @@ class URLWildcard extends RestController
     /**
      * Returns the list of URL wildcards.
      *
-     * @return \Ibexa\Rest\Server\Values\URLWildcardList
+     * @return URLWildcardList
      */
     public function listURLWildcards()
     {
-        return new Values\URLWildcardList(
+        return new URLWildcardList(
             $this->urlWildcardService->loadAll()
         );
     }
@@ -64,9 +67,9 @@ class URLWildcard extends RestController
     /**
      * Creates a new URL wildcard.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      *
-     * @return \Ibexa\Rest\Server\Values\CreatedURLWildcard
+     * @return CreatedURLWildcard
      */
     public function createURLWildcard(Request $request)
     {
@@ -87,7 +90,7 @@ class URLWildcard extends RestController
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
-        return new Values\CreatedURLWildcard(
+        return new CreatedURLWildcard(
             [
                 'urlWildcard' => $createdURLWildcard,
             ]
@@ -99,7 +102,7 @@ class URLWildcard extends RestController
      *
      * @param $urlWildcardId
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
     public function deleteURLWildcard($urlWildcardId)
     {
@@ -107,7 +110,7 @@ class URLWildcard extends RestController
             $this->urlWildcardService->load($urlWildcardId)
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 }
 

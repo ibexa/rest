@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Output;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\FieldType;
 use Ibexa\Contracts\Core\Repository\FieldTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
@@ -21,21 +23,23 @@ class FieldTypeSerializer
     /**
      * FieldTypeService.
      *
-     * @var \Ibexa\Contracts\Core\Repository\FieldTypeService
+     * @var FieldTypeService
      */
     protected $fieldTypeService;
 
     /**
-     * @var \Ibexa\Rest\FieldTypeProcessorRegistry
+     * @var FieldTypeProcessorRegistry
      */
     protected $fieldTypeProcessorRegistry;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\FieldTypeService $fieldTypeService
-     * @param \Ibexa\Rest\FieldTypeProcessorRegistry $fieldTypeProcessorRegistry
+     * @param FieldTypeService $fieldTypeService
+     * @param FieldTypeProcessorRegistry $fieldTypeProcessorRegistry
      */
-    public function __construct(FieldTypeService $fieldTypeService, FieldTypeProcessorRegistry $fieldTypeProcessorRegistry)
-    {
+    public function __construct(
+        FieldTypeService $fieldTypeService,
+        FieldTypeProcessorRegistry $fieldTypeProcessorRegistry
+    ) {
         $this->fieldTypeService = $fieldTypeService;
         $this->fieldTypeProcessorRegistry = $fieldTypeProcessorRegistry;
     }
@@ -44,18 +48,23 @@ class FieldTypeSerializer
      * @deprecated 4.6.0 The "FieldTypeSerializer::serializeFieldValue()" method is deprecated, will be removed in 5.0.
      * Use "FieldTypeSerializer::serializeContentFieldValue()" instead.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
-    public function serializeFieldValue(Generator $generator, ContentType $contentType, Field $field): void
-    {
+    public function serializeFieldValue(
+        Generator $generator,
+        ContentType $contentType,
+        Field $field
+    ): void {
         $this->serializeContentFieldValue($generator, $field);
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
-    public function serializeContentFieldValue(Generator $generator, Field $field): void
-    {
+    public function serializeContentFieldValue(
+        Generator $generator,
+        Field $field
+    ): void {
         $this->serializeValue(
             'fieldValue',
             $generator,
@@ -69,12 +78,15 @@ class FieldTypeSerializer
     /**
      * Serializes the $defaultValue for $fieldDefIdentifier through $generator.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param Generator $generator
      * @param string $fieldTypeIdentifier
      * @param mixed $defaultValue
      */
-    public function serializeFieldDefaultValue(Generator $generator, $fieldTypeIdentifier, $defaultValue)
-    {
+    public function serializeFieldDefaultValue(
+        Generator $generator,
+        $fieldTypeIdentifier,
+        $defaultValue
+    ) {
         $this->serializeValue(
             'defaultValue',
             $generator,
@@ -87,12 +99,15 @@ class FieldTypeSerializer
      * Serializes $settings as fieldSettings for $fieldDefinition using
      * $generator.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param Generator $generator
      * @param string $fieldTypeIdentifier
      * @param mixed $settings
      */
-    public function serializeFieldSettings(Generator $generator, $fieldTypeIdentifier, $settings)
-    {
+    public function serializeFieldSettings(
+        Generator $generator,
+        $fieldTypeIdentifier,
+        $settings
+    ) {
         $fieldType = $this->fieldTypeService->getFieldType($fieldTypeIdentifier);
         $hash = $fieldType->fieldSettingsToHash($settings);
 
@@ -107,12 +122,15 @@ class FieldTypeSerializer
     /**
      * Serializes $validatorConfiguration for $fieldDefinition using $generator.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param Generator $generator
      * @param string $fieldTypeIdentifier
      * @param mixed $validatorConfiguration
      */
-    public function serializeValidatorConfiguration(Generator $generator, $fieldTypeIdentifier, $validatorConfiguration)
-    {
+    public function serializeValidatorConfiguration(
+        Generator $generator,
+        $fieldTypeIdentifier,
+        $validatorConfiguration
+    ) {
         $fieldType = $this->fieldTypeService->getFieldType($fieldTypeIdentifier);
         $hash = $fieldType->validatorConfigurationToHash($validatorConfiguration);
 
@@ -129,7 +147,7 @@ class FieldTypeSerializer
      *
      * @param string $fieldTypeIdentifier
      *
-     * @return \Ibexa\Contracts\Core\Repository\FieldType
+     * @return FieldType
      */
     protected function getFieldType($fieldTypeIdentifier)
     {
@@ -143,12 +161,16 @@ class FieldTypeSerializer
      * $elementName.
      *
      * @param string $elementName
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param \Ibexa\Contracts\Core\Repository\FieldType $fieldType
+     * @param Generator $generator
+     * @param FieldType $fieldType
      * @param mixed $value
      */
-    protected function serializeValue($elementName, Generator $generator, FieldType $fieldType, $value)
-    {
+    protected function serializeValue(
+        $elementName,
+        Generator $generator,
+        FieldType $fieldType,
+        $value
+    ) {
         $hash = $fieldType->toHash($value);
 
         $fieldTypeIdentifier = $fieldType->getFieldTypeIdentifier();
@@ -164,11 +186,14 @@ class FieldTypeSerializer
      * Serializes the given $hash with $generator into $elementName.
      *
      * @param string $elementName
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param Generator $generator
      * @param mixed $hash
      */
-    protected function serializeHash($elementName, Generator $generator, $hash)
-    {
+    protected function serializeHash(
+        $elementName,
+        Generator $generator,
+        $hash
+    ) {
         $generator->generateFieldTypeHash($elementName, $hash);
     }
 }

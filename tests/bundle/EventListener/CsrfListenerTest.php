@@ -4,11 +4,15 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
 use Ibexa\Bundle\Rest\EventListener\CsrfListener;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException;
+use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -22,13 +26,13 @@ class CsrfListenerTest extends EventListenerTest
     public const INVALID_TOKEN = 'invalid';
     public const INTENTION = 'rest';
 
-    /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+    /** @var EventDispatcherInterface */
     protected $eventDispatcherMock;
 
     /**
      * If set to null before initializing mocks, Request::getSession() is expected not to be called.
      *
-     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
+     * @var SessionInterface
      */
     protected $sessionMock;
 
@@ -94,6 +98,7 @@ class CsrfListenerTest extends EventListenerTest
      * Tests that method CSRF check don't apply to are indeed ignored.
      *
      * @param string $ignoredMethod
+     *
      * @dataProvider getIgnoredRequestMethods
      */
     public function testIgnoredRequestMethods($ignoredMethod)
@@ -171,7 +176,7 @@ class CsrfListenerTest extends EventListenerTest
     }
 
     /**
-     * @return \Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return CsrfProviderInterface|MockObject
      */
     protected function getCsrfProviderMock()
     {
@@ -192,7 +197,7 @@ class CsrfListenerTest extends EventListenerTest
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpKernel\Event\RequestEvent
+     * @return MockObject|RequestEvent
      */
     protected function getEvent($class = null)
     {
@@ -209,7 +214,7 @@ class CsrfListenerTest extends EventListenerTest
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\Session\SessionInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return SessionInterface|MockObject
      */
     protected function getSessionMock()
     {
@@ -225,7 +230,7 @@ class CsrfListenerTest extends EventListenerTest
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\ParameterBag|\PHPUnit\Framework\MockObject\MockObject
+     * @return ParameterBag|MockObject
      */
     protected function getRequestHeadersMock()
     {
@@ -259,7 +264,7 @@ class CsrfListenerTest extends EventListenerTest
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\Request
+     * @return MockObject|Request
      */
     protected function getRequestMock()
     {
@@ -294,7 +299,7 @@ class CsrfListenerTest extends EventListenerTest
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\EventDispatcher\EventDispatcherInterface
+     * @return MockObject|EventDispatcherInterface
      */
     protected function getEventDispatcherMock()
     {
@@ -308,7 +313,7 @@ class CsrfListenerTest extends EventListenerTest
     /**
      * @param bool $csrfEnabled
      *
-     * @return \Ibexa\Bundle\Rest\EventListener\CsrfListener
+     * @return CsrfListener
      */
     protected function getEventListener($csrfEnabled = true)
     {

@@ -16,7 +16,7 @@ use Ibexa\Rest\Input\BaseParser;
 
 class Sibling extends BaseParser
 {
-    /** @var \Ibexa\Contracts\Core\Repository\LocationService */
+    /** @var LocationService */
     private $locationService;
 
     public function __construct(LocationService $locationService)
@@ -24,8 +24,10 @@ class Sibling extends BaseParser
         $this->locationService = $locationService;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): SiblingCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): SiblingCriterion {
         if (!array_key_exists('SiblingCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <SiblingCriterion> format');
         }

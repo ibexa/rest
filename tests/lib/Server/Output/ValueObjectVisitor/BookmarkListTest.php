@@ -20,7 +20,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 class BookmarkListTest extends ValueObjectVisitorBaseTest
 {
     /**
-     * @var \Ibexa\Rest\Server\Values\BookmarkList
+     * @var BookmarkList
      */
     private $data;
 

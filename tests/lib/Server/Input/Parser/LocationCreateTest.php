@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
@@ -159,7 +160,7 @@ class LocationCreateTest extends BaseTest
     /**
      * Returns the LocationCreateStruct parser.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\LocationCreate
+     * @return LocationCreate
      */
     protected function internalGetParser()
     {

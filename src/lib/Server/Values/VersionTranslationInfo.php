@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
@@ -15,12 +16,12 @@ use Ibexa\Rest\Value as RestValue;
 class VersionTranslationInfo extends RestValue
 {
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo
+     * @var VersionInfo
      */
     private $versionInfo;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo $versionInfo
+     * @param VersionInfo $versionInfo
      */
     public function __construct(VersionInfo $versionInfo)
     {
@@ -28,7 +29,7 @@ class VersionTranslationInfo extends RestValue
     }
 
     /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo
+     * @return VersionInfo
      */
     public function getVersionInfo()
     {

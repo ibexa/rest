@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
@@ -19,7 +20,7 @@ class CachedValue extends ValueObjectVisitor
 {
     use RequestStackAware;
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
+    /** @var ConfigResolverInterface */
     protected $configResolver;
 
     public function __construct(ConfigResolverInterface $configResolver)
@@ -28,12 +29,15 @@ class CachedValue extends ValueObjectVisitor
     }
 
     /**
-     * @param \Ibexa\Contracts\Rest\Output\Visitor   $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param Visitor   $visitor
+     * @param Generator $generator
      * @param \Ibexa\Rest\Server\Values\CachedValue $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ) {
         $visitor->visitValueObject($data->value);
 
         if ($this->getParameter('content.view_cache') !== true) {
@@ -57,8 +61,10 @@ class CachedValue extends ValueObjectVisitor
         }
     }
 
-    public function getParameter($parameterName, $defaultValue = null)
-    {
+    public function getParameter(
+        $parameterName,
+        $defaultValue = null
+    ) {
         if ($this->configResolver->hasParameter($parameterName)) {
             return $this->configResolver->getParameter($parameterName);
         }

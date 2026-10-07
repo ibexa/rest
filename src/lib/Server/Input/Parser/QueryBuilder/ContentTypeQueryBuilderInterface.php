@@ -16,5 +16,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 interface ContentTypeQueryBuilderInterface
 {
-    public function buildQuery(Request $request, int $defaultLimit): ContentTypeQuery;
+    public function buildQuery(
+        Request $request,
+        int $defaultLimit
+    ): ContentTypeQuery;
 }

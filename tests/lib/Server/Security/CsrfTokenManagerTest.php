@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Security;
 
 use Ibexa\Rest\Server\Security\CsrfTokenManager;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -17,10 +19,10 @@ class CsrfTokenManagerTest extends TestCase
 {
     public const CSRF_TOKEN_INTENTION = 'csrf';
 
-    /** @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface */
+    /** @var MockObject|TokenStorageInterface */
     private $tokenStorage;
 
-    /** @var \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpFoundation\RequestStack */
+    /** @var MockObject|RequestStack */
     private $requestStack;
 
     protected function setUp(): void

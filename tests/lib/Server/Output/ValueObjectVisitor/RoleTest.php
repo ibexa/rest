@@ -4,10 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\User;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\Role;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class RoleTest extends ValueObjectVisitorBaseTest
@@ -235,11 +236,11 @@ class RoleTest extends ValueObjectVisitorBaseTest
     /**
      * Get the Role visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Role
+     * @return Role
      */
     protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\Role();
+        return new Role();
     }
 }
 

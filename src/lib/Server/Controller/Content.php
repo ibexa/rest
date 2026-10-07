@@ -4,11 +4,14 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
@@ -19,9 +22,22 @@ use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Exceptions\ContentFieldValidationException as RESTContentFieldValidationException;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedContent;
+use Ibexa\Rest\Server\Values\CreatedRelation;
+use Ibexa\Rest\Server\Values\CreatedVersion;
+use Ibexa\Rest\Server\Values\NoContent;
+use Ibexa\Rest\Server\Values\RelationList;
+use Ibexa\Rest\Server\Values\ResourceCreated;
+use Ibexa\Rest\Server\Values\RestContent;
 use Ibexa\Rest\Server\Values\RestContentCreateStruct;
+use Ibexa\Rest\Server\Values\RestExecutedView;
+use Ibexa\Rest\Server\Values\RestRelation;
+use Ibexa\Rest\Server\Values\TemporaryRedirect;
+use Ibexa\Rest\Server\Values\Version;
+use Ibexa\Rest\Server\Values\VersionList;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
@@ -32,9 +48,9 @@ class Content extends RestController
     /**
      * Loads a content info by remote ID.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
+     * @throws BadRequestException
      *
-     * @return \Ibexa\Rest\Server\Values\TemporaryRedirect
+     * @return TemporaryRedirect
      */
     public function redirectContent(Request $request)
     {
@@ -46,7 +62,7 @@ class Content extends RestController
             $request->query->get('remoteId')
         );
 
-        return new Values\TemporaryRedirect(
+        return new TemporaryRedirect(
             $this->router->generate(
                 'ibexa.rest.load_content',
                 [
@@ -60,12 +76,14 @@ class Content extends RestController
      * Loads a content info, potentially with the current version embedded.
      *
      * @param mixed $contentId
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      *
-     * @return \Ibexa\Rest\Server\Values\RestContent
+     * @return RestContent
      */
-    public function loadContent($contentId, Request $request)
-    {
+    public function loadContent(
+        $contentId,
+        Request $request
+    ) {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
 
         $mainLocation = null;
@@ -87,7 +105,7 @@ class Content extends RestController
             $relations = $this->repository->getContentService()->loadRelations($contentVersion->getVersionInfo());
         }
 
-        $restContent = new Values\RestContent(
+        $restContent = new RestContent(
             $contentInfo,
             $mainLocation,
             $contentVersion,
@@ -111,10 +129,12 @@ class Content extends RestController
      *
      * @param mixed $contentId
      *
-     * @return \Ibexa\Rest\Server\Values\RestContent
+     * @return RestContent
      */
-    public function updateContentMetadata($contentId, Request $request)
-    {
+    public function updateContentMetadata(
+        $contentId,
+        Request $request
+    ) {
         $updateStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -150,7 +170,7 @@ class Content extends RestController
             $locationInfo = null;
         }
 
-        return new Values\RestContent(
+        return new RestContent(
             $contentInfo,
             $locationInfo
         );
@@ -161,13 +181,13 @@ class Content extends RestController
      *
      * @param mixed $contentId
      *
-     * @return \Ibexa\Rest\Server\Values\TemporaryRedirect
+     * @return TemporaryRedirect
      */
     public function redirectCurrentVersion($contentId)
     {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
 
-        return new Values\TemporaryRedirect(
+        return new TemporaryRedirect(
             $this->router->generate(
                 'ibexa.rest.load_content_in_version',
                 [
@@ -184,10 +204,13 @@ class Content extends RestController
      * @param mixed $contentId
      * @param int $versionNumber
      *
-     * @return \Ibexa\Rest\Server\Values\Version
+     * @return Version
      */
-    public function loadContentInVersion($contentId, $versionNumber, Request $request)
-    {
+    public function loadContentInVersion(
+        $contentId,
+        $versionNumber,
+        Request $request
+    ) {
         $languages = Language::ALL;
         if ($request->query->has('languages')) {
             $languages = explode(',', $request->query->get('languages'));
@@ -202,7 +225,7 @@ class Content extends RestController
             $content->getVersionInfo()->getContentInfo()->contentTypeId
         );
 
-        $versionValue = new Values\Version(
+        $versionValue = new Version(
             $content,
             $contentType,
             $this->repository->getContentService()->loadRelations($content->getVersionInfo()),
@@ -228,9 +251,9 @@ class Content extends RestController
      * object in the source server). The user has to publish the content if
      * it should be visible.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      *
-     * @return \Ibexa\Rest\Server\Values\CreatedContent
+     * @return CreatedContent
      */
     public function createContent(Request $request)
     {
@@ -245,7 +268,7 @@ class Content extends RestController
      *
      * @param mixed $contentId
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
     public function deleteContent($contentId)
     {
@@ -253,7 +276,7 @@ class Content extends RestController
             $this->repository->getContentService()->loadContentInfo($contentId)
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 
     /**
@@ -261,10 +284,12 @@ class Content extends RestController
      *
      * @param mixed $contentId
      *
-     * @return \Ibexa\Rest\Server\Values\ResourceCreated
+     * @return ResourceCreated
      */
-    public function copyContent($contentId, Request $request)
-    {
+    public function copyContent(
+        $contentId,
+        Request $request
+    ) {
         $destination = $request->headers->get('Destination');
 
         $parentLocationParts = explode('/', $destination);
@@ -273,7 +298,7 @@ class Content extends RestController
             $this->repository->getLocationService()->newLocationCreateStruct((int)array_pop($parentLocationParts))
         );
 
-        return new Values\ResourceCreated(
+        return new ResourceCreated(
             $this->router->generate(
                 'ibexa.rest.load_content',
                 ['contentId' => $copiedContent->id]
@@ -289,12 +314,14 @@ class Content extends RestController
      * @param int $contentId
      * @param string $languageCode
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      *
      * @throws \Exception
      */
-    public function deleteContentTranslation($contentId, $languageCode)
-    {
+    public function deleteContentTranslation(
+        $contentId,
+        $languageCode
+    ) {
         $contentService = $this->repository->getContentService();
 
         $this->repository->beginTransaction();
@@ -307,7 +334,7 @@ class Content extends RestController
 
             $this->repository->commit();
 
-            return new Values\NoContent();
+            return new NoContent();
         } catch (\Exception $e) {
             $this->repository->rollback();
             throw $e;
@@ -320,13 +347,15 @@ class Content extends RestController
      *
      * @param mixed $contentId
      *
-     * @return \Ibexa\Rest\Server\Values\VersionList
+     * @return VersionList
      */
-    public function loadContentVersions($contentId, Request $request)
-    {
+    public function loadContentVersions(
+        $contentId,
+        Request $request
+    ) {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
 
-        return new Values\VersionList(
+        return new VersionList(
             $this->repository->getContentService()->loadVersions($contentInfo),
             $request->getPathInfo()
         );
@@ -338,12 +367,14 @@ class Content extends RestController
      * @param mixed $contentId
      * @param mixed $versionNumber
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
-    public function deleteContentVersion($contentId, $versionNumber)
-    {
+    public function deleteContentVersion(
+        $contentId,
+        $versionNumber
+    ) {
         $versionInfo = $this->repository->getContentService()->loadVersionInfo(
             $this->repository->getContentService()->loadContentInfo($contentId),
             $versionNumber
@@ -357,7 +388,7 @@ class Content extends RestController
             $versionInfo
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 
     /**
@@ -367,12 +398,15 @@ class Content extends RestController
      * @param int $versionNumber
      * @param string $languageCode
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      */
-    public function deleteTranslationFromDraft($contentId, $versionNumber, $languageCode)
-    {
+    public function deleteTranslationFromDraft(
+        $contentId,
+        $versionNumber,
+        $languageCode
+    ) {
         $contentService = $this->repository->getContentService();
         $versionInfo = $contentService->loadVersionInfoById($contentId, $versionNumber);
 
@@ -382,7 +416,7 @@ class Content extends RestController
 
         $contentService->deleteTranslationFromDraft($versionInfo, $languageCode);
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 
     /**
@@ -391,10 +425,12 @@ class Content extends RestController
      * @param mixed $contentId
      * @param mixed $versionNumber
      *
-     * @return \Ibexa\Rest\Server\Values\CreatedVersion
+     * @return CreatedVersion
      */
-    public function createDraftFromVersion($contentId, $versionNumber)
-    {
+    public function createDraftFromVersion(
+        $contentId,
+        $versionNumber
+    ) {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
         $contentType = $this->repository->getContentTypeService()->loadContentType($contentInfo->contentTypeId);
         $contentDraft = $this->repository->getContentService()->createContentDraft(
@@ -402,9 +438,9 @@ class Content extends RestController
             $this->repository->getContentService()->loadVersionInfo($contentInfo, $versionNumber)
         );
 
-        return new Values\CreatedVersion(
+        return new CreatedVersion(
             [
-                'version' => new Values\Version(
+                'version' => new Version(
                     $contentDraft,
                     $contentType,
                     $this->repository->getContentService()->loadRelations($contentDraft->getVersionInfo())
@@ -418,9 +454,9 @@ class Content extends RestController
      *
      * @param mixed $contentId
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException if the current version is already a draft
+     * @throws ForbiddenException if the current version is already a draft
      *
-     * @return \Ibexa\Rest\Server\Values\CreatedVersion
+     * @return CreatedVersion
      */
     public function createDraftFromCurrentVersion($contentId)
     {
@@ -436,9 +472,9 @@ class Content extends RestController
 
         $contentDraft = $this->repository->getContentService()->createContentDraft($contentInfo);
 
-        return new Values\CreatedVersion(
+        return new CreatedVersion(
             [
-                'version' => new Values\Version(
+                'version' => new Version(
                     $contentDraft,
                     $contentType,
                     $this->repository->getContentService()->loadRelations($contentDraft->getVersionInfo())
@@ -453,13 +489,16 @@ class Content extends RestController
      * @param mixed $contentId
      * @param mixed $versionNumber
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
+     * @throws ForbiddenException
+     * @throws BadRequestException
      *
-     * @return \Ibexa\Rest\Server\Values\Version
+     * @return Version
      */
-    public function updateVersion($contentId, $versionNumber, Request $request)
-    {
+    public function updateVersion(
+        $contentId,
+        $versionNumber,
+        Request $request
+    ) {
         $contentUpdateStruct = $this->inputDispatcher->parse(
             new Message(
                 [
@@ -508,7 +547,7 @@ class Content extends RestController
             $content->getVersionInfo()->getContentInfo()->contentTypeId
         );
 
-        return new Values\Version(
+        return new Version(
             $content,
             $contentType,
             $this->repository->getContentService()->loadRelations($content->getVersionInfo()),
@@ -522,12 +561,14 @@ class Content extends RestController
      * @param mixed $contentId
      * @param mixed $versionNumber
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException if version $versionNumber isn't a draft
+     * @throws ForbiddenException if version $versionNumber isn't a draft
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
-    public function publishVersion($contentId, $versionNumber)
-    {
+    public function publishVersion(
+        $contentId,
+        $versionNumber
+    ) {
         $versionInfo = $this->repository->getContentService()->loadVersionInfo(
             $this->repository->getContentService()->loadContentInfo($contentId),
             $versionNumber
@@ -541,7 +582,7 @@ class Content extends RestController
             $versionInfo
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 
     /**
@@ -549,13 +590,13 @@ class Content extends RestController
      *
      * @param mixed $contentId
      *
-     * @return \Ibexa\Rest\Server\Values\TemporaryRedirect
+     * @return TemporaryRedirect
      */
     public function redirectCurrentVersionRelations($contentId)
     {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
 
-        return new Values\TemporaryRedirect(
+        return new TemporaryRedirect(
             $this->router->generate(
                 'ibexa.rest.load_version_relations',
                 [
@@ -572,10 +613,13 @@ class Content extends RestController
      * @param mixed $contentId
      * @param mixed $versionNumber
      *
-     * @return \Ibexa\Rest\Server\Values\RelationList
+     * @return RelationList
      */
-    public function loadVersionRelations($contentId, $versionNumber, Request $request)
-    {
+    public function loadVersionRelations(
+        $contentId,
+        $versionNumber,
+        Request $request
+    ) {
         $offset = $request->query->has('offset') ? (int)$request->query->get('offset') : 0;
         $limit = $request->query->has('limit') ? (int)$request->query->get('limit') : -1;
 
@@ -590,7 +634,7 @@ class Content extends RestController
             $limit >= 0 ? $limit : null
         );
 
-        $relationListValue = new Values\RelationList(
+        $relationListValue = new RelationList(
             $relationList,
             $contentId,
             $versionNumber,
@@ -614,12 +658,16 @@ class Content extends RestController
      * @param int $versionNumber
      * @param mixed $relationId
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws Exceptions\NotFoundException
      *
-     * @return \Ibexa\Rest\Server\Values\RestRelation
+     * @return RestRelation
      */
-    public function loadVersionRelation($contentId, $versionNumber, $relationId, Request $request)
-    {
+    public function loadVersionRelation(
+        $contentId,
+        $versionNumber,
+        $relationId,
+        Request $request
+    ) {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
         $relationList = $this->repository->getContentService()->loadRelations(
             $this->repository->getContentService()->loadVersionInfo($contentInfo, $versionNumber)
@@ -627,7 +675,7 @@ class Content extends RestController
 
         foreach ($relationList as $relation) {
             if ($relation->id == $relationId) {
-                $relation = new Values\RestRelation($relation, $contentId, $versionNumber);
+                $relation = new RestRelation($relation, $contentId, $versionNumber);
 
                 if ($contentInfo->mainLocationId === null) {
                     return $relation;
@@ -650,13 +698,17 @@ class Content extends RestController
      * @param int   $versionNumber
      * @param mixed $relationId
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws ForbiddenException
+     * @throws Exceptions\NotFoundException
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
-    public function removeRelation($contentId, $versionNumber, $relationId, Request $request)
-    {
+    public function removeRelation(
+        $contentId,
+        $versionNumber,
+        $relationId,
+        Request $request
+    ) {
         $versionInfo = $this->repository->getContentService()->loadVersionInfo(
             $this->repository->getContentService()->loadContentInfo($contentId),
             $versionNumber
@@ -675,7 +727,7 @@ class Content extends RestController
 
                 $this->repository->getContentService()->deleteRelation($versionInfo, $relation->getDestinationContentInfo());
 
-                return new Values\NoContent();
+                return new NoContent();
             }
         }
 
@@ -688,13 +740,16 @@ class Content extends RestController
      * @param mixed $contentId
      * @param int $versionNumber
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException if version $versionNumber isn't a draft
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException if a relation to the same content already exists
+     * @throws ForbiddenException if version $versionNumber isn't a draft
+     * @throws ForbiddenException if a relation to the same content already exists
      *
-     * @return \Ibexa\Rest\Server\Values\CreatedRelation
+     * @return CreatedRelation
      */
-    public function createRelation($contentId, $versionNumber, Request $request)
-    {
+    public function createRelation(
+        $contentId,
+        $versionNumber,
+        Request $request
+    ) {
         $destinationContentId = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -723,37 +778,37 @@ class Content extends RestController
 
         $relation = $this->repository->getContentService()->addRelation($versionInfo, $destinationContentInfo);
 
-        return new Values\CreatedRelation(
+        return new CreatedRelation(
             [
-                'relation' => new Values\RestRelation($relation, $contentId, $versionNumber),
+                'relation' => new RestRelation($relation, $contentId, $versionNumber),
             ]
         );
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
-    public function hideContent(int $contentId): Values\NoContent
+    public function hideContent(int $contentId): NoContent
     {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
 
         $this->repository->getContentService()->hideContent($contentInfo);
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
-    public function revealContent(int $contentId): Values\NoContent
+    public function revealContent(int $contentId): NoContent
     {
         $contentInfo = $this->repository->getContentService()->loadContentInfo($contentId);
 
         $this->repository->getContentService()->revealContent($contentInfo);
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 
     /**
@@ -761,7 +816,7 @@ class Content extends RestController
      *
      * @deprecated Since platform 1.0. Forwards the request to the new /views location, but returns a 301.
      *
-     * @return \Ibexa\Rest\Server\Values\RestExecutedView
+     * @return RestExecutedView
      */
     public function createView()
     {
@@ -777,7 +832,7 @@ class Content extends RestController
     /**
      * @param string $controller
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     protected function forward($controller)
     {
@@ -788,7 +843,7 @@ class Content extends RestController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      *
      * @return mixed
      */
@@ -803,17 +858,19 @@ class Content extends RestController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Ibexa\Rest\Server\Values\RestContentCreateStruct $contentCreate
+     * @param Request $request
+     * @param RestContentCreateStruct $contentCreate
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
      *
-     * @return \Ibexa\Rest\Server\Values\CreatedContent
+     * @return CreatedContent
      */
-    protected function doCreateContent(Request $request, RestContentCreateStruct $contentCreate)
-    {
+    protected function doCreateContent(
+        Request $request,
+        RestContentCreateStruct $contentCreate
+    ) {
         try {
             $contentCreateStruct = $contentCreate->contentCreateStruct;
             $contentCreate->locationCreateStruct->sortField = $contentCreateStruct->contentType->defaultSortField;
@@ -840,9 +897,9 @@ class Content extends RestController
             $relations = $this->repository->getContentService()->loadRelations($contentValue->getVersionInfo());
         }
 
-        return new Values\CreatedContent(
+        return new CreatedContent(
             [
-                'content' => new Values\RestContent(
+                'content' => new RestContent(
                     $content->contentInfo,
                     null,
                     $contentValue,

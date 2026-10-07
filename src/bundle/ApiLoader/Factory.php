@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Bundle\Rest\ApiLoader;
 
 use Ibexa\Contracts\Core\Repository\Repository;
@@ -20,21 +21,23 @@ class Factory
     use RequestStackAware;
 
     /**
-     * @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface
+     * @var ConfigResolverInterface
      */
     protected $configResolver;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Repository
+     * @var Repository
      */
     protected $repository;
 
     /**
-     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
-     * @param \Ibexa\Contracts\Core\Repository\Repository $repository
+     * @param ConfigResolverInterface $configResolver
+     * @param Repository $repository
      */
-    public function __construct(ConfigResolverInterface $configResolver, Repository $repository)
-    {
+    public function __construct(
+        ConfigResolverInterface $configResolver,
+        Repository $repository
+    ) {
         $this->configResolver = $configResolver;
         $this->repository = $repository;
     }
@@ -55,9 +58,9 @@ class Factory
     /**
      * Factory for ezpublish_rest.field_type_processor.ezimage.
      *
-     * @param \Symfony\Component\Routing\RouterInterface $router
+     * @param RouterInterface $router
      *
-     * @return \Ibexa\Rest\FieldTypeProcessor\ImageProcessor
+     * @return ImageProcessor
      */
     public function getImageFieldTypeProcessor(RouterInterface $router)
     {

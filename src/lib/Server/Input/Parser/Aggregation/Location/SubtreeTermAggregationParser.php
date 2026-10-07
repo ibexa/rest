@@ -21,8 +21,10 @@ final class SubtreeTermAggregationParser extends AbstractTermAggregationParser
         return 'SubtreeTermAggregation';
     }
 
-    protected function parseAggregation(array $data, ParsingDispatcher $parsingDispatcher): AbstractTermAggregation
-    {
+    protected function parseAggregation(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractTermAggregation {
         if (!array_key_exists('pathString', $data)) {
             throw new Exceptions\Parser("Missing 'pathString' element for SubtreeTerm.");
         }

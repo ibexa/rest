@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\RoleLimitation;
@@ -155,7 +156,7 @@ class RoleAssignInputTest extends BaseTest
     /**
      * Returns the role assign input parser.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\RoleAssignInput
+     * @return RoleAssignInput
      */
     protected function internalGetParser()
     {

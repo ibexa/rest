@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest;
 
 /**
@@ -30,7 +31,10 @@ interface RequestParser
      *
      * @return string
      */
-    public function generate($type, array $values = []);
+    public function generate(
+        $type,
+        array $values = []
+    );
 
     /**
      * Tries to match $href as a route, and returns the value of $attribute from the result.
@@ -40,7 +44,10 @@ interface RequestParser
      *
      * @return mixed|false
      */
-    public function parseHref($href, $attribute);
+    public function parseHref(
+        $href,
+        $attribute
+    );
 }
 
 class_alias(RequestParser::class, 'EzSystems\EzPlatformRest\RequestParser');

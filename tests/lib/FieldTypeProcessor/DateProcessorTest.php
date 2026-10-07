@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Rest\FieldTypeProcessor\DateProcessor;
@@ -31,10 +32,13 @@ class DateProcessorTest extends TestCase
 
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\DateProcessor::preProcessFieldSettingsHash
+     *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
-    {
+    public function testPreProcessFieldSettingsHash(
+        $inputSettings,
+        $outputSettings
+    ) {
         $processor = $this->getProcessor();
 
         $this->assertEquals(
@@ -45,10 +49,13 @@ class DateProcessorTest extends TestCase
 
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\DateProcessor::postProcessFieldSettingsHash
+     *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)
-    {
+    public function testPostProcessFieldSettingsHash(
+        $outputSettings,
+        $inputSettings
+    ) {
         $processor = $this->getProcessor();
 
         $this->assertEquals(
@@ -58,7 +65,7 @@ class DateProcessorTest extends TestCase
     }
 
     /**
-     * @return \Ibexa\Rest\FieldTypeProcessor\DateProcessor
+     * @return DateProcessor
      */
     protected function getProcessor()
     {

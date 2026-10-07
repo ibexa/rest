@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
@@ -17,6 +18,12 @@ use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedLocation;
+use Ibexa\Rest\Server\Values\LocationList;
+use Ibexa\Rest\Server\Values\NoContent;
+use Ibexa\Rest\Server\Values\ResourceCreated;
+use Ibexa\Rest\Server\Values\RestLocation;
+use Ibexa\Rest\Server\Values\TemporaryRedirect;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -28,38 +35,38 @@ class Location extends RestController
     /**
      * Location service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
+     * @var LocationService
      */
     protected $locationService;
 
     /**
      * Content service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
+     * @var ContentService
      */
     protected $contentService;
 
     /**
      * Trash service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\TrashService
+     * @var TrashService
      */
     protected $trashService;
 
     /**
      * URLAlias Service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\URLAliasService
+     * @var URLAliasService
      */
     protected $urlAliasService;
 
     /**
      * Construct controller.
      *
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
-     * @param \Ibexa\Contracts\Core\Repository\ContentService $contentService
-     * @param \Ibexa\Contracts\Core\Repository\TrashService $trashService
-     * @param \Ibexa\Contracts\Core\Repository\URLAliasService $urlAliasService
+     * @param LocationService $locationService
+     * @param ContentService $contentService
+     * @param TrashService $trashService
+     * @param URLAliasService $urlAliasService
      */
     public function __construct(
         LocationService $locationService,
@@ -76,9 +83,9 @@ class Location extends RestController
     /**
      * Loads the location for a given ID (x)or remote ID.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
+     * @throws BadRequestException
      *
-     * @return \Ibexa\Rest\Server\Values\TemporaryRedirect
+     * @return TemporaryRedirect
      */
     public function redirectLocation(Request $request)
     {
@@ -93,7 +100,7 @@ class Location extends RestController
             throw new BadRequestException("At least one of 'id', 'remoteId' or 'urlAlias' parameters is required.");
         }
 
-        return new Values\TemporaryRedirect(
+        return new TemporaryRedirect(
             $this->router->generate(
                 'ibexa.rest.load_location',
                 [
@@ -108,12 +115,14 @@ class Location extends RestController
      *
      * @param mixed $contentId
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      *
-     * @return \Ibexa\Rest\Server\Values\CreatedLocation
+     * @return CreatedLocation
      */
-    public function createLocation($contentId, Request $request)
-    {
+    public function createLocation(
+        $contentId,
+        Request $request
+    ) {
         $locationCreateStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -129,7 +138,7 @@ class Location extends RestController
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
-        return new Values\CreatedLocation(['restLocation' => new Values\RestLocation($createdLocation, 0)]);
+        return new CreatedLocation(['restLocation' => new RestLocation($createdLocation, 0)]);
     }
 
     /**
@@ -137,7 +146,7 @@ class Location extends RestController
      *
      * @param string $locationPath
      *
-     * @return \Ibexa\Rest\Server\Values\RestLocation
+     * @return RestLocation
      */
     public function loadLocation($locationPath)
     {
@@ -152,7 +161,7 @@ class Location extends RestController
         }
 
         return new Values\CachedValue(
-            new Values\RestLocation(
+            new RestLocation(
                 $location,
                 $this->locationService->getLocationChildCount($location)
             ),
@@ -165,7 +174,7 @@ class Location extends RestController
      *
      * @param string $locationPath
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
     public function deleteSubtree($locationPath)
     {
@@ -174,7 +183,7 @@ class Location extends RestController
         );
         $this->locationService->deleteLocation($location);
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 
     /**
@@ -182,10 +191,12 @@ class Location extends RestController
      *
      * @param string $locationPath
      *
-     * @return \Ibexa\Rest\Server\Values\ResourceCreated
+     * @return ResourceCreated
      */
-    public function copySubtree($locationPath, Request $request)
-    {
+    public function copySubtree(
+        $locationPath,
+        Request $request
+    ) {
         $location = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($locationPath)
         );
@@ -201,7 +212,7 @@ class Location extends RestController
 
         $newLocation = $this->locationService->copySubtree($location, $destinationLocation);
 
-        return new Values\ResourceCreated(
+        return new ResourceCreated(
             $this->router->generate(
                 'ibexa.rest.load_location',
                 [
@@ -216,12 +227,14 @@ class Location extends RestController
      *
      * @param string $locationPath
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException if the Destination header cannot be parsed as location or trash
+     * @throws BadRequestException if the Destination header cannot be parsed as location or trash
      *
-     * @return \Ibexa\Rest\Server\Values\ResourceCreated|\Ibexa\Rest\Server\Values\NoContent
+     * @return ResourceCreated|NoContent
      */
-    public function moveSubtree($locationPath, Request $request)
-    {
+    public function moveSubtree(
+        $locationPath,
+        Request $request
+    ) {
         $locationToMove = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($locationPath)
         );
@@ -241,7 +254,7 @@ class Location extends RestController
             // Reload the location to get the new position is subtree
             $locationToMove = $this->locationService->loadLocation($locationToMove->id);
 
-            return new Values\ResourceCreated(
+            return new ResourceCreated(
                 $this->router->generate(
                     'ibexa.rest.load_location',
                     [
@@ -260,7 +273,7 @@ class Location extends RestController
                 $trashItem = $this->trashService->trash($locationToMove);
 
                 if (isset($trashItem)) {
-                    return new Values\ResourceCreated(
+                    return new ResourceCreated(
                         $this->router->generate(
                             'ibexa.rest.load_trash_item',
                             ['trashItemId' => $trashItem->id]
@@ -268,7 +281,7 @@ class Location extends RestController
                     );
                 } else {
                     // Only a location has been trashed and not the object
-                    return new Values\NoContent();
+                    return new NoContent();
                 }
             } catch (Exceptions\InvalidArgumentException $e) {
                 // If that fails, the Destination header is not formatted right
@@ -283,10 +296,12 @@ class Location extends RestController
      *
      * @param string $locationPath
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
-    public function swapLocation($locationPath, Request $request)
-    {
+    public function swapLocation(
+        $locationPath,
+        Request $request
+    ) {
         $locationId = $this->extractLocationIdFromPath($locationPath);
         $location = $this->locationService->loadLocation($locationId);
 
@@ -301,7 +316,7 @@ class Location extends RestController
 
         $this->locationService->swapLocation($location, $destinationLocation);
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 
     /**
@@ -309,13 +324,13 @@ class Location extends RestController
      *
      * @todo remove, or use in loadLocation with filter
      *
-     * @return \Ibexa\Rest\Server\Values\LocationList
+     * @return LocationList
      */
     public function loadLocationByRemoteId(Request $request)
     {
-        return new Values\LocationList(
+        return new LocationList(
             [
-                new Values\RestLocation(
+                new RestLocation(
                     $location = $this->locationService->loadLocationByRemoteId(
                         $request->query->get('remoteId')
                     ),
@@ -331,14 +346,16 @@ class Location extends RestController
      *
      * @param mixed $contentId
      *
-     * @return \Ibexa\Rest\Server\Values\LocationList
+     * @return LocationList
      */
-    public function loadLocationsForContent($contentId, Request $request)
-    {
+    public function loadLocationsForContent(
+        $contentId,
+        Request $request
+    ) {
         $restLocations = [];
         $contentInfo = $this->contentService->loadContentInfo($contentId);
         foreach ($this->locationService->loadLocations($contentInfo) as $location) {
-            $restLocations[] = new Values\RestLocation(
+            $restLocations[] = new RestLocation(
                 $location,
                 // @todo Remove, and make optional in VO. Not needed for a location list.
                 $this->locationService->getLocationChildCount($location)
@@ -346,7 +363,7 @@ class Location extends RestController
         }
 
         return new Values\CachedValue(
-            new Values\LocationList($restLocations, $request->getPathInfo()),
+            new LocationList($restLocations, $request->getPathInfo()),
             ['locationId' => $contentInfo->mainLocationId]
         );
     }
@@ -356,10 +373,12 @@ class Location extends RestController
      *
      * @param string $locationPath
      *
-     * @return \Ibexa\Rest\Server\Values\LocationList
+     * @return LocationList
      */
-    public function loadLocationChildren($locationPath, Request $request)
-    {
+    public function loadLocationChildren(
+        $locationPath,
+        Request $request
+    ) {
         $offset = $request->query->has('offset') ? (int)$request->query->get('offset') : 0;
         $limit = $request->query->has('limit') ? (int)$request->query->get('limit') : 10;
 
@@ -371,14 +390,14 @@ class Location extends RestController
             $limit >= 0 ? $limit : 25
         )->locations;
         foreach ($children as $location) {
-            $restLocations[] = new Values\RestLocation(
+            $restLocations[] = new RestLocation(
                 $location,
                 $this->locationService->getLocationChildCount($location)
             );
         }
 
         return new Values\CachedValue(
-            new Values\LocationList($restLocations, $request->getPathInfo()),
+            new LocationList($restLocations, $request->getPathInfo()),
             ['locationId' => $locationId]
         );
     }
@@ -402,10 +421,12 @@ class Location extends RestController
      *
      * @param string $locationPath
      *
-     * @return \Ibexa\Rest\Server\Values\RestLocation
+     * @return RestLocation
      */
-    public function updateLocation($locationPath, Request $request)
-    {
+    public function updateLocation(
+        $locationPath,
+        Request $request
+    ) {
         $locationUpdate = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -425,7 +446,7 @@ class Location extends RestController
             $this->locationService->unhideLocation($location);
         }
 
-        return new Values\RestLocation(
+        return new RestLocation(
             $location = $this->locationService->updateLocation($location, $locationUpdate->locationUpdateStruct),
             $this->locationService->getLocationChildCount($location)
         );

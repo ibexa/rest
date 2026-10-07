@@ -29,8 +29,10 @@ final class ContentName extends BaseParser
     /**
      * @param array<mixed> $data
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentNameCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ContentNameCriterion {
         $this->validateInputArray($data);
 
         $criterionData = $data[self::CONTENT_NAME_CRITERION];

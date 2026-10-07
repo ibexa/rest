@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Bundle\Rest\DependencyInjection;
 
 use Ibexa\Bundle\Core\DependencyInjection\Configuration\SiteAccessAware\ConfigurationProcessor;
@@ -32,8 +33,10 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
     /**
      * @param array<string, mixed> $mergedConfig
      */
-    protected function loadInternal(array $mergedConfig, ContainerBuilder $container): void
-    {
+    protected function loadInternal(
+        array $mergedConfig,
+        ContainerBuilder $container
+    ): void {
         $container->setParameter('ibexa.rest.strict_mode', $mergedConfig['strict_mode']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));

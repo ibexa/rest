@@ -4,10 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Rest\Server\Exceptions;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\BadRequestException;
 
 class BadRequestExceptionTest extends ExceptionTest
 {
@@ -44,11 +45,11 @@ class BadRequestExceptionTest extends ExceptionTest
     /**
      * Gets the exception visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\BadRequestException
+     * @return BadRequestException
      */
     protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\BadRequestException();
+        return new BadRequestException();
     }
 }
 

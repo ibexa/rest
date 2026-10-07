@@ -4,10 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Input;
 
 use Ibexa\Contracts\Rest\Input\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -98,7 +100,7 @@ class ParsingDispatcherTest extends TestCase
     }
 
     /**
-     * @return \Ibexa\Contracts\Rest\Input\Parser|\PHPUnit\Framework\MockObject\MockObject
+     * @return Parser|MockObject
      */
     private function createParserMock()
     {

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Output\Generator\Json;
 
 use ArrayObject as NativeArrayObject;
@@ -19,7 +20,7 @@ class ArrayObject extends NativeArrayObject
     /**
      * Reference to the parent node.
      *
-     * @var \Ibexa\Rest\Output\Generator\Json\JsonObject
+     * @var JsonObject
      */
     protected $_ref_parent;
 
@@ -36,7 +37,7 @@ class ArrayObject extends NativeArrayObject
     /**
      * Get Parent of current node.
      *
-     * @return \Ibexa\Rest\Output\Generator\Json\JsonObject
+     * @return JsonObject
      */
     public function getParent()
     {

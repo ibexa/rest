@@ -4,14 +4,16 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Rest\FieldTypeProcessor\ImageProcessor;
+use Ibexa\Rest\RequestParser;
 use Symfony\Component\Routing\RouterInterface;
 
 class ImageProcessorTest extends BinaryInputProcessorTest
 {
-    /** @var \Ibexa\Rest\RequestParser */
+    /** @var RequestParser */
     protected $requestParser;
 
     /**
@@ -56,7 +58,7 @@ class ImageProcessorTest extends BinaryInputProcessorTest
     /**
      * Returns the processor under test.
      *
-     * @return \Ibexa\Rest\FieldTypeProcessor\ImageProcessor
+     * @return ImageProcessor
      */
     protected function getProcessor()
     {

@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser\FacetBuilder;
 
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
+use Ibexa\Rest\Server\Input\Parser\ContentQuery;
 use Ibexa\Rest\Server\Input\Parser\ContentQuery as QueryParser;
 use Ibexa\Rest\Server\Input\Parser\FacetBuilder\ContentTypeParser;
 use Ibexa\Rest\Server\Input\Parser\FacetBuilder\CriterionParser;
@@ -23,7 +25,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 abstract class FacetBuilderBaseTest extends BaseTest
 {
     /**
-     * @return \Ibexa\Contracts\Rest\Input\ParsingDispatcher
+     * @return ParsingDispatcher
      */
     protected function getParsingDispatcher()
     {
@@ -82,7 +84,7 @@ abstract class FacetBuilderBaseTest extends BaseTest
     /**
      * Returns the query parser.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\ContentQuery
+     * @return ContentQuery
      */
     protected function internalGetParser()
     {

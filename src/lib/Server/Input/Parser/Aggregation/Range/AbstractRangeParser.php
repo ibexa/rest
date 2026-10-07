@@ -15,8 +15,10 @@ use Ibexa\Rest\Input\BaseParser;
 
 abstract class AbstractRangeParser extends BaseParser
 {
-    final public function parse(array $data, ParsingDispatcher $parsingDispatcher): Range
-    {
+    final public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): Range {
         if (!array_key_exists('from', $data)) {
             throw new Exceptions\Parser("Missing 'from' element for Range.");
         }
@@ -31,7 +33,10 @@ abstract class AbstractRangeParser extends BaseParser
         );
     }
 
-    abstract protected function visitRangeValue(ParsingDispatcher $parsingDispatcher, $value);
+    abstract protected function visitRangeValue(
+        ParsingDispatcher $parsingDispatcher,
+        $value
+    );
 }
 
 class_alias(AbstractRangeParser::class, 'EzSystems\EzPlatformRest\Server\Input\Parser\Aggregation\Range\AbstractRangeParser');

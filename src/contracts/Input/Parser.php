@@ -4,7 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Contracts\Rest\Input;
+
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
  * Base class for input parser.
@@ -16,9 +19,12 @@ abstract class Parser
      *
      * @param array<mixed> $data
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject|object
+     * @return ValueObject|object
      */
-    abstract public function parse(array $data, ParsingDispatcher $parsingDispatcher);
+    abstract public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    );
 }
 
 class_alias(Parser::class, 'EzSystems\EzPlatformRest\Input\Parser');

@@ -17,7 +17,7 @@ use Ibexa\Rest\Server\Values\RestUser;
 
 final class User extends ValueObjectVisitor implements DelegateValueObjectVisitor
 {
-    /** @var \Ibexa\Contracts\Core\Repository\ContentService */
+    /** @var ContentService */
     private $contentService;
 
     public function __construct(ContentService $contentService)
@@ -28,8 +28,11 @@ final class User extends ValueObjectVisitor implements DelegateValueObjectVisito
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\User\User $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ): void {
         $visitor->visitValueObject(
             new RestUser(
                 $data,

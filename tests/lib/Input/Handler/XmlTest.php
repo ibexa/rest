@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Input\Handler;
 
 use Ibexa\Contracts\Rest\Exceptions\Parser;
@@ -45,8 +46,10 @@ class XmlTest extends TestCase
     /**
      * @dataProvider getXmlFixtures
      */
-    public function testConvertXml($xml, $expectation)
-    {
+    public function testConvertXml(
+        $xml,
+        $expectation
+    ) {
         $handler = new Xml();
 
         $this->assertSame(

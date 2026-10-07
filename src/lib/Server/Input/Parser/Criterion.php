@@ -4,10 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 
@@ -30,19 +32,22 @@ abstract class Criterion extends BaseParser
      *
      * @param string $criterionName
      * @param mixed $criterionData
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion
      */
-    public function dispatchCriterion($criterionName, $criterionData, ParsingDispatcher $parsingDispatcher)
-    {
+    public function dispatchCriterion(
+        $criterionName,
+        $criterionData,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         $mediaType = $this->getCriterionMediaType($criterionName);
         try {
             return $parsingDispatcher->parse([$criterionName => $criterionData], $mediaType);
-        } catch (Exceptions\Parser $e) {
-            throw new Exceptions\Parser("Invalid Criterion id <$criterionName> in <AND>", 0, $e);
+        } catch (Parser $e) {
+            throw new Parser("Invalid Criterion id <$criterionName> in <AND>", 0, $e);
         }
     }
 
@@ -51,27 +56,30 @@ abstract class Criterion extends BaseParser
      *
      * @param string $facetBuilderName
      * @param mixed $facetBuilderData
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject
+     * @return ValueObject
      */
-    public function dispatchFacetBuilder($facetBuilderName, $facetBuilderData, ParsingDispatcher $parsingDispatcher)
-    {
+    public function dispatchFacetBuilder(
+        $facetBuilderName,
+        $facetBuilderData,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         $mediaType = $this->getFacetBuilderMediaType($facetBuilderName);
 
         try {
             return $parsingDispatcher->parse([$facetBuilderName => $facetBuilderData], $mediaType);
-        } catch (Exceptions\Parser $e) {
-            throw new Exceptions\Parser("Invalid FacetBuilder id <$facetBuilderName>", 0, $e);
+        } catch (Parser $e) {
+            throw new Parser("Invalid FacetBuilder id <$facetBuilderName>", 0, $e);
         }
     }
 
     /**
      * Dispatches parsing of a aggregation name + data to its own parser.
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation
+     * @return Aggregation
      */
     public function dispatchAggregation(
         string $aggregationName,
@@ -91,14 +99,17 @@ abstract class Criterion extends BaseParser
      *
      * @param string $sortClauseName
      * @param string $direction
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion
      */
-    public function dispatchSortClause($sortClauseName, $direction, ParsingDispatcher $parsingDispatcher)
-    {
+    public function dispatchSortClause(
+        $sortClauseName,
+        $direction,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         $mediaType = $this->getSortClauseMediaType($sortClauseName);
 
         return $parsingDispatcher->parse([$sortClauseName => $direction], $mediaType);

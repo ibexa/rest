@@ -11,6 +11,4 @@ namespace Ibexa\Tests\Rest\Output;
 /**
  * Test dummy interface.
  */
-interface ValueObjectInterface
-{
-}
+interface ValueObjectInterface {}
