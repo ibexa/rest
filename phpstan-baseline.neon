@@ -253,12 +253,6 @@ parameters:
 			path: src/lib/Server/Controller/BinaryContent.php
 
 		-
-			message: '#^Variable \$field might not be defined\.$#'
-			identifier: variable.undefined
-			count: 2
-			path: src/lib/Server/Controller/BinaryContent.php
-
-		-
 			message: '#^Method Ibexa\\Rest\\Server\\Input\\Parser\\Aggregation\\AbstractRangeAggregationParser\:\:dispatchRanges\(\) has parameter \$data with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
