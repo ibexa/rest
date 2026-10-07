@@ -8,7 +8,6 @@
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeId as ContentTypeIdCriterion;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
@@ -39,7 +38,7 @@ class ContentTypeIdentifier extends BaseParser
      *
      * @throws Parser
      *
-     * @return ContentTypeId
+     * @return ContentTypeIdCriterion
      */
     public function parse(
         array $data,

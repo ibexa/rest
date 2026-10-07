@@ -8,7 +8,6 @@
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Core\Repository\LocationService;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ParentLocationId as ParentLocationIdCriterion;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
@@ -39,7 +38,7 @@ class ParentLocationRemoteId extends BaseParser
      *
      * @throws Parser
      *
-     * @return ParentLocationId
+     * @return ParentLocationIdCriterion
      */
     public function parse(
         array $data,

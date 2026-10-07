@@ -10,7 +10,6 @@ namespace Ibexa\Tests\Rest\Server\Input\Parser;
 use DateTime;
 use Ibexa\Contracts\Rest\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
-use Ibexa\Rest\Server\Input\Parser\ContentUpdate;
 use Ibexa\Rest\Server\Input\Parser\ContentUpdate as ContentUpdateParser;
 use Ibexa\Rest\Values\RestContentMetadataUpdateStruct;
 
@@ -136,7 +135,7 @@ class ContentUpdateTest extends BaseTest
     /**
      * Returns the ContentUpdate parser.
      *
-     * @return ContentUpdate
+     * @return ContentUpdateParser
      */
     protected function internalGetParser()
     {

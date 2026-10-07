@@ -7,7 +7,6 @@
 
 namespace Ibexa\Rest\Server\Input\Parser;
 
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion as CriterionValue;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
@@ -95,7 +94,7 @@ abstract class Query extends CriterionParser
      * @param array $criteriaArray
      * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return Criterion|null A criterion, or a LogicalAnd with a set of Criterion, or null if an empty array was given
+     * @return CriterionValue|null A criterion, or a LogicalAnd with a set of Criterion, or null if an empty array was given
      */
     private function processCriteriaArray(
         array $criteriaArray,

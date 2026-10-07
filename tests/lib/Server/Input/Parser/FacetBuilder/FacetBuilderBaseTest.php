@@ -8,7 +8,6 @@
 namespace Ibexa\Tests\Rest\Server\Input\Parser\FacetBuilder;
 
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
-use Ibexa\Rest\Server\Input\Parser\ContentQuery;
 use Ibexa\Rest\Server\Input\Parser\ContentQuery as QueryParser;
 use Ibexa\Rest\Server\Input\Parser\FacetBuilder\ContentTypeParser;
 use Ibexa\Rest\Server\Input\Parser\FacetBuilder\CriterionParser;
@@ -84,7 +83,7 @@ abstract class FacetBuilderBaseTest extends BaseTest
     /**
      * Returns the query parser.
      *
-     * @return ContentQuery
+     * @return QueryParser
      */
     protected function internalGetParser()
     {

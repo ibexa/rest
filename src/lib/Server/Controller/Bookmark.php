@@ -17,7 +17,6 @@ use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Rest\Server\Values\OK;
-use Ibexa\Rest\Value;
 use Ibexa\Rest\Value as RestValue;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -56,7 +55,7 @@ class Bookmark extends RestController
      * @throws NotFoundException
      * @throws UnauthorizedException
      *
-     * @return Value
+     * @return RestValue
      */
     public function createBookmark(
         Request $request,
@@ -89,7 +88,7 @@ class Bookmark extends RestController
      * @throws NotFoundException
      * @throws UnauthorizedException
      *
-     * @return Value
+     * @return RestValue
      */
     public function deleteBookmark(
         Request $request,
@@ -137,7 +136,7 @@ class Bookmark extends RestController
      *
      * @throws InvalidArgumentException
      *
-     * @return Value
+     * @return RestValue
      */
     public function loadBookmarks(Request $request): RestValue
     {

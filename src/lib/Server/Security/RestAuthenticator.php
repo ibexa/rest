@@ -9,7 +9,6 @@ namespace Ibexa\Rest\Server\Security;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Core\MVC\Symfony\Security\Authentication\AuthenticatorInterface;
-use Ibexa\Core\MVC\Symfony\Security\UserInterface;
 use Ibexa\Core\MVC\Symfony\Security\UserInterface as IbexaUser;
 use Ibexa\Rest\Server\Exceptions\InvalidUserTypeException;
 use Ibexa\Rest\Server\Exceptions\UserConflictException;
@@ -166,7 +165,7 @@ class RestAuthenticator implements AuthenticatorInterface
     /**
      * Checks if newly matched user is conflicting with previously non-anonymous logged in user, if any.
      *
-     * @param UserInterface $user
+     * @param IbexaUser $user
      * @param TokenInterface $previousToken
      *
      * @return bool

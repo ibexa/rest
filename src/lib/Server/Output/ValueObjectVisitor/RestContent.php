@@ -11,7 +11,6 @@ use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
-use Ibexa\Core\Base\Exceptions\BadStateException;
 use Ibexa\Core\Base\Exceptions\BadStateException as CoreBadStateException;
 use Ibexa\Core\Helper\TranslationHelper;
 use Ibexa\Rest\Server\Values\Version as VersionValue;
@@ -202,7 +201,7 @@ class RestContent extends ValueObjectVisitor
      *
      * @param int $status
      *
-     * @throws BadStateException
+     * @throws CoreBadStateException
      *
      * @return string
      */

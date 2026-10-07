@@ -8,7 +8,6 @@
 namespace Ibexa\Rest\Server;
 
 use Ibexa\Contracts\Core\Repository\Repository;
-use Ibexa\Rest\Input\Dispatcher;
 use Ibexa\Rest\Input\Dispatcher as InputDispatcher;
 use Ibexa\Rest\RequestParser;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -21,7 +20,7 @@ abstract class Controller implements ContainerAwareInterface
     use ContainerAwareTrait;
 
     /**
-     * @var Dispatcher
+     * @var InputDispatcher
      */
     protected $inputDispatcher;
 

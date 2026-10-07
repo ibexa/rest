@@ -7,7 +7,6 @@
 
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\RemoteId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\RemoteId as ContentRemoteIdCriterion;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
@@ -26,7 +25,7 @@ class ContentRemoteId extends BaseParser
      *
      * @throws Parser
      *
-     * @return RemoteId
+     * @return ContentRemoteIdCriterion
      */
     public function parse(
         array $data,

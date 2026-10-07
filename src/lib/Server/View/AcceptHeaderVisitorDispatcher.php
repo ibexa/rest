@@ -7,7 +7,6 @@
 
 namespace Ibexa\Rest\Server\View;
 
-use Ibexa\Contracts\Rest\Output\Visitor;
 use Ibexa\Contracts\Rest\Output\Visitor as OutputVisitor;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +29,7 @@ class AcceptHeaderVisitorDispatcher
      * Adds view handler.
      *
      * @param string $regexp
-     * @param Visitor $visitor
+     * @param OutputVisitor $visitor
      */
     public function addVisitor(
         $regexp,
@@ -54,7 +53,7 @@ class AcceptHeaderVisitorDispatcher
         $result
     ) {
         foreach ($request->getAcceptableContentTypes() as $mimeType) {
-            /** @var Visitor $visitor */
+            /** @var OutputVisitor $visitor */
             foreach ($this->mapping as $regexp => $visitor) {
                 if (preg_match($regexp, $mimeType)) {
                     return $visitor->visit($result);
