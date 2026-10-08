@@ -52,11 +52,11 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
      */
     private $templatedRouterMock;
 
-    /** @var int */
-    private $routerCallIndex = 0;
+    /** @var array<int, array{string, array<mixed>, string}> */
+    private $routeExpectations = [];
 
-    /** @var int */
-    private $templatedRouterCallIndex = 0;
+    /** @var array<int, array{string, array<mixed>, string}> */
+    private $templatedRouteExpectations = [];
 
     /**
      * Gets the visitor mock.
@@ -163,7 +163,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     protected function getRouterMock()
     {
         if (!isset($this->routerMock)) {
-            $this->routerMock = $this->createMock(RouterInterface::class);
+            $this->routerMock = $this->createRouterMock($this->routeExpectations);
         }
 
         return $this->routerMock;
@@ -175,7 +175,47 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     protected function resetRouterMock()
     {
         $this->routerMock = null;
-        $this->routerMockCallIndex = 0;
+        $this->routeExpectations = [];
+    }
+
+    protected function assertPostConditions(): void
+    {
+        parent::assertPostConditions();
+
+        self::assertSame([], $this->routeExpectations, 'Not all expected router calls were made.');
+        self::assertSame([], $this->templatedRouteExpectations, 'Not all expected templated router calls were made.');
+    }
+
+    /**
+     * Router mock which expects calls to generate() in the order given by the (by reference) expectation list.
+     *
+     * @param array<int, array{string, array<mixed>, string}> $expectations
+     *
+     * @return RouterInterface&MockObject
+     */
+    private function createRouterMock(array &$expectations): RouterInterface
+    {
+        $router = $this->createMock(RouterInterface::class);
+        $router
+            ->expects($this->any())
+            ->method('generate')
+            ->willReturnCallback(
+                function (string $name, array $parameters = []) use (&$expectations): string {
+                    $expected = array_shift($expectations);
+                    if ($expected === null) {
+                        // Calls beyond the expected ones are not asserted, same as with a plain mock.
+                        return '';
+                    }
+
+                    [$expectedName, $expectedParameters, $returnValue] = $expected;
+                    self::assertEquals($expectedName, $name);
+                    self::assertEquals($expectedParameters, $parameters);
+
+                    return $returnValue;
+                }
+            );
+
+        return $router;
     }
 
     /**
@@ -190,14 +230,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
         $arguments,
         $returnValue
     ) {
-        $this->getRouterMock()
-            ->expects($this->at($this->routerCallIndex++))
-            ->method('generate')
-            ->with(
-                $this->equalTo($routeName),
-                $this->equalTo($arguments)
-            )
-            ->willReturn($returnValue);
+        $this->routeExpectations[] = [$routeName, $arguments, $returnValue];
     }
 
     /**
@@ -206,7 +239,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     protected function getTemplatedRouterMock()
     {
         if (!isset($this->templatedRouterMock)) {
-            $this->templatedRouterMock = $this->createMock(RouterInterface::class);
+            $this->templatedRouterMock = $this->createRouterMock($this->templatedRouteExpectations);
         }
 
         return $this->templatedRouterMock;
@@ -224,14 +257,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
         $arguments,
         $returnValue
     ) {
-        $this->getTemplatedRouterMock()
-            ->expects($this->at($this->templatedRouterCallIndex++))
-            ->method('generate')
-            ->with(
-                $this->equalTo($routeName),
-                $this->equalTo($arguments)
-            )
-            ->willReturn($returnValue);
+        $this->templatedRouteExpectations[] = [$routeName, $arguments, $returnValue];
     }
 
     /**

@@ -91,7 +91,7 @@ XML;
         $jsonResponse = json_decode($imageResponse->getBody());
         $imageField = $jsonResponse->Version->Fields->field[2];
 
-        self::assertObjectHasAttribute('variations', $imageField->fieldValue);
+        self::assertObjectHasProperty('variations', $imageField->fieldValue);
 
         $variationResponse = $this->sendHttpRequest(
             $this->createHttpRequest(

@@ -79,14 +79,14 @@ class DispatcherTest extends TestCase
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('parse')
             ->with([42], 'text/html')
             ->willReturn(23);
 
         $handler = $this->createMock(Handler::class);
         $handler
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('convert')
             ->with('Hello world!')
             ->willReturn([[42]]);
@@ -115,14 +115,14 @@ class DispatcherTest extends TestCase
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('parse')
             ->with(['someKey' => 'someValue', '__url' => '/foo/bar'], 'text/html')
             ->willReturn(23);
 
         $handler = $this->createMock(Handler::class);
         $handler
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('convert')
             ->with('Hello world!')
             ->willReturn(

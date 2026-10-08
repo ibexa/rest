@@ -39,7 +39,7 @@ class ValueObjectVisitorDispatcherTest extends TestCase
 
         $visitor = $this->getValueObjectVisitorMock();
         $visitor
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('visit')
             ->with($this->getOutputVisitorMock(), $this->getOutputGeneratorMock(), $data);
 
@@ -71,7 +71,7 @@ class ValueObjectVisitorDispatcherTest extends TestCase
 
         $valueObjectVisitor = $this->getValueObjectVisitorMock();
         $valueObjectVisitor
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('visit')
             ->with($this->getOutputVisitorMock(), $this->getOutputGeneratorMock(), $data);
 
@@ -113,7 +113,7 @@ class ValueObjectVisitorDispatcherTest extends TestCase
             ->method('visit');
 
         $valueObjectVisitor2
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('visit')
             ->with($this->getOutputVisitorMock(), $this->getOutputGeneratorMock(), $data);
 

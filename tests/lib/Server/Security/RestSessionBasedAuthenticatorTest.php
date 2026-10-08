@@ -256,21 +256,13 @@ class RestSessionBasedAuthenticatorTest extends TestCase
             );
 
         $this->tokenStorage
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('getToken')
-            ->willReturn($existingToken);
+            ->willReturnOnConsecutiveCalls($existingToken, $authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(1))
+            ->expects($this->exactly(2))
             ->method('setToken')
-            ->with($authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->at(2))
-            ->method('getToken')
-            ->willReturn($authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->at(3))
-            ->method('setToken')
-            ->with($existingToken);
+            ->withConsecutive([$authenticatedToken], [$existingToken]);
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
@@ -325,17 +317,13 @@ class RestSessionBasedAuthenticatorTest extends TestCase
             );
 
         $this->tokenStorage
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('getToken')
-            ->willReturn($existingToken);
+            ->willReturnOnConsecutiveCalls($existingToken, $authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('setToken')
             ->with($authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->at(2))
-            ->method('getToken')
-            ->willReturn($authenticatedToken);
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
@@ -384,17 +372,13 @@ class RestSessionBasedAuthenticatorTest extends TestCase
             );
 
         $this->tokenStorage
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('getToken')
-            ->willReturn($existingToken);
+            ->willReturnOnConsecutiveCalls($existingToken, $authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('setToken')
             ->with($authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->at(2))
-            ->method('getToken')
-            ->willReturn($authenticatedToken);
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
@@ -442,17 +426,13 @@ class RestSessionBasedAuthenticatorTest extends TestCase
             );
 
         $this->tokenStorage
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('getToken')
-            ->willReturn($existingToken);
+            ->willReturnOnConsecutiveCalls($existingToken, $authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('setToken')
             ->with($authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->at(2))
-            ->method('getToken')
-            ->willReturn($authenticatedToken);
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
@@ -495,17 +475,13 @@ class RestSessionBasedAuthenticatorTest extends TestCase
             );
 
         $this->tokenStorage
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('getToken')
-            ->willReturn($existingToken);
+            ->willReturnOnConsecutiveCalls($existingToken, $authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('setToken')
             ->with($authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->at(2))
-            ->method('getToken')
-            ->willReturn($authenticatedToken);
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken

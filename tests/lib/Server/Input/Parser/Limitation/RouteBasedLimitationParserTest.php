@@ -26,7 +26,7 @@ class RouteBasedLimitationParserTest extends BaseTest
         $result = $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
 
         self::assertInstanceOf('stdClass', $result);
-        self::assertObjectHasAttribute('limitationValues', $result);
+        self::assertObjectHasProperty('limitationValues', $result);
         self::assertArrayHasKey(0, $result->limitationValues);
         self::assertEquals(42, $result->limitationValues[0]);
     }

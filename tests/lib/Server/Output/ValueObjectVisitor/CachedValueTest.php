@@ -41,9 +41,8 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
     {
         $responseMock = $this->getResponseMock();
         $responseMock->expects($this->once())->method('setPublic');
-        $responseMock->expects($this->at(1))->method('setVary')->with('Accept');
+        $responseMock->expects($this->exactly(2))->method('setVary')->withConsecutive(['Accept'], ['X-User-Hash', false]);
         $responseMock->expects($this->once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
-        $responseMock->expects($this->at(3))->method('setVary')->with('X-User-Hash', false);
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
@@ -54,9 +53,8 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
     {
         $responseMock = $this->getResponseMock();
         $responseMock->expects($this->once())->method('setPublic');
-        $responseMock->expects($this->at(1))->method('setVary')->with('Accept');
+        $responseMock->expects($this->exactly(2))->method('setVary')->withConsecutive(['Accept'], ['X-User-Hash', false]);
         $responseMock->expects($this->once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
-        $responseMock->expects($this->at(3))->method('setVary')->with('X-User-Hash', false);
 
         $result = $this->visit(new CachedValue(new stdClass(), ['locationId' => 'testLocationId']));
 

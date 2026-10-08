@@ -34,13 +34,16 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
             false
         );
 
-        $this->getVisitorMock()->expects($this->at(0))
+        $this->getVisitorMock()->expects($this->once())
             ->method('setStatus')
             ->with($this->equalTo(200));
 
-        $this->getVisitorMock()->expects($this->at(1))
+        $this->getVisitorMock()->expects($this->exactly(2))
             ->method('setHeader')
-            ->with($this->equalTo('Content-Type'), $this->equalTo('application/vnd.ibexa.api.Session+xml'));
+            ->withConsecutive(
+                [$this->equalTo('Content-Type'), $this->equalTo('application/vnd.ibexa.api.Session+xml')],
+                [$this->equalTo('Accept-Patch'), $this->equalTo(false)]
+            );
 
         $this->addRouteExpectation(
             'ibexa.rest.delete_session',

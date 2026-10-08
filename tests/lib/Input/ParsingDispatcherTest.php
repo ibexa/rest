@@ -33,7 +33,7 @@ class ParsingDispatcherTest extends TestCase
         $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('parse')
             ->with([42], $dispatcher)
             ->willReturn(23);
@@ -53,7 +53,7 @@ class ParsingDispatcherTest extends TestCase
         $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('parse')
             ->with([42], $dispatcher)
             ->willReturn(23);
@@ -88,7 +88,7 @@ class ParsingDispatcherTest extends TestCase
         $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('parse')
             ->with([42], $dispatcher)
             ->willReturn(23);

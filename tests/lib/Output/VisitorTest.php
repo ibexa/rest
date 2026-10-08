@@ -26,17 +26,17 @@ class VisitorTest extends TestCase
 
         $generator = $this->getGeneratorMock();
         $generator
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('startDocument')
             ->with($data);
 
         $generator
-            ->expects($this->at(2))
+            ->expects($this->once())
             ->method('isEmpty')
             ->willReturn(false);
 
         $generator
-            ->expects($this->at(3))
+            ->expects($this->once())
             ->method('endDocument')
             ->with($data)
             ->willReturn('Hello world!');
@@ -58,12 +58,12 @@ class VisitorTest extends TestCase
 
         $generator = $this->getGeneratorMock();
         $generator
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('startDocument')
             ->with($data);
 
         $generator
-            ->expects($this->at(2))
+            ->expects($this->once())
             ->method('isEmpty')
             ->willReturn(true);
 
