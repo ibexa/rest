@@ -15,8 +15,11 @@ abstract class SearchCriterionTestCase extends SearchViewTestCase
     /**
      * @dataProvider getCriteriaPayloads
      */
-    public function testFindContent(string $format, string $body, int $expectedItemCount): void
-    {
+    public function testFindContent(
+        string $format,
+        string $body,
+        int $expectedItemCount
+    ): void {
         self::assertEquals(
             $expectedItemCount,
             $this->getQueryResultsCount($format, $body),

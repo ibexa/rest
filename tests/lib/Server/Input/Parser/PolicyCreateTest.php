@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation;
@@ -225,7 +226,7 @@ class PolicyCreateTest extends BaseTest
     /**
      * Returns the PolicyCreateStruct parser.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\PolicyCreate
+     * @return PolicyCreate
      */
     protected function internalGetParser()
     {

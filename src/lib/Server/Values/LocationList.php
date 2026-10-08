@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Rest\Value as RestValue;
@@ -16,7 +17,7 @@ class LocationList extends RestValue
     /**
      * Locations.
      *
-     * @var \Ibexa\Rest\Server\Values\RestLocation[]
+     * @var RestLocation[]
      */
     public $locations;
 
@@ -30,11 +31,13 @@ class LocationList extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Rest\Server\Values\RestLocation[] $locations
+     * @param RestLocation[] $locations
      * @param string $path
      */
-    public function __construct(array $locations, $path)
-    {
+    public function __construct(
+        array $locations,
+        $path
+    ) {
         $this->locations = $locations;
         $this->path = $path;
     }

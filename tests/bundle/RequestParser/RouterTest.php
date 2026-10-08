@@ -13,6 +13,7 @@ use Ibexa\Bundle\Rest\UriParser\UriParser;
 use Ibexa\Contracts\Rest\Exceptions\InvalidArgumentException;
 use Ibexa\Rest\RequestParser;
 use PHPUnit\Framework\MockObject\Builder\InvocationMocker;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Rule\InvokedCount as InvokedCountMatcher;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
@@ -139,7 +140,7 @@ final class RouterTest extends TestCase
     }
 
     /**
-     * @return \Symfony\Component\Routing\RouterInterface&\PHPUnit\Framework\MockObject\MockObject
+     * @return RouterInterface&MockObject
      */
     private function getRouterMock(): RouterInterface
     {

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
@@ -17,7 +18,7 @@ class RestLocation extends RestValue
     /**
      * A location.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Location
+     * @var Location
      */
     public $location;
 
@@ -29,11 +30,13 @@ class RestLocation extends RestValue
     public $childCount;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Location $location
+     * @param Location $location
      * @param int $childCount
      */
-    public function __construct(Location $location, $childCount)
-    {
+    public function __construct(
+        Location $location,
+        $childCount
+    ) {
         $this->location = $location;
         $this->childCount = $childCount;
     }

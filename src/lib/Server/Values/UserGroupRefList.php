@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Rest\Value as RestValue;
@@ -16,7 +17,7 @@ class UserGroupRefList extends RestValue
     /**
      * User groups.
      *
-     * @var \Ibexa\Rest\Server\Values\RestUserGroup[]
+     * @var RestUserGroup[]
      */
     public $userGroups;
 
@@ -37,12 +38,15 @@ class UserGroupRefList extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Rest\Server\Values\RestUserGroup[] $userGroups
+     * @param RestUserGroup[] $userGroups
      * @param string $path
      * @param mixed $userId
      */
-    public function __construct(array $userGroups, $path, $userId = null)
-    {
+    public function __construct(
+        array $userGroups,
+        $path,
+        $userId = null
+    ) {
         $this->userGroups = $userGroups;
         $this->path = $path;
         $this->userId = $userId;

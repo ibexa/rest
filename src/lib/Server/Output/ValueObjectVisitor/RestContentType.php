@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType as APIContentType;
@@ -19,12 +20,15 @@ class RestContentType extends RestContentTypeBase
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param \Ibexa\Rest\Server\Values\RestContentType $data
+     * @param Visitor $visitor
+     * @param Generator $generator
+     * @param Values\RestContentType $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ) {
         $contentType = $data->contentType;
 
         $urlTypeSuffix = $this->getUrlTypeSuffix($contentType->status);

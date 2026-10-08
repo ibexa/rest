@@ -4,7 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Contracts\Rest\Input;
+
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 
 /**
  * Input format handler base class.
@@ -18,7 +21,7 @@ abstract class Handler
      *
      * @return array<mixed>|string|int|bool|float|null
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
     abstract public function convert($string);
 }

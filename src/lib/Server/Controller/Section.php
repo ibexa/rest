@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
@@ -13,8 +14,9 @@ use Ibexa\Contracts\Core\Repository\Values\Content\SectionUpdateStruct;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedSection;
 use Ibexa\Rest\Server\Values\NoContent;
+use Ibexa\Rest\Server\Values\SectionList;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -25,14 +27,14 @@ class Section extends RestController
     /**
      * Section service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\SectionService
+     * @var SectionService
      */
     protected $sectionService;
 
     /**
      * Construct controller.
      *
-     * @param \Ibexa\Contracts\Core\Repository\SectionService $sectionService
+     * @param SectionService $sectionService
      */
     public function __construct(SectionService $sectionService)
     {
@@ -42,7 +44,7 @@ class Section extends RestController
     /**
      * List sections.
      *
-     * @return \Ibexa\Rest\Server\Values\SectionList
+     * @return SectionList
      */
     public function listSections(Request $request)
     {
@@ -54,7 +56,7 @@ class Section extends RestController
             $sections = $this->sectionService->loadSections();
         }
 
-        return new Values\SectionList($sections, $request->getPathInfo());
+        return new SectionList($sections, $request->getPathInfo());
     }
 
     /**
@@ -73,9 +75,9 @@ class Section extends RestController
     /**
      * Create new section.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      *
-     * @return \Ibexa\Rest\Server\Values\CreatedSection
+     * @return CreatedSection
      */
     public function createSection(Request $request)
     {
@@ -92,7 +94,7 @@ class Section extends RestController
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
-        return new Values\CreatedSection(
+        return new CreatedSection(
             [
                 'section' => $createdSection,
             ]
@@ -116,12 +118,14 @@ class Section extends RestController
      *
      * @param $sectionId
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Section
      */
-    public function updateSection($sectionId, Request $request)
-    {
+    public function updateSection(
+        $sectionId,
+        Request $request
+    ) {
         $createStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -144,7 +148,7 @@ class Section extends RestController
      *
      * @param $sectionId
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
     public function deleteSection($sectionId)
     {
@@ -160,9 +164,9 @@ class Section extends RestController
      *
      * Needed since both structs are encoded into the same media type on input.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\SectionCreateStruct $createStruct
+     * @param SectionCreateStruct $createStruct
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\SectionUpdateStruct
+     * @return SectionUpdateStruct
      */
     protected function mapToUpdateStruct(SectionCreateStruct $createStruct)
     {

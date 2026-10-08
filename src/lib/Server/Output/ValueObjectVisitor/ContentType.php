@@ -19,8 +19,11 @@ final class ContentType extends ValueObjectVisitor implements DelegateValueObjec
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ): void {
         $visitor->visitValueObject(
             new RestContentType(
                 $data,

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Contracts\Core\Repository\LocationService;
@@ -34,10 +35,13 @@ class RelationListProcessorTest extends TestCase
 
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::preProcessFieldSettingsHash
+     *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
-    {
+    public function testPreProcessFieldSettingsHash(
+        $inputSettings,
+        $outputSettings
+    ) {
         $processor = $this->getProcessor();
 
         $this->assertEquals(
@@ -48,10 +52,13 @@ class RelationListProcessorTest extends TestCase
 
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::postProcessFieldSettingsHash
+     *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)
-    {
+    public function testPostProcessFieldSettingsHash(
+        $outputSettings,
+        $inputSettings
+    ) {
         $processor = $this->getProcessor();
 
         $this->assertEquals(
@@ -119,7 +126,7 @@ class RelationListProcessorTest extends TestCase
     }
 
     /**
-     * @return \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor
+     * @return RelationListProcessor
      */
     protected function getProcessor()
     {

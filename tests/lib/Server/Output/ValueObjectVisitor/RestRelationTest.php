@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
@@ -208,7 +209,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTest
     /**
      * Get the Relation visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestRelation
+     * @return ValueObjectVisitor\RestRelation
      */
     protected function internalGetVisitor()
     {

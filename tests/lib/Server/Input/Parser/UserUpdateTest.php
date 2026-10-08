@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
@@ -226,7 +227,7 @@ class UserUpdateTest extends BaseTest
     /**
      * Returns the UserUpdate parser.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\UserUpdate
+     * @return UserUpdate
      */
     protected function internalGetParser()
     {
@@ -241,7 +242,7 @@ class UserUpdateTest extends BaseTest
     /**
      * Get the field type parser mock object.
      *
-     * @return \Ibexa\Rest\Input\FieldTypeParser ;
+     * @return FieldTypeParser ;
      */
     private function getFieldTypeParserMock()
     {

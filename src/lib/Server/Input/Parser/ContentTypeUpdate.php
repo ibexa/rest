@@ -4,10 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use DateTime;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeUpdateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -21,25 +23,27 @@ class ContentTypeUpdate extends BaseParser
     /**
      * ContentType service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
+     * @var ContentTypeService
      */
     protected $contentTypeService;
 
     /**
      * Parser tools.
      *
-     * @var \Ibexa\Rest\Input\ParserTools
+     * @var ParserTools
      */
     protected $parserTools;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\ContentTypeService $contentTypeService
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
+     * @param ContentTypeService $contentTypeService
+     * @param ParserTools $parserTools
      */
-    public function __construct(ContentTypeService $contentTypeService, ParserTools $parserTools)
-    {
+    public function __construct(
+        ContentTypeService $contentTypeService,
+        ParserTools $parserTools
+    ) {
         $this->contentTypeService = $contentTypeService;
         $this->parserTools = $parserTools;
     }
@@ -48,12 +52,14 @@ class ContentTypeUpdate extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeUpdateStruct
+     * @return ContentTypeUpdateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         $contentTypeUpdateStruct = $this->contentTypeService->newContentTypeUpdateStruct();
 
         if (array_key_exists('identifier', $data)) {

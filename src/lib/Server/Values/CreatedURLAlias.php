@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\URLAlias;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
@@ -16,7 +18,7 @@ class CreatedURLAlias extends ValueObject
     /**
      * The created URL alias.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\URLAlias
+     * @var URLAlias
      */
     public $urlAlias;
 }

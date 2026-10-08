@@ -15,8 +15,10 @@ use Ibexa\Rest\Server\Values\JWTInput as JWTInputValue;
 
 final class JWTInput extends BaseParser
 {
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): JWTInputValue
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): JWTInputValue {
         if (!\array_key_exists('username', $data)) {
             throw new Exceptions\Parser("Missing 'username' attribute for JWTInput.");
         }

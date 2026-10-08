@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
@@ -11,6 +12,7 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content as ApiValues;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
@@ -25,20 +27,20 @@ class RestExecutedView extends ValueObjectVisitor
     /**
      * Location service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
+     * @var LocationService
      */
     protected $locationService;
 
     /**
      * Content service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
+     * @var ContentService
      */
     protected $contentService;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
-     * @param \Ibexa\Contracts\Core\Repository\ContentService $contentService
+     * @param LocationService $locationService
+     * @param ContentService $contentService
      */
     public function __construct(
         LocationService $locationService,
@@ -51,12 +53,15 @@ class RestExecutedView extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param Visitor $visitor
+     * @param Generator $generator
      * @param \Ibexa\Rest\Server\Values\RestExecutedView $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ) {
         $generator->startObjectElement('View');
         $visitor->setHeader('Content-Type', $generator->getMediaType('View'));
 
@@ -112,8 +117,8 @@ class RestExecutedView extends ValueObjectVisitor
             $generator->startObjectElement('value');
 
             // @todo Refactor
-            if ($searchHit->valueObject instanceof ApiValues\Content) {
-                /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $searchHit->valueObject */
+            if ($searchHit->valueObject instanceof Content) {
+                /** @var Content $searchHit->valueObject */
                 $contentInfo = $searchHit->valueObject->contentInfo;
 
                 try {

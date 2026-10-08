@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
@@ -148,7 +149,7 @@ class VersionListTest extends ValueObjectVisitorBaseTest
     /**
      * Get the VersionList visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionList
+     * @return ValueObjectVisitor\VersionList
      */
     protected function internalGetVisitor()
     {

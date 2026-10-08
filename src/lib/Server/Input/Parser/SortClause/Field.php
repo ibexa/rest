@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser\SortClause;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
@@ -18,12 +19,14 @@ class Field extends BaseParser
      * Parse input structure for Field sort clause.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause\Field
+     * @return FieldSortClause
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         if (!isset($data['Field'])) {
             throw new Exceptions\Parser("The <Field> Sort Clause doesn't exist in the input structure");
         }

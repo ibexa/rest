@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\ObjectState\ObjectState;
@@ -122,7 +123,7 @@ class ObjectStateListTest extends ValueObjectVisitorBaseTest
     /**
      * Get the ObjectStateList visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ObjectStateList
+     * @return ValueObjectVisitor\ObjectStateList
      */
     protected function internalGetVisitor()
     {

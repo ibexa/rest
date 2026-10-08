@@ -20,8 +20,10 @@ final class UserMetadataTermAggregationParser extends AbstractTermAggregationPar
         return 'UserMetadataTermAggregation';
     }
 
-    protected function parseAggregation(array $data, ParsingDispatcher $parsingDispatcher): AbstractTermAggregation
-    {
+    protected function parseAggregation(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractTermAggregation {
         if (!array_key_exists('type', $data)) {
             throw new Exceptions\Parser("Missing 'type' element for UserMetadataTerm.");
         }

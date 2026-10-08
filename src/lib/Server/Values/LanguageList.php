@@ -8,15 +8,16 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Value as RestValue;
 
 final class LanguageList extends RestValue
 {
-    /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Language[] */
+    /** @var Language[] */
     public array $languages;
 
     /**
-     * @param array<\Ibexa\Contracts\Core\Repository\Values\Content\Language> $languages
+     * @param array<Language> $languages
      */
     public function __construct(array $languages)
     {

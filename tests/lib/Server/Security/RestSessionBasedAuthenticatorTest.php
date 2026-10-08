@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Security;
 
 use Ibexa\Contracts\Core\Repository\Values\User\User;
@@ -12,6 +13,7 @@ use Ibexa\Core\MVC\Symfony\Security\User as IbexaUser;
 use Ibexa\Rest\Server\Exceptions\InvalidUserTypeException;
 use Ibexa\Rest\Server\Exceptions\UserConflictException;
 use Ibexa\Rest\Server\Security\RestAuthenticator;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -35,32 +37,32 @@ class RestSessionBasedAuthenticatorTest extends TestCase
     public const PROVIDER_KEY = 'test_key';
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $tokenStorage;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $authenticationManager;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $eventDispatcher;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $configResolver;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     private $logger;
 
     /**
-     * @var \Ibexa\Rest\Server\Security\RestAuthenticator
+     * @var RestAuthenticator
      */
     private $authenticator;
 
@@ -84,6 +86,10 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticateAlreadyHaveSessionToken()
     {
+        $this->authenticationManager->expects($this->never())->method('authenticate');
+        $this->eventDispatcher->expects($this->never())->method('dispatch');
+        $this->configResolver->expects($this->never())->method('getParameter');
+        $this->logger->expects($this->never())->method('error');
         $username = 'foo_user';
         $password = 'publish';
 
@@ -111,6 +117,8 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticateNoTokenFound()
     {
+        $this->eventDispatcher->expects($this->never())->method('dispatch');
+        $this->configResolver->expects($this->never())->method('getParameter');
         $this->expectException(TokenNotFoundException::class);
         $username = 'foo_user';
         $password = 'publish';
@@ -146,6 +154,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticateInvalidUser()
     {
+        $this->configResolver->expects($this->never())->method('getParameter');
         $this->expectException(InvalidUserTypeException::class);
         $username = 'foo_user';
         $password = 'publish';
@@ -203,7 +212,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
     /**
      * @param $userId
      *
-     * @return \Ibexa\Core\MVC\Symfony\Security\User
+     * @return IbexaUser
      */
     private function createUser($userId)
     {
@@ -218,6 +227,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticateUserConflict()
     {
+        $this->logger->expects($this->never())->method('error');
         $this->expectException(UserConflictException::class);
         $username = 'foo_user';
         $password = 'publish';
@@ -254,21 +264,13 @@ class RestSessionBasedAuthenticatorTest extends TestCase
             );
 
         $this->tokenStorage
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('getToken')
-            ->willReturn($existingToken);
+            ->willReturnOnConsecutiveCalls($existingToken, $authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(1))
+            ->expects($this->exactly(2))
             ->method('setToken')
-            ->with($authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->at(2))
-            ->method('getToken')
-            ->willReturn($authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->at(3))
-            ->method('setToken')
-            ->with($existingToken);
+            ->withConsecutive([$authenticatedToken], [$existingToken]);
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
@@ -287,6 +289,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticatePreviouslyAnonymous()
     {
+        $this->logger->expects($this->never())->method('error');
         $username = 'foo_user';
         $password = 'publish';
 
@@ -323,17 +326,13 @@ class RestSessionBasedAuthenticatorTest extends TestCase
             );
 
         $this->tokenStorage
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('getToken')
-            ->willReturn($existingToken);
+            ->willReturnOnConsecutiveCalls($existingToken, $authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('setToken')
             ->with($authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->at(2))
-            ->method('getToken')
-            ->willReturn($authenticatedToken);
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
@@ -352,6 +351,8 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticate()
     {
+        $this->configResolver->expects($this->never())->method('getParameter');
+        $this->logger->expects($this->never())->method('error');
         $username = 'foo_user';
         $password = 'publish';
 
@@ -382,17 +383,13 @@ class RestSessionBasedAuthenticatorTest extends TestCase
             );
 
         $this->tokenStorage
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('getToken')
-            ->willReturn($existingToken);
+            ->willReturnOnConsecutiveCalls($existingToken, $authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('setToken')
             ->with($authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->at(2))
-            ->method('getToken')
-            ->willReturn($authenticatedToken);
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
@@ -405,10 +402,12 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticatePreviousUserNonEz()
     {
+        $this->configResolver->expects($this->never())->method('getParameter');
+        $this->logger->expects($this->never())->method('error');
         $username = 'foo_user';
         $password = 'publish';
 
-        $existingUser = $this->createMock(UserInterface::class);
+        $existingUser = $this->createStub(UserInterface::class);
         $existingToken = $this->getUsernamePasswordTokenMock();
         $existingToken
             ->expects($this->once())
@@ -440,17 +439,13 @@ class RestSessionBasedAuthenticatorTest extends TestCase
             );
 
         $this->tokenStorage
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('getToken')
-            ->willReturn($existingToken);
+            ->willReturnOnConsecutiveCalls($existingToken, $authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('setToken')
             ->with($authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->at(2))
-            ->method('getToken')
-            ->willReturn($authenticatedToken);
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
@@ -463,6 +458,8 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticatePreviousTokenNotUsernamePassword()
     {
+        $this->configResolver->expects($this->never())->method('getParameter');
+        $this->logger->expects($this->never())->method('error');
         $username = 'foo_user';
         $password = 'publish';
 
@@ -493,17 +490,13 @@ class RestSessionBasedAuthenticatorTest extends TestCase
             );
 
         $this->tokenStorage
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('getToken')
-            ->willReturn($existingToken);
+            ->willReturnOnConsecutiveCalls($existingToken, $authenticatedToken);
         $this->tokenStorage
-            ->expects($this->at(1))
+            ->expects($this->once())
             ->method('setToken')
             ->with($authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->at(2))
-            ->method('getToken')
-            ->willReturn($authenticatedToken);
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
@@ -516,12 +509,16 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testLogout()
     {
+        $this->authenticationManager->expects($this->never())->method('authenticate');
+        $this->eventDispatcher->expects($this->never())->method('dispatch');
+        $this->configResolver->expects($this->never())->method('getParameter');
+        $this->logger->expects($this->never())->method('error');
         $sessionLogoutHandler = $this->createMock(SessionLogoutHandler::class);
         $sessionLogoutHandler
             ->expects($this->never())
             ->method('logout');
 
-        $token = $this->getTokenInterfaceMock();
+        $token = $this->createStub(TokenInterface::class);
         $this->tokenStorage
             ->expects($this->once())
             ->method('getToken')

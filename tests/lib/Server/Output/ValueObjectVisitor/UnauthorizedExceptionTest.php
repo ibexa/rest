@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
@@ -44,7 +45,7 @@ class UnauthorizedExceptionTest extends ExceptionTest
     /**
      * Gets the exception visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UnauthorizedException
+     * @return ValueObjectVisitor\UnauthorizedException
      */
     protected function internalGetVisitor()
     {

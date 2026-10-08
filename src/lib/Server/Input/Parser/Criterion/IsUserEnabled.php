@@ -16,7 +16,7 @@ use Ibexa\Rest\Input\ParserTools;
 
 class IsUserEnabled extends BaseParser
 {
-    /** @var \Ibexa\Rest\Input\ParserTools */
+    /** @var ParserTools */
     protected $parserTools;
 
     public function __construct(ParserTools $parserTools)
@@ -24,8 +24,10 @@ class IsUserEnabled extends BaseParser
         $this->parserTools = $parserTools;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): IsUserEnabledCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): IsUserEnabledCriterion {
         if (!array_key_exists('IsUserEnabledCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <IsUserEnabledCriterion> format');
         }

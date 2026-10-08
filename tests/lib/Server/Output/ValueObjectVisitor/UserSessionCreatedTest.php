@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Rest\Server\Values;
@@ -34,9 +35,12 @@ class UserSessionCreatedTest extends UserSessionTest
             ->method('setStatus')
             ->with($this->equalTo(201));
 
-        $this->getVisitorMock()->expects($this->at(1))
+        $this->getVisitorMock()->expects($this->exactly(2))
             ->method('setHeader')
-            ->with($this->equalTo('Content-Type'), $this->equalTo('application/vnd.ibexa.api.Session+xml'));
+            ->withConsecutive(
+                [$this->equalTo('Content-Type'), $this->equalTo('application/vnd.ibexa.api.Session+xml')],
+                [$this->equalTo('Accept-Patch'), $this->equalTo(false)]
+            );
 
         $this->addRouteExpectation(
             'ibexa.rest.delete_session',

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Rest\FieldTypeProcessor\BinaryProcessor;
@@ -39,7 +40,7 @@ class BinaryProcessorTest extends BinaryInputProcessorTest
     /**
      * Returns the processor under test.
      *
-     * @return \Ibexa\Rest\FieldTypeProcessor\BinaryProcessor
+     * @return BinaryProcessor
      */
     protected function getProcessor()
     {

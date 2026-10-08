@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\FieldTypeProcessor;
 
 use Symfony\Component\Routing\RouterInterface;
@@ -29,17 +30,20 @@ class ImageProcessor extends BinaryInputProcessor
     protected $variations;
 
     /**
-     * @var \Symfony\Component\Routing\RouterInterface
+     * @var RouterInterface
      */
     protected $router;
 
     /**
      * @param string $temporaryDirectory
-     * @param \Symfony\Component\Routing\RouterInterface $router
+     * @param RouterInterface $router
      * @param array $variations array of variations identifiers
      */
-    public function __construct($temporaryDirectory, RouterInterface $router, array $variations)
-    {
+    public function __construct(
+        $temporaryDirectory,
+        RouterInterface $router,
+        array $variations
+    ) {
         parent::__construct($temporaryDirectory);
         $this->router = $router;
         $this->variations = $variations;
@@ -87,8 +91,10 @@ class ImageProcessor extends BinaryInputProcessor
      *
      * @return string
      */
-    protected function generateUrl($path, $variation)
-    {
+    protected function generateUrl(
+        $path,
+        $variation
+    ) {
         $fieldId = '';
         $versionNo = '';
 

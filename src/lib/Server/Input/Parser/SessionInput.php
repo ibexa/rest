@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Rest\Exceptions;
@@ -20,12 +21,14 @@ class SessionInput extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Rest\Server\Values\SessionInput
+     * @return SessionInputValue
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         $sessionInput = new SessionInputValue();
 
         if (!array_key_exists('login', $data)) {

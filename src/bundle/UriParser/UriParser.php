@@ -24,8 +24,8 @@ final class UriParser implements UriParserInterface
      * @internal rely on \Ibexa\Contracts\Rest\UriParser\UriParserInterface::isRestRequest
      * or \Ibexa\Contracts\Rest\UriParser\UriParserInterface::hasRestPrefix instead.
      *
-     * @see \Ibexa\Contracts\Rest\UriParser\UriParserInterface::isRestRequest()
-     * @see \Ibexa\Contracts\Rest\UriParser\UriParserInterface::hasRestPrefix()
+     * @see UriParserInterface::isRestRequest()
+     * @see UriParserInterface::hasRestPrefix()
      */
     public const DEFAULT_REST_PREFIX_PATTERN = '/^\/api\/[a-zA-Z0-9-_]+\/v\d+(\.\d+)?\//';
 
@@ -41,8 +41,10 @@ final class UriParser implements UriParserInterface
         $this->restPrefixPattern = $restPrefixPattern;
     }
 
-    public function matchUri(string $uri, string $method = 'GET'): array
-    {
+    public function matchUri(
+        string $uri,
+        string $method = 'GET'
+    ): array {
         if (!$this->hasRestPrefix($uri)) {
             // keeping the original exception message for BC, otherwise could be more verbose
             throw new InvalidArgumentException("No route matched '$uri'");
@@ -72,8 +74,11 @@ final class UriParser implements UriParserInterface
         }
     }
 
-    public function getAttributeFromUri(string $uri, string $attribute, string $method = 'GET'): string
-    {
+    public function getAttributeFromUri(
+        string $uri,
+        string $attribute,
+        string $method = 'GET'
+    ): string {
         $parsingResult = $this->matchUri($uri, $method);
 
         if (!isset($parsingResult[$attribute])) {

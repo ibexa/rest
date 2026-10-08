@@ -19,8 +19,10 @@ final class LanguageTermAggregationParser extends AbstractTermAggregationParser
         return 'LanguageTermAggregation';
     }
 
-    protected function parseAggregation(array $data, ParsingDispatcher $parsingDispatcher): AbstractTermAggregation
-    {
+    protected function parseAggregation(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractTermAggregation {
         return new LanguageTermAggregation($data['name']);
     }
 }

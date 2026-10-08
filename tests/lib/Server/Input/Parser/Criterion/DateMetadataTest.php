@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata as DateMetadataCriterion;
@@ -56,10 +57,13 @@ final class DateMetadataTest extends BaseTest
      * Tests the DateMetaData parser.
      *
      * @param string[] $data
+     *
      * @dataProvider testParseProvider
      */
-    public function testParse(array $data, DateMetadataCriterion $expected): void
-    {
+    public function testParse(
+        array $data,
+        DateMetadataCriterion $expected
+    ): void {
         $dateMetadata = $this->getParser();
         $result = $dateMetadata->parse($data, $this->getParsingDispatcherMock());
 

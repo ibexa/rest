@@ -4,10 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Input;
 
 use Ibexa\Contracts\Rest\Input\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
@@ -20,7 +22,7 @@ class ParsingDispatcherTest extends TestCase
     {
         $this->expectException(\Ibexa\Contracts\Rest\Exceptions\Parser::class);
 
-        $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class));
+        $dispatcher = new ParsingDispatcher($this->createStub(EventDispatcherInterface::class));
 
         $dispatcher->parse([], 'text/unknown');
     }
@@ -28,10 +30,10 @@ class ParsingDispatcherTest extends TestCase
     public function testParse()
     {
         $parser = $this->createParserMock();
-        $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class), ['text/html' => $parser]);
+        $dispatcher = new ParsingDispatcher($this->createStub(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('parse')
             ->with([42], $dispatcher)
             ->willReturn(23);
@@ -48,10 +50,10 @@ class ParsingDispatcherTest extends TestCase
     public function testParseCharset()
     {
         $parser = $this->createParserMock();
-        $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class), ['text/html' => $parser]);
+        $dispatcher = new ParsingDispatcher($this->createStub(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('parse')
             ->with([42], $dispatcher)
             ->willReturn(23);
@@ -67,7 +69,7 @@ class ParsingDispatcherTest extends TestCase
         $parserVersionOne = $this->createParserMock();
         $parserVersionTwo = $this->createParserMock();
         $dispatcher = new ParsingDispatcher(
-            $this->createMock(EventDispatcherInterface::class),
+            $this->createStub(EventDispatcherInterface::class),
             [
                 'text/html' => $parserVersionOne,
                 'text/html; version=2' => $parserVersionTwo,
@@ -83,10 +85,10 @@ class ParsingDispatcherTest extends TestCase
     public function testParseStripFormat()
     {
         $parser = $this->createParserMock();
-        $dispatcher = new ParsingDispatcher($this->createMock(EventDispatcherInterface::class), ['text/html' => $parser]);
+        $dispatcher = new ParsingDispatcher($this->createStub(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('parse')
             ->with([42], $dispatcher)
             ->willReturn(23);
@@ -98,7 +100,7 @@ class ParsingDispatcherTest extends TestCase
     }
 
     /**
-     * @return \Ibexa\Contracts\Rest\Input\Parser|\PHPUnit\Framework\MockObject\MockObject
+     * @return Parser|MockObject
      */
     private function createParserMock()
     {

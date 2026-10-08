@@ -21,8 +21,10 @@ final class FloatStatsAggregationParser extends AbstractStatsAggregationParser
         return 'FloatStatsAggregation';
     }
 
-    protected function parseAggregation(array $data, ParsingDispatcher $parsingDispatcher): AbstractStatsAggregation
-    {
+    protected function parseAggregation(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractStatsAggregation {
         if (!array_key_exists('contentTypeIdentifier', $data)) {
             throw new Exceptions\Parser("Missing 'contentTypeIdentifier' element for {$this->getAggregationName()}");
         }

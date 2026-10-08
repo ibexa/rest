@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\User\Role;
@@ -17,14 +18,14 @@ class RestRole extends RestValue
     /**
      * Holds internal role object.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\User\Role
+     * @var Role
      */
     protected $innerRole;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\Role $role
+     * @param Role $role
      */
     public function __construct(Role $role)
     {
@@ -49,8 +50,10 @@ class RestRole extends RestValue
      * @param string $property
      * @param mixed $propertyValue
      */
-    public function __set($property, $propertyValue)
-    {
+    public function __set(
+        $property,
+        $propertyValue
+    ) {
         $this->innerRole->$property = $propertyValue;
     }
 

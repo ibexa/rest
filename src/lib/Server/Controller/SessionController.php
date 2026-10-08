@@ -4,10 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\PermissionResolver;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Core\MVC\Symfony\Security\Authentication\AuthenticatorInterface;
 use Ibexa\Rest\Message;
@@ -15,7 +17,9 @@ use Ibexa\Rest\Server\Controller;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Security\CsrfTokenManager;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\UserSession;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Csrf\CsrfToken;
@@ -49,9 +53,9 @@ class SessionController extends Controller
     /**
      * Creates a new session based on the credentials provided as POST parameters.
      *
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException If the login or password are incorrect or invalid CSRF
+     * @throws UnauthorizedException If the login or password are incorrect or invalid CSRF
      *
-     * @return Values\UserSession|Values\Conflict
+     * @return UserSession|Values\Conflict
      */
     public function createSessionAction(Request $request)
     {
@@ -70,7 +74,7 @@ class SessionController extends Controller
             $token = $this->getAuthenticator()->authenticate($request);
             $csrfToken = $this->getCsrfToken();
 
-            return new Values\UserSession(
+            return new UserSession(
                 $token->getUser()->getAPIUser(),
                 $session->getName(),
                 $session->getId(),
@@ -96,12 +100,14 @@ class SessionController extends Controller
      *
      * @param string $sessionId
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      *
-     * @return \Ibexa\Rest\Server\Values\UserSession
+     * @return UserSession
      */
-    public function refreshSessionAction($sessionId, Request $request)
-    {
+    public function refreshSessionAction(
+        $sessionId,
+        Request $request
+    ) {
         trigger_deprecation(
             'ibexa/rest',
             '4.6.7',
@@ -122,7 +128,7 @@ class SessionController extends Controller
             $this->permissionResolver->getCurrentUserReference()->getUserId()
         );
 
-        return new Values\UserSession(
+        return new UserSession(
             $currentUser,
             $session->getName(),
             $session->getId(),
@@ -132,7 +138,7 @@ class SessionController extends Controller
     }
 
     /**
-     * @return \Ibexa\Rest\Server\Values\UserSession|\Symfony\Component\HttpFoundation\Response
+     * @return UserSession|Response
      */
     public function checkSessionAction(Request $request)
     {
@@ -149,7 +155,7 @@ class SessionController extends Controller
             $this->permissionResolver->getCurrentUserReference()->getUserId()
         );
 
-        return new Values\UserSession(
+        return new UserSession(
             $currentUser,
             $session->getName(),
             $session->getId(),
@@ -165,10 +171,12 @@ class SessionController extends Controller
      *
      * @return Values\DeletedUserSession
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
-    public function deleteSessionAction($sessionId, Request $request)
-    {
+    public function deleteSessionAction(
+        $sessionId,
+        Request $request
+    ) {
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
         if (!$session->isStarted() || $session->getId() != $sessionId || !$this->hasStoredCsrfToken()) {
@@ -200,9 +208,9 @@ class SessionController extends Controller
     /**
      * Checks the presence / validity of the CSRF token.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      *
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException if the token is missing or invalid
+     * @throws UnauthorizedException if the token is missing or invalid
      */
     private function checkCsrfToken(Request $request)
     {

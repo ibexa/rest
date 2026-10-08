@@ -14,16 +14,17 @@ use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Security\JWTUser;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\JWTInput;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 final class JWT extends RestController
 {
-    /** @var \Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface */
+    /** @var JWTTokenManagerInterface */
     private $tokenManager;
 
-    /** @var \Ibexa\Core\MVC\Symfony\Security\Authentication\AuthenticatorInterface|null */
+    /** @var AuthenticatorInterface|null */
     private $authenticator;
 
     public function __construct(
@@ -36,7 +37,7 @@ final class JWT extends RestController
 
     public function createToken(Request $request): Values\JWT
     {
-        /** @var \Ibexa\Rest\Server\Values\JWTInput $jwtTokenInput */
+        /** @var JWTInput $jwtTokenInput */
         $jwtTokenInput = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

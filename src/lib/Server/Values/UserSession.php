@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\User\User;
@@ -17,7 +18,7 @@ class UserSession extends RestValue
     /**
      * User.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\User\User
+     * @var User
      */
     public $user;
 
@@ -52,13 +53,18 @@ class UserSession extends RestValue
     public bool $created;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\User $user
+     * @param User $user
      * @param string $sessionName
      * @param string $sessionId
      * @param string $csrfToken
      */
-    public function __construct(User $user, $sessionName, $sessionId, $csrfToken, $created)
-    {
+    public function __construct(
+        User $user,
+        $sessionName,
+        $sessionId,
+        $csrfToken,
+        $created
+    ) {
         $this->user = $user;
         $this->sessionName = $sessionName;
         $this->sessionId = $sessionId;

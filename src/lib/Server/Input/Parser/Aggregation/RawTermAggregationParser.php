@@ -19,8 +19,10 @@ final class RawTermAggregationParser extends AbstractTermAggregationParser
         return 'RawTermAggregation';
     }
 
-    protected function parseAggregation(array $data, ParsingDispatcher $parsingDispatcher): AbstractTermAggregation
-    {
+    protected function parseAggregation(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractTermAggregation {
         return new RawTermAggregation(
             $data['name'],
             $data['fieldName'],

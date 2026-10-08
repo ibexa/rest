@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Bundle\Rest\EventListener;
 
 use Ibexa\Bundle\Rest\RestEvents;
@@ -24,12 +25,12 @@ class CsrfListener implements EventSubscriberInterface
     public const CSRF_TOKEN_HEADER = 'X-CSRF-Token';
 
     /**
-     * @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface|null
+     * @var CsrfTokenManagerInterface|null
      */
     private $csrfTokenManager;
 
     /**
-     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+     * @var EventDispatcherInterface
      */
     private $eventDispatcher;
 
@@ -47,10 +48,10 @@ class CsrfListener implements EventSubscriberInterface
      * Note that CSRF provider needs to be optional as it will not be available
      * when CSRF protection is disabled.
      *
-     * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
+     * @param EventDispatcherInterface $eventDispatcher
      * @param bool $csrfEnabled
      * @param string $csrfTokenIntention
-     * @param \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface|null $csrfTokenManager
+     * @param CsrfTokenManagerInterface|null $csrfTokenManager
      */
     public function __construct(
         EventDispatcherInterface $eventDispatcher,
@@ -77,9 +78,9 @@ class CsrfListener implements EventSubscriberInterface
     /**
      * This method validates CSRF token if CSRF protection is enabled.
      *
-     * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
+     * @param RequestEvent $event
      *
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @throws UnauthorizedException
      */
     public function onKernelRequest(RequestEvent $event)
     {
@@ -161,7 +162,7 @@ class CsrfListener implements EventSubscriberInterface
     /**
      * Checks the validity of the request's csrf token header.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      *
      * @return bool true/false if the token is valid/invalid, false if none was found in the request's headers
      */

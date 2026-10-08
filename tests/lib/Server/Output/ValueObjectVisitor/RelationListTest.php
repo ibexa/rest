@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\Content;
@@ -125,7 +126,7 @@ class RelationListTest extends ValueObjectVisitorBaseTest
     /**
      * Get the RelationList visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RelationList
+     * @return ValueObjectVisitor\RelationList
      */
     protected function internalGetVisitor()
     {

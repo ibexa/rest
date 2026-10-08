@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectState;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -16,7 +18,7 @@ class ObjectStateList extends RestValue
     /**
      * Object states.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectState[]
+     * @var ObjectState[]
      */
     public $states;
 
@@ -30,11 +32,13 @@ class ObjectStateList extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectState[] $states
+     * @param ObjectState[] $states
      * @param mixed $groupId
      */
-    public function __construct(array $states, $groupId)
-    {
+    public function __construct(
+        array $states,
+        $groupId
+    ) {
         $this->states = $states;
         $this->groupId = $groupId;
     }

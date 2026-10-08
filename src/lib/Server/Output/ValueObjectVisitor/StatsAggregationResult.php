@@ -17,8 +17,11 @@ final class StatsAggregationResult extends ValueObjectVisitor
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Search\AggregationResult\StatsAggregationResult $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ): void {
         $generator->startObjectElement('StatsAggregationResult');
 
         $visitor->setHeader('Content-Type', $generator->getMediaType('StatsAggregationResult'));

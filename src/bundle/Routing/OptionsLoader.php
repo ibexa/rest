@@ -4,10 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Bundle\Rest\Routing;
 
 use Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper;
 use Symfony\Component\Config\Loader\Loader;
+use Symfony\Component\Routing\RouteCollection;
 
 /**
  * Goes through all REST routes, and registers new routes for all routes
@@ -27,15 +29,19 @@ class OptionsLoader extends Loader
      * @param mixed $resource
      * @param string $type
      *
-     * @return \Symfony\Component\Routing\RouteCollection
+     * @return RouteCollection
      */
-    public function load($resource, $type = null)
-    {
+    public function load(
+        $resource,
+        $type = null
+    ) {
         return $this->routeCollectionMapper->mapCollection($this->import($resource));
     }
 
-    public function supports($resource, $type = null)
-    {
+    public function supports(
+        $resource,
+        $type = null
+    ) {
         return $type === 'rest_options';
     }
 }

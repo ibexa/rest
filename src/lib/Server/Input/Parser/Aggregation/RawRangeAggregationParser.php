@@ -19,8 +19,10 @@ final class RawRangeAggregationParser extends AbstractRangeAggregationParser
         return 'RawRangeAggregation';
     }
 
-    protected function parseAggregation(array $data, ParsingDispatcher $parsingDispatcher): AbstractRangeAggregation
-    {
+    protected function parseAggregation(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractRangeAggregation {
         return new RawRangeAggregation(
             $data['name'],
             $data['fieldName']

@@ -13,13 +13,14 @@ use Ibexa\Contracts\Core\Repository\Values\User\User;
 use Ibexa\Core\MVC\Symfony\Security\UserInterface;
 use Ibexa\Rest\Server\Security\EventListener\SecurityListener;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class SecurityListenerTest extends TestCase
 {
-    /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var PermissionResolver|MockObject */
     private $permissionResolver;
 
     protected function setUp(): void

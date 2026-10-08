@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Security;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
@@ -19,12 +20,12 @@ use Symfony\Component\Security\Http\Logout\LogoutHandlerInterface;
 class RestLogoutHandler implements LogoutHandlerInterface
 {
     /**
-     * @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface
+     * @var ConfigResolverInterface
      */
     private $configResolver;
 
     /**
-     * @param \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface $configResolver
+     * @param ConfigResolverInterface $configResolver
      */
     public function __construct(ConfigResolverInterface $configResolver)
     {
@@ -32,12 +33,15 @@ class RestLogoutHandler implements LogoutHandlerInterface
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Symfony\Component\HttpFoundation\Response $response
-     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
+     * @param Request $request
+     * @param Response $response
+     * @param TokenInterface $token
      */
-    public function logout(Request $request, Response $response, TokenInterface $token)
-    {
+    public function logout(
+        Request $request,
+        Response $response,
+        TokenInterface $token
+    ) {
         if (!$request->attributes->get('is_rest_request')) {
             return;
         }

@@ -4,11 +4,13 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use DateTime;
 use Exception;
 use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 use Ibexa\Rest\Values\RestContentMetadataUpdateStruct;
@@ -24,21 +26,23 @@ class ContentUpdate extends BaseParser
      * @todo use url handler instead of hardcoded URL matching
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Rest\Values\RestContentMetadataUpdateStruct
+     * @return RestContentMetadataUpdateStruct
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser if $data is invalid
+     * @throws Parser if $data is invalid
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         $parsedData = [];
 
         if (array_key_exists('Section', $data) && is_array($data['Section']) && isset($data['Section']['_href'])) {
             try {
                 $parsedData['sectionId'] = $this->requestParser->parseHref($data['Section']['_href'], 'sectionId');
             } catch (Exceptions\InvalidArgumentException $e) {
-                throw new Exceptions\Parser('Invalid format for the <Section> reference in <ContentUpdate>.');
+                throw new Parser('Invalid format for the <Section> reference in <ContentUpdate>.');
             }
         }
 
@@ -46,7 +50,7 @@ class ContentUpdate extends BaseParser
             try {
                 $parsedData['ownerId'] = $this->requestParser->parseHref($data['Owner']['_href'], 'userId');
             } catch (Exceptions\InvalidArgumentException $e) {
-                throw new Exceptions\Parser('Invalid format for the <Owner> reference in <ContentUpdate>.');
+                throw new Parser('Invalid format for the <Owner> reference in <ContentUpdate>.');
             }
         }
 
@@ -59,7 +63,7 @@ class ContentUpdate extends BaseParser
                 $mainLocationIdParts = explode('/', $this->requestParser->parseHref($data['MainLocation']['_href'], 'locationPath'));
                 $parsedData['mainLocationId'] = array_pop($mainLocationIdParts);
             } catch (Exceptions\InvalidArgumentException $e) {
-                throw new Exceptions\Parser('Invalid format for the <MainLocation> reference in <ContentUpdate>.');
+                throw new Parser('Invalid format for the <MainLocation> reference in <ContentUpdate>.');
             }
         }
 
@@ -69,7 +73,7 @@ class ContentUpdate extends BaseParser
             } elseif ($data['alwaysAvailable'] === 'false') {
                 $parsedData['alwaysAvailable'] = false;
             } else {
-                throw new Exceptions\Parser('Invalid format for <alwaysAvailable> in <ContentUpdate>.');
+                throw new Parser('Invalid format for <alwaysAvailable> in <ContentUpdate>.');
             }
         }
 
@@ -83,7 +87,7 @@ class ContentUpdate extends BaseParser
             try {
                 $parsedData['modificationDate'] = new DateTime($data['modificationDate']);
             } catch (Exception $e) {
-                throw new Exceptions\Parser('Invalid format for <modificationDate> in <ContentUpdate>', 0, $e);
+                throw new Parser('Invalid format for <modificationDate> in <ContentUpdate>', 0, $e);
             }
         }
 
@@ -92,7 +96,7 @@ class ContentUpdate extends BaseParser
             try {
                 $parsedData['publishedDate'] = new DateTime($data['publishDate']);
             } catch (Exception $e) {
-                throw new Exceptions\Parser('Invalid format for <publishDate> in <ContentUpdate>', 0, $e);
+                throw new Parser('Invalid format for <publishDate> in <ContentUpdate>', 0, $e);
             }
         }
 

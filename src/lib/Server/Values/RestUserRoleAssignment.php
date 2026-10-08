@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment;
@@ -17,7 +18,7 @@ class RestUserRoleAssignment extends RestValue
     /**
      * Role assignment.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment
+     * @var UserRoleAssignment
      */
     public $roleAssignment;
 
@@ -31,11 +32,13 @@ class RestUserRoleAssignment extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment $roleAssignment
+     * @param UserRoleAssignment $roleAssignment
      * @param mixed $id
      */
-    public function __construct(UserRoleAssignment $roleAssignment, $id)
-    {
+    public function __construct(
+        UserRoleAssignment $roleAssignment,
+        $id
+    ) {
         $this->roleAssignment = $roleAssignment;
         $this->id = $id;
     }

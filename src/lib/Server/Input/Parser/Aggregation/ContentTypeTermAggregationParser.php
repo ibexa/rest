@@ -19,8 +19,10 @@ final class ContentTypeTermAggregationParser extends AbstractTermAggregationPars
         return 'ContentTypeTermAggregation';
     }
 
-    protected function parseAggregation(array $data, ParsingDispatcher $parsingDispatcher): AbstractTermAggregation
-    {
+    protected function parseAggregation(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractTermAggregation {
         return new ContentTypeTermAggregation($data['name']);
     }
 }

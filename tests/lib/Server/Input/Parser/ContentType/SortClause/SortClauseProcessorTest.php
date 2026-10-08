@@ -24,7 +24,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  */
 final class SortClauseProcessorTest extends TestCase
 {
-    /** @var \Ibexa\Contracts\Rest\Input\Parser\Query\SortClause\SortClauseProcessorInterface<SC> */
+    /** @var SortClauseProcessorInterface<SC> */
     private SortClauseProcessorInterface $sortClauseProcessor;
 
     protected function setUp(): void
@@ -38,7 +38,7 @@ final class SortClauseProcessorTest extends TestCase
      * @dataProvider provideForTestProcessSortClauses
      *
      * @param array<string, mixed> $inputClauses
-     * @param array<\Ibexa\Contracts\Core\Repository\Values\ContentType\Query\SortClause> $expectedOutput
+     * @param array<SortClause> $expectedOutput
      */
     public function testProcessSortClauses(
         array $inputClauses,
@@ -62,7 +62,7 @@ final class SortClauseProcessorTest extends TestCase
      *     string,
      *     array{
      *         array<string, string>,
-     *         array<\Ibexa\Contracts\Core\Repository\Values\ContentType\Query\SortClause>,
+     *         array<SortClause>,
      *     },
      * >
      */

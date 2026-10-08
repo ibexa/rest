@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\SectionService;
+use Ibexa\Contracts\Core\Repository\Values\Content\SectionCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -19,14 +21,14 @@ class SectionInput extends BaseParser
     /**
      * Section service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\SectionService
+     * @var SectionService
      */
     protected $sectionService;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\SectionService $sectionService
+     * @param SectionService $sectionService
      */
     public function __construct(SectionService $sectionService)
     {
@@ -37,12 +39,14 @@ class SectionInput extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\SectionCreateStruct
+     * @return SectionCreateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         $sectionCreate = $this->sectionService->newSectionCreateStruct();
 
         //@todo XSD says that name is not mandatory? Does that make sense?

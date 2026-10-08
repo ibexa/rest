@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\UrlHandler;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
@@ -120,8 +121,11 @@ class PatternTest extends TestCase
      *
      * @dataProvider getParseValues
      */
-    public function testParseUrl($type, $url, $values)
-    {
+    public function testParseUrl(
+        $type,
+        $url,
+        $values
+    ) {
         $urlHandler = $this->getWorkingUrlHandler();
 
         $this->assertSame(
@@ -185,8 +189,11 @@ class PatternTest extends TestCase
      *
      * @dataProvider getParseValues
      */
-    public function testGenerateUrl($type, $url, $values)
-    {
+    public function testGenerateUrl(
+        $type,
+        $url,
+        $values
+    ) {
         $urlHandler = $this->getWorkingUrlHandler();
 
         $this->assertSame(
@@ -198,7 +205,7 @@ class PatternTest extends TestCase
     /**
      * Returns the URL handler.
      *
-     * @return \Ibexa\Rest\RequestParser\Pattern
+     * @return Pattern
      */
     protected function getWorkingUrlHandler()
     {

@@ -20,8 +20,10 @@ abstract class SearchViewTestCase extends RESTFunctionalTestCase
      *
      * @param string $format xml or json
      */
-    protected function getQueryResultsCount(string $format, string $body): int
-    {
+    protected function getQueryResultsCount(
+        string $format,
+        string $body
+    ): int {
         $request = $this->createHttpRequest(
             'POST',
             '/api/ibexa/v2/views',

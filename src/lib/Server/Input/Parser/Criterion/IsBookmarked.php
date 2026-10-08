@@ -25,8 +25,10 @@ final class IsBookmarked extends BaseParser
         $this->parserTools = $parserTools;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): IsBookmarkedCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): IsBookmarkedCriterion {
         if (!array_key_exists(self::IS_BOOKMARKED_CRITERION, $data)) {
             throw new Parser('Invalid <IsBookmarkedCriterion> format');
         }

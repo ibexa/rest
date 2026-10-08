@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
@@ -16,7 +17,7 @@ class CreatedRelation extends ValueObject
     /**
      * The created relation.
      *
-     * @var \Ibexa\Rest\Server\Values\RestRelation
+     * @var RestRelation
      */
     public $relation;
 }

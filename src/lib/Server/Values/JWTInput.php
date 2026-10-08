@@ -18,8 +18,10 @@ class JWTInput extends RestValue
     /** @var string */
     public $password;
 
-    public function __construct(string $username, string $password)
-    {
+    public function __construct(
+        string $username,
+        string $password
+    ) {
         $this->username = $username;
         $this->password = $password;
     }

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Input;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
@@ -14,30 +15,30 @@ use Ibexa\Rest\FieldTypeProcessorRegistry;
 class FieldTypeParser
 {
     /**
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
+     * @var ContentService
      */
     protected $contentService;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
+     * @var ContentTypeService
      */
     protected $contentTypeService;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\FieldTypeService
+     * @var FieldTypeService
      */
     protected $fieldTypeService;
 
     /**
-     * @var \Ibexa\Rest\FieldTypeProcessorRegistry
+     * @var FieldTypeProcessorRegistry
      */
     protected $fieldTypeProcessorRegistry;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\ContentService $contentService
-     * @param \Ibexa\Contracts\Core\Repository\ContentTypeService $contentTypeService
-     * @param \Ibexa\Contracts\Core\Repository\FieldTypeService $fieldTypeService
-     * @param \Ibexa\Rest\FieldTypeProcessorRegistry $fieldTypeProcessorRegistry
+     * @param ContentService $contentService
+     * @param ContentTypeService $contentTypeService
+     * @param FieldTypeService $fieldTypeService
+     * @param FieldTypeProcessorRegistry $fieldTypeProcessorRegistry
      */
     public function __construct(
         ContentService $contentService,
@@ -61,8 +62,11 @@ class FieldTypeParser
      *
      * @return mixed
      */
-    public function parseFieldValue($contentInfoId, $fieldDefIdentifier, $value)
-    {
+    public function parseFieldValue(
+        $contentInfoId,
+        $fieldDefIdentifier,
+        $value
+    ) {
         $contentInfo = $this->contentService->loadContentInfo($contentInfoId);
         $contentType = $this->contentTypeService->loadContentType($contentInfo->contentTypeId);
 
@@ -80,8 +84,10 @@ class FieldTypeParser
      *
      * @return mixed
      */
-    public function parseValue($fieldTypeIdentifier, $value)
-    {
+    public function parseValue(
+        $fieldTypeIdentifier,
+        $value
+    ) {
         if ($this->fieldTypeProcessorRegistry->hasProcessor($fieldTypeIdentifier)) {
             $fieldTypeProcessor = $this->fieldTypeProcessorRegistry->getProcessor($fieldTypeIdentifier);
             $value = $fieldTypeProcessor->preProcessValueHash($value);
@@ -101,8 +107,10 @@ class FieldTypeParser
      *
      * @return mixed
      */
-    public function parseFieldSettings($fieldTypeIdentifier, $settingsHash)
-    {
+    public function parseFieldSettings(
+        $fieldTypeIdentifier,
+        $settingsHash
+    ) {
         if ($this->fieldTypeProcessorRegistry->hasProcessor($fieldTypeIdentifier)) {
             $fieldTypeProcessor = $this->fieldTypeProcessorRegistry->getProcessor($fieldTypeIdentifier);
             $settingsHash = $fieldTypeProcessor->preProcessFieldSettingsHash($settingsHash);
@@ -122,8 +130,10 @@ class FieldTypeParser
      *
      * @return mixed
      */
-    public function parseValidatorConfiguration($fieldTypeIdentifier, $configurationHash)
-    {
+    public function parseValidatorConfiguration(
+        $fieldTypeIdentifier,
+        $configurationHash
+    ) {
         if ($this->fieldTypeProcessorRegistry->hasProcessor($fieldTypeIdentifier)) {
             $fieldTypeProcessor = $this->fieldTypeProcessorRegistry->getProcessor($fieldTypeIdentifier);
             $configurationHash = $fieldTypeProcessor->preProcessValidatorConfigurationHash($configurationHash);

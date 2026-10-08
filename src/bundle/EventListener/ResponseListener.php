@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Bundle\Rest\EventListener;
 
 use Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher;
@@ -27,7 +28,7 @@ class ResponseListener implements EventSubscriberInterface, LoggerAwareInterface
     use LoggerAwareTrait;
 
     /**
-     * @var \Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher
+     * @var AcceptHeaderVisitorDispatcher
      */
     private $viewDispatcher;
 
@@ -52,7 +53,7 @@ class ResponseListener implements EventSubscriberInterface, LoggerAwareInterface
     }
 
     /**
-     * @param \Symfony\Component\HttpKernel\Event\ViewEvent $event
+     * @param ViewEvent $event
      */
     public function onKernelResultView(ViewEvent $event)
     {
@@ -70,7 +71,7 @@ class ResponseListener implements EventSubscriberInterface, LoggerAwareInterface
     }
 
     /**
-     * @param \Symfony\Component\HttpKernel\Event\ExceptionEvent $event
+     * @param ExceptionEvent $event
      *
      * @throws \Exception
      */

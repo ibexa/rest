@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\User\Policy as PolicyValue;
@@ -20,12 +21,15 @@ class Policy extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param Policy|\Ibexa\Contracts\Core\Repository\Values\User\PolicyDraft $data
+     * @param Visitor $visitor
+     * @param Generator $generator
+     * @param Policy|PolicyDraft $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ) {
         $generator->startObjectElement('Policy');
         $visitor->setHeader('Content-Type', $generator->getMediaType($data instanceof PolicyDraft ? 'PolicyDraft' : 'Policy'));
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('PolicyUpdate'));
@@ -33,8 +37,11 @@ class Policy extends ValueObjectVisitor
         $generator->endObjectElement('Policy');
     }
 
-    protected function visitPolicyAttributes(Visitor $visitor, Generator $generator, PolicyValue $data)
-    {
+    protected function visitPolicyAttributes(
+        Visitor $visitor,
+        Generator $generator,
+        PolicyValue $data
+    ) {
         $generator->startAttribute(
             'href',
             $this->router->generate('ibexa.rest.load_policy', ['roleId' => $data->roleId, 'policyId' => $data->id])

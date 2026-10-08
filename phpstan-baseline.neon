@@ -8827,12 +8827,6 @@ parameters:
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
 		-
-			message: '#^Access to an undefined property Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:\$routerMockCallIndex\.$#'
-			identifier: property.notFound
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:addRouteExpectation\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
@@ -8973,18 +8967,6 @@ parameters:
 		-
 			message: '#^Parameter \#1 \$data of method Ibexa\\Contracts\\Rest\\Output\\ValueObjectVisitorDispatcher\:\:visit\(\) expects object, int given\.$#'
 			identifier: argument.type
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorDispatcherTest\:\:\$outputGeneratorMock \(Ibexa\\Contracts\\Rest\\Output\\Generator&PHPUnit\\Framework\\MockObject\\MockObject\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorDispatcherTest\:\:\$outputVisitorMock \(Ibexa\\Contracts\\Rest\\Output\\Visitor&PHPUnit\\Framework\\MockObject\\MockObject\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
 			count: 1
 			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
 
@@ -9735,7 +9717,7 @@ parameters:
 		-
 			message: '#^Call to an undefined method Ibexa\\Contracts\\Rest\\Input\\ParsingDispatcher\:\:expects\(\)\.$#'
 			identifier: method.notFound
-			count: 6
+			count: 5
 			path: tests/lib/Server/Input/Parser/QueryParserTest.php
 
 		-

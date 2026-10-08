@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Bundle\Rest\EventListener;
 
 use Ibexa\Bundle\Rest\UriParser\UriParser;
@@ -24,7 +25,7 @@ class RequestListener implements EventSubscriberInterface
 {
     /**
      * @deprecated rely on \Ibexa\Contracts\Rest\UriParser\UriParserInterface::isRestRequest instead.
-     * @see \Ibexa\Contracts\Rest\UriParser\UriParserInterface::isRestRequest()
+     * @see UriParserInterface::isRestRequest()
      */
     public const REST_PREFIX_PATTERN = UriParser::DEFAULT_REST_PREFIX_PATTERN;
 
@@ -58,12 +59,12 @@ class RequestListener implements EventSubscriberInterface
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      *
      * @return bool
      *
      * @deprecated use \Ibexa\Contracts\Rest\UriParser\UriParserInterface::isRestRequest instead
-     * @see \Ibexa\Contracts\Rest\UriParser\UriParserInterface::isRestRequest()
+     * @see UriParserInterface::isRestRequest()
      */
     protected function hasRestPrefix(Request $request)
     {

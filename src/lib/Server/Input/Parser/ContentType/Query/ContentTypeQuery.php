@@ -8,14 +8,17 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Input\Parser\ContentType\Query;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidCriterionArgumentException;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\Query\ContentTypeQuery as ContentTypeQueryValueObject;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\Query\Criterion\LogicalAnd;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\Query\CriterionInterface;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\Parser\Query\Criterion\CriterionProcessorInterface;
 use Ibexa\Contracts\Rest\Input\Parser\Query\SortClause\SortClauseProcessorInterface;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
-use function Ibexa\PolyfillPhp82\iterator_to_array;
 use Ibexa\Rest\Input\BaseParser;
+
+use function Ibexa\PolyfillPhp82\iterator_to_array;
 
 /**
  * @phpstan-import-type TCriterionProcessor from \Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\CriterionProcessor
@@ -57,10 +60,12 @@ final class ContentTypeQuery extends BaseParser
     /**
      * @param array<mixed> $data
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidCriterionArgumentException
+     * @throws InvalidCriterionArgumentException
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): object
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): object {
         if (!empty($redundantKeys = $this->checkRedundantKeys(array_keys($data)))) {
             throw new Parser(
                 sprintf(
@@ -86,7 +91,7 @@ final class ContentTypeQuery extends BaseParser
     /**
      * @param array<mixed> $data
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidCriterionArgumentException
+     * @throws InvalidCriterionArgumentException
      */
     private function buildQuery(array $data): ContentTypeQueryValueObject
     {
@@ -95,7 +100,7 @@ final class ContentTypeQuery extends BaseParser
         if (array_key_exists(self::QUERY, $data) && is_array($data[self::QUERY])) {
             $criteria = $this->processCriteriaArray($data[self::QUERY]);
             if (count($criteria) > 0) {
-                /** @var list<\Ibexa\Contracts\Core\Repository\Values\ContentType\Query\CriterionInterface> $criteria */
+                /** @var list<CriterionInterface> $criteria */
                 $query->setCriterion(new LogicalAnd($criteria));
             }
         }

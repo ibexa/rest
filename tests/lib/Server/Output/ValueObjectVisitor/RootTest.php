@@ -4,10 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\Root;
 use Ibexa\Rest\Server\Service\ExpressionRouterRootResourceBuilder;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
@@ -182,11 +183,11 @@ class RootTest extends ValueObjectVisitorBaseTest
     /**
      * Get the Role visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Root
+     * @return Root
      */
     protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\Root();
+        return new Root();
     }
 }
 

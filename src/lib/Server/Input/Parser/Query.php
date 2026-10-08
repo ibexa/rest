@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion as CriterionValue;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Server\Input\Parser\Criterion as CriterionParser;
 
@@ -19,14 +21,16 @@ abstract class Query extends CriterionParser
      * Parses input structure to a Query.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         $query = $this->buildQuery();
 
         if (array_key_exists('Filter', $data) && is_array($data['Filter'])) {
@@ -88,12 +92,14 @@ abstract class Query extends CriterionParser
 
     /**
      * @param array $criteriaArray
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion|null A criterion, or a LogicalAnd with a set of Criterion, or null if an empty array was given
+     * @return CriterionValue|null A criterion, or a LogicalAnd with a set of Criterion, or null if an empty array was given
      */
-    private function processCriteriaArray(array $criteriaArray, ParsingDispatcher $parsingDispatcher)
-    {
+    private function processCriteriaArray(
+        array $criteriaArray,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         if (count($criteriaArray) === 0) {
             return null;
         }
@@ -110,12 +116,14 @@ abstract class Query extends CriterionParser
      * Handles SortClause data.
      *
      * @param array $sortClausesArray
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
      * @return array
      */
-    private function processSortClauses(array $sortClausesArray, ParsingDispatcher $parsingDispatcher)
-    {
+    private function processSortClauses(
+        array $sortClausesArray,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         $sortClauses = [];
         foreach ($sortClausesArray as $sortClauseName => $sortClauseData) {
             if (!is_array($sortClauseData) || !isset($sortClauseData[0])) {

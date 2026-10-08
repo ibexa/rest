@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use DOMDocument;
@@ -14,13 +15,14 @@ use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Rest\Output\Generator\Xml;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\Exception as ExceptionValueObjectVisitor;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ExceptionTest extends ValueObjectVisitorBaseTest
 {
     protected const NON_VERBOSE_ERROR_DESCRIPTION = 'An error has occurred. Please try again later or contact your Administrator.';
 
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var TranslatorInterface|MockObject */
     private $translatorMock;
 
     /**
@@ -171,7 +173,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
      */
     public function testResultContainsPreviousError($result)
     {
-        $dom = new \DOMDocument();
+        $dom = new DOMDocument();
         $dom->loadXml($result);
 
         $this->assertXPath(
@@ -213,7 +215,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
     /**
      * Gets the exception visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Exception
+     * @return ExceptionValueObjectVisitor
      */
     protected function internalGetVisitor()
     {
@@ -223,7 +225,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
     /**
      * Gets the exception visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Exception
+     * @return ExceptionValueObjectVisitor
      */
     protected function internalGetNonDebugVisitor(): ExceptionValueObjectVisitor
     {

@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\FieldType as APIFieldType;
 use Ibexa\Contracts\Core\Repository\FieldTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
@@ -38,7 +40,7 @@ class FieldTypeSerializerTest extends TestCase
      *
      * @param mixed $hashValue
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
     public function testSerializeFieldValue(
         APIFieldType $fieldType,
@@ -66,7 +68,7 @@ class FieldTypeSerializerTest extends TestCase
      *
      * @param mixed $hashValue
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
     public function testSerializeContentFieldValue(
         APIFieldType $fieldType,

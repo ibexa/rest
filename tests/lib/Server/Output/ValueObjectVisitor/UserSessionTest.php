@@ -4,10 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\User\User;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\UserSession;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
@@ -33,13 +34,16 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
             false
         );
 
-        $this->getVisitorMock()->expects($this->at(0))
+        $this->getVisitorMock()->expects($this->once())
             ->method('setStatus')
             ->with($this->equalTo(200));
 
-        $this->getVisitorMock()->expects($this->at(1))
+        $this->getVisitorMock()->expects($this->exactly(2))
             ->method('setHeader')
-            ->with($this->equalTo('Content-Type'), $this->equalTo('application/vnd.ibexa.api.Session+xml'));
+            ->withConsecutive(
+                [$this->equalTo('Content-Type'), $this->equalTo('application/vnd.ibexa.api.Session+xml')],
+                [$this->equalTo('Accept-Patch'), $this->equalTo(false)]
+            );
 
         $this->addRouteExpectation(
             'ibexa.rest.delete_session',
@@ -229,11 +233,11 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
     /**
      * Get the Session visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\UserSession
+     * @return UserSession
      */
     protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\UserSession();
+        return new UserSession();
     }
 }
 

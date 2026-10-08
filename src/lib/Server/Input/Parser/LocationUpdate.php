@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\LocationService;
@@ -20,25 +21,27 @@ class LocationUpdate extends BaseParser
     /**
      * Location service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
+     * @var LocationService
      */
     protected $locationService;
 
     /**
      * Parser tools.
      *
-     * @var \Ibexa\Rest\Input\ParserTools
+     * @var ParserTools
      */
     protected $parserTools;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
+     * @param LocationService $locationService
+     * @param ParserTools $parserTools
      */
-    public function __construct(LocationService $locationService, ParserTools $parserTools)
-    {
+    public function __construct(
+        LocationService $locationService,
+        ParserTools $parserTools
+    ) {
         $this->locationService = $locationService;
         $this->parserTools = $parserTools;
     }
@@ -47,12 +50,14 @@ class LocationUpdate extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Rest\Server\Values\RestLocationUpdateStruct
+     * @return RestLocationUpdateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         $locationUpdateStruct = $this->locationService->newLocationUpdateStruct();
 
         if (array_key_exists('priority', $data)) {

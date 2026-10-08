@@ -4,11 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values;
 use Ibexa\Rest\Server;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\FieldDefinitionList;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 /**
@@ -92,21 +93,24 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
      * @param \DOMDocument $dom
      *
      * @depends testVisitFieldDefinitionList
+     *
      * @dataProvider provideXpathAssertions
      */
-    public function testGeneratedXml($xpath, \DOMDocument $dom)
-    {
+    public function testGeneratedXml(
+        $xpath,
+        \DOMDocument $dom
+    ) {
         $this->assertXPath($dom, $xpath);
     }
 
     /**
      * Get the Content visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\FieldDefinitionList
+     * @return FieldDefinitionList
      */
     protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\FieldDefinitionList();
+        return new FieldDefinitionList();
     }
 }
 

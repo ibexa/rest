@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\FieldTypeProcessor;
 
 class BinaryProcessor extends BinaryInputProcessor
@@ -21,8 +22,10 @@ class BinaryProcessor extends BinaryInputProcessor
      * @param string $temporaryDirectory
      * @param string $hostPrefix
      */
-    public function __construct($temporaryDirectory, $hostPrefix)
-    {
+    public function __construct(
+        $temporaryDirectory,
+        $hostPrefix
+    ) {
         parent::__construct($temporaryDirectory);
         $this->hostPrefix = $hostPrefix;
     }

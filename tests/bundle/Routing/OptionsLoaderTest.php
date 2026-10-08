@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\Routing;
 
 use Ibexa\Bundle\Rest\Routing\OptionsLoader;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\RouteCollection;
 
@@ -18,10 +20,13 @@ class OptionsLoaderTest extends TestCase
     /**
      * @param string $type
      * @param bool $expected
+     *
      * @dataProvider getResourceType
      */
-    public function testSupportsResourceType($type, $expected)
-    {
+    public function testSupportsResourceType(
+        $type,
+        $expected
+    ) {
         self::assertEquals(
             $expected,
             $this->getOptionsLoader()->supports(null, $type)
@@ -54,7 +59,7 @@ class OptionsLoaderTest extends TestCase
     /**
      * Returns a partially mocked OptionsLoader, with the import method mocked.
      *
-     * @return \Ibexa\Bundle\Rest\Routing\OptionsLoader|\PHPUnit\Framework\MockObject\MockObject
+     * @return OptionsLoader|MockObject
      */
     protected function getOptionsLoader()
     {
@@ -72,7 +77,7 @@ class OptionsLoaderTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject
+     * @return MockObject
      */
     protected function getRouteCollectionMapperMock()
     {

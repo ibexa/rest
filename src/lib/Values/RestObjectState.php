@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectState;
@@ -17,7 +18,7 @@ class RestObjectState extends RestValue
     /**
      * Wrapped object state.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectState
+     * @var ObjectState
      */
     public $objectState;
 
@@ -31,11 +32,13 @@ class RestObjectState extends RestValue
     /**
      * Constructor.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectState $objectState
+     * @param ObjectState $objectState
      * @param mixed $groupId
      */
-    public function __construct(ObjectState $objectState, $groupId)
-    {
+    public function __construct(
+        ObjectState $objectState,
+        $groupId
+    ) {
         $this->objectState = $objectState;
         $this->groupId = $groupId;
     }

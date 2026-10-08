@@ -4,7 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Contracts\Rest;
+
+use Ibexa\Rest\Input\FieldTypeParser;
+use Ibexa\Rest\Output\FieldTypeSerializer;
 
 /**
  * FieldTypeProcessor.
@@ -21,7 +25,7 @@ abstract class FieldTypeProcessor
      * apply to hashes accepted by fromHash(). The return value of this method
      * replaces the $incomingValueHash.
      *
-     * @see \Ibexa\Rest\Input\FieldTypeParser
+     * @see FieldTypeParser
      *
      * @param mixed $incomingValueHash
      *
@@ -42,7 +46,7 @@ abstract class FieldTypeProcessor
      * $outgoingValueHash and must obey to the same rules as the original
      * $outgoingValueHash.
      *
-     * @see \Ibexa\Rest\Output\FieldTypeSerializer
+     * @see FieldTypeSerializer
      *
      * @param mixed $outgoingValueHash
      *
@@ -63,7 +67,7 @@ abstract class FieldTypeProcessor
      * need to apply to hashes accepted by fieldSettingsFromHash(). The return
      * value of this method replaces the $incomingSettingsHash.
      *
-     * @see \Ibexa\Rest\Input\FieldTypeParser
+     * @see FieldTypeParser
      *
      * @param mixed $incomingSettingsHash
      *
@@ -84,7 +88,7 @@ abstract class FieldTypeProcessor
      * $outgoingSettingsHash and must obey to the same rules as the original
      * $outgoingSettingsHash.
      *
-     * @see \Ibexa\Rest\Output\FieldTypeSerializer
+     * @see FieldTypeSerializer
      *
      * @param mixed $outgoingSettingsHash
      *
@@ -105,7 +109,7 @@ abstract class FieldTypeProcessor
      * rules that need to apply to hashes accepted by validatorConfigurationFromHash().
      * The return value of this method replaces the $incomingValidatorConfigurationHash.
      *
-     * @see \Ibexa\Rest\Input\FieldTypeParser
+     * @see FieldTypeParser
      *
      * @param mixed $incomingValidatorConfigurationHash
      *
@@ -126,7 +130,7 @@ abstract class FieldTypeProcessor
      * $outgoingValidatorConfigurationHash and must obey to the same rules as the original
      * $outgoingValidatorConfigurationHash.
      *
-     * @see \Ibexa\Rest\Output\FieldTypeSerializer
+     * @see FieldTypeSerializer
      *
      * @param mixed $outgoingValidatorConfigurationHash
      *

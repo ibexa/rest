@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
 use Ibexa\Bundle\Rest\EventListener\SupportedMediaTypesSubscriber;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +19,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 final class SupportedMediaTypesSubscriberTest extends TestCase
 {
-    /** @var \Symfony\Component\HttpKernel\HttpKernelInterface&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var HttpKernelInterface&MockObject */
     private HttpKernelInterface $kernel;
 
     protected function setUp(): void

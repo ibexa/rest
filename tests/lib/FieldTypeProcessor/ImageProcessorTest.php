@@ -4,14 +4,16 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Rest\FieldTypeProcessor\ImageProcessor;
+use Ibexa\Rest\RequestParser;
 use Symfony\Component\Routing\RouterInterface;
 
 class ImageProcessorTest extends BinaryInputProcessorTest
 {
-    /** @var \Ibexa\Rest\RequestParser */
+    /** @var RequestParser */
     protected $requestParser;
 
     /**
@@ -27,19 +29,21 @@ class ImageProcessorTest extends BinaryInputProcessorTest
         ];
 
         $routerMock = $this->getRouterMock();
-        foreach ($this->getVariations() as $iteration => $variationIdentifier) {
+        $expectedArguments = [];
+        $hrefs = [];
+        foreach ($this->getVariations() as $variationIdentifier) {
             $expectedVariations[$variationIdentifier]['href'] = "/content/binary/images/{$inputHash['imageId']}/variations/{$variationIdentifier}";
-            $routerMock
-                ->expects($this->at($iteration))
-                ->method('generate')
-                ->with(
-                    'ibexa.rest.binary_content.get_image_variation',
-                    ['imageId' => $inputHash['imageId'], 'variationIdentifier' => $variationIdentifier]
-                )
-                ->willReturn(
-                    $expectedVariations[$variationIdentifier]['href']
-                );
+            $expectedArguments[] = [
+                'ibexa.rest.binary_content.get_image_variation',
+                ['imageId' => $inputHash['imageId'], 'variationIdentifier' => $variationIdentifier],
+            ];
+            $hrefs[] = $expectedVariations[$variationIdentifier]['href'];
         }
+        $routerMock
+            ->expects($this->exactly(count($expectedArguments)))
+            ->method('generate')
+            ->withConsecutive(...$expectedArguments)
+            ->willReturnOnConsecutiveCalls(...$hrefs);
 
         $outputHash = $processor->postProcessValueHash($inputHash);
 
@@ -56,7 +60,7 @@ class ImageProcessorTest extends BinaryInputProcessorTest
     /**
      * Returns the processor under test.
      *
-     * @return \Ibexa\Rest\FieldTypeProcessor\ImageProcessor
+     * @return ImageProcessor
      */
     protected function getProcessor()
     {

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
@@ -294,7 +295,7 @@ class UserGroupCreateTest extends BaseTest
     /**
      * Returns the UserGroupCreate parser.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\UserGroupCreate
+     * @return UserGroupCreate
      */
     protected function internalGetParser()
     {
@@ -308,7 +309,7 @@ class UserGroupCreateTest extends BaseTest
     /**
      * Get the field type parser mock object.
      *
-     * @return \Ibexa\Rest\Input\FieldTypeParser ;
+     * @return FieldTypeParser ;
      */
     private function getFieldTypeParserMock()
     {

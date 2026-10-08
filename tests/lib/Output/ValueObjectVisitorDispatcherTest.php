@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output;
 
 use Error;
@@ -13,6 +14,8 @@ use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher;
 use Ibexa\Contracts\Rest\Output\Visitor;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -22,12 +25,12 @@ use stdClass;
 class ValueObjectVisitorDispatcherTest extends TestCase
 {
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Contracts\Rest\Output\Visitor
+     * @var (Stub&Visitor)|null
      */
     private $outputVisitorMock;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Contracts\Rest\Output\Generator
+     * @var (Stub&Generator)|null
      */
     private $outputGeneratorMock;
 
@@ -37,7 +40,7 @@ class ValueObjectVisitorDispatcherTest extends TestCase
 
         $visitor = $this->getValueObjectVisitorMock();
         $visitor
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('visit')
             ->with($this->getOutputVisitorMock(), $this->getOutputGeneratorMock(), $data);
 
@@ -69,7 +72,7 @@ class ValueObjectVisitorDispatcherTest extends TestCase
 
         $valueObjectVisitor = $this->getValueObjectVisitorMock();
         $valueObjectVisitor
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('visit')
             ->with($this->getOutputVisitorMock(), $this->getOutputGeneratorMock(), $data);
 
@@ -111,7 +114,7 @@ class ValueObjectVisitorDispatcherTest extends TestCase
             ->method('visit');
 
         $valueObjectVisitor2
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('visit')
             ->with($this->getOutputVisitorMock(), $this->getOutputGeneratorMock(), $data);
 
@@ -123,11 +126,11 @@ class ValueObjectVisitorDispatcherTest extends TestCase
         $this->expectException(Error::class);
 
         $dispatcher = $this->getValueObjectDispatcher();
-        $dispatcher->visit($this->createMock(Error::class));
+        $dispatcher->visit($this->createStub(Error::class));
     }
 
     /**
-     * @return \Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher
+     * @return ValueObjectVisitorDispatcher
      */
     private function getValueObjectDispatcher()
     {
@@ -139,7 +142,7 @@ class ValueObjectVisitorDispatcherTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Contracts\Rest\Output\ValueObjectVisitor
+     * @return MockObject|ValueObjectVisitor
      */
     private function getValueObjectVisitorMock()
     {
@@ -147,24 +150,24 @@ class ValueObjectVisitorDispatcherTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Contracts\Rest\Output\Visitor
+     * @return Stub&Visitor
      */
     private function getOutputVisitorMock()
     {
         if (!isset($this->outputVisitorMock)) {
-            $this->outputVisitorMock = $this->createMock(Visitor::class);
+            $this->outputVisitorMock = $this->createStub(Visitor::class);
         }
 
         return $this->outputVisitorMock;
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Ibexa\Contracts\Rest\Output\Generator
+     * @return Stub&Generator
      */
     private function getOutputGeneratorMock()
     {
         if (!isset($this->outputGeneratorMock)) {
-            $this->outputGeneratorMock = $this->createMock(Generator::class);
+            $this->outputGeneratorMock = $this->createStub(Generator::class);
         }
 
         return $this->outputGeneratorMock;

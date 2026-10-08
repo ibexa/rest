@@ -4,11 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Core\Repository\Values\Content;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionInfo;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class VersionInfoTest extends ValueObjectVisitorBaseTest
@@ -276,11 +277,11 @@ class VersionInfoTest extends ValueObjectVisitorBaseTest
     /**
      * Get the VersionInfo visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\VersionInfo
+     * @return VersionInfo
      */
     protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\VersionInfo();
+        return new VersionInfo();
     }
 }
 

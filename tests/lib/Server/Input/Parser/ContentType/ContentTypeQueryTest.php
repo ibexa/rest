@@ -46,34 +46,16 @@ final class ContentTypeQueryTest extends BaseTest
         self::assertInstanceOf(MockObject::class, $parsingDispatcherMock);
 
         $parsingDispatcherMock
-            ->expects(self::at(0))
+            ->expects(self::exactly(6))
             ->method('parse')
-            ->willReturn(new ContentTypeId([1, 2]));
-
-        $parsingDispatcherMock
-            ->expects(self::at(1))
-            ->method('parse')
-            ->willReturn(new ContentTypeIdentifier('folder'));
-
-        $parsingDispatcherMock
-            ->expects(self::at(2))
-            ->method('parse')
-            ->willReturn(new IsSystem(true));
-
-        $parsingDispatcherMock
-            ->expects(self::at(3))
-            ->method('parse')
-            ->willReturn(new ContentTypeGroupId(1));
-
-        $parsingDispatcherMock
-            ->expects(self::at(4))
-            ->method('parse')
-            ->willReturn(new ContainsFieldDefinitionId(1));
-
-        $parsingDispatcherMock
-            ->expects(self::at(5))
-            ->method('parse')
-            ->willReturn(new Identifier(SortClause::SORT_DESC));
+            ->willReturnOnConsecutiveCalls(
+                new ContentTypeId([1, 2]),
+                new ContentTypeIdentifier('folder'),
+                new IsSystem(true),
+                new ContentTypeGroupId(1),
+                new ContainsFieldDefinitionId(1),
+                new Identifier(SortClause::SORT_DESC)
+            );
 
         $result = $this->getParser()->parse($data, $this->getParsingDispatcherMock());
 

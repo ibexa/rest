@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest;
 
 /**
@@ -39,8 +40,11 @@ class Message
      * @param string $body
      * @param int $statusCode
      */
-    public function __construct(array $headers = [], $body = '', $statusCode = 200)
-    {
+    public function __construct(
+        array $headers = [],
+        $body = '',
+        $statusCode = 200
+    ) {
         $this->headers = $headers;
         $this->body = $body;
         $this->statusCode = $statusCode;

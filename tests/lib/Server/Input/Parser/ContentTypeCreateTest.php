@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
@@ -234,7 +235,7 @@ class ContentTypeCreateTest extends BaseTest
     /**
      * Returns the ContentTypeCreate parser.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\ContentTypeCreate
+     * @return ContentTypeCreate
      */
     protected function internalGetParser()
     {
@@ -248,7 +249,7 @@ class ContentTypeCreateTest extends BaseTest
     /**
      * Returns the FieldDefinitionCreate parser mock object.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate
+     * @return FieldDefinitionCreate
      */
     private function getFieldDefinitionCreateParserMock()
     {

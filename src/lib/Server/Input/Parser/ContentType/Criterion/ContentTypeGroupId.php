@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Server\Input\Parser\ContentType\Criterion;
 
 use Ibexa\Contracts\Core\Repository\Values\ContentType\Query\Criterion\ContentTypeGroupId as ContentTypeGroupIdCriterion;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 
@@ -20,12 +20,14 @@ final class ContentTypeGroupId extends BaseParser implements ContentTypeCriterio
     /**
      * @param array<mixed> $data
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentTypeGroupIdCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ContentTypeGroupIdCriterion {
         if (!array_key_exists(self::GROUP_ID, $data)) {
-            throw new Exceptions\Parser('Invalid <' . self::GROUP_ID . '> format');
+            throw new Parser('Invalid <' . self::GROUP_ID . '> format');
         }
 
         $ids = $data[self::GROUP_ID];

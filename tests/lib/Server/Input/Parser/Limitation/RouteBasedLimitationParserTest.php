@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser\Limitation;
 
 use Ibexa\Rest\Server\Input\Parser\Limitation\RouteBasedLimitationParser;
@@ -25,7 +26,7 @@ class RouteBasedLimitationParserTest extends BaseTest
         $result = $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
 
         self::assertInstanceOf('stdClass', $result);
-        self::assertObjectHasAttribute('limitationValues', $result);
+        self::assertObjectHasProperty('limitationValues', $result);
         self::assertArrayHasKey(0, $result->limitationValues);
         self::assertEquals(42, $result->limitationValues[0]);
     }
@@ -33,7 +34,7 @@ class RouteBasedLimitationParserTest extends BaseTest
     /**
      * Must return the tested parser object.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\Limitation\RouteBasedLimitationParser
+     * @return RouteBasedLimitationParser
      */
     protected function internalGetParser()
     {

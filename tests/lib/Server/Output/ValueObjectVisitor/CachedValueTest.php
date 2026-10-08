@@ -4,12 +4,14 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\CachedValue;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
+use PHPUnit\Framework\MockObject\MockObject;
 use stdClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -25,7 +27,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
     ];
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Request
+     * @var Request
      */
     protected $request;
 
@@ -39,9 +41,8 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
     {
         $responseMock = $this->getResponseMock();
         $responseMock->expects($this->once())->method('setPublic');
-        $responseMock->expects($this->at(1))->method('setVary')->with('Accept');
+        $responseMock->expects($this->exactly(2))->method('setVary')->withConsecutive(['Accept'], ['X-User-Hash', false]);
         $responseMock->expects($this->once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
-        $responseMock->expects($this->at(3))->method('setVary')->with('X-User-Hash', false);
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
@@ -52,9 +53,8 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
     {
         $responseMock = $this->getResponseMock();
         $responseMock->expects($this->once())->method('setPublic');
-        $responseMock->expects($this->at(1))->method('setVary')->with('Accept');
+        $responseMock->expects($this->exactly(2))->method('setVary')->withConsecutive(['Accept'], ['X-User-Hash', false]);
         $responseMock->expects($this->once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
-        $responseMock->expects($this->at(3))->method('setVary')->with('X-User-Hash', false);
 
         $result = $this->visit(new CachedValue(new stdClass(), ['locationId' => 'testLocationId']));
 
@@ -155,7 +155,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @return \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return ConfigResolverInterface|MockObject
      */
     protected function getConfigProviderMock()
     {
@@ -174,7 +174,10 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
             ->expects($this->any())
             ->method('getParameter')
             ->willReturnCallback(
-                static function ($parameterName, $defaultValue) use ($options) {
+                static function (
+                    $parameterName,
+                    $defaultValue
+                ) use ($options) {
                     return isset($options[$parameterName]) ? $options[$parameterName] : $defaultValue;
                 }
             );

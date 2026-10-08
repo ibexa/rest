@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Rest\Value as RestValue;
@@ -16,7 +17,7 @@ class ContentList extends RestValue
     /**
      * Contents.
      *
-     * @var \Ibexa\Rest\Server\Values\RestContent[]
+     * @var RestContent[]
      */
     public $contents;
 
@@ -30,11 +31,13 @@ class ContentList extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Rest\Server\Values\RestContent[] $contents
+     * @param RestContent[] $contents
      * @param int $totalCount
      */
-    public function __construct(array $contents, int $totalCount)
-    {
+    public function __construct(
+        array $contents,
+        int $totalCount
+    ) {
         $this->contents = $contents;
         $this->totalCount = $totalCount;
     }

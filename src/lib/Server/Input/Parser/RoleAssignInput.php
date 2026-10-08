@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Rest\Exceptions;
@@ -20,14 +21,14 @@ class RoleAssignInput extends BaseParser
     /**
      * Parser tools.
      *
-     * @var \Ibexa\Rest\Input\ParserTools
+     * @var ParserTools
      */
     protected $parserTools;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
+     * @param ParserTools $parserTools
      */
     public function __construct(ParserTools $parserTools)
     {
@@ -38,12 +39,14 @@ class RoleAssignInput extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Rest\Server\Values\RoleAssignment
+     * @return RoleAssignment
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         if (!array_key_exists('Role', $data)) {
             throw new Exceptions\Parser("Missing 'Role' element for RoleAssignInput.");
         }

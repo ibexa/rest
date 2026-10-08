@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Bundle\Rest\CorsOptions;
 
 use Nelmio\CorsBundle\Options\ProviderInterface;
@@ -19,11 +20,11 @@ use Symfony\Component\Routing\Matcher\RequestMatcherInterface;
  */
 class RestProvider implements ProviderInterface
 {
-    /** @var \Symfony\Component\Routing\Matcher\RequestMatcherInterface */
+    /** @var RequestMatcherInterface */
     protected $requestMatcher;
 
     /**
-     * @param \Symfony\Component\Routing\Matcher\RequestMatcherInterface $requestMatcher
+     * @param RequestMatcherInterface $requestMatcher
      */
     public function __construct(RequestMatcherInterface $requestMatcher)
     {
@@ -33,7 +34,7 @@ class RestProvider implements ProviderInterface
     /**
      * Returns allowed CORS methods for a REST route.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      *
      * @return array
      */

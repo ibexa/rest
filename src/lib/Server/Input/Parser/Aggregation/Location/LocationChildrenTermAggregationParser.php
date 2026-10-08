@@ -20,8 +20,10 @@ final class LocationChildrenTermAggregationParser extends AbstractTermAggregatio
         return 'LocationChildrenTermAggregation';
     }
 
-    protected function parseAggregation(array $data, ParsingDispatcher $parsingDispatcher): AbstractTermAggregation
-    {
+    protected function parseAggregation(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractTermAggregation {
         return new LocationChildrenTermAggregation($data['name']);
     }
 }

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Bundle\Rest\DependencyInjection\Security;
 
 use Ibexa\Rest\Server\Security\RestLogoutHandler;
@@ -26,8 +27,12 @@ class RestSessionBasedFactory extends FormLoginFactory
         return false;
     }
 
-    protected function createListener($container, $id, $config, $userProvider)
-    {
+    protected function createListener(
+        $container,
+        $id,
+        $config,
+        $userProvider
+    ) {
         $listenerId = $this->getListenerId();
         $listener = new ChildDefinition($listenerId);
         $listener->replaceArgument(2, $id);
@@ -72,8 +77,12 @@ class RestSessionBasedFactory extends FormLoginFactory
         return 'ibexa_rest_session';
     }
 
-    protected function createEntryPoint($container, $id, $config, $defaultEntryPoint): ?string
-    {
+    protected function createEntryPoint(
+        $container,
+        $id,
+        $config,
+        $defaultEntryPoint
+    ): ?string {
         return $defaultEntryPoint;
     }
 }
