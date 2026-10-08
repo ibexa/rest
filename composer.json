@@ -22,7 +22,7 @@
         }
     },
     "require": {
-        "php": " >=8.3",
+        "php": ">=8.5",
         "ext-dom": "*",
         "ext-json": "*",
         "ext-libxml": "*",
@@ -32,17 +32,17 @@
         "ibexa/core": "~6.0.x-dev",
         "ibexa/templated-uri-bundle": "^6.0",
         "lexik/jwt-authentication-bundle": "^3.2",
-        "symfony/config": "^7.4 || ^8.1",
-        "symfony/dependency-injection": "^7.4 || ^8.1",
-        "symfony/event-dispatcher": "^7.4 || ^8.1",
-        "symfony/expression-language": "^7.4 || ^8.1",
-        "symfony/form": "^7.4 || ^8.1",
-        "symfony/http-foundation": "^7.4 || ^8.1",
-        "symfony/http-kernel": "^7.4 || ^8.1",
-        "symfony/routing": "^7.4 || ^8.1",
-        "symfony/security-bundle": "^7.4 || ^8.1",
-        "symfony/security-csrf": "^7.4 || ^8.1",
-        "symfony/yaml": "^7.4 || ^8.1",
+        "symfony/config": "^8.1",
+        "symfony/dependency-injection": "^8.1",
+        "symfony/event-dispatcher": "^8.1",
+        "symfony/expression-language": "^8.1",
+        "symfony/form": "^8.1",
+        "symfony/http-foundation": "^8.1",
+        "symfony/http-kernel": "^8.1",
+        "symfony/routing": "^8.1",
+        "symfony/security-bundle": "^8.1",
+        "symfony/security-csrf": "^8.1",
+        "symfony/yaml": "^8.1",
         "twig/twig": "^3.0",
         "webmozart/assert": "^2.3"
     },
@@ -61,8 +61,8 @@
         "phpstan/phpstan-symfony": "^2.0",
         "phpstan/phpstan-webmozart-assert": "^2.0",
         "phpunit/phpunit": "^11.5",
-        "symfony/browser-kit": "^7.4 || ^8.1",
-        "symfony/http-client": "^7.4 || ^8.1"
+        "symfony/browser-kit": "^8.1",
+        "symfony/http-client": "^8.1"
     },
     "config": {
         "allow-plugins": {

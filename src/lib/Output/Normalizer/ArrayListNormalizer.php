@@ -29,7 +29,7 @@ final class ArrayListNormalizer implements NormalizerInterface, NormalizerAwareI
     {
         $data = [];
         foreach ($object as $key => $value) {
-            if (is_array($value)) {
+            if (is_array($value) && $value !== []) {
                 // If it's an array we assume that an array's first key is value that we have to store as a name of a parent element
                 $parentKeyThatMustBeStored = array_key_first($value);
                 $arrayCopy = $object->getArrayCopy();
