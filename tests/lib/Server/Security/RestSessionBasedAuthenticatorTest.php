@@ -86,6 +86,10 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticateAlreadyHaveSessionToken()
     {
+        $this->authenticationManager->expects($this->never())->method('authenticate');
+        $this->eventDispatcher->expects($this->never())->method('dispatch');
+        $this->configResolver->expects($this->never())->method('getParameter');
+        $this->logger->expects($this->never())->method('error');
         $username = 'foo_user';
         $password = 'publish';
 
@@ -113,6 +117,8 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticateNoTokenFound()
     {
+        $this->eventDispatcher->expects($this->never())->method('dispatch');
+        $this->configResolver->expects($this->never())->method('getParameter');
         $this->expectException(TokenNotFoundException::class);
         $username = 'foo_user';
         $password = 'publish';
@@ -148,6 +154,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticateInvalidUser()
     {
+        $this->configResolver->expects($this->never())->method('getParameter');
         $this->expectException(InvalidUserTypeException::class);
         $username = 'foo_user';
         $password = 'publish';
@@ -220,6 +227,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticateUserConflict()
     {
+        $this->logger->expects($this->never())->method('error');
         $this->expectException(UserConflictException::class);
         $username = 'foo_user';
         $password = 'publish';
@@ -281,6 +289,7 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticatePreviouslyAnonymous()
     {
+        $this->logger->expects($this->never())->method('error');
         $username = 'foo_user';
         $password = 'publish';
 
@@ -342,6 +351,8 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticate()
     {
+        $this->configResolver->expects($this->never())->method('getParameter');
+        $this->logger->expects($this->never())->method('error');
         $username = 'foo_user';
         $password = 'publish';
 
@@ -391,10 +402,12 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticatePreviousUserNonEz()
     {
+        $this->configResolver->expects($this->never())->method('getParameter');
+        $this->logger->expects($this->never())->method('error');
         $username = 'foo_user';
         $password = 'publish';
 
-        $existingUser = $this->createMock(UserInterface::class);
+        $existingUser = $this->createStub(UserInterface::class);
         $existingToken = $this->getUsernamePasswordTokenMock();
         $existingToken
             ->expects($this->once())
@@ -445,6 +458,8 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testAuthenticatePreviousTokenNotUsernamePassword()
     {
+        $this->configResolver->expects($this->never())->method('getParameter');
+        $this->logger->expects($this->never())->method('error');
         $username = 'foo_user';
         $password = 'publish';
 
@@ -494,12 +509,16 @@ class RestSessionBasedAuthenticatorTest extends TestCase
 
     public function testLogout()
     {
+        $this->authenticationManager->expects($this->never())->method('authenticate');
+        $this->eventDispatcher->expects($this->never())->method('dispatch');
+        $this->configResolver->expects($this->never())->method('getParameter');
+        $this->logger->expects($this->never())->method('error');
         $sessionLogoutHandler = $this->createMock(SessionLogoutHandler::class);
         $sessionLogoutHandler
             ->expects($this->never())
             ->method('logout');
 
-        $token = $this->getTokenInterfaceMock();
+        $token = $this->createStub(TokenInterface::class);
         $this->tokenStorage
             ->expects($this->once())
             ->method('getToken')

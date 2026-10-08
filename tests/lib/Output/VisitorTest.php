@@ -43,8 +43,9 @@ class VisitorTest extends TestCase
 
         $visitor = $this->getMockBuilder(Visitor::class)
             ->setMethods(['visitValueObject'])
-            ->setConstructorArgs([$generator, $this->getValueObjectDispatcherMock()])
+            ->setConstructorArgs([$generator, $this->createStub(ValueObjectVisitorDispatcher::class)])
             ->getMock();
+        $visitor->expects($this->once())->method('visitValueObject')->with($data);
 
         $this->assertEquals(
             new Response('Hello world!', 200, []),
@@ -73,8 +74,9 @@ class VisitorTest extends TestCase
 
         $visitor = $this->getMockBuilder(Visitor::class)
             ->setMethods(['visitValueObject'])
-            ->setConstructorArgs([$generator, $this->getValueObjectDispatcherMock()])
+            ->setConstructorArgs([$generator, $this->createStub(ValueObjectVisitorDispatcher::class)])
             ->getMock();
+        $visitor->expects($this->once())->method('visitValueObject')->with($data);
 
         $this->assertEquals(
             new Response(null, 200, []),
@@ -86,8 +88,7 @@ class VisitorTest extends TestCase
     {
         $data = new stdClass();
 
-        /** @var MockObject|Generator $generatorMock */
-        $generatorMock = $this->getGeneratorMock();
+        $generatorMock = $this->createStub(Generator::class);
 
         $valueObjectDispatcherMock = $this->getValueObjectDispatcherMock();
         $valueObjectDispatcherMock
@@ -237,8 +238,8 @@ class VisitorTest extends TestCase
             ->setMethods(['visitValueObject'])
             ->setConstructorArgs(
                 [
-                    $this->getGeneratorMock(),
-                    $this->getValueObjectDispatcherMock(),
+                    $this->createStub(Generator::class),
+                    $this->createStub(ValueObjectVisitorDispatcher::class),
                 ]
             )
             ->getMock();

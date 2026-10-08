@@ -100,7 +100,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
         if (!isset($this->generator)) {
             $this->generator = new Xml(
                 new Xml\FieldTypeHashGenerator(
-                    $this->createMock(NormalizerInterface::class)
+                    $this->createStub(NormalizerInterface::class)
                 )
             );
         }
@@ -200,7 +200,10 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
             ->expects($this->any())
             ->method('generate')
             ->willReturnCallback(
-                function (string $name, array $parameters = []) use (&$expectations): string {
+                static function (
+                    string $name,
+                    array $parameters = []
+                ) use (&$expectations): string {
                     $expected = array_shift($expectations);
                     if ($expected === null) {
                         // Calls beyond the expected ones are not asserted, same as with a plain mock.

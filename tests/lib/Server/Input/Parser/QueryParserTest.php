@@ -20,6 +20,7 @@ class QueryParserTest extends BaseTest
         ];
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $parsingDispatcher->expects($this->never())->method('parse');
         $parser = $this->getParser();
 
         $result = $parser->parse($inputArray, $parsingDispatcher);

@@ -15,6 +15,7 @@ use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher;
 use Ibexa\Contracts\Rest\Output\Visitor;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -24,12 +25,12 @@ use stdClass;
 class ValueObjectVisitorDispatcherTest extends TestCase
 {
     /**
-     * @var MockObject|Visitor
+     * @var (Stub&Visitor)|null
      */
     private $outputVisitorMock;
 
     /**
-     * @var MockObject|Generator
+     * @var (Stub&Generator)|null
      */
     private $outputGeneratorMock;
 
@@ -125,7 +126,7 @@ class ValueObjectVisitorDispatcherTest extends TestCase
         $this->expectException(Error::class);
 
         $dispatcher = $this->getValueObjectDispatcher();
-        $dispatcher->visit($this->createMock(Error::class));
+        $dispatcher->visit($this->createStub(Error::class));
     }
 
     /**
@@ -149,24 +150,24 @@ class ValueObjectVisitorDispatcherTest extends TestCase
     }
 
     /**
-     * @return MockObject|Visitor
+     * @return Stub&Visitor
      */
     private function getOutputVisitorMock()
     {
         if (!isset($this->outputVisitorMock)) {
-            $this->outputVisitorMock = $this->createMock(Visitor::class);
+            $this->outputVisitorMock = $this->createStub(Visitor::class);
         }
 
         return $this->outputVisitorMock;
     }
 
     /**
-     * @return MockObject|Generator
+     * @return Stub&Generator
      */
     private function getOutputGeneratorMock()
     {
         if (!isset($this->outputGeneratorMock)) {
-            $this->outputGeneratorMock = $this->createMock(Generator::class);
+            $this->outputGeneratorMock = $this->createStub(Generator::class);
         }
 
         return $this->outputGeneratorMock;
