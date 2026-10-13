@@ -4765,12 +4765,6 @@ parameters:
 			path: tests/bundle/EventListener/EventListenerTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\EventListener\\RequestListenerTest\:\:getDataForTestOnKernelRequest\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/bundle/EventListener/RequestListenerTest.php
-
-		-
 			message: '#^Return type \(Ibexa\\Bundle\\Rest\\EventListener\\RequestListener\) of method Ibexa\\Tests\\Bundle\\Rest\\EventListener\\RequestListenerTest\:\:getEventListener\(\) should be compatible with return type \(Ibexa\\Bundle\\Rest\\EventListener\\CsrfListener\) of method Ibexa\\Tests\\Bundle\\Rest\\EventListener\\EventListenerTest\:\:getEventListener\(\)$#'
 			identifier: method.childReturnType
 			count: 1

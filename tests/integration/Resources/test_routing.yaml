@@ -1,3 +1,7 @@
 test.ibexa.rest:
     resource: '@IbexaRestBundle/Resources/config/routing.yml'
     prefix: '%ibexa.rest.path_prefix%'
+
+test.acme.rest.load_foo:
+    path: /api/acme/v1/foo
+    methods: [GET]
