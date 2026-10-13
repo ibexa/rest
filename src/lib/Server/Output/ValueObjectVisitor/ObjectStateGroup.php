@@ -45,7 +45,7 @@ class ObjectStateGroup extends ValueObjectVisitor
         $generator->startValueElement('identifier', $data->identifier);
         $generator->endValueElement('identifier');
 
-        $generator->startValueElement('defaultLanguageCode', $data->defaultLanguageCode);
+        $generator->startValueElement('defaultLanguageCode', $data->mainLanguageCode);
         $generator->endValueElement('defaultLanguageCode');
 
         $generator->startValueElement('languageCodes', implode(',', $data->languageCodes));
