@@ -55,7 +55,7 @@ class RestObjectState extends ValueObjectVisitor
 
         $generator->endObjectElement('ObjectStateGroup');
 
-        $generator->startValueElement('defaultLanguageCode', $data->objectState->defaultLanguageCode);
+        $generator->startValueElement('defaultLanguageCode', $data->objectState->mainLanguageCode);
         $generator->endValueElement('defaultLanguageCode');
 
         $generator->startValueElement('languageCodes', implode(',', $data->objectState->languageCodes));

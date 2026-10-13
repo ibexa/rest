@@ -745,12 +745,6 @@ parameters:
 			path: src/lib/Server/Output/ValueObjectVisitor/RestExecutedView.php
 
 		-
-			message: '#^Access to an undefined property Ibexa\\Contracts\\Core\\Repository\\Values\\ObjectState\\ObjectState\:\:\$defaultLanguageCode\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/lib/Server/Output/ValueObjectVisitor/RestObjectState.php
-
-		-
 			message: '#^Access to an undefined property Ibexa\\Contracts\\Core\\Repository\\Values\\Content\\Content\:\:\$email\.$#'
 			identifier: property.notFound
 			count: 1
