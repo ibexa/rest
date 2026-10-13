@@ -119,9 +119,6 @@ final class UriParser implements UriParserInterface
         return false;
     }
 
-    /**
-     * Checks whether a route exists for the request path, regardless of the HTTP method.
-     */
     private function hasRestRoute(Request $request): bool
     {
         try {
@@ -137,9 +134,6 @@ final class UriParser implements UriParserInterface
     }
 
     /**
-     * Matches the request path in the context of the given request, as the matcher context might not have been
-     * initialized from the current request yet (e.g. when called before the Router Listener).
-     *
      * @return array<mixed> matched route configuration and parameters
      *
      * @throws \Symfony\Component\Routing\Exception\MethodNotAllowedException

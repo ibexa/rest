@@ -7549,12 +7549,6 @@ parameters:
 			path: tests/integration/BasicKernelTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Integration\\Rest\\UriParser\\UriParserTest\:\:getDataForTestIsRestRequest\(\) return type has no value type specified in iterable type iterable\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: tests/integration/UriParser/UriParserTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\AuthorProcessorTest\:\:fieldSettingsHashes\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
