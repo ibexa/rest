@@ -53,6 +53,9 @@ services:
         arguments:
             $urlMatcher: '@Symfony\Component\Routing\Matcher\UrlMatcherInterface'
             $restPrefixPattern: '%ibexa.rest.path_prefix.pattern%'
+            $restRouteMatcher: '@router.default'
+            $restPathPrefixes:
+                - '%ibexa.rest.path_prefix%'
 
     Ibexa\Rest\Input\ParserTools: ~
 

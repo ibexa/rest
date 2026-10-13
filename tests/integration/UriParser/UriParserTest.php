@@ -113,20 +113,43 @@ final class UriParserTest extends IbexaKernelTestCase
         $this->uriParser->getAttributeFromUri($uri, $attributeName, $method);
     }
 
+    /**
+     * @return iterable<string, array{\Symfony\Component\HttpFoundation\Request, bool}>
+     */
     public static function getDataForTestIsRestRequest(): iterable
     {
-        yield ($uri = '/api/ibexa/v2/foo') => [
-            Request::create($uri),
+        yield 'existing route under the REST path prefix' => [
+            Request::create('/api/ibexa/v2/content/sections/2'),
             true,
         ];
 
-        yield ($uri = '/api/acme/v1.5/bar') => [
-            Request::create($uri),
+        yield 'unknown route under the REST path prefix' => [
+            Request::create('/api/ibexa/v2/foo'),
             true,
         ];
 
-        yield ($uri = '/baz') => [
-            Request::create($uri),
+        yield 'existing route under a custom REST prefix' => [
+            Request::create('/api/acme/v1/foo'),
+            true,
+        ];
+
+        yield 'existing route for another HTTP method under a custom REST prefix' => [
+            Request::create('/api/acme/v1/foo', 'DELETE'),
+            true,
+        ];
+
+        yield 'unknown route under a custom REST prefix' => [
+            Request::create('/api/acme/v1.5/bar'),
+            false,
+        ];
+
+        yield 'unknown route under an unknown API prefix' => [
+            Request::create('/api/invalid/v1/test'),
+            false,
+        ];
+
+        yield 'non-REST route' => [
+            Request::create('/baz'),
             false,
         ];
     }
@@ -140,11 +163,21 @@ final class UriParserTest extends IbexaKernelTestCase
     }
 
     /**
-     * @dataProvider getDataForTestIsRestRequest
+     * @return iterable<string, array{string, bool}>
      */
-    public function testHasRestPrefix(Request $request, bool $hasRestPrefix): void
+    public static function getDataForTestHasRestPrefix(): iterable
     {
-        self::assertSame($hasRestPrefix, $this->uriParser->hasRestPrefix($request->getPathInfo()));
+        yield ($uri = '/api/ibexa/v2/foo') => [$uri, true];
+        yield ($uri = '/api/acme/v1.5/bar') => [$uri, true];
+        yield ($uri = '/baz') => [$uri, false];
+    }
+
+    /**
+     * @dataProvider getDataForTestHasRestPrefix
+     */
+    public function testHasRestPrefix(string $uri, bool $hasRestPrefix): void
+    {
+        self::assertSame($hasRestPrefix, $this->uriParser->hasRestPrefix($uri));
     }
 
     /**

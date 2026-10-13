@@ -33,12 +33,29 @@ final class UriParser implements UriParserInterface
 
     private string $restPrefixPattern;
 
+    private UrlMatcherInterface $restRouteMatcher;
+
+    /**
+     * @var string[]
+     */
+    private array $restPathPrefixes;
+
+    /**
+     * @param string[] $restPathPrefixes
+     */
     public function __construct(
         UrlMatcherInterface $urlMatcher,
-        string $restPrefixPattern = self::DEFAULT_REST_PREFIX_PATTERN
+        string $restPrefixPattern = self::DEFAULT_REST_PREFIX_PATTERN,
+        ?UrlMatcherInterface $restRouteMatcher = null,
+        array $restPathPrefixes = []
     ) {
         $this->urlMatcher = $urlMatcher;
         $this->restPrefixPattern = $restPrefixPattern;
+        $this->restRouteMatcher = $restRouteMatcher ?? $urlMatcher;
+        $this->restPathPrefixes = array_map(
+            static fn (string $restPathPrefix): string => rtrim($restPathPrefix, '/') . '/',
+            $restPathPrefixes
+        );
     }
 
     public function matchUri(string $uri, string $method = 'GET'): array
@@ -50,13 +67,8 @@ final class UriParser implements UriParserInterface
 
         $request = Request::create($uri, $method);
 
-        $originalContext = $this->urlMatcher->getContext();
-        $context = clone $originalContext;
-        $context->fromRequest($request);
-        $this->urlMatcher->setContext($context);
-
         try {
-            return $this->urlMatcher->match($request->getPathInfo());
+            return $this->matchRequest($this->urlMatcher, $request);
         } catch (MethodNotAllowedException $e) {
             // seems MethodNotAllowedException has no message set
             $allowedMethods = implode(', ', $e->getAllowedMethods());
@@ -67,8 +79,6 @@ final class UriParser implements UriParserInterface
             );
         } catch (ResourceNotFoundException $e) {
             throw new InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
-        } finally {
-            $this->urlMatcher->setContext($originalContext);
         }
     }
 
@@ -85,11 +95,61 @@ final class UriParser implements UriParserInterface
 
     public function isRestRequest(Request $request): bool
     {
-        return $this->hasRestPrefix($request->getPathInfo());
+        $pathInfo = $request->getPathInfo();
+        if (!$this->hasRestPrefix($pathInfo)) {
+            return false;
+        }
+
+        return $this->hasRestPathPrefix($pathInfo) || $this->hasRestRoute($request);
     }
 
     public function hasRestPrefix(string $uri): bool
     {
         return (bool)preg_match($this->restPrefixPattern, $uri);
+    }
+
+    private function hasRestPathPrefix(string $pathInfo): bool
+    {
+        foreach ($this->restPathPrefixes as $restPathPrefix) {
+            if (strpos($pathInfo, $restPathPrefix) === 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function hasRestRoute(Request $request): bool
+    {
+        try {
+            $this->matchRequest($this->restRouteMatcher, $request);
+        } catch (MethodNotAllowedException $e) {
+            // the route exists, it's up to the REST layer to respond with 405 Method Not Allowed
+            return true;
+        } catch (ResourceNotFoundException $e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @return array<mixed> matched route configuration and parameters
+     *
+     * @throws \Symfony\Component\Routing\Exception\MethodNotAllowedException
+     * @throws \Symfony\Component\Routing\Exception\ResourceNotFoundException
+     */
+    private function matchRequest(UrlMatcherInterface $urlMatcher, Request $request): array
+    {
+        $originalContext = $urlMatcher->getContext();
+        $context = clone $originalContext;
+        $context->fromRequest($request);
+        $urlMatcher->setContext($context);
+
+        try {
+            return $urlMatcher->match($request->getPathInfo());
+        } finally {
+            $urlMatcher->setContext($originalContext);
+        }
     }
 }
