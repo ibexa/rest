@@ -225,6 +225,41 @@ class RestSessionBasedAuthenticatorTest extends TestCase
         return new IbexaUser($apiUser);
     }
 
+    /**
+     * Expects calls of getToken() and setToken() on the token storage in the given order across both methods.
+     *
+     * @param list<TokenInterface> $getTokenReturns tokens returned by consecutive getToken() calls
+     * @param list<TokenInterface> $setTokenArguments tokens expected in consecutive setToken() calls
+     * @param list<string> $expectedOrder method names in the order they must be called
+     */
+    private function expectTokenStorageCalls(
+        array $getTokenReturns,
+        array $setTokenArguments,
+        array $expectedOrder
+    ): void {
+        $position = 0;
+        $assertNext = static function (string $method) use (&$position, $expectedOrder): void {
+            self::assertSame($expectedOrder[$position] ?? null, $method, "Unexpected call #$position.");
+            ++$position;
+        };
+
+        $this->tokenStorage
+            ->expects($this->exactly(count($getTokenReturns)))
+            ->method('getToken')
+            ->willReturnCallback(static function () use (&$getTokenReturns, $assertNext) {
+                $assertNext('getToken');
+
+                return array_shift($getTokenReturns);
+            });
+        $this->tokenStorage
+            ->expects($this->exactly(count($setTokenArguments)))
+            ->method('setToken')
+            ->willReturnCallback(static function (?TokenInterface $token) use (&$setTokenArguments, $assertNext): void {
+                $assertNext('setToken');
+                self::assertEquals(array_shift($setTokenArguments), $token);
+            });
+    }
+
     public function testAuthenticateUserConflict()
     {
         $this->logger->expects($this->never())->method('error');
@@ -263,14 +298,11 @@ class RestSessionBasedAuthenticatorTest extends TestCase
                 SecurityEvents::INTERACTIVE_LOGIN
             );
 
-        $this->tokenStorage
-            ->expects($this->exactly(2))
-            ->method('getToken')
-            ->willReturnOnConsecutiveCalls($existingToken, $authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->exactly(2))
-            ->method('setToken')
-            ->withConsecutive([$authenticatedToken], [$existingToken]);
+        $this->expectTokenStorageCalls(
+            [$existingToken, $authenticatedToken],
+            [$authenticatedToken, $existingToken],
+            ['getToken', 'setToken', 'getToken', 'setToken']
+        );
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
@@ -325,14 +357,11 @@ class RestSessionBasedAuthenticatorTest extends TestCase
                 SecurityEvents::INTERACTIVE_LOGIN
             );
 
-        $this->tokenStorage
-            ->expects($this->exactly(2))
-            ->method('getToken')
-            ->willReturnOnConsecutiveCalls($existingToken, $authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->once())
-            ->method('setToken')
-            ->with($authenticatedToken);
+        $this->expectTokenStorageCalls(
+            [$existingToken, $authenticatedToken],
+            [$authenticatedToken],
+            ['getToken', 'setToken', 'getToken']
+        );
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
@@ -382,14 +411,11 @@ class RestSessionBasedAuthenticatorTest extends TestCase
                 SecurityEvents::INTERACTIVE_LOGIN
             );
 
-        $this->tokenStorage
-            ->expects($this->exactly(2))
-            ->method('getToken')
-            ->willReturnOnConsecutiveCalls($existingToken, $authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->once())
-            ->method('setToken')
-            ->with($authenticatedToken);
+        $this->expectTokenStorageCalls(
+            [$existingToken, $authenticatedToken],
+            [$authenticatedToken],
+            ['getToken', 'setToken', 'getToken']
+        );
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
@@ -438,14 +464,11 @@ class RestSessionBasedAuthenticatorTest extends TestCase
                 SecurityEvents::INTERACTIVE_LOGIN
             );
 
-        $this->tokenStorage
-            ->expects($this->exactly(2))
-            ->method('getToken')
-            ->willReturnOnConsecutiveCalls($existingToken, $authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->once())
-            ->method('setToken')
-            ->with($authenticatedToken);
+        $this->expectTokenStorageCalls(
+            [$existingToken, $authenticatedToken],
+            [$authenticatedToken],
+            ['getToken', 'setToken', 'getToken']
+        );
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken
@@ -489,14 +512,11 @@ class RestSessionBasedAuthenticatorTest extends TestCase
                 SecurityEvents::INTERACTIVE_LOGIN
             );
 
-        $this->tokenStorage
-            ->expects($this->exactly(2))
-            ->method('getToken')
-            ->willReturnOnConsecutiveCalls($existingToken, $authenticatedToken);
-        $this->tokenStorage
-            ->expects($this->once())
-            ->method('setToken')
-            ->with($authenticatedToken);
+        $this->expectTokenStorageCalls(
+            [$existingToken, $authenticatedToken],
+            [$authenticatedToken],
+            ['getToken', 'setToken', 'getToken']
+        );
 
         $authenticatedUser = $this->createUser(456);
         $authenticatedToken

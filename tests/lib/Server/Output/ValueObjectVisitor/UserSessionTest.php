@@ -34,16 +34,23 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
             false
         );
 
+        $calls = [];
         $this->getVisitorMock()->expects($this->once())
             ->method('setStatus')
-            ->with($this->equalTo(200));
+            ->with($this->equalTo(200))
+            ->willReturnCallback(static function () use (&$calls): void {
+                $calls[] = 'setStatus';
+            });
 
         $this->getVisitorMock()->expects($this->exactly(2))
             ->method('setHeader')
             ->withConsecutive(
                 [$this->equalTo('Content-Type'), $this->equalTo('application/vnd.ibexa.api.Session+xml')],
                 [$this->equalTo('Accept-Patch'), $this->equalTo(false)]
-            );
+            )
+            ->willReturnCallback(static function (string $name) use (&$calls): void {
+                $calls[] = 'setHeader ' . $name;
+            });
 
         $this->addRouteExpectation(
             'ibexa.rest.delete_session',
@@ -67,6 +74,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
+        $this->assertSame(['setStatus', 'setHeader Content-Type', 'setHeader Accept-Patch'], $calls);
         $this->assertNotNull($result);
 
         return $result;

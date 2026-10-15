@@ -31,6 +31,8 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
      */
     protected $request;
 
+    private const FULL_CACHE_HEADER_CALLS = ['setPublic', 'setVary Accept', 'setSharedMaxAge', 'setVary X-User-Hash'];
+
     public function setUp(): void
     {
         $this->request = new Request();
@@ -39,26 +41,24 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
     public function testVisit()
     {
-        $responseMock = $this->getResponseMock();
-        $responseMock->expects($this->once())->method('setPublic');
-        $responseMock->expects($this->exactly(2))->method('setVary')->withConsecutive(['Accept'], ['X-User-Hash', false]);
-        $responseMock->expects($this->once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
+        $calls = [];
+        $this->expectFullCacheHeaders($calls);
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
         self::assertNotNull($result);
+        self::assertSame(self::FULL_CACHE_HEADER_CALLS, $calls);
     }
 
     public function testVisitLocationCache()
     {
-        $responseMock = $this->getResponseMock();
-        $responseMock->expects($this->once())->method('setPublic');
-        $responseMock->expects($this->exactly(2))->method('setVary')->withConsecutive(['Accept'], ['X-User-Hash', false]);
-        $responseMock->expects($this->once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
+        $calls = [];
+        $this->expectFullCacheHeaders($calls);
 
         $result = $this->visit(new CachedValue(new stdClass(), ['locationId' => 'testLocationId']));
 
         self::assertNotNull($result);
+        self::assertSame(self::FULL_CACHE_HEADER_CALLS, $calls);
     }
 
     public function testVisitNoUserHash()
@@ -115,6 +115,36 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
         $result = $this->visit(new CachedValue(new stdClass()));
 
         self::assertNotNull($result);
+    }
+
+    /**
+     * Expects the response calls and records them in $calls, to assert their order across methods.
+     *
+     * @param string[] $calls
+     */
+    private function expectFullCacheHeaders(array &$calls): void
+    {
+        $responseMock = $this->getResponseMock();
+        $responseMock->expects($this->once())->method('setPublic')
+            ->willReturnCallback(static function () use (&$calls, $responseMock) {
+                $calls[] = 'setPublic';
+
+                return $responseMock;
+            });
+        $responseMock->expects($this->exactly(2))->method('setVary')
+            ->withConsecutive(['Accept'], ['X-User-Hash', false])
+            ->willReturnCallback(static function (string $header) use (&$calls, $responseMock) {
+                $calls[] = 'setVary ' . $header;
+
+                return $responseMock;
+            });
+        $responseMock->expects($this->once())->method('setSharedMaxAge')
+            ->with($this->defaultOptions['content.default_ttl'])
+            ->willReturnCallback(static function () use (&$calls, $responseMock) {
+                $calls[] = 'setSharedMaxAge';
+
+                return $responseMock;
+            });
     }
 
     protected function visit($value)

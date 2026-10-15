@@ -23,23 +23,13 @@ class VisitorTest extends TestCase
     public function testVisitDocument()
     {
         $data = new stdClass();
+        $calls = [];
 
         $generator = $this->getGeneratorMock();
-        $generator
-            ->expects($this->once())
-            ->method('startDocument')
-            ->with($data);
-
-        $generator
-            ->expects($this->once())
-            ->method('isEmpty')
-            ->willReturn(false);
-
-        $generator
-            ->expects($this->once())
-            ->method('endDocument')
-            ->with($data)
-            ->willReturn('Hello world!');
+        $this->expectRecordedCall($generator, 'reset', $calls);
+        $this->expectRecordedCall($generator, 'startDocument', $calls, [$data]);
+        $this->expectRecordedCall($generator, 'isEmpty', $calls, [], false);
+        $this->expectRecordedCall($generator, 'endDocument', $calls, [$data], 'Hello world!');
 
         $visitor = $this->getMockBuilder(Visitor::class)
             ->setMethods(['visitValueObject'])
@@ -51,22 +41,18 @@ class VisitorTest extends TestCase
             new Response('Hello world!', 200, []),
             $visitor->visit($data)
         );
+        $this->assertSame(['reset', 'startDocument', 'isEmpty', 'endDocument'], $calls);
     }
 
     public function testVisitEmptyDocument()
     {
         $data = new stdClass();
+        $calls = [];
 
         $generator = $this->getGeneratorMock();
-        $generator
-            ->expects($this->once())
-            ->method('startDocument')
-            ->with($data);
-
-        $generator
-            ->expects($this->once())
-            ->method('isEmpty')
-            ->willReturn(true);
+        $this->expectRecordedCall($generator, 'reset', $calls);
+        $this->expectRecordedCall($generator, 'startDocument', $calls, [$data]);
+        $this->expectRecordedCall($generator, 'isEmpty', $calls, [], true);
 
         $generator
             ->expects($this->never())
@@ -82,6 +68,33 @@ class VisitorTest extends TestCase
             new Response(null, 200, []),
             $visitor->visit($data)
         );
+        $this->assertSame(['reset', 'startDocument', 'isEmpty'], $calls);
+    }
+
+    /**
+     * Expects exactly one call of $method with $arguments and records its name in $calls,
+     * to assert order across methods of one mock.
+     *
+     * @param list<string> $calls
+     * @param list<mixed> $arguments
+     * @param mixed $returnValue
+     */
+    private function expectRecordedCall(
+        MockObject $mock,
+        string $method,
+        array &$calls,
+        array $arguments = [],
+        $returnValue = null
+    ): void {
+        $builder = $mock->expects($this->once())->method($method);
+        if ($arguments !== []) {
+            $builder->with(...$arguments);
+        }
+        $builder->willReturnCallback(static function () use (&$calls, $method, $returnValue) {
+            $calls[] = $method;
+
+            return $returnValue;
+        });
     }
 
     public function testVisitValueObject()
