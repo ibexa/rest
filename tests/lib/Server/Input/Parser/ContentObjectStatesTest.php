@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Rest\Input\Parser;
+use Ibexa\Rest\Input\Parser\ContentObjectStates;
 
 class ContentObjectStatesTest extends BaseTest
 {
@@ -89,11 +91,11 @@ class ContentObjectStatesTest extends BaseTest
     /**
      * Gets the ContentObjectStates parser.
      *
-     * @return \Ibexa\Rest\Input\Parser\ContentObjectStates ;
+     * @return ContentObjectStates ;
      */
     protected function internalGetParser()
     {
-        return new Parser\ContentObjectStates();
+        return new ContentObjectStates();
     }
 }
 

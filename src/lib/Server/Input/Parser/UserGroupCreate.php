@@ -4,10 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\User\UserGroupCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -21,33 +23,36 @@ class UserGroupCreate extends BaseParser
     /**
      * User service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\UserService
+     * @var UserService
      */
     protected $userService;
 
     /**
      * ContentType service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
+     * @var ContentTypeService
      */
     protected $contentTypeService;
 
     /**
      * FieldType parser.
      *
-     * @var \Ibexa\Rest\Input\FieldTypeParser
+     * @var FieldTypeParser
      */
     protected $fieldTypeParser;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\UserService $userService
-     * @param \Ibexa\Contracts\Core\Repository\ContentTypeService $contentTypeService
-     * @param \Ibexa\Rest\Input\FieldTypeParser $fieldTypeParser
+     * @param UserService $userService
+     * @param ContentTypeService $contentTypeService
+     * @param FieldTypeParser $fieldTypeParser
      */
-    public function __construct(UserService $userService, ContentTypeService $contentTypeService, FieldTypeParser $fieldTypeParser)
-    {
+    public function __construct(
+        UserService $userService,
+        ContentTypeService $contentTypeService,
+        FieldTypeParser $fieldTypeParser
+    ) {
         $this->userService = $userService;
         $this->contentTypeService = $contentTypeService;
         $this->fieldTypeParser = $fieldTypeParser;
@@ -57,12 +62,14 @@ class UserGroupCreate extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\UserGroupCreateStruct
+     * @return UserGroupCreateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         $contentType = null;
         if (array_key_exists('ContentType', $data) && is_array($data['ContentType'])) {
             if (!array_key_exists('_href', $data['ContentType'])) {

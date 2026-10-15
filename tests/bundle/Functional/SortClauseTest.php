@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use Psr\Http\Client\ClientException;
 use SimpleXMLElement;
 
 class SortClauseTest extends RESTFunctionalTestCase
@@ -18,10 +20,13 @@ class SortClauseTest extends RESTFunctionalTestCase
      * @param string $sortClauseXML
      * @param array $foldersInExpectedOrder
      *
-     * @throws \Psr\Http\Client\ClientException
+     * @throws ClientException
      */
-    public function testFieldSortClause(array $foldersNameToCreate, string $sortClauseXML, array $foldersInExpectedOrder)
-    {
+    public function testFieldSortClause(
+        array $foldersNameToCreate,
+        string $sortClauseXML,
+        array $foldersInExpectedOrder
+    ) {
         $string = $this->addTestSuffix(__FUNCTION__);
         $mainTestFolderContent = $this->createFolder($string, '/api/ibexa/v2/content/locations/1/2');
 

@@ -4,10 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Controller as RestController;
+use Ibexa\Rest\Server\Service\RootResourceBuilderInterface;
 
 /**
  * Root controller.
@@ -15,7 +17,7 @@ use Ibexa\Rest\Server\Controller as RestController;
 class Root extends RestController
 {
     /**
-     * @var \Ibexa\Rest\Server\Service\RootResourceBuilderInterface
+     * @var RootResourceBuilderInterface
      */
     private $rootResourceBuilder;
 
@@ -37,7 +39,7 @@ class Root extends RestController
     /**
      * Catch-all for REST requests.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
     public function catchAll()
     {

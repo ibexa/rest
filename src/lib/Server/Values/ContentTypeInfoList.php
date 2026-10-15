@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -16,7 +18,7 @@ class ContentTypeInfoList extends RestValue
     /**
      * Content types.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType[]
+     * @var ContentType[]
      */
     public $contentTypes;
 
@@ -30,11 +32,13 @@ class ContentTypeInfoList extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType[] $contentTypes
+     * @param ContentType[] $contentTypes
      * @param string $path
      */
-    public function __construct(array $contentTypes, $path)
-    {
+    public function __construct(
+        array $contentTypes,
+        $path
+    ) {
         $this->contentTypes = $contentTypes;
         $this->path = $path;
     }

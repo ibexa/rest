@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Section as SectionValue;
@@ -19,12 +20,15 @@ class Section extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Section $data
+     * @param Visitor $visitor
+     * @param Generator $generator
+     * @param SectionValue $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ) {
         $generator->startObjectElement('Section');
         $visitor->setHeader('Content-Type', $generator->getMediaType('Section'));
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('SectionInput'));
@@ -32,8 +36,11 @@ class Section extends ValueObjectVisitor
         $generator->endObjectElement('Section');
     }
 
-    protected function visitSectionAttributes(Visitor $visitor, Generator $generator, SectionValue $data)
-    {
+    protected function visitSectionAttributes(
+        Visitor $visitor,
+        Generator $generator,
+        SectionValue $data
+    ) {
         $generator->startAttribute(
             'href',
             $this->router->generate('ibexa.rest.load_section', ['sectionId' => $data->id])

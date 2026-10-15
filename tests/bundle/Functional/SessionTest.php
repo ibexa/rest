@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use DOMDocument;
@@ -30,7 +31,7 @@ class SessionTest extends TestCase
     }
 
     /**
-     * @return \stdClass The login request's response
+     * @return stdClass The login request's response
      */
     public function testCreateSession()
     {
@@ -40,7 +41,7 @@ class SessionTest extends TestCase
     /**
      * @depends testCreateSession
      *
-     * @param \stdClass $session
+     * @param stdClass $session
      */
     public function testRefreshSession(stdClass $session)
     {
@@ -242,9 +243,9 @@ class SessionTest extends TestCase
     }
 
     /**
-     * @param \stdClass $session
+     * @param stdClass $session
      *
-     * @return \Psr\Http\Message\RequestInterface
+     * @return RequestInterface
      */
     protected function createRefreshRequest(stdClass $session): RequestInterface
     {
@@ -264,9 +265,9 @@ class SessionTest extends TestCase
     }
 
     /**
-     * @param \stdClass $session
+     * @param stdClass $session
      *
-     * @return \Psr\Http\Message\RequestInterface
+     * @return RequestInterface
      */
     protected function createDeleteRequest(stdClass $session): RequestInterface
     {
@@ -285,8 +286,10 @@ class SessionTest extends TestCase
         return $deleteRequest;
     }
 
-    private static function assertHttpResponseDeletesSessionCookie($session, ResponseInterface $response)
-    {
+    private static function assertHttpResponseDeletesSessionCookie(
+        $session,
+        ResponseInterface $response
+    ) {
         self::assertStringStartsWith("{$session->name}=deleted;", $response->getHeader('set-cookie')[0]);
     }
 }

@@ -10,33 +10,38 @@ namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\BookmarkService;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\OK;
 use Ibexa\Rest\Value as RestValue;
 use Symfony\Component\HttpFoundation\Request;
 
 class Bookmark extends RestController
 {
     /**
-     * @var \Ibexa\Contracts\Core\Repository\BookmarkService
+     * @var BookmarkService
      */
     protected $bookmarkService;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
+     * @var LocationService
      */
     protected $locationService;
 
     /**
      * Bookmark constructor.
      *
-     * @param \Ibexa\Contracts\Core\Repository\BookmarkService $bookmarkService
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
+     * @param BookmarkService $bookmarkService
+     * @param LocationService $locationService
      */
-    public function __construct(BookmarkService $bookmarkService, LocationService $locationService)
-    {
+    public function __construct(
+        BookmarkService $bookmarkService,
+        LocationService $locationService
+    ) {
         $this->bookmarkService = $bookmarkService;
         $this->locationService = $locationService;
     }
@@ -44,16 +49,18 @@ class Bookmark extends RestController
     /**
      * Add given location to bookmarks.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      * @param int $locationId
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      *
-     * @return \Ibexa\Rest\Value
+     * @return RestValue
      */
-    public function createBookmark(Request $request, int $locationId): RestValue
-    {
+    public function createBookmark(
+        Request $request,
+        int $locationId
+    ): RestValue {
         $location = $this->locationService->loadLocation($locationId);
 
         try {
@@ -75,16 +82,18 @@ class Bookmark extends RestController
     /**
      * Deletes a given bookmark.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      * @param int $locationId
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      *
-     * @return \Ibexa\Rest\Value
+     * @return RestValue
      */
-    public function deleteBookmark(Request $request, int $locationId): RestValue
-    {
+    public function deleteBookmark(
+        Request $request,
+        int $locationId
+    ): RestValue {
         $location = $this->locationService->loadLocation($locationId);
 
         try {
@@ -99,33 +108,35 @@ class Bookmark extends RestController
     /**
      * Checks if given location is bookmarked.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      * @param int $locationId
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      *
-     * @return \Ibexa\Rest\Server\Values\OK
+     * @return OK
      */
-    public function isBookmarked(Request $request, int $locationId): Values\OK
-    {
+    public function isBookmarked(
+        Request $request,
+        int $locationId
+    ): OK {
         $location = $this->locationService->loadLocation($locationId);
 
         if (!$this->bookmarkService->isBookmarked($location)) {
             throw new Exceptions\NotFoundException("Location {$locationId} is not bookmarked");
         }
 
-        return new Values\OK();
+        return new OK();
     }
 
     /**
      * List bookmarked locations.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      *
-     * @return \Ibexa\Rest\Value
+     * @return RestValue
      */
     public function loadBookmarks(Request $request): RestValue
     {

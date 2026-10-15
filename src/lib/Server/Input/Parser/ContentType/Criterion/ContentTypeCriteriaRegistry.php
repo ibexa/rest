@@ -10,11 +10,11 @@ namespace Ibexa\Rest\Server\Input\Parser\ContentType\Criterion;
 
 final class ContentTypeCriteriaRegistry
 {
-    /** @var iterable<\Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\ContentTypeCriterionInterface> */
+    /** @var iterable<ContentTypeCriterionInterface> */
     private iterable $criteria;
 
     /**
-     * @param iterable<\Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\ContentTypeCriterionInterface> $criteria
+     * @param iterable<ContentTypeCriterionInterface> $criteria
      */
     public function __construct(iterable $criteria)
     {
@@ -22,7 +22,7 @@ final class ContentTypeCriteriaRegistry
     }
 
     /**
-     * @return iterable<\Ibexa\Rest\Server\Input\Parser\ContentType\Criterion\ContentTypeCriterionInterface>
+     * @return iterable<ContentTypeCriterionInterface>
      */
     public function getCriteria(): iterable
     {

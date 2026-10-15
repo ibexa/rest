@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Variation\Values\ImageVariation as ImageVariationValue;
@@ -14,18 +15,24 @@ use Ibexa\Contracts\Rest\Output\Visitor;
 class ImageVariation extends ValueObjectVisitor
 {
     /**
-     * @param \Ibexa\Contracts\Core\Variation\Values\ImageVariation $data
+     * @param ImageVariationValue $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ) {
         $visitor->setHeader('Content-Type', $generator->getMediaType('ContentImageVariation'));
         $generator->startObjectElement('ContentImageVariation');
         $this->visitImageVariationAttributes($visitor, $generator, $data);
         $generator->endObjectElement('ContentImageVariation');
     }
 
-    protected function visitImageVariationAttributes(Visitor $visitor, Generator $generator, ImageVariationValue $data)
-    {
+    protected function visitImageVariationAttributes(
+        Visitor $visitor,
+        Generator $generator,
+        ImageVariationValue $data
+    ) {
         $generator->startAttribute(
             'href',
             $this->router->generate(

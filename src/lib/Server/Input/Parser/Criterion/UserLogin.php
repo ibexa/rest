@@ -16,8 +16,10 @@ use Ibexa\Rest\Input\BaseParser;
 
 class UserLogin extends BaseParser
 {
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): UserLoginCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): UserLoginCriterion {
         if (!array_key_exists('UserLoginCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <UserLoginCriterion> format');
         }

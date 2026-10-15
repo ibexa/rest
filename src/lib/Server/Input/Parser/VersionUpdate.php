@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentUpdateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -20,25 +22,27 @@ class VersionUpdate extends BaseParser
     /**
      * Content service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
+     * @var ContentService
      */
     protected $contentService;
 
     /**
      * FieldType parser.
      *
-     * @var \Ibexa\Rest\Input\FieldTypeParser
+     * @var FieldTypeParser
      */
     protected $fieldTypeParser;
 
     /**
      * Construct from content service.
      *
-     * @param \Ibexa\Contracts\Core\Repository\ContentService $contentService
-     * @param \Ibexa\Rest\Input\FieldTypeParser $fieldTypeParser
+     * @param ContentService $contentService
+     * @param FieldTypeParser $fieldTypeParser
      */
-    public function __construct(ContentService $contentService, FieldTypeParser $fieldTypeParser)
-    {
+    public function __construct(
+        ContentService $contentService,
+        FieldTypeParser $fieldTypeParser
+    ) {
         $this->contentService = $contentService;
         $this->fieldTypeParser = $fieldTypeParser;
     }
@@ -47,12 +51,14 @@ class VersionUpdate extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\ContentUpdateStruct
+     * @return ContentUpdateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         $contentUpdateStruct = $this->contentService->newContentUpdateStruct();
 
         // Missing initial language code

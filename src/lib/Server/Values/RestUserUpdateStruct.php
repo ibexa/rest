@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\User\UserUpdateStruct;
@@ -17,7 +18,7 @@ class RestUserUpdateStruct extends RestValue
     /**
      * User update struct.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\User\UserUpdateStruct
+     * @var UserUpdateStruct
      */
     public $userUpdateStruct;
 
@@ -31,11 +32,13 @@ class RestUserUpdateStruct extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\UserUpdateStruct $userUpdateStruct
+     * @param UserUpdateStruct $userUpdateStruct
      * @param mixed $sectionId
      */
-    public function __construct(UserUpdateStruct $userUpdateStruct, $sectionId = null)
-    {
+    public function __construct(
+        UserUpdateStruct $userUpdateStruct,
+        $sectionId = null
+    ) {
         $this->userUpdateStruct = $userUpdateStruct;
         $this->sectionId = $sectionId;
     }

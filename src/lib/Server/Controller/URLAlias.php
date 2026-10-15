@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
@@ -13,6 +14,9 @@ use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedURLAlias;
+use Ibexa\Rest\Server\Values\NoContent;
+use Ibexa\Rest\Server\Values\URLAliasRefList;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,25 +28,27 @@ class URLAlias extends RestController
     /**
      * URLAlias service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\URLAliasService
+     * @var URLAliasService
      */
     protected $urlAliasService;
 
     /**
      * Location service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
+     * @var LocationService
      */
     protected $locationService;
 
     /**
      * Construct controller.
      *
-     * @param \Ibexa\Contracts\Core\Repository\URLAliasService $urlAliasService
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
+     * @param URLAliasService $urlAliasService
+     * @param LocationService $locationService
      */
-    public function __construct(URLAliasService $urlAliasService, LocationService $locationService)
-    {
+    public function __construct(
+        URLAliasService $urlAliasService,
+        LocationService $locationService
+    ) {
         $this->urlAliasService = $urlAliasService;
         $this->locationService = $locationService;
     }
@@ -62,11 +68,11 @@ class URLAlias extends RestController
     /**
      * Returns the list of global URL aliases.
      *
-     * @return \Ibexa\Rest\Server\Values\URLAliasRefList
+     * @return URLAliasRefList
      */
     public function listGlobalURLAliases()
     {
-        return new Values\URLAliasRefList(
+        return new URLAliasRefList(
             $this->urlAliasService->listGlobalAliases(),
             $this->router->generate('ibexa.rest.list_global_url_aliases')
         );
@@ -77,10 +83,12 @@ class URLAlias extends RestController
      *
      * @param $locationPath
      *
-     * @return \Ibexa\Rest\Server\Values\URLAliasRefList
+     * @return URLAliasRefList
      */
-    public function listLocationURLAliases($locationPath, Request $request)
-    {
+    public function listLocationURLAliases(
+        $locationPath,
+        Request $request
+    ) {
         $locationPathParts = explode('/', $locationPath);
 
         $location = $this->locationService->loadLocation(
@@ -90,7 +98,7 @@ class URLAlias extends RestController
         $custom = !($request->query->has('custom') && $request->query->get('custom') === 'false');
 
         return new Values\CachedValue(
-            new Values\URLAliasRefList(
+            new URLAliasRefList(
                 $this->urlAliasService->listLocationAliases($location, $custom),
                 $request->getPathInfo()
             ),
@@ -101,9 +109,9 @@ class URLAlias extends RestController
     /**
      * Creates a new URL alias.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      *
-     * @return \Ibexa\Rest\Server\Values\CreatedURLAlias
+     * @return CreatedURLAlias
      */
     public function createURLAlias(Request $request)
     {
@@ -149,7 +157,7 @@ class URLAlias extends RestController
             }
         }
 
-        return new Values\CreatedURLAlias(
+        return new CreatedURLAlias(
             [
                 'urlAlias' => $createdURLAlias,
             ]
@@ -161,7 +169,7 @@ class URLAlias extends RestController
      *
      * @param $urlAliasId
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
     public function deleteURLAlias($urlAliasId)
     {
@@ -171,7 +179,7 @@ class URLAlias extends RestController
             ]
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 }
 

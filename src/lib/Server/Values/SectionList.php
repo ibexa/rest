@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Section;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -16,7 +18,7 @@ class SectionList extends RestValue
     /**
      * Sections.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Section[]
+     * @var Section[]
      */
     public $sections;
 
@@ -30,11 +32,13 @@ class SectionList extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Section[] $sections
+     * @param Section[] $sections
      * @param string $path
      */
-    public function __construct(array $sections, $path)
-    {
+    public function __construct(
+        array $sections,
+        $path
+    ) {
         $this->sections = $sections;
         $this->path = $path;
     }

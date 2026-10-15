@@ -4,11 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata as DateMetadataCriterion;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 
@@ -32,28 +33,30 @@ class DateMetadata extends BaseParser
      *
      * @param string[] $data
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): DateMetadataCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): DateMetadataCriterion {
         if (!isset($data['DateMetadataCriterion'])) {
-            throw new Exceptions\Parser('Invalid <DateMetadataCriterion> format');
+            throw new Parser('Invalid <DateMetadataCriterion> format');
         }
 
         $dateMetadata = $data['DateMetadataCriterion'];
 
         if (!isset($dateMetadata['Target'])) {
-            throw new Exceptions\Parser('Invalid <Target> format');
+            throw new Parser('Invalid <Target> format');
         }
 
         $target = strtolower($dateMetadata['Target']);
 
         if (!in_array($target, DateMetadataCriterion::TARGETS, true)) {
-            throw new Exceptions\Parser('Invalid <Target> format');
+            throw new Parser('Invalid <Target> format');
         }
 
         if (!isset($dateMetadata['Value'])) {
-            throw new Exceptions\Parser('Invalid <Value> format');
+            throw new Parser('Invalid <Value> format');
         }
 
         if (
@@ -65,13 +68,13 @@ class DateMetadata extends BaseParser
         }
 
         if (!in_array(gettype($dateMetadata['Value']), ['integer', 'array'], true)) {
-            throw new Exceptions\Parser('Invalid <Value> format');
+            throw new Parser('Invalid <Value> format');
         }
 
         $value = $dateMetadata['Value'];
 
         if (!isset($dateMetadata['Operator'])) {
-            throw new Exceptions\Parser('Invalid <Operator> format');
+            throw new Parser('Invalid <Operator> format');
         }
 
         $operator = $this->getOperator($dateMetadata['Operator']);
@@ -84,13 +87,13 @@ class DateMetadata extends BaseParser
      *
      * For the full list of supported operators:
      *
-     * @see \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\DateMetadata::OPERATORS
+     * @see DateMetadataCriterion::OPERATORS
      */
     private function getOperator(string $operatorName): string
     {
         $operatorName = strtoupper($operatorName);
         if (!isset(self::OPERATORS[$operatorName])) {
-            throw new Exceptions\Parser(
+            throw new Parser(
                 sprintf(
                     'Unexpected DateMetadata operator. Expected one of: %s',
                     implode(', ', array_keys(self::OPERATORS))

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
@@ -54,6 +55,7 @@ XML;
      * Covers POST /content/objectstategroups/{objectStateGroupId}/objectstates.
      *
      * @return string Object state href
+     *
      * @depends testCreateObjectStateGroup
      */
     public function testCreateObjectState($objectStateGroupHref)

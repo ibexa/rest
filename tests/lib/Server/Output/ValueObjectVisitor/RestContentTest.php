@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use DOMDocument;
@@ -14,10 +15,11 @@ use Ibexa\Core\Repository\Values;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestContent;
 use Ibexa\Rest\Server\Values\Version;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class RestContentTest extends BaseContentValueObjectVisitorTestCase
 {
-    /** @var \Ibexa\Core\Helper\TranslationHelper|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var TranslationHelper|MockObject */
     private $translationHelper;
 
     protected function setUp(): void
@@ -282,7 +284,7 @@ class RestContentTest extends BaseContentValueObjectVisitorTestCase
     }
 
     /**
-     * @param \DOMDocument $dom
+     * @param DOMDocument $dom
      *
      * @depends testVisitWithEmbeddedVersion
      */
@@ -292,7 +294,7 @@ class RestContentTest extends BaseContentValueObjectVisitorTestCase
     }
 
     /**
-     * @param \DOMDocument $dom
+     * @param DOMDocument $dom
      *
      * @depends testVisitWithEmbeddedVersion
      */
@@ -302,7 +304,7 @@ class RestContentTest extends BaseContentValueObjectVisitorTestCase
     }
 
     /**
-     * @param \DOMDocument $dom
+     * @param DOMDocument $dom
      *
      * @depends testVisitWithEmbeddedVersion
      */

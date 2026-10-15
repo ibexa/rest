@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
@@ -13,6 +14,9 @@ use Ibexa\Contracts\Core\Repository\Values\Content\Query;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\NoContent;
+use Ibexa\Rest\Server\Values\ResourceCreated;
+use Ibexa\Rest\Server\Values\RestTrashItem;
 use InvalidArgumentException;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,25 +29,27 @@ class Trash extends RestController
     /**
      * Trash service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\TrashService
+     * @var TrashService
      */
     protected $trashService;
 
     /**
      * Location service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
+     * @var LocationService
      */
     protected $locationService;
 
     /**
      * Construct controller.
      *
-     * @param \Ibexa\Contracts\Core\Repository\TrashService $trashService
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
+     * @param TrashService $trashService
+     * @param LocationService $locationService
      */
-    public function __construct(TrashService $trashService, LocationService $locationService)
-    {
+    public function __construct(
+        TrashService $trashService,
+        LocationService $locationService
+    ) {
         $this->trashService = $trashService;
         $this->locationService = $locationService;
     }
@@ -51,7 +57,7 @@ class Trash extends RestController
     /**
      * Returns a list of all trash items.
      *
-     * @return \Ibexa\Rest\Server\Values\Trash
+     * @return Values\Trash
      */
     public function loadTrashItems(Request $request)
     {
@@ -65,7 +71,7 @@ class Trash extends RestController
         $trashItems = [];
 
         foreach ($this->trashService->findTrashItems($query)->items as $trashItem) {
-            $trashItems[] = new Values\RestTrashItem(
+            $trashItems[] = new RestTrashItem(
                 $trashItem,
                 $this->locationService->getLocationChildCount($trashItem)
             );
@@ -82,11 +88,11 @@ class Trash extends RestController
      *
      * @param $trashItemId
      *
-     * @return \Ibexa\Rest\Server\Values\RestTrashItem
+     * @return RestTrashItem
      */
     public function loadTrashItem($trashItemId)
     {
-        return new Values\RestTrashItem(
+        return new RestTrashItem(
             $trashItem = $this->trashService->loadTrashItem($trashItemId),
             $this->locationService->getLocationChildCount($trashItem)
         );
@@ -95,13 +101,13 @@ class Trash extends RestController
     /**
      * Empties the trash.
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
     public function emptyTrash()
     {
         $this->trashService->emptyTrash();
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 
     /**
@@ -109,7 +115,7 @@ class Trash extends RestController
      *
      * @param $trashItemId
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
     public function deleteTrashItem($trashItemId)
     {
@@ -117,7 +123,7 @@ class Trash extends RestController
             $this->trashService->loadTrashItem($trashItemId)
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 
     /**
@@ -125,12 +131,14 @@ class Trash extends RestController
      *
      * @param $trashItemId
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      *
-     * @return \Ibexa\Rest\Server\Values\ResourceCreated
+     * @return ResourceCreated
      */
-    public function restoreTrashItem($trashItemId, Request $request)
-    {
+    public function restoreTrashItem(
+        $trashItemId,
+        Request $request
+    ) {
         $requestDestination = null;
         try {
             $requestDestination = $request->headers->get('Destination');
@@ -166,7 +174,7 @@ class Trash extends RestController
 
         $location = $this->trashService->recover($trashItem, $parentLocation);
 
-        return new Values\ResourceCreated(
+        return new ResourceCreated(
             $this->router->generate(
                 'ibexa.rest.load_location',
                 [

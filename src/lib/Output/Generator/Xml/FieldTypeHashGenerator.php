@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Output\Generator\Xml;
 
 use Psr\Log\LoggerAwareInterface;
@@ -39,8 +40,11 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * @param string $hashElementName
      * @param mixed $hashValue
      */
-    public function generateHashValue(\XMLWriter $writer, $hashElementName, $hashValue)
-    {
+    public function generateHashValue(
+        \XMLWriter $writer,
+        $hashElementName,
+        $hashValue
+    ) {
         $this->generateValue($writer, $hashValue, null, $hashElementName);
     }
 
@@ -52,8 +56,12 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * @param string|null $key
      * @param string $elementName
      */
-    protected function generateValue(\XmlWriter $writer, $value, $key = null, $elementName = 'value')
-    {
+    protected function generateValue(
+        \XmlWriter $writer,
+        $value,
+        $key = null,
+        $elementName = 'value'
+    ) {
         if ($value === null) {
             $this->generateNullValue($writer, $key, $elementName);
         } elseif (is_bool($value)) {
@@ -81,8 +89,12 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * @param string|null $key
      * @param string $elementName
      */
-    protected function generateArrayValue(\XmlWriter $writer, $value, $key, $elementName = 'value')
-    {
+    protected function generateArrayValue(
+        \XmlWriter $writer,
+        $value,
+        $key,
+        $elementName = 'value'
+    ) {
         if ($this->isNumericArray($value)) {
             $this->generateListArray($writer, $value, $key, $elementName);
         } else {
@@ -98,8 +110,12 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * @param string|null $key
      * @param string $elementName
      */
-    protected function generateHashArray(\XmlWriter $writer, $value, $key = null, $elementName = 'value')
-    {
+    protected function generateHashArray(
+        \XmlWriter $writer,
+        $value,
+        $key = null,
+        $elementName = 'value'
+    ) {
         $writer->startElement($elementName);
         $this->generateKeyAttribute($writer, $key);
 
@@ -118,8 +134,12 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * @param string|null $key
      * @param string $elementName
      */
-    protected function generateListArray(\XmlWriter $writer, $value, $key = null, $elementName = 'value')
-    {
+    protected function generateListArray(
+        \XmlWriter $writer,
+        $value,
+        $key = null,
+        $elementName = 'value'
+    ) {
         $writer->startElement($elementName);
         $this->generateKeyAttribute($writer, $key);
 
@@ -155,8 +175,11 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * @param string|null $key
      * @param string $elementName
      */
-    protected function generateNullValue(\XmlWriter $writer, $key = null, $elementName = 'value')
-    {
+    protected function generateNullValue(
+        \XmlWriter $writer,
+        $key = null,
+        $elementName = 'value'
+    ) {
         $writer->startElement($elementName);
         $this->generateKeyAttribute($writer, $key);
         // @todo: xsi:type?
@@ -171,8 +194,12 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * @param string|null $key
      * @param string $elementName
      */
-    protected function generateBooleanValue(\XmlWriter $writer, $value, $key = null, $elementName = 'value')
-    {
+    protected function generateBooleanValue(
+        \XmlWriter $writer,
+        $value,
+        $key = null,
+        $elementName = 'value'
+    ) {
         $writer->startElement($elementName);
         $this->generateKeyAttribute($writer, $key);
         $writer->text($value ? 'true' : 'false');
@@ -187,8 +214,12 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * @param string|null $key
      * @param string $elementName
      */
-    protected function generateIntegerValue(\XmlWriter $writer, $value, $key = null, $elementName = 'value')
-    {
+    protected function generateIntegerValue(
+        \XmlWriter $writer,
+        $value,
+        $key = null,
+        $elementName = 'value'
+    ) {
         $writer->startElement($elementName);
         $this->generateKeyAttribute($writer, $key);
         $writer->text($value);
@@ -203,8 +234,12 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * @param string|null $key
      * @param string $elementName
      */
-    protected function generateFloatValue(\XmlWriter $writer, $value, $key = null, $elementName = 'value')
-    {
+    protected function generateFloatValue(
+        \XmlWriter $writer,
+        $value,
+        $key = null,
+        $elementName = 'value'
+    ) {
         $writer->startElement($elementName);
         $this->generateKeyAttribute($writer, $key);
         $writer->text(sprintf('%F', $value));
@@ -219,8 +254,12 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * @param string|null $key
      * @param string $elementName
      */
-    protected function generateStringValue(\XmlWriter $writer, $value, $key = null, $elementName = 'value')
-    {
+    protected function generateStringValue(
+        \XmlWriter $writer,
+        $value,
+        $key = null,
+        $elementName = 'value'
+    ) {
         $writer->startElement($elementName);
         $this->generateKeyAttribute($writer, $key);
         $writer->text($value);
@@ -233,8 +272,10 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * @param \XmlWriter $writer
      * @param string|null $key
      */
-    protected function generateKeyAttribute(\XmlWriter $writer, $key = null)
-    {
+    protected function generateKeyAttribute(
+        \XmlWriter $writer,
+        $key = null
+    ) {
         if ($key !== null) {
             $writer->startAttribute('key');
             $writer->text($key);
@@ -242,8 +283,12 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
         }
     }
 
-    private function generateObjectValue(object $value, \XmlWriter $writer, ?string $key, string $elementName): void
-    {
+    private function generateObjectValue(
+        object $value,
+        \XmlWriter $writer,
+        ?string $key,
+        string $elementName
+    ): void {
         try {
             $value = $this->normalizer->normalize($value, 'xml');
         } catch (ExceptionInterface $e) {

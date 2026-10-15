@@ -64,7 +64,7 @@ abstract class BaseCriterionProcessor implements CriterionProcessorInterface
             $mediaTypePrefix .= '.';
         }
 
-        return  $mediaTypePrefix . $criterionName;
+        return $mediaTypePrefix . $criterionName;
     }
 
     abstract protected function getMediaTypePrefix(): string;

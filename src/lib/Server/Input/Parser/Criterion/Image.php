@@ -8,6 +8,8 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidCriterionArgumentException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Image as ImageCriterion;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -31,13 +33,15 @@ final class Image extends BaseParser
     /**
      * @param array<mixed> $data
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Image
+     * @return ImageCriterion
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidCriterionArgumentException
+     * @throws InvalidArgumentException
+     * @throws InvalidCriterionArgumentException
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ImageCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ImageCriterion {
         $this->validateInputArray($data);
 
         $criterionData = $data[self::IMAGE_CRITERION];

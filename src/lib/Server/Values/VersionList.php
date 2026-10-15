@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -16,7 +18,7 @@ class VersionList extends RestValue
     /**
      * Versions.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo[]
+     * @var VersionInfo[]
      */
     public $versions;
 
@@ -30,11 +32,13 @@ class VersionList extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo[] $versions
+     * @param VersionInfo[] $versions
      * @param string $path
      */
-    public function __construct(array $versions, $path)
-    {
+    public function __construct(
+        array $versions,
+        $path
+    ) {
         $this->versions = $versions;
         $this->path = $path;
     }

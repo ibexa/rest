@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Rest\Output\Generator;
@@ -19,12 +20,15 @@ class VersionTranslationInfo extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param \Ibexa\Rest\Server\Values\VersionTranslationInfo $data
+     * @param Visitor $visitor
+     * @param Generator $generator
+     * @param VersionTranslationInfoValue $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ) {
         $versionInfo = $data->getVersionInfo();
         if (empty($versionInfo->languageCodes)) {
             return;
@@ -35,8 +39,11 @@ class VersionTranslationInfo extends ValueObjectVisitor
         $generator->endObjectElement('VersionTranslationInfo');
     }
 
-    protected function visitVersionTranslationInfoAttributes(Visitor $visitor, Generator $generator, VersionTranslationInfoValue $versionTranslationInfo)
-    {
+    protected function visitVersionTranslationInfoAttributes(
+        Visitor $visitor,
+        Generator $generator,
+        VersionTranslationInfoValue $versionTranslationInfo
+    ) {
         $versionInfo = $versionTranslationInfo->getVersionInfo();
 
         // single language-independent conditions for deleting Translation

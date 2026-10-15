@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Contracts\Rest\Output;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
@@ -19,31 +20,35 @@ abstract class ValueObjectVisitor
     /**
      * URL handler for URL generation.
      *
-     * @var \Ibexa\Rest\RequestParser
+     * @var RequestParser
      */
     protected $requestParser;
 
     /**
-     * @var \Symfony\Component\Routing\RouterInterface
+     * @var RouterInterface
      */
     protected $router;
 
     /**
-     * @var \Symfony\Component\Routing\RouterInterface
+     * @var RouterInterface
      */
     protected $templateRouter;
 
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param Visitor $visitor
+     * @param Generator $generator
      * @param mixed $data
      */
-    abstract public function visit(Visitor $visitor, Generator $generator, $data);
+    abstract public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    );
 
     /**
-     * @param \Symfony\Component\Routing\RouterInterface $router
+     * @param RouterInterface $router
      */
     public function setRouter(RouterInterface $router)
     {
@@ -63,47 +68,56 @@ abstract class ValueObjectVisitor
     /**
      * Returns a string representation for the given $boolValue.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param Generator $generator
      * @param bool $boolValue
      *
      * @return mixed
      */
-    protected function serializeBool(Generator $generator, $boolValue)
-    {
+    protected function serializeBool(
+        Generator $generator,
+        $boolValue
+    ) {
         return $generator->serializeBool($boolValue);
     }
 
     /**
      * Visits the given list of $names.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param Generator $generator
      * @param array $names
      */
-    protected function visitNamesList(Generator $generator, array $names)
-    {
+    protected function visitNamesList(
+        Generator $generator,
+        array $names
+    ) {
         $this->visitTranslatedList($generator, $names, 'names');
     }
 
     /**
      * Visits the given list of $descriptions.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param Generator $generator
      * @param array $descriptions
      */
-    protected function visitDescriptionsList(Generator $generator, array $descriptions)
-    {
+    protected function visitDescriptionsList(
+        Generator $generator,
+        array $descriptions
+    ) {
         $this->visitTranslatedList($generator, $descriptions, 'descriptions');
     }
 
     /**
      * Visits a list of translated elements.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param Generator $generator
      * @param array $translatedElements
      * @param mixed $listName
      */
-    protected function visitTranslatedList(Generator $generator, array $translatedElements, $listName)
-    {
+    protected function visitTranslatedList(
+        Generator $generator,
+        array $translatedElements,
+        $listName
+    ) {
         $generator->startHashElement($listName);
         $generator->startList('value');
         foreach ($translatedElements as $languageCode => $element) {
@@ -117,11 +131,13 @@ abstract class ValueObjectVisitor
     /**
      * Visits a limitation.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\Limitation $limitation
+     * @param Generator $generator
+     * @param Limitation $limitation
      */
-    protected function visitLimitation(Generator $generator, Limitation $limitation)
-    {
+    protected function visitLimitation(
+        Generator $generator,
+        Limitation $limitation
+    ) {
         $generator->startHashElement('limitation');
 
         $generator->startAttribute('identifier', $limitation->getIdentifier());

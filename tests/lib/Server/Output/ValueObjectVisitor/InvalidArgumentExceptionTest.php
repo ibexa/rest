@@ -4,10 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Rest\Exceptions;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\InvalidArgumentException;
 
 class InvalidArgumentExceptionTest extends ExceptionTest
 {
@@ -44,11 +45,11 @@ class InvalidArgumentExceptionTest extends ExceptionTest
     /**
      * Gets the exception visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\InvalidArgumentException
+     * @return InvalidArgumentException
      */
     protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\InvalidArgumentException();
+        return new InvalidArgumentException();
     }
 }
 

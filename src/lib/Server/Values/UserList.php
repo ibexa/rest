@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Rest\Value as RestValue;
@@ -16,7 +17,7 @@ class UserList extends RestValue
     /**
      * Users.
      *
-     * @var \Ibexa\Rest\Server\Values\RestUser[]
+     * @var RestUser[]
      */
     public $users;
 
@@ -30,11 +31,13 @@ class UserList extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Rest\Server\Values\RestUser[] $users
+     * @param RestUser[] $users
      * @param string $path
      */
-    public function __construct(array $users, $path)
-    {
+    public function __construct(
+        array $users,
+        $path
+    ) {
         $this->users = $users;
         $this->path = $path;
     }

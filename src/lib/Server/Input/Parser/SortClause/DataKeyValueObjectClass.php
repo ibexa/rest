@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser\SortClause;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
+use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -35,8 +37,10 @@ class DataKeyValueObjectClass extends BaseParser
      * @param string $dataKey
      * @param string $valueObjectClass
      */
-    public function __construct($dataKey, $valueObjectClass)
-    {
+    public function __construct(
+        $dataKey,
+        $valueObjectClass
+    ) {
         $this->dataKey = $dataKey;
         $this->valueObjectClass = $valueObjectClass;
     }
@@ -45,12 +49,14 @@ class DataKeyValueObjectClass extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ValueObject
+     * @return ValueObject
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         if (!class_exists($this->valueObjectClass)) {
             throw new Exceptions\Parser("Value object class <{$this->valueObjectClass}> is not defined");
         }

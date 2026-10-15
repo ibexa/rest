@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Rest\Output\Visitor;
@@ -25,10 +26,13 @@ final class Field extends ValueObjectVisitor
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Field $data
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ): void {
         $generator->startHashElement('field');
 
         $generator->startValueElement('id', $data->id);

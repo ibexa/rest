@@ -4,10 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\CorsOptions;
 
 use Exception;
 use Ibexa\Bundle\Rest\CorsOptions\RestProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Exception\MethodNotAllowedException;
@@ -87,7 +89,7 @@ class RestProviderTest extends TestCase
     /**
      * @param bool $isRestRequest wether or not to set the is_rest_request attribute
      *
-     * @return \Symfony\Component\HttpFoundation\Request
+     * @return Request
      */
     protected function createRequest($isRestRequest = true)
     {
@@ -107,7 +109,7 @@ class RestProviderTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\Routing\Matcher\RequestMatcherInterface
+     * @return MockObject|RequestMatcherInterface
      */
     protected function getRequestMatcherMock()
     {

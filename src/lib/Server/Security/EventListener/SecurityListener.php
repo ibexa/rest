@@ -21,7 +21,7 @@ use Symfony\Component\Security\Http\SecurityEvents;
  */
 final class SecurityListener implements EventSubscriberInterface
 {
-    /** @var \Ibexa\Contracts\Core\Repository\PermissionResolver */
+    /** @var PermissionResolver */
     private $permissionResolver;
 
     public function __construct(

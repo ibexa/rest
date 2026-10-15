@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Contracts\Rest\Output;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -14,21 +15,21 @@ use Symfony\Component\HttpFoundation\Response;
 class Visitor
 {
     /**
-     * @var \Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher
+     * @var ValueObjectVisitorDispatcher
      */
     protected $valueObjectVisitorDispatcher = [];
 
     /**
      * Generator.
      *
-     * @var \Ibexa\Contracts\Rest\Output\Generator
+     * @var Generator
      */
     protected $generator;
 
     /**
      * HTTP Response Object.
      *
-     * @var \Symfony\Component\HttpFoundation\Response
+     * @var Response
      */
     protected $response;
 
@@ -42,11 +43,13 @@ class Visitor
     /**
      * Construct from Generator and an array of concrete view model visitors.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param \Ibexa\Contracts\Rest\Output\ValueObjectVisitorDispatcher $valueObjectVisitorDispatcher
+     * @param Generator $generator
+     * @param ValueObjectVisitorDispatcher $valueObjectVisitorDispatcher
      */
-    public function __construct(Generator $generator, ValueObjectVisitorDispatcher $valueObjectVisitorDispatcher)
-    {
+    public function __construct(
+        Generator $generator,
+        ValueObjectVisitorDispatcher $valueObjectVisitorDispatcher
+    ) {
         $this->generator = $generator;
         $this->valueObjectVisitorDispatcher = $valueObjectVisitorDispatcher;
         $this->response = new Response('', 200);
@@ -61,8 +64,10 @@ class Visitor
      * @param string $name
      * @param string $value
      */
-    public function setHeader($name, $value)
-    {
+    public function setHeader(
+        $name,
+        $value
+    ) {
         if (!$this->response->headers->has($name)) {
             $this->response->headers->set($name, $value);
         }
@@ -88,7 +93,7 @@ class Visitor
      *
      * @param mixed $data
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function visit($data)
     {
@@ -151,7 +156,7 @@ class Visitor
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function getResponse()
     {

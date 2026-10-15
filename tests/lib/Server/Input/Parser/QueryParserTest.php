@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
@@ -19,6 +20,7 @@ class QueryParserTest extends BaseTest
         ];
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $parsingDispatcher->expects($this->never())->method('parse');
         $parser = $this->getParser();
 
         $result = $parser->parse($inputArray, $parsingDispatcher);
@@ -61,15 +63,16 @@ class QueryParserTest extends BaseTest
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('parse')
-            ->with(['ContentTypeIdentifierCriterion' => 'article'])
-            ->willReturn(new Query\Criterion\ContentTypeIdentifier('article'));
-        $parsingDispatcher
-            ->expects($this->at(1))
-            ->method('parse')
-            ->with(['ParentLocationIdCriterion' => 762])
-            ->willReturn(new Query\Criterion\ParentLocationId(762));
+            ->withConsecutive(
+                [['ContentTypeIdentifierCriterion' => 'article']],
+                [['ParentLocationIdCriterion' => 762]]
+            )
+            ->willReturnOnConsecutiveCalls(
+                new Query\Criterion\ContentTypeIdentifier('article'),
+                new Query\Criterion\ParentLocationId(762)
+            );
 
         $parser = $this->getParser();
 
@@ -117,15 +120,16 @@ class QueryParserTest extends BaseTest
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('parse')
-            ->with(['ContentTypeIdentifierCriterion' => 'article'])
-            ->willReturn(new Query\Criterion\ContentTypeIdentifier('article'));
-        $parsingDispatcher
-            ->expects($this->at(1))
-            ->method('parse')
-            ->with(['ParentLocationIdCriterion' => 762])
-            ->willReturn(new Query\Criterion\ParentLocationId(762));
+            ->withConsecutive(
+                [['ContentTypeIdentifierCriterion' => 'article']],
+                [['ParentLocationIdCriterion' => 762]]
+            )
+            ->willReturnOnConsecutiveCalls(
+                new Query\Criterion\ContentTypeIdentifier('article'),
+                new Query\Criterion\ParentLocationId(762)
+            );
 
         $parser = $this->getParser();
 

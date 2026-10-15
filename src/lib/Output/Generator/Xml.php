@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Output\Generator;
 
 use Ibexa\Contracts\Rest\Output\Generator;
+use Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator;
 
 /**
  * Xml generator.
@@ -23,7 +25,7 @@ class Xml extends Generator
     /**
      * Generator for field type hash values.
      *
-     * @var \Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator
+     * @var FieldTypeHashGenerator
      */
     protected $hashGenerator;
 
@@ -42,11 +44,13 @@ class Xml extends Generator
     protected $vendor;
 
     /**
-     * @param \Ibexa\Rest\Output\Generator\Xml\FieldTypeHashGenerator $hashGenerator
+     * @param FieldTypeHashGenerator $hashGenerator
      * @param string $vendor
      */
-    public function __construct(Xml\FieldTypeHashGenerator $hashGenerator, $vendor = 'vnd.ibexa.api')
-    {
+    public function __construct(
+        FieldTypeHashGenerator $hashGenerator,
+        $vendor = 'vnd.ibexa.api'
+    ) {
         $this->hashGenerator = $hashGenerator;
         $this->vendor = $vendor;
     }
@@ -102,8 +106,10 @@ class Xml extends Generator
      * @param string $name
      * @param string $mediaTypeName
      */
-    public function startObjectElement($name, $mediaTypeName = null)
-    {
+    public function startObjectElement(
+        $name,
+        $mediaTypeName = null
+    ) {
         $this->checkStartObjectElement($name);
 
         $this->isEmpty = false;
@@ -154,8 +160,11 @@ class Xml extends Generator
         $this->xmlWriter->endElement();
     }
 
-    public function startValueElement(string $name, $value, array $attributes = []): void
-    {
+    public function startValueElement(
+        string $name,
+        $value,
+        array $attributes = []
+    ): void {
         $this->checkStartValueElement($name);
 
         $this->xmlWriter->startElement($name);
@@ -207,8 +216,10 @@ class Xml extends Generator
      * @param string $name
      * @param string $value
      */
-    public function startAttribute($name, $value)
-    {
+    public function startAttribute(
+        $name,
+        $value
+    ) {
         $this->checkStartAttribute($name);
 
         $this->xmlWriter->startAttribute($name);
@@ -247,8 +258,10 @@ class Xml extends Generator
      * @param string $hashElementName
      * @param mixed $hashValue
      */
-    public function generateFieldTypeHash($hashElementName, $hashValue)
-    {
+    public function generateFieldTypeHash(
+        $hashElementName,
+        $hashValue
+    ) {
         $this->hashGenerator->generateHashValue($this->xmlWriter, $hashElementName, $hashValue);
     }
 

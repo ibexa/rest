@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Output\Generator\Json;
 
 /**
@@ -17,7 +18,7 @@ class JsonObject
     /**
      * Reference to the parent node.
      *
-     * @var \Ibexa\Rest\Output\Generator\Json\JsonObject
+     * @var JsonObject
      */
     protected $_ref_parent;
 
@@ -34,7 +35,7 @@ class JsonObject
     /**
      * Get Parent of current node.
      *
-     * @return \Ibexa\Rest\Output\Generator\Json\JsonObject
+     * @return JsonObject
      */
     public function getParent()
     {

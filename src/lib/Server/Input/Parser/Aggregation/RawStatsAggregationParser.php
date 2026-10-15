@@ -19,8 +19,10 @@ final class RawStatsAggregationParser extends AbstractStatsAggregationParser
         return 'RawStatsAggregation';
     }
 
-    protected function parseAggregation(array $data, ParsingDispatcher $parsingDispatcher): AbstractStatsAggregation
-    {
+    protected function parseAggregation(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractStatsAggregation {
         return new RawStatsAggregation(
             $data['name'],
             $data['fieldName']

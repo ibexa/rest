@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Input;
 
 use Ibexa\Contracts\Rest\Exceptions;
@@ -28,23 +29,25 @@ class Dispatcher
      *  )
      * </code>
      *
-     * @var \Ibexa\Contracts\Rest\Input\Handler[]
+     * @var Handler[]
      */
     protected $handlers = [];
 
     /**
-     * @var \Ibexa\Contracts\Rest\Input\ParsingDispatcher
+     * @var ParsingDispatcher
      */
     protected $parsingDispatcher;
 
     /**
      * Construct from optional parsers array.
      *
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
-     * @param \Ibexa\Contracts\Rest\Input\Handler[] $handlers
+     * @param ParsingDispatcher $parsingDispatcher
+     * @param Handler[] $handlers
      */
-    public function __construct(ParsingDispatcher $parsingDispatcher, array $handlers = [])
-    {
+    public function __construct(
+        ParsingDispatcher $parsingDispatcher,
+        array $handlers = []
+    ) {
         $this->parsingDispatcher = $parsingDispatcher;
         foreach ($handlers as $type => $handler) {
             $this->addHandler($type, $handler);
@@ -55,17 +58,19 @@ class Dispatcher
      * Adds another handler for the given content type.
      *
      * @param string $type
-     * @param \Ibexa\Contracts\Rest\Input\Handler $handler
+     * @param Handler $handler
      */
-    public function addHandler($type, Handler $handler)
-    {
+    public function addHandler(
+        $type,
+        Handler $handler
+    ) {
         $this->handlers[$type] = $handler;
     }
 
     /**
      * Parse provided request.
      *
-     * @param \Ibexa\Rest\Message $message
+     * @param Message $message
      *
      * @return mixed
      */

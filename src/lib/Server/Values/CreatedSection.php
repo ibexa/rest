@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Section;
 use Ibexa\Contracts\Core\Repository\Values\ValueObject;
 
 /**
@@ -16,7 +18,7 @@ class CreatedSection extends ValueObject
     /**
      * The created section.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Section
+     * @var Section
      */
     public $section;
 }

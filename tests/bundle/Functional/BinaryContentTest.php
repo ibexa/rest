@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
@@ -90,7 +91,7 @@ XML;
         $jsonResponse = json_decode($imageResponse->getBody());
         $imageField = $jsonResponse->Version->Fields->field[2];
 
-        self::assertObjectHasAttribute('variations', $imageField->fieldValue);
+        self::assertObjectHasProperty('variations', $imageField->fieldValue);
 
         $variationResponse = $this->sendHttpRequest(
             $this->createHttpRequest(

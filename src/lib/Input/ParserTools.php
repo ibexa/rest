@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Input;
 
 use Ibexa\Contracts\Core\Repository\Values;
+use Ibexa\Contracts\Core\Repository\Values\User\Limitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\ContentTypeLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\LanguageLimitation;
 use Ibexa\Contracts\Core\Repository\Values\User\Limitation\LocationLimitation;
@@ -34,12 +36,14 @@ class ParserTools
      * Parses the given $objectElement, if it contains embedded data.
      *
      * @param array $objectElement
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
      * @return mixed
      */
-    public function parseObjectElement(array $objectElement, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parseObjectElement(
+        array $objectElement,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         if ($this->isEmbeddedObject($objectElement)) {
             $parsingDispatcher->parse(
                 $objectElement,
@@ -96,7 +100,7 @@ class ParserTools
      *
      * @return bool
      *
-     * @throws \RuntimeException if the value can not be transformed to a boolean
+     * @throws RuntimeException if the value can not be transformed to a boolean
      */
     public function parseBooleanValue($value)
     {
@@ -131,7 +135,7 @@ class ParserTools
                 return Values\ContentType\ContentType::STATUS_MODIFIED;
         }
 
-        throw new \RuntimeException("Unknown content type status '{$contentTypeStatus}.'");
+        throw new RuntimeException("Unknown content type status '{$contentTypeStatus}.'");
     }
 
     /**
@@ -170,7 +174,7 @@ class ParserTools
                 return Values\Content\Location::SORT_FIELD_CONTENTOBJECT_ID;
         }
 
-        throw new \RuntimeException("Unknown default sort Field: '{$defaultSortFieldString}'.");
+        throw new RuntimeException("Unknown default sort Field: '{$defaultSortFieldString}'.");
     }
 
     /**
@@ -189,7 +193,7 @@ class ParserTools
                 return Values\Content\Location::SORT_ORDER_DESC;
         }
 
-        throw new \RuntimeException("Unknown default sort order: '{$defaultSortOrderString}'.");
+        throw new RuntimeException("Unknown default sort order: '{$defaultSortOrderString}'.");
     }
 
     /**
@@ -197,7 +201,7 @@ class ParserTools
      *
      * @param array $limitation
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\Limitation
+     * @return Limitation
      */
     public function parseLimitation(array $limitation)
     {
@@ -232,50 +236,50 @@ class ParserTools
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\Limitation
+     * @return Limitation
      *
      * @todo Use dependency injection system
      */
     protected function getLimitationByIdentifier($identifier)
     {
         switch ($identifier) {
-            case Values\User\Limitation::CONTENTTYPE:
+            case Limitation::CONTENTTYPE:
                 return new ContentTypeLimitation();
 
-            case Values\User\Limitation::LANGUAGE:
+            case Limitation::LANGUAGE:
                 return new LanguageLimitation();
 
-            case Values\User\Limitation::LOCATION:
+            case Limitation::LOCATION:
                 return new LocationLimitation();
 
-            case Values\User\Limitation::OWNER:
+            case Limitation::OWNER:
                 return new OwnerLimitation();
 
-            case Values\User\Limitation::PARENTOWNER:
+            case Limitation::PARENTOWNER:
                 return new ParentOwnerLimitation();
 
-            case Values\User\Limitation::PARENTCONTENTTYPE:
+            case Limitation::PARENTCONTENTTYPE:
                 return new ParentContentTypeLimitation();
 
-            case Values\User\Limitation::PARENTDEPTH:
+            case Limitation::PARENTDEPTH:
                 return new ParentDepthLimitation();
 
-            case Values\User\Limitation::SECTION:
+            case Limitation::SECTION:
                 return new SectionLimitation();
 
-            case Values\User\Limitation::SITEACCESS:
-                return new SiteaccessLimitation();
+            case Limitation::SITEACCESS:
+                return new SiteAccessLimitation();
 
-            case Values\User\Limitation::STATE:
+            case Limitation::STATE:
                 return new ObjectStateLimitation();
 
-            case Values\User\Limitation::SUBTREE:
+            case Limitation::SUBTREE:
                 return new SubtreeLimitation();
 
-            case Values\User\Limitation::USERGROUP:
+            case Limitation::USERGROUP:
                 return new UserGroupLimitation();
 
-            case Values\User\Limitation::PARENTUSERGROUP:
+            case Limitation::PARENTUSERGROUP:
                 return new ParentUserGroupLimitation();
 
             default:

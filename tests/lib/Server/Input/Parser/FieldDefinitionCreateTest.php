@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionCreateStruct;
@@ -172,7 +173,7 @@ class FieldDefinitionCreateTest extends BaseTest
     /**
      * Returns the FieldDefinitionCreate parser.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate
+     * @return FieldDefinitionCreate
      */
     protected function internalGetParser()
     {
@@ -186,7 +187,7 @@ class FieldDefinitionCreateTest extends BaseTest
     /**
      * Get the FieldTypeParser mock object.
      *
-     * @return \Ibexa\Rest\Input\FieldTypeParser
+     * @return FieldTypeParser
      */
     protected function getFieldTypeParserMock()
     {

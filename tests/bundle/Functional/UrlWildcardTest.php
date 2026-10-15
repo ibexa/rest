@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
@@ -58,6 +59,7 @@ XML;
 
     /**
      * @param $urlWildcardHref Covers GET /content/urlwildcards/{urlWildcardId}
+     *
      * @depends testCreateUrlWildcard
      */
     public function testLoadUrlWildcard($urlWildcardHref)
@@ -71,6 +73,7 @@ XML;
 
     /**
      * @param $urlWildcardHref
+     *
      * @depends testCreateUrlWildcard
      */
     public function testDeleteURLWildcard($urlWildcardHref)

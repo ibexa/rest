@@ -4,10 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use DateTime;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -21,30 +23,30 @@ class ContentTypeCreate extends BaseParser
     /**
      * ContentType service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
+     * @var ContentTypeService
      */
     protected $contentTypeService;
 
     /**
      * FieldDefinitionCreate parser.
      *
-     * @var \Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate
+     * @var FieldDefinitionCreate
      */
     protected $fieldDefinitionCreateParser;
 
     /**
      * Parser tools.
      *
-     * @var \Ibexa\Rest\Input\ParserTools
+     * @var ParserTools
      */
     protected $parserTools;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\ContentTypeService $contentTypeService
-     * @param \Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate $fieldDefinitionCreateParser
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
+     * @param ContentTypeService $contentTypeService
+     * @param FieldDefinitionCreate $fieldDefinitionCreateParser
+     * @param ParserTools $parserTools
      */
     public function __construct(
         ContentTypeService $contentTypeService,
@@ -60,12 +62,14 @@ class ContentTypeCreate extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeCreateStruct
+     * @return ContentTypeCreateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         if (!array_key_exists('identifier', $data)) {
             throw new Exceptions\Parser("Missing 'identifier' element for ContentTypeCreate.");
         }

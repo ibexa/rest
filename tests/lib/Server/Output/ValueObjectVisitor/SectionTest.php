@@ -4,10 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\Section;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
 class SectionTest extends ValueObjectVisitorBaseTest
@@ -160,11 +161,11 @@ class SectionTest extends ValueObjectVisitorBaseTest
     /**
      * Get the Section visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Section
+     * @return Section
      */
     protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\Section();
+        return new Section();
     }
 }
 

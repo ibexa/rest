@@ -15,8 +15,10 @@ use Ibexa\Rest\Input\BaseParser;
 
 class UserId extends BaseParser
 {
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): UserIdCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): UserIdCriterion {
         if (!array_key_exists('UserIdCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <UserIdCriterion> format');
         }

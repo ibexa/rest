@@ -4,12 +4,14 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidVariationException;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
+use Ibexa\Contracts\Core\Variation\Values\Variation;
 use Ibexa\Contracts\Core\Variation\VariationHandler;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Core\FieldType\Image\Value as ImageValue;
 use Ibexa\Core\FieldType\ImageAsset\Value as ImageAssetValue;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -20,10 +22,10 @@ use Ibexa\Rest\Server\Values\CachedValue;
  */
 class BinaryContent extends RestController
 {
-    /** @var \Ibexa\Contracts\Core\Variation\VariationHandler */
+    /** @var VariationHandler */
     protected $imageVariationHandler;
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
+    /** @var ConfigResolverInterface */
     private $configResolver;
 
     public function __construct(
@@ -44,12 +46,14 @@ class BinaryContent extends RestController
      *                        If the version number isn't specified, the default one is used.
      * @param string $variationIdentifier
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      *
-     * @return \Ibexa\Contracts\Core\Variation\Values\Variation
+     * @return Variation
      */
-    public function getImageVariation($imageId, $variationIdentifier)
-    {
+    public function getImageVariation(
+        $imageId,
+        $variationIdentifier
+    ) {
         [$contentId, $fieldId, $versionNumber] = $this->parseImageId($imageId);
         $content = $this->repository->getContentService()->loadContent($contentId, null, $versionNumber);
 
@@ -63,17 +67,17 @@ class BinaryContent extends RestController
         }
 
         if (!$fieldFound) {
-            throw new Exceptions\NotFoundException("No image Field with ID $fieldId found");
+            throw new NotFoundException("No image Field with ID $fieldId found");
         }
 
         $value = $field->value;
 
         if ($value instanceof ImageValue && $value->uri === null) {
-            throw new Exceptions\NotFoundException("Image file {$value->id} doesn't exist");
+            throw new NotFoundException("Image file {$value->id} doesn't exist");
         }
         if ($value instanceof ImageAssetValue) {
             if ($value->destinationContentId === null) {
-                throw new Exceptions\NotFoundException("There is no image connected with field {$fieldId}");
+                throw new NotFoundException("There is no image connected with field {$fieldId}");
             }
             $content = $this->repository->getContentService()->loadContent((int) $value->destinationContentId);
             $mappings = $this->configResolver->getParameter('fieldtypes.ezimageasset.mappings');
@@ -92,7 +96,7 @@ class BinaryContent extends RestController
                 ['locationId' => $content->contentInfo->mainLocationId]
             );
         } catch (InvalidVariationException $e) {
-            throw new Exceptions\NotFoundException("Invalid image variation $variationIdentifier");
+            throw new NotFoundException("Invalid image variation $variationIdentifier");
         }
     }
 
@@ -104,7 +108,7 @@ class BinaryContent extends RestController
      * @return array An array with 3 keys: contentId, fieldId and versionNumber.
      *               If the versionNumber wasn't set, it is returned as null.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException If the imageId format is invalid
+     * @throws NotFoundException If the imageId format is invalid
      */
     private function parseImageId($imageId)
     {
@@ -117,7 +121,7 @@ class BinaryContent extends RestController
             return $idArray;
         }
 
-        throw new Exceptions\NotFoundException("Invalid image ID {$imageId}");
+        throw new NotFoundException("Invalid image ID {$imageId}");
     }
 }
 

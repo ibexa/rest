@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -16,14 +18,14 @@ class ContentTypeGroupList extends RestValue
     /**
      * Content type groups.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup[]
+     * @var ContentTypeGroup[]
      */
     public $contentTypeGroups;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup[] $contentTypeGroups
+     * @param ContentTypeGroup[] $contentTypeGroups
      */
     public function __construct(array $contentTypeGroups)
     {

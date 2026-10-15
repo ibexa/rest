@@ -4,9 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\NoContent;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
@@ -42,11 +43,11 @@ class NoContentTest extends ValueObjectVisitorBaseTest
     /**
      * Get the NoContent visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\NoContent
+     * @return NoContent
      */
     protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\NoContent();
+        return new NoContent();
     }
 }
 

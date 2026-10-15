@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Core\Repository\RoleService;
@@ -73,7 +74,7 @@ class RoleInputTest extends BaseTest
     /**
      * Returns the role input parser.
      *
-     * @return \Ibexa\Rest\Server\Input\Parser\RoleInput
+     * @return RoleInput
      */
     protected function internalGetParser()
     {

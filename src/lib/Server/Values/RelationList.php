@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -16,7 +18,7 @@ class RelationList extends RestValue
     /**
      * Relations.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Relation[]
+     * @var Relation[]
      */
     public $relations;
 
@@ -44,13 +46,17 @@ class RelationList extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Relation[] $relations
+     * @param Relation[] $relations
      * @param mixed $contentId
      * @param mixed $versionNo
      * @param string $path
      */
-    public function __construct(array $relations, $contentId, $versionNo, $path = null)
-    {
+    public function __construct(
+        array $relations,
+        $contentId,
+        $versionNo,
+        $path = null
+    ) {
         $this->relations = $relations;
         $this->contentId = $contentId;
         $this->versionNo = $versionNo;

@@ -17,7 +17,7 @@ use Ibexa\Rest\Server\Values\RestUserGroup;
 
 final class UserGroup extends ValueObjectVisitor implements DelegateValueObjectVisitor
 {
-    /** @var \Ibexa\Contracts\Core\Repository\ContentService */
+    /** @var ContentService */
     private $contentService;
 
     public function __construct(ContentService $contentService)
@@ -28,8 +28,11 @@ final class UserGroup extends ValueObjectVisitor implements DelegateValueObjectV
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\User\UserGroup $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ): void {
         $visitor->visitValueObject(
             new RestUserGroup(
                 $data,

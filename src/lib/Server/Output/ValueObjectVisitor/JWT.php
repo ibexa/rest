@@ -14,8 +14,11 @@ use Ibexa\Contracts\Rest\Output\Visitor;
 
 final class JWT extends ValueObjectVisitor
 {
-    public function visit(Visitor $visitor, Generator $generator, $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ): void {
         $visitor->setStatus(200);
         $visitor->setHeader('Content-Type', $generator->getMediaType('JWT'));
 

@@ -4,11 +4,13 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
 use Exception;
 use Ibexa\Bundle\Rest\EventListener\ResponseListener;
 use Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher;
+use PHPUnit\Framework\MockObject\MockObject;
 use stdClass;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
@@ -16,29 +18,30 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class ResponseListenerTest extends EventListenerTest
 {
-    /** @var \Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var AcceptHeaderVisitorDispatcher|MockObject */
     protected $visitorDispatcherMock;
 
-    /** @var \stdClass */
+    /** @var stdClass */
     protected $eventValue;
 
-    /** @var \Exception */
+    /** @var Exception */
     protected $exceptionEventValue;
 
     protected $dispatcherMessage;
 
     protected $controllerResult;
 
-    /** @var \Symfony\Component\HttpFoundation\Response */
+    /** @var Response */
     protected $response;
 
-    /** @var \Symfony\Contracts\EventDispatcher\Event */
+    /** @var Event */
     protected $event;
 
-    /** @var \Symfony\Component\HttpKernel\KernelInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var KernelInterface|MockObject */
     protected $kernelMock;
 
     public function setUp(): void
@@ -75,8 +78,10 @@ class ResponseListenerTest extends EventListenerTest
         );
     }
 
-    protected function onKernelViewIsNotRestRequest($method, RequestEvent $event)
-    {
+    protected function onKernelViewIsNotRestRequest(
+        $method,
+        RequestEvent $event
+    ) {
         $this->getVisitorDispatcherMock()
             ->expects($this->never())
             ->method('dispatch');
@@ -94,8 +99,11 @@ class ResponseListenerTest extends EventListenerTest
         $this->onKernelView('onKernelResultView', $this->getControllerResultEvent(), $this->eventValue);
     }
 
-    protected function onKernelView($method, $event, $value)
-    {
+    protected function onKernelView(
+        $method,
+        $event,
+        $value
+    ) {
         $this->getVisitorDispatcherMock()
             ->expects($this->once())
             ->method('dispatch')
@@ -112,7 +120,7 @@ class ResponseListenerTest extends EventListenerTest
     }
 
     /**
-     * @return \Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher|\PHPUnit\Framework\MockObject\MockObject
+     * @return AcceptHeaderVisitorDispatcher|MockObject
      */
     public function getVisitorDispatcherMock()
     {
@@ -124,7 +132,7 @@ class ResponseListenerTest extends EventListenerTest
     }
 
     /**
-     * @return \Ibexa\Bundle\Rest\EventListener\ResponseListener
+     * @return ResponseListener
      */
     protected function getEventListener()
     {
@@ -134,7 +142,7 @@ class ResponseListenerTest extends EventListenerTest
     }
 
     /**
-     * @return \Symfony\Component\HttpKernel\Event\ViewEvent
+     * @return ViewEvent
      */
     protected function getControllerResultEvent(): ViewEvent
     {
@@ -151,7 +159,7 @@ class ResponseListenerTest extends EventListenerTest
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject|\Symfony\Component\HttpKernel\KernelInterface
+     * @return MockObject|KernelInterface
      */
     protected function getKernelMock(): KernelInterface
     {
@@ -163,7 +171,7 @@ class ResponseListenerTest extends EventListenerTest
     }
 
     /**
-     * @return \Symfony\Component\HttpKernel\Event\ExceptionEvent
+     * @return ExceptionEvent
      */
     protected function getExceptionEvent(): ExceptionEvent
     {

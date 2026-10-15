@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Output\Generator\Json;
 
 use Psr\Log\LoggerAwareInterface;
@@ -35,12 +36,15 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * Generates the field type value $hashValue as a child of the given Object
      * using $hashElementName as the property name.
      *
-     * @param \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject $parent
+     * @param ArrayObject|JsonObject $parent
      * @param string $hashElementName
      * @param mixed $hashValue
      */
-    public function generateHashValue($parent, $hashElementName, $hashValue)
-    {
+    public function generateHashValue(
+        $parent,
+        $hashElementName,
+        $hashValue
+    ) {
         $parent->$hashElementName = $this->generateValue($parent, $hashValue);
     }
 
@@ -48,13 +52,15 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * Generates and returns a value based on $hashValue type, with $parent (
      * if the type of $hashValue supports it).
      *
-     * @param \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject $parent
+     * @param ArrayObject|JsonObject $parent
      * @param mixed $value
      *
      * @return mixed
      */
-    protected function generateValue($parent, $value)
-    {
+    protected function generateValue(
+        $parent,
+        $value
+    ) {
         if ($value === null || is_scalar($value)) {
             // Will be handled accordingly on serialization
             return $value;
@@ -78,13 +84,15 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
      * If $type only contains numeric keys, the resulting structure will be an
      * JSON array, otherwise a JSON object
      *
-     * @param \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject $parent
+     * @param ArrayObject|JsonObject $parent
      * @param array $value
      *
-     * @return \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject
+     * @return ArrayObject|JsonObject
      */
-    protected function generateArrayValue($parent, array $value)
-    {
+    protected function generateArrayValue(
+        $parent,
+        array $value
+    ) {
         if ($this->isNumericArray($value)) {
             return $this->generateListArray($parent, $value);
         } else {
@@ -95,13 +103,15 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
     /**
      * Generates a JSON array from the given $hashArray with $parent.
      *
-     * @param \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject $parent
+     * @param ArrayObject|JsonObject $parent
      * @param array $listArray
      *
-     * @return \Ibexa\Rest\Output\Generator\Json\ArrayObject
+     * @return ArrayObject
      */
-    protected function generateListArray($parent, array $listArray)
-    {
+    protected function generateListArray(
+        $parent,
+        array $listArray
+    ) {
         $arrayObject = new ArrayObject($parent);
         foreach ($listArray as $listItem) {
             $arrayObject[] = $this->generateValue($arrayObject, $listItem);
@@ -113,13 +123,15 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
     /**
      * Generates a JSON object from the given $hashArray with $parent.
      *
-     * @param \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject $parent
+     * @param ArrayObject|JsonObject $parent
      * @param array $hashArray
      *
-     * @return \Ibexa\Rest\Output\Generator\Json\JsonObject
+     * @return JsonObject
      */
-    protected function generateHashArray($parent, array $hashArray)
-    {
+    protected function generateHashArray(
+        $parent,
+        array $hashArray
+    ) {
         $object = new JsonObject($parent);
         foreach ($hashArray as $hashKey => $hashItem) {
             $object->$hashKey = $this->generateValue($object, $hashItem);
@@ -147,12 +159,14 @@ class FieldTypeHashGenerator implements LoggerAwareInterface
     }
 
     /**
-     * @param \Ibexa\Rest\Output\Generator\Json\ArrayObject|\Ibexa\Rest\Output\Generator\Json\JsonObject $parent
+     * @param ArrayObject|JsonObject $parent
      *
      * @return mixed
      */
-    private function generateObjectValue($parent, object $value)
-    {
+    private function generateObjectValue(
+        $parent,
+        object $value
+    ) {
         try {
             $value = $this->normalizer->normalize($value, 'json', ['parent' => $parent]);
         } catch (ExceptionInterface $e) {
