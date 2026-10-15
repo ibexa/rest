@@ -8,6 +8,7 @@
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
+use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
 use Ibexa\Core\Repository\Values\Content;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestRelation;
@@ -40,7 +41,7 @@ class RestRelationTest extends ValueObjectVisitorBaseTestCase
                             'id' => 2,
                         ]
                     ),
-                    'type' => Content\Relation::FIELD,
+                    'type' => RelationType::FIELD->value,
                     'sourceFieldDefinitionIdentifier' => 'relation_field',
                 ]
             ),
