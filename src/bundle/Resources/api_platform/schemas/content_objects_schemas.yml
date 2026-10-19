@@ -434,7 +434,7 @@ schemas:
               description: The content of the destination content of the relation.
               $ref: "#/components/schemas/Ref"
             RelationType:
-              description: "The relation type bitmask. Relations: Relation::COMMON = 1, Relation::EMBED = 2, Relation::LINK = 4, Relation::FIELD = 8, Relation::ASSET = 16"
+              description: "The relation type bitmask. Relations: RelationType::COMMON = 1, RelationType::EMBED = 2, RelationType::LINK = 4, RelationType::FIELD = 8, RelationType::ASSET = 16"
               type: string
     RelationWrapper:
       type: object
