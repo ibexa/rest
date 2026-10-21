@@ -20,10 +20,13 @@ class ContentTypeList extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Rest\Server\Values\ContentTypeList $data
+     * @param Values\ContentTypeList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('ContentTypeList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('ContentTypeList'));
         //@todo Needs refactoring, disabling certain headers should not be done this way

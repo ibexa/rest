@@ -23,8 +23,10 @@ class IsUserEnabled extends BaseParser
         $this->parserTools = $parserTools;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): IsUserEnabledCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): IsUserEnabledCriterion {
         if (!array_key_exists('IsUserEnabledCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <IsUserEnabledCriterion> format');
         }

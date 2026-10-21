@@ -26,7 +26,11 @@ abstract class ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      */
-    abstract public function visit(Visitor $visitor, Generator $generator, mixed $data);
+    abstract public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    );
 
     public function setRouter(RouterInterface $router): void
     {
@@ -46,32 +50,41 @@ abstract class ValueObjectVisitor
     /**
      * Returns a string representation for the given $boolValue.
      */
-    protected function serializeBool(Generator $generator, ?bool $boolValue): string|bool
-    {
+    protected function serializeBool(
+        Generator $generator,
+        ?bool $boolValue
+    ): string | bool {
         return $generator->serializeBool($boolValue);
     }
 
     /**
      * Visits the given list of $names.
      */
-    protected function visitNamesList(Generator $generator, array $names): void
-    {
+    protected function visitNamesList(
+        Generator $generator,
+        array $names
+    ): void {
         $this->visitTranslatedList($generator, $names, 'names');
     }
 
     /**
      * Visits the given list of $descriptions.
      */
-    protected function visitDescriptionsList(Generator $generator, array $descriptions): void
-    {
+    protected function visitDescriptionsList(
+        Generator $generator,
+        array $descriptions
+    ): void {
         $this->visitTranslatedList($generator, $descriptions, 'descriptions');
     }
 
     /**
      * Visits a list of translated elements.
      */
-    protected function visitTranslatedList(Generator $generator, array $translatedElements, string $listName): void
-    {
+    protected function visitTranslatedList(
+        Generator $generator,
+        array $translatedElements,
+        string $listName
+    ): void {
         $generator->startHashElement($listName);
         $generator->startList('value');
         foreach ($translatedElements as $languageCode => $element) {
@@ -85,8 +98,10 @@ abstract class ValueObjectVisitor
     /**
      * Visits a limitation.
      */
-    protected function visitLimitation(Generator $generator, Limitation $limitation): void
-    {
+    protected function visitLimitation(
+        Generator $generator,
+        Limitation $limitation
+    ): void {
         $generator->startHashElement('limitation');
 
         $generator->startAttribute('identifier', $limitation->getIdentifier());

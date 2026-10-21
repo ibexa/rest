@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @phpstan-import-type TBadgeList from \Ibexa\Bundle\Rest\ApiPlatform\EditionBadge\EditionBadgeFactoryInterface
  */
-#[CoversClass(\Ibexa\Bundle\Rest\ApiPlatform\EditionBadge\EditionBadgeFactory::class)]
+#[CoversClass(EditionBadgeFactory::class)]
 final class EditionBadgeFactoryTest extends TestCase
 {
     private const array TAG_TO_EDITION_MAP = [
@@ -44,8 +44,10 @@ final class EditionBadgeFactoryTest extends TestCase
      * @phpstan-param TBadgeList $expectedBadges
      */
     #[DataProvider('provideOperationBadgeData')]
-    public function testGetBadgesForOperation(?array $tags, array $expectedBadges): void
-    {
+    public function testGetBadgesForOperation(
+        ?array $tags,
+        array $expectedBadges
+    ): void {
         $operation = new Operation(tags: $tags);
         self::assertEquals($expectedBadges, $this->factory->getBadgesForOperation($operation));
     }

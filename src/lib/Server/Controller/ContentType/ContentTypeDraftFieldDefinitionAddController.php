@@ -15,7 +15,7 @@ use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentTypeFieldDefinitionValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
@@ -106,8 +106,8 @@ class ContentTypeDraftFieldDefinitionAddController extends RestController
     /**
      * Creates a new field definition for the given content type draft.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws ForbiddenException
+     * @throws NotFoundException
      */
     public function addContentTypeDraftFieldDefinition(
         int $contentTypeId,
@@ -147,6 +147,6 @@ class ContentTypeDraftFieldDefinitionAddController extends RestController
             }
         }
 
-        throw new Exceptions\NotFoundException("Field definition not found: '{$request->getPathInfo()}'.");
+        throw new NotFoundException("Field definition not found: '{$request->getPathInfo()}'.");
     }
 }

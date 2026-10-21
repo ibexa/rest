@@ -11,7 +11,7 @@ use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values\NoContent;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,7 +73,7 @@ class ContentTypeDraftFieldDefinitionDeleteController extends RestController
     /**
      * Deletes a field definition from a content type draft.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
     public function removeContentTypeDraftFieldDefinition(
         int $contentTypeId,
@@ -90,7 +90,7 @@ class ContentTypeDraftFieldDefinitionDeleteController extends RestController
         }
 
         if ($fieldDefinition === null) {
-            throw new Exceptions\NotFoundException("Field definition not found: '{$request->getPathInfo()}'.");
+            throw new NotFoundException("Field definition not found: '{$request->getPathInfo()}'.");
         }
 
         $this->contentTypeService->removeFieldDefinition(

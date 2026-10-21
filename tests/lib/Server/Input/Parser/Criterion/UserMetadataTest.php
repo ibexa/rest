@@ -17,7 +17,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 class UserMetadataTest extends BaseTestCase
 {
     /**
-     * @return array<array{0: array{UserMetadataCriterion: array{Target: string, Value: string|int|array<int>}}, 1: \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\UserMetadata}>
+     * @return array<array{0: array{UserMetadataCriterion: array{Target: string, Value: string|int|array<int>}}, 1: UserMetadataCriterion}>
      */
     public static function provideParseData(): array
     {
@@ -38,11 +38,13 @@ class UserMetadataTest extends BaseTestCase
     }
 
     /**
-     * @param array<array{0: array{UserMetadataCriterion: array{Target: string, Value: string|int|array<int>}}, 1: \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\UserMetadata}> $data
+     * @param array<array{0: array{UserMetadataCriterion: array{Target: string, Value: string|int|array<int>}}, 1: UserMetadataCriterion}> $data
      */
     #[DataProvider('provideParseData')]
-    public function testParse(array $data, UserMetadataCriterion $expected): void
-    {
+    public function testParse(
+        array $data,
+        UserMetadataCriterion $expected
+    ): void {
         $userMetadata = $this->getParser();
         $result = $userMetadata->parse($data, $this->getParsingDispatcherMock());
 

@@ -22,7 +22,7 @@ abstract class BaseInputParserCollectionValidatorBuilder extends BaseInputParser
     }
 
     /**
-     * @return array<string, \Symfony\Component\Validator\Constraint>
+     * @return array<string, Constraint>
      */
     abstract protected function getCollectionConstraints(): array;
 }

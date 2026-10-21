@@ -12,6 +12,8 @@ use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\BookmarkService;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -63,8 +65,10 @@ class BookmarkDeleteController extends RestController
     /**
      * Bookmark constructor.
      */
-    public function __construct(BookmarkService $bookmarkService, LocationService $locationService)
-    {
+    public function __construct(
+        BookmarkService $bookmarkService,
+        LocationService $locationService
+    ) {
         $this->bookmarkService = $bookmarkService;
         $this->locationService = $locationService;
     }
@@ -73,8 +77,8 @@ class BookmarkDeleteController extends RestController
      * Deletes a given bookmark.
      *
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
     public function deleteBookmark(int $locationId): RestValue
     {

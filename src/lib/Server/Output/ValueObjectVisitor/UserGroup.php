@@ -19,14 +19,16 @@ final class UserGroup extends ValueObjectVisitor implements DelegateValueObjectV
 {
     public function __construct(
         private readonly RelationListFacadeInterface $relationListFacade
-    ) {
-    }
+    ) {}
 
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\User\UserGroup $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $visitor->visitValueObject(
             new RestUserGroup(
                 $data,

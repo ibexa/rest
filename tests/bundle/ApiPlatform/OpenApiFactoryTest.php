@@ -39,7 +39,7 @@ final class OpenApiFactoryTest extends TestCase
 
     private OpenApiFactory $factory;
 
-    private OpenApiFactoryInterface&MockObject $decoratedFactory;
+    private OpenApiFactoryInterface & MockObject $decoratedFactory;
 
     private KernelInterface $kernel;
 
@@ -307,8 +307,10 @@ final class OpenApiFactoryTest extends TestCase
     /**
      * @param array<string, array<string, mixed>> $content
      */
-    private function processOpenApiWithRequestBody(array $content, OpenApiFactory $factory): OpenApi
-    {
+    private function processOpenApiWithRequestBody(
+        array $content,
+        OpenApiFactory $factory
+    ): OpenApi {
         $requestBody = new RequestBody(
             description: 'Login request',
             content: new ArrayObject($content)
@@ -356,12 +358,12 @@ final class OpenApiFactoryTest extends TestCase
         return $content;
     }
 
-    private function getDecoratedFactoryMock(): OpenApiFactoryInterface&MockObject
+    private function getDecoratedFactoryMock(): OpenApiFactoryInterface & MockObject
     {
         return $this->createMock(OpenApiFactoryInterface::class);
     }
 
-    private function getKernelMock(): KernelInterface&MockObject
+    private function getKernelMock(): KernelInterface & MockObject
     {
         $kernelMock = $this->createMock(KernelInterface::class);
 
@@ -380,7 +382,7 @@ final class OpenApiFactoryTest extends TestCase
         return $kernelMock;
     }
 
-    private function getEditionBadgeFactoryMock(): EditionBadgeFactoryInterface&MockObject
+    private function getEditionBadgeFactoryMock(): EditionBadgeFactoryInterface & MockObject
     {
         $editionBadgeFactoryMock = $this->createMock(EditionBadgeFactoryInterface::class);
 
@@ -394,7 +396,7 @@ final class OpenApiFactoryTest extends TestCase
     /**
      * @param array<string, string> $resourceMap
      */
-    private function getKernelMockWithCustomResourceMap(array $resourceMap): KernelInterface&MockObject
+    private function getKernelMockWithCustomResourceMap(array $resourceMap): KernelInterface & MockObject
     {
         $kernelMock = $this->createMock(KernelInterface::class);
 

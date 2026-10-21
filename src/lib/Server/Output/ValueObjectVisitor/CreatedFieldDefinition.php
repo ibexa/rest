@@ -22,8 +22,11 @@ class CreatedFieldDefinition extends RestFieldDefinition
      *
      * @param \Ibexa\Rest\Server\Values\CreatedFieldDefinition $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $restFieldDefinition = $data->fieldDefinition;
 
         parent::visit($visitor, $generator, $restFieldDefinition);

@@ -30,9 +30,9 @@ final class LocationTest extends ValueObjectVisitorBaseTestCase
 
     private const int LOCATION_ID = 55;
 
-    private LocationService&MockObject $locationServiceMock;
+    private LocationService & MockObject $locationServiceMock;
 
-    private ContentService\RelationListFacadeInterface&MockObject $relationListFacade;
+    private ContentService\RelationListFacadeInterface & MockObject $relationListFacade;
 
     protected function setUp(): void
     {

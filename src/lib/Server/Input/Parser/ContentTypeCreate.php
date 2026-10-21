@@ -36,8 +36,10 @@ class ContentTypeCreate extends BaseParser
         $this->parserTools = $parserTools;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentTypeCreateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ContentTypeCreateStruct {
         if (!array_key_exists('identifier', $data)) {
             throw new Exceptions\Parser("Missing 'identifier' element for ContentTypeCreate.");
         }

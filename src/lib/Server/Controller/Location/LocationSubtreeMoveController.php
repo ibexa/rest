@@ -8,6 +8,9 @@
 namespace Ibexa\Rest\Server\Controller\Location;
 
 use ApiPlatform\Metadata\Get;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
@@ -20,10 +23,12 @@ class LocationSubtreeMoveController extends LocationBaseController
     /**
      * Moves a subtree to a new location.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException if the Destination header cannot be parsed as location or trash
+     * @throws BadRequestException if the Destination header cannot be parsed as location or trash
      */
-    public function moveSubtree(string $locationPath, Request $request): ResourceCreated|NoContent
-    {
+    public function moveSubtree(
+        string $locationPath,
+        Request $request
+    ): ResourceCreated | NoContent {
         $locationToMove = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($locationPath)
         );
@@ -80,12 +85,14 @@ class LocationSubtreeMoveController extends LocationBaseController
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
      */
-    public function moveLocation(Request $request, string $locationPath): ResourceCreated
-    {
+    public function moveLocation(
+        Request $request,
+        string $locationPath
+    ): ResourceCreated {
         $destinationLocation = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

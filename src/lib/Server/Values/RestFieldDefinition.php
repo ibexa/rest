@@ -25,8 +25,11 @@ class RestFieldDefinition extends RestValue
      */
     public ?string $path;
 
-    public function __construct(ContentType $contentType, FieldDefinition $fieldDefinition, ?string $path = null)
-    {
+    public function __construct(
+        ContentType $contentType,
+        FieldDefinition $fieldDefinition,
+        ?string $path = null
+    ) {
         $this->contentType = $contentType;
         $this->fieldDefinition = $fieldDefinition;
         $this->path = $path;

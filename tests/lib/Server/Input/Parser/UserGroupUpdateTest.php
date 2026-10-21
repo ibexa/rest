@@ -235,12 +235,12 @@ class UserGroupUpdateTest extends BaseTestCase
             ->willReturn(
                 new Location(
                     [
-                            'contentInfo' => new ContentInfo(
-                                [
-                                    'id' => 4,
-                                ]
-                            ),
-                        ]
+                        'contentInfo' => new ContentInfo(
+                            [
+                                'id' => 4,
+                            ]
+                        ),
+                    ]
                 )
             );
 

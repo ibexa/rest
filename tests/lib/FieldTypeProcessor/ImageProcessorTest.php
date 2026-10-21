@@ -12,10 +12,10 @@ use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Routing\RouterInterface;
 
-#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\ImageProcessor::class, 'postProcessValueHash')]
+#[CoversMethod(ImageProcessor::class, 'postProcessValueHash')]
 class ImageProcessorTest extends BinaryInputProcessorTestCase
 {
-    protected RouterInterface&MockObject $router;
+    protected RouterInterface & MockObject $router;
 
     public function testPostProcessValueHash(): void
     {
@@ -33,11 +33,14 @@ class ImageProcessorTest extends BinaryInputProcessorTestCase
         }
 
         $routerMock = $this->getRouterMock();
-        $matcher = self::exactly(count($variations));
+        $matcher = $this->exactly(count($variations));
         $routerMock
             ->expects($matcher)
             ->method('generate')
-            ->willReturnCallback(static function (string $route, array $parameters) use ($matcher, $variations, $inputHash, $expectedVariations): string {
+            ->willReturnCallback(static function (
+                string $route,
+                array $parameters
+            ) use ($matcher, $variations, $inputHash, $expectedVariations): string {
                 $variationIdentifier = $variations[$matcher->numberOfInvocations() - 1];
 
                 self::assertSame('ibexa.rest.binary_content.get_image_variation', $route);
@@ -71,7 +74,7 @@ class ImageProcessorTest extends BinaryInputProcessorTestCase
         );
     }
 
-    protected function getRouterMock(): RouterInterface&MockObject
+    protected function getRouterMock(): RouterInterface & MockObject
     {
         if (!isset($this->router)) {
             $this->router = $this->createMock(RouterInterface::class);

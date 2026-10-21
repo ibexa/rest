@@ -147,7 +147,7 @@ class ContentTypeUpdateTest extends BaseTestCase
         );
     }
 
-    protected function getContentTypeServiceMock(): ContentTypeService&MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 

@@ -18,8 +18,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class ContentTypeCreateTest extends BaseTestCase
 {
-        public function testParse(): void
-        {
+    public function testParse(): void
+    {
         $inputArray = $this->getInputArray();
 
         $contentTypeCreate = $this->getParser();
@@ -237,8 +237,8 @@ class ContentTypeCreateTest extends BaseTestCase
             ->willReturn(
                 new ContentTypeCreateStruct(
                     [
-                            'identifier' => 'new_content_type',
-                        ]
+                        'identifier' => 'new_content_type',
+                    ]
                 )
             );
 

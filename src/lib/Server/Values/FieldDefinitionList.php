@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -21,15 +22,17 @@ class FieldDefinitionList extends RestValue
     public ContentType $contentType;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[]
+     * @var FieldDefinition[]
      */
     public array $fieldDefinitions;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition[] $fieldDefinitions
+     * @param FieldDefinition[] $fieldDefinitions
      */
-    public function __construct(ContentType $contentType, array $fieldDefinitions)
-    {
+    public function __construct(
+        ContentType $contentType,
+        array $fieldDefinitions
+    ) {
         $this->contentType = $contentType;
         $this->fieldDefinitions = $fieldDefinitions;
     }

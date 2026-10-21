@@ -20,8 +20,11 @@ class Resource extends RestValue
 
     public string $href;
 
-    public function __construct(string $name, string $mediaType, string $href)
-    {
+    public function __construct(
+        string $name,
+        string $mediaType,
+        string $href
+    ) {
         $this->name = $name;
         $this->mediaType = $mediaType;
         $this->href = $href;

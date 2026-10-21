@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Image\Dimensions as ImageDimensionsCriterion;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -32,10 +33,12 @@ final class ImageDimensions extends BaseParser
     /**
      * @param array<mixed> $data
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ImageDimensionsCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ImageDimensionsCriterion {
         $this->validateInputArray($data);
 
         $criterionData = $data[self::IMAGE_DIMENSIONS_CRITERION];

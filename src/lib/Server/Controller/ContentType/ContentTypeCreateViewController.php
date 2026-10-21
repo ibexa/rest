@@ -16,6 +16,7 @@ use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\ContentTypeRestViewInput;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -83,12 +84,11 @@ final class ContentTypeCreateViewController extends RestController
 {
     public function __construct(
         protected readonly ContentTypeService $contentTypeService
-    ) {
-    }
+    ) {}
 
     public function createView(Request $request): Values\ContentTypeList
     {
-        /** @var \Ibexa\Rest\Server\Values\ContentTypeRestViewInput $viewInput */
+        /** @var ContentTypeRestViewInput $viewInput */
         $viewInput = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

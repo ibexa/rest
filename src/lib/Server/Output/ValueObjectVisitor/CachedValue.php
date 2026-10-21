@@ -30,8 +30,11 @@ class CachedValue extends ValueObjectVisitor
     /**
      * @param \Ibexa\Rest\Server\Values\CachedValue $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $visitor->visitValueObject($data->value);
 
         if ($this->getParameter('content.view_cache') !== true) {
@@ -55,8 +58,10 @@ class CachedValue extends ValueObjectVisitor
         }
     }
 
-    public function getParameter(string $parameterName, mixed $defaultValue = null)
-    {
+    public function getParameter(
+        string $parameterName,
+        mixed $defaultValue = null
+    ) {
         if ($this->configResolver->hasParameter($parameterName)) {
             return $this->configResolver->getParameter($parameterName);
         }

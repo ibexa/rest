@@ -20,8 +20,10 @@ class RestContentCreateStruct extends ValueObject
 
     public LocationCreateStruct $locationCreateStruct;
 
-    public function __construct(ContentCreateStruct $contentCreateStruct, LocationCreateStruct $locationCreateStruct)
-    {
+    public function __construct(
+        ContentCreateStruct $contentCreateStruct,
+        LocationCreateStruct $locationCreateStruct
+    ) {
         $this->contentCreateStruct = $contentCreateStruct;
         $this->locationCreateStruct = $locationCreateStruct;
 

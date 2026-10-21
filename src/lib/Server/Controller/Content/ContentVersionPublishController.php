@@ -14,10 +14,12 @@ use Ibexa\Rest\Server\Values\NoContent;
 class ContentVersionPublishController extends RestController
 {
     /**
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException if version $versionNumber isn't a draft
+     * @throws ForbiddenException if version $versionNumber isn't a draft
      */
-    public function publishVersion(int $contentId, ?int $versionNumber): NoContent
-    {
+    public function publishVersion(
+        int $contentId,
+        ?int $versionNumber
+    ): NoContent {
         $versionInfo = $this->repository->getContentService()->loadVersionInfo(
             $this->repository->getContentService()->loadContentInfo($contentId),
             $versionNumber

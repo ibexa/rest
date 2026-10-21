@@ -45,8 +45,10 @@ class Visitor
      * Does not allow overwriting of response headers. The first definition of
      * a header will be used.
      */
-    public function setHeader(string $name, mixed $value): void
-    {
+    public function setHeader(
+        string $name,
+        mixed $value
+    ): void {
         if (is_bool($value) || is_int($value)) {
             trigger_deprecation(
                 'ibexa/rest',
@@ -118,13 +120,13 @@ class Visitor
     }
 
     /**
-     * @param array<mixed>|bool|string|int|float|\ArrayObject|null $data
+     * @param array<mixed>|bool|string|int|float|ArrayObject|null $data
      *
-     * @return array<mixed>|bool|string|int|float|\ArrayObject|null
+     * @return array<mixed>|bool|string|int|float|ArrayObject|null
      */
     private function removeEncodeContext(
-        array|bool|string|int|float|null|ArrayObject $data,
-    ): array|bool|string|int|float|null|ArrayObject {
+        array | bool | string | int | float | null | ArrayObject $data,
+    ): array | bool | string | int | float | null | ArrayObject {
         if (is_array($data) || $data instanceof ArrayObject) {
             foreach ($data as $key => $value) {
                 if ($key === VisitorAdapterNormalizer::ENCODER_CONTEXT) {
@@ -167,7 +169,7 @@ class Visitor
     /**
      * Generates a media type for $type based on the used generator.
      *
-     * @see \Ibexa\Contracts\Rest\Output\Generator::getMediaType()
+     * @see Generator::getMediaType()
      */
     public function getMediaType(string $type): string
     {

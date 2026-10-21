@@ -8,6 +8,8 @@
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\UserService;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroupCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
@@ -53,11 +55,13 @@ class UserGroupCreate extends BaseParser
      *     }
      * } $data
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws NotFoundException
+     * @throws InvalidArgumentException
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): UserGroupCreateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): UserGroupCreateStruct {
         $contentType = null;
         if (array_key_exists('ContentType', $data) && is_array($data['ContentType'])) {
             if (!array_key_exists('_href', $data['ContentType'])) {

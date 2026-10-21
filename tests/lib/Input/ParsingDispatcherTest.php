@@ -100,7 +100,7 @@ class ParsingDispatcherTest extends TestCase
     }
 
     /**
-     * @return \Ibexa\Contracts\Rest\Input\Parser|\PHPUnit\Framework\MockObject\MockObject
+     * @return Parser&MockObject
      */
     private function createParserMock(): MockObject
     {

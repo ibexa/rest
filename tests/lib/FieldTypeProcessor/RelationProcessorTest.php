@@ -16,8 +16,8 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\RouterInterface;
 
-#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\RelationProcessor::class, 'preProcessFieldSettingsHash')]
-#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\RelationProcessor::class, 'postProcessFieldSettingsHash')]
+#[CoversMethod(RelationProcessor::class, 'preProcessFieldSettingsHash')]
+#[CoversMethod(RelationProcessor::class, 'postProcessFieldSettingsHash')]
 class RelationProcessorTest extends TestCase
 {
     /**
@@ -49,8 +49,10 @@ class RelationProcessorTest extends TestCase
      * @param array<string, mixed> $outputSettings
      */
     #[DataProvider('fieldSettingsHashes')]
-    public function testPreProcessFieldSettingsHash(array $inputSettings, array $outputSettings): void
-    {
+    public function testPreProcessFieldSettingsHash(
+        array $inputSettings,
+        array $outputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(
@@ -64,8 +66,10 @@ class RelationProcessorTest extends TestCase
      * @param array<string, mixed> $outputSettings
      */
     #[DataProvider('fieldSettingsHashes')]
-    public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
-    {
+    public function testPostProcessFieldSettingsHash(
+        array $outputSettings,
+        array $inputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(
@@ -116,7 +120,7 @@ class RelationProcessorTest extends TestCase
         $processor->setRouter($routerMock);
 
         $routerMock
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('generate')
             ->with('ibexa.rest.load_content', ['contentId' => 42])
             ->willReturn('/api/ibexa/v2/content/objects/42');
@@ -134,7 +138,7 @@ class RelationProcessorTest extends TestCase
         $processor->setRouter($routerMock);
 
         $routerMock
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('generate');
 
         $hash = $processor->postProcessValueHash(['destinationContentId' => null]);
@@ -157,7 +161,7 @@ class RelationProcessorTest extends TestCase
         $processor->setRouter($routerMock);
 
         $routerMock
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('generate');
 
         $hash = $processor->postProcessFieldSettingsHash(['selectionRoot' => -1]);

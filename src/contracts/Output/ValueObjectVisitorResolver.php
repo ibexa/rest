@@ -12,14 +12,16 @@ use Throwable;
 
 final class ValueObjectVisitorResolver implements ValueObjectVisitorResolverInterface
 {
-    /** @var array<class-string, \Ibexa\Contracts\Rest\Output\ValueObjectVisitor> */
+    /** @var array<class-string, ValueObjectVisitor> */
     private array $visitors;
 
     /**
      * @param class-string $visitedClassName
      */
-    public function addVisitor(string $visitedClassName, ValueObjectVisitor $visitor): void
-    {
+    public function addVisitor(
+        string $visitedClassName,
+        ValueObjectVisitor $visitor
+    ): void {
         $this->visitors[$visitedClassName] = $visitor;
     }
 

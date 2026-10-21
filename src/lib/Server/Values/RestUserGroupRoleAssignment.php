@@ -20,10 +20,12 @@ class RestUserGroupRoleAssignment extends RestValue
     /**
      * User group path to which the role is assigned.
      */
-    public string|int $id;
+    public string | int $id;
 
-    public function __construct(UserGroupRoleAssignment $roleAssignment, string|int $id)
-    {
+    public function __construct(
+        UserGroupRoleAssignment $roleAssignment,
+        string | int $id
+    ) {
         $this->roleAssignment = $roleAssignment;
         $this->id = $id;
     }

@@ -12,6 +12,4 @@ use InvalidArgumentException;
 /**
  * Exception thrown if the request is forbidden.
  */
-class ForbiddenException extends InvalidArgumentException
-{
-}
+class ForbiddenException extends InvalidArgumentException {}

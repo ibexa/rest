@@ -90,8 +90,10 @@ class ObjectStateGroupCreateController extends RestController
 
     protected ContentService $contentService;
 
-    public function __construct(ObjectStateService $objectStateService, ContentService $contentService)
-    {
+    public function __construct(
+        ObjectStateService $objectStateService,
+        ContentService $contentService
+    ) {
         $this->objectStateService = $objectStateService;
         $this->contentService = $contentService;
     }
@@ -99,7 +101,7 @@ class ObjectStateGroupCreateController extends RestController
     /**
      * Creates a new object state group.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      */
     public function createObjectStateGroup(Request $request): CreatedObjectStateGroup
     {

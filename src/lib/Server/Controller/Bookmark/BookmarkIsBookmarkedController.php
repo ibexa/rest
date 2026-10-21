@@ -12,6 +12,8 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Bundle\Rest\ApiPlatform\Head;
 use Ibexa\Contracts\Core\Repository\BookmarkService;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -80,8 +82,10 @@ class BookmarkIsBookmarkedController extends RestController
     /**
      * Bookmark constructor.
      */
-    public function __construct(BookmarkService $bookmarkService, LocationService $locationService)
-    {
+    public function __construct(
+        BookmarkService $bookmarkService,
+        LocationService $locationService
+    ) {
         $this->bookmarkService = $bookmarkService;
         $this->locationService = $locationService;
     }
@@ -90,8 +94,8 @@ class BookmarkIsBookmarkedController extends RestController
      * Checks if a given location is bookmarked.
      *
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
     public function isBookmarked(int $locationId): Values\OK
     {

@@ -63,8 +63,7 @@ class URLAliasLoadByIdController extends RestController
     public function __construct(
         protected URLAliasService $urlAliasService,
         protected LocationService $locationService
-    ) {
-    }
+    ) {}
 
     /**
      * Returns the URL alias with the given ID.

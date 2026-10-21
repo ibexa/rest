@@ -24,14 +24,18 @@ class ContentTypeGroupInput extends BaseParser
 
     protected ParserTools $parserTools;
 
-    public function __construct(ContentTypeService $contentTypeService, ParserTools $parserTools)
-    {
+    public function __construct(
+        ContentTypeService $contentTypeService,
+        ParserTools $parserTools
+    ) {
         $this->contentTypeService = $contentTypeService;
         $this->parserTools = $parserTools;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentTypeGroupCreateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ContentTypeGroupCreateStruct {
         // Since ContentTypeGroupInput is used both for creating and updating ContentTypeGroup and identifier is not
         // required when updating ContentTypeGroup, we need to rely on PAPI to throw the exception on missing
         // identifier when creating a ContentTypeGroup

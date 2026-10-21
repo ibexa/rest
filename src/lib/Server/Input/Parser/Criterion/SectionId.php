@@ -8,7 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\SectionId as SectionIdCriterion;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 
@@ -20,12 +20,14 @@ class SectionId extends BaseParser
     /**
      * Parses input structure to a SectionId Criterion object.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): SectionIdCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): SectionIdCriterion {
         if (!array_key_exists('SectionIdCriterion', $data)) {
-            throw new Exceptions\Parser('Invalid <SectionIdCriterion> format');
+            throw new Parser('Invalid <SectionIdCriterion> format');
         }
 
         return new SectionIdCriterion($data['SectionIdCriterion']);

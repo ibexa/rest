@@ -8,7 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Ancestor as AncestorCriterion;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 
@@ -20,12 +20,14 @@ class Ancestor extends BaseParser
     /**
      * Parses input structure to a Criterion object.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): AncestorCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AncestorCriterion {
         if (!array_key_exists('AncestorCriterion', $data)) {
-            throw new Exceptions\Parser('Invalid <AncestorCriterion> format');
+            throw new Parser('Invalid <AncestorCriterion> format');
         }
 
         return new AncestorCriterion(explode(',', $data['AncestorCriterion']));

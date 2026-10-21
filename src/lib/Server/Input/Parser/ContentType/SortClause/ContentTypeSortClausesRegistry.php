@@ -8,13 +8,15 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Input\Parser\ContentType\SortClause;
 
+use Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass;
+
 final class ContentTypeSortClausesRegistry
 {
-    /** @var iterable<\Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass> */
+    /** @var iterable<DataKeyValueObjectClass> */
     private iterable $sortClauses;
 
     /**
-     * @param iterable<\Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass> $sortClauses
+     * @param iterable<DataKeyValueObjectClass> $sortClauses
      */
     public function __construct(iterable $sortClauses)
     {
@@ -22,7 +24,7 @@ final class ContentTypeSortClausesRegistry
     }
 
     /**
-     * @return iterable<\Ibexa\Rest\Server\Input\Parser\SortClause\DataKeyValueObjectClass>
+     * @return iterable<DataKeyValueObjectClass>
      */
     public function getSortClauses(): iterable
     {

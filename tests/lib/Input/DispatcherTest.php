@@ -32,6 +32,7 @@ class DispatcherTest extends TestCase
         $message = new Message();
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $parsingDispatcher->expects(self::never())->method('parse');
         $dispatcher = new Dispatcher($parsingDispatcher);
 
         $dispatcher->parse($message);
@@ -48,6 +49,7 @@ class DispatcherTest extends TestCase
         );
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $parsingDispatcher->expects(self::never())->method('parse');
         $dispatcher = new Dispatcher($parsingDispatcher);
 
         $dispatcher->parse($message);
@@ -64,6 +66,7 @@ class DispatcherTest extends TestCase
         );
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $parsingDispatcher->expects(self::never())->method('parse');
         $dispatcher = new Dispatcher($parsingDispatcher);
 
         $dispatcher->parse($message);
@@ -128,10 +131,10 @@ class DispatcherTest extends TestCase
             ->with('Hello world!')
             ->willReturn(
                 [
-                        [
-                            'someKey' => 'someValue',
-                        ],
-                    ]
+                    [
+                        'someKey' => 'someValue',
+                    ],
+                ]
             );
 
         $dispatcher = new Dispatcher($parsingDispatcher, ['format' => $handler]);

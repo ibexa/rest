@@ -31,8 +31,11 @@ class RestFieldDefinition extends RestContentTypeBase
      *
      * @param \Ibexa\Rest\Server\Values\RestFieldDefinition $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $restFieldDefinition = $data;
         $fieldDefinition = $restFieldDefinition->fieldDefinition;
         $contentType = $restFieldDefinition->contentType;

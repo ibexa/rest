@@ -24,6 +24,7 @@ use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RestUser;
 use LogicException;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -76,7 +77,7 @@ class UserBaseController extends RestController
     /**
      * Loads users.
      */
-    public function loadUsers(Request $request): Values\UserList|Values\UserRefList
+    public function loadUsers(Request $request): Values\UserList | Values\UserRefList
     {
         $restUsers = [];
 
@@ -120,13 +121,13 @@ class UserBaseController extends RestController
         return new Values\UserRefList($restUsers, $request->getPathInfo());
     }
 
-    protected function buildRestUserObject(RepositoryUser $user): Values\RestUser
+    protected function buildRestUserObject(RepositoryUser $user): RestUser
     {
         if ($user->contentInfo->mainLocationId === null) {
             throw new LogicException();
         }
 
-        return new Values\RestUser(
+        return new RestUser(
             $user,
             $this->contentTypeService->loadContentType($user->contentInfo->contentTypeId),
             $user->contentInfo,
@@ -136,7 +137,7 @@ class UserBaseController extends RestController
     }
 
     /**
-     * @return \Ibexa\Rest\Server\Values\RestUser[]
+     * @return RestUser[]
      */
     public function loadUsersAssignedToRole(int $roleId): array
     {

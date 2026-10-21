@@ -21,8 +21,11 @@ class ResourceCreated extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\ResourceCreated $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $visitor->setStatus(201);
         $visitor->setHeader('Location', $data->redirectUri);
     }

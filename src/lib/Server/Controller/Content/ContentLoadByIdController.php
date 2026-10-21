@@ -84,14 +84,15 @@ class ContentLoadByIdController extends RestController
 {
     public function __construct(
         private readonly ContentService\RelationListFacadeInterface $relationListFacade
-    ) {
-    }
+    ) {}
 
     /**
      * Loads a content info, potentially with the current version embedded.
      */
-    public function loadContent(int $contentId, Request $request): Values\CachedValue|Values\RestContent
-    {
+    public function loadContent(
+        int $contentId,
+        Request $request
+    ): Values\CachedValue | Values\RestContent {
         $contentService = $this->repository->getContentService();
 
         $contentInfo = $contentService->loadContentInfo($contentId);

@@ -89,13 +89,12 @@ class URLAliasCreateController extends RestController
     public function __construct(
         protected URLAliasService $urlAliasService,
         protected LocationService $locationService
-    ) {
-    }
+    ) {}
 
     /**
      * Creates a new URL alias.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      */
     public function createURLAlias(Request $request): CreatedURLAlias
     {

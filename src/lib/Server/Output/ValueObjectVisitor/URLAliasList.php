@@ -21,8 +21,11 @@ class URLAliasList extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\URLAliasList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('UrlAliasList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('UrlAliasList'));
 

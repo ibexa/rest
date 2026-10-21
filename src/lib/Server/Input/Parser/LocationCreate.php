@@ -23,14 +23,18 @@ class LocationCreate extends BaseParser
 
     protected ParserTools $parserTools;
 
-    public function __construct(LocationService $locationService, ParserTools $parserTools)
-    {
+    public function __construct(
+        LocationService $locationService,
+        ParserTools $parserTools
+    ) {
         $this->locationService = $locationService;
         $this->parserTools = $parserTools;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): LocationCreateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): LocationCreateStruct {
         if (!array_key_exists('ParentLocation', $data) || !is_array($data['ParentLocation'])) {
             throw new Exceptions\Parser("Missing or invalid 'ParentLocation' element for LocationCreate.");
         }

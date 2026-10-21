@@ -7,7 +7,7 @@
 
 namespace Ibexa\Rest\Server\Input\Parser;
 
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Server\Input\Parser\Criterion as CriterionParser;
 use Ibexa\Rest\Server\Values\RestViewInput;
@@ -20,15 +20,17 @@ class ViewInputOneDotOne extends CriterionParser
     /**
      * Parses input structure to a RestViewInput struct.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestViewInput
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): RestViewInput {
         $restViewInput = new RestViewInput();
 
         // identifier
         if (!array_key_exists('identifier', $data)) {
-            throw new Exceptions\Parser('Missing <identifier> attribute for <ViewInput>.');
+            throw new Parser('Missing <identifier> attribute for <ViewInput>.');
         }
         $restViewInput->identifier = $data['identifier'];
 
@@ -48,7 +50,7 @@ class ViewInputOneDotOne extends CriterionParser
         }
 
         if (!isset($queryMediaType) || !isset($queryData)) {
-            throw new Exceptions\Parser('Missing <ContentQuery> or <LocationQuery> attribute for <ViewInput>.');
+            throw new Parser('Missing <ContentQuery> or <LocationQuery> attribute for <ViewInput>.');
         }
 
         $restViewInput->query = $parsingDispatcher->parse($queryData, $queryMediaType);

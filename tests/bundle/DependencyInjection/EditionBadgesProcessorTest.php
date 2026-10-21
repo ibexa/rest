@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Exception\LogicException;
  * @phpstan-import-type TTagToEditionMappingConfig from \Ibexa\Bundle\Rest\DependencyInjection\EditionBadgesProcessorInterface
  * @phpstan-import-type TTagToEditionMap from \Ibexa\Bundle\Rest\ApiPlatform\EditionBadge\EditionBadgeFactory
  */
-#[CoversClass(\Ibexa\Bundle\Rest\DependencyInjection\EditionBadgesProcessor::class)]
+#[CoversClass(EditionBadgesProcessor::class)]
 final class EditionBadgesProcessorTest extends TestCase
 {
     public const array BADGES_CONFIG = [
@@ -89,12 +89,14 @@ final class EditionBadgesProcessorTest extends TestCase
      * @phpstan-param TTagToEditionMap $expectedTagToEditionMap
      */
     #[DataProvider('getDataForTestProcess')]
-    public function testProcess(array $tagToEditionMappingConfig, array $expectedTagToEditionMap): void
-    {
+    public function testProcess(
+        array $tagToEditionMappingConfig,
+        array $expectedTagToEditionMap
+    ): void {
         $processor = new EditionBadgesProcessor($this->containerBuilder);
 
         $this->containerBuilder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('setParameter')
             ->with(EditionBadgesProcessor::TAG_EDITION_MAP_PARAMETER_NAME, $expectedTagToEditionMap);
 
@@ -106,7 +108,7 @@ final class EditionBadgesProcessorTest extends TestCase
         $processor = new EditionBadgesProcessor($this->containerBuilder);
 
         $this->containerBuilder
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('setParameter');
 
         $this->expectException(LogicException::class);

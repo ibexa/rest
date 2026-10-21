@@ -12,6 +12,4 @@ use PHPUnit\Framework\TestCase;
 /**
  * Base test class.
  */
-abstract class BaseTestCase extends TestCase
-{
-}
+abstract class BaseTestCase extends TestCase {}

@@ -13,7 +13,6 @@ use ApiPlatform\OpenApi\Model;
 use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
-use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType as APIContentType;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
@@ -76,7 +75,7 @@ class ContentTypeListController extends RestController
     /**
      * Returns a list of content types.
      */
-    public function listContentTypes(Request $request): ContentTypeInfoList|ContentTypeList
+    public function listContentTypes(Request $request): ContentTypeInfoList | ContentTypeList
     {
         if ($this->getMediaType($request) === 'application/vnd.ibexa.api.contenttypelist') {
             $return = new ContentTypeList([], $request->getPathInfo());
@@ -140,12 +139,15 @@ class ContentTypeListController extends RestController
     }
 
     /**
-     * @param iterable<ContentType> &$contentTypes
+     * @param iterable<APIContentType> &$contentTypes
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
+     * @throws BadRequestException
      */
-    protected function sortContentTypeList(iterable &$contentTypes, string $orderby, string $sort = 'asc'): void
-    {
+    protected function sortContentTypeList(
+        iterable &$contentTypes,
+        string $orderby,
+        string $sort = 'asc'
+    ): void {
         $contentTypes = (array)$contentTypes;
 
         switch ($orderby) {
@@ -153,14 +155,20 @@ class ContentTypeListController extends RestController
                 if ($sort === 'asc' || $sort === '') {
                     usort(
                         $contentTypes,
-                        static function (APIContentType $contentType1, APIContentType $contentType2): int {
+                        static function (
+                            APIContentType $contentType1,
+                            APIContentType $contentType2
+                        ): int {
                             return strcasecmp($contentType1->identifier, $contentType2->identifier);
                         }
                     );
                 } elseif ($sort === 'desc') {
                     usort(
                         $contentTypes,
-                        static function (APIContentType $contentType1, APIContentType $contentType2): int {
+                        static function (
+                            APIContentType $contentType1,
+                            APIContentType $contentType2
+                        ): int {
                             return strcasecmp($contentType1->identifier, $contentType2->identifier) * -1;
                         }
                     );
@@ -172,7 +180,10 @@ class ContentTypeListController extends RestController
                 if ($sort === 'asc' || $sort === '') {
                     usort(
                         $contentTypes,
-                        static function (APIContentType $timeObj3, APIContentType $timeObj4): int {
+                        static function (
+                            APIContentType $timeObj3,
+                            APIContentType $timeObj4
+                        ): int {
                             $timeObj3 = strtotime($timeObj3->modificationDate->format('Y-m-d H:i:s'));
                             $timeObj4 = strtotime($timeObj4->modificationDate->format('Y-m-d H:i:s'));
 
@@ -182,7 +193,10 @@ class ContentTypeListController extends RestController
                 } elseif ($sort === 'desc') {
                     usort(
                         $contentTypes,
-                        static function (APIContentType $timeObj3, APIContentType $timeObj4): int {
+                        static function (
+                            APIContentType $timeObj3,
+                            APIContentType $timeObj4
+                        ): int {
                             $timeObj3 = strtotime($timeObj3->modificationDate->format('Y-m-d H:i:s'));
                             $timeObj4 = strtotime($timeObj4->modificationDate->format('Y-m-d H:i:s'));
 
@@ -199,7 +213,7 @@ class ContentTypeListController extends RestController
     }
 
     /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType[]
+     * @return APIContentType[]
      */
     protected function getContentTypeList(): array
     {

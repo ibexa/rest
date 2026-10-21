@@ -106,7 +106,7 @@ class RestProviderTest extends TestCase
         );
     }
 
-    protected function getRequestMatcherMock(): RequestMatcherInterface&MockObject
+    protected function getRequestMatcherMock(): RequestMatcherInterface & MockObject
     {
         $mock = $this->createMock(RequestMatcherInterface::class);
 

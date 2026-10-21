@@ -12,6 +12,4 @@ use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException as APIIn
 /**
  * This exception is thrown if a service method is called with an illegal or non appropriate value.
  */
-class InvalidArgumentException extends APIInvalidArgumentException
-{
-}
+class InvalidArgumentException extends APIInvalidArgumentException {}

@@ -10,9 +10,11 @@ namespace Ibexa\Rest\Server\Controller\Session;
 
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 #[Delete(
     uriTemplate: '/user/sessions/{sessionId}',
@@ -62,11 +64,13 @@ use Symfony\Component\HttpFoundation\Response;
 final class SessionDeleteController extends SessionBaseController
 {
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws UnauthorizedException
      */
-    public function deleteSessionAction(string $sessionId, Request $request): Values\DeletedUserSession|Response
-    {
-        /** @var \Symfony\Component\HttpFoundation\Session\Session $session */
+    public function deleteSessionAction(
+        string $sessionId,
+        Request $request
+    ): Values\DeletedUserSession | Response {
+        /** @var Session $session */
         $session = $request->getSession();
         if (!$session->isStarted() || $session->getId() !== $sessionId || !$this->hasStoredCsrfToken()) {
             return $this->logout($request);

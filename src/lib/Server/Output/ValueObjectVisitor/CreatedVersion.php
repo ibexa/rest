@@ -22,8 +22,11 @@ class CreatedVersion extends Version
      *
      * @param \Ibexa\Rest\Server\Values\CreatedVersion $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         parent::visit($visitor, $generator, $data->version);
         $visitor->setHeader(
             'Location',

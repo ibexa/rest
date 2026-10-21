@@ -15,7 +15,7 @@ class LocationTest extends RESTFunctionalTestCase
     /**
      * Covers POST /content/objects/{contentId}/locations.
      *
-     * @returns string location href
+     * @return string location href
      */
     public function testCreateLocation()
     {
@@ -160,9 +160,7 @@ XML;
      * Covers GET /content/objects/{contentId}/locations.
      */
     #[Depends('testCreateLocation')]
-    public function testLoadLocationsForContent($contentHref): void
-    {
-    }
+    public function testLoadLocationsForContent($contentHref): void {}
 
     /**
      * Covers SWAP /content/locations/{locationPath}.
@@ -234,8 +232,10 @@ XML;
         self::assertHttpResponseCodeEquals($response, 204);
     }
 
-    private function createUrlAlias(string $locationHref, string $urlAlias): string
-    {
+    private function createUrlAlias(
+        string $locationHref,
+        string $urlAlias
+    ): string {
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <UrlAliasCreate type="LOCATION">

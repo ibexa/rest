@@ -103,8 +103,10 @@ class ContentMetadataUpdateController extends RestController
     /**
      * Updates a content's metadata.
      */
-    public function updateContentMetadata(int $contentId, Request $request): Values\RestContent
-    {
+    public function updateContentMetadata(
+        int $contentId,
+        Request $request
+    ): Values\RestContent {
         $updateStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

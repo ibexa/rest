@@ -22,8 +22,10 @@ class RestTrashItem extends RestValue
      */
     public int $childCount;
 
-    public function __construct(TrashItem $trashItem, int $childCount)
-    {
+    public function __construct(
+        TrashItem $trashItem,
+        int $childCount
+    ) {
         $this->trashItem = $trashItem;
         $this->childCount = $childCount;
     }

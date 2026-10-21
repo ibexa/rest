@@ -26,20 +26,24 @@ class AcceptHeaderVisitorDispatcher
     /**
      * Adds view handler.
      */
-    public function addVisitor(string $regexp, OutputVisitor $visitor): void
-    {
+    public function addVisitor(
+        string $regexp,
+        OutputVisitor $visitor
+    ): void {
         $this->mapping[$regexp] = $visitor;
     }
 
     /**
      * Dispatches a visitable result to the mapped visitor.
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
-    public function dispatch(Request $request, mixed $result): Response
-    {
+    public function dispatch(
+        Request $request,
+        mixed $result
+    ): Response {
         foreach ($request->getAcceptableContentTypes() as $mimeType) {
-            /** @var \Ibexa\Contracts\Rest\Output\Visitor $visitor */
+            /** @var OutputVisitor $visitor */
             foreach ($this->mapping as $regexp => $visitor) {
                 if (preg_match($regexp, $mimeType)) {
                     return $visitor->visit($result);

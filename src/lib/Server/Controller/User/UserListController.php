@@ -65,6 +65,4 @@ use Symfony\Component\HttpFoundation\Response;
         ],
     ),
 )]
-final class UserListController extends UserBaseController
-{
-}
+final class UserListController extends UserBaseController {}

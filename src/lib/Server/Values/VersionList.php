@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -15,7 +16,7 @@ use Ibexa\Rest\Value as RestValue;
 class VersionList extends RestValue
 {
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo[]
+     * @var VersionInfo[]
      */
     public array $versions;
 
@@ -25,10 +26,12 @@ class VersionList extends RestValue
     public string $path;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo[] $versions
+     * @param VersionInfo[] $versions
      */
-    public function __construct(array $versions, string $path)
-    {
+    public function __construct(
+        array $versions,
+        string $path
+    ) {
         $this->versions = $versions;
         $this->path = $path;
     }

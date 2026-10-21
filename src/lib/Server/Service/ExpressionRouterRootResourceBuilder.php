@@ -41,8 +41,11 @@ class ExpressionRouterRootResourceBuilder implements RootResourceBuilderInterfac
 
     protected ConfigResolverInterface $configResolver;
 
-    public function __construct(RouterInterface $router, RouterInterface $templateRouter, ConfigResolverInterface $configResolver)
-    {
+    public function __construct(
+        RouterInterface $router,
+        RouterInterface $templateRouter,
+        ConfigResolverInterface $configResolver
+    ) {
         $this->router = $router;
         $this->templateRouter = $templateRouter;
         $this->configResolver = $configResolver;

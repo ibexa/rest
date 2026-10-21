@@ -10,6 +10,7 @@ namespace Ibexa\Tests\Bundle\Rest\Functional;
 use Nyholm\Psr7\Request as HttpRequest;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase as BaseTestCase;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\BrowserKit\HttpBrowser;
@@ -92,7 +93,7 @@ class TestCase extends BaseTestCase
     }
 
     /**
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
     public function sendHttpRequest(RequestInterface $request): ResponseInterface
     {
@@ -154,8 +155,10 @@ class TestCase extends BaseTestCase
         );
     }
 
-    protected function assertHttpResponseCodeEquals(ResponseInterface $response, int $expected): void
-    {
+    protected function assertHttpResponseCodeEquals(
+        ResponseInterface $response,
+        int $expected
+    ): void {
         $responseCode = $response->getStatusCode();
         try {
             self::assertEquals($expected, $responseCode);
@@ -196,8 +199,11 @@ EOF;
         return $errorMessageString;
     }
 
-    protected function assertHttpResponseHasHeader(ResponseInterface $response, string $header, $expectedValue = null)
-    {
+    protected function assertHttpResponseHasHeader(
+        ResponseInterface $response,
+        string $header,
+        $expectedValue = null
+    ) {
         $headerValue = $response->hasHeader($header) ? $response->getHeader($header)[0] : null;
         self::assertNotNull($headerValue, "Failed asserting that response has a {$header} header");
         if ($expectedValue !== null) {
@@ -358,8 +364,11 @@ XML;
     /**
      * @param array $extraHeaders extra [key => value] headers to be passed with the authentication request
      */
-    protected function createAuthenticationHttpRequest(string $login, string $password, array $extraHeaders = []): RequestInterface
-    {
+    protected function createAuthenticationHttpRequest(
+        string $login,
+        string $password,
+        array $extraHeaders = []
+    ): RequestInterface {
         return $this->createHttpRequest(
             'POST',
             '/api/ibexa/v2/user/sessions',

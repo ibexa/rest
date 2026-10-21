@@ -15,6 +15,7 @@ use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroupRoleAssignment;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RestUserGroup;
 use Ibexa\Rest\Value as RestValue;
 use LogicException;
 use Symfony\Component\HttpFoundation\Request;
@@ -94,7 +95,7 @@ final class UserGroupListController extends UserBaseController
             $contentType = $this->contentTypeService->loadContentType($userGroupContentInfo->contentTypeId);
 
             $restUserGroups = [
-                new Values\RestUserGroup(
+                new RestUserGroup(
                     $userGroup,
                     $contentType,
                     $userGroupContentInfo,
@@ -120,7 +121,7 @@ final class UserGroupListController extends UserBaseController
     /**
      * Loads a user group by its remote ID.
      */
-    public function loadUserGroupByRemoteId(Request $request): Values\RestUserGroup
+    public function loadUserGroupByRemoteId(Request $request): RestUserGroup
     {
         $remoteId = $request->query->getString('remoteId');
 
@@ -135,7 +136,7 @@ final class UserGroupListController extends UserBaseController
 
         $contentType = $this->contentTypeService->loadContentType($contentInfo->contentTypeId);
 
-        return new Values\RestUserGroup(
+        return new RestUserGroup(
             $userGroup,
             $contentType,
             $contentInfo,
@@ -145,7 +146,7 @@ final class UserGroupListController extends UserBaseController
     }
 
     /**
-     * @return \Ibexa\Rest\Server\Values\RestUserGroup[]
+     * @return RestUserGroup[]
      */
     public function loadUserGroupsAssignedToRole(int $roleId): array
     {
@@ -166,7 +167,7 @@ final class UserGroupListController extends UserBaseController
                 $userGroupLocation = $this->locationService->loadLocation($userGroupContentInfo->mainLocationId);
                 $contentType = $this->contentTypeService->loadContentType($userGroupContentInfo->contentTypeId);
 
-                $restUserGroups[] = new Values\RestUserGroup(
+                $restUserGroups[] = new RestUserGroup(
                     $userGroup,
                     $contentType,
                     $userGroupContentInfo,

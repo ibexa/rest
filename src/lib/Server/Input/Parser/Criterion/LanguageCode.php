@@ -8,7 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LanguageCode as LanguageCodeCriterion;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 
@@ -20,12 +20,14 @@ class LanguageCode extends BaseParser
     /**
      * Parses input structure to a LanguageCode Criterion object.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): LanguageCodeCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): LanguageCodeCriterion {
         if (!array_key_exists('LanguageCodeCriterion', $data)) {
-            throw new Exceptions\Parser('Invalid <LanguageCodeCriterion> format');
+            throw new Parser('Invalid <LanguageCodeCriterion> format');
         }
 
         return new LanguageCodeCriterion(explode(',', $data['LanguageCodeCriterion']));

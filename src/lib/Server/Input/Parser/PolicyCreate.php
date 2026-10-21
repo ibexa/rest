@@ -23,14 +23,18 @@ class PolicyCreate extends BaseParser
 
     protected ParserTools $parserTools;
 
-    public function __construct(RoleService $roleService, ParserTools $parserTools)
-    {
+    public function __construct(
+        RoleService $roleService,
+        ParserTools $parserTools
+    ) {
         $this->roleService = $roleService;
         $this->parserTools = $parserTools;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): PolicyCreateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): PolicyCreateStruct {
         if (!array_key_exists('module', $data)) {
             throw new Exceptions\Parser("Missing 'module' attribute for PolicyCreate.");
         }

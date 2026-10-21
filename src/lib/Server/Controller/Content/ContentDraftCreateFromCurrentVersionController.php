@@ -79,11 +79,10 @@ class ContentDraftCreateFromCurrentVersionController extends RestController
 {
     public function __construct(
         private readonly ContentService\RelationListFacadeInterface $relationListFacade
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException if the current version is already a draft
+     * @throws ForbiddenException if the current version is already a draft
      */
     public function createDraftFromCurrentVersion(int $contentId): CreatedVersion
     {

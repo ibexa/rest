@@ -44,11 +44,11 @@ final class ContentTypeQueryTest extends BaseTestCase
 
         $parsingDispatcherMock = $this->getParsingDispatcherMock();
 
-        $matcher = self::exactly(6);
+        $matcher = $this->exactly(6);
         $parsingDispatcherMock
             ->expects($matcher)
             ->method('parse')
-            ->willReturnCallback(static function (...$parameters) use ($matcher): CriterionInterface|SortClause {
+            ->willReturnCallback(static function (...$parameters) use ($matcher): CriterionInterface | SortClause {
                 return match ($matcher->numberOfInvocations()) {
                     1 => new ContentTypeId([1, 2]),
                     2 => new ContentTypeIdentifier('folder'),

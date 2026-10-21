@@ -83,8 +83,7 @@ class ContentInVersionLoadController extends RestController
 {
     public function __construct(
         private readonly ContentService\RelationListFacadeInterface $relationListFacade
-    ) {
-    }
+    ) {}
 
     /**
      * Loads a specific version of a given content object.
@@ -93,7 +92,7 @@ class ContentInVersionLoadController extends RestController
         int $contentId,
         int $versionNumber,
         Request $request
-    ): Version|Values\CachedValue {
+    ): Version | Values\CachedValue {
         $languages = Language::ALL;
         if ($request->query->has('languages')) {
             $languages = explode(',', $request->query->getString('languages'));

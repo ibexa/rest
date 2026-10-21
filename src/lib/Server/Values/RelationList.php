@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -15,7 +16,7 @@ use Ibexa\Rest\Value as RestValue;
 class RelationList extends RestValue
 {
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Relation[]
+     * @var Relation[]
      */
     public array $relations;
 
@@ -35,10 +36,14 @@ class RelationList extends RestValue
     public ?string $path;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Relation[] $relations
+     * @param Relation[] $relations
      */
-    public function __construct(array $relations, int $contentId, int $versionNo, ?string $path = null)
-    {
+    public function __construct(
+        array $relations,
+        int $contentId,
+        int $versionNo,
+        ?string $path = null
+    ) {
         $this->relations = $relations;
         $this->contentId = $contentId;
         $this->versionNo = $versionNo;

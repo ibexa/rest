@@ -18,8 +18,7 @@ final readonly class AuthenticationSuccessSubscriber implements EventSubscriberI
 {
     public function __construct(
         private RequestStack $requestStack,
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {
@@ -49,7 +48,7 @@ final readonly class AuthenticationSuccessSubscriber implements EventSubscriberI
      * @deprecated 5.0.0. Will be removed in the next REST API version.
      */
     /**
-     * @throws \Ibexa\Rest\Server\Exceptions\BadResponseException
+     * @throws BadResponseException
      */
     private function normalizeResponseToRest(AuthenticationSuccessEvent $event): void
     {

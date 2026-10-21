@@ -127,8 +127,10 @@ abstract class Generator
     /**
      * Start object element.
      */
-    public function startObjectElement(string|int $name, ?string $mediaTypeName = null): void
-    {
+    public function startObjectElement(
+        string | int $name,
+        ?string $mediaTypeName = null
+    ): void {
         $name = (string)$name;
 
         $this->checkStartObjectElement($name);
@@ -142,7 +144,7 @@ abstract class Generator
         $this->attribute('media-type', $this->getMediaType($mediaTypeName));
     }
 
-    public function endObjectElement(string|int $name): void
+    public function endObjectElement(string | int $name): void
     {
         $name = (string)$name;
 
@@ -223,8 +225,10 @@ abstract class Generator
     /**
      * Generate value element with given $name and $value.
      */
-    public function valueElement(string $name, mixed $value): void
-    {
+    public function valueElement(
+        string $name,
+        mixed $value
+    ): void {
         $this->startValueElement($name, $value);
         $this->endValueElement($name);
     }
@@ -233,7 +237,11 @@ abstract class Generator
      * @phpstan-param scalar|null $value
      * @phpstan-param array<string, scalar|null> $attributes
      */
-    abstract public function startValueElement(string $name, mixed $value, array $attributes = []): void;
+    abstract public function startValueElement(
+        string $name,
+        mixed $value,
+        array $attributes = []
+    ): void;
 
     /**
      * Check start value element.
@@ -300,8 +308,10 @@ abstract class Generator
     /**
      * Generate attribute with given $name and $value.
      */
-    public function attribute(string $name, mixed $value): void
-    {
+    public function attribute(
+        string $name,
+        mixed $value
+    ): void {
         $this->startAttribute($name, $value);
         $this->endAttribute($name);
     }
@@ -309,7 +319,10 @@ abstract class Generator
     /**
      * Start attribute.
      */
-    abstract public function startAttribute(string $name, mixed $value): void;
+    abstract public function startAttribute(
+        string $name,
+        mixed $value
+    ): void;
 
     /**
      * Check start attribute.
@@ -356,8 +369,10 @@ abstract class Generator
      * $hashValue into the document, using an element of $hashElementName as
      * its parent.
      */
-    public function generateFieldTypeHash(string $hashElementName, mixed $hashValue): void
-    {
+    public function generateFieldTypeHash(
+        string $hashElementName,
+        mixed $hashValue
+    ): void {
         $this->fieldTypeHashGenerator->generateHashValue(
             $this->json,
             $hashElementName,
@@ -370,8 +385,11 @@ abstract class Generator
      *
      * @param array<string> $validParents
      */
-    protected function checkStart(string $type, mixed $data, array $validParents): void
-    {
+    protected function checkStart(
+        string $type,
+        mixed $data,
+        array $validParents
+    ): void {
         $lastTag = end($this->stack);
 
         if (!is_array($lastTag)) {
@@ -399,8 +417,10 @@ abstract class Generator
     /**
      * Check close / end operation.
      */
-    protected function checkEnd(string $type, mixed $data): void
-    {
+    protected function checkEnd(
+        string $type,
+        mixed $data
+    ): void {
         $lastTag = array_pop($this->stack);
 
         if (!is_array($lastTag)) {
@@ -427,7 +447,7 @@ abstract class Generator
     /**
      * Serializes a boolean value.
      */
-    abstract public function serializeBool(bool|string|null $boolValue): bool|string;
+    abstract public function serializeBool(bool | string | null $boolValue): bool | string;
 
     abstract protected function getData(): Data\DataObjectInterface;
 

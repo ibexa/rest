@@ -25,7 +25,7 @@ class UrlWildcardTest extends RESTFunctionalTestCase
     }
 
     /**
-     * @returns string The created URL wildcard href
+     * @return string The created URL wildcard href
      * Covers POST /content/urlwildcards
      */
     public function testCreateUrlWildcard()

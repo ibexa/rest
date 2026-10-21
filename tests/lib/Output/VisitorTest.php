@@ -14,6 +14,7 @@ use Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolverInterface;
 use Ibexa\Contracts\Rest\Output\Visitor;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,13 +25,13 @@ final class VisitorTest extends TestCase
 {
     private Visitor $visitor;
 
-    private NormalizerInterface&MockObject $normalizer;
+    private NormalizerInterface & MockObject $normalizer;
 
-    private EncoderInterface&MockObject $encoder;
+    private EncoderInterface & MockObject $encoder;
 
-    private Generator&\PHPUnit\Framework\MockObject\Stub $generator;
+    private Generator & Stub $generator;
 
-    private ValueObjectVisitorResolverInterface&\PHPUnit\Framework\MockObject\Stub $valueObjectVisitorResolver;
+    private ValueObjectVisitorResolverInterface & Stub $valueObjectVisitorResolver;
 
     public function setUp(): void
     {
@@ -56,13 +57,13 @@ final class VisitorTest extends TestCase
         $content = 'Hello world!';
 
         $this->normalizer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('normalize')
             ->with($data, 'json', ['visitor' => $this->visitor])
             ->willReturn($content);
 
         $this->encoder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('encode')
             ->with($content)
             ->willReturn($content);
@@ -74,24 +75,24 @@ final class VisitorTest extends TestCase
     }
 
     /**
-     * @param \ArrayObject|array<mixed> $content
-     * @param \ArrayObject|array<mixed> $expectedEncoderData
+     * @param ArrayObject|array<mixed> $content
+     * @param ArrayObject|array<mixed> $expectedEncoderData
      */
     #[DataProvider('provideForTestEncoderContextShouldBeRemoved')]
     public function testEncoderContextShouldBeRemoved(
-        array|ArrayObject $content,
-        array|ArrayObject $expectedEncoderData,
+        array | ArrayObject $content,
+        array | ArrayObject $expectedEncoderData,
     ): void {
         $data = new stdClass();
 
         $this->normalizer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('normalize')
             ->with($data, 'json', ['visitor' => $this->visitor])
             ->willReturn($content);
 
         $this->encoder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('encode')
             ->with($expectedEncoderData, 'json', ['foo'])
             ->willReturn('foo');
@@ -140,13 +141,13 @@ final class VisitorTest extends TestCase
         $data = new stdClass();
 
         $this->normalizer
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('normalize')
             ->with($data, 'json', ['visitor' => $this->visitor])
             ->willReturn(null);
 
         $this->encoder
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('encode')
             ->with(null)
             ->willReturn('');

@@ -70,7 +70,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class SessionCheckController extends SessionBaseController
 {
-    public function checkSessionAction(Request $request): Response|UserSession
+    public function checkSessionAction(Request $request): Response | UserSession
     {
         $session = $request->getSession();
         if (!$session->isStarted()) {

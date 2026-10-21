@@ -439,9 +439,9 @@ class UserCreateTest extends BaseTestCase
             ->willReturn(
                 new UserCreateStruct(
                     [
-                            'contentType' => $contentType,
-                            'mainLanguageCode' => 'eng-US',
-                        ]
+                        'contentType' => $contentType,
+                        'mainLanguageCode' => 'eng-US',
+                    ]
                 )
             );
 

@@ -13,8 +13,11 @@ use Ibexa\Contracts\Rest\Output\Visitor;
 
 class OK extends ValueObjectVisitor
 {
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $visitor->setStatus(200);
     }
 }

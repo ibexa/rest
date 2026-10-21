@@ -22,8 +22,11 @@ class RestRelation extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\RestRelation $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('Relation');
         $visitor->setHeader('Content-Type', $generator->getMediaType('Relation'));
 

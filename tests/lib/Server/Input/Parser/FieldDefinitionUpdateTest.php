@@ -145,7 +145,7 @@ final class FieldDefinitionUpdateTest extends BaseTestCase
         );
     }
 
-    protected function getFieldTypeParserMock(): FieldTypeParser&MockObject
+    protected function getFieldTypeParserMock(): FieldTypeParser & MockObject
     {
         $fieldTypeParserMock = $this->createMock(FieldTypeParser::class);
 
@@ -171,7 +171,7 @@ final class FieldDefinitionUpdateTest extends BaseTestCase
         return $fieldTypeParserMock;
     }
 
-    protected function getContentTypeServiceMock(): ContentTypeService&MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
@@ -187,18 +187,18 @@ final class FieldDefinitionUpdateTest extends BaseTestCase
             ->willReturn(
                 new ContentTypeDraft(
                     [
-                            'innerContentType' => new ContentType([
-                                'fieldDefinitions' => new FieldDefinitionCollection([
-                                    new FieldDefinition(
-                                        [
-                                            'id' => 24,
-                                            'fieldTypeIdentifier' => 'ibexa_string',
-                                            'identifier' => 'foo',
-                                        ]
-                                    ),
-                                ]),
+                        'innerContentType' => new ContentType([
+                            'fieldDefinitions' => new FieldDefinitionCollection([
+                                new FieldDefinition(
+                                    [
+                                        'id' => 24,
+                                        'fieldTypeIdentifier' => 'ibexa_string',
+                                        'identifier' => 'foo',
+                                    ]
+                                ),
                             ]),
-                        ]
+                        ]),
+                    ]
                 )
             );
 

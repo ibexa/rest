@@ -21,8 +21,11 @@ class TemporaryRedirect extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\TemporaryRedirect $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $visitor->setStatus(307);
         $visitor->setHeader('Location', $data->redirectUri);
     }

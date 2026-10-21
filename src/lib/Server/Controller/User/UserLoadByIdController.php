@@ -12,6 +12,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Rest\Value as RestValue;
@@ -97,7 +98,7 @@ final class UserLoadByIdController extends UserBaseController
             // TODO: Hack for special case to allow current logged in user to load him/here self (but not relations)
             if ($user->id == $this->permissionResolver->getCurrentUserReference()->getUserId()) {
                 $userMainLocation = $this->repository->sudo(
-                    function () use ($userContentInfo): \Ibexa\Contracts\Core\Repository\Values\Content\Location {
+                    function () use ($userContentInfo): Location {
                         return $this->locationService->loadLocation($userContentInfo->mainLocationId);
                     }
                 );

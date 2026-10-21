@@ -116,10 +116,12 @@ class ContentTypeGroupUpdateController extends RestController
     /**
      * Updates a content type group.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      */
-    public function updateContentTypeGroup(int $contentTypeGroupId, Request $request): ContentTypeGroup
-    {
+    public function updateContentTypeGroup(
+        int $contentTypeGroupId,
+        Request $request
+    ): ContentTypeGroup {
         $createStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

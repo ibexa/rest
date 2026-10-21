@@ -10,7 +10,6 @@ namespace Ibexa\Tests\Rest\Server\Input\Parser;
 use DateTime;
 use Ibexa\Contracts\Rest\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
-use Ibexa\Rest\Server\Input\Parser\ContentUpdate;
 use Ibexa\Rest\Server\Input\Parser\ContentUpdate as ContentUpdateParser;
 use Ibexa\Rest\Values\RestContentMetadataUpdateStruct;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -51,8 +50,10 @@ class ContentUpdateTest extends BaseTestCase
     }
 
     #[DataProvider('providerForTestParseFailureInvalidHref')]
-    public function testParseFailureInvalidHref(string $element, string $exceptionMessage): void
-    {
+    public function testParseFailureInvalidHref(
+        string $element,
+        string $exceptionMessage
+    ): void {
         $inputArray = $this->getValidInputData();
         $inputArray[$element]['_href'] = '/invalid/section/uri';
 
@@ -88,8 +89,10 @@ class ContentUpdateTest extends BaseTestCase
     }
 
     #[DataProvider('providerForTestParseFailureInvalidDate')]
-    public function testParseFailureInvalidDate(string $element, string $exceptionMessage): void
-    {
+    public function testParseFailureInvalidDate(
+        string $element,
+        string $exceptionMessage
+    ): void {
         $inputArray = $this->getValidInputData();
         $inputArray[$element] = 42;
 
@@ -123,7 +126,7 @@ class ContentUpdateTest extends BaseTestCase
         ];
     }
 
-    protected function internalGetParser(): ContentUpdate
+    protected function internalGetParser(): ContentUpdateParser
     {
         return new ContentUpdateParser();
     }

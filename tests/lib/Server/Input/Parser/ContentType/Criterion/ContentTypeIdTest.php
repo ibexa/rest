@@ -41,8 +41,10 @@ final class ContentTypeIdTest extends TestCase
      * } $input
      */
     #[DataProvider('provideForTestInvalidInput')]
-    public function testInvalidInput(string $exceptionMessage, array $input): void
-    {
+    public function testInvalidInput(
+        string $exceptionMessage,
+        array $input
+    ): void {
         $this->expectException(Parser::class);
         $this->expectExceptionMessage($exceptionMessage);
 

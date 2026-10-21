@@ -22,8 +22,11 @@ class CreatedObjectStateGroup extends ObjectStateGroup
      *
      * @param \Ibexa\Rest\Server\Values\CreatedObjectStateGroup $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         parent::visit($visitor, $generator, $data->objectStateGroup);
         $visitor->setHeader(
             'Location',

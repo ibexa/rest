@@ -96,8 +96,10 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 class LocationUpdateController extends LocationBaseController
 {
-    public function updateLocation(string $locationPath, Request $request): RestLocation
-    {
+    public function updateLocation(
+        string $locationPath,
+        Request $request
+    ): RestLocation {
         $locationUpdate = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

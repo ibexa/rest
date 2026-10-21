@@ -22,8 +22,11 @@ class CreatedRelation extends RestRelation
      *
      * @param \Ibexa\Rest\Server\Values\CreatedRelation $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         parent::visit($visitor, $generator, $data->relation);
         $visitor->setHeader(
             'Location',

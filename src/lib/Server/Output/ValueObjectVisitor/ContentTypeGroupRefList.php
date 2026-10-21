@@ -21,8 +21,11 @@ class ContentTypeGroupRefList extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\ContentTypeGroupRefList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('ContentTypeGroupRefList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('ContentTypeGroupRefList'));
 

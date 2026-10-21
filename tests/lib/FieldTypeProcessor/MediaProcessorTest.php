@@ -11,8 +11,8 @@ use Ibexa\Rest\FieldTypeProcessor\MediaProcessor;
 use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\Attributes\DataProvider;
 
-#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\MediaProcessor::class, 'preProcessFieldSettingsHash')]
-#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\MediaProcessor::class, 'postProcessFieldSettingsHash')]
+#[CoversMethod(MediaProcessor::class, 'preProcessFieldSettingsHash')]
+#[CoversMethod(MediaProcessor::class, 'postProcessFieldSettingsHash')]
 class MediaProcessorTest extends BinaryInputProcessorTestCase
 {
     /**
@@ -45,8 +45,10 @@ class MediaProcessorTest extends BinaryInputProcessorTestCase
     }
 
     #[DataProvider('fieldSettingsHashes')]
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
-    {
+    public function testPreProcessFieldSettingsHash(
+        $inputSettings,
+        $outputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(
@@ -60,8 +62,10 @@ class MediaProcessorTest extends BinaryInputProcessorTestCase
      * @param array<string, mixed> $outputSettings
      */
     #[DataProvider('fieldSettingsHashes')]
-    public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
-    {
+    public function testPostProcessFieldSettingsHash(
+        array $outputSettings,
+        array $inputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(

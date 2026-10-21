@@ -9,6 +9,4 @@ namespace Ibexa\Rest\Server\Exceptions;
 
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
-class InvalidUserTypeException extends AuthenticationException
-{
-}
+class InvalidUserTypeException extends AuthenticationException {}

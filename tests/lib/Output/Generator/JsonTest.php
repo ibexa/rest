@@ -240,8 +240,10 @@ class JsonTest extends GeneratorTestCase
         );
     }
 
-    public function assertSnapshot(string $snapshotName, string $generatedContent): void
-    {
+    public function assertSnapshot(
+        string $snapshotName,
+        string $generatedContent
+    ): void {
         self::assertJsonStringEqualsJsonFile(
             sprintf('%s/_fixtures/%s.json', __DIR__, $snapshotName),
             $generatedContent

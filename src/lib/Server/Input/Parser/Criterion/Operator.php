@@ -15,8 +15,10 @@ use Ibexa\Rest\Input\BaseParser;
  */
 class Operator extends BaseParser
 {
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): never
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): never {
         throw new \Exception('@todo implement');
     }
 }

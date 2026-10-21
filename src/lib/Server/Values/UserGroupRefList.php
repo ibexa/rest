@@ -17,7 +17,7 @@ class UserGroupRefList extends RestValue
     /**
      * User groups.
      *
-     * @var \Ibexa\Rest\Server\Values\RestUserGroup[]
+     * @var RestUserGroup[]
      */
     public array $userGroups;
 
@@ -29,13 +29,16 @@ class UserGroupRefList extends RestValue
     /**
      * User ID whose groups are the ones in the list.
      */
-    public int|string|null $userId;
+    public int | string | null $userId;
 
     /**
-     * @param \Ibexa\Rest\Server\Values\RestUserGroup[] $userGroups
+     * @param RestUserGroup[] $userGroups
      */
-    public function __construct(array $userGroups, string $path, int|string|null $userId = null)
-    {
+    public function __construct(
+        array $userGroups,
+        string $path,
+        int | string | null $userId = null
+    ) {
         $this->userGroups = $userGroups;
         $this->path = $path;
         $this->userId = $userId;

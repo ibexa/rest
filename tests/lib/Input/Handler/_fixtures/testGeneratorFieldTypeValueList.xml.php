@@ -5,15 +5,15 @@
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 return [
-  'Version' => [
-    '_media-type' => 'application/vnd.ibexa.api.Version+xml',
-    'Field' => [
-      'fieldValue' => [
-        'Sindelfingen',
-        'Bielefeld',
-        'Skien',
-        'Dinslaken',
-      ],
+    'Version' => [
+        '_media-type' => 'application/vnd.ibexa.api.Version+xml',
+        'Field' => [
+            'fieldValue' => [
+                'Sindelfingen',
+                'Bielefeld',
+                'Skien',
+                'Dinslaken',
+            ],
+        ],
     ],
-  ],
 ];

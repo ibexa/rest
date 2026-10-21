@@ -7,6 +7,8 @@
 
 namespace Ibexa\Rest\Server\Controller\Location;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Values\ResourceCreated;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,11 +16,13 @@ use Symfony\Component\HttpFoundation\Request;
 class LocationSubtreeCopyController extends LocationBaseController
 {
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
-    public function copy(string $locationPath, Request $request): ResourceCreated
-    {
+    public function copy(
+        string $locationPath,
+        Request $request
+    ): ResourceCreated {
         $locationId = $this->extractLocationIdFromPath($locationPath);
         $location = $this->locationService->loadLocation($locationId);
 
@@ -44,8 +48,10 @@ class LocationSubtreeCopyController extends LocationBaseController
     /**
      * Copies a subtree to a new destination.
      */
-    public function copySubtree(string $locationPath, Request $request): ResourceCreated
-    {
+    public function copySubtree(
+        string $locationPath,
+        Request $request
+    ): ResourceCreated {
         $location = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($locationPath)
         );

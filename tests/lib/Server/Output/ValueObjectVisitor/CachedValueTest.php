@@ -28,9 +28,11 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
     ];
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Request
+     * @var Request
      */
     protected $request;
+
+    private const FULL_CACHE_HEADER_CALLS = ['setPublic', 'setVary Accept', 'setSharedMaxAge', 'setVary X-User-Hash'];
 
     public function setUp(): void
     {
@@ -40,50 +42,24 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
 
     public function testVisit(): void
     {
-        $responseMock = $this->getResponseMock();
-        $responseMock->expects(self::once())->method('setPublic');
-        $responseMock->expects(self::once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
-
-        $setVaryMatcher = self::exactly(2);
-        $responseMock->expects($setVaryMatcher)
-            ->method('setVary')
-            ->willReturnCallback(static function (...$parameters) use ($setVaryMatcher, $responseMock): Response {
-                match ($setVaryMatcher->numberOfInvocations()) {
-                    1 => self::assertSame(['Accept', true], $parameters),
-                    2 => self::assertSame(['X-User-Hash', false], $parameters),
-                    default => self::fail('Unexpected call to setVary().'),
-                };
-
-                return $responseMock;
-            });
+        $calls = [];
+        $this->expectFullCacheHeaders($calls);
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
         self::assertNotEmpty($result);
+        self::assertSame(self::FULL_CACHE_HEADER_CALLS, $calls);
     }
 
     public function testVisitLocationCache(): void
     {
-        $responseMock = $this->getResponseMock();
-        $responseMock->expects(self::once())->method('setPublic');
-        $responseMock->expects(self::once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
-
-        $setVaryMatcher = self::exactly(2);
-        $responseMock->expects($setVaryMatcher)
-            ->method('setVary')
-            ->willReturnCallback(static function (...$parameters) use ($setVaryMatcher, $responseMock): Response {
-                match ($setVaryMatcher->numberOfInvocations()) {
-                    1 => self::assertSame(['Accept', true], $parameters),
-                    2 => self::assertSame(['X-User-Hash', false], $parameters),
-                    default => self::fail('Unexpected call to setVary().'),
-                };
-
-                return $responseMock;
-            });
+        $calls = [];
+        $this->expectFullCacheHeaders($calls);
 
         $result = $this->visit(new CachedValue(new stdClass(), ['locationId' => 'testLocationId']));
 
         self::assertNotEmpty($result);
+        self::assertSame(self::FULL_CACHE_HEADER_CALLS, $calls);
     }
 
     public function testVisitNoUserHash(): void
@@ -91,10 +67,10 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
         $this->request->headers->remove('X-User-Hash');
 
         $responseMock = $this->getResponseMock();
-        $responseMock->expects(self::once())->method('setPublic');
+        $responseMock->expects($this->once())->method('setPublic');
         // no Vary header on X-User-Hash
-        $responseMock->expects(self::once())->method('setVary')->with('Accept');
-        $responseMock->expects(self::once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
+        $responseMock->expects($this->once())->method('setVary')->with('Accept');
+        $responseMock->expects($this->once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
@@ -106,9 +82,9 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
         $this->request = null;
 
         $responseMock = $this->getResponseMock();
-        $responseMock->expects(self::once())->method('setPublic');
-        $responseMock->expects(self::once())->method('setVary')->with('Accept');
-        $responseMock->expects(self::once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
+        $responseMock->expects($this->once())->method('setPublic');
+        $responseMock->expects($this->once())->method('setVary')->with('Accept');
+        $responseMock->expects($this->once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
@@ -120,7 +96,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
         // disable caching globally
         $this->options = array_merge($this->defaultOptions, ['content.view_cache' => false]);
 
-        $this->getResponseMock()->expects(self::never())->method('setPublic');
+        $this->getResponseMock()->expects($this->never())->method('setPublic');
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
@@ -133,18 +109,53 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
         $this->options = array_merge($this->defaultOptions, ['content.ttl_cache' => false]);
 
         $responseMock = $this->getResponseMock();
-        $responseMock->expects(self::once())->method('setPublic');
-        $responseMock->expects(self::once())->method('setVary')->with('Accept');
-        $responseMock->expects(self::never())->method('setSharedMaxAge');
+        $responseMock->expects($this->once())->method('setPublic');
+        $responseMock->expects($this->once())->method('setVary')->with('Accept');
+        $responseMock->expects($this->never())->method('setSharedMaxAge');
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
         self::assertNotEmpty($result);
     }
 
+    /**
+     * Expects the response calls and records them in $calls, to assert their order across methods.
+     *
+     * @param list<string> $calls
+     */
+    private function expectFullCacheHeaders(array &$calls): void
+    {
+        $responseMock = $this->getResponseMock();
+        $responseMock->expects($this->once())->method('setPublic')
+            ->willReturnCallback(static function () use (&$calls, $responseMock) {
+                $calls[] = 'setPublic';
+
+                return $responseMock;
+            });
+        $setVaryMatcher = $this->exactly(2);
+        $responseMock->expects($setVaryMatcher)->method('setVary')
+            ->willReturnCallback(static function (...$parameters) use ($setVaryMatcher, &$calls, $responseMock) {
+                if ($setVaryMatcher->numberOfInvocations() === 1) {
+                    self::assertSame(['Accept', true], $parameters);
+                } else {
+                    self::assertSame(['X-User-Hash', false], $parameters);
+                }
+                $calls[] = 'setVary ' . $parameters[0];
+
+                return $responseMock;
+            });
+        $responseMock->expects($this->once())->method('setSharedMaxAge')
+            ->with($this->defaultOptions['content.default_ttl'])
+            ->willReturnCallback(static function () use (&$calls, $responseMock) {
+                $calls[] = 'setSharedMaxAge';
+
+                return $responseMock;
+            });
+    }
+
     protected function visit($value): string
     {
-        $this->getVisitorMock()->expects(self::once())->method('visitValueObject')->with($value->value);
+        $this->getVisitorMock()->expects($this->once())->method('visitValueObject')->with($value->value);
 
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
@@ -180,7 +191,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
 
         $mock = $this->createMock(ConfigResolverInterface::class);
         $mock
-            ->expects(self::any())
+            ->expects($this->any())
             ->method('hasParameter')
             ->willReturnCallback(
                 static function ($parameterName) use ($options): bool {
@@ -188,10 +199,13 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
                 }
             );
         $mock
-            ->expects(self::any())
+            ->expects($this->any())
             ->method('getParameter')
             ->willReturnCallback(
-                static function ($parameterName, $defaultValue) use ($options): mixed {
+                static function (
+                    $parameterName,
+                    $defaultValue
+                ) use ($options): mixed {
                     return isset($options[$parameterName]) ? $options[$parameterName] : $defaultValue;
                 }
             );

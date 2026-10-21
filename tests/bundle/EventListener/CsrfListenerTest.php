@@ -11,6 +11,7 @@ namespace Ibexa\Tests\Bundle\Rest\EventListener;
 use Ibexa\Bundle\Rest\EventListener\CsrfListener;
 use Ibexa\Contracts\Rest\Exceptions\UnauthorizedException;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -179,7 +180,7 @@ final class CsrfListenerTest extends EventListenerTestCase
     {
         $event = $this->createMock(RequestEvent::class);
         $event
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getRequest')
             ->willReturn($request);
 
@@ -187,14 +188,14 @@ final class CsrfListenerTest extends EventListenerTestCase
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\Session\SessionInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return SessionInterface|MockObject
      */
     private function getSessionMock(bool $isSessionStarted = true): SessionInterface
     {
         $sessionMock = $this->createMock(SessionInterface::class);
 
         $sessionMock
-            ->expects(self::atLeastOnce())
+            ->expects($this->atLeastOnce())
             ->method('isStarted')
             ->willReturn($isSessionStarted);
 
@@ -202,12 +203,12 @@ final class CsrfListenerTest extends EventListenerTestCase
     }
 
     /**
-     * @return \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return CsrfTokenManagerInterface|MockObject
      */
     private function getCsrfProviderMock(): CsrfTokenManagerInterface
     {
         $provider = $this->createMock(CsrfTokenManagerInterface::class);
-        $provider->expects(self::any())
+        $provider->expects($this->any())
             ->method('isTokenValid')
             ->willReturnCallback(
                 static function (CsrfToken $token): bool {
@@ -221,7 +222,7 @@ final class CsrfListenerTest extends EventListenerTestCase
     }
 
     /**
-     * @return \Symfony\Component\EventDispatcher\EventDispatcherInterface&\PHPUnit\Framework\MockObject\MockObject
+     * @return EventDispatcherInterface&MockObject
      */
     private function getEventDispatcherMock(): EventDispatcherInterface
     {

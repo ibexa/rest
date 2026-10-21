@@ -11,6 +11,8 @@ namespace Ibexa\Rest\Server\Controller\User;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
+use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,8 +48,8 @@ final class UserGroupDeleteController extends UserBaseController
     /**
      * Given user group is deleted.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
     public function deleteUserGroup(string $groupPath): Values\NoContent
     {

@@ -16,8 +16,10 @@ class BinaryProcessor extends BinaryInputProcessor
      */
     protected string $hostPrefix;
 
-    public function __construct(string $temporaryDirectory, string $hostPrefix)
-    {
+    public function __construct(
+        string $temporaryDirectory,
+        string $hostPrefix
+    ) {
         parent::__construct($temporaryDirectory);
         $this->hostPrefix = $hostPrefix;
     }

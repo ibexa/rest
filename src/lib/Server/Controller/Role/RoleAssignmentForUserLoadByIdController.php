@@ -11,7 +11,8 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use ArrayObject;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Values\RestUserRoleAssignment;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,21 +72,24 @@ class RoleAssignmentForUserLoadByIdController extends RoleBaseController
     /**
      * Returns a role assignment to the given user.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
-    public function loadRoleAssignmentForUser(int $userId, int $roleId, Request $request): RestUserRoleAssignment
-    {
+    public function loadRoleAssignmentForUser(
+        int $userId,
+        int $roleId,
+        Request $request
+    ): RestUserRoleAssignment {
         $user = $this->userService->loadUser($userId);
         $roleAssignments = $this->roleService->getRoleAssignmentsForUser($user);
 
         foreach ($roleAssignments as $roleAssignment) {
             if ($roleAssignment->getRole()->id == $roleId) {
-                assert($roleAssignment instanceof \Ibexa\Contracts\Core\Repository\Values\User\UserRoleAssignment);
+                assert($roleAssignment instanceof UserRoleAssignment);
 
                 return new RestUserRoleAssignment($roleAssignment, $userId);
             }
         }
 
-        throw new Exceptions\NotFoundException("Role assignment not found: '{$request->getPathInfo()}'.");
+        throw new NotFoundException("Role assignment not found: '{$request->getPathInfo()}'.");
     }
 }

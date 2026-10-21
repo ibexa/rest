@@ -102,8 +102,10 @@ class RoleDraftUpdateController extends RoleBaseController
     /**
      * @param int $roleId Original role ID, or ID of the role draft itself
      */
-    public function updateRoleDraft(int $roleId, Request $request): RoleDraft
-    {
+    public function updateRoleDraft(
+        int $roleId,
+        Request $request
+    ): RoleDraft {
         $createStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

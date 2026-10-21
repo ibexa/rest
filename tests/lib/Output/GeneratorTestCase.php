@@ -8,6 +8,7 @@
 namespace Ibexa\Tests\Rest\Output;
 
 use Ibexa\Contracts\Rest\Output\Exceptions\OutputGeneratorException;
+use Ibexa\Contracts\Rest\Output\Generator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
@@ -17,12 +18,12 @@ use PHPUnit\Framework\TestCase;
 abstract class GeneratorTestCase extends TestCase
 {
     /**
-     * @var \Ibexa\Contracts\Rest\Output\Generator
+     * @var Generator
      */
     protected $generator;
 
     /**
-     * @return \Ibexa\Contracts\Rest\Output\Generator
+     * @return Generator
      */
     abstract protected function getGenerator();
 
@@ -188,15 +189,20 @@ abstract class GeneratorTestCase extends TestCase
         self::assertFalse($generator->isEmpty());
     }
 
-    abstract protected function assertSnapshot(string $snapshotName, string $generatedContent): void;
+    abstract protected function assertSnapshot(
+        string $snapshotName,
+        string $generatedContent
+    ): void;
 
     /**
      * @phpstan-param scalar|null $elementValue
      * @phpstan-param array<string, scalar|null> $attributes
      */
     #[DataProvider('getDataForTestStartValueElementWithAttributes')]
-    public function testStartValueElementWithAttributes(string|bool|int|float|null $elementValue, array $attributes): void
-    {
+    public function testStartValueElementWithAttributes(
+        string | bool | int | float | null $elementValue,
+        array $attributes
+    ): void {
         $generator = $this->getGenerator();
         $generator->startDocument('test');
         $generator->startObjectElement('Element');

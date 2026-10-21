@@ -82,8 +82,10 @@ class ObjectStateLoadByIdController extends RestController
 
     protected ContentService $contentService;
 
-    public function __construct(ObjectStateService $objectStateService, ContentService $contentService)
-    {
+    public function __construct(
+        ObjectStateService $objectStateService,
+        ContentService $contentService
+    ) {
         $this->objectStateService = $objectStateService;
         $this->contentService = $contentService;
     }
@@ -91,8 +93,10 @@ class ObjectStateLoadByIdController extends RestController
     /**
      * Loads an object state.
      */
-    public function loadObjectState(int $objectStateGroupId, int $objectStateId): RestObjectState
-    {
+    public function loadObjectState(
+        int $objectStateGroupId,
+        int $objectStateId
+    ): RestObjectState {
         return new RestObjectState(
             $this->objectStateService->loadObjectState($objectStateId, Language::ALL),
             $objectStateGroupId

@@ -31,8 +31,10 @@ class CachedValue extends RestValue
      *
      * @throw InvalidArgumentException If invalid cache tags are provided
      */
-    public function __construct(mixed $value, array $cacheTags = [])
-    {
+    public function __construct(
+        mixed $value,
+        array $cacheTags = []
+    ) {
         $this->value = $value;
         $this->cacheTags = $this->checkCacheTags($cacheTags);
     }
@@ -42,7 +44,7 @@ class CachedValue extends RestValue
      *
      * @return array<string, mixed>
      *
-     * @throws \Ibexa\Core\Base\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     protected function checkCacheTags(array $tags): array
     {

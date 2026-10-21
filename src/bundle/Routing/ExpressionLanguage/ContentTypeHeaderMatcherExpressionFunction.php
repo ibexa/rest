@@ -15,8 +15,7 @@ final readonly class ContentTypeHeaderMatcherExpressionFunction
 {
     public function __construct(
         private MediaTypeParserInterface $mediaTypeParser
-    ) {
-    }
+    ) {}
 
     public function __invoke(Request $request): ?string
     {

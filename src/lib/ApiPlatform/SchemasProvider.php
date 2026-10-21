@@ -19,8 +19,7 @@ final readonly class SchemasProvider implements SchemasProviderInterface
     public function __construct(
         private KernelInterface $kernel,
         private array $files,
-    ) {
-    }
+    ) {}
 
     public function getSchemas(): array
     {

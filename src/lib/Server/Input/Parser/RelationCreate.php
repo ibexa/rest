@@ -13,8 +13,10 @@ use Ibexa\Rest\Input\BaseParser;
 
 class RelationCreate extends BaseParser
 {
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): string
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): string {
         if (!array_key_exists('Destination', $data) || !is_array($data['Destination'])) {
             throw new Exceptions\Parser("Missing or invalid 'Destination' element for RelationCreate.");
         }

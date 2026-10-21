@@ -7,6 +7,8 @@
 
 namespace Ibexa\Rest\Server\Controller\Location;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Values\NoContent;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,8 +18,10 @@ class LocationSwapController extends LocationBaseController
     /**
      * Swaps a location with another one.
      */
-    public function swapLocation(string $locationPath, Request $request): NoContent
-    {
+    public function swapLocation(
+        string $locationPath,
+        Request $request
+    ): NoContent {
         $locationId = $this->extractLocationIdFromPath($locationPath);
         $location = $this->locationService->loadLocation($locationId);
 
@@ -36,11 +40,13 @@ class LocationSwapController extends LocationBaseController
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
-    public function swap(Request $request, string $locationPath): NoContent
-    {
+    public function swap(
+        Request $request,
+        string $locationPath
+    ): NoContent {
         $locationId = $this->extractLocationIdFromPath($locationPath);
         $location = $this->locationService->loadLocation($locationId);
 

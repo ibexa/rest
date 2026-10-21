@@ -8,7 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalOr as LogicalOrCriterion;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 
 /**
@@ -19,12 +19,14 @@ class LogicalOr extends LogicalOperator
     public const string TAG_NAME = 'OR';
 
     /**
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): LogicalOrCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): LogicalOrCriterion {
         if (!array_key_exists(static::TAG_NAME, $data) || !is_array($data[static::TAG_NAME])) {
-            throw new Exceptions\Parser('Invalid <' . static::TAG_NAME . '> format');
+            throw new Parser('Invalid <' . static::TAG_NAME . '> format');
         }
 
         $criteria = [];

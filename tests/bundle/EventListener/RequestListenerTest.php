@@ -80,8 +80,10 @@ final class RequestListenerTest extends EventListenerTestCase
     }
 
     #[DataProvider('getDataForTestOnKernelRequest')]
-    public function testOnKernelRequest(string $uri, bool $isExpectedRestRequest): void
-    {
+    public function testOnKernelRequest(
+        string $uri,
+        bool $isExpectedRestRequest
+    ): void {
         $request = $this->performFakeRequest($uri);
 
         self::assertSame($isExpectedRestRequest, $request->attributes->get('is_rest_request'));
@@ -94,8 +96,10 @@ final class RequestListenerTest extends EventListenerTestCase
         );
     }
 
-    protected function performFakeRequest(string $uri, int $type = HttpKernelInterface::MAIN_REQUEST): Request
-    {
+    protected function performFakeRequest(
+        string $uri,
+        int $type = HttpKernelInterface::MAIN_REQUEST
+    ): Request {
         $event = new RequestEvent(
             self::createStub(HttpKernelInterface::class),
             Request::create($uri),

@@ -9,8 +9,10 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Server\Controller\User;
 
 use Ibexa\Contracts\Core\Repository\Exceptions as ApiExceptions;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Message;
-use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
 use JMS\TranslationBundle\Annotation\Ignore;
@@ -21,11 +23,13 @@ final class UserGroupMoveController extends UserBaseController
     /**
      * Moves the user group to another parent.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
-    public function moveUserGroup(string $groupPath, Request $request): Values\ResourceCreated
-    {
+    public function moveUserGroup(
+        string $groupPath,
+        Request $request
+    ): Values\ResourceCreated {
         $userGroupLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($groupPath)
         );
@@ -44,13 +48,13 @@ final class UserGroupMoveController extends UserBaseController
                 $this->extractLocationIdFromPath($locationPath)
             );
         } catch (ApiExceptions\NotFoundException $e) {
-            throw new Exceptions\ForbiddenException($e->getMessage());
+            throw new ForbiddenException($e->getMessage());
         }
 
         try {
             $destinationGroup = $this->userService->loadUserGroup($destinationGroupLocation->contentId);
         } catch (ApiExceptions\NotFoundException $e) {
-            throw new Exceptions\ForbiddenException($e->getMessage());
+            throw new ForbiddenException($e->getMessage());
         }
 
         $this->userService->moveUserGroup($userGroup, $destinationGroup);
@@ -67,10 +71,12 @@ final class UserGroupMoveController extends UserBaseController
 
     /**
      * @throws \Ibexa\Contracts\Rest\Exceptions\ForbiddenException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws UnauthorizedException
      */
-    public function moveGroup(string $groupPath, Request $request): Values\ResourceCreated
-    {
+    public function moveGroup(
+        string $groupPath,
+        Request $request
+    ): Values\ResourceCreated {
         $userGroupLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($groupPath)
         );
@@ -80,7 +86,7 @@ final class UserGroupMoveController extends UserBaseController
         );
 
         try {
-            /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $destinationLocation */
+            /** @var Location $destinationLocation */
             $destinationLocation = $this->inputDispatcher->parse(
                 new Message(
                     ['Content-Type' => $request->headers->get('Content-Type')],

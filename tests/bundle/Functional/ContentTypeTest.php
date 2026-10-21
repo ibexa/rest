@@ -9,6 +9,7 @@ namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 use PHPUnit\Framework\Attributes\Depends;
+use Psr\Http\Client\ClientException;
 
 class ContentTypeTest extends RESTFunctionalTestCase
 {
@@ -425,7 +426,7 @@ XML;
     }
 
     /**
-     * @throws \Psr\Http\Client\ClientException
+     * @throws ClientException
      * Covers GET /content/types/<contentTypeId>/fieldDefinitions/<fieldDefinitionId>
      */
     #[Depends('testAddContentTypeDraftFieldDefinition')]
@@ -442,7 +443,7 @@ XML;
      * Covers GET /content/types/{contentTypeId}/fieldDefinition/{fieldDefinitionIdentifier}.
      *
      *
-     * @throws \Psr\Http\Client\ClientException
+     * @throws ClientException
      */
     #[Depends('testCreateContentType')]
     public function testLoadContentTypeFieldDefinitionByIdentifier(string $contentTypeHref): void

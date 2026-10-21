@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\ContentService\RelationListFacadeInterface;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content;
@@ -24,14 +25,16 @@ class Location extends ValueObjectVisitor
     public function __construct(
         private readonly LocationService $locationService,
         private readonly RelationListFacadeInterface $relationListFacade
-    ) {
-    }
+    ) {}
 
     /**
      * Visit struct returned by controllers.
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('Location');
         $visitor->setHeader('Content-Type', $generator->getMediaType('Location'));
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('LocationUpdate'));
@@ -40,8 +43,8 @@ class Location extends ValueObjectVisitor
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
     protected function visitLocationAttributes(
         Visitor $visitor,
@@ -168,7 +171,7 @@ class Location extends ValueObjectVisitor
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
     private function resolveMainLocation(
         Content\ContentInfo $contentInfo,

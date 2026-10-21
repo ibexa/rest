@@ -23,7 +23,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTestCase
 {
     protected const NON_VERBOSE_ERROR_DESCRIPTION = 'An error has occurred. Please try again later or contact your Administrator.';
 
-    /** @var \Symfony\Contracts\Translation\TranslatorInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var TranslatorInterface|MockObject */
     private ?MockObject $translatorMock = null;
 
     public function testVisit(): string

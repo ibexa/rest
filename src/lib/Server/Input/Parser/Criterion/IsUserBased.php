@@ -23,8 +23,10 @@ class IsUserBased extends BaseParser
         $this->parserTools = $parserTools;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): IsUserBasedCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): IsUserBasedCriterion {
         if (!array_key_exists('IsUserBasedCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <IsUserBasedCriterion> format');
         }

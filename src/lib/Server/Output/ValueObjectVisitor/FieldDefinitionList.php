@@ -21,8 +21,11 @@ class FieldDefinitionList extends RestContentTypeBase
      *
      * @param \Ibexa\Rest\Server\Values\FieldDefinitionList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $fieldDefinitionList = $data;
         $contentType = $fieldDefinitionList->contentType;
 

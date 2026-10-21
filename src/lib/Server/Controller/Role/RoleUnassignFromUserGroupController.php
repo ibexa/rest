@@ -78,8 +78,10 @@ class RoleUnassignFromUserGroupController extends RoleBaseController
     /**
      * Un-assigns role from user group.
      */
-    public function unassignRoleFromUserGroup(string $groupPath, int $roleId): Values\RoleAssignmentList
-    {
+    public function unassignRoleFromUserGroup(
+        string $groupPath,
+        int $roleId
+    ): Values\RoleAssignmentList {
         $groupLocationParts = explode('/', $groupPath);
         $groupLocation = $this->locationService->loadLocation((int)array_pop($groupLocationParts));
         $userGroup = $this->userService->loadUserGroup($groupLocation->contentId);

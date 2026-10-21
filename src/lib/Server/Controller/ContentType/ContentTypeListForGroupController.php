@@ -85,8 +85,10 @@ class ContentTypeListForGroupController extends RestController
     /**
      * Returns a list of content types of the group.
      */
-    public function listContentTypesForGroup(int $contentTypeGroupId, Request $request): ContentTypeList|ContentTypeInfoList
-    {
+    public function listContentTypesForGroup(
+        int $contentTypeGroupId,
+        Request $request
+    ): ContentTypeList | ContentTypeInfoList {
         $contentTypesIterable = $this->contentTypeService->loadContentTypes(
             $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId, Language::ALL),
             Language::ALL,

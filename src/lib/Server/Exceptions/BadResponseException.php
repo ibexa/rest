@@ -10,6 +10,4 @@ namespace Ibexa\Rest\Server\Exceptions;
 
 use RuntimeException;
 
-final class BadResponseException extends RuntimeException
-{
-}
+final class BadResponseException extends RuntimeException {}

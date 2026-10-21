@@ -105,8 +105,10 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 final class UserGroupUpdateController extends UserBaseController
 {
-    public function updateUserGroup(string $groupPath, Request $request): Values\RestUserGroup
-    {
+    public function updateUserGroup(
+        string $groupPath,
+        Request $request
+    ): Values\RestUserGroup {
         $userGroupLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($groupPath)
         );

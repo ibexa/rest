@@ -23,14 +23,18 @@ class ObjectStateGroupCreate extends BaseParser
 
     protected ParserTools $parserTools;
 
-    public function __construct(ObjectStateService $objectStateService, ParserTools $parserTools)
-    {
+    public function __construct(
+        ObjectStateService $objectStateService,
+        ParserTools $parserTools
+    ) {
         $this->objectStateService = $objectStateService;
         $this->parserTools = $parserTools;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ObjectStateGroupCreateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ObjectStateGroupCreateStruct {
         if (!array_key_exists('identifier', $data)) {
             throw new Exceptions\Parser("Missing 'identifier' attribute for ObjectStateGroupCreate.");
         }

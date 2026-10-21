@@ -8,7 +8,7 @@
 namespace Ibexa\Rest\Server\Controller\ContentType;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +23,7 @@ class ContentTypeFieldDefinitionLoadByIdentifierController extends RestControlle
     }
 
     /**
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
      */
     public function loadContentTypeFieldDefinitionByIdentifier(
@@ -42,7 +42,7 @@ class ContentTypeFieldDefinitionLoadByIdentifierController extends RestControlle
         );
 
         if ($fieldDefinition === null) {
-            throw new Exceptions\NotFoundException(
+            throw new NotFoundException(
                 sprintf("Field definition not found: '%s'.", $request->getPathInfo())
             );
         }

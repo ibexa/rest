@@ -7,12 +7,14 @@
 
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
+use Ibexa\Rest\Server\Controller\Content\ContentCurrentVersionRedirectController;
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
 use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\Attributes\Depends;
+use Psr\Http\Client\ClientException;
 use Psr\Http\Message\ResponseInterface;
 
-#[CoversMethod(\Ibexa\Rest\Server\Controller\Content\ContentCurrentVersionRedirectController::class, 'redirectCurrentVersion')]
+#[CoversMethod(ContentCurrentVersionRedirectController::class, 'redirectCurrentVersion')]
 class ContentTest extends RESTFunctionalTestCase
 {
     /**
@@ -146,7 +148,7 @@ XML;
     }
 
     /**
-     * @throws \Psr\Http\Client\ClientException
+     * @throws ClientException
      * Covers GET /content/objects/<contentId>/currentversion
      */
     #[Depends('testPublishContent')]
@@ -622,8 +624,11 @@ XML;
         }
     }
 
-    private function createVersionTranslation(string $restContentVersionHref, string $languageCode, string $languageName): void
-    {
+    private function createVersionTranslation(
+        string $restContentVersionHref,
+        string $languageCode,
+        string $languageName
+    ): void {
         // @todo Implement EZP-21171 to check if Language exists and add it
         // for now adding is done by ez:behat:create-language command executed in Travis job
 
@@ -657,8 +662,10 @@ XML;
      *
      * @param string $status uppercase string representation of Version status
      */
-    private function getVersionInfoFromJSONVersionListByStatus(array $versionList, string $status): array
-    {
+    private function getVersionInfoFromJSONVersionListByStatus(
+        array $versionList,
+        string $status
+    ): array {
         foreach ($versionList['VersionItem'] as $versionItem) {
             if ($versionItem['VersionInfo']['status'] === $status) {
                 return $versionItem['VersionInfo'];
@@ -699,8 +706,13 @@ XML;
      *
      * @return array Content structure decoded from JSON
      */
-    private function createContentDraft(string $restContentTypeHref, string $restParentLocationHref, string $restSectionHref, string $restUserHref, array $fieldValues)
-    {
+    private function createContentDraft(
+        string $restContentTypeHref,
+        string $restParentLocationHref,
+        string $restSectionHref,
+        string $restUserHref,
+        array $fieldValues
+    ) {
         $remoteId = md5(microtime() . uniqid());
         $modificationDate = new \DateTime();
 
@@ -800,8 +812,10 @@ XML;
      * @param string $restContentHref REST resource link of Content
      * @param string $languageCode new Main Translation language code
      */
-    private function updateMainTranslation(string $restContentHref, string $languageCode): void
-    {
+    private function updateMainTranslation(
+        string $restContentHref,
+        string $languageCode
+    ): void {
         $content = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentUpdate>

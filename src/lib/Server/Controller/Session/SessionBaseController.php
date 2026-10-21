@@ -28,8 +28,7 @@ class SessionBaseController extends Controller
         protected readonly SecurityTokenStorageInterface $securityTokenStorage,
         protected readonly string $csrfTokenIntention,
         protected readonly ConfigResolverInterface $configResolver,
-    ) {
-    }
+    ) {}
 
     protected function hasStoredCsrfToken(): bool
     {

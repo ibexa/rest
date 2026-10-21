@@ -8,7 +8,6 @@
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
-use Ibexa\Rest\Server\Input\Parser\ContentQuery;
 use Ibexa\Rest\Server\Input\Parser\ContentQuery as QueryParser;
 
 class QueryParserTest extends BaseTestCase
@@ -21,6 +20,7 @@ class QueryParserTest extends BaseTestCase
         ];
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $parsingDispatcher->expects($this->never())->method('parse');
         $parser = $this->getParser();
 
         $result = $parser->parse($inputArray, $parsingDispatcher);
@@ -39,7 +39,7 @@ class QueryParserTest extends BaseTestCase
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('parse')
             ->with(['ContentTypeIdentifierCriterion' => 'article'])
             ->willReturn(new Query\Criterion\ContentTypeIdentifier('article'));
@@ -62,7 +62,7 @@ class QueryParserTest extends BaseTestCase
         ];
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
-        $matcher = self::exactly(2);
+        $matcher = $this->exactly(2);
         $parsingDispatcher
             ->expects($matcher)
             ->method('parse')
@@ -104,7 +104,7 @@ class QueryParserTest extends BaseTestCase
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('parse')
             ->with(['ContentTypeIdentifierCriterion' => 'article'])
             ->willReturn(new Query\Criterion\ContentTypeIdentifier('article'));
@@ -127,7 +127,7 @@ class QueryParserTest extends BaseTestCase
         ];
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
-        $matcher = self::exactly(2);
+        $matcher = $this->exactly(2);
         $parsingDispatcher
             ->expects($matcher)
             ->method('parse')
@@ -160,7 +160,7 @@ class QueryParserTest extends BaseTestCase
         self::assertEquals($expectedQuery, $result);
     }
 
-    protected function internalGetParser(): ContentQuery
+    protected function internalGetParser(): QueryParser
     {
         return new QueryParser();
     }

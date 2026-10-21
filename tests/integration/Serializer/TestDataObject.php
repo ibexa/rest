@@ -16,6 +16,5 @@ final readonly class TestDataObject
         public string $string,
         public int $int,
         public ?Location $apiLocation = null,
-    ) {
-    }
+    ) {}
 }

@@ -63,8 +63,7 @@ class TrashItemLoadByIdController extends RestController
     public function __construct(
         protected TrashService $trashService,
         protected LocationService $locationService
-    ) {
-    }
+    ) {}
 
     /**
      * Returns the trash item given by id.

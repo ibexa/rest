@@ -13,6 +13,7 @@ use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use ArrayObject;
 use Ibexa\Contracts\Core\Repository\BookmarkService;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
@@ -61,8 +62,10 @@ class BookmarkListController extends RestController
     /**
      * Bookmark constructor.
      */
-    public function __construct(BookmarkService $bookmarkService, LocationService $locationService)
-    {
+    public function __construct(
+        BookmarkService $bookmarkService,
+        LocationService $locationService
+    ) {
         $this->bookmarkService = $bookmarkService;
         $this->locationService = $locationService;
     }
@@ -70,7 +73,7 @@ class BookmarkListController extends RestController
     /**
      * List bookmarked locations.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function loadBookmarks(Request $request): RestValue
     {

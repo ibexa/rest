@@ -17,8 +17,11 @@ final class Author extends ValueObjectVisitor
     /**
      * @param \Ibexa\Core\FieldType\Author\Author $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('Author');
         $generator->valueElement('name', $data->name);
         $generator->valueElement('email', $data->email);

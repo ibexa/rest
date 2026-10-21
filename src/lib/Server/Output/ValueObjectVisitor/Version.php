@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\Thumbnail;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
@@ -30,11 +31,14 @@ class Version extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Rest\Server\Values\Version $data
+     * @param VersionValue $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
-        /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $content */
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
+        /** @var Content $content */
         $content = $data->content;
 
         $generator->startObjectElement('Version');
@@ -48,8 +52,11 @@ class Version extends ValueObjectVisitor
         $generator->endObjectElement('Version');
     }
 
-    protected function visitVersionAttributes(Visitor $visitor, Generator $generator, VersionValue $data): void
-    {
+    protected function visitVersionAttributes(
+        Visitor $visitor,
+        Generator $generator,
+        VersionValue $data
+    ): void {
         $content = $data->content;
 
         $versionInfo = $content->getVersionInfo();

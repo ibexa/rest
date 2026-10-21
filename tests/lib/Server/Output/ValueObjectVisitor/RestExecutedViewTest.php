@@ -16,7 +16,6 @@ use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 use Ibexa\Core\Repository\Values\Content;
-use Ibexa\Core\Repository\Values\Content as ApiValues;
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestExecutedView;
@@ -99,8 +98,10 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTestCase
 
     #[Depends('testVisit')]
     #[DataProvider('provideXpathAssertions')]
-    public function testGeneratedXml(string $xpath, DOMDocument $dom): void
-    {
+    public function testGeneratedXml(
+        string $xpath,
+        DOMDocument $dom
+    ): void {
         $this->assertXPath($dom, $xpath);
     }
 
@@ -112,12 +113,12 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTestCase
         );
     }
 
-    public function getLocationServiceMock(): LocationService&MockObject
+    public function getLocationServiceMock(): LocationService & MockObject
     {
         return $this->createMock(LocationService::class);
     }
 
-    private function getRelationListFacadeMock(): ContentService\RelationListFacadeInterface&MockObject
+    private function getRelationListFacadeMock(): ContentService\RelationListFacadeInterface & MockObject
     {
         $relationListFacade = $this->createMock(ContentService\RelationListFacadeInterface::class);
         $relationListFacade->method('getRelations')->willReturnCallback(
@@ -127,7 +128,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTestCase
         return $relationListFacade;
     }
 
-    public function getContentTypeServiceMock(): ContentTypeService&MockObject
+    public function getContentTypeServiceMock(): ContentTypeService & MockObject
     {
         return $this->createMock(ContentTypeService::class);
     }
@@ -137,7 +138,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTestCase
         return new SearchHit([
             'score' => 0.123,
             'index' => 'alexandria',
-            'valueObject' => new ApiValues\Content([
+            'valueObject' => new Content\Content([
                 'versionInfo' => new Content\VersionInfo([
                     'contentInfo' => new ContentInfo([
                         'mainLocationId' => self::EXAMPLE_LOCATION_ID,
@@ -153,7 +154,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTestCase
         return new SearchHit([
             'score' => 0.234,
             'index' => 'waze',
-            'valueObject' => new ApiValues\Location(['id' => 10]),
+            'valueObject' => new Content\Location(['id' => 10]),
         ]);
     }
 }

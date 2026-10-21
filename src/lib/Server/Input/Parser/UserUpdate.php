@@ -29,16 +29,22 @@ class UserUpdate extends BaseParser
 
     protected ParserTools $parserTools;
 
-    public function __construct(UserService $userService, ContentService $contentService, FieldTypeParser $fieldTypeParser, ParserTools $parserTools)
-    {
+    public function __construct(
+        UserService $userService,
+        ContentService $contentService,
+        FieldTypeParser $fieldTypeParser,
+        ParserTools $parserTools
+    ) {
         $this->userService = $userService;
         $this->contentService = $contentService;
         $this->fieldTypeParser = $fieldTypeParser;
         $this->parserTools = $parserTools;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestUserUpdateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): RestUserUpdateStruct {
         $parsedData = [];
 
         //@todo XSD has a login element, but it's not possible to update login

@@ -25,8 +25,10 @@ class Exception extends AbstractExceptionVisitor
     /**
      * Construct from debug flag.
      */
-    public function __construct(bool $debug = false, ?TranslatorInterface $translator = null)
-    {
+    public function __construct(
+        bool $debug = false,
+        ?TranslatorInterface $translator = null
+    ) {
         $this->debug = $debug;
         $this->translator = $translator;
     }

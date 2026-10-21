@@ -15,6 +15,7 @@ use Ibexa\Rest\Server\Exceptions\BadResponseException;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -60,7 +61,7 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
     }
 
     /**
-     * @return iterable<string, array{\Symfony\Component\Security\Core\User\UserInterface, bool}>
+     * @return iterable<string, array{UserInterface, bool}>
      */
     public static function dataProviderForTestOnAuthenticationSuccess(): iterable
     {
@@ -121,7 +122,7 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\RequestStack&\PHPUnit\Framework\MockObject\MockObject
+     * @return RequestStack&MockObject
      */
     private function getRequestStackMock(bool $isRestRequest = true): RequestStack
     {

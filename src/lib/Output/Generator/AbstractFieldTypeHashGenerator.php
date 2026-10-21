@@ -71,7 +71,10 @@ abstract class AbstractFieldTypeHashGenerator implements LoggerAwareInterface
      * Generates and returns a value based on $hashValue type, with $parent (
      * if the type of $hashValue supports it).
      */
-    abstract protected function generateValue(DataObjectInterface $parent, mixed $value): mixed;
+    abstract protected function generateValue(
+        DataObjectInterface $parent,
+        mixed $value
+    ): mixed;
 
     /**
      * Checks if the given $value is a purely numeric array.
@@ -90,10 +93,12 @@ abstract class AbstractFieldTypeHashGenerator implements LoggerAwareInterface
     }
 
     /**
-     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     * @throws ExceptionInterface
      */
-    protected function generateObjectValue(DataObjectInterface $parent, object $value): mixed
-    {
+    protected function generateObjectValue(
+        DataObjectInterface $parent,
+        object $value
+    ): mixed {
         try {
             $value = $this->normalizer->normalize($value, 'json', ['parent' => $parent]);
         } catch (ExceptionInterface $e) {

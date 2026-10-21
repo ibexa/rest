@@ -14,14 +14,16 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\RouteCollection;
 
-#[CoversClass(\Ibexa\Bundle\Rest\Routing\OptionsLoader::class)]
+#[CoversClass(OptionsLoader::class)]
 class OptionsLoaderTest extends TestCase
 {
     private OptionsLoader\RouteCollectionMapper & MockObject $routeCollectionMapperMock;
 
     #[DataProvider('getResourceType')]
-    public function testSupportsResourceType(string $type, bool $expected): void
-    {
+    public function testSupportsResourceType(
+        string $type,
+        bool $expected
+    ): void {
         self::assertEquals(
             $expected,
             $this->getOptionsLoader()->supports(null, $type)
@@ -43,7 +45,7 @@ class OptionsLoaderTest extends TestCase
     {
         $optionsRouteCollection = new RouteCollection();
 
-        $this->getRouteCollectionMapperMock()->expects(self::once())
+        $this->getRouteCollectionMapperMock()->expects($this->once())
             ->method('mapCollection')
             ->with(new RouteCollection())
             ->willReturn($optionsRouteCollection);
@@ -64,7 +66,7 @@ class OptionsLoaderTest extends TestCase
             ->onlyMethods(['import'])
             ->getMock();
 
-        $mock->expects(self::any())
+        $mock->expects($this->any())
             ->method('import')
             ->with(self::anything(), self::anything())
             ->willReturn(new RouteCollection());

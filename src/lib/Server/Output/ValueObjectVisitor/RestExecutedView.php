@@ -12,6 +12,7 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content as ApiValues;
+use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
@@ -26,16 +27,18 @@ class RestExecutedView extends ValueObjectVisitor
     public function __construct(
         private readonly LocationService $locationService,
         private readonly RelationListFacadeInterface $relationListFacade
-    ) {
-    }
+    ) {}
 
     /**
      * Visit struct returned by controllers.
      *
      * @param \Ibexa\Rest\Server\Values\RestExecutedView $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('View');
         $visitor->setHeader('Content-Type', $generator->getMediaType('View'));
 
@@ -91,8 +94,8 @@ class RestExecutedView extends ValueObjectVisitor
             $generator->startObjectElement('value');
 
             // @todo Refactor
-            if ($searchHit->valueObject instanceof ApiValues\Content) {
-                /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Content $searchHit->valueObject */
+            if ($searchHit->valueObject instanceof Content) {
+                /** @var Content $searchHit->valueObject */
                 $contentInfo = $searchHit->valueObject->contentInfo;
 
                 try {

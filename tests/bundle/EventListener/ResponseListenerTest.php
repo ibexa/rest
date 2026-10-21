@@ -77,7 +77,7 @@ final class ResponseListenerTest extends EventListenerTestCase
         RequestEvent $event
     ): void {
         $this->getVisitorDispatcherMock()
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('dispatch');
 
         $this->getEventListener()->$method($event);
@@ -110,7 +110,7 @@ final class ResponseListenerTest extends EventListenerTestCase
         $value
     ): void {
         $this->getVisitorDispatcherMock()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('dispatch')
             ->with(
                 $this->getRequestMock(),

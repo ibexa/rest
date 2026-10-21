@@ -101,17 +101,19 @@ class ContentRelationCreateController extends RestController
 {
     public function __construct(
         private readonly ContentService\RelationListFacadeInterface $relationListFacade
-    ) {
-    }
+    ) {}
 
     /**
      * Creates a new relation of type COMMON for the given draft.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException if version $versionNumber isn't a draft
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException if a relation to the same content already exists
+     * @throws ForbiddenException if version $versionNumber isn't a draft
+     * @throws ForbiddenException if a relation to the same content already exists
      */
-    public function createRelation(int $contentId, int $versionNumber, Request $request): Values\CreatedRelation
-    {
+    public function createRelation(
+        int $contentId,
+        int $versionNumber,
+        Request $request
+    ): Values\CreatedRelation {
         $contentService = $this->repository->getContentService();
 
         $destinationContentId = $this->inputDispatcher->parse(

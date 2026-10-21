@@ -22,8 +22,10 @@ class RestUserUpdateStruct extends RestValue
      */
     public ?int $sectionId;
 
-    public function __construct(UserUpdateStruct $userUpdateStruct, ?int $sectionId = null)
-    {
+    public function __construct(
+        UserUpdateStruct $userUpdateStruct,
+        ?int $sectionId = null
+    ) {
         $this->userUpdateStruct = $userUpdateStruct;
         $this->sectionId = $sectionId;
     }

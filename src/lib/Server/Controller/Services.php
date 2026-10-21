@@ -52,8 +52,7 @@ class Services extends RestController
     public function __construct(
         #[Autowire(param: 'ibexa.field_type.country.data')]
         private readonly array $countriesInfo
-    ) {
-    }
+    ) {}
 
     public function loadCountryList(): CountryList
     {

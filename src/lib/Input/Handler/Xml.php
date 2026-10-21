@@ -86,7 +86,7 @@ class Xml extends Handler
         'validatorConfiguration',
     ];
 
-    public function convert(string $string): array|string|int|bool|float|null
+    public function convert(string $string): array | string | int | bool | float | null
     {
         $oldXmlErrorHandling = libxml_use_internal_errors(true);
         libxml_clear_errors();
@@ -122,7 +122,7 @@ class Xml extends Handler
      *
      * @return array<mixed>|string|int|bool|float|null
      */
-    protected function convertDom(DOMNode $node): array|string|int|bool|float|null
+    protected function convertDom(DOMNode $node): array | string | int | bool | float | null
     {
         $isArray = false;
         $current = [];
@@ -202,7 +202,7 @@ class Xml extends Handler
         return $current;
     }
 
-    protected function parseFieldTypeHash(DOMElement $domElement): array|string|int|bool|float|null
+    protected function parseFieldTypeHash(DOMElement $domElement): array | string | int | bool | float | null
     {
         $result = $this->parseFieldTypeValues($domElement->childNodes);
 
@@ -217,7 +217,7 @@ class Xml extends Handler
     /**
      * Parses a node list of <value> elements.
      */
-    protected function parseFieldTypeValues(DOMNodeList $valueNodes): array|string|int|bool|float
+    protected function parseFieldTypeValues(DOMNodeList $valueNodes): array | string | int | bool | float
     {
         $resultValues = [];
         $resultString = '';
@@ -275,7 +275,7 @@ class Xml extends Handler
     /**
      * Attempts to cast the given $stringValue into a sensible scalar type.
      */
-    protected function castScalarValue(string $stringValue): string|int|bool|float
+    protected function castScalarValue(string $stringValue): string | int | bool | float
     {
         switch (true) {
             case ctype_digit($stringValue):

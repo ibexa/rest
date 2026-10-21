@@ -12,6 +12,4 @@ use InvalidArgumentException as PHPInvalidArgumentException;
 /**
  * Exception thrown if a parser discovers an error.
  */
-class Parser extends PHPInvalidArgumentException
-{
-}
+class Parser extends PHPInvalidArgumentException {}

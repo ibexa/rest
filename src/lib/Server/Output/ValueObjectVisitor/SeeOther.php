@@ -21,8 +21,11 @@ class SeeOther extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\SeeOther $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $visitor->setStatus(303);
         $visitor->setHeader('Location', $data->getRedirectUri());
     }

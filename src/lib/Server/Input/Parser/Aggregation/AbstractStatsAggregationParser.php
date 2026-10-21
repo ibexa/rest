@@ -15,8 +15,10 @@ use Ibexa\Rest\Input\BaseParser;
 
 abstract class AbstractStatsAggregationParser extends BaseParser
 {
-    final public function parse(array $data, ParsingDispatcher $parsingDispatcher): AbstractStatsAggregation
-    {
+    final public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractStatsAggregation {
         if (!array_key_exists($this->getAggregationName(), $data)) {
             throw new Exceptions\Parser("Invalid <{$this->getAggregationName()}> format");
         }

@@ -27,8 +27,10 @@ class URLAliasCreate extends BaseParser
     /**
      * Parse input structure.
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): array
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): array {
         if (!array_key_exists('_type', $data)) {
             throw new Exceptions\Parser("Missing '_type' value for URLAliasCreate.");
         }

@@ -19,7 +19,7 @@ abstract class AbstractDestinationLocationInputTestCase extends BaseTestCase
 {
     private const int TESTED_LOCATION_ID = 22;
 
-    protected MockObject&LocationService $locationService;
+    protected MockObject & LocationService $locationService;
 
     protected ValidatorInterface $validator;
 

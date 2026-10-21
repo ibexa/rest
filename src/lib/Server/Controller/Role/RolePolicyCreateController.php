@@ -95,8 +95,10 @@ class RolePolicyCreateController extends RoleBaseController
      *
      * @param int $roleId ID of a role draft
      */
-    public function addPolicy(int $roleId, Request $request): CreatedPolicy
-    {
+    public function addPolicy(
+        int $roleId,
+        Request $request
+    ): CreatedPolicy {
         $createStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

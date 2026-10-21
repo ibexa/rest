@@ -25,8 +25,11 @@ trait AssertXmlTagTrait
      * @param string $actualXml
      * @param string $message
      */
-    public static function assertXMLTag($matcher, $actualXml, $message = ''): void
-    {
+    public static function assertXMLTag(
+        $matcher,
+        $actualXml,
+        $message = ''
+    ): void {
         // Provide default values.
         $matcher += ['attributes' => []];
 
@@ -52,7 +55,7 @@ trait AssertXmlTagTrait
         $document->loadXML($actualXml);
         $xpath = new DOMXPath($document);
         $queryResult = $xpath->query($query);
-        self::assertInstanceOf(DomNodeList::class, $queryResult);
+        self::assertInstanceOf(DOMNodeList::class, $queryResult);
 
         self::assertGreaterThanOrEqual(1, $queryResult->length, $message);
     }

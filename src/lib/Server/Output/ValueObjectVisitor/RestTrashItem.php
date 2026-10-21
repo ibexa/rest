@@ -22,8 +22,11 @@ class RestTrashItem extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\RestTrashItem $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('TrashItem');
         $visitor->setHeader('Content-Type', $generator->getMediaType('TrashItem'));
 

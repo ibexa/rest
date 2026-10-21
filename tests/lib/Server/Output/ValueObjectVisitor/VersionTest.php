@@ -16,10 +16,11 @@ use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\Version;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
 use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\MockObject\Stub;
 
 class VersionTest extends ValueObjectVisitorBaseTestCase
 {
-    protected FieldTypeSerializer&\PHPUnit\Framework\MockObject\Stub $fieldTypeSerializerMock;
+    protected FieldTypeSerializer & Stub $fieldTypeSerializerMock;
 
     public function setUp(): void
     {

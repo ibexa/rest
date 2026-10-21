@@ -25,8 +25,10 @@ class SectionInput extends BaseParser
         $this->sectionService = $sectionService;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): SectionCreateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): SectionCreateStruct {
         $sectionCreate = $this->sectionService->newSectionCreateStruct();
 
         //@todo XSD says that name is not mandatory? Does that make sense?

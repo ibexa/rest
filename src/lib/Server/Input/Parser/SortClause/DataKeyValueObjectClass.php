@@ -26,14 +26,18 @@ class DataKeyValueObjectClass extends BaseParser
      */
     protected string $valueObjectClass;
 
-    public function __construct(string $dataKey, string $valueObjectClass)
-    {
+    public function __construct(
+        string $dataKey,
+        string $valueObjectClass
+    ) {
         $this->dataKey = $dataKey;
         $this->valueObjectClass = $valueObjectClass;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): object
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): object {
         if (!class_exists($this->valueObjectClass)) {
             throw new Exceptions\Parser("Value object class <{$this->valueObjectClass}> is not defined");
         }

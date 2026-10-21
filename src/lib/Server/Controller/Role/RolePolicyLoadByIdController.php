@@ -10,8 +10,9 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use ArrayObject;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\Values\User\Policy;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -69,12 +70,15 @@ use Symfony\Component\HttpFoundation\Response;
 class RolePolicyLoadByIdController extends RoleBaseController
 {
     /**
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws UnauthorizedException
      */
-    public function loadPolicy(int $roleId, int $policyId, Request $request): Policy
-    {
+    public function loadPolicy(
+        int $roleId,
+        int $policyId,
+        Request $request
+    ): Policy {
         $loadedRole = $this->roleService->loadRole($roleId);
         foreach ($loadedRole->getPolicies() as $policy) {
             if ($policy->id == $policyId) {
@@ -82,6 +86,6 @@ class RolePolicyLoadByIdController extends RoleBaseController
             }
         }
 
-        throw new Exceptions\NotFoundException("Policy not found: '{$request->getPathInfo()}'.");
+        throw new NotFoundException("Policy not found: '{$request->getPathInfo()}'.");
     }
 }

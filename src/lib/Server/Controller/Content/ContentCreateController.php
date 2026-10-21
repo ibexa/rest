@@ -14,6 +14,9 @@ use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
@@ -102,8 +105,7 @@ class ContentCreateController extends RestController
 {
     public function __construct(
         private readonly ContentService\RelationListFacadeInterface $relationListFacade
-    ) {
-    }
+    ) {}
 
     /**
      * Creates a new content draft assigned to the authenticated user.
@@ -132,12 +134,14 @@ class ContentCreateController extends RestController
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
      */
-    protected function doCreateContent(Request $request, RestContentCreateStruct $contentCreate): CreatedContent
-    {
+    protected function doCreateContent(
+        Request $request,
+        RestContentCreateStruct $contentCreate
+    ): CreatedContent {
         try {
             $contentCreateStruct = $contentCreate->contentCreateStruct;
             $contentCreate->locationCreateStruct->sortField = $contentCreateStruct->contentType->defaultSortField;

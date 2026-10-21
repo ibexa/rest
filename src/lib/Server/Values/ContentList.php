@@ -15,7 +15,7 @@ use Ibexa\Rest\Value as RestValue;
 class ContentList extends RestValue
 {
     /**
-     * @var \Ibexa\Rest\Server\Values\RestContent[]
+     * @var RestContent[]
      */
     public array $contents;
 
@@ -27,10 +27,12 @@ class ContentList extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Rest\Server\Values\RestContent[] $contents
+     * @param RestContent[] $contents
      */
-    public function __construct(array $contents, int $totalCount)
-    {
+    public function __construct(
+        array $contents,
+        int $totalCount
+    ) {
         $this->contents = $contents;
         $this->totalCount = $totalCount;
     }

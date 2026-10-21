@@ -24,8 +24,10 @@ class Factory
 
     protected Repository $repository;
 
-    public function __construct(ConfigResolverInterface $configResolver, Repository $repository)
-    {
+    public function __construct(
+        ConfigResolverInterface $configResolver,
+        Repository $repository
+    ) {
         $this->configResolver = $configResolver;
         $this->repository = $repository;
     }

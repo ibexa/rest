@@ -14,8 +14,10 @@ use Ibexa\Rest\Output\Generator\Json\JsonObject;
 
 final class FieldTypeHashGenerator extends AbstractFieldTypeHashGenerator
 {
-    protected function generateValue(DataObjectInterface $parent, mixed $value): mixed
-    {
+    protected function generateValue(
+        DataObjectInterface $parent,
+        mixed $value
+    ): mixed {
         if ($value === null) {
             return null;
         } elseif (is_bool($value)) {

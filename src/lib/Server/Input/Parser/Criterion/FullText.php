@@ -8,7 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\FullText as FullTextCriterion;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 
@@ -20,12 +20,14 @@ class FullText extends BaseParser
     /**
      * Parses input structure to a FullText criterion.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): FullTextCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): FullTextCriterion {
         if (!array_key_exists('FullTextCriterion', $data)) {
-            throw new Exceptions\Parser('Invalid <FullTextCriterion> format');
+            throw new Parser('Invalid <FullTextCriterion> format');
         }
 
         return new FullTextCriterion($data['FullTextCriterion']);

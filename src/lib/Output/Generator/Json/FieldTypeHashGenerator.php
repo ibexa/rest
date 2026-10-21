@@ -13,8 +13,10 @@ use Ibexa\Rest\Output\Generator\Data\DataObjectInterface;
 
 class FieldTypeHashGenerator extends AbstractFieldTypeHashGenerator
 {
-    protected function generateValue(DataObjectInterface $parent, mixed $value): mixed
-    {
+    protected function generateValue(
+        DataObjectInterface $parent,
+        mixed $value
+    ): mixed {
         if ($value === null || is_scalar($value)) {
             // Will be handled accordingly on serialization
             return $value;

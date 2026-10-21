@@ -56,10 +56,13 @@ class RolePolicyDeleteController extends RoleBaseController
     /**
      * Delete a policy from role.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws Exceptions\NotFoundException
      */
-    public function deletePolicy(int $roleId, int $policyId, Request $request): NoContent
-    {
+    public function deletePolicy(
+        int $roleId,
+        int $policyId,
+        Request $request
+    ): NoContent {
         try {
             // First try to treat $roleId as a role draft ID.
             $roleDraft = $this->roleService->loadRoleDraft($roleId);

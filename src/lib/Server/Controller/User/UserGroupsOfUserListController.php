@@ -75,8 +75,10 @@ final class UserGroupsOfUserListController extends UserBaseController
      * The returned list includes the resources for unassigning
      * a user group if the user is in multiple groups.
      */
-    public function loadUserGroupsOfUser(int $userId, Request $request): RestValue
-    {
+    public function loadUserGroupsOfUser(
+        int $userId,
+        Request $request
+    ): RestValue {
         $offset = $request->query->has('offset') ? (int)$request->query->get('offset') : 0;
         $limit = $request->query->has('limit') ? (int)$request->query->get('limit') : 25;
 

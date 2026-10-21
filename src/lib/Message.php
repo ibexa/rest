@@ -21,8 +21,11 @@ class Message
 
     public int $statusCode;
 
-    public function __construct(array $headers = [], string $body = '', int $statusCode = 200)
-    {
+    public function __construct(
+        array $headers = [],
+        string $body = '',
+        int $statusCode = 200
+    ) {
         $this->headers = $headers;
         $this->body = $body;
         $this->statusCode = $statusCode;

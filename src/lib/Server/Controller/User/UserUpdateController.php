@@ -107,8 +107,10 @@ use Symfony\Component\HttpFoundation\Response;
 )]
 final class UserUpdateController extends UserBaseController
 {
-    public function updateUser(int $userId, Request $request): Values\RestUser
-    {
+    public function updateUser(
+        int $userId,
+        Request $request
+    ): Values\RestUser {
         $user = $this->userService->loadUser($userId);
 
         $updateStruct = $this->inputDispatcher->parse(

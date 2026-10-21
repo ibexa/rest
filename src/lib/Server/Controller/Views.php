@@ -19,6 +19,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\LocationQuery;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\RestViewInput;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -95,7 +96,7 @@ class Views extends Controller
      */
     public function createView(Request $request): Values\RestExecutedView
     {
-        /** @var \Ibexa\Rest\Server\Values\RestViewInput $viewInput */
+        /** @var RestViewInput $viewInput */
         $viewInput = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

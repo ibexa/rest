@@ -5,8 +5,8 @@
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 return [
-  'element' => [
-    '_media-type' => 'application/vnd.ibexa.api.element+xml',
-    '_attribute' => 'value',
-  ],
+    'element' => [
+        '_media-type' => 'application/vnd.ibexa.api.element+xml',
+        '_attribute' => 'value',
+    ],
 ];

@@ -13,6 +13,8 @@ use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use ArrayObject;
 use Ibexa\Contracts\Core\Repository\Exceptions as ApiExceptions;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
+use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Values;
 use LogicException;
@@ -79,11 +81,13 @@ final class UserAssignToUserGroupController extends UserBaseController
     /**
      * Assigns the user to a user group.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
-    public function assignUserToUserGroup(int $userId, Request $request): Values\UserGroupRefList
-    {
+    public function assignUserToUserGroup(
+        int $userId,
+        Request $request
+    ): Values\UserGroupRefList {
         $user = $this->userService->loadUser($userId);
 
         try {

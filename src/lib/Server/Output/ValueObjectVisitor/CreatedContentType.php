@@ -22,8 +22,11 @@ class CreatedContentType extends RestContentType
      *
      * @param \Ibexa\Rest\Server\Values\CreatedContentType $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $restContentType = $data->contentType;
 
         parent::visit($visitor, $generator, $restContentType);

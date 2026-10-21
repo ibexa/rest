@@ -20,7 +20,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class RestContentTest extends BaseContentValueObjectVisitorTestCase
 {
-    private MockObject&TranslationHelper $translationHelper;
+    private MockObject & TranslationHelper $translationHelper;
 
     protected function setUp(): void
     {

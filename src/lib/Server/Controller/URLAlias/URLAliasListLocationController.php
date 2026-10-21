@@ -65,14 +65,15 @@ class URLAliasListLocationController extends RestController
     public function __construct(
         protected URLAliasService $urlAliasService,
         protected LocationService $locationService
-    ) {
-    }
+    ) {}
 
     /**
      * Returns the list of URL aliases for a location.
      */
-    public function listLocationURLAliases(string $locationPath, Request $request): Values\CachedValue
-    {
+    public function listLocationURLAliases(
+        string $locationPath,
+        Request $request
+    ): Values\CachedValue {
         $locationPathParts = explode('/', $locationPath);
 
         $location = $this->locationService->loadLocation(

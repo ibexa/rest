@@ -7,10 +7,11 @@
 
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
+use Ibexa\Rest\FieldTypeProcessor\BinaryInputProcessor;
 use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\TestCase;
 
-#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\BinaryInputProcessor::class, 'preProcessValueHash')]
+#[CoversMethod(BinaryInputProcessor::class, 'preProcessValueHash')]
 abstract class BinaryInputProcessorTestCase extends TestCase
 {
     private $tempDir;
@@ -83,7 +84,7 @@ abstract class BinaryInputProcessorTestCase extends TestCase
     /**
      * Returns the processor under test.
      *
-     * @return \Ibexa\Rest\FieldTypeProcessor\BinaryInputProcessor
+     * @return BinaryInputProcessor
      */
     abstract protected function getProcessor();
 }

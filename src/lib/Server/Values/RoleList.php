@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -15,7 +16,7 @@ use Ibexa\Rest\Value as RestValue;
 class RoleList extends RestValue
 {
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\User\Role[]
+     * @var Role[]
      */
     public array $roles;
 
@@ -25,10 +26,12 @@ class RoleList extends RestValue
     public string $path;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\Role[] $roles
+     * @param Role[] $roles
      */
-    public function __construct(array $roles, string $path)
-    {
+    public function __construct(
+        array $roles,
+        string $path
+    ) {
         $this->roles = $roles;
         $this->path = $path;
     }

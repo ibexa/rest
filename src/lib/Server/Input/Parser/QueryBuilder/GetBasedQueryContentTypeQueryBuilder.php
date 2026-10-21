@@ -21,11 +21,12 @@ final class GetBasedQueryContentTypeQueryBuilder implements ContentTypeQueryBuil
 
     public function __construct(
         private readonly ParsingDispatcher $parsingDispatcher
-    ) {
-    }
+    ) {}
 
-    public function buildQuery(Request $request, int $defaultLimit): ContentTypeQuery
-    {
+    public function buildQuery(
+        Request $request,
+        int $defaultLimit
+    ): ContentTypeQuery {
         $limit = (int)($request->query->get('limit') ?? $defaultLimit);
         $offset = (int)($request->query->get('offset') ?? 0);
         $filter = $request->query->get('filter');

@@ -7,6 +7,4 @@
 
 namespace Ibexa\Rest;
 
-abstract class Value
-{
-}
+abstract class Value {}

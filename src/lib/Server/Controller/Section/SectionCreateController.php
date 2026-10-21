@@ -91,7 +91,7 @@ class SectionCreateController extends RestController
     /**
      * Create new section.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      */
     public function createSection(Request $request): CreatedSection
     {

@@ -77,7 +77,7 @@ class RoleInputTest extends BaseTestCase
         );
     }
 
-    protected function getRoleServiceMock(): RoleService&MockObject
+    protected function getRoleServiceMock(): RoleService & MockObject
     {
         $roleServiceMock = $this->createMock(RoleService::class);
 

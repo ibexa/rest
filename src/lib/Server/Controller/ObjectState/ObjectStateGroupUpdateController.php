@@ -14,6 +14,7 @@ use ArrayObject;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\ObjectStateService;
+use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
@@ -107,8 +108,10 @@ class ObjectStateGroupUpdateController extends RestController
 
     protected ContentService $contentService;
 
-    public function __construct(ObjectStateService $objectStateService, ContentService $contentService)
-    {
+    public function __construct(
+        ObjectStateService $objectStateService,
+        ContentService $contentService
+    ) {
         $this->objectStateService = $objectStateService;
         $this->contentService = $contentService;
     }
@@ -116,10 +119,12 @@ class ObjectStateGroupUpdateController extends RestController
     /**
      * Updates an object state group.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      */
-    public function updateObjectStateGroup(int $objectStateGroupId, Request $request): \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup
-    {
+    public function updateObjectStateGroup(
+        int $objectStateGroupId,
+        Request $request
+    ): ObjectStateGroup {
         $updateStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

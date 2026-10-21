@@ -15,8 +15,7 @@ final class SecurityExtension extends AbstractExtension
 {
     public function __construct(
         private readonly string $csrfTokenIntention,
-    ) {
-    }
+    ) {}
 
     public function getFunctions(): array
     {

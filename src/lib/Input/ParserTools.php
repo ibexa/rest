@@ -35,8 +35,10 @@ class ParserTools
     /**
      * Parses the given $objectElement, if it contains embedded data.
      */
-    public function parseObjectElement(array $objectElement, ParsingDispatcher $parsingDispatcher): string
-    {
+    public function parseObjectElement(
+        array $objectElement,
+        ParsingDispatcher $parsingDispatcher
+    ): string {
         if ($this->isEmbeddedObject($objectElement)) {
             $parsingDispatcher->parse(
                 $objectElement,
@@ -79,7 +81,7 @@ class ParserTools
     /***
      * @throws \RuntimeException if the value can not be transformed to a boolean
      */
-    public function parseBooleanValue(string|bool $value): bool
+    public function parseBooleanValue(string | bool $value): bool
     {
         if (is_bool($value)) {
             return $value;

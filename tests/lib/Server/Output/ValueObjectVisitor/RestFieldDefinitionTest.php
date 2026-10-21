@@ -44,7 +44,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTestCase
 
         $restFieldDefinition = $this->getBasicRestFieldDefinition($path);
 
-        $this->fieldTypeSerializerMock->expects(self::once())
+        $this->fieldTypeSerializerMock->expects($this->once())
             ->method('serializeFieldDefaultValue')
             ->with(
                 self::isInstanceOf('\\Ibexa\\Contracts\\Rest\\Output\\Generator'),
@@ -160,15 +160,19 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTestCase
 
     #[Depends('testVisitRestFieldDefinition')]
     #[DataProvider('provideXpathAssertions')]
-    public function testGeneratedXml(string $xpath, \DOMDocument $dom): void
-    {
+    public function testGeneratedXml(
+        string $xpath,
+        \DOMDocument $dom
+    ): void {
         $this->assertXPath($dom, $xpath);
     }
 
     #[Depends('testVisitRestFieldDefinitionWithPath')]
     #[DataProvider('provideXpathAssertionsPath')]
-    public function testGeneratedXmlPath(string $xpath, \DOMDocument $dom): void
-    {
+    public function testGeneratedXmlPath(
+        string $xpath,
+        \DOMDocument $dom
+    ): void {
         $this->assertXPath($dom, $xpath);
     }
 

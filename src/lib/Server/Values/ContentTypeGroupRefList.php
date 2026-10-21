@@ -19,15 +19,17 @@ class ContentTypeGroupRefList extends RestValue
     public ContentType $contentType;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup[]
+     * @var ContentTypeGroup[]
      */
     public array $contentTypeGroups;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroup[] $contentTypeGroups
+     * @param ContentTypeGroup[] $contentTypeGroups
      */
-    public function __construct(ContentType $contentType, array $contentTypeGroups)
-    {
+    public function __construct(
+        ContentType $contentType,
+        array $contentTypeGroups
+    ) {
         $this->contentType = $contentType;
         $this->contentTypeGroups = $contentTypeGroups;
     }

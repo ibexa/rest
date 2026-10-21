@@ -21,8 +21,11 @@ class Root extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Values\Root $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('Root');
         $visitor->setHeader('Content-Type', $generator->getMediaType('Root'));
 

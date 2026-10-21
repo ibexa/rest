@@ -22,8 +22,11 @@ class RestUserGroup extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\RestUserGroup $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $contentInfo = $data->contentInfo;
         $mainLocation = $data->mainLocation;
         $mainLocationPath = trim($mainLocation->pathString, '/');

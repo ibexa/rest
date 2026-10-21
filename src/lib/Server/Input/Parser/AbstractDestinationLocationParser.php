@@ -8,8 +8,11 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Server\Input\Parser;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 use Ibexa\Rest\Server\Exceptions\ValidationFailedException;
@@ -25,28 +28,29 @@ abstract class AbstractDestinationLocationParser extends BaseParser
     public function __construct(
         private readonly LocationService $locationService,
         protected readonly ValidatorInterface $validator,
-    ) {
-    }
+    ) {}
 
     /**
      * @phpstan-param array{
      *     'destination': string,
      * } $data
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws UnauthorizedException
+     * @throws NotFoundException
+     * @throws Parser
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): Location
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): Location {
         $this->validateInputData($data);
 
         return $this->getLocationByPath($data[self::DESTINATION_KEY]);
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws UnauthorizedException
+     * @throws NotFoundException
      */
     private function getLocationByPath(string $path): Location
     {
@@ -72,7 +76,7 @@ abstract class AbstractDestinationLocationParser extends BaseParser
      *
      * @param array<mixed> $data
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ValidationFailedException
+     * @throws ValidationFailedException
      */
     private function validateInputData(array $data): void
     {

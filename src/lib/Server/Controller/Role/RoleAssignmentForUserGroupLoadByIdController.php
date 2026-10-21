@@ -11,7 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use ArrayObject;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Values\RestUserGroupRoleAssignment;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,10 +71,13 @@ class RoleAssignmentForUserGroupLoadByIdController extends RoleBaseController
     /**
      * Returns a role assignment to the given user group.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
-    public function loadRoleAssignmentForUserGroup(string $groupPath, int $roleId, Request $request): RestUserGroupRoleAssignment
-    {
+    public function loadRoleAssignmentForUserGroup(
+        string $groupPath,
+        int $roleId,
+        Request $request
+    ): RestUserGroupRoleAssignment {
         $groupLocationParts = explode('/', $groupPath);
         $groupLocation = $this->locationService->loadLocation((int)array_pop($groupLocationParts));
         $userGroup = $this->userService->loadUserGroup($groupLocation->contentId);
@@ -86,6 +89,6 @@ class RoleAssignmentForUserGroupLoadByIdController extends RoleBaseController
             }
         }
 
-        throw new Exceptions\NotFoundException("Role assignment not found: '{$request->getPathInfo()}'.");
+        throw new NotFoundException("Role assignment not found: '{$request->getPathInfo()}'.");
     }
 }

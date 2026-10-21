@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Exceptions;
 
+use Ibexa\Contracts\Core\FieldType\ValidationError;
 use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException as APIContentFieldValidationException;
 
 /**
@@ -19,7 +20,7 @@ class ContentFieldValidationException extends BadRequestException
      *
      * @see \Ibexa\Core\Base\Exceptions\ContentFieldValidationException
      *
-     * @var array<int, array<string, \Ibexa\Contracts\Core\FieldType\ValidationError[]>>
+     * @var array<int, array<string, ValidationError[]>>
      */
     protected array $errors;
 
@@ -33,7 +34,7 @@ class ContentFieldValidationException extends BadRequestException
     /**
      * Returns an array of field validation error messages.
      *
-     * @return array<int, array<string, \Ibexa\Contracts\Core\FieldType\ValidationError[]>>
+     * @return array<int, array<string, ValidationError[]>>
      */
     public function getFieldErrors(): array
     {

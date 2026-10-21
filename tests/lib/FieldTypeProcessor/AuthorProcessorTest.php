@@ -12,8 +12,8 @@ use PHPUnit\Framework\Attributes\CoversMethod;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\AuthorProcessor::class, 'preProcessFieldSettingsHash')]
-#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\AuthorProcessor::class, 'postProcessFieldSettingsHash')]
+#[CoversMethod(AuthorProcessor::class, 'preProcessFieldSettingsHash')]
+#[CoversMethod(AuthorProcessor::class, 'postProcessFieldSettingsHash')]
 class AuthorProcessorTest extends TestCase
 {
     /**
@@ -41,8 +41,10 @@ class AuthorProcessorTest extends TestCase
     }
 
     #[DataProvider('fieldSettingsHashes')]
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
-    {
+    public function testPreProcessFieldSettingsHash(
+        $inputSettings,
+        $outputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(
@@ -52,8 +54,10 @@ class AuthorProcessorTest extends TestCase
     }
 
     #[DataProvider('fieldSettingsHashes')]
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings): void
-    {
+    public function testPostProcessFieldSettingsHash(
+        $outputSettings,
+        $inputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(

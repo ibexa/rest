@@ -83,8 +83,10 @@ final class UserGroupUsersListController extends UserBaseController
     /**
      * Loads the users of the group with the given path.
      */
-    public function loadUsersFromGroup(string $groupPath, Request $request): RestValue
-    {
+    public function loadUsersFromGroup(
+        string $groupPath,
+        Request $request
+    ): RestValue {
         $userGroupLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($groupPath)
         );

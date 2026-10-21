@@ -32,8 +32,11 @@ class ImageProcessor extends BinaryInputProcessor
     /**
      * @param array $variations array of variations identifiers
      */
-    public function __construct(string $temporaryDirectory, RouterInterface $router, array $variations)
-    {
+    public function __construct(
+        string $temporaryDirectory,
+        RouterInterface $router,
+        array $variations
+    ) {
         parent::__construct($temporaryDirectory);
         $this->router = $router;
         $this->variations = $variations;
@@ -76,8 +79,10 @@ class ImageProcessor extends BinaryInputProcessor
     /**
      * Generates a URL for $path in $variation.
      */
-    protected function generateUrl(string $path, string $variation): string
-    {
+    protected function generateUrl(
+        string $path,
+        string $variation
+    ): string {
         $fieldId = '';
         $versionNo = '';
 

@@ -50,22 +50,27 @@ class Xml extends Generator
     }
 
     #[\Override]
-    public function startAttribute(string $name, mixed $value): void
-    {
+    public function startAttribute(
+        string $name,
+        mixed $value
+    ): void {
         $this->checkStartAttribute($name);
 
         $this->json->{'@' . $name} = $value;
     }
 
     #[\Override]
-    public function serializeBool(bool|string|null $boolValue): string
+    public function serializeBool(bool | string | null $boolValue): string
     {
         return $boolValue ? 'true' : 'false';
     }
 
     #[\Override]
-    public function startValueElement(string $name, mixed $value, array $attributes = []): void
-    {
+    public function startValueElement(
+        string $name,
+        mixed $value,
+        array $attributes = []
+    ): void {
         $this->checkStartValueElement($name);
 
         $value = $value === false ? null : $value;

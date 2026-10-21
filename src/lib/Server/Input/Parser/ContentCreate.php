@@ -10,6 +10,8 @@ namespace Ibexa\Rest\Server\Input\Parser;
 use DateTime;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -70,11 +72,13 @@ class ContentCreate extends BaseParser
      * } $data
      *
      * @throws \DateMalformedStringException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws InvalidArgumentException
+     * @throws NotFoundException
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestContentCreateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): RestContentCreateStruct {
         if (!array_key_exists('LocationCreate', $data) || !is_array($data['LocationCreate'])) {
             throw new Exceptions\Parser("Missing or invalid 'LocationCreate' element for ContentCreate.");
         }

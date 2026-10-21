@@ -15,8 +15,8 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\RouterInterface;
 
-#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::class, 'preProcessFieldSettingsHash')]
-#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::class, 'postProcessFieldSettingsHash')]
+#[CoversMethod(RelationListProcessor::class, 'preProcessFieldSettingsHash')]
+#[CoversMethod(RelationListProcessor::class, 'postProcessFieldSettingsHash')]
 class RelationListProcessorTest extends TestCase
 {
     /** @var string[] */
@@ -46,8 +46,10 @@ class RelationListProcessorTest extends TestCase
      * @param array<string, mixed> $outputSettings
      */
     #[DataProvider('fieldSettingsHashes')]
-    public function testPreProcessFieldSettingsHash(array $inputSettings, array $outputSettings): void
-    {
+    public function testPreProcessFieldSettingsHash(
+        array $inputSettings,
+        array $outputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(
@@ -61,8 +63,10 @@ class RelationListProcessorTest extends TestCase
      * @param array<string, mixed> $outputSettings
      */
     #[DataProvider('fieldSettingsHashes')]
-    public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
-    {
+    public function testPostProcessFieldSettingsHash(
+        array $outputSettings,
+        array $inputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(
@@ -111,26 +115,27 @@ class RelationListProcessorTest extends TestCase
 
         $routerMock = $this->createMock(RouterInterface::class);
         $processor->setRouter($routerMock);
-        $matcher = self::exactly(2);
+        $matcher = $this->exactly(2);
 
+        $matcher = $this->exactly(2);
         $routerMock
             ->expects($matcher)
             ->method('generate')->willReturnCallback(static function (...$parameters) use ($matcher): string {
-            if ($matcher->numberOfInvocations() === 1) {
-                self::assertSame('ibexa.rest.load_content', $parameters[0]);
-                self::assertSame(['contentId' => 42], $parameters[1]);
+                if ($matcher->numberOfInvocations() === 1) {
+                    self::assertSame('ibexa.rest.load_content', $parameters[0]);
+                    self::assertSame(['contentId' => 42], $parameters[1]);
 
-                return '/api/ibexa/v2/content/objects/42';
-            }
-            if ($matcher->numberOfInvocations() === 2) {
-                self::assertSame('ibexa.rest.load_content', $parameters[0]);
-                self::assertSame(['contentId' => 300], $parameters[1]);
+                    return '/api/ibexa/v2/content/objects/42';
+                }
+                if ($matcher->numberOfInvocations() === 2) {
+                    self::assertSame('ibexa.rest.load_content', $parameters[0]);
+                    self::assertSame(['contentId' => 300], $parameters[1]);
 
-                return '/api/ibexa/v2/content/objects/300';
-            }
+                    return '/api/ibexa/v2/content/objects/300';
+                }
 
-            self::fail('Unexpected call to generate().');
-        });
+                self::fail('Unexpected call to generate().');
+            });
 
         $hash = $processor->postProcessValueHash(['destinationContentIds' => [42, 300]]);
         self::assertArrayHasKey('destinationContentHrefs', $hash);

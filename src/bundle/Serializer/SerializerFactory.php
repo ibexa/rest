@@ -8,27 +8,33 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\Rest\Serializer;
 
+use Symfony\Component\Serializer\Encoder\DecoderInterface;
+use Symfony\Component\Serializer\Encoder\EncoderInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Serializer;
 use Traversable;
 
 final class SerializerFactory
 {
     /**
-     * @var iterable<\Symfony\Component\Serializer\Normalizer\NormalizerInterface|\Symfony\Component\Serializer\Normalizer\DenormalizerInterface>
+     * @var iterable<NormalizerInterface|DenormalizerInterface>
      */
     private iterable $normalizers;
 
     /**
-     * @var iterable<\Symfony\Component\Serializer\Encoder\EncoderInterface|\Symfony\Component\Serializer\Encoder\DecoderInterface>
+     * @var iterable<EncoderInterface|DecoderInterface>
      */
     private iterable $encoders;
 
     /**
-     * @param iterable<\Symfony\Component\Serializer\Normalizer\NormalizerInterface|\Symfony\Component\Serializer\Normalizer\DenormalizerInterface> $normalizers
-     * @param iterable<\Symfony\Component\Serializer\Encoder\EncoderInterface|\Symfony\Component\Serializer\Encoder\DecoderInterface> $encoders
+     * @param iterable<NormalizerInterface|DenormalizerInterface> $normalizers
+     * @param iterable<EncoderInterface|DecoderInterface> $encoders
      */
-    public function __construct(iterable $normalizers, iterable $encoders)
-    {
+    public function __construct(
+        iterable $normalizers,
+        iterable $encoders
+    ) {
         $this->normalizers = $normalizers;
         $this->encoders = $encoders;
     }

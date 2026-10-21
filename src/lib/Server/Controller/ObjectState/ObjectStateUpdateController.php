@@ -116,8 +116,10 @@ class ObjectStateUpdateController extends RestController
 
     protected ContentService $contentService;
 
-    public function __construct(ObjectStateService $objectStateService, ContentService $contentService)
-    {
+    public function __construct(
+        ObjectStateService $objectStateService,
+        ContentService $contentService
+    ) {
         $this->objectStateService = $objectStateService;
         $this->contentService = $contentService;
     }
@@ -125,10 +127,13 @@ class ObjectStateUpdateController extends RestController
     /**
      * Updates an object state.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      */
-    public function updateObjectState(int $objectStateGroupId, int $objectStateId, Request $request): RestObjectState
-    {
+    public function updateObjectState(
+        int $objectStateGroupId,
+        int $objectStateId,
+        Request $request
+    ): RestObjectState {
         $updateStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

@@ -15,18 +15,23 @@ use Ibexa\Contracts\Rest\Output\Visitor;
 class ImageVariation extends ValueObjectVisitor
 {
     /**
-     * @param \Ibexa\Contracts\Core\Variation\Values\ImageVariation $data
+     * @param ImageVariationValue $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $visitor->setHeader('Content-Type', $generator->getMediaType('ContentImageVariation'));
         $generator->startObjectElement('ContentImageVariation');
         $this->visitImageVariationAttributes($generator, $data);
         $generator->endObjectElement('ContentImageVariation');
     }
 
-    protected function visitImageVariationAttributes(Generator $generator, ImageVariationValue $data): void
-    {
+    protected function visitImageVariationAttributes(
+        Generator $generator,
+        ImageVariationValue $data
+    ): void {
         $generator->startAttribute(
             'href',
             $this->router->generate(
