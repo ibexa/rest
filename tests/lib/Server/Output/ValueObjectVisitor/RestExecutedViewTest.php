@@ -14,7 +14,6 @@ use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
 use Ibexa\Core\Repository\Values\Content;
-use Ibexa\Core\Repository\Values\Content as ApiValues;
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestExecutedView;
@@ -157,7 +156,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         return new SearchHit([
             'score' => 0.123,
             'index' => 'alexandria',
-            'valueObject' => new ApiValues\Content([
+            'valueObject' => new Content\Content([
                 'versionInfo' => new Content\VersionInfo([
                     'contentInfo' => new ContentInfo([
                         'mainLocationId' => self::EXAMPLE_LOCATION_ID,
@@ -176,7 +175,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
         return new SearchHit([
             'score' => 0.234,
             'index' => 'waze',
-            'valueObject' => new ApiValues\Location(['id' => 10]),
+            'valueObject' => new Content\Location(['id' => 10]),
         ]);
     }
 }
