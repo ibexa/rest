@@ -131,10 +131,15 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
                 return $responseMock;
             });
-        $responseMock->expects($this->exactly(2))->method('setVary')
-            ->withConsecutive(['Accept'], ['X-User-Hash', false])
-            ->willReturnCallback(static function (string $header) use (&$calls, $responseMock) {
-                $calls[] = 'setVary ' . $header;
+        $setVaryMatcher = $this->exactly(2);
+        $responseMock->expects($setVaryMatcher)->method('setVary')
+            ->willReturnCallback(static function (...$parameters) use ($setVaryMatcher, &$calls, $responseMock) {
+                if ($setVaryMatcher->getInvocationCount() === 1) {
+                    self::assertSame(['Accept', true], $parameters);
+                } else {
+                    self::assertSame(['X-User-Hash', false], $parameters);
+                }
+                $calls[] = 'setVary ' . $parameters[0];
 
                 return $responseMock;
             });

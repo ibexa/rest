@@ -108,16 +108,25 @@ class RelationListProcessorTest extends TestCase
         $routerMock = $this->createMock(RouterInterface::class);
         $processor->setRouter($routerMock);
 
+        $matcher = $this->exactly(2);
         $routerMock
-            ->expects($this->exactly(2))
+            ->expects($matcher)
             ->method('generate')
-            ->withConsecutive(
-                ['ibexa.rest.load_content', ['contentId' => 42]],
-                ['ibexa.rest.load_content', ['contentId' => 300]]
-            )->willReturnOnConsecutiveCalls(
-                '/api/ibexa/v2/content/objects/42',
-                '/api/ibexa/v2/content/objects/300'
-            );
+            ->willReturnCallback(static function (
+                string $route,
+                array $parameters
+            ) use ($matcher): string {
+                self::assertSame('ibexa.rest.load_content', $route);
+                if ($matcher->getInvocationCount() === 1) {
+                    self::assertSame(['contentId' => 42], $parameters);
+
+                    return '/api/ibexa/v2/content/objects/42';
+                }
+
+                self::assertSame(['contentId' => 300], $parameters);
+
+                return '/api/ibexa/v2/content/objects/300';
+            });
 
         $hash = $processor->postProcessValueHash(['destinationContentIds' => [42, 300]]);
         $this->assertArrayHasKey('destinationContentHrefs', $hash);

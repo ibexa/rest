@@ -29,21 +29,30 @@ class ImageProcessorTest extends BinaryInputProcessorTest
         ];
 
         $routerMock = $this->getRouterMock();
-        $expectedArguments = [];
-        $hrefs = [];
-        foreach ($this->getVariations() as $variationIdentifier) {
+        $variations = $this->getVariations();
+        $expectedVariations = [];
+        foreach ($variations as $variationIdentifier) {
             $expectedVariations[$variationIdentifier]['href'] = "/content/binary/images/{$inputHash['imageId']}/variations/{$variationIdentifier}";
-            $expectedArguments[] = [
-                'ibexa.rest.binary_content.get_image_variation',
-                ['imageId' => $inputHash['imageId'], 'variationIdentifier' => $variationIdentifier],
-            ];
-            $hrefs[] = $expectedVariations[$variationIdentifier]['href'];
         }
+
+        $matcher = $this->exactly(count($variations));
         $routerMock
-            ->expects($this->exactly(count($expectedArguments)))
+            ->expects($matcher)
             ->method('generate')
-            ->withConsecutive(...$expectedArguments)
-            ->willReturnOnConsecutiveCalls(...$hrefs);
+            ->willReturnCallback(static function (
+                string $route,
+                array $parameters
+            ) use ($matcher, $variations, $inputHash, $expectedVariations): string {
+                $variationIdentifier = $variations[$matcher->getInvocationCount() - 1];
+
+                self::assertSame('ibexa.rest.binary_content.get_image_variation', $route);
+                self::assertSame(
+                    ['imageId' => $inputHash['imageId'], 'variationIdentifier' => $variationIdentifier],
+                    $parameters
+                );
+
+                return $expectedVariations[$variationIdentifier]['href'];
+            });
 
         $outputHash = $processor->postProcessValueHash($inputHash);
 

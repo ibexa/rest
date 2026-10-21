@@ -7711,12 +7711,6 @@ parameters:
 			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
 
 		-
-			message: '#^Variable \$expectedVariations might not be defined\.$#'
-			identifier: variable.undefined
-			count: 1
-			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\MediaProcessorTest\:\:fieldSettingsHashes\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1

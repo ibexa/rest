@@ -42,14 +42,16 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
                 $calls[] = 'setStatus';
             });
 
-        $this->getVisitorMock()->expects($this->exactly(2))
+        $setHeaderMatcher = $this->exactly(2);
+        $this->getVisitorMock()->expects($setHeaderMatcher)
             ->method('setHeader')
-            ->withConsecutive(
-                [$this->equalTo('Content-Type'), $this->equalTo('application/vnd.ibexa.api.Session+xml')],
-                [$this->equalTo('Accept-Patch'), $this->equalTo(false)]
-            )
-            ->willReturnCallback(static function (string $name) use (&$calls): void {
-                $calls[] = 'setHeader ' . $name;
+            ->willReturnCallback(static function (...$parameters) use ($setHeaderMatcher, &$calls): void {
+                if ($setHeaderMatcher->getInvocationCount() === 1) {
+                    self::assertSame(['Content-Type', 'application/vnd.ibexa.api.Session+xml'], $parameters);
+                } else {
+                    self::assertSame(['Accept-Patch', false], $parameters);
+                }
+                $calls[] = 'setHeader ' . $parameters[0];
             });
 
         $this->addRouteExpectation(
