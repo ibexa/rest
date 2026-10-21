@@ -77,7 +77,7 @@ final class LocationTest extends ValueObjectVisitorBaseTestCase
 
         $this->mockLoadLocation($location);
 
-        $this->relationListFacade->expects(self::once())
+        $this->relationListFacade->expects($this->once())
             ->method('getRelations')
             ->with($versionInfo)
             ->willReturnCallback(
@@ -138,17 +138,17 @@ final class LocationTest extends ValueObjectVisitorBaseTestCase
         switch ($mainLocationId) {
             case $location->id:
             case null:
-                $this->locationServiceMock->expects(self::never())
+                $this->locationServiceMock->expects($this->never())
                     ->method('loadLocation');
                 break;
             case self::UNAUTHORIZED_MAIN_LOCATION_ID:
-                $this->locationServiceMock->expects(self::once())
+                $this->locationServiceMock->expects($this->once())
                     ->method('loadLocation')
                     ->with($mainLocationId)
                     ->willThrowException(new UnauthorizedException('', ''));
                 break;
             default:
-                $this->locationServiceMock->expects(self::once())
+                $this->locationServiceMock->expects($this->once())
                     ->method('loadLocation')
                     ->with($mainLocationId)
                     ->willReturn(new Location(['id' => $mainLocationId]));

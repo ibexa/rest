@@ -35,7 +35,7 @@ final class RestoreTrashItemInputTest extends BaseTestCase
         $moveLocationParser = $this->getParser();
 
         $this->locationService
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('loadLocation')
             ->with(self::TESTED_LOCATION_ID)
             ->willReturn($this->getMockedLocation());

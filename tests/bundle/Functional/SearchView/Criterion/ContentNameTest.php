@@ -8,10 +8,11 @@ declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\Functional\SearchView\Criterion;
 
+use Ibexa\Rest\Server\Input\Parser\Criterion\ContentName;
 use Ibexa\Tests\Bundle\Rest\Functional\SearchView\SearchCriterionTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
-#[CoversClass(\Ibexa\Rest\Server\Input\Parser\Criterion\ContentName::class)]
+#[CoversClass(ContentName::class)]
 final class ContentNameTest extends SearchCriterionTestCase
 {
     protected function setUp(): void

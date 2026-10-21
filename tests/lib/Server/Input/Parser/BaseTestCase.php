@@ -71,7 +71,7 @@ abstract class BaseTestCase extends ParentBaseTest
             $this->uriParserMock = $this->createMock(UriParserInterface::class);
 
             $this->uriParserMock
-                ->expects(self::any())
+                ->expects($this->any())
                 ->method('getAttributeFromUri')
                 ->willReturnCallback($callback);
         }

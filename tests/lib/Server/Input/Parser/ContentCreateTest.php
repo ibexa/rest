@@ -466,7 +466,7 @@ class ContentCreateTest extends BaseTestCase
             )
             ->getMock();
 
-        $fieldTypeParserMock->expects(self::any())
+        $fieldTypeParserMock->expects($this->any())
             ->method('parseValue')
             ->with('ibexa_string', [])
             ->willReturn('foo');
@@ -478,7 +478,7 @@ class ContentCreateTest extends BaseTestCase
     {
         $locationCreateParserMock = $this->createMock(LocationCreate::class);
 
-        $locationCreateParserMock->expects(self::any())
+        $locationCreateParserMock->expects($this->any())
             ->method('parse')
             ->with([], $this->getParsingDispatcherMock())
             ->willReturn(new LocationCreateStruct());
@@ -491,7 +491,7 @@ class ContentCreateTest extends BaseTestCase
         $contentServiceMock = $this->createMock(ContentService::class);
 
         $contentType = $this->getContentType();
-        $contentServiceMock->expects(self::any())
+        $contentServiceMock->expects($this->any())
             ->method('newContentCreateStruct')
             ->with(
                 self::equalTo($contentType),
@@ -513,7 +513,7 @@ class ContentCreateTest extends BaseTestCase
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects(self::any())
+        $contentTypeServiceMock->expects($this->any())
             ->method('loadContentType')
             ->with(self::equalTo(13))
             ->willReturn($this->getContentType());

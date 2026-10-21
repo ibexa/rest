@@ -81,7 +81,7 @@ class RoleInputTest extends BaseTestCase
     {
         $roleServiceMock = $this->createMock(RoleService::class);
 
-        $roleServiceMock->expects(self::any())
+        $roleServiceMock->expects($this->any())
             ->method('newRoleCreateStruct')
             ->with(self::equalTo('Identifier Bar'))
             ->willReturn(

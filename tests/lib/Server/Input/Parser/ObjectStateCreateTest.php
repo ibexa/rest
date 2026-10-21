@@ -223,7 +223,7 @@ class ObjectStateCreateTest extends BaseTestCase
     {
         $objectStateServiceMock = $this->createMock(ObjectStateService::class);
 
-        $objectStateServiceMock->expects(self::any())
+        $objectStateServiceMock->expects($this->any())
             ->method('newObjectStateCreateStruct')
             ->with(self::equalTo('test-state'))
             ->willReturn(

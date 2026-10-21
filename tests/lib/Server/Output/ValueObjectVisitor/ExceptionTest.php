@@ -195,7 +195,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTestCase
 
         $this
             ->getVisitorMock()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('visitValueObject')
             ->with($previousException);
 

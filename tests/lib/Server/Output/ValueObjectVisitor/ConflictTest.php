@@ -22,7 +22,7 @@ class ConflictTest extends ValueObjectVisitorBaseTestCase
 
         $noContent = new Values\Conflict();
 
-        $this->getVisitorMock()->expects(self::once())
+        $this->getVisitorMock()->expects($this->once())
             ->method('setStatus')
             ->with(self::equalTo(409));
 

@@ -32,7 +32,7 @@ class DispatcherTest extends TestCase
         $message = new Message();
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
-        $parsingDispatcher->expects(self::never())->method('parse');
+        $parsingDispatcher->expects($this->never())->method('parse');
         $dispatcher = new Dispatcher($parsingDispatcher);
 
         $dispatcher->parse($message);
@@ -49,7 +49,7 @@ class DispatcherTest extends TestCase
         );
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
-        $parsingDispatcher->expects(self::never())->method('parse');
+        $parsingDispatcher->expects($this->never())->method('parse');
         $dispatcher = new Dispatcher($parsingDispatcher);
 
         $dispatcher->parse($message);
@@ -66,7 +66,7 @@ class DispatcherTest extends TestCase
         );
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
-        $parsingDispatcher->expects(self::never())->method('parse');
+        $parsingDispatcher->expects($this->never())->method('parse');
         $dispatcher = new Dispatcher($parsingDispatcher);
 
         $dispatcher->parse($message);
@@ -83,14 +83,14 @@ class DispatcherTest extends TestCase
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('parse')
             ->with([42], 'text/html')
             ->willReturn(23);
 
         $handler = $this->createMock(Handler::class);
         $handler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('convert')
             ->with('Hello world!')
             ->willReturn([[42]]);
@@ -119,14 +119,14 @@ class DispatcherTest extends TestCase
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('parse')
             ->with(['someKey' => 'someValue', '__url' => '/foo/bar'], 'text/html')
             ->willReturn(23);
 
         $handler = $this->createMock(Handler::class);
         $handler
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('convert')
             ->with('Hello world!')
             ->willReturn(
@@ -157,13 +157,13 @@ class DispatcherTest extends TestCase
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects(self::any())
+            ->expects($this->any())
             ->method('parse')
             ->with(self::anything(), 'text/html; version=1.1');
 
         $handler = $this->createMock(Handler::class);
         $handler
-            ->expects(self::any())
+            ->expects($this->any())
             ->method('convert')
             ->willReturn([]);
 

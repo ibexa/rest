@@ -25,11 +25,11 @@ class OptionsTest extends ValueObjectVisitorBaseTestCase
 
         $noContent = new Values\Options(['GET', 'POST']);
 
-        $this->getVisitorMock()->expects(self::once())
+        $this->getVisitorMock()->expects($this->once())
             ->method('setStatus')
             ->with(self::equalTo(200));
 
-        $this->getVisitorMock()->expects(self::exactly(2))
+        $this->getVisitorMock()->expects($this->exactly(2))
             ->method('setHeader')
             ->willReturnMap([
                 ['Allow', 'GET,POST'],

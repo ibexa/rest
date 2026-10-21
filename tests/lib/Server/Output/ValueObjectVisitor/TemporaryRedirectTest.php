@@ -22,10 +22,10 @@ class TemporaryRedirectTest extends ValueObjectVisitorBaseTestCase
 
         $redirect = new Values\TemporaryRedirect('/some/redirect/uri');
 
-        $this->getVisitorMock()->expects(self::once())
+        $this->getVisitorMock()->expects($this->once())
             ->method('setStatus')
             ->with(self::equalTo(307));
-        $this->getVisitorMock()->expects(self::once())
+        $this->getVisitorMock()->expects($this->once())
             ->method('setHeader')
             ->with(self::equalTo('Location'), self::equalTo('/some/redirect/uri'));
 

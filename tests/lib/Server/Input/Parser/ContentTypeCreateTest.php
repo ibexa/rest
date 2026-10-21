@@ -219,7 +219,7 @@ class ContentTypeCreateTest extends BaseTestCase
     {
         $fieldDefinitionCreateParserMock = $this->createMock(FieldDefinitionCreate::class);
 
-        $fieldDefinitionCreateParserMock->expects(self::any())
+        $fieldDefinitionCreateParserMock->expects($this->any())
             ->method('parse')
             ->with([], $this->getParsingDispatcherMock())
             ->willReturn(new FieldDefinitionCreateStruct());
@@ -231,7 +231,7 @@ class ContentTypeCreateTest extends BaseTestCase
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects(self::any())
+        $contentTypeServiceMock->expects($this->any())
             ->method('newContentTypeCreateStruct')
             ->with(self::equalTo('new_content_type'))
             ->willReturn(

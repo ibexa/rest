@@ -29,7 +29,7 @@ class RestContentTypeTest extends ValueObjectVisitorBaseTestCase
 
         $restContentType = $this->getBasicContentType();
 
-        $this->getVisitorMock()->expects(self::once())
+        $this->getVisitorMock()->expects($this->once())
             ->method('visitValueObject')
             ->with(self::isInstanceOf(FieldDefinitionList::class));
 

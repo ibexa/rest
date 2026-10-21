@@ -25,7 +25,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-#[CoversClass(\Ibexa\Bundle\Rest\ApiPlatform\OpenApiFactory::class)]
+#[CoversClass(OpenApiFactory::class)]
 final class OpenApiFactoryTest extends TestCase
 {
     private const string EXAMPLE_REQUEST_FILE = __DIR__ . '/Fixtures/examples/test-request.json.example';
@@ -284,7 +284,7 @@ final class OpenApiFactoryTest extends TestCase
         );
 
         $this->decoratedFactory
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('__invoke')
             ->willReturn($openApi);
 
@@ -333,7 +333,7 @@ final class OpenApiFactoryTest extends TestCase
         );
 
         $this->decoratedFactory
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('__invoke')
             ->willReturn($openApi);
 

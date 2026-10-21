@@ -74,7 +74,7 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTestCase
             "/content/objects/{$trashItem->trashItem->contentInfo->id}"
         );
 
-        $this->getVisitorMock()->expects(self::once())
+        $this->getVisitorMock()->expects($this->once())
             ->method('visitValueObject')
             ->with(self::isInstanceOf(RestContent::class));
 

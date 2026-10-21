@@ -25,7 +25,7 @@ class ViewInputOneDotOneTest extends BaseTestCase
         $parser = $this->getParser();
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('parse')
             ->with($inputArray['ContentQuery'], 'application/vnd.ibexa.api.internal.ContentQuery')
             ->willReturn(new Query());
@@ -51,7 +51,7 @@ class ViewInputOneDotOneTest extends BaseTestCase
         $parser = $this->getParser();
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('parse')
             ->with($inputArray['LocationQuery'], 'application/vnd.ibexa.api.internal.LocationQuery')
             ->willReturn(new LocationQuery());

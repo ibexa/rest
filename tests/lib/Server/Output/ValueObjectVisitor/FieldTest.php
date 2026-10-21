@@ -18,7 +18,7 @@ use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
 
-#[CoversClass(\Ibexa\Rest\Server\Output\ValueObjectVisitor\Field::class)]
+#[CoversClass(Field::class)]
 final class FieldTest extends ValueObjectVisitorBaseTestCase
 {
     private FieldTypeService & MockObject $fieldTypeService;

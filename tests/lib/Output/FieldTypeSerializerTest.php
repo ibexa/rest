@@ -83,7 +83,7 @@ class FieldTypeSerializerTest extends TestCase
             $fieldTypeMock
         );
 
-        $fieldTypeMock->expects(self::once())
+        $fieldTypeMock->expects($this->once())
             ->method('toHash')
             ->with(self::equalTo('my-field-value'))
             ->willReturn([23, 42]);
@@ -108,7 +108,7 @@ class FieldTypeSerializerTest extends TestCase
             $fieldTypeMock
         );
 
-        $fieldTypeMock->expects(self::once())
+        $fieldTypeMock->expects($this->once())
             ->method('fieldSettingsToHash')
             ->with(self::equalTo('my-field-settings'))
             ->willReturn(['foo' => 'bar']);
@@ -130,12 +130,12 @@ class FieldTypeSerializerTest extends TestCase
 
         $processorMock = $this->getFieldTypeProcessorMock();
         $this->getFieldTypeProcessorRegistryMock()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('hasProcessor')
             ->with('myFancyFieldType')
             ->willReturn(true);
         $this->getFieldTypeProcessorRegistryMock()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getProcessor')
             ->with('myFancyFieldType')
             ->willReturnCallback(
@@ -143,7 +143,7 @@ class FieldTypeSerializerTest extends TestCase
                     return $processorMock;
                 }
             );
-        $processorMock->expects(self::once())
+        $processorMock->expects($this->once())
             ->method('postProcessFieldSettingsHash')
             ->with(self::equalTo(['foo' => 'bar']))
             ->willReturn(['post-processed']);
@@ -153,7 +153,7 @@ class FieldTypeSerializerTest extends TestCase
             $fieldTypeMock
         );
 
-        $fieldTypeMock->expects(self::once())
+        $fieldTypeMock->expects($this->once())
             ->method('fieldSettingsToHash')
             ->with(self::equalTo('my-field-settings'))
             ->willReturn(['foo' => 'bar']);
@@ -178,7 +178,7 @@ class FieldTypeSerializerTest extends TestCase
             $fieldTypeMock
         );
 
-        $fieldTypeMock->expects(self::once())
+        $fieldTypeMock->expects($this->once())
             ->method('validatorConfigurationToHash')
             ->with(self::equalTo('validator-config'))
             ->willReturn(['bar' => 'foo']);
@@ -200,12 +200,12 @@ class FieldTypeSerializerTest extends TestCase
 
         $processorMock = $this->getFieldTypeProcessorMock();
         $this->getFieldTypeProcessorRegistryMock()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('hasProcessor')
             ->with('myFancyFieldType')
             ->willReturn(true);
         $this->getFieldTypeProcessorRegistryMock()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('getProcessor')
             ->with('myFancyFieldType')
             ->willReturnCallback(
@@ -213,7 +213,7 @@ class FieldTypeSerializerTest extends TestCase
                     return $processorMock;
                 }
             );
-        $processorMock->expects(self::once())
+        $processorMock->expects($this->once())
             ->method('postProcessValidatorConfigurationHash')
             ->with(self::equalTo(['bar' => 'foo']))
             ->willReturn(['post-processed']);
@@ -224,7 +224,7 @@ class FieldTypeSerializerTest extends TestCase
             $fieldTypeMock
         );
 
-        $fieldTypeMock->expects(self::once())
+        $fieldTypeMock->expects($this->once())
             ->method('validatorConfigurationToHash')
             ->with(self::equalTo('validator-config'))
             ->willReturn(['bar' => 'foo']);

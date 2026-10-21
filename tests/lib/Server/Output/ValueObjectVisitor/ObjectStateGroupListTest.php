@@ -84,7 +84,7 @@ class ObjectStateGroupListTest extends ValueObjectVisitorBaseTestCase
             ]
         );
 
-        $this->getVisitorMock()->expects(self::exactly(2))
+        $this->getVisitorMock()->expects($this->exactly(2))
             ->method('visitValueObject')
             ->with(self::isInstanceOf(\Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup::class));
 

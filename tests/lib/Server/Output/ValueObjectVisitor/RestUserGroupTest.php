@@ -25,7 +25,7 @@ class RestUserGroupTest extends BaseContentValueObjectVisitorTestCase
 
         $restUserGroup = $this->getBasicRestUserGroup();
 
-        $this->getVisitorMock()->expects(self::once())
+        $this->getVisitorMock()->expects($this->once())
             ->method('visitValueObject');
 
         $userGroupPath = trim($restUserGroup->mainLocation->getPathString(), '/');

@@ -149,15 +149,15 @@ final class FieldDefinitionUpdateTest extends BaseTestCase
     {
         $fieldTypeParserMock = $this->createMock(FieldTypeParser::class);
 
-        $fieldTypeParserMock->expects(self::any())
+        $fieldTypeParserMock->expects($this->any())
             ->method('parseValue')
             ->willReturn('New title');
 
-        $fieldTypeParserMock->expects(self::any())
+        $fieldTypeParserMock->expects($this->any())
             ->method('parseFieldSettings')
             ->willReturn(['textRows' => 24]);
 
-        $fieldTypeParserMock->expects(self::any())
+        $fieldTypeParserMock->expects($this->any())
             ->method('parseValidatorConfiguration')
             ->willReturn(
                 [
@@ -175,13 +175,13 @@ final class FieldDefinitionUpdateTest extends BaseTestCase
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects(self::any())
+        $contentTypeServiceMock->expects($this->any())
             ->method('newFieldDefinitionUpdateStruct')
             ->willReturn(
                 new FieldDefinitionUpdateStruct()
             );
 
-        $contentTypeServiceMock->expects(self::any())
+        $contentTypeServiceMock->expects($this->any())
             ->method('loadContentTypeDraft')
             ->with(self::equalTo(42))
             ->willReturn(

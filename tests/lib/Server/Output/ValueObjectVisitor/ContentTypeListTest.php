@@ -105,7 +105,7 @@ class ContentTypeListTest extends ValueObjectVisitorBaseTestCase
             '/content/typegroups/2/types'
         );
 
-        $this->getVisitorMock()->expects(self::exactly(2))
+        $this->getVisitorMock()->expects($this->exactly(2))
             ->method('visitValueObject')
             ->with(self::isInstanceOf(RestContentType::class));
 

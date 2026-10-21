@@ -221,7 +221,7 @@ class PolicyCreateTest extends BaseTestCase
     {
         $roleServiceMock = $this->createMock(RoleService::class);
 
-        $roleServiceMock->expects(self::any())
+        $roleServiceMock->expects($this->any())
             ->method('newPolicyCreateStruct')
             ->with(
                 self::equalTo('content'),

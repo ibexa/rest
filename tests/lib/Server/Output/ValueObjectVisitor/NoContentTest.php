@@ -22,7 +22,7 @@ class NoContentTest extends ValueObjectVisitorBaseTestCase
 
         $noContent = new Values\NoContent();
 
-        $this->getVisitorMock()->expects(self::once())
+        $this->getVisitorMock()->expects($this->once())
             ->method('setStatus')
             ->with(self::equalTo(204));
 

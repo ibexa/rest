@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
-#[CoversClass(\Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper::class)]
+#[CoversClass(RouteCollectionMapper::class)]
 class RouteCollectionMapperTest extends TestCase
 {
     /** @var RouteCollectionMapper */

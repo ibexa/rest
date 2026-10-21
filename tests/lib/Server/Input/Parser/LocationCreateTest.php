@@ -155,7 +155,7 @@ class LocationCreateTest extends BaseTestCase
     {
         $locationServiceMock = $this->createMock(LocationService::class);
 
-        $locationServiceMock->expects(self::any())
+        $locationServiceMock->expects($this->any())
             ->method('newLocationCreateStruct')
             ->with(self::equalTo(42))
             ->willReturn(

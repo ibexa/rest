@@ -23,7 +23,7 @@ class ViewInputTest extends BaseTestCase
         $parser = $this->getParser();
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('parse')
             ->with($inputArray['Query'], 'application/vnd.ibexa.api.internal.ContentQuery')
             ->willReturn(new Query());

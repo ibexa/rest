@@ -41,7 +41,7 @@ class RestContentTest extends BaseContentValueObjectVisitorTestCase
 
         $restContent = $this->getBasicRestContent();
 
-        $this->getVisitorMock()->expects(self::never())
+        $this->getVisitorMock()->expects($this->never())
             ->method('visitValueObject');
 
         $this->addRouteExpectation(
@@ -216,7 +216,7 @@ class RestContentTest extends BaseContentValueObjectVisitorTestCase
             ContentType::class
         );
 
-        $this->getVisitorMock()->expects(self::once())
+        $this->getVisitorMock()->expects($this->once())
             ->method('visitValueObject')
             ->with(self::isInstanceOf(Version::class));
 

@@ -48,7 +48,7 @@ class ParserToolsTest extends TestCase
         $parserTools = $this->getParserTools();
 
         $dispatcherMock = $this->createMock(ParsingDispatcher::class);
-        $dispatcherMock->expects(self::once())
+        $dispatcherMock->expects($this->once())
             ->method('parse')
             ->with(
                 self::isArray(),
@@ -72,7 +72,7 @@ class ParserToolsTest extends TestCase
         $parserTools = $this->getParserTools();
 
         $dispatcherMock = $this->createMock(ParsingDispatcher::class);
-        $dispatcherMock->expects(self::never())
+        $dispatcherMock->expects($this->never())
             ->method('parse');
 
         $parsingInput = [

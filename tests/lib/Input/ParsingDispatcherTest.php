@@ -33,7 +33,7 @@ class ParsingDispatcherTest extends TestCase
         $dispatcher = new ParsingDispatcher(self::createStub(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('parse')
             ->with([42], $dispatcher)
             ->willReturn(23);
@@ -53,7 +53,7 @@ class ParsingDispatcherTest extends TestCase
         $dispatcher = new ParsingDispatcher(self::createStub(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('parse')
             ->with([42], $dispatcher)
             ->willReturn(23);
@@ -76,8 +76,8 @@ class ParsingDispatcherTest extends TestCase
             ]
         );
 
-        $parserVersionOne->expects(self::never())->method('parse');
-        $parserVersionTwo->expects(self::once())->method('parse');
+        $parserVersionOne->expects($this->never())->method('parse');
+        $parserVersionTwo->expects($this->once())->method('parse');
 
         $dispatcher->parse([42], 'text/html; version=2');
     }
@@ -88,7 +88,7 @@ class ParsingDispatcherTest extends TestCase
         $dispatcher = new ParsingDispatcher(self::createStub(EventDispatcherInterface::class), ['text/html' => $parser]);
 
         $parser
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('parse')
             ->with([42], $dispatcher)
             ->willReturn(23);

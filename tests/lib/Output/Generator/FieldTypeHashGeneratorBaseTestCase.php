@@ -192,7 +192,7 @@ abstract class FieldTypeHashGeneratorBaseTestCase extends TestCase
     {
         $object = (object)[];
         $this->getNormalizer()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('normalize')
             ->with(self::identicalTo($object))
             ->willReturn([
@@ -216,7 +216,7 @@ abstract class FieldTypeHashGeneratorBaseTestCase extends TestCase
     {
         $object = new ArrayObject();
         $this->getNormalizer()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('normalize')
             ->with(self::identicalTo($object))
             ->willReturnArgument(0);
@@ -230,13 +230,13 @@ abstract class FieldTypeHashGeneratorBaseTestCase extends TestCase
     {
         $object = (object)[];
         $this->getNormalizer()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('normalize')
             ->with(self::identicalTo($object))
             ->willThrowException(new NotNormalizableValueException('foo'));
 
         $this->getLogger()
-            ->expects(self::once())
+            ->expects($this->once())
             ->method('error')
             ->with(self::identicalTo(
                 'Unable to normalize value for type "stdClass". foo. Ensure that a normalizer is registered '

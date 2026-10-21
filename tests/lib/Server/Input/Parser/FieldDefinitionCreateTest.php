@@ -169,15 +169,15 @@ class FieldDefinitionCreateTest extends BaseTestCase
     {
         $fieldTypeParserMock = $this->createMock(FieldTypeParser::class);
 
-        $fieldTypeParserMock->expects(self::any())
+        $fieldTypeParserMock->expects($this->any())
             ->method('parseValue')
             ->willReturn('New title');
 
-        $fieldTypeParserMock->expects(self::any())
+        $fieldTypeParserMock->expects($this->any())
             ->method('parseFieldSettings')
             ->willReturn(['textRows' => 24]);
 
-        $fieldTypeParserMock->expects(self::any())
+        $fieldTypeParserMock->expects($this->any())
             ->method('parseValidatorConfiguration')
             ->willReturn(
                 [
@@ -195,7 +195,7 @@ class FieldDefinitionCreateTest extends BaseTestCase
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects(self::any())
+        $contentTypeServiceMock->expects($this->any())
             ->method('newFieldDefinitionCreateStruct')
             ->with(self::equalTo('title'), self::equalTo('ibexa_string'))
             ->willReturn(

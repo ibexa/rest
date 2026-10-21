@@ -100,7 +100,7 @@ class ObjectStateListTest extends ValueObjectVisitorBaseTestCase
             42
         );
 
-        $this->getVisitorMock()->expects(self::exactly(2))
+        $this->getVisitorMock()->expects($this->exactly(2))
             ->method('visitValueObject')
             ->with(self::isInstanceOf(RestObjectState::class));
 

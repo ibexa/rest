@@ -24,10 +24,10 @@ class ResourceCreatedTest extends ValueObjectVisitorBaseTestCase
             '/some/redirect/uri'
         );
 
-        $this->getVisitorMock()->expects(self::once())
+        $this->getVisitorMock()->expects($this->once())
             ->method('setStatus')
             ->with(self::equalTo(201));
-        $this->getVisitorMock()->expects(self::once())
+        $this->getVisitorMock()->expects($this->once())
             ->method('setHeader')
             ->with(self::equalTo('Location'), self::equalTo('/some/redirect/uri'));
 

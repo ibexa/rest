@@ -114,7 +114,7 @@ class VersionListTest extends ValueObjectVisitorBaseTestCase
             '/some/path'
         );
 
-        $this->getVisitorMock()->expects(self::exactly(2))
+        $this->getVisitorMock()->expects($this->exactly(2))
             ->method('visitValueObject')
             ->with(self::isInstanceOf(\Ibexa\Contracts\Core\Repository\Values\Content\VersionInfo::class));
 

@@ -33,7 +33,7 @@ class DeletedUserSessionTest extends ValueObjectVisitorBaseTestCase
         $deletedSessionValue = new Values\DeletedUserSession($generatedResponse);
 
         $outputVisitor = $this->getVisitorMock();
-        $outputVisitor->expects(self::once())
+        $outputVisitor->expects($this->once())
             ->method('setStatus')
             ->with(self::equalTo(204));
 

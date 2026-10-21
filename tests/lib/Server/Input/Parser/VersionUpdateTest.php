@@ -132,7 +132,7 @@ class VersionUpdateTest extends BaseTestCase
             )
             ->getMock();
 
-        $fieldTypeParserMock->expects(self::any())
+        $fieldTypeParserMock->expects($this->any())
             ->method('parseFieldValue')
             ->with(42, 'subject', [])
             ->willReturn('foo');
@@ -144,7 +144,7 @@ class VersionUpdateTest extends BaseTestCase
     {
         $contentServiceMock = $this->createMock(ContentService::class);
 
-        $contentServiceMock->expects(self::any())
+        $contentServiceMock->expects($this->any())
             ->method('newContentUpdateStruct')
             ->willReturn(
                 new ContentUpdateStruct()

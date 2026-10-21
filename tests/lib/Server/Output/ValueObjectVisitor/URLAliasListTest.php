@@ -80,7 +80,7 @@ class URLAliasListTest extends ValueObjectVisitorBaseTestCase
             '/content/urlaliases'
         );
 
-        $this->getVisitorMock()->expects(self::exactly(2))
+        $this->getVisitorMock()->expects($this->exactly(2))
             ->method('visitValueObject')
             ->with(self::isInstanceOf(Content\URLAlias::class));
 

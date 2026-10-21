@@ -80,7 +80,7 @@ class RestLocationRootNodeTest extends RestLocationTest
             "/content/objects/{$location->location->contentId}"
         );
 
-        $this->getVisitorMock()->expects(self::once())
+        $this->getVisitorMock()->expects($this->once())
             ->method('visitValueObject')
             ->with(self::isInstanceOf(RestContent::class));
 

@@ -291,7 +291,7 @@ class UserGroupCreateTest extends BaseTestCase
             )
             ->getMock();
 
-        $fieldTypeParserMock->expects(self::any())
+        $fieldTypeParserMock->expects($this->any())
             ->method('parseValue')
             ->with('ibexa_string', [])
             ->willReturn('foo');
@@ -304,7 +304,7 @@ class UserGroupCreateTest extends BaseTestCase
         $userServiceMock = $this->createMock(UserService::class);
 
         $contentType = $this->getContentType();
-        $userServiceMock->expects(self::any())
+        $userServiceMock->expects($this->any())
             ->method('newUserGroupCreateStruct')
             ->with(
                 self::equalTo('eng-US'),
@@ -326,7 +326,7 @@ class UserGroupCreateTest extends BaseTestCase
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects(self::any())
+        $contentTypeServiceMock->expects($this->any())
             ->method('loadContentType')
             ->with(self::equalTo(3))
             ->willReturn($this->getContentType());

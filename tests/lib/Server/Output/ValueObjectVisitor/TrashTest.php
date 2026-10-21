@@ -101,7 +101,7 @@ class TrashTest extends ValueObjectVisitorBaseTestCase
             '/content/trash'
         );
 
-        $this->getVisitorMock()->expects(self::exactly(2))
+        $this->getVisitorMock()->expects($this->exactly(2))
             ->method('visitValueObject')
             ->with(self::isInstanceOf(RestTrashItem::class));
 

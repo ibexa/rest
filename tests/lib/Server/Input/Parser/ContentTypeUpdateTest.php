@@ -151,7 +151,7 @@ class ContentTypeUpdateTest extends BaseTestCase
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects(self::any())
+        $contentTypeServiceMock->expects($this->any())
             ->method('newContentTypeUpdateStruct')
             ->willReturn(new ContentTypeUpdateStruct());
 

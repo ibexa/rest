@@ -72,8 +72,10 @@ final class OpenApiDocumentTest extends IbexaKernelTestCase
         self::assertSame([], $unresolved, 'Unresolved references in the OpenAPI document.');
     }
 
-    private function isRegisteredByProductCatalog(string $location, string $schemaName): bool
-    {
+    private function isRegisteredByProductCatalog(
+        string $location,
+        string $schemaName
+    ): bool {
         foreach (self::SCHEMAS_REGISTERED_BY_PRODUCT_CATALOG as $component => $schemaNames) {
             if (
                 str_starts_with($location, self::COMPONENT_SCHEMA_LOCATION_PREFIX . $component . '/')
@@ -109,8 +111,10 @@ final class OpenApiDocumentTest extends IbexaKernelTestCase
      *
      * @return iterable<string, string>
      */
-    private function collectReferences(array $node, string $path = ''): iterable
-    {
+    private function collectReferences(
+        array $node,
+        string $path = ''
+    ): iterable {
         foreach ($node as $key => $value) {
             $location = $path . '/' . $key;
             if ($key === '$ref' && is_string($value)) {

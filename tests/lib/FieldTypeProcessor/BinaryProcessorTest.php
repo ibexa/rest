@@ -10,7 +10,7 @@ namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 use Ibexa\Rest\FieldTypeProcessor\BinaryProcessor;
 use PHPUnit\Framework\Attributes\CoversMethod;
 
-#[CoversMethod(\Ibexa\Rest\FieldTypeProcessor\BinaryProcessor::class, 'postProcessValueHash')]
+#[CoversMethod(BinaryProcessor::class, 'postProcessValueHash')]
 class BinaryProcessorTest extends BinaryInputProcessorTestCase
 {
     public const TEMPLATE_URL = 'http://ibexa.co/subdir/var/rest_test/storage/original/{path}';

@@ -123,7 +123,7 @@ class LocationUpdateTest extends BaseTestCase
     {
         $locationServiceMock = $this->createMock(LocationService::class);
 
-        $locationServiceMock->expects(self::any())
+        $locationServiceMock->expects($this->any())
             ->method('newLocationUpdateStruct')
             ->willReturn(
                 new LocationUpdateStruct()

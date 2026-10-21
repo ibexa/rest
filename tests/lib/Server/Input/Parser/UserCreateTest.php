@@ -414,7 +414,7 @@ class UserCreateTest extends BaseTestCase
             )
             ->getMock();
 
-        $fieldTypeParserMock->expects(self::any())
+        $fieldTypeParserMock->expects($this->any())
             ->method('parseValue')
             ->with('ibexa_string', [])
             ->willReturn('foo');
@@ -427,7 +427,7 @@ class UserCreateTest extends BaseTestCase
         $userServiceMock = $this->createMock(UserService::class);
 
         $contentType = $this->getContentType();
-        $userServiceMock->expects(self::any())
+        $userServiceMock->expects($this->any())
             ->method('newUserCreateStruct')
             ->with(
                 self::equalTo('login'),
@@ -452,7 +452,7 @@ class UserCreateTest extends BaseTestCase
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects(self::any())
+        $contentTypeServiceMock->expects($this->any())
             ->method('loadContentType')
             ->with(self::equalTo(4))
             ->willReturn($this->getContentType());

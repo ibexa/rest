@@ -25,7 +25,7 @@ class RestUserTest extends BaseContentValueObjectVisitorTestCase
 
         $restUser = $this->getBasicRestUser();
 
-        $this->getVisitorMock()->expects(self::once())
+        $this->getVisitorMock()->expects($this->once())
             ->method('visitValueObject');
 
         $this->addRouteExpectation(

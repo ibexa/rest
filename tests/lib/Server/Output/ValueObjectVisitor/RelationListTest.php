@@ -91,7 +91,7 @@ class RelationListTest extends ValueObjectVisitorBaseTestCase
             1
         );
 
-        $this->getVisitorMock()->expects(self::exactly(2))
+        $this->getVisitorMock()->expects($this->exactly(2))
             ->method('visitValueObject')
             ->with(self::isInstanceOf(RestRelation::class));
 

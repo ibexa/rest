@@ -81,7 +81,7 @@ class RoleListTest extends ValueObjectVisitorBaseTestCase
             '/user/roles'
         );
 
-        $this->getVisitorMock()->expects(self::exactly(2))
+        $this->getVisitorMock()->expects($this->exactly(2))
             ->method('visitValueObject')
             ->with(self::isInstanceOf(Role::class));
 

@@ -79,7 +79,7 @@ class ContentTypeGroupInputTest extends BaseTestCase
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects(self::any())
+        $contentTypeServiceMock->expects($this->any())
             ->method('newContentTypeGroupCreateStruct')
             ->with(self::equalTo('Identifier Bar'))
             ->willReturn(

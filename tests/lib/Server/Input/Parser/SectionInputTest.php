@@ -67,7 +67,7 @@ class SectionInputTest extends BaseTestCase
     {
         $sectionServiceMock = $this->createMock(SectionService::class);
 
-        $sectionServiceMock->expects(self::any())
+        $sectionServiceMock->expects($this->any())
             ->method('newSectionCreateStruct')
             ->willReturn(
                 new SectionCreateStruct()
