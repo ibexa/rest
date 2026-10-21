@@ -10,7 +10,7 @@ namespace Ibexa\Tests\Rest\Security\EventListener\JWT;
 
 use Ibexa\Rest\Security\EventListener\JWT\JsonLoginHeaderReplacingSubscriber;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -75,15 +75,13 @@ final class JsonLoginHeaderReplacingSubscriberTest extends TestCase
 
     /**
      * @param array<string, string> $headers
-     *
-     * @return RequestEvent&MockObject
      */
-    private function getRequestEventMock(array $headers): RequestEvent
+    private function getRequestEventMock(array $headers): RequestEvent & Stub
     {
         $request = new Request();
         $request->headers->replace($headers);
 
-        $requestEvent = $this->createMock(RequestEvent::class);
+        $requestEvent = self::createStub(RequestEvent::class);
         $requestEvent
             ->method('getRequest')
             ->willReturn($request);

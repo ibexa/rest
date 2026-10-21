@@ -25,7 +25,7 @@ class DataKeyValueObjectClassTest extends BaseTestCase
         ];
 
         $dataKeyValueObjectClass = $this->getParser();
-        $result = $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertEquals(
             new DatePublished(Query::SORT_ASC),
@@ -46,7 +46,7 @@ class DataKeyValueObjectClassTest extends BaseTestCase
         ];
 
         $dataKeyValueObjectClass = $this->getParser();
-        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
+        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     /**
@@ -61,7 +61,7 @@ class DataKeyValueObjectClassTest extends BaseTestCase
         ];
 
         $dataKeyValueObjectClass = $this->getParser();
-        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
+        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     /**
@@ -79,7 +79,7 @@ class DataKeyValueObjectClassTest extends BaseTestCase
             'DatePublished',
             'eC\Pubish\APl\Repudiatory\BadValues\Discontent\Queezy\SantaClause\ThisClassIsExistentiallyChallenged'
         );
-        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
+        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     /**

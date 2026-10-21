@@ -15,7 +15,7 @@ use Ibexa\Rest\Server\Exceptions\BadResponseException;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -121,10 +121,7 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
         );
     }
 
-    /**
-     * @return RequestStack&MockObject
-     */
-    private function getRequestStackMock(bool $isRestRequest = true): RequestStack
+    private function getRequestStackMock(bool $isRestRequest = true): RequestStack & Stub
     {
         $request = new Request(
             [],
@@ -132,7 +129,7 @@ final class AuthenticationSuccessSubscriberTest extends TestCase
             $isRestRequest === true ? ['is_rest_request' => true] : []
         );
 
-        $requestStackMock = $this->createMock(RequestStack::class);
+        $requestStackMock = self::createStub(RequestStack::class);
         $requestStackMock
             ->method('getCurrentRequest')
             ->willReturn($request);

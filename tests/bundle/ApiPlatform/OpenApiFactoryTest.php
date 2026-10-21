@@ -22,6 +22,7 @@ use Ibexa\Bundle\Rest\ApiPlatform\OpenApiFactory;
 use Ibexa\Bundle\Rest\ApiPlatform\SchemasCollectionFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -47,8 +48,8 @@ final class OpenApiFactoryTest extends TestCase
     {
         $this->decoratedFactory = $this->getDecoratedFactoryMock();
         $schemasCollectionFactory = new SchemasCollectionFactory();
-        $this->kernel = $this->getKernelMock();
-        $editionBadgeFactory = $this->getEditionBadgeFactoryMock();
+        $this->kernel = $this->getKernelStub();
+        $editionBadgeFactory = $this->getEditionBadgeFactoryStub();
 
         $this->factory = new OpenApiFactory(
             $this->decoratedFactory,
@@ -174,7 +175,7 @@ final class OpenApiFactoryTest extends TestCase
 
         try {
             // Update kernel mock to include the invalid file
-            $kernel = $this->getKernelMockWithCustomResourceMap([
+            $kernel = $this->getKernelStubWithCustomResourceMap([
                 '@TestBundle/examples/invalid.json' => $invalidJsonFile,
             ]);
 
@@ -182,7 +183,7 @@ final class OpenApiFactoryTest extends TestCase
                 $this->decoratedFactory,
                 new SchemasCollectionFactory(),
                 $kernel,
-                $this->getEditionBadgeFactoryMock(),
+                $this->getEditionBadgeFactoryStub(),
                 '/api/ibexa/v2'
             );
 
@@ -363,9 +364,9 @@ final class OpenApiFactoryTest extends TestCase
         return $this->createMock(OpenApiFactoryInterface::class);
     }
 
-    private function getKernelMock(): KernelInterface & MockObject
+    private function getKernelStub(): KernelInterface & Stub
     {
-        $kernelMock = $this->createMock(KernelInterface::class);
+        $kernelMock = self::createStub(KernelInterface::class);
 
         $kernelMock
             ->method('locateResource')
@@ -382,9 +383,9 @@ final class OpenApiFactoryTest extends TestCase
         return $kernelMock;
     }
 
-    private function getEditionBadgeFactoryMock(): EditionBadgeFactoryInterface & MockObject
+    private function getEditionBadgeFactoryStub(): EditionBadgeFactoryInterface & Stub
     {
-        $editionBadgeFactoryMock = $this->createMock(EditionBadgeFactoryInterface::class);
+        $editionBadgeFactoryMock = self::createStub(EditionBadgeFactoryInterface::class);
 
         $editionBadgeFactoryMock
             ->method('getBadgesForOperation')
@@ -396,9 +397,9 @@ final class OpenApiFactoryTest extends TestCase
     /**
      * @param array<string, string> $resourceMap
      */
-    private function getKernelMockWithCustomResourceMap(array $resourceMap): KernelInterface & MockObject
+    private function getKernelStubWithCustomResourceMap(array $resourceMap): KernelInterface & Stub
     {
-        $kernelMock = $this->createMock(KernelInterface::class);
+        $kernelMock = self::createStub(KernelInterface::class);
 
         $kernelMock
             ->method('locateResource')

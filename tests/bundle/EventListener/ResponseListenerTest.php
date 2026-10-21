@@ -12,6 +12,7 @@ use Exception;
 use Ibexa\Bundle\Rest\EventListener\ResponseListener;
 use Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use stdClass;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,8 +36,6 @@ final class ResponseListenerTest extends EventListenerTestCase
     protected Response $response;
 
     protected EventDispatcherInterface $event;
-
-    protected KernelInterface & MockObject $kernelMock;
 
     public function setUp(): void
     {
@@ -136,7 +135,7 @@ final class ResponseListenerTest extends EventListenerTestCase
     protected function getEventListener(?bool $csrfEnabled = null): EventSubscriberInterface
     {
         return new ResponseListener(
-            $this->getVisitorDispatcherMock()
+            $this->visitorDispatcherMock ?? self::createStub(AcceptHeaderVisitorDispatcher::class)
         );
     }
 
@@ -150,9 +149,9 @@ final class ResponseListenerTest extends EventListenerTestCase
         );
     }
 
-    protected function getKernelMock(): KernelInterface & MockObject
+    protected function getKernelMock(): KernelInterface & Stub
     {
-        return $this->createMock(KernelInterface::class);
+        return self::createStub(KernelInterface::class);
     }
 
     private function getExceptionEvent(): ExceptionEvent

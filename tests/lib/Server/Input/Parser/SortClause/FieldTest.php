@@ -28,7 +28,7 @@ class FieldTest extends BaseTestCase
         ];
 
         $fieldParser = $this->getParser();
-        $result = $fieldParser->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $fieldParser->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertEquals(
             new Field('content', 'field', Query::SORT_ASC),
@@ -49,7 +49,7 @@ class FieldTest extends BaseTestCase
         ];
 
         $fieldParser = $this->getParser();
-        $fieldParser->parse($inputArray, $this->getParsingDispatcherMock());
+        $fieldParser->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     /**
@@ -67,7 +67,7 @@ class FieldTest extends BaseTestCase
         ];
 
         $fieldParser = $this->getParser();
-        $fieldParser->parse($inputArray, $this->getParsingDispatcherMock());
+        $fieldParser->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     /**

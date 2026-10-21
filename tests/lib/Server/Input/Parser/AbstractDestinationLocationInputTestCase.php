@@ -12,14 +12,14 @@ use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\Server\Exceptions\ValidationFailedException;
 use Ibexa\Rest\Server\Input\Parser\AbstractDestinationLocationParser;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 abstract class AbstractDestinationLocationInputTestCase extends BaseTestCase
 {
     private const int TESTED_LOCATION_ID = 22;
 
-    protected MockObject & LocationService $locationService;
+    protected LocationService & Stub $locationService;
 
     protected ValidatorInterface $validator;
 
@@ -33,13 +33,18 @@ abstract class AbstractDestinationLocationInputTestCase extends BaseTestCase
 
         $moveLocationParser = $this->getParser();
 
+        $loadLocationCalls = 0;
         $this->locationService
-            ->expects($this->once())
             ->method('loadLocation')
-            ->with(self::TESTED_LOCATION_ID)
-            ->willReturn($this->getMockedLocation());
+            ->willReturnCallback(function (int $locationId) use (&$loadLocationCalls): Location {
+                ++$loadLocationCalls;
+                self::assertSame(self::TESTED_LOCATION_ID, $locationId);
 
-        $result = $moveLocationParser->parse($inputArray, $this->getParsingDispatcherMock());
+                return $this->getMockedLocation();
+            });
+
+        $result = $moveLocationParser->parse($inputArray, $this->getParsingDispatcherStub());
+        self::assertSame(1, $loadLocationCalls);
 
         self::assertInstanceOf(
             Location::class,
@@ -70,7 +75,7 @@ abstract class AbstractDestinationLocationInputTestCase extends BaseTestCase
 
         $sessionInput = $this->getParser();
 
-        $sessionInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $sessionInput->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function parseExceptionOnInvalidDestinationElement(string $parser): void
@@ -86,7 +91,7 @@ abstract class AbstractDestinationLocationInputTestCase extends BaseTestCase
             sprintf('Input data validation failed for %s', $parser),
         );
 
-        $sessionInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $sessionInput->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     private function getMockedLocation(): Location

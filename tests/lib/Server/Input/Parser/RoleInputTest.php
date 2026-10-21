@@ -10,7 +10,7 @@ namespace Ibexa\Tests\Rest\Server\Input\Parser;
 use Ibexa\Core\Repository\RoleService;
 use Ibexa\Core\Repository\Values\User\RoleCreateStruct;
 use Ibexa\Rest\Server\Input\Parser\RoleInput;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class RoleInputTest extends BaseTestCase
 {
@@ -40,7 +40,7 @@ class RoleInputTest extends BaseTestCase
         ];
 
         $roleInput = $this->getParser();
-        $result = $roleInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $roleInput->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             RoleCreateStruct::class,
@@ -77,16 +77,17 @@ class RoleInputTest extends BaseTestCase
         );
     }
 
-    protected function getRoleServiceMock(): RoleService & MockObject
+    protected function getRoleServiceMock(): RoleService & Stub
     {
-        $roleServiceMock = $this->createMock(RoleService::class);
+        $roleServiceMock = self::createStub(RoleService::class);
 
-        $roleServiceMock->expects($this->any())
+        $roleServiceMock
             ->method('newRoleCreateStruct')
-            ->with(self::equalTo('Identifier Bar'))
-            ->willReturn(
-                new RoleCreateStruct(['identifier' => 'Identifier Bar'])
-            );
+            ->willReturnCallback(static function (...$arguments): RoleCreateStruct {
+                self::assertEquals(['Identifier Bar'], array_slice($arguments, 0, 1));
+
+                return new RoleCreateStruct(['identifier' => 'Identifier Bar']);
+            });
 
         return $roleServiceMock;
     }

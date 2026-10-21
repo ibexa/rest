@@ -11,7 +11,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\SectionCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\SectionService;
 use Ibexa\Rest\Server\Input\Parser\SectionInput;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class SectionInputTest extends BaseTestCase
 {
@@ -23,7 +23,7 @@ class SectionInputTest extends BaseTestCase
         ];
 
         $sectionInput = $this->getParser();
-        $result = $sectionInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $sectionInput->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertEquals(
             new SectionCreateStruct($inputArray),
@@ -41,7 +41,7 @@ class SectionInputTest extends BaseTestCase
         ];
 
         $sectionInput = $this->getParser();
-        $sectionInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $sectionInput->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingName(): void
@@ -53,7 +53,7 @@ class SectionInputTest extends BaseTestCase
         ];
 
         $sectionInput = $this->getParser();
-        $sectionInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $sectionInput->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): SectionInput
@@ -63,11 +63,11 @@ class SectionInputTest extends BaseTestCase
         );
     }
 
-    protected function getSectionServiceMock(): SectionService & MockObject
+    protected function getSectionServiceMock(): SectionService & Stub
     {
-        $sectionServiceMock = $this->createMock(SectionService::class);
+        $sectionServiceMock = self::createStub(SectionService::class);
 
-        $sectionServiceMock->expects($this->any())
+        $sectionServiceMock
             ->method('newSectionCreateStruct')
             ->willReturn(
                 new SectionCreateStruct()

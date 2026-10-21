@@ -57,7 +57,7 @@ class LogicalAndTest extends BaseTestCase
 
         $criterionMock = self::createStub(Content\Query\Criterion::class);
 
-        $parserMock = $this->createMock(\Ibexa\Contracts\Rest\Input\Parser::class);
+        $parserMock = self::createStub(\Ibexa\Contracts\Rest\Input\Parser::class);
         $parserMock->method('parse')->willReturn($criterionMock);
 
         $result = $this->internalGetParser()->parse($logicalAndParsedFromXml, new ParsingDispatcher(

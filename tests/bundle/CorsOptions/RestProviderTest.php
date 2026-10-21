@@ -111,14 +111,14 @@ class RestProviderTest extends TestCase
         $mock = $this->createMock(RequestMatcherInterface::class);
 
         if ($this->matchRequestResult instanceof Exception) {
-            $mock->expects($this->any())
+            $mock->expects($this->once())
                 ->method('matchRequest')
                 ->will($this->throwException($this->matchRequestResult));
         } elseif ($this->matchRequestResult === false) {
             $mock->expects($this->never())
                 ->method('matchRequest');
         } else {
-            $mock->expects($this->any())
+            $mock->expects($this->once())
                 ->method('matchRequest')
                 ->willReturn($this->matchRequestResult);
         }

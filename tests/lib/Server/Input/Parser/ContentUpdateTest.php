@@ -24,7 +24,7 @@ class ContentUpdateTest extends BaseTestCase
         $contentUpdateParser = $this->getParser();
         $result = $contentUpdateParser->parse(
             $inputArray,
-            $this->getParsingDispatcherMock()
+            $this->getParsingDispatcherStub()
         );
 
         self::assertInstanceOf(
@@ -62,7 +62,7 @@ class ContentUpdateTest extends BaseTestCase
         try {
             $contentUpdateParser->parse(
                 $inputArray,
-                $this->getParsingDispatcherMock()
+                $this->getParsingDispatcherStub()
             );
         } catch (Parser $e) {
             if ($e->getMessage() != $exceptionMessage) {
@@ -101,7 +101,7 @@ class ContentUpdateTest extends BaseTestCase
         try {
             $contentUpdateParser->parse(
                 $inputArray,
-                $this->getParsingDispatcherMock()
+                $this->getParsingDispatcherStub()
             );
         } catch (Parser $e) {
             if ($e->getMessage() != $exceptionMessage) {

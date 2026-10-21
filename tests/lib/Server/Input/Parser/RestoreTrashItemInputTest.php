@@ -12,7 +12,7 @@ use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\Server\Exceptions\ValidationFailedException;
 use Ibexa\Rest\Server\Input\Parser\RestoreTrashItemInput;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -20,7 +20,7 @@ final class RestoreTrashItemInputTest extends BaseTestCase
 {
     private const int TESTED_LOCATION_ID = 22;
 
-    private MockObject & LocationService $locationService;
+    private LocationService & Stub $locationService;
 
     private ValidatorInterface $validator;
 
@@ -34,13 +34,18 @@ final class RestoreTrashItemInputTest extends BaseTestCase
 
         $moveLocationParser = $this->getParser();
 
+        $loadLocationCalls = 0;
         $this->locationService
-            ->expects($this->once())
             ->method('loadLocation')
-            ->with(self::TESTED_LOCATION_ID)
-            ->willReturn($this->getMockedLocation());
+            ->willReturnCallback(function (int $locationId) use (&$loadLocationCalls): Location {
+                ++$loadLocationCalls;
+                self::assertSame(self::TESTED_LOCATION_ID, $locationId);
 
-        $result = $moveLocationParser->parse($inputArray, $this->getParsingDispatcherMock());
+                return $this->getMockedLocation();
+            });
+
+        $result = $moveLocationParser->parse($inputArray, $this->getParsingDispatcherStub());
+        self::assertSame(1, $loadLocationCalls);
 
         self::assertInstanceOf(
             Location::class,
@@ -64,7 +69,7 @@ final class RestoreTrashItemInputTest extends BaseTestCase
 
         $sessionInput = $this->getParser();
 
-        $result = $sessionInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $sessionInput->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertEmpty($result);
     }
@@ -80,12 +85,12 @@ final class RestoreTrashItemInputTest extends BaseTestCase
         $this->expectException(ValidationFailedException::class);
         $this->expectExceptionMessage('Input data validation failed for RestoreTrashItemInput');
 
-        $sessionInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $sessionInput->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): RestoreTrashItemInput
     {
-        $locationService = $this->createMock(LocationService::class);
+        $locationService = self::createStub(LocationService::class);
         $this->locationService = $locationService;
         $this->validator = Validation::createValidator();
 

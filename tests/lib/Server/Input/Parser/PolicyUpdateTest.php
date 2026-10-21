@@ -12,7 +12,7 @@ use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\RoleService;
 use Ibexa\Core\Repository\Values\User\PolicyUpdateStruct;
 use Ibexa\Rest\Server\Input\Parser\PolicyUpdate;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class PolicyUpdateTest extends BaseTestCase
 {
@@ -42,7 +42,7 @@ class PolicyUpdateTest extends BaseTestCase
         ];
 
         $policyUpdate = $this->getParser();
-        $result = $policyUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $policyUpdate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             PolicyUpdateStruct::class,
@@ -106,7 +106,7 @@ class PolicyUpdateTest extends BaseTestCase
         ];
 
         $policyUpdate = $this->getParser();
-        $policyUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $policyUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingLimitationValues(): void
@@ -124,7 +124,7 @@ class PolicyUpdateTest extends BaseTestCase
         ];
 
         $policyUpdate = $this->getParser();
-        $policyUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $policyUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): PolicyUpdate
@@ -135,11 +135,11 @@ class PolicyUpdateTest extends BaseTestCase
         );
     }
 
-    protected function getRoleServiceMock(): RoleService & MockObject
+    protected function getRoleServiceMock(): RoleService & Stub
     {
-        $roleServiceMock = $this->createMock(RoleService::class);
+        $roleServiceMock = self::createStub(RoleService::class);
 
-        $roleServiceMock->expects($this->any())
+        $roleServiceMock
             ->method('newPolicyUpdateStruct')
             ->willReturn(
                 new PolicyUpdateStruct()

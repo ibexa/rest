@@ -7,8 +7,6 @@
 
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
-use Ibexa\Contracts\Core\Repository\ContentService;
-use Ibexa\Contracts\Core\Repository\FieldTypeService;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\ContentTypeService;
 use Ibexa\Core\Repository\UserService;
@@ -18,7 +16,7 @@ use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Ibexa\Core\Repository\Values\User\UserGroupCreateStruct;
 use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\UserGroupCreate;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class UserGroupCreateTest extends BaseTestCase
 {
@@ -44,7 +42,7 @@ class UserGroupCreateTest extends BaseTestCase
         ];
 
         $userGroupCreate = $this->getParser();
-        $result = $userGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $userGroupCreate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             UserGroupCreateStruct::class,
@@ -113,7 +111,7 @@ class UserGroupCreateTest extends BaseTestCase
         ];
 
         $userGroupCreate = $this->getParser();
-        $userGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $userGroupCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingMainLanguageCode(): void
@@ -139,7 +137,7 @@ class UserGroupCreateTest extends BaseTestCase
         ];
 
         $userGroupCreate = $this->getParser();
-        $userGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $userGroupCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidSection(): void
@@ -164,7 +162,7 @@ class UserGroupCreateTest extends BaseTestCase
         ];
 
         $userGroupCreate = $this->getParser();
-        $userGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $userGroupCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidFields(): void
@@ -183,7 +181,7 @@ class UserGroupCreateTest extends BaseTestCase
         ];
 
         $userGroupCreate = $this->getParser();
-        $userGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $userGroupCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingFieldDefinitionIdentifier(): void
@@ -213,7 +211,7 @@ class UserGroupCreateTest extends BaseTestCase
         ];
 
         $userGroupCreate = $this->getParser();
-        $userGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $userGroupCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidFieldDefinitionIdentifier(): void
@@ -240,7 +238,7 @@ class UserGroupCreateTest extends BaseTestCase
         ];
 
         $userGroupCreate = $this->getParser();
-        $userGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $userGroupCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingFieldValue(): void
@@ -266,7 +264,7 @@ class UserGroupCreateTest extends BaseTestCase
         ];
 
         $userGroupCreate = $this->getParser();
-        $userGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $userGroupCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): UserGroupCreate
@@ -278,58 +276,53 @@ class UserGroupCreateTest extends BaseTestCase
         );
     }
 
-    private function getFieldTypeParserMock(): FieldTypeParser & MockObject
+    private function getFieldTypeParserMock(): FieldTypeParser & Stub
     {
-        $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
-            ->disableOriginalConstructor()
-            ->setConstructorArgs(
-                [
-                    self::createStub(ContentService::class),
-                    $this->getContentTypeServiceMock(),
-                    self::createStub(FieldTypeService::class),
-                ]
-            )
-            ->getMock();
+        $fieldTypeParserMock = self::createStub(FieldTypeParser::class);
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock
             ->method('parseValue')
-            ->with('ibexa_string', [])
-            ->willReturn('foo');
+            ->willReturnCallback(static function (...$arguments): mixed {
+                self::assertEquals(['ibexa_string', []], array_slice($arguments, 0, 2));
+
+                return 'foo';
+            });
 
         return $fieldTypeParserMock;
     }
 
-    protected function getUserServiceMock(): UserService & MockObject
+    protected function getUserServiceMock(): UserService & Stub
     {
-        $userServiceMock = $this->createMock(UserService::class);
+        $userServiceMock = self::createStub(UserService::class);
 
         $contentType = $this->getContentType();
-        $userServiceMock->expects($this->any())
+        $userServiceMock
             ->method('newUserGroupCreateStruct')
-            ->with(
-                self::equalTo('eng-US'),
-                self::equalTo($contentType)
-            )
-            ->willReturn(
-                new UserGroupCreateStruct(
+            ->willReturnCallback(static function (...$arguments) use ($contentType): UserGroupCreateStruct {
+                self::assertEquals(['eng-US', $contentType], array_slice($arguments, 0, 2));
+
+                return new UserGroupCreateStruct(
                     [
                         'contentType' => $contentType,
                         'mainLanguageCode' => 'eng-US',
                     ]
-                )
-            );
+                );
+            });
 
         return $userServiceMock;
     }
 
-    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService & Stub
     {
-        $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
+        $contentTypeServiceMock = self::createStub(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects($this->any())
+        $contentTypeServiceMock
             ->method('loadContentType')
-            ->with(self::equalTo(3))
-            ->willReturn($this->getContentType());
+            ->willReturnCallback(function (...$arguments): mixed {
+                self::assertEquals([3], array_slice($arguments, 0, 1));
+
+                return $this->getContentType();
+            });
 
         return $contentTypeServiceMock;
     }

@@ -22,9 +22,9 @@ abstract class FieldTypeHashGeneratorBaseTestCase extends TestCase
 
     private AbstractFieldTypeHashGenerator $fieldTypeHashGenerator;
 
-    private NormalizerInterface & MockObject $normalizer;
+    private (NormalizerInterface & MockObject) | null $normalizerMock = null;
 
-    private LoggerInterface & MockObject $logger;
+    private (LoggerInterface & MockObject) | null $loggerMock = null;
 
     /** @var array{0: string|false, 1: string|false} */
     private array $iniPrecisions;
@@ -50,14 +50,27 @@ abstract class FieldTypeHashGeneratorBaseTestCase extends TestCase
 
     abstract protected function initializeGenerator(): Generator;
 
-    final protected function getNormalizer(): MockObject & NormalizerInterface
+    /**
+     * Collaborator for the generator under test: the mock when a test set expectations on it, a stub otherwise.
+     */
+    final protected function getNormalizer(): NormalizerInterface
     {
-        return $this->normalizer ??= $this->createMock(NormalizerInterface::class);
+        return $this->normalizerMock ?? self::createStub(NormalizerInterface::class);
     }
 
-    final protected function getLogger(): MockObject & LoggerInterface
+    final protected function getLogger(): LoggerInterface
     {
-        return $this->logger ??= $this->createMock(LoggerInterface::class);
+        return $this->loggerMock ?? self::createStub(LoggerInterface::class);
+    }
+
+    final protected function getNormalizerMock(): MockObject & NormalizerInterface
+    {
+        return $this->normalizerMock ??= $this->createMock(NormalizerInterface::class);
+    }
+
+    final protected function getLoggerMock(): MockObject & LoggerInterface
+    {
+        return $this->loggerMock ??= $this->createMock(LoggerInterface::class);
     }
 
     public function testGenerateNull(): void
@@ -191,7 +204,7 @@ abstract class FieldTypeHashGeneratorBaseTestCase extends TestCase
     public function testGenerateUsingNormalizer(): void
     {
         $object = (object)[];
-        $this->getNormalizer()
+        $this->getNormalizerMock()
             ->expects($this->once())
             ->method('normalize')
             ->with(self::identicalTo($object))
@@ -215,7 +228,7 @@ abstract class FieldTypeHashGeneratorBaseTestCase extends TestCase
     public function testGenerateObjectUsingNormalizer(): void
     {
         $object = new ArrayObject();
-        $this->getNormalizer()
+        $this->getNormalizerMock()
             ->expects($this->once())
             ->method('normalize')
             ->with(self::identicalTo($object))
@@ -229,13 +242,13 @@ abstract class FieldTypeHashGeneratorBaseTestCase extends TestCase
     public function testGenerateWithMissingNormalizer(): void
     {
         $object = (object)[];
-        $this->getNormalizer()
+        $this->getNormalizerMock()
             ->expects($this->once())
             ->method('normalize')
             ->with(self::identicalTo($object))
             ->willThrowException(new NotNormalizableValueException('foo'));
 
-        $this->getLogger()
+        $this->getLoggerMock()
             ->expects($this->once())
             ->method('error')
             ->with(self::identicalTo(

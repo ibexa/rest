@@ -15,6 +15,7 @@ use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchHit;
 use Ibexa\Contracts\Core\Repository\Values\Content\Search\SearchResult;
+use Ibexa\Contracts\Rest\Output\Visitor;
 use Ibexa\Core\Repository\Values\Content;
 use Ibexa\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
@@ -22,7 +23,7 @@ use Ibexa\Rest\Server\Values\RestExecutedView;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Depends;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class RestExecutedViewTest extends ValueObjectVisitorBaseTestCase
 {
@@ -60,7 +61,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTestCase
         );
 
         $visitor->visit(
-            $this->getVisitorMock(),
+            self::createStub(Visitor::class),
             $generator,
             $view
         );
@@ -113,14 +114,14 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTestCase
         );
     }
 
-    public function getLocationServiceMock(): LocationService & MockObject
+    public function getLocationServiceMock(): LocationService & Stub
     {
-        return $this->createMock(LocationService::class);
+        return self::createStub(LocationService::class);
     }
 
-    private function getRelationListFacadeMock(): ContentService\RelationListFacadeInterface & MockObject
+    private function getRelationListFacadeMock(): ContentService\RelationListFacadeInterface & Stub
     {
-        $relationListFacade = $this->createMock(ContentService\RelationListFacadeInterface::class);
+        $relationListFacade = self::createStub(ContentService\RelationListFacadeInterface::class);
         $relationListFacade->method('getRelations')->willReturnCallback(
             static fn (): Generator => yield
         );
@@ -128,9 +129,9 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTestCase
         return $relationListFacade;
     }
 
-    public function getContentTypeServiceMock(): ContentTypeService & MockObject
+    public function getContentTypeServiceMock(): ContentTypeService & Stub
     {
-        return $this->createMock(ContentTypeService::class);
+        return self::createStub(ContentTypeService::class);
     }
 
     protected function buildContentSearchHit(): SearchHit

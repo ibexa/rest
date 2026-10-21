@@ -35,11 +35,13 @@ final class EditionBadgesProcessorTest extends TestCase
     {
         $this->containerBuilder = $this->createMock(ContainerBuilder::class);
         $this->containerBuilder
+            ->expects($this->once())
             ->method('hasParameter')
             ->with(EditionBadgesProcessor::BADGES_CONFIG_PARAMETER_NAME)
             ->willReturn(true);
 
         $this->containerBuilder
+            ->expects($this->once())
             ->method('getParameter')
             ->with(EditionBadgesProcessor::BADGES_CONFIG_PARAMETER_NAME)
             ->willReturn(self::BADGES_CONFIG);

@@ -11,7 +11,7 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeGroupCreateStr
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\ContentTypeService;
 use Ibexa\Rest\Server\Input\Parser\ContentTypeGroupInput;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class ContentTypeGroupInputTest extends BaseTestCase
 {
@@ -26,7 +26,7 @@ class ContentTypeGroupInputTest extends BaseTestCase
         ];
 
         $contentTypeGroupInput = $this->getParser();
-        $result = $contentTypeGroupInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $contentTypeGroupInput->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             ContentTypeGroupCreateStruct::class,
@@ -64,7 +64,7 @@ class ContentTypeGroupInputTest extends BaseTestCase
         ];
 
         $contentTypeGroupInput = $this->getParser();
-        $contentTypeGroupInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentTypeGroupInput->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): ContentTypeGroupInput
@@ -75,16 +75,17 @@ class ContentTypeGroupInputTest extends BaseTestCase
         );
     }
 
-    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService & Stub
     {
-        $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
+        $contentTypeServiceMock = self::createStub(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects($this->any())
+        $contentTypeServiceMock
             ->method('newContentTypeGroupCreateStruct')
-            ->with(self::equalTo('Identifier Bar'))
-            ->willReturn(
-                new ContentTypeGroupCreateStruct(['identifier' => 'Identifier Bar'])
-            );
+            ->willReturnCallback(static function (...$arguments): ContentTypeGroupCreateStruct {
+                self::assertEquals(['Identifier Bar'], array_slice($arguments, 0, 1));
+
+                return new ContentTypeGroupCreateStruct(['identifier' => 'Identifier Bar']);
+            });
 
         return $contentTypeServiceMock;
     }

@@ -11,7 +11,7 @@ use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroupCreateStr
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\ObjectStateService;
 use Ibexa\Rest\Server\Input\Parser\ObjectStateGroupCreate;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class ObjectStateGroupCreateTest extends BaseTestCase
 {
@@ -39,7 +39,7 @@ class ObjectStateGroupCreateTest extends BaseTestCase
         ];
 
         $objectStateGroupCreate = $this->getParser();
-        $result = $objectStateGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $objectStateGroupCreate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             ObjectStateGroupCreateStruct::class,
@@ -97,7 +97,7 @@ class ObjectStateGroupCreateTest extends BaseTestCase
         ];
 
         $objectStateGroupCreate = $this->getParser();
-        $objectStateGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $objectStateGroupCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingDefaultLanguageCode(): void
@@ -125,7 +125,7 @@ class ObjectStateGroupCreateTest extends BaseTestCase
         ];
 
         $objectStateGroupCreate = $this->getParser();
-        $objectStateGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $objectStateGroupCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingNames(): void
@@ -146,7 +146,7 @@ class ObjectStateGroupCreateTest extends BaseTestCase
         ];
 
         $objectStateGroupCreate = $this->getParser();
-        $objectStateGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $objectStateGroupCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidNames(): void
@@ -168,7 +168,7 @@ class ObjectStateGroupCreateTest extends BaseTestCase
         ];
 
         $objectStateGroupCreate = $this->getParser();
-        $objectStateGroupCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $objectStateGroupCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): ObjectStateGroupCreate
@@ -179,16 +179,17 @@ class ObjectStateGroupCreateTest extends BaseTestCase
         );
     }
 
-    protected function getObjectStateServiceMock(): ObjectStateService & MockObject
+    protected function getObjectStateServiceMock(): ObjectStateService & Stub
     {
-        $objectStateServiceMock = $this->createMock(ObjectStateService::class);
+        $objectStateServiceMock = self::createStub(ObjectStateService::class);
 
-        $objectStateServiceMock->expects($this->any())
+        $objectStateServiceMock
             ->method('newObjectStateGroupCreateStruct')
-            ->with(self::equalTo('test-group'))
-            ->willReturn(
-                new ObjectStateGroupCreateStruct(['identifier' => 'test-group'])
-            );
+            ->willReturnCallback(static function (...$arguments): ObjectStateGroupCreateStruct {
+                self::assertEquals(['test-group'], array_slice($arguments, 0, 1));
+
+                return new ObjectStateGroupCreateStruct(['identifier' => 'test-group']);
+            });
 
         return $objectStateServiceMock;
     }

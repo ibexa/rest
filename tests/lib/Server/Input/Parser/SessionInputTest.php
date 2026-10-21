@@ -21,7 +21,7 @@ class SessionInputTest extends BaseTestCase
         ];
 
         $sessionInput = $this->getParser();
-        $result = $sessionInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $sessionInput->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertEquals(
             new SessionInputValue($inputArray),
@@ -39,7 +39,7 @@ class SessionInputTest extends BaseTestCase
         ];
 
         $sessionInput = $this->getParser();
-        $sessionInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $sessionInput->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingName(): void
@@ -51,7 +51,7 @@ class SessionInputTest extends BaseTestCase
         ];
 
         $sessionInput = $this->getParser();
-        $sessionInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $sessionInput->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): SessionInput

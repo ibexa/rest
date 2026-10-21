@@ -38,14 +38,32 @@ final class VisitorTest extends TestCase
         parent::setUp();
 
         $this->generator = self::createStub(Generator::class);
-        $this->normalizer = $this->createMock(NormalizerInterface::class);
-        $this->encoder = $this->createMock(EncoderInterface::class);
         $this->valueObjectVisitorResolver = self::createStub(ValueObjectVisitorResolverInterface::class);
 
-        $this->visitor = new Visitor(
+        $this->visitor = $this->createVisitor(
+            self::createStub(NormalizerInterface::class),
+            self::createStub(EncoderInterface::class)
+        );
+    }
+
+    /**
+     * Replaces the visitor's normalizer and encoder with mocks, for tests which set expectations on them.
+     */
+    private function mockSerialization(): void
+    {
+        $this->normalizer = $this->createMock(NormalizerInterface::class);
+        $this->encoder = $this->createMock(EncoderInterface::class);
+        $this->visitor = $this->createVisitor($this->normalizer, $this->encoder);
+    }
+
+    private function createVisitor(
+        NormalizerInterface $normalizer,
+        EncoderInterface $encoder
+    ): Visitor {
+        return new Visitor(
             $this->generator,
-            $this->normalizer,
-            $this->encoder,
+            $normalizer,
+            $encoder,
             $this->valueObjectVisitorResolver,
             'json',
         );
@@ -53,6 +71,7 @@ final class VisitorTest extends TestCase
 
     public function testVisitDocument(): void
     {
+        $this->mockSerialization();
         $data = new stdClass();
         $content = 'Hello world!';
 
@@ -83,6 +102,7 @@ final class VisitorTest extends TestCase
         array | ArrayObject $content,
         array | ArrayObject $expectedEncoderData,
     ): void {
+        $this->mockSerialization();
         $data = new stdClass();
 
         $this->normalizer
@@ -138,6 +158,7 @@ final class VisitorTest extends TestCase
 
     public function testVisitEmptyDocument(): void
     {
+        $this->mockSerialization();
         $data = new stdClass();
 
         $this->normalizer

@@ -12,7 +12,7 @@ use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\RoleService;
 use Ibexa\Core\Repository\Values\User\PolicyCreateStruct;
 use Ibexa\Rest\Server\Input\Parser\PolicyCreate;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class PolicyCreateTest extends BaseTestCase
 {
@@ -44,7 +44,7 @@ class PolicyCreateTest extends BaseTestCase
         ];
 
         $policyCreate = $this->getParser();
-        $result = $policyCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $policyCreate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             PolicyCreateStruct::class,
@@ -122,7 +122,7 @@ class PolicyCreateTest extends BaseTestCase
         ];
 
         $policyCreate = $this->getParser();
-        $policyCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $policyCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingFunction(): void
@@ -154,7 +154,7 @@ class PolicyCreateTest extends BaseTestCase
         ];
 
         $policyCreate = $this->getParser();
-        $policyCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $policyCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingLimitationIdentifier(): void
@@ -186,7 +186,7 @@ class PolicyCreateTest extends BaseTestCase
         ];
 
         $policyCreate = $this->getParser();
-        $policyCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $policyCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingLimitationValues(): void
@@ -206,7 +206,7 @@ class PolicyCreateTest extends BaseTestCase
         ];
 
         $policyCreate = $this->getParser();
-        $policyCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $policyCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): PolicyCreate
@@ -217,24 +217,22 @@ class PolicyCreateTest extends BaseTestCase
         );
     }
 
-    protected function getRoleServiceMock(): RoleService & MockObject
+    protected function getRoleServiceMock(): RoleService & Stub
     {
-        $roleServiceMock = $this->createMock(RoleService::class);
+        $roleServiceMock = self::createStub(RoleService::class);
 
-        $roleServiceMock->expects($this->any())
+        $roleServiceMock
             ->method('newPolicyCreateStruct')
-            ->with(
-                self::equalTo('content'),
-                self::equalTo('delete')
-            )
-            ->willReturn(
-                new PolicyCreateStruct(
+            ->willReturnCallback(static function (...$arguments): PolicyCreateStruct {
+                self::assertEquals(['content', 'delete'], array_slice($arguments, 0, 2));
+
+                return new PolicyCreateStruct(
                     [
                         'module' => 'content',
                         'function' => 'delete',
                     ]
-                )
-            );
+                );
+            });
 
         return $roleServiceMock;
     }

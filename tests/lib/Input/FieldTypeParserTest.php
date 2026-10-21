@@ -39,30 +39,17 @@ class FieldTypeParserTest extends TestCase
 
     protected FieldTypeProcessor & MockObject $fieldTypeProcessorMock;
 
-    public function setUp(): void
-    {
-        $this->contentServiceMock = $this->createMock(ContentService::class);
-        $this->contentTypeServiceMock = $this->createMock(ContentTypeService::class);
-        $this->fieldTypeServiceMock = $this->createMock(FieldTypeService::class);
-        $this->contentTypeMock = $this->createMock(ContentType::class);
-        $this->fieldTypeMock = $this->createMock(FieldType::class);
-        $this->fieldTypeProcessorRegistryMock = $this->createMock(FieldTypeProcessorRegistry::class);
-        $this->fieldTypeProcessorMock = $this->createMock(FieldTypeProcessor::class);
-    }
-
     public function testParseFieldValue(): void
     {
-        $fieldTypeParser = $this->getFieldTypeParser();
-
-        $this->contentServiceMock->expects($this->once())
+        $this->getContentServiceMock()->expects($this->once())
             ->method('loadContentInfo')
             ->with('23')
             ->willReturn(
                 new ContentInfo(['contentTypeId' => '42'])
             );
 
-        $contentTypeMock = $this->contentTypeMock;
-        $this->contentTypeServiceMock->expects($this->once())
+        $contentTypeMock = $this->getContentTypeMock();
+        $this->getContentTypeServiceMock()->expects($this->once())
             ->method('loadContentType')
             ->with('42')
             ->willReturnCallback(
@@ -83,13 +70,13 @@ class FieldTypeParserTest extends TestCase
                 )
             );
 
-        $this->fieldTypeProcessorRegistryMock->expects($this->once())
+        $this->getFieldTypeProcessorRegistryMock()->expects($this->once())
             ->method('hasProcessor')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturn(false);
 
-        $fieldTypeMock = $this->fieldTypeMock;
-        $this->fieldTypeServiceMock->expects($this->once())
+        $fieldTypeMock = $this->getFieldTypeMock();
+        $this->getFieldTypeServiceMock()->expects($this->once())
             ->method('getFieldType')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
@@ -103,6 +90,8 @@ class FieldTypeParserTest extends TestCase
             ->method('fromHash')
             ->with(self::equalTo([1, 2, 3]))
             ->willReturn(['foo', 'bar']);
+
+        $fieldTypeParser = $this->getFieldTypeParser();
 
         self::assertEquals(
             ['foo', 'bar'],
@@ -116,15 +105,13 @@ class FieldTypeParserTest extends TestCase
 
     public function testParseValue(): void
     {
-        $fieldTypeParser = $this->getFieldTypeParser();
-
-        $this->fieldTypeProcessorRegistryMock->expects($this->once())
+        $this->getFieldTypeProcessorRegistryMock()->expects($this->once())
             ->method('hasProcessor')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturn(false);
 
-        $fieldTypeMock = $this->fieldTypeMock;
-        $this->fieldTypeServiceMock->expects($this->once())
+        $fieldTypeMock = $this->getFieldTypeMock();
+        $this->getFieldTypeServiceMock()->expects($this->once())
             ->method('getFieldType')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
@@ -139,6 +126,8 @@ class FieldTypeParserTest extends TestCase
             ->with(self::equalTo([1, 2, 3]))
             ->willReturn(['foo', 'bar']);
 
+        $fieldTypeParser = $this->getFieldTypeParser();
+
         self::assertEquals(
             ['foo', 'bar'],
             $fieldTypeParser->parseValue(
@@ -150,15 +139,13 @@ class FieldTypeParserTest extends TestCase
 
     public function testParseValueWithPreProcessing(): void
     {
-        $fieldTypeParser = $this->getFieldTypeParser();
-
-        $this->fieldTypeProcessorRegistryMock->expects($this->once())
+        $this->getFieldTypeProcessorRegistryMock()->expects($this->once())
             ->method('hasProcessor')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturn(true);
 
-        $processor = $this->fieldTypeProcessorMock;
-        $this->fieldTypeProcessorRegistryMock->expects($this->once())
+        $processor = $this->getFieldTypeProcessorMock();
+        $this->getFieldTypeProcessorRegistryMock()->expects($this->once())
             ->method('getProcessor')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
@@ -172,8 +159,8 @@ class FieldTypeParserTest extends TestCase
             ->with([1, 2, 3])
             ->willReturn([4, 5, 6]);
 
-        $fieldTypeMock = $this->fieldTypeMock;
-        $this->fieldTypeServiceMock->expects($this->once())
+        $fieldTypeMock = $this->getFieldTypeMock();
+        $this->getFieldTypeServiceMock()->expects($this->once())
             ->method('getFieldType')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
@@ -188,6 +175,8 @@ class FieldTypeParserTest extends TestCase
             ->with(self::equalTo([4, 5, 6]))
             ->willReturn(['foo', 'bar']);
 
+        $fieldTypeParser = $this->getFieldTypeParser();
+
         self::assertEquals(
             ['foo', 'bar'],
             $fieldTypeParser->parseValue(
@@ -199,10 +188,8 @@ class FieldTypeParserTest extends TestCase
 
     public function testParseFieldSettings(): void
     {
-        $fieldTypeParser = $this->getFieldTypeParser();
-
-        $fieldTypeMock = $this->fieldTypeMock;
-        $this->fieldTypeServiceMock->expects($this->once())
+        $fieldTypeMock = $this->getFieldTypeMock();
+        $this->getFieldTypeServiceMock()->expects($this->once())
             ->method('getFieldType')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
@@ -217,6 +204,8 @@ class FieldTypeParserTest extends TestCase
             ->with(self::equalTo([1, 2, 3]))
             ->willReturn(['foo', 'bar']);
 
+        $fieldTypeParser = $this->getFieldTypeParser();
+
         self::assertEquals(
             ['foo', 'bar'],
             $fieldTypeParser->parseFieldSettings(
@@ -228,15 +217,13 @@ class FieldTypeParserTest extends TestCase
 
     public function testParseFieldSettingsWithPreProcessing(): void
     {
-        $fieldTypeParser = $this->getFieldTypeParser();
-
-        $this->fieldTypeProcessorRegistryMock->expects($this->once())
+        $this->getFieldTypeProcessorRegistryMock()->expects($this->once())
             ->method('hasProcessor')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturn(true);
 
-        $processor = $this->fieldTypeProcessorMock;
-        $this->fieldTypeProcessorRegistryMock->expects($this->once())
+        $processor = $this->getFieldTypeProcessorMock();
+        $this->getFieldTypeProcessorRegistryMock()->expects($this->once())
             ->method('getProcessor')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
@@ -250,8 +237,8 @@ class FieldTypeParserTest extends TestCase
             ->with([1, 2, 3])
             ->willReturn([4, 5, 6]);
 
-        $fieldTypeMock = $this->fieldTypeMock;
-        $this->fieldTypeServiceMock->expects($this->once())
+        $fieldTypeMock = $this->getFieldTypeMock();
+        $this->getFieldTypeServiceMock()->expects($this->once())
             ->method('getFieldType')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
@@ -266,6 +253,8 @@ class FieldTypeParserTest extends TestCase
             ->with(self::equalTo([4, 5, 6]))
             ->willReturn(['foo', 'bar']);
 
+        $fieldTypeParser = $this->getFieldTypeParser();
+
         self::assertEquals(
             ['foo', 'bar'],
             $fieldTypeParser->parseFieldSettings(
@@ -277,10 +266,8 @@ class FieldTypeParserTest extends TestCase
 
     public function testParseValidatorConfiguration(): void
     {
-        $fieldTypeParser = $this->getFieldTypeParser();
-
-        $fieldTypeMock = $this->fieldTypeMock;
-        $this->fieldTypeServiceMock->expects($this->once())
+        $fieldTypeMock = $this->getFieldTypeMock();
+        $this->getFieldTypeServiceMock()->expects($this->once())
             ->method('getFieldType')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
@@ -295,6 +282,8 @@ class FieldTypeParserTest extends TestCase
             ->with(self::equalTo([1, 2, 3]))
             ->willReturn(['foo', 'bar']);
 
+        $fieldTypeParser = $this->getFieldTypeParser();
+
         self::assertEquals(
             ['foo', 'bar'],
             $fieldTypeParser->parseValidatorConfiguration(
@@ -306,15 +295,13 @@ class FieldTypeParserTest extends TestCase
 
     public function testParseValidatorConfigurationWithPreProcessing(): void
     {
-        $fieldTypeParser = $this->getFieldTypeParser();
-
-        $this->fieldTypeProcessorRegistryMock->expects($this->once())
+        $this->getFieldTypeProcessorRegistryMock()->expects($this->once())
             ->method('hasProcessor')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturn(true);
 
-        $processor = $this->fieldTypeProcessorMock;
-        $this->fieldTypeProcessorRegistryMock->expects($this->once())
+        $processor = $this->getFieldTypeProcessorMock();
+        $this->getFieldTypeProcessorRegistryMock()->expects($this->once())
             ->method('getProcessor')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
@@ -328,8 +315,8 @@ class FieldTypeParserTest extends TestCase
             ->with([1, 2, 3])
             ->willReturn([4, 5, 6]);
 
-        $fieldTypeMock = $this->fieldTypeMock;
-        $this->fieldTypeServiceMock->expects($this->once())
+        $fieldTypeMock = $this->getFieldTypeMock();
+        $this->getFieldTypeServiceMock()->expects($this->once())
             ->method('getFieldType')
             ->with(self::equalTo('some-fancy-field-type'))
             ->willReturnCallback(
@@ -344,6 +331,8 @@ class FieldTypeParserTest extends TestCase
             ->with(self::equalTo([4, 5, 6]))
             ->willReturn(['foo', 'bar']);
 
+        $fieldTypeParser = $this->getFieldTypeParser();
+
         self::assertEquals(
             ['foo', 'bar'],
             $fieldTypeParser->parseValidatorConfiguration(
@@ -356,10 +345,45 @@ class FieldTypeParserTest extends TestCase
     protected function getFieldTypeParser(): FieldTypeParser
     {
         return new FieldTypeParser(
-            $this->contentServiceMock,
-            $this->contentTypeServiceMock,
-            $this->fieldTypeServiceMock,
-            $this->fieldTypeProcessorRegistryMock
+            $this->contentServiceMock ?? self::createStub(ContentService::class),
+            $this->contentTypeServiceMock ?? self::createStub(ContentTypeService::class),
+            $this->fieldTypeServiceMock ?? self::createStub(FieldTypeService::class),
+            $this->fieldTypeProcessorRegistryMock ?? self::createStub(FieldTypeProcessorRegistry::class)
         );
+    }
+
+    private function getContentServiceMock(): ContentService & MockObject
+    {
+        return $this->contentServiceMock ??= $this->createMock(ContentService::class);
+    }
+
+    private function getContentTypeServiceMock(): ContentTypeService & MockObject
+    {
+        return $this->contentTypeServiceMock ??= $this->createMock(ContentTypeService::class);
+    }
+
+    private function getFieldTypeServiceMock(): FieldTypeService & MockObject
+    {
+        return $this->fieldTypeServiceMock ??= $this->createMock(FieldTypeService::class);
+    }
+
+    private function getContentTypeMock(): ContentType & MockObject
+    {
+        return $this->contentTypeMock ??= $this->createMock(ContentType::class);
+    }
+
+    private function getFieldTypeMock(): FieldType & MockObject
+    {
+        return $this->fieldTypeMock ??= $this->createMock(FieldType::class);
+    }
+
+    private function getFieldTypeProcessorRegistryMock(): FieldTypeProcessorRegistry & MockObject
+    {
+        return $this->fieldTypeProcessorRegistryMock ??= $this->createMock(FieldTypeProcessorRegistry::class);
+    }
+
+    private function getFieldTypeProcessorMock(): FieldTypeProcessor & MockObject
+    {
+        return $this->fieldTypeProcessorMock ??= $this->createMock(FieldTypeProcessor::class);
     }
 }

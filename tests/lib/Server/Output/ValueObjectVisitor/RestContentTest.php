@@ -16,15 +16,15 @@ use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\RestContent;
 use Ibexa\Rest\Server\Values\Version;
 use PHPUnit\Framework\Attributes\Depends;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class RestContentTest extends BaseContentValueObjectVisitorTestCase
 {
-    private MockObject & TranslationHelper $translationHelper;
+    private Stub & TranslationHelper $translationHelper;
 
     protected function setUp(): void
     {
-        $this->translationHelper = $this->createMock(TranslationHelper::class);
+        $this->translationHelper = self::createStub(TranslationHelper::class);
         $this->translationHelper
             ->method('getTranslatedContentNameByContentInfo')
             ->willReturnCallback(static function (ContentInfo $content): string {

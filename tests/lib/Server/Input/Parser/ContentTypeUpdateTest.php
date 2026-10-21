@@ -12,7 +12,7 @@ use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentTypeUpdateStruct;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\ContentTypeService;
 use Ibexa\Rest\Server\Input\Parser\ContentTypeUpdate;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class ContentTypeUpdateTest extends BaseTestCase
 {
@@ -21,7 +21,7 @@ class ContentTypeUpdateTest extends BaseTestCase
         $inputArray = $this->getInputArray();
 
         $contentTypeUpdate = $this->getParser();
-        $result = $contentTypeUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $contentTypeUpdate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             ContentTypeUpdateStruct::class,
@@ -114,7 +114,7 @@ class ContentTypeUpdateTest extends BaseTestCase
         unset($inputArray['names']['value']);
 
         $contentTypeUpdate = $this->getParser();
-        $contentTypeUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentTypeUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidDescriptions(): void
@@ -125,7 +125,7 @@ class ContentTypeUpdateTest extends BaseTestCase
         unset($inputArray['descriptions']['value']);
 
         $contentTypeUpdate = $this->getParser();
-        $contentTypeUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentTypeUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidUser(): void
@@ -136,7 +136,7 @@ class ContentTypeUpdateTest extends BaseTestCase
         unset($inputArray['User']['_href']);
 
         $contentTypeUpdate = $this->getParser();
-        $contentTypeUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentTypeUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): ContentTypeUpdate
@@ -147,11 +147,11 @@ class ContentTypeUpdateTest extends BaseTestCase
         );
     }
 
-    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService & Stub
     {
-        $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
+        $contentTypeServiceMock = self::createStub(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects($this->any())
+        $contentTypeServiceMock
             ->method('newContentTypeUpdateStruct')
             ->willReturn(new ContentTypeUpdateStruct());
 

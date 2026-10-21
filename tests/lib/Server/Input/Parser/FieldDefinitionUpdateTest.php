@@ -17,7 +17,7 @@ use Ibexa\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Core\Repository\Values\ContentType\FieldDefinitionCollection;
 use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\FieldDefinitionUpdate;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 /**
  * @todo Test with fieldSettings and validatorConfiguration when specifiedś
@@ -29,7 +29,7 @@ final class FieldDefinitionUpdateTest extends BaseTestCase
         $inputArray = $this->getInputArray();
 
         $fieldDefinitionUpdate = $this->getParser();
-        $result = $fieldDefinitionUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $fieldDefinitionUpdate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             FieldDefinitionUpdateStruct::class,
@@ -121,7 +121,7 @@ final class FieldDefinitionUpdateTest extends BaseTestCase
         unset($inputArray['names']['value']);
 
         $fieldDefinitionUpdate = $this->getParser();
-        $fieldDefinitionUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $fieldDefinitionUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidDescriptions(): void
@@ -133,7 +133,7 @@ final class FieldDefinitionUpdateTest extends BaseTestCase
         unset($inputArray['descriptions']['value']);
 
         $fieldDefinitionUpdate = $this->getParser();
-        $fieldDefinitionUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $fieldDefinitionUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): FieldDefinitionUpdate
@@ -145,19 +145,19 @@ final class FieldDefinitionUpdateTest extends BaseTestCase
         );
     }
 
-    protected function getFieldTypeParserMock(): FieldTypeParser & MockObject
+    protected function getFieldTypeParserMock(): FieldTypeParser & Stub
     {
-        $fieldTypeParserMock = $this->createMock(FieldTypeParser::class);
+        $fieldTypeParserMock = self::createStub(FieldTypeParser::class);
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock
             ->method('parseValue')
             ->willReturn('New title');
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock
             ->method('parseFieldSettings')
             ->willReturn(['textRows' => 24]);
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock
             ->method('parseValidatorConfiguration')
             ->willReturn(
                 [
@@ -171,21 +171,22 @@ final class FieldDefinitionUpdateTest extends BaseTestCase
         return $fieldTypeParserMock;
     }
 
-    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService & Stub
     {
-        $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
+        $contentTypeServiceMock = self::createStub(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects($this->any())
+        $contentTypeServiceMock
             ->method('newFieldDefinitionUpdateStruct')
             ->willReturn(
                 new FieldDefinitionUpdateStruct()
             );
 
-        $contentTypeServiceMock->expects($this->any())
+        $contentTypeServiceMock
             ->method('loadContentTypeDraft')
-            ->with(self::equalTo(42))
-            ->willReturn(
-                new ContentTypeDraft(
+            ->willReturnCallback(static function (...$arguments): ContentTypeDraft {
+                self::assertEquals([42], array_slice($arguments, 0, 1));
+
+                return new ContentTypeDraft(
                     [
                         'innerContentType' => new ContentType([
                             'fieldDefinitions' => new FieldDefinitionCollection([
@@ -199,8 +200,8 @@ final class FieldDefinitionUpdateTest extends BaseTestCase
                             ]),
                         ]),
                     ]
-                )
-            );
+                );
+            });
 
         return $contentTypeServiceMock;
     }

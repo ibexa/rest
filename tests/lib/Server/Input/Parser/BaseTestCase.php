@@ -12,6 +12,7 @@ use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
 use Ibexa\Rest\Input;
 use Ibexa\Tests\Rest\Server\BaseTestCase as ParentBaseTest;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 /**
  * Base test for input parsers.
@@ -20,7 +21,9 @@ abstract class BaseTestCase extends ParentBaseTest
 {
     protected ParsingDispatcher & MockObject $parsingDispatcherMock;
 
-    protected UriParserInterface & MockObject $uriParserMock;
+    protected (ParsingDispatcher & Stub) | null $parsingDispatcherStub = null;
+
+    protected UriParserInterface & Stub $uriParserMock;
 
     protected Input\ParserTools $parserTools;
 
@@ -31,6 +34,15 @@ abstract class BaseTestCase extends ParentBaseTest
         }
 
         return $this->parsingDispatcherMock;
+    }
+
+    protected function getParsingDispatcherStub(): ParsingDispatcher & Stub
+    {
+        if ($this->parsingDispatcherStub === null) {
+            $this->parsingDispatcherStub = self::createStub(ParsingDispatcher::class);
+        }
+
+        return $this->parsingDispatcherStub;
     }
 
     /**
@@ -46,7 +58,7 @@ abstract class BaseTestCase extends ParentBaseTest
         return [];
     }
 
-    protected function getUriParserMock(): UriParserInterface & MockObject
+    protected function getUriParserMock(): UriParserInterface & Stub
     {
         if (!isset($this->uriParserMock)) {
             $that = &$this;
@@ -68,10 +80,9 @@ abstract class BaseTestCase extends ParentBaseTest
                 return null;
             };
 
-            $this->uriParserMock = $this->createMock(UriParserInterface::class);
+            $this->uriParserMock = self::createStub(UriParserInterface::class);
 
             $this->uriParserMock
-                ->expects($this->any())
                 ->method('getAttributeFromUri')
                 ->willReturnCallback($callback);
         }

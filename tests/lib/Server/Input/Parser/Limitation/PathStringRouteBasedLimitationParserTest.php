@@ -24,7 +24,7 @@ class PathStringRouteBasedLimitationParserTest extends BaseTestCase
             ],
         ];
 
-        $result = $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $this->getParser()->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(Limitation::class, $result);
         self::assertObjectHasProperty('limitationValues', $result);

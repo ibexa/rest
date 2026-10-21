@@ -12,7 +12,7 @@ use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\ContentTypeService;
 use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 /**
  * @todo Test with fieldSettings and validatorConfiguration when specified
@@ -24,7 +24,7 @@ class FieldDefinitionCreateTest extends BaseTestCase
         $inputArray = $this->getInputArray();
 
         $fieldDefinitionCreate = $this->getParser();
-        $result = $fieldDefinitionCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $fieldDefinitionCreate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             FieldDefinitionCreateStruct::class,
@@ -120,7 +120,7 @@ class FieldDefinitionCreateTest extends BaseTestCase
         unset($inputArray['identifier']);
 
         $fieldDefinitionCreate = $this->getParser();
-        $fieldDefinitionCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $fieldDefinitionCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingFieldType(): void
@@ -131,7 +131,7 @@ class FieldDefinitionCreateTest extends BaseTestCase
         unset($inputArray['fieldType']);
 
         $fieldDefinitionCreate = $this->getParser();
-        $fieldDefinitionCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $fieldDefinitionCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidNames(): void
@@ -142,7 +142,7 @@ class FieldDefinitionCreateTest extends BaseTestCase
         unset($inputArray['names']['value']);
 
         $fieldDefinitionCreate = $this->getParser();
-        $fieldDefinitionCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $fieldDefinitionCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidDescriptions(): void
@@ -153,7 +153,7 @@ class FieldDefinitionCreateTest extends BaseTestCase
         unset($inputArray['descriptions']['value']);
 
         $fieldDefinitionCreate = $this->getParser();
-        $fieldDefinitionCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $fieldDefinitionCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): FieldDefinitionCreate
@@ -165,19 +165,19 @@ class FieldDefinitionCreateTest extends BaseTestCase
         );
     }
 
-    protected function getFieldTypeParserMock(): FieldTypeParser & MockObject
+    protected function getFieldTypeParserMock(): FieldTypeParser & Stub
     {
-        $fieldTypeParserMock = $this->createMock(FieldTypeParser::class);
+        $fieldTypeParserMock = self::createStub(FieldTypeParser::class);
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock
             ->method('parseValue')
             ->willReturn('New title');
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock
             ->method('parseFieldSettings')
             ->willReturn(['textRows' => 24]);
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock
             ->method('parseValidatorConfiguration')
             ->willReturn(
                 [
@@ -191,21 +191,22 @@ class FieldDefinitionCreateTest extends BaseTestCase
         return $fieldTypeParserMock;
     }
 
-    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService & Stub
     {
-        $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
+        $contentTypeServiceMock = self::createStub(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects($this->any())
+        $contentTypeServiceMock
             ->method('newFieldDefinitionCreateStruct')
-            ->with(self::equalTo('title'), self::equalTo('ibexa_string'))
-            ->willReturn(
-                new FieldDefinitionCreateStruct(
+            ->willReturnCallback(static function (...$arguments): FieldDefinitionCreateStruct {
+                self::assertEquals(['title', 'ibexa_string'], array_slice($arguments, 0, 2));
+
+                return new FieldDefinitionCreateStruct(
                     [
                         'identifier' => 'title',
                         'fieldTypeIdentifier' => 'ibexa_string',
                     ]
-                )
-            );
+                );
+            });
 
         return $contentTypeServiceMock;
     }

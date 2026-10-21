@@ -12,6 +12,7 @@ use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location as ApiLocation;
+use Ibexa\Contracts\Rest\Output\Visitor;
 use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Core\Repository\Values\Content\Content;
 use Ibexa\Core\Repository\Values\Content\Location;
@@ -85,7 +86,7 @@ final class LocationTest extends ValueObjectVisitorBaseTestCase
             );
 
         $visitor->visit(
-            $this->getVisitorMock(),
+            self::createStub(Visitor::class),
             $generator,
             $location
         );

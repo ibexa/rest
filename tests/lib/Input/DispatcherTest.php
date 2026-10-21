@@ -157,13 +157,13 @@ class DispatcherTest extends TestCase
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->any())
+            ->expects($this->once())
             ->method('parse')
             ->with(self::anything(), 'text/html; version=1.1');
 
         $handler = $this->createMock(Handler::class);
         $handler
-            ->expects($this->any())
+            ->expects($this->once())
             ->method('convert')
             ->willReturn([]);
 

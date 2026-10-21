@@ -12,8 +12,6 @@ use Ibexa\Contracts\Core\Repository\Values\Content\ContentMetadataUpdateStruct;
 use Ibexa\Contracts\Core\Repository\Values\User\UserGroupUpdateStruct;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\ContentService;
-use Ibexa\Core\Repository\ContentTypeService;
-use Ibexa\Core\Repository\FieldTypeService;
 use Ibexa\Core\Repository\LocationService;
 use Ibexa\Core\Repository\UserService;
 use Ibexa\Core\Repository\Values\Content\ContentUpdateStruct;
@@ -21,7 +19,7 @@ use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\UserGroupUpdate;
 use Ibexa\Rest\Server\Values\RestUserGroupUpdateStruct;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class UserGroupUpdateTest extends BaseTestCase
 {
@@ -45,7 +43,7 @@ class UserGroupUpdateTest extends BaseTestCase
         ];
 
         $userGroupUpdate = $this->getParser();
-        $result = $userGroupUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $userGroupUpdate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             RestUserGroupUpdateStruct::class,
@@ -112,7 +110,7 @@ class UserGroupUpdateTest extends BaseTestCase
         ];
 
         $userGroupUpdate = $this->getParser();
-        $userGroupUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $userGroupUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidFields(): void
@@ -130,7 +128,7 @@ class UserGroupUpdateTest extends BaseTestCase
         ];
 
         $userGroupUpdate = $this->getParser();
-        $userGroupUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $userGroupUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingFieldDefinitionIdentifier(): void
@@ -154,7 +152,7 @@ class UserGroupUpdateTest extends BaseTestCase
         ];
 
         $userGroupUpdate = $this->getParser();
-        $userGroupUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $userGroupUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingFieldValue(): void
@@ -178,7 +176,7 @@ class UserGroupUpdateTest extends BaseTestCase
         ];
 
         $userGroupUpdate = $this->getParser();
-        $userGroupUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $userGroupUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): UserGroupUpdate
@@ -191,32 +189,26 @@ class UserGroupUpdateTest extends BaseTestCase
         );
     }
 
-    private function getFieldTypeParserMock(): FieldTypeParser & MockObject
+    private function getFieldTypeParserMock(): FieldTypeParser & Stub
     {
-        $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
-            ->disableOriginalConstructor()
-            ->setConstructorArgs(
-                [
-                    $this->getContentServiceMock(),
-                    self::createStub(ContentTypeService::class),
-                    self::createStub(FieldTypeService::class),
-                ]
-            )
-            ->getMock();
+        $fieldTypeParserMock = self::createStub(FieldTypeParser::class);
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock
             ->method('parseFieldValue')
-            ->with(4, 'name', [])
-            ->willReturn('foo');
+            ->willReturnCallback(static function (...$arguments): mixed {
+                self::assertEquals([4, 'name', []], array_slice($arguments, 0, 3));
+
+                return 'foo';
+            });
 
         return $fieldTypeParserMock;
     }
 
-    protected function getUserServiceMock(): UserService & MockObject
+    protected function getUserServiceMock(): UserService & Stub
     {
-        $userServiceMock = $this->createMock(UserService::class);
+        $userServiceMock = self::createStub(UserService::class);
 
-        $userServiceMock->expects($this->any())
+        $userServiceMock
             ->method('newUserGroupUpdateStruct')
             ->willReturn(
                 new UserGroupUpdateStruct()
@@ -225,15 +217,16 @@ class UserGroupUpdateTest extends BaseTestCase
         return $userServiceMock;
     }
 
-    protected function getLocationServiceMock(): LocationService & MockObject
+    protected function getLocationServiceMock(): LocationService & Stub
     {
-        $userServiceMock = $this->createMock(LocationService::class);
+        $userServiceMock = self::createStub(LocationService::class);
 
-        $userServiceMock->expects($this->any())
+        $userServiceMock
             ->method('loadLocation')
-            ->with(self::equalTo(5))
-            ->willReturn(
-                new Location(
+            ->willReturnCallback(static function (...$arguments): Location {
+                self::assertEquals([5], array_slice($arguments, 0, 1));
+
+                return new Location(
                     [
                         'contentInfo' => new ContentInfo(
                             [
@@ -241,23 +234,23 @@ class UserGroupUpdateTest extends BaseTestCase
                             ]
                         ),
                     ]
-                )
-            );
+                );
+            });
 
         return $userServiceMock;
     }
 
-    protected function getContentServiceMock(): ContentService & MockObject
+    protected function getContentServiceMock(): ContentService & Stub
     {
-        $contentServiceMock = $this->createMock(ContentService::class);
+        $contentServiceMock = self::createStub(ContentService::class);
 
-        $contentServiceMock->expects($this->any())
+        $contentServiceMock
             ->method('newContentUpdateStruct')
             ->willReturn(
                 new ContentUpdateStruct()
             );
 
-        $contentServiceMock->expects($this->any())
+        $contentServiceMock
             ->method('newContentMetadataUpdateStruct')
             ->willReturn(
                 new ContentMetadataUpdateStruct()

@@ -11,6 +11,7 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Core\Repository\FieldType;
 use Ibexa\Contracts\Core\Repository\FieldTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field as ApiField;
+use Ibexa\Contracts\Rest\Output\Visitor;
 use Ibexa\Rest\FieldTypeProcessorRegistry;
 use Ibexa\Rest\Output\FieldTypeSerializer;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor\Field;
@@ -52,7 +53,7 @@ final class FieldTest extends ValueObjectVisitorBaseTestCase
         $this->mockSerializingFieldValue($field);
 
         $visitor->visit(
-            $this->getVisitorMock(),
+            self::createStub(Visitor::class),
             $generator,
             $field
         );
@@ -73,11 +74,11 @@ final class FieldTest extends ValueObjectVisitorBaseTestCase
         $fieldTypeIdentifier = $field->getFieldTypeIdentifier();
 
         $fieldTypeMock->method('getFieldTypeIdentifier')->willReturn($fieldTypeIdentifier);
-        $fieldTypeMock->method('toHash')->with('foo')->willReturn(['value' => 'foo']);
+        $fieldTypeMock->expects($this->once())->method('toHash')->with('foo')->willReturn(['value' => 'foo']);
 
-        $this->fieldTypeProcessorRegistry->method('hasProcessor')->with($fieldTypeIdentifier)->willReturn(false);
+        $this->fieldTypeProcessorRegistry->expects($this->once())->method('hasProcessor')->with($fieldTypeIdentifier)->willReturn(false);
 
-        $this->fieldTypeService->method('getFieldType')->with($fieldTypeIdentifier)->willReturn($fieldTypeMock);
+        $this->fieldTypeService->expects($this->once())->method('getFieldType')->with($fieldTypeIdentifier)->willReturn($fieldTypeMock);
     }
 
     private function assertContainsTag(

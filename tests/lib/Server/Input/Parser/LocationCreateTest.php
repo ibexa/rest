@@ -12,7 +12,7 @@ use Ibexa\Contracts\Core\Repository\Values\Content\LocationCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\LocationService;
 use Ibexa\Rest\Server\Input\Parser\LocationCreate;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class LocationCreateTest extends BaseTestCase
 {
@@ -30,7 +30,7 @@ class LocationCreateTest extends BaseTestCase
         ];
 
         $locationCreate = $this->getParser();
-        $result = $locationCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $locationCreate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             LocationCreateStruct::class,
@@ -87,7 +87,7 @@ class LocationCreateTest extends BaseTestCase
         ];
 
         $locationCreate = $this->getParser();
-        $locationCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $locationCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingHrefAttribute(): void
@@ -104,7 +104,7 @@ class LocationCreateTest extends BaseTestCase
         ];
 
         $locationCreate = $this->getParser();
-        $locationCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $locationCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingSortField(): void
@@ -122,7 +122,7 @@ class LocationCreateTest extends BaseTestCase
         ];
 
         $locationCreate = $this->getParser();
-        $locationCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $locationCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingSortOrder(): void
@@ -140,7 +140,7 @@ class LocationCreateTest extends BaseTestCase
         ];
 
         $locationCreate = $this->getParser();
-        $locationCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $locationCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): LocationCreate
@@ -151,16 +151,17 @@ class LocationCreateTest extends BaseTestCase
         );
     }
 
-    protected function getLocationServiceMock(): LocationService & MockObject
+    protected function getLocationServiceMock(): LocationService & Stub
     {
-        $locationServiceMock = $this->createMock(LocationService::class);
+        $locationServiceMock = self::createStub(LocationService::class);
 
-        $locationServiceMock->expects($this->any())
+        $locationServiceMock
             ->method('newLocationCreateStruct')
-            ->with(self::equalTo(42))
-            ->willReturn(
-                new LocationCreateStruct(['parentLocationId' => 42])
-            );
+            ->willReturnCallback(static function (...$arguments): LocationCreateStruct {
+                self::assertEquals([42], array_slice($arguments, 0, 1));
+
+                return new LocationCreateStruct(['parentLocationId' => 42]);
+            });
 
         return $locationServiceMock;
     }

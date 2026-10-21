@@ -23,8 +23,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTestCase
 {
     protected const NON_VERBOSE_ERROR_DESCRIPTION = 'An error has occurred. Please try again later or contact your Administrator.';
 
-    /** @var TranslatorInterface|MockObject */
-    private ?MockObject $translatorMock = null;
+    private (TranslatorInterface & MockObject) | null $translatorMock = null;
 
     public function testVisit(): string
     {
@@ -40,7 +39,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTestCase
 
     public function testVisitNonVerbose(): string
     {
-        $this->getTranslatorMock()->method('trans')
+        $this->getTranslatorMock()->expects($this->once())->method('trans')
              ->with('non_verbose_error', [], 'ibexa_repository_exceptions')
              ->willReturn(self::NON_VERBOSE_ERROR_DESCRIPTION);
 
@@ -165,7 +164,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTestCase
 
     protected function internalGetVisitor(): ExceptionValueObjectVisitor
     {
-        return new ExceptionValueObjectVisitor(true, $this->getTranslatorMock());
+        return new ExceptionValueObjectVisitor(true, self::createStub(TranslatorInterface::class));
     }
 
     protected function internalGetNonDebugVisitor(): ExceptionValueObjectVisitor
@@ -176,9 +175,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTestCase
     protected function getTranslatorMock(): TranslatorInterface & MockObject
     {
         if (!isset($this->translatorMock)) {
-            $this->translatorMock = $this->getMockBuilder(TranslatorInterface::class)
-                 ->disableOriginalConstructor()
-                 ->getMock();
+            $this->translatorMock = $this->createMock(TranslatorInterface::class);
         }
 
         return $this->translatorMock;

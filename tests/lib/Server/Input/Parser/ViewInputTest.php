@@ -43,14 +43,14 @@ class ViewInputTest extends BaseTestCase
     {
         $this->expectException('Ibexa\\Contracts\\Rest\\Exceptions\\Parser');
         $inputArray = ['Query' => []];
-        $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
+        $this->getParser()->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testThrowsExceptionOnMissingQuery(): void
     {
         $this->expectException('Ibexa\\Contracts\\Rest\\Exceptions\\Parser');
         $inputArray = ['identifier' => 'foo'];
-        $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
+        $this->getParser()->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): ViewInput

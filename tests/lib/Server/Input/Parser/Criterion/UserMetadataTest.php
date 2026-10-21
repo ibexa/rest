@@ -46,7 +46,7 @@ class UserMetadataTest extends BaseTestCase
         UserMetadataCriterion $expected
     ): void {
         $userMetadata = $this->getParser();
-        $result = $userMetadata->parse($data, $this->getParsingDispatcherMock());
+        $result = $userMetadata->parse($data, $this->getParsingDispatcherStub());
 
         self::assertEquals(
             $expected,
@@ -64,7 +64,7 @@ class UserMetadataTest extends BaseTestCase
         ];
 
         $dataKeyValueObjectClass = $this->getParser();
-        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
+        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidTargetFormat(): void
@@ -79,7 +79,7 @@ class UserMetadataTest extends BaseTestCase
         ];
 
         $dataKeyValueObjectClass = $this->getParser();
-        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
+        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidValueFormat(): void
@@ -94,7 +94,7 @@ class UserMetadataTest extends BaseTestCase
         ];
 
         $dataKeyValueObjectClass = $this->getParser();
-        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
+        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnWrongValueType(): void
@@ -109,7 +109,7 @@ class UserMetadataTest extends BaseTestCase
         ];
 
         $dataKeyValueObjectClass = $this->getParser();
-        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
+        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): UserMetadata

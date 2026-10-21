@@ -7,7 +7,6 @@
 
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
-use Ibexa\Contracts\Core\Repository\FieldTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\LocationCreateStruct;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\ContentService;
@@ -20,7 +19,7 @@ use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\ContentCreate;
 use Ibexa\Rest\Server\Input\Parser\LocationCreate;
 use Ibexa\Rest\Server\Values\RestContentCreateStruct;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class ContentCreateTest extends BaseTestCase
 {
@@ -55,7 +54,7 @@ class ContentCreateTest extends BaseTestCase
         ];
 
         $contentCreate = $this->getParser();
-        $result = $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $contentCreate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             RestContentCreateStruct::class,
@@ -139,7 +138,7 @@ class ContentCreateTest extends BaseTestCase
         ];
 
         $contentCreate = $this->getParser();
-        $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingContentType(): void
@@ -172,7 +171,7 @@ class ContentCreateTest extends BaseTestCase
         ];
 
         $contentCreate = $this->getParser();
-        $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidContentType(): void
@@ -206,7 +205,7 @@ class ContentCreateTest extends BaseTestCase
         ];
 
         $contentCreate = $this->getParser();
-        $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingMainLanguageCode(): void
@@ -241,7 +240,7 @@ class ContentCreateTest extends BaseTestCase
         ];
 
         $contentCreate = $this->getParser();
-        $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidSection(): void
@@ -275,7 +274,7 @@ class ContentCreateTest extends BaseTestCase
         ];
 
         $contentCreate = $this->getParser();
-        $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidUser(): void
@@ -309,7 +308,7 @@ class ContentCreateTest extends BaseTestCase
         ];
 
         $contentCreate = $this->getParser();
-        $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidFields(): void
@@ -333,7 +332,7 @@ class ContentCreateTest extends BaseTestCase
         ];
 
         $contentCreate = $this->getParser();
-        $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingFieldDefinitionIdentifier(): void
@@ -368,7 +367,7 @@ class ContentCreateTest extends BaseTestCase
         ];
 
         $contentCreate = $this->getParser();
-        $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidFieldDefinitionIdentifier(): void
@@ -404,7 +403,7 @@ class ContentCreateTest extends BaseTestCase
         ];
 
         $contentCreate = $this->getParser();
-        $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingFieldValue(): void
@@ -439,7 +438,7 @@ class ContentCreateTest extends BaseTestCase
         ];
 
         $contentCreate = $this->getParser();
-        $contentCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): ContentCreate
@@ -453,70 +452,68 @@ class ContentCreateTest extends BaseTestCase
         );
     }
 
-    private function getFieldTypeParserMock(): FieldTypeParser & MockObject
+    private function getFieldTypeParserMock(): FieldTypeParser & Stub
     {
-        $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
-            ->disableOriginalConstructor()
-            ->setConstructorArgs(
-                [
-                    $this->getContentServiceMock(),
-                    $this->getContentTypeServiceMock(),
-                    self::createStub(FieldTypeService::class),
-                ]
-            )
-            ->getMock();
+        $fieldTypeParserMock = self::createStub(FieldTypeParser::class);
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock
             ->method('parseValue')
-            ->with('ibexa_string', [])
-            ->willReturn('foo');
+            ->willReturnCallback(static function (...$arguments): mixed {
+                self::assertEquals(['ibexa_string', []], array_slice($arguments, 0, 2));
+
+                return 'foo';
+            });
 
         return $fieldTypeParserMock;
     }
 
-    private function getLocationCreateParserMock(): LocationCreate & MockObject
+    private function getLocationCreateParserMock(): LocationCreate & Stub
     {
-        $locationCreateParserMock = $this->createMock(LocationCreate::class);
+        $locationCreateParserMock = self::createStub(LocationCreate::class);
 
-        $locationCreateParserMock->expects($this->any())
+        $locationCreateParserMock
             ->method('parse')
-            ->with([], $this->getParsingDispatcherMock())
-            ->willReturn(new LocationCreateStruct());
+            ->willReturnCallback(function (...$arguments): LocationCreateStruct {
+                self::assertEquals([[], $this->getParsingDispatcherStub()], array_slice($arguments, 0, 2));
+
+                return new LocationCreateStruct();
+            });
 
         return $locationCreateParserMock;
     }
 
-    protected function getContentServiceMock(): ContentService & MockObject
+    protected function getContentServiceMock(): ContentService & Stub
     {
-        $contentServiceMock = $this->createMock(ContentService::class);
+        $contentServiceMock = self::createStub(ContentService::class);
 
         $contentType = $this->getContentType();
-        $contentServiceMock->expects($this->any())
+        $contentServiceMock
             ->method('newContentCreateStruct')
-            ->with(
-                self::equalTo($contentType),
-                self::equalTo('eng-US')
-            )
-            ->willReturn(
-                new ContentCreateStruct(
+            ->willReturnCallback(static function (...$arguments) use ($contentType): ContentCreateStruct {
+                self::assertEquals([$contentType, 'eng-US'], array_slice($arguments, 0, 2));
+
+                return new ContentCreateStruct(
                     [
                         'contentType' => $contentType,
                         'mainLanguageCode' => 'eng-US',
                     ]
-                )
-            );
+                );
+            });
 
         return $contentServiceMock;
     }
 
-    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService & Stub
     {
-        $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
+        $contentTypeServiceMock = self::createStub(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects($this->any())
+        $contentTypeServiceMock
             ->method('loadContentType')
-            ->with(self::equalTo(13))
-            ->willReturn($this->getContentType());
+            ->willReturnCallback(function (...$arguments): mixed {
+                self::assertEquals([13], array_slice($arguments, 0, 1));
+
+                return $this->getContentType();
+            });
 
         return $contentTypeServiceMock;
     }

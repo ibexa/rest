@@ -46,6 +46,8 @@ class FieldTypeSerializerTest extends TestCase
     public function testSerializeContentFieldValue(
         array $hashValue
     ): void {
+        // the mocked field type returns an empty identifier
+        $this->expectNoFieldTypeProcessor('');
         $serializer = $this->getFieldTypeSerializer();
         $fieldType = $this->createFieldTypeMock('my-field-value', $hashValue);
 
@@ -75,6 +77,8 @@ class FieldTypeSerializerTest extends TestCase
 
     public function testSerializeFieldDefaultValue(): void
     {
+        // the mocked field type returns an empty identifier
+        $this->expectNoFieldTypeProcessor('');
         $serializer = $this->getFieldTypeSerializer();
 
         $fieldTypeMock = $this->getFieldTypeMock();
@@ -100,6 +104,7 @@ class FieldTypeSerializerTest extends TestCase
 
     public function testSerializeFieldSettings(): void
     {
+        $this->expectNoFieldTypeProcessor();
         $serializer = $this->getFieldTypeSerializer();
 
         $fieldTypeMock = $this->getFieldTypeMock();
@@ -170,6 +175,7 @@ class FieldTypeSerializerTest extends TestCase
 
     public function testSerializeValidatorConfiguration(): void
     {
+        $this->expectNoFieldTypeProcessor();
         $serializer = $this->getFieldTypeSerializer();
 
         $fieldTypeMock = $this->getFieldTypeMock();
@@ -296,7 +302,7 @@ class FieldTypeSerializerTest extends TestCase
         string $fieldTypeIdentifier,
         string $value
     ): Field {
-        $fieldMock = $this->createMock(Field::class);
+        $fieldMock = self::createStub(Field::class);
         $fieldMock
             ->method('getFieldTypeIdentifier')
             ->willReturn($fieldTypeIdentifier);
@@ -317,6 +323,7 @@ class FieldTypeSerializerTest extends TestCase
     ): Generator {
         $generator = $this->createMock(Generator::class);
         $generator
+            ->expects($this->once())
             ->method('generateFieldTypeHash')
             ->with(
                 $hashElementName,
@@ -335,6 +342,7 @@ class FieldTypeSerializerTest extends TestCase
     ): APIFieldType {
         $fieldTypeMock = $this->createMock(APIFieldType::class);
         $fieldTypeMock
+            ->expects($this->once())
             ->method('toHash')
             ->with($value)
             ->willReturn($hashValue);
@@ -342,11 +350,21 @@ class FieldTypeSerializerTest extends TestCase
         return $fieldTypeMock;
     }
 
+    private function expectNoFieldTypeProcessor(string $fieldTypeIdentifier = 'myFancyFieldType'): void
+    {
+        $this->getFieldTypeProcessorRegistryMock()
+            ->expects($this->once())
+            ->method('hasProcessor')
+            ->with($fieldTypeIdentifier)
+            ->willReturn(false);
+    }
+
     private function mockFieldTypeServiceGetFieldType(
         string $identifier,
         APIFieldType $fieldType,
     ): void {
         $this->getFieldTypeServiceMock()
+            ->expects($this->once())
             ->method('getFieldType')
             ->with($identifier)
             ->willReturn($fieldType);

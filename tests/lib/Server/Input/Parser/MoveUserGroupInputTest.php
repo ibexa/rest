@@ -33,7 +33,7 @@ final class MoveUserGroupInputTest extends AbstractDestinationLocationInputTestC
 
     protected function internalGetParser(): MoveUserGroupInput
     {
-        $this->locationService = $this->createMock(LocationService::class);
+        $this->locationService = self::createStub(LocationService::class);
         $this->validator = Validation::createValidator();
 
         return new MoveUserGroupInput(

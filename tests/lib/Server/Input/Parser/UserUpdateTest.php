@@ -7,8 +7,6 @@
 
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
-use Ibexa\Contracts\Core\Repository\ContentTypeService;
-use Ibexa\Contracts\Core\Repository\FieldTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentMetadataUpdateStruct;
 use Ibexa\Contracts\Core\Repository\Values\User\UserUpdateStruct;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
@@ -18,7 +16,7 @@ use Ibexa\Core\Repository\Values\Content\ContentUpdateStruct;
 use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\UserUpdate;
 use Ibexa\Rest\Server\Values\RestUserUpdateStruct;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class UserUpdateTest extends BaseTestCase
 {
@@ -45,7 +43,7 @@ class UserUpdateTest extends BaseTestCase
         ];
 
         $userUpdate = $this->getParser();
-        $result = $userUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $userUpdate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             RestUserUpdateStruct::class,
@@ -132,7 +130,7 @@ class UserUpdateTest extends BaseTestCase
         ];
 
         $userUpdate = $this->getParser();
-        $userUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $userUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidFields(): void
@@ -153,7 +151,7 @@ class UserUpdateTest extends BaseTestCase
         ];
 
         $userUpdate = $this->getParser();
-        $userUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $userUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingFieldDefinitionIdentifier(): void
@@ -180,7 +178,7 @@ class UserUpdateTest extends BaseTestCase
         ];
 
         $userUpdate = $this->getParser();
-        $userUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $userUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingFieldValue(): void
@@ -207,7 +205,7 @@ class UserUpdateTest extends BaseTestCase
         ];
 
         $userUpdate = $this->getParser();
-        $userUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $userUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): UserUpdate
@@ -220,32 +218,26 @@ class UserUpdateTest extends BaseTestCase
         );
     }
 
-    private function getFieldTypeParserMock(): FieldTypeParser & MockObject
+    private function getFieldTypeParserMock(): FieldTypeParser & Stub
     {
-        $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
-            ->disableOriginalConstructor()
-            ->setConstructorArgs(
-                [
-                    $this->getContentServiceMock(),
-                    self::createStub(ContentTypeService::class),
-                    self::createStub(FieldTypeService::class),
-                ]
-            )
-            ->getMock();
+        $fieldTypeParserMock = self::createStub(FieldTypeParser::class);
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock
             ->method('parseFieldValue')
-            ->with(14, 'first_name', [])
-            ->willReturn('foo');
+            ->willReturnCallback(static function (...$arguments): mixed {
+                self::assertEquals([14, 'first_name', []], array_slice($arguments, 0, 3));
+
+                return 'foo';
+            });
 
         return $fieldTypeParserMock;
     }
 
-    protected function getUserServiceMock(): UserService & MockObject
+    protected function getUserServiceMock(): UserService & Stub
     {
-        $userServiceMock = $this->createMock(UserService::class);
+        $userServiceMock = self::createStub(UserService::class);
 
-        $userServiceMock->expects($this->any())
+        $userServiceMock
             ->method('newUserUpdateStruct')
             ->willReturn(
                 new UserUpdateStruct()
@@ -254,17 +246,17 @@ class UserUpdateTest extends BaseTestCase
         return $userServiceMock;
     }
 
-    protected function getContentServiceMock(): ContentService & MockObject
+    protected function getContentServiceMock(): ContentService & Stub
     {
-        $contentServiceMock = $this->createMock(ContentService::class);
+        $contentServiceMock = self::createStub(ContentService::class);
 
-        $contentServiceMock->expects($this->any())
+        $contentServiceMock
             ->method('newContentUpdateStruct')
             ->willReturn(
                 new ContentUpdateStruct()
             );
 
-        $contentServiceMock->expects($this->any())
+        $contentServiceMock
             ->method('newContentMetadataUpdateStruct')
             ->willReturn(
                 new ContentMetadataUpdateStruct()

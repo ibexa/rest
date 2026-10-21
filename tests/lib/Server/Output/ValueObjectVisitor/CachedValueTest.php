@@ -12,6 +12,7 @@ use Ibexa\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Rest\Server\Values\CachedValue;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use stdClass;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -31,6 +32,8 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
      * @var Request
      */
     protected $request;
+
+    private (Response & MockObject) | null $cachedValueResponseMock = null;
 
     private const FULL_CACHE_HEADER_CALLS = ['setPublic', 'setVary Accept', 'setSharedMaxAge', 'setVary X-User-Hash'];
 
@@ -153,6 +156,11 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
             });
     }
 
+    protected function getResponseMock(): Response & MockObject
+    {
+        return $this->cachedValueResponseMock ??= $this->getMockBuilder(Response::class)->getMock();
+    }
+
     protected function visit($value): string
     {
         $this->getVisitorMock()->expects($this->once())->method('visitValueObject')->with($value->value);
@@ -185,13 +193,12 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
         return $visitor;
     }
 
-    protected function getConfigProviderMock(): ConfigResolverInterface & MockObject
+    protected function getConfigProviderMock(): ConfigResolverInterface & Stub
     {
         $options = $this->options ?: $this->defaultOptions;
 
-        $mock = $this->createMock(ConfigResolverInterface::class);
+        $mock = self::createStub(ConfigResolverInterface::class);
         $mock
-            ->expects($this->any())
             ->method('hasParameter')
             ->willReturnCallback(
                 static function ($parameterName) use ($options): bool {
@@ -199,7 +206,6 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
                 }
             );
         $mock
-            ->expects($this->any())
             ->method('getParameter')
             ->willReturnCallback(
                 static function (

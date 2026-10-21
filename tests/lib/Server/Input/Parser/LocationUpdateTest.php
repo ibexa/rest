@@ -13,7 +13,7 @@ use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\LocationService;
 use Ibexa\Rest\Server\Input\Parser\LocationUpdate;
 use Ibexa\Rest\Server\Values\RestLocationUpdateStruct;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class LocationUpdateTest extends BaseTestCase
 {
@@ -28,7 +28,7 @@ class LocationUpdateTest extends BaseTestCase
         ];
 
         $locationUpdate = $this->getParser();
-        $result = $locationUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $locationUpdate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             RestLocationUpdateStruct::class,
@@ -75,7 +75,7 @@ class LocationUpdateTest extends BaseTestCase
         ];
 
         $locationUpdate = $this->getParser();
-        $result = $locationUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $locationUpdate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             RestLocationUpdateStruct::class,
@@ -99,7 +99,7 @@ class LocationUpdateTest extends BaseTestCase
         ];
 
         $locationUpdate = $this->getParser();
-        $result = $locationUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $locationUpdate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             RestLocationUpdateStruct::class,
@@ -119,11 +119,11 @@ class LocationUpdateTest extends BaseTestCase
         );
     }
 
-    protected function getLocationServiceMock(): LocationService & MockObject
+    protected function getLocationServiceMock(): LocationService & Stub
     {
-        $locationServiceMock = $this->createMock(LocationService::class);
+        $locationServiceMock = self::createStub(LocationService::class);
 
-        $locationServiceMock->expects($this->any())
+        $locationServiceMock
             ->method('newLocationUpdateStruct')
             ->willReturn(
                 new LocationUpdateStruct()

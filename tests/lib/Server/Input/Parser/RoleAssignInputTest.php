@@ -81,7 +81,7 @@ class RoleAssignInputTest extends BaseTestCase
         ];
 
         $roleAssignInput = $this->getParser();
-        $roleAssignInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $roleAssignInput->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidRole(): void
@@ -109,7 +109,7 @@ class RoleAssignInputTest extends BaseTestCase
         ];
 
         $roleAssignInput = $this->getParser();
-        $roleAssignInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $roleAssignInput->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingLimitationIdentifier(): void
@@ -138,7 +138,7 @@ class RoleAssignInputTest extends BaseTestCase
         ];
 
         $roleAssignInput = $this->getParser();
-        $roleAssignInput->parse($inputArray, $this->getParsingDispatcherMock());
+        $roleAssignInput->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): RoleAssignInput

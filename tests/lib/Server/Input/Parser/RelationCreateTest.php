@@ -21,7 +21,7 @@ class RelationCreateTest extends BaseTestCase
         ];
 
         $relationCreate = $this->getParser();
-        $result = $relationCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $relationCreate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertEquals(
             42,
@@ -37,7 +37,7 @@ class RelationCreateTest extends BaseTestCase
         $inputArray = [];
 
         $relationCreate = $this->getParser();
-        $relationCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $relationCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingDestinationHref(): void
@@ -49,7 +49,7 @@ class RelationCreateTest extends BaseTestCase
         ];
 
         $relationCreate = $this->getParser();
-        $relationCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $relationCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): RelationCreate

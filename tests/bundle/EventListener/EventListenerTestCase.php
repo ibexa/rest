@@ -9,17 +9,12 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\Rest\EventListener;
 
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 abstract class EventListenerTestCase extends TestCase
 {
-    /** @var ParameterBag&MockObject */
-    protected ParameterBag $requestAttributesMock;
-
     protected bool $isRestRequest = true;
 
     protected int $requestType = HttpKernelInterface::MAIN_REQUEST;
@@ -47,23 +42,6 @@ abstract class EventListenerTestCase extends TestCase
                 method_exists($eventListener, is_array($method) ? (is_array($method[0]) ? $method[0][0] : (string)$method[0]) : $method)
             );
         }
-    }
-
-    protected function getRequestAttributesMock(): MockObject & ParameterBag
-    {
-        $requestAttributesMock = $this->createMock(ParameterBag::class);
-
-        $requestAttributesMock
-            ->method('get')
-            ->with('is_rest_request')
-            ->willReturn($this->isRestRequest);
-
-        $requestAttributesMock
-            ->method('getBoolean')
-            ->with('csrf_protection', true)
-            ->willReturn($this->enableCsrfProtection);
-
-        return $requestAttributesMock;
     }
 
     abstract protected function getEventListener(?bool $csrfEnabled = null): EventSubscriberInterface;

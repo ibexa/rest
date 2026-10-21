@@ -12,7 +12,7 @@ use Ibexa\Rest\Server\Output\ValueObjectVisitor\UserSession;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTestCase;
 use PHPUnit\Framework\Attributes\Depends;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class UserSessionTest extends ValueObjectVisitorBaseTestCase
 {
@@ -152,13 +152,15 @@ class UserSessionTest extends ValueObjectVisitorBaseTestCase
         );
     }
 
-    protected function getUserMock(): User & MockObject
+    protected function getUserMock(): User & Stub
     {
-        $user = $this->createMock(User::class);
-        $user->expects($this->any())
-            ->method('__get')
-            ->with(self::equalTo('id'))
-            ->willReturn('user123');
+        $user = self::createStub(User::class);
+        $user->method('__get')
+            ->willReturnCallback(static function (string $name): string {
+                self::assertSame('id', $name);
+
+                return 'user123';
+            });
 
         return $user;
     }

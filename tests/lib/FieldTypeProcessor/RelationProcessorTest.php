@@ -86,6 +86,7 @@ class RelationProcessorTest extends TestCase
         $processor->setLocationService($serviceLocationMock);
 
         $serviceLocationMock
+            ->expects($this->once())
             ->method('loadLocation')
             ->with('42')
             ->willReturn(new Location(['path' => ['1', '25', '42'], 'pathString' => '1/25/42']));
@@ -94,6 +95,7 @@ class RelationProcessorTest extends TestCase
         $processor->setRouter($routerMock);
 
         $routerMock
+            ->expects($this->once())
             ->method('generate')
             ->with('ibexa.rest.load_location', ['locationPath' => '1/25/42'])
             ->willReturn('/api/ibexa/v2/content/locations/1/25/42');
@@ -153,6 +155,7 @@ class RelationProcessorTest extends TestCase
         $processor->setLocationService($serviceLocationMock);
 
         $serviceLocationMock
+            ->expects($this->once())
             ->method('loadLocation')
             ->with('-1')
             ->willThrowException(new NotFoundException('', ''));

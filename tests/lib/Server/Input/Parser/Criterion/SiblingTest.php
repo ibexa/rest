@@ -14,18 +14,18 @@ use Ibexa\Contracts\Rest\Exceptions\Parser as ParserExpcetion;
 use Ibexa\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\Server\Input\Parser\Criterion\Sibling as SiblingParser;
 use Ibexa\Tests\Rest\Server\Input\Parser\BaseTestCase;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 final class SiblingTest extends BaseTestCase
 {
     private const int EXAMPLE_LOCATION_ID = 54;
     private const int EXAMPLE_PARENT_LOCATION_ID = 2;
 
-    private LocationService & MockObject $locationService;
+    private LocationService & Stub $locationService;
 
     protected function setUp(): void
     {
-        $this->locationService = $this->createMock(LocationService::class);
+        $this->locationService = self::createStub(LocationService::class);
     }
 
     public function testParse(): void
@@ -35,14 +35,21 @@ final class SiblingTest extends BaseTestCase
             'parentLocationId' => self::EXAMPLE_PARENT_LOCATION_ID,
         ]);
 
+        $loadLocationCalls = 0;
         $this->locationService
             ->method('loadLocation')
-            ->with(self::EXAMPLE_LOCATION_ID)
-            ->willReturn($location);
+            ->willReturnCallback(static function (int $locationId) use (&$loadLocationCalls, $location): Location {
+                ++$loadLocationCalls;
+                self::assertSame(self::EXAMPLE_LOCATION_ID, $locationId);
+
+                return $location;
+            });
 
         $actual = $this->getParser()->parse([
             'SiblingCriterion' => self::EXAMPLE_LOCATION_ID,
-        ], $this->getParsingDispatcherMock());
+        ], $this->getParsingDispatcherStub());
+
+        self::assertSame(1, $loadLocationCalls);
 
         $exepected = new SiblingCriterion(
             self::EXAMPLE_LOCATION_ID,
@@ -59,7 +66,7 @@ final class SiblingTest extends BaseTestCase
 
         $this->getParser()->parse([
         /** Missing SiblingCriterion key */
-        ], $this->getParsingDispatcherMock());
+        ], $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): SiblingParser

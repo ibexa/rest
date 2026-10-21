@@ -33,7 +33,7 @@ final class SwapLocationInputTest extends AbstractDestinationLocationInputTestCa
 
     protected function internalGetParser(): SwapLocationInput
     {
-        $locationService = $this->createMock(LocationService::class);
+        $locationService = self::createStub(LocationService::class);
         $this->locationService = $locationService;
         $this->validator = Validation::createValidator();
 

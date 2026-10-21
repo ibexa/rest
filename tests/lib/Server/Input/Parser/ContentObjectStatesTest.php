@@ -22,7 +22,7 @@ class ContentObjectStatesTest extends BaseTestCase
         ];
 
         $objectState = $this->getParser();
-        $result = $objectState->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $objectState->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertIsArray($result, 'ContentObjectStates not parsed correctly');
 
@@ -64,7 +64,7 @@ class ContentObjectStatesTest extends BaseTestCase
         ];
 
         $objectState = $this->getParser();
-        $objectState->parse($inputArray, $this->getParsingDispatcherMock());
+        $objectState->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function getParseHrefExpectationsMap(): array

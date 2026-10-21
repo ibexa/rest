@@ -14,7 +14,7 @@ use Ibexa\Core\Repository\ContentTypeService;
 use Ibexa\Core\Repository\Values\ContentType\ContentTypeCreateStruct;
 use Ibexa\Rest\Server\Input\Parser\ContentTypeCreate;
 use Ibexa\Rest\Server\Input\Parser\FieldDefinitionCreate;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class ContentTypeCreateTest extends BaseTestCase
 {
@@ -23,7 +23,7 @@ class ContentTypeCreateTest extends BaseTestCase
         $inputArray = $this->getInputArray();
 
         $contentTypeCreate = $this->getParser();
-        $result = $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             ContentTypeCreateStruct::class,
@@ -124,7 +124,7 @@ class ContentTypeCreateTest extends BaseTestCase
         unset($inputArray['identifier']);
 
         $contentTypeCreate = $this->getParser();
-        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingMainLanguageCode(): void
@@ -135,7 +135,7 @@ class ContentTypeCreateTest extends BaseTestCase
         unset($inputArray['mainLanguageCode']);
 
         $contentTypeCreate = $this->getParser();
-        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidNames(): void
@@ -146,7 +146,7 @@ class ContentTypeCreateTest extends BaseTestCase
         unset($inputArray['names']['value']);
 
         $contentTypeCreate = $this->getParser();
-        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidDescriptions(): void
@@ -157,7 +157,7 @@ class ContentTypeCreateTest extends BaseTestCase
         unset($inputArray['descriptions']['value']);
 
         $contentTypeCreate = $this->getParser();
-        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidUser(): void
@@ -168,7 +168,7 @@ class ContentTypeCreateTest extends BaseTestCase
         unset($inputArray['User']['_href']);
 
         $contentTypeCreate = $this->getParser();
-        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidFieldDefinitions(): void
@@ -179,7 +179,7 @@ class ContentTypeCreateTest extends BaseTestCase
         unset($inputArray['FieldDefinitions']['FieldDefinition']);
 
         $contentTypeCreate = $this->getParser();
-        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingFieldDefinitions(): void
@@ -192,7 +192,7 @@ class ContentTypeCreateTest extends BaseTestCase
         $inputArray['FieldDefinitions']['FieldDefinition'] = [];
 
         $contentTypeCreate = $this->getParser();
-        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidFieldDefinition(): void
@@ -203,7 +203,7 @@ class ContentTypeCreateTest extends BaseTestCase
         $inputArray['FieldDefinitions']['FieldDefinition'] = ['hi there'];
 
         $contentTypeCreate = $this->getParser();
-        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $contentTypeCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): ContentTypeCreate
@@ -215,32 +215,36 @@ class ContentTypeCreateTest extends BaseTestCase
         );
     }
 
-    private function getFieldDefinitionCreateParserMock(): FieldDefinitionCreate & MockObject
+    private function getFieldDefinitionCreateParserMock(): FieldDefinitionCreate & Stub
     {
-        $fieldDefinitionCreateParserMock = $this->createMock(FieldDefinitionCreate::class);
+        $fieldDefinitionCreateParserMock = self::createStub(FieldDefinitionCreate::class);
 
-        $fieldDefinitionCreateParserMock->expects($this->any())
+        $fieldDefinitionCreateParserMock
             ->method('parse')
-            ->with([], $this->getParsingDispatcherMock())
-            ->willReturn(new FieldDefinitionCreateStruct());
+            ->willReturnCallback(function (...$arguments): FieldDefinitionCreateStruct {
+                self::assertEquals([[], $this->getParsingDispatcherStub()], array_slice($arguments, 0, 2));
+
+                return new FieldDefinitionCreateStruct();
+            });
 
         return $fieldDefinitionCreateParserMock;
     }
 
-    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService & Stub
     {
-        $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
+        $contentTypeServiceMock = self::createStub(ContentTypeService::class);
 
-        $contentTypeServiceMock->expects($this->any())
+        $contentTypeServiceMock
             ->method('newContentTypeCreateStruct')
-            ->with(self::equalTo('new_content_type'))
-            ->willReturn(
-                new ContentTypeCreateStruct(
+            ->willReturnCallback(static function (...$arguments): ContentTypeCreateStruct {
+                self::assertEquals(['new_content_type'], array_slice($arguments, 0, 1));
+
+                return new ContentTypeCreateStruct(
                     [
                         'identifier' => 'new_content_type',
                     ]
-                )
-            );
+                );
+            });
 
         return $contentTypeServiceMock;
     }

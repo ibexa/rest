@@ -11,7 +11,6 @@ namespace Ibexa\Tests\Bundle\Rest\EventListener;
 use Ibexa\Bundle\Rest\EventListener\CsrfListener;
 use Ibexa\Contracts\Rest\Exceptions\UnauthorizedException;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -159,8 +158,13 @@ final class CsrfListenerTest extends EventListenerTestCase
         $request->setSession($this->getSessionMock());
         $request->setMethod('POST');
 
+        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
+        $eventDispatcher
+            ->expects($this->once())
+            ->method('dispatch');
+
         $this
-            ->getEventListener(true, $this->getEventDispatcherMock())
+            ->getEventListener(true, $eventDispatcher)
             ->onKernelRequest($this->getEvent($request));
     }
 
@@ -169,10 +173,10 @@ final class CsrfListenerTest extends EventListenerTestCase
         ?EventDispatcherInterface $eventDispatcher = null
     ): CsrfListener {
         return new CsrfListener(
-            $eventDispatcher ?? $this->getEventDispatcherMock(),
+            $eventDispatcher ?? self::createStub(EventDispatcherInterface::class),
             $csrfEnabled ?? true,
             self::INTENTION,
-            $csrfEnabled === true ? $this->getCsrfProviderMock() : null
+            $csrfEnabled === true ? $this->getCsrfProvider() : null
         );
     }
 
@@ -187,9 +191,6 @@ final class CsrfListenerTest extends EventListenerTestCase
         return $event;
     }
 
-    /**
-     * @return SessionInterface|MockObject
-     */
     private function getSessionMock(bool $isSessionStarted = true): SessionInterface
     {
         $sessionMock = $this->createMock(SessionInterface::class);
@@ -202,13 +203,10 @@ final class CsrfListenerTest extends EventListenerTestCase
         return $sessionMock;
     }
 
-    /**
-     * @return CsrfTokenManagerInterface|MockObject
-     */
-    private function getCsrfProviderMock(): CsrfTokenManagerInterface
+    private function getCsrfProvider(): CsrfTokenManagerInterface
     {
-        $provider = $this->createMock(CsrfTokenManagerInterface::class);
-        $provider->expects($this->any())
+        $provider = self::createStub(CsrfTokenManagerInterface::class);
+        $provider
             ->method('isTokenValid')
             ->willReturnCallback(
                 static function (CsrfToken $token): bool {
@@ -219,13 +217,5 @@ final class CsrfListenerTest extends EventListenerTestCase
             );
 
         return $provider;
-    }
-
-    /**
-     * @return EventDispatcherInterface&MockObject
-     */
-    private function getEventDispatcherMock(): EventDispatcherInterface
-    {
-        return $this->createMock(EventDispatcherInterface::class);
     }
 }

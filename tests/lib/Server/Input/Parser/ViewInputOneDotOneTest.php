@@ -71,14 +71,14 @@ class ViewInputOneDotOneTest extends BaseTestCase
     {
         $this->expectException(Parser::class);
         $inputArray = ['Query' => []];
-        $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
+        $this->getParser()->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testThrowsExceptionOnMissingQuery(): void
     {
         $this->expectException(Parser::class);
         $inputArray = ['identifier' => 'foo'];
-        $this->getParser()->parse($inputArray, $this->getParsingDispatcherMock());
+        $this->getParser()->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): ViewInputOneDotOne

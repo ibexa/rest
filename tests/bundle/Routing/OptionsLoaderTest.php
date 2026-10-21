@@ -17,8 +17,6 @@ use Symfony\Component\Routing\RouteCollection;
 #[CoversClass(OptionsLoader::class)]
 class OptionsLoaderTest extends TestCase
 {
-    private OptionsLoader\RouteCollectionMapper & MockObject $routeCollectionMapperMock;
-
     #[DataProvider('getResourceType')]
     public function testSupportsResourceType(
         string $type,
@@ -26,7 +24,7 @@ class OptionsLoaderTest extends TestCase
     ): void {
         self::assertEquals(
             $expected,
-            $this->getOptionsLoader()->supports(null, $type)
+            (new OptionsLoader(self::createStub(OptionsLoader\RouteCollectionMapper::class)))->supports(null, $type)
         );
     }
 
@@ -45,41 +43,33 @@ class OptionsLoaderTest extends TestCase
     {
         $optionsRouteCollection = new RouteCollection();
 
-        $this->getRouteCollectionMapperMock()->expects($this->once())
+        $routeCollectionMapperMock = $this->createMock(OptionsLoader\RouteCollectionMapper::class);
+        $routeCollectionMapperMock->expects($this->once())
             ->method('mapCollection')
             ->with(new RouteCollection())
             ->willReturn($optionsRouteCollection);
 
         self::assertSame(
             $optionsRouteCollection,
-            $this->getOptionsLoader()->load('resource', 'rest_options')
+            $this->getOptionsLoader($routeCollectionMapperMock)->load('resource', 'rest_options')
         );
     }
 
     /**
      * Returns a partially mocked OptionsLoader, with the import method mocked.
      */
-    protected function getOptionsLoader(): OptionsLoader & MockObject
+    protected function getOptionsLoader(OptionsLoader\RouteCollectionMapper $routeCollectionMapper): OptionsLoader & MockObject
     {
         $mock = $this->getMockBuilder(OptionsLoader::class)
-            ->setConstructorArgs([$this->getRouteCollectionMapperMock()])
+            ->setConstructorArgs([$routeCollectionMapper])
             ->onlyMethods(['import'])
             ->getMock();
 
-        $mock->expects($this->any())
+        $mock->expects($this->once())
             ->method('import')
             ->with(self::anything(), self::anything())
             ->willReturn(new RouteCollection());
 
         return $mock;
-    }
-
-    protected function getRouteCollectionMapperMock(): OptionsLoader\RouteCollectionMapper & MockObject
-    {
-        if (!isset($this->routeCollectionMapperMock)) {
-            $this->routeCollectionMapperMock = $this->createMock(OptionsLoader\RouteCollectionMapper::class);
-        }
-
-        return $this->routeCollectionMapperMock;
     }
 }

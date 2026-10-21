@@ -11,7 +11,7 @@ use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroupUpdateStr
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\ObjectStateService;
 use Ibexa\Rest\Server\Input\Parser\ObjectStateGroupUpdate;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class ObjectStateGroupUpdateTest extends BaseTestCase
 {
@@ -39,7 +39,7 @@ class ObjectStateGroupUpdateTest extends BaseTestCase
         ];
 
         $objectStateGroupUpdate = $this->getParser();
-        $result = $objectStateGroupUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $objectStateGroupUpdate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             ObjectStateGroupUpdateStruct::class,
@@ -91,7 +91,7 @@ class ObjectStateGroupUpdateTest extends BaseTestCase
         ];
 
         $objectStateGroupUpdate = $this->getParser();
-        $objectStateGroupUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $objectStateGroupUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): ObjectStateGroupUpdate
@@ -102,11 +102,11 @@ class ObjectStateGroupUpdateTest extends BaseTestCase
         );
     }
 
-    protected function getObjectStateServiceMock(): ObjectStateService & MockObject
+    protected function getObjectStateServiceMock(): ObjectStateService & Stub
     {
-        $objectStateServiceMock = $this->createMock(ObjectStateService::class);
+        $objectStateServiceMock = self::createStub(ObjectStateService::class);
 
-        $objectStateServiceMock->expects($this->any())
+        $objectStateServiceMock
             ->method('newObjectStateGroupUpdateStruct')
             ->willReturn(
                 new ObjectStateGroupUpdateStruct()

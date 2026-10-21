@@ -65,7 +65,7 @@ final class DateMetadataTest extends BaseTestCase
         DateMetadataCriterion $expected
     ): void {
         $dateMetadata = $this->getParser();
-        $result = $dateMetadata->parse($data, $this->getParsingDispatcherMock());
+        $result = $dateMetadata->parse($data, $this->getParsingDispatcherStub());
 
         self::assertEquals(
             $expected,
@@ -83,7 +83,7 @@ final class DateMetadataTest extends BaseTestCase
         ];
 
         $dataKeyValueObjectClass = $this->getParser();
-        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
+        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidTargetFormat(): void
@@ -99,7 +99,7 @@ final class DateMetadataTest extends BaseTestCase
         ];
 
         $dataKeyValueObjectClass = $this->getParser();
-        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
+        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnWrongTargetType(): void
@@ -115,7 +115,7 @@ final class DateMetadataTest extends BaseTestCase
         ];
 
         $dataKeyValueObjectClass = $this->getParser();
-        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
+        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidValueFormat(): void
@@ -131,7 +131,7 @@ final class DateMetadataTest extends BaseTestCase
         ];
 
         $dataKeyValueObjectClass = $this->getParser();
-        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
+        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnWrongValueType(): void
@@ -147,7 +147,7 @@ final class DateMetadataTest extends BaseTestCase
         ];
 
         $dataKeyValueObjectClass = $this->getParser();
-        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
+        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnInvalidOperatorFormat(): void
@@ -163,7 +163,7 @@ final class DateMetadataTest extends BaseTestCase
         ];
 
         $dataKeyValueObjectClass = $this->getParser();
-        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherMock());
+        $dataKeyValueObjectClass->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): DateMetadata

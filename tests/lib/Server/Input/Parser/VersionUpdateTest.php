@@ -7,14 +7,12 @@
 
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
-use Ibexa\Contracts\Core\Repository\ContentTypeService;
-use Ibexa\Contracts\Core\Repository\FieldTypeService;
 use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Core\Repository\ContentService;
 use Ibexa\Core\Repository\Values\Content\ContentUpdateStruct;
 use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Server\Input\Parser\VersionUpdate;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 
 class VersionUpdateTest extends BaseTestCase
 {
@@ -34,7 +32,7 @@ class VersionUpdateTest extends BaseTestCase
         ];
 
         $VersionUpdate = $this->getParser();
-        $result = $VersionUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $VersionUpdate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertInstanceOf(
             ContentUpdateStruct::class,
@@ -68,7 +66,7 @@ class VersionUpdateTest extends BaseTestCase
         ];
 
         $VersionUpdate = $this->getParser();
-        $VersionUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $VersionUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingFieldDefinitionIdentifier(): void
@@ -88,7 +86,7 @@ class VersionUpdateTest extends BaseTestCase
         ];
 
         $VersionUpdate = $this->getParser();
-        $VersionUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $VersionUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingFieldValue(): void
@@ -108,7 +106,7 @@ class VersionUpdateTest extends BaseTestCase
         ];
 
         $VersionUpdate = $this->getParser();
-        $VersionUpdate->parse($inputArray, $this->getParsingDispatcherMock());
+        $VersionUpdate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): VersionUpdate
@@ -119,32 +117,26 @@ class VersionUpdateTest extends BaseTestCase
         );
     }
 
-    private function getFieldTypeParserMock(): FieldTypeParser & MockObject
+    private function getFieldTypeParserMock(): FieldTypeParser & Stub
     {
-        $fieldTypeParserMock = $this->getMockBuilder(FieldTypeParser::class)
-            ->disableOriginalConstructor()
-            ->setConstructorArgs(
-                [
-                    $this->getContentServiceMock(),
-                    self::createStub(ContentTypeService::class),
-                    self::createStub(FieldTypeService::class),
-                ]
-            )
-            ->getMock();
+        $fieldTypeParserMock = self::createStub(FieldTypeParser::class);
 
-        $fieldTypeParserMock->expects($this->any())
+        $fieldTypeParserMock
             ->method('parseFieldValue')
-            ->with(42, 'subject', [])
-            ->willReturn('foo');
+            ->willReturnCallback(static function (...$arguments): mixed {
+                self::assertEquals([42, 'subject', []], array_slice($arguments, 0, 3));
+
+                return 'foo';
+            });
 
         return $fieldTypeParserMock;
     }
 
-    protected function getContentServiceMock(): ContentService & MockObject
+    protected function getContentServiceMock(): ContentService & Stub
     {
-        $contentServiceMock = $this->createMock(ContentService::class);
+        $contentServiceMock = self::createStub(ContentService::class);
 
-        $contentServiceMock->expects($this->any())
+        $contentServiceMock
             ->method('newContentUpdateStruct')
             ->willReturn(
                 new ContentUpdateStruct()

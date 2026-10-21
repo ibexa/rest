@@ -10,6 +10,7 @@ namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
+use Ibexa\Contracts\Rest\Output\Visitor;
 use Ibexa\Core\Repository\Values;
 use Ibexa\Rest\Output\FieldTypeSerializer;
 use Ibexa\Rest\Server\Output\ValueObjectVisitor;
@@ -68,7 +69,7 @@ class VersionTest extends ValueObjectVisitorBaseTestCase
                     ],
                 ]
             ),
-            $this->getMockForAbstractClass(ContentType::class),
+            self::createStub(ContentType::class),
             []
         );
 
@@ -82,7 +83,7 @@ class VersionTest extends ValueObjectVisitorBaseTestCase
         );
 
         $visitor->visit(
-            $this->getVisitorMock(),
+            self::createStub(Visitor::class),
             $generator,
             $version
         );

@@ -15,6 +15,7 @@ use Ibexa\Rest\Output\Generator\Xml;
 use Ibexa\Tests\Rest\AssertXmlTagTrait;
 use Ibexa\Tests\Rest\Server;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -25,13 +26,13 @@ abstract class ValueObjectVisitorBaseTestCase extends Server\BaseTestCase
 
     protected (Visitor & MockObject) | null $visitorMock = null;
 
-    protected (Response & MockObject) | null $responseMock = null;
+    protected Response | null $responseMock = null;
 
     protected Xml | null $generator;
 
-    private (RouterInterface & MockObject) | null $routerMock = null;
+    private (RouterInterface & Stub) | null $routerMock = null;
 
-    private (RouterInterface & MockObject) | null $templatedRouterMock = null;
+    private (RouterInterface & Stub) | null $templatedRouterMock = null;
 
     /** @var array<int, array{string, array<string, mixed>, string}> */
     private array $routeExpectations = [];
@@ -43,14 +44,17 @@ abstract class ValueObjectVisitorBaseTestCase extends Server\BaseTestCase
 
     private bool $templatedRouterMockConfigured = false;
 
-    private UriParserInterface & MockObject $uriParser;
+    private UriParserInterface & Stub $uriParser;
+
+    private int $routeCallIndex = 0;
+
+    private int $templatedRouteCallIndex = 0;
 
     protected function getVisitorMock(): Visitor & MockObject
     {
         if (!isset($this->visitorMock)) {
             $this->visitorMock = $this->createMock(Visitor::class);
             $this->visitorMock
-                ->expects($this->any())
                 ->method('getResponse')
                 ->willReturn($this->getResponseMock());
         }
@@ -58,11 +62,10 @@ abstract class ValueObjectVisitorBaseTestCase extends Server\BaseTestCase
         return $this->visitorMock;
     }
 
-    protected function getResponseMock(): Response & MockObject
+    protected function getResponseMock(): Response
     {
         if (!isset($this->responseMock)) {
-            $this->responseMock = $this->getMockBuilder(Response::class)
-                ->getMock();
+            $this->responseMock = new Response();
         }
 
         return $this->responseMock;
@@ -115,19 +118,19 @@ abstract class ValueObjectVisitorBaseTestCase extends Server\BaseTestCase
         return $visitor;
     }
 
-    protected function getUriParser(): UriParserInterface & MockObject
+    protected function getUriParser(): UriParserInterface & Stub
     {
         if (!isset($this->uriParser)) {
-            $this->uriParser = $this->createMock(UriParserInterface::class);
+            $this->uriParser = self::createStub(UriParserInterface::class);
         }
 
         return $this->uriParser;
     }
 
-    protected function getRouterMock(): RouterInterface & MockObject
+    protected function getRouterMock(): RouterInterface & Stub
     {
         if (!isset($this->routerMock)) {
-            $this->routerMock = $this->createMock(RouterInterface::class);
+            $this->routerMock = self::createStub(RouterInterface::class);
         }
 
         return $this->routerMock;
@@ -140,6 +143,7 @@ abstract class ValueObjectVisitorBaseTestCase extends Server\BaseTestCase
     {
         $this->routerMock = null;
         $this->routeExpectations = [];
+        $this->routeCallIndex = 0;
         $this->routerMockConfigured = false;
     }
 
@@ -159,14 +163,12 @@ abstract class ValueObjectVisitorBaseTestCase extends Server\BaseTestCase
         $this->routerMockConfigured = true;
 
         $this->getRouterMock()
-            ->expects($this->any())
             ->method('generate')
             ->willReturnCallback(function (
                 string $routeName,
                 array $arguments = []
             ): string {
-                static $index = 0;
-                $callIndex = $index++;
+                $callIndex = $this->routeCallIndex++;
 
                 // Calls beyond the registered expectations are not asserted, mirroring the
                 // permissive behaviour of the removed self::at() matcher.
@@ -182,10 +184,10 @@ abstract class ValueObjectVisitorBaseTestCase extends Server\BaseTestCase
             });
     }
 
-    protected function getTemplatedRouterMock(): RouterInterface & MockObject
+    protected function getTemplatedRouterMock(): RouterInterface & Stub
     {
         if (!isset($this->templatedRouterMock)) {
-            $this->templatedRouterMock = $this->createMock(RouterInterface::class);
+            $this->templatedRouterMock = self::createStub(RouterInterface::class);
         }
 
         return $this->templatedRouterMock;
@@ -209,14 +211,12 @@ abstract class ValueObjectVisitorBaseTestCase extends Server\BaseTestCase
         $this->templatedRouterMockConfigured = true;
 
         $this->getTemplatedRouterMock()
-            ->expects($this->any())
             ->method('generate')
             ->willReturnCallback(function (
                 string $routeName,
                 array $arguments = []
             ): string {
-                static $index = 0;
-                $callIndex = $index++;
+                $callIndex = $this->templatedRouteCallIndex++;
 
                 // Calls beyond the registered expectations are not asserted, mirroring the
                 // permissive behaviour of the removed self::at() matcher.
@@ -230,6 +230,22 @@ abstract class ValueObjectVisitorBaseTestCase extends Server\BaseTestCase
 
                 return $returnValue;
             });
+    }
+
+    protected function assertPostConditions(): void
+    {
+        parent::assertPostConditions();
+
+        self::assertGreaterThanOrEqual(
+            count($this->routeExpectations),
+            $this->routeCallIndex,
+            'Not all expected router calls were made.'
+        );
+        self::assertGreaterThanOrEqual(
+            count($this->templatedRouteExpectations),
+            $this->templatedRouteCallIndex,
+            'Not all expected templated router calls were made.'
+        );
     }
 
     abstract protected function internalGetVisitor(): ValueObjectVisitor;

@@ -33,7 +33,7 @@ final class CopyContentInputTest extends AbstractDestinationLocationInputTestCas
 
     protected function internalGetParser(): CopyContentInput
     {
-        $locationService = $this->createMock(LocationService::class);
+        $locationService = self::createStub(LocationService::class);
         $this->locationService = $locationService;
         $this->validator = Validation::createValidator();
 

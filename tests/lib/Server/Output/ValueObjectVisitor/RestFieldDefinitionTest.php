@@ -7,6 +7,7 @@
 
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
+use Ibexa\Contracts\Rest\Output\Visitor;
 use Ibexa\Core\Repository\Values;
 use Ibexa\Rest\Output\FieldTypeSerializer;
 use Ibexa\Rest\Server;
@@ -20,11 +21,6 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTestCase
 {
     protected FieldTypeSerializer & MockObject $fieldTypeSerializerMock;
 
-    public function setUp(): void
-    {
-        $this->fieldTypeSerializerMock = $this->createMock(FieldTypeSerializer::class);
-    }
-
     public function testVisitRestFieldDefinition(): \DOMDocument
     {
         return $this->generateDomDocument();
@@ -37,6 +33,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTestCase
 
     protected function generateDomDocument(?string $path = null): \DOMDocument
     {
+        $this->fieldTypeSerializerMock = $this->createMock(FieldTypeSerializer::class);
         $visitor = $this->getVisitor();
         $generator = $this->getGenerator();
 
@@ -66,7 +63,7 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTestCase
         }
 
         $visitor->visit(
-            $this->getVisitorMock(),
+            self::createStub(Visitor::class),
             $generator,
             $restFieldDefinition
         );

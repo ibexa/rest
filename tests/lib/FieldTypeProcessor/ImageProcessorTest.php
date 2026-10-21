@@ -19,6 +19,7 @@ class ImageProcessorTest extends BinaryInputProcessorTestCase
 
     public function testPostProcessValueHash(): void
     {
+        $this->router = $this->createMock(RouterInterface::class);
         $processor = $this->getProcessor();
 
         $inputHash = [
@@ -32,7 +33,7 @@ class ImageProcessorTest extends BinaryInputProcessorTestCase
             $expectedVariations[$variationIdentifier]['href'] = "/content/binary/images/{$inputHash['imageId']}/variations/{$variationIdentifier}";
         }
 
-        $routerMock = $this->getRouterMock();
+        $routerMock = $this->router;
         $matcher = $this->exactly(count($variations));
         $routerMock
             ->expects($matcher)
@@ -69,18 +70,9 @@ class ImageProcessorTest extends BinaryInputProcessorTestCase
     {
         return new ImageProcessor(
             $this->getTempDir(),
-            $this->getRouterMock(),
+            $this->router ?? self::createStub(RouterInterface::class),
             $this->getVariations()
         );
-    }
-
-    protected function getRouterMock(): RouterInterface & MockObject
-    {
-        if (!isset($this->router)) {
-            $this->router = $this->createMock(RouterInterface::class);
-        }
-
-        return $this->router;
     }
 
     /**

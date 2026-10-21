@@ -21,7 +21,7 @@ class URLWildcardCreateTest extends BaseTestCase
         ];
 
         $urlWildcardCreate = $this->getParser();
-        $result = $urlWildcardCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $result = $urlWildcardCreate->parse($inputArray, $this->getParsingDispatcherStub());
 
         self::assertEquals(
             [
@@ -44,7 +44,7 @@ class URLWildcardCreateTest extends BaseTestCase
         ];
 
         $urlWildcardCreate = $this->getParser();
-        $urlWildcardCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $urlWildcardCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingDestinationUrl(): void
@@ -57,7 +57,7 @@ class URLWildcardCreateTest extends BaseTestCase
         ];
 
         $urlWildcardCreate = $this->getParser();
-        $urlWildcardCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $urlWildcardCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     public function testParseExceptionOnMissingForward(): void
@@ -70,7 +70,7 @@ class URLWildcardCreateTest extends BaseTestCase
         ];
 
         $urlWildcardCreate = $this->getParser();
-        $urlWildcardCreate->parse($inputArray, $this->getParsingDispatcherMock());
+        $urlWildcardCreate->parse($inputArray, $this->getParsingDispatcherStub());
     }
 
     protected function internalGetParser(): URLWildcardCreate

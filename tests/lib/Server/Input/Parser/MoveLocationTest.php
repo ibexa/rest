@@ -33,7 +33,7 @@ final class MoveLocationTest extends AbstractDestinationLocationInputTestCase
 
     protected function internalGetParser(): MoveLocation
     {
-        $this->locationService = $this->createMock(LocationService::class);
+        $this->locationService = self::createStub(LocationService::class);
         $this->validator = Validation::createValidator();
 
         return new MoveLocation(
