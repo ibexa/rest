@@ -937,6 +937,12 @@ parameters:
 			path: tests/bundle/Functional/ContentTypeTest.php
 
 		-
+			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\ContentTypeTest\:\:testCreateContentType\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/bundle/Functional/ContentTypeTest.php
+
+		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\ContentTypeTest\:\:testCreateContentType\(\) has parameter \$contentTypeGroupHref with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
@@ -1565,6 +1571,12 @@ parameters:
 			identifier: deadCode.unreachable
 			count: 2
 			path: tests/bundle/Functional/TrashTest.php
+
+		-
+			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\UrlAliasTest\:\:testCreateUrlAlias\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: tests/bundle/Functional/UrlAliasTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\UrlAliasTest\:\:testCreateUrlAlias\(\) has parameter \$locationHref with no type specified\.$#'

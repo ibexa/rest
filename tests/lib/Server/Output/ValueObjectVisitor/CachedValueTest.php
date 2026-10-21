@@ -127,14 +127,14 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
     {
         $responseMock = $this->getResponseMock();
         $responseMock->expects($this->once())->method('setPublic')
-            ->willReturnCallback(static function () use (&$calls, $responseMock) {
+            ->willReturnCallback(static function () use (&$calls, $responseMock): Response {
                 $calls[] = 'setPublic';
 
                 return $responseMock;
             });
         $setVaryMatcher = $this->exactly(2);
         $responseMock->expects($setVaryMatcher)->method('setVary')
-            ->willReturnCallback(static function (...$parameters) use ($setVaryMatcher, &$calls, $responseMock) {
+            ->willReturnCallback(static function (...$parameters) use ($setVaryMatcher, &$calls, $responseMock): Response {
                 if ($setVaryMatcher->numberOfInvocations() === 1) {
                     self::assertSame(['Accept', true], $parameters);
                 } else {
@@ -146,7 +146,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTestCase
             });
         $responseMock->expects($this->once())->method('setSharedMaxAge')
             ->with($this->defaultOptions['content.default_ttl'])
-            ->willReturnCallback(static function () use (&$calls, $responseMock) {
+            ->willReturnCallback(static function () use (&$calls, $responseMock): Response {
                 $calls[] = 'setSharedMaxAge';
 
                 return $responseMock;
