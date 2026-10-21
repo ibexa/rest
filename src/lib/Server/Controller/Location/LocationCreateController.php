@@ -100,10 +100,12 @@ class LocationCreateController extends LocationBaseController
     /**
      * Creates a new location for object with id $contentId.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      */
-    public function createLocation(int $contentId, Request $request): CreatedLocation
-    {
+    public function createLocation(
+        int $contentId,
+        Request $request
+    ): CreatedLocation {
         $locationCreateStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

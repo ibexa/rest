@@ -21,8 +21,7 @@ final class GetBasedQueryContentTypeQueryBuilder implements ContentTypeQueryBuil
 
     public function __construct(
         private readonly ParsingDispatcher $parsingDispatcher
-    ) {
-    }
+    ) {}
 
     public function buildQuery(
         Request $request,

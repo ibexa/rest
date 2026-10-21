@@ -77,8 +77,10 @@ class ContentTranslationDeleteController extends RestController
      *
      * @throws \Exception
      */
-    public function deleteContentTranslation(int $contentId, string $languageCode): NoContent
-    {
+    public function deleteContentTranslation(
+        int $contentId,
+        string $languageCode
+    ): NoContent {
         $contentService = $this->repository->getContentService();
 
         $this->repository->beginTransaction();

@@ -73,14 +73,16 @@ class ContentVersionsRelationsListController extends RestController
 {
     public function __construct(
         private readonly ContentService\RelationListFacadeInterface $relationListFacade,
-    ) {
-    }
+    ) {}
 
     /**
      * Loads the relations of the given version.
      */
-    public function loadVersionRelations(int $contentId, int $versionNumber, Request $request): Values\CachedValue|Values\RelationList
-    {
+    public function loadVersionRelations(
+        int $contentId,
+        int $versionNumber,
+        Request $request
+    ): Values\CachedValue | Values\RelationList {
         $offset = $request->query->has('offset') ? (int)$request->query->get('offset') : 0;
         $limit = $request->query->has('limit') ? (int)$request->query->get('limit') : -1;
 

@@ -95,8 +95,10 @@ class RoleAssignToUserGroupController extends RoleBaseController
     /**
      * Assigns role to user group.
      */
-    public function assignRoleToUserGroup(string $groupPath, Request $request): RoleAssignmentList
-    {
+    public function assignRoleToUserGroup(
+        string $groupPath,
+        Request $request
+    ): RoleAssignmentList {
         $roleAssignment = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

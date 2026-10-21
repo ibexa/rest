@@ -10,6 +10,8 @@ namespace Ibexa\Rest\Server\Controller\User;
 
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
+use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,8 +55,8 @@ final class UserDeleteController extends UserBaseController
     /**
      * Given user is deleted.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
     public function deleteUser(int $userId): Values\NoContent
     {

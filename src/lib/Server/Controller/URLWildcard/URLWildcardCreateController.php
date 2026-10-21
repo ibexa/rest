@@ -92,11 +92,10 @@ class URLWildcardCreateController extends RestController
 {
     public function __construct(
         protected URLWildcardService $urlWildcardService
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      */
     public function createURLWildcard(Request $request): CreatedURLWildcard
     {

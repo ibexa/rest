@@ -34,8 +34,7 @@ final class ContentTypeQuery extends BaseParser
     public function __construct(
         private readonly CriterionProcessorInterface $criterionProcessor,
         private readonly SortClauseProcessorInterface $sortClauseProcessor
-    ) {
-    }
+    ) {}
 
     /**
      * @return list<string>

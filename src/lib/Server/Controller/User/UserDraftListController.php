@@ -72,8 +72,10 @@ final class UserDraftListController extends UserBaseController
     /**
      * Loads drafts assigned to user.
      */
-    public function loadUserDrafts(int $userId, Request $request): Values\VersionList
-    {
+    public function loadUserDrafts(
+        int $userId,
+        Request $request
+    ): Values\VersionList {
         $contentDrafts = $this->contentService->loadContentDraftList(
             $this->userService->loadUser($userId)
         );

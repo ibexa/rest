@@ -10,7 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Content;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentService;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,20 +82,19 @@ class ContentVersionRelationLoadByIdController extends RestController
 {
     public function __construct(
         private readonly ContentService\RelationListFacadeInterface $relationListFacade
-    ) {
-    }
+    ) {}
 
     /**
      * Loads a relation for the given content object and version.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
     public function loadVersionRelation(
         int $contentId,
         int $versionNumber,
         int $relationId,
         Request $request
-    ): Values\CachedValue|Values\RestRelation {
+    ): Values\CachedValue | Values\RestRelation {
         $contentService = $this->repository->getContentService();
         $contentInfo = $contentService->loadContentInfo($contentId);
 
@@ -118,6 +117,6 @@ class ContentVersionRelationLoadByIdController extends RestController
             }
         }
 
-        throw new Exceptions\NotFoundException("Relation not found: '{$request->getPathInfo()}'.");
+        throw new NotFoundException("Relation not found: '{$request->getPathInfo()}'.");
     }
 }

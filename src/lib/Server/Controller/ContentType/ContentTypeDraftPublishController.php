@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\ContentType;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Controller as RestController;
+use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values\RestContentType;
 
 class ContentTypeDraftPublishController extends RestController
@@ -24,7 +25,7 @@ class ContentTypeDraftPublishController extends RestController
     /**
      * Publishes a content type draft.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      */
     public function publishContentTypeDraft(int $contentTypeId): RestContentType
     {

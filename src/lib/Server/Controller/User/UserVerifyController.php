@@ -38,7 +38,7 @@ use Symfony\Component\HttpFoundation\Response;
 final class UserVerifyController extends UserBaseController
 {
     /**
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
     public function verifyUsers(Request $request): Values\OK
     {

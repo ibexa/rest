@@ -12,6 +12,10 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions as ApiExceptions;
+use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
+use Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
+use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values;
@@ -110,13 +114,15 @@ final class UserCreateController extends UserBaseController
     /**
      * Create a new user group in the given group.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @throws ContentFieldValidationException
+     * @throws ContentValidationException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
-    public function createUser(string $groupPath, Request $request): Values\CreatedUser
-    {
+    public function createUser(
+        string $groupPath,
+        Request $request
+    ): Values\CreatedUser {
         $userGroupLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($groupPath)
         );

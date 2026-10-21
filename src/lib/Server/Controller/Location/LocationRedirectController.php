@@ -55,7 +55,7 @@ class LocationRedirectController extends LocationBaseController
     /**
      * Loads the location for a given ID (x)or remote ID.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
+     * @throws BadRequestException
      */
     public function redirectLocation(Request $request): TemporaryRedirect
     {

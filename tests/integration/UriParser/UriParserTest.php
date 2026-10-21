@@ -114,7 +114,7 @@ final class UriParserTest extends IbexaKernelTestCase
     }
 
     /**
-     * @return iterable<string, array{\Symfony\Component\HttpFoundation\Request, bool}>
+     * @return iterable<string, array{Request, bool}>
      */
     public static function getDataForTestIsRestRequest(): iterable
     {

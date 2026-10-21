@@ -52,8 +52,7 @@ class TrashEmptyController extends RestController
     public function __construct(
         protected TrashService $trashService,
         protected LocationService $locationService
-    ) {
-    }
+    ) {}
 
     public function emptyTrash(): NoContent
     {

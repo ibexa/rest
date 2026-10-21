@@ -61,7 +61,7 @@ class ContentRedirectController extends RestController
     /**
      * Loads a content info by a remote ID.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
+     * @throws BadRequestException
      */
     public function redirectContent(Request $request): TemporaryRedirect
     {

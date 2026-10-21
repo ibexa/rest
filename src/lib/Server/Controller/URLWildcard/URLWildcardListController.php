@@ -53,8 +53,7 @@ class URLWildcardListController extends RestController
 {
     public function __construct(
         protected URLWildcardService $urlWildcardService
-    ) {
-    }
+    ) {}
 
     /**
      * Returns the list of URL wildcards.

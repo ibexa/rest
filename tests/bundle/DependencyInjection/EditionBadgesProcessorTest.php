@@ -89,8 +89,10 @@ final class EditionBadgesProcessorTest extends TestCase
      * @phpstan-param TTagToEditionMappingConfig $tagToEditionMappingConfig
      * @phpstan-param TTagToEditionMap $expectedTagToEditionMap
      */
-    public function testProcess(array $tagToEditionMappingConfig, array $expectedTagToEditionMap): void
-    {
+    public function testProcess(
+        array $tagToEditionMappingConfig,
+        array $expectedTagToEditionMap
+    ): void {
         $processor = new EditionBadgesProcessor($this->containerBuilder);
 
         $this->containerBuilder

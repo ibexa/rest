@@ -85,10 +85,13 @@ class ContentDraftTranslationDeleteController extends RestController
     /**
      * Remove the given Translation from the given Version Draft.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      */
-    public function deleteTranslationFromDraft(int $contentId, ?int $versionNumber, string $languageCode): NoContent
-    {
+    public function deleteTranslationFromDraft(
+        int $contentId,
+        ?int $versionNumber,
+        string $languageCode
+    ): NoContent {
         $contentService = $this->repository->getContentService();
         $versionInfo = $contentService->loadVersionInfoById($contentId, $versionNumber);
 

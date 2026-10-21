@@ -21,9 +21,7 @@ final readonly class EditionBadgesProcessor implements EditionBadgesProcessorInt
     public const string TAG_EDITION_MAP_PARAMETER_NAME = 'ibexa.rest.edition_badges.badges.tag_editions.map';
     public const string BADGES_CONFIG_PARAMETER_NAME = 'ibexa.rest.edition_badges.badges.config';
 
-    public function __construct(private ContainerBuilder $container)
-    {
-    }
+    public function __construct(private ContainerBuilder $container) {}
 
     /**
      * Transforms a list of `array{tag, editions[]}` into a map of `tag => editions[]`.

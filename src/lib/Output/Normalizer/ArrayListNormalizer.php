@@ -18,15 +18,18 @@ final class ArrayListNormalizer implements NormalizerInterface, NormalizerAwareI
     use NormalizerAwareTrait;
 
     /**
-     * @param \Ibexa\Rest\Output\Generator\Data\ArrayList $object
+     * @param ArrayList $object
      * @param array<mixed> $context
      *
      * @return array<mixed>
      *
      * {@inheritDoc}
      */
-    public function normalize(mixed $object, ?string $format = null, array $context = []): array
-    {
+    public function normalize(
+        mixed $object,
+        ?string $format = null,
+        array $context = []
+    ): array {
         $data = [];
         foreach ($object as $key => $value) {
             if (is_array($value)) {
@@ -46,8 +49,11 @@ final class ArrayListNormalizer implements NormalizerInterface, NormalizerAwareI
         return $data;
     }
 
-    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
-    {
+    public function supportsNormalization(
+        mixed $data,
+        ?string $format = null,
+        array $context = []
+    ): bool {
         return $data instanceof ArrayList;
     }
 

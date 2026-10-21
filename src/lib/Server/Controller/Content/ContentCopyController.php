@@ -7,6 +7,9 @@
 
 namespace Ibexa\Rest\Server\Controller\Content;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
@@ -17,8 +20,10 @@ class ContentCopyController extends RestController
     /**
      * Creates a new content object as copy under the given parent location given in the destination header.
      */
-    public function copyContent(int $contentId, Request $request): Values\ResourceCreated
-    {
+    public function copyContent(
+        int $contentId,
+        Request $request
+    ): Values\ResourceCreated {
         $destination = (string)$request->headers->get('Destination');
 
         $parentLocationParts = explode('/', $destination);
@@ -36,17 +41,19 @@ class ContentCopyController extends RestController
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws UnauthorizedException
+     * @throws NotFoundException
      */
-    public function copy(int $contentId, Request $request): Values\ResourceCreated
-    {
+    public function copy(
+        int $contentId,
+        Request $request
+    ): Values\ResourceCreated {
         $contentService = $this->repository->getContentService();
         $locationService = $this->repository->getLocationService();
 
         $contentInfo = $contentService->loadContentInfo($contentId);
 
-        /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location $destinationLocation */
+        /** @var Location $destinationLocation */
         $destinationLocation = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

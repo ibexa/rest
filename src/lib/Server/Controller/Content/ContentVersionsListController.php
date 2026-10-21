@@ -65,8 +65,10 @@ class ContentVersionsListController extends RestController
      * Returns a list of all versions of the content. This method does not
      * include fields and relations in the Version elements of the response.
      */
-    public function loadContentVersions(int $contentId, Request $request): VersionList
-    {
+    public function loadContentVersions(
+        int $contentId,
+        Request $request
+    ): VersionList {
         $contentService = $this->repository->getContentService();
         $contentInfo = $contentService->loadContentInfo($contentId);
 

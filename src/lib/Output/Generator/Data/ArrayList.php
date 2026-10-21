@@ -16,8 +16,10 @@ final class ArrayList extends ArrayObject implements DataObjectInterface
 
     private string $name;
 
-    public function __construct(string $name, ?DataObjectInterface $parent)
-    {
+    public function __construct(
+        string $name,
+        ?DataObjectInterface $parent
+    ) {
         $this->name = $name;
         $this->parent = $parent;
 

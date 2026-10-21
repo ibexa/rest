@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Controller\Role;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\Values\User\PolicyDraft;
 use Ibexa\Rest\Server\Values\NoContent;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -61,7 +62,7 @@ class RolePolicyDeleteAllFromRoleController extends RoleBaseController
     {
         $loadedRole = $this->roleService->loadRole($roleId);
         $roleDraft = $this->roleService->createRoleDraft($loadedRole);
-        /** @var \Ibexa\Contracts\Core\Repository\Values\User\PolicyDraft $policyDraft */
+        /** @var PolicyDraft $policyDraft */
         foreach ($roleDraft->getPolicies() as $policyDraft) {
             $this->roleService->removePolicyByRoleDraft($roleDraft, $policyDraft);
         }

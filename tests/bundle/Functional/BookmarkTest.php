@@ -9,12 +9,13 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use Psr\Http\Client\ClientExceptionInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 class BookmarkTest extends RESTFunctionalTestCase
 {
     /**
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
     public function testCreateBookmark(): int
     {
@@ -39,7 +40,7 @@ class BookmarkTest extends RESTFunctionalTestCase
     /**
      * @depends testCreateBookmark
      *
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
     public function testCreateBookmarkIfAlreadyExists(int $locationId): void
     {
@@ -56,7 +57,7 @@ class BookmarkTest extends RESTFunctionalTestCase
     /**
      * @depends testCreateBookmark
      *
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
     public function testIsBookmarked(int $locationId): void
     {
@@ -73,7 +74,7 @@ class BookmarkTest extends RESTFunctionalTestCase
     /**
      * @depends testDeleteBookmark
      *
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
     public function testIsBookmarkedReturnsNotFound(int $locationId): void
     {
@@ -90,7 +91,7 @@ class BookmarkTest extends RESTFunctionalTestCase
     /**
      * @depends testCreateBookmark
      *
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
     public function testDeleteBookmark(int $locationId): int
     {
@@ -107,7 +108,7 @@ class BookmarkTest extends RESTFunctionalTestCase
     }
 
     /**
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
     public function testLoadBookmarks(): void
     {
@@ -126,7 +127,7 @@ class BookmarkTest extends RESTFunctionalTestCase
     /**
      * @depends testDeleteBookmark
      *
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
     public function testDeleteBookmarkReturnNotFound(int $locationId): void
     {

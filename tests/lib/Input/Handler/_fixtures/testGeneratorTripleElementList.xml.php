@@ -5,18 +5,18 @@
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 return [
-  'elementList' => [
-    '_media-type' => 'application/vnd.ibexa.api.elementList+xml',
-    'element' => [
-      0 => [
-        '_media-type' => 'application/vnd.ibexa.api.element+xml',
-      ],
-      1 => [
-        '_media-type' => 'application/vnd.ibexa.api.element+xml',
-      ],
-      2 => [
-        '_media-type' => 'application/vnd.ibexa.api.element+xml',
-      ],
+    'elementList' => [
+        '_media-type' => 'application/vnd.ibexa.api.elementList+xml',
+        'element' => [
+            0 => [
+                '_media-type' => 'application/vnd.ibexa.api.element+xml',
+            ],
+            1 => [
+                '_media-type' => 'application/vnd.ibexa.api.element+xml',
+            ],
+            2 => [
+                '_media-type' => 'application/vnd.ibexa.api.element+xml',
+            ],
+        ],
     ],
-  ],
 ];

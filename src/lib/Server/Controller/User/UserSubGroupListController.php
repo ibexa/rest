@@ -88,8 +88,10 @@ final class UserSubGroupListController extends UserBaseController
     /**
      * Returns a list of the sub groups.
      */
-    public function loadSubUserGroups(string $groupPath, Request $request): RestValue
-    {
+    public function loadSubUserGroups(
+        string $groupPath,
+        Request $request
+    ): RestValue {
         $offset = $request->query->has('offset') ? (int)$request->query->get('offset') : 0;
         $limit = $request->query->has('limit') ? (int)$request->query->get('limit') : 25;
 

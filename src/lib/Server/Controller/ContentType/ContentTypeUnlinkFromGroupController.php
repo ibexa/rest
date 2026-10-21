@@ -10,7 +10,7 @@ namespace Ibexa\Rest\Server\Controller\ContentType;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values\ContentTypeGroupRefList;
@@ -94,11 +94,13 @@ class ContentTypeUnlinkFromGroupController extends RestController
     /**
      * Removes the given group from the content type and returns the updated group list.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws ForbiddenException
+     * @throws NotFoundException
      */
-    public function unlinkContentTypeFromGroup(int $contentTypeId, int $contentTypeGroupId): ContentTypeGroupRefList
-    {
+    public function unlinkContentTypeFromGroup(
+        int $contentTypeId,
+        int $contentTypeGroupId
+    ): ContentTypeGroupRefList {
         $contentType = $this->contentTypeService->loadContentType($contentTypeId);
         $contentTypeGroup = $this->contentTypeService->loadContentTypeGroup($contentTypeGroupId);
 
@@ -112,7 +114,7 @@ class ContentTypeUnlinkFromGroupController extends RestController
         }
 
         if (!$contentTypeInGroup) {
-            throw new Exceptions\NotFoundException('The content type is not in the provided group');
+            throw new NotFoundException('The content type is not in the provided group');
         }
 
         if (count($existingContentTypeGroups) == 1) {

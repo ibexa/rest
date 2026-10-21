@@ -59,8 +59,7 @@ class URLWildcardDeleteController extends RestController
 {
     public function __construct(
         protected URLWildcardService $urlWildcardService
-    ) {
-    }
+    ) {}
 
     /**
      * The given URL wildcard is deleted.

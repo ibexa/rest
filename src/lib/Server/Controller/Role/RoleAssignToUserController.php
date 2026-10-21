@@ -95,8 +95,10 @@ class RoleAssignToUserController extends RoleBaseController
     /**
      * Assigns role to user.
      */
-    public function assignRoleToUser(int $userId, Request $request): RoleAssignmentList
-    {
+    public function assignRoleToUser(
+        int $userId,
+        Request $request
+    ): RoleAssignmentList {
         $roleAssignment = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

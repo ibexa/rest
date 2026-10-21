@@ -124,17 +124,19 @@ class ContentVersionUpdateController extends RestController
 {
     public function __construct(
         private readonly ContentService\RelationListFacadeInterface $relationListFacade
-    ) {
-    }
+    ) {}
 
     /**
      * A specific draft is updated.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException
+     * @throws ForbiddenException
+     * @throws BadRequestException
      */
-    public function updateVersion(int $contentId, int $versionNumber, Request $request): Version
-    {
+    public function updateVersion(
+        int $contentId,
+        int $versionNumber,
+        Request $request
+    ): Version {
         $contentUpdateStruct = $this->inputDispatcher->parse(
             new Message(
                 [

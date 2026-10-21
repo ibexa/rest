@@ -55,8 +55,7 @@ class URLAliasListGlobalController extends RestController
     public function __construct(
         protected URLAliasService $urlAliasService,
         protected LocationService $locationService
-    ) {
-    }
+    ) {}
 
     /**
      * Returns the list of global URL aliases.

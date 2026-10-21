@@ -12,7 +12,7 @@ use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
@@ -116,8 +116,8 @@ class ContentTypeDraftFieldDefinitionUpdateController extends RestController
     /**
      * Updates the attributes of a field definition.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws ForbiddenException
+     * @throws NotFoundException
      */
     public function updateContentTypeDraftFieldDefinition(
         int $contentTypeId,
@@ -144,7 +144,7 @@ class ContentTypeDraftFieldDefinitionUpdateController extends RestController
         }
 
         if ($fieldDefinition === null) {
-            throw new Exceptions\NotFoundException("Field definition not found: '{$request->getPathInfo()}'.");
+            throw new NotFoundException("Field definition not found: '{$request->getPathInfo()}'.");
         }
 
         try {
@@ -164,6 +164,6 @@ class ContentTypeDraftFieldDefinitionUpdateController extends RestController
             }
         }
 
-        throw new Exceptions\NotFoundException("Field definition not found: '{$request->getPathInfo()}'.");
+        throw new NotFoundException("Field definition not found: '{$request->getPathInfo()}'.");
     }
 }

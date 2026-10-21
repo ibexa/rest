@@ -25,9 +25,10 @@ final readonly class EditionBadgeFactory implements EditionBadgeFactoryInterface
      * @phpstan-param TBadgesConfig $badgesConfig
      * @phpstan-param TTagToEditionMap $tagToEditionMap
      */
-    public function __construct(private array $badgesConfig, private array $tagToEditionMap)
-    {
-    }
+    public function __construct(
+        private array $badgesConfig,
+        private array $tagToEditionMap
+    ) {}
 
     public function getBadgesForOperation(Operation $operation): array
     {

@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Rest\Security\EventListener\JWT;
 
 use Ibexa\Rest\Security\EventListener\JWT\JsonLoginHeaderReplacingSubscriber;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -77,7 +78,7 @@ final class JsonLoginHeaderReplacingSubscriberTest extends TestCase
     /**
      * @param array<string, string> $headers
      *
-     * @return \Symfony\Component\HttpKernel\Event\RequestEvent&\PHPUnit\Framework\MockObject\MockObject
+     * @return RequestEvent&MockObject
      */
     private function getRequestEventMock(array $headers): RequestEvent
     {

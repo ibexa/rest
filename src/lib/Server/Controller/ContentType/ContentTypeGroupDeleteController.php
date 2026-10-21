@@ -69,7 +69,7 @@ class ContentTypeGroupDeleteController extends RestController
     }
 
     /**
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      */
     public function deleteContentTypeGroup(int $contentTypeGroupId): NoContent
     {

@@ -64,8 +64,7 @@ class URLWildcardLoadByIdController extends RestController
 {
     public function __construct(
         protected URLWildcardService $urlWildcardService
-    ) {
-    }
+    ) {}
 
     /**
      * Returns the URL wildcard with the given id.

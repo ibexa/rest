@@ -100,7 +100,7 @@ class ContentTypeGroupCreateController extends RestController
     /**
      * Creates a new content type group.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      */
     public function createContentTypeGroup(Request $request): Values\CreatedContentTypeGroup
     {

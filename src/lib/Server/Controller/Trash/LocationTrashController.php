@@ -7,6 +7,8 @@
 
 namespace Ibexa\Rest\Server\Controller\Trash;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\TrashService;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -19,12 +21,11 @@ class LocationTrashController extends RestController
     public function __construct(
         protected TrashService $trashService,
         protected LocationService $locationService
-    ) {
-    }
+    ) {}
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws UnauthorizedException
+     * @throws NotFoundException
      */
     public function trashLocation(string $locationPath): RestValue
     {

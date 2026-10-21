@@ -11,7 +11,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values\RestFieldDefinition;
 use Symfony\Component\HttpFoundation\Request;
@@ -83,10 +83,13 @@ class ContentTypeFieldDefinitionLoadByIdController extends RestController
     /**
      * Returns the field definition given by id.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
-    public function loadContentTypeFieldDefinition(int $contentTypeId, int $fieldDefinitionId, Request $request): RestFieldDefinition
-    {
+    public function loadContentTypeFieldDefinition(
+        int $contentTypeId,
+        int $fieldDefinitionId,
+        Request $request
+    ): RestFieldDefinition {
         $contentType = $this->contentTypeService->loadContentType($contentTypeId, Language::ALL);
 
         foreach ($contentType->getFieldDefinitions() as $fieldDefinition) {
@@ -98,6 +101,6 @@ class ContentTypeFieldDefinitionLoadByIdController extends RestController
             }
         }
 
-        throw new Exceptions\NotFoundException("Field definition not found: '{$request->getPathInfo()}'.");
+        throw new NotFoundException("Field definition not found: '{$request->getPathInfo()}'.");
     }
 }

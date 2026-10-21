@@ -20,7 +20,7 @@ final class RestoreTrashItemInputTest extends BaseTest
 {
     private const int TESTED_LOCATION_ID = 22;
 
-    private MockObject&LocationService $locationService;
+    private MockObject & LocationService $locationService;
 
     private ValidatorInterface $validator;
 

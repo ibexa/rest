@@ -105,8 +105,10 @@ class RoleUpdateController extends RoleBaseController
     /**
      * Updates a role.
      */
-    public function updateRole(int $roleId, Request $request): Role
-    {
+    public function updateRole(
+        int $roleId,
+        Request $request
+    ): Role {
         $createStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

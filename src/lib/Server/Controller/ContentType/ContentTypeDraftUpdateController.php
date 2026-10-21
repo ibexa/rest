@@ -113,10 +113,12 @@ class ContentTypeDraftUpdateController extends RestController
     /**
      * Updates metadata of a draft. This method does not handle field definitions.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      */
-    public function updateContentTypeDraft(int $contentTypeId, Request $request): RestContentType
-    {
+    public function updateContentTypeDraft(
+        int $contentTypeId,
+        Request $request
+    ): RestContentType {
         $contentTypeDraft = $this->contentTypeService->loadContentTypeDraft($contentTypeId);
         $contentTypeUpdateStruct = $this->inputDispatcher->parse(
             new Message(

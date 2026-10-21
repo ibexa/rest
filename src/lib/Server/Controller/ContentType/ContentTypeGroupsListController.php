@@ -13,6 +13,7 @@ use Ibexa\Contracts\Core\Repository\ContentTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\ContentTypeGroupList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -67,7 +68,7 @@ class ContentTypeGroupsListController extends RestController
     /**
      * Returns a list of all content type groups.
      */
-    public function loadContentTypeGroupList(Request $request): Values\TemporaryRedirect|\Ibexa\Rest\Server\Values\ContentTypeGroupList
+    public function loadContentTypeGroupList(Request $request): Values\TemporaryRedirect | ContentTypeGroupList
     {
         if ($request->query->has('identifier')) {
             $contentTypeGroup = $this->contentTypeService->loadContentTypeGroupByIdentifier(
@@ -90,7 +91,7 @@ class ContentTypeGroupsListController extends RestController
             $contentTypeGroups[] = $contentTypeGroup;
         }
 
-        return new Values\ContentTypeGroupList(
+        return new ContentTypeGroupList(
             $contentTypeGroups,
         );
     }

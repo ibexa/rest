@@ -8,7 +8,6 @@
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
-use Ibexa\Rest\Server\Input\Parser\ContentQuery;
 use Ibexa\Rest\Server\Input\Parser\ContentQuery as QueryParser;
 
 class QueryParserTest extends BaseTest
@@ -153,7 +152,7 @@ class QueryParserTest extends BaseTest
         self::assertEquals($expectedQuery, $result);
     }
 
-    protected function internalGetParser(): ContentQuery
+    protected function internalGetParser(): QueryParser
     {
         return new QueryParser();
     }

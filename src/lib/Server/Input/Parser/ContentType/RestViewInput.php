@@ -23,8 +23,7 @@ final class RestViewInput extends CriterionParser
 
     public function __construct(
         private readonly ValidatorInterface $validator
-    ) {
-    }
+    ) {}
 
     public function parse(
         array $data,

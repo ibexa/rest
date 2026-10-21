@@ -11,6 +11,11 @@ namespace Ibexa\Rest\Server\Controller\User;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
+use Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException;
+use Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException;
+use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Values;
 use LogicException;
@@ -174,14 +179,16 @@ final class UserGroupCreateController extends UserBaseController
      * Create a new user group under the given parent
      * To create a top level group use /user/groups/1/5/subgroups.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws ContentFieldValidationException
+     * @throws ContentValidationException
+     * @throws InvalidArgumentException
+     * @throws UnauthorizedException
+     * @throws NotFoundException
      */
-    public function createUserGroup(string $groupPath, Request $request): Values\CreatedUserGroup
-    {
+    public function createUserGroup(
+        string $groupPath,
+        Request $request
+    ): Values\CreatedUserGroup {
         $userGroupLocation = $this->locationService->loadLocation(
             $this->extractLocationIdFromPath($groupPath)
         );
@@ -223,11 +230,11 @@ final class UserGroupCreateController extends UserBaseController
     /**
      * Create a new user group under the root location.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentFieldValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ContentValidationException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
+     * @throws ContentFieldValidationException
+     * @throws ContentValidationException
+     * @throws InvalidArgumentException
      */
     public function createRootUserGroup(Request $request): Values\CreatedUserGroup
     {

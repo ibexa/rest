@@ -9,8 +9,10 @@ namespace Ibexa\Rest\Server\Controller\Trash;
 
 use Ibexa\Contracts\Core\Repository\Exceptions as ApiExceptions;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\TrashService;
+use Ibexa\Contracts\Core\Repository\Values\Content\Location;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
@@ -24,18 +26,19 @@ class TrashItemRestoreController extends RestController
     public function __construct(
         protected TrashService $trashService,
         protected LocationService $locationService
-    ) {
-    }
+    ) {}
 
     /**
      * Restores a trashItem.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \InvalidArgumentException
+     * @throws UnauthorizedException
+     * @throws NotFoundException
+     * @throws InvalidArgumentException
      */
-    public function restoreTrashItem(int $trashItemId, Request $request): Values\ResourceCreated
-    {
+    public function restoreTrashItem(
+        int $trashItemId,
+        Request $request
+    ): Values\ResourceCreated {
         $requestDestination = null;
         try {
             $requestDestination = $request->headers->get('Destination');
@@ -82,21 +85,23 @@ class TrashItemRestoreController extends RestController
     }
 
     /**
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
+     * @throws ApiExceptions\ForbiddenException
      */
-    public function restoreItem(int $trashItemId, Request $request): Values\ResourceCreated
-    {
+    public function restoreItem(
+        int $trashItemId,
+        Request $request
+    ): Values\ResourceCreated {
         try {
-            /** @var \Ibexa\Contracts\Core\Repository\Values\Content\Location|null $locationDestination */
+            /** @var Location|null $locationDestination */
             $locationDestination = $this->inputDispatcher->parse(
                 new Message(
                     ['Content-Type' => $request->headers->get('Content-Type')],
                     $request->getContent(),
                 ),
             );
-        } catch (ApiExceptions\NotFoundException $e) {
+        } catch (NotFoundException $e) {
             throw new ForbiddenException(/** @Ignore */ $e->getMessage(), 1, $e);
         }
 

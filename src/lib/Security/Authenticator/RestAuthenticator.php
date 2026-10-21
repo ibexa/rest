@@ -11,6 +11,7 @@ namespace Ibexa\Rest\Security\Authenticator;
 use Ibexa\Contracts\Rest\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Input\Dispatcher;
 use Ibexa\Rest\Message;
+use Ibexa\Rest\Server\Values\SessionInput;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -34,8 +35,7 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
     public function __construct(
         private readonly Dispatcher $inputDispatcher,
         private readonly TokenStorageInterface $tokenStorage,
-    ) {
-    }
+    ) {}
 
     public function supports(Request $request): ?bool
     {
@@ -55,7 +55,7 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
             );
         }
 
-        /** @var \Ibexa\Rest\Server\Values\SessionInput $sessionInput */
+        /** @var SessionInput $sessionInput */
         $sessionInput = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -83,8 +83,10 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
     /**
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
      */
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
-    {
+    public function onAuthenticationFailure(
+        Request $request,
+        AuthenticationException $exception
+    ): ?Response {
         throw new UnauthorizedException($exception->getMessageKey());
     }
 
@@ -118,8 +120,10 @@ final class RestAuthenticator extends AbstractAuthenticator implements Interacti
         return $existingUserToken?->getUser() !== null;
     }
 
-    private function createAuthorizationPassport(string $login, string $password): Passport
-    {
+    private function createAuthorizationPassport(
+        string $login,
+        string $password
+    ): Passport {
         return new Passport(
             new UserBadge($login),
             new PasswordCredentials($password),

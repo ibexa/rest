@@ -61,8 +61,7 @@ class URLAliasDeleteController extends RestController
     public function __construct(
         protected URLAliasService $urlAliasService,
         protected LocationService $locationService
-    ) {
-    }
+    ) {}
 
     /**
      * The given URL alias is deleted.

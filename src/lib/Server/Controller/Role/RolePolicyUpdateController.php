@@ -112,10 +112,13 @@ class RolePolicyUpdateController extends RoleBaseController
     /**
      * Updates a policy.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws Exceptions\NotFoundException
      */
-    public function updatePolicy(int $roleId, int $policyId, Request $request): Policy
-    {
+    public function updatePolicy(
+        int $roleId,
+        int $policyId,
+        Request $request
+    ): Policy {
         $updateStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

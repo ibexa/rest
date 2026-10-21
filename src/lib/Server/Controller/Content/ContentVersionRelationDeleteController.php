@@ -12,7 +12,7 @@ use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 use Ibexa\Contracts\Core\Repository\Values\Content\RelationType;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
 use Ibexa\Rest\Server\Values\NoContent;
@@ -83,17 +83,20 @@ class ContentVersionRelationDeleteController extends RestController
 {
     public function __construct(
         private readonly ContentService\RelationListFacadeInterface $relationListFacade
-    ) {
-    }
+    ) {}
 
     /**
      * Deletes a relation of the given draft.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws ForbiddenException
+     * @throws NotFoundException
      */
-    public function removeRelation(int $contentId, int $versionNumber, int $relationId, Request $request): NoContent
-    {
+    public function removeRelation(
+        int $contentId,
+        int $versionNumber,
+        int $relationId,
+        Request $request
+    ): NoContent {
         $contentService = $this->repository->getContentService();
         $versionInfo = $contentService->loadVersionInfo(
             $contentService->loadContentInfo($contentId),
@@ -120,6 +123,6 @@ class ContentVersionRelationDeleteController extends RestController
             }
         }
 
-        throw new Exceptions\NotFoundException("Could not find Relation '{$request->getPathInfo()}'.");
+        throw new NotFoundException("Could not find Relation '{$request->getPathInfo()}'.");
     }
 }

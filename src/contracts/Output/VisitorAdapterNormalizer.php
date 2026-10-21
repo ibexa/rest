@@ -12,6 +12,7 @@ use Ibexa\Contracts\Rest\Output\Generator as BaseGenerator;
 use Ibexa\Rest\Output\Generator;
 use LogicException;
 use Symfony\Component\Serializer\Encoder\EncoderInterface;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -28,18 +29,20 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
         private readonly EncoderInterface $jsonEncoder,
         private readonly EncoderInterface $xmlEncoder,
         private readonly ValueObjectVisitorResolverInterface $valueObjectVisitorResolver,
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<string, mixed> $context
      *
      * @return array<mixed>|bool|string|int|float|\ArrayObject<int|string, mixed>|null
      *
-     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     * @throws ExceptionInterface
      */
-    public function normalize(mixed $object, ?string $format = null, array $context = []): array|bool|string|int|float|null|\ArrayObject
-    {
+    public function normalize(
+        mixed $object,
+        ?string $format = null,
+        array $context = []
+    ): array | bool | string | int | float | null | \ArrayObject {
         $eligibleVisitor = is_object($object)
             ? $this->valueObjectVisitorResolver->resolveValueObjectVisitor($object)
             : null;
@@ -54,8 +57,11 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
     /**
      * @param array<string, mixed> $context
      */
-    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
-    {
+    public function supportsNormalization(
+        mixed $data,
+        ?string $format = null,
+        array $context = []
+    ): bool {
         if (($context[self::CALLED_CONTEXT] ?? false) === true) {
             return false;
         }
@@ -80,7 +86,7 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
      *
      * @return array<mixed>
      *
-     * @throws \LogicException
+     * @throws LogicException
      */
     private function visitValueObject(
         object $object,
@@ -112,8 +118,10 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
      *
      * @return array<mixed>
      */
-    private function buildContext(array $context, ?string $format): array
-    {
+    private function buildContext(
+        array $context,
+        ?string $format
+    ): array {
         $context += [self::CALLED_CONTEXT => true];
 
         if ($format === 'xml') {
@@ -124,7 +132,7 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
     }
 
     /**
-     * @throws \LogicException
+     * @throws LogicException
      */
     private function createGenerator(string $format): BaseGenerator
     {
@@ -146,7 +154,7 @@ final class VisitorAdapterNormalizer implements NormalizerInterface, NormalizerA
     }
 
     /**
-     * @throws \LogicException
+     * @throws LogicException
      */
     private function createVisitor(?string $format): Visitor
     {

@@ -12,6 +12,7 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Rest\Exceptions\UnauthorizedException;
+use Ibexa\Core\MVC\Symfony\Security\User;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Rest\Value as RestValue;
@@ -149,7 +150,7 @@ final class SessionCreateController extends SessionBaseController
                 throw new UnauthorizedException('The current user is not authenticated.');
             }
 
-            /** @var \Ibexa\Core\MVC\Symfony\Security\User $user */
+            /** @var User $user */
             $user = $token->getUser();
 
             return new Values\UserSession(

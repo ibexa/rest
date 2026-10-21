@@ -79,8 +79,10 @@ class RoleUnassignFromUserController extends RoleBaseController
     /**
      * Un-assigns role from user.
      */
-    public function unassignRoleFromUser(int $userId, int $roleId): Values\RoleAssignmentList
-    {
+    public function unassignRoleFromUser(
+        int $userId,
+        int $roleId
+    ): Values\RoleAssignmentList {
         $user = $this->userService->loadUser($userId);
 
         $roleAssignments = $this->roleService->getRoleAssignmentsForUser($user);

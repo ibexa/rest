@@ -5,16 +5,16 @@
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 return [
-  'ContentTypeCreate' => [
-    'FieldDefinitions' => [
-      'FieldDefinition' => [
-        [
-          'fieldSettings' => [
-            'selectionMethod' => 'SELECTION_DROPDOWN',
-            'selectionRoot' => 33,
-          ],
+    'ContentTypeCreate' => [
+        'FieldDefinitions' => [
+            'FieldDefinition' => [
+                [
+                    'fieldSettings' => [
+                        'selectionMethod' => 'SELECTION_DROPDOWN',
+                        'selectionRoot' => 33,
+                    ],
+                ],
+            ],
         ],
-      ],
     ],
-  ],
 ];

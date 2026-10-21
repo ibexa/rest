@@ -61,8 +61,7 @@ class TrashItemDeleteController extends RestController
     public function __construct(
         protected TrashService $trashService,
         protected LocationService $locationService
-    ) {
-    }
+    ) {}
 
     /**
      * Deletes the given trash item.

@@ -62,8 +62,10 @@ class ObjectStateGroupDeleteController extends RestController
 
     protected ContentService $contentService;
 
-    public function __construct(ObjectStateService $objectStateService, ContentService $contentService)
-    {
+    public function __construct(
+        ObjectStateService $objectStateService,
+        ContentService $contentService
+    ) {
         $this->objectStateService = $objectStateService;
         $this->contentService = $contentService;
     }

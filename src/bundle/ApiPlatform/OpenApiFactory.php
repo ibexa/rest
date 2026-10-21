@@ -11,6 +11,7 @@ namespace Ibexa\Bundle\Rest\ApiPlatform;
 use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
 use ApiPlatform\OpenApi\Model\Info;
 use ApiPlatform\OpenApi\Model\Operation;
+use ApiPlatform\OpenApi\Model\PathItem;
 use ApiPlatform\OpenApi\Model\RequestBody;
 use ApiPlatform\OpenApi\Model\Response;
 use ApiPlatform\OpenApi\Model\Server;
@@ -28,8 +29,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
         private KernelInterface $kernel,
         private EditionBadgeFactoryInterface $editionBadgeFactory,
         private string $prefix,
-    ) {
-    }
+    ) {}
 
     /**
      * @param array<string, mixed> $context
@@ -65,7 +65,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
     {
         $paths = $openApi->getPaths();
 
-        /** @var \ApiPlatform\OpenApi\Model\PathItem $pathItem */
+        /** @var PathItem $pathItem */
         foreach ($paths->getPaths() as $path => $pathItem) {
             $newPathItem = clone $pathItem;
 
@@ -211,7 +211,7 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
      *
      * @throws \JsonException
      */
-    private function loadExampleFromFile(string $filePath): array|string
+    private function loadExampleFromFile(string $filePath): array | string
     {
         $fileContent = file_get_contents($filePath);
 
@@ -232,8 +232,10 @@ final readonly class OpenApiFactory implements OpenApiFactoryInterface
     /**
      * @return array<string, mixed>
      */
-    private function parseJsonFile(string $fileContent, string $filePath): array
-    {
+    private function parseJsonFile(
+        string $fileContent,
+        string $filePath
+    ): array {
         try {
             return json_decode($fileContent, true, 512, JSON_THROW_ON_ERROR);
         } catch (\JsonException $e) {

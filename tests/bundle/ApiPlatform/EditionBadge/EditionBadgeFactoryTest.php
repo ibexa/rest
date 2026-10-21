@@ -44,8 +44,10 @@ final class EditionBadgeFactoryTest extends TestCase
      *
      * @phpstan-param TBadgeList $expectedBadges
      */
-    public function testGetBadgesForOperation(?array $tags, array $expectedBadges): void
-    {
+    public function testGetBadgesForOperation(
+        ?array $tags,
+        array $expectedBadges
+    ): void {
         $operation = new Operation(tags: $tags);
         self::assertEquals($expectedBadges, $this->factory->getBadgesForOperation($operation));
     }

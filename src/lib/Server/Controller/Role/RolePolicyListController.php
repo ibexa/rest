@@ -64,8 +64,10 @@ class RolePolicyListController extends RoleBaseController
     /**
      * Loads the policies for the role.
      */
-    public function loadPolicies(int $roleId, Request $request): PolicyList
-    {
+    public function loadPolicies(
+        int $roleId,
+        Request $request
+    ): PolicyList {
         $loadedRole = $this->roleService->loadRole($roleId);
         $policiesIterable = $loadedRole->getPolicies();
         $policies = [];

@@ -73,8 +73,10 @@ class LocationForContentListController extends LocationBaseController
     /**
      * Loads all locations for content object.
      */
-    public function loadLocationsForContent(int $contentId, Request $request): Values\CachedValue
-    {
+    public function loadLocationsForContent(
+        int $contentId,
+        Request $request
+    ): Values\CachedValue {
         $restLocations = [];
         $contentInfo = $this->contentService->loadContentInfo($contentId);
         foreach ($this->locationService->loadLocations($contentInfo) as $location) {

@@ -15,8 +15,7 @@ final readonly class SchemasCollection implements \IteratorAggregate, \Countable
      */
     public function __construct(
         private array $schemas = [],
-    ) {
-    }
+    ) {}
 
     /**
      * @return \Traversable<string>

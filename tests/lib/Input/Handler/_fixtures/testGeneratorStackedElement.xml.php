@@ -5,10 +5,10 @@
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
 return [
-  'element' => [
-    '_media-type' => 'application/vnd.ibexa.api.element+xml',
-    'stacked' => [
-      '_media-type' => 'application/vnd.ibexa.api.stacked+xml',
+    'element' => [
+        '_media-type' => 'application/vnd.ibexa.api.element+xml',
+        'stacked' => [
+            '_media-type' => 'application/vnd.ibexa.api.stacked+xml',
+        ],
     ],
-  ],
 ];

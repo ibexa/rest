@@ -22,8 +22,7 @@ final class AuthorizationHeaderRESTRequestMatcher implements RequestMatcherInter
 
     public function __construct(
         private readonly ?string $headerName = null,
-    ) {
-    }
+    ) {}
 
     public function matches(Request $request): bool
     {

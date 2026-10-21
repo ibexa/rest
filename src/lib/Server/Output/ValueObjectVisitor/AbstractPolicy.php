@@ -16,10 +16,16 @@ use Ibexa\Contracts\Rest\Output\Visitor;
 
 abstract class AbstractPolicy extends ValueObjectVisitor
 {
-    abstract public function visit(Visitor $visitor, Generator $generator, mixed $data): void;
+    abstract public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void;
 
-    protected function visitPolicyAttributes(Generator $generator, PolicyValue $data): void
-    {
+    protected function visitPolicyAttributes(
+        Generator $generator,
+        PolicyValue $data
+    ): void {
         $generator->startAttribute(
             'href',
             $this->router->generate('ibexa.rest.load_policy', ['roleId' => $data->roleId, 'policyId' => $data->id])

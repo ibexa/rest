@@ -15,6 +15,7 @@ use Ibexa\Rest\Server\Values;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Controller\UserValueResolver;
 
 #[Get(
     uriTemplate: '/user/current',
@@ -63,7 +64,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 final class UserRedirectToCurrentUserController extends UserBaseController
 {
     /**
-     * @see \Symfony\Component\Security\Http\Controller\UserValueResolver
+     * @see UserValueResolver
      */
     public function redirectToCurrentUser(?UserInterface $user): Values\TemporaryRedirect
     {

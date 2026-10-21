@@ -121,10 +121,12 @@ class SectionUpdateController extends RestController
     /**
      * Updates a section.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      */
-    public function updateSection(int $sectionId, Request $request): Section
-    {
+    public function updateSection(
+        int $sectionId,
+        Request $request
+    ): Section {
         $createStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

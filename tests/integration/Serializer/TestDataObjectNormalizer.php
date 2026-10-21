@@ -20,8 +20,11 @@ final class TestDataObjectNormalizer implements NormalizerInterface, NormalizerA
     /**
      * @return array<string, mixed>
      */
-    public function normalize(mixed $object, ?string $format = null, array $context = []): array
-    {
+    public function normalize(
+        mixed $object,
+        ?string $format = null,
+        array $context = []
+    ): array {
         assert($object instanceof TestDataObject);
 
         $data = [
@@ -38,8 +41,11 @@ final class TestDataObjectNormalizer implements NormalizerInterface, NormalizerA
         return $data;
     }
 
-    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
-    {
+    public function supportsNormalization(
+        mixed $data,
+        ?string $format = null,
+        array $context = []
+    ): bool {
         return $data instanceof TestDataObject;
     }
 

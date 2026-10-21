@@ -87,14 +87,15 @@ class ContentDraftCreateFromVersionController extends RestController
 {
     public function __construct(
         private readonly ContentService\RelationListFacadeInterface $relationListFacade
-    ) {
-    }
+    ) {}
 
     /**
      * The system creates a new draft version as a copy from the given version.
      */
-    public function createDraftFromVersion(int $contentId, int $versionNumber): Values\CreatedVersion
-    {
+    public function createDraftFromVersion(
+        int $contentId,
+        int $versionNumber
+    ): Values\CreatedVersion {
         $contentService = $this->repository->getContentService();
 
         $contentInfo = $contentService->loadContentInfo($contentId);

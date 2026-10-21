@@ -21,5 +21,5 @@ abstract class Handler
      *
      * @throws Parser
      */
-    abstract public function convert(string $string): array|string|int|bool|float|null;
+    abstract public function convert(string $string): array | string | int | bool | float | null;
 }

@@ -18,19 +18,21 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAwareInterface
 {
-    public const string PRESERVE_EMPTY_OBJECTS = 'preserve_empty_objects';
-
     use NormalizerAwareTrait;
+    public const string PRESERVE_EMPTY_OBJECTS = 'preserve_empty_objects';
 
     /**
      * @param array<mixed> $context
      *
-     * @return array<mixed>|\ArrayObject
+     * @return array<mixed>|NativeArrayObject
      *
      * {@inheritDoc}
      */
-    public function normalize(mixed $object, ?string $format = null, array $context = []): array|\ArrayObject
-    {
+    public function normalize(
+        mixed $object,
+        ?string $format = null,
+        array $context = []
+    ): array | NativeArrayObject {
         $vars = get_object_vars($object);
 
         $isOuterElement = $context[Xml::OUTER_ELEMENT] ?? false;
@@ -70,8 +72,11 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
         return $data;
     }
 
-    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
-    {
+    public function supportsNormalization(
+        mixed $data,
+        ?string $format = null,
+        array $context = []
+    ): bool {
         return $data instanceof JsonObject;
     }
 

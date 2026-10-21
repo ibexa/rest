@@ -20,8 +20,11 @@ final class ArrayObjectNormalizer implements NormalizerInterface
      *
      * {@inheritDoc}
      */
-    public function normalize(mixed $object, ?string $format = null, array $context = []): array
-    {
+    public function normalize(
+        mixed $object,
+        ?string $format = null,
+        array $context = []
+    ): array {
         $data = get_object_vars($object);
 
         foreach ($data as $key => $value) {
@@ -31,8 +34,11 @@ final class ArrayObjectNormalizer implements NormalizerInterface
         return $data;
     }
 
-    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
-    {
+    public function supportsNormalization(
+        mixed $data,
+        ?string $format = null,
+        array $context = []
+    ): bool {
         return $data instanceof ArrayObject;
     }
 

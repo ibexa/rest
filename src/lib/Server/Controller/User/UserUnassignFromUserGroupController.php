@@ -11,6 +11,9 @@ namespace Ibexa\Rest\Server\Controller\User;
 use ApiPlatform\Metadata\Delete;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\Exceptions as ApiExceptions;
+use Ibexa\Contracts\Core\Repository\Exceptions\BadStateException;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
+use Ibexa\Core\Base\Exceptions\UnauthorizedException;
 use Ibexa\Rest\Server\Exceptions;
 use Ibexa\Rest\Server\Values;
 use LogicException;
@@ -85,12 +88,14 @@ final class UserUnassignFromUserGroupController extends UserBaseController
     /**
      * Unassigns the user from a user group.
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\BadStateException
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
-     * @throws \Ibexa\Core\Base\Exceptions\UnauthorizedException
+     * @throws BadStateException
+     * @throws NotFoundException
+     * @throws UnauthorizedException
      */
-    public function unassignUserFromUserGroup(int $userId, string $groupPath): Values\UserGroupRefList
-    {
+    public function unassignUserFromUserGroup(
+        int $userId,
+        string $groupPath
+    ): Values\UserGroupRefList {
         $user = $this->userService->loadUser($userId);
         $userGroupLocation = $this->locationService->loadLocation((int)trim($groupPath, '/'));
 

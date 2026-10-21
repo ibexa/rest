@@ -10,7 +10,7 @@ namespace Ibexa\Rest\Server\Controller\ContentType;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\OpenApi\Model;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Values\RestFieldDefinition;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,7 +82,7 @@ class ContentTypeDraftFieldDefinitionLoadByIdController extends RestController
     /**
      * Returns the draft field definition given by id.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
     public function loadContentTypeDraftFieldDefinition(
         int $contentTypeId,
@@ -100,6 +100,6 @@ class ContentTypeDraftFieldDefinitionLoadByIdController extends RestController
             }
         }
 
-        throw new Exceptions\NotFoundException("Field definition not found: '{$request->getPathInfo()}'.");
+        throw new NotFoundException("Field definition not found: '{$request->getPathInfo()}'.");
     }
 }

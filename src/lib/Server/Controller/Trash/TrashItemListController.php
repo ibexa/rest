@@ -58,8 +58,7 @@ class TrashItemListController extends RestController
     public function __construct(
         protected TrashService $trashService,
         protected LocationService $locationService
-    ) {
-    }
+    ) {}
 
     /**
      * Returns a list of all trash items.

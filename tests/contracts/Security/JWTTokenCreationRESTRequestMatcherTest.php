@@ -48,8 +48,10 @@ final class JWTTokenCreationRESTRequestMatcherTest extends TestCase
      * @param array<string, mixed> $attributes
      * @param array<string, array<string>|string> $server
      */
-    private function createRequest(array $attributes = [], array $server = []): Request
-    {
+    private function createRequest(
+        array $attributes = [],
+        array $server = []
+    ): Request {
         return new Request([], [], $attributes, [], [], $server);
     }
 }
