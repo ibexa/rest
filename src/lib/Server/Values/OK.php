@@ -10,6 +10,4 @@ namespace Ibexa\Rest\Server\Values;
 /**
  * Value object for a 200 OK response.
  */
-class OK
-{
-}
+class OK {}

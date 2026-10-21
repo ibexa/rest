@@ -21,8 +21,11 @@ class RoleList extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\RoleList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('RoleList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('RoleList'));
         //@todo Needs refactoring, disabling certain headers should not be done this way

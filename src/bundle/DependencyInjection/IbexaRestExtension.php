@@ -32,8 +32,10 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
     /**
      * @param array<string, mixed> $mergedConfig
      */
-    protected function loadInternal(array $mergedConfig, ContainerBuilder $container): void
-    {
+    protected function loadInternal(
+        array $mergedConfig,
+        ContainerBuilder $container
+    ): void {
         $this->configureApiPlatformAutotagging($container);
 
         $container->setParameter('ibexa.rest.strict_mode', $mergedConfig['strict_mode']);

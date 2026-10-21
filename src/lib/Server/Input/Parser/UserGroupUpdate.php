@@ -44,8 +44,10 @@ class UserGroupUpdate extends BaseParser
     /**
      * Parse input structure.
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestUserGroupUpdateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): RestUserGroupUpdateStruct {
         $parsedData = [];
 
         if (array_key_exists('mainLanguageCode', $data)) {

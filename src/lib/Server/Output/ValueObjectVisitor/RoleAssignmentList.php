@@ -20,10 +20,13 @@ class RoleAssignmentList extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Rest\Server\Values\RoleAssignmentList $data
+     * @param Values\RoleAssignmentList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('RoleAssignmentList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('RoleAssignmentList'));
 

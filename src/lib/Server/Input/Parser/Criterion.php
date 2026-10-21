@@ -10,7 +10,7 @@ namespace Ibexa\Rest\Server\Input\Parser;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Aggregation;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\CriterionInterface;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\SortClause;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 
@@ -31,7 +31,7 @@ abstract class Criterion extends BaseParser
     /**
      * Dispatches parsing of a criterion name + data to its own parser.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
     public function dispatchCriterion(
         string $criterionName,
@@ -41,8 +41,8 @@ abstract class Criterion extends BaseParser
         $mediaType = $this->getCriterionMediaType($criterionName);
         try {
             return $parsingDispatcher->parse([$criterionName => $criterionData], $mediaType);
-        } catch (Exceptions\Parser $e) {
-            throw new Exceptions\Parser("Invalid Criterion id <$criterionName> in <AND>", 0, $e);
+        } catch (Parser $e) {
+            throw new Parser("Invalid Criterion id <$criterionName> in <AND>", 0, $e);
         }
     }
 
@@ -67,11 +67,11 @@ abstract class Criterion extends BaseParser
      *
      * @param array<string, string>|string $direction
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
     public function dispatchSortClause(
         string $sortClauseName,
-        array|string $direction,
+        array | string $direction,
         ParsingDispatcher $parsingDispatcher
     ): SortClause {
         $mediaType = $this->getSortClauseMediaType($sortClauseName);

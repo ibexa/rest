@@ -70,10 +70,13 @@ abstract class AbstractExceptionVisitor extends ValueObjectVisitor
     }
 
     /**
-     * @param \Exception $data
+     * @param Exception $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('ErrorMessage');
 
         $visitor->setHeader('Content-Type', $generator->getMediaType('ErrorMessage'));
@@ -102,8 +105,11 @@ abstract class AbstractExceptionVisitor extends ValueObjectVisitor
         $generator->endObjectElement('ErrorMessage');
     }
 
-    protected function generateErrorCode(Generator $generator, Visitor $visitor, Exception $e): int
-    {
+    protected function generateErrorCode(
+        Generator $generator,
+        Visitor $visitor,
+        Exception $e
+    ): int {
         $statusCode = $this->getStatus();
         $visitor->setStatus($statusCode);
 
@@ -112,13 +118,17 @@ abstract class AbstractExceptionVisitor extends ValueObjectVisitor
         return $statusCode;
     }
 
-    protected function getErrorMessage(Exception $data, int $statusCode): string
-    {
+    protected function getErrorMessage(
+        Exception $data,
+        int $statusCode
+    ): string {
         return static::$httpStatusCodes[$statusCode] ?? static::$httpStatusCodes[500];
     }
 
-    protected function getErrorDescription(Exception $data, int $statusCode): string
-    {
+    protected function getErrorDescription(
+        Exception $data,
+        int $statusCode
+    ): string {
         $translator = $this->getTranslator();
         if ($statusCode < 500 || $this->canDisplayExceptionMessage()) {
             $errorDescription = $data instanceof Translatable && $translator

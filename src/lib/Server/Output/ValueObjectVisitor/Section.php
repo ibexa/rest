@@ -20,10 +20,13 @@ class Section extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Section $data
+     * @param SectionValue $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('Section');
         $visitor->setHeader('Content-Type', $generator->getMediaType('Section'));
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('SectionInput'));
@@ -31,8 +34,10 @@ class Section extends ValueObjectVisitor
         $generator->endObjectElement('Section');
     }
 
-    protected function visitSectionAttributes(Generator $generator, SectionValue $data): void
-    {
+    protected function visitSectionAttributes(
+        Generator $generator,
+        SectionValue $data
+    ): void {
         $generator->startAttribute(
             'href',
             $this->router->generate('ibexa.rest.load_section', ['sectionId' => $data->id])

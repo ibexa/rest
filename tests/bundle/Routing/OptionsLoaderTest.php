@@ -22,8 +22,10 @@ class OptionsLoaderTest extends TestCase
     /**
      * @dataProvider getResourceType
      */
-    public function testSupportsResourceType(string $type, bool $expected): void
-    {
+    public function testSupportsResourceType(
+        string $type,
+        bool $expected
+    ): void {
         self::assertEquals(
             $expected,
             $this->getOptionsLoader()->supports(null, $type)

@@ -22,8 +22,10 @@ class RestLocation extends RestValue
      */
     public int $childCount;
 
-    public function __construct(Location $location, int $childCount)
-    {
+    public function __construct(
+        Location $location,
+        int $childCount
+    ) {
         $this->location = $location;
         $this->childCount = $childCount;
     }

@@ -967,12 +967,6 @@ parameters:
 			path: tests/bundle/Functional/ContentTypeTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\ContentTypeTest\:\:testCreateContentType\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/ContentTypeTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\ContentTypeTest\:\:testCreateContentType\(\) has parameter \$contentTypeGroupHref with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
@@ -1013,12 +1007,6 @@ parameters:
 			identifier: throws.notThrowable
 			count: 2
 			path: tests/bundle/Functional/ContentTypeTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\LocationTest\:\:testCreateLocation\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/LocationTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\LocationTest\:\:testLoadLocationChildren\(\) has parameter \$locationHref with no type specified\.$#'
@@ -1615,18 +1603,6 @@ parameters:
 			path: tests/bundle/Functional/TrashTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\UrlAliasTest\:\:testCreateGlobalUrlAlias\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/UrlAliasTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\UrlAliasTest\:\:testCreateUrlAlias\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/UrlAliasTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\UrlAliasTest\:\:testCreateUrlAlias\(\) has parameter \$locationHref with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
@@ -1643,12 +1619,6 @@ parameters:
 			identifier: deadCode.unreachable
 			count: 2
 			path: tests/bundle/Functional/UrlAliasTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\UrlWildcardTest\:\:testCreateUrlWildcard\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/UrlWildcardTest.php
 
 		-
 			message: '#^Unreachable statement \- code above always terminates\.$#'
@@ -1739,12 +1709,6 @@ parameters:
 			identifier: missingType.parameter
 			count: 1
 			path: tests/lib/FieldTypeProcessor/DateProcessorTest.php
-
-		-
-			message: '#^Variable \$expectedVariations might not be defined\.$#'
-			identifier: variable.undefined
-			count: 1
-			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\MediaProcessorTest\:\:testPreProcessFieldSettingsHash\(\) has parameter \$inputSettings with no type specified\.$#'

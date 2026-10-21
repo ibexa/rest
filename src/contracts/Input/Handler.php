@@ -7,6 +7,8 @@
 
 namespace Ibexa\Contracts\Rest\Input;
 
+use Ibexa\Contracts\Rest\Exceptions\Parser;
+
 /**
  * Input format handler base class.
  */
@@ -17,7 +19,7 @@ abstract class Handler
      *
      * @return array<mixed>|string|int|bool|float|null
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
     abstract public function convert(string $string): array|string|int|bool|float|null;
 }

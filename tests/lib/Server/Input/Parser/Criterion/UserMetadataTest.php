@@ -16,7 +16,7 @@ use Ibexa\Tests\Rest\Server\Input\Parser\BaseTest;
 class UserMetadataTest extends BaseTest
 {
     /**
-     * @return array<array{0: array{UserMetadataCriterion: array{Target: string, Value: string|int|array<int>}}, 1: \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\UserMetadata}>
+     * @return array<array{0: array{UserMetadataCriterion: array{Target: string, Value: string|int|array<int>}}, 1: UserMetadataCriterion}>
      */
     public function testParseProvider(): array
     {
@@ -37,12 +37,14 @@ class UserMetadataTest extends BaseTest
     }
 
     /**
-     * @param array<array{0: array{UserMetadataCriterion: array{Target: string, Value: string|int|array<int>}}, 1: \Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\UserMetadata}> $data
+     * @param array<array{0: array{UserMetadataCriterion: array{Target: string, Value: string|int|array<int>}}, 1: UserMetadataCriterion}> $data
      *
      * @dataProvider testParseProvider
      */
-    public function testParse(array $data, UserMetadataCriterion $expected): void
-    {
+    public function testParse(
+        array $data,
+        UserMetadataCriterion $expected
+    ): void {
         $userMetadata = $this->getParser();
         $result = $userMetadata->parse($data, $this->getParsingDispatcherMock());
 

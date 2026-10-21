@@ -8,6 +8,7 @@
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use Psr\Http\Client\ClientException;
 
 class ContentTypeTest extends RESTFunctionalTestCase
 {
@@ -72,7 +73,7 @@ XML;
     /**
      * @depends testCreateContentTypeGroup
      *
-     * @returns string The created content type href
+     * @return string The created content type href
      * Covers POST /content/typegroups/<contentTypeGroupId>/types?publish=true
      *
      * @todo write test with full workflow (draft, edit, publish)
@@ -433,7 +434,7 @@ XML;
      * @depends testAddContentTypeDraftFieldDefinition
      * Covers GET /content/types/<contentTypeId>/fieldDefinitions/<fieldDefinitionId>
      *
-     * @throws \Psr\Http\Client\ClientException
+     * @throws ClientException
      */
     public function testLoadContentTypeFieldDefinition(string $fieldDefinitionHref): void
     {
@@ -449,7 +450,7 @@ XML;
      *
      * @depends testCreateContentType
      *
-     * @throws \Psr\Http\Client\ClientException
+     * @throws ClientException
      */
     public function testLoadContentTypeFieldDefinitionByIdentifier(string $contentTypeHref): void
     {

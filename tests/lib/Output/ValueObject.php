@@ -12,6 +12,4 @@ use stdClass;
 /**
  * Test dummy class.
  */
-class ValueObject extends stdClass implements ValueObjectInterface
-{
-}
+class ValueObject extends stdClass implements ValueObjectInterface {}

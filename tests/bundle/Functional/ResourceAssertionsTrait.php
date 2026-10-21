@@ -12,13 +12,17 @@ use JsonSchema\Validator;
 
 trait ResourceAssertionsTrait
 {
-    final protected static function assertResponseMatchesXmlSnapshot(string $content, ?string $file = null): void
-    {
+    final protected static function assertResponseMatchesXmlSnapshot(
+        string $content,
+        ?string $file = null
+    ): void {
         self::assertStringMatchesSnapshot($content, 'xml', $file);
     }
 
-    final protected static function assertResponseMatchesJsonSnapshot(string $content, ?string $file = null): void
-    {
+    final protected static function assertResponseMatchesJsonSnapshot(
+        string $content,
+        ?string $file = null
+    ): void {
         self::assertStringMatchesSnapshot($content, 'json', $file);
     }
 
@@ -46,8 +50,10 @@ trait ResourceAssertionsTrait
     /**
      * @throws \JsonException
      */
-    final protected static function assertJsonResponseIsValid(string $response, string $resourceType): void
-    {
+    final protected static function assertJsonResponseIsValid(
+        string $response,
+        string $resourceType
+    ): void {
         self::assertJson($response);
         self::assertStringContainsString($resourceType, $response);
         self::validateAgainstJSONSchema($response, $resourceType);
@@ -56,8 +62,10 @@ trait ResourceAssertionsTrait
     /**
      * @throws \JsonException
      */
-    final protected static function validateAgainstJSONSchema(string $data, string $resource): void
-    {
+    final protected static function validateAgainstJSONSchema(
+        string $data,
+        string $resource
+    ): void {
         $validator = new Validator();
         $decodedData = json_decode($data, false, 512, JSON_THROW_ON_ERROR);
         $schemaReference = [
@@ -69,8 +77,10 @@ trait ResourceAssertionsTrait
         self::assertTrue($validator->isValid(), self::convertErrorsToString($validator, $data));
     }
 
-    private static function convertErrorsToString(Validator $validator, string $data): string
-    {
+    private static function convertErrorsToString(
+        Validator $validator,
+        string $data
+    ): string {
         $errorMessage = '';
         foreach ($validator->getErrors() as $error) {
             $errorMessage .= sprintf(
@@ -91,8 +101,10 @@ trait ResourceAssertionsTrait
         return __DIR__ . '/JsonSchema/' . $resource . '.json';
     }
 
-    private static function checkSnapshotFileExistence(string $file, string $content): void
-    {
+    private static function checkSnapshotFileExistence(
+        string $file,
+        string $content
+    ): void {
         if (file_exists($file)) {
             return;
         }

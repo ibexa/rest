@@ -21,8 +21,11 @@ class Trash extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\Trash $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('Trash');
         $visitor->setHeader('Content-Type', $generator->getMediaType('Trash'));
         $generator->startAttribute('href', $data->path);

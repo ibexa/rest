@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
+use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Value as RestValue;
 
@@ -21,7 +22,7 @@ class Version extends RestValue
     public ContentType $contentType;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Relation[]
+     * @var Relation[]
      */
     public array $relations;
 
@@ -31,10 +32,14 @@ class Version extends RestValue
     public ?string $path;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Relation[] $relations
+     * @param Relation[] $relations
      */
-    public function __construct(Content $content, ContentType $contentType, array $relations, ?string $path = null)
-    {
+    public function __construct(
+        Content $content,
+        ContentType $contentType,
+        array $relations,
+        ?string $path = null
+    ) {
         $this->content = $content;
         $this->contentType = $contentType;
         $this->relations = $relations;

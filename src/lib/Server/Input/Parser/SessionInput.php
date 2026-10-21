@@ -20,8 +20,10 @@ class SessionInput extends BaseParser
     /**
      * Parse input structure.
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): SessionInputValue
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): SessionInputValue {
         $sessionInput = new SessionInputValue();
 
         if (!array_key_exists('login', $data)) {

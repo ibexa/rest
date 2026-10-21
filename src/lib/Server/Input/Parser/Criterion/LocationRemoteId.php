@@ -8,7 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LocationRemoteId as LocationRemoteIdCriterion;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 
@@ -20,12 +20,14 @@ class LocationRemoteId extends BaseParser
     /**
      * Parses input structure to a Criterion object.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): LocationRemoteIdCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): LocationRemoteIdCriterion {
         if (!array_key_exists('LocationRemoteIdCriterion', $data)) {
-            throw new Exceptions\Parser('Invalid <LocationRemoteIdCriterion> format');
+            throw new Parser('Invalid <LocationRemoteIdCriterion> format');
         }
 
         return new LocationRemoteIdCriterion(explode(',', $data['LocationRemoteIdCriterion']));

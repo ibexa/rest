@@ -219,7 +219,7 @@ class ObjectStateCreateTest extends BaseTest
         );
     }
 
-    protected function getObjectStateServiceMock(): ObjectStateService&MockObject
+    protected function getObjectStateServiceMock(): ObjectStateService & MockObject
     {
         $objectStateServiceMock = $this->createMock(ObjectStateService::class);
 

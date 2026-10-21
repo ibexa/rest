@@ -35,14 +35,18 @@ class RouteBasedLimitationParser extends BaseParser
      */
     private string $limitationClass;
 
-    public function __construct(string $limitationRouteParameterName, string $limitationClass)
-    {
+    public function __construct(
+        string $limitationRouteParameterName,
+        string $limitationClass
+    ) {
         $this->limitationRouteParameterName = $limitationRouteParameterName;
         $this->limitationClass = $limitationClass;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): Limitation
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): Limitation {
         if (!array_key_exists('_identifier', $data)) {
             throw new Exceptions\Parser("Missing '_identifier' attribute for Limitation.");
         }

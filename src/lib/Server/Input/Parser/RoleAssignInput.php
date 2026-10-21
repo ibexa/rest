@@ -31,8 +31,10 @@ class RoleAssignInput extends BaseParser
     /**
      * Parse input structure.
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): RoleAssignment
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): RoleAssignment {
         if (!array_key_exists('Role', $data)) {
             throw new Exceptions\Parser("Missing 'Role' element for RoleAssignInput.");
         }

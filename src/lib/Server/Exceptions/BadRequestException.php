@@ -12,6 +12,4 @@ use InvalidArgumentException;
 /**
  * Exception thrown if the request is not formatted correctly.
  */
-class BadRequestException extends InvalidArgumentException
-{
-}
+class BadRequestException extends InvalidArgumentException {}

@@ -23,8 +23,10 @@ class Sibling extends BaseParser
         $this->locationService = $locationService;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): SiblingCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): SiblingCriterion {
         if (!array_key_exists('SiblingCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <SiblingCriterion> format');
         }

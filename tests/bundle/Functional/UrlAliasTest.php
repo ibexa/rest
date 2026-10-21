@@ -40,7 +40,7 @@ class UrlAliasTest extends RESTFunctionalTestCase
      * @depends testCreateFolder
      * Covers POST /content/urlaliases
      *
-     * @returns string The created url alias href
+     * @return string The created url alias href
      */
     public function testCreateUrlAlias($locationHref)
     {
@@ -78,7 +78,7 @@ XML;
     /**
      * Covers POST /content/urlaliases.
      *
-     * @returns string The created url alias href
+     * @return string The created url alias href
      */
     public function testCreateGlobalUrlAlias()
     {

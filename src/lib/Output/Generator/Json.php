@@ -38,8 +38,11 @@ class Json extends Generator
     }
 
     #[\Override]
-    public function startValueElement(string $name, mixed $value, array $attributes = []): void
-    {
+    public function startValueElement(
+        string $name,
+        mixed $value,
+        array $attributes = []
+    ): void {
         $this->checkStartValueElement($name);
 
         if (empty($attributes)) {
@@ -71,8 +74,10 @@ class Json extends Generator
     }
 
     #[\Override]
-    public function startAttribute(string $name, mixed $value): void
-    {
+    public function startAttribute(
+        string $name,
+        mixed $value
+    ): void {
         $this->checkStartAttribute($name);
 
         $this->json->{'_' . $name} = $value;
@@ -85,7 +90,7 @@ class Json extends Generator
     }
 
     #[\Override]
-    public function serializeBool(bool|string|null $boolValue): bool
+    public function serializeBool(bool | string | null $boolValue): bool
     {
         return (bool)$boolValue;
     }

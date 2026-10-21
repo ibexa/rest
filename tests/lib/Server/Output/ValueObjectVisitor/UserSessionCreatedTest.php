@@ -26,13 +26,25 @@ class UserSessionCreatedTest extends UserSessionTest
             true
         );
 
-        $this->getVisitorMock()->expects(self::any())
+        $calls = [];
+        $this->getVisitorMock()->expects(self::once())
             ->method('setStatus')
-            ->with(self::equalTo(201));
+            ->with(self::equalTo(201))
+            ->willReturnCallback(static function () use (&$calls): void {
+                $calls[] = 'setStatus';
+            });
 
-        $this->getVisitorMock()->expects(self::at(1))
+        $setHeaderMatcher = self::exactly(2);
+        $this->getVisitorMock()->expects($setHeaderMatcher)
             ->method('setHeader')
-            ->with(self::equalTo('Content-Type'), self::equalTo('application/vnd.ibexa.api.Session+xml'));
+            ->willReturnCallback(static function (...$parameters) use ($setHeaderMatcher, &$calls): void {
+                if ($setHeaderMatcher->getInvocationCount() === 1) {
+                    self::assertSame(['Content-Type', 'application/vnd.ibexa.api.Session+xml'], $parameters);
+                } else {
+                    self::assertSame(['Accept-Patch', false], $parameters);
+                }
+                $calls[] = 'setHeader ' . $parameters[0];
+            });
 
         $this->addRouteExpectation(
             'ibexa.rest.delete_session',
@@ -56,6 +68,7 @@ class UserSessionCreatedTest extends UserSessionTest
 
         $result = $generator->endDocument(null);
 
+        self::assertSame(['setStatus', 'setHeader Content-Type', 'setHeader Accept-Patch'], $calls);
         self::assertNotEmpty($result);
 
         return $result;

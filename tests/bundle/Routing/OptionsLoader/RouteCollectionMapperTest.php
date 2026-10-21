@@ -18,7 +18,7 @@ use Symfony\Component\Routing\RouteCollection;
  */
 class RouteCollectionMapperTest extends TestCase
 {
-    /** @var \Ibexa\Bundle\Rest\Routing\OptionsLoader\RouteCollectionMapper */
+    /** @var RouteCollectionMapper */
     protected $collectionMapper;
 
     public function setUp(): void

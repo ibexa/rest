@@ -165,7 +165,7 @@ class FieldDefinitionCreateTest extends BaseTest
         );
     }
 
-    protected function getFieldTypeParserMock(): FieldTypeParser&MockObject
+    protected function getFieldTypeParserMock(): FieldTypeParser & MockObject
     {
         $fieldTypeParserMock = $this->createMock(FieldTypeParser::class);
 
@@ -191,7 +191,7 @@ class FieldDefinitionCreateTest extends BaseTest
         return $fieldTypeParserMock;
     }
 
-    protected function getContentTypeServiceMock(): ContentTypeService&MockObject
+    protected function getContentTypeServiceMock(): ContentTypeService & MockObject
     {
         $contentTypeServiceMock = $this->createMock(ContentTypeService::class);
 
@@ -201,9 +201,9 @@ class FieldDefinitionCreateTest extends BaseTest
             ->willReturn(
                 new FieldDefinitionCreateStruct(
                     [
-                            'identifier' => 'title',
-                            'fieldTypeIdentifier' => 'ibexa_string',
-                        ]
+                        'identifier' => 'title',
+                        'fieldTypeIdentifier' => 'ibexa_string',
+                    ]
                 )
             );
 

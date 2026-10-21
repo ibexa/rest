@@ -21,8 +21,11 @@ class URLWildcardList extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\URLWildcardList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('UrlWildcardList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('UrlWildcardList'));
 

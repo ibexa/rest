@@ -19,7 +19,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 class VersionTest extends ValueObjectVisitorBaseTest
 {
-    protected FieldTypeSerializer&MockObject $fieldTypeSerializerMock;
+    protected FieldTypeSerializer & MockObject $fieldTypeSerializerMock;
 
     public function setUp(): void
     {

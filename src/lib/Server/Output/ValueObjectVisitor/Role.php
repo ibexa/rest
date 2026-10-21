@@ -22,10 +22,13 @@ class Role extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\Role $data
+     * @param ApiRole $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $role = $data instanceof RestRole ? $data->innerRole : $data;
         $generator->startObjectElement('Role');
         $visitor->setHeader(
@@ -37,8 +40,10 @@ class Role extends ValueObjectVisitor
         $generator->endObjectElement('Role');
     }
 
-    protected function visitRoleAttributes(Generator $generator, ApiRole $data): void
-    {
+    protected function visitRoleAttributes(
+        Generator $generator,
+        ApiRole $data
+    ): void {
         $generator->startAttribute(
             'href',
             $this->router->generate('ibexa.rest.load_role', ['roleId' => $data->id])

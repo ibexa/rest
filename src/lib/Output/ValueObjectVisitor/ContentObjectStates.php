@@ -21,8 +21,11 @@ class ContentObjectStates extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Values\ContentObjectStates $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('ContentObjectStates');
         $visitor->setHeader('Content-Type', $generator->getMediaType('ContentObjectStates'));
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('ContentObjectStates'));

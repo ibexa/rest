@@ -22,8 +22,11 @@ class RestUser extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\RestUser $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $contentInfo = $data->contentInfo;
 
         $generator->startObjectElement('User');

@@ -17,15 +17,16 @@ use Ibexa\Rest\Server\Values\RestUser;
 
 final class User extends ValueObjectVisitor implements DelegateValueObjectVisitor
 {
-    public function __construct(private readonly RelationListFacadeInterface $relationListFacade)
-    {
-    }
+    public function __construct(private readonly RelationListFacadeInterface $relationListFacade) {}
 
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\User\User $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ): void {
         $visitor->visitValueObject(
             new RestUser(
                 $data,

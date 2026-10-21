@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -17,12 +18,12 @@ class URLWildcardList extends RestValue
     /**
      * URL wildcards.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard[]
+     * @var URLWildcard[]
      */
     public array $urlWildcards;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard[] $urlWildcards
+     * @param URLWildcard[] $urlWildcards
      */
     public function __construct(array $urlWildcards)
     {

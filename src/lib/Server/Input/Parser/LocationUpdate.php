@@ -22,8 +22,10 @@ class LocationUpdate extends BaseParser
 
     protected ParserTools $parserTools;
 
-    public function __construct(LocationService $locationService, ParserTools $parserTools)
-    {
+    public function __construct(
+        LocationService $locationService,
+        ParserTools $parserTools
+    ) {
         $this->locationService = $locationService;
         $this->parserTools = $parserTools;
     }
@@ -31,8 +33,10 @@ class LocationUpdate extends BaseParser
     /**
      * Parse input structure.
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): RestLocationUpdateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): RestLocationUpdateStruct {
         $locationUpdateStruct = $this->locationService->newLocationUpdateStruct();
 
         if (array_key_exists('priority', $data)) {

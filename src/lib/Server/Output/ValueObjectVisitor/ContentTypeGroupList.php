@@ -21,8 +21,11 @@ class ContentTypeGroupList extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\ContentTypeGroupList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('ContentTypeGroupList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('ContentTypeGroupList'));
         //@todo Needs refactoring, disabling certain headers should not be done this way

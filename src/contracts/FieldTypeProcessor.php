@@ -7,6 +7,9 @@
 
 namespace Ibexa\Contracts\Rest;
 
+use Ibexa\Rest\Input\FieldTypeParser;
+use Ibexa\Rest\Output\FieldTypeSerializer;
+
 /**
  * FieldTypeProcessor.
  */
@@ -22,7 +25,7 @@ abstract class FieldTypeProcessor
      * apply to hashes accepted by fromHash(). The return value of this method
      * replaces the $incomingValueHash.
      *
-     * @see \Ibexa\Rest\Input\FieldTypeParser
+     * @see FieldTypeParser
      *
      * @return mixed Pre processed hash
      */
@@ -41,7 +44,7 @@ abstract class FieldTypeProcessor
      * $outgoingValueHash and must obey to the same rules as the original
      * $outgoingValueHash.
      *
-     * @see \Ibexa\Rest\Output\FieldTypeSerializer
+     * @see FieldTypeSerializer
      *
      * @return mixed Post processed hash
      */
@@ -60,7 +63,7 @@ abstract class FieldTypeProcessor
      * need to apply to hashes accepted by fieldSettingsFromHash(). The return
      * value of this method replaces the $incomingSettingsHash.
      *
-     * @see \Ibexa\Rest\Input\FieldTypeParser
+     * @see FieldTypeParser
      *
      * @return mixed Preprocessed hash
      */
@@ -79,7 +82,7 @@ abstract class FieldTypeProcessor
      * $outgoingSettingsHash and must obey to the same rules as the original
      * $outgoingSettingsHash.
      *
-     * @see \Ibexa\Rest\Output\FieldTypeSerializer
+     * @see FieldTypeSerializer
      *
      * @return mixed Post processed hash
      */
@@ -98,7 +101,7 @@ abstract class FieldTypeProcessor
      * rules that need to apply to hashes accepted by validatorConfigurationFromHash().
      * The return value of this method replaces the $incomingValidatorConfigurationHash.
      *
-     * @see \Ibexa\Rest\Input\FieldTypeParser
+     * @see FieldTypeParser
      *
      * @return mixed Preprocessed hash
      */
@@ -117,7 +120,7 @@ abstract class FieldTypeProcessor
      * $outgoingValidatorConfigurationHash and must obey to the same rules as the original
      * $outgoingValidatorConfigurationHash.
      *
-     * @see \Ibexa\Rest\Output\FieldTypeSerializer
+     * @see FieldTypeSerializer
      *
      * @return mixed Post processed hash
      */

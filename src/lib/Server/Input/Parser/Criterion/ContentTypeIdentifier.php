@@ -8,9 +8,8 @@
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
-use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeId;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeId as ContentTypeIdCriterion;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 
@@ -29,12 +28,14 @@ class ContentTypeIdentifier extends BaseParser
     /**
      * Parses input structure to a Criterion object.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentTypeId
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ContentTypeIdCriterion {
         if (!array_key_exists('ContentTypeIdentifierCriterion', $data)) {
-            throw new Exceptions\Parser('Invalid <ContentTypeIdCriterion> format');
+            throw new Parser('Invalid <ContentTypeIdCriterion> format');
         }
         if (!is_array($data['ContentTypeIdentifierCriterion'])) {
             $data['ContentTypeIdentifierCriterion'] = [$data['ContentTypeIdentifierCriterion']];

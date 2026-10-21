@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Values;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
+use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Value as RestValue;
 
@@ -29,7 +30,7 @@ class RestContent extends RestValue
     public ?ContentType $contentType;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Relation[]
+     * @var Relation[]
      */
     public ?array $relations;
 
@@ -39,8 +40,8 @@ class RestContent extends RestValue
     public ?string $path;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType|null $contentType Can only be null if $currentVersion is
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Relation[]|null $relations Can only be null if $currentVersion is
+     * @param ContentType|null $contentType Can only be null if $currentVersion is
+     * @param Relation[]|null $relations Can only be null if $currentVersion is
      */
     public function __construct(
         ContentInfo $contentInfo,

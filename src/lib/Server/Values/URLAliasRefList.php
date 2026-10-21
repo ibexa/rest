@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\URLAlias;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -17,7 +18,7 @@ class URLAliasRefList extends RestValue
     /**
      * URL aliases.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\URLAlias[]
+     * @var URLAlias[]
      */
     public array $urlAliases;
 
@@ -27,10 +28,12 @@ class URLAliasRefList extends RestValue
     public string $path;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\URLAlias[] $urlAliases
+     * @param URLAlias[] $urlAliases
      */
-    public function __construct(array $urlAliases, string $path)
-    {
+    public function __construct(
+        array $urlAliases,
+        string $path
+    ) {
         $this->urlAliases = $urlAliases;
         $this->path = $path;
     }

@@ -23,13 +23,13 @@ final class VisitorTest extends TestCase
 {
     private Visitor $visitor;
 
-    private NormalizerInterface&MockObject $normalizer;
+    private NormalizerInterface & MockObject $normalizer;
 
-    private EncoderInterface&MockObject $encoder;
+    private EncoderInterface & MockObject $encoder;
 
-    private Generator&MockObject $generator;
+    private Generator & MockObject $generator;
 
-    private ValueObjectVisitorResolverInterface&MockObject $valueObjectVisitorResolver;
+    private ValueObjectVisitorResolverInterface & MockObject $valueObjectVisitorResolver;
 
     public function setUp(): void
     {
@@ -75,12 +75,12 @@ final class VisitorTest extends TestCase
     /**
      * @dataProvider provideForTestEncoderContextShouldBeRemoved
      *
-     * @param \ArrayObject|array<mixed> $content
-     * @param \ArrayObject|array<mixed> $expectedEncoderData
+     * @param ArrayObject|array<mixed> $content
+     * @param ArrayObject|array<mixed> $expectedEncoderData
      */
     public function testEncoderContextShouldBeRemoved(
-        array|ArrayObject $content,
-        array|ArrayObject $expectedEncoderData,
+        array | ArrayObject $content,
+        array | ArrayObject $expectedEncoderData,
     ): void {
         $data = new stdClass();
 

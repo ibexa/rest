@@ -8,7 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\ContentTypeGroupId as ContentTypeGroupIdCriterion;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 
@@ -20,12 +20,14 @@ class ContentTypeGroupId extends BaseParser
     /**
      * Parses input structure to a Criterion object.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentTypeGroupIdCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ContentTypeGroupIdCriterion {
         if (!array_key_exists('ContentTypeGroupIdCriterion', $data)) {
-            throw new Exceptions\Parser('Invalid <ContentTypeGroupIdCriterion> format');
+            throw new Parser('Invalid <ContentTypeGroupIdCriterion> format');
         }
 
         return new ContentTypeGroupIdCriterion($data['ContentTypeGroupIdCriterion']);

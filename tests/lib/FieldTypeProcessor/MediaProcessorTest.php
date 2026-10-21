@@ -45,8 +45,10 @@ class MediaProcessorTest extends BinaryInputProcessorTest
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
-    {
+    public function testPreProcessFieldSettingsHash(
+        $inputSettings,
+        $outputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(
@@ -63,8 +65,10 @@ class MediaProcessorTest extends BinaryInputProcessorTest
      * @param array<string, mixed> $inputSettings
      * @param array<string, mixed> $outputSettings
      */
-    public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
-    {
+    public function testPostProcessFieldSettingsHash(
+        array $outputSettings,
+        array $inputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(

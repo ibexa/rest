@@ -22,8 +22,10 @@ class RestLocationUpdateStruct extends RestValue
      */
     public ?bool $hidden;
 
-    public function __construct(LocationUpdateStruct $locationUpdateStruct, ?bool $hidden = null)
-    {
+    public function __construct(
+        LocationUpdateStruct $locationUpdateStruct,
+        ?bool $hidden = null
+    ) {
         $this->locationUpdateStruct = $locationUpdateStruct;
         $this->hidden = $hidden;
     }

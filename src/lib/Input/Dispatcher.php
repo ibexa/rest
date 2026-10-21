@@ -29,7 +29,7 @@ class Dispatcher
      *  )
      * </code>
      *
-     * @var \Ibexa\Contracts\Rest\Input\Handler[]
+     * @var Handler[]
      */
     protected array $handlers = [];
 
@@ -38,10 +38,12 @@ class Dispatcher
     /**
      * Construct from optional parsers array.
      *
-     * @param \Ibexa\Contracts\Rest\Input\Handler[] $handlers
+     * @param Handler[] $handlers
      */
-    public function __construct(ParsingDispatcher $parsingDispatcher, array $handlers = [])
-    {
+    public function __construct(
+        ParsingDispatcher $parsingDispatcher,
+        array $handlers = []
+    ) {
         $this->parsingDispatcher = $parsingDispatcher;
         foreach ($handlers as $type => $handler) {
             $this->addHandler($type, $handler);
@@ -51,8 +53,10 @@ class Dispatcher
     /**
      * Adds another handler for the given content type.
      */
-    public function addHandler(string $type, Handler $handler): void
-    {
+    public function addHandler(
+        string $type,
+        Handler $handler
+    ): void {
         $this->handlers[$type] = $handler;
     }
 

@@ -9,6 +9,4 @@ namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Rest\Value as RestValue;
 
-class Conflict extends RestValue
-{
-}
+class Conflict extends RestValue {}

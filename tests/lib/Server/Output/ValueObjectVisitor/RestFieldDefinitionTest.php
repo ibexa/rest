@@ -161,8 +161,10 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
      *
      * @dataProvider provideXpathAssertions
      */
-    public function testGeneratedXml(string $xpath, \DOMDocument $dom): void
-    {
+    public function testGeneratedXml(
+        string $xpath,
+        \DOMDocument $dom
+    ): void {
         $this->assertXPath($dom, $xpath);
     }
 
@@ -171,8 +173,10 @@ class RestFieldDefinitionTest extends ValueObjectVisitorBaseTest
      *
      * @dataProvider provideXpathAssertionsPath
      */
-    public function testGeneratedXmlPath(string $xpath, \DOMDocument $dom): void
-    {
+    public function testGeneratedXmlPath(
+        string $xpath,
+        \DOMDocument $dom
+    ): void {
         $this->assertXPath($dom, $xpath);
     }
 

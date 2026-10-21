@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Input\Parser;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query as ContentQuery;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion as CriterionValue;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\CriterionInterface;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Server\Input\Parser\Criterion as CriterionParser;
 
@@ -19,10 +20,12 @@ use Ibexa\Rest\Server\Input\Parser\Criterion as CriterionParser;
 abstract class Query extends CriterionParser
 {
     /**
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentQuery
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ContentQuery {
         $query = $this->buildQuery();
 
         if (array_key_exists('Filter', $data) && is_array($data['Filter'])) {
@@ -70,8 +73,10 @@ abstract class Query extends CriterionParser
      */
     abstract protected function buildQuery(): ContentQuery;
 
-    private function processCriteriaArray(array $criteriaArray, ParsingDispatcher $parsingDispatcher): ?CriterionInterface
-    {
+    private function processCriteriaArray(
+        array $criteriaArray,
+        ParsingDispatcher $parsingDispatcher
+    ): ?CriterionInterface {
         if (count($criteriaArray) === 0) {
             return null;
         }
@@ -87,8 +92,10 @@ abstract class Query extends CriterionParser
     /**
      * Handles SortClause data.
      */
-    private function processSortClauses(array $sortClausesArray, ParsingDispatcher $parsingDispatcher): array
-    {
+    private function processSortClauses(
+        array $sortClausesArray,
+        ParsingDispatcher $parsingDispatcher
+    ): array {
         $sortClauses = [];
         foreach ($sortClausesArray as $sortClauseName => $sortClauseData) {
             if (!is_array($sortClauseData) || !isset($sortClauseData[0])) {

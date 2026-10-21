@@ -20,8 +20,10 @@ final class DateMetadataRangeAggregationParser extends AbstractRangeAggregationP
         return 'DateMetadataRangeAggregation';
     }
 
-    protected function parseAggregation(array $data, ParsingDispatcher $parsingDispatcher): AbstractRangeAggregation
-    {
+    protected function parseAggregation(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractRangeAggregation {
         if (!array_key_exists('type', $data)) {
             throw new Exceptions\Parser("Missing 'type' element for DateMetadataRange.");
         }

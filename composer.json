@@ -47,7 +47,7 @@
         "webmozart/assert": "^2.3"
     },
     "require-dev": {
-        "ibexa/code-style": "~2.0.0",
+        "ibexa/code-style": "~2.3.1",
         "ibexa/doctrine-migrations": "~5.0.x-dev",
         "ibexa/doctrine-schema": "~5.0.x-dev",
         "ibexa/rector": "~5.0.x-dev",
@@ -59,7 +59,7 @@
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
         "phpstan/phpstan-webmozart-assert": "^2.0",
-        "phpunit/phpunit": "^9.6",
+        "phpunit/phpunit": "^9.6.11",
         "symfony/browser-kit": "^7.4",
         "symfony/http-client": "^7.4"
     },

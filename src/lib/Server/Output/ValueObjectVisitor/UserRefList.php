@@ -21,8 +21,11 @@ class UserRefList extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\UserRefList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('UserRefList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('UserRefList'));
         //@todo Needs refactoring, disabling certain headers should not be done this way

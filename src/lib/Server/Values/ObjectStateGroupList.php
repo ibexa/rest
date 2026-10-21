@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -17,12 +18,12 @@ class ObjectStateGroupList extends RestValue
     /**
      * Object state groups.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup[]
+     * @var ObjectStateGroup[]
      */
     public array $groups;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup[] $groups
+     * @param ObjectStateGroup[] $groups
      */
     public function __construct(array $groups)
     {

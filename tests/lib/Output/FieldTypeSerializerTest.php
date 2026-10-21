@@ -7,6 +7,7 @@
 
 namespace Ibexa\Tests\Rest\Output;
 
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\FieldType as APIFieldType;
 use Ibexa\Contracts\Core\Repository\FieldTypeService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Field;
@@ -23,24 +24,24 @@ use PHPUnit\Framework\TestCase;
  */
 class FieldTypeSerializerTest extends TestCase
 {
-    protected (MockObject&FieldTypeService)|null $fieldTypeServiceMock = null;
+    protected (MockObject & FieldTypeService) | null $fieldTypeServiceMock = null;
 
-    protected (MockObject&FieldTypeProcessorRegistry)|null $fieldTypeProcessorRegistryMock = null;
+    protected (MockObject & FieldTypeProcessorRegistry) | null $fieldTypeProcessorRegistryMock = null;
 
-    protected (MockObject&FieldTypeProcessor)|null $fieldTypeProcessorMock = null;
+    protected (MockObject & FieldTypeProcessor) | null $fieldTypeProcessorMock = null;
 
-    protected (MockObject&APIContentType)|null $contentTypeMock = null;
+    protected (MockObject & APIContentType) | null $contentTypeMock = null;
 
-    protected (MockObject&APIFieldType)|null $fieldTypeMock = null;
+    protected (MockObject & APIFieldType) | null $fieldTypeMock = null;
 
-    protected (MockObject&Generator)|null $generatorMock = null;
+    protected (MockObject & Generator) | null $generatorMock = null;
 
     /**
      * @dataProvider provideDataWithFieldValueToSerialize
      *
      * @param array<int> $hashValue
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
     public function testSerializeContentFieldValue(
         APIFieldType $fieldType,
@@ -146,7 +147,7 @@ class FieldTypeSerializerTest extends TestCase
             ->method('getProcessor')
             ->with('myFancyFieldType')
             ->willReturnCallback(
-                static function () use ($processorMock): FieldTypeProcessor&MockObject {
+                static function () use ($processorMock): FieldTypeProcessor & MockObject {
                     return $processorMock;
                 }
             );
@@ -216,7 +217,7 @@ class FieldTypeSerializerTest extends TestCase
             ->method('getProcessor')
             ->with('myFancyFieldType')
             ->willReturnCallback(
-                static function () use ($processorMock): FieldTypeProcessor&MockObject {
+                static function () use ($processorMock): FieldTypeProcessor & MockObject {
                     return $processorMock;
                 }
             );
@@ -254,7 +255,7 @@ class FieldTypeSerializerTest extends TestCase
         );
     }
 
-    protected function getFieldTypeServiceMock(): FieldTypeService&MockObject
+    protected function getFieldTypeServiceMock(): FieldTypeService & MockObject
     {
         if (!isset($this->fieldTypeServiceMock)) {
             $this->fieldTypeServiceMock = $this->createMock(FieldTypeService::class);
@@ -263,7 +264,7 @@ class FieldTypeSerializerTest extends TestCase
         return $this->fieldTypeServiceMock;
     }
 
-    protected function getFieldTypeProcessorRegistryMock(): FieldTypeProcessorRegistry&MockObject
+    protected function getFieldTypeProcessorRegistryMock(): FieldTypeProcessorRegistry & MockObject
     {
         if (!isset($this->fieldTypeProcessorRegistryMock)) {
             $this->fieldTypeProcessorRegistryMock = $this->createMock(FieldTypeProcessorRegistry::class);
@@ -272,7 +273,7 @@ class FieldTypeSerializerTest extends TestCase
         return $this->fieldTypeProcessorRegistryMock;
     }
 
-    protected function getFieldTypeProcessorMock(): FieldTypeProcessor&MockObject
+    protected function getFieldTypeProcessorMock(): FieldTypeProcessor & MockObject
     {
         if (!isset($this->fieldTypeProcessorMock)) {
             $this->fieldTypeProcessorMock = $this->createMock(FieldTypeProcessor::class);
@@ -281,7 +282,7 @@ class FieldTypeSerializerTest extends TestCase
         return $this->fieldTypeProcessorMock;
     }
 
-    protected function getContentTypeMock(): APIContentType&MockObject
+    protected function getContentTypeMock(): APIContentType & MockObject
     {
         if (!isset($this->contentTypeMock)) {
             $this->contentTypeMock = $this->createMock(APIContentType::class);
@@ -290,7 +291,7 @@ class FieldTypeSerializerTest extends TestCase
         return $this->contentTypeMock;
     }
 
-    protected function getFieldTypeMock(): APIFieldType&MockObject
+    protected function getFieldTypeMock(): APIFieldType & MockObject
     {
         if (!isset($this->fieldTypeMock)) {
             $this->fieldTypeMock = $this->createMock(APIFieldType::class);

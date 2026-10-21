@@ -18,8 +18,11 @@ class SortClauseTest extends RESTFunctionalTestCase
      * @param string[] $foldersNameToCreate
      * @param string[] $foldersInExpectedOrder
      */
-    public function testFieldSortClause(array $foldersNameToCreate, string $sortClauseXML, array $foldersInExpectedOrder): void
-    {
+    public function testFieldSortClause(
+        array $foldersNameToCreate,
+        string $sortClauseXML,
+        array $foldersInExpectedOrder
+    ): void {
         $string = $this->addTestSuffix(__FUNCTION__);
         $mainTestFolderContent = $this->createFolder($string, '/api/ibexa/v2/content/locations/1/2');
 

@@ -26,7 +26,7 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class ResponseListenerTest extends EventListenerTest
 {
-    protected AcceptHeaderVisitorDispatcher&MockObject $visitorDispatcherMock;
+    protected AcceptHeaderVisitorDispatcher & MockObject $visitorDispatcherMock;
 
     protected stdClass $eventValue;
 
@@ -36,7 +36,7 @@ final class ResponseListenerTest extends EventListenerTest
 
     protected EventDispatcherInterface $event;
 
-    protected KernelInterface&MockObject $kernelMock;
+    protected KernelInterface & MockObject $kernelMock;
 
     public function setUp(): void
     {
@@ -72,8 +72,10 @@ final class ResponseListenerTest extends EventListenerTest
         );
     }
 
-    protected function onKernelViewIsNotRestRequest(string $method, RequestEvent $event): void
-    {
+    protected function onKernelViewIsNotRestRequest(
+        string $method,
+        RequestEvent $event
+    ): void {
         $this->getVisitorDispatcherMock()
             ->expects(self::never())
             ->method('dispatch');
@@ -122,7 +124,7 @@ final class ResponseListenerTest extends EventListenerTest
         self::assertEquals($this->response, $event->getResponse());
     }
 
-    private function getVisitorDispatcherMock(): AcceptHeaderVisitorDispatcher&MockObject
+    private function getVisitorDispatcherMock(): AcceptHeaderVisitorDispatcher & MockObject
     {
         if (!isset($this->visitorDispatcherMock)) {
             $this->visitorDispatcherMock = $this->createMock(AcceptHeaderVisitorDispatcher::class);
@@ -148,7 +150,7 @@ final class ResponseListenerTest extends EventListenerTest
         );
     }
 
-    protected function getKernelMock(): KernelInterface&MockObject
+    protected function getKernelMock(): KernelInterface & MockObject
     {
         return $this->createMock(KernelInterface::class);
     }
@@ -163,7 +165,7 @@ final class ResponseListenerTest extends EventListenerTest
         );
     }
 
-    private function getRequestMock(): Request&MockObject
+    private function getRequestMock(): Request & MockObject
     {
         $request = $this->createMock(Request::class);
         $request->attributes = $this->getRequestAttributesMock();

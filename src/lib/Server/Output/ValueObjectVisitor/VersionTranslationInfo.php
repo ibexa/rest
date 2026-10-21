@@ -20,10 +20,13 @@ class VersionTranslationInfo extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Rest\Server\Values\VersionTranslationInfo $data
+     * @param VersionTranslationInfoValue $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $versionInfo = $data->getVersionInfo();
         if (empty($versionInfo->languageCodes)) {
             return;

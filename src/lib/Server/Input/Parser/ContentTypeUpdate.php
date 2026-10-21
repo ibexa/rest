@@ -24,14 +24,18 @@ class ContentTypeUpdate extends BaseParser
 
     protected ParserTools $parserTools;
 
-    public function __construct(ContentTypeService $contentTypeService, ParserTools $parserTools)
-    {
+    public function __construct(
+        ContentTypeService $contentTypeService,
+        ParserTools $parserTools
+    ) {
         $this->contentTypeService = $contentTypeService;
         $this->parserTools = $parserTools;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentTypeUpdateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ContentTypeUpdateStruct {
         $contentTypeUpdateStruct = $this->contentTypeService->newContentTypeUpdateStruct();
 
         if (array_key_exists('identifier', $data)) {

@@ -23,5 +23,5 @@ class RestExecutedView extends ValueObject
     /**
      * The view identifier.
      */
-    public string|int $identifier;
+    public string | int $identifier;
 }

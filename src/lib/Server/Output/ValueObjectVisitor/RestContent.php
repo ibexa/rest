@@ -32,8 +32,11 @@ class RestContent extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\RestContent $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $restContent = $data;
         $contentInfo = $restContent->contentInfo;
         $translatedContentName = $this->translationHelper->getTranslatedContentNameByContentInfo($contentInfo);
@@ -193,7 +196,7 @@ class RestContent extends ValueObjectVisitor
     /**
      * Maps the given content $status to a representative string.
      *
-     * @throws \Ibexa\Core\Base\Exceptions\BadStateException
+     * @throws CoreBadStateException
      */
     protected function getStatusString(int $status): string
     {

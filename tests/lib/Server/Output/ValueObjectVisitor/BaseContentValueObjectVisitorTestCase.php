@@ -157,8 +157,10 @@ abstract class BaseContentValueObjectVisitorTestCase extends ValueObjectVisitorB
         $this->assertXPath($dom, sprintf('/%s/alwaysAvailable[text()="true"]', $this->getXPathFirstElementName()));
     }
 
-    protected function addContentRouteExpectations(ContentInfo $contentInfo, Location $location): void
-    {
+    protected function addContentRouteExpectations(
+        ContentInfo $contentInfo,
+        Location $location
+    ): void {
         $contentId = $contentInfo->getId();
         $contentTypeId = $contentInfo->getContentType()->id;
         $sectionId = $contentInfo->getSectionId();

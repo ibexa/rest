@@ -37,8 +37,8 @@ class RestTrashItemTest extends ValueObjectVisitorBaseTest
                     'contentInfo' => new ContentInfo(
                         [
                             'id' => 84,
-                             'contentTypeId' => 4,
-                             'name' => 'A Node, long lost in the trash',
+                            'contentTypeId' => 4,
+                            'name' => 'A Node, long lost in the trash',
                         ]
                     ),
                     'sortField' => TrashItem::SORT_FIELD_NAME,

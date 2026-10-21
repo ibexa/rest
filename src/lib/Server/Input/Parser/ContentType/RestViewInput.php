@@ -26,8 +26,10 @@ final class RestViewInput extends CriterionParser
     ) {
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentTypeRestViewInput
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ContentTypeRestViewInput {
         $restViewInput = new ContentTypeRestViewInput();
         $restViewInput->languageCode = $data['languageCode'] ?? null;
 

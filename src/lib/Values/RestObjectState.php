@@ -23,10 +23,12 @@ class RestObjectState extends RestValue
     /**
      * Group ID to which wrapped state belongs.
      */
-    public string|int $groupId;
+    public string | int $groupId;
 
-    public function __construct(ObjectState $objectState, string|int $groupId)
-    {
+    public function __construct(
+        ObjectState $objectState,
+        string | int $groupId
+    ) {
         $this->objectState = $objectState;
         $this->groupId = $groupId;
     }

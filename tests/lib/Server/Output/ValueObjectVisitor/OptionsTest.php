@@ -41,7 +41,7 @@ class OptionsTest extends ValueObjectVisitorBaseTest
             $generator,
             $noContent
         );
-         }
+    }
 
     protected function internalGetVisitor(): Options
     {

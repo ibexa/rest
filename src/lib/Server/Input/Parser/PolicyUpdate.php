@@ -23,14 +23,18 @@ class PolicyUpdate extends BaseParser
 
     protected ParserTools $parserTools;
 
-    public function __construct(RoleService $roleService, ParserTools $parserTools)
-    {
+    public function __construct(
+        RoleService $roleService,
+        ParserTools $parserTools
+    ) {
         $this->roleService = $roleService;
         $this->parserTools = $parserTools;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): PolicyUpdateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): PolicyUpdateStruct {
         $policyUpdate = $this->roleService->newPolicyUpdateStruct();
 
         // @todo XSD says that limitations field is mandatory, but

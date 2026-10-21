@@ -22,14 +22,18 @@ class RoleInput extends BaseParser
 
     protected ParserTools $parserTools;
 
-    public function __construct(RoleService $roleService, ParserTools $parserTools)
-    {
+    public function __construct(
+        RoleService $roleService,
+        ParserTools $parserTools
+    ) {
         $this->roleService = $roleService;
         $this->parserTools = $parserTools;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): RoleCreateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): RoleCreateStruct {
         // Since RoleInput is used both for creating and updating role and identifier is not
         // required when updating role, we need to rely on PAPI to throw the exception on missing
         // identifier when creating a role

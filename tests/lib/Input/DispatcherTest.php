@@ -32,6 +32,7 @@ class DispatcherTest extends TestCase
         $message = new Message();
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $parsingDispatcher->expects(self::never())->method('parse');
         $dispatcher = new Dispatcher($parsingDispatcher);
 
         $dispatcher->parse($message);
@@ -48,6 +49,7 @@ class DispatcherTest extends TestCase
         );
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $parsingDispatcher->expects(self::never())->method('parse');
         $dispatcher = new Dispatcher($parsingDispatcher);
 
         $dispatcher->parse($message);
@@ -64,6 +66,7 @@ class DispatcherTest extends TestCase
         );
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $parsingDispatcher->expects(self::never())->method('parse');
         $dispatcher = new Dispatcher($parsingDispatcher);
 
         $dispatcher->parse($message);
@@ -80,14 +83,14 @@ class DispatcherTest extends TestCase
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects(self::at(0))
+            ->expects(self::once())
             ->method('parse')
             ->with([42], 'text/html')
             ->willReturn(23);
 
         $handler = $this->createMock(Handler::class);
         $handler
-            ->expects(self::at(0))
+            ->expects(self::once())
             ->method('convert')
             ->with('Hello world!')
             ->willReturn([[42]]);
@@ -116,22 +119,22 @@ class DispatcherTest extends TestCase
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects(self::at(0))
+            ->expects(self::once())
             ->method('parse')
             ->with(['someKey' => 'someValue', '__url' => '/foo/bar'], 'text/html')
             ->willReturn(23);
 
         $handler = $this->createMock(Handler::class);
         $handler
-            ->expects(self::at(0))
+            ->expects(self::once())
             ->method('convert')
             ->with('Hello world!')
             ->willReturn(
                 [
-                        [
-                            'someKey' => 'someValue',
-                        ],
-                    ]
+                    [
+                        'someKey' => 'someValue',
+                    ],
+                ]
             );
 
         $dispatcher = new Dispatcher($parsingDispatcher, ['format' => $handler]);

@@ -15,17 +15,19 @@ class BookmarkList extends RestValue
     public int $totalCount = 0;
 
     /**
-     * @var \Ibexa\Rest\Server\Values\RestLocation[]
+     * @var RestLocation[]
      */
     public array $items = [];
 
     /**
      * BookmarkList constructor.
      *
-     * @param \Ibexa\Rest\Server\Values\RestLocation[] $items
+     * @param RestLocation[] $items
      */
-    public function __construct(int $totalCount, array $items)
-    {
+    public function __construct(
+        int $totalCount,
+        array $items
+    ) {
         $this->totalCount = $totalCount;
         $this->items = $items;
     }

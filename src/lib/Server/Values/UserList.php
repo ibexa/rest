@@ -15,7 +15,7 @@ use Ibexa\Rest\Value as RestValue;
 class UserList extends RestValue
 {
     /**
-     * @var \Ibexa\Rest\Server\Values\RestUser[]
+     * @var RestUser[]
      */
     public array $users;
 
@@ -25,10 +25,12 @@ class UserList extends RestValue
     public string $path;
 
     /**
-     * @param \Ibexa\Rest\Server\Values\RestUser[] $users
+     * @param RestUser[] $users
      */
-    public function __construct(array $users, string $path)
-    {
+    public function __construct(
+        array $users,
+        string $path
+    ) {
         $this->users = $users;
         $this->path = $path;
     }

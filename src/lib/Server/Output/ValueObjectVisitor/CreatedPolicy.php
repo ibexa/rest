@@ -23,8 +23,11 @@ class CreatedPolicy extends AbstractPolicy
      *
      * @param \Ibexa\Rest\Server\Values\CreatedPolicy $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('Policy');
         $visitor->setHeader(
             'Content-Type',

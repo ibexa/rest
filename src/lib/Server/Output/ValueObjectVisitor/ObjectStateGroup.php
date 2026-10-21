@@ -20,10 +20,13 @@ class ObjectStateGroup extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup $data
+     * @param ObjectStateGroupValue $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('ObjectStateGroup');
         $visitor->setHeader('Content-Type', $generator->getMediaType('ObjectStateGroup'));
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('ObjectStateGroupUpdate'));
@@ -31,8 +34,10 @@ class ObjectStateGroup extends ValueObjectVisitor
         $generator->endObjectElement('ObjectStateGroup');
     }
 
-    protected function visitObjectStateGroupAttributes(Generator $generator, ObjectStateGroupValue $data): void
-    {
+    protected function visitObjectStateGroupAttributes(
+        Generator $generator,
+        ObjectStateGroupValue $data
+    ): void {
         $generator->startAttribute(
             'href',
             $this->router->generate('ibexa.rest.load_object_state_group', ['objectStateGroupId' => $data->id])

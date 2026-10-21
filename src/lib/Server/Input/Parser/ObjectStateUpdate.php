@@ -23,14 +23,18 @@ class ObjectStateUpdate extends BaseParser
 
     protected ParserTools $parserTools;
 
-    public function __construct(ObjectStateService $objectStateService, ParserTools $parserTools)
-    {
+    public function __construct(
+        ObjectStateService $objectStateService,
+        ParserTools $parserTools
+    ) {
         $this->objectStateService = $objectStateService;
         $this->parserTools = $parserTools;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ObjectStateUpdateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ObjectStateUpdateStruct {
         $objectStateUpdateStruct = $this->objectStateService->newObjectStateUpdateStruct();
 
         if (array_key_exists('identifier', $data)) {

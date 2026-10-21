@@ -19,9 +19,9 @@ class RestRole extends RestValue
     /**
      * Holds internal role object.
      */
-    public Role|RoleDraft $innerRole;
+    public Role | RoleDraft $innerRole;
 
-    public function __construct(Role|RoleDraft $role)
+    public function __construct(Role | RoleDraft $role)
     {
         $this->innerRole = $role;
     }
@@ -37,8 +37,10 @@ class RestRole extends RestValue
     /**
      * Magic set for routing set calls to innerRole.
      */
-    public function __set(string $property, mixed $propertyValue): void
-    {
+    public function __set(
+        string $property,
+        mixed $propertyValue
+    ): void {
         $this->innerRole->$property = $propertyValue;
     }
 

@@ -21,8 +21,10 @@ final class DateRangeAggregationParser extends AbstractRangeAggregationParser
         return 'DateRangeAggregation';
     }
 
-    protected function parseAggregation(array $data, ParsingDispatcher $parsingDispatcher): AbstractRangeAggregation
-    {
+    protected function parseAggregation(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractRangeAggregation {
         if (!array_key_exists('contentTypeIdentifier', $data)) {
             throw new Exceptions\Parser("Missing 'contentTypeIdentifier' element for {$this->getAggregationName()}");
         }

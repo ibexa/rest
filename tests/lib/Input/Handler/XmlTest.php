@@ -49,8 +49,10 @@ class XmlTest extends TestCase
     /**
      * @dataProvider getXmlFixtures
      */
-    public function testConvertXml(string $xml, mixed $expectation): void
-    {
+    public function testConvertXml(
+        string $xml,
+        mixed $expectation
+    ): void {
         $handler = new Xml();
 
         self::assertSame(

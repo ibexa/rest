@@ -21,8 +21,10 @@ final class SelectionTermAggregationParser extends AbstractTermAggregationParser
         return 'SelectionTermAggregation';
     }
 
-    protected function parseAggregation(array $data, ParsingDispatcher $parsingDispatcher): AbstractTermAggregation
-    {
+    protected function parseAggregation(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractTermAggregation {
         if (!array_key_exists('contentTypeIdentifier', $data)) {
             throw new Exceptions\Parser("Missing 'contentTypeIdentifier' element for {$this->getAggregationName()}");
         }

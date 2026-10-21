@@ -21,8 +21,11 @@ class CountryList extends ValueObjectVisitor
      *
      * @param \Ibexa\Rest\Server\Values\CountryList $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('CountryList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('CountryList'));
         $visitor->setHeader('Accept-Patch', false);

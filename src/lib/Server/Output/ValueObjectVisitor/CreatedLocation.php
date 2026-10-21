@@ -22,8 +22,11 @@ class CreatedLocation extends RestLocation
      *
      * @param \Ibexa\Rest\Server\Values\CreatedLocation $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         parent::visit($visitor, $generator, $data->restLocation);
         $visitor->setHeader(
             'Location',

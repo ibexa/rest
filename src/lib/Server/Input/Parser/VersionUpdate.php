@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
+use Ibexa\Contracts\Core\Repository\Values\Content\ContentUpdateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -22,17 +23,21 @@ class VersionUpdate extends BaseParser
 
     protected FieldTypeParser $fieldTypeParser;
 
-    public function __construct(ContentService $contentService, FieldTypeParser $fieldTypeParser)
-    {
+    public function __construct(
+        ContentService $contentService,
+        FieldTypeParser $fieldTypeParser
+    ) {
         $this->contentService = $contentService;
         $this->fieldTypeParser = $fieldTypeParser;
     }
 
     /**
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\ContentUpdateStruct
+     * @return ContentUpdateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): mixed
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): mixed {
         $contentUpdateStruct = $this->contentService->newContentUpdateStruct();
 
         // Missing initial language code

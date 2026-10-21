@@ -8,10 +8,11 @@
 namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\InvalidVariationException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
 use Ibexa\Contracts\Core\Variation\Values\Variation;
 use Ibexa\Contracts\Core\Variation\VariationHandler;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\NotFoundException;
 use Ibexa\Core\FieldType\Image\Value as ImageValue;
 use Ibexa\Core\FieldType\ImageAsset\Value as ImageAssetValue;
 use Ibexa\Rest\Server\Controller as RestController;
@@ -43,12 +44,14 @@ class BinaryContent extends RestController
      *                        since v6.9, the format is {contentId}-{fieldId}-{versionNumber}.
      *                        If the version number isn't specified, the default one is used.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException
+     * @throws UnauthorizedException
      */
-    public function getImageVariation(string $imageId, string $variationIdentifier): Variation|CachedValue
-    {
+    public function getImageVariation(
+        string $imageId,
+        string $variationIdentifier
+    ): Variation | CachedValue {
         [$contentId, $fieldId, $versionNumber] = $this->parseImageId($imageId);
         $content = $this->repository->getContentService()->loadContent($contentId, null, $versionNumber);
 
@@ -62,17 +65,17 @@ class BinaryContent extends RestController
         }
 
         if (!$fieldFound) {
-            throw new Exceptions\NotFoundException("No image Field with ID $fieldId found");
+            throw new NotFoundException("No image Field with ID $fieldId found");
         }
 
         $value = $field->value;
 
         if ($value instanceof ImageValue && $value->uri === null) {
-            throw new Exceptions\NotFoundException("Image file {$value->id} doesn't exist");
+            throw new NotFoundException("Image file {$value->id} doesn't exist");
         }
         if ($value instanceof ImageAssetValue) {
             if ($value->destinationContentId === null) {
-                throw new Exceptions\NotFoundException("There is no image connected with field {$fieldId}");
+                throw new NotFoundException("There is no image connected with field {$fieldId}");
             }
             $content = $this->repository->getContentService()->loadContent((int) $value->destinationContentId);
             $mappings = $this->configResolver->getParameter('fieldtypes.ibexa_image_asset.mappings');
@@ -91,7 +94,7 @@ class BinaryContent extends RestController
                 ['locationId' => $content->contentInfo->mainLocationId]
             );
         } catch (InvalidVariationException $e) {
-            throw new Exceptions\NotFoundException("Invalid image variation $variationIdentifier");
+            throw new NotFoundException("Invalid image variation $variationIdentifier");
         }
     }
 
@@ -103,7 +106,7 @@ class BinaryContent extends RestController
      * @return array An array with 3 keys: contentId, fieldId and versionNumber.
      *               If the versionNumber wasn't set, it is returned as null.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException If the imageId format is invalid
+     * @throws NotFoundException If the imageId format is invalid
      */
     private function parseImageId(string $imageId): array
     {
@@ -116,6 +119,6 @@ class BinaryContent extends RestController
             return $idArray;
         }
 
-        throw new Exceptions\NotFoundException("Invalid image ID {$imageId}");
+        throw new NotFoundException("Invalid image ID {$imageId}");
     }
 }

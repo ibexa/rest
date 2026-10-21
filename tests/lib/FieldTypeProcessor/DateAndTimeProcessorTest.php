@@ -42,8 +42,10 @@ class DateAndTimeProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings): void
-    {
+    public function testPreProcessFieldSettingsHash(
+        $inputSettings,
+        $outputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(
@@ -57,8 +59,10 @@ class DateAndTimeProcessorTest extends TestCase
      *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings): void
-    {
+    public function testPostProcessFieldSettingsHash(
+        $outputSettings,
+        $inputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(

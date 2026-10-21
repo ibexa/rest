@@ -34,8 +34,10 @@ class Mapper
     /**
      * Merges the methods from $restRoute into the _method default of $optionsRoute.
      */
-    public function mergeMethodsDefault(Route $optionsRoute, Route $restRoute): Route
-    {
+    public function mergeMethodsDefault(
+        Route $optionsRoute,
+        Route $restRoute
+    ): Route {
         $mergedRoute = clone $optionsRoute;
         $mergedRoute->setDefault(
             'allowedMethods',

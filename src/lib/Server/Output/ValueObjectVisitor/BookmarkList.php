@@ -16,10 +16,13 @@ use Ibexa\Rest\Server\Values\BookmarkList as BookmarkListValue;
 class BookmarkList extends ValueObjectVisitor
 {
     /**
-     * @param \Ibexa\Rest\Server\Values\BookmarkList $data
+     * @param BookmarkListValue $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('BookmarkList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('BookmarkList'));
 
@@ -27,8 +30,11 @@ class BookmarkList extends ValueObjectVisitor
         $generator->endObjectElement('BookmarkList');
     }
 
-    protected function visitAttributes(Visitor $visitor, Generator $generator, BookmarkListValue $data): void
-    {
+    protected function visitAttributes(
+        Visitor $visitor,
+        Generator $generator,
+        BookmarkListValue $data
+    ): void {
         $generator->startValueElement('count', $data->totalCount);
         $generator->endValueElement('count');
 

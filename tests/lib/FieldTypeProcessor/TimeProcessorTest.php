@@ -44,8 +44,10 @@ class TimeProcessorTest extends TestCase
      * @param array<string, mixed> $inputSettings
      * @param array<string, mixed> $outputSettings
      */
-    public function testPreProcessFieldSettingsHash(array $inputSettings, array $outputSettings): void
-    {
+    public function testPreProcessFieldSettingsHash(
+        array $inputSettings,
+        array $outputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(
@@ -62,8 +64,10 @@ class TimeProcessorTest extends TestCase
      * @param array<string, mixed> $inputSettings
      * @param array<string, mixed> $outputSettings
      */
-    public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
-    {
+    public function testPostProcessFieldSettingsHash(
+        array $outputSettings,
+        array $inputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(

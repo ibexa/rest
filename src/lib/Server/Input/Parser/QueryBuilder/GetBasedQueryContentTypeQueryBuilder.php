@@ -24,8 +24,10 @@ final class GetBasedQueryContentTypeQueryBuilder implements ContentTypeQueryBuil
     ) {
     }
 
-    public function buildQuery(Request $request, int $defaultLimit): ContentTypeQuery
-    {
+    public function buildQuery(
+        Request $request,
+        int $defaultLimit
+    ): ContentTypeQuery {
         $limit = (int)($request->get('limit') ?? $defaultLimit);
         $offset = (int)($request->get('offset') ?? 0);
         $filter = $request->get('filter');

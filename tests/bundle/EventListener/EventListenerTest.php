@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 abstract class EventListenerTest extends TestCase
 {
-    /** @var \Symfony\Component\HttpFoundation\ParameterBag&\PHPUnit\Framework\MockObject\MockObject */
+    /** @var ParameterBag&MockObject */
     protected ParameterBag $requestAttributesMock;
 
     protected bool $isRestRequest = true;

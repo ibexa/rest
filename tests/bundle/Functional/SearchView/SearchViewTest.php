@@ -11,6 +11,7 @@ namespace Ibexa\Tests\Bundle\Rest\Functional\SearchView;
 use DOMDocument;
 use DOMElement;
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\Operator;
+use Psr\Http\Client\ClientExceptionInterface;
 
 class SearchViewTest extends SearchViewTestCase
 {
@@ -22,7 +23,7 @@ class SearchViewTest extends SearchViewTestCase
     private string $nonSearchableContentHref;
 
     /**
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
     protected function setUp(): void
     {
@@ -35,7 +36,7 @@ class SearchViewTest extends SearchViewTestCase
     }
 
     /**
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
     protected function tearDown(): void
     {
@@ -50,10 +51,12 @@ class SearchViewTest extends SearchViewTestCase
      *
      * @dataProvider xmlProvider
      *
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
-    public function testSimpleXmlContentQuery(string $xmlQueryBody, int $expectedCount): void
-    {
+    public function testSimpleXmlContentQuery(
+        string $xmlQueryBody,
+        int $expectedCount
+    ): void {
         $body = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <ViewInput>
@@ -111,10 +114,12 @@ XML;
      *
      * @dataProvider jsonProvider
      *
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
-    public function testSimpleJsonContentQuery(string $jsonQueryBody, int $expectedCount): void
-    {
+    public function testSimpleJsonContentQuery(
+        string $jsonQueryBody,
+        int $expectedCount
+    ): void {
         $body = <<< JSON
 {
     "ViewInput": {
@@ -135,7 +140,7 @@ JSON;
     }
 
     /**
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
     private function createTestContentType(): string
     {
@@ -209,10 +214,12 @@ XML;
     /**
      * @param string[] $tags
      *
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
-    private function createTestContentWithTags(string $name, array $tags): string
-    {
+    private function createTestContentWithTags(
+        string $name,
+        array $tags
+    ): string {
         $tagsString = implode(',', $tags);
         $body = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -264,7 +271,7 @@ XML;
     }
 
     /**
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
     private function deleteContent(string $href): void
     {
@@ -358,8 +365,11 @@ JSON,
     /**
      * @param string|string[] $value
      */
-    private function buildFieldXml(string $name, string $operator, string|array $value): DOMElement
-    {
+    private function buildFieldXml(
+        string $name,
+        string $operator,
+        string | array $value
+    ): DOMElement {
         $xml = new DOMDocument();
         $element = $xml->createElement('Field');
         $element->appendChild(new DOMElement('name', $name));
@@ -383,8 +393,10 @@ JSON,
         return $element;
     }
 
-    private function wrapIn(string $logicalOperator, array $toWrap): DOMElement
-    {
+    private function wrapIn(
+        string $logicalOperator,
+        array $toWrap
+    ): DOMElement {
         $xml = new DOMDocument();
         $wrapper = $xml->createElement($logicalOperator);
 
@@ -406,7 +418,7 @@ JSON,
      * This is just to assure that field with same name but without legacy search engine implementation
      * does not block search in different content type.
      *
-     * @throws \Psr\Http\Client\ClientExceptionInterface
+     * @throws ClientExceptionInterface
      */
     private function createContentWithUrlField(): string
     {

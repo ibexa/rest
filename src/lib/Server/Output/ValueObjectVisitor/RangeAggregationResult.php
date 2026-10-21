@@ -19,8 +19,11 @@ final class RangeAggregationResult extends ValueObjectVisitor
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Search\AggregationResult\RangeAggregationResult $data
      */
-    public function visit(Visitor $visitor, Generator $generator, mixed $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        mixed $data
+    ): void {
         $generator->startObjectElement('RangeAggregationResult');
 
         $visitor->setHeader('Content-Type', $generator->getMediaType('RangeAggregationResult'));
@@ -36,23 +39,31 @@ final class RangeAggregationResult extends ValueObjectVisitor
         $generator->endObjectElement('RangeAggregationResult');
     }
 
-    private function visitEntry(Visitor $visitor, Generator $generator, RangeAggregationResultEntry $entry): void
-    {
+    private function visitEntry(
+        Visitor $visitor,
+        Generator $generator,
+        RangeAggregationResultEntry $entry
+    ): void {
         $generator->startObjectElement('RangeAggregationResultEntry');
         $this->visitKey($visitor, $generator, $entry->getKey());
         $this->visitCount($generator, $entry->getCount());
         $generator->endObjectElement('RangeAggregationResultEntry');
     }
 
-    private function visitKey(Visitor $visitor, Generator $generator, Range $key): void
-    {
+    private function visitKey(
+        Visitor $visitor,
+        Generator $generator,
+        Range $key
+    ): void {
         $generator->startHashElement('key');
         $visitor->visitValueObject($key);
         $generator->endHashElement('key');
     }
 
-    private function visitCount(Generator $generator, int $count): void
-    {
+    private function visitCount(
+        Generator $generator,
+        int $count
+    ): void {
         $generator->valueElement('count', $count);
     }
 }

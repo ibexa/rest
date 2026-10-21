@@ -8,6 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
+use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinition;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionUpdateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
@@ -15,6 +16,7 @@ use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 use Ibexa\Rest\Input\FieldTypeParser;
 use Ibexa\Rest\Input\ParserTools;
+use Ibexa\Rest\Server\Controller\ContentType;
 
 /**
  * Parser for FieldDefinitionUpdate.
@@ -27,15 +29,20 @@ class FieldDefinitionUpdate extends BaseParser
 
     protected ParserTools $parserTools;
 
-    public function __construct(ContentTypeService $contentTypeService, FieldTypeParser $fieldTypeParser, ParserTools $parserTools)
-    {
+    public function __construct(
+        ContentTypeService $contentTypeService,
+        FieldTypeParser $fieldTypeParser,
+        ParserTools $parserTools
+    ) {
         $this->contentTypeService = $contentTypeService;
         $this->fieldTypeParser = $fieldTypeParser;
         $this->parserTools = $parserTools;
     }
 
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): FieldDefinitionUpdateStruct
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): FieldDefinitionUpdateStruct {
         $fieldDefinitionUpdate = $this->contentTypeService->newFieldDefinitionUpdateStruct();
 
         if (array_key_exists('identifier', $data)) {
@@ -124,9 +131,9 @@ class FieldDefinitionUpdate extends BaseParser
      *
      * @todo depends on temporary solution to give parser access to the URL
      *
-     * @see \Ibexa\Rest\Server\Controller\ContentType::updateFieldDefinition
+     * @see ContentType::updateFieldDefinition
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
     protected function getFieldDefinition(array $data): FieldDefinition
     {

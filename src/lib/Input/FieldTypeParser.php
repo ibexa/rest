@@ -38,8 +38,11 @@ class FieldTypeParser
      * Parses the given $value for the field $fieldDefIdentifier in the content
      * identified by $contentInfoId.
      */
-    public function parseFieldValue(int $contentInfoId, string $fieldDefIdentifier, mixed $value): mixed
-    {
+    public function parseFieldValue(
+        int $contentInfoId,
+        string $fieldDefIdentifier,
+        mixed $value
+    ): mixed {
         $contentInfo = $this->contentService->loadContentInfo($contentInfoId);
         $contentType = $this->contentTypeService->loadContentType($contentInfo->contentTypeId);
 
@@ -52,8 +55,10 @@ class FieldTypeParser
      * Parses the given $value using the FieldType identified by
      * $fieldTypeIdentifier.
      */
-    public function parseValue(string $fieldTypeIdentifier, mixed $value): mixed
-    {
+    public function parseValue(
+        string $fieldTypeIdentifier,
+        mixed $value
+    ): mixed {
         if ($this->fieldTypeProcessorRegistry->hasProcessor($fieldTypeIdentifier)) {
             $fieldTypeProcessor = $this->fieldTypeProcessorRegistry->getProcessor($fieldTypeIdentifier);
             $value = $fieldTypeProcessor->preProcessValueHash($value);
@@ -68,8 +73,10 @@ class FieldTypeParser
      * Parses the given $settingsHash using the FieldType identified by
      * $fieldTypeIdentifier.
      */
-    public function parseFieldSettings(string $fieldTypeIdentifier, mixed $settingsHash): mixed
-    {
+    public function parseFieldSettings(
+        string $fieldTypeIdentifier,
+        mixed $settingsHash
+    ): mixed {
         if ($this->fieldTypeProcessorRegistry->hasProcessor($fieldTypeIdentifier)) {
             $fieldTypeProcessor = $this->fieldTypeProcessorRegistry->getProcessor($fieldTypeIdentifier);
             $settingsHash = $fieldTypeProcessor->preProcessFieldSettingsHash($settingsHash);
@@ -86,8 +93,10 @@ class FieldTypeParser
      *
      * @param array<mixed> $configurationHash
      */
-    public function parseValidatorConfiguration(string $fieldTypeIdentifier, array $configurationHash): mixed
-    {
+    public function parseValidatorConfiguration(
+        string $fieldTypeIdentifier,
+        array $configurationHash
+    ): mixed {
         if ($this->fieldTypeProcessorRegistry->hasProcessor($fieldTypeIdentifier)) {
             $fieldTypeProcessor = $this->fieldTypeProcessorRegistry->getProcessor($fieldTypeIdentifier);
             $configurationHash = $fieldTypeProcessor->preProcessValidatorConfigurationHash($configurationHash);

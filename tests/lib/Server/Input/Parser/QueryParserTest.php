@@ -21,6 +21,7 @@ class QueryParserTest extends BaseTest
         ];
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $parsingDispatcher->expects(self::never())->method('parse');
         $parser = $this->getParser();
 
         $result = $parser->parse($inputArray, $parsingDispatcher);
@@ -62,16 +63,21 @@ class QueryParserTest extends BaseTest
         ];
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $matcher = self::exactly(2);
         $parsingDispatcher
-            ->expects(self::at(0))
+            ->expects($matcher)
             ->method('parse')
-            ->with(['ContentTypeIdentifierCriterion' => 'article'])
-            ->willReturn(new Query\Criterion\ContentTypeIdentifier('article'));
-        $parsingDispatcher
-            ->expects(self::at(1))
-            ->method('parse')
-            ->with(['ParentLocationIdCriterion' => 762])
-            ->willReturn(new Query\Criterion\ParentLocationId(762));
+            ->willReturnCallback(static function (array $parameters) use ($matcher): Query\Criterion {
+                if ($matcher->getInvocationCount() === 1) {
+                    self::assertSame(['ContentTypeIdentifierCriterion' => 'article'], $parameters);
+
+                    return new Query\Criterion\ContentTypeIdentifier('article');
+                }
+
+                self::assertSame(['ParentLocationIdCriterion' => 762], $parameters);
+
+                return new Query\Criterion\ParentLocationId(762);
+            });
 
         $parser = $this->getParser();
 
@@ -118,16 +124,21 @@ class QueryParserTest extends BaseTest
         ];
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $matcher = self::exactly(2);
         $parsingDispatcher
-            ->expects(self::at(0))
+            ->expects($matcher)
             ->method('parse')
-            ->with(['ContentTypeIdentifierCriterion' => 'article'])
-            ->willReturn(new Query\Criterion\ContentTypeIdentifier('article'));
-        $parsingDispatcher
-            ->expects(self::at(1))
-            ->method('parse')
-            ->with(['ParentLocationIdCriterion' => 762])
-            ->willReturn(new Query\Criterion\ParentLocationId(762));
+            ->willReturnCallback(static function (array $parameters) use ($matcher): Query\Criterion {
+                if ($matcher->getInvocationCount() === 1) {
+                    self::assertSame(['ContentTypeIdentifierCriterion' => 'article'], $parameters);
+
+                    return new Query\Criterion\ContentTypeIdentifier('article');
+                }
+
+                self::assertSame(['ParentLocationIdCriterion' => 762], $parameters);
+
+                return new Query\Criterion\ParentLocationId(762);
+            });
 
         $parser = $this->getParser();
 

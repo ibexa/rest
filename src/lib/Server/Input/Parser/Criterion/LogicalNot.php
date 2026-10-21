@@ -8,7 +8,7 @@
 namespace Ibexa\Rest\Server\Input\Parser\Criterion;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query\Criterion\LogicalNot as LogicalNotCriterion;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Server\Input\Parser\Criterion as CriterionParser;
 
@@ -20,16 +20,18 @@ class LogicalNot extends CriterionParser
     /**
      * Parses input structure to a Criterion object.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): LogicalNotCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): LogicalNotCriterion {
         if (!array_key_exists('NOT', $data) || !is_array($data['NOT'])) {
-            throw new Exceptions\Parser('Invalid <NOT> format');
+            throw new Parser('Invalid <NOT> format');
         }
 
         if (count($data['NOT']) > 1) {
-            throw new Exceptions\Parser('NOT element can only contain one subitem');
+            throw new Parser('NOT element can only contain one subitem');
         }
         $criterionName = key($data['NOT']);
         $criterionData = current($data['NOT']);

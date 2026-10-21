@@ -94,8 +94,10 @@ class FieldDefinitionListTest extends ValueObjectVisitorBaseTest
      *
      * @dataProvider provideXpathAssertions
      */
-    public function testGeneratedXml(string $xpath, \DOMDocument $dom): void
-    {
+    public function testGeneratedXml(
+        string $xpath,
+        \DOMDocument $dom
+    ): void {
         $this->assertXPath($dom, $xpath);
     }
 

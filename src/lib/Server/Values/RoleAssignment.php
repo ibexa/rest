@@ -19,8 +19,10 @@ class RoleAssignment extends RestValue
 
     public ?RoleLimitation $limitation;
 
-    public function __construct(int $roleId, ?RoleLimitation $limitation = null)
-    {
+    public function __construct(
+        int $roleId,
+        ?RoleLimitation $limitation = null
+    ) {
         $this->roleId = $roleId;
         $this->limitation = $limitation;
     }

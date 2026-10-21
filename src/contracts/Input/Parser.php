@@ -17,5 +17,8 @@ abstract class Parser
      *
      * @param array<mixed> $data
      */
-    abstract public function parse(array $data, ParsingDispatcher $parsingDispatcher): mixed;
+    abstract public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): mixed;
 }

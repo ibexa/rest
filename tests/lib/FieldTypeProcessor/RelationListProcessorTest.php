@@ -45,8 +45,10 @@ class RelationListProcessorTest extends TestCase
      * @param array<string, mixed> $inputSettings
      * @param array<string, mixed> $outputSettings
      */
-    public function testPreProcessFieldSettingsHash(array $inputSettings, array $outputSettings): void
-    {
+    public function testPreProcessFieldSettingsHash(
+        array $inputSettings,
+        array $outputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(
@@ -63,8 +65,10 @@ class RelationListProcessorTest extends TestCase
      * @param array<string, mixed> $inputSettings
      * @param array<string, mixed> $outputSettings
      */
-    public function testPostProcessFieldSettingsHash(array $outputSettings, array $inputSettings): void
-    {
+    public function testPostProcessFieldSettingsHash(
+        array $outputSettings,
+        array $inputSettings
+    ): void {
         $processor = $this->getProcessor();
 
         self::assertEquals(
@@ -114,16 +118,25 @@ class RelationListProcessorTest extends TestCase
         $routerMock = $this->createMock(RouterInterface::class);
         $processor->setRouter($routerMock);
 
+        $matcher = self::exactly(2);
         $routerMock
-            ->expects(self::exactly(2))
+            ->expects($matcher)
             ->method('generate')
-            ->withConsecutive(
-                ['ibexa.rest.load_content', ['contentId' => 42]],
-                ['ibexa.rest.load_content', ['contentId' => 300]]
-            )->willReturnOnConsecutiveCalls(
-                '/api/ibexa/v2/content/objects/42',
-                '/api/ibexa/v2/content/objects/300'
-            );
+            ->willReturnCallback(static function (
+                string $route,
+                array $parameters
+            ) use ($matcher): string {
+                self::assertSame('ibexa.rest.load_content', $route);
+                if ($matcher->getInvocationCount() === 1) {
+                    self::assertSame(['contentId' => 42], $parameters);
+
+                    return '/api/ibexa/v2/content/objects/42';
+                }
+
+                self::assertSame(['contentId' => 300], $parameters);
+
+                return '/api/ibexa/v2/content/objects/300';
+            });
 
         $hash = $processor->postProcessValueHash(['destinationContentIds' => [42, 300]]);
         self::assertArrayHasKey('destinationContentHrefs', $hash);

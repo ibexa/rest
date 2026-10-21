@@ -27,8 +27,11 @@ class RestRelation extends RestValue
      */
     public int $versionNo;
 
-    public function __construct(Relation $relation, int $contentId, int $versionNo)
-    {
+    public function __construct(
+        Relation $relation,
+        int $contentId,
+        int $versionNo
+    ) {
         $this->relation = $relation;
         $this->contentId = $contentId;
         $this->versionNo = $versionNo;

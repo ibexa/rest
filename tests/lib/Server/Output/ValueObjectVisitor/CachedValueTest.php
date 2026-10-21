@@ -27,9 +27,11 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
     ];
 
     /**
-     * @var \Symfony\Component\HttpFoundation\Request
+     * @var Request
      */
     protected $request;
+
+    private const FULL_CACHE_HEADER_CALLS = ['setPublic', 'setVary Accept', 'setSharedMaxAge', 'setVary X-User-Hash'];
 
     public function setUp(): void
     {
@@ -39,28 +41,24 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
 
     public function testVisit(): void
     {
-        $responseMock = $this->getResponseMock();
-        $responseMock->expects(self::once())->method('setPublic');
-        $responseMock->expects(self::at(1))->method('setVary')->with('Accept');
-        $responseMock->expects(self::once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
-        $responseMock->expects(self::at(3))->method('setVary')->with('X-User-Hash', false);
+        $calls = [];
+        $this->expectFullCacheHeaders($calls);
 
         $result = $this->visit(new CachedValue(new stdClass()));
 
         self::assertNotEmpty($result);
+        self::assertSame(self::FULL_CACHE_HEADER_CALLS, $calls);
     }
 
     public function testVisitLocationCache(): void
     {
-        $responseMock = $this->getResponseMock();
-        $responseMock->expects(self::once())->method('setPublic');
-        $responseMock->expects(self::at(1))->method('setVary')->with('Accept');
-        $responseMock->expects(self::once())->method('setSharedMaxAge')->with($this->defaultOptions['content.default_ttl']);
-        $responseMock->expects(self::at(3))->method('setVary')->with('X-User-Hash', false);
+        $calls = [];
+        $this->expectFullCacheHeaders($calls);
 
         $result = $this->visit(new CachedValue(new stdClass(), ['locationId' => 'testLocationId']));
 
         self::assertNotEmpty($result);
+        self::assertSame(self::FULL_CACHE_HEADER_CALLS, $calls);
     }
 
     public function testVisitNoUserHash(): void
@@ -119,6 +117,41 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
         self::assertNotEmpty($result);
     }
 
+    /**
+     * Expects the response calls and records them in $calls, to assert their order across methods.
+     *
+     * @param list<string> $calls
+     */
+    private function expectFullCacheHeaders(array &$calls): void
+    {
+        $responseMock = $this->getResponseMock();
+        $responseMock->expects(self::once())->method('setPublic')
+            ->willReturnCallback(static function () use (&$calls, $responseMock) {
+                $calls[] = 'setPublic';
+
+                return $responseMock;
+            });
+        $setVaryMatcher = self::exactly(2);
+        $responseMock->expects($setVaryMatcher)->method('setVary')
+            ->willReturnCallback(static function (...$parameters) use ($setVaryMatcher, &$calls, $responseMock) {
+                if ($setVaryMatcher->getInvocationCount() === 1) {
+                    self::assertSame(['Accept', true], $parameters);
+                } else {
+                    self::assertSame(['X-User-Hash', false], $parameters);
+                }
+                $calls[] = 'setVary ' . $parameters[0];
+
+                return $responseMock;
+            });
+        $responseMock->expects(self::once())->method('setSharedMaxAge')
+            ->with($this->defaultOptions['content.default_ttl'])
+            ->willReturnCallback(static function () use (&$calls, $responseMock) {
+                $calls[] = 'setSharedMaxAge';
+
+                return $responseMock;
+            });
+    }
+
     protected function visit($value): string
     {
         $this->getVisitorMock()->expects(self::once())->method('visitValueObject')->with($value->value);
@@ -168,7 +201,10 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
             ->expects(self::any())
             ->method('getParameter')
             ->willReturnCallback(
-                static function ($parameterName, $defaultValue) use ($options) {
+                static function (
+                    $parameterName,
+                    $defaultValue
+                ) use ($options) {
                     return isset($options[$parameterName]) ? $options[$parameterName] : $defaultValue;
                 }
             );

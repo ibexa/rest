@@ -19,8 +19,7 @@ class CountryList extends RestValue
      */
     public function __construct(
         private readonly array $countries
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string, array{Name: string, Alpha2: string, Alpha3: string, IDC: string}>

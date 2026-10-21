@@ -7,6 +7,7 @@
 
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\Section;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -17,7 +18,7 @@ class SectionList extends RestValue
     /**
      * Sections.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Section[]
+     * @var Section[]
      */
     public array $sections;
 
@@ -29,10 +30,12 @@ class SectionList extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Section[] $sections
+     * @param Section[] $sections
      */
-    public function __construct(array $sections, string $path)
-    {
+    public function __construct(
+        array $sections,
+        string $path
+    ) {
         $this->sections = $sections;
         $this->path = $path;
     }

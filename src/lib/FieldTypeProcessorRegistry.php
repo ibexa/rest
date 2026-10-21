@@ -17,12 +17,12 @@ class FieldTypeProcessorRegistry
     /**
      * Registered processors.
      *
-     * @var \Ibexa\Contracts\Rest\FieldTypeProcessor[]
+     * @var FieldTypeProcessor[]
      */
     private array $processors = [];
 
     /**
-     * @param \Ibexa\Contracts\Rest\FieldTypeProcessor[] $processors
+     * @param FieldTypeProcessor[] $processors
      */
     public function __construct(array $processors = [])
     {
@@ -34,8 +34,10 @@ class FieldTypeProcessorRegistry
     /**
      * Registers $processor for $fieldTypeIdentifier.
      */
-    public function registerProcessor(string $fieldTypeIdentifier, FieldTypeProcessor $processor): void
-    {
+    public function registerProcessor(
+        string $fieldTypeIdentifier,
+        FieldTypeProcessor $processor
+    ): void {
         $this->processors[$fieldTypeIdentifier] = $processor;
     }
 

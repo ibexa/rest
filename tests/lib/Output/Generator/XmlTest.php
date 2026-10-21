@@ -242,8 +242,10 @@ final class XmlTest extends GeneratorTest
         );
     }
 
-    public function assertSnapshot(string $snapshotName, string $generatedContent): void
-    {
+    public function assertSnapshot(
+        string $snapshotName,
+        string $generatedContent
+    ): void {
         self::assertXmlStringEqualsXmlFile(
             sprintf('%s/_fixtures/%s.xml', __DIR__, $snapshotName),
             $generatedContent
@@ -284,8 +286,10 @@ final class XmlTest extends GeneratorTest
         return $this->generator;
     }
 
-    private function compareXmls(string|false $expected, string $result): void
-    {
+    private function compareXmls(
+        string | false $expected,
+        string $result
+    ): void {
         $expectedXml = new \DOMDocument();
         $expectedXml->preserveWhiteSpace = false;
         $expectedXml->formatOutput = true;

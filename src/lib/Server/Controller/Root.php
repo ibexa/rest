@@ -68,7 +68,7 @@ class Root extends RestController
     /**
      * Catch-all for REST requests.
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws NotFoundException
      */
     public function catchAll(): never
     {

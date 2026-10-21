@@ -18,8 +18,10 @@ class Field extends BaseParser
     /**
      * Parse input structure for Field sort clause.
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): FieldSortClause
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): FieldSortClause {
         if (!isset($data['Field'])) {
             throw new Exceptions\Parser("The <Field> Sort Clause doesn't exist in the input structure");
         }

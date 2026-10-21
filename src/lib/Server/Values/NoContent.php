@@ -9,6 +9,4 @@ namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Rest\Value as RestValue;
 
-class NoContent extends RestValue
-{
-}
+class NoContent extends RestValue {}

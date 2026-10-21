@@ -10,6 +10,7 @@ namespace Ibexa\Rest\Server\Values;
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
+use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Value as RestValue;
 
@@ -25,17 +26,22 @@ class RestUser extends RestValue
     public ContentInfo $contentInfo;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Relation[]
+     * @var Relation[]
      */
     public array $relations;
 
     public Location $mainLocation;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Relation[] $relations
+     * @param Relation[] $relations
      */
-    public function __construct(Content $content, ContentType $contentType, ContentInfo $contentInfo, Location $mainLocation, array $relations)
-    {
+    public function __construct(
+        Content $content,
+        ContentType $contentType,
+        ContentInfo $contentInfo,
+        Location $mainLocation,
+        array $relations
+    ) {
         $this->content = $content;
         $this->contentType = $contentType;
         $this->contentInfo = $contentInfo;

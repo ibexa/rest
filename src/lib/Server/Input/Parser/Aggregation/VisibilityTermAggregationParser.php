@@ -19,8 +19,10 @@ final class VisibilityTermAggregationParser extends AbstractTermAggregationParse
         return 'VisibilityTermAggregation';
     }
 
-    protected function parseAggregation(array $data, ParsingDispatcher $parsingDispatcher): AbstractTermAggregation
-    {
+    protected function parseAggregation(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): AbstractTermAggregation {
         return new VisibilityTermAggregation($data['name']);
     }
 }
