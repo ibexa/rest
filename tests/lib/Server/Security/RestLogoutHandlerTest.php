@@ -20,12 +20,12 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 class RestLogoutHandlerTest extends TestCase
 {
     /**
-     * @var MockObject
+     * @var ConfigResolverInterface&MockObject
      */
     private $configResolver;
 
     /**
-     * @var MockObject
+     * @var SessionInterface&MockObject
      */
     private $session;
 

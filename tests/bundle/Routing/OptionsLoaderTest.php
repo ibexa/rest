@@ -77,7 +77,7 @@ class OptionsLoaderTest extends TestCase
     }
 
     /**
-     * @return MockObject
+     * @return OptionsLoader\RouteCollectionMapper&MockObject
      */
     protected function getRouteCollectionMapperMock()
     {

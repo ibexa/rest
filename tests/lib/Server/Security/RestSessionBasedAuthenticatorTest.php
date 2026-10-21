@@ -37,27 +37,27 @@ class RestSessionBasedAuthenticatorTest extends TestCase
     public const PROVIDER_KEY = 'test_key';
 
     /**
-     * @var MockObject
+     * @var TokenStorageInterface&MockObject
      */
     private $tokenStorage;
 
     /**
-     * @var MockObject
+     * @var AuthenticationManagerInterface&MockObject
      */
     private $authenticationManager;
 
     /**
-     * @var MockObject
+     * @var EventDispatcherInterface&MockObject
      */
     private $eventDispatcher;
 
     /**
-     * @var MockObject
+     * @var ConfigResolverInterface&MockObject
      */
     private $configResolver;
 
     /**
-     * @var MockObject
+     * @var LoggerInterface&MockObject
      */
     private $logger;
 
