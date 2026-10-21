@@ -15,6 +15,7 @@ use Ibexa\Rest\RequestParser;
 use Ibexa\Tests\Rest\AssertXmlTagTrait;
 use Ibexa\Tests\Rest\Server;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -43,12 +44,12 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     protected $requestParser;
 
     /**
-     * @var (RouterInterface&MockObject)|null
+     * @var (RouterInterface&Stub)|null
      */
     private $routerMock;
 
     /**
-     * @var (RouterInterface&MockObject)|null
+     * @var (RouterInterface&Stub)|null
      */
     private $templatedRouterMock;
 
@@ -158,7 +159,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     }
 
     /**
-     * @return RouterInterface&MockObject
+     * @return RouterInterface&Stub
      */
     protected function getRouterMock()
     {
@@ -187,17 +188,16 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     }
 
     /**
-     * Router mock which expects calls to generate() in the order given by the (by reference) expectation list.
+     * Router stub which checks calls to generate() in the order given by the (by reference) expectation list.
      *
      * @param list<array{string, array<mixed>, string}> $expectations
      *
-     * @return RouterInterface&MockObject
+     * @return RouterInterface&Stub
      */
     private function createRouterMock(array &$expectations): RouterInterface
     {
-        $router = $this->createMock(RouterInterface::class);
+        $router = $this->createStub(RouterInterface::class);
         $router
-            ->expects($this->any())
             ->method('generate')
             ->willReturnCallback(
                 static function (
@@ -206,7 +206,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
                 ) use (&$expectations): string {
                     $expected = array_shift($expectations);
                     if ($expected === null) {
-                        // Calls beyond the expected ones are not asserted, same as with a plain mock.
+                        // Calls beyond the expected ones are not asserted, same as with the removed at() matcher.
                         return '';
                     }
 
@@ -237,7 +237,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     }
 
     /**
-     * @return RouterInterface&MockObject
+     * @return RouterInterface&Stub
      */
     protected function getTemplatedRouterMock()
     {
