@@ -142,7 +142,7 @@ class ValueObjectVisitorDispatcherTest extends TestCase
     }
 
     /**
-     * @return MockObject|ValueObjectVisitor
+     * @return MockObject&ValueObjectVisitor
      */
     private function getValueObjectVisitorMock()
     {

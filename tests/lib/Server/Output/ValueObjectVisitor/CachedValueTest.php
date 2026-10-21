@@ -185,7 +185,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @return ConfigResolverInterface|MockObject
+     * @return ConfigResolverInterface&MockObject
      */
     protected function getConfigProviderMock()
     {

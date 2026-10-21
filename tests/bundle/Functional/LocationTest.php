@@ -14,7 +14,7 @@ class LocationTest extends RESTFunctionalTestCase
     /**
      * Covers POST /content/objects/{contentId}/locations.
      *
-     * @returns string location href
+     * @return string location href
      */
     public function testCreateLocation()
     {

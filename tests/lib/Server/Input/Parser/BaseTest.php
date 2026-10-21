@@ -21,12 +21,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 abstract class BaseTest extends ParentBaseTest
 {
     /**
-     * @var ParsingDispatcher|MockObject
+     * @var ParsingDispatcher&MockObject
      */
     protected $parsingDispatcherMock;
 
     /**
-     * @var RequestParser|MockObject
+     * @var RequestParser&MockObject
      */
     protected $requestParserMock;
 
@@ -65,7 +65,7 @@ abstract class BaseTest extends ParentBaseTest
     /**
      * Get the Request parser.
      *
-     * @return RequestParser|MockObject
+     * @return RequestParser&MockObject
      */
     protected function getRequestParserMock()
     {

@@ -22,7 +22,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class ResponseListenerTest extends EventListenerTest
 {
-    /** @var AcceptHeaderVisitorDispatcher|MockObject */
+    /** @var AcceptHeaderVisitorDispatcher&MockObject */
     protected $visitorDispatcherMock;
 
     /** @var stdClass */
@@ -41,7 +41,7 @@ class ResponseListenerTest extends EventListenerTest
     /** @var Event */
     protected $event;
 
-    /** @var KernelInterface|MockObject */
+    /** @var KernelInterface&MockObject */
     protected $kernelMock;
 
     public function setUp(): void
@@ -120,7 +120,7 @@ class ResponseListenerTest extends EventListenerTest
     }
 
     /**
-     * @return AcceptHeaderVisitorDispatcher|MockObject
+     * @return AcceptHeaderVisitorDispatcher&MockObject
      */
     public function getVisitorDispatcherMock()
     {
@@ -159,7 +159,7 @@ class ResponseListenerTest extends EventListenerTest
     }
 
     /**
-     * @return MockObject|KernelInterface
+     * @return MockObject&KernelInterface
      */
     protected function getKernelMock(): KernelInterface
     {

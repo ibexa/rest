@@ -20,7 +20,7 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class SecurityListenerTest extends TestCase
 {
-    /** @var PermissionResolver|MockObject */
+    /** @var PermissionResolver&MockObject */
     private $permissionResolver;
 
     protected function setUp(): void

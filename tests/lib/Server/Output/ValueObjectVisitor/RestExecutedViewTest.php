@@ -123,7 +123,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @return LocationService|MockObject
+     * @return LocationService&MockObject
      */
     public function getLocationServiceMock()
     {
@@ -131,7 +131,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @return ContentService|MockObject
+     * @return ContentService&MockObject
      */
     public function getContentServiceMock()
     {
@@ -142,7 +142,7 @@ class RestExecutedViewTest extends ValueObjectVisitorBaseTest
     }
 
     /**
-     * @return ContentTypeService|MockObject
+     * @return ContentTypeService&MockObject
      */
     public function getContentTypeServiceMock()
     {

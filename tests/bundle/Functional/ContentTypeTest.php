@@ -73,7 +73,7 @@ XML;
     /**
      * @depends testCreateContentTypeGroup
      *
-     * @returns string The created content type href
+     * @return string The created content type href
      * Covers POST /content/typegroups/<contentTypeGroupId>/types?publish=true
      *
      * @todo write test with full workflow (draft, edit, publish)

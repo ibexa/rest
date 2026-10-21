@@ -20,13 +20,13 @@ abstract class EventListenerTest extends TestCase
     /** @var EventDispatcherInterface */
     protected $event;
 
-    /** @var Request|MockObject */
+    /** @var Request&MockObject */
     protected $requestMock;
 
-    /** @var ParameterBag|MockObject */
+    /** @var ParameterBag&MockObject */
     protected $requestAttributesMock;
 
-    /** @var ParameterBag|MockObject */
+    /** @var ParameterBag&MockObject */
     protected $requestHeadersMock;
 
     protected $isRestRequest = true;
@@ -79,7 +79,7 @@ abstract class EventListenerTest extends TestCase
     }
 
     /**
-     * @return ParameterBag|MockObject
+     * @return ParameterBag&MockObject
      */
     protected function getRequestAttributesMock()
     {
@@ -101,7 +101,7 @@ abstract class EventListenerTest extends TestCase
     }
 
     /**
-     * @return MockObject|Request
+     * @return MockObject&Request
      */
     protected function getRequestMock()
     {
@@ -126,7 +126,7 @@ abstract class EventListenerTest extends TestCase
     }
 
     /**
-     * @return ParameterBag|MockObject
+     * @return ParameterBag&MockObject
      */
     protected function getRequestHeadersMock()
     {

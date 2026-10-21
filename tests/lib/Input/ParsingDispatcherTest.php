@@ -100,7 +100,7 @@ class ParsingDispatcherTest extends TestCase
     }
 
     /**
-     * @return Parser|MockObject
+     * @return Parser&MockObject
      */
     private function createParserMock()
     {

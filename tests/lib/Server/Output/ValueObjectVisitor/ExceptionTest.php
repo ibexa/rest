@@ -22,7 +22,7 @@ class ExceptionTest extends ValueObjectVisitorBaseTest
 {
     protected const NON_VERBOSE_ERROR_DESCRIPTION = 'An error has occurred. Please try again later or contact your Administrator.';
 
-    /** @var TranslatorInterface|MockObject */
+    /** @var TranslatorInterface&MockObject */
     private $translatorMock;
 
     /**

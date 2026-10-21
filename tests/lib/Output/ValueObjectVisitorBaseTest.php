@@ -43,12 +43,12 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     protected $requestParser;
 
     /**
-     * @var RouterInterface|MockObject
+     * @var (RouterInterface&MockObject)|null
      */
     private $routerMock;
 
     /**
-     * @var RouterInterface|MockObject
+     * @var (RouterInterface&MockObject)|null
      */
     private $templatedRouterMock;
 
@@ -61,7 +61,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     /**
      * Gets the visitor mock.
      *
-     * @return Visitor|MockObject
+     * @return Visitor&MockObject
      */
     protected function getVisitorMock()
     {
@@ -78,7 +78,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     }
 
     /**
-     * @return Response|MockObject
+     * @return Response&MockObject
      */
     protected function getResponseMock()
     {
@@ -146,7 +146,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     }
 
     /**
-     * @return RequestParser|MockObject
+     * @return RequestParser&MockObject
      */
     protected function getRequestParser()
     {
@@ -158,7 +158,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     }
 
     /**
-     * @return RouterInterface|MockObject
+     * @return RouterInterface&MockObject
      */
     protected function getRouterMock()
     {
@@ -237,7 +237,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     }
 
     /**
-     * @return RouterInterface|MockObject
+     * @return RouterInterface&MockObject
      */
     protected function getTemplatedRouterMock()
     {

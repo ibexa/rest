@@ -59,7 +59,7 @@ class OptionsLoaderTest extends TestCase
     /**
      * Returns a partially mocked OptionsLoader, with the import method mocked.
      *
-     * @return OptionsLoader|MockObject
+     * @return OptionsLoader&MockObject
      */
     protected function getOptionsLoader()
     {

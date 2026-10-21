@@ -176,7 +176,7 @@ class CsrfListenerTest extends EventListenerTest
     }
 
     /**
-     * @return CsrfProviderInterface|MockObject
+     * @return CsrfProviderInterface&MockObject
      */
     protected function getCsrfProviderMock()
     {
@@ -197,7 +197,7 @@ class CsrfListenerTest extends EventListenerTest
     }
 
     /**
-     * @return MockObject|RequestEvent
+     * @return MockObject&RequestEvent
      */
     protected function getEvent($class = null)
     {
@@ -214,7 +214,7 @@ class CsrfListenerTest extends EventListenerTest
     }
 
     /**
-     * @return SessionInterface|MockObject
+     * @return SessionInterface&MockObject
      */
     protected function getSessionMock()
     {
@@ -230,7 +230,7 @@ class CsrfListenerTest extends EventListenerTest
     }
 
     /**
-     * @return ParameterBag|MockObject
+     * @return ParameterBag&MockObject
      */
     protected function getRequestHeadersMock()
     {
@@ -264,7 +264,7 @@ class CsrfListenerTest extends EventListenerTest
     }
 
     /**
-     * @return MockObject|Request
+     * @return MockObject&Request
      */
     protected function getRequestMock()
     {
@@ -299,7 +299,7 @@ class CsrfListenerTest extends EventListenerTest
     }
 
     /**
-     * @return MockObject|EventDispatcherInterface
+     * @return MockObject&EventDispatcherInterface
      */
     protected function getEventDispatcherMock()
     {

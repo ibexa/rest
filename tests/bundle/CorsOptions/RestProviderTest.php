@@ -109,7 +109,7 @@ class RestProviderTest extends TestCase
     }
 
     /**
-     * @return MockObject|RequestMatcherInterface
+     * @return MockObject&RequestMatcherInterface
      */
     protected function getRequestMatcherMock()
     {

@@ -19,10 +19,10 @@ class CsrfTokenManagerTest extends TestCase
 {
     public const CSRF_TOKEN_INTENTION = 'csrf';
 
-    /** @var MockObject|TokenStorageInterface */
+    /** @var MockObject&TokenStorageInterface */
     private $tokenStorage;
 
-    /** @var MockObject|RequestStack */
+    /** @var MockObject&RequestStack */
     private $requestStack;
 
     protected function setUp(): void
