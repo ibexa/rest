@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <files version="1">
  <file path="src/lib/Input/Dispatcher.php">
-  <line number="99" hash="e30c0df05baeac9abd828d0eac2e2aea92c78003">
+  <line number="103" hash="e30c0df05baeac9abd828d0eac2e2aea92c78003">
    <issue><![CDATA[Automatic conversion of false to array is deprecated]]></issue>
   </line>
  </file>
