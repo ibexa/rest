@@ -9,7 +9,6 @@ namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\LimitationValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
-use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException as APINotFoundException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\RoleService;
 use Ibexa\Contracts\Core\Repository\UserService;
@@ -177,7 +176,7 @@ class Role extends RestController
             try {
                 $role = $this->roleService->loadRoleByIdentifier($request->query->get('identifier'));
                 $roles[] = $role;
-            } catch (APINotFoundException $e) {
+            } catch (NotFoundException $e) {
                 // Do nothing
             }
         } else {
