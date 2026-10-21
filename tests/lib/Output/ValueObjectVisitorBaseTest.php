@@ -52,10 +52,10 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
      */
     private $templatedRouterMock;
 
-    /** @var array<int, array{string, array<mixed>, string}> */
+    /** @var list<array{string, array<mixed>, string}> */
     private $routeExpectations = [];
 
-    /** @var array<int, array{string, array<mixed>, string}> */
+    /** @var list<array{string, array<mixed>, string}> */
     private $templatedRouteExpectations = [];
 
     /**
@@ -189,7 +189,7 @@ abstract class ValueObjectVisitorBaseTest extends Server\BaseTest
     /**
      * Router mock which expects calls to generate() in the order given by the (by reference) expectation list.
      *
-     * @param array<int, array{string, array<mixed>, string}> $expectations
+     * @param list<array{string, array<mixed>, string}> $expectations
      *
      * @return RouterInterface&MockObject
      */

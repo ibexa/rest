@@ -120,7 +120,7 @@ class CachedValueTest extends ValueObjectVisitorBaseTest
     /**
      * Expects the response calls and records them in $calls, to assert their order across methods.
      *
-     * @param string[] $calls
+     * @param list<string> $calls
      */
     private function expectFullCacheHeaders(array &$calls): void
     {
