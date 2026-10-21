@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
@@ -17,7 +18,7 @@ class RestRelation extends RestValue
     /**
      * A relation.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Relation
+     * @var Relation
      */
     public $relation;
 
@@ -36,12 +37,15 @@ class RestRelation extends RestValue
     public $versionNo;
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Relation $relation
+     * @param Relation $relation
      * @param mixed $contentId
      * @param mixed $versionNo
      */
-    public function __construct(Relation $relation, $contentId, $versionNo)
-    {
+    public function __construct(
+        Relation $relation,
+        $contentId,
+        $versionNo
+    ) {
         $this->relation = $relation;
         $this->contentId = $contentId;
         $this->versionNo = $versionNo;

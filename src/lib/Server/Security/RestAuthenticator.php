@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Security;
 
 use Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface;
@@ -35,12 +36,12 @@ use Symfony\Component\Security\Http\SecurityEvents;
 class RestAuthenticator implements AuthenticatorInterface
 {
     /**
-     * @var \Psr\Log\LoggerInterface
+     * @var LoggerInterface
      */
     private $logger;
 
     /**
-     * @var \Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface
+     * @var AuthenticationManagerInterface
      */
     private $authenticationManager;
 
@@ -50,22 +51,22 @@ class RestAuthenticator implements AuthenticatorInterface
     private $providerKey;
 
     /**
-     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+     * @var TokenStorageInterface
      */
     private $tokenStorage;
 
     /**
-     * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+     * @var EventDispatcherInterface
      */
     private $dispatcher;
 
     /**
-     * @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface
+     * @var ConfigResolverInterface
      */
     private $configResolver;
 
     /**
-     * @var \Symfony\Component\Security\Http\Logout\LogoutHandlerInterface[]
+     * @var LogoutHandlerInterface[]
      */
     private $logoutHandlers = [];
 
@@ -88,7 +89,7 @@ class RestAuthenticator implements AuthenticatorInterface
     /**
      * Doesn't do anything as we don't use this service with main Firewall listener.
      *
-     * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
+     * @param RequestEvent $event
      */
     public function __invoke(RequestEvent $event)
     {
@@ -146,9 +147,9 @@ class RestAuthenticator implements AuthenticatorInterface
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param Request $request
      *
-     * @return \Symfony\Component\Security\Core\Authentication\Token\TokenInterface
+     * @return TokenInterface
      */
     private function attemptAuthentication(Request $request)
     {
@@ -164,13 +165,15 @@ class RestAuthenticator implements AuthenticatorInterface
     /**
      * Checks if newly matched user is conflicting with previously non-anonymous logged in user, if any.
      *
-     * @param \Ibexa\Core\MVC\Symfony\Security\UserInterface $user
-     * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $previousToken
+     * @param IbexaUser $user
+     * @param TokenInterface $previousToken
      *
      * @return bool
      */
-    private function isUserConflict(IbexaUser $user, ?TokenInterface $previousToken = null)
-    {
+    private function isUserConflict(
+        IbexaUser $user,
+        ?TokenInterface $previousToken = null
+    ) {
         if ($previousToken === null || !$previousToken instanceof UsernamePasswordToken) {
             return false;
         }
@@ -181,6 +184,7 @@ class RestAuthenticator implements AuthenticatorInterface
         }
 
         $wasAnonymous = $previousUser->getAPIUser()->getUserId() == $this->configResolver->getParameter('anonymous_user_id');
+
         // TODO: isEqualTo is not on the interface
         return !$wasAnonymous && !$user->isEqualTo($previousUser);
     }

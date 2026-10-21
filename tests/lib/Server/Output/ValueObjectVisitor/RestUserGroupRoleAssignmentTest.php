@@ -4,10 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Repository\Values\User;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserGroupRoleAssignment;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
@@ -156,11 +157,11 @@ class RestUserGroupRoleAssignmentTest extends ValueObjectVisitorBaseTest
     /**
      * Get the RestUserGroupRoleAssignment visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\RestUserGroupRoleAssignment
+     * @return RestUserGroupRoleAssignment
      */
     protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\RestUserGroupRoleAssignment();
+        return new RestUserGroupRoleAssignment();
     }
 }
 

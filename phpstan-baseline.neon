@@ -5173,12 +5173,6 @@ parameters:
 			path: tests/bundle/Functional/ContentTypeTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\ContentTypeTest\:\:testCreateContentType\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/ContentTypeTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\ContentTypeTest\:\:testCreateContentType\(\) has parameter \$contentTypeGroupHref with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
@@ -5403,12 +5397,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\LocationTest\:\:testCopySubtree\(\) has parameter \$locationHref with no type specified\.$#'
 			identifier: missingType.parameter
-			count: 1
-			path: tests/bundle/Functional/LocationTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\LocationTest\:\:testCreateLocation\(\) has no return type specified\.$#'
-			identifier: missingType.return
 			count: 1
 			path: tests/bundle/Functional/LocationTest.php
 
@@ -7135,18 +7123,6 @@ parameters:
 			path: tests/bundle/Functional/TrashTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\UrlAliasTest\:\:testCreateGlobalUrlAlias\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/UrlAliasTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\UrlAliasTest\:\:testCreateUrlAlias\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/UrlAliasTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\UrlAliasTest\:\:testCreateUrlAlias\(\) has parameter \$locationHref with no type specified\.$#'
 			identifier: missingType.parameter
 			count: 1
@@ -7199,12 +7175,6 @@ parameters:
 			identifier: deadCode.unreachable
 			count: 2
 			path: tests/bundle/Functional/UrlAliasTest.php
-
-		-
-			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\UrlWildcardTest\:\:testCreateUrlWildcard\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/bundle/Functional/UrlWildcardTest.php
 
 		-
 			message: '#^Method Ibexa\\Tests\\Bundle\\Rest\\Functional\\UrlWildcardTest\:\:testDeleteURLWildcard\(\) has no return type specified\.$#'
@@ -7729,12 +7699,6 @@ parameters:
 			path: tests/lib/FieldTypeProcessor/DateProcessorTest.php
 
 		-
-			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\ImageProcessorTest\:\:getRouterMock\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\ImageProcessorTest\:\:getVariations\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
@@ -7743,24 +7707,6 @@ parameters:
 		-
 			message: '#^Method Ibexa\\Tests\\Rest\\FieldTypeProcessor\\ImageProcessorTest\:\:testPostProcessValueHash\(\) has no return type specified\.$#'
 			identifier: missingType.return
-			count: 1
-			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\Rest\\FieldTypeProcessor\\ImageProcessorTest\:\:\$requestParser \(Ibexa\\Rest\\RequestParser\) does not accept PHPUnit\\Framework\\MockObject\\MockObject&Symfony\\Component\\Routing\\RouterInterface\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\Rest\\FieldTypeProcessor\\ImageProcessorTest\:\:\$requestParser \(Ibexa\\Rest\\RequestParser\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
-			count: 1
-			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
-
-		-
-			message: '#^Variable \$expectedVariations might not be defined\.$#'
-			identifier: variable.undefined
 			count: 1
 			path: tests/lib/FieldTypeProcessor/ImageProcessorTest.php
 
@@ -8827,12 +8773,6 @@ parameters:
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
 		-
-			message: '#^Access to an undefined property Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:\$routerMockCallIndex\.$#'
-			identifier: property.notFound
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
-
-		-
 			message: '#^Method Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:addRouteExpectation\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
@@ -8917,24 +8857,6 @@ parameters:
 			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
 
 		-
-			message: '#^Property Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:\$routerMock \(PHPUnit\\Framework\\MockObject\\MockObject&Symfony\\Component\\Routing\\RouterInterface\) does not accept null\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:\$routerMock \(PHPUnit\\Framework\\MockObject\\MockObject&Symfony\\Component\\Routing\\RouterInterface\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:\$templatedRouterMock \(PHPUnit\\Framework\\MockObject\\MockObject&Symfony\\Component\\Routing\\RouterInterface\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorBaseTest.php
-
-		-
 			message: '#^Property Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorBaseTest\:\:\$visitorMock \(Ibexa\\Contracts\\Rest\\Output\\Visitor\) in isset\(\) is not nullable\.$#'
 			identifier: isset.property
 			count: 1
@@ -8973,18 +8895,6 @@ parameters:
 		-
 			message: '#^Parameter \#1 \$data of method Ibexa\\Contracts\\Rest\\Output\\ValueObjectVisitorDispatcher\:\:visit\(\) expects object, int given\.$#'
 			identifier: argument.type
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorDispatcherTest\:\:\$outputGeneratorMock \(Ibexa\\Contracts\\Rest\\Output\\Generator&PHPUnit\\Framework\\MockObject\\MockObject\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
-			count: 1
-			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
-
-		-
-			message: '#^Property Ibexa\\Tests\\Rest\\Output\\ValueObjectVisitorDispatcherTest\:\:\$outputVisitorMock \(Ibexa\\Contracts\\Rest\\Output\\Visitor&PHPUnit\\Framework\\MockObject\\MockObject\) in isset\(\) is not nullable\.$#'
-			identifier: isset.property
 			count: 1
 			path: tests/lib/Output/ValueObjectVisitorDispatcherTest.php
 
@@ -9735,7 +9645,7 @@ parameters:
 		-
 			message: '#^Call to an undefined method Ibexa\\Contracts\\Rest\\Input\\ParsingDispatcher\:\:expects\(\)\.$#'
 			identifier: method.notFound
-			count: 6
+			count: 5
 			path: tests/lib/Server/Input/Parser/QueryParserTest.php
 
 		-
@@ -12562,18 +12472,6 @@ parameters:
 			message: '#^Method Ibexa\\Tests\\Rest\\Server\\Security\\RestLogoutHandlerTest\:\:testLogoutWithoutSiteaccessSessionSettings\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
-			path: tests/lib/Server/Security/RestLogoutHandlerTest.php
-
-		-
-			message: '#^Parameter \#1 \$configResolver of class Ibexa\\Rest\\Server\\Security\\RestLogoutHandler constructor expects Ibexa\\Contracts\\Core\\SiteAccess\\ConfigResolverInterface, PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
-			identifier: argument.type
-			count: 3
-			path: tests/lib/Server/Security/RestLogoutHandlerTest.php
-
-		-
-			message: '#^Parameter \#1 \$session of method Symfony\\Component\\HttpFoundation\\Request\:\:setSession\(\) expects Symfony\\Component\\HttpFoundation\\Session\\SessionInterface, PHPUnit\\Framework\\MockObject\\MockObject given\.$#'
-			identifier: argument.type
-			count: 2
 			path: tests/lib/Server/Security/RestLogoutHandlerTest.php
 
 		-

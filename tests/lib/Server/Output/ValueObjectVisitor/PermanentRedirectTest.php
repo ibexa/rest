@@ -4,9 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\PermanentRedirect;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
@@ -45,11 +46,11 @@ class PermanentRedirectTest extends ValueObjectVisitorBaseTest
     /**
      * Get the PermanentRedirect visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\PermanentRedirect
+     * @return PermanentRedirect
      */
     protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\PermanentRedirect();
+        return new PermanentRedirect();
     }
 }
 

@@ -4,11 +4,13 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Content;
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
 use Ibexa\Contracts\Core\Repository\Values\Content\Location;
+use Ibexa\Contracts\Core\Repository\Values\Content\Relation;
 use Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType;
 use Ibexa\Rest\Value as RestValue;
 
@@ -20,27 +22,27 @@ use Ibexa\Rest\Value as RestValue;
 class RestContent extends RestValue
 {
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo
+     * @var ContentInfo
      */
     public $contentInfo;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Location
+     * @var Location
      */
     public $mainLocation;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Content
+     * @var Content
      */
     public $currentVersion;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType
+     * @var ContentType
      */
     public $contentType;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\Relation[]
+     * @var Relation[]
      */
     public $relations;
 
@@ -54,11 +56,11 @@ class RestContent extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo $contentInfo
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Location|null $mainLocation
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Content|null $currentVersion
-     * @param \Ibexa\Contracts\Core\Repository\Values\ContentType\ContentType|null $contentType Can only be null if $currentVersion is
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\Relation[]|null $relations Can only be null if $currentVersion is
+     * @param ContentInfo $contentInfo
+     * @param Location|null $mainLocation
+     * @param Content|null $currentVersion
+     * @param ContentType|null $contentType Can only be null if $currentVersion is
+     * @param Relation[]|null $relations Can only be null if $currentVersion is
      * @param string $path
      */
     public function __construct(

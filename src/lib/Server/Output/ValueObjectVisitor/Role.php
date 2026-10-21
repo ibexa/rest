@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\User\RoleDraft;
@@ -19,12 +20,15 @@ class Role extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param Role|\Ibexa\Contracts\Core\Repository\Values\User\RoleDraft $data
+     * @param Visitor $visitor
+     * @param Generator $generator
+     * @param Role|RoleDraft $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ) {
         $generator->startObjectElement('Role');
         $visitor->setHeader('Content-Type', $generator->getMediaType($data instanceof RoleDraft ? 'RoleDraft' : 'Role'));
         $visitor->setHeader('Accept-Patch', $generator->getMediaType('RoleInput'));
@@ -32,8 +36,11 @@ class Role extends ValueObjectVisitor
         $generator->endObjectElement('Role');
     }
 
-    protected function visitRoleAttributes(Visitor $visitor, Generator $generator, $data)
-    {
+    protected function visitRoleAttributes(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ) {
         $generator->startAttribute(
             'href',
             $this->router->generate('ibexa.rest.load_role', ['roleId' => $data->id])

@@ -4,9 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\Conflict;
 use Ibexa\Rest\Server\Values;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 
@@ -42,11 +43,11 @@ class ConflictTest extends ValueObjectVisitorBaseTest
     /**
      * Get the Conflict visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\Conflict
+     * @return Conflict
      */
     protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\Conflict();
+        return new Conflict();
     }
 }
 

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use DateTime;
@@ -24,46 +25,46 @@ class ContentCreate extends BaseParser
     /**
      * Content service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
+     * @var ContentService
      */
     protected $contentService;
 
     /**
      * ContentType service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
+     * @var ContentTypeService
      */
     protected $contentTypeService;
 
     /**
      * FieldType parser.
      *
-     * @var \Ibexa\Rest\Input\FieldTypeParser
+     * @var FieldTypeParser
      */
     protected $fieldTypeParser;
 
     /**
      * LocationCreate parser.
      *
-     * @var \Ibexa\Rest\Server\Input\Parser\LocationCreate
+     * @var LocationCreate
      */
     protected $locationCreateParser;
 
     /**
      * Parser tools.
      *
-     * @var \Ibexa\Rest\Input\ParserTools
+     * @var ParserTools
      */
     protected $parserTools;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\ContentService $contentService
-     * @param \Ibexa\Contracts\Core\Repository\ContentTypeService $contentTypeService
-     * @param \Ibexa\Rest\Input\FieldTypeParser $fieldTypeParser
-     * @param \Ibexa\Rest\Server\Input\Parser\LocationCreate $locationCreateParser
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
+     * @param ContentService $contentService
+     * @param ContentTypeService $contentTypeService
+     * @param FieldTypeParser $fieldTypeParser
+     * @param LocationCreate $locationCreateParser
+     * @param ParserTools $parserTools
      */
     public function __construct(
         ContentService $contentService,
@@ -83,12 +84,14 @@ class ContentCreate extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Rest\Server\Values\RestContentCreateStruct
+     * @return RestContentCreateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         if (!array_key_exists('LocationCreate', $data) || !is_array($data['LocationCreate'])) {
             throw new Exceptions\Parser("Missing or invalid 'LocationCreate' element for ContentCreate.");
         }

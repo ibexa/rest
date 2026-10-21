@@ -10,6 +10,4 @@ namespace Ibexa\Bundle\Rest\Exception;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 
-final class UnexpectedUserException extends UnauthorizedException
-{
-}
+final class UnexpectedUserException extends UnauthorizedException {}

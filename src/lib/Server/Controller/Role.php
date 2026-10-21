@@ -4,15 +4,18 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\LimitationValidationException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
-use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException as APINotFoundException;
 use Ibexa\Contracts\Core\Repository\LocationService;
 use Ibexa\Contracts\Core\Repository\RoleService;
 use Ibexa\Contracts\Core\Repository\UserService;
+use Ibexa\Contracts\Core\Repository\Values\User\Policy;
+use Ibexa\Contracts\Core\Repository\Values\User\PolicyDraft;
 use Ibexa\Contracts\Core\Repository\Values\User\RoleCreateStruct;
+use Ibexa\Contracts\Core\Repository\Values\User\RoleDraft;
 use Ibexa\Contracts\Core\Repository\Values\User\RoleUpdateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Core\Base\Exceptions\ForbiddenException;
@@ -22,6 +25,15 @@ use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\BadRequestException;
 use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedPolicy;
+use Ibexa\Rest\Server\Values\CreatedRole;
+use Ibexa\Rest\Server\Values\NoContent;
+use Ibexa\Rest\Server\Values\PolicyList;
+use Ibexa\Rest\Server\Values\PublishedRole;
+use Ibexa\Rest\Server\Values\RestUserGroupRoleAssignment;
+use Ibexa\Rest\Server\Values\RestUserRoleAssignment;
+use Ibexa\Rest\Server\Values\RoleAssignmentList;
+use Ibexa\Rest\Server\Values\RoleList;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -33,30 +45,30 @@ class Role extends RestController
     /**
      * Role service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\RoleService
+     * @var RoleService
      */
     protected $roleService;
 
     /**
      * User service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\UserService
+     * @var UserService
      */
     protected $userService;
 
     /**
      * Location service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
+     * @var LocationService
      */
     protected $locationService;
 
     /**
      * Construct controller.
      *
-     * @param \Ibexa\Contracts\Core\Repository\RoleService $roleService
-     * @param \Ibexa\Contracts\Core\Repository\UserService $userService
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
+     * @param RoleService $roleService
+     * @param UserService $userService
+     * @param LocationService $locationService
      */
     public function __construct(
         RoleService $roleService,
@@ -73,7 +85,7 @@ class Role extends RestController
      *
      * Defaults to publishing the role, but you can create a draft instead by setting the POST parameter publish=false
      *
-     * @return \Ibexa\Rest\Server\Values\CreatedRole
+     * @return CreatedRole
      */
     public function createRole(Request $request)
     {
@@ -116,10 +128,10 @@ class Role extends RestController
 
             $role = $this->roleService->loadRole($roleDraft->id);
 
-            return new Values\CreatedRole(['role' => new Values\RestRole($role)]);
+            return new CreatedRole(['role' => new Values\RestRole($role)]);
         }
 
-        return new Values\CreatedRole(['role' => new Values\RestRole($roleDraft)]);
+        return new CreatedRole(['role' => new Values\RestRole($roleDraft)]);
     }
 
     /**
@@ -129,12 +141,14 @@ class Role extends RestController
      *
      * @throws \Ibexa\Contracts\Core\Repository\Exceptions\ForbiddenException if the Role already has a Role Draft that will need to be removed first,
      *                                                                  or if the authenticated user is not allowed to create a role
-     * @throws \Ibexa\Rest\Server\Exceptions\BadRequestException if a policy limitation in the $roleCreateStruct is not valid
+     * @throws BadRequestException if a policy limitation in the $roleCreateStruct is not valid
      *
-     * @return \Ibexa\Rest\Server\Values\CreatedRole
+     * @return CreatedRole
      */
-    public function createRoleDraft($roleId, Request $request)
-    {
+    public function createRoleDraft(
+        $roleId,
+        Request $request
+    ) {
         try {
             $roleDraft = $this->roleService->createRoleDraft(
                 $this->roleService->loadRole($roleId)
@@ -147,13 +161,13 @@ class Role extends RestController
             throw new BadRequestException($e->getMessage());
         }
 
-        return new Values\CreatedRole(['role' => new Values\RestRole($roleDraft)]);
+        return new CreatedRole(['role' => new Values\RestRole($roleDraft)]);
     }
 
     /**
      * Loads list of roles.
      *
-     * @return \Ibexa\Rest\Server\Values\RoleList
+     * @return RoleList
      */
     public function listRoles(Request $request)
     {
@@ -162,7 +176,7 @@ class Role extends RestController
             try {
                 $role = $this->roleService->loadRoleByIdentifier($request->query->get('identifier'));
                 $roles[] = $role;
-            } catch (APINotFoundException $e) {
+            } catch (NotFoundException $e) {
                 // Do nothing
             }
         } else {
@@ -176,7 +190,7 @@ class Role extends RestController
             );
         }
 
-        return new Values\RoleList($roles, $request->getPathInfo());
+        return new RoleList($roles, $request->getPathInfo());
     }
 
     /**
@@ -196,7 +210,7 @@ class Role extends RestController
      *
      * @param mixed $roleId Original role ID, or ID of the role draft itself
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\RoleDraft
+     * @return RoleDraft
      */
     public function loadRoleDraft($roleId)
     {
@@ -217,8 +231,10 @@ class Role extends RestController
      *
      * @return \Ibexa\Contracts\Core\Repository\Values\User\Role
      */
-    public function updateRole($roleId, Request $request)
-    {
+    public function updateRole(
+        $roleId,
+        Request $request
+    ) {
         $createStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -243,10 +259,12 @@ class Role extends RestController
      *
      * @param mixed $roleId Original role ID, or ID of the role draft itself
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\RoleDraft
+     * @return RoleDraft
      */
-    public function updateRoleDraft($roleId, Request $request)
-    {
+    public function updateRoleDraft(
+        $roleId,
+        Request $request
+    ) {
         $createStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -271,7 +289,7 @@ class Role extends RestController
      *
      * @param mixed $roleId Original role ID, or ID of the role draft itself
      *
-     * @return \Ibexa\Rest\Server\Values\PublishedRole
+     * @return PublishedRole
      */
     public function publishRoleDraft($roleId)
     {
@@ -288,7 +306,7 @@ class Role extends RestController
 
         $role = $this->roleService->loadRoleByIdentifier($roleDraft->identifier);
 
-        return new Values\PublishedRole(['role' => new Values\RestRole($role)]);
+        return new PublishedRole(['role' => new Values\RestRole($role)]);
     }
 
     /**
@@ -296,7 +314,7 @@ class Role extends RestController
      *
      * @param $roleId
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
     public function deleteRole($roleId)
     {
@@ -304,7 +322,7 @@ class Role extends RestController
             $this->roleService->loadRole($roleId)
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 
     /**
@@ -314,7 +332,7 @@ class Role extends RestController
      *
      * @param $roleId
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
     public function deleteRoleDraft($roleId)
     {
@@ -322,7 +340,7 @@ class Role extends RestController
             $this->roleService->loadRoleDraft($roleId)
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 
     /**
@@ -330,13 +348,15 @@ class Role extends RestController
      *
      * @param $roleId
      *
-     * @return \Ibexa\Rest\Server\Values\PolicyList
+     * @return PolicyList
      */
-    public function loadPolicies($roleId, Request $request)
-    {
+    public function loadPolicies(
+        $roleId,
+        Request $request
+    ) {
         $loadedRole = $this->roleService->loadRole($roleId);
 
-        return new Values\PolicyList($loadedRole->getPolicies(), $request->getPathInfo());
+        return new PolicyList($loadedRole->getPolicies(), $request->getPathInfo());
     }
 
     /**
@@ -344,19 +364,19 @@ class Role extends RestController
      *
      * @param $roleId
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
     public function deletePolicies($roleId)
     {
         $loadedRole = $this->roleService->loadRole($roleId);
         $roleDraft = $this->roleService->createRoleDraft($loadedRole);
-        /** @var \Ibexa\Contracts\Core\Repository\Values\User\PolicyDraft $policyDraft */
+        /** @var PolicyDraft $policyDraft */
         foreach ($roleDraft->getPolicies() as $policyDraft) {
             $this->roleService->removePolicyByRoleDraft($roleDraft, $policyDraft);
         }
         $this->roleService->publishRoleDraft($roleDraft);
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 
     /**
@@ -365,12 +385,15 @@ class Role extends RestController
      * @param $roleId
      * @param $policyId
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws Exceptions\NotFoundException
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\Policy
+     * @return Policy
      */
-    public function loadPolicy($roleId, $policyId, Request $request)
-    {
+    public function loadPolicy(
+        $roleId,
+        $policyId,
+        Request $request
+    ) {
         $loadedRole = $this->roleService->loadRole($roleId);
         foreach ($loadedRole->getPolicies() as $policy) {
             if ($policy->id == $policyId) {
@@ -386,10 +409,12 @@ class Role extends RestController
      *
      * @param int $roleId ID of a role draft
      *
-     * @return \Ibexa\Rest\Server\Values\CreatedPolicy
+     * @return CreatedPolicy
      */
-    public function addPolicy($roleId, Request $request)
-    {
+    public function addPolicy(
+        $roleId,
+        Request $request
+    ) {
         $createStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -418,7 +443,7 @@ class Role extends RestController
             throw new BadRequestException($e->getMessage());
         }
 
-        return new Values\CreatedPolicy(
+        return new CreatedPolicy(
             [
                 'policy' => $this->getLastAddedPolicy($role),
             ]
@@ -433,7 +458,7 @@ class Role extends RestController
      *
      * @param $role \Ibexa\Contracts\Core\Repository\Values\User\Role
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\Policy
+     * @return Policy
      */
     private function getLastAddedPolicy($role)
     {
@@ -455,12 +480,15 @@ class Role extends RestController
      * @param int $roleId ID of a role draft
      * @param int $policyId ID of a policy
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws Exceptions\NotFoundException
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\Policy
+     * @return Policy
      */
-    public function updatePolicy($roleId, $policyId, Request $request)
-    {
+    public function updatePolicy(
+        $roleId,
+        $policyId,
+        Request $request
+    ) {
         $updateStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -520,12 +548,15 @@ class Role extends RestController
      * @param int $roleId ID of a role draft
      * @param int $policyId ID of a policy
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws Exceptions\NotFoundException
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
-    public function deletePolicy($roleId, $policyId, Request $request)
-    {
+    public function deletePolicy(
+        $roleId,
+        $policyId,
+        Request $request
+    ) {
         try {
             // First try to treat $roleId as a role draft ID.
             $roleDraft = $this->roleService->loadRoleDraft($roleId);
@@ -539,7 +570,7 @@ class Role extends RestController
             if ($policy !== null) {
                 $this->roleService->removePolicyByRoleDraft($roleDraft, $policy);
 
-                return new Values\NoContent();
+                return new NoContent();
             }
         } catch (NotFoundException $e) {
             // Then try to treat $roleId as a role ID.
@@ -557,7 +588,7 @@ class Role extends RestController
                 $this->roleService->removePolicyByRoleDraft($roleDraft, $policy);
                 $this->roleService->publishRoleDraft($roleDraft);
 
-                return new Values\NoContent();
+                return new NoContent();
             }
         }
         throw new Exceptions\NotFoundException("Policy not found: '{$request->getPathInfo()}'.");
@@ -568,10 +599,12 @@ class Role extends RestController
      *
      * @param $userId
      *
-     * @return \Ibexa\Rest\Server\Values\RoleAssignmentList
+     * @return RoleAssignmentList
      */
-    public function assignRoleToUser($userId, Request $request)
-    {
+    public function assignRoleToUser(
+        $userId,
+        Request $request
+    ) {
         $roleAssignment = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -590,7 +623,7 @@ class Role extends RestController
 
         $roleAssignments = $this->roleService->getRoleAssignmentsForUser($user);
 
-        return new Values\RoleAssignmentList($roleAssignments, $user->id);
+        return new RoleAssignmentList($roleAssignments, $user->id);
     }
 
     /**
@@ -598,10 +631,12 @@ class Role extends RestController
      *
      * @param $groupPath
      *
-     * @return \Ibexa\Rest\Server\Values\RoleAssignmentList
+     * @return RoleAssignmentList
      */
-    public function assignRoleToUserGroup($groupPath, Request $request)
-    {
+    public function assignRoleToUserGroup(
+        $groupPath,
+        Request $request
+    ) {
         $roleAssignment = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -623,7 +658,7 @@ class Role extends RestController
 
         $roleAssignments = $this->roleService->getRoleAssignmentsForUserGroup($userGroup);
 
-        return new Values\RoleAssignmentList($roleAssignments, $groupPath, true);
+        return new RoleAssignmentList($roleAssignments, $groupPath, true);
     }
 
     /**
@@ -632,10 +667,12 @@ class Role extends RestController
      * @param $userId
      * @param $roleId
      *
-     * @return \Ibexa\Rest\Server\Values\RoleAssignmentList
+     * @return RoleAssignmentList
      */
-    public function unassignRoleFromUser($userId, $roleId)
-    {
+    public function unassignRoleFromUser(
+        $userId,
+        $roleId
+    ) {
         $user = $this->userService->loadUser($userId);
 
         $roleAssignments = $this->roleService->getRoleAssignmentsForUser($user);
@@ -646,7 +683,7 @@ class Role extends RestController
         }
         $newRoleAssignments = $this->roleService->getRoleAssignmentsForUser($user);
 
-        return new Values\RoleAssignmentList($newRoleAssignments, $user->id);
+        return new RoleAssignmentList($newRoleAssignments, $user->id);
     }
 
     /**
@@ -655,10 +692,12 @@ class Role extends RestController
      * @param $groupPath
      * @param $roleId
      *
-     * @return \Ibexa\Rest\Server\Values\RoleAssignmentList
+     * @return RoleAssignmentList
      */
-    public function unassignRoleFromUserGroup($groupPath, $roleId)
-    {
+    public function unassignRoleFromUserGroup(
+        $groupPath,
+        $roleId
+    ) {
         $groupLocationParts = explode('/', $groupPath);
         $groupLocation = $this->locationService->loadLocation(array_pop($groupLocationParts));
         $userGroup = $this->userService->loadUserGroup($groupLocation->contentId);
@@ -671,7 +710,7 @@ class Role extends RestController
         }
         $roleAssignments = $this->roleService->getRoleAssignmentsForUserGroup($userGroup);
 
-        return new Values\RoleAssignmentList($roleAssignments, $groupPath, true);
+        return new RoleAssignmentList($roleAssignments, $groupPath, true);
     }
 
     /**
@@ -679,7 +718,7 @@ class Role extends RestController
      *
      * @param $userId
      *
-     * @return \Ibexa\Rest\Server\Values\RoleAssignmentList
+     * @return RoleAssignmentList
      */
     public function loadRoleAssignmentsForUser($userId)
     {
@@ -687,7 +726,7 @@ class Role extends RestController
 
         $roleAssignments = $this->roleService->getRoleAssignmentsForUser($user);
 
-        return new Values\RoleAssignmentList($roleAssignments, $user->id);
+        return new RoleAssignmentList($roleAssignments, $user->id);
     }
 
     /**
@@ -695,7 +734,7 @@ class Role extends RestController
      *
      * @param $groupPath
      *
-     * @return \Ibexa\Rest\Server\Values\RoleAssignmentList
+     * @return RoleAssignmentList
      */
     public function loadRoleAssignmentsForUserGroup($groupPath)
     {
@@ -705,7 +744,7 @@ class Role extends RestController
 
         $roleAssignments = $this->roleService->getRoleAssignmentsForUserGroup($userGroup);
 
-        return new Values\RoleAssignmentList($roleAssignments, $groupPath, true);
+        return new RoleAssignmentList($roleAssignments, $groupPath, true);
     }
 
     /**
@@ -714,18 +753,21 @@ class Role extends RestController
      * @param $userId
      * @param $roleId
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws Exceptions\NotFoundException
      *
-     * @return \Ibexa\Rest\Server\Values\RestUserRoleAssignment
+     * @return RestUserRoleAssignment
      */
-    public function loadRoleAssignmentForUser($userId, $roleId, Request $request)
-    {
+    public function loadRoleAssignmentForUser(
+        $userId,
+        $roleId,
+        Request $request
+    ) {
         $user = $this->userService->loadUser($userId);
         $roleAssignments = $this->roleService->getRoleAssignmentsForUser($user);
 
         foreach ($roleAssignments as $roleAssignment) {
             if ($roleAssignment->getRole()->id == $roleId) {
-                return new Values\RestUserRoleAssignment($roleAssignment, $userId);
+                return new RestUserRoleAssignment($roleAssignment, $userId);
             }
         }
 
@@ -738,12 +780,15 @@ class Role extends RestController
      * @param $groupPath
      * @param $roleId
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\NotFoundException
+     * @throws Exceptions\NotFoundException
      *
-     * @return \Ibexa\Rest\Server\Values\RestUserGroupRoleAssignment
+     * @return RestUserGroupRoleAssignment
      */
-    public function loadRoleAssignmentForUserGroup($groupPath, $roleId, Request $request)
-    {
+    public function loadRoleAssignmentForUserGroup(
+        $groupPath,
+        $roleId,
+        Request $request
+    ) {
         $groupLocationParts = explode('/', $groupPath);
         $groupLocation = $this->locationService->loadLocation(array_pop($groupLocationParts));
         $userGroup = $this->userService->loadUserGroup($groupLocation->contentId);
@@ -751,7 +796,7 @@ class Role extends RestController
         $roleAssignments = $this->roleService->getRoleAssignmentsForUserGroup($userGroup);
         foreach ($roleAssignments as $roleAssignment) {
             if ($roleAssignment->getRole()->id == $roleId) {
-                return new Values\RestUserGroupRoleAssignment($roleAssignment, $groupPath);
+                return new RestUserGroupRoleAssignment($roleAssignment, $groupPath);
             }
         }
 
@@ -761,7 +806,7 @@ class Role extends RestController
     /**
      * Search all policies which are applied to a given user.
      *
-     * @return \Ibexa\Rest\Server\Values\PolicyList
+     * @return PolicyList
      */
     public function listPoliciesForUser(Request $request)
     {
@@ -773,7 +818,7 @@ class Role extends RestController
             $policies[] = $roleAssignment->getRole()->getPolicies();
         }
 
-        return new Values\PolicyList(
+        return new PolicyList(
             !empty($policies) ? array_merge(...$policies) : [],
             $request->getPathInfo()
         );
@@ -784,9 +829,9 @@ class Role extends RestController
      *
      * Needed since both structs are encoded into the same media type on input.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\RoleCreateStruct $createStruct
+     * @param RoleCreateStruct $createStruct
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\User\RoleUpdateStruct
+     * @return RoleUpdateStruct
      */
     protected function mapToUpdateStruct(RoleCreateStruct $createStruct)
     {

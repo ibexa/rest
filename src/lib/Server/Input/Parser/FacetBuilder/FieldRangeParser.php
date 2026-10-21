@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser\FacetBuilder;
 
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Core\Repository\Values\Content\Query\FacetBuilder\FieldRangeFacetBuilder;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 
@@ -19,15 +21,17 @@ class FieldRangeParser extends BaseParser
      * Parses input structure to a FacetBuilder object.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\Content\Query\FacetBuilder\FieldRangeFacetBuilder
+     * @return FieldRangeFacetBuilder
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
-        throw new Exceptions\Parser('<FieldRange> is not supported yet');
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
+        throw new Parser('<FieldRange> is not supported yet');
     }
 }
 

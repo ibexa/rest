@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content;
@@ -114,7 +115,7 @@ class SectionListTest extends ValueObjectVisitorBaseTest
     /**
      * Get the SectionList visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\SectionList
+     * @return ValueObjectVisitor\SectionList
      */
     protected function internalGetVisitor()
     {

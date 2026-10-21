@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Output\Generator;
 
 use Ibexa\Contracts\Rest\Output\Generator;
+use Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator;
 
 /**
  * Json generator.
@@ -23,7 +25,7 @@ class Json extends Generator
     /**
      * Generator for field type hash values.
      *
-     * @var \Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator
+     * @var FieldTypeHashGenerator
      */
     protected $fieldTypeHashGenerator;
 
@@ -42,11 +44,13 @@ class Json extends Generator
     protected $vendor;
 
     /**
-     * @param \Ibexa\Rest\Output\Generator\Json\FieldTypeHashGenerator $fieldTypeHashGenerator
+     * @param FieldTypeHashGenerator $fieldTypeHashGenerator
      * @param string $vendor
      */
-    public function __construct(Json\FieldTypeHashGenerator $fieldTypeHashGenerator, $vendor = 'vnd.ibexa.api')
-    {
+    public function __construct(
+        FieldTypeHashGenerator $fieldTypeHashGenerator,
+        $vendor = 'vnd.ibexa.api'
+    ) {
         $this->fieldTypeHashGenerator = $fieldTypeHashGenerator;
         $this->vendor = $vendor;
     }
@@ -132,8 +136,10 @@ class Json extends Generator
      * @param string $name
      * @param string $mediaTypeName
      */
-    public function startObjectElement($name, $mediaTypeName = null)
-    {
+    public function startObjectElement(
+        $name,
+        $mediaTypeName = null
+    ) {
         $this->checkStartObjectElement($name);
 
         $this->isEmpty = false;
@@ -200,8 +206,11 @@ class Json extends Generator
         $this->json = $this->json->getParent();
     }
 
-    public function startValueElement(string $name, $value, array $attributes = []): void
-    {
+    public function startValueElement(
+        string $name,
+        $value,
+        array $attributes = []
+    ): void {
         $this->checkStartValueElement($name);
 
         $jsonValue = null;
@@ -266,8 +275,10 @@ class Json extends Generator
      * @param string $name
      * @param string $value
      */
-    public function startAttribute($name, $value)
-    {
+    public function startAttribute(
+        $name,
+        $value
+    ) {
         $this->checkStartAttribute($name);
 
         $this->json->{'_' . $name} = $value;
@@ -303,8 +314,10 @@ class Json extends Generator
      * @param string $hashElementName
      * @param mixed $hashValue
      */
-    public function generateFieldTypeHash($hashElementName, $hashValue)
-    {
+    public function generateFieldTypeHash(
+        $hashElementName,
+        $hashValue
+    ) {
         $this->fieldTypeHashGenerator->generateHashValue(
             $this->json,
             $hashElementName,

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Controller;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
@@ -11,10 +12,15 @@ use Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
 use Ibexa\Contracts\Core\Repository\ObjectStateService;
 use Ibexa\Contracts\Core\Repository\Values\Content\Language;
+use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup;
 use Ibexa\Rest\Message;
 use Ibexa\Rest\Server\Controller as RestController;
 use Ibexa\Rest\Server\Exceptions\ForbiddenException;
-use Ibexa\Rest\Server\Values;
+use Ibexa\Rest\Server\Values\CreatedObjectState;
+use Ibexa\Rest\Server\Values\CreatedObjectStateGroup;
+use Ibexa\Rest\Server\Values\NoContent;
+use Ibexa\Rest\Server\Values\ObjectStateGroupList;
+use Ibexa\Rest\Server\Values\ObjectStateList;
 use Ibexa\Rest\Values\ContentObjectStates;
 use Ibexa\Rest\Values\RestObjectState;
 use JMS\TranslationBundle\Annotation\Ignore;
@@ -28,25 +34,27 @@ class ObjectState extends RestController
     /**
      * ObjectState service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\ObjectStateService
+     * @var ObjectStateService
      */
     protected $objectStateService;
 
     /**
      * Content service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
+     * @var ContentService
      */
     protected $contentService;
 
     /**
      * Construct controller.
      *
-     * @param \Ibexa\Contracts\Core\Repository\ObjectStateService $objectStateService
-     * @param \Ibexa\Contracts\Core\Repository\ContentService $contentService
+     * @param ObjectStateService $objectStateService
+     * @param ContentService $contentService
      */
-    public function __construct(ObjectStateService $objectStateService, ContentService $contentService)
-    {
+    public function __construct(
+        ObjectStateService $objectStateService,
+        ContentService $contentService
+    ) {
         $this->objectStateService = $objectStateService;
         $this->contentService = $contentService;
     }
@@ -54,9 +62,9 @@ class ObjectState extends RestController
     /**
      * Creates a new object state group.
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      *
-     * @return \Ibexa\Rest\Server\Values\CreatedObjectStateGroup
+     * @return CreatedObjectStateGroup
      */
     public function createObjectStateGroup(Request $request)
     {
@@ -70,10 +78,10 @@ class ObjectState extends RestController
                 )
             );
         } catch (InvalidArgumentException $e) {
-            throw new ForbiddenException(/** @Ignore */$e->getMessage());
+            throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
-        return new Values\CreatedObjectStateGroup(
+        return new CreatedObjectStateGroup(
             [
                 'objectStateGroup' => $createdStateGroup,
             ]
@@ -85,12 +93,14 @@ class ObjectState extends RestController
      *
      * @param $objectStateGroupId
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      *
-     * @return \Ibexa\Rest\Server\Values\CreatedObjectState
+     * @return CreatedObjectState
      */
-    public function createObjectState($objectStateGroupId, Request $request)
-    {
+    public function createObjectState(
+        $objectStateGroupId,
+        Request $request
+    ) {
         $objectStateGroup = $this->objectStateService->loadObjectStateGroup($objectStateGroupId);
 
         try {
@@ -107,7 +117,7 @@ class ObjectState extends RestController
             throw new ForbiddenException(/** @Ignore */ $e->getMessage());
         }
 
-        return new Values\CreatedObjectState(
+        return new CreatedObjectState(
             [
                 'objectState' => new RestObjectState(
                     $createdObjectState,
@@ -122,7 +132,7 @@ class ObjectState extends RestController
      *
      * @param $objectStateGroupId
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup
+     * @return ObjectStateGroup
      */
     public function loadObjectStateGroup($objectStateGroupId)
     {
@@ -135,10 +145,12 @@ class ObjectState extends RestController
      * @param $objectStateGroupId
      * @param $objectStateId
      *
-     * @return \Ibexa\Rest\Values\RestObjectState
+     * @return RestObjectState
      */
-    public function loadObjectState($objectStateGroupId, $objectStateId)
-    {
+    public function loadObjectState(
+        $objectStateGroupId,
+        $objectStateId
+    ) {
         return new RestObjectState(
             $this->objectStateService->loadObjectState($objectStateId, Language::ALL),
             $objectStateGroupId
@@ -148,11 +160,11 @@ class ObjectState extends RestController
     /**
      * Returns a list of all object state groups.
      *
-     * @return \Ibexa\Rest\Server\Values\ObjectStateGroupList
+     * @return ObjectStateGroupList
      */
     public function loadObjectStateGroups()
     {
-        return new Values\ObjectStateGroupList(
+        return new ObjectStateGroupList(
             $this->objectStateService->loadObjectStateGroups(0, -1, Language::ALL)
         );
     }
@@ -162,13 +174,13 @@ class ObjectState extends RestController
      *
      * @param $objectStateGroupId
      *
-     * @return \Ibexa\Rest\Server\Values\ObjectStateList
+     * @return ObjectStateList
      */
     public function loadObjectStates($objectStateGroupId)
     {
         $objectStateGroup = $this->objectStateService->loadObjectStateGroup($objectStateGroupId);
 
-        return new Values\ObjectStateList(
+        return new ObjectStateList(
             $this->objectStateService->loadObjectStates($objectStateGroup, Language::ALL),
             $objectStateGroup->id
         );
@@ -179,7 +191,7 @@ class ObjectState extends RestController
      *
      * @param $objectStateGroupId
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
     public function deleteObjectStateGroup($objectStateGroupId)
     {
@@ -187,7 +199,7 @@ class ObjectState extends RestController
             $this->objectStateService->loadObjectStateGroup($objectStateGroupId)
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 
     /**
@@ -195,7 +207,7 @@ class ObjectState extends RestController
      *
      * @param $objectStateId
      *
-     * @return \Ibexa\Rest\Server\Values\NoContent
+     * @return NoContent
      */
     public function deleteObjectState($objectStateId)
     {
@@ -203,7 +215,7 @@ class ObjectState extends RestController
             $this->objectStateService->loadObjectState($objectStateId)
         );
 
-        return new Values\NoContent();
+        return new NoContent();
     }
 
     /**
@@ -211,12 +223,14 @@ class ObjectState extends RestController
      *
      * @param $objectStateGroupId
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateGroup
+     * @return ObjectStateGroup
      */
-    public function updateObjectStateGroup($objectStateGroupId, Request $request)
-    {
+    public function updateObjectStateGroup(
+        $objectStateGroupId,
+        Request $request
+    ) {
         $updateStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -241,12 +255,15 @@ class ObjectState extends RestController
      * @param $objectStateGroupId
      * @param $objectStateId
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      *
-     * @return \Ibexa\Rest\Values\RestObjectState
+     * @return RestObjectState
      */
-    public function updateObjectState($objectStateGroupId, $objectStateId, Request $request)
-    {
+    public function updateObjectState(
+        $objectStateGroupId,
+        $objectStateId,
+        Request $request
+    ) {
         $updateStruct = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],
@@ -270,7 +287,7 @@ class ObjectState extends RestController
      *
      * @param $contentId
      *
-     * @return \Ibexa\Rest\Values\ContentObjectStates
+     * @return ContentObjectStates
      */
     public function getObjectStatesForContent($contentId)
     {
@@ -297,12 +314,14 @@ class ObjectState extends RestController
      *
      * @param $contentId
      *
-     * @throws \Ibexa\Rest\Server\Exceptions\ForbiddenException
+     * @throws ForbiddenException
      *
-     * @return \Ibexa\Rest\Values\ContentObjectStates
+     * @return ContentObjectStates
      */
-    public function setObjectStatesForContent($contentId, Request $request)
-    {
+    public function setObjectStatesForContent(
+        $contentId,
+        Request $request
+    ) {
         $newObjectStates = $this->inputDispatcher->parse(
             new Message(
                 ['Content-Type' => $request->headers->get('Content-Type')],

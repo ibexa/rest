@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Core\Repository\Values\ContentType\Countries;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -14,7 +16,7 @@ use Ibexa\Rest\Value as RestValue;
 class CountryList extends RestValue
 {
     /**
-     * @var \Ibexa\Core\Repository\Values\ContentType\Countries[]
+     * @var Countries[]
      */
     public $countries;
 

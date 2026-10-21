@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\User\Role;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -16,7 +18,7 @@ class RoleList extends RestValue
     /**
      * Roles.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\User\Role[]
+     * @var Role[]
      */
     public $roles;
 
@@ -30,11 +32,13 @@ class RoleList extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\User\Role[] $roles
+     * @param Role[] $roles
      * @param string $path
      */
-    public function __construct(array $roles, $path)
-    {
+    public function __construct(
+        array $roles,
+        $path
+    ) {
         $this->roles = $roles;
         $this->path = $path;
     }

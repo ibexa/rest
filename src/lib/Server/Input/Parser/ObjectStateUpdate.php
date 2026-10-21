@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ObjectStateService;
+use Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateUpdateStruct;
 use Ibexa\Contracts\Rest\Exceptions;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
@@ -20,23 +22,25 @@ class ObjectStateUpdate extends BaseParser
     /**
      * Object state service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\ObjectStateService
+     * @var ObjectStateService
      */
     protected $objectStateService;
 
     /**
-     * @var \Ibexa\Rest\Input\ParserTools
+     * @var ParserTools
      */
     protected $parserTools;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\ObjectStateService $objectStateService
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
+     * @param ObjectStateService $objectStateService
+     * @param ParserTools $parserTools
      */
-    public function __construct(ObjectStateService $objectStateService, ParserTools $parserTools)
-    {
+    public function __construct(
+        ObjectStateService $objectStateService,
+        ParserTools $parserTools
+    ) {
         $this->objectStateService = $objectStateService;
         $this->parserTools = $parserTools;
     }
@@ -45,12 +49,14 @@ class ObjectStateUpdate extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ObjectState\ObjectStateUpdateStruct
+     * @return ObjectStateUpdateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         $objectStateUpdateStruct = $this->objectStateService->newObjectStateUpdateStruct();
 
         if (array_key_exists('identifier', $data)) {

@@ -15,8 +15,10 @@ use Ibexa\Rest\Input\BaseParser;
 
 class SectionIdentifier extends BaseParser
 {
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): SectionIdentifierCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): SectionIdentifierCriterion {
         if (!array_key_exists('SectionIdentifierCriterion', $data)) {
             throw new Exceptions\Parser('Invalid <SectionIdentifierCriterion> format');
         }

@@ -4,9 +4,9 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
-use Ibexa\Contracts\Core\Repository\Values;
 use Ibexa\Contracts\Core\Repository\Values\Content\URLAlias as URLAliasValue;
 use Ibexa\Contracts\Rest\Output\Generator;
 use Ibexa\Contracts\Rest\Output\ValueObjectVisitor;
@@ -20,12 +20,15 @@ class URLAlias extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\URLAlias $data
+     * @param Visitor $visitor
+     * @param Generator $generator
+     * @param URLAliasValue $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ) {
         $generator->startObjectElement('UrlAlias');
         $visitor->setHeader('Content-Type', $generator->getMediaType('UrlAlias'));
         $this->visitURLAliasAttributes($visitor, $generator, $data);
@@ -42,21 +45,24 @@ class URLAlias extends ValueObjectVisitor
     protected function serializeType($urlAliasType)
     {
         switch ($urlAliasType) {
-            case Values\Content\URLAlias::LOCATION:
+            case URLAliasValue::LOCATION:
                 return 'LOCATION';
 
-            case Values\Content\URLAlias::RESOURCE:
+            case URLAliasValue::RESOURCE:
                 return 'RESOURCE';
 
-            case Values\Content\URLAlias::VIRTUAL:
+            case URLAliasValue::VIRTUAL:
                 return 'VIRTUAL';
         }
 
         throw new \RuntimeException("Unknown URL alias type: '{$urlAliasType}'.");
     }
 
-    protected function visitURLAliasAttributes(Visitor $visitor, Generator $generator, URLAliasValue $data)
-    {
+    protected function visitURLAliasAttributes(
+        Visitor $visitor,
+        Generator $generator,
+        URLAliasValue $data
+    ) {
         $generator->startAttribute(
             'href',
             $this->router->generate('ibexa.rest.load_url_alias', ['urlAliasId' => $data->id])
@@ -69,7 +75,7 @@ class URLAlias extends ValueObjectVisitor
         $generator->startAttribute('type', $this->serializeType($data->type));
         $generator->endAttribute('type');
 
-        if ($data->type === Values\Content\URLAlias::LOCATION) {
+        if ($data->type === URLAliasValue::LOCATION) {
             $generator->startObjectElement('location', 'Location');
             $generator->startAttribute(
                 'href',

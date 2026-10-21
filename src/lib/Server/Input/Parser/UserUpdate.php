@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
@@ -23,41 +24,45 @@ class UserUpdate extends BaseParser
     /**
      * User service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\UserService
+     * @var UserService
      */
     protected $userService;
 
     /**
      * Content service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
+     * @var ContentService
      */
     protected $contentService;
 
     /**
      * FieldType parser.
      *
-     * @var \Ibexa\Rest\Input\FieldTypeParser
+     * @var FieldTypeParser
      */
     protected $fieldTypeParser;
 
     /**
      * Parser tools.
      *
-     * @var \Ibexa\Rest\Input\ParserTools
+     * @var ParserTools
      */
     protected $parserTools;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\UserService $userService
-     * @param \Ibexa\Contracts\Core\Repository\ContentService $contentService
-     * @param \Ibexa\Rest\Input\FieldTypeParser $fieldTypeParser
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
+     * @param UserService $userService
+     * @param ContentService $contentService
+     * @param FieldTypeParser $fieldTypeParser
+     * @param ParserTools $parserTools
      */
-    public function __construct(UserService $userService, ContentService $contentService, FieldTypeParser $fieldTypeParser, ParserTools $parserTools)
-    {
+    public function __construct(
+        UserService $userService,
+        ContentService $contentService,
+        FieldTypeParser $fieldTypeParser,
+        ParserTools $parserTools
+    ) {
         $this->userService = $userService;
         $this->contentService = $contentService;
         $this->fieldTypeParser = $fieldTypeParser;
@@ -68,12 +73,14 @@ class UserUpdate extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Rest\Server\Values\RestUserUpdateStruct
+     * @return RestUserUpdateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         $parsedData = [];
 
         //@todo XSD has a login element, but it's not possible to update login

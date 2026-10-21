@@ -4,9 +4,11 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 use Ibexa\Tests\Bundle\Rest\Functional\TestCase as RESTFunctionalTestCase;
+use Psr\Http\Client\ClientException;
 use Psr\Http\Message\ResponseInterface;
 
 class ContentTest extends RESTFunctionalTestCase
@@ -155,11 +157,12 @@ XML;
     /**
      * @depends testPublishContent
      * Covers GET /content/objects/<contentId>/currentversion
+     *
      * @covers \Ibexa\Rest\Server\Controller\Content::redirectCurrentVersion
      *
      * @param string $restContentHref
      *
-     * @throws \Psr\Http\Client\ClientException
+     * @throws ClientException
      */
     public function testRedirectCurrentVersion(string $restContentHref)
     {
@@ -637,8 +640,11 @@ XML;
      *
      * @return string
      */
-    private function createVersionTranslation($restContentVersionHref, $languageCode, $languageName)
-    {
+    private function createVersionTranslation(
+        $restContentVersionHref,
+        $languageCode,
+        $languageName
+    ) {
         // @todo Implement EZP-21171 to check if Language exists and add it
         // for now adding is done by ez:behat:create-language command executed in Travis job
 
@@ -675,8 +681,10 @@ XML;
      *
      * @return array
      */
-    private function getVersionInfoFromJSONVersionListByStatus(array $versionList, $status)
-    {
+    private function getVersionInfoFromJSONVersionListByStatus(
+        array $versionList,
+        $status
+    ) {
         foreach ($versionList['VersionItem'] as $versionItem) {
             if ($versionItem['VersionInfo']['status'] === $status) {
                 return $versionItem['VersionInfo'];
@@ -689,7 +697,7 @@ XML;
     /**
      * Assert that Version REST Response contains proper fields.
      *
-     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param ResponseInterface $response
      */
     private function assertVersionResponseContainsExpectedFields(ResponseInterface $response)
     {
@@ -719,8 +727,13 @@ XML;
      *
      * @return array Content structure decoded from JSON
      */
-    private function createContentDraft($restContentTypeHref, $restParentLocationHref, $restSectionHref, $restUserHref, array $fieldValues)
-    {
+    private function createContentDraft(
+        $restContentTypeHref,
+        $restParentLocationHref,
+        $restSectionHref,
+        $restUserHref,
+        array $fieldValues
+    ) {
         $remoteId = md5(microtime() . uniqid());
         $modificationDate = new \DateTime();
 
@@ -820,8 +833,10 @@ XML;
      * @param string $restContentHref REST resource link of Content
      * @param string $languageCode new Main Translation language code
      */
-    private function updateMainTranslation($restContentHref, $languageCode)
-    {
+    private function updateMainTranslation(
+        $restContentHref,
+        $languageCode
+    ) {
         $content = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentUpdate>

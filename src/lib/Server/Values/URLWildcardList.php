@@ -4,8 +4,10 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
+use Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard;
 use Ibexa\Rest\Value as RestValue;
 
 /**
@@ -16,14 +18,14 @@ class URLWildcardList extends RestValue
     /**
      * URL wildcards.
      *
-     * @var \Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard[]
+     * @var URLWildcard[]
      */
     public $urlWildcards;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\Values\Content\URLWildcard[] $urlWildcards
+     * @param URLWildcard[] $urlWildcards
      */
     public function __construct(array $urlWildcards)
     {

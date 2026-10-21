@@ -35,17 +35,20 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class ExpressionRouterRootResourceBuilder implements RootResourceBuilderInterface
 {
-    /** @var \Symfony\Component\Routing\RouterInterface */
+    /** @var RouterInterface */
     protected $router;
 
-    /** @var \Symfony\Component\Routing\RouterInterface */
+    /** @var RouterInterface */
     protected $templateRouter;
 
-    /** @var \Ibexa\Contracts\Core\SiteAccess\ConfigResolverInterface */
+    /** @var ConfigResolverInterface */
     protected $configResolver;
 
-    public function __construct(RouterInterface $router, RouterInterface $templateRouter, ConfigResolverInterface $configResolver)
-    {
+    public function __construct(
+        RouterInterface $router,
+        RouterInterface $templateRouter,
+        ConfigResolverInterface $configResolver
+    ) {
         $this->router = $router;
         $this->templateRouter = $templateRouter;
         $this->configResolver = $configResolver;
@@ -54,7 +57,7 @@ class ExpressionRouterRootResourceBuilder implements RootResourceBuilderInterfac
     /**
      * Build root resource.
      *
-     * @return array|\Ibexa\Rest\Values\Root
+     * @return array|Root
      */
     public function buildRootResource(): Root
     {

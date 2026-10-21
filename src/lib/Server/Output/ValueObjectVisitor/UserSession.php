@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Rest\Output\Generator;
@@ -19,12 +20,15 @@ class UserSession extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
-     * @param \Ibexa\Rest\Server\Values\UserSession $data
+     * @param Visitor $visitor
+     * @param Generator $generator
+     * @param UserSessionValue $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ) {
         $status = $data->created ? 201 : 200;
         $visitor->setStatus($status);
 
@@ -37,8 +41,11 @@ class UserSession extends ValueObjectVisitor
         $generator->endObjectElement('Session');
     }
 
-    protected function visitUserSessionAttributes(Visitor $visitor, Generator $generator, UserSessionValue $data)
-    {
+    protected function visitUserSessionAttributes(
+        Visitor $visitor,
+        Generator $generator,
+        UserSessionValue $data
+    ) {
         $sessionHref = $this->router->generate('ibexa.rest.delete_session', ['sessionId' => $data->sessionId]);
 
         $generator->startAttribute('href', $sessionHref);

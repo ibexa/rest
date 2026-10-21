@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Security;
 
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -15,7 +16,7 @@ use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 class CsrfTokenManager extends BaseCsrfTokenManager
 {
     /**
-     * @var \Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface
+     * @var TokenStorageInterface
      */
     private $storage;
 
@@ -50,7 +51,7 @@ class CsrfTokenManager extends BaseCsrfTokenManager
     /**
      * Resolves token namespace.
      *
-     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+     * @param RequestStack $requestStack
      *
      * @return string
      */

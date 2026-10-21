@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
@@ -23,41 +24,45 @@ class UserGroupUpdate extends BaseParser
     /**
      * User service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\UserService
+     * @var UserService
      */
     protected $userService;
 
     /**
      * Content service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\ContentService
+     * @var ContentService
      */
     protected $contentService;
 
     /**
      * Location service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
+     * @var LocationService
      */
     protected $locationService;
 
     /**
      * FieldType parser.
      *
-     * @var \Ibexa\Rest\Input\FieldTypeParser
+     * @var FieldTypeParser
      */
     protected $fieldTypeParser;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\UserService $userService
-     * @param \Ibexa\Contracts\Core\Repository\ContentService $contentService
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
-     * @param \Ibexa\Rest\Input\FieldTypeParser $fieldTypeParser
+     * @param UserService $userService
+     * @param ContentService $contentService
+     * @param LocationService $locationService
+     * @param FieldTypeParser $fieldTypeParser
      */
-    public function __construct(UserService $userService, ContentService $contentService, LocationService $locationService, FieldTypeParser $fieldTypeParser)
-    {
+    public function __construct(
+        UserService $userService,
+        ContentService $contentService,
+        LocationService $locationService,
+        FieldTypeParser $fieldTypeParser
+    ) {
         $this->userService = $userService;
         $this->contentService = $contentService;
         $this->locationService = $locationService;
@@ -68,12 +73,14 @@ class UserGroupUpdate extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @return \Ibexa\Rest\Server\Values\RestUserGroupUpdateStruct
+     * @return RestUserGroupUpdateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         $parsedData = [];
 
         if (array_key_exists('mainLanguageCode', $data)) {

@@ -4,11 +4,13 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Input\Parser;
 
 use Exception;
 use Ibexa\Contracts\Core\Repository\ContentTypeService;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionCreateStruct;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 use Ibexa\Rest\Input\FieldTypeParser;
@@ -22,33 +24,36 @@ class FieldDefinitionCreate extends BaseParser
     /**
      * ContentType service.
      *
-     * @var \Ibexa\Contracts\Core\Repository\ContentTypeService
+     * @var ContentTypeService
      */
     protected $contentTypeService;
 
     /**
      * FieldType parser.
      *
-     * @var \Ibexa\Rest\Input\FieldTypeParser
+     * @var FieldTypeParser
      */
     protected $fieldTypeParser;
 
     /**
      * Parser tools.
      *
-     * @var \Ibexa\Rest\Input\ParserTools
+     * @var ParserTools
      */
     protected $parserTools;
 
     /**
      * Construct.
      *
-     * @param \Ibexa\Contracts\Core\Repository\ContentTypeService $contentTypeService
-     * @param \Ibexa\Rest\Input\FieldTypeParser $fieldTypeParser
-     * @param \Ibexa\Rest\Input\ParserTools $parserTools
+     * @param ContentTypeService $contentTypeService
+     * @param FieldTypeParser $fieldTypeParser
+     * @param ParserTools $parserTools
      */
-    public function __construct(ContentTypeService $contentTypeService, FieldTypeParser $fieldTypeParser, ParserTools $parserTools)
-    {
+    public function __construct(
+        ContentTypeService $contentTypeService,
+        FieldTypeParser $fieldTypeParser,
+        ParserTools $parserTools
+    ) {
         $this->contentTypeService = $contentTypeService;
         $this->fieldTypeParser = $fieldTypeParser;
         $this->parserTools = $parserTools;
@@ -58,20 +63,22 @@ class FieldDefinitionCreate extends BaseParser
      * Parse input structure.
      *
      * @param array $data
-     * @param \Ibexa\Contracts\Rest\Input\ParsingDispatcher $parsingDispatcher
+     * @param ParsingDispatcher $parsingDispatcher
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser If an error is found while parsing
+     * @throws Parser If an error is found while parsing
      *
-     * @return \Ibexa\Contracts\Core\Repository\Values\ContentType\FieldDefinitionCreateStruct
+     * @return FieldDefinitionCreateStruct
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher)
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ) {
         if (!array_key_exists('identifier', $data)) {
-            throw new Exceptions\Parser("Missing 'identifier' element for FieldDefinitionCreate.");
+            throw new Parser("Missing 'identifier' element for FieldDefinitionCreate.");
         }
 
         if (!array_key_exists('fieldType', $data)) {
-            throw new Exceptions\Parser("Missing 'fieldType' element for FieldDefinitionCreate.");
+            throw new Parser("Missing 'fieldType' element for FieldDefinitionCreate.");
         }
 
         $fieldDefinitionCreate = $this->contentTypeService->newFieldDefinitionCreateStruct(
@@ -82,7 +89,7 @@ class FieldDefinitionCreate extends BaseParser
         // @todo XSD says that descriptions is mandatory, but content type can be created without it
         if (array_key_exists('names', $data)) {
             if (!is_array($data['names']) || !array_key_exists('value', $data['names']) || !is_array($data['names']['value'])) {
-                throw new Exceptions\Parser("Invalid 'names' element for FieldDefinitionCreate.");
+                throw new Parser("Invalid 'names' element for FieldDefinitionCreate.");
             }
 
             $fieldDefinitionCreate->names = $this->parserTools->parseTranslatableList($data['names']);
@@ -91,7 +98,7 @@ class FieldDefinitionCreate extends BaseParser
         // @todo XSD says that descriptions is mandatory, but content type can be created without it
         if (array_key_exists('descriptions', $data)) {
             if (!is_array($data['descriptions']) || !array_key_exists('value', $data['descriptions']) || !is_array($data['descriptions']['value'])) {
-                throw new Exceptions\Parser("Invalid 'descriptions' element for FieldDefinitionCreate.");
+                throw new Parser("Invalid 'descriptions' element for FieldDefinitionCreate.");
             }
 
             $fieldDefinitionCreate->descriptions = $this->parserTools->parseTranslatableList($data['descriptions']);
@@ -135,7 +142,7 @@ class FieldDefinitionCreate extends BaseParser
                     $data['defaultValue']
                 );
             } catch (Exception $e) {
-                throw new Exceptions\Parser("Invalid 'defaultValue' element for FieldDefinitionCreate.", 0, $e);
+                throw new Parser("Invalid 'defaultValue' element for FieldDefinitionCreate.", 0, $e);
             }
         }
 

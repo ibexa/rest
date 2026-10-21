@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Contracts\Core\Repository\LocationService;
@@ -34,10 +35,13 @@ class RelationListProcessorTest extends TestCase
 
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::preProcessFieldSettingsHash
+     *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPreProcessFieldSettingsHash($inputSettings, $outputSettings)
-    {
+    public function testPreProcessFieldSettingsHash(
+        $inputSettings,
+        $outputSettings
+    ) {
         $processor = $this->getProcessor();
 
         $this->assertEquals(
@@ -48,10 +52,13 @@ class RelationListProcessorTest extends TestCase
 
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor::postProcessFieldSettingsHash
+     *
      * @dataProvider fieldSettingsHashes
      */
-    public function testPostProcessFieldSettingsHash($outputSettings, $inputSettings)
-    {
+    public function testPostProcessFieldSettingsHash(
+        $outputSettings,
+        $inputSettings
+    ) {
         $processor = $this->getProcessor();
 
         $this->assertEquals(
@@ -101,16 +108,25 @@ class RelationListProcessorTest extends TestCase
         $routerMock = $this->createMock(RouterInterface::class);
         $processor->setRouter($routerMock);
 
+        $matcher = $this->exactly(2);
         $routerMock
-            ->expects($this->exactly(2))
+            ->expects($matcher)
             ->method('generate')
-            ->withConsecutive(
-                ['ibexa.rest.load_content', ['contentId' => 42]],
-                ['ibexa.rest.load_content', ['contentId' => 300]]
-            )->willReturnOnConsecutiveCalls(
-                '/api/ibexa/v2/content/objects/42',
-                '/api/ibexa/v2/content/objects/300'
-            );
+            ->willReturnCallback(static function (
+                string $route,
+                array $parameters
+            ) use ($matcher): string {
+                self::assertSame('ibexa.rest.load_content', $route);
+                if ($matcher->getInvocationCount() === 1) {
+                    self::assertSame(['contentId' => 42], $parameters);
+
+                    return '/api/ibexa/v2/content/objects/42';
+                }
+
+                self::assertSame(['contentId' => 300], $parameters);
+
+                return '/api/ibexa/v2/content/objects/300';
+            });
 
         $hash = $processor->postProcessValueHash(['destinationContentIds' => [42, 300]]);
         $this->assertArrayHasKey('destinationContentHrefs', $hash);
@@ -119,7 +135,7 @@ class RelationListProcessorTest extends TestCase
     }
 
     /**
-     * @return \Ibexa\Rest\FieldTypeProcessor\RelationListProcessor
+     * @return RelationListProcessor
      */
     protected function getProcessor()
     {

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Rest\Output\Generator;
@@ -17,8 +18,11 @@ use Ibexa\Contracts\Rest\Output\Visitor;
  */
 class Options extends ValueObjectVisitor
 {
-    public function visit(Visitor $visitor, Generator $generator, $data)
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ) {
         $visitor->setHeader('Allow', implode(',', $data->allowedMethods));
         $visitor->setHeader('Content-Length', 0);
         $visitor->setStatus(200);

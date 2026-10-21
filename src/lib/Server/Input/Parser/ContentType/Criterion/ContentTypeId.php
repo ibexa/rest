@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Rest\Server\Input\Parser\ContentType\Criterion;
 
 use Ibexa\Contracts\Core\Repository\Values\ContentType\Query\Criterion\ContentTypeId as ContentTypeIdCriterion;
-use Ibexa\Contracts\Rest\Exceptions;
+use Ibexa\Contracts\Rest\Exceptions\Parser;
 use Ibexa\Contracts\Rest\Input\ParsingDispatcher;
 use Ibexa\Rest\Input\BaseParser;
 
@@ -20,12 +20,14 @@ final class ContentTypeId extends BaseParser implements ContentTypeCriterionInte
     /**
      * @param array<mixed> $data
      *
-     * @throws \Ibexa\Contracts\Rest\Exceptions\Parser
+     * @throws Parser
      */
-    public function parse(array $data, ParsingDispatcher $parsingDispatcher): ContentTypeIdCriterion
-    {
+    public function parse(
+        array $data,
+        ParsingDispatcher $parsingDispatcher
+    ): ContentTypeIdCriterion {
         if (!array_key_exists(self::ID_CRITERION, $data)) {
-            throw new Exceptions\Parser('Invalid <' . self::ID_CRITERION . '> format');
+            throw new Parser('Invalid <' . self::ID_CRITERION . '> format');
         }
 
         $ids = $data[self::ID_CRITERION];

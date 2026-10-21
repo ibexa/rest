@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\FieldTypeProcessor;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
@@ -16,17 +17,17 @@ use Symfony\Component\Routing\RouterInterface;
 abstract class BaseRelationProcessor extends FieldTypeProcessor
 {
     /**
-     * @var \Symfony\Component\Routing\RouterInterface
+     * @var RouterInterface
      */
     private $router;
 
     /**
-     * @var \Ibexa\Contracts\Core\Repository\LocationService
+     * @var LocationService
      */
     private $locationService;
 
     /**
-     * @param \Symfony\Component\Routing\RouterInterface $router
+     * @param RouterInterface $router
      */
     public function setRouter(RouterInterface $router)
     {
@@ -34,7 +35,7 @@ abstract class BaseRelationProcessor extends FieldTypeProcessor
     }
 
     /**
-     * @param \Ibexa\Contracts\Core\Repository\LocationService $locationService
+     * @param LocationService $locationService
      */
     public function setLocationService(LocationService $locationService)
     {

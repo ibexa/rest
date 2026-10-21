@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Contracts\Rest\Exceptions;
 
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException as APINotFoundException;
@@ -11,11 +12,9 @@ use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException as APINotFoundE
 /**
  * REST API equivalent of PHP API's NotFoundException.
  *
- * Implementation of the {@see \Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException}
+ * Implementation of the {@see APINotFoundException}
  * interface.
  */
-class NotFoundException extends APINotFoundException
-{
-}
+class NotFoundException extends APINotFoundException {}
 
 class_alias(NotFoundException::class, 'EzSystems\EzPlatformRest\Exceptions\NotFoundException');

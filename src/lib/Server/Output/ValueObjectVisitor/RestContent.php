@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\ContentInfo;
@@ -19,7 +20,7 @@ use Ibexa\Rest\Server\Values\Version as VersionValue;
  */
 class RestContent extends ValueObjectVisitor
 {
-    /** @var \Ibexa\Core\Helper\TranslationHelper */
+    /** @var TranslationHelper */
     private $translationHelper;
 
     public function __construct(TranslationHelper $translationHelper)
@@ -30,12 +31,15 @@ class RestContent extends ValueObjectVisitor
     /**
      * Visit struct returned by controllers.
      *
-     * @param \Ibexa\Contracts\Rest\Output\Visitor $visitor
-     * @param \Ibexa\Contracts\Rest\Output\Generator $generator
+     * @param Visitor $visitor
+     * @param Generator $generator
      * @param \Ibexa\Rest\Server\Values\RestContent $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ) {
         $restContent = $data;
         $contentInfo = $restContent->contentInfo;
         $translatedContentName = $this->translationHelper->getTranslatedContentNameByContentInfo($contentInfo);
@@ -197,7 +201,7 @@ class RestContent extends ValueObjectVisitor
      *
      * @param int $status
      *
-     * @throws \Ibexa\Core\Base\Exceptions\BadStateException
+     * @throws CoreBadStateException
      *
      * @return string
      */

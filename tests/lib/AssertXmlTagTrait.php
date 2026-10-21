@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest;
 
 use DOMDocument;
@@ -24,8 +25,11 @@ trait AssertXmlTagTrait
      * @param string $actualXml
      * @param string $message
      */
-    public static function assertXMLTag($matcher, $actualXml, $message = '')
-    {
+    public static function assertXMLTag(
+        $matcher,
+        $actualXml,
+        $message = ''
+    ) {
         // Provide default values.
         $matcher += ['attributes' => []];
 
@@ -51,7 +55,7 @@ trait AssertXmlTagTrait
         $document->loadXML($actualXml);
         $xpath = new DOMXPath($document);
         $queryResult = $xpath->query($query);
-        self::assertInstanceOf(DomNodeList::class, $queryResult);
+        self::assertInstanceOf(DOMNodeList::class, $queryResult);
 
         self::assertGreaterThanOrEqual(1, $queryResult->length, $message);
     }

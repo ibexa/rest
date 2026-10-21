@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Output;
 
 use stdClass;
@@ -11,8 +12,6 @@ use stdClass;
 /**
  * Test dummy class.
  */
-class ValueObject extends stdClass implements ValueObjectInterface
-{
-}
+class ValueObject extends stdClass implements ValueObjectInterface {}
 
 class_alias(ValueObject::class, 'EzSystems\EzPlatformRest\Tests\Output\ValueObject');

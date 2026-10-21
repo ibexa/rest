@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Bundle\Rest\Routing\OptionsLoader;
 
 use Symfony\Component\Routing\Route;
@@ -16,7 +17,7 @@ class Mapper
     /**
      * @param $route Route REST route
      *
-     * @return \Symfony\Component\Routing\Route
+     * @return Route
      */
     public function mapRoute(Route $route)
     {
@@ -38,13 +39,15 @@ class Mapper
     /**
      * Merges the methods from $restRoute into the _method default of $optionsRoute.
      *
-     * @param \Symfony\Component\Routing\Route $restRoute
-     * @param \Symfony\Component\Routing\Route $optionsRoute
+     * @param Route $restRoute
+     * @param Route $optionsRoute
      *
-     * @return \Symfony\Component\Routing\Route $optionsRoute with the methods from $restRoute in the _methods default
+     * @return Route $optionsRoute with the methods from $restRoute in the _methods default
      */
-    public function mergeMethodsDefault(Route $optionsRoute, Route $restRoute)
-    {
+    public function mergeMethodsDefault(
+        Route $optionsRoute,
+        Route $restRoute
+    ) {
         $mergedRoute = clone $optionsRoute;
         $mergedRoute->setDefault(
             'allowedMethods',

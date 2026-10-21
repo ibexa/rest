@@ -4,15 +4,17 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\FieldTypeProcessor;
 
 use Ibexa\Rest\FieldTypeProcessor\ImageProcessor;
+use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Routing\RouterInterface;
 
 class ImageProcessorTest extends BinaryInputProcessorTest
 {
-    /** @var \Ibexa\Rest\RequestParser */
-    protected $requestParser;
+    /** @var (RouterInterface&MockObject)|null */
+    protected $routerMock;
 
     /**
      * @covers \Ibexa\Rest\FieldTypeProcessor\ImageProcessor::postProcessValueHash
@@ -27,19 +29,30 @@ class ImageProcessorTest extends BinaryInputProcessorTest
         ];
 
         $routerMock = $this->getRouterMock();
-        foreach ($this->getVariations() as $iteration => $variationIdentifier) {
+        $variations = $this->getVariations();
+        $expectedVariations = [];
+        foreach ($variations as $variationIdentifier) {
             $expectedVariations[$variationIdentifier]['href'] = "/content/binary/images/{$inputHash['imageId']}/variations/{$variationIdentifier}";
-            $routerMock
-                ->expects($this->at($iteration))
-                ->method('generate')
-                ->with(
-                    'ibexa.rest.binary_content.get_image_variation',
-                    ['imageId' => $inputHash['imageId'], 'variationIdentifier' => $variationIdentifier]
-                )
-                ->willReturn(
-                    $expectedVariations[$variationIdentifier]['href']
-                );
         }
+
+        $matcher = $this->exactly(count($variations));
+        $routerMock
+            ->expects($matcher)
+            ->method('generate')
+            ->willReturnCallback(static function (
+                string $route,
+                array $parameters
+            ) use ($matcher, $variations, $inputHash, $expectedVariations): string {
+                $variationIdentifier = $variations[$matcher->getInvocationCount() - 1];
+
+                self::assertSame('ibexa.rest.binary_content.get_image_variation', $route);
+                self::assertSame(
+                    ['imageId' => $inputHash['imageId'], 'variationIdentifier' => $variationIdentifier],
+                    $parameters
+                );
+
+                return $expectedVariations[$variationIdentifier]['href'];
+            });
 
         $outputHash = $processor->postProcessValueHash($inputHash);
 
@@ -56,7 +69,7 @@ class ImageProcessorTest extends BinaryInputProcessorTest
     /**
      * Returns the processor under test.
      *
-     * @return \Ibexa\Rest\FieldTypeProcessor\ImageProcessor
+     * @return ImageProcessor
      */
     protected function getProcessor()
     {
@@ -68,15 +81,15 @@ class ImageProcessorTest extends BinaryInputProcessorTest
     }
 
     /**
-     * @returns \Symfony\Component\Routing\RouterInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @return RouterInterface&MockObject
      */
     protected function getRouterMock()
     {
-        if (!isset($this->requestParser)) {
-            $this->requestParser = $this->createMock(RouterInterface::class);
+        if (!isset($this->routerMock)) {
+            $this->routerMock = $this->createMock(RouterInterface::class);
         }
 
-        return $this->requestParser;
+        return $this->routerMock;
     }
 
     protected function getVariations()

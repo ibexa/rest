@@ -18,8 +18,11 @@ final class TermAggregationResult extends ValueObjectVisitor
     /**
      * @param \Ibexa\Contracts\Core\Repository\Values\Content\Search\AggregationResult\TermAggregationResult $data
      */
-    public function visit(Visitor $visitor, Generator $generator, $data): void
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ): void {
         $generator->startObjectElement('TermAggregationResult');
 
         $visitor->setHeader('Content-Type', $generator->getMediaType('TermAggregationResult'));
@@ -35,8 +38,11 @@ final class TermAggregationResult extends ValueObjectVisitor
         $generator->endObjectElement('TermAggregationResult');
     }
 
-    private function visitEntry(Visitor $visitor, Generator $generator, TermAggregationResultEntry $entry): void
-    {
+    private function visitEntry(
+        Visitor $visitor,
+        Generator $generator,
+        TermAggregationResultEntry $entry
+    ): void {
         $generator->startObjectElement('TermAggregationResultEntry');
         $this->visitKey($visitor, $generator, $entry->getKey());
         $this->visitCount($visitor, $generator, $entry->getCount());
@@ -46,8 +52,11 @@ final class TermAggregationResult extends ValueObjectVisitor
     /**
      * @param mixed $key
      */
-    private function visitKey(Visitor $visitor, Generator $generator, $key): void
-    {
+    private function visitKey(
+        Visitor $visitor,
+        Generator $generator,
+        $key
+    ): void {
         if (is_object($key)) {
             $generator->startHashElement('key');
             $visitor->visitValueObject($key);
@@ -57,8 +66,11 @@ final class TermAggregationResult extends ValueObjectVisitor
         }
     }
 
-    private function visitCount(Visitor $visitor, Generator $generator, int $count): void
-    {
+    private function visitCount(
+        Visitor $visitor,
+        Generator $generator,
+        int $count
+    ): void {
         $generator->valueElement('count', $count);
     }
 }

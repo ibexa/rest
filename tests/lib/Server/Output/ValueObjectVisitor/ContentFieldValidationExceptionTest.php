@@ -4,12 +4,13 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Output\ValueObjectVisitor;
 
 use Ibexa\Core\Base\Exceptions\ContentFieldValidationException as CoreContentFieldValidationException;
 use Ibexa\Core\FieldType\ValidationError;
 use Ibexa\Rest\Server\Exceptions;
-use Ibexa\Rest\Server\Output\ValueObjectVisitor;
+use Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentFieldValidationException;
 use Ibexa\Tests\Rest\Output\ValueObjectVisitorBaseTest;
 use Symfony\Component\Translation\Translator;
 
@@ -149,11 +150,11 @@ class ContentFieldValidationExceptionTest extends ValueObjectVisitorBaseTest
     /**
      * Gets the exception visitor.
      *
-     * @return \Ibexa\Rest\Server\Output\ValueObjectVisitor\ContentFieldValidationException
+     * @return ContentFieldValidationException
      */
     protected function internalGetVisitor()
     {
-        return new ValueObjectVisitor\ContentFieldValidationException(false, new Translator('eng-GB'));
+        return new ContentFieldValidationException(false, new Translator('eng-GB'));
     }
 }
 

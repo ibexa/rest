@@ -50,7 +50,7 @@ final class UriParserTest extends IbexaKernelTestCase
     /**
      * @dataProvider getDataForTestGetAttributeFromUri
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testGetAttributeFromUri(
         string $method,
@@ -100,7 +100,7 @@ final class UriParserTest extends IbexaKernelTestCase
     /**
      * @dataProvider getDataForTestGetAttributeFromUriThrowsException
      *
-     * @throws \Ibexa\Contracts\Core\Repository\Exceptions\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function testGetAttributeFromUriThrowsException(
         string $method,
@@ -134,16 +134,20 @@ final class UriParserTest extends IbexaKernelTestCase
     /**
      * @dataProvider getDataForTestIsRestRequest
      */
-    public function testIsRestRequest(Request $request, bool $isRestRequest): void
-    {
+    public function testIsRestRequest(
+        Request $request,
+        bool $isRestRequest
+    ): void {
         self::assertSame($isRestRequest, $this->uriParser->isRestRequest($request));
     }
 
     /**
      * @dataProvider getDataForTestIsRestRequest
      */
-    public function testHasRestPrefix(Request $request, bool $hasRestPrefix): void
-    {
+    public function testHasRestPrefix(
+        Request $request,
+        bool $hasRestPrefix
+    ): void {
         self::assertSame($hasRestPrefix, $this->uriParser->hasRestPrefix($request->getPathInfo()));
     }
 
@@ -171,8 +175,11 @@ final class UriParserTest extends IbexaKernelTestCase
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\InvalidArgumentException
      */
-    public function testMatchUri(string $uri, string $method, array $expectedMatch): void
-    {
+    public function testMatchUri(
+        string $uri,
+        string $method,
+        array $expectedMatch
+    ): void {
         $actualMatch = $this->uriParser->matchUri($uri, $method);
         foreach ($expectedMatch as $expectedKey => $expectedValue) {
             self::assertArrayHasKey($expectedKey, $actualMatch);
@@ -205,8 +212,11 @@ final class UriParserTest extends IbexaKernelTestCase
      *
      * @throws \Ibexa\Contracts\Rest\Exceptions\InvalidArgumentException
      */
-    public function testMatchUriThrowsException(string $uri, string $method, string $expectedExceptionMessage): void
-    {
+    public function testMatchUriThrowsException(
+        string $uri,
+        string $method,
+        string $expectedExceptionMessage
+    ): void {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage($expectedExceptionMessage);
         $this->uriParser->matchUri($uri, $method);

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Input;
 
 use Ibexa\Contracts\Rest\Exceptions\Parser;
@@ -30,6 +31,7 @@ class DispatcherTest extends TestCase
         $message = new Message();
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $parsingDispatcher->expects($this->never())->method('parse');
         $dispatcher = new Dispatcher($parsingDispatcher);
 
         $dispatcher->parse($message);
@@ -46,6 +48,7 @@ class DispatcherTest extends TestCase
         );
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $parsingDispatcher->expects($this->never())->method('parse');
         $dispatcher = new Dispatcher($parsingDispatcher);
 
         $dispatcher->parse($message);
@@ -62,6 +65,7 @@ class DispatcherTest extends TestCase
         );
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $parsingDispatcher->expects($this->never())->method('parse');
         $dispatcher = new Dispatcher($parsingDispatcher);
 
         $dispatcher->parse($message);
@@ -78,14 +82,14 @@ class DispatcherTest extends TestCase
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('parse')
             ->with([42], 'text/html')
             ->willReturn(23);
 
         $handler = $this->createMock(Handler::class);
         $handler
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('convert')
             ->with('Hello world!')
             ->willReturn([[42]]);
@@ -114,14 +118,14 @@ class DispatcherTest extends TestCase
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
         $parsingDispatcher
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('parse')
             ->with(['someKey' => 'someValue', '__url' => '/foo/bar'], 'text/html')
             ->willReturn(23);
 
         $handler = $this->createMock(Handler::class);
         $handler
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('convert')
             ->with('Hello world!')
             ->willReturn(

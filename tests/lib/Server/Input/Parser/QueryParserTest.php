@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Tests\Rest\Server\Input\Parser;
 
 use Ibexa\Contracts\Core\Repository\Values\Content\Query;
@@ -19,6 +20,7 @@ class QueryParserTest extends BaseTest
         ];
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $parsingDispatcher->expects($this->never())->method('parse');
         $parser = $this->getParser();
 
         $result = $parser->parse($inputArray, $parsingDispatcher);
@@ -60,16 +62,21 @@ class QueryParserTest extends BaseTest
         ];
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $matcher = $this->exactly(2);
         $parsingDispatcher
-            ->expects($this->at(0))
+            ->expects($matcher)
             ->method('parse')
-            ->with(['ContentTypeIdentifierCriterion' => 'article'])
-            ->willReturn(new Query\Criterion\ContentTypeIdentifier('article'));
-        $parsingDispatcher
-            ->expects($this->at(1))
-            ->method('parse')
-            ->with(['ParentLocationIdCriterion' => 762])
-            ->willReturn(new Query\Criterion\ParentLocationId(762));
+            ->willReturnCallback(static function (array $parameters) use ($matcher): Query\Criterion {
+                if ($matcher->getInvocationCount() === 1) {
+                    self::assertSame(['ContentTypeIdentifierCriterion' => 'article'], $parameters);
+
+                    return new Query\Criterion\ContentTypeIdentifier('article');
+                }
+
+                self::assertSame(['ParentLocationIdCriterion' => 762], $parameters);
+
+                return new Query\Criterion\ParentLocationId(762);
+            });
 
         $parser = $this->getParser();
 
@@ -116,16 +123,21 @@ class QueryParserTest extends BaseTest
         ];
 
         $parsingDispatcher = $this->getParsingDispatcherMock();
+        $matcher = $this->exactly(2);
         $parsingDispatcher
-            ->expects($this->at(0))
+            ->expects($matcher)
             ->method('parse')
-            ->with(['ContentTypeIdentifierCriterion' => 'article'])
-            ->willReturn(new Query\Criterion\ContentTypeIdentifier('article'));
-        $parsingDispatcher
-            ->expects($this->at(1))
-            ->method('parse')
-            ->with(['ParentLocationIdCriterion' => 762])
-            ->willReturn(new Query\Criterion\ParentLocationId(762));
+            ->willReturnCallback(static function (array $parameters) use ($matcher): Query\Criterion {
+                if ($matcher->getInvocationCount() === 1) {
+                    self::assertSame(['ContentTypeIdentifierCriterion' => 'article'], $parameters);
+
+                    return new Query\Criterion\ContentTypeIdentifier('article');
+                }
+
+                self::assertSame(['ParentLocationIdCriterion' => 762], $parameters);
+
+                return new Query\Criterion\ParentLocationId(762);
+            });
 
         $parser = $this->getParser();
 

@@ -4,10 +4,12 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Bundle\Rest;
 
 use Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 use Ibexa\Bundle\Rest\DependencyInjection\Security\RestSessionBasedFactory;
+use Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -22,7 +24,7 @@ class IbexaRestBundle extends Bundle
         $container->addCompilerPass(new Compiler\OutputVisitorPass());
         $container->addCompilerPass(new Compiler\ValueObjectVisitorPass());
 
-        /** @var \Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension $securityExtension */
+        /** @var SecurityExtension $securityExtension */
         $securityExtension = $container->getExtension('security');
         $securityExtension->addSecurityListenerFactory(new RestSessionBasedFactory());
 

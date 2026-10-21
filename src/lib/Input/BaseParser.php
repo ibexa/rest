@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Input;
 
 use Ibexa\Contracts\Rest\Input\Parser;
@@ -14,7 +15,7 @@ abstract class BaseParser extends Parser
     /**
      * URL handler.
      *
-     * @var \Ibexa\Rest\RequestParser
+     * @var RequestParser
      */
     protected $requestParser;
 

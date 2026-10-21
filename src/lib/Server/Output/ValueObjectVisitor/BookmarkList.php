@@ -18,8 +18,11 @@ class BookmarkList extends ValueObjectVisitor
     /**
      * {@inheritdoc}
      */
-    public function visit(Visitor $visitor, Generator $generator, $data)
-    {
+    public function visit(
+        Visitor $visitor,
+        Generator $generator,
+        $data
+    ) {
         $generator->startObjectElement('BookmarkList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('BookmarkList'));
 
@@ -27,8 +30,11 @@ class BookmarkList extends ValueObjectVisitor
         $generator->endObjectElement('BookmarkList');
     }
 
-    protected function visitAttributes(Visitor $visitor, Generator $generator, BookmarkListValue $data): void
-    {
+    protected function visitAttributes(
+        Visitor $visitor,
+        Generator $generator,
+        BookmarkListValue $data
+    ): void {
         $generator->startValueElement('count', $data->totalCount);
         $generator->endValueElement('count');
 

@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+
 namespace Ibexa\Rest\Server\Values;
 
 use Ibexa\Rest\Value as RestValue;
@@ -16,7 +17,7 @@ class Trash extends RestValue
     /**
      * Trash items.
      *
-     * @var \Ibexa\Rest\Server\Values\RestTrashItem[]
+     * @var RestTrashItem[]
      */
     public $trashItems;
 
@@ -30,11 +31,13 @@ class Trash extends RestValue
     /**
      * Construct.
      *
-     * @param \Ibexa\Rest\Server\Values\RestTrashItem[] $trashItems
+     * @param RestTrashItem[] $trashItems
      * @param string $path
      */
-    public function __construct(array $trashItems, $path)
-    {
+    public function __construct(
+        array $trashItems,
+        $path
+    ) {
         $this->trashItems = $trashItems;
         $this->path = $path;
     }

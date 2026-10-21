@@ -12,14 +12,16 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 final class JWTUser implements UserInterface
 {
-    /** @var \Symfony\Component\Security\Core\User\UserInterface */
+    /** @var UserInterface */
     private $wrappedUser;
 
     /** @var string|null */
     private $userIdentifier;
 
-    public function __construct(UserInterface $wrappedUser, ?string $userIdentifier)
-    {
+    public function __construct(
+        UserInterface $wrappedUser,
+        ?string $userIdentifier
+    ) {
         $this->wrappedUser = $wrappedUser;
         $this->userIdentifier = $userIdentifier;
     }
