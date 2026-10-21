@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Rest\Output\Normalizer;
 
-use ArrayObject as NativeArrayObject;
+use ArrayObject;
 use Ibexa\Rest\Output\Generator\Data\ArrayList;
 use Ibexa\Rest\Output\Generator\Json\JsonObject;
 use Ibexa\Rest\Output\Generator\Xml;
@@ -24,7 +24,7 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
     /**
      * @param array<mixed> $context
      *
-     * @return array<mixed>|NativeArrayObject
+     * @return array<mixed>|ArrayObject
      *
      * {@inheritDoc}
      */
@@ -32,7 +32,7 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
         mixed $object,
         ?string $format = null,
         array $context = []
-    ): array | NativeArrayObject {
+    ): array | ArrayObject {
         $vars = get_object_vars($object);
 
         $isOuterElement = $context[Xml::OUTER_ELEMENT] ?? false;
@@ -56,7 +56,7 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
                 }
             } else {
                 $modifiedKey = $isOuterElement && count($vars) === 1 ? '#' : $key;
-                $data[$modifiedKey] = $value instanceof NativeArrayObject
+                $data[$modifiedKey] = $value instanceof ArrayObject
                     ? $value
                     : $this->normalizer->normalize($value, $format, $context)
                 ;
@@ -66,7 +66,7 @@ final class JsonObjectNormalizer implements NormalizerInterface, NormalizerAware
         $preserveEmptyObjects = $context[self::PRESERVE_EMPTY_OBJECTS] ?? false;
 
         if ($preserveEmptyObjects && $data === []) {
-            return new NativeArrayObject();
+            return new ArrayObject();
         }
 
         return $data;
