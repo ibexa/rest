@@ -52,10 +52,6 @@ class CachedValue extends ValueObjectVisitor
                 $response->setVary('X-User-Hash', false);
             }
         }
-
-        if (isset($data->cacheTags['locationId'])) {
-            $visitor->getResponse()->headers->set('X-Location-Id', $data->cacheTags['locationId']);
-        }
     }
 
     public function getParameter(
