@@ -30,7 +30,7 @@
         "ext-xmlwriter": "*",
         "api-platform/core": "~4.1.18",
         "ibexa/core": "~5.0.x-dev",
-        "ibexa/templated-uri-bundle": "^4.0",
+        "ibexa/templated-uri-bundle": "~5.0.x-dev",
         "lexik/jwt-authentication-bundle": "^2.8",
         "symfony/config": "^7.4",
         "symfony/dependency-injection": "^7.4",
