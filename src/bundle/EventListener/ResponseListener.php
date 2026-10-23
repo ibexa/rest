@@ -12,6 +12,7 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LogLevel;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
@@ -77,7 +78,8 @@ class ResponseListener implements EventSubscriberInterface, LoggerAwareInterface
      */
     public function onKernelExceptionView(ExceptionEvent $event)
     {
-        if (!$event->getRequest()->attributes->get('is_rest_request')) {
+        $request = $event->getRequest();
+        if (!$request->attributes->get('is_rest_request') || $this->expectsHtml($request)) {
             return;
         }
 
@@ -86,10 +88,15 @@ class ResponseListener implements EventSubscriberInterface, LoggerAwareInterface
 
         $event->setResponse(
             $this->viewDispatcher->dispatch(
-                $event->getRequest(),
+                $request,
                 $exception
             )
         );
+    }
+
+    private function expectsHtml(Request $request): bool
+    {
+        return $request->getPreferredFormat(null) === 'html';
     }
 
     private function logException(Throwable $exception): void
