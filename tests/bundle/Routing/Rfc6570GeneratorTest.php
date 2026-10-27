@@ -74,6 +74,15 @@ final class Rfc6570GeneratorTest extends TestCase
         self::assertEquals('/foo/{placeholder}/{?bar}', $generator->generate('foo', ['foo' => '{placeholder}', 'bar' => 'barbar']));
     }
 
+    public function testNonStringValueInStrictParameter(): void
+    {
+        $routes = $this->getRoutes(true);
+
+        $generator = new Rfc6570Generator($routes, new RequestContext());
+
+        self::assertSame('/foo/123/{?bar}', $generator->generate('foo', ['foo' => 123, 'bar' => 'barbar']));
+    }
+
     public function testStrictParameters(): void
     {
         $routes = $this->getRoutes(true);
