@@ -28,7 +28,6 @@ class ObjectStateGroupList extends ValueObjectVisitor
     ): void {
         $generator->startObjectElement('ObjectStateGroupList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('ObjectStateGroupList'));
-        //@todo Needs refactoring, disabling certain headers should not be done this way
         $visitor->suppressHeader('Accept-Patch');
 
         $generator->startAttribute('href', $this->router->generate('ibexa.rest.load_object_state_groups'));

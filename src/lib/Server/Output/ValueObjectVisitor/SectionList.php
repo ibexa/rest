@@ -28,7 +28,6 @@ class SectionList extends ValueObjectVisitor
     ): void {
         $generator->startObjectElement('SectionList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('SectionList'));
-        //@todo Needs refactoring, disabling certain headers should not be done this way
         $visitor->suppressHeader('Accept-Patch');
 
         $generator->startAttribute('href', $data->path);

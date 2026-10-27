@@ -28,7 +28,6 @@ class PolicyList extends ValueObjectVisitor
     ): void {
         $generator->startObjectElement('PolicyList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('PolicyList'));
-        //@todo Needs refactoring, disabling certain headers should not be done this way
         $visitor->suppressHeader('Accept-Patch');
 
         $generator->startAttribute('href', $data->path);

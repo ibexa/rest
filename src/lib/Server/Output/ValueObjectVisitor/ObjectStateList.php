@@ -29,7 +29,6 @@ class ObjectStateList extends ValueObjectVisitor
     ): void {
         $generator->startObjectElement('ObjectStateList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('ObjectStateList'));
-        //@todo Needs refactoring, disabling certain headers should not be done this way
         $visitor->suppressHeader('Accept-Patch');
 
         $generator->startAttribute(
