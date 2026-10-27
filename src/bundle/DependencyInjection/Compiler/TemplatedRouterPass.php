@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * @internal
  */
-final class TemplatedRouterPass implements CompilerPassInterface
+final readonly class TemplatedRouterPass implements CompilerPassInterface
 {
     public const string TEMPLATED_ROUTER_SERVICE_ID = 'ibexa.rest.templated_router.inner';
 
