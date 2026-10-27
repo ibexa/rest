@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Ibexa\Bundle\Rest\DependencyInjection\Compiler;
 
+use LogicException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -23,18 +24,22 @@ final readonly class TemplatedRouterPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->hasDefinition('router.default') || !$container->hasDefinition(self::TEMPLATED_ROUTER_SERVICE_ID)) {
-            return;
+        $defaultRouterOptions = $container->findDefinition('router.default')->getArgument(2);
+        if (!is_array($defaultRouterOptions)) {
+            throw new LogicException(sprintf(
+                'Expected the options argument (index 2) of the "router.default" service to be an array, "%s" given.',
+                get_debug_type($defaultRouterOptions)
+            ));
         }
 
-        $resourceType = $container->getDefinition('router.default')->getArgument(2)['resource_type'] ?? null;
-        if ($resourceType === null) {
+        // Set by FrameworkBundle only when "framework.router.type" is configured
+        if (!isset($defaultRouterOptions['resource_type'])) {
             return;
         }
 
         $templatedRouter = $container->getDefinition(self::TEMPLATED_ROUTER_SERVICE_ID);
         $options = $templatedRouter->getArgument('$options');
-        $options['resource_type'] = $resourceType;
+        $options['resource_type'] = $defaultRouterOptions['resource_type'];
         $templatedRouter->replaceArgument('$options', $options);
     }
 }

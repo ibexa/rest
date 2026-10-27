@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Ibexa\Tests\Bundle\Rest\DependencyInjection\Compiler;
 
 use Ibexa\Bundle\Rest\DependencyInjection\Compiler\TemplatedRouterPass;
+use LogicException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -39,10 +40,17 @@ final class TemplatedRouterPassTest extends TestCase
         );
     }
 
-    /**
-     * @param array<string, mixed> $defaultRouterOptions
-     */
-    private function buildContainer(array $defaultRouterOptions): ContainerBuilder
+    public function testThrowsWhenDefaultRouterOptionsAreNotAnArray(): void
+    {
+        $container = $this->buildContainer('not-an-array');
+
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('Expected the options argument (index 2) of the "router.default" service to be an array, "string" given.');
+
+        (new TemplatedRouterPass())->process($container);
+    }
+
+    private function buildContainer(mixed $defaultRouterOptions): ContainerBuilder
     {
         $container = new ContainerBuilder();
         $container->setDefinition('router.default', new Definition(null, [null, 'resource', $defaultRouterOptions]));
