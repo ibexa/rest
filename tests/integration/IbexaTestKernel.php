@@ -10,7 +10,6 @@ namespace Ibexa\Tests\Integration\Rest;
 
 use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
 use ApiPlatform\Symfony\Bundle\ApiPlatformBundle;
-use Hautelook\TemplatedUriBundle\HautelookTemplatedUriBundle;
 use Ibexa\Bundle\Rest\IbexaRestBundle;
 use Ibexa\Bundle\Test\Core\IbexaTestCoreBundle;
 use Ibexa\Contracts\Rest\UriParser\UriParserInterface;
@@ -19,6 +18,7 @@ use Ibexa\Rest\Server\Controller\Root as RestRootController;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Serializer;
 
@@ -30,7 +30,6 @@ final class IbexaTestKernel extends CoreIbexaTestKernel
 
         yield new IbexaTestCoreBundle();
 
-        yield new HautelookTemplatedUriBundle();
         yield new IbexaRestBundle();
         yield new ApiPlatformBundle();
     }
@@ -57,6 +56,7 @@ final class IbexaTestKernel extends CoreIbexaTestKernel
     {
         yield from parent::getExposedServicesById();
         yield 'ibexa.rest.serializer' => Serializer::class;
+        yield 'ibexa.rest.templated_router' => RouterInterface::class;
         yield 'ibexa.api_platform.ibexa_openapi.factory' => OpenApiFactoryInterface::class;
         yield 'api_platform.openapi.normalizer' => NormalizerInterface::class;
     }

@@ -23,4 +23,6 @@ return $configFactory
                 __DIR__ . '/tests',
             ])
             ->files()->name('*.php')
+            // MIT-licensed code copied from ibexa/templated-uri-router: its license header must stay
+            ->notPath(['bundle/Routing/Rfc6570Generator.php', 'bundle/Routing/Rfc6570GeneratorTest.php'])
     );
