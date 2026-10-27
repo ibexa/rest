@@ -32,7 +32,7 @@ class UserSession extends ValueObjectVisitor
 
         $visitor->setHeader('Content-Type', $generator->getMediaType('Session'));
         //@todo Needs refactoring, disabling certain headers should not be done this way
-        $visitor->setHeader('Accept-Patch', false);
+        $visitor->suppressHeader('Accept-Patch');
 
         $generator->startObjectElement('Session');
         $this->visitUserSessionAttributes($generator, $data);

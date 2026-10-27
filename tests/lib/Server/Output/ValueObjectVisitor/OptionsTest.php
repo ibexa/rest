@@ -33,7 +33,7 @@ class OptionsTest extends ValueObjectVisitorBaseTest
             ->method('setHeader')
             ->willReturnMap([
                 ['Allow', 'GET,POST'],
-                ['Content-Length', 0],
+                ['Content-Length', '0'],
             ]);
 
         $visitor->visit(
