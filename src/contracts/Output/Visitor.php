@@ -29,6 +29,13 @@ class Visitor
      */
     private ?int $statusCode = null;
 
+    /**
+     * Headers which inner visitors must not set, keyed by lowercase name.
+     *
+     * @var array<string, true>
+     */
+    private array $suppressedHeaders = [];
+
     public function __construct(
         private readonly Generator $generator,
         private readonly NormalizerInterface $normalizer,
@@ -53,14 +60,44 @@ class Visitor
             trigger_deprecation(
                 'ibexa/rest',
                 '5.0.0',
-                sprintf('Calling %s with second argument being bool or int is deprecated.', __METHOD__),
+                sprintf(
+                    'Passing bool or int as the second argument of %s() is deprecated, pass a string instead, or call %s::suppressHeader() to leave the header out of the response.',
+                    __METHOD__,
+                    self::class,
+                ),
             );
+
+            if ($value === false) {
+                $this->suppressHeader($name);
+
+                return;
+            }
+
             $value = (string)$value;
         }
 
-        if (!$this->response->headers->has($name)) {
+        if (!$this->isHeaderDefined($name)) {
             $this->response->headers->set($name, $value);
         }
+    }
+
+    /**
+     * Leaves the header out of the response, also when inner visitors set it.
+     *
+     * For example, a list of resources suppresses the Accept-Patch header,
+     * which is valid for a single resource only.
+     * Like setHeader(), it has no effect on a header which is already defined.
+     */
+    public function suppressHeader(string $name): void
+    {
+        if (!$this->isHeaderDefined($name)) {
+            $this->suppressedHeaders[strtolower($name)] = true;
+        }
+    }
+
+    private function isHeaderDefined(string $name): bool
+    {
+        return $this->response->headers->has($name) || isset($this->suppressedHeaders[strtolower($name)]);
     }
 
     /**
@@ -95,17 +132,6 @@ class Visitor
 
         $normalizedData = $this->removeEncodeContext($normalizedData);
 
-        //@todo Needs refactoring!
-        // A hackish solution to enable outer visitors to disable setting
-        // of certain headers in inner visitors, for example Accept-Patch header
-        // which is valid in GET/POST/PATCH for a resource, but must not appear
-        // in the list of resources
-        foreach ($this->response->headers->all() as $headerName => $headerValue) {
-            if ($headerValue[0] === false) {
-                $this->response->headers->remove($headerName);
-            }
-        }
-
         $response = clone $this->response;
 
         $content = $this->encoder->encode($normalizedData, $this->format, $encoderContext);
@@ -115,6 +141,7 @@ class Visitor
         // reset the inner response
         $this->response = new Response(null, Response::HTTP_OK);
         $this->statusCode = null;
+        $this->suppressedHeaders = [];
 
         return $response;
     }

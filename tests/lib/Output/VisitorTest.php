@@ -176,27 +176,70 @@ final class VisitorTest extends TestCase
         );
     }
 
-    /**
-     * @todo This is a test for a feature that needs refactoring.
-     */
-    public function testSetFilteredHeaders(): void
+    public function testSuppressHeader(): void
     {
-        $data = new stdClass();
-
         $visitor = $this->visitor;
 
         $visitor->setHeader('Content-Type', 'text/xml');
-        $visitor->setHeader('Accept-Patch', null);
+        $visitor->suppressHeader('Accept-Patch');
+        $visitor->setHeader('Accept-Patch', 'application/vnd.ibexa.api.ContentUpdate+json');
+
         self::assertEquals(
             new Response(
                 null,
                 Response::HTTP_OK,
                 [
                     'Content-Type' => 'text/xml',
-                    'Accept-Patch' => [0 => ''],
                 ]
             ),
-            $visitor->visit($data),
+            $visitor->visit(new stdClass()),
+        );
+    }
+
+    public function testSetHeaderWithFalseSuppressesHeader(): void
+    {
+        $visitor = $this->visitor;
+
+        $visitor->setHeader('Content-Type', 'text/xml');
+        $visitor->setHeader('Accept-Patch', false);
+        $visitor->setHeader('Accept-Patch', 'application/vnd.ibexa.api.ContentUpdate+json');
+
+        self::assertEquals(
+            new Response(
+                null,
+                Response::HTTP_OK,
+                [
+                    'Content-Type' => 'text/xml',
+                ]
+            ),
+            $visitor->visit(new stdClass()),
+        );
+    }
+
+    public function testSuppressHeaderKeepsDefinedHeader(): void
+    {
+        $visitor = $this->visitor;
+
+        $visitor->setHeader('Accept-Patch', 'application/vnd.ibexa.api.ContentUpdate+json');
+        $visitor->suppressHeader('Accept-Patch');
+
+        self::assertSame(
+            'application/vnd.ibexa.api.ContentUpdate+json',
+            $visitor->visit(new stdClass())->headers->get('Accept-Patch'),
+        );
+    }
+
+    public function testSuppressedHeadersAreResetAfterVisit(): void
+    {
+        $visitor = $this->visitor;
+
+        $visitor->suppressHeader('Accept-Patch');
+        $visitor->visit(new stdClass());
+        $visitor->setHeader('Accept-Patch', 'application/vnd.ibexa.api.ContentUpdate+json');
+
+        self::assertSame(
+            'application/vnd.ibexa.api.ContentUpdate+json',
+            $visitor->visit(new stdClass())->headers->get('Accept-Patch'),
         );
     }
 
