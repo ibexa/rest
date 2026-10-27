@@ -10,32 +10,29 @@ namespace Ibexa\Tests\Bundle\Rest\DependencyInjection\Compiler;
 
 use Ibexa\Bundle\Rest\DependencyInjection\Compiler\TemplatedRouterPass;
 use LogicException;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 final class TemplatedRouterPassTest extends TestCase
 {
-    public function testCopiesResourceTypeFromDefaultRouter(): void
-    {
-        $container = $this->buildContainer(['resource_type' => 'service']);
+    /**
+     * @param array<string, mixed> $defaultRouterOptions
+     * @param array<string, mixed> $expectedOptions
+     */
+    #[TestWith([['resource_type' => 'service'], ['cache_dir' => '/cache', 'resource_type' => 'service']])]
+    #[TestWith([[], ['cache_dir' => '/cache']])]
+    public function testCopiesResourceTypeFromDefaultRouter(
+        array $defaultRouterOptions,
+        array $expectedOptions
+    ): void {
+        $container = $this->buildContainer($defaultRouterOptions);
 
         (new TemplatedRouterPass())->process($container);
 
         self::assertSame(
-            ['cache_dir' => '/cache', 'resource_type' => 'service'],
-            $container->getDefinition(TemplatedRouterPass::TEMPLATED_ROUTER_SERVICE_ID)->getArgument('$options')
-        );
-    }
-
-    public function testKeepsOptionsWhenDefaultRouterHasNoResourceType(): void
-    {
-        $container = $this->buildContainer([]);
-
-        (new TemplatedRouterPass())->process($container);
-
-        self::assertSame(
-            ['cache_dir' => '/cache'],
+            $expectedOptions,
             $container->getDefinition(TemplatedRouterPass::TEMPLATED_ROUTER_SERVICE_ID)->getArgument('$options')
         );
     }
