@@ -216,6 +216,16 @@ final class VisitorTest extends TestCase
         );
     }
 
+    public function testSuppressHeaderIgnoresCase(): void
+    {
+        $visitor = $this->visitor;
+
+        $visitor->suppressHeader('Accept-Patch');
+        $visitor->setHeader('accept-patch', 'application/vnd.ibexa.api.ContentUpdate+json');
+
+        self::assertFalse($visitor->visit(new stdClass())->headers->has('Accept-Patch'));
+    }
+
     public function testSuppressHeaderKeepsDefinedHeader(): void
     {
         $visitor = $this->visitor;
