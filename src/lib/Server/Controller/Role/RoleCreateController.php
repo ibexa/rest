@@ -64,17 +64,17 @@ use Symfony\Component\HttpFoundation\Response;
         ),
         responses: [
             Response::HTTP_CREATED => new Model\Response(
-                description: 'If set, the new user is returned in XML or JSON format.',
+                description: 'The new Role draft is returned in XML or JSON format.',
                 content: new ArrayObject([
-                    'application/vnd.ibexa.api.Role+json' => [
+                    'application/vnd.ibexa.api.RoleDraft+json' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/RoleWrapper',
+                            '$ref' => '#/components/schemas/RoleDraftWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/Role.json.example',
                     ],
-                    'application/vnd.ibexa.api.Role+xml' => [
+                    'application/vnd.ibexa.api.RoleDraft+xml' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/Role',
+                            '$ref' => '#/components/schemas/RoleDraft',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/Role.xml.example',
                     ],
