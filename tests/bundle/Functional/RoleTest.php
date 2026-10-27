@@ -33,7 +33,7 @@ class RoleTest extends RESTFunctionalTestCase
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ibexa/v2/user/roles',
+            '/api/ibexa/v2/user/roles?publish=false',
             'RoleInput+xml',
             'RoleDraft+json',
             $xml
@@ -42,6 +42,7 @@ XML;
 
         self::assertHttpResponseCodeEquals($response, 201);
         self::assertHttpResponseHasHeader($response, 'Location');
+        self::assertHttpResponseHasHeader($response, 'Content-Type', $this->generateMediaTypeString('RoleDraft+json'));
 
         $href = $response->getHeader('Location')[0];
         $this->addCreatedElement($href);
@@ -624,7 +625,7 @@ XML;
     /**
      * Covers PUBLISH /user/roles/{roleId}/draft.
      *
-     * @depends testCreateRoleDraft
+     * @depends testCreateRoleWithDraft
      */
     public function testPublishRoleDraft(string $roleDraftHref): string
     {
