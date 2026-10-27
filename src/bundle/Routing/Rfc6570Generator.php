@@ -41,8 +41,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Baldur Rensch <baldur.rensch@hautelook.com>
- *
- * @internal
  */
 final class Rfc6570Generator extends CompiledUrlGenerator implements UrlGeneratorInterface, ConfigurableRequirementsInterface
 {
