@@ -403,9 +403,24 @@ services:
 
     # Templated (RFC 6570) URI router. It is wrapped in the SiteAccess-aware router decorator, like router.default.
     ibexa.rest.templated_router.inner:
-        parent: hautelook.router.template
-        calls:
-            - [ setOption, [ strict_requirements, ~ ] ]
+        class: Symfony\Bundle\FrameworkBundle\Routing\Router
+        arguments:
+            $container: '@service_container'
+            $resource: '%router.resource%'
+            $options:
+                cache_dir: '%kernel.cache_dir%'
+                debug: '%kernel.debug%'
+                generator_class: Ibexa\Bundle\Rest\Routing\Rfc6570Generator
+                generator_dumper_class: Symfony\Component\Routing\Generator\Dumper\CompiledUrlGeneratorDumper
+                matcher_class: Symfony\Bundle\FrameworkBundle\Routing\RedirectableCompiledUrlMatcher
+                matcher_dumper_class: Symfony\Component\Routing\Matcher\Dumper\CompiledUrlMatcherDumper
+                strict_requirements: ~
+            $context: '@?router.request_context'
+            $parameters: '@?parameter_bag'
+            $logger: '@?logger'
+            $defaultLocale: '%kernel.default_locale%'
+        tags:
+            - { name: monolog.logger, channel: router }
 
     ibexa.rest.templated_router:
         class: Ibexa\Bundle\Core\Routing\DefaultRouter
