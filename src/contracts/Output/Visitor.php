@@ -90,9 +90,7 @@ class Visitor
      */
     public function suppressHeader(string $name): void
     {
-        if (!$this->isHeaderDefined($name)) {
-            $this->suppressedHeaders[strtolower($name)] = true;
-        }
+        $this->suppressedHeaders[strtolower($name)] = true;
     }
 
     private function isHeaderDefined(string $name): bool
