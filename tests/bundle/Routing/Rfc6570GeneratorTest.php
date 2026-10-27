@@ -28,6 +28,7 @@
 namespace Ibexa\Tests\Bundle\Rest\Routing;
 
 use Ibexa\Bundle\Rest\Routing\Rfc6570Generator;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\Exception\InvalidParameterException;
@@ -36,6 +37,7 @@ use Symfony\Component\Routing\RequestContext;
 /**
  * @author Baldur Rensch <baldur.rensch@hautelook.com>
  */
+#[CoversClass(Rfc6570Generator::class)]
 final class Rfc6570GeneratorTest extends TestCase
 {
     /**
