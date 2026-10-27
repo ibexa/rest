@@ -23,7 +23,7 @@ final class TemplatedRouterPassTest extends TestCase
 
         self::assertSame(
             ['cache_dir' => '/cache', 'resource_type' => 'service'],
-            $container->getDefinition(TemplatedRouterPass::TEMPLATED_ROUTER_SERVICE_ID)->getArgument(2)
+            $container->getDefinition(TemplatedRouterPass::TEMPLATED_ROUTER_SERVICE_ID)->getArgument('$options')
         );
     }
 
@@ -35,7 +35,7 @@ final class TemplatedRouterPassTest extends TestCase
 
         self::assertSame(
             ['cache_dir' => '/cache'],
-            $container->getDefinition(TemplatedRouterPass::TEMPLATED_ROUTER_SERVICE_ID)->getArgument(2)
+            $container->getDefinition(TemplatedRouterPass::TEMPLATED_ROUTER_SERVICE_ID)->getArgument('$options')
         );
     }
 
@@ -48,7 +48,7 @@ final class TemplatedRouterPassTest extends TestCase
         $container->setDefinition('router.default', new Definition(null, [null, 'resource', $defaultRouterOptions]));
         $container->setDefinition(
             TemplatedRouterPass::TEMPLATED_ROUTER_SERVICE_ID,
-            new Definition(null, [null, 'resource', ['cache_dir' => '/cache']])
+            new Definition(null, ['$options' => ['cache_dir' => '/cache']])
         );
 
         return $container;

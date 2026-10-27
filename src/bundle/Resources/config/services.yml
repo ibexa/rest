@@ -405,19 +405,20 @@ services:
     ibexa.rest.templated_router.inner:
         class: Symfony\Bundle\FrameworkBundle\Routing\Router
         arguments:
-            - '@service_container'
-            - '%router.resource%'
-            - cache_dir: '%kernel.cache_dir%'
-              debug: '%kernel.debug%'
-              generator_class: Ibexa\Bundle\Rest\Routing\Rfc6570Generator
-              generator_dumper_class: Symfony\Component\Routing\Generator\Dumper\CompiledUrlGeneratorDumper
-              matcher_class: Symfony\Bundle\FrameworkBundle\Routing\RedirectableCompiledUrlMatcher
-              matcher_dumper_class: Symfony\Component\Routing\Matcher\Dumper\CompiledUrlMatcherDumper
-              strict_requirements: ~
-            - '@?router.request_context'
-            - '@?parameter_bag'
-            - '@?logger'
-            - '%kernel.default_locale%'
+            $container: '@service_container'
+            $resource: '%router.resource%'
+            $options:
+                cache_dir: '%kernel.cache_dir%'
+                debug: '%kernel.debug%'
+                generator_class: Ibexa\Bundle\Rest\Routing\Rfc6570Generator
+                generator_dumper_class: Symfony\Component\Routing\Generator\Dumper\CompiledUrlGeneratorDumper
+                matcher_class: Symfony\Bundle\FrameworkBundle\Routing\RedirectableCompiledUrlMatcher
+                matcher_dumper_class: Symfony\Component\Routing\Matcher\Dumper\CompiledUrlMatcherDumper
+                strict_requirements: ~
+            $context: '@?router.request_context'
+            $parameters: '@?parameter_bag'
+            $logger: '@?logger'
+            $defaultLocale: '%kernel.default_locale%'
         tags:
             - { name: monolog.logger, channel: router }
 

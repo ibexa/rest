@@ -33,8 +33,8 @@ final readonly class TemplatedRouterPass implements CompilerPassInterface
         }
 
         $templatedRouter = $container->getDefinition(self::TEMPLATED_ROUTER_SERVICE_ID);
-        $options = $templatedRouter->getArgument(2);
+        $options = $templatedRouter->getArgument('$options');
         $options['resource_type'] = $resourceType;
-        $templatedRouter->replaceArgument(2, $options);
+        $templatedRouter->replaceArgument('$options', $options);
     }
 }
