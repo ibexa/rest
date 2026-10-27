@@ -35,7 +35,7 @@ class RoleTest extends RESTFunctionalTestCase
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ibexa/v2/user/roles?publish=false',
+            '/api/ibexa/v2/user/roles',
             'RoleInput+xml',
             'RoleDraft+json',
             $xml
