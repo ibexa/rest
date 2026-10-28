@@ -85,7 +85,7 @@ class Visitor
      *
      * For example, a list of resources suppresses the Accept-Patch header,
      * which is valid for a single resource only.
-     * Like setHeader(), it has no effect on a header which is already defined.
+     * A header which is already set stays in the response.
      */
     public function suppressHeader(string $name): void
     {
