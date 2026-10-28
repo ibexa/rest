@@ -648,16 +648,13 @@ XML;
 
     /**
      * Covers DELETE /user/roles/{roleId}/draft.
-     *
-     * @depends testCreateRoleDraft
      */
-    public function testDeleteRoleDraft(string $roleDraftHref): void
+    public function testDeleteRoleDraft(): void
     {
-        // we need to create a role draft first since we published the previous one in testPublishRoleDraft
-        $roleHref = $this->testCreateRoleDraft($this->roleDraftHrefToRoleHref($roleDraftHref));
+        $roleDraftHref = $this->testCreateRoleDraft($this->createAndPublishRole('testDeleteRoleDraft'));
 
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('DELETE', $roleHref)
+            $this->createHttpRequest('DELETE', $roleDraftHref)
         );
 
         self::assertHttpResponseCodeEquals($response, 204);
