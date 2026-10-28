@@ -35,7 +35,7 @@ class RoleTest extends RESTFunctionalTestCase
 XML;
         $request = $this->createHttpRequest(
             'POST',
-            '/api/ibexa/v2/user/roles',
+            '/api/ibexa/v2/user/roles?publish=false',
             'RoleInput+xml',
             'RoleDraft+json',
             $xml
@@ -44,6 +44,7 @@ XML;
 
         self::assertHttpResponseCodeEquals($response, 201);
         self::assertHttpResponseHasHeader($response, 'Location');
+        self::assertHttpResponseHasHeader($response, 'Content-Type', $this->generateMediaTypeString('RoleDraft+json'));
 
         $href = $response->getHeader('Location')[0];
         $this->addCreatedElement($href);
@@ -607,7 +608,7 @@ XML;
     /**
      * Covers PUBLISH /user/roles/{roleId}/draft.
      */
-    #[Depends('testCreateRoleDraft')]
+    #[Depends('testCreateRoleWithDraft')]
     public function testPublishRoleDraft(string $roleDraftHref): string
     {
         $response = $this->sendHttpRequest(
@@ -630,14 +631,12 @@ XML;
     /**
      * Covers DELETE /user/roles/{roleId}/draft.
      */
-    #[Depends('testCreateRoleDraft')]
-    public function testDeleteRoleDraft(string $roleDraftHref): void
+    public function testDeleteRoleDraft(): void
     {
-        // we need to create a role draft first since we published the previous one in testPublishRoleDraft
-        $roleHref = $this->testCreateRoleDraft($this->roleDraftHrefToRoleHref($roleDraftHref));
+        $roleDraftHref = $this->testCreateRoleDraft($this->createAndPublishRole('testDeleteRoleDraft'));
 
         $response = $this->sendHttpRequest(
-            $this->createHttpRequest('DELETE', $roleHref)
+            $this->createHttpRequest('DELETE', $roleDraftHref)
         );
 
         self::assertHttpResponseCodeEquals($response, 204);
