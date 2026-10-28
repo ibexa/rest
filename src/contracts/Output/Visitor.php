@@ -61,9 +61,8 @@ class Visitor
                 'ibexa/rest',
                 '5.0.0',
                 sprintf(
-                    'Passing bool or int as the second argument of %s() is deprecated, pass a string instead, or call %s::suppressHeader() to leave the header out of the response.',
+                    'Passing bool or int as the second argument of %s() is deprecated, pass a string instead, or call suppressHeader() to leave the header out of the response.',
                     __METHOD__,
-                    self::class,
                 ),
             );
 
