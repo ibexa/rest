@@ -115,32 +115,35 @@ class Visitor
      */
     public function visit(mixed $data): Response
     {
-        $normalizedData = $this->normalizer->normalize(
-            $data,
-            $this->format,
-            ['visitor' => $this],
-        );
+        try {
+            $normalizedData = $this->normalizer->normalize(
+                $data,
+                $this->format,
+                ['visitor' => $this],
+            );
 
-        $encoderContext = [];
-        if (isset($normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT])) {
-            $encoderContext = $normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT];
-            unset($normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT]);
+            $encoderContext = [];
+            if (isset($normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT])) {
+                $encoderContext = $normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT];
+                unset($normalizedData[VisitorAdapterNormalizer::ENCODER_CONTEXT]);
+            }
+
+            $normalizedData = $this->removeEncodeContext($normalizedData);
+
+            $response = clone $this->response;
+
+            $content = $this->encoder->encode($normalizedData, $this->format, $encoderContext);
+
+            $response->setContent($content);
+
+            return $response;
+        } finally {
+            // reset the inner response, also when visiting failed - the visitor is shared,
+            // e.g. the exception listener renders the error response with it
+            $this->response = new Response(null, Response::HTTP_OK);
+            $this->statusCode = null;
+            $this->suppressedHeaders = [];
         }
-
-        $normalizedData = $this->removeEncodeContext($normalizedData);
-
-        $response = clone $this->response;
-
-        $content = $this->encoder->encode($normalizedData, $this->format, $encoderContext);
-
-        $response->setContent($content);
-
-        // reset the inner response
-        $this->response = new Response(null, Response::HTTP_OK);
-        $this->statusCode = null;
-        $this->suppressedHeaders = [];
-
-        return $response;
     }
 
     /**
