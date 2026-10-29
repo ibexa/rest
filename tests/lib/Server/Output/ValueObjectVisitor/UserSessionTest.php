@@ -41,16 +41,18 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
                 $calls[] = 'setStatus';
             });
 
-        $setHeaderMatcher = self::exactly(2);
-        $this->getVisitorMock()->expects($setHeaderMatcher)
+        $this->getVisitorMock()->expects(self::once())
             ->method('setHeader')
-            ->willReturnCallback(static function (...$parameters) use ($setHeaderMatcher, &$calls): void {
-                if ($setHeaderMatcher->getInvocationCount() === 1) {
-                    self::assertSame(['Content-Type', 'application/vnd.ibexa.api.Session+xml'], $parameters);
-                } else {
-                    self::assertSame(['Accept-Patch', false], $parameters);
-                }
-                $calls[] = 'setHeader ' . $parameters[0];
+            ->with('Content-Type', 'application/vnd.ibexa.api.Session+xml')
+            ->willReturnCallback(static function () use (&$calls): void {
+                $calls[] = 'setHeader Content-Type';
+            });
+
+        $this->getVisitorMock()->expects(self::once())
+            ->method('suppressHeader')
+            ->with('Accept-Patch')
+            ->willReturnCallback(static function () use (&$calls): void {
+                $calls[] = 'suppressHeader Accept-Patch';
             });
 
         $this->addRouteExpectation(
@@ -75,7 +77,7 @@ class UserSessionTest extends ValueObjectVisitorBaseTest
 
         $result = $generator->endDocument(null);
 
-        self::assertSame(['setStatus', 'setHeader Content-Type', 'setHeader Accept-Patch'], $calls);
+        self::assertSame(['setStatus', 'setHeader Content-Type', 'suppressHeader Accept-Patch'], $calls);
         self::assertNotEmpty($result);
 
         return $result;

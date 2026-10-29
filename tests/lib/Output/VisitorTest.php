@@ -14,6 +14,7 @@ use Ibexa\Contracts\Rest\Output\ValueObjectVisitorResolverInterface;
 use Ibexa\Contracts\Rest\Output\Visitor;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use stdClass;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\EncoderInterface;
@@ -176,28 +177,114 @@ final class VisitorTest extends TestCase
         );
     }
 
-    /**
-     * @todo This is a test for a feature that needs refactoring.
-     */
-    public function testSetFilteredHeaders(): void
+    public function testSuppressHeader(): void
     {
-        $data = new stdClass();
-
         $visitor = $this->visitor;
 
         $visitor->setHeader('Content-Type', 'text/xml');
-        $visitor->setHeader('Accept-Patch', null);
+        $visitor->suppressHeader('Accept-Patch');
+        $visitor->setHeader('Accept-Patch', 'application/vnd.ibexa.api.ContentUpdate+json');
+
         self::assertEquals(
             new Response(
                 null,
                 Response::HTTP_OK,
                 [
                     'Content-Type' => 'text/xml',
-                    'Accept-Patch' => [0 => ''],
                 ]
             ),
-            $visitor->visit($data),
+            $visitor->visit(new stdClass()),
         );
+    }
+
+    public function testSetHeaderWithFalseSuppressesHeader(): void
+    {
+        $visitor = $this->visitor;
+
+        $visitor->setHeader('Content-Type', 'text/xml');
+        $visitor->setHeader('Accept-Patch', false);
+        $visitor->setHeader('Accept-Patch', 'application/vnd.ibexa.api.ContentUpdate+json');
+
+        self::assertEquals(
+            new Response(
+                null,
+                Response::HTTP_OK,
+                [
+                    'Content-Type' => 'text/xml',
+                ]
+            ),
+            $visitor->visit(new stdClass()),
+        );
+    }
+
+    public function testSuppressHeaderIgnoresCase(): void
+    {
+        $visitor = $this->visitor;
+
+        $visitor->suppressHeader('Accept-Patch');
+        $visitor->setHeader('accept-patch', 'application/vnd.ibexa.api.ContentUpdate+json');
+
+        self::assertFalse($visitor->visit(new stdClass())->headers->has('Accept-Patch'));
+    }
+
+    public function testSuppressHeaderKeepsDefinedHeader(): void
+    {
+        $visitor = $this->visitor;
+
+        $visitor->setHeader('Accept-Patch', 'application/vnd.ibexa.api.ContentUpdate+json');
+        $visitor->suppressHeader('Accept-Patch');
+
+        self::assertSame(
+            'application/vnd.ibexa.api.ContentUpdate+json',
+            $visitor->visit(new stdClass())->headers->get('Accept-Patch'),
+        );
+    }
+
+    public function testSuppressedHeadersAreResetAfterVisit(): void
+    {
+        $visitor = $this->visitor;
+
+        $visitor->suppressHeader('Accept-Patch');
+        $visitor->visit(new stdClass());
+        $visitor->setHeader('Accept-Patch', 'application/vnd.ibexa.api.ContentUpdate+json');
+
+        self::assertSame(
+            'application/vnd.ibexa.api.ContentUpdate+json',
+            $visitor->visit(new stdClass())->headers->get('Accept-Patch'),
+        );
+    }
+
+    public function testStateIsResetWhenVisitFails(): void
+    {
+        $visitor = $this->visitor;
+        $calls = 0;
+        $this->normalizer
+            ->expects(self::exactly(2))
+            ->method('normalize')
+            ->willReturnCallback(static function () use (&$calls): array {
+                if (++$calls === 1) {
+                    throw new RuntimeException('Normalization failed');
+                }
+
+                return [];
+            });
+
+        $visitor->setStatus(Response::HTTP_CREATED);
+        $visitor->setHeader('Content-Type', 'text/xml');
+        $visitor->suppressHeader('Accept-Patch');
+        try {
+            $visitor->visit(new stdClass());
+            self::fail('Expected the normalizer exception to be rethrown');
+        } catch (RuntimeException) {
+        }
+
+        $visitor->setStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+        $visitor->setHeader('Accept-Patch', 'application/vnd.ibexa.api.ContentUpdate+json');
+        $response = $visitor->visit(new stdClass());
+
+        self::assertSame(Response::HTTP_INTERNAL_SERVER_ERROR, $response->getStatusCode());
+        self::assertFalse($response->headers->has('Content-Type'));
+        self::assertSame('application/vnd.ibexa.api.ContentUpdate+json', $response->headers->get('Accept-Patch'));
     }
 
     public function testSetHeadersNoOverwrite(): void

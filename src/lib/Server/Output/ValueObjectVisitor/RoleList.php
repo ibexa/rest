@@ -28,8 +28,7 @@ class RoleList extends ValueObjectVisitor
     ): void {
         $generator->startObjectElement('RoleList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('RoleList'));
-        //@todo Needs refactoring, disabling certain headers should not be done this way
-        $visitor->setHeader('Accept-Patch', false);
+        $visitor->suppressHeader('Accept-Patch');
 
         $generator->startAttribute('href', $data->path);
         $generator->endAttribute('href');

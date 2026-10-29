@@ -24,7 +24,7 @@ class Options extends ValueObjectVisitor
         mixed $data
     ): void {
         $visitor->setHeader('Allow', implode(',', $data->allowedMethods));
-        $visitor->setHeader('Content-Length', 0);
+        $visitor->setHeader('Content-Length', '0');
         $visitor->setStatus(200);
     }
 }
