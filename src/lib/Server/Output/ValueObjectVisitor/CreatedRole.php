@@ -12,8 +12,6 @@ use Ibexa\Contracts\Rest\Output\Visitor;
 
 /**
  * CreatedRole value object visitor.
- *
- * @todo coverage add unit test
  */
 class CreatedRole extends Role
 {
@@ -28,13 +26,7 @@ class CreatedRole extends Role
         mixed $data
     ): void {
         parent::visit($visitor, $generator, $data->role->innerRole);
-        $visitor->setHeader(
-            'Location',
-            $this->router->generate(
-                'ibexa.rest.load_role',
-                ['roleId' => $data->role->innerRole->id]
-            )
-        );
+        $visitor->setHeader('Location', $this->generateRoleHref($data->role->innerRole));
         $visitor->setStatus(201);
     }
 }

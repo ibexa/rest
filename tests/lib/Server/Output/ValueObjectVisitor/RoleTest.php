@@ -56,6 +56,36 @@ class RoleTest extends ValueObjectVisitorBaseTestCase
         return $result;
     }
 
+    public function testVisitRoleDraftLinksToDraft(): void
+    {
+        $visitor = $this->getVisitor();
+        $generator = $this->getGenerator();
+
+        $generator->startDocument(null);
+
+        $roleDraft = new User\RoleDraft(['innerRole' => new User\Role(['id' => 42, 'identifier' => 'some-role'])]);
+
+        $this->addRouteExpectation('ibexa.rest.load_role_draft', ['roleId' => 42], '/user/roles/42/draft');
+        $this->addRouteExpectation('ibexa.rest.load_policies', ['roleId' => 42], '/user/roles/42/policies');
+
+        $visitor->visit(
+            $this->getVisitorMock(),
+            $generator,
+            new RestRole($roleDraft),
+        );
+
+        self::assertXMLTag(
+            [
+                'tag' => 'Role',
+                'attributes' => [
+                    'href' => '/user/roles/42/draft',
+                ],
+            ],
+            $generator->endDocument(null),
+            'A Role draft must link to its draft URL, the Role URL is a 404 for a draft.'
+        );
+    }
+
     #[Depends('testVisit')]
     public function testResultContainsRoleElement(string $result): void
     {

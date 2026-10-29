@@ -47,9 +47,10 @@ XML;
         self::assertHttpResponseHasHeader($response, 'Content-Type', $this->generateMediaTypeString('RoleDraft+json'));
 
         $href = $response->getHeader('Location')[0];
-        $this->addCreatedElement($href);
+        self::assertStringEndsWith('/draft', $href);
+        $this->addCreatedElement($this->roleDraftHrefToRoleHref($href));
 
-        return $href . '/draft';
+        return $href;
     }
 
     /**
@@ -110,9 +111,10 @@ XML;
         self::assertHttpResponseHasHeader($response, 'Location');
 
         $href = $response->getHeader('Location')[0];
-        $this->addCreatedElement($href);
+        self::assertStringEndsWith('/draft', $href);
+        $this->addCreatedElement($this->roleDraftHrefToRoleHref($href));
 
-        return $href . '/draft';
+        return $href;
     }
 
     /**
@@ -685,12 +687,12 @@ XML;
 
         self::assertHttpResponseCodeEquals($response, 201);
         self::assertHttpResponseHasHeader($response, 'Location');
-        $href = $response->getHeader('Location')[0];
-
-        $this->sendHttpRequest(
-            $this->createHttpRequest('PUBLISH', $href . '/draft')
+        $response = $this->sendHttpRequest(
+            $this->createHttpRequest('PUBLISH', $response->getHeader('Location')[0])
         );
 
+        self::assertHttpResponseCodeEquals($response, 204);
+        $href = $response->getHeader('Location')[0];
         $this->addCreatedElement($href);
 
         return $href;
