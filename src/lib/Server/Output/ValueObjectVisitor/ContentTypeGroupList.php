@@ -28,8 +28,7 @@ class ContentTypeGroupList extends ValueObjectVisitor
     ): void {
         $generator->startObjectElement('ContentTypeGroupList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('ContentTypeGroupList'));
-        //@todo Needs refactoring, disabling certain headers should not be done this way
-        $visitor->setHeader('Accept-Patch', false);
+        $visitor->suppressHeader('Accept-Patch');
 
         $generator->startAttribute(
             'href',

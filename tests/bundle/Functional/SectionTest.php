@@ -22,6 +22,10 @@ class SectionTest extends RESTFunctionalTestCase
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
+        self::assertFalse(
+            $response->hasHeader('Accept-Patch'),
+            'A list of Sections must not advertise Accept-Patch, which is valid for a single Section only'
+        );
     }
 
     /**
@@ -91,6 +95,7 @@ XML;
         );
 
         self::assertHttpResponseCodeEquals($response, 200);
+        self::assertHttpResponseHasHeader($response, 'Accept-Patch');
     }
 
     /**

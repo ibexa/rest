@@ -29,18 +29,23 @@ class OptionsTest extends ValueObjectVisitorBaseTestCase
             ->method('setStatus')
             ->with(self::equalTo(200));
 
+        $headers = [];
         $this->getVisitorMock()->expects($this->exactly(2))
             ->method('setHeader')
-            ->willReturnMap([
-                ['Allow', 'GET,POST'],
-                ['Content-Length', 0],
-            ]);
+            ->willReturnCallback(static function (
+                string $name,
+                mixed $value
+            ) use (&$headers): void {
+                $headers[] = [$name, $value];
+            });
 
         $visitor->visit(
             $this->getVisitorMock(),
             $generator,
             $noContent
         );
+
+        self::assertSame([['Allow', 'GET,POST'], ['Content-Length', '0']], $headers);
     }
 
     protected function internalGetVisitor(): Options

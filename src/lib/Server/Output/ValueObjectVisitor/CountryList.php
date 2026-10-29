@@ -28,7 +28,7 @@ class CountryList extends ValueObjectVisitor
     ): void {
         $generator->startObjectElement('CountryList');
         $visitor->setHeader('Content-Type', $generator->getMediaType('CountryList'));
-        $visitor->setHeader('Accept-Patch', false);
+        $visitor->suppressHeader('Accept-Patch');
 
         $generator->startList('Country');
 
