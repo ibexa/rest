@@ -219,26 +219,6 @@ final class VisitorTest extends TestCase
         );
     }
 
-    public function testSetHeaderWithFalseSuppressesHeader(): void
-    {
-        $visitor = $this->visitor;
-
-        $visitor->setHeader('Content-Type', 'text/xml');
-        $visitor->setHeader('Accept-Patch', false);
-        $visitor->setHeader('Accept-Patch', 'application/vnd.ibexa.api.ContentUpdate+json');
-
-        self::assertEquals(
-            new Response(
-                null,
-                Response::HTTP_OK,
-                [
-                    'Content-Type' => 'text/xml',
-                ]
-            ),
-            $visitor->visit(new stdClass()),
-        );
-    }
-
     public function testSuppressHeaderIgnoresCase(): void
     {
         $visitor = $this->visitor;

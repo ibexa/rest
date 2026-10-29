@@ -7,7 +7,6 @@
 
 namespace Ibexa\Rest\Server\Controller\Role;
 
-use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\OpenApi\Factory\OpenApiFactory;
 use ApiPlatform\OpenApi\Model;
@@ -30,8 +29,8 @@ use Symfony\Component\HttpFoundation\Response;
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
         operationId: 'ibexa.rest.create_role',
-        summary: 'Create Role or Role draft',
-        description: 'Creates a new Role or Role draft.',
+        summary: 'Create Role draft',
+        description: 'Creates a new Role draft. Publish it with PUBLISH /user/roles/{id}/draft.',
         tags: [
             'User Role',
         ],
@@ -65,49 +64,37 @@ use Symfony\Component\HttpFoundation\Response;
         ),
         responses: [
             Response::HTTP_CREATED => new Model\Response(
-                description: 'If set, the new user is returned in XML or JSON format.',
+                description: 'The new Role draft is returned in XML or JSON format.',
                 content: new ArrayObject([
-                    'application/vnd.ibexa.api.Role+json' => [
+                    'application/vnd.ibexa.api.RoleDraft+json' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/RoleWrapper',
+                            '$ref' => '#/components/schemas/RoleDraftWrapper',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/Role.json.example',
                     ],
-                    'application/vnd.ibexa.api.Role+xml' => [
+                    'application/vnd.ibexa.api.RoleDraft+xml' => [
                         'schema' => [
-                            '$ref' => '#/components/schemas/Role',
+                            '$ref' => '#/components/schemas/RoleDraft',
                         ],
                         'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/roles/POST/Role.xml.example',
                     ],
                 ]),
             ),
             Response::HTTP_BAD_REQUEST => new Model\Response(description: 'Error - the input does not match the input schema definition.'),
-            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to create a Role or a Role draft.'),
+            Response::HTTP_UNAUTHORIZED => new Model\Response(description: 'Error - the user is not authorized to create a Role draft.'),
         ],
     ),
 )]
 class RoleCreateController extends RoleBaseController
 {
-    /**
-     * Creates a new role.
-     *
-     * Defaults to publishing the role, but you can create a draft instead by setting the POST parameter publish=false
-     */
     public function createRole(Request $request): CreatedRole
     {
-        $publish = (
-            !$request->query->has('publish') ||
-            ($request->query->get('publish') === 'true')
-        );
-
         try {
             $roleDraft = $this->roleService->createRole(
                 $this->inputDispatcher->parse(
                     new Message(
                         [
                             'Content-Type' => $request->headers->get('Content-Type'),
-                            // @todo Needs refactoring! Temporary solution so parser has access to get parameters
-                            '__publish' => $publish,
                         ],
                         $request->getContent()
                     )
@@ -121,20 +108,6 @@ class RoleCreateController extends RoleBaseController
             throw new BadRequestException($e->getMessage());
         } catch (Exceptions\Parser $e) {
             throw new BadRequestException($e->getMessage());
-        }
-
-        if ($publish) {
-            @trigger_error(
-                "Create and publish role in the same operation is deprecated, and will be removed in the future.\n" .
-                'Instead, publish the role draft using Role::publishRoleDraft().',
-                E_USER_DEPRECATED
-            );
-
-            $this->roleService->publishRoleDraft($roleDraft);
-
-            $role = $this->roleService->loadRole($roleDraft->id);
-
-            return new CreatedRole(['role' => new Values\RestRole($role)]);
         }
 
         return new CreatedRole(['role' => new Values\RestRole($roleDraft)]);

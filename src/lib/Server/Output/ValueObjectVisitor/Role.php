@@ -44,10 +44,7 @@ class Role extends ValueObjectVisitor
         Generator $generator,
         ApiRole $data
     ): void {
-        $generator->startAttribute(
-            'href',
-            $this->router->generate('ibexa.rest.load_role', ['roleId' => $data->id])
-        );
+        $generator->startAttribute('href', $this->generateRoleHref($data));
         $generator->endAttribute('href');
 
         $generator->startValueElement('identifier', $data->identifier);
@@ -60,5 +57,16 @@ class Role extends ValueObjectVisitor
         );
         $generator->endAttribute('href');
         $generator->endObjectElement('Policies');
+    }
+
+    /**
+     * A draft, also a draft of a role which isn't published yet, is only reachable under its draft URL.
+     */
+    protected function generateRoleHref(ApiRole $role): string
+    {
+        return $this->router->generate(
+            $role instanceof RoleDraft ? 'ibexa.rest.load_role_draft' : 'ibexa.rest.load_role',
+            ['roleId' => $role->id]
+        );
     }
 }
