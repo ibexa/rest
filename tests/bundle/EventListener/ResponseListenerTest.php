@@ -94,6 +94,45 @@ class ResponseListenerTest extends EventListenerTest
         $this->onKernelView('onKernelExceptionView', $this->getExceptionEvent(), $this->exceptionEventValue);
     }
 
+    /**
+     * @return iterable<string, array{string}>
+     */
+    public static function getDataForTestOnKernelExceptionViewForRestFormat(): iterable
+    {
+        yield 'json' => ['json'];
+        yield 'xml' => ['xml'];
+    }
+
+    /**
+     * @dataProvider getDataForTestOnKernelExceptionViewForRestFormat
+     */
+    public function testOnKernelExceptionViewForRestFormat(string $preferredFormat): void
+    {
+        $this->getRequestMock()
+            ->method('getPreferredFormat')
+            ->with(null)
+            ->willReturn($preferredFormat);
+
+        $this->onKernelView('onKernelExceptionView', $this->getExceptionEvent(), $this->exceptionEventValue);
+    }
+
+    public function testOnKernelExceptionViewForHtmlFormat(): void
+    {
+        $this->getRequestMock()
+            ->method('getPreferredFormat')
+            ->with(null)
+            ->willReturn('html');
+
+        $this->getVisitorDispatcherMock()
+            ->expects(self::never())
+            ->method('dispatch');
+
+        $event = $this->getExceptionEvent();
+        $this->getEventListener()->onKernelExceptionView($event);
+
+        self::assertNull($event->getResponse());
+    }
+
     public function testOnControllerResultView()
     {
         $this->onKernelView('onKernelResultView', $this->getControllerResultEvent(), $this->eventValue);
