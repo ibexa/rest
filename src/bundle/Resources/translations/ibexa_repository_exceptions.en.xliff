@@ -6,6 +6,16 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="b084dc9da16119ada861bb68af70e55331b2ab04" resname="Cannot delete non-empty User Groups">
+        <source>Cannot delete non-empty User Groups</source>
+        <target state="new">Cannot delete non-empty User Groups</target>
+        <note>key: Cannot delete non-empty User Groups</note>
+      </trans-unit>
+      <trans-unit id="6896775d521636a2fd6ac8200e3829104ab04842" resname="Cannot delete the currently authenticated User">
+        <source>Cannot delete the currently authenticated User</source>
+        <target state="new">Cannot delete the currently authenticated User</target>
+        <note>key: Cannot delete the currently authenticated User</note>
+      </trans-unit>
       <trans-unit id="18a38f6c46cc84d27fa3d24cbd09aee62125be8d" resname="Cannot publish an empty content type draft">
         <source>Cannot publish an empty content type draft</source>
         <target state="new">Cannot publish an empty content type draft</target>
