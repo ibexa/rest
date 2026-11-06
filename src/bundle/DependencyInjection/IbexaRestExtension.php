@@ -70,7 +70,7 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
 
         $this->prependRouterConfiguration($container);
         $this->prependJMSTranslation($container);
-        $this->prependApiPlatformConfiguration($container);
+        $this->loadApiPlatformServices($container);
     }
 
     private function prependRouterConfiguration(ContainerBuilder $container): void
@@ -95,7 +95,7 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
         ]);
     }
 
-    private function prependApiPlatformConfiguration(ContainerBuilder $container): void
+    private function loadApiPlatformServices(ContainerBuilder $container): void
     {
         if (!$container->hasExtension('api_platform')) {
             return;
@@ -103,29 +103,6 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('api_platform.yml');
-
-        $config = [
-            'title' => 'Ibexa API',
-            'version' => '1.0.0',
-            'defaults' => [
-                'stateless' => true,
-                'cache_headers' => [
-                    'vary' => ['Content-Type', 'Authorization', 'Origin'],
-                ],
-                'formats' => [
-                    'json' => ['application/json'],
-                ],
-            ],
-            'enable_re_doc' => false,
-            'graphql' => [
-                'graphiql' => [
-                    'enabled' => false,
-                ],
-            ],
-            'enable_docs' => $container->getParameter('kernel.debug'),
-        ];
-
-        $container->prependExtensionConfig('api_platform', $config);
     }
 
     private function configureApiPlatformAutotagging(ContainerBuilder $container): void

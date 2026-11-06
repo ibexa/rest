@@ -42,24 +42,18 @@ final class RequestListenerTest extends EventListenerTestCase
         return [
             // REST requests
             [self::REST_ROUTE, true],
-            ['/api/ibexa/v2/true', true],
-            ['/api/bundle-name/v2/true', true],
-            ['/api/MyBundle12/v2/true', true],
-            ['/api/ThisIs_Bundle123/v2/true', true],
-            ['/api/my-bundle/v1/true', true],
-            ['/api/my-bundle/v2/true', true],
-            ['/api/my-bundle/v2.7/true', true],
-            ['/api/my-bundle/v122.73/true', true],
+            ['/api/ibexa/v2/', true],
+            ['/api/ibexa/v2/content/objects/1', true],
             // non-REST requests
+            ['/api/ibexa/v3/translations', false],
+            ['/api/ibexa/ping', false],
+            ['/api/ibexa/errors/404', false],
+            ['/api/errors/404', false],
+            ['/api/ibexa/v2', false],
+            ['/api/ibexa/v2.7/x', false],
+            ['/api/my-bundle/v2/x', false],
+            ['/api/ibexav2/x', false],
             [self::NON_REST_ROUTE, false],
-            ['/ap/ezp/v2/false', false],
-            ['/api/bundle name/v2/false', false],
-            ['/api/My/Bundle/v2/false', false],
-            ['/api//v2/false', false],
-            ['/api/my-bundle/v/false', false],
-            ['/api/my-bundle/v2-2/false', false],
-            ['/api/my-bundle/v2 7/false', false],
-            ['/api/my-bundle/v/7/false', false],
         ];
     }
 

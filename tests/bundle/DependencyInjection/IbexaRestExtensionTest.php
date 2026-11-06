@@ -11,6 +11,8 @@ namespace Ibexa\Tests\Bundle\Rest\DependencyInjection;
 use Ibexa\Bundle\Rest\DependencyInjection\EditionBadgesProcessor;
 use Ibexa\Bundle\Rest\DependencyInjection\IbexaRestExtension;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 
 final class IbexaRestExtensionTest extends AbstractExtensionTestCase
 {
@@ -47,5 +49,47 @@ final class IbexaRestExtensionTest extends AbstractExtensionTestCase
                 'Bar' => ['foo', 'bar'],
             ]
         );
+    }
+
+    public function testPrependDoesNotConfigureApiPlatform(): void
+    {
+        $this->container->registerExtension(self::createApiPlatformExtensionStub());
+
+        (new IbexaRestExtension())->prepend($this->container);
+
+        self::assertSame([], $this->container->getExtensionConfig('api_platform'));
+    }
+
+    public function testApiPlatformServicesAreLoadedWhenApiPlatformIsRegistered(): void
+    {
+        $this->container->registerExtension(self::createApiPlatformExtensionStub());
+
+        (new IbexaRestExtension())->prepend($this->container);
+        $this->load();
+
+        $this->assertContainerBuilderHasService('ibexa.api_platform.openapi.command');
+    }
+
+    public function testApiPlatformServicesAreSkippedWithoutApiPlatform(): void
+    {
+        (new IbexaRestExtension())->prepend($this->container);
+        $this->load();
+
+        $this->assertContainerBuilderNotHasService('ibexa.api_platform.openapi.command');
+    }
+
+    private static function createApiPlatformExtensionStub(): Extension
+    {
+        return new class() extends Extension {
+            public function getAlias(): string
+            {
+                return 'api_platform';
+            }
+
+            public function load(
+                array $configs,
+                ContainerBuilder $container
+            ): void {}
+        };
     }
 }
