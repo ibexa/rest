@@ -121,9 +121,14 @@ final class UriParserTest extends IbexaKernelTestCase
             true,
         ];
 
-        yield ($uri = '/api/acme/v1.5/bar') => [
+        yield ($uri = '/api/ibexa/v3/foo') => [
             Request::create($uri),
-            true,
+            false,
+        ];
+
+        yield ($uri = '/api/acme/v1/bar') => [
+            Request::create($uri),
+            false,
         ];
 
         yield ($uri = '/baz') => [
