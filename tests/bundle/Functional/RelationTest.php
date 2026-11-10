@@ -4,6 +4,7 @@
  * @copyright Copyright (C) Ibexa AS. All rights reserved.
  * @license For full copyright and license information view LICENSE file distributed with this source code.
  */
+declare(strict_types=1);
 
 namespace Ibexa\Tests\Bundle\Rest\Functional;
 
@@ -13,6 +14,8 @@ class RelationTest extends RESTFunctionalTestCase
 {
     public function testRelation(): void
     {
+        $imageContentId = $this->createImage();
+
         $xml = <<< XML
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentCreate>
@@ -51,7 +54,8 @@ class RelationTest extends RESTFunctionalTestCase
       <fieldDefinitionIdentifier>image</fieldDefinitionIdentifier>
       <languageCode>eng-GB</languageCode>
       <fieldValue>
-        <value key="destinationContentId">1</value>
+        <value key="destinationContentId">{$imageContentId}</value>
+        <value key="alternativeText">testRelation image</value>
       </fieldValue>
     </field>
   </fields>
@@ -63,11 +67,54 @@ XML;
         $expectedRelationTypes = [
             'LINK',
             'EMBED',
-            'ATTRIBUTE',
+            'ASSET',
         ];
 
         $actualTypes = array_column($relations, 'RelationType');
 
         self::assertEqualsCanonicalizing($expectedRelationTypes, $actualTypes);
+    }
+
+    private function createImage(): int
+    {
+        $name = $this->addTestSuffix(__FUNCTION__);
+        $xml = <<< XML
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentCreate>
+  <ContentType href="/api/ibexa/v2/content/types/5" />
+  <mainLanguageCode>eng-GB</mainLanguageCode>
+  <LocationCreate>
+    <ParentLocation href="/api/ibexa/v2/content/locations/1/2" />
+    <priority>0</priority>
+    <hidden>false</hidden>
+    <sortField>PATH</sortField>
+    <sortOrder>ASC</sortOrder>
+  </LocationCreate>
+  <Section href="/api/ibexa/v2/content/sections/3" />
+  <alwaysAvailable>true</alwaysAvailable>
+  <User href="/api/ibexa/v2/user/users/14" />
+  <modificationDate>2012-09-30T12:30:00</modificationDate>
+  <fields>
+    <field>
+      <fieldDefinitionIdentifier>name</fieldDefinitionIdentifier>
+      <languageCode>eng-GB</languageCode>
+      <fieldValue>{$name}</fieldValue>
+    </field>
+    <field>
+      <fieldDefinitionIdentifier>image</fieldDefinitionIdentifier>
+      <languageCode>eng-GB</languageCode>
+      <fieldValue>
+        <value key="fileName">1px.png</value>
+        <value key="fileSize">4718</value>
+        <value key="data">iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==</value>
+      </fieldValue>
+    </field>
+  </fields>
+</ContentCreate>
+XML;
+
+        $parsedHref = explode('/', $this->createContent($xml)['_href']);
+
+        return (int)end($parsedHref);
     }
 }
