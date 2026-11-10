@@ -10,6 +10,7 @@ namespace Ibexa\Tests\Bundle\Rest\DependencyInjection;
 
 use Ibexa\Bundle\Rest\DependencyInjection\EditionBadgesProcessor;
 use Ibexa\Bundle\Rest\DependencyInjection\IbexaRestExtension;
+use Ibexa\Rest\Server\Controller;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -60,6 +61,25 @@ final class IbexaRestExtensionTest extends AbstractExtensionTestCase
         self::assertSame([], $this->container->getExtensionConfig('api_platform'));
     }
 
+    public function testPrependExcludesV2ControllersFromIbexaApiPlatformRoutePrefix(): void
+    {
+        $this->container->registerExtension(self::createApiPlatformExtensionStub('ibexa_api_platform'));
+
+        (new IbexaRestExtension())->prepend($this->container);
+
+        self::assertSame(
+            [['route_prefix' => ['excluded_classes' => [Controller::class]]]],
+            $this->container->getExtensionConfig('ibexa_api_platform')
+        );
+    }
+
+    public function testPrependSkipsRoutePrefixExclusionWithoutIbexaApiPlatform(): void
+    {
+        (new IbexaRestExtension())->prepend($this->container);
+
+        self::assertSame([], $this->container->getExtensionConfig('ibexa_api_platform'));
+    }
+
     public function testApiPlatformServicesAreLoadedWhenApiPlatformIsRegistered(): void
     {
         $this->container->registerExtension(self::createApiPlatformExtensionStub());
@@ -78,12 +98,14 @@ final class IbexaRestExtensionTest extends AbstractExtensionTestCase
         $this->assertContainerBuilderNotHasService('ibexa.api_platform.openapi.command');
     }
 
-    private static function createApiPlatformExtensionStub(): Extension
+    private static function createApiPlatformExtensionStub(string $alias = 'api_platform'): Extension
     {
-        return new class() extends Extension {
+        return new class($alias) extends Extension {
+            public function __construct(private readonly string $alias) {}
+
             public function getAlias(): string
             {
-                return 'api_platform';
+                return $this->alias;
             }
 
             public function load(

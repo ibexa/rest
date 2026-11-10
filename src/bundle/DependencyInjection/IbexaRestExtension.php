@@ -70,7 +70,22 @@ class IbexaRestExtension extends ConfigurableExtension implements PrependExtensi
 
         $this->prependRouterConfiguration($container);
         $this->prependJMSTranslation($container);
+        $this->prependApiPlatformRoutePrefixExclusion($container);
         $this->loadApiPlatformServices($container);
+    }
+
+    /**
+     * ibexa/api-platform prefixes every API Platform resource with `/ibexa`; the v2 controllers are documented by this bundle under its own server and keep their paths.
+     */
+    private function prependApiPlatformRoutePrefixExclusion(ContainerBuilder $container): void
+    {
+        if (!$container->hasExtension('ibexa_api_platform')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('ibexa_api_platform', [
+            'route_prefix' => ['excluded_classes' => [RestController::class]],
+        ]);
     }
 
     private function prependRouterConfiguration(ContainerBuilder $container): void
