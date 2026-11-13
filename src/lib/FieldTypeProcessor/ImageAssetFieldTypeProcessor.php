@@ -10,6 +10,7 @@ namespace Ibexa\Rest\FieldTypeProcessor;
 
 use Ibexa\Contracts\Core\Repository\ContentService;
 use Ibexa\Contracts\Core\Repository\Exceptions\NotFoundException;
+use Ibexa\Contracts\Core\Repository\Exceptions\UnauthorizedException;
 use Ibexa\Contracts\Rest\FieldTypeProcessor;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -49,7 +50,7 @@ class ImageAssetFieldTypeProcessor extends FieldTypeProcessor
 
         try {
             $imageContent = $this->contentService->loadContent((int) $outgoingValueHash['destinationContentId']);
-        } catch (NotFoundException $e) {
+        } catch (NotFoundException | UnauthorizedException $e) {
             return $outgoingValueHash;
         }
 
