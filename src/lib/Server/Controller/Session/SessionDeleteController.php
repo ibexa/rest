@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 #[Delete(
     uriTemplate: '/user/sessions/{sessionId}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.delete_session',
         summary: 'Delete session (logout a User)',
         description: 'The user session is removed i.e. the user is logged out.',
         tags: [
@@ -37,8 +38,8 @@ use Symfony\Component\HttpFoundation\Session\Session;
             new Model\Parameter(
                 name: 'X-CSRF-Token',
                 in: 'header',
-                required: true,
-                description: 'The {csrfToken} needed on all unsafe HTTP methods with session.',
+                required: false,
+                description: 'The CSRF Token needed on all unsafe HTTP methods with session.',
                 schema: [
                     'type' => 'string',
                 ],
