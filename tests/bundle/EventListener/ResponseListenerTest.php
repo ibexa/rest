@@ -91,6 +91,40 @@ final class ResponseListenerTest extends EventListenerTestCase
         );
     }
 
+    /**
+     * @return iterable<string, array{string}>
+     */
+    public static function getDataForTestOnKernelExceptionViewForRestFormat(): iterable
+    {
+        yield 'json' => ['json'];
+        yield 'xml' => ['xml'];
+    }
+
+    /**
+     * @dataProvider getDataForTestOnKernelExceptionViewForRestFormat
+     */
+    public function testOnKernelExceptionViewForRestFormat(string $preferredFormat): void
+    {
+        $this->onKernelView(
+            'onKernelExceptionView',
+            $this->getExceptionEvent($this->getRequestMockPreferringFormat($preferredFormat)),
+            $this->exceptionEventValue
+        );
+    }
+
+    public function testOnKernelExceptionViewForHtmlFormat(): void
+    {
+        $visitorDispatcherMock = $this->getVisitorDispatcherMock();
+        $visitorDispatcherMock
+            ->expects(self::never())
+            ->method('dispatch');
+
+        $event = $this->getExceptionEvent($this->getRequestMockPreferringFormat('html'));
+        (new ResponseListener($visitorDispatcherMock))->onKernelExceptionView($event);
+
+        self::assertNull($event->getResponse());
+    }
+
     public function testOnControllerResultView(): void
     {
         $this->onKernelView(
@@ -154,11 +188,11 @@ final class ResponseListenerTest extends EventListenerTestCase
         return self::createStub(KernelInterface::class);
     }
 
-    private function getExceptionEvent(): ExceptionEvent
+    private function getExceptionEvent(?Request $request = null): ExceptionEvent
     {
         return new ExceptionEvent(
             $this->getKernelMock(),
-            $this->getRequestMock(),
+            $request ?? $this->getRequestMock(),
             HttpKernelInterface::MAIN_REQUEST,
             $this->exceptionEventValue
         );
@@ -169,5 +203,16 @@ final class ResponseListenerTest extends EventListenerTestCase
         return new Request(attributes: [
             'is_rest_request' => $this->isRestRequest,
         ]);
+    }
+
+    private function getRequestMockPreferringFormat(string $preferredFormat): Request & MockObject
+    {
+        $request = $this->getRequestMock();
+        $request
+            ->method('getPreferredFormat')
+            ->with(null)
+            ->willReturn($preferredFormat);
+
+        return $request;
     }
 }

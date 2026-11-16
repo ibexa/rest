@@ -65,7 +65,12 @@ final class ResponseListener implements EventSubscriberInterface, LoggerAwareInt
      */
     public function onKernelExceptionView(ExceptionEvent $event): void
     {
-        if (!$event->getRequest()->attributes->get('is_rest_request')) {
+        $request = $event->getRequest();
+        if (!$request->attributes->get('is_rest_request')) {
+            return;
+        }
+
+        if ($request->getPreferredFormat(null) === 'html') {
             return;
         }
 
@@ -74,7 +79,7 @@ final class ResponseListener implements EventSubscriberInterface, LoggerAwareInt
 
         $event->setResponse(
             $this->viewDispatcher->dispatch(
-                $event->getRequest(),
+                $request,
                 $exception
             )
         );
