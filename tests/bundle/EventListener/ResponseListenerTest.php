@@ -11,6 +11,7 @@ namespace Ibexa\Tests\Bundle\Rest\EventListener;
 use Exception;
 use Ibexa\Bundle\Rest\EventListener\ResponseListener;
 use Ibexa\Rest\Server\View\AcceptHeaderVisitorDispatcher;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use stdClass;
@@ -96,18 +97,16 @@ final class ResponseListenerTest extends EventListenerTestCase
      */
     public static function getDataForTestOnKernelExceptionViewForRestFormat(): iterable
     {
-        yield 'json' => ['json'];
-        yield 'xml' => ['xml'];
+        yield 'json' => ['application/json'];
+        yield 'xml' => ['application/xml'];
     }
 
-    /**
-     * @dataProvider getDataForTestOnKernelExceptionViewForRestFormat
-     */
-    public function testOnKernelExceptionViewForRestFormat(string $preferredFormat): void
+    #[DataProvider('getDataForTestOnKernelExceptionViewForRestFormat')]
+    public function testOnKernelExceptionViewForRestFormat(string $acceptHeader): void
     {
         $this->onKernelView(
             'onKernelExceptionView',
-            $this->getExceptionEvent($this->getRequestMockPreferringFormat($preferredFormat)),
+            $this->getExceptionEvent($this->getRequestAccepting($acceptHeader)),
             $this->exceptionEventValue
         );
     }
@@ -116,10 +115,10 @@ final class ResponseListenerTest extends EventListenerTestCase
     {
         $visitorDispatcherMock = $this->getVisitorDispatcherMock();
         $visitorDispatcherMock
-            ->expects(self::never())
+            ->expects($this->never())
             ->method('dispatch');
 
-        $event = $this->getExceptionEvent($this->getRequestMockPreferringFormat('html'));
+        $event = $this->getExceptionEvent($this->getRequestAccepting('text/html'));
         (new ResponseListener($visitorDispatcherMock))->onKernelExceptionView($event);
 
         self::assertNull($event->getResponse());
@@ -146,7 +145,7 @@ final class ResponseListenerTest extends EventListenerTestCase
             ->expects($this->once())
             ->method('dispatch')
             ->with(
-                $this->getRequestMock(),
+                $event->getRequest(),
                 $value
             )->willReturn(
                 $this->response
@@ -205,13 +204,10 @@ final class ResponseListenerTest extends EventListenerTestCase
         ]);
     }
 
-    private function getRequestMockPreferringFormat(string $preferredFormat): Request & MockObject
+    private function getRequestAccepting(string $acceptHeader): Request
     {
         $request = $this->getRequestMock();
-        $request
-            ->method('getPreferredFormat')
-            ->with(null)
-            ->willReturn($preferredFormat);
+        $request->headers->set('Accept', $acceptHeader);
 
         return $request;
     }
