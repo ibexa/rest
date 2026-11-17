@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 #[Get(
     uriTemplate: '/user/groups/{path}',
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.load_user_group',
         summary: 'Load User Group',
         description: 'Loads User Groups for the given {path}.',
         tags: [
@@ -26,18 +27,9 @@ use Symfony\Component\HttpFoundation\Response;
         ],
         parameters: [
             new Model\Parameter(
-                name: 'Accept',
-                in: 'header',
-                required: true,
-                description: 'If set, the new User Group is returned in XML or JSON format.',
-                schema: [
-                    'type' => 'string',
-                ],
-            ),
-            new Model\Parameter(
                 name: 'If-None-Match',
                 in: 'header',
-                required: true,
+                required: false,
                 description: 'ETag',
                 schema: [
                     'type' => 'string',
@@ -56,17 +48,17 @@ use Symfony\Component\HttpFoundation\Response;
             Response::HTTP_OK => [
                 'description' => 'OK - loads User Groups.',
                 'content' => [
-                    'application/vnd.ibexa.api.UserGroup+xml' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/UserGroup',
-                        ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.xml.example',
-                    ],
                     'application/vnd.ibexa.api.UserGroup+json' => [
                         'schema' => [
                             '$ref' => '#/components/schemas/UserGroupWrapper',
                         ],
-                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/subgroups/POST/UserGroup.json.example',
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/GET/UserGroup.json.example',
+                    ],
+                    'application/vnd.ibexa.api.UserGroup+xml' => [
+                        'schema' => [
+                            '$ref' => '#/components/schemas/UserGroup',
+                        ],
+                        'x-ibexa-example-file' => '@IbexaRestBundle/Resources/api_platform/examples/user/groups/path/GET/UserGroup.xml.example',
                     ],
                 ],
             ],

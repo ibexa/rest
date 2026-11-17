@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
     uriTemplate: '/user/token/jwt',
     extraProperties: [OpenApiFactory::OVERRIDE_OPENAPI_RESPONSES => false],
     openapi: new Model\Operation(
+        operationId: 'ibexa.rest.create_token',
         summary: 'Create JWT token',
         description: 'Creates JWT authentication token.',
         tags: [
