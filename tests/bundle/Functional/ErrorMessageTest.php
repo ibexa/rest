@@ -10,7 +10,7 @@ namespace Ibexa\Tests\Bundle\Rest\Functional;
 
 final class ErrorMessageTest extends TestCase
 {
-    private const string UNKNOWN_API_URI = '/api/invalid/v1/test';
+    private const string UNKNOWN_API_URI = '/api/ibexa/v2/not-a-route';
 
     protected bool $autoLogin = false;
 

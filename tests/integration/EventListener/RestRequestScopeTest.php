@@ -42,7 +42,7 @@ final class RestRequestScopeTest extends IbexaKernelTestCase
     private function handle(string $uri): Response
     {
         return self::bootKernel()->handle(
-            Request::create($uri),
+            Request::create($uri, server: ['HTTP_ACCEPT' => '*/*']),
             HttpKernelInterface::MAIN_REQUEST,
             true
         );
