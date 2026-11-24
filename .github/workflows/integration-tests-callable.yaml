@@ -69,6 +69,28 @@ jobs:
                 cd "$HOME/build/project"
                 docker compose --env-file=.env exec -T --user www-data app sh -c "APP_ENV=behat php bin/console ibexa:behat:create-language 'pol-PL' 'Polish (polski)'"
 
+            # [TMP] Diagnostic, never to be merged: an unknown v2 URI answers 500 instead of 404 to a browser on 6.0
+            # (ErrorMessageTest::testUnknownApiUriReturnsErrorPageForClientExpectingHtml).
+            - name: "[TMP] Probe an unknown v2 URI as a browser would"
+              run: |
+                cd "$HOME/build/project"
+                docker compose --env-file=.env exec -T --user www-data app sh -c "
+                    echo '--- API Platform packages installed ---' ;
+                    ls -d vendor/api-platform/core vendor/ibexa/api-platform ;
+                    echo '--- config/packages/api_platform.yaml ---' ;
+                    grep -v -E '^\s*(#|$)' config/packages/api_platform.yaml ;
+                    echo '--- request ---' ;
+                    curl -s -o var/probe-body.txt -w 'status=%{http_code} content-type=%{content_type}\n' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' http://$WEB_HOST/api/ibexa/v2/not-a-route ;
+                    echo '--- exception titles in the body ---' ;
+                    grep -a -o -E '<title>[^<]*</title>|exception-message[^<]*<[^<]*' var/probe-body.txt | head -n 10 ;
+                    echo '--- body (first 3000 bytes) ---' ;
+                    head -c 3000 var/probe-body.txt ;
+                    echo ;
+                    echo '--- last errors in var/log/dev.log ---' ;
+                    grep -a -E 'CRITICAL|ERROR' var/log/dev.log | tail -n 8 | cut -c1-6000 ;
+                    true
+                "
+
             - name: Configure composer inside vendor/ibexa/rest
               run: |
                 cd "$HOME/build/project"
