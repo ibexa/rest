@@ -4,6 +4,9 @@ on:
 env:
     APP_ENV: dev
     APP_DEBUG: 1
+    # The docker setup passes the empty APP_SECRET of the project's .env into the container, where it overrides
+    # the secret generated in .env.dev; Pagerfanta 4 then fails on every Twig-rendered page. Any non-empty value works.
+    APP_SECRET: 'rest-functional-tests-not-a-real-secret'
     PHP_INI_ENV_memory_limit: 512M
     COMPOSER_CACHE_DIR: ~/.composer/cache
     PROJECT_EDITION: oss
