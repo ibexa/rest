@@ -427,6 +427,7 @@ services:
         arguments:
             $innerRouter: '@ibexa.rest.templated_router.inner'
             $siteAccessRouter: '@Ibexa\Core\MVC\Symfony\SiteAccess\Router'
+            $siteAccessService: '@Ibexa\Core\MVC\Symfony\SiteAccess\SiteAccessServiceInterface'
             $nonSiteAccessAwareRoutes: '%ibexa.default_router.non_site_access_aware_routes%'
             $logger: '@?logger'
 
