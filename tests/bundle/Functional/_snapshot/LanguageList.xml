@@ -6,7 +6,7 @@
   <name>English (United Kingdom)</name>
  </Language>
  <Language href="/api/ibexa/v2/languages/pol-PL" media-type="application/vnd.ibexa.api.Language+xml">
-  <languageId>4</languageId>
+  <languageId>3</languageId>
   <languageCode>pol-PL</languageCode>
   <name>Polish (polski)</name>
  </Language>
